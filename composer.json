@@ -18,7 +18,7 @@
         "symfony/console": "^6.0",
         "symfony/finder": "^6.0",
         "twig/twig": "^3.3",
-        "roave/better-reflection": "^5.5",
+        "roave/better-reflection": "5.5.1.1",
         "nikic/php-parser": "^4.13",
         "phpdocumentor/reflection-docblock": "^5.3",
         "doctrine/annotations": "^1.13",
