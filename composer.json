@@ -1,0 +1,35 @@
+{
+    "name": "bumble/doc-gen",
+    "description": "Documentation generator next to the code for large and small php projects",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Filipp Shcherbanich",
+            "email": "filipp.shcherbanich@team.bumble.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/shcherbanich/BetterReflection.git"
+        }
+    ],
+    "require": {
+        "symfony/console": "^6.0",
+        "symfony/finder": "^6.0",
+        "twig/twig": "^3.3",
+        "roave/better-reflection": "^5.5",
+        "nikic/php-parser": "^4.13",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "doctrine/annotations": "^1.13",
+        "nette/php-generator": "^4.0",
+        "monolog/monolog": "^2.5",
+        "bramus/monolog-colored-line-formatter": "^3.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "BumbleDocGen\\": "BumbleDocGen/"
+        }
+    }
+}

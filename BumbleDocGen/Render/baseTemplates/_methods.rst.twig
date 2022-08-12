@@ -1,0 +1,8 @@
+
+.. raw:: html
+
+  <ol>
+      {% for methodEntity in methodEntityCollection %}
+          <li><a href="#m{{ methodEntity.getName()|prepareSourceLink }}">{% if methodEntity.isDeprecated() %}<s>{{ methodEntity.getName() }}</s>{% else %}{{ methodEntity.getName() }}{% endif %}</a> {% if methodEntity.getDescription() %}- <i>{{ methodEntity.getDescription()|removeLineBrakes|raw }}</i>{% endif %}</li>
+      {% endfor %}
+  </ol>

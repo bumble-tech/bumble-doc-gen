@@ -1,0 +1,35 @@
+{% for propertyEntity in classEntity.getPropertyEntityCollection() %}
+
+.. _p{{ propertyEntity.getName()|prepareSourceLink }}:
+
+* `# <p{{ propertyEntity.getName()|prepareSourceLink }}_>`_ ``${{ propertyEntity.getName() }}`` {% if propertyEntity.isInternal() %}**:warning:** Is internal {% endif %} {% if propertyEntity.isDeprecated() %}**:no_entry:** Deprecated {% endif %} {% if propertyEntity.getFileName() %}**|** `source code <{{ propertyEntity.getFileName() }}#L{{ propertyEntity.getLine() }}>`_ {% endif %}
+
+.. code-block:: php
+
+      {% if propertyEntity.isImplementedInParentClass() %}
+      // Implemented in \{{ propertyEntity.getImplementingClassName() }}
+
+      {% endif %}
+      {{ propertyEntity.getModifiersString()|raw }} ${{ propertyEntity.getName() }};
+
+
+{% if propertyEntity.getDescription() %}
+..
+
+{{ propertyEntity.getDescription()|addIndentFromLeft|quotemeta }}
+{% endif %}
+{% if propertyEntity.hasDescriptionLinks() %}
+
+
+See:
+
+{% for link in propertyEntity.getDescriptionLinks() %}
+#. {% if link.url %}`{{ link.name|quotemeta }} <{{ link.url }}>`_{% else %}{{ link.name|quotemeta }}{% endif %} {% if link.description %}- {{ link.description|quotemeta|removeLineBrakes }}{% endif %}
+
+{% endfor %}
+
+
+{% endif %}
+
+________
+{% endfor %}

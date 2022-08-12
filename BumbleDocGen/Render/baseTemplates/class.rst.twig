@@ -1,0 +1,85 @@
+{% include 'breadcrumbs.rst.twig' with {'breadcrumbs': breadcrumbs, 'title': classEntity.getShortName()} only %}
+
+
+{% include '_classHeader.rst.twig' with {'classEntity': classEntity} only %}
+
+
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_HEADER')) }}
+
+
+{% include '_classMainInfo.rst.twig' with {'classEntity': classEntity} only %}
+
+
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_MAIN_INFO')) }}
+
+
+{% if not classEntity.getMethodEntityCollection().getInitializations().isEmpty() %}
+Initialization methods:
+-----------------------
+
+
+{% include '_methods.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection().getInitializations()} only %}
+{% endif %}
+
+
+{% if not classEntity.getMethodEntityCollection().getAllExceptInitializations().isEmpty() %}
+Methods:
+-----------------------
+
+
+{% include '_methods.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection().getAllExceptInitializations()} only %}
+{% endif %}
+
+
+{% if classEntity.hasTraits() %}
+Traits:
+-----------------------
+
+
+{% include '_traits.rst.twig' with {'classEntity': classEntity} only %}
+{% endif %}
+
+
+{% if not classEntity.getConstantEntityCollection().isEmpty() %}
+Constants:
+-----------------------
+
+
+{% include '_constants.rst.twig' with {'classEntity': classEntity} only %}
+{% endif %}
+
+
+{% if not classEntity.getPropertyEntityCollection().isEmpty() %}
+Properties:
+-----------------------
+
+
+{% include '_properties.rst.twig' with {'classEntity': classEntity} only %}
+{% endif %}
+
+
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_BEFORE_DETAILS')) }}
+
+
+--------------------
+
+
+{% if not classEntity.getPropertyEntityCollection().isEmpty() %}
+Property details:
+-----------------------
+
+
+{% include '_property_details.rst.twig' with {'classEntity': classEntity} only %}
+{% endif %}
+
+
+{% if not classEntity.getMethodEntityCollection().isEmpty() %}
+Method details:
+-----------------------
+
+
+{% include '_method_details.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection()} only %}
+{% endif %}
+
+
+{% include '_classFooter.rst.twig' with {'classEntity': classEntity} only %}

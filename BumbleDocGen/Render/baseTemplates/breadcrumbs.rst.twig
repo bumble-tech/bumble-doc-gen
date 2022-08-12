@@ -1,0 +1,11 @@
+{% if breadcrumbs %}
+.. raw:: html
+
+{% for item in breadcrumbs %}
+ <a href="{{ item.url }}">{{ item.title }}</a> <b>/</b>
+{% endfor %}
+ {{ title }}
+
+--------------
+{% endif %}
+

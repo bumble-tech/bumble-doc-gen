@@ -1,0 +1,8 @@
+
+.. raw:: html
+
+    <ol>
+      {% for propertyEntity in classEntity.getPropertyEntityCollection() %}
+          <li><a href="#p{{ propertyEntity.getName()|prepareSourceLink }}">${{ propertyEntity.getName() }}</a> {% if propertyEntity.getDescription() %}- <i>{{ propertyEntity.getDescription()|removeLineBrakes|raw }}</i>{% endif %}</li>
+      {% endfor %}
+    </ol>
