@@ -204,6 +204,15 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         $params = $docBlock->getTagsByName('param');
         $typesFromDoc = $this::parseAnnotationParams($params);
         foreach ($this->getReflection()->getParameters() as $param) {
+            try {
+                $param->getType();
+            } catch (\Exception $e) {
+                if (preg_match('/(not locate constant ")([\s\S]+)(")/', $e->getMessage(), $matches)) {
+                    // Temporary hack to get rid of global constants parsing error
+                    $constEvalString = 'const ' . $matches[2] . "='';";
+                    eval($constEvalString);
+                }
+            }
             $type = (string)$param->getType();
             $annotationType = '';
             $name = $param->getName();
