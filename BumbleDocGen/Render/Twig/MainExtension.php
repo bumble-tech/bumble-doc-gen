@@ -11,6 +11,7 @@ use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Render\Twig\Filter\RemoveLineBrakes;
 use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 use BumbleDocGen\Render\Twig\Function\DrawClassMap;
+use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
 
@@ -27,6 +28,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
                 'is_safe' => ['html'],
             ]),
             new \Twig\TwigFunction('drawClassMap', new DrawClassMap($this->context), ['is_safe' => ['html']]),
+            new \Twig\TwigFunction('drawDocumentationMenu', new DrawDocumentationMenu($this->context), ['is_safe' => ['html']]),
             new \Twig\TwigFunction('loadPluginsContent', new LoadPluginsContent($this->context), [
                 'is_safe' => ['html'],
             ]),

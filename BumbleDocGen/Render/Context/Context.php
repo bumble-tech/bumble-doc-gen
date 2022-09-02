@@ -6,6 +6,7 @@ namespace BumbleDocGen\Render\Context;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\Render\Twig\BreadcrumbsHelper;
 use Roave\BetterReflection\Reflector\Reflector;
 
 final class Context
@@ -16,7 +17,8 @@ final class Context
     public function __construct(
         private Reflector $reflector,
         private ConfigurationInterface $configuration,
-        private ClassEntityCollection $classEntityCollection
+        private ClassEntityCollection $classEntityCollection,
+        private BreadcrumbsHelper $breadcrumbsHelper
     ) {
         $this->documentedClassesCollection = new DocumentedClassesCollection();
     }
@@ -49,5 +51,10 @@ final class Context
     public function getDocumentedClassesCollection(): DocumentedClassesCollection
     {
         return $this->documentedClassesCollection;
+    }
+
+    public function getBreadcrumbsHelper(): BreadcrumbsHelper
+    {
+        return $this->breadcrumbsHelper;
     }
 }

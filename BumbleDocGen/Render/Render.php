@@ -50,7 +50,10 @@ final class Render
         ]);
         $twig = new Environment($loader);
 
-        $context = new Context($this->reflector, $this->configuration, $this->classEntityCollection);
+        $breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
+        $context = new Context(
+            $this->reflector, $this->configuration, $this->classEntityCollection, $breadcrumbsHelper
+        );
         $twig->addExtension(new MainExtension($context));
 
         $allFiles = new \RecursiveIteratorIterator(
