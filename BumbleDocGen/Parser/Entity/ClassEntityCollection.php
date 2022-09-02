@@ -13,8 +13,11 @@ final class ClassEntityCollection extends BaseEntityCollection
 {
     private array $classEntities = [];
 
-    private function __construct(private Reflector $reflector, private LoggerInterface $logger)
-    {
+    private function __construct(
+        private ConfigurationInterface $configuration,
+        private Reflector $reflector,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function getIterator(): \Generator
@@ -28,7 +31,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         AttributeParser $attributeParser
     ): ClassEntityCollection {
         $logger = $configuration->getLogger();
-        $classEntityCollection = new ClassEntityCollection($reflector, $logger);
+        $classEntityCollection = new ClassEntityCollection($configuration, $reflector, $logger);
         foreach ($reflector->reflectAllClasses() as $classReflection) {
             if (
                 str_contains($classReflection->getName(), chr(0)) ||
@@ -45,14 +48,6 @@ final class ClassEntityCollection extends BaseEntityCollection
                 $attributeParser
             );
             if ($configuration->classEntityFilterCondition($classEntity)->canAddToCollection()) {
-                $logger->info("Parsing {$classReflection->getFileName()} file");
-                $classEntity->loadClassMembers();
-
-                foreach ($configuration->getPlugins()->getOnlyForClassEntities() as $plugin) {
-                    /**@var \BumbleDocGen\Plugin\ClassEntityPluginInterface $plugin */
-                    $classEntity = $plugin->beforeAddingClassEntity($classEntity, $classEntityCollection);
-                }
-
                 $classEntityCollection->add($classEntity);
             }
         }
@@ -63,6 +58,12 @@ final class ClassEntityCollection extends BaseEntityCollection
     {
         $key = $classEntity->getObjectId();
         if (!isset($this->classEntities[$key]) || $reload) {
+            $this->logger->info("Parsing {$classEntity->getFileName()} file");
+            $classEntity->loadClassMembers();
+            foreach ($this->configuration->getPlugins()->getOnlyForClassEntities() as $plugin) {
+                /**@var \BumbleDocGen\Plugin\ClassEntityPluginInterface $plugin */
+                $classEntity = $plugin->beforeAddingClassEntity($classEntity, $this);
+            }
             $this->classEntities[$key] = $classEntity;
         }
         return $this;
