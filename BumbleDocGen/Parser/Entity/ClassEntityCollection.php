@@ -89,7 +89,7 @@ final class ClassEntityCollection extends BaseEntityCollection
      */
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection($this->reflector, $this->logger);
+        $classEntityCollection = new ClassEntityCollection($this->configuration, $this->reflector, $this->logger);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if (array_intersect($interfaces, $classEntity->getInterfaces())) {
@@ -101,7 +101,7 @@ final class ClassEntityCollection extends BaseEntityCollection
 
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection($this->reflector, $this->logger);
+        $classEntityCollection = new ClassEntityCollection($this->configuration, $this->reflector, $this->logger);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if (array_intersect($parentClassNames, iterator_to_array($classEntity->getParentClassNames()))) {
@@ -113,7 +113,7 @@ final class ClassEntityCollection extends BaseEntityCollection
 
     public function filterByPaths(array $paths): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection($this->reflector, $this->logger);
+        $classEntityCollection = new ClassEntityCollection($this->configuration, $this->reflector, $this->logger);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             foreach ($paths as $path) {
@@ -127,7 +127,7 @@ final class ClassEntityCollection extends BaseEntityCollection
 
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection($this->reflector, $this->logger);
+        $classEntityCollection = new ClassEntityCollection($this->configuration, $this->reflector, $this->logger);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if (preg_match($regexPattern, $classEntity->getShortName())) {
@@ -139,7 +139,7 @@ final class ClassEntityCollection extends BaseEntityCollection
 
     public function getOnlyInstantiable(): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection($this->reflector, $this->logger);
+        $classEntityCollection = new ClassEntityCollection($this->configuration, $this->reflector, $this->logger);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if ($classEntity->getReflection()->isInstantiable()) {
