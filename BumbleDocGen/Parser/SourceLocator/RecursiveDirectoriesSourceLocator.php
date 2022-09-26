@@ -20,13 +20,15 @@ final class RecursiveDirectoriesSourceLocator implements SourceLocatorInterface
     {
         $iterator = new \AppendIterator();
         foreach ($this->directories as $directory) {
-            $iterator->append(
-                new \RecursiveIteratorIterator(
-                    new \RecursiveDirectoryIterator(
-                        $directory, FilesystemIterator::SKIP_DOTS
+            if (is_dir($directory)) {
+                $iterator->append(
+                    new \RecursiveIteratorIterator(
+                        new \RecursiveDirectoryIterator(
+                            $directory, FilesystemIterator::SKIP_DOTS
+                        )
                     )
-                )
-            );
+                );
+            }
         }
         return new MemoizingSourceLocator(
             new \Roave\BetterReflection\SourceLocator\Type\FileIteratorSourceLocator(
