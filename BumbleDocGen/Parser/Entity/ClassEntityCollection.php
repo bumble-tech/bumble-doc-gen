@@ -11,18 +11,11 @@ use Roave\BetterReflection\Reflector\Reflector;
 
 final class ClassEntityCollection extends BaseEntityCollection
 {
-    private array $classEntities = [];
-
     private function __construct(
         private ConfigurationInterface $configuration,
         private Reflector $reflector,
         private LoggerInterface $logger
     ) {
-    }
-
-    public function getIterator(): \Generator
-    {
-        yield from $this->classEntities;
     }
 
     public static function createByReflector(
@@ -57,21 +50,21 @@ final class ClassEntityCollection extends BaseEntityCollection
     public function add(ClassEntity $classEntity, bool $reload = false): ClassEntityCollection
     {
         $key = $classEntity->getObjectId();
-        if (!isset($this->classEntities[$key]) || $reload) {
+        if (!isset($this->entities[$key]) || $reload) {
             $this->logger->info("Parsing {$classEntity->getFileName()} file");
             $classEntity->loadClassMembers();
             foreach ($this->configuration->getPlugins()->getOnlyForClassEntities() as $plugin) {
                 /**@var \BumbleDocGen\Plugin\ClassEntityPluginInterface $plugin */
                 $classEntity = $plugin->beforeAddingClassEntity($classEntity, $this);
             }
-            $this->classEntities[$key] = $classEntity;
+            $this->entities[$key] = $classEntity;
         }
         return $this;
     }
 
     public function get(string $objectId): ?ClassEntity
     {
-        return $this->classEntities[$objectId] ?? null;
+        return $this->entities[$objectId] ?? null;
     }
 
     public function getReflector(): Reflector
