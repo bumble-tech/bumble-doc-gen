@@ -262,18 +262,20 @@ class ClassEntity extends BaseEntity
     public function getTraitsNames(): array
     {
         static $traits = [];
-        if (empty($traits)) {
+        $objectId = $this->getObjectId();
+        if (!isset($traits[$objectId])) {
             $ast = $this->reflection->getAst();
-            $traits = [];
+            $traits[$objectId] = [];
             if (property_exists($ast, 'stmts')) {
                 foreach ($ast->stmts as $stmt) {
                     if (property_exists($stmt, 'traits')) {
-                        $traits += $stmt->traits;
+                        $traits[$objectId] += $stmt->traits;
                     }
                 }
+                $traits[$objectId] = array_unique($traits[$objectId]);
             }
         }
-        return $traits;
+        return $traits[$objectId];
     }
 
     public function hasTraits(): bool
