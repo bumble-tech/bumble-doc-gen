@@ -226,7 +226,11 @@ class ClassEntity extends BaseEntity
     {
         $ast = $this->reflection->getAst();
         if (property_exists($ast, 'implements')) {
-            return $ast->implements;
+            $implements = [];
+            foreach ($ast->implements as $implementAst){
+                $implements[] = $implementAst->toString();
+            }
+            return $implements;
         }
         return [];
     }
