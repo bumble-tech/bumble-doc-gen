@@ -224,15 +224,12 @@ class ClassEntity extends BaseEntity
 
     public function getInterfaces(): array
     {
-        $ast = $this->reflection->getAst();
-        if (property_exists($ast, 'implements')) {
-            $implements = [];
-            foreach ($ast->implements as $implementAst){
-                $implements[] = $implementAst->toString();
-            }
-            return $implements;
+        static $interfaces = [];
+        $objectId = $this->getObjectId();
+        if (!isset($interfaces[$objectId])) {
+            $interfaces[$objectId] = $this->reflection->getInterfaceNames();
         }
-        return [];
+        return $interfaces[$objectId];
     }
 
     /**
