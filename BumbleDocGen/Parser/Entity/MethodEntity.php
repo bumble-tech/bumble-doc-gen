@@ -161,6 +161,10 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
             $docBlock = $this->getDocBlock();
             $returnType = $docBlock->getTagsByName('return');
             $type = (string)($returnType[0] ?? 'mixed');
+            $type = preg_replace_callback(['/({)([^{}]*)(})/', '/(\[)([^\[\]]*)(\])/'], function ($condition) {
+                return str_replace(' ', '', $condition[0]);
+            }, $type);
+            $type = explode(' ', $type)[0];
         }
         return $type;
     }
