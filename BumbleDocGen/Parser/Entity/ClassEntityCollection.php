@@ -62,6 +62,12 @@ final class ClassEntityCollection extends BaseEntityCollection
         return $this;
     }
 
+    public function addWithoutPreparation(ClassEntity $classEntity): ClassEntityCollection
+    {
+        $this->entities[$classEntity->getObjectId()] = $classEntity;
+        return $this;
+    }
+
     public function get(string $objectId): ?ClassEntity
     {
         return $this->entities[$objectId] ?? null;
@@ -86,7 +92,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if (array_intersect($interfaces, $classEntity->getInterfaces())) {
-                $classEntityCollection->add($classEntity);
+                $classEntityCollection->addWithoutPreparation($classEntity);
             }
         }
         return $classEntityCollection;
@@ -98,7 +104,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if (array_intersect($parentClassNames, iterator_to_array($classEntity->getParentClassNames()))) {
-                $classEntityCollection->add($classEntity);
+                $classEntityCollection->addWithoutPreparation($classEntity);
             }
         }
         return $classEntityCollection;
@@ -111,7 +117,7 @@ final class ClassEntityCollection extends BaseEntityCollection
             /**@var ClassEntity $classEntity */
             foreach ($paths as $path) {
                 if (str_starts_with($classEntity->getFileName(), $path)) {
-                    $classEntityCollection->add($classEntity);
+                    $classEntityCollection->addWithoutPreparation($classEntity);
                 }
             }
         }
@@ -124,7 +130,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if (preg_match($regexPattern, $classEntity->getShortName())) {
-                $classEntityCollection->add($classEntity);
+                $classEntityCollection->addWithoutPreparation($classEntity);
             }
         }
         return $classEntityCollection;
@@ -136,7 +142,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if ($classEntity->getReflection()->isInstantiable()) {
-                $classEntityCollection->add($classEntity);
+                $classEntityCollection->addWithoutPreparation($classEntity);
             }
         }
         return $classEntityCollection;
