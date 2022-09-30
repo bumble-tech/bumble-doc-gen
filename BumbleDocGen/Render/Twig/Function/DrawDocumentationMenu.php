@@ -26,6 +26,9 @@ final class DrawDocumentationMenu
         foreach ($allFiles as $file) {
             /**@var \SplFileInfo $file */
             $filePatch = str_replace($templatesDir, '', $file->getRealPath());
+            if (!str_ends_with($filePatch, '.twig')) {
+                continue;
+            }
             $pageKey = null;
             foreach ($breadcrumbsHelper->getBreadcrumbs($filePatch) as $breadcrumb) {
                 if (!is_null($pageKey)) {
