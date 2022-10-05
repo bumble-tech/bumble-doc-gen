@@ -42,7 +42,7 @@ abstract class BaseEntity
         return $this->attributeParser;
     }
 
-    protected static function generateObjectIdByReflection(Reflection $reflection): string
+    public static function generateObjectIdByReflection(Reflection $reflection): string
     {
         if (method_exists($reflection, 'getImplementingClass')) {
             return "{$reflection->getImplementingClass()->getName()}:{$reflection->getName()}";
