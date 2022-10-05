@@ -89,6 +89,11 @@ final class MethodEntityCollection extends BaseEntityCollection
         return $this;
     }
 
+    public function get(string $key): ?MethodEntity
+    {
+        return $this->entities[$key] ?? null;
+    }
+
     public function getInitializations(): MethodEntityCollection
     {
         $methodEntityCollection = new MethodEntityCollection();
