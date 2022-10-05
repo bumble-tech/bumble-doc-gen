@@ -366,4 +366,10 @@ abstract class BaseEntity
         }
         return $examplesCache[$objectId];
     }
+
+    public function getFirstExample(): string
+    {
+        $examples = $this->getExamples();
+        return $examples[0]['example'] ?? '';
+    }
 }
