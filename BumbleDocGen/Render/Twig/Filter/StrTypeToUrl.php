@@ -13,7 +13,7 @@ final class StrTypeToUrl
     {
     }
 
-    public function __invoke(string $text, string $templateType = 'rst'): string
+    public function __invoke(string $text, string $templateType = 'rst', bool $useShortLinkVersion = false): string
     {
         $preparedTypes = [];
         $reflector = $this->context->getReflector();
@@ -33,6 +33,11 @@ final class StrTypeToUrl
                     if ($templateType == 'rst') {
                         $preparedTypes[] = "`{$type} <{$fileName}#L{$reflectionOfLink->getStartLine()}>`_";
                     } else {
+                        if ($useShortLinkVersion) {
+                            $type = $reflectionOfLink->getShortName();
+                        } else {
+                            $type = $reflectionOfLink->getName();
+                        }
                         $preparedTypes[] = "<a href='{$fileName}#L{$reflectionOfLink->getStartLine()}'>{$type}</a>";
                     }
                 }
