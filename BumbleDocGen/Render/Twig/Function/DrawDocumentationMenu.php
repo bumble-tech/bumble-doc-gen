@@ -6,6 +6,9 @@ namespace BumbleDocGen\Render\Twig\Function;
 
 use BumbleDocGen\Render\Context\Context;
 
+/**
+ * Generate documentation menu in HTML format
+ */
 final class DrawDocumentationMenu
 {
     public function __construct(private Context $context)

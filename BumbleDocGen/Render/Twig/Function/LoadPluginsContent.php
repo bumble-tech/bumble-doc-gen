@@ -7,6 +7,10 @@ namespace BumbleDocGen\Render\Twig\Function;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Context\Context;
 
+/**
+ * Loading plugin content documented class
+ * @internal
+ */
 final class LoadPluginsContent
 {
     public function __construct(private Context $context)

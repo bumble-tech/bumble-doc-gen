@@ -8,6 +8,9 @@ use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
 
+/**
+ * Generate class map in HTML format
+ */
 final class DrawClassMap
 {
     /** @var array<string, string> */

@@ -9,6 +9,11 @@ use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedClass;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 
+/**
+ * Get the URL of a documented class by its name
+ *
+ * @example `MainExtension::getFunctions() <{{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}>`_
+ */
 final class GetDocumentedClassUrl
 {
     public const DEFAULT_URL = '#';
