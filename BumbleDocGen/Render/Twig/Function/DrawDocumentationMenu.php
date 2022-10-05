@@ -40,6 +40,7 @@ final class DrawDocumentationMenu
         }
 
         $drawPages = function (array $pagesData, int $currentDeep = 1) use ($structure, $maxDeep, &$drawPages): string {
+            ksort($pagesData);
             $html = ' <ul>';
             foreach ($pagesData as $pageData) {
                 $html .= "<li>";
