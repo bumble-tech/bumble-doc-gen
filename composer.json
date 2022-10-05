@@ -31,5 +31,10 @@
         "psr-4": {
             "BumbleDocGen\\": "BumbleDocGen/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SelfDoc\\": "SelfDoc/"
+        }
     }
 }
