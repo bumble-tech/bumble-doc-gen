@@ -6,6 +6,7 @@ namespace BumbleDocGen\Render\Twig\Filter;
 
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 
 final class StrTypeToUrl
 {
@@ -15,6 +16,8 @@ final class StrTypeToUrl
 
     public function __invoke(string $text, string $templateType = 'rst', bool $useShortLinkVersion = false): string
     {
+        $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
+
         $preparedTypes = [];
         $reflector = $this->context->getReflector();
         $configuration = $this->context->getConfiguration();
@@ -24,11 +27,19 @@ final class StrTypeToUrl
                 $reflectionOfLink = $reflector->reflectClass($type);
                 $fullFileName = $reflectionOfLink->getFileName();
                 if ($fullFileName && str_starts_with($fullFileName, $configuration->getProjectRoot())) {
-                    $fileName = str_replace(
-                        $configuration->getProjectRoot(),
-                        '',
-                        $fullFileName
+                    $classEntity = $this->context->getClassEntityCollection()->getEntityByClassName(
+                        $reflectionOfLink->getName()
                     );
+                    if ($classEntity) {
+                        $link = $getDocumentedClassUrlFunction($classEntity->getName());
+                    } else {
+                        $fileName = str_replace(
+                            $configuration->getProjectRoot(),
+                            '',
+                            $fullFileName
+                        );
+                        $link = "{$fileName}#L{$reflectionOfLink->getStartLine()}";
+                    }
 
                     if ($useShortLinkVersion) {
                         $type = $reflectionOfLink->getShortName();
@@ -37,9 +48,9 @@ final class StrTypeToUrl
                     }
 
                     if ($templateType == 'rst') {
-                        $preparedTypes[] = "`{$type} <{$fileName}#L{$reflectionOfLink->getStartLine()}>`_";
+                        $preparedTypes[] = "`{$type} <{$link}>`_";
                     } else {
-                        $preparedTypes[] = "<a href='{$fileName}#L{$reflectionOfLink->getStartLine()}'>{$type}</a>";
+                        $preparedTypes[] = "<a href='{$link}'>{$type}</a>";
                     }
                 }
             } else {
