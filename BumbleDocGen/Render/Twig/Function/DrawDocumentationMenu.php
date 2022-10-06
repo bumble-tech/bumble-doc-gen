@@ -7,7 +7,8 @@ namespace BumbleDocGen\Render\Twig\Function;
 use BumbleDocGen\Render\Context\Context;
 
 /**
- * Generate documentation menu in HTML format
+ * Generate documentation menu in HTML format. To generate the menu, the start page is taken,
+ * and all links with this page are recursively collected for it, after which the html menu is created.
  *
  * @example {{ drawDocumentationMenu() }}
  * @example {{ drawDocumentationMenu('/render/index.rst') }}
