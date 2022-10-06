@@ -8,8 +8,10 @@ use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Context\Context;
 
 /**
- * Loading plugin content documented class
+ * Process class template blocks with plugins. The method returns the content processed by plugins.
  * @internal
+ *
+ * @example {{ loadPluginsContent('some text', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_HEADER')) }}
  */
 final class LoadPluginsContent
 {
@@ -17,6 +19,12 @@ final class LoadPluginsContent
     {
     }
 
+    /**
+     * @param string $content Content to be processed by plugins
+     * @param ClassEntity $classEntity The entity for which we process the content block
+     * @param string $blockType Content block type. @see BaseTemplatePluginInterface::BLOCK_*
+     * @return string
+     */
     public function __invoke(string $content, ClassEntity $classEntity, string $blockType): string
     {
         $configuration = $this->context->getConfiguration();

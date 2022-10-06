@@ -10,6 +10,9 @@ use BumbleDocGen\Render\Context\Context;
 
 /**
  * Generate class map in HTML format
+ *
+ * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/BumbleDocGen/Render'])) }}
+ * @example {{ drawClassMap(classEntityCollection) }}
  */
 final class DrawClassMap
 {
@@ -20,6 +23,11 @@ final class DrawClassMap
     {
     }
 
+    /**
+     * @param ClassEntityCollection ...$classEntityCollections
+     *  The collection of entities for which the class map will be generated
+     * @return string
+     */
     public function __invoke(ClassEntityCollection ...$classEntityCollections): string
     {
         $structure = $this->convertDirectoryStructureToFormattedString(
