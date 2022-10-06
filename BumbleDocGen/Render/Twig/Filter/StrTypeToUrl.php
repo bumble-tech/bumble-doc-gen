@@ -8,12 +8,21 @@ use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 
+/**
+ * The filter converts the string with the data type into a link to the documented class, if possible.
+ */
 final class StrTypeToUrl
 {
     public function __construct(private Context $context)
     {
     }
 
+    /**
+     * @param string $text Processed text
+     * @param string $templateType Display format. rst or html
+     * @param bool $useShortLinkVersion Shorten or not the link name. When shortening, only the shortName of the class will be shown
+     * @return string
+     */
     public function __invoke(string $text, string $templateType = 'rst', bool $useShortLinkVersion = false): string
     {
         $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
