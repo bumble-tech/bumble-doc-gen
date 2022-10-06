@@ -44,6 +44,10 @@ final class ClassEntityCollection extends BaseEntityCollection
                 $classEntityCollection->add($classEntity);
             }
         }
+        foreach ($configuration->getPlugins()->getOnlyForClassEntityCollection() as $plugin) {
+            /**@var \BumbleDocGen\Plugin\ClassEntityCollectionPluginInterface $plugin */
+            $plugin->afterCreationClassEntityCollectionByReflector($classEntityCollection);
+        }
         return $classEntityCollection;
     }
 
