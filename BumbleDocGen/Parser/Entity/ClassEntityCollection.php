@@ -77,6 +77,13 @@ final class ClassEntityCollection extends BaseEntityCollection
         return $this->entities[$objectId] ?? null;
     }
 
+    public function getEntityByClassName(string $className): ?ClassEntity
+    {
+        $reflection = $this->getReflector()->reflectClass($className);
+        $objectId = ClassEntity::generateObjectIdByReflection($reflection);
+        return $this->get($objectId);
+    }
+
     public function getReflector(): Reflector
     {
         return $this->reflector;
