@@ -58,6 +58,18 @@ final class PluginsCollection implements \IteratorAggregate
         return $pluginsCollection;
     }
 
+    public function getOnlyForClassEntityCollection(): PluginsCollection
+    {
+        $pluginsCollection = new PluginsCollection();
+        foreach ($this as $plugin) {
+            /**@var PluginInterface $plugin */
+            if ($plugin instanceof ClassEntityCollectionPluginInterface) {
+                $pluginsCollection->add($plugin);
+            }
+        }
+        return $pluginsCollection;
+    }
+
     public function getOnlyForSourceLocator(): PluginsCollection
     {
         $pluginsCollection = new PluginsCollection();
