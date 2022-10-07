@@ -185,7 +185,7 @@ class ClassEntity extends BaseEntity
     {
         $modifiersString = [];
 
-        if ($this->getReflection()->isFinal()) {
+        if ($this->getReflection()->isFinal() && !$this->getReflection()->isEnum()) {
             $modifiersString[] = 'final';
         }
 
