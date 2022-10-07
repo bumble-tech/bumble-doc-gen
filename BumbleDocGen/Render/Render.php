@@ -7,6 +7,7 @@ namespace BumbleDocGen\Render;
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\ParsedFileDocRender\PhpClassToRst\PhpClassToRstDocRender;
 use BumbleDocGen\Render\Twig\BreadcrumbsHelper;
 use BumbleDocGen\Render\Twig\MainExtension;
 use Roave\BetterReflection\Reflector\Reflector;
@@ -117,14 +118,11 @@ final class Render
             $logger->info("Saving `{$filePatch}`");
         }
 
-        foreach ($context->getDocumentedClassesCollection() as $documentedClass) {
-            /**@var \BumbleDocGen\Render\Context\DocumentedClass $documentedClass */
-            $documentedClass->getFileName();
-            $content = $twig->render('class.rst.twig', [
-                'classEntity' => $documentedClass->getClassEntity(),
-                'breadcrumbs' => $documentedClass->getBreadcrumbsData(),
-            ]);
+        $phpClassToRstDocRender = new PhpClassToRstDocRender($this->configuration);
+        $phpClassToRstDocRender->setContext($context);
 
+        foreach ($context->getDocumentedClassesCollection() as $documentedClass) {
+            $content = $phpClassToRstDocRender->getRenderedText($documentedClass);
             $filePatch = "{$outputDir}{$documentedClass->getDocUrl()}";
             if (str_contains($filePatch, chr(0))) {
                 $logger->warning("Skipping `{$filePatch}`");
