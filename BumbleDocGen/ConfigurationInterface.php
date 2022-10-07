@@ -11,6 +11,7 @@ use BumbleDocGen\Parser\Entity\PropertyEntity;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginsCollection;
+use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
 use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
 use Psr\Log\LoggerInterface;
 
@@ -39,6 +40,8 @@ interface ConfigurationInterface
     public function getPlugins(): PluginsCollection;
 
     public function getTemplateFillers(): TemplateFillersCollection;
+
+    public function getEntityDocRendersCollection(): EntityDocRendersCollection;
 
     public function getLogger(): LoggerInterface;
 }

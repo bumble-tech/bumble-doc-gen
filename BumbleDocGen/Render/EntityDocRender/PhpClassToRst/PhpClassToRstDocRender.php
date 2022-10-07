@@ -30,12 +30,18 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
 
     public function isAvailableForEntity(DocumentedEntityWrapper $entityWrapper): bool
     {
-        return is_subclass_of($entityWrapper->getDocumentTransformableEntity(), ClassEntity::class);
+        return is_a($entityWrapper->getDocumentTransformableEntity(), ClassEntity::class);
     }
 
     public function setContext(Context $context): void
     {
-        $this->twig->addExtension(new MainExtension($context));
+        static $mainExtension;
+        if (!$mainExtension) {
+            $mainExtension = new MainExtension($context);
+            $this->twig->addExtension($mainExtension);
+        } else {
+            $mainExtension->changeContext($context);
+        }
     }
 
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string

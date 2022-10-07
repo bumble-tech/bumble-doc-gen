@@ -17,6 +17,8 @@ use BumbleDocGen\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentCla
 use BumbleDocGen\Parser\FilterCondition\MethodFilterCondition\VisibilityCondition as MethodVisibilityCondition;
 use BumbleDocGen\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondition as PropertyVisibilityCondition;
 use BumbleDocGen\Plugin\PluginsCollection;
+use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
+use BumbleDocGen\Render\EntityDocRender\PhpClassToRst\PhpClassToRstDocRender;
 use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -75,6 +77,16 @@ abstract class BaseConfiguration implements ConfigurationInterface
     public function getTemplateFillers(): TemplateFillersCollection
     {
         return new TemplateFillersCollection();
+    }
+
+    public function getEntityDocRendersCollection(): EntityDocRendersCollection
+    {
+        static $entityDocRendersCollection = null;
+        if (!$entityDocRendersCollection) {
+            $entityDocRendersCollection = new EntityDocRendersCollection();
+            $entityDocRendersCollection->add(new PhpClassToRstDocRender());
+        }
+        return $entityDocRendersCollection;
     }
 
     public function getLogger(): LoggerInterface

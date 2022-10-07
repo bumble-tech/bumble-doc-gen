@@ -121,11 +121,19 @@ final class Render
             $logger->info("Saving `{$filePatch}`");
         }
 
-        $phpClassToRstDocRender = new PhpClassToRstDocRender();
-        $phpClassToRstDocRender->setContext($context);
-
         foreach ($context->getEntityWrappersCollection() as $entityWrapper) {
-            $content = $phpClassToRstDocRender->getRenderedText($entityWrapper);
+            /**@var \BumbleDocGen\Render\Context\DocumentedEntityWrapper $entityWrapper * */
+            $docRender = $this->configuration->getEntityDocRendersCollection()->getFirstMatchingRender($entityWrapper);
+            if (!$docRender) {
+                $logger->warning(
+                    "Skipping `{$entityWrapper->getDocumentTransformableEntity()->getName()}`. Render not found."
+                );
+                continue;
+            }
+
+            $docRender->setContext($context);
+
+            $content = $docRender->getRenderedText($entityWrapper);
             $filePatch = "{$outputDir}{$entityWrapper->getDocUrl()}";
             if (str_contains($filePatch, chr(0))) {
                 $logger->warning("Skipping `{$filePatch}`");
