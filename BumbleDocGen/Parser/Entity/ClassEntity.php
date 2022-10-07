@@ -6,10 +6,11 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
+use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
 
-class ClassEntity extends BaseEntity
+class ClassEntity extends BaseEntity implements DocumentTransformableEntityInterface
 {
     private array $pluginsData = [];
 
