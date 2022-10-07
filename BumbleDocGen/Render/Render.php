@@ -13,6 +13,12 @@ use Roave\BetterReflection\Reflector\Reflector;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+/**
+ * Generates and processes files from directory TemplatesDir saving them to directory OutputDir
+ *
+ * @see ConfigurationInterface::getTemplatesDir()
+ * @see ConfigurationInterface::getOutputDir()
+ */
 final class Render
 {
     public function __construct(
@@ -22,6 +28,12 @@ final class Render
     ) {
     }
 
+    /**
+     * Remove all files from OutputDir before rendering process
+     *
+     * @see ConfigurationInterface::clearOutputDirBeforeDocGeneration()
+     * @see ConfigurationInterface::getOutputDir()
+     */
     private function clearOutputDir(string $dir): bool
     {
         if (is_dir($dir)) {
@@ -41,6 +53,13 @@ final class Render
         return false;
     }
 
+    /**
+     * Starting the rendering process
+     *
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function run(): void
     {
         $templateFolder = $this->configuration->getTemplatesDir();

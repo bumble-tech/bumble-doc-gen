@@ -15,12 +15,18 @@ use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
 
+/**
+ * This is an extension that is used to generate documents from templates
+ */
 final class MainExtension extends \Twig\Extension\AbstractExtension
 {
     public function __construct(private Context $context)
     {
     }
 
+    /**
+     * List of custom functions
+     */
     public function getFunctions(): array
     {
         return [
@@ -35,6 +41,9 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
         ];
     }
 
+    /**
+     * List of custom filters
+     */
     public function getFilters(): array
     {
         return [
