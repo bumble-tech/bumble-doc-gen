@@ -1,4 +1,4 @@
-{% include 'breadcrumbs.rst.twig' with {'breadcrumbs': breadcrumbs, 'title': classEntity.getShortName()} only %}
+{{ breadcrumbs | raw }}
 
 
 {% include '_classHeader.rst.twig' with {'classEntity': classEntity} only %}

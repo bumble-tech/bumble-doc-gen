@@ -66,7 +66,6 @@ final class Render
         $templateFolder = $this->configuration->getTemplatesDir();
         $loader = new FilesystemLoader([
             $templateFolder,
-            $this->configuration->getClassTemplatesDir(),
         ]);
         $twig = new Environment($loader);
 
@@ -101,7 +100,11 @@ final class Render
                         $this->reflector,
                         $filePatch
                     ),
-                    'breadcrumbs' => $breadcrumbsHelper->getBreadcrumbs($filePatch, false),
+                    'breadcrumbs' => $breadcrumbsHelper->renderBreadcrumbs(
+                        $breadcrumbsHelper->getTemplateTitle($filePatch),
+                        $filePatch,
+                        false
+                    ),
                 ]);
 
                 $filePatch = str_replace('.twig', '', $filePatch);

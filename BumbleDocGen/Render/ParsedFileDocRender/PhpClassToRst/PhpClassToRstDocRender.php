@@ -20,7 +20,6 @@ class PhpClassToRstDocRender implements ParsedFileDocRenderInterface
     {
         $loader = new FilesystemLoader([
             __DIR__ . '/templates',
-            $configuration->getClassTemplatesDir()
         ]);
         $this->twig = new Environment($loader);
     }
@@ -34,7 +33,7 @@ class PhpClassToRstDocRender implements ParsedFileDocRenderInterface
     {
         return $this->twig->render('class.rst.twig', [
             'classEntity' => $documentedClass->getClassEntity(),
-            'breadcrumbs' => $documentedClass->getBreadcrumbsData(),
+            'breadcrumbs' => $documentedClass->renderBreadcrumbs(),
         ]);
     }
 }

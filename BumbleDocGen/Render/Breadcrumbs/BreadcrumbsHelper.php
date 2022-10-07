@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Breadcrumbs;
 
 use BumbleDocGen\ConfigurationInterface;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 final class BreadcrumbsHelper
 {
@@ -35,7 +37,7 @@ final class BreadcrumbsHelper
         return $templateContentCache[$templateName];
     }
 
-    private function getTemplateTitle(string $templateName): string
+    public function getTemplateTitle(string $templateName): string
     {
         $code = $this->loadTemplateContent($templateName);
         if (preg_match_all('/({%)( ?)(set)( )(title)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
@@ -73,5 +75,20 @@ final class BreadcrumbsHelper
             ];
         } while ($filePatch = $this->getPrevPage($filePatch));
         return array_reverse($breadcrumbs);
+    }
+
+    public function renderBreadcrumbs(string $currentPageTitle, string $filePatch, bool $fromCurrent = true): string
+    {
+        static $twig;
+        if (!$twig) {
+            $loader = new FilesystemLoader([
+                __DIR__ . '/templates',
+            ]);
+            $twig = new Environment($loader);
+        }
+        return $twig->render('breadcrumbs.rst.twig', [
+            'currentPageTitle' => $currentPageTitle,
+            'breadcrumbs' => $this->getBreadcrumbs($filePatch, $fromCurrent),
+        ]);
     }
 }

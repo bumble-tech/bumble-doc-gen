@@ -24,7 +24,7 @@ final class DocumentedClass
     {
         return substr(
             base_convert(
-                md5(serialize($this->getBreadcrumbsData()) . $this->classEntity->getName()),
+                md5($this->renderBreadcrumbs() . $this->classEntity->getName()),
                 16,
                 32
             ),
@@ -44,9 +44,12 @@ final class DocumentedClass
         return $this->classEntity;
     }
 
-    public function getBreadcrumbsData(): array
+    public function renderBreadcrumbs(): string
     {
-        return $this->breadcrumbsHelper->getBreadcrumbs($this->initiatorFilePath);
+        return $this->breadcrumbsHelper->renderBreadcrumbs(
+            $this->classEntity->getShortName(),
+            $this->initiatorFilePath
+        );
     }
 
     public function getDocUrl(): string
