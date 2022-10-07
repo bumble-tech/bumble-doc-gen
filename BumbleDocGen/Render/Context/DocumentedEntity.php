@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Context;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 
 final class DocumentedEntity
@@ -14,7 +13,7 @@ final class DocumentedEntity
 
     public function __construct(
         private ConfigurationInterface $configuration,
-        private ClassEntity $classEntity,
+        private DocumentTransformableEntityInterface $documentTransformableEntity,
         private string $initiatorFilePath
     ) {
         $this->breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
@@ -24,7 +23,7 @@ final class DocumentedEntity
     {
         return substr(
             base_convert(
-                md5($this->renderBreadcrumbs() . $this->classEntity->getName()),
+                md5($this->renderBreadcrumbs() . $this->documentTransformableEntity->getName()),
                 16,
                 32
             ),
@@ -35,19 +34,19 @@ final class DocumentedEntity
 
     public function getFileName(): string
     {
-        $className = str_replace('\\', '_', $this->classEntity->getShortName());
+        $className = str_replace('\\', '_', $this->documentTransformableEntity->getShortName());
         return "{$className}_{$this->getKey()}.rst";
     }
 
-    public function getClassEntity(): ClassEntity
+    public function getDocumentTransformableEntity(): DocumentTransformableEntityInterface
     {
-        return $this->classEntity;
+        return $this->documentTransformableEntity;
     }
 
     public function renderBreadcrumbs(): string
     {
         return $this->breadcrumbsHelper->renderBreadcrumbs(
-            $this->classEntity->getShortName(),
+            $this->documentTransformableEntity->getShortName(),
             $this->initiatorFilePath
         );
     }
