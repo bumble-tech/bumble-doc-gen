@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Render\Twig;
+namespace BumbleDocGen\Render\Breadcrumbs;
 
 use BumbleDocGen\ConfigurationInterface;
 

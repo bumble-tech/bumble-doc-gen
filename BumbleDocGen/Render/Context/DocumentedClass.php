@@ -6,7 +6,7 @@ namespace BumbleDocGen\Render\Context;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntity;
-use BumbleDocGen\Render\Twig\BreadcrumbsHelper;
+use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 
 final class DocumentedClass
 {
