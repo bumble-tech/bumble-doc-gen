@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Render\ParsedFileDocRender\PhpClassToRst;
+namespace BumbleDocGen\Render\EntityDocRender\PhpClassToRst;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedClass;
-use BumbleDocGen\Render\ParsedFileDocRender\ParsedFileDocRenderInterface;
+use BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Render\Twig\MainExtension;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-class PhpClassToRstDocRender implements ParsedFileDocRenderInterface
+class PhpClassToRstDocRender implements EntityDocRenderInterface
 {
     private Environment $twig;
 

@@ -8,7 +8,7 @@ use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\ParsedFileDocRender\PhpClassToRst\PhpClassToRstDocRender;
+use BumbleDocGen\Render\EntityDocRender\PhpClassToRst\PhpClassToRstDocRender;
 use BumbleDocGen\Render\Twig\MainExtension;
 use Roave\BetterReflection\Reflector\Reflector;
 use Twig\Environment;

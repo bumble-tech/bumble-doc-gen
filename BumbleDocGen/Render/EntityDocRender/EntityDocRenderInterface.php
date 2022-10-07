@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Render\ParsedFileDocRender;
+namespace BumbleDocGen\Render\EntityDocRender;
 
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedClass;
 
-interface ParsedFileDocRenderInterface
+interface EntityDocRenderInterface
 {
     public function setContext(Context $context): void;
 
