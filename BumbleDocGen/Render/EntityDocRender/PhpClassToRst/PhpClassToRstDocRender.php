@@ -12,6 +12,9 @@ use BumbleDocGen\Render\Twig\MainExtension;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+/**
+ * Rendering PHP classes into rst format documents (for display on github)
+ */
 class PhpClassToRstDocRender implements EntityDocRenderInterface
 {
     private Environment $twig;

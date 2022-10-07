@@ -22,6 +22,9 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Basic configuration for project documentation
+ */
 abstract class BaseConfiguration implements ConfigurationInterface
 {
     public function clearOutputDirBeforeDocGeneration(): bool

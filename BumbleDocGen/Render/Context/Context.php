@@ -9,6 +9,9 @@ use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 use Roave\BetterReflection\Reflector\Reflector;
 
+/**
+ * Document rendering context
+ */
 final class Context
 {
     private string $currentTemplateFilePath = '';
@@ -23,11 +26,17 @@ final class Context
         $this->entityWrappersCollection = new DocumentedEntityWrappersCollection();
     }
 
+    /**
+     * Saving the path to the template file that is currently being worked on in the context
+     */
     public function setCurrentTemplateFilePatch(string $currentTemplateFilePath): void
     {
         $this->currentTemplateFilePath = $currentTemplateFilePath;
     }
 
+    /**
+     * Getting the path to the template file that is currently being worked on
+     */
     public function getCurrentTemplateFilePatch(): string
     {
         return $this->currentTemplateFilePath;

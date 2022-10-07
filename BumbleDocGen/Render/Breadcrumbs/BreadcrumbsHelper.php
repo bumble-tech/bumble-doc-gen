@@ -8,9 +8,18 @@ use BumbleDocGen\ConfigurationInterface;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+/**
+ * Helper class for working with breadcrumbs
+ */
 final class BreadcrumbsHelper
 {
+    /**
+     * Main documentation page name
+     */
     public const MAIN_PAGE_NAME = 'readme.rst';
+    /**
+     * The name of the file that will be the entry point when switching between pages
+     */
     public const DEFAULT_PREV_PAGE_NAME = 'index.rst';
 
     public function __construct(private ConfigurationInterface $configuration)
@@ -37,16 +46,6 @@ final class BreadcrumbsHelper
         return $templateContentCache[$templateName];
     }
 
-    public function getTemplateTitle(string $templateName): string
-    {
-        $code = $this->loadTemplateContent($templateName);
-        if (preg_match_all('/({%)( ?)(set)( )(title)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
-            return array_reverse($matches[8])[0];
-        }
-
-        return pathinfo($templateName, PATHINFO_FILENAME);
-    }
-
     private function getPrevPage(string $templateName): ?string
     {
         $code = $this->loadTemplateContent($templateName);
@@ -60,6 +59,35 @@ final class BreadcrumbsHelper
         return $pathParts ? implode('/', $pathParts) . "/{$defaultValue}" : null;
     }
 
+    /**
+     * Get the name of a template by its URL.
+     * Only templates with .twig extension are processed.
+     * The title is parsed from the `title` variable in the template
+     *
+     * @example
+     *  // variable in template:
+     *  // {% set title = 'Some template title' %}
+     *
+     *  $breadcrumbsHelper->getTemplateTitle() == 'Some template title'; // is true
+     */
+    public function getTemplateTitle(string $templateName): string
+    {
+        $code = $this->loadTemplateContent($templateName);
+        if (preg_match_all('/({%)( ?)(set)( )(title)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
+            return array_reverse($matches[8])[0];
+        }
+
+        return pathinfo($templateName, PATHINFO_FILENAME);
+    }
+
+    /**
+     * Get breadcrumbs as an array
+     *
+     * @param string $filePatch
+     * @param bool $fromCurrent
+     *
+     * @return array<int, array{url: string, title: string}>
+     */
     public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): array
     {
         $breadcrumbs = [];
