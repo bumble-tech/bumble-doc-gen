@@ -124,9 +124,9 @@ final class Render
         $phpClassToRstDocRender = new PhpClassToRstDocRender();
         $phpClassToRstDocRender->setContext($context);
 
-        foreach ($context->getDocumentedEntityCollection() as $documentedEntity) {
-            $content = $phpClassToRstDocRender->getRenderedText($documentedEntity);
-            $filePatch = "{$outputDir}{$documentedEntity->getDocUrl()}";
+        foreach ($context->getEntityWrappersCollection() as $entityWrapper) {
+            $content = $phpClassToRstDocRender->getRenderedText($entityWrapper);
+            $filePatch = "{$outputDir}{$entityWrapper->getDocUrl()}";
             if (str_contains($filePatch, chr(0))) {
                 $logger->warning("Skipping `{$filePatch}`");
                 continue;

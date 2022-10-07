@@ -6,7 +6,7 @@ namespace BumbleDocGen\Render\EntityDocRender\PhpClassToRst;
 
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Context\DocumentedEntity;
+use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Render\Twig\MainExtension;
 use Twig\Environment;
@@ -24,9 +24,9 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
         $this->twig = new Environment($loader);
     }
 
-    public function isAvailableForDocumentedEntity(DocumentedEntity $documentedClass): bool
+    public function isAvailableForEntity(DocumentedEntityWrapper $entityWrapper): bool
     {
-        return is_subclass_of($documentedClass->getDocumentTransformableEntity(), ClassEntity::class);
+        return is_subclass_of($entityWrapper->getDocumentTransformableEntity(), ClassEntity::class);
     }
 
     public function setContext(Context $context): void
@@ -34,11 +34,11 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
         $this->twig->addExtension(new MainExtension($context));
     }
 
-    public function getRenderedText(DocumentedEntity $documentedEntity): string
+    public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string
     {
         return $this->twig->render('class.rst.twig', [
-            'classEntity' => $documentedEntity->getDocumentTransformableEntity(),
-            'breadcrumbs' => $documentedEntity->renderBreadcrumbs(),
+            'classEntity' => $entityWrapper->getDocumentTransformableEntity(),
+            'breadcrumbs' => $entityWrapper->renderBreadcrumbs(),
         ]);
     }
 }

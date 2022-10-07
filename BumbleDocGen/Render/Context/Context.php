@@ -12,7 +12,7 @@ use Roave\BetterReflection\Reflector\Reflector;
 final class Context
 {
     private string $currentTemplateFilePath = '';
-    private DocumentedEntityCollection $documentedEntityCollection;
+    private DocumentedEntityWrappersCollection $entityWrappersCollection;
 
     public function __construct(
         private Reflector $reflector,
@@ -20,7 +20,7 @@ final class Context
         private ClassEntityCollection $classEntityCollection,
         private BreadcrumbsHelper $breadcrumbsHelper
     ) {
-        $this->documentedEntityCollection = new DocumentedEntityCollection();
+        $this->entityWrappersCollection = new DocumentedEntityWrappersCollection();
     }
 
     public function setCurrentTemplateFilePatch(string $currentTemplateFilePath): void
@@ -48,9 +48,9 @@ final class Context
         return $this->classEntityCollection;
     }
 
-    public function getDocumentedEntityCollection(): DocumentedEntityCollection
+    public function getEntityWrappersCollection(): DocumentedEntityWrappersCollection
     {
-        return $this->documentedEntityCollection;
+        return $this->entityWrappersCollection;
     }
 
     public function getBreadcrumbsHelper(): BreadcrumbsHelper
