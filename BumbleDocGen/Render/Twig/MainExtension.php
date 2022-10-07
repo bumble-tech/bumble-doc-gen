@@ -27,6 +27,11 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     {
     }
 
+    public function changeContext(Context $context): void
+    {
+        $this->context = $context;
+    }
+
     /**
      * List of custom functions
      */
@@ -37,7 +42,11 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
                 'is_safe' => ['html'],
             ]),
             new \Twig\TwigFunction('drawClassMap', new DrawClassMap($this->context), ['is_safe' => ['html']]),
-            new \Twig\TwigFunction('drawDocumentationMenu', new DrawDocumentationMenu($this->context), ['is_safe' => ['html']]),
+            new \Twig\TwigFunction(
+                'drawDocumentationMenu',
+                new DrawDocumentationMenu($this->context),
+                ['is_safe' => ['html']]
+            ),
             new \Twig\TwigFunction('loadPluginsContent', new LoadPluginsContent($this->context), [
                 'is_safe' => ['html'],
             ]),
