@@ -12,6 +12,12 @@
 
 {{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_MAIN_INFO')) }}
 
+{% if classEntity.getCasesNames() %}
+Cases:
+-----------------------
+
+{% include '_enumCases.rst.twig' with {'classEntity': classEntity} only %}
+{% endif %}
 
 {% if not classEntity.getMethodEntityCollection().getInitializations().isEmpty() %}
 Initialization methods:
