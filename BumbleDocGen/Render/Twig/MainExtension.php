@@ -7,6 +7,7 @@ namespace BumbleDocGen\Render\Twig;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Render\Twig\Filter\FixStrSize;
+use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Render\Twig\Filter\Quotemeta;
 use BumbleDocGen\Render\Twig\Filter\RemoveLineBrakes;
@@ -56,6 +57,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
             new \Twig\TwigFilter('removeLineBrakes', new RemoveLineBrakes()),
             new \Twig\TwigFilter('addIndentFromLeft', new AddIndentFromLeft(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('fixStrSize', new FixStrSize(), ['is_safe' => ['html']]),
+            new \Twig\TwigFilter('htmlToRst', new HtmlToRst(), ['is_safe' => ['html']]),
         ];
     }
 }
