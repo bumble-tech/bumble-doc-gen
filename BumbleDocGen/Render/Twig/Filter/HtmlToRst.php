@@ -9,6 +9,10 @@ final class HtmlToRst
 {
     public function __invoke(string $text): string
     {
-        return ".. raw:: html\n\n {$text}";
+        static $addIndentFromLeftFunction;
+        if (!$addIndentFromLeftFunction) {
+            $addIndentFromLeftFunction = new AddIndentFromLeft();
+        }
+        return ".. raw:: html\n\n {$addIndentFromLeftFunction($text, 1)}";
     }
 }
