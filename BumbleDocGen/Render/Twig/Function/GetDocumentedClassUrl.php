@@ -14,8 +14,10 @@ use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
  * Get the URL of a documented class by its name. If the class is found, next to the file where this method was called,
  * the `_Classes` directory will be created, in which the documented class file will be created
  *
+ * @note This function initiates the creation of documents for the displayed classes
  * @see DocumentedEntityWrapper
  * @see DocumentedEntityWrappersCollection
+ * @see Context::$entityWrappersCollection
  *
  * @example {{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}
  * @example {{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
@@ -34,6 +36,7 @@ final class GetDocumentedClassUrl
      *  If the class is not found, the DEFAULT_URL value will be returned.
      * @param string $cursor
      *  Cursor on the page of the documented class (for example, the name of a method or property)
+     *
      * @return string
      */
     public function __invoke(string $className, string $cursor = ''): string

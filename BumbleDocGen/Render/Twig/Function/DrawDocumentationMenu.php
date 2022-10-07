@@ -10,6 +10,9 @@ use BumbleDocGen\Render\Context\Context;
  * Generate documentation menu in HTML format. To generate the menu, the start page is taken,
  * and all links with this page are recursively collected for it, after which the html menu is created.
  *
+ * @note This function initiates the creation of documents for the displayed classes
+ * @see GetDocumentedClassUrl
+ *
  * @example {{ drawDocumentationMenu() }}
  * @example {{ drawDocumentationMenu('/render/index.rst') }}
  */
@@ -26,6 +29,7 @@ final class DrawDocumentationMenu
      * @param null|int $maxDeep
      *  Maximum parsing depth of documented links starting from the current page.
      *  By default, this restriction is disabled.
+     *
      * @return string
      */
     public function __invoke(?string $startPageKey = null, ?int $maxDeep = null): string

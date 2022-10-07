@@ -10,6 +10,9 @@ use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 
 /**
  * The filter converts the string with the data type into a link to the documented class, if possible.
+ *
+ * @note This filter initiates the creation of documents for the displayed classes
+ * @see GetDocumentedClassUrl
  */
 final class StrTypeToUrl
 {
@@ -21,6 +24,7 @@ final class StrTypeToUrl
      * @param string $text Processed text
      * @param string $templateType Display format. rst or html
      * @param bool $useShortLinkVersion Shorten or not the link name. When shortening, only the shortName of the class will be shown
+     *
      * @return string
      */
     public function __invoke(string $text, string $templateType = 'rst', bool $useShortLinkVersion = false): string
