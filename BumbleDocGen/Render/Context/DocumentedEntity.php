@@ -8,7 +8,7 @@ use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 
-final class DocumentedClass
+final class DocumentedEntity
 {
     private BreadcrumbsHelper $breadcrumbsHelper;
 

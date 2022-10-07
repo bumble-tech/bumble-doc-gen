@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Context;
 
-final class DocumentedClassesCollection implements \IteratorAggregate
+final class DocumentedEntityCollection implements \IteratorAggregate
 {
-    /** @var DocumentedClass[] */
+    /** @var DocumentedEntity[] */
     private array $documentedClasses = [];
 
     public function getIterator(): \Generator
@@ -14,7 +14,7 @@ final class DocumentedClassesCollection implements \IteratorAggregate
         yield from $this->documentedClasses;
     }
 
-    public function add(DocumentedClass $documentedClass): DocumentedClassesCollection
+    public function add(DocumentedEntity $documentedClass): DocumentedEntityCollection
     {
         $this->documentedClasses[$documentedClass->getKey()] = $documentedClass;
         return $this;

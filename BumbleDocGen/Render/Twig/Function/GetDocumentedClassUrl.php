@@ -6,7 +6,7 @@ namespace BumbleDocGen\Render\Twig\Function;
 
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Context\DocumentedClass;
+use BumbleDocGen\Render\Context\DocumentedEntity;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 
 /**
@@ -40,13 +40,13 @@ final class GetDocumentedClassUrl
         $reflector = $this->context->getReflector();
         if (ParserHelper::isClassLoaded($reflector, $className)) {
             $classEntityCollection = $this->context->getClassEntityCollection();
-            $documentedClassesCollection = $this->context->getDocumentedClassesCollection();
+            $documentedEntityCollection = $this->context->getDocumentedEntityCollection();
             $classEntity = $classEntityCollection->get($className);
             if (!is_null($classEntity)) {
-                $documentedClass = new DocumentedClass(
+                $documentedClass = new DocumentedEntity(
                     $this->context->getConfiguration(), $classEntity, $this->context->getCurrentTemplateFilePatch()
                 );
-                $documentedClassesCollection->add($documentedClass);
+                $documentedEntityCollection->add($documentedClass);
                 $url = $this->context->getConfiguration()->getOutputDirBaseUrl() . $documentedClass->getDocUrl();
             } else {
                 $configuration = $this->context->getConfiguration();
