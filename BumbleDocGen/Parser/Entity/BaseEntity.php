@@ -372,4 +372,15 @@ abstract class BaseEntity
         $examples = $this->getExamples();
         return $examples[0]['example'] ?? '';
     }
+
+    public function getDocNote(): string
+    {
+        static $docNoteCache = [];
+        $objectId = $this->getObjectId();
+        if (!isset($docNoteCache[$objectId])) {
+            $docBlock = $this->getDocBlock();
+            $docNoteCache[$objectId] = (string)($docBlock->getTagsByName('note')[0] ?? '');
+        }
+        return $docNoteCache[$objectId];
+    }
 }
