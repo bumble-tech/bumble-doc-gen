@@ -303,4 +303,9 @@ class ClassEntity extends BaseEntity
         $docBlock = $this->getDocBlock();
         return $docBlock->getSummary();
     }
+
+    public function isEnum(): bool
+    {
+        return $this->reflection->isEnum();
+    }
 }

@@ -34,7 +34,11 @@ final class ClassEntityCollection extends BaseEntityCollection
                 continue;
             }
 
-            $classEntity = ClassEntity::create(
+            $entityClassName = ClassEntity::class;
+            if ($classReflection->isEnum()) {
+                $entityClassName = EnumEntity::class;
+            }
+            $classEntity = $entityClassName::create(
                 $configuration,
                 $reflector,
                 $classReflection,
