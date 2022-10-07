@@ -16,7 +16,7 @@ class PhpClassToRstDocRender implements ParsedFileDocRenderInterface
 {
     private Environment $twig;
 
-    public function __construct(ConfigurationInterface $configuration)
+    public function __construct()
     {
         $loader = new FilesystemLoader([
             __DIR__ . '/templates',

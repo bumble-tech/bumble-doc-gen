@@ -22,8 +22,6 @@ interface ConfigurationInterface
 
     public function getTemplatesDir(): string;
 
-    public function getClassTemplatesDir(): string;
-
     public function getOutputDir(): string;
 
     public function getOutputDirBaseUrl(): string;

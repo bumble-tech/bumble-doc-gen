@@ -24,11 +24,6 @@ use Psr\Log\LoggerInterface;
 
 abstract class BaseConfiguration implements ConfigurationInterface
 {
-    public function getClassTemplatesDir(): string
-    {
-        return __DIR__ . '/Render/baseTemplates';
-    }
-
     public function clearOutputDirBeforeDocGeneration(): bool
     {
         return true;

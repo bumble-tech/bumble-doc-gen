@@ -121,7 +121,7 @@ final class Render
             $logger->info("Saving `{$filePatch}`");
         }
 
-        $phpClassToRstDocRender = new PhpClassToRstDocRender($this->configuration);
+        $phpClassToRstDocRender = new PhpClassToRstDocRender();
         $phpClassToRstDocRender->setContext($context);
 
         foreach ($context->getDocumentedClassesCollection() as $documentedClass) {
