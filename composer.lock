@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fa4c4f2fd375313b14c02c8d3bffa86",
+    "content-hash": "b021262e1a7de4f9b9d63cabb96931fe",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -526,16 +526,16 @@
         },
         {
             "name": "nette/php-generator",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/php-generator.git",
-                "reference": "ce449138b73ee788e818afeb41af51df3ec03710"
+                "reference": "80f158a2d2fa44c1785b16a3dcdabef3120b3e71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/php-generator/zipball/ce449138b73ee788e818afeb41af51df3ec03710",
-                "reference": "ce449138b73ee788e818afeb41af51df3ec03710",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/80f158a2d2fa44c1785b16a3dcdabef3120b3e71",
+                "reference": "80f158a2d2fa44c1785b16a3dcdabef3120b3e71",
                 "shasum": ""
             },
             "require": {
@@ -544,7 +544,7 @@
             },
             "require-dev": {
                 "nette/tester": "^2.4",
-                "nikic/php-parser": "^4.13",
+                "nikic/php-parser": "^4.15",
                 "phpstan/phpstan": "^1.0",
                 "tracy/tracy": "^2.8"
             },
@@ -578,7 +578,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 8.1 features.",
+            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 8.2 features.",
             "homepage": "https://nette.org",
             "keywords": [
                 "code",
@@ -588,9 +588,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/php-generator/issues",
-                "source": "https://github.com/nette/php-generator/tree/v4.0.3"
+                "source": "https://github.com/nette/php-generator/tree/v4.0.4"
             },
-            "time": "2022-09-12T23:43:02+00:00"
+            "time": "2022-10-06T21:43:12+00:00"
         },
         {
             "name": "nette/utils",
@@ -1578,16 +1578,16 @@
         },
         {
             "name": "roave/better-reflection",
-            "version": "5.5.1.1",
+            "version": "5.5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shcherbanich/BetterReflection.git",
-                "reference": "243663905374dd3533bfdd99673d650a8c5aee1e"
+                "reference": "c97cdc7fda1d63e32d280e68cabeee430138fc97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shcherbanich/BetterReflection/zipball/243663905374dd3533bfdd99673d650a8c5aee1e",
-                "reference": "243663905374dd3533bfdd99673d650a8c5aee1e",
+                "url": "https://api.github.com/repos/shcherbanich/BetterReflection/zipball/c97cdc7fda1d63e32d280e68cabeee430138fc97",
+                "reference": "c97cdc7fda1d63e32d280e68cabeee430138fc97",
                 "shasum": ""
             },
             "require": {
@@ -1649,9 +1649,9 @@
             ],
             "description": "Better Reflection - an improved code reflection API",
             "support": {
-                "source": "https://github.com/shcherbanich/BetterReflection/tree/5.5.1.1"
+                "source": "https://github.com/shcherbanich/BetterReflection/tree/5.5.1.2"
             },
-            "time": "2022-04-24T19:26:53+00:00"
+            "time": "2022-10-07T06:51:30+00:00"
         },
         {
             "name": "roave/signature",
