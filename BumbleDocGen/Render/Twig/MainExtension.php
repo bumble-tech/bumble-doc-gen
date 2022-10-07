@@ -8,6 +8,7 @@ use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Render\Twig\Filter\FixStrSize;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
+use BumbleDocGen\Render\Twig\Filter\Quotemeta;
 use BumbleDocGen\Render\Twig\Filter\RemoveLineBrakes;
 use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 use BumbleDocGen\Render\Twig\Function\DrawClassMap;
@@ -47,7 +48,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     public function getFilters(): array
     {
         return [
-            new \Twig\TwigFilter('quotemeta', 'quotemeta', ['is_safe' => ['html']]),
+            new \Twig\TwigFilter('quotemeta', new Quotemeta(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('strTypeToUrl', new StrTypeToUrl($this->context), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('prepareSourceLink', new PrepareSourceLink()),
             new \Twig\TwigFilter('removeLineBrakes', new RemoveLineBrakes()),
