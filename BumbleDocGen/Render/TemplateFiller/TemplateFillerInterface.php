@@ -8,6 +8,10 @@ use Roave\BetterReflection\Reflector\Reflector;
 
 interface TemplateFillerInterface
 {
-    /** @var array<string, string> */
+    /**
+     * Getting template parameters from filler
+     *
+     * @var array<string, string>
+     */
     public function getTemplateParameters(Reflector $reflector): array;
 }

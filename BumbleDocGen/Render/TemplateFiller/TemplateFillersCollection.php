@@ -11,6 +11,9 @@ final class TemplateFillersCollection
     /** @var array<string, TemplateFillerInterface[]> */
     private array $templateFillers = [];
 
+    /**
+     * Add a set of fillers for the template
+     */
     public function setForTemplate(
         string $templateName,
         TemplateFillerInterface ...$templateFillers
@@ -19,6 +22,9 @@ final class TemplateFillersCollection
         return $this;
     }
 
+    /**
+     * Get all parameters for a template, obtained using all its fillers
+     */
     public function getParametersForTemplate(Reflector $reflector, string $templateName): array
     {
         $parameters = [];
