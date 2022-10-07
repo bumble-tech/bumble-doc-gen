@@ -77,6 +77,9 @@ final class BreadcrumbsHelper
         return array_reverse($breadcrumbs);
     }
 
+    /**
+     * Returns an HTML string with rendered breadcrumbs
+     */
     public function renderBreadcrumbs(string $currentPageTitle, string $filePatch, bool $fromCurrent = true): string
     {
         static $twig;
@@ -86,7 +89,7 @@ final class BreadcrumbsHelper
             ]);
             $twig = new Environment($loader);
         }
-        return $twig->render('breadcrumbs.rst.twig', [
+        return $twig->render('breadcrumbs.html.twig', [
             'currentPageTitle' => $currentPageTitle,
             'breadcrumbs' => $this->getBreadcrumbs($filePatch, $fromCurrent),
         ]);
