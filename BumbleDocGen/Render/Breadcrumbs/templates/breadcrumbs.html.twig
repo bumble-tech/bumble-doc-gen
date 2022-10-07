@@ -1,7 +1,1 @@
-{% if breadcrumbs %}
-{% for item in breadcrumbs %}
- <a href="{{ item.url }}">{{ item.title }}</a> <b>/</b>
-{% endfor %}
- {{ currentPageTitle }}
-{% endif %}
-
+{% if breadcrumbs %}{% for item in breadcrumbs %}<a href="{{ item.url }}">{{ item.title }}</a> <b>/</b> {% endfor %}{{ currentPageTitle }}{% endif %}
