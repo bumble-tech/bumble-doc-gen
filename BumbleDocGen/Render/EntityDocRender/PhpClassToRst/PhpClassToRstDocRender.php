@@ -15,6 +15,7 @@ use Twig\Loader\FilesystemLoader;
 class PhpClassToRstDocRender implements EntityDocRenderInterface
 {
     private Environment $twig;
+    private ?Context $context = null;
 
     public function __construct()
     {
@@ -36,9 +37,17 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
 
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string
     {
+        $renderedBreadcrumbs = '';
+        if ($this->context) {
+            $renderedBreadcrumbs = $this->context->getBreadcrumbsHelper()->renderBreadcrumbs(
+                $entityWrapper->getDocumentTransformableEntity()->getShortName(),
+                $entityWrapper->getInitiatorFilePath()
+            );
+        }
+
         return $this->twig->render('class.rst.twig', [
             'classEntity' => $entityWrapper->getDocumentTransformableEntity(),
-            'breadcrumbs' => $entityWrapper->renderBreadcrumbs(),
+            'breadcrumbs' => $renderedBreadcrumbs,
         ]);
     }
 }

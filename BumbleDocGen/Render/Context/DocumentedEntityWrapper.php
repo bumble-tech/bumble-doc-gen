@@ -4,27 +4,19 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Context;
 
-use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
-
 /**
  * Wrapper for the class that was requested for documentation
  */
 final class DocumentedEntityWrapper
 {
-    private BreadcrumbsHelper $breadcrumbsHelper;
-
     /**
-     * @param ConfigurationInterface $configuration DocGen configuration
      * @param DocumentTransformableEntityInterface $documentTransformableEntity An entity that is allowed to be documented
      * @param string $initiatorFilePath The file in which the documentation of the entity was requested
      */
     public function __construct(
-        private ConfigurationInterface $configuration,
         private DocumentTransformableEntityInterface $documentTransformableEntity,
         private string $initiatorFilePath
     ) {
-        $this->breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
     }
 
     /**
@@ -34,7 +26,10 @@ final class DocumentedEntityWrapper
     {
         return substr(
             base_convert(
-                md5($this->renderBreadcrumbs() . $this->documentTransformableEntity->getName()),
+                md5(
+                    $this->documentTransformableEntity->getShortName() . $this->initiatorFilePath .
+                    $this->documentTransformableEntity->getName()
+                ),
                 16,
                 32
             ),
@@ -61,17 +56,6 @@ final class DocumentedEntityWrapper
     }
 
     /**
-     * Generate breadcrumbs for entity document
-     */
-    public function renderBreadcrumbs(): string
-    {
-        return $this->breadcrumbsHelper->renderBreadcrumbs(
-            $this->documentTransformableEntity->getShortName(),
-            $this->initiatorFilePath
-        );
-    }
-
-    /**
      * Get the relative path to the document to be generated
      */
     public function getDocUrl(): string
@@ -80,5 +64,10 @@ final class DocumentedEntityWrapper
         array_pop($pathParts);
         $path = implode('/', $pathParts);
         return "{$path}/_Classes/{$this->getFileName()}";
+    }
+
+    public function getInitiatorFilePath(): string
+    {
+        return $this->initiatorFilePath;
     }
 }

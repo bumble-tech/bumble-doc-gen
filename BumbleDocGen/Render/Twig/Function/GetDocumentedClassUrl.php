@@ -7,11 +7,15 @@ namespace BumbleDocGen\Render\Twig\Function;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
+use BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 
 /**
  * Get the URL of a documented class by its name. If the class is found, next to the file where this method was called,
  * the `_Classes` directory will be created, in which the documented class file will be created
+ *
+ * @see DocumentedEntityWrapper
+ * @see DocumentedEntityWrappersCollection
  *
  * @example {{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}
  * @example {{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
@@ -44,7 +48,7 @@ final class GetDocumentedClassUrl
             $classEntity = $classEntityCollection->get($className);
             if (!is_null($classEntity)) {
                 $documentedClass = new DocumentedEntityWrapper(
-                    $this->context->getConfiguration(), $classEntity, $this->context->getCurrentTemplateFilePatch()
+                    $classEntity, $this->context->getCurrentTemplateFilePatch()
                 );
                 $entityWrappersCollection->add($documentedClass);
                 $url = $this->context->getConfiguration()->getOutputDirBaseUrl() . $documentedClass->getDocUrl();
