@@ -86,7 +86,6 @@ final class Render
             $this->clearOutputDir($outputDir);
         }
 
-        $breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
         foreach ($allFiles as $templateFile) {
             /**@var \SplFileInfo $templateFile */
             $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
@@ -98,11 +97,6 @@ final class Render
                     'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
                         $this->reflector,
                         $filePatch
-                    ),
-                    'breadcrumbs' => $breadcrumbsHelper->renderBreadcrumbs(
-                        $breadcrumbsHelper->getTemplateTitle($filePatch),
-                        $filePatch,
-                        false
                     ),
                 ]);
 
