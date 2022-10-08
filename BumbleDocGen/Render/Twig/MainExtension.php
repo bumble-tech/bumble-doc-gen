@@ -14,6 +14,7 @@ use BumbleDocGen\Render\Twig\Filter\RemoveLineBrakes;
 use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 use BumbleDocGen\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
+use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use BumbleDocGen\Render\Twig\Function\IsSubclassOf;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
@@ -51,6 +52,9 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
                 'is_safe' => ['html'],
             ]),
             new \Twig\TwigFunction('isSubclassOf', new IsSubclassOf()),
+            new \Twig\TwigFunction('generatePageBreadcrumbs', new GeneratePageBreadcrumbs($this->context), [
+                'is_safe' => ['html'],
+            ]),
         ];
     }
 
