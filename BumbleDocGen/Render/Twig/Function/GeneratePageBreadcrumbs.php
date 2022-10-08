@@ -12,8 +12,12 @@ final class GeneratePageBreadcrumbs
     {
     }
 
-    public function __invoke(string $currentPageTitle, string $templatePath): string
+    public function __invoke(string $currentPageTitle, string $templatePath, bool $fromCurrent = false): string
     {
-        return $this->context->getBreadcrumbsHelper()->renderBreadcrumbs($currentPageTitle, $templatePath);
+        return $this->context->getBreadcrumbsHelper()->renderBreadcrumbs(
+            $currentPageTitle,
+            $templatePath,
+            $fromCurrent
+        );
     }
 }

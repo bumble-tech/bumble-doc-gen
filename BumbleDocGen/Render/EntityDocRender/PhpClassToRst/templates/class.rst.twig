@@ -1,4 +1,4 @@
-{{ breadcrumbs | raw | htmlToRst }}
+{{ generatePageBreadcrumbs(classEntity.getShortName(), generationInitiatorFilePath, true) | htmlToRst }}
 
 {% include '_classHeader.rst.twig' with {'classEntity': classEntity} only %}
 
