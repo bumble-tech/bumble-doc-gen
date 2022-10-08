@@ -105,7 +105,7 @@ final class Render
                 ]);
 
                 foreach ($plugins as $plugin) {
-                    $plugin->handleRenderedTemplateContent($content, $context);
+                    $content = $plugin->handleRenderedTemplateContent($content, $context);
                 }
 
                 $filePatch = str_replace('.twig', '', $filePatch);
