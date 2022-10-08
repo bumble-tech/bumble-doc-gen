@@ -42,6 +42,7 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
         } else {
             $mainExtension->changeContext($context);
         }
+        $this->context = $context;
     }
 
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string
