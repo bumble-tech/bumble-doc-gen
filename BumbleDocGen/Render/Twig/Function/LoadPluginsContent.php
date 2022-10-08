@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Twig\Function;
 
 use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\Plugin\BaseTemplatePluginInterface;
 use BumbleDocGen\Render\Context\Context;
 
 /**
  * Process class template blocks with plugins. The method returns the content processed by plugins.
+ *
  * @internal
  *
  * @example {{ loadPluginsContent('some text', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_HEADER')) }}
@@ -28,8 +30,9 @@ final class LoadPluginsContent
     public function __invoke(string $content, ClassEntity $classEntity, string $blockType): string
     {
         $configuration = $this->context->getConfiguration();
-        foreach ($configuration->getPlugins()->getOnlyForTemplates() as $plugin) {
-            /**@var \BumbleDocGen\Plugin\BaseTemplatePluginInterface $plugin */
+        /**@var BaseTemplatePluginInterface[] $plugins */
+        $plugins = $configuration->getPlugins()->filterByInterface(BaseTemplatePluginInterface::class);
+        foreach ($plugins as $plugin) {
             $content = $plugin->handleTemplateBlockContent($content, $classEntity, $blockType, $this->context);
         }
         return $content;

@@ -6,6 +6,8 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
+use BumbleDocGen\Plugin\ClassEntityCollectionPluginInterface;
+use BumbleDocGen\Plugin\ClassEntityPluginInterface;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflector\Reflector;
 
@@ -48,8 +50,9 @@ final class ClassEntityCollection extends BaseEntityCollection
                 $classEntityCollection->add($classEntity);
             }
         }
-        foreach ($configuration->getPlugins()->getOnlyForClassEntityCollection() as $plugin) {
-            /**@var \BumbleDocGen\Plugin\ClassEntityCollectionPluginInterface $plugin */
+        /** @var ClassEntityCollectionPluginInterface[] $plugins */
+        $plugins = $configuration->getPlugins()->filterByInterface(ClassEntityCollectionPluginInterface::class);
+        foreach ($plugins as $plugin) {
             $plugin->afterCreationClassEntityCollectionByReflector($classEntityCollection);
         }
         return $classEntityCollection;
@@ -61,8 +64,9 @@ final class ClassEntityCollection extends BaseEntityCollection
         if (!isset($this->entities[$key]) || $reload) {
             $this->logger->info("Parsing {$classEntity->getFileName()} file");
             $classEntity->loadClassMembers();
-            foreach ($this->configuration->getPlugins()->getOnlyForClassEntities() as $plugin) {
-                /**@var \BumbleDocGen\Plugin\ClassEntityPluginInterface $plugin */
+            /**@var ClassEntityPluginInterface[] $plugins */
+            $plugins = $this->configuration->getPlugins()->filterByInterface(ClassEntityPluginInterface::class);
+            foreach ($plugins as $plugin) {
                 $classEntity = $plugin->beforeAddingClassEntity($classEntity, $this);
             }
             $this->entities[$key] = $classEntity;

@@ -36,8 +36,10 @@ final class ProjectParser
 
         $locator = (new BetterReflection())->astLocator();
         $customSourceLocators = [];
-        foreach ($configuration->getPlugins()->getOnlyForSourceLocator() as $plugin) {
-            /** @var CustomSourceLocatorInterface $plugin */
+
+        /**@var CustomSourceLocatorInterface[] $plugins */
+        $plugins = $configuration->getPlugins()->filterByInterface(CustomSourceLocatorInterface::class);
+        foreach ($plugins as $plugin) {
             $customSourceLocators[] = $plugin->getSourceLocator()->convertToReflectorSourceLocator($locator);
         }
 
