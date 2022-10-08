@@ -34,6 +34,18 @@ final class PluginsCollection implements \IteratorAggregate
         return $this->plugins[$key] ?? null;
     }
 
+    public function filterByInterface(string $interfaceName): PluginsCollection
+    {
+        $pluginsCollection = new PluginsCollection();
+        foreach ($this as $plugin) {
+            /**@var PluginInterface $plugin */
+            if ($plugin instanceof $interfaceName) {
+                $pluginsCollection->add($plugin);
+            }
+        }
+        return $pluginsCollection;
+    }
+
     public function getOnlyForTemplates(): PluginsCollection
     {
         $pluginsCollection = new PluginsCollection();
