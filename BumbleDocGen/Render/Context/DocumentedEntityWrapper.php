@@ -24,18 +24,28 @@ final class DocumentedEntityWrapper
      */
     public function getKey(): string
     {
-        return substr(
-            base_convert(
-                md5(
-                    $this->documentTransformableEntity->getShortName() . $this->initiatorFilePath .
-                    $this->documentTransformableEntity->getName()
-                ),
-                16,
-                32
-            ),
-            0,
-            12
-        );
+        return md5("{$this->documentTransformableEntity->getName()}{$this->initiatorFilePath}");
+    }
+
+    private function getUniqueFileName(): string
+    {
+        static $fileNames = [];
+        static $usedKeysCounter = [];
+
+        $fileKey = $this->getKey();
+        if (!isset($fileNames[$fileKey])) {
+            $fileName = $this->documentTransformableEntity->getShortName();
+            $counterKey = "{$this->initiatorFilePath}{$fileName}";
+
+            if (!isset($usedKeysCounter[$counterKey])) {
+                $usedKeysCounter[$counterKey] = 1;
+            } else {
+                $usedKeysCounter[$counterKey] += 1;
+                $fileName .= '_' . $usedKeysCounter[$counterKey];
+            }
+            $fileNames[$fileKey] = $fileName;
+        }
+        return $fileNames[$fileKey];
     }
 
     /**
@@ -43,8 +53,7 @@ final class DocumentedEntityWrapper
      */
     public function getFileName(string $fileExtension = 'rst'): string
     {
-        $className = str_replace('\\', '_', $this->documentTransformableEntity->getShortName());
-        return "{$className}_{$this->getKey()}.{$fileExtension}";
+        return "{$this->getUniqueFileName()}.{$fileExtension}";
     }
 
     /**
