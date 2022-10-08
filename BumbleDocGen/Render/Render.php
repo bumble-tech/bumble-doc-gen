@@ -6,6 +6,7 @@ namespace BumbleDocGen\Render;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\Plugin\TemplatePluginInterface;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\MainExtension;
@@ -86,6 +87,9 @@ final class Render
             $this->clearOutputDir($outputDir);
         }
 
+        /**@var TemplatePluginInterface[] $plugins */
+        $plugins = $this->configuration->getPlugins()->filterByInterface(TemplatePluginInterface::class);
+
         foreach ($allFiles as $templateFile) {
             /**@var \SplFileInfo $templateFile */
             $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
@@ -99,6 +103,10 @@ final class Render
                         $filePatch
                     ),
                 ]);
+
+                foreach ($plugins as $plugin) {
+                    $plugin->handleRenderedTemplateContent($content, $context);
+                }
 
                 $filePatch = str_replace('.twig', '', $filePatch);
             } else {
