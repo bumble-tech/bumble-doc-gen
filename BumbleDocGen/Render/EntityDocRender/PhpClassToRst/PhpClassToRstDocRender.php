@@ -18,7 +18,6 @@ use Twig\Loader\FilesystemLoader;
 class PhpClassToRstDocRender implements EntityDocRenderInterface
 {
     private Environment $twig;
-    private ?Context $context = null;
 
     public function __construct()
     {
@@ -42,7 +41,6 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
         } else {
             $mainExtension->changeContext($context);
         }
-        $this->context = $context;
     }
 
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string
