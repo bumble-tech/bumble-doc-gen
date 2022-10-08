@@ -29,7 +29,7 @@ final class TemplateFillersCollection
     {
         $parameters = [];
         foreach ($this->templateFillers[$templateName] ?? [] as $item) {
-            $parameters = array_merge($parameters, $item->getTemplateParameters($reflector));
+            $parameters = array_merge($parameters, $item->getTemplateParameters($reflector, $templateName));
         }
         return $parameters;
     }

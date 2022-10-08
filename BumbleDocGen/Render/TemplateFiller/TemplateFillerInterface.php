@@ -11,7 +11,9 @@ interface TemplateFillerInterface
     /**
      * Getting template parameters from filler
      *
-     * @var array<string, string>
+     * @param Reflector $reflector
+     * @param string $templateName
+     * @return array
      */
-    public function getTemplateParameters(Reflector $reflector): array;
+    public function getTemplateParameters(Reflector $reflector, string $templateName): array;
 }
