@@ -80,6 +80,16 @@ final class BreadcrumbsHelper
         return pathinfo($templateName, PATHINFO_FILENAME);
     }
 
+    public function getTemplateLinkKey(string $templateName): ?string
+    {
+        $code = $this->loadTemplateContent($templateName);
+        if (preg_match_all('/({%)( ?)(set)( )(linkKey)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
+            return array_reverse($matches[8])[0];
+        }
+
+        return null;
+    }
+
     /**
      * Get breadcrumbs as an array
      *
