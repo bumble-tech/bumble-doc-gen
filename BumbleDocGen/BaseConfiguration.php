@@ -16,6 +16,7 @@ use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition as MethodOnlyFromCurrentClassCondition;
 use BumbleDocGen\Parser\FilterCondition\MethodFilterCondition\VisibilityCondition as MethodVisibilityCondition;
 use BumbleDocGen\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondition as PropertyVisibilityCondition;
+use BumbleDocGen\Plugin\PageLinker\PageLinkerPlugin;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
 use BumbleDocGen\Render\EntityDocRender\PhpClassToRst\PhpClassToRstDocRender;
@@ -71,7 +72,9 @@ abstract class BaseConfiguration implements ConfigurationInterface
 
     public function getPlugins(): PluginsCollection
     {
-        return PluginsCollection::create();
+        return PluginsCollection::create(
+            new PageLinkerPlugin()
+        );
     }
 
     public function getTemplateFillers(): TemplateFillersCollection
