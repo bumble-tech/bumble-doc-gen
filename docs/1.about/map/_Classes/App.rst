@@ -1,0 +1,83 @@
+.. raw:: html
+
+ <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.rst">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.rst">BumbleDocGen class map</a> <b>/</b> App</embed>
+
+
+Description of the `App </SelfDoc/Console/App.php>`_ class:
+-----------------------
+
+
+
+
+
+
+.. code-block:: php
+
+    namespace SelfDoc\Console;
+
+    class App extends Symfony\Component\Console\Application implements Symfony\Contracts\Service\ResetInterface
+
+
+..
+
+        An Application is the container for a collection of commands\.
+
+
+
+
+
+Initialization methods:
+-----------------------
+
+
+
+.. raw:: html
+
+  <ol>
+                <li><a href="#m-construct">__construct</a> </li>
+        </ol>
+
+
+
+
+
+Constants:
+-----------------------
+
+
+* ``VERSION``   **|** `source code </SelfDoc/Console/App.php#L10>`_ 
+
+
+
+
+
+
+
+--------------------
+
+
+
+
+Method details:
+-----------------------
+
+
+
+.. _m-construct:
+
+* `# <m-construct_>`_  ``__construct``   **|** `source code </SelfDoc/Console/App.php#L12>`_
+.. code-block:: php
+
+        public function __construct(): mixed;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** mixed
+
+________
+
+

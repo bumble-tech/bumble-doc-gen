@@ -1,0 +1,328 @@
+.. raw:: html
+
+ <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.rst">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.rst">BumbleDocGen class map</a> <b>/</b> PropertyEntity</embed>
+
+
+Description of the `PropertyEntity </BumbleDocGen/Parser/Entity/PropertyEntity.php>`_ class:
+-----------------------
+
+
+
+
+
+
+.. code-block:: php
+
+    namespace BumbleDocGen\Parser\Entity;
+
+    final class PropertyEntity extends BumbleDocGen\Parser\Entity\BaseEntity
+
+
+..
+
+        Class property entity
+
+
+
+
+
+Initialization methods:
+-----------------------
+
+
+
+.. raw:: html
+
+  <ol>
+                <li><a href="#mcreate">create</a> </li>
+        </ol>
+
+Methods:
+-----------------------
+
+
+
+.. raw:: html
+
+  <ol>
+                <li><a href="#mgetreflection">getReflection</a> </li>
+                <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
+                <li><a href="#mgetdocannotation">getDocAnnotation</a> </li>
+                <li><a href="#mgetname">getName</a> </li>
+                <li><a href="#mgetfilename">getFileName</a> </li>
+                <li><a href="#mgetline">getLine</a> </li>
+                <li><a href="#mgettype">getType</a> </li>
+                <li><a href="#mgetmodifiersstring">getModifiersString</a> </li>
+                <li><a href="#misimplementedinparentclass">isImplementedInParentClass</a> </li>
+                <li><a href="#mgetimplementingclassname">getImplementingClassName</a> </li>
+                <li><a href="#mgetdescription">getDescription</a> </li>
+        </ol>
+
+
+
+
+
+
+
+
+
+
+--------------------
+
+
+
+
+Method details:
+-----------------------
+
+
+
+.. _mcreate:
+
+* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L29>`_
+.. code-block:: php
+
+        public static function create(BumbleDocGen\ConfigurationInterface $configuration, Roave\BetterReflection\Reflector\Reflector $reflector, Roave\BetterReflection\Reflection\ReflectionClass $reflectionClass, Roave\BetterReflection\Reflection\ReflectionProperty $reflectionProperty, BumbleDocGen\Parser\AttributeParser $attributeParser, bool $reloadCache = false): BumbleDocGen\Parser\Entity\PropertyEntity;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$configuration</td>
+            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reflector</td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reflectionClass</td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflection/ReflectionClass.php#L63'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reflectionProperty</td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflection/ReflectionProperty.php#L38'>Roave\BetterReflection\Reflection\ReflectionProperty</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$attributeParser</td>
+            <td><a href='/docs/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reloadCache</td>
+            <td>bool</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntity </docs/_Classes/PropertyEntity\.rst>`_
+
+________
+
+.. _mgetreflection:
+
+* `# <mgetreflection_>`_  ``getReflection``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L47>`_
+.. code-block:: php
+
+        public function getReflection(): Roave\BetterReflection\Reflection\ReflectionProperty;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionProperty </vendor/roave/better-reflection/src/Reflection/ReflectionProperty\.php#L38>`_
+
+________
+
+.. _mgetimplementingreflectionclass:
+
+* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L52>`_
+.. code-block:: php
+
+        public function getImplementingReflectionClass(): Roave\BetterReflection\Reflection\ReflectionClass;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php#L63>`_
+
+________
+
+.. _mgetdocannotation:
+
+* `# <mgetdocannotation_>`_  ``getDocAnnotation``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L95>`_
+.. code-block:: php
+
+        public function getDocAnnotation(): object|null;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** object | null
+
+________
+
+.. _mgetname:
+
+* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L108>`_
+.. code-block:: php
+
+        public function getName(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _mgetfilename:
+
+* `# <mgetfilename_>`_  ``getFileName``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L113>`_
+.. code-block:: php
+
+        public function getFileName(): string|null;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string | null
+
+________
+
+.. _mgetline:
+
+* `# <mgetline_>`_  ``getLine``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L126>`_
+.. code-block:: php
+
+        public function getLine(): int;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** int
+
+________
+
+.. _mgettype:
+
+* `# <mgettype_>`_  ``getType``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L131>`_
+.. code-block:: php
+
+        public function getType(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _mgetmodifiersstring:
+
+* `# <mgetmodifiersstring_>`_  ``getModifiersString``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L154>`_
+.. code-block:: php
+
+        public function getModifiersString(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _misimplementedinparentclass:
+
+* `# <misimplementedinparentclass_>`_  ``isImplementedInParentClass``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L175>`_
+.. code-block:: php
+
+        public function isImplementedInParentClass(): bool;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** bool
+
+________
+
+.. _mgetimplementingclassname:
+
+* `# <mgetimplementingclassname_>`_  ``getImplementingClassName``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L180>`_
+.. code-block:: php
+
+        public function getImplementingClassName(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _mgetdescription:
+
+* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntity.php#L185>`_
+.. code-block:: php
+
+        public function getDescription(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+
