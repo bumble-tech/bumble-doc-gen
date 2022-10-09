@@ -10,6 +10,9 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionClassConstant;
 use Roave\BetterReflection\Reflector\Reflector;
 
+/**
+ * Class constant entity
+ */
 final class ConstantEntity extends BaseEntity
 {
     private function __construct(

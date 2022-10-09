@@ -10,6 +10,9 @@ use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
 
+/**
+ * Class entity
+ */
 class ClassEntity extends BaseEntity implements DocumentTransformableEntityInterface
 {
     private array $pluginsData = [];

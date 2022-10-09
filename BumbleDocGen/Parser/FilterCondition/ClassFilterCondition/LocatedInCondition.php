@@ -7,6 +7,9 @@ namespace BumbleDocGen\Parser\FilterCondition\ClassFilterCondition;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
+/**
+ * Checking the existence of a class in the specified directories
+ */
 final class LocatedInCondition implements ConditionInterface
 {
     public function __construct(

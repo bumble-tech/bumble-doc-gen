@@ -10,6 +10,9 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 use Roave\BetterReflection\Reflector\Reflector;
 
+/**
+ * Class method entity
+ */
 final class MethodEntity extends BaseEntity implements MethodEntityInterface
 {
     private function __construct(

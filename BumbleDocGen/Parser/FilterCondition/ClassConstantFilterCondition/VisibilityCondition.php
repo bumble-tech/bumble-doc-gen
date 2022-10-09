@@ -8,6 +8,9 @@ use BumbleDocGen\Parser\Entity\ConstantEntity;
 use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
+/**
+ * Constant access modifier check
+ */
 final class VisibilityCondition implements ConditionInterface
 {
     public function __construct(

@@ -1,0 +1,6 @@
+{% set title = 'Render class map' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+{{ "Render class map" | textToHeading('H1') }}
+
+{{ drawClassMap( classEntityCollection.filterByPaths(['/BumbleDocGen/Render'])) }}

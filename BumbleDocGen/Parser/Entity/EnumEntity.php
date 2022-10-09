@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
+/**
+ * Enum class entity
+ */
 final class EnumEntity extends ClassEntity
 {
     public function loadClassMembers(): void

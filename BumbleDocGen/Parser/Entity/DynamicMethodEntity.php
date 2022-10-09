@@ -11,9 +11,11 @@ use Roave\BetterReflection\Reflection\ReflectionMethod;
 use Roave\BetterReflection\Reflector\Reflector;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 
+/**
+ * Method obtained by parsing the "method" annotation
+ */
 final class DynamicMethodEntity implements MethodEntityInterface
 {
-
     private function __construct(
         private ConfigurationInterface $configuration,
         private Reflector $reflector,

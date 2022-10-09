@@ -10,6 +10,9 @@ use Roave\BetterReflection\SourceLocator\Type\MemoizingSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
 use Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator;
 
+/**
+ * Loads all files from the specified directories, which are traversed recursively
+ */
 final class RecursiveDirectoriesSourceLocator implements SourceLocatorInterface
 {
     public function __construct(private array $directories, private array $exclude = [])

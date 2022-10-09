@@ -1,0 +1,78 @@
+{% set title = 'Entity filter conditions' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+{{ "Entity filter conditions" | textToHeading('H1') }}
+
+In order to determine whether an entity can be added to a collection (for example, `ClassEntity`_ in a `ClassEntityCollection`_ ), filter conditions must be used.
+
+Filtering conditions must be set in the configuration:
+
+*  For classes - `ConfigurationInterface::classEntityFilterCondition()`_
+*  For class constants - `ConfigurationInterface::classConstantEntityFilterCondition()`_
+*  For class properties - `ConfigurationInterface::propertyEntityFilterCondition()`_
+*  For class methods - `ConfigurationInterface::methodEntityFilterCondition()`_
+
+**Usage example:**
+
+{{ "public function classEntityFilterCondition(ClassEntity $classEntity): ConditionInterface
+{
+    return new TrueCondition();
+}" | textToCodeBlockRst('php') }}
+
+
+Any conditions must comply with interface `ConditionInterface`_.
+
+To group conditions, there is a `ConditionGroup`_ in the documentation generator:
+
+{{ "public function methodEntityFilterCondition(MethodEntity $methodEntity): ConditionInterface {
+    return ConditionGroup::create(
+        ConditionGroupTypeEnum::AND,
+        new MethodVisibilityCondition(
+            $methodEntity,
+            VisibilityConditionModifier::PUBLIC
+        ),
+        new MethodOnlyFromCurrentClassCondition(
+            $methodEntity
+        )
+    );
+}" | textToCodeBlockRst('php') }}
+
+
+{{ "Built-in filter conditions" | textToHeading('H2') }}
+
+{% set filterConditions = classEntityCollection.filterByInterfaces(['BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
+
+{{ "Common filter conditions" | textToHeading('H3') }}
+
+{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/CommonFilterCondition']) %}
+#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
+
+{% endfor %}
+
+{{ "Class filter conditions" | textToHeading('H3') }}
+
+{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassFilterCondition']) %}
+#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
+
+{% endfor %}
+
+{{ "Method filter conditions" | textToHeading('H3') }}
+
+{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/MethodFilterCondition']) %}
+#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
+
+{% endfor %}
+
+{{ "Property filter conditions" | textToHeading('H3') }}
+
+{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/PropertyFilterCondition']) %}
+#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
+
+{% endfor %}
+
+{{ "Class constant filter conditions" | textToHeading('H3') }}
+
+{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassConstantFilterCondition']) %}
+#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
+
+{% endfor %}

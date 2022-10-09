@@ -7,6 +7,9 @@ namespace BumbleDocGen\Parser\FilterCondition\MethodFilterCondition;
 use BumbleDocGen\Parser\Entity\MethodEntity;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
+/**
+ * Only methods that belong to the current class (not parent)
+ */
 final class OnlyFromCurrentClassCondition implements ConditionInterface
 {
 

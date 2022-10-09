@@ -8,6 +8,9 @@ use BumbleDocGen\Parser\Entity\PropertyEntity;
 use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
+/**
+ * Property access modifier check
+ */
 final class VisibilityCondition implements ConditionInterface
 {
     public function __construct(

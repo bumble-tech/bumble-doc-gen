@@ -1,0 +1,23 @@
+{% set title = 'Entities' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+{{ "Entities" | textToHeading('H1') }}
+
+Entities are the result of class parsing.
+They are necessary so that in the template you can easily get any information about the required objects.
+
+{{ "Available entities" | textToHeading('H3') }}
+
+{% for entity in classEntityCollection.filterByParentClassNames(['BumbleDocGen\\Parser\\Entity\\BaseEntity']) %}
+#. `{{ entity.getShortName() }} <{{ getDocumentedClassUrl(entity.getName()) }}>`_ - {{ entity.getDescription() }}
+
+{% endfor %}
+
+{{ "Etities collections" | textToHeading('H3') }}
+
+To work with entities, we use collections, which have convenient ways to filter objects:
+
+{% for entity in classEntityCollection.filterByParentClassNames(['BumbleDocGen\\Parser\\Entity\\BaseEntityCollection']) %}
+#. `{{ entity.getShortName() }} <{{ getDocumentedClassUrl(entity.getName()) }}>`_
+
+{% endfor %}

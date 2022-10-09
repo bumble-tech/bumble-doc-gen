@@ -10,6 +10,9 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
 use Roave\BetterReflection\Reflector\Reflector;
 
+/**
+ * Class property entity
+ */
 final class PropertyEntity extends BaseEntity
 {
 

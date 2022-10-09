@@ -6,6 +6,9 @@ namespace BumbleDocGen\Parser\FilterCondition\CommonFilterCondition;
 
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
+/**
+ * False conditions, any object is not available
+ */
 final class FalseCondition implements ConditionInterface
 {
     public function canAddToCollection(): bool

@@ -7,6 +7,9 @@ namespace BumbleDocGen\Parser\FilterCondition\ClassFilterCondition;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
+/**
+ * Checking for an attribute on a class
+ */
 final class HasAttributeCondition implements ConditionInterface
 {
     public function __construct(

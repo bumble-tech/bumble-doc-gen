@@ -1,0 +1,6 @@
+{% set title = 'BumbleDocGen class map' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+Directory layout ( only documented files shown ):
+
+{{ drawClassMap( classEntityCollection ) }}

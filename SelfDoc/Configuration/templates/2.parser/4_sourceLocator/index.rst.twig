@@ -1,0 +1,34 @@
+{% set title = 'Source locators' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+{{ "Source locators" | textToHeading('H1') }}
+
+Source locators are needed so that the parser knows which files to parse, or to get data on a specific file after the primary parsing procedure
+
+Source locators are set in the configuration, in method `ConfigurationInterface::classEntityFilterCondition()`_.
+They can also be connected using plugins that implement interface `CustomSourceLocatorInterface`_
+
+**Usage example:**
+
+{{ 'public function getSourceLocators(): SourceLocatorsCollection
+{
+    return SourceLocatorsCollection::create(
+        new RecursiveDirectoriesSourceLocator([
+            "{$this->getProjectRoot()}/BumbleDocGen",
+            "{$this->getProjectRoot()}/SelfDoc",
+        ]),
+    );
+}' | textToCodeBlockRst('php') }}
+
+
+All source locators must implement the `SourceLocatorInterface`_ interface.
+
+
+{{ "Built-in source locators" | textToHeading('H2') }}
+
+{% set sourceLocators = classEntityCollection.filterByInterfaces(['BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable() %}
+
+{% for sourceLocator in sourceLocators %}
+#. `{{ sourceLocator.getShortName() }} <{{ getDocumentedClassUrl(sourceLocator.getName()) }}>`_ - {{ sourceLocator.getDescription() }}
+
+{% endfor %}
