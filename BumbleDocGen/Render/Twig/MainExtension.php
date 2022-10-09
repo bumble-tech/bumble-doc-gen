@@ -12,6 +12,7 @@ use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Render\Twig\Filter\Quotemeta;
 use BumbleDocGen\Render\Twig\Filter\RemoveLineBrakes;
 use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
+use BumbleDocGen\Render\Twig\Filter\TextToHeadingRst;
 use BumbleDocGen\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
 use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
@@ -71,6 +72,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
             new \Twig\TwigFilter('addIndentFromLeft', new AddIndentFromLeft(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('fixStrSize', new FixStrSize(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('htmlToRst', new HtmlToRst(), ['is_safe' => ['html']]),
+            new \Twig\TwigFilter('textToHeadingRst', new TextToHeadingRst()),
         ];
     }
 }
