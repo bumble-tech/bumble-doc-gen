@@ -6,6 +6,7 @@ namespace BumbleDocGen\Render\Twig;
 
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
+use BumbleDocGen\Render\Twig\Filter\EndTextBySeparatorRst;
 use BumbleDocGen\Render\Twig\Filter\FixStrSize;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
@@ -72,7 +73,8 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
             new \Twig\TwigFilter('addIndentFromLeft', new AddIndentFromLeft(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('fixStrSize', new FixStrSize(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('htmlToRst', new HtmlToRst(), ['is_safe' => ['html']]),
-            new \Twig\TwigFilter('textToHeadingRst', new TextToHeadingRst()),
+            new \Twig\TwigFilter('textToHeadingRst', new TextToHeadingRst(), ['is_safe' => ['html']]),
+            new \Twig\TwigFilter('endTextBySeparatorRst', new EndTextBySeparatorRst(), ['is_safe' => ['html']]),
         ];
     }
 }
