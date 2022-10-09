@@ -26,6 +26,9 @@ final class GetDocumentedClassUrl
 {
     public const DEFAULT_URL = '#';
 
+    /**
+     * @param Context $context Render context
+     */
     public function __construct(private Context $context)
     {
     }

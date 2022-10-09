@@ -8,7 +8,7 @@ use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 
 /**
- * Generate documentation menu in HTML format. To generate the menu, the start page is taken,
+ * Generate documentation menu in HTML or rst format. To generate the menu, the start page is taken,
  * and all links with this page are recursively collected for it, after which the html menu is created.
  *
  * @note This function initiates the creation of documents for the displayed classes
@@ -20,6 +20,10 @@ use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
  */
 final class DrawDocumentationMenu
 {
+    /**
+     * @param Context $context Render context
+     * @param string $templateType The type of string to be generated ( html or rst )
+     */
     public function __construct(private Context $context, private string $templateType = 'rst')
     {
     }

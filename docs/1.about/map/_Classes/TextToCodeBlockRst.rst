@@ -94,12 +94,12 @@ Method details:
             <tr>
             <td>$text</td>
             <td>string</td>
-            <td>-</td>
+            <td>Processed text</td>
         </tr>
             <tr>
             <td>$codeBlockType</td>
             <td>string</td>
-            <td>-</td>
+            <td>Code block type (e.g. php or console )</td>
         </tr>
         </tbody>
     </table>

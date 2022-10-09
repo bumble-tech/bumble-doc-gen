@@ -18,6 +18,9 @@ Description of the `ProjectParser </BumbleDocGen/Parser/ProjectParser.php>`_ cla
     final class ProjectParser
 
 
+..
+
+        Class for project parsing using source locators
 
 
 
@@ -67,7 +70,7 @@ Method details:
 
 .. _mcreate:
 
-* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L31>`_
+* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L34>`_
 .. code-block:: php
 
         public static function create(BumbleDocGen\ConfigurationInterface $configuration): BumbleDocGen\Parser\ProjectParser;
@@ -103,7 +106,7 @@ ________
 
 .. _mparse:
 
-* `# <mparse_>`_  ``parse``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L66>`_
+* `# <mparse_>`_  ``parse``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L69>`_
 .. code-block:: php
 
         public function parse(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -120,7 +123,7 @@ ________
 
 .. _mgetreflector:
 
-* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L76>`_
+* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L79>`_
 .. code-block:: php
 
         public function getReflector(): Roave\BetterReflection\Reflector\Reflector;

@@ -70,7 +70,7 @@ Method details:
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/RemoveLineBrakes.php#L12>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/RemoveLineBrakes.php#L15>`_
 .. code-block:: php
 
         public function __invoke(string $text): string;
@@ -94,7 +94,7 @@ Method details:
             <tr>
             <td>$text</td>
             <td>string</td>
-            <td>-</td>
+            <td>Processed text</td>
         </tr>
         </tbody>
     </table>

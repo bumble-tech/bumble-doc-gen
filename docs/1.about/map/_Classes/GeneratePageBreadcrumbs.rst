@@ -79,7 +79,7 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php#L15>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php#L19>`_
 .. code-block:: php
 
         public function __construct(BumbleDocGen\Render\Context\Context $context, string $templateType = 'rst'): mixed;
@@ -103,12 +103,12 @@ Method details:
             <tr>
             <td>$context</td>
             <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
-            <td>-</td>
+            <td>Render context</td>
         </tr>
             <tr>
             <td>$templateType</td>
             <td>string</td>
-            <td>-</td>
+            <td>The type of string to be generated ( html or rst )</td>
         </tr>
         </tbody>
     </table>
@@ -120,7 +120,7 @@ ________
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php#L29>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php#L33>`_
 .. code-block:: php
 
         public function __invoke(string $currentPageTitle, string $templatePath, bool $skipFirstTemplatePage = true): string;

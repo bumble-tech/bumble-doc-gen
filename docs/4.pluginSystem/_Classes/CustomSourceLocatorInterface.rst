@@ -79,7 +79,7 @@ Method details:
 
 **See:**
 
-#. `BumbleDocGen\\Parser\\ProjectParser::create\(\) </BumbleDocGen/Parser/ProjectParser.php#L31>`_ 
+#. `BumbleDocGen\\Parser\\ProjectParser::create\(\) </BumbleDocGen/Parser/ProjectParser.php#L34>`_ 
 
 ________
 

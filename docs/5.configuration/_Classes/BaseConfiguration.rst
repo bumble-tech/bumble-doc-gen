@@ -37,7 +37,7 @@ Methods:
 
   <ol>
                 <li><a href="#mclearoutputdirbeforedocgeneration">clearOutputDirBeforeDocGeneration</a> </li>
-                <li><a href="#mgetoutputdir">getOutputDir</a> </li>
+                <li><a href="#mgetoutputdir">getOutputDir</a> - <i>Directory where the documentation will be generated (absolute path)</i></li>
                 <li><a href="#mclassconstantentityfiltercondition">classConstantEntityFilterCondition</a> </li>
                 <li><a href="#mmethodentityfiltercondition">methodEntityFilterCondition</a> </li>
                 <li><a href="#mpropertyentityfiltercondition">propertyEntityFilterCondition</a> </li>
@@ -91,6 +91,9 @@ ________
         public function getOutputDir(): string;
 
 
+..
+
+    Directory where the documentation will be generated \(absolute path\)
 
 
 **Parameters:** not specified

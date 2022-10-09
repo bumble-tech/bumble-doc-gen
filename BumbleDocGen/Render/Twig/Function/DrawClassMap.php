@@ -10,7 +10,7 @@ use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 
 /**
- * Generate class map in HTML format
+ * Generate class map in HTML or rst format
  *
  * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/BumbleDocGen/Render'])) }}
  * @example {{ drawClassMap(classEntityCollection) }}

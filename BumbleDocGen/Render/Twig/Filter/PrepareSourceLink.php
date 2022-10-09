@@ -9,6 +9,9 @@ namespace BumbleDocGen\Render\Twig\Filter;
  */
 final class PrepareSourceLink
 {
+    /**
+     * @param string $text Processed text
+     */
     public function __invoke(string $text): string
     {
         return mb_strtolower(str_replace(['__', '_'], '-', $text));

@@ -10,8 +10,8 @@ namespace BumbleDocGen\Render\Twig\Filter;
 final class TextToCodeBlockRst
 {
     /**
-     * @param string $text
-     * @param string $codeBlockType
+     * @param string $text Processed text
+     * @param string $codeBlockType Code block type (e.g. php or console )
      * @return string
      */
     public function __invoke(string $text, string $codeBlockType): string

@@ -151,7 +151,7 @@ We use the twig template engine, you can get more information about working with
                         <tr>
                                 <td rowspan="3">
                     <a href="/docs/3.render/4_twigCustomFunctions/_Classes/DrawDocumentationMenu.rst">drawDocumentationMenu</a><br>
-                                        Generate documentation menu in HTML format. To generate the menu, the start page is taken, and all links with this page are recursively collected for it, after which the html menu is created.
+                                        Generate documentation menu in HTML or rst format. To generate the menu, the start page is taken, and all links with this page are recursively collected for it, after which the html menu is created.
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed classes</b></i><br>                </td>
                                 <td>
                     <b>$startPageKey</b>
@@ -221,7 +221,7 @@ We use the twig template engine, you can get more information about working with
                         <tr>
                                 <td rowspan="1">
                     <a href="/docs/3.render/4_twigCustomFunctions/_Classes/DrawClassMap.rst">drawClassMap</a><br>
-                                        Generate class map in HTML format
+                                        Generate class map in HTML or rst format
                                     </td>
                                 <td>
                     <b>$classEntityCollections</b>

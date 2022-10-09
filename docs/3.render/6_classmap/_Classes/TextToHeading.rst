@@ -20,7 +20,7 @@ Description of the `TextToHeading </BumbleDocGen/Render/Twig/Filter/TextToHeadin
 
 ..
 
-        Convert text to html header
+        Convert text to html or rst header
 
 
 

@@ -19,6 +19,9 @@ use Roave\BetterReflection\SourceLocator\Type\EvaledCodeSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\MemoizingSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\PhpInternalSourceLocator;
 
+/**
+ * Class for project parsing using source locators
+ */
 final class ProjectParser
 {
     private function __construct(

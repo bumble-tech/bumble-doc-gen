@@ -106,7 +106,7 @@ or
                     <tr>
                                                         <td >
                         <a href="/docs/3.render/3_twigCustomFilters/_Classes/EndTextBySeparatorRst.rst">endTextBySeparatorRst</a><br>
-                                                
+                                                Terminates a string with a delimiter (only in rst format)
                                             </td>
                                             <td colspan="3">The filter does not accept any additional parameters</td>
                                                 </tr>
@@ -196,7 +196,7 @@ or
                     <tr>
                                                         <td rowspan="3">
                         <a href="/docs/3.render/3_twigCustomFilters/_Classes/TextToHeading.rst">textToHeading</a><br>
-                                                Convert text to html header
+                                                Convert text to html or rst header
                                             </td>
                                                 </tr>
                             <tr>
@@ -231,7 +231,7 @@ or
                     <td>
                         <i>string</i>
                     </td>
-                    <td></td>
+                    <td>Code block type (e.g. php or console )</td>
                             </tr>
                                         <tr>
                 <td colspan="4">&nbsp;</td>

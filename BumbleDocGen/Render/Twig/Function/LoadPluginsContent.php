@@ -17,6 +17,9 @@ use BumbleDocGen\Render\Context\Context;
  */
 final class LoadPluginsContent
 {
+    /**
+     * @param Context $context Render context
+     */
     public function __construct(private Context $context)
     {
     }

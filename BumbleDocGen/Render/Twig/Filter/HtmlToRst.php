@@ -7,6 +7,9 @@ namespace BumbleDocGen\Render\Twig\Filter;
  */
 final class HtmlToRst
 {
+    /**
+     * @param string $text Processed text
+     */
     public function __invoke(string $text): string
     {
         static $addIndentFromLeftFunction;

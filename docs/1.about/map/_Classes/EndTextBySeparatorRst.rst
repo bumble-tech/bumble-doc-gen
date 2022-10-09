@@ -18,6 +18,9 @@ Description of the `EndTextBySeparatorRst </BumbleDocGen/Render/Twig/Filter/EndT
     final class EndTextBySeparatorRst
 
 
+..
+
+        Terminates a string with a delimiter \(only in rst format\)
 
 
 
@@ -67,7 +70,7 @@ Method details:
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/EndTextBySeparatorRst.php#L10>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/EndTextBySeparatorRst.php#L13>`_
 .. code-block:: php
 
         public function __invoke(string $text): string;
@@ -91,7 +94,7 @@ Method details:
             <tr>
             <td>$text</td>
             <td>string</td>
-            <td>-</td>
+            <td>Processed text</td>
         </tr>
         </tbody>
     </table>

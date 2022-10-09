@@ -36,10 +36,10 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetprojectroot">getProjectRoot</a> </li>
-                <li><a href="#mgettemplatesdir">getTemplatesDir</a> </li>
-                <li><a href="#mgetoutputdirbaseurl">getOutputDirBaseUrl</a> </li>
-                <li><a href="#mgetsourcelocators">getSourceLocators</a> </li>
+                <li><a href="#mgetprojectroot">getProjectRoot</a> - <i>Get project root (absolute path)</i></li>
+                <li><a href="#mgettemplatesdir">getTemplatesDir</a> - <i>Directory with documentation templates (absolute path)</i></li>
+                <li><a href="#mgetoutputdirbaseurl">getOutputDirBaseUrl</a> - <i>Base URL of the generated document</i></li>
+                <li><a href="#mgetsourcelocators">getSourceLocators</a> - <i>Get a collection of source locators</i></li>
                 <li><a href="#mclassentityfiltercondition">classEntityFilterCondition</a> </li>
                 <li><a href="#mgetplugins">getPlugins</a> </li>
         </ol>
@@ -71,6 +71,9 @@ Method details:
         public function getProjectRoot(): string;
 
 
+..
+
+    Get project root \(absolute path\)
 
 
 **Parameters:** not specified
@@ -88,6 +91,9 @@ ________
         public function getTemplatesDir(): string;
 
 
+..
+
+    Directory with documentation templates \(absolute path\)
 
 
 **Parameters:** not specified
@@ -105,6 +111,9 @@ ________
         public function getOutputDirBaseUrl(): string;
 
 
+..
+
+    Base URL of the generated document
 
 
 **Parameters:** not specified
@@ -122,6 +131,9 @@ ________
         public function getSourceLocators(): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 
 
+..
+
+    Get a collection of source locators
 
 
 **Parameters:** not specified

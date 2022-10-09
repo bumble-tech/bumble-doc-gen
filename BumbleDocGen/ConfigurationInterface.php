@@ -15,16 +15,34 @@ use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
 use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Documentation generator configuration
+ */
 interface ConfigurationInterface
 {
+    /**
+     * Get project root (absolute path)
+     */
     public function getProjectRoot(): string;
 
+    /**
+     * Get a collection of source locators
+     */
     public function getSourceLocators(): SourceLocatorsCollection;
 
+    /**
+     * Directory with documentation templates (absolute path)
+     */
     public function getTemplatesDir(): string;
 
+    /**
+     * Directory where the documentation will be generated (absolute path)
+     */
     public function getOutputDir(): string;
 
+    /**
+     * Base URL of the generated document
+     */
     public function getOutputDirBaseUrl(): string;
 
     public function clearOutputDirBeforeDocGeneration(): bool;

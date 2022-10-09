@@ -20,7 +20,7 @@ Description of the `DrawClassMap </BumbleDocGen/Render/Twig/Function/DrawClassMa
 
 ..
 
-        Generate class map in HTML format
+        Generate class map in HTML or rst format
 
 
 **Examples of using:**

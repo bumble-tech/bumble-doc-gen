@@ -12,6 +12,10 @@ use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
  */
 final class GeneratePageBreadcrumbs
 {
+    /**
+     * @param Context $context Render context
+     * @param string $templateType The type of string to be generated ( html or rst )
+     */
     public function __construct(private Context $context, private string $templateType = 'rst')
     {
     }

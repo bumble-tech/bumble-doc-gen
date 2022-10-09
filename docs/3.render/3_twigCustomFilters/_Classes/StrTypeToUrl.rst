@@ -83,7 +83,7 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Filter/StrTypeToUrl.php#L19>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Filter/StrTypeToUrl.php#L22>`_
 .. code-block:: php
 
         public function __construct(BumbleDocGen\Render\Context\Context $context): mixed;
@@ -107,7 +107,7 @@ Method details:
             <tr>
             <td>$context</td>
             <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
-            <td>-</td>
+            <td>Render context</td>
         </tr>
         </tbody>
     </table>
@@ -119,7 +119,7 @@ ________
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/StrTypeToUrl.php#L30>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/StrTypeToUrl.php#L33>`_
 .. code-block:: php
 
         public function __invoke(string $text, string $templateType = 'rst', bool $useShortLinkVersion = false): string;

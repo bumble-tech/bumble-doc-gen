@@ -16,6 +16,9 @@ use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
  */
 final class StrTypeToUrl
 {
+    /**
+     * @param Context $context Render context
+     */
     public function __construct(private Context $context)
     {
     }

@@ -20,7 +20,7 @@ Description of the `DrawDocumentationMenu </BumbleDocGen/Render/Twig/Function/Dr
 
 ..
 
-        Generate documentation menu in HTML format\. To generate the menu, the start page is taken,     and all links with this page are recursively collected for it, after which the html menu is created\.
+        Generate documentation menu in HTML or rst format\. To generate the menu, the start page is taken,     and all links with this page are recursively collected for it, after which the html menu is created\.
 
 
 See:
@@ -102,7 +102,7 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentationMenu.php#L23>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentationMenu.php#L27>`_
 .. code-block:: php
 
         public function __construct(BumbleDocGen\Render\Context\Context $context, string $templateType = 'rst'): mixed;
@@ -126,12 +126,12 @@ Method details:
             <tr>
             <td>$context</td>
             <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
-            <td>-</td>
+            <td>Render context</td>
         </tr>
             <tr>
             <td>$templateType</td>
             <td>string</td>
-            <td>-</td>
+            <td>The type of string to be generated ( html or rst )</td>
         </tr>
         </tbody>
     </table>
@@ -143,7 +143,7 @@ ________
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentationMenu.php#L37>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentationMenu.php#L41>`_
 .. code-block:: php
 
         public function __invoke(string|null $startPageKey = NULL, int|null $maxDeep = NULL): string;
