@@ -7,6 +7,7 @@ namespace BumbleDocGen\Render\Twig\Function;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 
 /**
  * Generate class map in HTML format
@@ -19,7 +20,7 @@ final class DrawClassMap
     /** @var array<string, string> */
     private array $fileClassmap;
 
-    public function __construct(private Context $context)
+    public function __construct(private Context $context, private string $templateType = 'rst')
     {
     }
 
@@ -34,7 +35,13 @@ final class DrawClassMap
             $this->getDirectoryStructure(...$classEntityCollections),
         );
 
-        return "<pre>{$structure}</pre>";
+        $content = "<pre>{$structure}</pre>";
+        if ($this->templateType == 'rst') {
+            $htmlToRstFunction = new HtmlToRst();
+            return $htmlToRstFunction($content);
+        }
+
+        return $content;
     }
 
     protected function appendClassToDirectoryStructure(array $directoryStructure, ClassEntity $classEntity): array

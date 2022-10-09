@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Twig\Function;
 
 use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 
 /**
  * Function to generate breadcrumbs on the page
  */
 final class GeneratePageBreadcrumbs
 {
-    public function __construct(private Context $context)
+    public function __construct(private Context $context, private string $templateType = 'rst')
     {
     }
 
@@ -25,12 +26,21 @@ final class GeneratePageBreadcrumbs
      *
      * @return string
      */
-    public function __invoke(string $currentPageTitle, string $templatePath, bool $skipFirstTemplatePage = true): string
-    {
-        return $this->context->getBreadcrumbsHelper()->renderBreadcrumbs(
+    public function __invoke(
+        string $currentPageTitle,
+        string $templatePath,
+        bool $skipFirstTemplatePage = true
+    ): string {
+        $content = $this->context->getBreadcrumbsHelper()->renderBreadcrumbs(
             $currentPageTitle,
             $templatePath,
             !$skipFirstTemplatePage
         );
+
+        if ($this->templateType == 'rst') {
+            $htmlToRstFunction = new HtmlToRst();
+            return $htmlToRstFunction($content);
+        }
+        return $content;
     }
 }

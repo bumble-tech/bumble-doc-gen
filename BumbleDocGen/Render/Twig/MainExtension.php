@@ -14,7 +14,7 @@ use BumbleDocGen\Render\Twig\Filter\Quotemeta;
 use BumbleDocGen\Render\Twig\Filter\RemoveLineBrakes;
 use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 use BumbleDocGen\Render\Twig\Filter\TextToCodeBlockRst;
-use BumbleDocGen\Render\Twig\Filter\TextToHeadingRst;
+use BumbleDocGen\Render\Twig\Filter\TextToHeading;
 use BumbleDocGen\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
 use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
@@ -74,7 +74,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
             new \Twig\TwigFilter('addIndentFromLeft', new AddIndentFromLeft(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('fixStrSize', new FixStrSize(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('htmlToRst', new HtmlToRst(), ['is_safe' => ['html']]),
-            new \Twig\TwigFilter('textToHeadingRst', new TextToHeadingRst(), ['is_safe' => ['html']]),
+            new \Twig\TwigFilter('textToHeading', new TextToHeading(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('endTextBySeparatorRst', new EndTextBySeparatorRst(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('textToCodeBlockRst', new TextToCodeBlockRst(), ['is_safe' => ['html']]),
         ];

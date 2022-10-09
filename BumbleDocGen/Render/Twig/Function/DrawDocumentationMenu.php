@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Twig\Function;
 
 use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 
 /**
  * Generate documentation menu in HTML format. To generate the menu, the start page is taken,
@@ -19,7 +20,7 @@ use BumbleDocGen\Render\Context\Context;
  */
 final class DrawDocumentationMenu
 {
-    public function __construct(private Context $context)
+    public function __construct(private Context $context, private string $templateType = 'rst')
     {
     }
 
@@ -90,6 +91,12 @@ final class DrawDocumentationMenu
         } else {
             $startPageKey = array_key_first($structure);
         }
-        return isset($structure[$startPageKey]) ? $drawPages($structure[$startPageKey]) : '';
+
+        $content = isset($structure[$startPageKey]) ? $drawPages($structure[$startPageKey]) : '';
+        if ($this->templateType == 'rst') {
+            $htmlToRstFunction = new HtmlToRst();
+            return $htmlToRstFunction($content);
+        }
+        return $content;
     }
 }
