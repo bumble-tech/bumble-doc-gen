@@ -1,0 +1,81 @@
+{% set title = 'Template filters' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+{{ "Template filters" | textToHeading('H1') }}
+
+When generating pages, you can use filters that allow you to modify the content.
+Filters available during page generation are defined in method `MainExtension::getFilters()`_
+
+We use the twig template engine, you can get more information about working with filters here: https://twig.symfony.com/doc/1.x/advanced.html#filters
+
+
+{{ "How to use a filter in a template:" | textToHeading('H2') }}
+
+{{ '{{ someText | filter(...parameters) }}' | textToCodeBlockRst('twig') }}
+
+or
+
+{{ '{{ someText | filter }}' | textToCodeBlockRst('twig') }}
+
+
+{{ "Available template filters:" | textToHeading('H2') }}
+
+.. raw:: html
+
+  <table>
+    <thead>
+    <tr>
+        <th rowspan="3">Filter</th>
+        <th colspan="3">Parameters</th>
+    </tr>
+    <tr>
+        <th>name</th>
+        <th>type</th>
+        <th>description</th>
+    </tr>
+    <tr>
+        <th colspan="4"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for filter in classEntityCollection.filterByPaths(['/BumbleDocGen/Render/Twig/Filter']) %}
+        {% set twigFilterData = filter.getPluginData('twigFilterClassParserPlugin') %}
+        {% set paramsCount = twigFilterData.parameters | length %}
+
+        {% for parameter in twigFilterData.parameters %}
+            <tr>
+                {% if loop.index == 1 %}
+                    {% set rowspan = paramsCount * 2 - 1 %}
+                    <td {% if rowspan > 1 %}rowspan="{{ rowspan }}"{% endif %}>
+                        <a href="{{ getDocumentedClassUrl(filter.getName()) }}">{{ twigFilterData.name }}</a><br>
+                        {% if filter.isInternal() %}<i><b>:warning: For internal use</b></i><br>{% endif %}
+                        {{ filter.getDescription() | removeLineBrakes }}
+                        {% if filter.getDocNote() %}<br><i><b>:warning: {{ filter.getDocNote() }}</b></i><br>{% endif %}
+                    </td>
+                    {% if rowspan == 1 %}
+                        <td colspan="3">The filter does not accept any additional parameters</td>
+                    {% endif %}
+                {% else %}
+                    <td>
+                        <b>${{ parameter.name }}</b>
+                    </td>
+                    <td>
+                        <i>{{ parameter.type | strTypeToUrl('html', true) }}</i>
+                    </td>
+                    <td>{{ parameter.description | removeLineBrakes }}</td>
+                {% endif %}
+            </tr>
+            {% if loop.last == false %}
+                <tr>
+                    <td colspan="3"></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        {% if loop.last == false %}
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>

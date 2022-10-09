@@ -1,0 +1,9 @@
+{% set title = 'Documentation generator configuration' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+{{ "Documentation generator configuration" | textToHeading('H1') }}
+
+In order to make it clear exactly how to generate documentation, which files to parse and to store other settings, the configuration is used.
+The configuration must implement interface `ConfigurationInterface`_.
+
+To simplify the work with the configuration, we have created a basic configuration with basic settings: `BaseConfiguration`_

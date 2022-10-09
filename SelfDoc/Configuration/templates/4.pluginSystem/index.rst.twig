@@ -1,0 +1,51 @@
+{% set title = 'Plugin system' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+{{ "Plugin system" | textToHeading('H1') }}
+
+The documentation generator initially includes the possibility of expanding the functionality.
+Plugins allow you to add the necessary functionality to the system without changing its core.
+
+
+{{ "Using plugins" | textToHeading('H2') }}
+
+Plugins can be added in documentation generator configuration, in method `ConfigurationInterface::getPlugins()`_
+
+
+{{ "Adding a new plugin" | textToHeading('H2') }}
+
+If you decide to add a new plugin, there are a few things you need to do:
+
+*  Implement an interface that matches one of the available plugin interfaces
+*  Add plugin to configuration `ConfigurationInterface::getPlugins()`_:
+
+{{ "public function getPlugins(): PluginsCollection
+{
+    $plugins = parent::getPlugins();
+    $plugins->add(new TwigFunctionClassParserPlugin());
+    $plugins->add(new TwigFilterClassParserPlugin());
+    return $plugins;
+}" | textToCodeBlockRst('php') }}
+
+
+{{ "Available plugin interfaces" | textToHeading('H2') }}
+
+{% set pluginInterfaces = classEntityCollection.
+    filterByInterfaces(['BumbleDocGen\\Plugin\\PluginInterface']).
+    getOnlyInterfaces()
+%}
+
+{% for pluginInterface in pluginInterfaces %}
+#. `{{ pluginInterface.getShortName() }} <{{ getDocumentedClassUrl(pluginInterface.getName()) }}>`_
+
+{% endfor %}
+
+*A plugin can implement multiple interfaces at once*
+
+
+{{ "Example" | textToHeading('H2') }}
+
+Several plugins have been written to create this document. They can be considered as an example:
+
+{{ drawClassMap( classEntityCollection.filterByPaths(['/SelfDoc/Configuration/Plugin'])) }}
+

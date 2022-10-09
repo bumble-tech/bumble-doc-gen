@@ -1,0 +1,11 @@
+{% set title = 'BumbleDocGen' %}
+
+{{ "Bumble Documentation Generator" | textToHeading('H1') }}
+
+{{ drawDocumentationMenu() }}
+
+**This documentation was generated using the Bumble Documentation Generator, and is an example of how it works.**
+
+To update this documentation, run the following command:
+
+{{ 'php SelfDoc/docGen.php generate' | textToCodeBlockRst('console') }}
