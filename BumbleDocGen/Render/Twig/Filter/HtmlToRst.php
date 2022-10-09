@@ -13,6 +13,6 @@ final class HtmlToRst
         if (!$addIndentFromLeftFunction) {
             $addIndentFromLeftFunction = new AddIndentFromLeft();
         }
-        return ".. raw:: html\n\n {$addIndentFromLeftFunction($text, 1)}";
+        return ".. raw:: html\n\n {$addIndentFromLeftFunction($text, 1)}\n";
     }
 }
