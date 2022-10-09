@@ -6,7 +6,13 @@ namespace BumbleDocGen\Plugin;
 
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
 
+/**
+ * Plugin for working with templates of documented entities
+ *
+ * @see LoadPluginsContent
+ */
 interface BaseTemplatePluginInterface extends PluginInterface
 {
     public const BLOCK_AFTER_MAIN_INFO = 'after_main_info';
