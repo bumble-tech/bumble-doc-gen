@@ -16,7 +16,7 @@ interface CustomSourceLocatorInterface extends PluginInterface
     /**
      * Method for getting custom resource locator
      *
-     * @see ProjectParser::create()
+     * @see \BumbleDocGen\Parser\ProjectParser::create()
      */
     public function getSourceLocator(): SourceLocatorInterface;
 }
