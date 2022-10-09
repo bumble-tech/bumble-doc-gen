@@ -10,16 +10,29 @@ use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use Psr\Log\LoggerInterface;
 
-final class PageLinkerPlugin implements TemplatePluginInterface
+abstract class BasePageLinker implements TemplatePluginInterface
 {
     private array $keyUsageCount = [];
 
-    public function __construct(
-        private string $linkRegEx = '/(`)([^<>\n]+?)(`_)/m',
-        private int $groupRegExNumber = 2,
-        private string $outputTemplate = "`%title% <%url%>`_"
-    ) {
-    }
+    /**
+     * Template to search for empty links
+     *
+     * @example /(`)([^<>\n]+?)(`_)/m
+     */
+    abstract function getLinkRegEx(): string;
+
+    /**
+     * Group number of the regular expression that contains the text that will be used to search for the link
+     */
+    abstract function getGroupRegExNumber(): int;
+
+    /**
+     * Template of the result of processing an empty link by a plugin.
+     * Keys %title% and %url% will be replaced with real data
+     *
+     * @example `%title% <%url%>`_
+     */
+    abstract function getOutputTemplate(): string;
 
     private function getAllPageLinks(Context $context): array
     {
@@ -115,30 +128,39 @@ final class PageLinkerPlugin implements TemplatePluginInterface
         }
     }
 
-    public function handleRenderedTemplateContent(string $content, Context $context): string
+    private function getFilledOutputTemplate(string $title, string $url): string
+    {
+        return str_replace(
+            ['%title%', '%url%'],
+            [$title, $url],
+            $this->getOutputTemplate()
+        );
+    }
+
+    final public function handleRenderedTemplateContent(string $content, Context $context): string
     {
         $logger = $context->getConfiguration()->getLogger();
 
         $pageLinks = $this->getAllPageLinks($context);
-        return preg_replace_callback($this->linkRegEx, function (array $matches) use ($pageLinks, $logger, $context) {
-            $linkString = $matches[$this->groupRegExNumber];
-            if (array_key_exists($linkString, $pageLinks)) {
-                $breadcrumb = $pageLinks[$linkString];
-                $this->checkKey($linkString, $logger);
-                return "`{$breadcrumb['title']} <{$breadcrumb['url']}>`_";
-            } else {
-                $entityUrlData = $this->getEntityUrlData($linkString, $context);
-                if ($entityUrlData) {
-                    return str_replace(
-                        ['%title%', '%url%'],
-                        [$entityUrlData['title'], $entityUrlData['url']],
-                        $this->outputTemplate
-                    );
+        return preg_replace_callback(
+            $this->getLinkRegEx(),
+            function (array $matches) use ($pageLinks, $logger, $context) {
+                $linkString = $matches[$this->getGroupRegExNumber()];
+                if (array_key_exists($linkString, $pageLinks)) {
+                    $breadcrumb = $pageLinks[$linkString];
+                    $this->checkKey($linkString, $logger);
+                    return $this->getFilledOutputTemplate($breadcrumb['title'], $breadcrumb['url']);
+                } else {
+                    $entityUrlData = $this->getEntityUrlData($linkString, $context);
+                    if ($entityUrlData) {
+                        return $this->getFilledOutputTemplate($entityUrlData['title'], $entityUrlData['url']);
+                    }
                 }
-            }
 
-            $logger->warning("PageLinkerPlugin: Key `{$linkString}` not found to get document link.");
-            return $linkString;
-        }, $content);
+                $logger->warning("PageLinkerPlugin: Key `{$linkString}` not found to get document link.");
+                return $linkString;
+            },
+            $content
+        );
     }
 }
