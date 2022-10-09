@@ -3,13 +3,13 @@
 {% include '_classHeader.rst.twig' with {'classEntity': classEntity} only %}
 
 
-{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_HEADER')) }}
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToRst\\PhpClassToRstDocRender::BLOCK_AFTER_HEADER')) }}
 
 
 {% include '_classMainInfo.rst.twig' with {'classEntity': classEntity} only %}
 
 
-{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_MAIN_INFO')) }}
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToRst\\PhpClassToRstDocRender::BLOCK_AFTER_MAIN_INFO')) }}
 
 {% if classEntity.getCasesNames() %}
 Cases:
@@ -63,7 +63,7 @@ Properties:
 {% endif %}
 
 
-{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_BEFORE_DETAILS')) }}
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToRst\\PhpClassToRstDocRender::BLOCK_BEFORE_DETAILS')) }}
 
 
 --------------------

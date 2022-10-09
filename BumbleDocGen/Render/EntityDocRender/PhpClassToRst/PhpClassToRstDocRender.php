@@ -17,6 +17,10 @@ use Twig\Loader\FilesystemLoader;
  */
 class PhpClassToRstDocRender implements EntityDocRenderInterface
 {
+    public const BLOCK_AFTER_MAIN_INFO = 'after_main_info';
+    public const BLOCK_AFTER_HEADER = 'after_header';
+    public const BLOCK_BEFORE_DETAILS = 'before_details';
+
     private Environment $twig;
 
     public function __construct()
