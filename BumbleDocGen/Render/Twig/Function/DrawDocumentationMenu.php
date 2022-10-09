@@ -15,6 +15,7 @@ use BumbleDocGen\Render\Context\Context;
  *
  * @example {{ drawDocumentationMenu() }}
  * @example {{ drawDocumentationMenu('/render/index.rst') }}
+ * @example {{ drawDocumentationMenu(_self) }}
  */
 final class DrawDocumentationMenu
 {
@@ -34,6 +35,10 @@ final class DrawDocumentationMenu
      */
     public function __invoke(?string $startPageKey = null, ?int $maxDeep = null): string
     {
+        if ($startPageKey) {
+            $startPageKey = str_replace('.twig', '', $startPageKey);
+        }
+
         $structure = [];
         $breadcrumbsHelper = $this->context->getBreadcrumbsHelper();
         $templatesDir = $this->context->getConfiguration()->getTemplatesDir();
