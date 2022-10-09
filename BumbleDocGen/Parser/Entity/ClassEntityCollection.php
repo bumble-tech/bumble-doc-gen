@@ -166,4 +166,16 @@ final class ClassEntityCollection extends BaseEntityCollection
         }
         return $classEntityCollection;
     }
+
+    public function getOnlyInterfaces(): ClassEntityCollection
+    {
+        $classEntityCollection = new ClassEntityCollection($this->configuration, $this->reflector, $this->logger);
+        foreach ($this as $classEntity) {
+            /**@var ClassEntity $classEntity */
+            if ($classEntity->getReflection()->isInterface()) {
+                $classEntityCollection->addWithoutPreparation($classEntity);
+            }
+        }
+        return $classEntityCollection;
+    }
 }
