@@ -149,7 +149,7 @@ We use the twig template engine, you can get more information about working with
             </tr>
                                             
                         <tr>
-                                <td rowspan="3">
+                                <td rowspan="5">
                     <a href="/docs/3.render/4_twigCustomFunctions/_Classes/PrintClassEntityCollectionAsList.rst">printClassEntityCollectionAsList</a><br>
                                         Outputting entity data as HTML or rst list
                                     </td>
@@ -172,6 +172,18 @@ We use the twig template engine, you can get more information about working with
                     <i>string</i>
                 </td>
                 <td>List tag type</td>
+            </tr>
+                        <tr>
+                <td colspan="3"></td>
+            </tr>
+                                    <tr>
+                                <td>
+                    <b>$skipDescription</b>
+                </td>
+                <td>
+                    <i>bool</i>
+                </td>
+                <td>Don&#039;t print description</td>
             </tr>
                                                 <tr>
                 <td colspan="4">&nbsp;</td>

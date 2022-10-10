@@ -20,15 +20,19 @@ final class PrintClassEntityCollectionAsList
     /**
      * @param ClassEntityCollection $classEntityCollection Processed entity collection
      * @param string $type List tag type
+     * @param bool $skipDescription Don't print description
      * @return string
      */
-    public function __invoke(ClassEntityCollection $classEntityCollection, string $type = 'ul'): string
-    {
+    public function __invoke(
+        ClassEntityCollection $classEntityCollection,
+        string $type = 'ul',
+        bool $skipDescription = false
+    ): string {
         $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
         $result = "<{$type}>";
         foreach ($classEntityCollection as $classEntity) {
             $description = $classEntity->getDescription();
-            $descriptionText = $description ? " - {$description}" : '';
+            $descriptionText = !$skipDescription && $description ? " - {$description}" : '';
             $result .= "<li><a href='{$getDocumentedClassUrlFunction($classEntity->getName())}'>{$classEntity->getShortName()}</a>{$descriptionText}</li>";
         }
         $result .= "</{$type}>";
