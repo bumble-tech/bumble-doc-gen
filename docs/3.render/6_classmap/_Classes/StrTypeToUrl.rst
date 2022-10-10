@@ -25,7 +25,8 @@ Description of the `StrTypeToUrl </BumbleDocGen/Render/Twig/Filter/StrTypeToUrl.
 
 See:
 
-    #. GetDocumentedClassUrl 
+#. GetDocumentedClassUrl 
+
 
 
 

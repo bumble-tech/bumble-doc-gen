@@ -25,7 +25,8 @@ Description of the `DrawDocumentationMenu </BumbleDocGen/Render/Twig/Function/Dr
 
 See:
 
-    #. GetDocumentedClassUrl 
+#. GetDocumentedClassUrl 
+
 
 **Examples of using:**
 

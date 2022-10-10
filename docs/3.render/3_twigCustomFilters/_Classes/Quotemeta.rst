@@ -25,7 +25,8 @@ Description of the `Quotemeta </BumbleDocGen/Render/Twig/Filter/Quotemeta.php>`_
 
 See:
 
-    #. `https://www\.php\.net/manual/en/function\.quotemeta\.php <https://www.php.net/manual/en/function.quotemeta.php>`_ 
+#. `https://www\.php\.net/manual/en/function\.quotemeta\.php <https://www.php.net/manual/en/function.quotemeta.php>`_ 
+
 
 
 

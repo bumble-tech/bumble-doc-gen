@@ -25,7 +25,9 @@ Description of the `Render </BumbleDocGen/Render/Render.php>`_ class:
 
 See:
 
-    #. `BumbleDocGen\\ConfigurationInterface::getTemplatesDir\(\) </BumbleDocGen/ConfigurationInterface.php#L36>`_     #. `BumbleDocGen\\ConfigurationInterface::getOutputDir\(\) </BumbleDocGen/ConfigurationInterface.php#L41>`_ 
+#. `BumbleDocGen\\ConfigurationInterface::getTemplatesDir\(\) </BumbleDocGen/ConfigurationInterface.php#L36>`_ 
+#. `BumbleDocGen\\ConfigurationInterface::getOutputDir\(\) </BumbleDocGen/ConfigurationInterface.php#L41>`_ 
+
 
 
 

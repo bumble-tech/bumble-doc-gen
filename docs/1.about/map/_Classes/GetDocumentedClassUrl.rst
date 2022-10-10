@@ -25,7 +25,10 @@ Description of the `GetDocumentedClassUrl </BumbleDocGen/Render/Twig/Function/Ge
 
 See:
 
-    #. DocumentedEntityWrapper     #. DocumentedEntityWrappersCollection     #. `BumbleDocGen\\Render\\Context\\Context::\$entityWrappersCollection </BumbleDocGen/Render/Context/Context.php#L18>`_ 
+#. DocumentedEntityWrapper 
+#. DocumentedEntityWrappersCollection 
+#. `BumbleDocGen\\Render\\Context\\Context::\$entityWrappersCollection </BumbleDocGen/Render/Context/Context.php#L18>`_ 
+
 
 **Examples of using:**
 

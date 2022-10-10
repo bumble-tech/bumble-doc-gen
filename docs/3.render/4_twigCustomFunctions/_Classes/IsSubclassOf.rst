@@ -25,7 +25,8 @@ Description of the `IsSubclassOf </BumbleDocGen/Render/Twig/Function/IsSubclassO
 
 See:
 
-    #. `https://www\.php\.net/manual/en/function\.is-subclass-of\.php <https://www.php.net/manual/en/function.is-subclass-of.php>`_ 
+#. `https://www\.php\.net/manual/en/function\.is-subclass-of\.php <https://www.php.net/manual/en/function.is-subclass-of.php>`_ 
+
 
 
 
