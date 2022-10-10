@@ -7,20 +7,7 @@
 
 .. raw:: html
 
- <embed> <h1>About documentation generator</h1></embed>
-
-
-This library was created in order to simplify the process of generating technical documentation for complex projects and simple projects.
-
-The main idea of the project is to allow library users to create handwritten documentation with dynamic blocks, the information
-for which is parsed from the code according to the rules specified in the configuration.
-
-The system is flexible and easily expandable, as you can see when you start working with it. Write your first documentation today! :)
-
-
-.. raw:: html
-
- <embed> <h2>How to use the library</h2></embed>
+ <embed> <h1>How to use the library</h1></embed>
 
 
 To use the library, you need to follow only 3 steps:
@@ -35,6 +22,7 @@ To use the library, you need to follow only 3 steps:
 .. code-block:: php
 
  $configuration = new Configuration();
+ 
  DocGenerator::generateDocumentation($configuration);
 
 
