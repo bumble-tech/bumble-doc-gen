@@ -11,7 +11,7 @@
 
 
 When generating pages, you can use filters that allow you to modify the content.
-Filters available during page generation are defined in method `MainExtension::getFilters() </docs/3.render/3_twigCustomFilters/_Classes/MainExtension.rst#mgetfilters>`_
+Filters available during page generation are defined in method `MainExtension::getFilters\(\) </docs/3.render/3_twigCustomFilters/_Classes/MainExtension.rst#mgetfilters>`_
 
 We use the twig template engine, you can get more information about working with filters here: https://twig.symfony.com/doc/1.x/advanced.html#filters
 

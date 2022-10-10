@@ -22,8 +22,8 @@ you can create a TemplateFiller that will collect this information and pass it t
 If you decide to add a new template filler, there are a few things you need to do:
 
 *  Add a new class that implements the `TemplateFillerInterface </docs/3.render/2_templateFillers/_Classes/TemplateFillerInterface.rst>`_ interface
-*  In method `TemplateFillerInterface::getTemplateParameters() </docs/3.render/2_templateFillers/_Classes/TemplateFillerInterface.rst#mgettemplateparameters>`_, implement the return of the parameters that are expected in the template
-*  Add a new filler to the `TemplateFillersCollection::setForTemplate() </docs/3.render/2_templateFillers/_Classes/TemplateFillersCollection.rst#msetfortemplate>`_ returned in the `ConfigurationInterface::getTemplateFillers() </docs/3.render/2_templateFillers/_Classes/ConfigurationInterface.rst#mgettemplatefillers>`_ method
+*  In method `TemplateFillerInterface::getTemplateParameters\(\) </docs/3.render/2_templateFillers/_Classes/TemplateFillerInterface.rst#mgettemplateparameters>`_, implement the return of the parameters that are expected in the template
+*  Add a new filler to the `TemplateFillersCollection::setForTemplate\(\) </docs/3.render/2_templateFillers/_Classes/TemplateFillersCollection.rst#msetfortemplate>`_ returned in the `ConfigurationInterface::getTemplateFillers\(\) </docs/3.render/2_templateFillers/_Classes/ConfigurationInterface.rst#mgettemplatefillers>`_ method
 
 After that, the data will be available in the template you connected it to in step 3.
 

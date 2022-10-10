@@ -14,10 +14,10 @@ In order to determine whether an entity can be added to a collection (for exampl
 
 Filtering conditions must be set in the configuration:
 
-*  For classes - `ConfigurationInterface::classEntityFilterCondition() </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mclassentityfiltercondition>`_
-*  For class constants - `ConfigurationInterface::classConstantEntityFilterCondition() </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mclassconstantentityfiltercondition>`_
-*  For class properties - `ConfigurationInterface::propertyEntityFilterCondition() </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mpropertyentityfiltercondition>`_
-*  For class methods - `ConfigurationInterface::methodEntityFilterCondition() </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mmethodentityfiltercondition>`_
+*  For classes - `ConfigurationInterface::classEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mclassentityfiltercondition>`_
+*  For class constants - `ConfigurationInterface::classConstantEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mclassconstantentityfiltercondition>`_
+*  For class properties - `ConfigurationInterface::propertyEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mpropertyentityfiltercondition>`_
+*  For class methods - `ConfigurationInterface::methodEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mmethodentityfiltercondition>`_
 
 **Usage example:**
 
@@ -62,9 +62,9 @@ To group conditions, there is a `ConditionGroup </docs/2.parser/3_entityFilterCo
  <embed> <h3>Common filter conditions</h3></embed>
 
 
-#. `FalseCondition </docs/2.parser/3_entityFilterCondition/_Classes/FalseCondition.rst>`_ - False conditions, any object is not available
+.. raw:: html
 
-#. `TrueCondition </docs/2.parser/3_entityFilterCondition/_Classes/TrueCondition.rst>`_ - True conditions, any object is available
+ <embed> <ul><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/FalseCondition.rst'>FalseCondition</a> - False conditions, any object is not available</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/TrueCondition.rst'>TrueCondition</a> - True conditions, any object is available</li></ul></embed>
 
 
 .. raw:: html
@@ -72,11 +72,9 @@ To group conditions, there is a `ConditionGroup </docs/2.parser/3_entityFilterCo
  <embed> <h3>Class filter conditions</h3></embed>
 
 
-#. `LocatedInCondition </docs/2.parser/3_entityFilterCondition/_Classes/LocatedInCondition.rst>`_ - Checking the existence of a class in the specified directories
+.. raw:: html
 
-#. `HasAnnotationCondition </docs/2.parser/3_entityFilterCondition/_Classes/HasAnnotationCondition.rst>`_ - Checking for an annotation on a class
-
-#. `HasAttributeCondition </docs/2.parser/3_entityFilterCondition/_Classes/HasAttributeCondition.rst>`_ - Checking for an attribute on a class
+ <embed> <ul><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/LocatedInCondition.rst'>LocatedInCondition</a> - Checking the existence of a class in the specified directories</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/HasAnnotationCondition.rst'>HasAnnotationCondition</a> - Checking for an annotation on a class</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/HasAttributeCondition.rst'>HasAttributeCondition</a> - Checking for an attribute on a class</li></ul></embed>
 
 
 .. raw:: html
@@ -84,9 +82,9 @@ To group conditions, there is a `ConditionGroup </docs/2.parser/3_entityFilterCo
  <embed> <h3>Method filter conditions</h3></embed>
 
 
-#. `OnlyFromCurrentClassCondition </docs/2.parser/3_entityFilterCondition/_Classes/OnlyFromCurrentClassCondition.rst>`_ - Only methods that belong to the current class (not parent)
+.. raw:: html
 
-#. `VisibilityCondition </docs/2.parser/3_entityFilterCondition/_Classes/VisibilityCondition.rst>`_ - Method access modifier check
+ <embed> <ul><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/OnlyFromCurrentClassCondition.rst'>OnlyFromCurrentClassCondition</a> - Only methods that belong to the current class (not parent)</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/VisibilityCondition.rst'>VisibilityCondition</a> - Method access modifier check</li></ul></embed>
 
 
 .. raw:: html
@@ -94,9 +92,9 @@ To group conditions, there is a `ConditionGroup </docs/2.parser/3_entityFilterCo
  <embed> <h3>Property filter conditions</h3></embed>
 
 
-#. `OnlyFromCurrentClassCondition </docs/2.parser/3_entityFilterCondition/_Classes/OnlyFromCurrentClassCondition_2.rst>`_ - Only properties that belong to the current class (not parent)
+.. raw:: html
 
-#. `VisibilityCondition </docs/2.parser/3_entityFilterCondition/_Classes/VisibilityCondition_2.rst>`_ - Property access modifier check
+ <embed> <ul><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/OnlyFromCurrentClassCondition_2.rst'>OnlyFromCurrentClassCondition</a> - Only properties that belong to the current class (not parent)</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/VisibilityCondition_2.rst'>VisibilityCondition</a> - Property access modifier check</li></ul></embed>
 
 
 .. raw:: html
@@ -104,5 +102,6 @@ To group conditions, there is a `ConditionGroup </docs/2.parser/3_entityFilterCo
  <embed> <h3>Class constant filter conditions</h3></embed>
 
 
-#. `VisibilityCondition </docs/2.parser/3_entityFilterCondition/_Classes/VisibilityCondition_3.rst>`_ - Constant access modifier check
+.. raw:: html
 
+ <embed> <ul><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/VisibilityCondition_3.rst'>VisibilityCondition</a> - Constant access modifier check</li></ul></embed>

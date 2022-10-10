@@ -38,6 +38,7 @@ Directory layout ( only documented files shown ):
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/GetDocumentedClassUrl.rst'>GetDocumentedClassUrl.php</a>
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/LoadPluginsContent.rst'>LoadPluginsContent.php</a>
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/IsSubclassOf.rst'>IsSubclassOf.php</a>
+ │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/PrintClassEntityCollectionAsList.rst'>PrintClassEntityCollectionAsList.php</a>
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/DrawDocumentationMenu.rst'>DrawDocumentationMenu.php</a>
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/GeneratePageBreadcrumbs.rst'>GeneratePageBreadcrumbs.php</a>
  │  │  │  │  └── <a href='/docs/1.about/map/_Classes/DrawClassMap.rst'>DrawClassMap.php</a>

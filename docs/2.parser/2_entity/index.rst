@@ -18,15 +18,9 @@ They are necessary so that in the template you can easily get any information ab
  <embed> <h3>Available entities</h3></embed>
 
 
-#. `PropertyEntity </docs/2.parser/2_entity/_Classes/PropertyEntity.rst>`_ - Class property entity
+.. raw:: html
 
-#. `EnumEntity </docs/2.parser/2_entity/_Classes/EnumEntity.rst>`_ - Enum class entity
-
-#. `ConstantEntity </docs/2.parser/2_entity/_Classes/ConstantEntity.rst>`_ - Class constant entity
-
-#. `ClassEntity </docs/2.parser/2_entity/_Classes/ClassEntity.rst>`_ - Class entity
-
-#. `MethodEntity </docs/2.parser/2_entity/_Classes/MethodEntity.rst>`_ - Class method entity
+ <embed> <ul><li><a href='/docs/2.parser/2_entity/_Classes/PropertyEntity.rst'>PropertyEntity</a> - Class property entity</li><li><a href='/docs/2.parser/2_entity/_Classes/EnumEntity.rst'>EnumEntity</a> - Enum class entity</li><li><a href='/docs/2.parser/2_entity/_Classes/ConstantEntity.rst'>ConstantEntity</a> - Class constant entity</li><li><a href='/docs/2.parser/2_entity/_Classes/ClassEntity.rst'>ClassEntity</a> - Class entity</li><li><a href='/docs/2.parser/2_entity/_Classes/MethodEntity.rst'>MethodEntity</a> - Class method entity</li></ul></embed>
 
 
 .. raw:: html
@@ -36,11 +30,6 @@ They are necessary so that in the template you can easily get any information ab
 
 To work with entities, we use collections, which have convenient ways to filter objects:
 
-#. `PropertyEntityCollection </docs/2.parser/2_entity/_Classes/PropertyEntityCollection.rst>`_
+.. raw:: html
 
-#. `MethodEntityCollection </docs/2.parser/2_entity/_Classes/MethodEntityCollection.rst>`_
-
-#. `ClassEntityCollection </docs/2.parser/2_entity/_Classes/ClassEntityCollection.rst>`_
-
-#. `ConstantEntityCollection </docs/2.parser/2_entity/_Classes/ConstantEntityCollection.rst>`_
-
+ <embed> <ul><li><a href='/docs/2.parser/2_entity/_Classes/PropertyEntityCollection.rst'>PropertyEntityCollection</a></li><li><a href='/docs/2.parser/2_entity/_Classes/MethodEntityCollection.rst'>MethodEntityCollection</a></li><li><a href='/docs/2.parser/2_entity/_Classes/ClassEntityCollection.rst'>ClassEntityCollection</a></li><li><a href='/docs/2.parser/2_entity/_Classes/ConstantEntityCollection.rst'>ConstantEntityCollection</a></li></ul></embed>

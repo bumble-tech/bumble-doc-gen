@@ -29,6 +29,7 @@
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/GetDocumentedClassUrl.rst'>GetDocumentedClassUrl.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/LoadPluginsContent.rst'>LoadPluginsContent.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/IsSubclassOf.rst'>IsSubclassOf.php</a>
+ │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/PrintClassEntityCollectionAsList.rst'>PrintClassEntityCollectionAsList.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/DrawDocumentationMenu.rst'>DrawDocumentationMenu.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/GeneratePageBreadcrumbs.rst'>GeneratePageBreadcrumbs.php</a>
  │  │  │  │  └── <a href='/docs/3.render/6_classmap/_Classes/DrawClassMap.rst'>DrawClassMap.php</a>

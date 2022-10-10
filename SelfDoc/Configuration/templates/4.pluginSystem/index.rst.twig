@@ -34,11 +34,7 @@ If you decide to add a new plugin, there are a few things you need to do:
     filterByInterfaces(['BumbleDocGen\\Plugin\\PluginInterface']).
     getOnlyInterfaces()
 %}
-
-{% for pluginInterface in pluginInterfaces %}
-#. `{{ pluginInterface.getShortName() }} <{{ getDocumentedClassUrl(pluginInterface.getName()) }}>`_
-
-{% endfor %}
+{{ printClassEntityCollectionAsList( pluginInterfaces ) }}
 
 *A plugin can implement multiple interfaces at once*
 

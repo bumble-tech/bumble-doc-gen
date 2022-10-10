@@ -44,35 +44,30 @@ To group conditions, there is a `ConditionGroup`_ in the documentation generator
 
 {{ "Common filter conditions" | textToHeading('H3') }}
 
-{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/CommonFilterCondition']) %}
-#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
-
-{% endfor %}
+{{ printClassEntityCollectionAsList(
+    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/CommonFilterCondition'])
+) }}
 
 {{ "Class filter conditions" | textToHeading('H3') }}
 
-{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassFilterCondition']) %}
-#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
-
-{% endfor %}
+{{ printClassEntityCollectionAsList(
+    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassFilterCondition'])
+) }}
 
 {{ "Method filter conditions" | textToHeading('H3') }}
 
-{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/MethodFilterCondition']) %}
-#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
-
-{% endfor %}
+{{ printClassEntityCollectionAsList(
+    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/MethodFilterCondition'])
+) }}
 
 {{ "Property filter conditions" | textToHeading('H3') }}
 
-{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/PropertyFilterCondition']) %}
-#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
-
-{% endfor %}
+{{ printClassEntityCollectionAsList(
+    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/PropertyFilterCondition'])
+) }}
 
 {{ "Class constant filter conditions" | textToHeading('H3') }}
 
-{% for filterCondition in filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassConstantFilterCondition']) %}
-#. `{{ filterCondition.getShortName() }} <{{ getDocumentedClassUrl(filterCondition.getName()) }}>`_ - {{ filterCondition.getDescription() }}
-
-{% endfor %}
+{{ printClassEntityCollectionAsList(
+    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassConstantFilterCondition'])
+) }}

@@ -21,6 +21,7 @@ use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use BumbleDocGen\Render\Twig\Function\IsSubclassOf;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
+use BumbleDocGen\Render\Twig\Function\PrintClassEntityCollectionAsList;
 
 /**
  * This is an extension that is used to generate documents from templates
@@ -46,11 +47,9 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
                 'is_safe' => ['html'],
             ]),
             new \Twig\TwigFunction('drawClassMap', new DrawClassMap($this->context), ['is_safe' => ['html']]),
-            new \Twig\TwigFunction(
-                'drawDocumentationMenu',
+            new \Twig\TwigFunction('drawDocumentationMenu',
                 new DrawDocumentationMenu($this->context),
-                ['is_safe' => ['html']]
-            ),
+                ['is_safe' => ['html']]),
             new \Twig\TwigFunction('loadPluginsContent', new LoadPluginsContent($this->context), [
                 'is_safe' => ['html'],
             ]),
@@ -58,6 +57,14 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
             new \Twig\TwigFunction('generatePageBreadcrumbs', new GeneratePageBreadcrumbs($this->context), [
                 'is_safe' => ['html'],
             ]),
+            new \Twig\TwigFunction(
+                'printClassEntityCollectionAsList',
+                new PrintClassEntityCollectionAsList($this->context),
+                [
+                    'is_safe' => ['html'],
+                ]
+            ),
+
         ];
     }
 

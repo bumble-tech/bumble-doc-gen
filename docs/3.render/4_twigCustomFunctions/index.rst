@@ -11,7 +11,7 @@
 
 
 When generating pages, you can use functions that allow you to modify the content.
-Functions available during page generation are defined in method `MainExtension::getFunctions() </docs/3.render/4_twigCustomFunctions/_Classes/MainExtension.rst#mgetfunctions>`_
+Functions available during page generation are defined in method `MainExtension::getFunctions\(\) </docs/3.render/4_twigCustomFunctions/_Classes/MainExtension.rst#mgetfunctions>`_
 
 We use the twig template engine, you can get more information about working with functions here: https://twig.symfony.com/doc/1.x/advanced.html#functions
 
@@ -143,6 +143,35 @@ We use the twig template engine, you can get more information about working with
                     <i>string</i>
                 </td>
                 <td>The class name</td>
+            </tr>
+                                                <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+                                            
+                        <tr>
+                                <td rowspan="3">
+                    <a href="/docs/3.render/4_twigCustomFunctions/_Classes/PrintClassEntityCollectionAsList.rst">printClassEntityCollectionAsList</a><br>
+                                        Outputting entity data as HTML or rst list
+                                    </td>
+                                <td>
+                    <b>$classEntityCollection</b>
+                </td>
+                <td>
+                    <i><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ClassEntityCollection.rst'>ClassEntityCollection</a></i>
+                </td>
+                <td>Processed entity collection</td>
+            </tr>
+                        <tr>
+                <td colspan="3"></td>
+            </tr>
+                                    <tr>
+                                <td>
+                    <b>$type</b>
+                </td>
+                <td>
+                    <i>string</i>
+                </td>
+                <td>List tag type</td>
             </tr>
                                                 <tr>
                 <td colspan="4">&nbsp;</td>

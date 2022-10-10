@@ -19,7 +19,7 @@ Plugins allow you to add the necessary functionality to the system without chang
  <embed> <h2>Using plugins</h2></embed>
 
 
-Plugins can be added in documentation generator configuration, in method `ConfigurationInterface::getPlugins() </docs/4.pluginSystem/_Classes/ConfigurationInterface.rst#mgetplugins>`_
+Plugins can be added in documentation generator configuration, in method `ConfigurationInterface::getPlugins\(\) </docs/4.pluginSystem/_Classes/ConfigurationInterface.rst#mgetplugins>`_
 
 
 .. raw:: html
@@ -30,7 +30,7 @@ Plugins can be added in documentation generator configuration, in method `Config
 If you decide to add a new plugin, there are a few things you need to do:
 
 *  Implement an interface that matches one of the available plugin interfaces
-*  Add plugin to configuration `ConfigurationInterface::getPlugins() </docs/4.pluginSystem/_Classes/ConfigurationInterface.rst#mgetplugins>`_:
+*  Add plugin to configuration `ConfigurationInterface::getPlugins\(\) </docs/4.pluginSystem/_Classes/ConfigurationInterface.rst#mgetplugins>`_:
 
 .. code-block:: php
 
@@ -49,16 +49,10 @@ If you decide to add a new plugin, there are a few things you need to do:
  <embed> <h2>Available plugin interfaces</h2></embed>
 
 
+.. raw:: html
 
-#. `CustomSourceLocatorInterface </docs/4.pluginSystem/_Classes/CustomSourceLocatorInterface.rst>`_
-
-#. `ClassEntityPluginInterface </docs/4.pluginSystem/_Classes/ClassEntityPluginInterface.rst>`_
-
-#. `ClassEntityCollectionPluginInterface </docs/4.pluginSystem/_Classes/ClassEntityCollectionPluginInterface.rst>`_
-
-#. `EntityDocRenderPluginInterface </docs/4.pluginSystem/_Classes/EntityDocRenderPluginInterface.rst>`_
-
-#. `TemplatePluginInterface </docs/4.pluginSystem/_Classes/TemplatePluginInterface.rst>`_
+ <embed> <ul><li><a href='/docs/4.pluginSystem/_Classes/CustomSourceLocatorInterface.rst'>CustomSourceLocatorInterface</a> - Plugin for working with custom source locators. Why? -sometimes it is better to move the complex logic of resource
+ locators out of the configurator into a separate plugin.</li><li><a href='/docs/4.pluginSystem/_Classes/ClassEntityPluginInterface.rst'>ClassEntityPluginInterface</a> - Plugin for working with class entities</li><li><a href='/docs/4.pluginSystem/_Classes/ClassEntityCollectionPluginInterface.rst'>ClassEntityCollectionPluginInterface</a> - Plugin for working with ClassEntityCollection</li><li><a href='/docs/4.pluginSystem/_Classes/EntityDocRenderPluginInterface.rst'>EntityDocRenderPluginInterface</a> - Plugin for working with templates of documented entities</li><li><a href='/docs/4.pluginSystem/_Classes/TemplatePluginInterface.rst'>TemplatePluginInterface</a> - Plugin for working with page templates</li></ul></embed>
 
 
 *A plugin can implement multiple interfaces at once*

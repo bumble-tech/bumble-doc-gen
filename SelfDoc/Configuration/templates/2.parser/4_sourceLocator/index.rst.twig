@@ -27,8 +27,4 @@ All source locators must implement the `SourceLocatorInterface`_ interface.
 {{ "Built-in source locators" | textToHeading('H2') }}
 
 {% set sourceLocators = classEntityCollection.filterByInterfaces(['BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable() %}
-
-{% for sourceLocator in sourceLocators %}
-#. `{{ sourceLocator.getShortName() }} <{{ getDocumentedClassUrl(sourceLocator.getName()) }}>`_ - {{ sourceLocator.getDescription() }}
-
-{% endfor %}
+{{ printClassEntityCollectionAsList(sourceLocators) }}

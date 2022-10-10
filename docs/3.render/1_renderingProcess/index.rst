@@ -20,10 +20,10 @@
  <embed> <h2>Start rendering:</h2></embed>
 
 
-Render passes through all files from the directory specified in method `ConfigurationInterface::getTemplatesDir() </docs/3.render/1_renderingProcess/_Classes/ConfigurationInterface.rst#mgettemplatesdir>`_
+Render passes through all files from the directory specified in method `ConfigurationInterface::getTemplatesDir\(\) </docs/3.render/1_renderingProcess/_Classes/ConfigurationInterface.rst#mgettemplatesdir>`_
 
 If the file ends with **.twig** then the file is processed, otherwise it is simply copied
-to the target directory obtained from method `ConfigurationInterface::getOutputDirBaseUrl() </docs/3.render/1_renderingProcess/_Classes/ConfigurationInterface.rst#mgetoutputdirbaseurl>`_.
+to the target directory obtained from method `ConfigurationInterface::getOutputDirBaseUrl\(\) </docs/3.render/1_renderingProcess/_Classes/ConfigurationInterface.rst#mgetoutputdirbaseurl>`_.
 We use twig to process templates.
 
 .. raw:: html
@@ -33,7 +33,7 @@ We use twig to process templates.
 
 If the template contains links to any classes *(for example, when calling the* `GetDocumentedClassUrl </docs/3.render/1_renderingProcess/_Classes/GetDocumentedClassUrl.rst>`_ *function)*,
 as well as if they were parsed according to the rules in the
-`ConfigurationInterface::getSourceLocators() </docs/3.render/1_renderingProcess/_Classes/ConfigurationInterface.rst#mgetsourcelocators>`_ and `ConfigurationInterface::classEntityFilterCondition() </docs/3.render/1_renderingProcess/_Classes/ConfigurationInterface.rst#mclassentityfiltercondition>`_ methods, the **_Classes** directory
+`ConfigurationInterface::getSourceLocators\(\) </docs/3.render/1_renderingProcess/_Classes/ConfigurationInterface.rst#mgetsourcelocators>`_ and `ConfigurationInterface::classEntityFilterCondition\(\) </docs/3.render/1_renderingProcess/_Classes/ConfigurationInterface.rst#mclassentityfiltercondition>`_ methods, the **_Classes** directory
 is automatically created next to this file, in which automatically generated documentation for these classes.
 
 
@@ -50,7 +50,7 @@ is automatically created next to this file, in which automatically generated doc
 
 
 *  **classEntityCollection** - contains an instance of class `ClassEntityCollection </docs/3.render/1_renderingProcess/_Classes/ClassEntityCollection.rst>`_
-*  **fillersParameters** - contains an array obtained from method `TemplateFillersCollection::getParametersForTemplate() </docs/3.render/1_renderingProcess/_Classes/TemplateFillersCollection.rst#mgetparametersfortemplate>`_ You can read more about this on the `Template filters </docs/3.render/3_twigCustomFilters/index.rst>`_ page.
+*  **fillersParameters** - contains an array obtained from method `TemplateFillersCollection::getParametersForTemplate\(\) </docs/3.render/1_renderingProcess/_Classes/TemplateFillersCollection.rst#mgetparametersfortemplate>`_ You can read more about this on the `Template filters </docs/3.render/3_twigCustomFilters/index.rst>`_ page.
 
 
 
