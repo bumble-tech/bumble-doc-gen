@@ -36,4 +36,13 @@ final class PageRstLinkerPlugin extends BasePageLinker
     {
         return "`%title% <%url%>`_";
     }
+
+    protected function getFilledOutputTemplate(string $title, string $url): string
+    {
+        return str_replace(
+            ['%title%', '%url%'],
+            [quotemeta($title), $url],
+            $this->getOutputTemplate()
+        );
+    }
 }

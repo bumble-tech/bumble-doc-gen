@@ -128,7 +128,7 @@ abstract class BasePageLinker implements TemplatePluginInterface
         }
     }
 
-    private function getFilledOutputTemplate(string $title, string $url): string
+    protected function getFilledOutputTemplate(string $title, string $url): string
     {
         return str_replace(
             ['%title%', '%url%'],
