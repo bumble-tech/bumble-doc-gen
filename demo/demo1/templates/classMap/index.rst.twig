@@ -1,0 +1,10 @@
+{% set title = 'Class map' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+{{ "Class map epample" | textToHeading('H1') }}
+
+{{ "{{ drawClassMap( classEntityCollection ) }}"  | textToCodeBlockRst('twig') }}
+
+**The result of the function execution:**
+
+{{ drawClassMap( classEntityCollection ) }}

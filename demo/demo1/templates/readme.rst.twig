@@ -1,0 +1,10 @@
+{% set title = 'Demo 1' %}
+
+{{ "Demo 1" | textToHeading('H1') }}
+
+{{ drawDocumentationMenu() }}
+
+
+To update this documentation, run the following command:
+
+{{ 'php demo/demo1/demoScript.php' | textToCodeBlockRst('console') }}

@@ -1,0 +1,10 @@
+{% set title = 'Class list example' %}
+{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+
+{{ "Class list" | textToHeading('H1') }}
+
+**List of classes filtered by the directory where they are located.**
+
+{{ "{{ printClassEntityCollectionAsList( classEntityCollection.filterByPaths(['/annotations']) ) }}"  | textToCodeBlockRst('twig') }}
+
+{{ printClassEntityCollectionAsList( classEntityCollection.filterByPaths(['/annotations']) ) }}
