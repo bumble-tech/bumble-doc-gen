@@ -57,7 +57,7 @@ Constants:
 -----------------------
 
 
-* ``MAIN_PAGE_NAME``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L19>`_ 
+* ``DEFAULT_MAIN_PAGE_NAME``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L19>`_ 
 * ``DEFAULT_PREV_PAGE_NAME``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L23>`_ 
 
 
@@ -78,10 +78,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L25>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L30>`_
 .. code-block:: php
 
-        public function __construct(BumbleDocGen\ConfigurationInterface $configuration): mixed;
+        public function __construct(BumbleDocGen\ConfigurationInterface $configuration, string $mainPageName = BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper::DEFAULT_MAIN_PAGE_NAME, string $prevPageName = BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper::DEFAULT_PREV_PAGE_NAME): mixed;
 
 
 
@@ -104,6 +104,16 @@ Method details:
             <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$mainPageName</td>
+            <td>string</td>
+            <td>Main documentation page name</td>
+        </tr>
+            <tr>
+            <td>$prevPageName</td>
+            <td>string</td>
+            <td>Index page for each child section</td>
+        </tr>
         </tbody>
     </table>
 
@@ -114,7 +124,7 @@ ________
 
 .. _mgettemplatetitle:
 
-* `# <mgettemplatetitle_>`_  ``getTemplateTitle``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L73>`_
+* `# <mgettemplatetitle_>`_  ``getTemplateTitle``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L81>`_
 .. code-block:: php
 
         public function getTemplateTitle(string $templateName): string;
@@ -165,7 +175,7 @@ ________
 
 .. _mgettemplatelinkkey:
 
-* `# <mgettemplatelinkkey_>`_  ``getTemplateLinkKey``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L83>`_
+* `# <mgettemplatelinkkey_>`_  ``getTemplateLinkKey``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L91>`_
 .. code-block:: php
 
         public function getTemplateLinkKey(string $templateName): string|null;
@@ -201,7 +211,7 @@ ________
 
 .. _mgetbreadcrumbs:
 
-* `# <mgetbreadcrumbs_>`_  ``getBreadcrumbs``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L101>`_
+* `# <mgetbreadcrumbs_>`_  ``getBreadcrumbs``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L109>`_
 .. code-block:: php
 
         public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): array;
@@ -245,7 +255,7 @@ ________
 
 .. _mrenderbreadcrumbs:
 
-* `# <mrenderbreadcrumbs_>`_  ``renderBreadcrumbs``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L121>`_
+* `# <mrenderbreadcrumbs_>`_  ``renderBreadcrumbs``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L129>`_
 .. code-block:: php
 
         public function renderBreadcrumbs(string $currentPageTitle, string $filePatch, bool $fromCurrent = true): string;

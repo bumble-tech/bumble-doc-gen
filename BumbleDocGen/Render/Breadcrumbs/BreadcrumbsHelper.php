@@ -16,14 +16,22 @@ final class BreadcrumbsHelper
     /**
      * Main documentation page name
      */
-    public const MAIN_PAGE_NAME = 'readme.rst';
+    public const DEFAULT_MAIN_PAGE_NAME = 'readme.rst';
     /**
      * The name of the file that will be the entry point when switching between pages
      */
     public const DEFAULT_PREV_PAGE_NAME = 'index.rst';
 
-    public function __construct(private ConfigurationInterface $configuration)
-    {
+    /**
+     * @param ConfigurationInterface $configuration
+     * @param string $mainPageName Main documentation page name
+     * @param string $prevPageName Index page for each child section
+     */
+    public function __construct(
+        private ConfigurationInterface $configuration,
+        private string $mainPageName = self::DEFAULT_MAIN_PAGE_NAME,
+        private string $prevPageName = self::DEFAULT_PREV_PAGE_NAME
+    ) {
     }
 
     private function loadTemplateContent(string $templateName): string
@@ -55,7 +63,7 @@ final class BreadcrumbsHelper
         $pathParts = explode('/', $templateName);
         array_pop($pathParts);
         array_pop($pathParts);
-        $defaultValue = (count($pathParts) == 1 ? self::MAIN_PAGE_NAME : self::DEFAULT_PREV_PAGE_NAME);
+        $defaultValue = (count($pathParts) == 1 ? $this->mainPageName : $this->prevPageName);
         return $pathParts ? implode('/', $pathParts) . "/{$defaultValue}" : null;
     }
 
