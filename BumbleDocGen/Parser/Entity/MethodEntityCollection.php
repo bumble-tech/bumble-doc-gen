@@ -6,8 +6,6 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
-use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
 
 /**
@@ -15,25 +13,6 @@ use Roave\BetterReflection\Reflector\Reflector;
  */
 final class MethodEntityCollection extends BaseEntityCollection
 {
-    private static function getMethodsReflections(
-        ReflectionClass $reflectionClass,
-        LoggerInterface $logger
-    ): \Generator {
-        try {
-            foreach ($reflectionClass->getImmediateMethods() as $methodsReflection) {
-                yield $methodsReflection;
-            }
-            $parentClass = $reflectionClass->getParentClass();
-            if ($parentClass) {
-                foreach (self::getMethodsReflections($parentClass, $logger) as $methodsReflection) {
-                    yield $methodsReflection;
-                }
-            }
-        } catch (\Exception $e) {
-            $logger->error($e->getMessage());
-        }
-    }
-
     public static function createByClassEntity(
         ConfigurationInterface $configuration,
         Reflector $reflector,
@@ -43,7 +22,7 @@ final class MethodEntityCollection extends BaseEntityCollection
         $methodEntityCollection = new MethodEntityCollection();
         $logger = $configuration->getLogger();
         $reflectionClass = $classEntity->getReflection();
-        foreach (self::getMethodsReflections($reflectionClass, $logger) as $reflectionMethod) {
+        foreach ($reflectionClass->getMethods() as $reflectionMethod) {
             $methodEntity = MethodEntity::create(
                 $configuration,
                 $reflector,

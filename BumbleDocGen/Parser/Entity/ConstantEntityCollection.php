@@ -6,31 +6,11 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
-use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
 
 final class ConstantEntityCollection extends BaseEntityCollection
 {
-    private static function getConstantsReflections(
-        ReflectionClass $reflectionClass,
-        LoggerInterface $logger
-    ): \Generator {
-        try {
-            foreach ($reflectionClass->getImmediateReflectionConstants() as $constantsReflection) {
-                yield $constantsReflection;
-            }
-            $parentClass = $reflectionClass->getParentClass();
-            if ($parentClass) {
-                foreach (self::getConstantsReflections($parentClass, $logger) as $constantsReflection) {
-                    yield $constantsReflection;
-                }
-            }
-        } catch (\Exception $e) {
-            $logger->error($e->getMessage());
-        }
-    }
-
     public static function createByReflectionClass(
         ConfigurationInterface $configuration,
         Reflector $reflector,
@@ -38,8 +18,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
         AttributeParser $attributeParser
     ): ConstantEntityCollection {
         $constantEntityCollection = new ConstantEntityCollection();
-        $logger = $configuration->getLogger();
-        foreach (self::getConstantsReflections($reflectionClass, $logger) as $reflectionConstant) {
+        foreach ($reflectionClass->getReflectionConstants() as $reflectionConstant) {
             $constantEntity = ConstantEntity::create(
                 $configuration,
                 $reflector,
