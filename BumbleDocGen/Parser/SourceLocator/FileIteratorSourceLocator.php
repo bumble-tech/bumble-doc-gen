@@ -17,6 +17,14 @@ final class FileIteratorSourceLocator implements SourceLocatorInterface
     {
     }
 
+    public function getFiles(): \Generator
+    {
+        foreach ($this->fileInfoIterator as $file) {
+            /** @var \SplFileInfo $file */
+            yield $file;
+        }
+    }
+
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
     {
         return new MemoizingSourceLocator(

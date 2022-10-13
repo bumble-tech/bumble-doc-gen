@@ -17,6 +17,21 @@ final class DirectorySourceLocator implements SourceLocatorInterface
     {
     }
 
+    private function getDirectoryIterator(): \Iterator
+    {
+        return new \IteratorIterator(
+            new \RecursiveDirectoryIterator($this->directory, \FilesystemIterator::SKIP_DOTS)
+        );
+    }
+
+    public function getFiles(): \Generator
+    {
+        foreach ($this->getDirectoryIterator() as $file) {
+            /** @var \SplFileInfo $file */
+            yield $file;
+        }
+    }
+
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
     {
         return new MemoizingSourceLocator(

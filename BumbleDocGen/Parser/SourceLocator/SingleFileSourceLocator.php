@@ -17,6 +17,11 @@ final class SingleFileSourceLocator implements SourceLocatorInterface
     {
     }
 
+    public function getFiles(): \Generator
+    {
+        yield new \SplFileInfo($this->filename);
+    }
+
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
     {
         return new MemoizingSourceLocator(

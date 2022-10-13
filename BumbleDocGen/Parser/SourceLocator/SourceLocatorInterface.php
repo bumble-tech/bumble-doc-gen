@@ -9,5 +9,10 @@ use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
 
 interface SourceLocatorInterface
 {
+    /**
+     * @return \Generator|\SplFileInfo[]
+     */
+    public function getFiles(): \Generator;
+
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator;
 }

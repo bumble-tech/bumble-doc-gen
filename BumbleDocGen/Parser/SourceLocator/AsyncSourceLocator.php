@@ -19,6 +19,11 @@ final class AsyncSourceLocator implements SourceLocatorInterface
     ) {
     }
 
+    public function getFiles(): \Generator
+    {
+        yield;
+    }
+
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
     {
         return new MemoizingSourceLocator(

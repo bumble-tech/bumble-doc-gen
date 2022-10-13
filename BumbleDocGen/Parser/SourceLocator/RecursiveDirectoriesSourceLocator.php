@@ -19,7 +19,7 @@ final class RecursiveDirectoriesSourceLocator implements SourceLocatorInterface
     {
     }
 
-    public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
+    private function getDirectoryIterator(): \Iterator
     {
         $iterator = new \AppendIterator();
         foreach ($this->directories as $directory) {
@@ -33,9 +33,22 @@ final class RecursiveDirectoriesSourceLocator implements SourceLocatorInterface
                 );
             }
         }
+        return $iterator;
+    }
+
+    public function getFiles(): \Generator
+    {
+        foreach ($this->getDirectoryIterator() as $file) {
+            /** @var \SplFileInfo $file */
+            yield $file;
+        }
+    }
+
+    public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
+    {
         return new MemoizingSourceLocator(
             new \Roave\BetterReflection\SourceLocator\Type\FileIteratorSourceLocator(
-                new ExcludeDirectoryFilterIterator($iterator, $this->exclude), $astLocator
+                new ExcludeDirectoryFilterIterator($this->getDirectoryIterator(), $this->exclude), $astLocator
             )
         );
     }

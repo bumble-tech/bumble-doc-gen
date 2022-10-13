@@ -39,4 +39,16 @@ final class SourceLocatorsCollection implements \IteratorAggregate
         }
         return $reflectorSourceLocatorsList;
     }
+
+    /**
+     * @return \Generator|\SplFileInfo[]
+     */
+    public function getAllFiles(): \Generator
+    {
+        foreach ($this->sourceLocators as $locator) {
+            foreach ($locator->getFiles() as $file) {
+                yield $file;
+            }
+        }
+    }
 }
