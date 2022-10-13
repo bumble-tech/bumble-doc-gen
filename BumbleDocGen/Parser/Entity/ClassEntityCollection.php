@@ -53,7 +53,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         /** @var ClassEntityCollectionPluginInterface[] $plugins */
         $plugins = $configuration->getPlugins()->filterByInterface(ClassEntityCollectionPluginInterface::class);
         foreach ($plugins as $plugin) {
-            $plugin->afterCreationClassEntityCollectionByReflector($classEntityCollection);
+            $plugin->afterCreationClassEntityCollection($classEntityCollection);
         }
         return $classEntityCollection;
     }

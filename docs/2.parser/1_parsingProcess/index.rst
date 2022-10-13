@@ -20,7 +20,7 @@
 
 *  The entity is processed using the `ClassEntityPluginInterface::beforeAddingClassEntity\(\) </docs/2.parser/1_parsingProcess/_Classes/ClassEntityPluginInterface.rst#mbeforeaddingclassentity>`_ method
 *  The entity is added to the `ClassEntityCollection </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollection.rst>`_
-*  `ClassEntityCollection </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollection.rst>`_ is handled by plugins by method `ClassEntityCollectionPluginInterface::afterCreationClassEntityCollectionByReflector\(\) </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollectionPluginInterface.rst#maftercreationclassentitycollectionbyreflector>`_
+*  `ClassEntityCollection </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollection.rst>`_ is handled by plugins by method `ClassEntityCollectionPluginInterface::afterCreationClassEntityCollection\(\) </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollectionPluginInterface.rst#maftercreationclassentitycollection>`_
 
 
 The result of the parser is a filled collection `ClassEntityCollection </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollection.rst>`_

@@ -16,7 +16,7 @@ interface ClassEntityCollectionPluginInterface extends PluginInterface
      *
      * @see ClassEntityCollection::createByReflector()
      */
-    public function afterCreationClassEntityCollectionByReflector(
+    public function afterCreationClassEntityCollection(
         ClassEntityCollection $classEntityCollection
     ): void;
 }

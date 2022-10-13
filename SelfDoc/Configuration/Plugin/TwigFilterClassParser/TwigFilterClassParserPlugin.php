@@ -70,7 +70,7 @@ final class TwigFilterClassParserPlugin implements ClassEntityCollectionPluginIn
         return $filtersData[$className];
     }
 
-    public function afterCreationClassEntityCollectionByReflector(ClassEntityCollection $classEntityCollection): void
+    public function afterCreationClassEntityCollection(ClassEntityCollection $classEntityCollection): void
     {
         foreach ($classEntityCollection as $classEntity) {
             if ($this->isCustomTwigFunction($classEntity)) {

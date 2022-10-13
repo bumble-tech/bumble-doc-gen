@@ -74,7 +74,7 @@ final class TwigFunctionClassParserPlugin implements ClassEntityCollectionPlugin
         return $functionsData[$className];
     }
 
-    public function afterCreationClassEntityCollectionByReflector(ClassEntityCollection $classEntityCollection): void
+    public function afterCreationClassEntityCollection(ClassEntityCollection $classEntityCollection): void
     {
         foreach ($classEntityCollection as $classEntity) {
             if ($this->isCustomTwigFunction($classEntity)) {

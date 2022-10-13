@@ -36,7 +36,7 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#maftercreationclassentitycollectionbyreflector">afterCreationClassEntityCollectionByReflector</a> - <i>The method is called after the ClassEntityCollection has been created using the reflector</i></li>
+                <li><a href="#maftercreationclassentitycollection">afterCreationClassEntityCollection</a> - <i>The method is called after the ClassEntityCollection has been created using the reflector</i></li>
         </ol>
 
 
@@ -58,12 +58,12 @@ Method details:
 
 
 
-.. _maftercreationclassentitycollectionbyreflector:
+.. _maftercreationclassentitycollection:
 
-* `# <maftercreationclassentitycollectionbyreflector_>`_  ``afterCreationClassEntityCollectionByReflector``   **|** `source code </BumbleDocGen/Plugin/ClassEntityCollectionPluginInterface.php#L19>`_
+* `# <maftercreationclassentitycollection_>`_  ``afterCreationClassEntityCollection``   **|** `source code </BumbleDocGen/Plugin/ClassEntityCollectionPluginInterface.php#L19>`_
 .. code-block:: php
 
-        public function afterCreationClassEntityCollectionByReflector(BumbleDocGen\Parser\Entity\ClassEntityCollection $classEntityCollection): void;
+        public function afterCreationClassEntityCollection(BumbleDocGen\Parser\Entity\ClassEntityCollection $classEntityCollection): void;
 
 
 ..
