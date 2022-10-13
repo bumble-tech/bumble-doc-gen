@@ -37,7 +37,7 @@ final class Configuration extends BaseConfiguration
             new RecursiveDirectoriesSourceLocator([
                 "{$this->getProjectRoot()}/BumbleDocGen",
                 "{$this->getProjectRoot()}/SelfDoc",
-            ]),
+            ], [], $this->getCacheDir()),
         );
     }
 
@@ -52,5 +52,10 @@ final class Configuration extends BaseConfiguration
         $plugins->add(new TwigFunctionClassParserPlugin());
         $plugins->add(new TwigFilterClassParserPlugin());
         return $plugins;
+    }
+
+    public function getCacheDir(): ?string
+    {
+        return dirname(__DIR__) . '/__cache';
     }
 }

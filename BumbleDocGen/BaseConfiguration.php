@@ -94,6 +94,11 @@ abstract class BaseConfiguration implements ConfigurationInterface
         return $entityDocRendersCollection;
     }
 
+    public function getCacheDir(): ?string
+    {
+        return null;
+    }
+
     public function getLogger(): LoggerInterface
     {
         static $logger = null;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\SourceLocator;
 
+use BumbleDocGen\Parser\SourceLocator\Internal\CachedSourceLocator;
 use FilesystemIterator;
 use Roave\BetterReflection\SourceLocator\Ast\Locator;
 use Roave\BetterReflection\SourceLocator\Type\MemoizingSourceLocator;
@@ -15,8 +16,11 @@ use Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator;
  */
 final class RecursiveDirectoriesSourceLocator implements SourceLocatorInterface
 {
-    public function __construct(private array $directories, private array $exclude = [])
-    {
+    public function __construct(
+        private array $directories,
+        private array $exclude = [],
+        private ?string $cacheDirName = null
+    ) {
     }
 
     private function getDirectoryIterator(): \Iterator
@@ -46,10 +50,14 @@ final class RecursiveDirectoriesSourceLocator implements SourceLocatorInterface
 
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
     {
-        return new MemoizingSourceLocator(
-            new \Roave\BetterReflection\SourceLocator\Type\FileIteratorSourceLocator(
-                new ExcludeDirectoryFilterIterator($this->getDirectoryIterator(), $this->exclude), $astLocator
-            )
+        $fileIteratorSourceLocator = new \Roave\BetterReflection\SourceLocator\Type\FileIteratorSourceLocator(
+            new ExcludeDirectoryFilterIterator($this->getDirectoryIterator(), $this->exclude), $astLocator
         );
+
+        if ($this->cacheDirName) {
+            return new CachedSourceLocator($fileIteratorSourceLocator, $this->cacheDirName);
+        }
+
+        return new MemoizingSourceLocator($fileIteratorSourceLocator);
     }
 }

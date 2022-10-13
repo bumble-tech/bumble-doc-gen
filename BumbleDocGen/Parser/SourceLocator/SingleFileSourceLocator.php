@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\SourceLocator;
 
+use BumbleDocGen\Parser\SourceLocator\Internal\CachedSourceLocator;
 use Roave\BetterReflection\SourceLocator\Ast\Locator;
 use Roave\BetterReflection\SourceLocator\Type\MemoizingSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
@@ -13,8 +14,10 @@ use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
  */
 final class SingleFileSourceLocator implements SourceLocatorInterface
 {
-    public function __construct(private string $filename)
-    {
+    public function __construct(
+        private string $filename,
+        private ?string $cacheDirName = null
+    ) {
     }
 
     public function getFiles(): \Generator
@@ -24,10 +27,14 @@ final class SingleFileSourceLocator implements SourceLocatorInterface
 
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
     {
-        return new MemoizingSourceLocator(
-            new \Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator(
-                $this->filename, $astLocator
-            )
+        $singleFileSourceLocator = new \Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator(
+            $this->filename, $astLocator
         );
+
+        if ($this->cacheDirName) {
+            return new CachedSourceLocator($singleFileSourceLocator, $this->cacheDirName);
+        }
+
+        return new MemoizingSourceLocator($singleFileSourceLocator);
     }
 }

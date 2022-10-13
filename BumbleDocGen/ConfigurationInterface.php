@@ -45,6 +45,8 @@ interface ConfigurationInterface
      */
     public function getOutputDirBaseUrl(): string;
 
+    public function getCacheDir(): ?string;
+
     public function clearOutputDirBeforeDocGeneration(): bool;
 
     public function classEntityFilterCondition(ClassEntity $classEntity): ConditionInterface;
