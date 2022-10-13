@@ -98,19 +98,6 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $docCommentsCache[$objectId];
     }
 
-    public function getDocAnnotation(): ?object
-    {
-        static $docAttributesCache = [];
-        $objectId = $this->getObjectId();
-        if (!isset($docAttributesCache[$objectId])) {
-            $docAttributesCache[$objectId] = $this->attributeParser->getAnnotationIfIsSubclassOf(
-                $this->reflection->getDocComment(),
-                'DocumentationGenerator\Annotations\MethodDocAnnotation'
-            );
-        }
-        return $docAttributesCache[$objectId];
-    }
-
     public function getName(): string
     {
         return $this->getReflection()->getName();

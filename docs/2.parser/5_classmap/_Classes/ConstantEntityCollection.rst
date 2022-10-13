@@ -66,7 +66,7 @@ Method details:
 
 .. _mcreatebyreflectionclass:
 
-* `# <mcreatebyreflectionclass_>`_  ``createByReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntityCollection.php#L15>`_
+* `# <mcreatebyreflectionclass_>`_  ``createByReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntityCollection.php#L14>`_
 .. code-block:: php
 
         public static function createByReflectionClass(BumbleDocGen\ConfigurationInterface $configuration, Roave\BetterReflection\Reflector\Reflector $reflector, Roave\BetterReflection\Reflection\ReflectionClass $reflectionClass, BumbleDocGen\Parser\AttributeParser $attributeParser): BumbleDocGen\Parser\Entity\ConstantEntityCollection;
@@ -117,7 +117,7 @@ ________
 
 .. _madd:
 
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntityCollection.php#L39>`_
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntityCollection.php#L38>`_
 .. code-block:: php
 
         public function add(BumbleDocGen\Parser\Entity\ConstantEntity $constantEntity, bool $reload = false): BumbleDocGen\Parser\Entity\ConstantEntityCollection;

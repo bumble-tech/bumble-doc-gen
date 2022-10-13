@@ -68,19 +68,6 @@ final class ConstantEntity extends BaseEntity
         return $docCommentsCache[$objectId];
     }
 
-    public function getDocAnnotation(): ?object
-    {
-        static $docAttributesCache = [];
-        $objectId = $this->getObjectId();
-        if (!isset($docAttributesCache[$objectId])) {
-            $docAttributesCache[$objectId] = $this->attributeParser->getAnnotationIfIsSubclassOf(
-                $this->reflection->getDocComment(),
-                'DocumentationGenerator\Annotations\ConstantDocAnnotation'
-            );
-        }
-        return $docAttributesCache[$objectId];
-    }
-
     public function getName(): string
     {
         return $this->getReflection()->getName();

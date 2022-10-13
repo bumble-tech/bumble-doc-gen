@@ -47,7 +47,6 @@ Methods:
   <ol>
                 <li><a href="#mgetreflection">getReflection</a> </li>
                 <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
-                <li><a href="#mgetdocannotation">getDocAnnotation</a> </li>
                 <li><a href="#mgetname">getName</a> </li>
                 <li><a href="#mgetfilename">getFileName</a> </li>
                 <li><a href="#mgetline">getLine</a> </li>
@@ -168,26 +167,9 @@ ________
 
 ________
 
-.. _mgetdocannotation:
-
-* `# <mgetdocannotation_>`_  ``getDocAnnotation``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L71>`_
-.. code-block:: php
-
-        public function getDocAnnotation(): object|null;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** object | null
-
-________
-
 .. _mgetname:
 
-* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L84>`_
+* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L71>`_
 .. code-block:: php
 
         public function getName(): string;
@@ -204,7 +186,7 @@ ________
 
 .. _mgetfilename:
 
-* `# <mgetfilename_>`_  ``getFileName``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L89>`_
+* `# <mgetfilename_>`_  ``getFileName``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L76>`_
 .. code-block:: php
 
         public function getFileName(): string|null;
@@ -221,7 +203,7 @@ ________
 
 .. _mgetline:
 
-* `# <mgetline_>`_  ``getLine``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L102>`_
+* `# <mgetline_>`_  ``getLine``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L89>`_
 .. code-block:: php
 
         public function getLine(): int;
@@ -238,7 +220,7 @@ ________
 
 .. _mgetdescription:
 
-* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L107>`_
+* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L94>`_
 .. code-block:: php
 
         public function getDescription(): string;

@@ -121,19 +121,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->pluginsData[$pluginKey] ?? null;
     }
 
-    public function getDocAnnotation(): ?object
-    {
-        static $docAttributesCache = [];
-        $objectId = $this->getObjectId();
-        if (!isset($docAttributesCache[$objectId])) {
-            $docAttributesCache[$objectId] = $this->attributeParser->getAnnotationIfIsSubclassOf(
-                $this->reflection->getDocComment(),
-                'DocumentationGenerator\Annotations\ClassDocAnnotation'
-            );
-        }
-        return $docAttributesCache[$objectId];
-    }
-
     public function getReflection(): ReflectionClass
     {
         return $this->reflection;

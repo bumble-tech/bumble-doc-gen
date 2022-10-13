@@ -47,7 +47,6 @@ Methods:
   <ol>
                 <li><a href="#mgetreflection">getReflection</a> </li>
                 <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
-                <li><a href="#mgetdocannotation">getDocAnnotation</a> </li>
                 <li><a href="#mgetname">getName</a> </li>
                 <li><a href="#mgetfilename">getFileName</a> </li>
                 <li><a href="#mgetline">getLine</a> </li>
@@ -177,26 +176,9 @@ ________
 
 ________
 
-.. _mgetdocannotation:
-
-* `# <mgetdocannotation_>`_  ``getDocAnnotation``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L101>`_
-.. code-block:: php
-
-        public function getDocAnnotation(): object|null;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** object | null
-
-________
-
 .. _mgetname:
 
-* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L114>`_
+* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L101>`_
 .. code-block:: php
 
         public function getName(): string;
@@ -213,7 +195,7 @@ ________
 
 .. _mgetfilename:
 
-* `# <mgetfilename_>`_  ``getFileName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L119>`_
+* `# <mgetfilename_>`_  ``getFileName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L106>`_
 .. code-block:: php
 
         public function getFileName(): string|null;
@@ -230,7 +212,7 @@ ________
 
 .. _mgetline:
 
-* `# <mgetline_>`_  ``getLine``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L133>`_
+* `# <mgetline_>`_  ``getLine``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L120>`_
 .. code-block:: php
 
         public function getLine(): int;
@@ -247,7 +229,7 @@ ________
 
 .. _mgetmodifiersstring:
 
-* `# <mgetmodifiersstring_>`_  ``getModifiersString``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L138>`_
+* `# <mgetmodifiersstring_>`_  ``getModifiersString``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L125>`_
 .. code-block:: php
 
         public function getModifiersString(): string;
@@ -264,7 +246,7 @@ ________
 
 .. _mgetreturntype:
 
-* `# <mgetreturntype_>`_  ``getReturnType``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L158>`_
+* `# <mgetreturntype_>`_  ``getReturnType``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L145>`_
 .. code-block:: php
 
         public function getReturnType(): string;
@@ -281,7 +263,7 @@ ________
 
 .. _mparseannotationparams:
 
-* `# <mparseannotationparams_>`_  ``parseAnnotationParams``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L178>`_
+* `# <mparseannotationparams_>`_  ``parseAnnotationParams``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L165>`_
 .. code-block:: php
 
         public static function parseAnnotationParams(array $params): array;
@@ -317,7 +299,7 @@ ________
 
 .. _mgetparameters:
 
-* `# <mgetparameters_>`_  ``getParameters``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L203>`_
+* `# <mgetparameters_>`_  ``getParameters``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L190>`_
 .. code-block:: php
 
         public function getParameters(): array;
@@ -334,7 +316,7 @@ ________
 
 .. _mgetparametersstring:
 
-* `# <mgetparametersstring_>`_  ``getParametersString``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L258>`_
+* `# <mgetparametersstring_>`_  ``getParametersString``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L245>`_
 .. code-block:: php
 
         public function getParametersString(): string;
@@ -351,7 +333,7 @@ ________
 
 .. _misimplementedinparentclass:
 
-* `# <misimplementedinparentclass_>`_  ``isImplementedInParentClass``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L268>`_
+* `# <misimplementedinparentclass_>`_  ``isImplementedInParentClass``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L255>`_
 .. code-block:: php
 
         public function isImplementedInParentClass(): bool;
@@ -368,7 +350,7 @@ ________
 
 .. _mgetimplementingclassname:
 
-* `# <mgetimplementingclassname_>`_  ``getImplementingClassName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L273>`_
+* `# <mgetimplementingclassname_>`_  ``getImplementingClassName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L260>`_
 .. code-block:: php
 
         public function getImplementingClassName(): string;
@@ -385,7 +367,7 @@ ________
 
 .. _mgetdescription:
 
-* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L278>`_
+* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L265>`_
 .. code-block:: php
 
         public function getDescription(): string;
@@ -402,7 +384,7 @@ ________
 
 .. _misinitialization:
 
-* `# <misinitialization_>`_  ``isInitialization``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L284>`_
+* `# <misinitialization_>`_  ``isInitialization``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L271>`_
 .. code-block:: php
 
         public function isInitialization(): bool;
@@ -419,7 +401,7 @@ ________
 
 .. _misdynamic:
 
-* `# <misdynamic_>`_  ``isDynamic``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L300>`_
+* `# <misdynamic_>`_  ``isDynamic``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L287>`_
 .. code-block:: php
 
         public function isDynamic(): bool;

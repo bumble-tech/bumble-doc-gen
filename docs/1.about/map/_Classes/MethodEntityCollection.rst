@@ -69,7 +69,7 @@ Method details:
 
 .. _mcreatebyclassentity:
 
-* `# <mcreatebyclassentity_>`_  ``createByClassEntity``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L18>`_
+* `# <mcreatebyclassentity_>`_  ``createByClassEntity``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L16>`_
 .. code-block:: php
 
         public static function createByClassEntity(BumbleDocGen\ConfigurationInterface $configuration, Roave\BetterReflection\Reflector\Reflector $reflector, BumbleDocGen\Parser\Entity\ClassEntity $classEntity, BumbleDocGen\Parser\AttributeParser $attributeParser): BumbleDocGen\Parser\Entity\MethodEntityCollection;
@@ -120,7 +120,7 @@ ________
 
 .. _madd:
 
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L64>`_
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L62>`_
 .. code-block:: php
 
         public function add(BumbleDocGen\Parser\Entity\MethodEntityInterface $methodEntity, bool $reload = false): BumbleDocGen\Parser\Entity\MethodEntityCollection;
@@ -161,7 +161,7 @@ ________
 
 .. _mget:
 
-* `# <mget_>`_  ``get``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L73>`_
+* `# <mget_>`_  ``get``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L71>`_
 .. code-block:: php
 
         public function get(string $key): BumbleDocGen\Parser\Entity\MethodEntity|null;
@@ -197,7 +197,7 @@ ________
 
 .. _mgetinitializations:
 
-* `# <mgetinitializations_>`_  ``getInitializations``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L78>`_
+* `# <mgetinitializations_>`_  ``getInitializations``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L76>`_
 .. code-block:: php
 
         public function getInitializations(): BumbleDocGen\Parser\Entity\MethodEntityCollection;
@@ -214,7 +214,7 @@ ________
 
 .. _mgetallexceptinitializations:
 
-* `# <mgetallexceptinitializations_>`_  ``getAllExceptInitializations``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L90>`_
+* `# <mgetallexceptinitializations_>`_  ``getAllExceptInitializations``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L88>`_
 .. code-block:: php
 
         public function getAllExceptInitializations(): BumbleDocGen\Parser\Entity\MethodEntityCollection;

@@ -29,8 +29,6 @@ abstract class BaseEntity
 
     abstract public function getImplementingReflectionClass(): ReflectionClass;
 
-    abstract public function getDocAnnotation(): ?object;
-
     abstract protected function getDocCommentRecursive(): string;
 
     abstract protected function getDocCommentReflectionRecursive(): Reflection;

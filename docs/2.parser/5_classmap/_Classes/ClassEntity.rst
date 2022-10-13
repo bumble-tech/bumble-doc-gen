@@ -48,7 +48,6 @@ Methods:
                 <li><a href="#mloadclassmembers">loadClassMembers</a> </li>
                 <li><a href="#mloadplugindata">loadPluginData</a> </li>
                 <li><a href="#mgetplugindata">getPluginData</a> </li>
-                <li><a href="#mgetdocannotation">getDocAnnotation</a> </li>
                 <li><a href="#mgetreflection">getReflection</a> </li>
                 <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
                 <li><a href="#mhasannotationkey">hasAnnotationKey</a> </li>
@@ -242,26 +241,9 @@ ________
 
 ________
 
-.. _mgetdocannotation:
-
-* `# <mgetdocannotation_>`_  ``getDocAnnotation``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L124>`_
-.. code-block:: php
-
-        public function getDocAnnotation(): object|null;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** object | null
-
-________
-
 .. _mgetreflection:
 
-* `# <mgetreflection_>`_  ``getReflection``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L137>`_
+* `# <mgetreflection_>`_  ``getReflection``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L124>`_
 .. code-block:: php
 
         public function getReflection(): Roave\BetterReflection\Reflection\ReflectionClass;
@@ -278,7 +260,7 @@ ________
 
 .. _mgetimplementingreflectionclass:
 
-* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L142>`_
+* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L129>`_
 .. code-block:: php
 
         public function getImplementingReflectionClass(): Roave\BetterReflection\Reflection\ReflectionClass;
@@ -295,7 +277,7 @@ ________
 
 .. _mhasannotationkey:
 
-* `# <mhasannotationkey_>`_  ``hasAnnotationKey``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L147>`_
+* `# <mhasannotationkey_>`_  ``hasAnnotationKey``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L134>`_
 .. code-block:: php
 
         public function hasAnnotationKey(string $annotationKey): bool;
@@ -331,7 +313,7 @@ ________
 
 .. _mgetname:
 
-* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L152>`_
+* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L139>`_
 .. code-block:: php
 
         public function getName(): string;
@@ -348,7 +330,7 @@ ________
 
 .. _mgetshortname:
 
-* `# <mgetshortname_>`_  ``getShortName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L157>`_
+* `# <mgetshortname_>`_  ``getShortName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L144>`_
 .. code-block:: php
 
         public function getShortName(): string;
@@ -365,7 +347,7 @@ ________
 
 .. _mgetnamespacename:
 
-* `# <mgetnamespacename_>`_  ``getNamespaceName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L162>`_
+* `# <mgetnamespacename_>`_  ``getNamespaceName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L149>`_
 .. code-block:: php
 
         public function getNamespaceName(): string;
@@ -382,7 +364,7 @@ ________
 
 .. _mgetfilename:
 
-* `# <mgetfilename_>`_  ``getFileName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L167>`_
+* `# <mgetfilename_>`_  ``getFileName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L154>`_
 .. code-block:: php
 
         public function getFileName(): string;
@@ -399,7 +381,7 @@ ________
 
 .. _mgetfilepath:
 
-* `# <mgetfilepath_>`_  ``getFilePath``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L172>`_
+* `# <mgetfilepath_>`_  ``getFilePath``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L159>`_
 .. code-block:: php
 
         public function getFilePath(): string;
@@ -416,7 +398,7 @@ ________
 
 .. _mgetstartline:
 
-* `# <mgetstartline_>`_  ``getStartLine``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L178>`_
+* `# <mgetstartline_>`_  ``getStartLine``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L165>`_
 .. code-block:: php
 
         public function getStartLine(): int;
@@ -433,7 +415,7 @@ ________
 
 .. _mgetendline:
 
-* `# <mgetendline_>`_  ``getEndLine``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L183>`_
+* `# <mgetendline_>`_  ``getEndLine``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L170>`_
 .. code-block:: php
 
         public function getEndLine(): int;
@@ -450,7 +432,7 @@ ________
 
 .. _mgetmodifiersstring:
 
-* `# <mgetmodifiersstring_>`_  ``getModifiersString``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L188>`_
+* `# <mgetmodifiersstring_>`_  ``getModifiersString``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L175>`_
 .. code-block:: php
 
         public function getModifiersString(): string;
@@ -467,7 +449,7 @@ ________
 
 .. _mgetextends:
 
-* `# <mgetextends_>`_  ``getExtends``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L215>`_
+* `# <mgetextends_>`_  ``getExtends``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L202>`_
 .. code-block:: php
 
         public function getExtends(): string|null;
@@ -484,7 +466,7 @@ ________
 
 .. _mgetinterfaces:
 
-* `# <mgetinterfaces_>`_  ``getInterfaces``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L229>`_
+* `# <mgetinterfaces_>`_  ``getInterfaces``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L216>`_
 .. code-block:: php
 
         public function getInterfaces(): array;
@@ -501,7 +483,7 @@ ________
 
 .. _mgetparentclassnames:
 
-* `# <mgetparentclassnames_>`_  ``getParentClassNames``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L242>`_
+* `# <mgetparentclassnames_>`_  ``getParentClassNames``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L229>`_
 .. code-block:: php
 
         public function getParentClassNames(): Generator;
@@ -518,7 +500,7 @@ ________
 
 .. _mgetinterfacesstring:
 
-* `# <mgetinterfacesstring_>`_  ``getInterfacesString``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L261>`_
+* `# <mgetinterfacesstring_>`_  ``getInterfacesString``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L248>`_
 .. code-block:: php
 
         public function getInterfacesString(): string;
@@ -535,7 +517,7 @@ ________
 
 .. _mgettraitsnames:
 
-* `# <mgettraitsnames_>`_  ``getTraitsNames``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L266>`_
+* `# <mgettraitsnames_>`_  ``getTraitsNames``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L253>`_
 .. code-block:: php
 
         public function getTraitsNames(): array;
@@ -552,7 +534,7 @@ ________
 
 .. _mhastraits:
 
-* `# <mhastraits_>`_  ``hasTraits``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L285>`_
+* `# <mhastraits_>`_  ``hasTraits``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L272>`_
 .. code-block:: php
 
         public function hasTraits(): bool;
@@ -569,7 +551,7 @@ ________
 
 .. _mgetconstantentitycollection:
 
-* `# <mgetconstantentitycollection_>`_  ``getConstantEntityCollection``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L290>`_
+* `# <mgetconstantentitycollection_>`_  ``getConstantEntityCollection``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L277>`_
 .. code-block:: php
 
         public function getConstantEntityCollection(): BumbleDocGen\Parser\Entity\ConstantEntityCollection;
@@ -586,7 +568,7 @@ ________
 
 .. _mgetpropertyentitycollection:
 
-* `# <mgetpropertyentitycollection_>`_  ``getPropertyEntityCollection``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L295>`_
+* `# <mgetpropertyentitycollection_>`_  ``getPropertyEntityCollection``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L282>`_
 .. code-block:: php
 
         public function getPropertyEntityCollection(): BumbleDocGen\Parser\Entity\PropertyEntityCollection;
@@ -603,7 +585,7 @@ ________
 
 .. _mgetmethodentitycollection:
 
-* `# <mgetmethodentitycollection_>`_  ``getMethodEntityCollection``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L300>`_
+* `# <mgetmethodentitycollection_>`_  ``getMethodEntityCollection``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L287>`_
 .. code-block:: php
 
         public function getMethodEntityCollection(): BumbleDocGen\Parser\Entity\MethodEntityCollection;
@@ -620,7 +602,7 @@ ________
 
 .. _mgetdescription:
 
-* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L305>`_
+* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L292>`_
 .. code-block:: php
 
         public function getDescription(): string;
@@ -637,7 +619,7 @@ ________
 
 .. _misenum:
 
-* `# <misenum_>`_  ``isEnum``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L311>`_
+* `# <misenum_>`_  ``isEnum``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntity.php#L298>`_
 .. code-block:: php
 
         public function isEnum(): bool;
