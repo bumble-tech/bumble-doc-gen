@@ -152,7 +152,7 @@ ________
 
 .. _mlocateidentifiersbytype:
 
-* `# <mlocateidentifiersbytype_>`_  ``locateIdentifiersByType``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L89>`_
+* `# <mlocateidentifiersbytype_>`_  ``locateIdentifiersByType``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L90>`_
 .. code-block:: php
 
         public function locateIdentifiersByType(Roave\BetterReflection\Reflector\Reflector $reflector, Roave\BetterReflection\Identifier\IdentifierType $identifierType): array;

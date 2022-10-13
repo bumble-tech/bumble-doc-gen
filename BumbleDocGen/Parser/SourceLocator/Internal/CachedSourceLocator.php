@@ -39,11 +39,12 @@ final class CachedSourceLocator implements SourceLocator
         }
 
         $cacheDirName = "{$this->cacheDirName}/SourceLocatorCache";
+        $cacheFileName = "{$cacheDirName}/{$cacheKey}.cache";
+        $cacheDirName = dirname($cacheFileName);
         if (!is_dir($cacheDirName)) {
             mkdir($cacheDirName, 0755, true);
         }
 
-        $cacheFileName = "{$cacheDirName}/{$cacheKey}.cache";
         $locateIdentifier = null;
 
         if (is_file($cacheFileName)) {
@@ -111,13 +112,16 @@ final class CachedSourceLocator implements SourceLocator
 
     private function identifierToCacheKey(Identifier $identifier): string
     {
+        $nameElements = explode('\\', $identifier->getName());
+        $name = array_pop($nameElements);
         return str_replace(
             '\\',
             '_',
             sprintf(
-                '%s|name:%s',
+                '%s' . DIRECTORY_SEPARATOR . '%s_name:%s',
+                implode(DIRECTORY_SEPARATOR, $nameElements),
                 $this->identifierTypeToCacheKey($identifier->getType()),
-                $identifier->getName(),
+                $name,
             )
         );
     }
