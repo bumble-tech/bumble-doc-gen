@@ -45,6 +45,7 @@ Methods:
                 <li><a href="#mgetiterator">getIterator</a> - <i>Retrieve an external iterator</i></li>
                 <li><a href="#madd">add</a> </li>
                 <li><a href="#mconverttoreflectorsourcelocatorslist">convertToReflectorSourceLocatorsList</a> </li>
+                <li><a href="#mgetallfiles">getAllFiles</a> </li>
         </ol>
 
 
@@ -201,6 +202,23 @@ ________
 
 
 **Return value:** array
+
+________
+
+.. _mgetallfiles:
+
+* `# <mgetallfiles_>`_  ``getAllFiles``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L46>`_
+.. code-block:: php
+
+        public function getAllFiles(): Generator;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** 
 
 ________
 

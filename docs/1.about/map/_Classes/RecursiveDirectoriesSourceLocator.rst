@@ -45,6 +45,7 @@ Methods:
 .. raw:: html
 
   <ol>
+                <li><a href="#mgetfiles">getFiles</a> </li>
                 <li><a href="#mconverttoreflectorsourcelocator">convertToReflectorSourceLocator</a> </li>
         </ol>
 
@@ -69,10 +70,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/RecursiveDirectoriesSourceLocator.php#L18>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/RecursiveDirectoriesSourceLocator.php#L19>`_
 .. code-block:: php
 
-        public function __construct(array $directories, array $exclude = [ ]): mixed;
+        public function __construct(array $directories, array $exclude = [ ], string|null $cacheDirName = NULL): mixed;
 
 
 
@@ -100,6 +101,11 @@ Method details:
             <td>array</td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$cacheDirName</td>
+            <td>string | null</td>
+            <td>-</td>
+        </tr>
         </tbody>
     </table>
 
@@ -108,9 +114,26 @@ Method details:
 
 ________
 
+.. _mgetfiles:
+
+* `# <mgetfiles_>`_  ``getFiles``   **|** `source code </BumbleDocGen/Parser/SourceLocator/RecursiveDirectoriesSourceLocator.php#L43>`_
+.. code-block:: php
+
+        public function getFiles(): Generator;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** 
+
+________
+
 .. _mconverttoreflectorsourcelocator:
 
-* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/RecursiveDirectoriesSourceLocator.php#L22>`_
+* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/RecursiveDirectoriesSourceLocator.php#L51>`_
 .. code-block:: php
 
         public function convertToReflectorSourceLocator(Roave\BetterReflection\SourceLocator\Ast\Locator $astLocator): Roave\BetterReflection\SourceLocator\Type\SourceLocator;

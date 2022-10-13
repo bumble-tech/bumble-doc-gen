@@ -45,6 +45,7 @@ Methods:
 .. raw:: html
 
   <ol>
+                <li><a href="#mgetfiles">getFiles</a> </li>
                 <li><a href="#mconverttoreflectorsourcelocator">convertToReflectorSourceLocator</a> </li>
         </ol>
 
@@ -69,10 +70,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SingleFileSourceLocator.php#L16>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SingleFileSourceLocator.php#L17>`_
 .. code-block:: php
 
-        public function __construct(string $filename): mixed;
+        public function __construct(string $filename, string|null $cacheDirName = NULL): mixed;
 
 
 
@@ -95,6 +96,11 @@ Method details:
             <td>string</td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$cacheDirName</td>
+            <td>string | null</td>
+            <td>-</td>
+        </tr>
         </tbody>
     </table>
 
@@ -103,9 +109,26 @@ Method details:
 
 ________
 
+.. _mgetfiles:
+
+* `# <mgetfiles_>`_  ``getFiles``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SingleFileSourceLocator.php#L23>`_
+.. code-block:: php
+
+        public function getFiles(): Generator;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** 
+
+________
+
 .. _mconverttoreflectorsourcelocator:
 
-* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SingleFileSourceLocator.php#L20>`_
+* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SingleFileSourceLocator.php#L28>`_
 .. code-block:: php
 
         public function convertToReflectorSourceLocator(Roave\BetterReflection\SourceLocator\Ast\Locator $astLocator): Roave\BetterReflection\SourceLocator\Type\SourceLocator;

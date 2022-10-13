@@ -42,6 +42,7 @@ Methods:
                 <li><a href="#mgetsourcelocators">getSourceLocators</a> - <i>Get a collection of source locators</i></li>
                 <li><a href="#mclassentityfiltercondition">classEntityFilterCondition</a> </li>
                 <li><a href="#mgetplugins">getPlugins</a> </li>
+                <li><a href="#mgetcachedir">getCacheDir</a> </li>
         </ol>
 
 
@@ -193,6 +194,23 @@ ________
 
 
 **Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </docs/_Classes/PluginsCollection\.rst>`_
+
+________
+
+.. _mgetcachedir:
+
+* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </SelfDoc/Configuration/Configuration.php#L57>`_
+.. code-block:: php
+
+        public function getCacheDir(): string|null;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string | null
 
 ________
 

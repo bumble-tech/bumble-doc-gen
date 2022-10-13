@@ -33,6 +33,7 @@ Methods:
 .. raw:: html
 
   <ol>
+                <li><a href="#mgetfiles">getFiles</a> </li>
                 <li><a href="#mconverttoreflectorsourcelocator">convertToReflectorSourceLocator</a> </li>
         </ol>
 
@@ -55,9 +56,26 @@ Method details:
 
 
 
+.. _mgetfiles:
+
+* `# <mgetfiles_>`_  ``getFiles``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L15>`_
+.. code-block:: php
+
+        public function getFiles(): Generator;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** 
+
+________
+
 .. _mconverttoreflectorsourcelocator:
 
-* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L12>`_
+* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L17>`_
 .. code-block:: php
 
         public function convertToReflectorSourceLocator(Roave\BetterReflection\SourceLocator\Ast\Locator $astLocator): Roave\BetterReflection\SourceLocator\Type\SourceLocator;

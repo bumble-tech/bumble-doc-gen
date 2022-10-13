@@ -44,6 +44,7 @@ Methods:
                 <li><a href="#mgetplugins">getPlugins</a> </li>
                 <li><a href="#mgettemplatefillers">getTemplateFillers</a> </li>
                 <li><a href="#mgetentitydocrenderscollection">getEntityDocRendersCollection</a> </li>
+                <li><a href="#mgetcachedir">getCacheDir</a> </li>
                 <li><a href="#mgetlogger">getLogger</a> </li>
         </ol>
 
@@ -262,9 +263,26 @@ ________
 
 ________
 
+.. _mgetcachedir:
+
+* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L97>`_
+.. code-block:: php
+
+        public function getCacheDir(): string|null;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string | null
+
+________
+
 .. _mgetlogger:
 
-* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L97>`_
+* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L102>`_
 .. code-block:: php
 
         public function getLogger(): Psr\Log\LoggerInterface;

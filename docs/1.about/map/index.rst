@@ -63,6 +63,7 @@ Directory layout ( only documented files shown ):
  │  ├──<b>Parser</b>/
  │  │  ├──<b>SourceLocator</b>/
  │  │  │  ├──<b>Internal</b>/
+ │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/CachedSourceLocator.rst'>CachedSourceLocator.php</a>
  │  │  │  │  └── <a href='/docs/1.about/map/_Classes/SystemAsyncSourceLocator.rst'>SystemAsyncSourceLocator.php</a>
  │  │  │  ├── <a href='/docs/1.about/map/_Classes/SourceLocatorInterface.rst'>SourceLocatorInterface.php</a>
  │  │  │  ├── <a href='/docs/1.about/map/_Classes/DirectorySourceLocator.rst'>DirectorySourceLocator.php</a>
