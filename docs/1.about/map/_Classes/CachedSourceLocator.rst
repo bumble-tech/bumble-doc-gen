@@ -70,7 +70,7 @@ Method details:
 * `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L30>`_
 .. code-block:: php
 
-        public function __construct(Roave\BetterReflection\SourceLocator\Type\SourceLocator $wrappedSourceLocator, string $cacheDirName): mixed;
+        public function __construct(Roave\BetterReflection\SourceLocator\Type\SourceLocator $wrappedSourceLocator, Psr\Cache\CacheItemPoolInterface $cache): mixed;
 
 
 
@@ -94,8 +94,8 @@ Method details:
             <td>-</td>
         </tr>
             <tr>
-            <td>$cacheDirName</td>
-            <td>string</td>
+            <td>$cache</td>
+            <td><a href='/vendor/psr/cache/src/CacheItemPoolInterface.php#L14'>Psr\Cache\CacheItemPoolInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -152,7 +152,7 @@ ________
 
 .. _mlocateidentifiersbytype:
 
-* `# <mlocateidentifiersbytype_>`_  ``locateIdentifiersByType``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L90>`_
+* `# <mlocateidentifiersbytype_>`_  ``locateIdentifiersByType``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L81>`_
 .. code-block:: php
 
         public function locateIdentifiersByType(Roave\BetterReflection\Reflector\Reflector $reflector, Roave\BetterReflection\Identifier\IdentifierType $identifierType): array;

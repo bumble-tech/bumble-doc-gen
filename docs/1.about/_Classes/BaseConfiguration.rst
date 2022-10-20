@@ -69,7 +69,7 @@ Method details:
 
 .. _mclearoutputdirbeforedocgeneration:
 
-* `# <mclearoutputdirbeforedocgeneration_>`_  ``clearOutputDirBeforeDocGeneration``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L34>`_
+* `# <mclearoutputdirbeforedocgeneration_>`_  ``clearOutputDirBeforeDocGeneration``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L36>`_
 .. code-block:: php
 
         public function clearOutputDirBeforeDocGeneration(): bool;
@@ -86,7 +86,7 @@ ________
 
 .. _mgetoutputdir:
 
-* `# <mgetoutputdir_>`_  ``getOutputDir``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L39>`_
+* `# <mgetoutputdir_>`_  ``getOutputDir``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L41>`_
 .. code-block:: php
 
         public function getOutputDir(): string;
@@ -106,7 +106,7 @@ ________
 
 .. _mclassconstantentityfiltercondition:
 
-* `# <mclassconstantentityfiltercondition_>`_  ``classConstantEntityFilterCondition``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L44>`_
+* `# <mclassconstantentityfiltercondition_>`_  ``classConstantEntityFilterCondition``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L46>`_
 .. code-block:: php
 
         public function classConstantEntityFilterCondition(BumbleDocGen\Parser\Entity\ConstantEntity $constantEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
@@ -142,7 +142,7 @@ ________
 
 .. _mmethodentityfiltercondition:
 
-* `# <mmethodentityfiltercondition_>`_  ``methodEntityFilterCondition``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L52>`_
+* `# <mmethodentityfiltercondition_>`_  ``methodEntityFilterCondition``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L54>`_
 .. code-block:: php
 
         public function methodEntityFilterCondition(BumbleDocGen\Parser\Entity\MethodEntity $methodEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
@@ -178,7 +178,7 @@ ________
 
 .. _mpropertyentityfiltercondition:
 
-* `# <mpropertyentityfiltercondition_>`_  ``propertyEntityFilterCondition``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L66>`_
+* `# <mpropertyentityfiltercondition_>`_  ``propertyEntityFilterCondition``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L68>`_
 .. code-block:: php
 
         public function propertyEntityFilterCondition(BumbleDocGen\Parser\Entity\PropertyEntity $propertyEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
@@ -214,7 +214,7 @@ ________
 
 .. _mgetplugins:
 
-* `# <mgetplugins_>`_  ``getPlugins``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L74>`_
+* `# <mgetplugins_>`_  ``getPlugins``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L76>`_
 .. code-block:: php
 
         public function getPlugins(): BumbleDocGen\Plugin\PluginsCollection;
@@ -231,7 +231,7 @@ ________
 
 .. _mgettemplatefillers:
 
-* `# <mgettemplatefillers_>`_  ``getTemplateFillers``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L82>`_
+* `# <mgettemplatefillers_>`_  ``getTemplateFillers``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L84>`_
 .. code-block:: php
 
         public function getTemplateFillers(): BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
@@ -248,7 +248,7 @@ ________
 
 .. _mgetentitydocrenderscollection:
 
-* `# <mgetentitydocrenderscollection_>`_  ``getEntityDocRendersCollection``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L87>`_
+* `# <mgetentitydocrenderscollection_>`_  ``getEntityDocRendersCollection``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L89>`_
 .. code-block:: php
 
         public function getEntityDocRendersCollection(): BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
@@ -265,7 +265,7 @@ ________
 
 .. _mgetcachedir:
 
-* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L97>`_
+* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L99>`_
 .. code-block:: php
 
         public function getCacheDir(): string|null;
@@ -282,7 +282,7 @@ ________
 
 .. _mgetlogger:
 
-* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L102>`_
+* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L104>`_
 .. code-block:: php
 
         public function getLogger(): Psr\Log\LoggerInterface;

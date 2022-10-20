@@ -24,7 +24,9 @@ use BumbleDocGen\Render\EntityDocRender\PhpClassToRst\PhpClassToRstDocRender;
 use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 /**
  * Basic configuration for project documentation
@@ -109,5 +111,19 @@ abstract class BaseConfiguration implements ConfigurationInterface
             $logger->pushHandler($handler);
         }
         return $logger;
+    }
+
+    private function getCacheItemPool(string $cacheNamespace): CacheItemPoolInterface
+    {
+        static $cache = [];
+        if (!isset($cache[$cacheNamespace])) {
+            $cache[$cacheNamespace] = new FilesystemAdapter($cacheNamespace, 604800, $this->getCacheDir());
+        }
+        return $cache[$cacheNamespace];
+    }
+
+    protected function getSourceLocatorCacheItemPool(): CacheItemPoolInterface
+    {
+        return $this->getCacheItemPool('sourceLocator');
     }
 }

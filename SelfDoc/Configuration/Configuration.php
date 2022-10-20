@@ -37,7 +37,7 @@ final class Configuration extends BaseConfiguration
             new RecursiveDirectoriesSourceLocator([
                 "{$this->getProjectRoot()}/BumbleDocGen",
                 "{$this->getProjectRoot()}/SelfDoc",
-            ], [], $this->getCacheDir()),
+            ], [], $this->getSourceLocatorCacheItemPool()),
         );
     }
 

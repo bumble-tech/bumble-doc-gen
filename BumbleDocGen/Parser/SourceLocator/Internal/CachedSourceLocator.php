@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\SourceLocator\Internal;
 
+use Psr\Cache\CacheItemPoolInterface;
 use Roave\BetterReflection\Identifier\Identifier;
 use Roave\BetterReflection\Identifier\IdentifierType;
 use Roave\BetterReflection\Reflection\Reflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
-
 use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
 
 use function array_key_exists;
@@ -27,7 +27,7 @@ final class CachedSourceLocator implements SourceLocator
     /** @var array<string, list<Reflection>> indexed by reflector key and identifier type cache key */
     private array $cacheByIdentifierTypeKeyAndOid = [];
 
-    public function __construct(private SourceLocator $wrappedSourceLocator, private string $cacheDirName)
+    public function __construct(private SourceLocator $wrappedSourceLocator, private CacheItemPoolInterface $cache)
     {
     }
 
@@ -38,17 +38,9 @@ final class CachedSourceLocator implements SourceLocator
             return $this->cacheByIdentifierKeyAndOid[$cacheKey];
         }
 
-        $cacheDirName = "{$this->cacheDirName}/SourceLocatorCache";
-        $cacheFileName = "{$cacheDirName}/{$cacheKey}.cache";
-        $cacheDirName = dirname($cacheFileName);
-        if (!is_dir($cacheDirName)) {
-            mkdir($cacheDirName, 0755, true);
-        }
-
         $locateIdentifier = null;
-
-        if (is_file($cacheFileName)) {
-            $cachedData = unserialize(file_get_contents($cacheFileName));
+        if ($this->cache->hasItem($cacheKey)) {
+            $cachedData = $this->cache->getItem($cacheKey)->get();
             if (file_exists($cachedData['fileName']) && md5_file($cachedData['fileName']) === $cachedData['fileHash']) {
                 $locateIdentifier = $cachedData['className']::createFromNode(
                     $reflector,
@@ -57,7 +49,7 @@ final class CachedSourceLocator implements SourceLocator
                     $cachedData['namespaceAst']
                 );
             } else {
-                unlink($cacheFileName);
+                $this->cache->deleteItem($cacheKey);
             }
         }
 
@@ -68,17 +60,16 @@ final class CachedSourceLocator implements SourceLocator
                 $locatedSource = $locateIdentifier->getLocatedSource();
                 $namespaceAst = $locateIdentifier->getDeclaringNamespaceAst();
                 $className = get_class($locateIdentifier);
-                file_put_contents(
-                    $cacheFileName,
-                    serialize([
-                        'className' => $className,
-                        'node' => $node,
-                        'locatedSource' => $locatedSource,
-                        'namespaceAst' => $namespaceAst,
-                        'fileName' => $locateIdentifier->getFileName(),
-                        'fileHash' => md5_file($locateIdentifier->getFileName()),
-                    ])
-                );
+                $cacheItem = $this->cache->getItem($cacheKey);
+                $cacheItem->set([
+                    'className' => $className,
+                    'node' => $node,
+                    'locatedSource' => $locatedSource,
+                    'namespaceAst' => $namespaceAst,
+                    'fileName' => $locateIdentifier->getFileName(),
+                    'fileHash' => md5_file($locateIdentifier->getFileName()),
+                ]);
+                $this->cache->save($cacheItem);
             }
         }
         return $this->cacheByIdentifierKeyAndOid[$cacheKey] = $locateIdentifier;
@@ -115,10 +106,10 @@ final class CachedSourceLocator implements SourceLocator
         $nameElements = explode('\\', $identifier->getName());
         $name = array_pop($nameElements);
         return str_replace(
-            '\\',
+            ['\\', '/'],
             '_',
             sprintf(
-                '%s' . DIRECTORY_SEPARATOR . '%s_name:%s',
+                '%s' . DIRECTORY_SEPARATOR . '%s_name_%s',
                 implode(DIRECTORY_SEPARATOR, $nameElements),
                 $this->identifierTypeToCacheKey($identifier->getType()),
                 $name,
@@ -128,6 +119,6 @@ final class CachedSourceLocator implements SourceLocator
 
     private function identifierTypeToCacheKey(IdentifierType $identifierType): string
     {
-        return sprintf('type:%s', $identifierType->getName());
+        return sprintf('type_%s', $identifierType->getName());
     }
 }
