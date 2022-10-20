@@ -201,16 +201,16 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getExtends(): ?string
     {
-        $ast = $this->reflection->getAst();
-        if (property_exists($ast, 'extends')) {
-            if (is_array($ast->extends)) {
-                $extends = $ast->extends[0] ?? '';
+        static $extends = [];
+        $objectId = $this->getObjectId();
+        if (!isset($extends[$objectId])) {
+            if ($this->reflection->isInterface()) {
+                $extends[$objectId] = $this->reflection->getInterfaceNames()[0] ?? null;
             } else {
-                $extends = $ast->extends;
+                $extends[$objectId] = $this->reflection->getParentClass()?->getName();
             }
-            return (string)$extends;
         }
-        return null;
+        return $extends[$objectId];
     }
 
     public function getInterfaces(): array
@@ -218,7 +218,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         static $interfaces = [];
         $objectId = $this->getObjectId();
         if (!isset($interfaces[$objectId])) {
-            $interfaces[$objectId] = $this->reflection->getInterfaceNames();
+            $interfaces[$objectId] = !$this->reflection->isInterface() ? $this->reflection->getInterfaceNames() : [];
         }
         return $interfaces[$objectId];
     }
@@ -255,16 +255,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         static $traits = [];
         $objectId = $this->getObjectId();
         if (!isset($traits[$objectId])) {
-            $ast = $this->reflection->getAst();
-            $traits[$objectId] = [];
-            if (property_exists($ast, 'stmts')) {
-                foreach ($ast->stmts as $stmt) {
-                    if (property_exists($stmt, 'traits')) {
-                        $traits[$objectId] += $stmt->traits;
-                    }
-                }
-                $traits[$objectId] = array_unique($traits[$objectId]);
-            }
+            $traits[$objectId] = $this->reflection->getTraitNames();
         }
         return $traits[$objectId];
     }

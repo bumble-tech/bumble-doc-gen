@@ -31,7 +31,7 @@ If you decide to add a new plugin, there are a few things you need to do:
 {{ "Available plugin interfaces" | textToHeading('H2') }}
 
 {% set pluginInterfaces = classEntityCollection.
-    filterByInterfaces(['BumbleDocGen\\Plugin\\PluginInterface']).
+    filterByParentClassNames(['BumbleDocGen\\Plugin\\PluginInterface']).
     getOnlyInterfaces()
 %}
 {{ printClassEntityCollectionAsList( pluginInterfaces ) }}
