@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Parser\SourceLocator\Internal\CachedSourceLocator;
 use BumbleDocGen\Plugin\CustomSourceLocatorInterface;
 use Psr\Log\LoggerInterface;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -16,7 +17,6 @@ use Roave\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber;
 use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\AutoloadSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\EvaledCodeSourceLocator;
-use Roave\BetterReflection\SourceLocator\Type\MemoizingSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\PhpInternalSourceLocator;
 
 /**
@@ -50,11 +50,13 @@ final class ProjectParser
             array_merge(
                 $configuration->getSourceLocators()->convertToReflectorSourceLocatorsList($locator),
                 [
-                    new MemoizingSourceLocator(new AutoloadSourceLocator($locator)),
-                    new MemoizingSourceLocator(
+                    new CachedSourceLocator(
+                        new AutoloadSourceLocator($locator), $configuration->getSourceLocatorCacheItemPool()
+                    ),
+                    new CachedSourceLocator(
                         new PhpInternalSourceLocator(
                             $locator, new PhpStormStubsSourceStubber($parser)
-                        )
+                        ), $configuration->getSourceLocatorCacheItemPool()
                     ),
                     new EvaledCodeSourceLocator($locator, new ReflectionSourceStubber()),
                 ],

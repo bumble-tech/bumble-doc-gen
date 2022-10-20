@@ -13,6 +13,7 @@ use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
 use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -64,4 +65,6 @@ interface ConfigurationInterface
     public function getEntityDocRendersCollection(): EntityDocRendersCollection;
 
     public function getLogger(): LoggerInterface;
+
+    public function getSourceLocatorCacheItemPool(): CacheItemPoolInterface;
 }

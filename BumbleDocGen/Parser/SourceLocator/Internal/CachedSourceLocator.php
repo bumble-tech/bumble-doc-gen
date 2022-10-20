@@ -41,7 +41,10 @@ final class CachedSourceLocator implements SourceLocator
         $locateIdentifier = null;
         if ($this->cache->hasItem($cacheKey)) {
             $cachedData = $this->cache->getItem($cacheKey)->get();
-            if (file_exists($cachedData['fileName']) && md5_file($cachedData['fileName']) === $cachedData['fileHash']) {
+            if (
+                !$cachedData['fileName'] ||
+                file_exists($cachedData['fileName']) && md5_file($cachedData['fileName']) === $cachedData['fileHash']
+            ) {
                 $locateIdentifier = $cachedData['className']::createFromNode(
                     $reflector,
                     $cachedData['node'],
@@ -67,8 +70,11 @@ final class CachedSourceLocator implements SourceLocator
                     'locatedSource' => $locatedSource,
                     'namespaceAst' => $namespaceAst,
                     'fileName' => $locateIdentifier->getFileName(),
-                    'fileHash' => md5_file($locateIdentifier->getFileName()),
+                    'fileHash' => $locateIdentifier->getFileName() ? md5_file($locateIdentifier->getFileName()) : null,
                 ]);
+                if (!$locateIdentifier->getFileName()) {
+                    $cacheItem->expiresAfter(604800);
+                }
                 $this->cache->save($cacheItem);
             }
         }
