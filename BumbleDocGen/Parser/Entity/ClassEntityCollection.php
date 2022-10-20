@@ -122,7 +122,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         $classEntityCollection = new ClassEntityCollection($this->configuration, $this->reflector, $this->logger);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
-            if (array_intersect($parentClassNames, iterator_to_array($classEntity->getParentClassNames()))) {
+            if (array_intersect($parentClassNames, $classEntity->getParentClassNames())) {
                 $classEntityCollection->addWithoutPreparation($classEntity);
             }
         }

@@ -15,7 +15,7 @@ Description of the `TemplatePluginInterface </BumbleDocGen/Plugin/TemplatePlugin
 
     namespace BumbleDocGen\Plugin;
 
-    interface TemplatePluginInterface extends BumbleDocGen\Plugin\PluginInterface implements BumbleDocGen\Plugin\PluginInterface
+    interface TemplatePluginInterface extends BumbleDocGen\Plugin\PluginInterface
 
 
 ..

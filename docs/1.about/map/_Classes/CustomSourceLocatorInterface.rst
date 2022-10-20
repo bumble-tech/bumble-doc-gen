@@ -15,7 +15,7 @@ Description of the `CustomSourceLocatorInterface </BumbleDocGen/Plugin/CustomSou
 
     namespace BumbleDocGen\Plugin;
 
-    interface CustomSourceLocatorInterface extends BumbleDocGen\Plugin\PluginInterface implements BumbleDocGen\Plugin\PluginInterface
+    interface CustomSourceLocatorInterface extends BumbleDocGen\Plugin\PluginInterface
 
 
 ..

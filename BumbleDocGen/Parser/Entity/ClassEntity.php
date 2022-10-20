@@ -226,23 +226,18 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @return string[]
      */
-    public function getParentClassNames(): \Generator
+    public function getParentClassNames(): array
     {
-        $getParentNamesRecursive = function (ReflectionClass $reflectionClass) use (&$getParentNamesRecursive
-        ): \Generator {
-            try {
-                $parentClass = $reflectionClass->getParentClass();
-                if ($parentClass) {
-                    yield $parentClass->getName();
-                    foreach ($getParentNamesRecursive($parentClass) as $parentName) {
-                        yield $parentName;
-                    }
-                }
-            } catch (\Exception $e) {
-                $this->logger->error($e->getMessage());
+        static $parentClassNames = [];
+        $objectId = $this->getObjectId();
+        if (!isset($parentClassNames[$objectId])) {
+            if ($this->reflection->isInterface()) {
+                $parentClassNames[$objectId] = $this->reflection->getInterfaceNames();
+            } else {
+                $parentClassNames[$objectId] = $this->reflection->getParentClassNames();
             }
-        };
-        return $getParentNamesRecursive($this->getReflection());
+        }
+        return $parentClassNames[$objectId];
     }
 
     public function getInterfacesString(): string

@@ -15,7 +15,7 @@ Description of the `EntityDocRenderPluginInterface </BumbleDocGen/Plugin/EntityD
 
     namespace BumbleDocGen\Plugin;
 
-    interface EntityDocRenderPluginInterface extends BumbleDocGen\Plugin\PluginInterface implements BumbleDocGen\Plugin\PluginInterface
+    interface EntityDocRenderPluginInterface extends BumbleDocGen\Plugin\PluginInterface
 
 
 ..

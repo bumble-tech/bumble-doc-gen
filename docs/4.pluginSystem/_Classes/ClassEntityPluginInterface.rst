@@ -15,7 +15,7 @@ Description of the `ClassEntityPluginInterface </BumbleDocGen/Plugin/ClassEntity
 
     namespace BumbleDocGen\Plugin;
 
-    interface ClassEntityPluginInterface extends BumbleDocGen\Plugin\PluginInterface implements BumbleDocGen\Plugin\PluginInterface
+    interface ClassEntityPluginInterface extends BumbleDocGen\Plugin\PluginInterface
 
 
 ..
