@@ -25,7 +25,8 @@
         "nette/php-generator": "^4.0",
         "monolog/monolog": "^2.5",
         "bramus/monolog-colored-line-formatter": "^3.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "symfony/cache": "^6.1"
     },
     "autoload": {
         "psr-4": {
