@@ -2,3 +2,4 @@ composer.phar
 /vendor/
 .idea
 /SelfDoc/__cache/
+/demo/demo1/result/
