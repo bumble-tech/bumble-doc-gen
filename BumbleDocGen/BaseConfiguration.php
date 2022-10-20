@@ -122,7 +122,7 @@ abstract class BaseConfiguration implements ConfigurationInterface
         return $cache[$cacheNamespace];
     }
 
-    protected function getSourceLocatorCacheItemPool(): CacheItemPoolInterface
+    public function getSourceLocatorCacheItemPool(): CacheItemPoolInterface
     {
         return $this->getCacheItemPool('sourceLocator');
     }
