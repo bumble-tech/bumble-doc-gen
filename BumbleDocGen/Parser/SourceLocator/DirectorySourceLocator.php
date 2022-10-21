@@ -16,6 +16,6 @@ final class DirectorySourceLocator extends BaseSourceLocator
         ?CacheItemPoolInterface $cache = null
     ) {
         parent::__construct($cache);
-        $this->getFinder()->in($directory);
+        $this->getFinder()->in($directory)->depth("==0");
     }
 }
