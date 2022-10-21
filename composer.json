@@ -16,7 +16,7 @@
     ],
     "require": {
         "symfony/console": "^6.0",
-        "symfony/finder": "^6.0",
+        "symfony/finder": "^6.1",
         "twig/twig": "^3.3",
         "roave/better-reflection": "5.5.1.2",
         "nikic/php-parser": "^4.13",
