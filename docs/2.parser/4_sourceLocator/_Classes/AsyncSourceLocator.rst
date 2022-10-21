@@ -45,7 +45,7 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetfiles">getFiles</a> </li>
+                <li><a href="#mgetfinder">getFinder</a> </li>
                 <li><a href="#mconverttoreflectorsourcelocator">convertToReflectorSourceLocator</a> </li>
         </ol>
 
@@ -70,7 +70,7 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L18>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L19>`_
 .. code-block:: php
 
         public function __construct(array $psr4FileMap, array $classMap, Psr\Cache\CacheItemPoolInterface|null $cache = NULL): mixed;
@@ -114,12 +114,12 @@ Method details:
 
 ________
 
-.. _mgetfiles:
+.. _mgetfinder:
 
-* `# <mgetfiles_>`_  ``getFiles``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L25>`_
+* `# <mgetfinder_>`_  ``getFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L29>`_
 .. code-block:: php
 
-        public function getFiles(): Generator;
+        public function getFinder(): Symfony\Component\Finder\Finder;
 
 
 
@@ -127,13 +127,13 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** 
+**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php#L42>`_
 
 ________
 
 .. _mconverttoreflectorsourcelocator:
 
-* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L30>`_
+* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L34>`_
 .. code-block:: php
 
         public function convertToReflectorSourceLocator(Roave\BetterReflection\SourceLocator\Ast\Locator $astLocator): Roave\BetterReflection\SourceLocator\Type\SourceLocator;

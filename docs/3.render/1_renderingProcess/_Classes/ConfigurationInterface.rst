@@ -51,6 +51,7 @@ Methods:
                 <li><a href="#mgettemplatefillers">getTemplateFillers</a> </li>
                 <li><a href="#mgetentitydocrenderscollection">getEntityDocRendersCollection</a> </li>
                 <li><a href="#mgetlogger">getLogger</a> </li>
+                <li><a href="#mgetsourcelocatorcacheitempool">getSourceLocatorCacheItemPool</a> </li>
         </ol>
 
 
@@ -74,7 +75,7 @@ Method details:
 
 .. _mgetprojectroot:
 
-* `# <mgetprojectroot_>`_  ``getProjectRoot``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L26>`_
+* `# <mgetprojectroot_>`_  ``getProjectRoot``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L27>`_
 .. code-block:: php
 
         public function getProjectRoot(): string;
@@ -94,7 +95,7 @@ ________
 
 .. _mgetsourcelocators:
 
-* `# <mgetsourcelocators_>`_  ``getSourceLocators``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L31>`_
+* `# <mgetsourcelocators_>`_  ``getSourceLocators``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L32>`_
 .. code-block:: php
 
         public function getSourceLocators(): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
@@ -114,7 +115,7 @@ ________
 
 .. _mgettemplatesdir:
 
-* `# <mgettemplatesdir_>`_  ``getTemplatesDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L36>`_
+* `# <mgettemplatesdir_>`_  ``getTemplatesDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L37>`_
 .. code-block:: php
 
         public function getTemplatesDir(): string;
@@ -134,7 +135,7 @@ ________
 
 .. _mgetoutputdir:
 
-* `# <mgetoutputdir_>`_  ``getOutputDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L41>`_
+* `# <mgetoutputdir_>`_  ``getOutputDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L42>`_
 .. code-block:: php
 
         public function getOutputDir(): string;
@@ -154,7 +155,7 @@ ________
 
 .. _mgetoutputdirbaseurl:
 
-* `# <mgetoutputdirbaseurl_>`_  ``getOutputDirBaseUrl``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L46>`_
+* `# <mgetoutputdirbaseurl_>`_  ``getOutputDirBaseUrl``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L47>`_
 .. code-block:: php
 
         public function getOutputDirBaseUrl(): string;
@@ -174,7 +175,7 @@ ________
 
 .. _mgetcachedir:
 
-* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L48>`_
+* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L49>`_
 .. code-block:: php
 
         public function getCacheDir(): string|null;
@@ -191,7 +192,7 @@ ________
 
 .. _mclearoutputdirbeforedocgeneration:
 
-* `# <mclearoutputdirbeforedocgeneration_>`_  ``clearOutputDirBeforeDocGeneration``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L50>`_
+* `# <mclearoutputdirbeforedocgeneration_>`_  ``clearOutputDirBeforeDocGeneration``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L51>`_
 .. code-block:: php
 
         public function clearOutputDirBeforeDocGeneration(): bool;
@@ -208,7 +209,7 @@ ________
 
 .. _mclassentityfiltercondition:
 
-* `# <mclassentityfiltercondition_>`_  ``classEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L52>`_
+* `# <mclassentityfiltercondition_>`_  ``classEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L53>`_
 .. code-block:: php
 
         public function classEntityFilterCondition(BumbleDocGen\Parser\Entity\ClassEntity $classEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
@@ -244,7 +245,7 @@ ________
 
 .. _mclassconstantentityfiltercondition:
 
-* `# <mclassconstantentityfiltercondition_>`_  ``classConstantEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L54>`_
+* `# <mclassconstantentityfiltercondition_>`_  ``classConstantEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L55>`_
 .. code-block:: php
 
         public function classConstantEntityFilterCondition(BumbleDocGen\Parser\Entity\ConstantEntity $constantEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
@@ -280,7 +281,7 @@ ________
 
 .. _mmethodentityfiltercondition:
 
-* `# <mmethodentityfiltercondition_>`_  ``methodEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L56>`_
+* `# <mmethodentityfiltercondition_>`_  ``methodEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L57>`_
 .. code-block:: php
 
         public function methodEntityFilterCondition(BumbleDocGen\Parser\Entity\MethodEntity $methodEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
@@ -316,7 +317,7 @@ ________
 
 .. _mpropertyentityfiltercondition:
 
-* `# <mpropertyentityfiltercondition_>`_  ``propertyEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L58>`_
+* `# <mpropertyentityfiltercondition_>`_  ``propertyEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L59>`_
 .. code-block:: php
 
         public function propertyEntityFilterCondition(BumbleDocGen\Parser\Entity\PropertyEntity $propertyEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
@@ -352,7 +353,7 @@ ________
 
 .. _mgetplugins:
 
-* `# <mgetplugins_>`_  ``getPlugins``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L60>`_
+* `# <mgetplugins_>`_  ``getPlugins``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L61>`_
 .. code-block:: php
 
         public function getPlugins(): BumbleDocGen\Plugin\PluginsCollection;
@@ -369,7 +370,7 @@ ________
 
 .. _mgettemplatefillers:
 
-* `# <mgettemplatefillers_>`_  ``getTemplateFillers``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L62>`_
+* `# <mgettemplatefillers_>`_  ``getTemplateFillers``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L63>`_
 .. code-block:: php
 
         public function getTemplateFillers(): BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
@@ -386,7 +387,7 @@ ________
 
 .. _mgetentitydocrenderscollection:
 
-* `# <mgetentitydocrenderscollection_>`_  ``getEntityDocRendersCollection``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L64>`_
+* `# <mgetentitydocrenderscollection_>`_  ``getEntityDocRendersCollection``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L65>`_
 .. code-block:: php
 
         public function getEntityDocRendersCollection(): BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
@@ -403,7 +404,7 @@ ________
 
 .. _mgetlogger:
 
-* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L66>`_
+* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L67>`_
 .. code-block:: php
 
         public function getLogger(): Psr\Log\LoggerInterface;
@@ -415,6 +416,23 @@ ________
 
 
 **Return value:** `Psr\\Log\\LoggerInterface </vendor/psr/log/src/LoggerInterface\.php#L20>`_
+
+________
+
+.. _mgetsourcelocatorcacheitempool:
+
+* `# <mgetsourcelocatorcacheitempool_>`_  ``getSourceLocatorCacheItemPool``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L69>`_
+.. code-block:: php
+
+        public function getSourceLocatorCacheItemPool(): Psr\Cache\CacheItemPoolInterface;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Psr\\Cache\\CacheItemPoolInterface </vendor/psr/cache/src/CacheItemPoolInterface\.php#L14>`_
 
 ________
 

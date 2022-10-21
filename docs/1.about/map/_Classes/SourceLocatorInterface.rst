@@ -33,7 +33,7 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetfiles">getFiles</a> </li>
+                <li><a href="#mgetfinder">getFinder</a> </li>
                 <li><a href="#mconverttoreflectorsourcelocator">convertToReflectorSourceLocator</a> </li>
         </ol>
 
@@ -56,12 +56,12 @@ Method details:
 
 
 
-.. _mgetfiles:
+.. _mgetfinder:
 
-* `# <mgetfiles_>`_  ``getFiles``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L15>`_
+* `# <mgetfinder_>`_  ``getFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L13>`_
 .. code-block:: php
 
-        public function getFiles(): Generator;
+        public function getFinder(): Symfony\Component\Finder\Finder;
 
 
 
@@ -69,13 +69,13 @@ Method details:
 **Parameters:** not specified
 
 
-**Return value:** 
+**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php#L42>`_
 
 ________
 
 .. _mconverttoreflectorsourcelocator:
 
-* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L17>`_
+* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L15>`_
 .. code-block:: php
 
         public function convertToReflectorSourceLocator(Roave\BetterReflection\SourceLocator\Ast\Locator $astLocator): Roave\BetterReflection\SourceLocator\Type\SourceLocator;

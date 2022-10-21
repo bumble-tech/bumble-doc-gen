@@ -46,6 +46,7 @@ Methods:
                 <li><a href="#mgetentitydocrenderscollection">getEntityDocRendersCollection</a> </li>
                 <li><a href="#mgetcachedir">getCacheDir</a> </li>
                 <li><a href="#mgetlogger">getLogger</a> </li>
+                <li><a href="#mgetsourcelocatorcacheitempool">getSourceLocatorCacheItemPool</a> </li>
         </ol>
 
 
@@ -294,6 +295,23 @@ ________
 
 
 **Return value:** `Psr\\Log\\LoggerInterface </vendor/psr/log/src/LoggerInterface\.php#L20>`_
+
+________
+
+.. _mgetsourcelocatorcacheitempool:
+
+* `# <mgetsourcelocatorcacheitempool_>`_  ``getSourceLocatorCacheItemPool``   **|** `source code </BumbleDocGen/BaseConfiguration.php#L125>`_
+.. code-block:: php
+
+        public function getSourceLocatorCacheItemPool(): Psr\Cache\CacheItemPoolInterface;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Psr\\Cache\\CacheItemPoolInterface </vendor/psr/cache/src/CacheItemPoolInterface\.php#L14>`_
 
 ________
 

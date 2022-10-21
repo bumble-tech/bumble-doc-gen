@@ -106,7 +106,7 @@ ________
 
 .. _mparse:
 
-* `# <mparse_>`_  ``parse``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L69>`_
+* `# <mparse_>`_  ``parse``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L71>`_
 .. code-block:: php
 
         public function parse(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -123,7 +123,7 @@ ________
 
 .. _mgetreflector:
 
-* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L79>`_
+* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L81>`_
 .. code-block:: php
 
         public function getReflector(): Roave\BetterReflection\Reflector\Reflector;

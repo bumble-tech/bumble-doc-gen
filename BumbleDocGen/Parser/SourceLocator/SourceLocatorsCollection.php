@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\SourceLocator;
 
 use Roave\BetterReflection\SourceLocator\Ast\Locator;
+use Symfony\Component\Finder\Finder;
 
 final class SourceLocatorsCollection implements \IteratorAggregate
 {
@@ -40,15 +41,12 @@ final class SourceLocatorsCollection implements \IteratorAggregate
         return $reflectorSourceLocatorsList;
     }
 
-    /**
-     * @return \Generator|\SplFileInfo[]
-     */
-    public function getAllFiles(): \Generator
+    public function getCommonFinder(): Finder
     {
+        $finder = new Finder();
         foreach ($this->sourceLocators as $locator) {
-            foreach ($locator->getFiles() as $file) {
-                yield $file;
-            }
+            $finder->append($locator->getFinder());
         }
+        return $finder;
     }
 }

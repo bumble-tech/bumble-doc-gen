@@ -20,6 +20,7 @@
  │  │  │  │  └── <a href='/docs/2.parser/5_classmap/_Classes/SystemAsyncSourceLocator.rst'>SystemAsyncSourceLocator.php</a>
  │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/SourceLocatorInterface.rst'>SourceLocatorInterface.php</a>
  │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/DirectorySourceLocator.rst'>DirectorySourceLocator.php</a>
+ │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/BaseSourceLocator.rst'>BaseSourceLocator.php</a>
  │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/AsyncSourceLocator.rst'>AsyncSourceLocator.php</a>
  │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/SourceLocatorsCollection.rst'>SourceLocatorsCollection.php</a>
  │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/RecursiveDirectoriesSourceLocator.rst'>RecursiveDirectoriesSourceLocator.php</a>

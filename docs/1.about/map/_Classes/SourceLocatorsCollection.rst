@@ -45,7 +45,7 @@ Methods:
                 <li><a href="#mgetiterator">getIterator</a> - <i>Retrieve an external iterator</i></li>
                 <li><a href="#madd">add</a> </li>
                 <li><a href="#mconverttoreflectorsourcelocatorslist">convertToReflectorSourceLocatorsList</a> </li>
-                <li><a href="#mgetallfiles">getAllFiles</a> </li>
+                <li><a href="#mgetcommonfinder">getCommonFinder</a> </li>
         </ol>
 
 
@@ -69,7 +69,7 @@ Method details:
 
 .. _mgetiterator:
 
-* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L14>`_
+* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L15>`_
 .. code-block:: php
 
         public function getIterator(): Generator;
@@ -99,7 +99,7 @@ ________
 
 .. _mcreate:
 
-* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L19>`_
+* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L20>`_
 .. code-block:: php
 
         public static function create(BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface $sourceLocators): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
@@ -135,7 +135,7 @@ ________
 
 .. _madd:
 
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L28>`_
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L29>`_
 .. code-block:: php
 
         public function add(BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface $sourceLocator): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
@@ -171,7 +171,7 @@ ________
 
 .. _mconverttoreflectorsourcelocatorslist:
 
-* `# <mconverttoreflectorsourcelocatorslist_>`_  ``convertToReflectorSourceLocatorsList``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L34>`_
+* `# <mconverttoreflectorsourcelocatorslist_>`_  ``convertToReflectorSourceLocatorsList``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L35>`_
 .. code-block:: php
 
         public function convertToReflectorSourceLocatorsList(Roave\BetterReflection\SourceLocator\Ast\Locator $astLocator): array;
@@ -205,12 +205,12 @@ ________
 
 ________
 
-.. _mgetallfiles:
+.. _mgetcommonfinder:
 
-* `# <mgetallfiles_>`_  ``getAllFiles``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L46>`_
+* `# <mgetcommonfinder_>`_  ``getCommonFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L44>`_
 .. code-block:: php
 
-        public function getAllFiles(): Generator;
+        public function getCommonFinder(): Symfony\Component\Finder\Finder;
 
 
 
@@ -218,7 +218,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** 
+**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php#L42>`_
 
 ________
 
