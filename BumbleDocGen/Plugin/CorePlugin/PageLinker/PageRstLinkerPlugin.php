@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Plugin\PageLinker;
+namespace BumbleDocGen\Plugin\CorePlugin\PageLinker;
 
 /**
  * Adds URLs to empty links in rst format;
