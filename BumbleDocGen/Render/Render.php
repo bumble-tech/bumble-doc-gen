@@ -93,9 +93,6 @@ final class Render
             $this->clearOutputDir($outputDir);
         }
 
-        /**@var TemplatePluginInterface[] $plugins */
-        $plugins = $this->configuration->getPlugins()->filterByInterface(TemplatePluginInterface::class);
-
         foreach ($allFiles as $templateFile) {
             /**@var \SplFileInfo $templateFile */
             $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
