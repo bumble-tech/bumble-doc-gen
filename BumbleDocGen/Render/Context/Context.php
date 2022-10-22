@@ -6,6 +6,7 @@ namespace BumbleDocGen\Render\Context;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 use Roave\BetterReflection\Reflector\Reflector;
 
@@ -21,7 +22,8 @@ final class Context
         private Reflector $reflector,
         private ConfigurationInterface $configuration,
         private ClassEntityCollection $classEntityCollection,
-        private BreadcrumbsHelper $breadcrumbsHelper
+        private BreadcrumbsHelper $breadcrumbsHelper,
+        private PluginEventDispatcher $pluginEventDispatcher
     ) {
         $this->entityWrappersCollection = new DocumentedEntityWrappersCollection();
     }
@@ -65,5 +67,10 @@ final class Context
     public function getBreadcrumbsHelper(): BreadcrumbsHelper
     {
         return $this->breadcrumbsHelper;
+    }
+
+    public function getPluginEventDispatcher(): PluginEventDispatcher
+    {
+        return $this->pluginEventDispatcher;
     }
 }

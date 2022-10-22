@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Twig\Function;
 
 use BumbleDocGen\Parser\Entity\ClassEntity;
-use BumbleDocGen\Plugin\EntityDocRenderPluginInterface;
+use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Render\Context\Context;
 
 /**
@@ -32,11 +32,16 @@ final class LoadPluginsContent
      */
     public function __invoke(string $content, ClassEntity $classEntity, string $blockType): string
     {
-        $configuration = $this->context->getConfiguration();
-        /**@var EntityDocRenderPluginInterface[] $plugins */
-        $plugins = $configuration->getPlugins()->filterByInterface(EntityDocRenderPluginInterface::class);
-        foreach ($plugins as $plugin) {
-            $content = $plugin->handleTemplateBlockContent($content, $classEntity, $blockType, $this->context);
+        $pluginEventDispatcher = $this->context->getPluginEventDispatcher();
+
+        $blockContentPluginResults = $pluginEventDispatcher->dispatch(
+            new OnLoadEntityDocPluginContent(
+                $content, $classEntity, $blockType, $this->context
+            )
+        )->getBlockContentPluginResults();
+
+        foreach ($blockContentPluginResults as $blockContentPluginResult) {
+            $content .= "\n\n{$blockContentPluginResult}";
         }
         return $content;
     }

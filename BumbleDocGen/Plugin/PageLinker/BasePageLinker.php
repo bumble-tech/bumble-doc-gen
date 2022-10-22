@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace BumbleDocGen\Plugin\PageLinker;
 
 use BumbleDocGen\Parser\Entity\ClassEntity;
-use BumbleDocGen\Plugin\TemplatePluginInterface;
+use BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile;
+use BumbleDocGen\Plugin\PluginInterface;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use Psr\Log\LoggerInterface;
 
-abstract class BasePageLinker implements TemplatePluginInterface
+abstract class BasePageLinker implements PluginInterface
 {
     private array $keyUsageCount = [];
 
@@ -33,6 +34,46 @@ abstract class BasePageLinker implements TemplatePluginInterface
      * @example `%title% <%url%>`_
      */
     abstract function getOutputTemplate(): string;
+
+    public function __construct(private LoggerInterface $logger)
+    {
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            BeforeCreatingDocFile::class => 'beforeCreatingDocFile',
+        ];
+    }
+
+    final public function beforeCreatingDocFile(BeforeCreatingDocFile $event): void
+    {
+        $context = $event->getContext();
+        $pageLinks = $this->getAllPageLinks($context);
+
+        $content = preg_replace_callback(
+            $this->getLinkRegEx(),
+            function (array $matches) use ($pageLinks, $context) {
+                $linkString = $matches[$this->getGroupRegExNumber()];
+                if (array_key_exists($linkString, $pageLinks)) {
+                    $breadcrumb = $pageLinks[$linkString];
+                    $this->checkKey($linkString, $this->logger);
+                    return $this->getFilledOutputTemplate($breadcrumb['title'], $breadcrumb['url']);
+                } else {
+                    $entityUrlData = $this->getEntityUrlData($linkString, $context);
+                    if ($entityUrlData) {
+                        return $this->getFilledOutputTemplate($entityUrlData['title'], $entityUrlData['url']);
+                    }
+                }
+
+                $this->logger->warning("PageLinkerPlugin: Key `{$linkString}` not found to get document link.");
+                return $linkString;
+            },
+            $event->getContent()
+        );
+
+        $event->setContent($content);
+    }
 
     private function getAllPageLinks(Context $context): array
     {
@@ -134,33 +175,6 @@ abstract class BasePageLinker implements TemplatePluginInterface
             ['%title%', '%url%'],
             [$title, $url],
             $this->getOutputTemplate()
-        );
-    }
-
-    final public function handleRenderedTemplateContent(string $content, Context $context): string
-    {
-        $logger = $context->getConfiguration()->getLogger();
-
-        $pageLinks = $this->getAllPageLinks($context);
-        return preg_replace_callback(
-            $this->getLinkRegEx(),
-            function (array $matches) use ($pageLinks, $logger, $context) {
-                $linkString = $matches[$this->getGroupRegExNumber()];
-                if (array_key_exists($linkString, $pageLinks)) {
-                    $breadcrumb = $pageLinks[$linkString];
-                    $this->checkKey($linkString, $logger);
-                    return $this->getFilledOutputTemplate($breadcrumb['title'], $breadcrumb['url']);
-                } else {
-                    $entityUrlData = $this->getEntityUrlData($linkString, $context);
-                    if ($entityUrlData) {
-                        return $this->getFilledOutputTemplate($entityUrlData['title'], $entityUrlData['url']);
-                    }
-                }
-
-                $logger->warning("PageLinkerPlugin: Key `{$linkString}` not found to get document link.");
-                return $linkString;
-            },
-            $content
         );
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Plugin;
 
-interface PluginInterface
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+interface PluginInterface extends EventSubscriberInterface
 {
 }

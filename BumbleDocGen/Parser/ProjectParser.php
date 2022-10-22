@@ -6,7 +6,8 @@ namespace BumbleDocGen\Parser;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\SourceLocator\Internal\CachedSourceLocator;
-use BumbleDocGen\Plugin\CustomSourceLocatorInterface;
+use BumbleDocGen\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
+use BumbleDocGen\Plugin\PluginEventDispatcher;
 use Psr\Log\LoggerInterface;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use Roave\BetterReflection\BetterReflection;
@@ -27,28 +28,28 @@ final class ProjectParser
     private function __construct(
         private Reflector $reflector,
         private ConfigurationInterface $configuration,
+        private PluginEventDispatcher $pluginEventDispatcher,
         private LoggerInterface $logger
     ) {
     }
 
-    public static function create(ConfigurationInterface $configuration): ProjectParser
-    {
+    public static function create(
+        ConfigurationInterface $configuration,
+        PluginEventDispatcher $pluginEventDispatcher
+    ): ProjectParser {
         $parser = (new \PhpParser\ParserFactory)->create(
             \PhpParser\ParserFactory::PREFER_PHP7
         );
 
-        $locator = (new BetterReflection())->astLocator();
-        $customSourceLocators = [];
+        $sourceLocatorsCollection = $pluginEventDispatcher->dispatch(
+            new OnLoadSourceLocatorsCollection($configuration->getSourceLocators())
+        )->getSourceLocatorsCollection();
 
-        /**@var CustomSourceLocatorInterface[] $plugins */
-        $plugins = $configuration->getPlugins()->filterByInterface(CustomSourceLocatorInterface::class);
-        foreach ($plugins as $plugin) {
-            $customSourceLocators[] = $plugin->getSourceLocator()->convertToReflectorSourceLocator($locator);
-        }
+        $locator = (new BetterReflection())->astLocator();
 
         $sourceLocator = new AggregateSourceLocator(
             array_merge(
-                $configuration->getSourceLocators()->convertToReflectorSourceLocatorsList($locator),
+                $sourceLocatorsCollection->convertToReflectorSourceLocatorsList($locator),
                 [
                     new CachedSourceLocator(
                         new AutoloadSourceLocator($locator), $configuration->getSourceLocatorCacheItemPool()
@@ -60,12 +61,11 @@ final class ProjectParser
                     ),
                     new EvaledCodeSourceLocator($locator, new ReflectionSourceStubber()),
                 ],
-                $customSourceLocators
             )
         );
 
         $reflector = new DefaultReflector($sourceLocator);
-        return new self($reflector, $configuration, $configuration->getLogger());
+        return new self($reflector, $configuration, $pluginEventDispatcher, $configuration->getLogger());
     }
 
     public function parse(): ClassEntityCollection
@@ -74,7 +74,8 @@ final class ProjectParser
         return ClassEntityCollection::createByReflector(
             $this->configuration,
             $this->reflector,
-            $attributeParser
+            $attributeParser,
+            $this->pluginEventDispatcher
         );
     }
 

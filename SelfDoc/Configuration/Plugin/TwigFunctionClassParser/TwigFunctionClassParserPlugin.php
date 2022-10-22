@@ -6,27 +6,70 @@ namespace SelfDoc\Configuration\Plugin\TwigFunctionClassParser;
 
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\Plugin\EntityDocRenderPluginInterface;
-use BumbleDocGen\Plugin\ClassEntityCollectionPluginInterface;
-use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection;
+use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
+use BumbleDocGen\Plugin\PluginInterface;
 use BumbleDocGen\Render\EntityDocRender\PhpClassToRst\PhpClassToRstDocRender;
 use BumbleDocGen\Render\Twig\MainExtension;
 use Roave\BetterReflection\Reflector\Reflector;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-final class TwigFunctionClassParserPlugin implements ClassEntityCollectionPluginInterface, EntityDocRenderPluginInterface
+final class TwigFunctionClassParserPlugin implements PluginInterface
 {
     private const TWIG_FUNCTION_DIRNAME = '/BumbleDocGen/Render/Twig/Function';
     public const PLUGIN_KEY = 'twigFunctionClassParserPlugin';
-    private Environment $twig;
 
-    public function __construct()
+    public static function getSubscribedEvents()
     {
-        $loader = new FilesystemLoader([
-            __DIR__ . '/templates/',
-        ]);
-        $this->twig = new Environment($loader);
+        return [
+            AfterCreationClassEntityCollection::class => 'afterCreationClassEntityCollection',
+            OnLoadEntityDocPluginContent::class => 'onLoadEntityDocPluginContentEvent',
+        ];
+    }
+
+    public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
+    {
+        if (
+            $event->getBlockType() !== PhpClassToRstDocRender::BLOCK_AFTER_MAIN_INFO ||
+            !$this->isCustomTwigFunction($event->getClassEntity())
+        ) {
+            return;
+        }
+
+        try {
+            $pluginResult = $this->getTwig()->render('twigFunctionInfoBlock.twig', [
+                'classEntity' => $event->getClassEntity(),
+            ]);
+        } catch (\Exception) {
+            $pluginResult = '';
+        }
+
+        $event->addBlockContentPluginResult($pluginResult);
+    }
+
+    public function afterCreationClassEntityCollection(AfterCreationClassEntityCollection $event): void
+    {
+        foreach ($event->getClassEntityCollection() as $classEntity) {
+            if ($this->isCustomTwigFunction($classEntity)) {
+                $classEntity->loadPluginData(
+                    self::PLUGIN_KEY,
+                    $this->getFunctionData($event->getClassEntityCollection(), $classEntity->getName())
+                );
+            }
+        }
+    }
+
+    private function getTwig(): Environment
+    {
+        static $twig;
+        if (!$twig) {
+            $loader = new FilesystemLoader([
+                __DIR__ . '/templates/',
+            ]);
+            $twig = new Environment($loader);
+        }
+        return $twig;
     }
 
     private function isCustomTwigFunction(ClassEntity $classEntity): bool
@@ -72,33 +115,5 @@ final class TwigFunctionClassParserPlugin implements ClassEntityCollectionPlugin
             $functionsData[$className] = $functionData;
         }
         return $functionsData[$className];
-    }
-
-    public function afterCreationClassEntityCollection(ClassEntityCollection $classEntityCollection): void
-    {
-        foreach ($classEntityCollection as $classEntity) {
-            if ($this->isCustomTwigFunction($classEntity)) {
-                $classEntity->loadPluginData(
-                    self::PLUGIN_KEY,
-                    $this->getFunctionData($classEntityCollection, $classEntity->getName())
-                );
-            }
-        }
-    }
-
-    public function handleTemplateBlockContent(
-        string $blockContent,
-        ClassEntity $classEntity,
-        string $blockType,
-        Context $context
-    ): string {
-        if (
-            $blockType == PhpClassToRstDocRender::BLOCK_AFTER_MAIN_INFO && $this->isCustomTwigFunction($classEntity)
-        ) {
-            return "{$blockContent}\n\n" . $this->twig->render('twigFunctionInfoBlock.twig', [
-                    'classEntity' => $classEntity,
-                ]);
-        }
-        return $blockContent;
     }
 }

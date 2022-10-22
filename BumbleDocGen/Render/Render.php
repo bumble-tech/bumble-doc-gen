@@ -6,7 +6,8 @@ namespace BumbleDocGen\Render;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\Plugin\TemplatePluginInterface;
+use BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile;
+use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\MainExtension;
@@ -25,7 +26,8 @@ final class Render
     public function __construct(
         private ConfigurationInterface $configuration,
         private Reflector $reflector,
-        private ClassEntityCollection $classEntityCollection
+        private ClassEntityCollection $classEntityCollection,
+        private PluginEventDispatcher $pluginEventDispatcher
     ) {
     }
 
@@ -71,7 +73,11 @@ final class Render
 
         $breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
         $context = new Context(
-            $this->reflector, $this->configuration, $this->classEntityCollection, $breadcrumbsHelper
+            $this->reflector,
+            $this->configuration,
+            $this->classEntityCollection,
+            $breadcrumbsHelper,
+            $this->pluginEventDispatcher
         );
         $twig->addExtension(new MainExtension($context));
 
@@ -104,9 +110,9 @@ final class Render
                     ),
                 ]);
 
-                foreach ($plugins as $plugin) {
-                    $content = $plugin->handleRenderedTemplateContent($content, $context);
-                }
+                $content = $this->pluginEventDispatcher->dispatch(
+                    new BeforeCreatingDocFile($content, $context)
+                )->getContent();
 
                 $filePatch = str_replace('.twig', '', $filePatch);
             } else {

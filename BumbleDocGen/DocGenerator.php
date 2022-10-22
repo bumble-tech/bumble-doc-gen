@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen;
 
 use BumbleDocGen\Parser\ProjectParser;
+use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Render\Render;
 
 /**
@@ -23,8 +24,10 @@ final class DocGenerator
      */
     public static function generateDocumentation(ConfigurationInterface $configuration): void
     {
-        $projectParser = ProjectParser::create($configuration);
+        $pluginEventDispatcher = new PluginEventDispatcher($configuration);
+
+        $projectParser = ProjectParser::create($configuration, $pluginEventDispatcher);
         $classEntityCollection = $projectParser->parse();
-        (new Render($configuration, $projectParser->getReflector(), $classEntityCollection))->run();
+        (new Render($configuration, $projectParser->getReflector(), $classEntityCollection, $pluginEventDispatcher))->run();
     }
 }

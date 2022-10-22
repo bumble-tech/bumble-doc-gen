@@ -76,8 +76,8 @@ abstract class BaseConfiguration implements ConfigurationInterface
     public function getPlugins(): PluginsCollection
     {
         return PluginsCollection::create(
-            new PageRstLinkerPlugin(),
-            new PageHtmlLinkerPlugin()
+            new PageRstLinkerPlugin($this->getLogger()),
+            new PageHtmlLinkerPlugin($this->getLogger())
         );
     }
 
