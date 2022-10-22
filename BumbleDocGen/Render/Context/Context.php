@@ -17,15 +17,16 @@ final class Context
 {
     private string $currentTemplateFilePath = '';
     private DocumentedEntityWrappersCollection $entityWrappersCollection;
+    private Reflector $reflector;
 
     public function __construct(
-        private Reflector $reflector,
         private ConfigurationInterface $configuration,
         private ClassEntityCollection $classEntityCollection,
         private BreadcrumbsHelper $breadcrumbsHelper,
         private PluginEventDispatcher $pluginEventDispatcher
     ) {
         $this->entityWrappersCollection = new DocumentedEntityWrappersCollection();
+        $this->reflector = $classEntityCollection->getReflector();
     }
 
     /**

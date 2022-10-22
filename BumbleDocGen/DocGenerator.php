@@ -25,9 +25,7 @@ final class DocGenerator
     public static function generateDocumentation(ConfigurationInterface $configuration): void
     {
         $pluginEventDispatcher = new PluginEventDispatcher($configuration);
-
-        $projectParser = ProjectParser::create($configuration, $pluginEventDispatcher);
-        $classEntityCollection = $projectParser->parse();
-        (new Render($configuration, $projectParser->getReflector(), $classEntityCollection, $pluginEventDispatcher))->run();
+        $classEntityCollection = ProjectParser::create($configuration, $pluginEventDispatcher)->parse();
+        (new Render($configuration, $classEntityCollection, $pluginEventDispatcher))->run();
     }
 }

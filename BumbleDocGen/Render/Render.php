@@ -11,7 +11,6 @@ use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\MainExtension;
-use Roave\BetterReflection\Reflector\Reflector;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -25,7 +24,6 @@ final class Render
 {
     public function __construct(
         private ConfigurationInterface $configuration,
-        private Reflector $reflector,
         private ClassEntityCollection $classEntityCollection,
         private PluginEventDispatcher $pluginEventDispatcher
     ) {
@@ -73,7 +71,6 @@ final class Render
 
         $breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
         $context = new Context(
-            $this->reflector,
             $this->configuration,
             $this->classEntityCollection,
             $breadcrumbsHelper,
@@ -102,7 +99,7 @@ final class Render
                 $content = $twig->render($filePatch, [
                     'classEntityCollection' => $this->classEntityCollection,
                     'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
-                        $this->reflector,
+                        $this->classEntityCollection->getReflector(),
                         $filePatch
                     ),
                 ]);
