@@ -15,7 +15,7 @@ use Roave\BetterReflection\Reflector\Reflector;
  */
 final class AttributeParser
 {
-    private fakeClassLoader $fakeClassLoader;
+    private FakeClassLoader $fakeClassLoader;
 
     public function __construct(private Reflector $reflector, private LoggerInterface $logger)
     {
