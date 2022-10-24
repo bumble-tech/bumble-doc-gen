@@ -13,7 +13,7 @@
 Source locators are needed so that the parser knows which files to parse, or to get data on a specific file after the primary parsing procedure
 
 Source locators are set in the configuration, in method `ConfigurationInterface::classEntityFilterCondition\(\) </docs/2.parser/4_sourceLocator/_Classes/ConfigurationInterface.rst#mclassentityfiltercondition>`_.
-They can also be connected using plugins that implement interface `CustomSourceLocatorInterface </docs/2.parser/4_sourceLocator/_Classes/CustomSourceLocatorInterface.rst>`_
+They can also be connected using plugins handle `OnLoadSourceLocatorsCollection </docs/2.parser/4_sourceLocator/_Classes/OnLoadSourceLocatorsCollection.rst>`_ event
 
 **Usage example:**
 

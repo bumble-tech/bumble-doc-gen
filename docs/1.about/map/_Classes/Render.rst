@@ -75,10 +75,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Render.php#L25>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Render.php#L26>`_
 .. code-block:: php
 
-        public function __construct(BumbleDocGen\ConfigurationInterface $configuration, Roave\BetterReflection\Reflector\Reflector $reflector, BumbleDocGen\Parser\Entity\ClassEntityCollection $classEntityCollection): mixed;
+        public function __construct(BumbleDocGen\ConfigurationInterface $configuration, BumbleDocGen\Parser\Entity\ClassEntityCollection $classEntityCollection, BumbleDocGen\Plugin\PluginEventDispatcher $pluginEventDispatcher): mixed;
 
 
 
@@ -102,13 +102,13 @@ Method details:
             <td>-</td>
         </tr>
             <tr>
-            <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td>$classEntityCollection</td>
+            <td><a href='/docs/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
             <td>-</td>
         </tr>
             <tr>
-            <td>$classEntityCollection</td>
-            <td><a href='/docs/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td>$pluginEventDispatcher</td>
+            <td><a href='/docs/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -121,7 +121,7 @@ ________
 
 .. _mrun:
 
-* `# <mrun_>`_  ``run``   **|** `source code </BumbleDocGen/Render/Render.php#L64>`_
+* `# <mrun_>`_  ``run``   **|** `source code </BumbleDocGen/Render/Render.php#L65>`_
 .. code-block:: php
 
         public function run(): void;

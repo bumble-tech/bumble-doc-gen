@@ -70,10 +70,10 @@ Method details:
 
 .. _mcreate:
 
-* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L34>`_
+* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L36>`_
 .. code-block:: php
 
-        public static function create(BumbleDocGen\ConfigurationInterface $configuration): BumbleDocGen\Parser\ProjectParser;
+        public static function create(BumbleDocGen\ConfigurationInterface $configuration, BumbleDocGen\Plugin\PluginEventDispatcher $pluginEventDispatcher): BumbleDocGen\Parser\ProjectParser;
 
 
 
@@ -94,6 +94,11 @@ Method details:
             <tr>
             <td>$configuration</td>
             <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$pluginEventDispatcher</td>
+            <td><a href='/docs/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -123,7 +128,7 @@ ________
 
 .. _mgetreflector:
 
-* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L81>`_
+* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L82>`_
 .. code-block:: php
 
         public function getReflector(): Roave\BetterReflection\Reflector\Reflector;

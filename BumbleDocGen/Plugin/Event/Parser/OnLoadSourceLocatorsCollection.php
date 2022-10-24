@@ -7,6 +7,9 @@ namespace BumbleDocGen\Plugin\Event\Parser;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use Symfony\Contracts\EventDispatcher\Event;
 
+/**
+ * Called when source locators are loaded
+ */
 final class OnLoadSourceLocatorsCollection extends Event
 {
     public function __construct(private SourceLocatorsCollection $sourceLocatorsCollection)

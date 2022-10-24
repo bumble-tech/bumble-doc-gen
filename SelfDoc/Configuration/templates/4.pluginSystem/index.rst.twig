@@ -6,6 +6,8 @@
 The documentation generator initially includes the possibility of expanding the functionality.
 Plugins allow you to add the necessary functionality to the system without changing its core.
 
+Plugin system based on event model.
+
 
 {{ "Using plugins" | textToHeading('H2') }}
 
@@ -16,7 +18,7 @@ Plugins can be added in documentation generator configuration, in method `Config
 
 If you decide to add a new plugin, there are a few things you need to do:
 
-*  Implement an interface that matches one of the available plugin interfaces
+*  Implement events handling in plugin class
 *  Add plugin to configuration `ConfigurationInterface::getPlugins()`_:
 
 {{ "public function getPlugins(): PluginsCollection
@@ -28,15 +30,12 @@ If you decide to add a new plugin, there are a few things you need to do:
 }" | textToCodeBlockRst('php') }}
 
 
-{{ "Available plugin interfaces" | textToHeading('H2') }}
+{{ "Available plugin events" | textToHeading('H2') }}
 
-{% set pluginInterfaces = classEntityCollection.
-    filterByParentClassNames(['BumbleDocGen\\Plugin\\PluginInterface']).
-    getOnlyInterfaces()
-%}
-{{ printClassEntityCollectionAsList( pluginInterfaces ) }}
+{% set pluginEvents = classEntityCollection.filterByPaths(['/BumbleDocGen/Plugin/Event']) %}
+{{ printClassEntityCollectionAsList( pluginEvents ) }}
 
-*A plugin can implement multiple interfaces at once*
+*A plugin can handle multiple events*
 
 
 {{ "Example" | textToHeading('H2') }}

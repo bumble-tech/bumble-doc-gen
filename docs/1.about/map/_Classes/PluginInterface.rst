@@ -15,7 +15,7 @@ Description of the `PluginInterface </BumbleDocGen/Plugin/PluginInterface.php>`_
 
     namespace BumbleDocGen\Plugin;
 
-    interface PluginInterface
+    interface PluginInterface extends Symfony\Component\EventDispatcher\EventSubscriberInterface
 
 
 

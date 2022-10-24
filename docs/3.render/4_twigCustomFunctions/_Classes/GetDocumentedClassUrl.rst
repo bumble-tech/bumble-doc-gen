@@ -27,7 +27,7 @@ See:
 
 #. DocumentedEntityWrapper 
 #. DocumentedEntityWrappersCollection 
-#. `BumbleDocGen\\Render\\Context\\Context::\$entityWrappersCollection </BumbleDocGen/Render/Context/Context.php#L18>`_ 
+#. `BumbleDocGen\\Render\\Context\\Context::\$entityWrappersCollection </BumbleDocGen/Render/Context/Context.php#L19>`_ 
 
 
 **Examples of using:**

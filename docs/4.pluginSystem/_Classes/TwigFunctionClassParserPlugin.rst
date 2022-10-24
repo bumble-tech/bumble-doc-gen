@@ -15,7 +15,7 @@ Description of the `TwigFunctionClassParserPlugin </SelfDoc/Configuration/Plugin
 
     namespace SelfDoc\Configuration\Plugin\TwigFunctionClassParser;
 
-    final class TwigFunctionClassParserPlugin implements BumbleDocGen\Plugin\ClassEntityCollectionPluginInterface, BumbleDocGen\Plugin\PluginInterface, BumbleDocGen\Plugin\EntityDocRenderPluginInterface
+    final class TwigFunctionClassParserPlugin implements BumbleDocGen\Plugin\PluginInterface, Symfony\Component\EventDispatcher\EventSubscriberInterface
 
 
 
@@ -23,16 +23,7 @@ Description of the `TwigFunctionClassParserPlugin </SelfDoc/Configuration/Plugin
 
 
 
-Initialization methods:
------------------------
 
-
-
-.. raw:: html
-
-  <ol>
-                <li><a href="#m-construct">__construct</a> </li>
-        </ol>
 
 Methods:
 -----------------------
@@ -42,8 +33,9 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#maftercreationclassentitycollection">afterCreationClassEntityCollection</a> - <i>The method is called after the ClassEntityCollection has been created using the reflector</i></li>
-                <li><a href="#mhandletemplateblockcontent">handleTemplateBlockContent</a> - <i>Handles text blocks in an entity template when generating entity documentation</i></li>
+                <li><a href="#mgetsubscribedevents">getSubscribedEvents</a> - <i>Returns an array of event names this subscriber wants to listen to.</i></li>
+                <li><a href="#monloadentitydocplugincontentevent">onLoadEntityDocPluginContentEvent</a> </li>
+                <li><a href="#maftercreationclassentitycollection">afterCreationClassEntityCollection</a> </li>
         </ol>
 
 
@@ -70,34 +62,34 @@ Method details:
 
 
 
-.. _m-construct:
+.. _mgetsubscribedevents:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L24>`_
+* `# <mgetsubscribedevents_>`_  ``getSubscribedEvents``   **|** `source code </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L23>`_
 .. code-block:: php
 
-        public function __construct(): mixed;
+        public static function getSubscribedEvents(): array&lt;string,;
 
 
+..
+
+    Returns an array of event names this subscriber wants to listen to\.
 
 
 **Parameters:** not specified
 
 
-**Return value:** mixed
+**Return value:** array<string,
 
 ________
 
-.. _maftercreationclassentitycollection:
+.. _monloadentitydocplugincontentevent:
 
-* `# <maftercreationclassentitycollection_>`_  ``afterCreationClassEntityCollection``   **|** `source code </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L77>`_
+* `# <monloadentitydocplugincontentevent_>`_  ``onLoadEntityDocPluginContentEvent``   **|** `source code </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L31>`_
 .. code-block:: php
 
-        public function afterCreationClassEntityCollection(BumbleDocGen\Parser\Entity\ClassEntityCollection $classEntityCollection): void;
+        public function onLoadEntityDocPluginContentEvent(BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent $event): void;
 
 
-..
-
-    The method is called after the ClassEntityCollection has been created using the reflector
 
 
 **Parameters:**
@@ -114,8 +106,8 @@ ________
     </thead>
     <tbody>
             <tr>
-            <td>$classEntityCollection</td>
-            <td><a href='/docs/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td>$event</td>
+            <td><a href='/docs/_Classes/OnLoadEntityDocPluginContent.rst'>BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -124,24 +116,16 @@ ________
 
 **Return value:** void
 
-
-**See:**
-
-#. `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection::createByReflector\(\) </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L23>`_ 
-
 ________
 
-.. _mhandletemplateblockcontent:
+.. _maftercreationclassentitycollection:
 
-* `# <mhandletemplateblockcontent_>`_  ``handleTemplateBlockContent``   **|** `source code </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L89>`_
+* `# <maftercreationclassentitycollection_>`_  ``afterCreationClassEntityCollection``   **|** `source code </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L51>`_
 .. code-block:: php
 
-        public function handleTemplateBlockContent(string $blockContent, BumbleDocGen\Parser\Entity\ClassEntity $classEntity, string $blockType, BumbleDocGen\Render\Context\Context $context): string;
+        public function afterCreationClassEntityCollection(BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection $event): void;
 
 
-..
-
-    Handles text blocks in an entity template when generating entity documentation
 
 
 **Parameters:**
@@ -158,35 +142,15 @@ ________
     </thead>
     <tbody>
             <tr>
-            <td>$blockContent</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$classEntity</td>
-            <td><a href='/docs/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$blockType</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td>$event</td>
+            <td><a href='/docs/_Classes/AfterCreationClassEntityCollection.rst'>BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** string
-
-
-**See:**
-
-#. **LoadPluginsContent** 
+**Return value:** void
 
 ________
 

@@ -45,7 +45,6 @@ Methods:
                 <li><a href="#mgetiterator">getIterator</a> - <i>Retrieve an external iterator</i></li>
                 <li><a href="#madd">add</a> </li>
                 <li><a href="#mget">get</a> </li>
-                <li><a href="#mfilterbyinterface">filterByInterface</a> </li>
         </ol>
 
 
@@ -202,42 +201,6 @@ ________
 
 
 **Return value:** `BumbleDocGen\\Plugin\\PluginInterface </docs/_Classes/PluginInterface\.rst>`_ | null
-
-________
-
-.. _mfilterbyinterface:
-
-* `# <mfilterbyinterface_>`_  ``filterByInterface``   **|** `source code </BumbleDocGen/Plugin/PluginsCollection.php#L37>`_
-.. code-block:: php
-
-        public function filterByInterface(string $interfaceName): BumbleDocGen\Plugin\PluginsCollection;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$interfaceName</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </docs/_Classes/PluginsCollection\.rst>`_
 
 ________
 

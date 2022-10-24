@@ -18,9 +18,9 @@
    *  For properties - `ConfigurationInterface::propertyEntityFilterCondition\(\) </docs/2.parser/1_parsingProcess/_Classes/ConfigurationInterface.rst#mpropertyentityfiltercondition>`_
    *  For methods - `ConfigurationInterface::methodEntityFilterCondition\(\) </docs/2.parser/1_parsingProcess/_Classes/ConfigurationInterface.rst#mmethodentityfiltercondition>`_
 
-*  The entity is processed using the `ClassEntityPluginInterface::beforeAddingClassEntity\(\) </docs/2.parser/1_parsingProcess/_Classes/ClassEntityPluginInterface.rst#mbeforeaddingclassentity>`_ method
+*  The entity is processed using the `OnAddClassEntityToCollection </docs/2.parser/1_parsingProcess/_Classes/OnAddClassEntityToCollection.rst>`_ event
 *  The entity is added to the `ClassEntityCollection </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollection.rst>`_
-*  `ClassEntityCollection </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollection.rst>`_ is handled by plugins by method `ClassEntityCollectionPluginInterface::afterCreationClassEntityCollection\(\) </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollectionPluginInterface.rst#maftercreationclassentitycollection>`_
+*  `ClassEntityCollection </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollection.rst>`_ is handled by plugins by event `AfterCreationClassEntityCollection </docs/2.parser/1_parsingProcess/_Classes/AfterCreationClassEntityCollection.rst>`_
 
 
 The result of the parser is a filled collection `ClassEntityCollection </docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollection.rst>`_

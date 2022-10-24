@@ -60,7 +60,7 @@ Method details:
 
 .. _mgeneratedocumentation:
 
-* `# <mgeneratedocumentation_>`_  ``generateDocumentation``   **|** `source code </BumbleDocGen/DocGenerator.php#L24>`_
+* `# <mgeneratedocumentation_>`_  ``generateDocumentation``   **|** `source code </BumbleDocGen/DocGenerator.php#L25>`_
 .. code-block:: php
 
         public static function generateDocumentation(BumbleDocGen\ConfigurationInterface $configuration): void;

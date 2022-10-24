@@ -7,6 +7,9 @@ namespace BumbleDocGen\Plugin\Event\Parser;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use Symfony\Contracts\EventDispatcher\Event;
 
+/**
+ * The event is called after the initial creation of a collection of class entities
+ */
 final class AfterCreationClassEntityCollection extends Event
 {
     public function __construct(private ClassEntityCollection $classEntityCollection)

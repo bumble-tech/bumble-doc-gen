@@ -11,9 +11,9 @@
    *  For properties - `ConfigurationInterface::propertyEntityFilterCondition()`_
    *  For methods - `ConfigurationInterface::methodEntityFilterCondition()`_
 
-*  The entity is processed using the `ClassEntityPluginInterface::beforeAddingClassEntity()`_ method
+*  The entity is processed using the `OnAddClassEntityToCollection`_ event
 *  The entity is added to the `ClassEntityCollection`_
-*  `ClassEntityCollection`_ is handled by plugins by method `ClassEntityCollectionPluginInterface::afterCreationClassEntityCollection()`_
+*  `ClassEntityCollection`_ is handled by plugins by event `AfterCreationClassEntityCollection`_
 
 
 The result of the parser is a filled collection `ClassEntityCollection`_

@@ -3,7 +3,7 @@
  <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> <a href="/docs/3.render/1_renderingProcess/index.rst">Rendering process</a> <b>/</b> PageHtmlLinkerPlugin</embed>
 
 
-Description of the `PageHtmlLinkerPlugin </BumbleDocGen/Plugin/PageLinker/PageHtmlLinkerPlugin.php>`_ class:
+Description of the `PageHtmlLinkerPlugin </BumbleDocGen/Plugin/CorePlugin/PageLinker/PageHtmlLinkerPlugin.php>`_ class:
 -----------------------
 
 
@@ -13,9 +13,9 @@ Description of the `PageHtmlLinkerPlugin </BumbleDocGen/Plugin/PageLinker/PageHt
 
 .. code-block:: php
 
-    namespace BumbleDocGen\Plugin\PageLinker;
+    namespace BumbleDocGen\Plugin\CorePlugin\PageLinker;
 
-    final class PageHtmlLinkerPlugin extends BumbleDocGen\Plugin\PageLinker\BasePageLinker implements BumbleDocGen\Plugin\TemplatePluginInterface, BumbleDocGen\Plugin\PluginInterface
+    final class PageHtmlLinkerPlugin extends BumbleDocGen\Plugin\CorePlugin\PageLinker\BasePageLinker implements BumbleDocGen\Plugin\PluginInterface, Symfony\Component\EventDispatcher\EventSubscriberInterface
 
 
 ..
@@ -76,7 +76,7 @@ Method details:
 
 .. _mgetlinkregex:
 
-* `# <mgetlinkregex_>`_  ``getLinkRegEx``   **|** `source code </BumbleDocGen/Plugin/PageLinker/PageHtmlLinkerPlugin.php#L25>`_
+* `# <mgetlinkregex_>`_  ``getLinkRegEx``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/PageHtmlLinkerPlugin.php#L25>`_
 .. code-block:: php
 
         public function getLinkRegEx(): string;
@@ -105,7 +105,7 @@ ________
 
 .. _mgetgroupregexnumber:
 
-* `# <mgetgroupregexnumber_>`_  ``getGroupRegExNumber``   **|** `source code </BumbleDocGen/Plugin/PageLinker/PageHtmlLinkerPlugin.php#L30>`_
+* `# <mgetgroupregexnumber_>`_  ``getGroupRegExNumber``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/PageHtmlLinkerPlugin.php#L30>`_
 .. code-block:: php
 
         public function getGroupRegExNumber(): int;
@@ -125,7 +125,7 @@ ________
 
 .. _mgetoutputtemplate:
 
-* `# <mgetoutputtemplate_>`_  ``getOutputTemplate``   **|** `source code </BumbleDocGen/Plugin/PageLinker/PageHtmlLinkerPlugin.php#L35>`_
+* `# <mgetoutputtemplate_>`_  ``getOutputTemplate``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/PageHtmlLinkerPlugin.php#L35>`_
 .. code-block:: php
 
         public function getOutputTemplate(): string;

@@ -13,6 +13,8 @@
 The documentation generator initially includes the possibility of expanding the functionality.
 Plugins allow you to add the necessary functionality to the system without changing its core.
 
+Plugin system based on event model.
+
 
 .. raw:: html
 
@@ -29,7 +31,7 @@ Plugins can be added in documentation generator configuration, in method `Config
 
 If you decide to add a new plugin, there are a few things you need to do:
 
-*  Implement an interface that matches one of the available plugin interfaces
+*  Implement events handling in plugin class
 *  Add plugin to configuration `ConfigurationInterface::getPlugins\(\) </docs/4.pluginSystem/_Classes/ConfigurationInterface.rst#mgetplugins>`_:
 
 .. code-block:: php
@@ -46,16 +48,15 @@ If you decide to add a new plugin, there are a few things you need to do:
 
 .. raw:: html
 
- <embed> <h2>Available plugin interfaces</h2></embed>
+ <embed> <h2>Available plugin events</h2></embed>
 
 
 .. raw:: html
 
- <embed> <ul><li><a href='/docs/4.pluginSystem/_Classes/CustomSourceLocatorInterface.rst'>CustomSourceLocatorInterface</a> - Plugin for working with custom source locators. Why? -sometimes it is better to move the complex logic of resource
- locators out of the configurator into a separate plugin.</li><li><a href='/docs/4.pluginSystem/_Classes/ClassEntityPluginInterface.rst'>ClassEntityPluginInterface</a> - Plugin for working with class entities</li><li><a href='/docs/4.pluginSystem/_Classes/ClassEntityCollectionPluginInterface.rst'>ClassEntityCollectionPluginInterface</a> - Plugin for working with ClassEntityCollection</li><li><a href='/docs/4.pluginSystem/_Classes/EntityDocRenderPluginInterface.rst'>EntityDocRenderPluginInterface</a> - Plugin for working with templates of documented entities</li><li><a href='/docs/4.pluginSystem/_Classes/TemplatePluginInterface.rst'>TemplatePluginInterface</a> - Plugin for working with page templates</li></ul></embed>
+ <embed> <ul><li><a href='/docs/4.pluginSystem/_Classes/OnLoadEntityDocPluginContent.rst'>OnLoadEntityDocPluginContent</a> - Called when class documentation is generated (plugin content loading)</li><li><a href='/docs/4.pluginSystem/_Classes/BeforeCreatingDocFile.rst'>BeforeCreatingDocFile</a> - Called before the content of the documentation document is saved to a file</li><li><a href='/docs/4.pluginSystem/_Classes/OnLoadSourceLocatorsCollection.rst'>OnLoadSourceLocatorsCollection</a> - Called when source locators are loaded</li><li><a href='/docs/4.pluginSystem/_Classes/AfterCreationClassEntityCollection.rst'>AfterCreationClassEntityCollection</a> - The event is called after the initial creation of a collection of class entities</li><li><a href='/docs/4.pluginSystem/_Classes/OnAddClassEntityToCollection.rst'>OnAddClassEntityToCollection</a> - Called when each class entity is added to the entity collection</li></ul></embed>
 
 
-*A plugin can implement multiple interfaces at once*
+*A plugin can handle multiple events*
 
 
 .. raw:: html

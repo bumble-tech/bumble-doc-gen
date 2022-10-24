@@ -52,6 +52,7 @@ Methods:
                 <li><a href="#mgetclassentitycollection">getClassEntityCollection</a> </li>
                 <li><a href="#mgetentitywrapperscollection">getEntityWrappersCollection</a> </li>
                 <li><a href="#mgetbreadcrumbshelper">getBreadcrumbsHelper</a> </li>
+                <li><a href="#mgetplugineventdispatcher">getPluginEventDispatcher</a> </li>
         </ol>
 
 
@@ -75,10 +76,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L20>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L22>`_
 .. code-block:: php
 
-        public function __construct(Roave\BetterReflection\Reflector\Reflector $reflector, BumbleDocGen\ConfigurationInterface $configuration, BumbleDocGen\Parser\Entity\ClassEntityCollection $classEntityCollection, BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper $breadcrumbsHelper): mixed;
+        public function __construct(BumbleDocGen\ConfigurationInterface $configuration, BumbleDocGen\Parser\Entity\ClassEntityCollection $classEntityCollection, BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper $breadcrumbsHelper, BumbleDocGen\Plugin\PluginEventDispatcher $pluginEventDispatcher): mixed;
 
 
 
@@ -97,11 +98,6 @@ Method details:
     </thead>
     <tbody>
             <tr>
-            <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
             <td>$configuration</td>
             <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
@@ -116,6 +112,11 @@ Method details:
             <td><a href='/docs/_Classes/BreadcrumbsHelper.rst'>BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper</a></td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$pluginEventDispatcher</td>
+            <td><a href='/docs/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
+            <td>-</td>
+        </tr>
         </tbody>
     </table>
 
@@ -126,7 +127,7 @@ ________
 
 .. _msetcurrenttemplatefilepatch:
 
-* `# <msetcurrenttemplatefilepatch_>`_  ``setCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L32>`_
+* `# <msetcurrenttemplatefilepatch_>`_  ``setCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L35>`_
 .. code-block:: php
 
         public function setCurrentTemplateFilePatch(string $currentTemplateFilePath): void;
@@ -165,7 +166,7 @@ ________
 
 .. _mgetcurrenttemplatefilepatch:
 
-* `# <mgetcurrenttemplatefilepatch_>`_  ``getCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L40>`_
+* `# <mgetcurrenttemplatefilepatch_>`_  ``getCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L43>`_
 .. code-block:: php
 
         public function getCurrentTemplateFilePatch(): string;
@@ -185,7 +186,7 @@ ________
 
 .. _mgetreflector:
 
-* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L45>`_
+* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L48>`_
 .. code-block:: php
 
         public function getReflector(): Roave\BetterReflection\Reflector\Reflector;
@@ -202,7 +203,7 @@ ________
 
 .. _mgetconfiguration:
 
-* `# <mgetconfiguration_>`_  ``getConfiguration``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L50>`_
+* `# <mgetconfiguration_>`_  ``getConfiguration``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L53>`_
 .. code-block:: php
 
         public function getConfiguration(): BumbleDocGen\ConfigurationInterface;
@@ -219,7 +220,7 @@ ________
 
 .. _mgetclassentitycollection:
 
-* `# <mgetclassentitycollection_>`_  ``getClassEntityCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L55>`_
+* `# <mgetclassentitycollection_>`_  ``getClassEntityCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L58>`_
 .. code-block:: php
 
         public function getClassEntityCollection(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -236,7 +237,7 @@ ________
 
 .. _mgetentitywrapperscollection:
 
-* `# <mgetentitywrapperscollection_>`_  ``getEntityWrappersCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L60>`_
+* `# <mgetentitywrapperscollection_>`_  ``getEntityWrappersCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L63>`_
 .. code-block:: php
 
         public function getEntityWrappersCollection(): BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
@@ -253,7 +254,7 @@ ________
 
 .. _mgetbreadcrumbshelper:
 
-* `# <mgetbreadcrumbshelper_>`_  ``getBreadcrumbsHelper``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L65>`_
+* `# <mgetbreadcrumbshelper_>`_  ``getBreadcrumbsHelper``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L68>`_
 .. code-block:: php
 
         public function getBreadcrumbsHelper(): BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
@@ -265,6 +266,23 @@ ________
 
 
 **Return value:** `BumbleDocGen\\Render\\Breadcrumbs\\BreadcrumbsHelper </docs/_Classes/BreadcrumbsHelper\.rst>`_
+
+________
+
+.. _mgetplugineventdispatcher:
+
+* `# <mgetplugineventdispatcher_>`_  ``getPluginEventDispatcher``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L73>`_
+.. code-block:: php
+
+        public function getPluginEventDispatcher(): BumbleDocGen\Plugin\PluginEventDispatcher;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Plugin\\PluginEventDispatcher </docs/_Classes/PluginEventDispatcher\.rst>`_
 
 ________
 

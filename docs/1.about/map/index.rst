@@ -11,17 +11,22 @@ Directory layout ( only documented files shown ):
 
  <embed> <pre>├──<b>BumbleDocGen</b>/
  │  ├──<b>Plugin</b>/
- │  │  ├──<b>PageLinker</b>/
- │  │  │  ├── <a href='/docs/1.about/map/_Classes/PageRstLinkerPlugin.rst'>PageRstLinkerPlugin.php</a>
- │  │  │  ├── <a href='/docs/1.about/map/_Classes/PageHtmlLinkerPlugin.rst'>PageHtmlLinkerPlugin.php</a>
- │  │  │  └── <a href='/docs/1.about/map/_Classes/BasePageLinker.rst'>BasePageLinker.php</a>
- │  │  ├── <a href='/docs/1.about/map/_Classes/CustomSourceLocatorInterface.rst'>CustomSourceLocatorInterface.php</a>
+ │  │  ├──<b>CorePlugin</b>/
+ │  │  │  └──<b>PageLinker</b>/
+ │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/PageRstLinkerPlugin.rst'>PageRstLinkerPlugin.php</a>
+ │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/PageHtmlLinkerPlugin.rst'>PageHtmlLinkerPlugin.php</a>
+ │  │  │  │  └── <a href='/docs/1.about/map/_Classes/BasePageLinker.rst'>BasePageLinker.php</a>
+ │  │  ├──<b>Event</b>/
+ │  │  │  ├──<b>Render</b>/
+ │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/OnLoadEntityDocPluginContent.rst'>OnLoadEntityDocPluginContent.php</a>
+ │  │  │  │  └── <a href='/docs/1.about/map/_Classes/BeforeCreatingDocFile.rst'>BeforeCreatingDocFile.php</a>
+ │  │  │  └──<b>Parser</b>/
+ │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/OnLoadSourceLocatorsCollection.rst'>OnLoadSourceLocatorsCollection.php</a>
+ │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/AfterCreationClassEntityCollection.rst'>AfterCreationClassEntityCollection.php</a>
+ │  │  │  │  └── <a href='/docs/1.about/map/_Classes/OnAddClassEntityToCollection.rst'>OnAddClassEntityToCollection.php</a>
+ │  │  ├── <a href='/docs/1.about/map/_Classes/PluginEventDispatcher.rst'>PluginEventDispatcher.php</a>
  │  │  ├── <a href='/docs/1.about/map/_Classes/PluginsCollection.rst'>PluginsCollection.php</a>
- │  │  ├── <a href='/docs/1.about/map/_Classes/ClassEntityPluginInterface.rst'>ClassEntityPluginInterface.php</a>
- │  │  ├── <a href='/docs/1.about/map/_Classes/ClassEntityCollectionPluginInterface.rst'>ClassEntityCollectionPluginInterface.php</a>
- │  │  ├── <a href='/docs/1.about/map/_Classes/PluginInterface.rst'>PluginInterface.php</a>
- │  │  ├── <a href='/docs/1.about/map/_Classes/EntityDocRenderPluginInterface.rst'>EntityDocRenderPluginInterface.php</a>
- │  │  └── <a href='/docs/1.about/map/_Classes/TemplatePluginInterface.rst'>TemplatePluginInterface.php</a>
+ │  │  └── <a href='/docs/1.about/map/_Classes/PluginInterface.rst'>PluginInterface.php</a>
  │  ├──<b>Render</b>/
  │  │  ├──<b>Context</b>/
  │  │  │  ├── <a href='/docs/1.about/map/_Classes/DocumentTransformableEntityInterface.rst'>DocumentTransformableEntityInterface.php</a>

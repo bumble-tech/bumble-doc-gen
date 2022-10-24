@@ -6,8 +6,14 @@ namespace BumbleDocGen\Plugin\Event\Render;
 
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
 use Symfony\Contracts\EventDispatcher\Event;
 
+/**
+ * Called when class documentation is generated (plugin content loading)
+ *
+ * @see LoadPluginsContent
+ */
 final class OnLoadEntityDocPluginContent extends Event
 {
     private array $blockContentPluginResults = [];
