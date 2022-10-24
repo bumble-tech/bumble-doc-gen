@@ -1,0 +1,123 @@
+.. raw:: html
+
+ <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.rst">Plugin system</a> <b>/</b> OnLoadSourceLocatorsCollection</embed>
+
+
+Description of the `OnLoadSourceLocatorsCollection </BumbleDocGen/Plugin/Event/Parser/OnLoadSourceLocatorsCollection.php>`_ class:
+-----------------------
+
+
+
+
+
+
+.. code-block:: php
+
+    namespace BumbleDocGen\Plugin\Event\Parser;
+
+    final class OnLoadSourceLocatorsCollection extends Symfony\Contracts\EventDispatcher\Event implements Psr\EventDispatcher\StoppableEventInterface
+
+
+..
+
+        Called when source locators are loaded
+
+
+
+
+
+Initialization methods:
+-----------------------
+
+
+
+.. raw:: html
+
+  <ol>
+                <li><a href="#m-construct">__construct</a> </li>
+        </ol>
+
+Methods:
+-----------------------
+
+
+
+.. raw:: html
+
+  <ol>
+                <li><a href="#mgetsourcelocatorscollection">getSourceLocatorsCollection</a> </li>
+        </ol>
+
+
+
+
+
+
+
+
+
+
+--------------------
+
+
+
+
+Method details:
+-----------------------
+
+
+
+.. _m-construct:
+
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Plugin/Event/Parser/OnLoadSourceLocatorsCollection.php#L15>`_
+.. code-block:: php
+
+        public function __construct(BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection $sourceLocatorsCollection): mixed;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$sourceLocatorsCollection</td>
+            <td><a href='/docs/_Classes/SourceLocatorsCollection.rst'>BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** mixed
+
+________
+
+.. _mgetsourcelocatorscollection:
+
+* `# <mgetsourcelocatorscollection_>`_  ``getSourceLocatorsCollection``   **|** `source code </BumbleDocGen/Plugin/Event/Parser/OnLoadSourceLocatorsCollection.php#L19>`_
+.. code-block:: php
+
+        public function getSourceLocatorsCollection(): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/_Classes/SourceLocatorsCollection\.rst>`_
+
+________
+
+
