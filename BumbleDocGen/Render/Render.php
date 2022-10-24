@@ -11,6 +11,7 @@ use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\MainExtension;
+use Symfony\Component\Finder\Finder;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -78,11 +79,12 @@ final class Render
         );
         $twig->addExtension(new MainExtension($context));
 
-        $allFiles = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator(
-                $templateFolder, \FilesystemIterator::SKIP_DOTS
-            )
-        );
+        $finder = Finder::create()
+            ->in($templateFolder)
+            ->ignoreDotFiles(true)
+            ->ignoreVCSIgnored(true)
+            ->files();
+
         $logger = $this->configuration->getLogger();
         $outputDir = $this->configuration->getOutputDir();
 
@@ -90,7 +92,7 @@ final class Render
             $this->clearOutputDir($outputDir);
         }
 
-        foreach ($allFiles as $templateFile) {
+        foreach ($finder as $templateFile) {
             /**@var \SplFileInfo $templateFile */
             $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
 
