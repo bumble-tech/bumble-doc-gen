@@ -12,7 +12,7 @@
 
 .. code-block:: php
 
- (new Render($configuration, $projectParser->getReflector(), $classEntityCollection))->run();
+ (new Render($configuration, $classEntityCollection, $pluginEventDispatcher))->run();
 
 
 .. raw:: html

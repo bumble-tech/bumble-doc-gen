@@ -3,7 +3,7 @@
 
 {{ "Rendering process" | textToHeading('H1') }}
 
-{{ "(new Render($configuration, $projectParser->getReflector(), $classEntityCollection))->run();" | textToCodeBlockRst('php') }}
+{{ "(new Render($configuration, $classEntityCollection, $pluginEventDispatcher))->run();" | textToCodeBlockRst('php') }}
 
 {{ "Start rendering:" | textToHeading('H2') }}
 
