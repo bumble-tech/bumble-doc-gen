@@ -80,6 +80,47 @@ We use the twig template engine, you can get more information about working with
                                             
                         <tr>
                                 <td rowspan="5">
+                    <a href="/docs/3.render/4_twigCustomFunctions/_Classes/DrawDocumentedClassLink.rst">drawDocumentedClassLink</a><br>
+                                        Creates an entity link by object
+                    <br><i><b>:warning: This function initiates the creation of documents for the displayed classes</b></i><br>                </td>
+                                <td>
+                    <b>$classEntity</b>
+                </td>
+                <td>
+                    <i><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ClassEntity.rst'>ClassEntity</a></i>
+                </td>
+                <td></td>
+            </tr>
+                        <tr>
+                <td colspan="3"></td>
+            </tr>
+                                    <tr>
+                                <td>
+                    <b>$cursor</b>
+                </td>
+                <td>
+                    <i>string</i>
+                </td>
+                <td></td>
+            </tr>
+                        <tr>
+                <td colspan="3"></td>
+            </tr>
+                                    <tr>
+                                <td>
+                    <b>$useShortName</b>
+                </td>
+                <td>
+                    <i>bool</i>
+                </td>
+                <td></td>
+            </tr>
+                                                <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+                                            
+                        <tr>
+                                <td rowspan="5">
                     <a href="/docs/3.render/4_twigCustomFunctions/_Classes/LoadPluginsContent.rst">loadPluginsContent</a><br>
                     <i><b>:warning: For internal use</b></i><br>                    Process class template blocks with plugins. The method returns the content processed by plugins.
                                     </td>

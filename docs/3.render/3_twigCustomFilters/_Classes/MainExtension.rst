@@ -71,7 +71,7 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L31>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L32>`_
 .. code-block:: php
 
         public function __construct(BumbleDocGen\Render\Context\Context $context): mixed;
@@ -107,7 +107,7 @@ ________
 
 .. _mchangecontext:
 
-* `# <mchangecontext_>`_  ``changeContext``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L35>`_
+* `# <mchangecontext_>`_  ``changeContext``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L36>`_
 .. code-block:: php
 
         public function changeContext(BumbleDocGen\Render\Context\Context $context): void;
@@ -143,7 +143,7 @@ ________
 
 .. _mgetfunctions:
 
-* `# <mgetfunctions_>`_  ``getFunctions``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L43>`_
+* `# <mgetfunctions_>`_  ``getFunctions``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L44>`_
 .. code-block:: php
 
         public function getFunctions(): array;
@@ -163,7 +163,7 @@ ________
 
 .. _mgetfilters:
 
-* `# <mgetfilters_>`_  ``getFilters``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L74>`_
+* `# <mgetfilters_>`_  ``getFilters``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L81>`_
 .. code-block:: php
 
         public function getFilters(): array;

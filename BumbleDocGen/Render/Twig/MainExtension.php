@@ -17,6 +17,7 @@ use BumbleDocGen\Render\Twig\Filter\TextToCodeBlockRst;
 use BumbleDocGen\Render\Twig\Filter\TextToHeading;
 use BumbleDocGen\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
+use BumbleDocGen\Render\Twig\Function\DrawDocumentedClassLink;
 use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use BumbleDocGen\Render\Twig\Function\IsSubclassOf;
@@ -64,7 +65,13 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
                     'is_safe' => ['html'],
                 ]
             ),
-
+            new \Twig\TwigFunction(
+                'drawDocumentedClassLink',
+                new DrawDocumentedClassLink($this->context),
+                [
+                    'is_safe' => ['html'],
+                ]
+            ),
         ];
     }
 

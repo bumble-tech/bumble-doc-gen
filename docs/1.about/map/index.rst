@@ -41,6 +41,7 @@ Directory layout ( only documented files shown ):
  │  │  ├──<b>Twig</b>/
  │  │  │  ├──<b>Function</b>/
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/GetDocumentedClassUrl.rst'>GetDocumentedClassUrl.php</a>
+ │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/DrawDocumentedClassLink.rst'>DrawDocumentedClassLink.php</a>
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/LoadPluginsContent.rst'>LoadPluginsContent.php</a>
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/IsSubclassOf.rst'>IsSubclassOf.php</a>
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/PrintClassEntityCollectionAsList.rst'>PrintClassEntityCollectionAsList.php</a>
