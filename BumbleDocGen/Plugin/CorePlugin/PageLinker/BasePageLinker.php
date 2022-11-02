@@ -13,6 +13,9 @@ use Psr\Log\LoggerInterface;
 
 abstract class BasePageLinker implements PluginInterface
 {
+    public const CLASS_ENTITY_SHORT_LINK_OPTION = 'short_form';
+    public const CLASS_ENTITY_FULL_LINK_OPTION = 'full_form';
+
     private array $keyUsageCount = [];
 
     /**
@@ -134,6 +137,11 @@ abstract class BasePageLinker implements PluginInterface
             }
         }
 
+        $explodedLinkString = explode('|', $linkString);
+        $linkString = array_shift($explodedLinkString);
+
+        $linkOptions = $explodedLinkString;
+
         $classData = explode('::', $linkString);
         $className = $classData[0];
 
@@ -152,6 +160,13 @@ abstract class BasePageLinker implements PluginInterface
             }
 
             $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
+
+            if (in_array(self::CLASS_ENTITY_SHORT_LINK_OPTION, $linkOptions)) {
+                $linkString = $pageLinks[$className]->getShortName();
+            } elseif (in_array(self::CLASS_ENTITY_FULL_LINK_OPTION, $linkOptions)) {
+                $linkString = $pageLinks[$className]->getName();
+            }
+
             $url = $getDocumentedClassUrl($pageLinks[$className]->getName(), $cursor);
 
             return [
