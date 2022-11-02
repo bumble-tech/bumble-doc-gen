@@ -15,6 +15,7 @@ abstract class BasePageLinker implements PluginInterface
 {
     public const CLASS_ENTITY_SHORT_LINK_OPTION = 'short_form';
     public const CLASS_ENTITY_FULL_LINK_OPTION = 'full_form';
+    public const CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION = 'only_cursor';
 
     private array $keyUsageCount = [];
 
@@ -165,6 +166,8 @@ abstract class BasePageLinker implements PluginInterface
                 $linkString = $pageLinks[$className]->getShortName() . '::' . ($classData[1] ?? '');
             } elseif (in_array(self::CLASS_ENTITY_FULL_LINK_OPTION, $linkOptions)) {
                 $linkString = $pageLinks[$className]->getName() . '::' . ($classData[1] ?? '');
+            } elseif (in_array(self::CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION, $linkOptions) && isset($classData[1])) {
+                $linkString = $classData[1];
             }
 
             $url = $getDocumentedClassUrl($pageLinks[$className]->getName(), $cursor);
