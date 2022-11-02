@@ -163,9 +163,10 @@ abstract class BasePageLinker implements PluginInterface
             $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
 
             if (in_array(self::CLASS_ENTITY_SHORT_LINK_OPTION, $linkOptions)) {
-                $linkString = $pageLinks[$className]->getShortName() . '::' . ($classData[1] ?? '');
+                $linkString = $pageLinks[$className]->getShortName() .
+                    (isset($classData[1]) ? "::{$classData[1]}" : '');
             } elseif (in_array(self::CLASS_ENTITY_FULL_LINK_OPTION, $linkOptions)) {
-                $linkString = $pageLinks[$className]->getName() . '::' . ($classData[1] ?? '');
+                $linkString = $pageLinks[$className]->getName() . (isset($classData[1]) ? "::{$classData[1]}" : '');
             } elseif (in_array(self::CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION, $linkOptions) && isset($classData[1])) {
                 $linkString = $classData[1];
             }
