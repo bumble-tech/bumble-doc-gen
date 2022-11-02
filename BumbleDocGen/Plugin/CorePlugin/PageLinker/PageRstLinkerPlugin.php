@@ -24,7 +24,7 @@ final class PageRstLinkerPlugin extends BasePageLinker
 {
     function getLinkRegEx(): string
     {
-        return '/(`)([^<>\n]+?)(`_)/m';
+        return '/(`)([^<>`\n]+?)(`_)/m';
     }
 
     function getGroupRegExNumber(): int
