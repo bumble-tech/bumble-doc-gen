@@ -1,4 +1,4 @@
 {% for constantEntity in classEntity.getConstantEntityCollection() %}
-* ``{{ constantEntity.getName() }}`` {% if constantEntity.isInternal() %}**:warning:** Is internal {% endif %} {% if constantEntity.isDeprecated() %}**:no_entry:** Deprecated {% endif %} {% if constantEntity.getFileName() %}**|** `source code <{{ constantEntity.getFileName() }}#L{{ constantEntity.getLine() }}>`_ {% endif %}
+* `# <c{{ constantEntity.getName()|prepareSourceLink }}_>`_  ``{{ constantEntity.getName() }}`` {% if constantEntity.isInternal() %}**:warning:** Is internal {% endif %} {% if constantEntity.isDeprecated() %}**:no_entry:** Deprecated {% endif %} {% if constantEntity.getFileName() %}**|** `source code <{{ constantEntity.getFileName() }}#L{{ constantEntity.getLine() }}>`_ {% endif %}
 
 {% endfor %}
