@@ -156,7 +156,7 @@ abstract class BasePageLinker implements PluginInterface
                 } elseif (str_starts_with($classData[1], '$')) {
                     $cursor = 'p' . str_replace('$', '', $classData[1]);
                 } else {
-                    $cursor = 'c' . $classData[1];
+                    $cursor = 'q' . $classData[1];
                 }
             }
 
