@@ -54,7 +54,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
             if ($this->isCustomTwigFunction($classEntity)) {
                 $classEntity->loadPluginData(
                     self::PLUGIN_KEY,
-                    $this->getFilterData($event->getClassEntityCollection(), $classEntity->getName())
+                    $this->getFilterData($event->getClassEntityCollection(), $classEntity->getName()) ?? []
                 );
             }
         }

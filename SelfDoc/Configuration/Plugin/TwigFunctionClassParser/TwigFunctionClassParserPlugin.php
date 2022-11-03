@@ -54,7 +54,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
             if ($this->isCustomTwigFunction($classEntity)) {
                 $classEntity->loadPluginData(
                     self::PLUGIN_KEY,
-                    $this->getFunctionData($event->getClassEntityCollection(), $classEntity->getName())
+                    $this->getFunctionData($event->getClassEntityCollection(), $classEntity->getName()) ?? []
                 );
             }
         }
