@@ -10,9 +10,9 @@ final class ConditionGroup implements ConditionInterface
      * @var ConditionInterface[]
      */
     private array $conditions = [];
-    private ConditionGroupTypeEnum $groupType = ConditionGroupTypeEnum::AND;
+    private string $groupType = ConditionGroupTypeEnum::AND;
 
-    public static function create(ConditionGroupTypeEnum $groupType, ConditionInterface ...$conditions): ConditionGroup
+    public static function create(string $groupType, ConditionInterface ...$conditions): ConditionGroup
     {
         $conditionGroup = new self();
         $conditionGroup->conditions = $conditions;

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\FilterCondition;
 
-enum ConditionGroupTypeEnum
+final class ConditionGroupTypeEnum
 {
-    case AND;
-    case OR;
+    public const AND = 'and';
+    public const  OR = 'or';
 }

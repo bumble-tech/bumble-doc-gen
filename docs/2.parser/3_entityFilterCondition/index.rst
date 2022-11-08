@@ -74,7 +74,7 @@ To group conditions, there is a `ConditionGroup </docs/2.parser/3_entityFilterCo
 
 .. raw:: html
 
- <embed> <ul><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/LocatedInCondition.rst'>LocatedInCondition</a> - Checking the existence of a class in the specified directories</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/HasAnnotationCondition.rst'>HasAnnotationCondition</a> - Checking for an annotation on a class</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/HasAttributeCondition.rst'>HasAttributeCondition</a> - Checking for an attribute on a class</li></ul></embed>
+ <embed> <ul><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/LocatedInCondition.rst'>LocatedInCondition</a> - Checking the existence of a class in the specified directories</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/FileTextContainsCondition.rst'>FileTextContainsCondition</a> - Checking if a file contains a substring</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/HasAnnotationCondition.rst'>HasAnnotationCondition</a> - Checking for an annotation on a class</li><li><a href='/docs/2.parser/3_entityFilterCondition/_Classes/HasAttributeCondition.rst'>HasAttributeCondition</a> - Checking for an attribute on a class</li></ul></embed>
 
 
 .. raw:: html

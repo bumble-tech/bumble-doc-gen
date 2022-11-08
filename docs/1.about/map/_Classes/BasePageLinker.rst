@@ -51,6 +51,18 @@ Methods:
 
 
 
+Constants:
+-----------------------
+
+
+
+.. raw:: html
+
+    <ul>
+            <li><a name="qclass-entity-short-link-option" href="#qclass-entity-short-link-option">#</a> <code>CLASS_ENTITY_SHORT_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L16">source code</a> </li>
+            <li><a name="qclass-entity-full-link-option" href="#qclass-entity-full-link-option">#</a> <code>CLASS_ENTITY_FULL_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L17">source code</a> </li>
+            <li><a name="qclass-entity-only-cursor-link-option" href="#qclass-entity-only-cursor-link-option">#</a> <code>CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L18">source code</a> </li>
+        </ul>
 
 
 
@@ -70,7 +82,7 @@ Method details:
 
 .. _mgetlinkregex:
 
-* `# <mgetlinkregex_>`_  ``getLinkRegEx``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L23>`_
+* `# <mgetlinkregex_>`_  ``getLinkRegEx``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L27>`_
 .. code-block:: php
 
         public function getLinkRegEx(): string;
@@ -99,7 +111,7 @@ ________
 
 .. _mgetgroupregexnumber:
 
-* `# <mgetgroupregexnumber_>`_  ``getGroupRegExNumber``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L28>`_
+* `# <mgetgroupregexnumber_>`_  ``getGroupRegExNumber``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L32>`_
 .. code-block:: php
 
         public function getGroupRegExNumber(): int;
@@ -119,7 +131,7 @@ ________
 
 .. _mgetoutputtemplate:
 
-* `# <mgetoutputtemplate_>`_  ``getOutputTemplate``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L36>`_
+* `# <mgetoutputtemplate_>`_  ``getOutputTemplate``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L40>`_
 .. code-block:: php
 
         public function getOutputTemplate(): string;
@@ -148,7 +160,7 @@ ________
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L38>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L42>`_
 .. code-block:: php
 
         public function __construct(Psr\Log\LoggerInterface $logger): mixed;
@@ -184,7 +196,7 @@ ________
 
 .. _mgetsubscribedevents:
 
-* `# <mgetsubscribedevents_>`_  ``getSubscribedEvents``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L42>`_
+* `# <mgetsubscribedevents_>`_  ``getSubscribedEvents``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L46>`_
 .. code-block:: php
 
         public static function getSubscribedEvents(): array&lt;string,;
@@ -204,7 +216,7 @@ ________
 
 .. _mbeforecreatingdocfile:
 
-* `# <mbeforecreatingdocfile_>`_  ``beforeCreatingDocFile``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L49>`_
+* `# <mbeforecreatingdocfile_>`_  ``beforeCreatingDocFile``   **|** `source code </BumbleDocGen/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L53>`_
 .. code-block:: php
 
         public function beforeCreatingDocFile(BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile $event): void;

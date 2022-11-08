@@ -72,7 +72,7 @@ Method details:
 * `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/FilterCondition/PropertyFilterCondition/VisibilityCondition.php#L16>`_
 .. code-block:: php
 
-        public function __construct(BumbleDocGen\Parser\Entity\PropertyEntity $propertyEntity, BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier $visibilityModifier = BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier::PUBLIC): mixed;
+        public function __construct(BumbleDocGen\Parser\Entity\PropertyEntity $propertyEntity, string $visibilityModifier = BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier::PUBLIC): mixed;
 
 
 
@@ -97,7 +97,7 @@ Method details:
         </tr>
             <tr>
             <td>$visibilityModifier</td>
-            <td><a href='/docs/_Classes/VisibilityConditionModifier.rst'>BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier</a></td>
+            <td>string</td>
             <td>-</td>
         </tr>
         </tbody>

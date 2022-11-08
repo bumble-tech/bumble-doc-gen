@@ -56,9 +56,14 @@ Constants:
 -----------------------
 
 
-* ``BLOCK_AFTER_MAIN_INFO``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L20>`_ 
-* ``BLOCK_AFTER_HEADER``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L21>`_ 
-* ``BLOCK_BEFORE_DETAILS``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L22>`_ 
+
+.. raw:: html
+
+    <ul>
+            <li><a name="qblock-after-main-info" href="#qblock-after-main-info">#</a> <code>BLOCK_AFTER_MAIN_INFO</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L20">source code</a> </li>
+            <li><a name="qblock-after-header" href="#qblock-after-header">#</a> <code>BLOCK_AFTER_HEADER</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L21">source code</a> </li>
+            <li><a name="qblock-before-details" href="#qblock-before-details">#</a> <code>BLOCK_BEFORE_DETAILS</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L22">source code</a> </li>
+        </ul>
 
 
 

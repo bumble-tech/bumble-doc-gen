@@ -3,7 +3,7 @@
  <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.rst">Parser class map</a> <b>/</b> VisibilityConditionModifier</embed>
 
 
-Description of the `VisibilityConditionModifier </BumbleDocGen/Parser/FilterCondition/CommonFilterCondition/VisibilityConditionModifier.php>`_ enum:
+Description of the `VisibilityConditionModifier </BumbleDocGen/Parser/FilterCondition/CommonFilterCondition/VisibilityConditionModifier.php>`_ class:
 -----------------------
 
 
@@ -15,40 +15,33 @@ Description of the `VisibilityConditionModifier </BumbleDocGen/Parser/FilterCond
 
     namespace BumbleDocGen\Parser\FilterCondition\CommonFilterCondition;
 
-    enum VisibilityConditionModifier implements UnitEnum
+    final class VisibilityConditionModifier
 
 
 
 
 
 
-Cases:
------------------------
-
-* ``NONE``
-
-* ``PUBLIC``
-
-* ``PROTECTED``
-
-* ``PRIVATE``
 
 
 
 
-Methods:
+
+
+
+Constants:
 -----------------------
 
 
 
 .. raw:: html
 
-  <ol>
-                <li><a href="#mcases">cases</a> </li>
-        </ol>
-
-
-
+    <ul>
+            <li><a name="qnone" href="#qnone">#</a> <code>NONE</code>   <b>|</b> <a href="/BumbleDocGen/Parser/FilterCondition/CommonFilterCondition/VisibilityConditionModifier.php#L9">source code</a> </li>
+            <li><a name="qpublic" href="#qpublic">#</a> <code>PUBLIC</code>   <b>|</b> <a href="/BumbleDocGen/Parser/FilterCondition/CommonFilterCondition/VisibilityConditionModifier.php#L10">source code</a> </li>
+            <li><a name="qprotected" href="#qprotected">#</a> <code>PROTECTED</code>   <b>|</b> <a href="/BumbleDocGen/Parser/FilterCondition/CommonFilterCondition/VisibilityConditionModifier.php#L11">source code</a> </li>
+            <li><a name="qprivate" href="#qprivate">#</a> <code>PRIVATE</code>   <b>|</b> <a href="/BumbleDocGen/Parser/FilterCondition/CommonFilterCondition/VisibilityConditionModifier.php#L12">source code</a> </li>
+        </ul>
 
 
 
@@ -61,26 +54,5 @@ Methods:
 
 
 
-Method details:
------------------------
-
-
-
-.. _mcases:
-
-* `# <mcases_>`_  ``cases``   **|** `source code </BumbleDocGen/Parser/FilterCondition/CommonFilterCondition/VisibilityConditionModifier.php#L-1>`_
-.. code-block:: php
-
-        public static function cases(): array;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** array
-
-________
 
 

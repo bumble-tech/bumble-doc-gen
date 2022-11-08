@@ -85,7 +85,12 @@ Constants:
 -----------------------
 
 
-* ``DEFAULT_URL``   **|** `source code </BumbleDocGen/Render/Twig/Function/GetDocumentedClassUrl.php#L27>`_ 
+
+.. raw:: html
+
+    <ul>
+            <li><a name="qdefault-url" href="#qdefault-url">#</a> <code>DEFAULT_URL</code>   <b>|</b> <a href="/BumbleDocGen/Render/Twig/Function/GetDocumentedClassUrl.php#L27">source code</a> </li>
+        </ul>
 
 
 

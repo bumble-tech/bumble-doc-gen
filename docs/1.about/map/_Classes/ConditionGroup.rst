@@ -69,7 +69,7 @@ Method details:
 * `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/FilterCondition/ConditionGroup.php#L15>`_
 .. code-block:: php
 
-        public static function create(BumbleDocGen\Parser\FilterCondition\ConditionGroupTypeEnum $groupType, BumbleDocGen\Parser\FilterCondition\ConditionInterface $conditions): BumbleDocGen\Parser\FilterCondition\ConditionGroup;
+        public static function create(string $groupType, BumbleDocGen\Parser\FilterCondition\ConditionInterface $conditions): BumbleDocGen\Parser\FilterCondition\ConditionGroup;
 
 
 
@@ -89,7 +89,7 @@ Method details:
     <tbody>
             <tr>
             <td>$groupType</td>
-            <td><a href='/docs/_Classes/ConditionGroupTypeEnum.rst'>BumbleDocGen\Parser\FilterCondition\ConditionGroupTypeEnum</a></td>
+            <td>string</td>
             <td>-</td>
         </tr>
             <tr>

@@ -15,7 +15,7 @@ final class VisibilityCondition implements ConditionInterface
 {
     public function __construct(
         private MethodEntity $methodEntity,
-        private VisibilityConditionModifier $visibilityModifier = VisibilityConditionModifier::PUBLIC
+        private string $visibilityModifier = VisibilityConditionModifier::PUBLIC
     ) {
     }
 

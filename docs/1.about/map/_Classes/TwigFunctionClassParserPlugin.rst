@@ -44,7 +44,12 @@ Constants:
 -----------------------
 
 
-* ``PLUGIN_KEY``   **|** `source code </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L21>`_ 
+
+.. raw:: html
+
+    <ul>
+            <li><a name="qplugin-key" href="#qplugin-key">#</a> <code>PLUGIN_KEY</code>   <b>|</b> <a href="/SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L21">source code</a> </li>
+        </ul>
 
 
 

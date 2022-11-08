@@ -83,8 +83,13 @@ Constants:
 -----------------------
 
 
-* ``TEMPLATE_RST``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L21>`_ 
-* ``TEMPLATE_HTML``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L22>`_ 
+
+.. raw:: html
+
+    <ul>
+            <li><a name="qtemplate-rst" href="#qtemplate-rst">#</a> <code>TEMPLATE_RST</code>   <b>|</b> <a href="/BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L21">source code</a> </li>
+            <li><a name="qtemplate-html" href="#qtemplate-html">#</a> <code>TEMPLATE_HTML</code>   <b>|</b> <a href="/BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L22">source code</a> </li>
+        </ul>
 
 
 

@@ -3,7 +3,7 @@
  <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.rst">Parser class map</a> <b>/</b> ConditionGroupTypeEnum</embed>
 
 
-Description of the `ConditionGroupTypeEnum </BumbleDocGen/Parser/FilterCondition/ConditionGroupTypeEnum.php>`_ enum:
+Description of the `ConditionGroupTypeEnum </BumbleDocGen/Parser/FilterCondition/ConditionGroupTypeEnum.php>`_ class:
 -----------------------
 
 
@@ -15,36 +15,31 @@ Description of the `ConditionGroupTypeEnum </BumbleDocGen/Parser/FilterCondition
 
     namespace BumbleDocGen\Parser\FilterCondition;
 
-    enum ConditionGroupTypeEnum implements UnitEnum
+    final class ConditionGroupTypeEnum
 
 
 
 
 
 
-Cases:
------------------------
-
-* ``AND``
-
-* ``OR``
 
 
 
 
-Methods:
+
+
+
+Constants:
 -----------------------
 
 
 
 .. raw:: html
 
-  <ol>
-                <li><a href="#mcases">cases</a> </li>
-        </ol>
-
-
-
+    <ul>
+            <li><a name="qand" href="#qand">#</a> <code>AND</code>   <b>|</b> <a href="/BumbleDocGen/Parser/FilterCondition/ConditionGroupTypeEnum.php#L9">source code</a> </li>
+            <li><a name="qor" href="#qor">#</a> <code>OR</code>   <b>|</b> <a href="/BumbleDocGen/Parser/FilterCondition/ConditionGroupTypeEnum.php#L10">source code</a> </li>
+        </ul>
 
 
 
@@ -57,26 +52,5 @@ Methods:
 
 
 
-Method details:
------------------------
-
-
-
-.. _mcases:
-
-* `# <mcases_>`_  ``cases``   **|** `source code </BumbleDocGen/Parser/FilterCondition/ConditionGroupTypeEnum.php#L-1>`_
-.. code-block:: php
-
-        public static function cases(): array;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** array
-
-________
 
 

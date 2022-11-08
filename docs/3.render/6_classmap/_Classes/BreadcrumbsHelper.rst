@@ -57,8 +57,13 @@ Constants:
 -----------------------
 
 
-* ``DEFAULT_MAIN_PAGE_NAME``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L19>`_ 
-* ``DEFAULT_PREV_PAGE_NAME``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L23>`_ 
+
+.. raw:: html
+
+    <ul>
+            <li><a name="qdefault-main-page-name" href="#qdefault-main-page-name">#</a> <code>DEFAULT_MAIN_PAGE_NAME</code>   <b>|</b> <a href="/BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L19">source code</a> </li>
+            <li><a name="qdefault-prev-page-name" href="#qdefault-prev-page-name">#</a> <code>DEFAULT_PREV_PAGE_NAME</code>   <b>|</b> <a href="/BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L23">source code</a> </li>
+        </ul>
 
 
 

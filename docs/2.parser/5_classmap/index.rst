@@ -41,6 +41,7 @@
  │  │  │  │  └── <a href='/docs/2.parser/5_classmap/_Classes/VisibilityCondition_3.rst'>VisibilityCondition.php</a>
  │  │  │  ├──<b>ClassFilterCondition</b>/
  │  │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/LocatedInCondition.rst'>LocatedInCondition.php</a>
+ │  │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/FileTextContainsCondition.rst'>FileTextContainsCondition.php</a>
  │  │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/HasAnnotationCondition.rst'>HasAnnotationCondition.php</a>
  │  │  │  │  └── <a href='/docs/2.parser/5_classmap/_Classes/HasAttributeCondition.rst'>HasAttributeCondition.php</a>
  │  │  │  ├── <a href='/docs/2.parser/5_classmap/_Classes/ConditionGroupTypeEnum.rst'>ConditionGroupTypeEnum.php</a>

@@ -94,6 +94,7 @@ Directory layout ( only documented files shown ):
  │  │  │  │  └── <a href='/docs/1.about/map/_Classes/VisibilityCondition_3.rst'>VisibilityCondition.php</a>
  │  │  │  ├──<b>ClassFilterCondition</b>/
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/LocatedInCondition.rst'>LocatedInCondition.php</a>
+ │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/FileTextContainsCondition.rst'>FileTextContainsCondition.php</a>
  │  │  │  │  ├── <a href='/docs/1.about/map/_Classes/HasAnnotationCondition.rst'>HasAnnotationCondition.php</a>
  │  │  │  │  └── <a href='/docs/1.about/map/_Classes/HasAttributeCondition.rst'>HasAttributeCondition.php</a>
  │  │  │  ├── <a href='/docs/1.about/map/_Classes/ConditionGroupTypeEnum.rst'>ConditionGroupTypeEnum.php</a>

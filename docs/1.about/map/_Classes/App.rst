@@ -45,7 +45,12 @@ Constants:
 -----------------------
 
 
-* ``VERSION``   **|** `source code </SelfDoc/Console/App.php#L10>`_ 
+
+.. raw:: html
+
+    <ul>
+            <li><a name="qversion" href="#qversion">#</a> <code>VERSION</code>   <b>|</b> <a href="/SelfDoc/Console/App.php#L10">source code</a> </li>
+        </ul>
 
 
 

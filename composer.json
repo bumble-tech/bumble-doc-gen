@@ -17,7 +17,7 @@
     "require": {
         "php": "^8.0.0",
         "symfony/console": "^6.0",
-        "symfony/finder": "^6.1",
+        "symfony/finder": "^6.0",
         "twig/twig": "^3.3",
         "roave/better-reflection": "5.5.1.2",
         "nikic/php-parser": "^4.13",
@@ -27,8 +27,8 @@
         "monolog/monolog": "^2.5",
         "bramus/monolog-colored-line-formatter": "^3.0",
         "phpunit/phpunit": "^9.5",
-        "symfony/cache": "^6.1",
-        "symfony/event-dispatcher": "^6.1"
+        "symfony/cache": "^6.0",
+        "symfony/event-dispatcher": "^6.0"
     },
     "autoload": {
         "psr-4": {
