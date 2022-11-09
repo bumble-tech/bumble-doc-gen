@@ -37,10 +37,15 @@ final class ConstantEntityCollection extends BaseEntityCollection
 
     public function add(ConstantEntity $constantEntity, bool $reload = false): ConstantEntityCollection
     {
-        $key = $constantEntity->getObjectId();
+        $key = $constantEntity->getName();
         if (!isset($this->entities[$key]) || $reload) {
             $this->entities[$key] = $constantEntity;
         }
         return $this;
+    }
+
+    public function get(string $key): ?PropertyEntity
+    {
+        return $this->entities[$key] ?? null;
     }
 }
