@@ -108,7 +108,9 @@ abstract class BaseEntity
 
     public function hasDescriptionLinks(): bool
     {
-        return count($this->getDescriptionLinks()) > 0;
+        $docBlock = $this->getDocBlock();
+        return preg_match_all('/(\@see )(.*?)( |}|])/', $this->getDescription() . ' ') ||
+            count($docBlock->getTagsByName('see')) || count($docBlock->getTagsByName('link'));
     }
 
     private function getDocCommentImplementingClass(): ReflectionClass
@@ -221,7 +223,8 @@ abstract class BaseEntity
 
     public function hasThrows(): bool
     {
-        return count($this->getThrows()) > 0;
+        $docBlock = $this->getDocBlock();
+        return count($docBlock->getTagsByName('throws')) > 0;
     }
 
     /**
@@ -277,7 +280,8 @@ abstract class BaseEntity
 
     public function hasExamples(): bool
     {
-        return count($this->getExamples()) > 0;
+        $docBlock = $this->getDocBlock();
+        return count($docBlock->getTagsByName('example')) > 0;
     }
 
     /**
