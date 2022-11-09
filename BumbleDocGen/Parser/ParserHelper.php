@@ -58,4 +58,42 @@ final class ParserHelper
 
         return $uses;
     }
+
+    public static function parseFullClassName(
+        string $searchClassName,
+        Reflector $reflector,
+        ReflectionClass $reflectionClass,
+        bool $extended = true
+    ): string {
+        static $parsedFullClassNameCache = [];
+        $key = $reflectionClass->getName() . $searchClassName;
+        if (!isset($parsedFullClassNameCache[$key])) {
+            $trimmedName = ltrim($searchClassName, '\\');
+            $uses = self::getUsesList($reflectionClass, $extended);
+            if (isset($uses[$trimmedName])) {
+                $className = $uses[$trimmedName];
+            } elseif (isset($uses[$searchClassName])) {
+                $className = $uses[$searchClassName];
+            } elseif (
+                str_contains($searchClassName, '\\') && ParserHelper::isClassLoaded($reflector, $searchClassName)
+            ) {
+                $className = $searchClassName;
+            } elseif (
+                !str_starts_with(
+                    $searchClassName,
+                    '\\' . $reflectionClass->getNamespaceName()
+                )
+            ) {
+                $className = "{$reflectionClass->getNamespaceName()}{$searchClassName}";
+                if (!ParserHelper::isClassLoaded($reflector, $className)) {
+                    $className = $searchClassName;
+                }
+            } else {
+                $className = $searchClassName;
+            }
+
+            $parsedFullClassNameCache[$key] = $className;
+        }
+        return $parsedFullClassNameCache[$key];
+    }
 }
