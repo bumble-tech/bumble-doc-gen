@@ -16,6 +16,35 @@ use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
  */
 final class StrTypeToUrl
 {
+    private array $builtInTypes = [
+        'array',
+        'int',
+        'string',
+        'array',
+        'bool',
+        'boolean',
+        'null',
+        'mixed',
+        'void',
+        'self',
+        'static',
+        'false',
+        'true',
+        'float',
+        'callable',
+        '[]',
+    ];
+
+    private function isBuiltIn(string $type): bool
+    {
+        foreach ($this->builtInTypes as $builtInType) {
+            if (str_starts_with($type, $builtInType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * @param Context $context Render context
      */
@@ -39,7 +68,7 @@ final class StrTypeToUrl
         $configuration = $this->context->getConfiguration();
         $types = explode('|', $text);
         foreach ($types as $type) {
-            if (ParserHelper::isClassLoaded($reflector, $type)) {
+            if (!$this->isBuiltIn($type) && ParserHelper::isClassLoaded($reflector, $type)) {
                 $reflectionOfLink = $reflector->reflectClass($type);
                 $fullFileName = $reflectionOfLink->getFileName();
                 if ($fullFileName && str_starts_with($fullFileName, $configuration->getProjectRoot())) {
