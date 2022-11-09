@@ -83,7 +83,7 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>

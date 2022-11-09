@@ -25,7 +25,7 @@ Description of the `DrawDocumentationMenu </BumbleDocGen/Render/Twig/Function/Dr
 
 See:
 
-#. GetDocumentedClassUrl 
+#. `BumbleDocGen\\Render\\Twig\\Function\\GetDocumentedClassUrl </docs/3.render/4_twigCustomFunctions/_Classes/GetDocumentedClassUrl.rst>`_ 
 
 
 **Examples of using:**
@@ -126,7 +126,7 @@ Method details:
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
             <tr>

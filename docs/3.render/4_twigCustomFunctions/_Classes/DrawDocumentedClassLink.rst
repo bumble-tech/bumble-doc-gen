@@ -132,7 +132,7 @@ Method details:
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
             <tr>
@@ -173,7 +173,7 @@ ________
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='/docs/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
             <td>-</td>
         </tr>
             <tr>

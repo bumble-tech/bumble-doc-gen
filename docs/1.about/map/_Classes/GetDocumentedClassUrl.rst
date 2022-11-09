@@ -25,9 +25,9 @@ Description of the `GetDocumentedClassUrl </BumbleDocGen/Render/Twig/Function/Ge
 
 See:
 
-#. DocumentedEntityWrapper 
-#. DocumentedEntityWrappersCollection 
-#. `BumbleDocGen\\Render\\Context\\Context::\$entityWrappersCollection </BumbleDocGen/Render/Context/Context.php#L19>`_ 
+#. `BumbleDocGen\\Render\\Context\\DocumentedEntityWrapper </docs/1.about/map/_Classes/DocumentedEntityWrapper.rst>`_ 
+#. `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </docs/1.about/map/_Classes/DocumentedEntityWrappersCollection.rst>`_ 
+#. `\\Context::\$entityWrappersCollection </docs/1.about/map/_Classes/Context.rst#pentitywrapperscollection>`_ 
 
 
 **Examples of using:**
@@ -133,7 +133,7 @@ Method details:
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
         </tbody>

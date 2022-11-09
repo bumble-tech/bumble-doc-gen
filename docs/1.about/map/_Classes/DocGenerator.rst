@@ -86,7 +86,7 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -98,9 +98,9 @@ Method details:
 
 **Throws:**
 
-#. `Twig\\Error\\LoaderError </vendor/twig/twig/src/Error/LoaderError.php#L19>`_ 
-#. `Twig\\Error\\RuntimeError </vendor/twig/twig/src/Error/RuntimeError.php#L20>`_ 
-#. `Twig\\Error\\SyntaxError </vendor/twig/twig/src/Error/SyntaxError.php#L20>`_ 
+#. `\\Twig\\Error\\LoaderError </vendor/twig/twig/src/Error/LoaderError.php>`_ 
+#. `\\Twig\\Error\\RuntimeError </vendor/twig/twig/src/Error/RuntimeError.php>`_ 
+#. `\\Twig\\Error\\SyntaxError </vendor/twig/twig/src/Error/SyntaxError.php>`_ 
 
 ________
 

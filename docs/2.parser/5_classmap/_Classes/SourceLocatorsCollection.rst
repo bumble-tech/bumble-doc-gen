@@ -88,7 +88,7 @@ Method details:
 
 **Throws:**
 
-#. **Exception** - on failure.
+#. **\\Exception** - on failure.
 
 
 **See:**
@@ -122,14 +122,14 @@ ________
     <tbody>
             <tr>
             <td>$sourceLocators</td>
-            <td><a href='/docs/_Classes/SourceLocatorInterface.rst'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
+            <td><a href='/docs/2.parser/5_classmap/_Classes/SourceLocatorInterface.rst'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/_Classes/SourceLocatorsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/2\.parser/5_classmap/_Classes/SourceLocatorsCollection\.rst>`_
 
 ________
 
@@ -158,14 +158,14 @@ ________
     <tbody>
             <tr>
             <td>$sourceLocator</td>
-            <td><a href='/docs/_Classes/SourceLocatorInterface.rst'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
+            <td><a href='/docs/2.parser/5_classmap/_Classes/SourceLocatorInterface.rst'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/_Classes/SourceLocatorsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/2\.parser/5_classmap/_Classes/SourceLocatorsCollection\.rst>`_
 
 ________
 

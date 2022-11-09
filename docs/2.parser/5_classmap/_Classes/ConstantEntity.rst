@@ -97,7 +97,7 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/2.parser/5_classmap/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -117,7 +117,7 @@ Method details:
         </tr>
             <tr>
             <td>$attributeParser</td>
-            <td><a href='/docs/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
+            <td><a href='/docs/2.parser/5_classmap/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -129,7 +129,7 @@ Method details:
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntity </docs/_Classes/ConstantEntity\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntity </docs/2\.parser/5_classmap/_Classes/ConstantEntity\.rst>`_
 
 ________
 

@@ -77,7 +77,7 @@ Method details:
 
 **Throws:**
 
-#. **Exception** - on failure.
+#. **\\Exception** - on failure.
 
 
 **See:**

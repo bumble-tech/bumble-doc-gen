@@ -43,6 +43,7 @@ Methods:
 
   <ol>
                 <li><a href="#madd">add</a> </li>
+                <li><a href="#mget">get</a> </li>
         </ol>
 
 
@@ -89,7 +90,7 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -104,14 +105,14 @@ Method details:
         </tr>
             <tr>
             <td>$attributeParser</td>
-            <td><a href='/docs/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
+            <td><a href='/docs/1.about/map/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </docs/_Classes/ConstantEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </docs/1\.about/map/_Classes/ConstantEntityCollection\.rst>`_
 
 ________
 
@@ -140,7 +141,7 @@ ________
     <tbody>
             <tr>
             <td>$constantEntity</td>
-            <td><a href='/docs/_Classes/ConstantEntity.rst'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ConstantEntity.rst'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -152,7 +153,43 @@ ________
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </docs/_Classes/ConstantEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </docs/1\.about/map/_Classes/ConstantEntityCollection\.rst>`_
+
+________
+
+.. _mget:
+
+* `# <mget_>`_  ``get``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntityCollection.php#L47>`_
+.. code-block:: php
+
+        public function get(string $key): BumbleDocGen\Parser\Entity\PropertyEntity|null;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$key</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntity </docs/1\.about/map/_Classes/PropertyEntity\.rst>`_ | null
 
 ________
 

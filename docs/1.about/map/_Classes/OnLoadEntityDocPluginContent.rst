@@ -25,7 +25,7 @@ Description of the `OnLoadEntityDocPluginContent </BumbleDocGen/Plugin/Event/Ren
 
 See:
 
-#. LoadPluginsContent 
+#. `BumbleDocGen\\Render\\Twig\\Function\\LoadPluginsContent </docs/1.about/map/_Classes/LoadPluginsContent.rst>`_ 
 
 
 
@@ -107,7 +107,7 @@ Method details:
         </tr>
             <tr>
             <td>$classEntity</td>
-            <td><a href='/docs/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -117,7 +117,7 @@ Method details:
         </tr>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -141,7 +141,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </docs/_Classes/ClassEntity\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </docs/1\.about/map/_Classes/ClassEntity\.rst>`_
 
 ________
 
@@ -192,7 +192,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\Context\\Context </docs/_Classes/Context\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\Context\\Context </docs/1\.about/map/_Classes/Context\.rst>`_
 
 ________
 

@@ -99,7 +99,7 @@ Method details:
         </tr>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -176,7 +176,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\Context\\Context </docs/_Classes/Context\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\Context\\Context </docs/1\.about/map/_Classes/Context\.rst>`_
 
 ________
 

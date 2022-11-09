@@ -109,7 +109,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/_Classes/SourceLocatorsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/1\.about/map/_Classes/SourceLocatorsCollection\.rst>`_
 
 ________
 
@@ -232,14 +232,14 @@ ________
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='/docs/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/_Classes/ConditionInterface\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/1\.about/map/_Classes/ConditionInterface\.rst>`_
 
 ________
 
@@ -268,14 +268,14 @@ ________
     <tbody>
             <tr>
             <td>$constantEntity</td>
-            <td><a href='/docs/_Classes/ConstantEntity.rst'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ConstantEntity.rst'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/_Classes/ConditionInterface\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/1\.about/map/_Classes/ConditionInterface\.rst>`_
 
 ________
 
@@ -304,14 +304,14 @@ ________
     <tbody>
             <tr>
             <td>$methodEntity</td>
-            <td><a href='/docs/_Classes/MethodEntity.rst'>BumbleDocGen\Parser\Entity\MethodEntity</a></td>
+            <td><a href='/docs/1.about/map/_Classes/MethodEntity.rst'>BumbleDocGen\Parser\Entity\MethodEntity</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/_Classes/ConditionInterface\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/1\.about/map/_Classes/ConditionInterface\.rst>`_
 
 ________
 
@@ -340,14 +340,14 @@ ________
     <tbody>
             <tr>
             <td>$propertyEntity</td>
-            <td><a href='/docs/_Classes/PropertyEntity.rst'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
+            <td><a href='/docs/1.about/map/_Classes/PropertyEntity.rst'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/_Classes/ConditionInterface\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/1\.about/map/_Classes/ConditionInterface\.rst>`_
 
 ________
 
@@ -364,7 +364,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </docs/_Classes/PluginsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </docs/1\.about/map/_Classes/PluginsCollection\.rst>`_
 
 ________
 
@@ -381,7 +381,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </docs/_Classes/TemplateFillersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </docs/1\.about/map/_Classes/TemplateFillersCollection\.rst>`_
 
 ________
 
@@ -398,7 +398,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </docs/_Classes/EntityDocRendersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </docs/1\.about/map/_Classes/EntityDocRendersCollection\.rst>`_
 
 ________
 

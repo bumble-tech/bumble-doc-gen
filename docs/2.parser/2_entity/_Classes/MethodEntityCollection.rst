@@ -92,7 +92,7 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/2.parser/2_entity/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -102,19 +102,19 @@ Method details:
         </tr>
             <tr>
             <td>$classEntity</td>
-            <td><a href='/docs/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td><a href='/docs/2.parser/2_entity/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$attributeParser</td>
-            <td><a href='/docs/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
+            <td><a href='/docs/2.parser/2_entity/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/2\.parser/2_entity/_Classes/MethodEntityCollection\.rst>`_
 
 ________
 
@@ -143,7 +143,7 @@ ________
     <tbody>
             <tr>
             <td>$methodEntity</td>
-            <td><a href='/docs/_Classes/MethodEntityInterface.rst'>BumbleDocGen\Parser\Entity\MethodEntityInterface</a></td>
+            <td><a href='/docs/2.parser/2_entity/_Classes/MethodEntityInterface.rst'>BumbleDocGen\Parser\Entity\MethodEntityInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -155,7 +155,7 @@ ________
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/2\.parser/2_entity/_Classes/MethodEntityCollection\.rst>`_
 
 ________
 
@@ -191,7 +191,7 @@ ________
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntity </docs/_Classes/MethodEntity\.rst>`_ | null
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntity </docs/2\.parser/2_entity/_Classes/MethodEntity\.rst>`_ | null
 
 ________
 
@@ -208,7 +208,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/2\.parser/2_entity/_Classes/MethodEntityCollection\.rst>`_
 
 ________
 
@@ -225,7 +225,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/2\.parser/2_entity/_Classes/MethodEntityCollection\.rst>`_
 
 ________
 

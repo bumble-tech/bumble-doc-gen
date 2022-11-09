@@ -36,6 +36,7 @@ Directory layout ( only documented files shown ):
  │  │  ├──<b>EntityDocRender</b>/
  │  │  │  ├──<b>PhpClassToRst</b>/
  │  │  │  │  └── <a href='/docs/1.about/map/_Classes/PhpClassToRstDocRender.rst'>PhpClassToRstDocRender.php</a>
+ │  │  │  ├── <a href='/docs/1.about/map/_Classes/EntityDocRenderHelper.rst'>EntityDocRenderHelper.php</a>
  │  │  │  ├── <a href='/docs/1.about/map/_Classes/EntityDocRenderInterface.rst'>EntityDocRenderInterface.php</a>
  │  │  │  └── <a href='/docs/1.about/map/_Classes/EntityDocRendersCollection.rst'>EntityDocRendersCollection.php</a>
  │  │  ├──<b>Twig</b>/

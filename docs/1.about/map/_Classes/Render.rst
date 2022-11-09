@@ -25,8 +25,8 @@ Description of the `Render </BumbleDocGen/Render/Render.php>`_ class:
 
 See:
 
-#. `BumbleDocGen\\ConfigurationInterface::getTemplatesDir\(\) </BumbleDocGen/ConfigurationInterface.php#L37>`_ 
-#. `BumbleDocGen\\ConfigurationInterface::getOutputDir\(\) </BumbleDocGen/ConfigurationInterface.php#L42>`_ 
+#. `\\ConfigurationInterface::getTemplatesDir\(\) </docs/1.about/map/_Classes/ConfigurationInterface.rst#mgettemplatesdir>`_ 
+#. `\\ConfigurationInterface::getOutputDir\(\) </docs/1.about/map/_Classes/ConfigurationInterface.rst#mgetoutputdir>`_ 
 
 
 
@@ -98,17 +98,17 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$classEntityCollection</td>
-            <td><a href='/docs/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$pluginEventDispatcher</td>
-            <td><a href='/docs/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
+            <td><a href='/docs/1.about/map/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -140,9 +140,9 @@ ________
 
 **Throws:**
 
-#. `Twig\\Error\\LoaderError </vendor/twig/twig/src/Error/LoaderError.php#L19>`_ 
-#. `Twig\\Error\\RuntimeError </vendor/twig/twig/src/Error/RuntimeError.php#L20>`_ 
-#. `Twig\\Error\\SyntaxError </vendor/twig/twig/src/Error/SyntaxError.php#L20>`_ 
+#. `\\Twig\\Error\\LoaderError </vendor/twig/twig/src/Error/LoaderError.php>`_ 
+#. `\\Twig\\Error\\RuntimeError </vendor/twig/twig/src/Error/RuntimeError.php>`_ 
+#. `\\Twig\\Error\\SyntaxError </vendor/twig/twig/src/Error/SyntaxError.php>`_ 
 
 ________
 

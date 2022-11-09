@@ -99,22 +99,22 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$classEntityCollection</td>
-            <td><a href='/docs/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$breadcrumbsHelper</td>
-            <td><a href='/docs/_Classes/BreadcrumbsHelper.rst'>BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper</a></td>
+            <td><a href='/docs/1.about/map/_Classes/BreadcrumbsHelper.rst'>BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$pluginEventDispatcher</td>
-            <td><a href='/docs/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
+            <td><a href='/docs/1.about/map/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -214,7 +214,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\ConfigurationInterface </docs/_Classes/ConfigurationInterface\.rst>`_
+**Return value:** `BumbleDocGen\\ConfigurationInterface </docs/1\.about/map/_Classes/ConfigurationInterface\.rst>`_
 
 ________
 
@@ -231,7 +231,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </docs/_Classes/ClassEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </docs/1\.about/map/_Classes/ClassEntityCollection\.rst>`_
 
 ________
 
@@ -248,7 +248,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </docs/_Classes/DocumentedEntityWrappersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </docs/1\.about/map/_Classes/DocumentedEntityWrappersCollection\.rst>`_
 
 ________
 
@@ -265,7 +265,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\Breadcrumbs\\BreadcrumbsHelper </docs/_Classes/BreadcrumbsHelper\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\Breadcrumbs\\BreadcrumbsHelper </docs/1\.about/map/_Classes/BreadcrumbsHelper\.rst>`_
 
 ________
 
@@ -282,7 +282,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Plugin\\PluginEventDispatcher </docs/_Classes/PluginEventDispatcher\.rst>`_
+**Return value:** `BumbleDocGen\\Plugin\\PluginEventDispatcher </docs/1\.about/map/_Classes/PluginEventDispatcher\.rst>`_
 
 ________
 

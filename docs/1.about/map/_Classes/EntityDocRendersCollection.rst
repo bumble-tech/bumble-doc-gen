@@ -78,7 +78,7 @@ Method details:
 
 **Throws:**
 
-#. **Exception** - on failure.
+#. **\\Exception** - on failure.
 
 
 **See:**
@@ -112,14 +112,14 @@ ________
     <tbody>
             <tr>
             <td>$entityDocRender</td>
-            <td><a href='/docs/_Classes/EntityDocRenderInterface.rst'>BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/EntityDocRenderInterface.rst'>BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </docs/_Classes/EntityDocRendersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </docs/1\.about/map/_Classes/EntityDocRendersCollection\.rst>`_
 
 ________
 
@@ -148,14 +148,14 @@ ________
     <tbody>
             <tr>
             <td>$entityWrapper</td>
-            <td><a href='/docs/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='/docs/1.about/map/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRenderInterface </docs/_Classes/EntityDocRenderInterface\.rst>`_ | null
+**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRenderInterface </docs/1\.about/map/_Classes/EntityDocRenderInterface\.rst>`_ | null
 
 ________
 

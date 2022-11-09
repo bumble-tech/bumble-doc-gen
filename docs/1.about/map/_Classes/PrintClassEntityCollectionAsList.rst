@@ -102,7 +102,7 @@ Method details:
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -143,7 +143,7 @@ ________
     <tbody>
             <tr>
             <td>$classEntityCollection</td>
-            <td><a href='/docs/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
             <td>Processed entity collection</td>
         </tr>
             <tr>

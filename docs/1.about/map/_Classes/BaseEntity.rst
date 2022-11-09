@@ -73,7 +73,7 @@ Method details:
 
 .. _mgetreflection:
 
-* `# <mgetreflection_>`_  ``getReflection``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L28>`_
+* `# <mgetreflection_>`_  ``getReflection``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L30>`_
 .. code-block:: php
 
         public function getReflection(): Roave\BetterReflection\Reflection\Reflection;
@@ -90,7 +90,7 @@ ________
 
 .. _mgetimplementingreflectionclass:
 
-* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L30>`_
+* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L32>`_
 .. code-block:: php
 
         public function getImplementingReflectionClass(): Roave\BetterReflection\Reflection\ReflectionClass;
@@ -107,7 +107,7 @@ ________
 
 .. _mgetdescription:
 
-* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L36>`_
+* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L38>`_
 .. code-block:: php
 
         public function getDescription(): string;
@@ -124,7 +124,7 @@ ________
 
 .. _mgetattributeparser:
 
-* `# <mgetattributeparser_>`_  ``getAttributeParser``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L38>`_
+* `# <mgetattributeparser_>`_  ``getAttributeParser``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L40>`_
 .. code-block:: php
 
         public function getAttributeParser(): BumbleDocGen\Parser\AttributeParser;
@@ -135,13 +135,13 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\AttributeParser </docs/_Classes/AttributeParser\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\AttributeParser </docs/1\.about/map/_Classes/AttributeParser\.rst>`_
 
 ________
 
 .. _mgenerateobjectidbyreflection:
 
-* `# <mgenerateobjectidbyreflection_>`_  ``generateObjectIdByReflection``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L43>`_
+* `# <mgenerateobjectidbyreflection_>`_  ``generateObjectIdByReflection``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L45>`_
 .. code-block:: php
 
         public static function generateObjectIdByReflection(Roave\BetterReflection\Reflection\Reflection $reflection): string;
@@ -177,7 +177,7 @@ ________
 
 .. _mgetobjectid:
 
-* `# <mgetobjectid_>`_  ``getObjectId``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L51>`_
+* `# <mgetobjectid_>`_  ``getObjectId``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L53>`_
 .. code-block:: php
 
         public function getObjectId(): string;
@@ -194,7 +194,7 @@ ________
 
 .. _mgetdocblock:
 
-* `# <mgetdocblock_>`_  ``getDocBlock``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L72>`_
+* `# <mgetdocblock_>`_  ``getDocBlock``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L74>`_
 .. code-block:: php
 
         public function getDocBlock(): phpDocumentor\Reflection\DocBlock;
@@ -211,7 +211,7 @@ ________
 
 .. _misinternal:
 
-* `# <misinternal_>`_  ``isInternal``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L83>`_
+* `# <misinternal_>`_  ``isInternal``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L85>`_
 .. code-block:: php
 
         public function isInternal(): bool;
@@ -228,7 +228,7 @@ ________
 
 .. _misdeprecated:
 
-* `# <misdeprecated_>`_  ``isDeprecated``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L95>`_
+* `# <misdeprecated_>`_  ``isDeprecated``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L97>`_
 .. code-block:: php
 
         public function isDeprecated(): bool;
@@ -245,7 +245,7 @@ ________
 
 .. _mhasdescriptionlinks:
 
-* `# <mhasdescriptionlinks_>`_  ``hasDescriptionLinks``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L107>`_
+* `# <mhasdescriptionlinks_>`_  ``hasDescriptionLinks``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L109>`_
 .. code-block:: php
 
         public function hasDescriptionLinks(): bool;
@@ -262,15 +262,34 @@ ________
 
 .. _mgetdescriptionlinks:
 
-* `# <mgetdescriptionlinks_>`_  ``getDescriptionLinks``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L200>`_
+* `# <mgetdescriptionlinks_>`_  ``getDescriptionLinks``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L130>`_
 .. code-block:: php
 
-        public function getDescriptionLinks(): array;
+        public function getDescriptionLinks(BumbleDocGen\Render\Context\Context|null $context = NULL): array;
 
 
 
 
-**Parameters:** not specified
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$context</td>
+            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a> | null</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
 
 
 **Return value:** array
@@ -279,7 +298,7 @@ ________
 
 .. _mhasthrows:
 
-* `# <mhasthrows_>`_  ``hasThrows``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L274>`_
+* `# <mhasthrows_>`_  ``hasThrows``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L224>`_
 .. code-block:: php
 
         public function hasThrows(): bool;
@@ -296,15 +315,34 @@ ________
 
 .. _mgetthrows:
 
-* `# <mgetthrows_>`_  ``getThrows``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L282>`_
+* `# <mgetthrows_>`_  ``getThrows``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L233>`_
 .. code-block:: php
 
-        public function getThrows(): array;
+        public function getThrows(BumbleDocGen\Render\Context\Context|null $context = NULL): array;
 
 
 
 
-**Parameters:** not specified
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$context</td>
+            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a> | null</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
 
 
 **Return value:** array
@@ -313,7 +351,7 @@ ________
 
 .. _mhasexamples:
 
-* `# <mhasexamples_>`_  ``hasExamples``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L341>`_
+* `# <mhasexamples_>`_  ``hasExamples``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L281>`_
 .. code-block:: php
 
         public function hasExamples(): bool;
@@ -330,7 +368,7 @@ ________
 
 .. _mgetexamples:
 
-* `# <mgetexamples_>`_  ``getExamples``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L349>`_
+* `# <mgetexamples_>`_  ``getExamples``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L290>`_
 .. code-block:: php
 
         public function getExamples(): array;
@@ -347,7 +385,7 @@ ________
 
 .. _mgetfirstexample:
 
-* `# <mgetfirstexample_>`_  ``getFirstExample``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L368>`_
+* `# <mgetfirstexample_>`_  ``getFirstExample``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L309>`_
 .. code-block:: php
 
         public function getFirstExample(): string;
@@ -364,7 +402,7 @@ ________
 
 .. _mgetdocnote:
 
-* `# <mgetdocnote_>`_  ``getDocNote``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L374>`_
+* `# <mgetdocnote_>`_  ``getDocNote``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L315>`_
 .. code-block:: php
 
         public function getDocNote(): string;

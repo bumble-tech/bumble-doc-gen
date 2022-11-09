@@ -77,7 +77,7 @@ Method details:
 
 **Throws:**
 
-#. **Exception** - on failure.
+#. **\\Exception** - on failure.
 
 
 **See:**
@@ -111,14 +111,14 @@ ________
     <tbody>
             <tr>
             <td>$documentedClass</td>
-            <td><a href='/docs/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='/docs/3.render/6_classmap/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </docs/_Classes/DocumentedEntityWrappersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </docs/3\.render/6_classmap/_Classes/DocumentedEntityWrappersCollection\.rst>`_
 
 ________
 

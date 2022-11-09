@@ -25,7 +25,7 @@ Description of the `StrTypeToUrl </BumbleDocGen/Render/Twig/Filter/StrTypeToUrl.
 
 See:
 
-#. GetDocumentedClassUrl 
+#. `BumbleDocGen\\Render\\Twig\\Function\\GetDocumentedClassUrl </docs/3.render/3_twigCustomFilters/_Classes/GetDocumentedClassUrl.rst>`_ 
 
 
 
@@ -107,7 +107,7 @@ Method details:
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/docs/3.render/3_twigCustomFilters/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
         </tbody>

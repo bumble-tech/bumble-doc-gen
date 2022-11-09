@@ -43,6 +43,7 @@ Methods:
 
   <ol>
                 <li><a href="#madd">add</a> </li>
+                <li><a href="#mget">get</a> </li>
         </ol>
 
 
@@ -89,7 +90,7 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/2.parser/2_entity/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -104,14 +105,14 @@ Method details:
         </tr>
             <tr>
             <td>$attributeParser</td>
-            <td><a href='/docs/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
+            <td><a href='/docs/2.parser/2_entity/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </docs/_Classes/PropertyEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </docs/2\.parser/2_entity/_Classes/PropertyEntityCollection\.rst>`_
 
 ________
 
@@ -140,7 +141,7 @@ ________
     <tbody>
             <tr>
             <td>$propertyEntity</td>
-            <td><a href='/docs/_Classes/PropertyEntity.rst'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
+            <td><a href='/docs/2.parser/2_entity/_Classes/PropertyEntity.rst'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -152,7 +153,43 @@ ________
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </docs/_Classes/PropertyEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </docs/2\.parser/2_entity/_Classes/PropertyEntityCollection\.rst>`_
+
+________
+
+.. _mget:
+
+* `# <mget_>`_  ``get``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntityCollection.php#L47>`_
+.. code-block:: php
+
+        public function get(string $key): BumbleDocGen\Parser\Entity\PropertyEntity|null;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$key</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntity </docs/2\.parser/2_entity/_Classes/PropertyEntity\.rst>`_ | null
 
 ________
 

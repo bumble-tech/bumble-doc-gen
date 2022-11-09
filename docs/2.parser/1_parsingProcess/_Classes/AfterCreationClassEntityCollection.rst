@@ -92,7 +92,7 @@ Method details:
     <tbody>
             <tr>
             <td>$classEntityCollection</td>
-            <td><a href='/docs/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='/docs/2.parser/1_parsingProcess/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -116,7 +116,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </docs/_Classes/ClassEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </docs/2\.parser/1_parsingProcess/_Classes/ClassEntityCollection\.rst>`_
 
 ________
 

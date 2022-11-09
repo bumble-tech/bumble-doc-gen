@@ -239,7 +239,7 @@ ________
     <tbody>
             <tr>
             <td>$event</td>
-            <td><a href='/docs/_Classes/BeforeCreatingDocFile.rst'>BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile</a></td>
+            <td><a href='/docs/1.about/map/_Classes/BeforeCreatingDocFile.rst'>BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile</a></td>
             <td>-</td>
         </tr>
         </tbody>

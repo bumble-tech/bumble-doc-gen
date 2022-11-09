@@ -22,6 +22,7 @@
  │  │  ├──<b>EntityDocRender</b>/
  │  │  │  ├──<b>PhpClassToRst</b>/
  │  │  │  │  └── <a href='/docs/3.render/6_classmap/_Classes/PhpClassToRstDocRender.rst'>PhpClassToRstDocRender.php</a>
+ │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/EntityDocRenderHelper.rst'>EntityDocRenderHelper.php</a>
  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/EntityDocRenderInterface.rst'>EntityDocRenderInterface.php</a>
  │  │  │  └── <a href='/docs/3.render/6_classmap/_Classes/EntityDocRendersCollection.rst'>EntityDocRendersCollection.php</a>
  │  │  ├──<b>Twig</b>/

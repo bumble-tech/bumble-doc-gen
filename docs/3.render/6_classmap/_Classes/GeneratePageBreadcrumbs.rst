@@ -102,7 +102,7 @@ Method details:
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/docs/3.render/6_classmap/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
             <tr>

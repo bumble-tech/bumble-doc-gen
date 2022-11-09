@@ -83,7 +83,7 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L26>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L27>`_
 .. code-block:: php
 
         public function __construct(): mixed;
@@ -100,7 +100,7 @@ ________
 
 .. _misavailableforentity:
 
-* `# <misavailableforentity_>`_  ``isAvailableForEntity``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L34>`_
+* `# <misavailableforentity_>`_  ``isAvailableForEntity``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L35>`_
 .. code-block:: php
 
         public function isAvailableForEntity(BumbleDocGen\Render\Context\DocumentedEntityWrapper $entityWrapper): bool;
@@ -126,7 +126,7 @@ ________
     <tbody>
             <tr>
             <td>$entityWrapper</td>
-            <td><a href='/docs/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='/docs/3.render/6_classmap/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
             <td>The class whose documentation was requested</td>
         </tr>
         </tbody>
@@ -139,7 +139,7 @@ ________
 
 .. _msetcontext:
 
-* `# <msetcontext_>`_  ``setContext``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L39>`_
+* `# <msetcontext_>`_  ``setContext``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L40>`_
 .. code-block:: php
 
         public function setContext(BumbleDocGen\Render\Context\Context $context): void;
@@ -162,7 +162,7 @@ ________
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/docs/3.render/6_classmap/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -175,7 +175,7 @@ ________
 
 .. _mgetrenderedtext:
 
-* `# <mgetrenderedtext_>`_  ``getRenderedText``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L50>`_
+* `# <mgetrenderedtext_>`_  ``getRenderedText``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L52>`_
 .. code-block:: php
 
         public function getRenderedText(BumbleDocGen\Render\Context\DocumentedEntityWrapper $entityWrapper): string;
@@ -201,7 +201,7 @@ ________
     <tbody>
             <tr>
             <td>$entityWrapper</td>
-            <td><a href='/docs/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='/docs/3.render/6_classmap/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
             <td>The class whose documentation was requested</td>
         </tr>
         </tbody>

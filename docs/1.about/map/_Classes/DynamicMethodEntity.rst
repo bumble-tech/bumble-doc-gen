@@ -104,7 +104,7 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -126,7 +126,7 @@ Method details:
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\DynamicMethodEntity </docs/_Classes/DynamicMethodEntity\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\DynamicMethodEntity </docs/1\.about/map/_Classes/DynamicMethodEntity\.rst>`_
 
 ________
 

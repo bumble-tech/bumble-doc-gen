@@ -35,6 +35,7 @@ Methods:
   <ol>
                 <li><a href="#misclassloaded">isClassLoaded</a> </li>
                 <li><a href="#mgetuseslist">getUsesList</a> </li>
+                <li><a href="#mparsefullclassname">parseFullClassName</a> </li>
         </ol>
 
 
@@ -135,6 +136,57 @@ ________
 
 
 **Return value:** array
+
+________
+
+.. _mparsefullclassname:
+
+* `# <mparsefullclassname_>`_  ``parseFullClassName``   **|** `source code </BumbleDocGen/Parser/ParserHelper.php#L62>`_
+.. code-block:: php
+
+        public static function parseFullClassName(string $searchClassName, Roave\BetterReflection\Reflector\Reflector $reflector, Roave\BetterReflection\Reflection\ReflectionClass $reflectionClass, bool $extended = true): string;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$searchClassName</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reflector</td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reflectionClass</td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflection/ReflectionClass.php#L63'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$extended</td>
+            <td>bool</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** string
 
 ________
 

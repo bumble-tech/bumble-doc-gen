@@ -92,7 +92,7 @@ Method details:
     <tbody>
             <tr>
             <td>$propertyEntity</td>
-            <td><a href='/docs/_Classes/PropertyEntity.rst'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
+            <td><a href='/docs/2.parser/5_classmap/_Classes/PropertyEntity.rst'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
             <td>-</td>
         </tr>
             <tr>

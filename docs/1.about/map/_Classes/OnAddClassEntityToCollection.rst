@@ -93,12 +93,12 @@ Method details:
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='/docs/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$classEntityCollection</td>
-            <td><a href='/docs/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -122,7 +122,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </docs/_Classes/ClassEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </docs/1\.about/map/_Classes/ClassEntityCollection\.rst>`_
 
 ________
 
@@ -139,7 +139,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </docs/_Classes/ClassEntity\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </docs/1\.about/map/_Classes/ClassEntity\.rst>`_
 
 ________
 

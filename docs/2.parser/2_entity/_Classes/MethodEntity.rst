@@ -106,7 +106,7 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/2.parser/2_entity/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -126,7 +126,7 @@ Method details:
         </tr>
             <tr>
             <td>$attributeParser</td>
-            <td><a href='/docs/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
+            <td><a href='/docs/2.parser/2_entity/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -138,7 +138,7 @@ Method details:
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntity </docs/_Classes/MethodEntity\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntity </docs/2\.parser/2_entity/_Classes/MethodEntity\.rst>`_
 
 ________
 

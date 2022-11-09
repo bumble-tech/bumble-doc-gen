@@ -116,7 +116,7 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -131,7 +131,7 @@ Method details:
         </tr>
             <tr>
             <td>$attributeParser</td>
-            <td><a href='/docs/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
+            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -143,7 +143,7 @@ Method details:
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </docs/_Classes/ClassEntity\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </docs/3\.render/4_twigCustomFunctions/_Classes/ClassEntity\.rst>`_
 
 ________
 
@@ -562,7 +562,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </docs/_Classes/ConstantEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </docs/3\.render/4_twigCustomFunctions/_Classes/ConstantEntityCollection\.rst>`_
 
 ________
 
@@ -579,7 +579,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </docs/_Classes/PropertyEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </docs/3\.render/4_twigCustomFunctions/_Classes/PropertyEntityCollection\.rst>`_
 
 ________
 
@@ -596,7 +596,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/3\.render/4_twigCustomFunctions/_Classes/MethodEntityCollection\.rst>`_
 
 ________
 

@@ -87,7 +87,7 @@ Method details:
 
 **Throws:**
 
-#. **Exception** - on failure.
+#. **\\Exception** - on failure.
 
 
 **See:**
@@ -121,14 +121,14 @@ ________
     <tbody>
             <tr>
             <td>$plugins</td>
-            <td><a href='/docs/_Classes/PluginInterface.rst'>BumbleDocGen\Plugin\PluginInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/PluginInterface.rst'>BumbleDocGen\Plugin\PluginInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </docs/_Classes/PluginsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </docs/1\.about/map/_Classes/PluginsCollection\.rst>`_
 
 ________
 
@@ -157,14 +157,14 @@ ________
     <tbody>
             <tr>
             <td>$plugin</td>
-            <td><a href='/docs/_Classes/PluginInterface.rst'>BumbleDocGen\Plugin\PluginInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/PluginInterface.rst'>BumbleDocGen\Plugin\PluginInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </docs/_Classes/PluginsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </docs/1\.about/map/_Classes/PluginsCollection\.rst>`_
 
 ________
 
@@ -200,7 +200,7 @@ ________
     </table>
 
 
-**Return value:** `BumbleDocGen\\Plugin\\PluginInterface </docs/_Classes/PluginInterface\.rst>`_ | null
+**Return value:** `BumbleDocGen\\Plugin\\PluginInterface </docs/1\.about/map/_Classes/PluginInterface\.rst>`_ | null
 
 ________
 

@@ -93,19 +93,19 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/docs/1.about/map/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$pluginEventDispatcher</td>
-            <td><a href='/docs/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
+            <td><a href='/docs/1.about/map/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\ProjectParser </docs/_Classes/ProjectParser\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\ProjectParser </docs/1\.about/map/_Classes/ProjectParser\.rst>`_
 
 ________
 
@@ -122,7 +122,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </docs/_Classes/ClassEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </docs/1\.about/map/_Classes/ClassEntityCollection\.rst>`_
 
 ________
 

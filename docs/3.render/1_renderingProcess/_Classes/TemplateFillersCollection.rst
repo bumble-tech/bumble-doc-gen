@@ -89,14 +89,14 @@ Method details:
         </tr>
             <tr>
             <td>$templateFillers</td>
-            <td><a href='/docs/_Classes/TemplateFillerInterface.rst'>BumbleDocGen\Render\TemplateFiller\TemplateFillerInterface</a></td>
+            <td><a href='/docs/3.render/1_renderingProcess/_Classes/TemplateFillerInterface.rst'>BumbleDocGen\Render\TemplateFiller\TemplateFillerInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </docs/_Classes/TemplateFillersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </docs/3\.render/1_renderingProcess/_Classes/TemplateFillersCollection\.rst>`_
 
 ________
 
