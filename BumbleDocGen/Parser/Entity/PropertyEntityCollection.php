@@ -43,4 +43,9 @@ final class PropertyEntityCollection extends BaseEntityCollection
         }
         return $this;
     }
+
+    public function get(string $key): ?PropertyEntity
+    {
+        return $this->entities[$key] ?? null;
+    }
 }
