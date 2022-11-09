@@ -72,18 +72,11 @@ final class Render
 
         $breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
         $context = new Context(
-            $this->configuration,
-            $this->classEntityCollection,
-            $breadcrumbsHelper,
-            $this->pluginEventDispatcher
+            $this->configuration, $this->classEntityCollection, $breadcrumbsHelper, $this->pluginEventDispatcher
         );
         $twig->addExtension(new MainExtension($context));
 
-        $finder = Finder::create()
-            ->in($templateFolder)
-            ->ignoreDotFiles(true)
-            ->ignoreVCSIgnored(true)
-            ->files();
+        $finder = Finder::create()->in($templateFolder)->ignoreDotFiles(true)->ignoreVCSIgnored(true)->files();
 
         $logger = $this->configuration->getLogger();
         $outputDir = $this->configuration->getOutputDir();
@@ -134,6 +127,7 @@ final class Render
                 continue;
             }
 
+            $context->setCurrentTemplateFilePatch($entityWrapper->getInitiatorFilePath());
             $docRender->setContext($context);
 
             $content = $docRender->getRenderedText($entityWrapper);
