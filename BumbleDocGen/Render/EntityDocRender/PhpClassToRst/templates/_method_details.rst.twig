@@ -62,7 +62,7 @@
 
 **Throws:**
 
-{% for throw in methodEntity.getThrows() %}
+{% for throw in methodEntity.getThrows(renderContext) %}
 #. {% if throw.url %}`{{ throw.name|quotemeta }} <{{ throw.url }}>`_{% else %}**{{ throw.name|quotemeta }}**{% endif %} {% if throw.description %}- {{ throw.description|removeLineBrakes }}{% endif %}
 
 {% endfor %}
@@ -72,7 +72,7 @@
 
 **See:**
 
-{% for link in methodEntity.getDescriptionLinks() %}
+{% for link in methodEntity.getDescriptionLinks(renderContext) %}
 #. {% if link.url %}`{{ link.name|quotemeta }} <{{ link.url }}>`_{% else %}**{{ link.name|quotemeta }}**{% endif %} {% if link.description %}- {{ link.description|quotemeta|removeLineBrakes }}{% endif %}
 
 {% endfor %}

@@ -22,6 +22,7 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
     public const BLOCK_BEFORE_DETAILS = 'before_details';
 
     private Environment $twig;
+    private ?Context $context = null;
 
     public function __construct()
     {
@@ -45,6 +46,7 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
         } else {
             $mainExtension->changeContext($context);
         }
+        $this->context = $context;
     }
 
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string
@@ -52,6 +54,7 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
         return $this->twig->render('class.rst.twig', [
             'classEntity' => $entityWrapper->getDocumentTransformableEntity(),
             'generationInitiatorFilePath' => $entityWrapper->getInitiatorFilePath(),
+            'renderContext' => $this->context,
         ]);
     }
 }

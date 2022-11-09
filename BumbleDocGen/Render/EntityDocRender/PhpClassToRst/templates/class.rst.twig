@@ -1,12 +1,12 @@
 {{ generatePageBreadcrumbs(classEntity.getShortName(), generationInitiatorFilePath, false) }}
 
-{% include '_classHeader.rst.twig' with {'classEntity': classEntity} only %}
+{% include '_classHeader.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 
 
 {{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToRst\\PhpClassToRstDocRender::BLOCK_AFTER_HEADER')) }}
 
 
-{% include '_classMainInfo.rst.twig' with {'classEntity': classEntity} only %}
+{% include '_classMainInfo.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 
 
 {{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToRst\\PhpClassToRstDocRender::BLOCK_AFTER_MAIN_INFO')) }}
@@ -15,7 +15,7 @@
 Cases:
 -----------------------
 
-{% include '_enumCases.rst.twig' with {'classEntity': classEntity} only %}
+{% include '_enumCases.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 {% endif %}
 
 {% if not classEntity.getMethodEntityCollection().getInitializations().isEmpty() %}
@@ -23,7 +23,7 @@ Initialization methods:
 -----------------------
 
 
-{% include '_methods.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection().getInitializations()} only %}
+{% include '_methods.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection().getInitializations(), 'renderContext': renderContext} only %}
 {% endif %}
 
 
@@ -32,7 +32,7 @@ Methods:
 -----------------------
 
 
-{% include '_methods.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection().getAllExceptInitializations()} only %}
+{% include '_methods.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection().getAllExceptInitializations(), 'renderContext': renderContext} only %}
 {% endif %}
 
 
@@ -41,7 +41,7 @@ Traits:
 -----------------------
 
 
-{% include '_traits.rst.twig' with {'classEntity': classEntity} only %}
+{% include '_traits.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 {% endif %}
 
 
@@ -50,7 +50,7 @@ Constants:
 -----------------------
 
 
-{% include '_constants.rst.twig' with {'classEntity': classEntity} only %}
+{% include '_constants.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 {% endif %}
 
 
@@ -59,7 +59,7 @@ Properties:
 -----------------------
 
 
-{% include '_properties.rst.twig' with {'classEntity': classEntity} only %}
+{% include '_properties.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 {% endif %}
 
 
@@ -74,7 +74,7 @@ Property details:
 -----------------------
 
 
-{% include '_property_details.rst.twig' with {'classEntity': classEntity} only %}
+{% include '_property_details.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 {% endif %}
 
 
@@ -83,8 +83,8 @@ Method details:
 -----------------------
 
 
-{% include '_method_details.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection()} only %}
+{% include '_method_details.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection(), 'renderContext': renderContext} only %}
 {% endif %}
 
 
-{% include '_classFooter.rst.twig' with {'classEntity': classEntity} only %}
+{% include '_classFooter.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}

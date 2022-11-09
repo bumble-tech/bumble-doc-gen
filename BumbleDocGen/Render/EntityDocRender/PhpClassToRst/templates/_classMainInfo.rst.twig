@@ -19,7 +19,7 @@
 
 See:
 
-{% for link in classEntity.getDescriptionLinks() %}
+{% for link in classEntity.getDescriptionLinks(renderContext) %}
 #. {% if link.url %}`{{ link.name|quotemeta }} <{{ link.url }}>`_{% else %}{{ link.name|quotemeta }}{% endif %} {% if link.description %}- {{ link.description|removeLineBrakes }}{% endif %}
 
 {% endfor %}
