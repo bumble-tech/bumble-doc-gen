@@ -7,6 +7,8 @@ namespace BumbleDocGen\Parser\Entity;
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
 use BumbleDocGen\Parser\ParserHelper;
+use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\Reflection;
@@ -109,104 +111,33 @@ abstract class BaseEntity
         return count($this->getDescriptionLinks()) > 0;
     }
 
-    private function getClassLinkUrlFromString(string $link, string &$name): ?string
+    private function getDocCommentImplementingClass(): ReflectionClass
     {
-        $name = $link;
-        try {
-            $link = str_replace(['(', ')', '$'], '', ltrim($link, '\\'));
-            if (str_contains($link, '->')) {
-                $nameParts = explode('->', $link);
-            } else {
-                $nameParts = explode('::', $link);
-            }
-
-            $implementingReflectionClass = $this->getImplementingReflectionClass();
-            $getReflectionOfLink = function (
-                ReflectionClass $reflectionClass,
-                string $linkName
-            ) use (&$name): ?Reflection {
-                $reflectionOfLink = null;
-                if ($reflectionClass->hasMethod($linkName)) {
-                    $reflectionOfLink = $reflectionClass->getMethod($linkName);
-                    $name = "{$reflectionClass->getName()}::{$reflectionOfLink->getName()}()";
-                } elseif ($reflectionClass->hasProperty($linkName)) {
-                    $reflectionOfLink = $reflectionClass->getProperty($linkName);
-                    $name = "{$reflectionClass->getName()}::\${$reflectionOfLink->getName()}";
-                } elseif ($reflectionClass->hasConstant($linkName)) {
-                    $reflectionOfLink = $reflectionClass->getReflectionConstant($linkName);
-                    $name = "{$reflectionClass->getName()}::{$reflectionOfLink->getName()}";
-                } elseif (ParserHelper::isClassLoaded($this->reflector, $linkName)) {
-                    $reflectionOfLink = $this->reflector->reflectClass($linkName);
-                    $name = $linkName;
-                }
-                return $reflectionOfLink;
-            };
-
-            if (!isset($nameParts[1])) {
-                $reflectionOfLink = $getReflectionOfLink($implementingReflectionClass, $nameParts[0]);
-            } else {
-                $className = str_replace(
-                    ['self', 'static', 'this'],
-                    $implementingReflectionClass->getShortName(),
-                    $nameParts[0]
-                );
-
-                if (!str_contains($className, '\\')) {
-                    $uses = ParserHelper::getUsesList($implementingReflectionClass);
-                    if (isset($uses[$className])) {
-                        $className = $uses[$className];
-                    } else {
-                        $newClassName = "{$implementingReflectionClass->getNamespaceName()}\\{$className}";
-                        if (ParserHelper::isClassLoaded($this->reflector, $newClassName)) {
-                            $className = $newClassName;
-                        }
-                    }
-                }
-
-                if (!ParserHelper::isClassLoaded($this->reflector, $className)) {
-                    throw new \Exception("\"\\{$className}\" could not be found in the located source");
-                }
-                $linkClassReflection = $this->reflector->reflectClass($className);
-                $reflectionOfLink = $getReflectionOfLink($linkClassReflection, $nameParts[1]);
-            }
-
-            if ($reflectionOfLink) {
-                if (method_exists($reflectionOfLink, 'getDeclaringClass')) {
-                    $fullFileName = $reflectionOfLink->getDeclaringClass()->getFileName();
-                } elseif (method_exists($reflectionOfLink, 'getFileName')) {
-                    $fullFileName = $reflectionOfLink->getFileName();
-                } else {
-                    return null;
-                }
-                if (!$fullFileName || !str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
-                    return null;
-                }
-                $fileName = str_replace(
-                    $this->configuration->getProjectRoot(),
-                    '',
-                    $fullFileName
-                );
-                return "{$fileName}#L{$reflectionOfLink->getStartLine()}";
-            }
-        } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
+        $implementingReflection = $this->getDocCommentReflectionRecursive();
+        if (method_exists($implementingReflection, 'getImplementingClass')) {
+            $implementingReflectionClass = $implementingReflection->getImplementingClass();
+        } else {
+            $implementingReflectionClass = $implementingReflection;
         }
-        return null;
+        return $implementingReflectionClass;
     }
 
     /**
      * @return array<int,array{name:string, description:string|null, url:string|null}>
      */
-    public function getDescriptionLinks(): array
+    public function getDescriptionLinks(?Context $context = null): array
     {
         static $linksCache = [];
-        $objectId = $this->getObjectId();
+        $objectId = $this->getObjectId() .
+            ($context ? spl_object_id($context) . $context->getCurrentTemplateFilePatch() : '');
         if (!isset($linksCache[$objectId])) {
             $links = [];
             $docBlock = $this->getDocBlock();
             $getLinkKey = function (?string $url, ?string $name): string {
                 return md5($url . $name);
             };
+
+            $docCommentImplementingClass = $this->getDocCommentImplementingClass();
             foreach ($docBlock->getTagsByName('see') as $seeBlock) {
                 try {
                     $name = (string)$seeBlock->getReference();
@@ -214,11 +145,19 @@ abstract class BaseEntity
                     $url = null;
                     if (filter_var($name, FILTER_VALIDATE_URL)) {
                         $url = $name;
-                    } elseif (str_starts_with($name, '\\')) {
-                        $name = ltrim($name, '\\');
-                        $newName = '';
-                        $url = $this->getClassLinkUrlFromString($name, $newName);
-                        $name = $newName;
+                    } elseif (str_starts_with($name, '\\') && $context) {
+                        $className = ParserHelper::parseFullClassName(
+                            $name,
+                            $this->reflector,
+                            $docCommentImplementingClass
+                        );
+                        $data = EntityDocRenderHelper::getEntityUrlData(
+                            $className,
+                            $context,
+                            $this->getImplementingReflectionClass()->getName()
+                        );
+                        $url = $data['url'];
+                        $name = $data['title'];
                     }
                     $key = $getLinkKey($url, $name);
                     $links[$key] = [
@@ -234,13 +173,22 @@ abstract class BaseEntity
             $description = $this->getDescription();
             if (preg_match_all('/(\@see )(.*?)( |}|])/', $description . ' ', $matches)) {
                 foreach ($matches[2] as $name) {
+                    $url = null;
                     if (filter_var($name, FILTER_VALIDATE_URL)) {
                         $url = $name;
-                    } else {
-                        $name = ltrim($name, '\\');
-                        $newName = '';
-                        $url = $this->getClassLinkUrlFromString($name, $newName);
-                        $name = $newName;
+                    } elseif ($context) {
+                        $className = ParserHelper::parseFullClassName(
+                            $name,
+                            $this->reflector,
+                            $docCommentImplementingClass
+                        );
+                        $data = EntityDocRenderHelper::getEntityUrlData(
+                            $className,
+                            $context,
+                            $this->getImplementingReflectionClass()->getName()
+                        );
+                        $url = $data['url'];
+                        $name = $data['title'];
                     }
                     $key = $getLinkKey($url, $name);
                     $links[$key] = [
@@ -279,48 +227,35 @@ abstract class BaseEntity
     /**
      * @return array<int,array{name:string, description:string|null}>
      */
-    public function getThrows(): array
+    public function getThrows(?Context $context = null): array
     {
         static $throwsCache = [];
-        $objectId = $this->getObjectId();
+        $objectId = $this->getObjectId() .
+            ($context ? spl_object_id($context) . $context->getCurrentTemplateFilePatch() : '');
         if (!isset($throwsCache[$objectId])) {
             $throws = [];
             try {
-                $implementingReflection = $this->getDocCommentReflectionRecursive();
-                if (method_exists($implementingReflection, 'getImplementingClass')) {
-                    $implementingReflectionClass = $implementingReflection->getImplementingClass();
-                } else {
-                    $implementingReflectionClass = $implementingReflection;
-                }
-                $uses = ParserHelper::getUsesList($implementingReflectionClass);
+                $implementingReflectionClass = $this->getDocCommentImplementingClass();
                 $docBlock = $this->getDocBlock();
                 foreach ($docBlock->getTagsByName('throws') as $throwBlock) {
                     try {
                         $names = explode('|', (string)$throwBlock->getType());
                         foreach ($names as $name) {
-                            $trimmedName = ltrim($name, '\\');
-                            if (isset($uses[$trimmedName])) {
-                                $className = $uses[$trimmedName];
-                            } elseif (isset($uses[$name])) {
-                                $className = $uses[$name];
-                            } elseif (
-                                str_contains($name, '\\') && ParserHelper::isClassLoaded($this->reflector, $name)
-                            ) {
-                                $className = $name;
-                            } elseif (
-                                !str_starts_with(
-                                    $name,
-                                    '\\' . $implementingReflectionClass->getNamespaceName()
-                                )
-                            ) {
-                                $className = "{$implementingReflectionClass->getNamespaceName()}{$name}";
-                                if (!ParserHelper::isClassLoaded($this->reflector, $className)) {
-                                    $className = $name;
-                                }
-                            } else {
-                                $className = $name;
+                            $className = ParserHelper::parseFullClassName(
+                                $name,
+                                $this->reflector,
+                                $implementingReflectionClass
+                            );
+                            $url = null;
+                            if ($context) {
+                                $data = EntityDocRenderHelper::getEntityUrlData(
+                                    $className,
+                                    $context,
+                                    $this->getImplementingReflectionClass()->getName()
+                                );
+                                $url = $data['url'];
+                                $name = $data['title'];
                             }
-                            $url = $this->getClassLinkUrlFromString($className, $name);
 
                             $throws[] = [
                                 'name' => $name,
