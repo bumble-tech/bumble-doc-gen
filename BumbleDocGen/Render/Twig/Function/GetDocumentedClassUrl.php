@@ -61,10 +61,14 @@ final class GetDocumentedClassUrl
             } else {
                 $configuration = $this->context->getConfiguration();
                 $reflection = $reflector->reflectClass($className);
-                $url = str_replace($configuration->getProjectRoot(), '', $reflection->getFileName());
+                $url = $reflection->getFileName() ? str_replace(
+                    $configuration->getProjectRoot(),
+                    '',
+                    $reflection->getFileName()
+                ) : '';
             }
 
-            if ($cursor) {
+            if ($url && $cursor) {
                 $prepareSourceLink = new PrepareSourceLink();
                 return "{$url}#{$prepareSourceLink($cursor)}";
             }
