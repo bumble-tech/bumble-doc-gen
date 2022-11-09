@@ -15,8 +15,11 @@ final class EntityDocRenderHelper
     public const CLASS_ENTITY_FULL_LINK_OPTION = 'full_form';
     public const CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION = 'only_cursor';
 
-    public static function getEntityUrlData(string $linkString, Context $context): array
-    {
+    public static function getEntityUrlData(
+        string $linkString,
+        Context $context,
+        ?string $defaultEntityClassName = null
+    ): array {
         static $pageLinksCache = [];
 
         $classEntityCollection = $context->getClassEntityCollection();
@@ -46,9 +49,33 @@ final class EntityDocRenderHelper
         } else {
             $classData = explode('::', $linkString);
         }
-        $className = $classData[0];
+        $className = ltrim($classData[0], '\\');
 
-        $entity = $pageLinks[$className] ?? $pageLinks["\\$className"] ?? null;
+        $entity = $pageLinks[$className] ?? null;
+
+        $needToUseDefaultEntity = !$entity || in_array($classData[0], [
+                'self',
+                'static',
+                'parent',
+                '$this',
+                'this',
+            ]) || !isset($classData[1]);
+
+        if (
+            $needToUseDefaultEntity && $defaultEntityClassName &&
+            $defaultEntity = $classEntityCollection->getEntityByClassName($defaultEntityClassName)
+        ) {
+            $cursorTmpName = str_replace(['$', '(', ')'], '', $className);
+            if (
+                $defaultEntity->getReflection()->hasMethod($cursorTmpName) ||
+                $defaultEntity->getReflection()->hasProperty($cursorTmpName) ||
+                $defaultEntity->getReflection()->hasConstant($cursorTmpName)
+            ) {
+                $classData[1] = $cursorTmpName;
+                $entity = $defaultEntity;
+            }
+        }
+
         if (!$entity) {
             try {
                 $reflector = $context->getClassEntityCollection()->getReflector();
@@ -62,6 +89,7 @@ final class EntityDocRenderHelper
                     $reflectionClass,
                     $attributeParser
                 );
+                $entity->loadClassMembers();
             } catch (\Exception) {
             }
         }
@@ -69,15 +97,16 @@ final class EntityDocRenderHelper
         if ($entity) {
             $cursor = '';
             if (isset($classData[1])) {
-                if (str_ends_with($classData[1], '()')) {
+                $cursorTarget = str_replace(['$', '(', ')'], '', $classData[1]);
+                if (
+                    str_ends_with($classData[1], '()') || $entity->getReflection()->hasMethod($cursorTarget)
+                ) {
                     $cursor = 'm' . str_replace('()', '', $classData[1]);
-                } elseif (str_starts_with($classData[1], '$')) {
+                } elseif (
+                    str_starts_with($classData[1], '$') || $entity->getReflection()->hasProperty($classData[1])
+                ) {
                     $cursor = 'p' . str_replace('$', '', $classData[1]);
-                } elseif ($entity->getMethodEntityCollection()->get($classData[1])) {
-                    $cursor = 'm' . $classData[1];
-                } elseif ($entity->getPropertyEntityCollection()->get($classData[1])) {
-                    $cursor = 'p' . $classData[1];
-                } else {
+                } elseif ($entity->getReflection()->hasConstant($classData[1])) {
                     $cursor = 'q' . $classData[1];
                 }
             }
@@ -100,7 +129,7 @@ final class EntityDocRenderHelper
         }
         return [
             'url' => null,
-            'title' => $className,
+            'title' => $linkString,
         ];
     }
 }
