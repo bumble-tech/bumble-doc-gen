@@ -298,8 +298,10 @@ abstract class BaseEntity
                     try {
                         $names = explode('|', (string)$throwBlock->getType());
                         foreach ($names as $name) {
-                            $name = ltrim($name, '\\');
-                            if (isset($uses[$name])) {
+                            $trimmedName = ltrim($name, '\\');
+                            if (isset($uses[$trimmedName])) {
+                                $className = $uses[$trimmedName];
+                            } elseif (isset($uses[$name])) {
                                 $className = $uses[$name];
                             } elseif (
                                 str_contains($name, '\\') && ParserHelper::isClassLoaded($this->reflector, $name)
