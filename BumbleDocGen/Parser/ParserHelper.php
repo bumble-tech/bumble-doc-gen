@@ -9,8 +9,54 @@ use Roave\BetterReflection\Reflector\Reflector;
 
 final class ParserHelper
 {
+    private static array $builtInTypes = [
+        'array',
+        'int',
+        'string',
+        'array',
+        'bool',
+        'boolean',
+        'null',
+        'mixed',
+        'void',
+        'self',
+        'static',
+        'false',
+        'true',
+        'float',
+        'callable',
+        '[]',
+    ];
+
+    public static function getBuiltInClassNames(): array
+    {
+        static $classNames = [];
+        if (!$classNames) {
+            foreach (get_declared_classes() as $className) {
+                if (str_starts_with(ltrim($className, '\\'), 'Composer')) {
+                    break;
+                }
+                $classNames[] = $className;
+            }
+        }
+        return $classNames;
+    }
+
+    public static function isBuiltInType(string $name): bool
+    {
+        foreach (self::$builtInTypes as $builtInType) {
+            if (str_starts_with($name, $builtInType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static function isClassLoaded(Reflector $reflector, string $className): bool
     {
+        if (self::isBuiltInType($className) || in_array($className, self::getBuiltInClassNames())) {
+            return false;
+        }
         try {
             $reflector->reflectClass($className);
             return true;
@@ -66,6 +112,9 @@ final class ParserHelper
         bool $extended = true
     ): string {
         static $parsedFullClassNameCache = [];
+        $classNameParts = explode('::', $searchClassName);
+        $searchClassName = $classNameParts[0];
+
         $key = $reflectionClass->getName() . $searchClassName;
         if (!isset($parsedFullClassNameCache[$key])) {
             $trimmedName = ltrim($searchClassName, '\\');
@@ -94,6 +143,11 @@ final class ParserHelper
 
             $parsedFullClassNameCache[$key] = $className;
         }
-        return $parsedFullClassNameCache[$key];
+
+        $className = $parsedFullClassNameCache[$key];
+        if (isset($classNameParts[1])) {
+            $className = "{$className}::$classNameParts[1]";
+        }
+        return $className;
     }
 }
