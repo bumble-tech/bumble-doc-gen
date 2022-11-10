@@ -63,7 +63,7 @@ final class EntityDocRenderHelper
             ]) || !isset($classData[1]);
 
         if (
-            $needToUseDefaultEntity && $defaultEntityClassName &&
+            !$entity && $needToUseDefaultEntity && $defaultEntityClassName &&
             $defaultEntity = $classEntityCollection->getEntityByClassName($defaultEntityClassName)
         ) {
             $cursorTmpName = str_replace(['$', '(', ')'], '', $className);
