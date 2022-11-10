@@ -13,9 +13,10 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate
     public function getIterator(): \Generator
     {
         $i = 0;
-        while (count($this->iteratorKeys) !== ++$i) {
+        while (count($this->iteratorKeys) !== $i) {
             $iteratorKey = $this->iteratorKeys[$i];
             yield $this->documentedClasses[$iteratorKey];
+            ++$i;
         }
     }
 
