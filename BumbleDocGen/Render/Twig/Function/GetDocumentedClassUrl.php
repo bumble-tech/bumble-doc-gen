@@ -44,19 +44,14 @@ final class GetDocumentedClassUrl
      */
     public function __invoke(string $className, string $cursor = ''): string
     {
-        if (str_starts_with($className, '\\')) {
-            $className = ltrim($className, '\\');
-        }
         $reflector = $this->context->getReflector();
         if (ParserHelper::isClassLoaded($reflector, $className)) {
-            $classEntityCollection = $this->context->getClassEntityCollection();
-            $entityWrappersCollection = $this->context->getEntityWrappersCollection();
-            $classEntity = $classEntityCollection->get($className);
+            $classEntity = $this->context->getClassEntityCollection()->getEntityByClassName($className);
             if (!is_null($classEntity)) {
                 $documentedClass = new DocumentedEntityWrapper(
                     $classEntity, $this->context->getCurrentTemplateFilePatch()
                 );
-                $entityWrappersCollection->add($documentedClass);
+                $this->context->getEntityWrappersCollection()->add($documentedClass);
                 $url = $this->context->getConfiguration()->getOutputDirBaseUrl() . $documentedClass->getDocUrl();
             } else {
                 $configuration = $this->context->getConfiguration();
