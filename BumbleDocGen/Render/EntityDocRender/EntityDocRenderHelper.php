@@ -6,6 +6,7 @@ namespace BumbleDocGen\Render\EntityDocRender;
 
 use BumbleDocGen\Parser\AttributeParser;
 use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 
@@ -76,22 +77,19 @@ final class EntityDocRenderHelper
             }
         }
 
-        if (!$entity) {
-            try {
-                $reflector = $context->getClassEntityCollection()->getReflector();
-                $reflectionClass = $reflector->reflectClass($className);
-                $attributeParser = new AttributeParser(
-                    $reflector, $context->getClassEntityCollection()->getLogger()
-                );
-                $entity = ClassEntity::create(
-                    $context->getConfiguration(),
-                    $reflector,
-                    $reflectionClass,
-                    $attributeParser
-                );
-                $entity->loadClassMembers();
-            } catch (\Exception) {
-            }
+        $reflector = $context->getClassEntityCollection()->getReflector();
+        if (!$entity && ParserHelper::isClassLoaded($reflector, $className)) {
+            $reflectionClass = $reflector->reflectClass($className);
+            $attributeParser = new AttributeParser(
+                $reflector, $context->getClassEntityCollection()->getLogger()
+            );
+            $entity = ClassEntity::create(
+                $context->getConfiguration(),
+                $reflector,
+                $reflectionClass,
+                $attributeParser
+            );
+            $entity->loadClassMembers();
         }
 
         if ($entity) {
