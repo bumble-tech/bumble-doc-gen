@@ -52,15 +52,33 @@ final class ParserHelper
         return false;
     }
 
+    private static function checkIsClassName(string $name): bool
+    {
+        if (
+            !(bool)preg_match(
+                '/^(?=_*[A-z]+)[A-z0-9]+$/',
+                $name
+            )
+        ) {
+            return false;
+        }
+
+        $name = explode('\\', $name);
+        $name = end($name);
+        $chr = mb_substr($name, 0, 1, "UTF-8");
+        return mb_strtolower($chr, "UTF-8") != $chr;
+    }
+
     public static function isClassLoaded(Reflector $reflector, string $className): bool
     {
         if (self::isBuiltInType($className) || in_array($className, self::getBuiltInClassNames())) {
             return false;
-        }
-        try {
-            $reflector->reflectClass($className);
-            return true;
-        } catch (\Exception) {
+        } elseif (self::checkIsClassName($className)) {
+            try {
+                $reflector->reflectClass($className);
+                return true;
+            } catch (\Exception) {
+            }
         }
 
         return false;
