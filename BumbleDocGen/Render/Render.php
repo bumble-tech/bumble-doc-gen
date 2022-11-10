@@ -117,13 +117,6 @@ final class Render
             $logger->info("Saving `{$filePatch}`");
         }
 
-        // tmp hack
-        foreach ($context->getEntityWrappersCollection() as $entityWrapper) {
-            $context->setCurrentTemplateFilePatch($entityWrapper->getInitiatorFilePath());
-            $entityWrapper->getDocumentTransformableEntity()->getDescriptionLinks($context);
-            $entityWrapper->getDocumentTransformableEntity()->getThrows($context);
-        }
-
         foreach ($context->getEntityWrappersCollection() as $entityWrapper) {
             /**@var \BumbleDocGen\Render\Context\DocumentedEntityWrapper $entityWrapper * */
             $docRender = $this->configuration->getEntityDocRendersCollection()->getFirstMatchingRender($entityWrapper);

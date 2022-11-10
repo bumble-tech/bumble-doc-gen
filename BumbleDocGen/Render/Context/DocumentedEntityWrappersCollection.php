@@ -8,15 +8,23 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate
 {
     /** @var DocumentedEntityWrapper[] */
     private array $documentedClasses = [];
+    private array $iteratorKeys = [];
 
     public function getIterator(): \Generator
     {
-        yield from $this->documentedClasses;
+        $i = 0;
+        while (count($this->iteratorKeys) !== ++$i) {
+            $iteratorKey = $this->iteratorKeys[$i];
+            yield $this->documentedClasses[$iteratorKey];
+        }
     }
 
     public function add(DocumentedEntityWrapper $documentedClass): DocumentedEntityWrappersCollection
     {
-        $this->documentedClasses[$documentedClass->getKey()] = $documentedClass;
+        if (!isset($this->documentedClasses[$documentedClass->getKey()])) {
+            $this->documentedClasses[$documentedClass->getKey()] = $documentedClass;
+            $this->iteratorKeys[] = $documentedClass->getKey();
+        }
         return $this;
     }
 }
