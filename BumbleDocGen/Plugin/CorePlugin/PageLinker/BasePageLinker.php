@@ -8,7 +8,7 @@ use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Plugin\PluginInterface;
 use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
+use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
 use Psr\Log\LoggerInterface;
 
 abstract class BasePageLinker implements PluginInterface
@@ -124,59 +124,26 @@ abstract class BasePageLinker implements PluginInterface
             $pageLinks = [];
             foreach ($context->getClassEntityCollection() as $classEntity) {
                 /**@var ClassEntity $classEntity */
-                $pageLinks[$classEntity->getShortName()] = $classEntity;
                 $this->keyUsageCount[$classEntity->getShortName()] ??= 0;
                 ++$this->keyUsageCount[$classEntity->getShortName()];
 
-                $pageLinks[$classEntity->getFileName()] = $classEntity;
                 $this->keyUsageCount[$classEntity->getFileName()] ??= 0;
                 ++$this->keyUsageCount[$classEntity->getFileName()];
 
-                $pageLinks[$classEntity->getName()] = $classEntity;
                 $this->keyUsageCount[$classEntity->getName()] ??= 0;
                 ++$this->keyUsageCount[$classEntity->getName()];
             }
         }
 
-        $explodedLinkString = explode('|', $linkString);
-        $linkString = array_shift($explodedLinkString);
+        $entityUrlData = EntityDocRenderHelper::getEntityUrlData($linkString, $context);
+        if ($entityUrlData['url']) {
+            $linkString = explode('|', $linkString)[0];
+            $className = explode('::', $linkString)[0];
 
-        $linkOptions = $explodedLinkString;
-
-        $classData = explode('::', $linkString);
-        $className = $classData[0];
-
-        if (isset($pageLinks[$className])) {
-            $this->checkKey($className, $context->getConfiguration()->getLogger());
-
-            $cursor = '';
-            if (isset($classData[1])) {
-                if (str_ends_with($classData[1], '()')) {
-                    $cursor = 'm' . str_replace('()', '', $classData[1]);
-                } elseif (str_starts_with($classData[1], '$')) {
-                    $cursor = 'p' . str_replace('$', '', $classData[1]);
-                } else {
-                    $cursor = 'q' . $classData[1];
-                }
+            if (isset($pageLinks[$className])) {
+                $this->checkKey($className, $context->getConfiguration()->getLogger());
             }
-
-            $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
-
-            if (in_array(self::CLASS_ENTITY_SHORT_LINK_OPTION, $linkOptions)) {
-                $linkString = $pageLinks[$className]->getShortName() .
-                    (isset($classData[1]) ? "::{$classData[1]}" : '');
-            } elseif (in_array(self::CLASS_ENTITY_FULL_LINK_OPTION, $linkOptions)) {
-                $linkString = $pageLinks[$className]->getName() . (isset($classData[1]) ? "::{$classData[1]}" : '');
-            } elseif (in_array(self::CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION, $linkOptions) && isset($classData[1])) {
-                $linkString = $classData[1];
-            }
-
-            $url = $getDocumentedClassUrl($pageLinks[$className]->getName(), $cursor);
-
-            return [
-                'url' => $url,
-                'title' => $linkString,
-            ];
+            return $entityUrlData;
         }
         return null;
     }
