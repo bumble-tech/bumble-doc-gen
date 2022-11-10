@@ -148,11 +148,18 @@ abstract class BaseEntity
                     if (filter_var($name, FILTER_VALIDATE_URL)) {
                         $url = $name;
                     } elseif (str_starts_with($name, '\\') && $context) {
-                        $className = ParserHelper::parseFullClassName(
-                            $name,
-                            $this->reflector,
-                            $docCommentImplementingClass
-                        );
+
+                        $className = $name;
+
+                        // fixing annotations bug. Result always started with `\\`
+                        if(!str_contains($this->getDocCommentRecursive(), $name)) {
+                            $className = ParserHelper::parseFullClassName(
+                                $name,
+                                $this->reflector,
+                                $docCommentImplementingClass
+                            );
+                        }
+
                         $data = EntityDocRenderHelper::getEntityUrlData(
                             $className,
                             $context,
