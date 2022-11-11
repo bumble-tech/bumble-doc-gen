@@ -49,19 +49,7 @@ final class StrTypeToUrl
                 $reflectionOfLink = $reflector->reflectClass($type);
                 $fullFileName = $reflectionOfLink->getFileName();
                 if ($fullFileName && str_starts_with($fullFileName, $configuration->getProjectRoot())) {
-                    $classEntity = $this->context->getClassEntityCollection()->getEntityByClassName(
-                        $reflectionOfLink->getName()
-                    );
-                    if ($classEntity) {
-                        $link = $getDocumentedClassUrlFunction($classEntity->getName(), '', $createDocument);
-                    } else {
-                        $fileName = str_replace(
-                            $configuration->getProjectRoot(),
-                            '',
-                            $fullFileName
-                        );
-                        $link = "{$fileName}#L{$reflectionOfLink->getStartLine()}";
-                    }
+                    $link = $getDocumentedClassUrlFunction($type, '', $createDocument);
 
                     if ($useShortLinkVersion) {
                         $type = $reflectionOfLink->getShortName();
