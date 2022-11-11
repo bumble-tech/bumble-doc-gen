@@ -19,7 +19,8 @@ final class EntityDocRenderHelper
     public static function getEntityUrlData(
         string $linkString,
         Context $context,
-        ?string $defaultEntityClassName = null
+        ?string $defaultEntityClassName = null,
+        bool $createDocument = true,
     ): array {
         static $pageLinksCache = [];
 
@@ -119,7 +120,7 @@ final class EntityDocRenderHelper
                 $linkString = $classData[1];
             }
 
-            $url = $getDocumentedClassUrl($entity->getName(), $cursor);
+            $url = $getDocumentedClassUrl($entity->getName(), $cursor, $createDocument);
             return [
                 'url' => $url,
                 'title' => $linkString,
