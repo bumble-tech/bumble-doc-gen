@@ -27,11 +27,17 @@ final class StrTypeToUrl
      * @param string $text Processed text
      * @param string $templateType Display format. rst or html
      * @param bool $useShortLinkVersion Shorten or not the link name. When shortening, only the shortName of the class will be shown
+     * @param bool $createDocument
+     *  If true, creates a class document. Otherwise, just gives a reference to the class code
      *
      * @return string
      */
-    public function __invoke(string $text, string $templateType = 'rst', bool $useShortLinkVersion = false): string
-    {
+    public function __invoke(
+        string $text,
+        string $templateType = 'rst',
+        bool $useShortLinkVersion = false,
+        bool $createDocument = false
+    ): string {
         $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
 
         $preparedTypes = [];
@@ -47,7 +53,7 @@ final class StrTypeToUrl
                         $reflectionOfLink->getName()
                     );
                     if ($classEntity) {
-                        $link = $getDocumentedClassUrlFunction($classEntity->getName());
+                        $link = $getDocumentedClassUrlFunction($classEntity->getName(), '', $createDocument);
                     } else {
                         $fileName = str_replace(
                             $configuration->getProjectRoot(),
