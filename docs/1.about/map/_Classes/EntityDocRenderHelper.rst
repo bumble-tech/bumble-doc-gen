@@ -46,9 +46,9 @@ Constants:
 .. raw:: html
 
     <ul>
-            <li><a name="qclass-entity-short-link-option" href="#qclass-entity-short-link-option">#</a> <code>CLASS_ENTITY_SHORT_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L14">source code</a> </li>
-            <li><a name="qclass-entity-full-link-option" href="#qclass-entity-full-link-option">#</a> <code>CLASS_ENTITY_FULL_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L15">source code</a> </li>
-            <li><a name="qclass-entity-only-cursor-link-option" href="#qclass-entity-only-cursor-link-option">#</a> <code>CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L16">source code</a> </li>
+            <li><a name="qclass-entity-short-link-option" href="#qclass-entity-short-link-option">#</a> <code>CLASS_ENTITY_SHORT_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L15">source code</a> </li>
+            <li><a name="qclass-entity-full-link-option" href="#qclass-entity-full-link-option">#</a> <code>CLASS_ENTITY_FULL_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L16">source code</a> </li>
+            <li><a name="qclass-entity-only-cursor-link-option" href="#qclass-entity-only-cursor-link-option">#</a> <code>CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L17">source code</a> </li>
         </ul>
 
 
@@ -69,10 +69,10 @@ Method details:
 
 .. _mgetentityurldata:
 
-* `# <mgetentityurldata_>`_  ``getEntityUrlData``   **|** `source code </BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L18>`_
+* `# <mgetentityurldata_>`_  ``getEntityUrlData``   **|** `source code </BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L19>`_
 .. code-block:: php
 
-        public static function getEntityUrlData(string $linkString, BumbleDocGen\Render\Context\Context $context, string|null $defaultEntityClassName = NULL): array;
+        public static function getEntityUrlData(string $linkString, BumbleDocGen\Render\Context\Context $context, string|null $defaultEntityClassName = NULL, bool $createDocument = true): array;
 
 
 
@@ -97,12 +97,17 @@ Method details:
         </tr>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$defaultEntityClassName</td>
             <td>string | null</td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$createDocument</td>
+            <td>bool</td>
             <td>-</td>
         </tr>
         </tbody>

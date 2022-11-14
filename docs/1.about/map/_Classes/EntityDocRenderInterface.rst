@@ -88,7 +88,7 @@ Method details:
     <tbody>
             <tr>
             <td>$entityWrapper</td>
-            <td><a href='/docs/1.about/map/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/DocumentedEntityWrapper.php'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
             <td>The class whose documentation was requested</td>
         </tr>
         </tbody>
@@ -124,7 +124,7 @@ ________
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -163,7 +163,7 @@ ________
     <tbody>
             <tr>
             <td>$entityWrapper</td>
-            <td><a href='/docs/1.about/map/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/DocumentedEntityWrapper.php'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
             <td>The class whose documentation was requested</td>
         </tr>
         </tbody>

@@ -1,6 +1,6 @@
 .. raw:: html
 
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> DocumentedEntityWrapper</embed>
+ <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> <a href="/docs/3.render/3_twigCustomFilters/index.rst">Template filters</a> <b>/</b> DocumentedEntityWrapper</embed>
 
 
 Description of the `DocumentedEntityWrapper </BumbleDocGen/Render/Context/DocumentedEntityWrapper.php>`_ class:

@@ -93,12 +93,12 @@ Method details:
     <tbody>
             <tr>
             <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$logger</td>
-            <td><a href='/vendor/psr/log/src/LoggerInterface.php#L20'>Psr\Log\LoggerInterface</a></td>
+            <td><a href='/vendor/psr/log/src/LoggerInterface.php'>Psr\Log\LoggerInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -158,7 +158,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `phpDocumentor\\Reflection\\DocBlockFactory </vendor/phpdocumentor/reflection-docblock/src/DocBlockFactory\.php#L36>`_
+**Return value:** `phpDocumentor\\Reflection\\DocBlockFactory </vendor/phpdocumentor/reflection-docblock/src/DocBlockFactory\.php>`_
 
 ________
 
@@ -269,7 +269,7 @@ ________
     <tbody>
             <tr>
             <td>$reflectionClass</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflection/ReflectionClass.php#L63'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflection/ReflectionClass.php'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
             <td>-</td>
         </tr>
             <tr>

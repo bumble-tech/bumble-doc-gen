@@ -104,29 +104,29 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/1.about/map/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/BumbleDocGen/ConfigurationInterface.php'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$reflectionClass</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflection/ReflectionClass.php#L63'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflection/ReflectionClass.php'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$annotationMethod</td>
-            <td><a href='/vendor/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Method.php#L40'>phpDocumentor\Reflection\DocBlock\Tags\Method</a></td>
+            <td><a href='/vendor/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Method.php'>phpDocumentor\Reflection\DocBlock\Tags\Method</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\DynamicMethodEntity </docs/1\.about/map/_Classes/DynamicMethodEntity\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\DynamicMethodEntity </BumbleDocGen/Parser/Entity/DynamicMethodEntity\.php>`_
 
 ________
 
@@ -279,7 +279,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php#L63>`_
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
 
 ________
 

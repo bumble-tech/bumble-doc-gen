@@ -89,14 +89,14 @@ Method details:
         </tr>
             <tr>
             <td>$templateFillers</td>
-            <td><a href='/docs/3.render/2_templateFillers/_Classes/TemplateFillerInterface.rst'>BumbleDocGen\Render\TemplateFiller\TemplateFillerInterface</a></td>
+            <td><a href='/BumbleDocGen/Render/TemplateFiller/TemplateFillerInterface.php'>BumbleDocGen\Render\TemplateFiller\TemplateFillerInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </docs/3\.render/2_templateFillers/_Classes/TemplateFillersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </BumbleDocGen/Render/TemplateFiller/TemplateFillersCollection\.php>`_
 
 ________
 
@@ -128,7 +128,7 @@ ________
     <tbody>
             <tr>
             <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>

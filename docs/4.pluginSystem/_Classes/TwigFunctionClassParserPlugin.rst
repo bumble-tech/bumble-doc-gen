@@ -112,7 +112,7 @@ ________
     <tbody>
             <tr>
             <td>$event</td>
-            <td><a href='/docs/4.pluginSystem/_Classes/OnLoadEntityDocPluginContent.rst'>BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent</a></td>
+            <td><a href='/BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php'>BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -148,7 +148,7 @@ ________
     <tbody>
             <tr>
             <td>$event</td>
-            <td><a href='/docs/4.pluginSystem/_Classes/AfterCreationClassEntityCollection.rst'>BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection</a></td>
+            <td><a href='/BumbleDocGen/Plugin/Event/Parser/AfterCreationClassEntityCollection.php'>BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>

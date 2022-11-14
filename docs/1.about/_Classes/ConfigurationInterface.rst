@@ -109,7 +109,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/1\.about/_Classes/SourceLocatorsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
 
 ________
 
@@ -232,14 +232,14 @@ ________
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='/docs/1.about/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/1\.about/_Classes/ConditionInterface\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </BumbleDocGen/Parser/FilterCondition/ConditionInterface\.php>`_
 
 ________
 
@@ -268,14 +268,14 @@ ________
     <tbody>
             <tr>
             <td>$constantEntity</td>
-            <td><a href='/docs/1.about/_Classes/ConstantEntity.rst'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ConstantEntity.php'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/1\.about/_Classes/ConditionInterface\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </BumbleDocGen/Parser/FilterCondition/ConditionInterface\.php>`_
 
 ________
 
@@ -304,14 +304,14 @@ ________
     <tbody>
             <tr>
             <td>$methodEntity</td>
-            <td><a href='/docs/1.about/_Classes/MethodEntity.rst'>BumbleDocGen\Parser\Entity\MethodEntity</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/MethodEntity.php'>BumbleDocGen\Parser\Entity\MethodEntity</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/1\.about/_Classes/ConditionInterface\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </BumbleDocGen/Parser/FilterCondition/ConditionInterface\.php>`_
 
 ________
 
@@ -340,14 +340,14 @@ ________
     <tbody>
             <tr>
             <td>$propertyEntity</td>
-            <td><a href='/docs/1.about/_Classes/PropertyEntity.rst'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/PropertyEntity.php'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </docs/1\.about/_Classes/ConditionInterface\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </BumbleDocGen/Parser/FilterCondition/ConditionInterface\.php>`_
 
 ________
 
@@ -364,7 +364,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </docs/1\.about/_Classes/PluginsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </BumbleDocGen/Plugin/PluginsCollection\.php>`_
 
 ________
 
@@ -381,7 +381,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </docs/1\.about/_Classes/TemplateFillersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </BumbleDocGen/Render/TemplateFiller/TemplateFillersCollection\.php>`_
 
 ________
 
@@ -398,7 +398,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </docs/1\.about/_Classes/EntityDocRendersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </BumbleDocGen/Render/EntityDocRender/EntityDocRendersCollection\.php>`_
 
 ________
 
@@ -415,7 +415,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `Psr\\Log\\LoggerInterface </vendor/psr/log/src/LoggerInterface\.php#L20>`_
+**Return value:** `Psr\\Log\\LoggerInterface </vendor/psr/log/src/LoggerInterface\.php>`_
 
 ________
 
@@ -432,7 +432,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `Psr\\Cache\\CacheItemPoolInterface </vendor/psr/cache/src/CacheItemPoolInterface\.php#L14>`_
+**Return value:** `Psr\\Cache\\CacheItemPoolInterface </vendor/psr/cache/src/CacheItemPoolInterface\.php>`_
 
 ________
 

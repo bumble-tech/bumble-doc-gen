@@ -93,7 +93,7 @@ Method details:
         </tr>
             <tr>
             <td>$cache</td>
-            <td><a href='/vendor/psr/cache/src/CacheItemPoolInterface.php#L14'>Psr\Cache\CacheItemPoolInterface</a> | null</td>
+            <td><a href='/vendor/psr/cache/src/CacheItemPoolInterface.php'>Psr\Cache\CacheItemPoolInterface</a> | null</td>
             <td>-</td>
         </tr>
         </tbody>

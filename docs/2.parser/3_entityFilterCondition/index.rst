@@ -14,10 +14,10 @@ In order to determine whether an entity can be added to a collection (for exampl
 
 Filtering conditions must be set in the configuration:
 
-*  For classes - `ConfigurationInterface::classEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mclassentityfiltercondition>`_
-*  For class constants - `ConfigurationInterface::classConstantEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mclassconstantentityfiltercondition>`_
-*  For class properties - `ConfigurationInterface::propertyEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mpropertyentityfiltercondition>`_
-*  For class methods - `ConfigurationInterface::methodEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst#mmethodentityfiltercondition>`_
+*  For classes - `ConfigurationInterface::classEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst>`_
+*  For class constants - `ConfigurationInterface::classConstantEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst>`_
+*  For class properties - `ConfigurationInterface::propertyEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst>`_
+*  For class methods - `ConfigurationInterface::methodEntityFilterCondition\(\) </docs/2.parser/3_entityFilterCondition/_Classes/ConfigurationInterface.rst>`_
 
 **Usage example:**
 

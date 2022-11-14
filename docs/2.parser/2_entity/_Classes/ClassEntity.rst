@@ -116,22 +116,22 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/2.parser/2_entity/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/BumbleDocGen/ConfigurationInterface.php'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$reflectionClass</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflection/ReflectionClass.php#L63'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflection/ReflectionClass.php'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$attributeParser</td>
-            <td><a href='/docs/2.parser/2_entity/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
+            <td><a href='/BumbleDocGen/Parser/AttributeParser.php'>BumbleDocGen\Parser\AttributeParser</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -143,7 +143,7 @@ Method details:
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </docs/2\.parser/2_entity/_Classes/ClassEntity\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </BumbleDocGen/Parser/Entity/ClassEntity\.php>`_
 
 ________
 
@@ -254,7 +254,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php#L63>`_
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
 
 ________
 
@@ -271,7 +271,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php#L63>`_
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
 
 ________
 
@@ -562,7 +562,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </docs/2\.parser/2_entity/_Classes/ConstantEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </BumbleDocGen/Parser/Entity/ConstantEntityCollection\.php>`_
 
 ________
 
@@ -579,7 +579,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </docs/2\.parser/2_entity/_Classes/PropertyEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </BumbleDocGen/Parser/Entity/PropertyEntityCollection\.php>`_
 
 ________
 
@@ -596,7 +596,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/2\.parser/2_entity/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </BumbleDocGen/Parser/Entity/MethodEntityCollection\.php>`_
 
 ________
 

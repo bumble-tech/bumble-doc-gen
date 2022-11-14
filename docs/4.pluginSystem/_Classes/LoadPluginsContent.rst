@@ -111,7 +111,7 @@ Method details:
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/4.pluginSystem/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
         </tbody>
@@ -152,7 +152,7 @@ ________
         </tr>
             <tr>
             <td>$classEntity</td>
-            <td><a href='/docs/4.pluginSystem/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
             <td>The entity for which we process the content block</td>
         </tr>
             <tr>

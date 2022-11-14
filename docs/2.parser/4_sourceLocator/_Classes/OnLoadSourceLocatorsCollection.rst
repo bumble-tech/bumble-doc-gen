@@ -92,7 +92,7 @@ Method details:
     <tbody>
             <tr>
             <td>$sourceLocatorsCollection</td>
-            <td><a href='/docs/2.parser/4_sourceLocator/_Classes/SourceLocatorsCollection.rst'>BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection</a></td>
+            <td><a href='/BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php'>BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -116,7 +116,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/2\.parser/4_sourceLocator/_Classes/SourceLocatorsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
 
 ________
 

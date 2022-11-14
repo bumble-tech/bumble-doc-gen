@@ -90,7 +90,7 @@ Method details:
     <tbody>
             <tr>
             <td>$astLocator</td>
-            <td><a href='/vendor/roave/better-reflection/src/SourceLocator/Ast/Locator.php#L23'>Roave\BetterReflection\SourceLocator\Ast\Locator</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/SourceLocator/Ast/Locator.php'>Roave\BetterReflection\SourceLocator\Ast\Locator</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -148,7 +148,7 @@ ________
     </table>
 
 
-**Return value:** `Composer\\Autoload\\ClassLoader </vendor/composer/ClassLoader\.php#L43>`_
+**Return value:** `Composer\\Autoload\\ClassLoader </vendor/composer/ClassLoader\.php>`_
 
 ________
 
@@ -184,7 +184,7 @@ ________
     </table>
 
 
-**Return value:** `Roave\\BetterReflection\\SourceLocator\\Located\\LocatedSource </vendor/roave/better-reflection/src/SourceLocator/Located/LocatedSource\.php#L17>`_ | null
+**Return value:** `Roave\\BetterReflection\\SourceLocator\\Located\\LocatedSource </vendor/roave/better-reflection/src/SourceLocator/Located/LocatedSource\.php>`_ | null
 
 ________
 

@@ -92,7 +92,7 @@ Method details:
     <tbody>
             <tr>
             <td>$constantEntity</td>
-            <td><a href='/docs/1.about/map/_Classes/ConstantEntity.rst'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ConstantEntity.php'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
             <td>-</td>
         </tr>
             <tr>

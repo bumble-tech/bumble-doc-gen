@@ -94,14 +94,14 @@ Method details:
         </tr>
             <tr>
             <td>$conditions</td>
-            <td><a href='/docs/1.about/map/_Classes/ConditionInterface.rst'>BumbleDocGen\Parser\FilterCondition\ConditionInterface</a></td>
+            <td><a href='/BumbleDocGen/Parser/FilterCondition/ConditionInterface.php'>BumbleDocGen\Parser\FilterCondition\ConditionInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionGroup </docs/1\.about/map/_Classes/ConditionGroup\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionGroup </BumbleDocGen/Parser/FilterCondition/ConditionGroup\.php>`_
 
 ________
 

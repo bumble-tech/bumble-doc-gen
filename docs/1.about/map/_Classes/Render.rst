@@ -25,8 +25,8 @@ Description of the `Render </BumbleDocGen/Render/Render.php>`_ class:
 
 See:
 
-#. `\\ConfigurationInterface::getTemplatesDir\(\) </docs/1.about/map/_Classes/ConfigurationInterface.rst#mgettemplatesdir>`_ 
-#. `\\ConfigurationInterface::getOutputDir\(\) </docs/1.about/map/_Classes/ConfigurationInterface.rst#mgetoutputdir>`_ 
+#. `BumbleDocGen\\ConfigurationInterface::getTemplatesDir\(\) </docs/1.about/map/_Classes/ConfigurationInterface.rst>`_ 
+#. `BumbleDocGen\\ConfigurationInterface::getOutputDir\(\) </docs/1.about/map/_Classes/ConfigurationInterface.rst>`_ 
 
 
 
@@ -98,17 +98,17 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/1.about/map/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/BumbleDocGen/ConfigurationInterface.php'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$classEntityCollection</td>
-            <td><a href='/docs/1.about/map/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntityCollection.php'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$pluginEventDispatcher</td>
-            <td><a href='/docs/1.about/map/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
+            <td><a href='/BumbleDocGen/Plugin/PluginEventDispatcher.php'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
         </tr>
         </tbody>

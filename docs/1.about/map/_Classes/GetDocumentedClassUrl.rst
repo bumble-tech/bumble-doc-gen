@@ -27,7 +27,7 @@ See:
 
 #. `BumbleDocGen\\Render\\Context\\DocumentedEntityWrapper </docs/1.about/map/_Classes/DocumentedEntityWrapper.rst>`_ 
 #. `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </docs/1.about/map/_Classes/DocumentedEntityWrappersCollection.rst>`_ 
-#. `\\Context::\$entityWrappersCollection </docs/1.about/map/_Classes/Context.rst#pentitywrapperscollection>`_ 
+#. `BumbleDocGen\\Render\\Context\\Context::\$entityWrappersCollection </docs/1.about/map/_Classes/Context.rst>`_ 
 
 
 **Examples of using:**
@@ -40,6 +40,11 @@ See:
 .. code-block:: php
 
         {{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
+
+
+.. code-block:: php
+
+        {{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', '', false) }}
 
 
 
@@ -89,7 +94,7 @@ Constants:
 .. raw:: html
 
     <ul>
-            <li><a name="qdefault-url" href="#qdefault-url">#</a> <code>DEFAULT_URL</code>   <b>|</b> <a href="/BumbleDocGen/Render/Twig/Function/GetDocumentedClassUrl.php#L27">source code</a> </li>
+            <li><a name="qdefault-url" href="#qdefault-url">#</a> <code>DEFAULT_URL</code>   <b>|</b> <a href="/BumbleDocGen/Render/Twig/Function/GetDocumentedClassUrl.php#L30">source code</a> </li>
         </ul>
 
 
@@ -110,7 +115,7 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/GetDocumentedClassUrl.php#L32>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/GetDocumentedClassUrl.php#L35>`_
 .. code-block:: php
 
         public function __construct(BumbleDocGen\Render\Context\Context $context): mixed;
@@ -133,7 +138,7 @@ Method details:
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
         </tbody>
@@ -146,10 +151,10 @@ ________
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/GetDocumentedClassUrl.php#L45>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/GetDocumentedClassUrl.php#L50>`_
 .. code-block:: php
 
-        public function __invoke(string $className, string $cursor = ''): string;
+        public function __invoke(string $className, string $cursor = '', bool $createDocument = true): string;
 
 
 
@@ -177,6 +182,11 @@ ________
             <td>$cursor</td>
             <td>string</td>
             <td>Cursor on the page of the documented class (for example, the name of a method or property)</td>
+        </tr>
+            <tr>
+            <td>$createDocument</td>
+            <td>bool</td>
+            <td>If true, creates a class document. Otherwise, just gives a reference to the class code</td>
         </tr>
         </tbody>
     </table>

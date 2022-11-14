@@ -90,12 +90,12 @@ Method details:
     <tbody>
             <tr>
             <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$logger</td>
-            <td><a href='/vendor/psr/log/src/LoggerInterface.php#L20'>Psr\Log\LoggerInterface</a></td>
+            <td><a href='/vendor/psr/log/src/LoggerInterface.php'>Psr\Log\LoggerInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>

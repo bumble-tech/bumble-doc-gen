@@ -102,7 +102,7 @@ Method details:
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -143,7 +143,7 @@ ________
     <tbody>
             <tr>
             <td>$classEntityCollection</td>
-            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntityCollection.php'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
             <td>Processed entity collection</td>
         </tr>
             <tr>

@@ -92,7 +92,7 @@ Method details:
     <tbody>
             <tr>
             <td>$methodEntity</td>
-            <td><a href='/docs/1.about/map/_Classes/MethodEntity.rst'>BumbleDocGen\Parser\Entity\MethodEntity</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/MethodEntity.php'>BumbleDocGen\Parser\Entity\MethodEntity</a></td>
             <td>-</td>
         </tr>
             <tr>

@@ -96,7 +96,7 @@ Method details:
     <tbody>
             <tr>
             <td>$documentTransformableEntity</td>
-            <td><a href='/docs/1.about/map/_Classes/DocumentTransformableEntityInterface.rst'>BumbleDocGen\Render\Context\DocumentTransformableEntityInterface</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/DocumentTransformableEntityInterface.php'>BumbleDocGen\Render\Context\DocumentTransformableEntityInterface</a></td>
             <td>An entity that is allowed to be documented</td>
         </tr>
             <tr>
@@ -187,7 +187,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\Context\\DocumentTransformableEntityInterface </docs/1\.about/map/_Classes/DocumentTransformableEntityInterface\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\Context\\DocumentTransformableEntityInterface </BumbleDocGen/Render/Context/DocumentTransformableEntityInterface\.php>`_
 
 ________
 

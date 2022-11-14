@@ -72,7 +72,7 @@ Method details:
 **Parameters:** not specified
 
 
-**Return value:** 
+**Return value:** Generator
 
 
 **Throws:**

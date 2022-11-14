@@ -58,7 +58,7 @@ Method details:
 
 .. _mgetiterator:
 
-* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Render/Context/DocumentedEntityWrappersCollection.php#L12>`_
+* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Render/Context/DocumentedEntityWrappersCollection.php#L13>`_
 .. code-block:: php
 
         public function getIterator(): Generator;
@@ -72,7 +72,7 @@ Method details:
 **Parameters:** not specified
 
 
-**Return value:** 
+**Return value:** Generator
 
 
 **Throws:**
@@ -88,7 +88,7 @@ ________
 
 .. _madd:
 
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Render/Context/DocumentedEntityWrappersCollection.php#L17>`_
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Render/Context/DocumentedEntityWrappersCollection.php#L23>`_
 .. code-block:: php
 
         public function add(BumbleDocGen\Render\Context\DocumentedEntityWrapper $documentedClass): BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
@@ -111,14 +111,14 @@ ________
     <tbody>
             <tr>
             <td>$documentedClass</td>
-            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/DocumentedEntityWrapper.php'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </docs/3\.render/4_twigCustomFunctions/_Classes/DocumentedEntityWrappersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </BumbleDocGen/Render/Context/DocumentedEntityWrappersCollection\.php>`_
 
 ________
 

@@ -92,29 +92,29 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/2.parser/5_classmap/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/BumbleDocGen/ConfigurationInterface.php'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$classEntity</td>
-            <td><a href='/docs/2.parser/5_classmap/_Classes/ClassEntity.rst'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$attributeParser</td>
-            <td><a href='/docs/2.parser/5_classmap/_Classes/AttributeParser.rst'>BumbleDocGen\Parser\AttributeParser</a></td>
+            <td><a href='/BumbleDocGen/Parser/AttributeParser.php'>BumbleDocGen\Parser\AttributeParser</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/2\.parser/5_classmap/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </BumbleDocGen/Parser/Entity/MethodEntityCollection\.php>`_
 
 ________
 
@@ -143,7 +143,7 @@ ________
     <tbody>
             <tr>
             <td>$methodEntity</td>
-            <td><a href='/docs/2.parser/5_classmap/_Classes/MethodEntityInterface.rst'>BumbleDocGen\Parser\Entity\MethodEntityInterface</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/MethodEntityInterface.php'>BumbleDocGen\Parser\Entity\MethodEntityInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -155,7 +155,7 @@ ________
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/2\.parser/5_classmap/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </BumbleDocGen/Parser/Entity/MethodEntityCollection\.php>`_
 
 ________
 
@@ -191,7 +191,7 @@ ________
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntity </docs/2\.parser/5_classmap/_Classes/MethodEntity\.rst>`_ | null
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntity </BumbleDocGen/Parser/Entity/MethodEntity\.php>`_ | null
 
 ________
 
@@ -208,7 +208,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/2\.parser/5_classmap/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </BumbleDocGen/Parser/Entity/MethodEntityCollection\.php>`_
 
 ________
 
@@ -225,7 +225,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </docs/2\.parser/5_classmap/_Classes/MethodEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </BumbleDocGen/Parser/Entity/MethodEntityCollection\.php>`_
 
 ________
 

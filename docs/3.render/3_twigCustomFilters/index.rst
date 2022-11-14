@@ -11,7 +11,7 @@
 
 
 When generating pages, you can use filters that allow you to modify the content.
-Filters available during page generation are defined in method `MainExtension::getFilters\(\) </docs/3.render/3_twigCustomFilters/_Classes/MainExtension.rst#mgetfilters>`_
+Filters available during page generation are defined in method `MainExtension::getFilters\(\) </docs/3.render/3_twigCustomFilters/_Classes/MainExtension.rst>`_
 
 We use the twig template engine, you can get more information about working with filters here: https://twig.symfony.com/doc/1.x/advanced.html#filters
 
@@ -115,7 +115,7 @@ or
             </tr>
                             
                     <tr>
-                                                        <td rowspan="5">
+                                                        <td rowspan="7">
                         <a href="/docs/3.render/3_twigCustomFilters/_Classes/StrTypeToUrl.rst">strTypeToUrl</a><br>
                                                 The filter converts the string with the data type into a link to the documented class, if possible.
                         <br><i><b>:warning: This filter initiates the creation of documents for the displayed classes</b></i><br>                    </td>
@@ -143,6 +143,18 @@ or
                         <i>bool</i>
                     </td>
                     <td>Shorten or not the link name. When shortening, only the shortName of the class will be shown</td>
+                            </tr>
+                            <tr>
+                    <td colspan="3"></td>
+                </tr>
+                                <tr>
+                                    <td>
+                        <b>$createDocument</b>
+                    </td>
+                    <td>
+                        <i>bool</i>
+                    </td>
+                    <td>If true, creates a class document. Otherwise, just gives a reference to the class code</td>
                             </tr>
                                         <tr>
                 <td colspan="4">&nbsp;</td>

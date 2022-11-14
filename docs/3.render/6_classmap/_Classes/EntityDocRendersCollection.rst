@@ -73,7 +73,7 @@ Method details:
 **Parameters:** not specified
 
 
-**Return value:** 
+**Return value:** Generator
 
 
 **Throws:**
@@ -112,14 +112,14 @@ ________
     <tbody>
             <tr>
             <td>$entityDocRender</td>
-            <td><a href='/docs/3.render/6_classmap/_Classes/EntityDocRenderInterface.rst'>BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface</a></td>
+            <td><a href='/BumbleDocGen/Render/EntityDocRender/EntityDocRenderInterface.php'>BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </docs/3\.render/6_classmap/_Classes/EntityDocRendersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </BumbleDocGen/Render/EntityDocRender/EntityDocRendersCollection\.php>`_
 
 ________
 
@@ -148,14 +148,14 @@ ________
     <tbody>
             <tr>
             <td>$entityWrapper</td>
-            <td><a href='/docs/3.render/6_classmap/_Classes/DocumentedEntityWrapper.rst'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='/BumbleDocGen/Render/Context/DocumentedEntityWrapper.php'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRenderInterface </docs/3\.render/6_classmap/_Classes/EntityDocRenderInterface\.rst>`_ | null
+**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRenderInterface </BumbleDocGen/Render/EntityDocRender/EntityDocRenderInterface\.php>`_ | null
 
 ________
 

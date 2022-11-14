@@ -90,12 +90,12 @@ Method details:
     <tbody>
             <tr>
             <td>$wrappedSourceLocator</td>
-            <td><a href='/vendor/roave/better-reflection/src/SourceLocator/Type/SourceLocator.php#L12'>Roave\BetterReflection\SourceLocator\Type\SourceLocator</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/SourceLocator/Type/SourceLocator.php'>Roave\BetterReflection\SourceLocator\Type\SourceLocator</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$cache</td>
-            <td><a href='/vendor/psr/cache/src/CacheItemPoolInterface.php#L14'>Psr\Cache\CacheItemPoolInterface</a></td>
+            <td><a href='/vendor/psr/cache/src/CacheItemPoolInterface.php'>Psr\Cache\CacheItemPoolInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -134,19 +134,19 @@ ________
     <tbody>
             <tr>
             <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$identifier</td>
-            <td><a href='/vendor/roave/better-reflection/src/Identifier/Identifier.php#L15'>Roave\BetterReflection\Identifier\Identifier</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Identifier/Identifier.php'>Roave\BetterReflection\Identifier\Identifier</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `Roave\\BetterReflection\\Reflection\\Reflection </vendor/roave/better-reflection/src/Reflection/Reflection\.php#L13>`_ | null
+**Return value:** `Roave\\BetterReflection\\Reflection\\Reflection </vendor/roave/better-reflection/src/Reflection/Reflection\.php>`_ | null
 
 ________
 
@@ -175,12 +175,12 @@ ________
     <tbody>
             <tr>
             <td>$reflector</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php#L12'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$identifierType</td>
-            <td><a href='/vendor/roave/better-reflection/src/Identifier/IdentifierType.php#L15'>Roave\BetterReflection\Identifier\IdentifierType</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Identifier/IdentifierType.php'>Roave\BetterReflection\Identifier\IdentifierType</a></td>
             <td>-</td>
         </tr>
         </tbody>

@@ -11,7 +11,7 @@
 
 
 When generating pages, you can use functions that allow you to modify the content.
-Functions available during page generation are defined in method `MainExtension::getFunctions\(\) </docs/3.render/4_twigCustomFunctions/_Classes/MainExtension.rst#mgetfunctions>`_
+Functions available during page generation are defined in method `MainExtension::getFunctions\(\) </docs/3.render/4_twigCustomFunctions/_Classes/MainExtension.rst>`_
 
 We use the twig template engine, you can get more information about working with functions here: https://twig.symfony.com/doc/1.x/advanced.html#functions
 
@@ -50,7 +50,7 @@ We use the twig template engine, you can get more information about working with
         <tbody>
                                 
                         <tr>
-                                <td rowspan="3">
+                                <td rowspan="5">
                     <a href="/docs/3.render/4_twigCustomFunctions/_Classes/GetDocumentedClassUrl.rst">getDocumentedClassUrl</a><br>
                                         Get the URL of a documented class by its name. If the class is found, next to the file where this method was called, the `_Classes` directory will be created, in which the documented class file will be created
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed classes</b></i><br>                </td>
@@ -74,6 +74,18 @@ We use the twig template engine, you can get more information about working with
                 </td>
                 <td>Cursor on the page of the documented class (for example, the name of a method or property)</td>
             </tr>
+                        <tr>
+                <td colspan="3"></td>
+            </tr>
+                                    <tr>
+                                <td>
+                    <b>$createDocument</b>
+                </td>
+                <td>
+                    <i>bool</i>
+                </td>
+                <td>If true, creates a class document. Otherwise, just gives a reference to the class code</td>
+            </tr>
                                                 <tr>
                 <td colspan="4">&nbsp;</td>
             </tr>
@@ -87,7 +99,7 @@ We use the twig template engine, you can get more information about working with
                     <b>$classEntity</b>
                 </td>
                 <td>
-                    <i><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ClassEntity.rst'>ClassEntity</a></i>
+                    <i><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>ClassEntity</a></i>
                 </td>
                 <td></td>
             </tr>
@@ -140,7 +152,7 @@ We use the twig template engine, you can get more information about working with
                     <b>$classEntity</b>
                 </td>
                 <td>
-                    <i><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ClassEntity.rst'>ClassEntity</a></i>
+                    <i><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>ClassEntity</a></i>
                 </td>
                 <td>The entity for which we process the content block</td>
             </tr>
@@ -198,7 +210,7 @@ We use the twig template engine, you can get more information about working with
                     <b>$classEntityCollection</b>
                 </td>
                 <td>
-                    <i><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ClassEntityCollection.rst'>ClassEntityCollection</a></i>
+                    <i><a href='/BumbleDocGen/Parser/Entity/ClassEntityCollection.php'>ClassEntityCollection</a></i>
                 </td>
                 <td>Processed entity collection</td>
             </tr>
@@ -309,7 +321,7 @@ We use the twig template engine, you can get more information about working with
                     <b>$classEntityCollections</b>
                 </td>
                 <td>
-                    <i><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ClassEntityCollection.rst'>ClassEntityCollection</a></i>
+                    <i><a href='/BumbleDocGen/Parser/Entity/ClassEntityCollection.php'>ClassEntityCollection</a></i>
                 </td>
                 <td>The collection of entities for which the class map will be generated</td>
             </tr>

@@ -183,7 +183,7 @@ ________
     <tbody>
             <tr>
             <td>$logger</td>
-            <td><a href='/vendor/psr/log/src/LoggerInterface.php#L20'>Psr\Log\LoggerInterface</a></td>
+            <td><a href='/vendor/psr/log/src/LoggerInterface.php'>Psr\Log\LoggerInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -239,7 +239,7 @@ ________
     <tbody>
             <tr>
             <td>$event</td>
-            <td><a href='/docs/1.about/map/_Classes/BeforeCreatingDocFile.rst'>BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile</a></td>
+            <td><a href='/BumbleDocGen/Plugin/Event/Render/BeforeCreatingDocFile.php'>BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile</a></td>
             <td>-</td>
         </tr>
         </tbody>

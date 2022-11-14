@@ -83,7 +83,7 @@ Method details:
 **Parameters:** not specified
 
 
-**Return value:** 
+**Return value:** Generator
 
 
 **Throws:**
@@ -122,14 +122,14 @@ ________
     <tbody>
             <tr>
             <td>$sourceLocators</td>
-            <td><a href='/docs/2.parser/5_classmap/_Classes/SourceLocatorInterface.rst'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
+            <td><a href='/BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/2\.parser/5_classmap/_Classes/SourceLocatorsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
 
 ________
 
@@ -158,14 +158,14 @@ ________
     <tbody>
             <tr>
             <td>$sourceLocator</td>
-            <td><a href='/docs/2.parser/5_classmap/_Classes/SourceLocatorInterface.rst'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
+            <td><a href='/BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </docs/2\.parser/5_classmap/_Classes/SourceLocatorsCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
 
 ________
 
@@ -194,7 +194,7 @@ ________
     <tbody>
             <tr>
             <td>$astLocator</td>
-            <td><a href='/vendor/roave/better-reflection/src/SourceLocator/Ast/Locator.php#L23'>Roave\BetterReflection\SourceLocator\Ast\Locator</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/SourceLocator/Ast/Locator.php'>Roave\BetterReflection\SourceLocator\Ast\Locator</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -218,7 +218,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php#L42>`_
+**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php>`_
 
 ________
 

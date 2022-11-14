@@ -84,7 +84,7 @@ Method details:
 **Parameters:** not specified
 
 
-**Return value:** `Roave\\BetterReflection\\Reflection\\Reflection </vendor/roave/better-reflection/src/Reflection/Reflection\.php#L13>`_
+**Return value:** `Roave\\BetterReflection\\Reflection\\Reflection </vendor/roave/better-reflection/src/Reflection/Reflection\.php>`_
 
 ________
 
@@ -101,7 +101,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php#L63>`_
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
 
 ________
 
@@ -135,7 +135,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\AttributeParser </docs/1\.about/map/_Classes/AttributeParser\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\AttributeParser </BumbleDocGen/Parser/AttributeParser\.php>`_
 
 ________
 
@@ -164,7 +164,7 @@ ________
     <tbody>
             <tr>
             <td>$reflection</td>
-            <td><a href='/vendor/roave/better-reflection/src/Reflection/Reflection.php#L13'>Roave\BetterReflection\Reflection\Reflection</a></td>
+            <td><a href='/vendor/roave/better-reflection/src/Reflection/Reflection.php'>Roave\BetterReflection\Reflection\Reflection</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -205,7 +205,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `phpDocumentor\\Reflection\\DocBlock </vendor/phpdocumentor/reflection-docblock/src/DocBlock\.php#L20>`_
+**Return value:** `phpDocumentor\\Reflection\\DocBlock </vendor/phpdocumentor/reflection-docblock/src/DocBlock\.php>`_
 
 ________
 
@@ -285,7 +285,7 @@ ________
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a> | null</td>
+            <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a> | null</td>
             <td>-</td>
         </tr>
         </tbody>
@@ -298,7 +298,7 @@ ________
 
 .. _mhasthrows:
 
-* `# <mhasthrows_>`_  ``hasThrows``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L224>`_
+* `# <mhasthrows_>`_  ``hasThrows``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L231>`_
 .. code-block:: php
 
         public function hasThrows(): bool;
@@ -315,7 +315,7 @@ ________
 
 .. _mgetthrows:
 
-* `# <mgetthrows_>`_  ``getThrows``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L233>`_
+* `# <mgetthrows_>`_  ``getThrows``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L240>`_
 .. code-block:: php
 
         public function getThrows(BumbleDocGen\Render\Context\Context|null $context = NULL): array;
@@ -338,7 +338,7 @@ ________
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='/docs/1.about/map/_Classes/Context.rst'>BumbleDocGen\Render\Context\Context</a> | null</td>
+            <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a> | null</td>
             <td>-</td>
         </tr>
         </tbody>
@@ -351,7 +351,7 @@ ________
 
 .. _mhasexamples:
 
-* `# <mhasexamples_>`_  ``hasExamples``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L281>`_
+* `# <mhasexamples_>`_  ``hasExamples``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L288>`_
 .. code-block:: php
 
         public function hasExamples(): bool;
@@ -368,7 +368,7 @@ ________
 
 .. _mgetexamples:
 
-* `# <mgetexamples_>`_  ``getExamples``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L290>`_
+* `# <mgetexamples_>`_  ``getExamples``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L297>`_
 .. code-block:: php
 
         public function getExamples(): array;
@@ -385,7 +385,7 @@ ________
 
 .. _mgetfirstexample:
 
-* `# <mgetfirstexample_>`_  ``getFirstExample``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L309>`_
+* `# <mgetfirstexample_>`_  ``getFirstExample``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L316>`_
 .. code-block:: php
 
         public function getFirstExample(): string;
@@ -402,7 +402,7 @@ ________
 
 .. _mgetdocnote:
 
-* `# <mgetdocnote_>`_  ``getDocNote``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L315>`_
+* `# <mgetdocnote_>`_  ``getDocNote``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntity.php#L322>`_
 .. code-block:: php
 
         public function getDocNote(): string;

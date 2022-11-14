@@ -21,7 +21,7 @@ Plugin system based on event model.
  <embed> <h2>Using plugins</h2></embed>
 
 
-Plugins can be added in documentation generator configuration, in method `ConfigurationInterface::getPlugins\(\) </docs/4.pluginSystem/_Classes/ConfigurationInterface.rst#mgetplugins>`_
+Plugins can be added in documentation generator configuration, in method `ConfigurationInterface::getPlugins\(\) </docs/4.pluginSystem/_Classes/ConfigurationInterface.rst>`_
 
 
 .. raw:: html
@@ -32,7 +32,7 @@ Plugins can be added in documentation generator configuration, in method `Config
 If you decide to add a new plugin, there are a few things you need to do:
 
 *  Implement events handling in plugin class
-*  Add plugin to configuration `ConfigurationInterface::getPlugins\(\) </docs/4.pluginSystem/_Classes/ConfigurationInterface.rst#mgetplugins>`_:
+*  Add plugin to configuration `ConfigurationInterface::getPlugins\(\) </docs/4.pluginSystem/_Classes/ConfigurationInterface.rst>`_:
 
 .. code-block:: php
 

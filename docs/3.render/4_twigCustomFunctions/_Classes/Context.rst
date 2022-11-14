@@ -99,22 +99,22 @@ Method details:
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ConfigurationInterface.rst'>BumbleDocGen\ConfigurationInterface</a></td>
+            <td><a href='/BumbleDocGen/ConfigurationInterface.php'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$classEntityCollection</td>
-            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/ClassEntityCollection.rst'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntityCollection.php'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$breadcrumbsHelper</td>
-            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/BreadcrumbsHelper.rst'>BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper</a></td>
+            <td><a href='/BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php'>BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$pluginEventDispatcher</td>
-            <td><a href='/docs/3.render/4_twigCustomFunctions/_Classes/PluginEventDispatcher.rst'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
+            <td><a href='/BumbleDocGen/Plugin/PluginEventDispatcher.php'>BumbleDocGen\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -197,7 +197,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `Roave\\BetterReflection\\Reflector\\Reflector </vendor/roave/better-reflection/src/Reflector/Reflector\.php#L12>`_
+**Return value:** `Roave\\BetterReflection\\Reflector\\Reflector </vendor/roave/better-reflection/src/Reflector/Reflector\.php>`_
 
 ________
 
@@ -214,7 +214,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\ConfigurationInterface </docs/3\.render/4_twigCustomFunctions/_Classes/ConfigurationInterface\.rst>`_
+**Return value:** `BumbleDocGen\\ConfigurationInterface </BumbleDocGen/ConfigurationInterface\.php>`_
 
 ________
 
@@ -231,7 +231,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </docs/3\.render/4_twigCustomFunctions/_Classes/ClassEntityCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
 
 ________
 
@@ -248,7 +248,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </docs/3\.render/4_twigCustomFunctions/_Classes/DocumentedEntityWrappersCollection\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </BumbleDocGen/Render/Context/DocumentedEntityWrappersCollection\.php>`_
 
 ________
 
@@ -265,7 +265,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Render\\Breadcrumbs\\BreadcrumbsHelper </docs/3\.render/4_twigCustomFunctions/_Classes/BreadcrumbsHelper\.rst>`_
+**Return value:** `BumbleDocGen\\Render\\Breadcrumbs\\BreadcrumbsHelper </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper\.php>`_
 
 ________
 
@@ -282,7 +282,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Plugin\\PluginEventDispatcher </docs/3\.render/4_twigCustomFunctions/_Classes/PluginEventDispatcher\.rst>`_
+**Return value:** `BumbleDocGen\\Plugin\\PluginEventDispatcher </BumbleDocGen/Plugin/PluginEventDispatcher\.php>`_
 
 ________
 
