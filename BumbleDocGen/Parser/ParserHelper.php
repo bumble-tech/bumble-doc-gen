@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser;
 
 use Roave\BetterReflection\Reflection\ReflectionClass;
+use Roave\BetterReflection\Reflection\ReflectionMethod;
 use Roave\BetterReflection\Reflector\Reflector;
 
 final class ParserHelper
@@ -167,5 +168,36 @@ final class ParserHelper
             $className = "{$className}::$classNameParts[1]";
         }
         return $className;
+    }
+
+    public static function getMethodReturnValue(Reflector $reflector, ReflectionMethod $reflection): mixed
+    {
+        if (preg_match('/(return )([^;]+)/', $reflection->getBodyCode(), $matches)) {
+            if (
+                str_contains($matches[2], '::') && !str_contains($matches[2], '"') && !str_contains($matches[2], '\'')
+            ) {
+                try {
+                    $nextClass = null;
+                    $parts = explode('::', $matches[2]);
+                    if ($parts[0] === 'parent') {
+                        $nextClass = $reflection->getImplementingClass()->getParentClass();
+                    } elseif ($parts[0] === 'self') {
+                        $nextClass = $reflection->getImplementingClass();
+                    } elseif (self::isClassLoaded($reflector, $parts[0])) {
+                        $nextClass = $reflector->reflectClass($parts[0]);
+                    }
+
+                    if ($nextClass && str_contains($parts[1], '(')) {
+                        $methodName = explode('(', $parts[1])[0];
+                        $nextReflection = $nextClass->getMethod($methodName);
+                        return self::getMethodReturnValue($reflector, $nextReflection);
+                    }
+                } catch (\Exception) {
+                }
+            }
+
+            return str_replace(['\'', '"'], '', trim($matches[2]));
+        }
+        return null;
     }
 }
