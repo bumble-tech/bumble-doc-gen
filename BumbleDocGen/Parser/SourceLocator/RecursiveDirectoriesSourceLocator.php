@@ -12,11 +12,15 @@ use Psr\Cache\CacheItemPoolInterface;
 final class RecursiveDirectoriesSourceLocator extends BaseSourceLocator
 {
     public function __construct(
-        array $directories,
-        array $exclude = [],
+        array                   $directories,
+        array                   $exclude = [],
         ?CacheItemPoolInterface $cache = null
-    ) {
+    )
+    {
         parent::__construct($cache);
+        $directories = array_filter($directories, function ($directory) {
+            return is_dir($directory);
+        });
         $this->getFinder()->in($directories)->exclude($exclude);
     }
 }
