@@ -11,8 +11,10 @@ use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\Reflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
+use Roave\BetterReflection\Reflection\ReflectionClassConstant;
+use Roave\BetterReflection\Reflection\ReflectionMethod;
+use Roave\BetterReflection\Reflection\ReflectionProperty;
 use Roave\BetterReflection\Reflector\Reflector;
 
 abstract class BaseEntity
@@ -21,19 +23,20 @@ abstract class BaseEntity
 
     protected function __construct(
         protected ConfigurationInterface $configuration,
-        protected Reflector $reflector,
-        protected AttributeParser $attributeParser
-    ) {
+        protected Reflector              $reflector,
+        protected AttributeParser        $attributeParser
+    )
+    {
         $this->logger = $this->configuration->getLogger();
     }
 
-    abstract public function getReflection(): Reflection;
+    abstract public function getReflection(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
 
     abstract public function getImplementingReflectionClass(): ReflectionClass;
 
     abstract protected function getDocCommentRecursive(): string;
 
-    abstract protected function getDocCommentReflectionRecursive(): Reflection;
+    abstract protected function getDocCommentReflectionRecursive(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
 
     abstract public function getDescription(): string;
 
@@ -42,7 +45,7 @@ abstract class BaseEntity
         return $this->attributeParser;
     }
 
-    public static function generateObjectIdByReflection(Reflection $reflection): string
+    public static function generateObjectIdByReflection(ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant $reflection): string
     {
         if (method_exists($reflection, 'getImplementingClass')) {
             return "{$reflection->getImplementingClass()->getName()}:{$reflection->getName()}";
@@ -152,7 +155,7 @@ abstract class BaseEntity
                         $className = $name;
 
                         // fixing annotations bug. Result always started with `\\`
-                        if(!str_contains($this->getDocCommentRecursive(), $name)) {
+                        if (!str_contains($this->getDocCommentRecursive(), $name)) {
                             $className = ParserHelper::parseFullClassName(
                                 $name,
                                 $this->reflector,
