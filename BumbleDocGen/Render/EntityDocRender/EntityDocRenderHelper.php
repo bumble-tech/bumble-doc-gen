@@ -90,7 +90,6 @@ final class EntityDocRenderHelper
                 $reflectionClass,
                 $attributeParser
             );
-            $entity->loadClassMembers();
         }
 
         if ($entity) {
