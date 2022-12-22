@@ -26,9 +26,9 @@ final class AsyncSourceLocator implements SourceLocatorInterface
     /**
      * @warning Initial file parsing disabled
      */
-    public function getFinder(): Finder
+    public function getFinder(): ?Finder
     {
-        return new Finder();
+        return null;
     }
 
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator

@@ -10,7 +10,7 @@ use Symfony\Component\Finder\Finder;
 
 interface SourceLocatorInterface
 {
-    public function getFinder(): Finder;
+    public function getFinder(): ?Finder;
 
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator;
 }
