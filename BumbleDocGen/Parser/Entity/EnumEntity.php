@@ -9,20 +9,13 @@ namespace BumbleDocGen\Parser\Entity;
  */
 final class EnumEntity extends ClassEntity
 {
-    public function loadClassMembers(): void
+    public function getPropertyEntityCollection(): PropertyEntityCollection
     {
-        $this->constantEntityCollection = ConstantEntityCollection::createByReflectionClass(
-            $this->configuration,
-            $this->reflector,
-            $this->getReflection(),
-            $this->attributeParser
-        );
-        $this->methodEntityCollection = MethodEntityCollection::createByClassEntity(
-            $this->configuration,
-            $this->reflector,
-            $this,
-            $this->attributeParser
-        );
+        static $propertyEntityCollection = [];
+        if (!isset($propertyEntityCollection[$this->getObjectId()])) {
+            $propertyEntityCollection[$this->getObjectId()] = new PropertyEntityCollection();
+        }
+        return $propertyEntityCollection[$this->getObjectId()];
     }
 
     public function getCasesNames(): array

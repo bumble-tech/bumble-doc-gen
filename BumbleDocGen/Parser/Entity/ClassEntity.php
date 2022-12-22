@@ -19,23 +19,22 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     protected function __construct(
         protected ConfigurationInterface $configuration,
-        protected Reflector $reflector,
-        protected ReflectionClass $reflection,
-        protected AttributeParser $attributeParser,
-        protected ConstantEntityCollection $constantEntityCollection,
-        protected PropertyEntityCollection $propertyEntityCollection,
-        protected MethodEntityCollection $methodEntityCollection,
-    ) {
+        protected Reflector              $reflector,
+        protected ReflectionClass        $reflection,
+        protected AttributeParser        $attributeParser
+    )
+    {
         parent::__construct($configuration, $reflector, $attributeParser);
     }
 
     public static function create(
         ConfigurationInterface $configuration,
-        Reflector $reflector,
-        ReflectionClass $reflectionClass,
-        AttributeParser $attributeParser,
-        bool $reloadCache = false
-    ): ClassEntity {
+        Reflector              $reflector,
+        ReflectionClass        $reflectionClass,
+        AttributeParser        $attributeParser,
+        bool                   $reloadCache = false
+    ): ClassEntity
+    {
         static $classEntities = [];
         $objectId = static::generateObjectIdByReflection($reflectionClass);
         if (!isset($classEntities[$objectId]) || $reloadCache) {
@@ -43,35 +42,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $configuration,
                 $reflector,
                 $reflectionClass,
-                $attributeParser,
-                new ConstantEntityCollection(),
-                new PropertyEntityCollection(),
-                new MethodEntityCollection()
+                $attributeParser
             );
         }
         return $classEntities[$objectId];
-    }
-
-    public function loadClassMembers(): void
-    {
-        $this->constantEntityCollection = ConstantEntityCollection::createByReflectionClass(
-            $this->configuration,
-            $this->reflector,
-            $this->getReflection(),
-            $this->attributeParser
-        );
-        $this->propertyEntityCollection = PropertyEntityCollection::createByReflectionClass(
-            $this->configuration,
-            $this->reflector,
-            $this->getReflection(),
-            $this->attributeParser
-        );
-        $this->methodEntityCollection = MethodEntityCollection::createByClassEntity(
-            $this->configuration,
-            $this->reflector,
-            $this,
-            $this->attributeParser
-        );
     }
 
     protected function getDocCommentReflectionRecursive(): ReflectionClass
@@ -262,17 +236,44 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getConstantEntityCollection(): ConstantEntityCollection
     {
-        return $this->constantEntityCollection;
+        static $constantEntityCollection = [];
+        if (!isset($constantEntityCollection[$this->getObjectId()])) {
+            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByReflectionClass(
+                $this->configuration,
+                $this->reflector,
+                $this->getReflection(),
+                $this->attributeParser
+            );
+        }
+        return $constantEntityCollection[$this->getObjectId()];
     }
 
     public function getPropertyEntityCollection(): PropertyEntityCollection
     {
-        return $this->propertyEntityCollection;
+        static $propertyEntityCollection = [];
+        if (!isset($propertyEntityCollection[$this->getObjectId()])) {
+            $propertyEntityCollection[$this->getObjectId()] = PropertyEntityCollection::createByReflectionClass(
+                $this->configuration,
+                $this->reflector,
+                $this->getReflection(),
+                $this->attributeParser
+            );
+        }
+        return $propertyEntityCollection[$this->getObjectId()];
     }
 
     public function getMethodEntityCollection(): MethodEntityCollection
     {
-        return $this->methodEntityCollection;
+        static $methodEntityCollection = [];
+        if (!isset($methodEntityCollection[$this->getObjectId()])) {
+            $methodEntityCollection[$this->getObjectId()] = MethodEntityCollection::createByClassEntity(
+                $this->configuration,
+                $this->reflector,
+                $this,
+                $this->attributeParser
+            );
+        }
+        return $methodEntityCollection[$this->getObjectId()];
     }
 
     public function getDescription(): string
