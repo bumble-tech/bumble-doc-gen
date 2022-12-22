@@ -45,8 +45,8 @@ final class SourceLocatorsCollection implements \IteratorAggregate
     {
         $finder = new Finder();
         foreach ($this->sourceLocators as $locator) {
-            if($finder = $locator->getFinder()) {
-                $finder->append($finder);
+            if($f = $locator->getFinder()) {
+                $finder->append($f);
             }
         }
         return $finder;
