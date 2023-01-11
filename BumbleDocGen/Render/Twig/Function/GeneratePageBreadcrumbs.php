@@ -41,6 +41,7 @@ final class GeneratePageBreadcrumbs
             !$skipFirstTemplatePage
         );
 
+        $content = "<embed>{$content}</embed>";
         if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($content);

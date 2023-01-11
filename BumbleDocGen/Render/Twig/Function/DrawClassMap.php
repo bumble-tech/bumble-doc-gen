@@ -20,7 +20,7 @@ final class DrawClassMap
     /** @var array<string, string> */
     private array $fileClassmap;
 
-    public function __construct(private Context $context, private string $templateType = 'rst')
+    public function __construct(private Context $context)
     {
     }
 
@@ -35,8 +35,8 @@ final class DrawClassMap
             $this->getDirectoryStructure(...$classEntityCollections),
         );
 
-        $content = "<pre>{$structure}</pre>";
-        if ($this->templateType == 'rst') {
+        $content = "<embed><pre>{$structure}</pre></embed>";
+        if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($content);
         }

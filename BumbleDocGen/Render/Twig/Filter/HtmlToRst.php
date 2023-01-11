@@ -16,6 +16,6 @@ final class HtmlToRst
         if (!$addIndentFromLeftFunction) {
             $addIndentFromLeftFunction = new AddIndentFromLeft();
         }
-        return ".. raw:: html\n\n <embed>{$addIndentFromLeftFunction($text, 1)}</embed>\n";
+        return ".. raw:: html\n\n {$addIndentFromLeftFunction($text, 1)}\n";
     }
 }

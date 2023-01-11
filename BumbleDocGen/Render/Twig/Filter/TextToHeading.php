@@ -30,6 +30,7 @@ final class TextToHeading
     {
         $template = $this->templates[strtolower($headingType)] ?? '%text%';
         $content = str_replace('%text%', $text, $template);
+        $content = "<embed>{$content}</embed>";
         if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($content);

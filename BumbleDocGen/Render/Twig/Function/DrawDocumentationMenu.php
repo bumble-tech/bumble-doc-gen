@@ -96,6 +96,7 @@ final class DrawDocumentationMenu
         }
 
         $content = isset($structure[$startPageKey]) ? $drawPages($structure[$startPageKey]) : '';
+        $content = "<embed>{$content}</embed>";
         if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($content);
