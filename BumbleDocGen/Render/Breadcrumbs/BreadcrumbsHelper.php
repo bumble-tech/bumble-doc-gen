@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Breadcrumbs;
 
 use BumbleDocGen\ConfigurationInterface;
+use Symfony\Component\Finder\Finder;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -14,24 +15,19 @@ use Twig\Loader\FilesystemLoader;
 final class BreadcrumbsHelper
 {
     /**
-     * Main documentation page name
+     * The name template of the file that will be the entry point when switching between pages
      */
-    public const DEFAULT_MAIN_PAGE_NAME = 'readme.rst';
-    /**
-     * The name of the file that will be the entry point when switching between pages
-     */
-    public const DEFAULT_PREV_PAGE_NAME = 'index.rst';
+    public const DEFAULT_PREV_PAGE_NAME_TEMPLATE = '/^((readme|index)\.(rst|md)\.twig)/';
 
     /**
      * @param ConfigurationInterface $configuration
-     * @param string $mainPageName Main documentation page name
-     * @param string $prevPageName Index page for each child section
+     * @param string $prevPageNameTemplate Index page for each child section
      */
     public function __construct(
         private ConfigurationInterface $configuration,
-        private string $mainPageName = self::DEFAULT_MAIN_PAGE_NAME,
-        private string $prevPageName = self::DEFAULT_PREV_PAGE_NAME
-    ) {
+        private string                 $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
+    )
+    {
     }
 
     private function loadTemplateContent(string $templateName): string
@@ -56,15 +52,42 @@ final class BreadcrumbsHelper
 
     private function getPrevPage(string $templateName): ?string
     {
-        $code = $this->loadTemplateContent($templateName);
-        if (preg_match_all('/({%)( ?)(set)( )(prevPage)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
-            return array_reverse($matches[8])[0];
+        static $prevPagesCache = [];
+        if (!isset($prevPagesCache[$templateName])) {
+            $code = $this->loadTemplateContent($templateName);
+            if (preg_match_all('/({%)( ?)(set)( )(prevPage)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
+                return array_reverse($matches[8])[0];
+            }
+            $pathParts = explode('/', $templateName);
+            array_pop($pathParts);
+            array_pop($pathParts);
+
+            $prevPagesCache[$templateName] = null;
+
+            if ($pathParts) {
+                $subPath = count($pathParts) > 1 ? implode('/', $pathParts) : '';
+                $finder = Finder::create()
+                    ->name('*.twig')
+                    ->ignoreVCS(true)
+                    ->ignoreDotFiles(true)
+                    ->ignoreUnreadableDirs()
+                    ->depth(0)
+                    ->in($this->configuration->getTemplatesDir() . '/' . $subPath);
+
+                $indexFile = null;
+                foreach ($finder->files() as $file) {
+                    $indexFile = $file->getFileName();
+                    if (preg_match($this->prevPageNameTemplate, $indexFile)) {
+                        break;
+                    }
+                }
+
+                if ($indexFile) {
+                    $prevPagesCache[$templateName] = $subPath . "/{$indexFile}";
+                }
+            }
         }
-        $pathParts = explode('/', $templateName);
-        array_pop($pathParts);
-        array_pop($pathParts);
-        $defaultValue = (count($pathParts) == 1 ? $this->mainPageName : $this->prevPageName);
-        return $pathParts ? implode('/', $pathParts) . "/{$defaultValue}" : null;
+        return $prevPagesCache[$templateName];
     }
 
     /**
