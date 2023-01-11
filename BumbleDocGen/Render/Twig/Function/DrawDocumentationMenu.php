@@ -22,9 +22,8 @@ final class DrawDocumentationMenu
 {
     /**
      * @param Context $context Render context
-     * @param string $templateType The type of string to be generated ( html or rst )
      */
-    public function __construct(private Context $context, private string $templateType = 'rst')
+    public function __construct(private Context $context)
     {
     }
 
@@ -97,7 +96,7 @@ final class DrawDocumentationMenu
         }
 
         $content = isset($structure[$startPageKey]) ? $drawPages($structure[$startPageKey]) : '';
-        if ($this->templateType == 'rst') {
+        if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($content);
         }

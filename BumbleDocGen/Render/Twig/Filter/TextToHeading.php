@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Filter;
 
+use BumbleDocGen\Render\Context\Context;
+
 /**
  * Convert text to html or rst header
  */
@@ -15,7 +17,7 @@ final class TextToHeading
         'h3' => "<h3>%text%</h3>",
     ];
 
-    public function __construct(private string $templateType = 'rst')
+    public function __construct(private Context $context)
     {
     }
 
@@ -28,7 +30,7 @@ final class TextToHeading
     {
         $template = $this->templates[strtolower($headingType)] ?? '%text%';
         $content = str_replace('%text%', $text, $template);
-        if ($this->templateType == 'rst') {
+        if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($content);
         }

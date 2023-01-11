@@ -18,28 +18,25 @@ use BumbleDocGen\Render\Context\Context;
  */
 final class DrawDocumentedClassLink
 {
-    public const TEMPLATE_RST = 'rst';
-    public const TEMPLATE_HTML = 'html';
-
     /**
      * @param Context $context Render context
      */
-    public function __construct(private Context $context, private string $templateType = self::TEMPLATE_RST)
+    public function __construct(private Context $context)
     {
     }
 
     public function __invoke(
         ClassEntity $classEntity,
-        string $cursor = '',
-        bool $useShortName = true
-    ): string {
+        string      $cursor = '',
+        bool        $useShortName = true
+    ): string
+    {
         $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
         $url = $getDocumentedClassUrlFunction($classEntity->getName(), $cursor);
         $name = $useShortName ? $classEntity->getShortName() : $classEntity->getName();
-
-        return match ($this->templateType) {
-            self::TEMPLATE_RST => "`{$name} <{$url}>`_",
-            default => "<a href='{$url}'>{$name}</a>",
-        };
+        if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
+            return "`{$name} <{$url}>`_";
+        }
+        return "<a href='{$url}'>{$name}</a>";
     }
 }

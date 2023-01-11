@@ -14,9 +14,8 @@ final class GeneratePageBreadcrumbs
 {
     /**
      * @param Context $context Render context
-     * @param string $templateType The type of string to be generated ( html or rst )
      */
-    public function __construct(private Context $context, private string $templateType = 'rst')
+    public function __construct(private Context $context)
     {
     }
 
@@ -33,15 +32,16 @@ final class GeneratePageBreadcrumbs
     public function __invoke(
         string $currentPageTitle,
         string $templatePath,
-        bool $skipFirstTemplatePage = true
-    ): string {
+        bool   $skipFirstTemplatePage = true
+    ): string
+    {
         $content = $this->context->getBreadcrumbsHelper()->renderBreadcrumbs(
             $currentPageTitle,
             $templatePath,
             !$skipFirstTemplatePage
         );
 
-        if ($this->templateType == 'rst') {
+        if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($content);
         }

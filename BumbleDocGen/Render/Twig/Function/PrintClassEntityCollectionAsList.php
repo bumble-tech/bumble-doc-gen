@@ -13,7 +13,7 @@ use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
  */
 final class PrintClassEntityCollectionAsList
 {
-    public function __construct(private Context $context, private string $templateType = 'rst')
+    public function __construct(private Context $context)
     {
     }
 
@@ -25,9 +25,10 @@ final class PrintClassEntityCollectionAsList
      */
     public function __invoke(
         ClassEntityCollection $classEntityCollection,
-        string $type = 'ul',
-        bool $skipDescription = false
-    ): string {
+        string                $type = 'ul',
+        bool                  $skipDescription = false
+    ): string
+    {
         $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
         $result = "<{$type}>";
         foreach ($classEntityCollection as $classEntity) {
@@ -37,7 +38,7 @@ final class PrintClassEntityCollectionAsList
         }
         $result .= "</{$type}>";
 
-        if ($this->templateType == 'rst') {
+        if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($result);
         }
