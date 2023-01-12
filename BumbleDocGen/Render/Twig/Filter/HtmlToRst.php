@@ -16,6 +16,9 @@ final class HtmlToRst
         if (!$addIndentFromLeftFunction) {
             $addIndentFromLeftFunction = new AddIndentFromLeft();
         }
-        return ".. raw:: html\n\n {$addIndentFromLeftFunction($text, 1)}\n";
+        if (!str_starts_with($text, '.. raw:: html')) {
+            return ".. raw:: html\n\n {$addIndentFromLeftFunction($text, 1)}\n";
+        }
+        return $text;
     }
 }
