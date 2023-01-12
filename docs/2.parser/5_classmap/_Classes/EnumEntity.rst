@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.rst">Parser class map</a> <b>/</b> EnumEntity</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> EnumEntity<hr></embed>
 
 Description of the `EnumEntity </BumbleDocGen/Parser/Entity/EnumEntity.php>`_ class:
 -----------------------
@@ -36,7 +33,7 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mloadclassmembers">loadClassMembers</a> </li>
+                <li><a href="#mgetpropertyentitycollection">getPropertyEntityCollection</a> </li>
                 <li><a href="#mgetcasesnames">getCasesNames</a> </li>
         </ol>
 
@@ -59,12 +56,12 @@ Method details:
 
 
 
-.. _mloadclassmembers:
+.. _mgetpropertyentitycollection:
 
-* `# <mloadclassmembers_>`_  ``loadClassMembers``   **|** `source code </BumbleDocGen/Parser/Entity/EnumEntity.php#L12>`_
+* `# <mgetpropertyentitycollection_>`_  ``getPropertyEntityCollection``   **|** `source code </BumbleDocGen/Parser/Entity/EnumEntity.php#L12>`_
 .. code-block:: php
 
-        public function loadClassMembers(): void;
+        public function getPropertyEntityCollection(): BumbleDocGen\Parser\Entity\PropertyEntityCollection;
 
 
 
@@ -72,13 +69,13 @@ Method details:
 **Parameters:** not specified
 
 
-**Return value:** void
+**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </BumbleDocGen/Parser/Entity/PropertyEntityCollection\.php>`_
 
 ________
 
 .. _mgetcasesnames:
 
-* `# <mgetcasesnames_>`_  ``getCasesNames``   **|** `source code </BumbleDocGen/Parser/Entity/EnumEntity.php#L28>`_
+* `# <mgetcasesnames_>`_  ``getCasesNames``   **|** `source code </BumbleDocGen/Parser/Entity/EnumEntity.php#L21>`_
 .. code-block:: php
 
         public function getCasesNames(): array;

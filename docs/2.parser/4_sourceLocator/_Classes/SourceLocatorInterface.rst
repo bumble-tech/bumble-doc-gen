@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.rst">Source locators</a> <b>/</b> SourceLocatorInterface</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.md">Source locators</a> <b>/</b> SourceLocatorInterface<hr></embed>
 
 Description of the `SourceLocatorInterface </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php>`_ class:
 -----------------------
@@ -61,7 +58,7 @@ Method details:
 * `# <mgetfinder_>`_  ``getFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L13>`_
 .. code-block:: php
 
-        public function getFinder(): Symfony\Component\Finder\Finder;
+        public function getFinder(): Symfony\Component\Finder\Finder|null;
 
 
 
@@ -69,7 +66,7 @@ Method details:
 **Parameters:** not specified
 
 
-**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php>`_
+**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php>`_ | null
 
 ________
 

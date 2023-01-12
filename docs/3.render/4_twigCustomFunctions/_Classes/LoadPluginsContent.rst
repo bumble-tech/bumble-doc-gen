@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> <a href="/docs/3.render/4_twigCustomFunctions/index.rst">Template functions</a> <b>/</b> LoadPluginsContent</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/4_twigCustomFunctions/index.md">Template functions</a> <b>/</b> LoadPluginsContent<hr></embed>
 
 Description of the `LoadPluginsContent </BumbleDocGen/Render/Twig/Function/LoadPluginsContent.php>`_ class:
 -----------------------

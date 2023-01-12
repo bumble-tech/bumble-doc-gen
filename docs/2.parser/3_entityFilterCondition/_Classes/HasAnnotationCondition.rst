@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/3_entityFilterCondition/index.rst">Entity filter conditions</a> <b>/</b> HasAnnotationCondition</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/3_entityFilterCondition/index.md">Entity filter conditions</a> <b>/</b> HasAnnotationCondition<hr></embed>
 
 Description of the `HasAnnotationCondition </BumbleDocGen/Parser/FilterCondition/ClassFilterCondition/HasAnnotationCondition.php>`_ class:
 -----------------------

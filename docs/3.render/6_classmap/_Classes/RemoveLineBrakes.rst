@@ -1,6 +1,6 @@
 .. raw:: html
 
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> RemoveLineBrakes</embed>
+  <embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> RemoveLineBrakes<hr></embed>
 
 
 Description of the `RemoveLineBrakes </BumbleDocGen/Render/Twig/Filter/RemoveLineBrakes.php>`_ class:

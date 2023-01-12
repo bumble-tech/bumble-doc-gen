@@ -1,6 +1,6 @@
 .. raw:: html
 
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> GeneratePageBreadcrumbs</embed>
+  <embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> GeneratePageBreadcrumbs<hr></embed>
 
 
 Description of the `GeneratePageBreadcrumbs </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php>`_ class:
@@ -79,10 +79,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php#L19>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php#L18>`_
 .. code-block:: php
 
-        public function __construct(BumbleDocGen\Render\Context\Context $context, string $templateType = 'rst'): mixed;
+        public function __construct(BumbleDocGen\Render\Context\Context $context): mixed;
 
 
 
@@ -105,11 +105,6 @@ Method details:
             <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
-            <tr>
-            <td>$templateType</td>
-            <td>string</td>
-            <td>The type of string to be generated ( html or rst )</td>
-        </tr>
         </tbody>
     </table>
 
@@ -120,7 +115,7 @@ ________
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php#L33>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php#L32>`_
 .. code-block:: php
 
         public function __invoke(string $currentPageTitle, string $templatePath, bool $skipFirstTemplatePage = true): string;

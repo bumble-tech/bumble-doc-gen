@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.rst">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.rst">BumbleDocGen class map</a> <b>/</b> TwigFilterClassParserPlugin</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> TwigFilterClassParserPlugin<hr></embed>
 
 Description of the `TwigFilterClassParserPlugin </SelfDoc/Configuration/Plugin/TwigFilterClassParser/TwigFilterClassParserPlugin.php>`_ class:
 -----------------------

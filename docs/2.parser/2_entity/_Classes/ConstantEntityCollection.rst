@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/2_entity/index.rst">Entities</a> <b>/</b> ConstantEntityCollection</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/2_entity/index.md">Entities</a> <b>/</b> ConstantEntityCollection<hr></embed>
 
 Description of the `ConstantEntityCollection </BumbleDocGen/Parser/Entity/ConstantEntityCollection.php>`_ class:
 -----------------------

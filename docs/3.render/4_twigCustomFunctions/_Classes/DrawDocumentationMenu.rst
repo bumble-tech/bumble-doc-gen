@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> <a href="/docs/3.render/4_twigCustomFunctions/index.rst">Template functions</a> <b>/</b> DrawDocumentationMenu</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/4_twigCustomFunctions/index.md">Template functions</a> <b>/</b> DrawDocumentationMenu<hr></embed>
 
 Description of the `DrawDocumentationMenu </BumbleDocGen/Render/Twig/Function/DrawDocumentationMenu.php>`_ class:
 -----------------------
@@ -103,10 +100,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentationMenu.php#L27>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentationMenu.php#L26>`_
 .. code-block:: php
 
-        public function __construct(BumbleDocGen\Render\Context\Context $context, string $templateType = 'rst'): mixed;
+        public function __construct(BumbleDocGen\Render\Context\Context $context): mixed;
 
 
 
@@ -129,11 +126,6 @@ Method details:
             <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
-            <tr>
-            <td>$templateType</td>
-            <td>string</td>
-            <td>The type of string to be generated ( html or rst )</td>
-        </tr>
         </tbody>
     </table>
 
@@ -144,7 +136,7 @@ ________
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentationMenu.php#L41>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentationMenu.php#L40>`_
 .. code-block:: php
 
         public function __invoke(string|null $startPageKey = NULL, int|null $maxDeep = NULL): string;

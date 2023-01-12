@@ -1,18 +1,16 @@
 .. raw:: html
 
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> Render class map</embed>
-
----------
+  <embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> Render class map<hr></embed>
 
 
 .. raw:: html
 
- <embed> <h1>Render class map</h1></embed>
+  <embed><h1>Render class map</h1></embed>
 
 
 .. raw:: html
 
- <embed> <pre>└──<b>BumbleDocGen</b>/
+  <embed><pre>└──<b>BumbleDocGen</b>/
  │  └──<b>Render</b>/
  │  │  ├──<b>Context</b>/
  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/DocumentTransformableEntityInterface.rst'>DocumentTransformableEntityInterface.php</a>
@@ -37,13 +35,12 @@
  │  │  │  │  └── <a href='/docs/3.render/6_classmap/_Classes/DrawClassMap.rst'>DrawClassMap.php</a>
  │  │  │  ├──<b>Filter</b>/
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/PrepareSourceLink.rst'>PrepareSourceLink.php</a>
+ │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/TextToCodeBlock.rst'>TextToCodeBlock.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/FixStrSize.rst'>FixStrSize.php</a>
- │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/EndTextBySeparatorRst.rst'>EndTextBySeparatorRst.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/StrTypeToUrl.rst'>StrTypeToUrl.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/AddIndentFromLeft.rst'>AddIndentFromLeft.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/HtmlToRst.rst'>HtmlToRst.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/TextToHeading.rst'>TextToHeading.php</a>
- │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/TextToCodeBlockRst.rst'>TextToCodeBlockRst.php</a>
  │  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/Quotemeta.rst'>Quotemeta.php</a>
  │  │  │  │  └── <a href='/docs/3.render/6_classmap/_Classes/RemoveLineBrakes.rst'>RemoveLineBrakes.php</a>
  │  │  │  └── <a href='/docs/3.render/6_classmap/_Classes/MainExtension.rst'>MainExtension.php</a>

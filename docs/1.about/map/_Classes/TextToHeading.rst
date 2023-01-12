@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.rst">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.rst">BumbleDocGen class map</a> <b>/</b> TextToHeading</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> TextToHeading<hr></embed>
 
 Description of the `TextToHeading </BumbleDocGen/Render/Twig/Filter/TextToHeading.php>`_ class:
 -----------------------
@@ -79,10 +76,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Filter/TextToHeading.php#L18>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Filter/TextToHeading.php#L20>`_
 .. code-block:: php
 
-        public function __construct(string $templateType = 'rst'): mixed;
+        public function __construct(BumbleDocGen\Render\Context\Context $context): mixed;
 
 
 
@@ -101,8 +98,8 @@ Method details:
     </thead>
     <tbody>
             <tr>
-            <td>$templateType</td>
-            <td>string</td>
+            <td>$context</td>
+            <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -115,7 +112,7 @@ ________
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/TextToHeading.php#L27>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/TextToHeading.php#L29>`_
 .. code-block:: php
 
         public function __invoke(string $text, string $headingType): string;

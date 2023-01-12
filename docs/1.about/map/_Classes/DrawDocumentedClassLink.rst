@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.rst">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.rst">BumbleDocGen class map</a> <b>/</b> DrawDocumentedClassLink</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> DrawDocumentedClassLink<hr></embed>
 
 Description of the `DrawDocumentedClassLink </BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php>`_ class:
 -----------------------
@@ -79,17 +76,6 @@ Methods:
 
 
 
-Constants:
------------------------
-
-
-
-.. raw:: html
-
-    <ul>
-            <li><a name="qtemplate-rst" href="#qtemplate-rst">#</a> <code>TEMPLATE_RST</code>   <b>|</b> <a href="/BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L21">source code</a> </li>
-            <li><a name="qtemplate-html" href="#qtemplate-html">#</a> <code>TEMPLATE_HTML</code>   <b>|</b> <a href="/BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L22">source code</a> </li>
-        </ul>
 
 
 
@@ -109,10 +95,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L27>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L24>`_
 .. code-block:: php
 
-        public function __construct(BumbleDocGen\Render\Context\Context $context, string $templateType = BumbleDocGen\Render\Twig\Function\DrawDocumentedClassLink::TEMPLATE_RST): mixed;
+        public function __construct(BumbleDocGen\Render\Context\Context $context): mixed;
 
 
 
@@ -135,11 +121,6 @@ Method details:
             <td><a href='/BumbleDocGen/Render/Context/Context.php'>BumbleDocGen\Render\Context\Context</a></td>
             <td>Render context</td>
         </tr>
-            <tr>
-            <td>$templateType</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
         </tbody>
     </table>
 
@@ -150,7 +131,7 @@ ________
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L31>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawDocumentedClassLink.php#L28>`_
 .. code-block:: php
 
         public function __invoke(BumbleDocGen\Parser\Entity\ClassEntity $classEntity, string $cursor = '', bool $useShortName = true): string;

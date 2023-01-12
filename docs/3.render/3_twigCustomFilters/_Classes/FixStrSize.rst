@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> <a href="/docs/3.render/3_twigCustomFilters/index.rst">Template filters</a> <b>/</b> FixStrSize</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/3_twigCustomFilters/index.md">Template filters</a> <b>/</b> FixStrSize<hr></embed>
 
 Description of the `FixStrSize </BumbleDocGen/Render/Twig/Filter/FixStrSize.php>`_ class:
 -----------------------

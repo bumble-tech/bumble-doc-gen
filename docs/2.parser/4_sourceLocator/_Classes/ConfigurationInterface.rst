@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.rst">Source locators</a> <b>/</b> ConfigurationInterface</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.md">Source locators</a> <b>/</b> ConfigurationInterface<hr></embed>
 
 Description of the `ConfigurationInterface </BumbleDocGen/ConfigurationInterface.php>`_ class:
 -----------------------

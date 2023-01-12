@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.rst">Source locators</a> <b>/</b> AsyncSourceLocator</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.md">Source locators</a> <b>/</b> AsyncSourceLocator<hr></embed>
 
 Description of the `AsyncSourceLocator </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php>`_ class:
 -----------------------
@@ -119,7 +116,7 @@ ________
 * `# <mgetfinder_>`_  ``getFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L29>`_
 .. code-block:: php
 
-        public function getFinder(): Symfony\Component\Finder\Finder;
+        public function getFinder(): Symfony\Component\Finder\Finder|null;
 
 
 
@@ -127,7 +124,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php>`_
+**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php>`_ | null
 
 ________
 

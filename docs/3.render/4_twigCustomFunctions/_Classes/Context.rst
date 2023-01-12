@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.rst">Render</a> <b>/</b> <a href="/docs/3.render/4_twigCustomFunctions/index.rst">Template functions</a> <b>/</b> Context</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/4_twigCustomFunctions/index.md">Template functions</a> <b>/</b> Context<hr></embed>
 
 Description of the `Context </BumbleDocGen/Render/Context/Context.php>`_ class:
 -----------------------

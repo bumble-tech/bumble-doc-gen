@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.rst">Plugin system</a> <b>/</b> OnAddClassEntityToCollection</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> OnAddClassEntityToCollection<hr></embed>
 
 Description of the `OnAddClassEntityToCollection </BumbleDocGen/Plugin/Event/Parser/OnAddClassEntityToCollection.php>`_ class:
 -----------------------

@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.rst">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.rst">BumbleDocGen class map</a> <b>/</b> ParserHelper</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> ParserHelper<hr></embed>
 
 Description of the `ParserHelper </BumbleDocGen/Parser/ParserHelper.php>`_ class:
 -----------------------
@@ -38,6 +35,7 @@ Methods:
                 <li><a href="#misclassloaded">isClassLoaded</a> </li>
                 <li><a href="#mgetuseslist">getUsesList</a> </li>
                 <li><a href="#mparsefullclassname">parseFullClassName</a> </li>
+                <li><a href="#mgetclassfromfile">getClassFromFile</a> </li>
                 <li><a href="#mgetmethodreturnvalue">getMethodReturnValue</a> </li>
         </ol>
 
@@ -246,9 +244,45 @@ ________
 
 ________
 
+.. _mgetclassfromfile:
+
+* `# <mgetclassfromfile_>`_  ``getClassFromFile``   **|** `source code </BumbleDocGen/Parser/ParserHelper.php#L173>`_
+.. code-block:: php
+
+        public static function getClassFromFile(mixed $file): string|null;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$file</td>
+            <td>mixed</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** string | null
+
+________
+
 .. _mgetmethodreturnvalue:
 
-* `# <mgetmethodreturnvalue_>`_  ``getMethodReturnValue``   **|** `source code </BumbleDocGen/Parser/ParserHelper.php#L173>`_
+* `# <mgetmethodreturnvalue_>`_  ``getMethodReturnValue``   **|** `source code </BumbleDocGen/Parser/ParserHelper.php#L197>`_
 .. code-block:: php
 
         public static function getMethodReturnValue(Roave\BetterReflection\Reflector\Reflector $reflector, Roave\BetterReflection\Reflection\ReflectionMethod $reflection): mixed;

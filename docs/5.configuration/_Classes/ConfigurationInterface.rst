@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/5.configuration/index.rst">Documentation generator configuration</a> <b>/</b> ConfigurationInterface</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/5.configuration/index.md">Documentation generator configuration</a> <b>/</b> ConfigurationInterface<hr></embed>
 
 Description of the `ConfigurationInterface </BumbleDocGen/ConfigurationInterface.php>`_ class:
 -----------------------

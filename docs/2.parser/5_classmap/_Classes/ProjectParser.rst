@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.rst">Parser class map</a> <b>/</b> ProjectParser</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> ProjectParser<hr></embed>
 
 Description of the `ProjectParser </BumbleDocGen/Parser/ProjectParser.php>`_ class:
 -----------------------
@@ -70,7 +67,7 @@ Method details:
 
 .. _mcreate:
 
-* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L36>`_
+* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L31>`_
 .. code-block:: php
 
         public static function create(BumbleDocGen\ConfigurationInterface $configuration, BumbleDocGen\Plugin\PluginEventDispatcher $pluginEventDispatcher): BumbleDocGen\Parser\ProjectParser;
@@ -111,7 +108,7 @@ ________
 
 .. _mparse:
 
-* `# <mparse_>`_  ``parse``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L71>`_
+* `# <mparse_>`_  ``parse``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L57>`_
 .. code-block:: php
 
         public function parse(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -128,7 +125,7 @@ ________
 
 .. _mgetreflector:
 
-* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L82>`_
+* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L68>`_
 .. code-block:: php
 
         public function getReflector(): Roave\BetterReflection\Reflector\Reflector;

@@ -1,6 +1,6 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/3_twigCustomFilters/index.md">Template filters</a> <b>/</b> TextToHeading<hr></embed>
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> TextToCodeBlock<hr></embed>
 
-Description of the `TextToHeading </BumbleDocGen/Render/Twig/Filter/TextToHeading.php>`_ class:
+Description of the `TextToCodeBlock </BumbleDocGen/Render/Twig/Filter/TextToCodeBlock.php>`_ class:
 -----------------------
 
 
@@ -12,12 +12,12 @@ Description of the `TextToHeading </BumbleDocGen/Render/Twig/Filter/TextToHeadin
 
     namespace BumbleDocGen\Render\Twig\Filter;
 
-    final class TextToHeading
+    final class TextToCodeBlock
 
 
 ..
 
-        Convert text to html or rst header
+        Convert text to code block
 
 
 
@@ -28,7 +28,7 @@ Settings:
 ==============  ================
 name            value
 ==============  ================
-Filter name     **textToHeading**
+Filter name     **textToCodeBlock**
 ==============  ================
 
 
@@ -76,7 +76,7 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Filter/TextToHeading.php#L20>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Render/Twig/Filter/TextToCodeBlock.php#L15>`_
 .. code-block:: php
 
         public function __construct(BumbleDocGen\Render\Context\Context $context): mixed;
@@ -112,10 +112,10 @@ ________
 
 .. _m-invoke:
 
-* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/TextToHeading.php#L29>`_
+* `# <m-invoke_>`_  ``__invoke``   **|** `source code </BumbleDocGen/Render/Twig/Filter/TextToCodeBlock.php#L24>`_
 .. code-block:: php
 
-        public function __invoke(string $text, string $headingType): string;
+        public function __invoke(string $text, string $codeBlockType): string;
 
 
 
@@ -136,12 +136,12 @@ ________
             <tr>
             <td>$text</td>
             <td>string</td>
-            <td>-</td>
+            <td>Processed text</td>
         </tr>
             <tr>
-            <td>$headingType</td>
+            <td>$codeBlockType</td>
             <td>string</td>
-            <td>Choose heading type: H1, H2, H3</td>
+            <td>Code block type (e.g. php or console )</td>
         </tr>
         </tbody>
     </table>

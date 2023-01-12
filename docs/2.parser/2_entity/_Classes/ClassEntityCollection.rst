@@ -1,7 +1,4 @@
-.. raw:: html
-
- <embed> <a href="/docs/readme.rst">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.rst">Parser</a> <b>/</b> <a href="/docs/2.parser/2_entity/index.rst">Entities</a> <b>/</b> ClassEntityCollection</embed>
-
+<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/2_entity/index.md">Entities</a> <b>/</b> ClassEntityCollection<hr></embed>
 
 Description of the `ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection.php>`_ class:
 -----------------------
@@ -77,7 +74,7 @@ Method details:
 
 .. _mcreatebyreflector:
 
-* `# <mcreatebyreflector_>`_  ``createByReflector``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L25>`_
+* `# <mcreatebyreflector_>`_  ``createByReflector``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L27>`_
 .. code-block:: php
 
         public static function createByReflector(BumbleDocGen\ConfigurationInterface $configuration, Roave\BetterReflection\Reflector\Reflector $reflector, BumbleDocGen\Parser\AttributeParser $attributeParser, BumbleDocGen\Plugin\PluginEventDispatcher $pluginEventDispatcher): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -128,7 +125,7 @@ ________
 
 .. _madd:
 
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L60>`_
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L61>`_
 .. code-block:: php
 
         public function add(BumbleDocGen\Parser\Entity\ClassEntity $classEntity, bool $reload = false): BumbleDocGen\Parser\Entity\ClassEntityCollection;
