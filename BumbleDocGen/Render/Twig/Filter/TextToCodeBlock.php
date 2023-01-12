@@ -25,9 +25,9 @@ final class TextToCodeBlock
     {
         $addIndentFromLeftFunction = new AddIndentFromLeft();
 
-        if (str_contains($this->context->getCurrentTemplateFilePatch(), '.rst')) {
+        if ($this->context->isCurrentTemplateRst()) {
             return ".. code-block:: {$codeBlockType}\n\n{$addIndentFromLeftFunction($text, 1)}\n";
-        } elseif (str_contains($this->context->getCurrentTemplateFilePatch(), '.md')) {
+        } elseif ($this->context->isCurrentTemplateMd()) {
             return "```{$codeBlockType}\n{$addIndentFromLeftFunction($text, 1)}\n```\n";
         }
         return "<code>{$addIndentFromLeftFunction($text, 1)}</code>";

@@ -38,8 +38,8 @@ final class PrintClassEntityCollectionAsList
         }
         $result .= "</{$type}>";
 
-        $result = "<embed>{$result}</embed>";
-        if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
+        $result = "<embed> {$result} </embed>";
+        if ($this->context->isCurrentTemplateRst()) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($result);
         }

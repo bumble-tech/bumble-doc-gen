@@ -35,8 +35,8 @@ final class DrawClassMap
             $this->getDirectoryStructure(...$classEntityCollections),
         );
 
-        $content = "<embed><pre>{$structure}</pre></embed>";
-        if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
+        $content = "<embed> <pre>{$structure}</pre> </embed>";
+        if ($this->context->isCurrentTemplateRst()) {
             $htmlToRstFunction = new HtmlToRst();
             return $htmlToRstFunction($content);
         }

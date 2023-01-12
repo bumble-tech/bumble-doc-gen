@@ -34,7 +34,7 @@ final class DrawDocumentedClassLink
         $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
         $url = $getDocumentedClassUrlFunction($classEntity->getName(), $cursor);
         $name = $useShortName ? $classEntity->getShortName() : $classEntity->getName();
-        if (str_contains($this->context->getCurrentTemplateFilePatch(), 'rst')) {
+        if ($this->context->isCurrentTemplateRst()) {
             return "`{$name} <{$url}>`_";
         }
         return "<a href='{$url}'>{$name}</a>";

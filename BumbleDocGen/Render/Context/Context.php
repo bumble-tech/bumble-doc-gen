@@ -21,10 +21,11 @@ final class Context
 
     public function __construct(
         private ConfigurationInterface $configuration,
-        private ClassEntityCollection $classEntityCollection,
-        private BreadcrumbsHelper $breadcrumbsHelper,
-        private PluginEventDispatcher $pluginEventDispatcher
-    ) {
+        private ClassEntityCollection  $classEntityCollection,
+        private BreadcrumbsHelper      $breadcrumbsHelper,
+        private PluginEventDispatcher  $pluginEventDispatcher
+    )
+    {
         $this->entityWrappersCollection = new DocumentedEntityWrappersCollection();
         $this->reflector = $classEntityCollection->getReflector();
     }
@@ -43,6 +44,16 @@ final class Context
     public function getCurrentTemplateFilePatch(): string
     {
         return $this->currentTemplateFilePath;
+    }
+
+    public function isCurrentTemplateRst(): bool
+    {
+        return str_ends_with($this->getCurrentTemplateFilePatch(), '.rst.twig');
+    }
+
+    public function isCurrentTemplateMd(): bool
+    {
+        return str_ends_with($this->getCurrentTemplateFilePatch(), '.md.twig');
     }
 
     public function getReflector(): Reflector
