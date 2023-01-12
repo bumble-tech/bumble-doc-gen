@@ -7,9 +7,9 @@ namespace BumbleDocGen\Render\Twig\Filter;
 use BumbleDocGen\Render\Context\Context;
 
 /**
- * Convert text to rst header
+ * Convert text to code block
  */
-final class TextToCodeBlockRst
+final class TextToCodeBlock
 {
 
     public function __construct(private Context $context)
