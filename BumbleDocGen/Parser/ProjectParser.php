@@ -13,12 +13,7 @@ use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\Reflector\Reflector;
-use Roave\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber;
-use Roave\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber;
 use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
-use Roave\BetterReflection\SourceLocator\Type\AutoloadSourceLocator;
-use Roave\BetterReflection\SourceLocator\Type\EvaledCodeSourceLocator;
-use Roave\BetterReflection\SourceLocator\Type\PhpInternalSourceLocator;
 
 /**
  * Class for project parsing using source locators
@@ -37,29 +32,20 @@ final class ProjectParser
         ConfigurationInterface $configuration,
         PluginEventDispatcher $pluginEventDispatcher
     ): ProjectParser {
-        $parser = (new \PhpParser\ParserFactory)->create(
-            \PhpParser\ParserFactory::PREFER_PHP7
-        );
+        $betterReflection = (new BetterReflection());
 
         $sourceLocatorsCollection = $pluginEventDispatcher->dispatch(
             new OnLoadSourceLocatorsCollection($configuration->getSourceLocators())
         )->getSourceLocatorsCollection();
 
-        $locator = (new BetterReflection())->astLocator();
-
+        $locator = $betterReflection->astLocator();
         $sourceLocator = new AggregateSourceLocator(
             array_merge(
                 $sourceLocatorsCollection->convertToReflectorSourceLocatorsList($locator),
                 [
                     new CachedSourceLocator(
-                        new AutoloadSourceLocator($locator), $configuration->getSourceLocatorCacheItemPool()
+                        $betterReflection->sourceLocator(), $configuration->getSourceLocatorCacheItemPool()
                     ),
-                    new CachedSourceLocator(
-                        new PhpInternalSourceLocator(
-                            $locator, new PhpStormStubsSourceStubber($parser)
-                        ), $configuration->getSourceLocatorCacheItemPool()
-                    ),
-                    new EvaledCodeSourceLocator($locator, new ReflectionSourceStubber()),
                 ],
             )
         );
