@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\SourceLocator\Internal;
 
-use Psr\Cache\CacheItemPoolInterface;
+use BumbleDocGen\ConfigurationInterface;
 use Roave\BetterReflection\Identifier\Identifier;
 use Roave\BetterReflection\Identifier\IdentifierType;
 use Roave\BetterReflection\Reflection\Reflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
+use Roave\BetterReflection\SourceLocator\Located\LocatedSource;
 use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
 
 use function array_key_exists;
@@ -27,7 +28,7 @@ final class CachedSourceLocator implements SourceLocator
     /** @var array<string, list<Reflection>> indexed by reflector key and identifier type cache key */
     private array $cacheByIdentifierTypeKeyAndOid = [];
 
-    public function __construct(private SourceLocator $wrappedSourceLocator, private CacheItemPoolInterface $cache)
+    public function __construct(private SourceLocator $wrappedSourceLocator, private ConfigurationInterface $configuration)
     {
     }
 
@@ -38,21 +39,36 @@ final class CachedSourceLocator implements SourceLocator
             return $this->cacheByIdentifierKeyAndOid[$cacheKey];
         }
 
+        $cache = $this->configuration->getSourceLocatorCacheItemPool();
         $locateIdentifier = null;
-        if ($this->cache->hasItem($cacheKey)) {
-            $cachedData = $this->cache->getItem($cacheKey)->get();
+        if ($cache->hasItem($cacheKey)) {
+            $cachedData = $cache->getItem($cacheKey)->get();
+
+            $actualFileName = null;
+            if ($cachedData['fileName']) {
+                $actualFileName = $this->configuration->getProjectRoot() . $cachedData['fileName'];
+            }
+
             if (
-                !$cachedData['fileName'] ||
-                file_exists($cachedData['fileName']) && md5_file($cachedData['fileName']) === $cachedData['fileHash']
+                (!$actualFileName ||
+                    file_exists($actualFileName) && md5_file($actualFileName) === $cachedData['fileHash']) &&
+                isset($cachedData['locatedSourceSource']) && isset($cachedData['locatedSourceName'])
             ) {
+
+                $locatedSource = new LocatedSource(
+                    $cachedData['locatedSourceSource'],
+                    $cachedData['locatedSourceName'],
+                    $actualFileName
+                );
+
                 $locateIdentifier = $cachedData['className']::createFromNode(
                     $reflector,
                     $cachedData['node'],
-                    $cachedData['locatedSource'],
+                    $locatedSource,
                     $cachedData['namespaceAst']
                 );
             } else {
-                $this->cache->deleteItem($cacheKey);
+                $cache->deleteItem($cacheKey);
             }
         }
 
@@ -63,19 +79,22 @@ final class CachedSourceLocator implements SourceLocator
                 $locatedSource = $locateIdentifier->getLocatedSource();
                 $namespaceAst = $locateIdentifier->getDeclaringNamespaceAst();
                 $className = get_class($locateIdentifier);
-                $cacheItem = $this->cache->getItem($cacheKey);
+                $cacheItem = $cache->getItem($cacheKey);
+                $actualFileName = $locateIdentifier->getFileName() ? str_replace($this->configuration->getProjectRoot(), '', $locateIdentifier->getFileName()) : null;
                 $cacheItem->set([
                     'className' => $className,
                     'node' => $node,
                     'locatedSource' => $locatedSource,
                     'namespaceAst' => $namespaceAst,
-                    'fileName' => $locateIdentifier->getFileName(),
+                    'fileName' => $actualFileName,
+                    'locatedSourceName' => $locateIdentifier->getLocatedSource()->getName(),
+                    'locatedSourceSource' => $locateIdentifier->getLocatedSource()->getSource(),
                     'fileHash' => $locateIdentifier->getFileName() ? md5_file($locateIdentifier->getFileName()) : null,
                 ]);
                 if (!$locateIdentifier->getFileName()) {
                     $cacheItem->expiresAfter(604800);
                 }
-                $this->cache->save($cacheItem);
+                $cache->save($cacheItem);
             }
         }
         return $this->cacheByIdentifierKeyAndOid[$cacheKey] = $locateIdentifier;

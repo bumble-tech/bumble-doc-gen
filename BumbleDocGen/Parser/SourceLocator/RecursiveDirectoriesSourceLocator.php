@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\SourceLocator;
 
-use Psr\Cache\CacheItemPoolInterface;
-
 /**
  * Loads all files from the specified directories, which are traversed recursively
  */
@@ -13,11 +11,10 @@ final class RecursiveDirectoriesSourceLocator extends BaseSourceLocator
 {
     public function __construct(
         array                   $directories,
-        array                   $exclude = [],
-        ?CacheItemPoolInterface $cache = null
+        array                   $exclude = []
     )
     {
-        parent::__construct($cache);
+        parent::__construct();
         $directories = array_filter($directories, function ($directory) {
             return is_dir($directory);
         });

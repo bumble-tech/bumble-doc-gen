@@ -14,6 +14,7 @@ use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\Reflector\Reflector;
 use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
+use Roave\BetterReflection\SourceLocator\Type\MemoizingSourceLocator;
 
 /**
  * Class for project parsing using source locators
@@ -21,17 +22,19 @@ use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 final class ProjectParser
 {
     private function __construct(
-        private Reflector $reflector,
+        private Reflector              $reflector,
         private ConfigurationInterface $configuration,
-        private PluginEventDispatcher $pluginEventDispatcher,
-        private LoggerInterface $logger
-    ) {
+        private PluginEventDispatcher  $pluginEventDispatcher,
+        private LoggerInterface        $logger
+    )
+    {
     }
 
     public static function create(
         ConfigurationInterface $configuration,
-        PluginEventDispatcher $pluginEventDispatcher
-    ): ProjectParser {
+        PluginEventDispatcher  $pluginEventDispatcher
+    ): ProjectParser
+    {
         $betterReflection = (new BetterReflection());
 
         $sourceLocatorsCollection = $pluginEventDispatcher->dispatch(
@@ -39,16 +42,9 @@ final class ProjectParser
         )->getSourceLocatorsCollection();
 
         $locator = $betterReflection->astLocator();
-        $sourceLocator = new AggregateSourceLocator(
-            array_merge(
-                $sourceLocatorsCollection->convertToReflectorSourceLocatorsList($locator),
-                [
-                    new CachedSourceLocator(
-                        $betterReflection->sourceLocator(), $configuration->getSourceLocatorCacheItemPool()
-                    ),
-                ],
-            )
-        );
+        $sourceLocators = $sourceLocatorsCollection->convertToReflectorSourceLocatorsList($locator);
+        $sourceLocators[] = $betterReflection->sourceLocator();
+        $sourceLocator = new CachedSourceLocator(new AggregateSourceLocator($sourceLocators), $configuration);
 
         $reflector = new DefaultReflector($sourceLocator);
         return new self($reflector, $configuration, $pluginEventDispatcher, $configuration->getLogger());

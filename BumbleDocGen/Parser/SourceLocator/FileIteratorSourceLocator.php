@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\SourceLocator;
 
-use Psr\Cache\CacheItemPoolInterface;
-
 /**
  * Loads all files using an iterator
  */
 final class FileIteratorSourceLocator extends BaseSourceLocator
 {
-    public function __construct(\Iterator $fileInfoIterator, ?CacheItemPoolInterface $cache = null)
+    public function __construct(\Iterator $fileInfoIterator)
     {
-        parent::__construct($cache);
+        parent::__construct();
         $this->getFinder()->append($fileInfoIterator);
     }
 }

@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\SourceLocator;
 
-use Psr\Cache\CacheItemPoolInterface;
-
 /**
  * Loads all files from the specified directory
  */
 final class DirectorySourceLocator extends BaseSourceLocator
 {
     public function __construct(
-        string $directory,
-        ?CacheItemPoolInterface $cache = null
+        string $directory
     ) {
-        parent::__construct($cache);
+        parent::__construct();
         $this->getFinder()->in($directory)->depth("==0");
     }
 }
