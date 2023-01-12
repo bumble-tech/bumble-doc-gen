@@ -21,7 +21,7 @@ final class EnumEntity extends ClassEntity
     public function getCasesNames(): array
     {
         $caseNames = [];
-        foreach ($this->reflection->getCases() as $case) {
+        foreach ($this->getReflection()->getCases() as $case) {
             $caseNames[] = $case->getName();
         }
         return $caseNames;

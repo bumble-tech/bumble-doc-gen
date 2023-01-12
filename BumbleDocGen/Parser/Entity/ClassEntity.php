@@ -68,7 +68,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 }
                 return $reflectionClass;
             };
-            $docCommentsReflectionCache[$objectId] = $getDocCommentReflection($this->reflection);
+            $docCommentsReflectionCache[$objectId] = $getDocCommentReflection($this->getReflection());
         }
         return $docCommentsReflectionCache[$objectId];
     }
@@ -102,7 +102,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getImplementingReflectionClass(): ReflectionClass
     {
-        return $this->reflection;
+        return $this->getReflection();
     }
 
     public function hasAnnotationKey(string $annotationKey): bool
@@ -150,21 +150,22 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $modifiersString = [];
 
-        if ($this->getReflection()->isFinal() && !$this->getReflection()->isEnum()) {
+        $reflection = $this->getReflection();
+        if ($reflection->isFinal() && !$reflection->isEnum()) {
             $modifiersString[] = 'final';
         }
 
-        $isInterface = $this->getReflection()->isInterface();
+        $isInterface = $reflection->isInterface();
         if ($isInterface) {
             $modifiersString[] = 'interface';
             return implode(' ', $modifiersString);
-        } elseif ($this->getReflection()->isAbstract()) {
+        } elseif ($reflection->isAbstract()) {
             $modifiersString[] = 'abstract';
         }
 
-        if ($this->getReflection()->isTrait()) {
+        if ($reflection->isTrait()) {
             $modifiersString[] = 'trait';
-        } elseif ($this->getReflection()->isEnum()) {
+        } elseif ($reflection->isEnum()) {
             $modifiersString[] = 'enum';
         } else {
             $modifiersString[] = 'class';
@@ -178,10 +179,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         static $extends = [];
         $objectId = $this->getObjectId();
         if (!isset($extends[$objectId])) {
-            if ($this->reflection->isInterface()) {
-                $extends[$objectId] = $this->reflection->getInterfaceNames()[0] ?? null;
+            $reflection = $this->getReflection();
+            if ($reflection->isInterface()) {
+                $extends[$objectId] = $reflection->getInterfaceNames()[0] ?? null;
             } else {
-                $extends[$objectId] = $this->reflection->getParentClass()?->getName();
+                $extends[$objectId] = $reflection->getParentClass()?->getName();
             }
         }
         return $extends[$objectId];
@@ -192,7 +194,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         static $interfaces = [];
         $objectId = $this->getObjectId();
         if (!isset($interfaces[$objectId])) {
-            $interfaces[$objectId] = !$this->reflection->isInterface() ? $this->reflection->getInterfaceNames() : [];
+            $reflection = $this->getReflection();
+            $interfaces[$objectId] = !$reflection->isInterface() ? $reflection->getInterfaceNames() : [];
         }
         return $interfaces[$objectId];
     }
@@ -205,10 +208,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         static $parentClassNames = [];
         $objectId = $this->getObjectId();
         if (!isset($parentClassNames[$objectId])) {
-            if ($this->reflection->isInterface()) {
-                $parentClassNames[$objectId] = $this->reflection->getInterfaceNames();
+            $reflection = $this->getReflection();
+            if ($reflection->isInterface()) {
+                $parentClassNames[$objectId] = $reflection->getInterfaceNames();
             } else {
-                $parentClassNames[$objectId] = $this->reflection->getParentClassNames();
+                $parentClassNames[$objectId] = $reflection->getParentClassNames();
             }
         }
         return $parentClassNames[$objectId];
@@ -224,7 +228,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         static $traits = [];
         $objectId = $this->getObjectId();
         if (!isset($traits[$objectId])) {
-            $traits[$objectId] = $this->reflection->getTraitNames();
+            $traits[$objectId] = $this->getReflection()->getTraitNames();
         }
         return $traits[$objectId];
     }
@@ -284,6 +288,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function isEnum(): bool
     {
-        return $this->reflection->isEnum();
+        return $this->getReflection()->isEnum();
     }
 }
