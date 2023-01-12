@@ -1,28 +1,28 @@
 {% set title = 'Entity filter conditions' %}
-{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+{{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Entity filter conditions" | textToHeading('H1') }}
 
-In order to determine whether an entity can be added to a collection (for example, `ClassEntity`_ in a `ClassEntityCollection`_ ), filter conditions must be used.
+In order to determine whether an entity can be added to a collection (for example, <a>ClassEntity</a> in a <a>ClassEntityCollection</a> ), filter conditions must be used.
 
 Filtering conditions must be set in the configuration:
 
-*  For classes - `ConfigurationInterface::classEntityFilterCondition()`_
-*  For class constants - `ConfigurationInterface::classConstantEntityFilterCondition()`_
-*  For class properties - `ConfigurationInterface::propertyEntityFilterCondition()`_
-*  For class methods - `ConfigurationInterface::methodEntityFilterCondition()`_
+*  For classes - <a>ConfigurationInterface::classEntityFilterCondition()</a>
+*  For class constants - <a>ConfigurationInterface::classConstantEntityFilterCondition()</a>
+*  For class properties - <a>ConfigurationInterface::propertyEntityFilterCondition()</a>
+*  For class methods - <a>ConfigurationInterface::methodEntityFilterCondition()</a>
 
 **Usage example:**
 
 {{ "public function classEntityFilterCondition(ClassEntity $classEntity): ConditionInterface
 {
     return new TrueCondition();
-}" | textToCodeBlockRst('php') }}
+}" | textToCodeBlock('php') }}
 
 
-Any conditions must comply with interface `ConditionInterface`_.
+Any conditions must comply with interface <a>ConditionInterface</a>.
 
-To group conditions, there is a `ConditionGroup`_ in the documentation generator:
+To group conditions, there is a <a>ConditionGroup</a> in the documentation generator:
 
 {{ "public function methodEntityFilterCondition(MethodEntity $methodEntity): ConditionInterface {
     return ConditionGroup::create(
@@ -35,7 +35,7 @@ To group conditions, there is a `ConditionGroup`_ in the documentation generator
             $methodEntity
         )
     );
-}" | textToCodeBlockRst('php') }}
+}" | textToCodeBlock('php') }}
 
 
 {{ "Built-in filter conditions" | textToHeading('H2') }}

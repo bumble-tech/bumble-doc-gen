@@ -1,5 +1,5 @@
 {% set title = 'Plugin system' %}
-{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+{{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Plugin system" | textToHeading('H1') }}
 
@@ -11,7 +11,7 @@ Plugin system based on event model.
 
 {{ "Using plugins" | textToHeading('H2') }}
 
-Plugins can be added in documentation generator configuration, in method `ConfigurationInterface::getPlugins()`_
+Plugins can be added in documentation generator configuration, in method <a>ConfigurationInterface::getPlugins()</a>
 
 
 {{ "Adding a new plugin" | textToHeading('H2') }}
@@ -19,7 +19,7 @@ Plugins can be added in documentation generator configuration, in method `Config
 If you decide to add a new plugin, there are a few things you need to do:
 
 *  Implement events handling in plugin class
-*  Add plugin to configuration `ConfigurationInterface::getPlugins()`_:
+*  Add plugin to configuration <a>ConfigurationInterface::getPlugins()</a>:
 
 {{ "public function getPlugins(): PluginsCollection
 {
@@ -27,7 +27,7 @@ If you decide to add a new plugin, there are a few things you need to do:
     $plugins->add(new TwigFunctionClassParserPlugin());
     $plugins->add(new TwigFilterClassParserPlugin());
     return $plugins;
-}" | textToCodeBlockRst('php') }}
+}" | textToCodeBlock('php') }}
 
 
 {{ "Available plugin events" | textToHeading('H2') }}

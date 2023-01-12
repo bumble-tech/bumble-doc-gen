@@ -1,12 +1,12 @@
 {% set title = 'About documentation generator' %}
-{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+{{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "How to use the library" | textToHeading('H1') }}
 
 To use the library, you need to follow only 3 steps:
 
-*  Create a configuration file that implements the interface `ConfigurationInterface`_.
- To simplify this step, a basic configuration ( `BaseConfiguration`_ ) with the main settings has already been created, you can use it as a parent class.
+*  Create a configuration file that implements the interface <a>ConfigurationInterface</a>.
+ To simplify this step, a basic configuration ( <a>BaseConfiguration</a> ) with the main settings has already been created, you can use it as a parent class.
 
 *  Add documentation templates. These templates are the basis for future documentation. An example of the implementation of templates can be found here: *SelfDoc/Configuration/templates*
 
@@ -14,9 +14,9 @@ To use the library, you need to follow only 3 steps:
 
 {{ "$configuration = new Configuration();
 
-DocGenerator::generateDocumentation($configuration);" | textToCodeBlockRst('php') }}
+DocGenerator::generateDocumentation($configuration);" | textToCodeBlock('php') }}
 
 
 {{ "Project сlass map" | textToHeading('H2') }}
 
-You can see the full class map of this project on the page `BumbleDocGen class map`_
+You can see the full class map of this project on the page <a>BumbleDocGen class map</a>

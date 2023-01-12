@@ -1,0 +1,67 @@
+{% set title = 'Template functions' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Template filters:" | textToHeading('H1') }}
+
+When generating pages, you can use functions that allow you to modify the content.
+Functions available during page generation are defined in method <a>MainExtension::getFunctions()</a>
+
+We use the twig template engine, you can get more information about working with functions here: https://twig.symfony.com/doc/1.x/advanced.html#functions
+
+{{ "How to use a function in a template:" | textToHeading('H2') }}
+
+{{ '{{ functionName(...parameters) }}' | textToCodeBlock('twig') }}
+
+{{ "Available template functions:" | textToHeading('H2') }}
+
+<table>
+   <thead>
+      <tr>
+         <th rowspan="3">Function</th>
+         <th colspan="3">Parameters</th>
+      </tr>
+      <tr>
+         <th>name</th>
+         <th>type</th>
+         <th>description</th>
+      </tr>
+      <tr>
+         <th colspan="4"></th>
+      </tr>
+   </thead>
+   <tbody>
+    {% for function in classEntityCollection.filterByPaths(['/BumbleDocGen/Render/Twig/Function']) %}
+    {% set twigFunctionData = function.getPluginData('twigFunctionClassParserPlugin') %}
+    {% set paramsCount = twigFunctionData.parameters | length %}
+    {% for parameter in twigFunctionData.parameters %}
+      <tr>
+         {% if loop.index == 1 %}
+         <td rowspan="{{ paramsCount * 2 - 1 }}">
+            <a href="{{ getDocumentedClassUrl(function.getName()) }}">{{ twigFunctionData.name }}</a><br>
+            {% if function.isInternal() %}<i><b>:warning: For internal use</b></i><br>{% endif %}
+            {{ function.getDescription() | removeLineBrakes }}
+            {% if function.getDocNote() %}<br><i><b>:warning: {{ function.getDocNote() }}</b></i><br>{% endif %}
+         </td>
+         {% endif %}
+         <td>
+            <b>${{ parameter.name }}</b>
+         </td>
+         <td>
+            <i>{{ parameter.type | strTypeToUrl('html', true) }}</i>
+         </td>
+         <td>{{ parameter.description | removeLineBrakes }}</td>
+      </tr>
+      {% if loop.last == false %}
+      <tr>
+         <td colspan="3"></td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      {% if loop.last == false %}
+      <tr>
+         <td colspan="4">&nbsp;</td>
+      </tr>
+    {% endif %}
+    {% endfor %}
+   </tbody>
+</table>

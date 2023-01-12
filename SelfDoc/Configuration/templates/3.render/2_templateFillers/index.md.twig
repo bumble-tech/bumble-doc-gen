@@ -1,5 +1,5 @@
 {% set title = 'Template fillers' %}
-{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+{{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Template fillers" | textToHeading('H1') }}
 
@@ -11,15 +11,15 @@ you can create a TemplateFiller that will collect this information and pass it t
 
 If you decide to add a new template filler, there are a few things you need to do:
 
-*  Add a new class that implements the `TemplateFillerInterface`_ interface
-*  In method `TemplateFillerInterface::getTemplateParameters()`_, implement the return of the parameters that are expected in the template
-*  Add a new filler to the `TemplateFillersCollection::setForTemplate()`_ returned in the `ConfigurationInterface::getTemplateFillers()`_ method
+*  Add a new class that implements the <a>TemplateFillerInterface</a> interface
+*  In method <a>TemplateFillerInterface::getTemplateParameters()</a>, implement the return of the parameters that are expected in the template
+*  Add a new filler to the <a>TemplateFillersCollection::setForTemplate()</a> returned in the <a>ConfigurationInterface::getTemplateFillers()</a> method
 
 After that, the data will be available in the template you connected it to in step 3.
 
 The data is passed to the template in the **fillersParameters** variable:
 
-{{ '{{ fillersParameters.someParameter }}' | textToCodeBlockRst('twig') }}
+{{ '{{ fillersParameters.someParameter }}' | textToCodeBlock('twig') }}
 
 
 {{ "Template fillers class map" | textToHeading('H2') }}

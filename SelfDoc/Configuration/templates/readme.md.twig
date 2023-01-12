@@ -1,5 +1,4 @@
 {% set title = 'BumbleDocGen' %}
-
 {{ "Bumble Documentation Generator" | textToHeading('H1') }}
 
 This library was created in order to simplify the process of generating technical documentation for complex projects and simple projects.
@@ -7,7 +6,7 @@ The main idea of the project is to allow library users to create handwritten doc
 
 The system is flexible and easily expandable, as you can see when you start working with it. Write your first documentation today! :)
 
-{{ '' | endTextBySeparatorRst }}
+<hr>
 
 {{ drawDocumentationMenu() }}
 
@@ -15,4 +14,4 @@ The system is flexible and easily expandable, as you can see when you start work
 
 To update this documentation, run the following command:
 
-{{ 'php SelfDoc/docGen.php generate' | textToCodeBlockRst('console') }}
+{{ 'php SelfDoc/docGen.php generate' | textToCodeBlock('console') }}

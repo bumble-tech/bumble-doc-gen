@@ -1,14 +1,14 @@
 {% set title = 'Breadcrumbs' %}
-{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+{{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Breadcrumbs" | textToHeading('H1') }}
 
-For breadcrumbs we have class `BreadcrumbsHelper`_ .
+For breadcrumbs we have class <a>BreadcrumbsHelper</a>.
 It contains methods that allow you to get additional information from the templates, such as the title of the page,
 and also gives you the ability to get breadcrumbs for the current page in html format or as an array.
 
-In templates, you can use the built-in function `GeneratePageBreadcrumbs`_, which turns the rendered breadcrumbs into rst or html format:
+In templates, you can use the built-in function <a>GeneratePageBreadcrumbs</a>, which turns the rendered breadcrumbs into rst or html format:
 
-{{ '{{ generatePageBreadcrumbs(title, _self) }}' | textToCodeBlockRst('twig') }}
+{{ '{{ generatePageBreadcrumbs(title, _self) }}' | textToCodeBlock('twig') }}
 
 With this function, you can generate breadcrumbs for the template, for example, in the example shown, breadcrumbs are generated for the current page

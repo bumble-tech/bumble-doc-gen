@@ -1,28 +1,26 @@
 {% set title = 'Template filters' %}
-{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+{{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Template filters" | textToHeading('H1') }}
 
 When generating pages, you can use filters that allow you to modify the content.
-Filters available during page generation are defined in method `MainExtension::getFilters()`_
+Filters available during page generation are defined in method <a>MainExtension::getFilters()</a>
 
 We use the twig template engine, you can get more information about working with filters here: https://twig.symfony.com/doc/1.x/advanced.html#filters
 
 
 {{ "How to use a filter in a template:" | textToHeading('H2') }}
 
-{{ '{{ someText | filter(...parameters) }}' | textToCodeBlockRst('twig') }}
+{{ '{{ someText | filter(...parameters) }}' | textToCodeBlock('twig') }}
 
 or
 
-{{ '{{ someText | filter }}' | textToCodeBlockRst('twig') }}
+{{ '{{ someText | filter }}' | textToCodeBlock('twig') }}
 
 
 {{ "Available template filters:" | textToHeading('H2') }}
 
-.. raw:: html
-
-  <table>
+<table>
     <thead>
     <tr>
         <th rowspan="3">Filter</th>
@@ -41,7 +39,6 @@ or
     {% for filter in classEntityCollection.filterByPaths(['/BumbleDocGen/Render/Twig/Filter']) %}
         {% set twigFilterData = filter.getPluginData('twigFilterClassParserPlugin') %}
         {% set paramsCount = twigFilterData.parameters | length %}
-
         {% for parameter in twigFilterData.parameters %}
             <tr>
                 {% if loop.index == 1 %}
@@ -78,4 +75,4 @@ or
         {% endif %}
     {% endfor %}
     </tbody>
-  </table>
+</table>

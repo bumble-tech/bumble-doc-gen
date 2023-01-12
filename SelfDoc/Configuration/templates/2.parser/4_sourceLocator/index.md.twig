@@ -1,12 +1,12 @@
 {% set title = 'Source locators' %}
-{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+{{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Source locators" | textToHeading('H1') }}
 
 Source locators are needed so that the parser knows which files to parse, or to get data on a specific file after the primary parsing procedure
 
-Source locators are set in the configuration, in method `ConfigurationInterface::classEntityFilterCondition()`_.
-They can also be connected using plugins handle `OnLoadSourceLocatorsCollection`_ event
+Source locators are set in the configuration, in method <a>ConfigurationInterface::classEntityFilterCondition()</a>.
+They can also be connected using plugins handle <a>OnLoadSourceLocatorsCollection</a> event
 
 **Usage example:**
 
@@ -18,10 +18,10 @@ They can also be connected using plugins handle `OnLoadSourceLocatorsCollection`
             "{$this->getProjectRoot()}/SelfDoc",
         ]),
     );
-}' | textToCodeBlockRst('php') }}
+}' | textToCodeBlock('php') }}
 
 
-All source locators must implement the `SourceLocatorInterface`_ interface.
+All source locators must implement the <a>SourceLocatorInterface</a> interface.
 
 
 {{ "Built-in source locators" | textToHeading('H2') }}

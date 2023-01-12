@@ -1,41 +1,33 @@
 {% set title = 'Rendering process' %}
-{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+{{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Rendering process" | textToHeading('H1') }}
 
-{{ "(new Render($configuration, $classEntityCollection, $pluginEventDispatcher))->run();" | textToCodeBlockRst('php') }}
+{{ "(new Render($configuration, $classEntityCollection, $pluginEventDispatcher))->run();" | textToCodeBlock('php') }}
 
 {{ "Start rendering:" | textToHeading('H2') }}
 
-Render passes through all files from the directory specified in method `ConfigurationInterface::getTemplatesDir()`_
+Render passes through all files from the directory specified in method <a>ConfigurationInterface::getTemplatesDir()</a>
 
 If the file ends with **.twig** then the file is processed, otherwise it is simply copied
-to the target directory obtained from method `ConfigurationInterface::getOutputDirBaseUrl()`_.
+to the target directory obtained from method <a>ConfigurationInterface::getOutputDirBaseUrl()</a>.
 We use twig to process templates.
 
 {{ "Adding class documentation:" | textToHeading('H2') }}
 
-If the template contains links to any classes *(for example, when calling the* `GetDocumentedClassUrl`_ *function)*,
+If the template contains links to any classes *(for example, when calling the* <a>GetDocumentedClassUrl</a> *function)*,
 as well as if they were parsed according to the rules in the
-`ConfigurationInterface::getSourceLocators()`_ and `ConfigurationInterface::classEntityFilterCondition()`_ methods, the **_Classes** directory
+<a>ConfigurationInterface::getSourceLocators()</a> and <a>ConfigurationInterface::classEntityFilterCondition()</a> methods, the **_Classes** directory
 is automatically created next to this file, in which automatically generated documentation for these classes.
 
-
-
-{{ '' | endTextBySeparatorRst }}
-
-
+<hr>
 
 {{ "Variables available in doc templates" | textToHeading('H1') }}
 
-*  **classEntityCollection** - contains an instance of class `ClassEntityCollection`_
-*  **fillersParameters** - contains an array obtained from method `TemplateFillersCollection::getParametersForTemplate()`_ You can read more about this on the `Template filters`_ page.
+*  **classEntityCollection** - contains an instance of class <a>ClassEntityCollection</a>
+*  **fillersParameters** - contains an array obtained from method <a>TemplateFillersCollection::getParametersForTemplate()</a> You can read more about this on the <a>Template filters</a> page.
 
-
-
-{{ '' | endTextBySeparatorRst }}
-
-
+<hr>
 
 {{ "Linking templates" | textToHeading('H1') }}
 
@@ -45,34 +37,34 @@ We have several options for this:
 
 {{ "Completing blank links" | textToHeading('H2') }}
 
-Two plugins ( `PageRstLinkerPlugin`_ and `PageHtmlLinkerPlugin`_ ) have been added to the basic configuration,
+Two plugins ( <a>PageRstLinkerPlugin</a> and <a>PageHtmlLinkerPlugin</a> ) have been added to the basic configuration,
 which process the text of the filled template before its result is written to a file, and fill in all empty links.
 
 For example, an empty rst link of this format:
 
-{{ '<pre>&lsquo;Existent page name&lsquo;_</pre>' | htmlToRst }}
+{{ '<pre>&lsquo;Existent page name&lsquo;_</pre>' }}
 
 will be replaced with this link:
 
-{{ '<pre>&lsquo;Existent page name &#8249;/docs/some/page/targetPage.rst&#8250;&lsquo;_</pre>' | htmlToRst }}
+{{ '<pre>&lsquo;Existent page name &#8249;/docs/some/page/targetPage.rst&#8250;&lsquo;_</pre>' }}
 
 
-And for HTML links like this:
+And for HTML or MD links like this:
 
-{{ '<pre>&lt;a&gt;Existent page name&lt;/a&gt;</pre>' | htmlToRst }}
+{{ '<pre>&lt;a&gt;Existent page name&lt;/a&gt;</pre>' }}
 
 will be replaced with this link:
 
-{{ '<pre>&lt;a href=&quot;/docs/some/page/targetPage.rst&quot;&gt;Existent page name&lt;/a&gt;</pre>' | htmlToRst }}
+{{ '<pre>&lt;a href=&quot;/docs/some/page/targetPage.rst&quot;&gt;Existent page name&lt;/a&gt;</pre>' }}
 
 
 {{ "Breadcrumbs" | textToHeading('H2') }}
 
-For breadcrumbs we have class `BreadcrumbsHelper`_
+For breadcrumbs we have class <a>BreadcrumbsHelper</a>
 
 The **generatePageBreadcrumbs** function is also available in each template:
 
-{{ '{{ generatePageBreadcrumbs(title, _self) }}' | textToCodeBlockRst('twig') }}
+{{ '{{ generatePageBreadcrumbs(title, _self) }}' | textToCodeBlock('twig') }}
 
 With it, you can generate breadcrumbs for the template, for example, in the example shown, breadcrumbs are generated for the current page
 
@@ -81,11 +73,7 @@ With it, you can generate breadcrumbs for the template, for example, in the exam
 
 We have functions and filters that can generate a reference for documented classes.
 
-
-
-{{ '' | endTextBySeparatorRst }}
-
-
+<hr>
 
 {{ "Page title" | textToHeading('H1') }}
 
@@ -93,6 +81,6 @@ You need to add a page title for several reasons: the title text is involved in 
 
 To add a title to a template, add the following code:
 
-{{ '{% set title = \'Some title\' %}' | textToCodeBlockRst('twig') }}
+{{ '{% set title = \'Some title\' %}' | textToCodeBlock('twig') }}
 
 *:warning:* If the title is not set, the name of the directory will be used as the title.
