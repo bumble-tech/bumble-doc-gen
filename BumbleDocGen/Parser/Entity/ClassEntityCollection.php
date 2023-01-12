@@ -16,41 +16,65 @@ final class ClassEntityCollection extends BaseEntityCollection
 {
     private function __construct(
         private ConfigurationInterface $configuration,
-        private Reflector $reflector,
-        private PluginEventDispatcher $pluginEventDispatcher,
-        private LoggerInterface $logger
-    ) {
+        private Reflector              $reflector,
+        private PluginEventDispatcher  $pluginEventDispatcher,
+        private LoggerInterface        $logger
+    )
+    {
+    }
+
+    public static function getClassFromFile($file): ?string
+    {
+        if (str_ends_with($file, '.php')) {
+            $content = file_get_contents($file);
+            $namespaceLevel = false;
+            $classLevel = false;
+            $namespace = '';
+            foreach (token_get_all($content, TOKEN_PARSE) as $token) {
+                if ($token[0] === T_NAMESPACE) {
+                    $namespaceLevel = true;
+                } elseif ($namespaceLevel && in_array($token[0], [T_NAME_QUALIFIED, T_STRING])) {
+                    $namespaceLevel = false;
+                    $namespace = $token[1];
+                }
+                if (!$namespaceLevel && in_array($token[0], [T_CLASS, T_INTERFACE, T_TRAIT])) {
+                    $classLevel = true;
+                } elseif (!$namespaceLevel && $classLevel && $token[0] === T_STRING) {
+                    return $namespace . '\\' . $token[1];
+                }
+            }
+        }
+        return null;
     }
 
     public static function createByReflector(
         ConfigurationInterface $configuration,
-        Reflector $reflector,
-        AttributeParser $attributeParser,
-        PluginEventDispatcher $pluginEventDispatcher
-    ): ClassEntityCollection {
+        Reflector              $reflector,
+        AttributeParser        $attributeParser,
+        PluginEventDispatcher  $pluginEventDispatcher
+    ): ClassEntityCollection
+    {
         $logger = $configuration->getLogger();
         $classEntityCollection = new ClassEntityCollection($configuration, $reflector, $pluginEventDispatcher, $logger);
-        foreach ($reflector->reflectAllClasses() as $classReflection) {
-            if (
-                str_contains($classReflection->getName(), chr(0)) ||
-                str_contains($classReflection->getName(), '@anonymous')
-            ) {
-                $logger->warning("Skipping `{$classReflection->getName()}`");
-                continue;
-            }
 
-            $entityClassName = ClassEntity::class;
-            if ($classReflection->isEnum()) {
-                $entityClassName = EnumEntity::class;
-            }
-            $classEntity = $entityClassName::create(
-                $configuration,
-                $reflector,
-                $classReflection,
-                $attributeParser
-            );
-            if ($configuration->classEntityFilterCondition($classEntity)->canAddToCollection()) {
-                $classEntityCollection->add($classEntity);
+        foreach ($configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
+            $className = self::getClassFromFile($file->getPathName());
+            if ($className) {
+                $classReflection = $reflector->reflectClass($className);
+
+                $entityClassName = ClassEntity::class;
+                if ($classReflection->isEnum()) {
+                    $entityClassName = EnumEntity::class;
+                }
+                $classEntity = $entityClassName::create(
+                    $configuration,
+                    $reflector,
+                    $classReflection,
+                    $attributeParser
+                );
+                if ($configuration->classEntityFilterCondition($classEntity)->canAddToCollection()) {
+                    $classEntityCollection->add($classEntity);
+                }
             }
         }
         $pluginEventDispatcher->dispatch(new AfterCreationClassEntityCollection($classEntityCollection));
@@ -62,7 +86,6 @@ final class ClassEntityCollection extends BaseEntityCollection
         $key = $classEntity->getObjectId();
         if (!isset($this->entities[$key]) || $reload) {
             $this->logger->info("Parsing {$classEntity->getFileName()} file");
-            $classEntity->loadClassMembers();
             $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
             $this->entities[$key] = $classEntity;
         }
