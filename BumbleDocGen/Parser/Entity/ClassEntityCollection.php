@@ -6,6 +6,7 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
+use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
@@ -23,30 +24,6 @@ final class ClassEntityCollection extends BaseEntityCollection
     {
     }
 
-    public static function getClassFromFile($file): ?string
-    {
-        if (str_ends_with($file, '.php')) {
-            $content = file_get_contents($file);
-            $namespaceLevel = false;
-            $classLevel = false;
-            $namespace = '';
-            foreach (token_get_all($content, TOKEN_PARSE) as $token) {
-                if ($token[0] === T_NAMESPACE) {
-                    $namespaceLevel = true;
-                } elseif ($namespaceLevel && in_array($token[0], [T_NAME_QUALIFIED, T_STRING])) {
-                    $namespaceLevel = false;
-                    $namespace = $token[1];
-                }
-                if (!$namespaceLevel && in_array($token[0], [T_CLASS, T_INTERFACE, T_TRAIT])) {
-                    $classLevel = true;
-                } elseif (!$namespaceLevel && $classLevel && $token[0] === T_STRING) {
-                    return $namespace . '\\' . $token[1];
-                }
-            }
-        }
-        return null;
-    }
-
     public static function createByReflector(
         ConfigurationInterface $configuration,
         Reflector              $reflector,
@@ -58,7 +35,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         $classEntityCollection = new ClassEntityCollection($configuration, $reflector, $pluginEventDispatcher, $logger);
 
         foreach ($configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
-            $className = self::getClassFromFile($file->getPathName());
+            $className = ParserHelper::getClassFromFile($file->getPathName());
             if ($className) {
                 $classReflection = $reflector->reflectClass($className);
 

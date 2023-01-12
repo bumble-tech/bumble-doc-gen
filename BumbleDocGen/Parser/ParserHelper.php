@@ -170,6 +170,30 @@ final class ParserHelper
         return $className;
     }
 
+    public static function getClassFromFile($file): ?string
+    {
+        if (str_ends_with($file, '.php')) {
+            $content = file_get_contents($file);
+            $namespaceLevel = false;
+            $classLevel = false;
+            $namespace = '';
+            foreach (token_get_all($content, TOKEN_PARSE) as $token) {
+                if ($token[0] === T_NAMESPACE) {
+                    $namespaceLevel = true;
+                } elseif ($namespaceLevel && in_array($token[0], [T_NAME_QUALIFIED, T_STRING])) {
+                    $namespaceLevel = false;
+                    $namespace = $token[1];
+                }
+                if (!$namespaceLevel && in_array($token[0], [T_CLASS, T_INTERFACE, T_TRAIT])) {
+                    $classLevel = true;
+                } elseif (!$namespaceLevel && $classLevel && $token[0] === T_STRING) {
+                    return $namespace . '\\' . $token[1];
+                }
+            }
+        }
+        return null;
+    }
+
     public static function getMethodReturnValue(Reflector $reflector, ReflectionMethod $reflection): mixed
     {
         if (preg_match('/(return )([^;]+)/', $reflection->getBodyCode(), $matches)) {
