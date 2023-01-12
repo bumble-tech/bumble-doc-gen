@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> DynamicMethodEntity<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> DynamicMethodEntity<hr> </embed>
 
 Description of the `DynamicMethodEntity </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php>`_ class:
 -----------------------

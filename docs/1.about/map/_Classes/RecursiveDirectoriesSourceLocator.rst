@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> RecursiveDirectoriesSourceLocator<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> RecursiveDirectoriesSourceLocator<hr> </embed>
 
 Description of the `RecursiveDirectoriesSourceLocator </BumbleDocGen/Parser/SourceLocator/RecursiveDirectoriesSourceLocator.php>`_ class:
 -----------------------
@@ -57,10 +57,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/RecursiveDirectoriesSourceLocator.php#L14>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/RecursiveDirectoriesSourceLocator.php#L12>`_
 .. code-block:: php
 
-        public function __construct(array $directories, array $exclude = [ ], Psr\Cache\CacheItemPoolInterface|null $cache = NULL): mixed;
+        public function __construct(array $directories, array $exclude = [ ]): mixed;
 
 
 
@@ -86,11 +86,6 @@ Method details:
             <tr>
             <td>$exclude</td>
             <td>array</td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$cache</td>
-            <td><a href='/vendor/psr/cache/src/CacheItemPoolInterface.php'>Psr\Cache\CacheItemPoolInterface</a> | null</td>
             <td>-</td>
         </tr>
         </tbody>

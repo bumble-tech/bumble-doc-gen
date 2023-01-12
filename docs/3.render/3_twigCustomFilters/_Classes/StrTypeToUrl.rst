@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/3_twigCustomFilters/index.md">Template filters</a> <b>/</b> StrTypeToUrl<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/3_twigCustomFilters/index.md">Template filters</a> <b>/</b> StrTypeToUrl<hr> </embed>
 
 Description of the `StrTypeToUrl </BumbleDocGen/Render/Twig/Filter/StrTypeToUrl.php>`_ class:
 -----------------------

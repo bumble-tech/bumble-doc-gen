@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> BeforeCreatingDocFile<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> BeforeCreatingDocFile<hr> </embed>
 
 Description of the `BeforeCreatingDocFile </BumbleDocGen/Plugin/Event/Render/BeforeCreatingDocFile.php>`_ class:
 -----------------------

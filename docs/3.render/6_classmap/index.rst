@@ -1,16 +1,16 @@
 .. raw:: html
 
-  <embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> Render class map<hr></embed>
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> Render class map<hr> </embed>
 
 
 .. raw:: html
 
-  <embed><h1>Render class map</h1></embed>
+  <embed> <h1>Render class map</h1> </embed>
 
 
 .. raw:: html
 
-  <embed><pre>└──<b>BumbleDocGen</b>/
+  <embed> <pre>└──<b>BumbleDocGen</b>/
  │  └──<b>Render</b>/
  │  │  ├──<b>Context</b>/
  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/DocumentTransformableEntityInterface.rst'>DocumentTransformableEntityInterface.php</a>
@@ -50,4 +50,4 @@
  │  │  │  ├── <a href='/docs/3.render/6_classmap/_Classes/TemplateFillerInterface.rst'>TemplateFillerInterface.php</a>
  │  │  │  └── <a href='/docs/3.render/6_classmap/_Classes/TemplateFillersCollection.rst'>TemplateFillersCollection.php</a>
  │  │  └── <a href='/docs/3.render/6_classmap/_Classes/Render.rst'>Render.php</a>
- </pre></embed>
+ </pre> </embed>

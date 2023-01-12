@@ -1,6 +1,6 @@
 .. raw:: html
 
-  <embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> Context<hr></embed>
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> Context<hr> </embed>
 
 
 Description of the `Context </BumbleDocGen/Render/Context/Context.php>`_ class:
@@ -47,6 +47,8 @@ Methods:
   <ol>
                 <li><a href="#msetcurrenttemplatefilepatch">setCurrentTemplateFilePatch</a> - <i>Saving the path to the template file that is currently being worked on in the context</i></li>
                 <li><a href="#mgetcurrenttemplatefilepatch">getCurrentTemplateFilePatch</a> - <i>Getting the path to the template file that is currently being worked on</i></li>
+                <li><a href="#miscurrenttemplaterst">isCurrentTemplateRst</a> </li>
+                <li><a href="#miscurrenttemplatemd">isCurrentTemplateMd</a> </li>
                 <li><a href="#mgetreflector">getReflector</a> </li>
                 <li><a href="#mgetconfiguration">getConfiguration</a> </li>
                 <li><a href="#mgetclassentitycollection">getClassEntityCollection</a> </li>
@@ -127,7 +129,7 @@ ________
 
 .. _msetcurrenttemplatefilepatch:
 
-* `# <msetcurrenttemplatefilepatch_>`_  ``setCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L35>`_
+* `# <msetcurrenttemplatefilepatch_>`_  ``setCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L36>`_
 .. code-block:: php
 
         public function setCurrentTemplateFilePatch(string $currentTemplateFilePath): void;
@@ -166,7 +168,7 @@ ________
 
 .. _mgetcurrenttemplatefilepatch:
 
-* `# <mgetcurrenttemplatefilepatch_>`_  ``getCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L43>`_
+* `# <mgetcurrenttemplatefilepatch_>`_  ``getCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L44>`_
 .. code-block:: php
 
         public function getCurrentTemplateFilePatch(): string;
@@ -184,9 +186,43 @@ ________
 
 ________
 
+.. _miscurrenttemplaterst:
+
+* `# <miscurrenttemplaterst_>`_  ``isCurrentTemplateRst``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L49>`_
+.. code-block:: php
+
+        public function isCurrentTemplateRst(): bool;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** bool
+
+________
+
+.. _miscurrenttemplatemd:
+
+* `# <miscurrenttemplatemd_>`_  ``isCurrentTemplateMd``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L54>`_
+.. code-block:: php
+
+        public function isCurrentTemplateMd(): bool;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** bool
+
+________
+
 .. _mgetreflector:
 
-* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L48>`_
+* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L59>`_
 .. code-block:: php
 
         public function getReflector(): Roave\BetterReflection\Reflector\Reflector;
@@ -203,7 +239,7 @@ ________
 
 .. _mgetconfiguration:
 
-* `# <mgetconfiguration_>`_  ``getConfiguration``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L53>`_
+* `# <mgetconfiguration_>`_  ``getConfiguration``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L64>`_
 .. code-block:: php
 
         public function getConfiguration(): BumbleDocGen\ConfigurationInterface;
@@ -220,7 +256,7 @@ ________
 
 .. _mgetclassentitycollection:
 
-* `# <mgetclassentitycollection_>`_  ``getClassEntityCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L58>`_
+* `# <mgetclassentitycollection_>`_  ``getClassEntityCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L69>`_
 .. code-block:: php
 
         public function getClassEntityCollection(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -237,7 +273,7 @@ ________
 
 .. _mgetentitywrapperscollection:
 
-* `# <mgetentitywrapperscollection_>`_  ``getEntityWrappersCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L63>`_
+* `# <mgetentitywrapperscollection_>`_  ``getEntityWrappersCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L74>`_
 .. code-block:: php
 
         public function getEntityWrappersCollection(): BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
@@ -254,7 +290,7 @@ ________
 
 .. _mgetbreadcrumbshelper:
 
-* `# <mgetbreadcrumbshelper_>`_  ``getBreadcrumbsHelper``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L68>`_
+* `# <mgetbreadcrumbshelper_>`_  ``getBreadcrumbsHelper``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L79>`_
 .. code-block:: php
 
         public function getBreadcrumbsHelper(): BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
@@ -271,7 +307,7 @@ ________
 
 .. _mgetplugineventdispatcher:
 
-* `# <mgetplugineventdispatcher_>`_  ``getPluginEventDispatcher``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L73>`_
+* `# <mgetplugineventdispatcher_>`_  ``getPluginEventDispatcher``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L84>`_
 .. code-block:: php
 
         public function getPluginEventDispatcher(): BumbleDocGen\Plugin\PluginEventDispatcher;

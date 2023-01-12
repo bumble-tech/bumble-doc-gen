@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> OnLoadEntityDocPluginContent<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> OnLoadEntityDocPluginContent<hr> </embed>
 
 Description of the `OnLoadEntityDocPluginContent </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php>`_ class:
 -----------------------

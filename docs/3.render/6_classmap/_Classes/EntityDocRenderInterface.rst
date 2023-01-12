@@ -1,6 +1,6 @@
 .. raw:: html
 
-  <embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> EntityDocRenderInterface<hr></embed>
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> EntityDocRenderInterface<hr> </embed>
 
 
 Description of the `EntityDocRenderInterface </BumbleDocGen/Render/EntityDocRender/EntityDocRenderInterface.php>`_ class:

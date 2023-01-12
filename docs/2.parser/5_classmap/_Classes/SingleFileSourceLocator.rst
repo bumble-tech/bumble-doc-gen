@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> SingleFileSourceLocator<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> SingleFileSourceLocator<hr> </embed>
 
 Description of the `SingleFileSourceLocator </BumbleDocGen/Parser/SourceLocator/SingleFileSourceLocator.php>`_ class:
 -----------------------
@@ -57,10 +57,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SingleFileSourceLocator.php#L14>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SingleFileSourceLocator.php#L12>`_
 .. code-block:: php
 
-        public function __construct(string $filename, Psr\Cache\CacheItemPoolInterface|null $cache = NULL): mixed;
+        public function __construct(string $filename): mixed;
 
 
 
@@ -81,11 +81,6 @@ Method details:
             <tr>
             <td>$filename</td>
             <td>string</td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$cache</td>
-            <td><a href='/vendor/psr/cache/src/CacheItemPoolInterface.php'>Psr\Cache\CacheItemPoolInterface</a> | null</td>
             <td>-</td>
         </tr>
         </tbody>

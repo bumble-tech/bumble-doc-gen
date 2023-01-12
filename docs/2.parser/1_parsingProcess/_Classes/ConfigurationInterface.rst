@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/1_parsingProcess/index.md">Parsing process</a> <b>/</b> ConfigurationInterface<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/1_parsingProcess/index.md">Parsing process</a> <b>/</b> ConfigurationInterface<hr> </embed>
 
 Description of the `ConfigurationInterface </BumbleDocGen/ConfigurationInterface.php>`_ class:
 -----------------------

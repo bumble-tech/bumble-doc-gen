@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/3_twigCustomFilters/index.md">Template filters</a> <b>/</b> RemoveLineBrakes<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/3_twigCustomFilters/index.md">Template filters</a> <b>/</b> RemoveLineBrakes<hr> </embed>
 
 Description of the `RemoveLineBrakes </BumbleDocGen/Render/Twig/Filter/RemoveLineBrakes.php>`_ class:
 -----------------------

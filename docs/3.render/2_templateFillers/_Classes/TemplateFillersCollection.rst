@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/2_templateFillers/index.md">Template fillers</a> <b>/</b> TemplateFillersCollection<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/2_templateFillers/index.md">Template fillers</a> <b>/</b> TemplateFillersCollection<hr> </embed>
 
 Description of the `TemplateFillersCollection </BumbleDocGen/Render/TemplateFiller/TemplateFillersCollection.php>`_ class:
 -----------------------

@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> TwigFunctionClassParserPlugin<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> TwigFunctionClassParserPlugin<hr> </embed>
 
 Description of the `TwigFunctionClassParserPlugin </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php>`_ class:
 -----------------------

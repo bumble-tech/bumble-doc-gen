@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.md">Source locators</a> <b>/</b> OnLoadSourceLocatorsCollection<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.md">Source locators</a> <b>/</b> OnLoadSourceLocatorsCollection<hr> </embed>
 
 Description of the `OnLoadSourceLocatorsCollection </BumbleDocGen/Plugin/Event/Parser/OnLoadSourceLocatorsCollection.php>`_ class:
 -----------------------

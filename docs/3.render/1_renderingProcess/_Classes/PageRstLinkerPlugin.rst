@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/1_renderingProcess/index.md">Rendering process</a> <b>/</b> PageRstLinkerPlugin<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/1_renderingProcess/index.md">Rendering process</a> <b>/</b> PageRstLinkerPlugin<hr> </embed>
 
 Description of the `PageRstLinkerPlugin </BumbleDocGen/Plugin/CorePlugin/PageLinker/PageRstLinkerPlugin.php>`_ class:
 -----------------------

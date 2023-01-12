@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> CachedSourceLocator<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> CachedSourceLocator<hr> </embed>
 
 Description of the `CachedSourceLocator </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php>`_ class:
 -----------------------
@@ -64,10 +64,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L30>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L31>`_
 .. code-block:: php
 
-        public function __construct(Roave\BetterReflection\SourceLocator\Type\SourceLocator $wrappedSourceLocator, Psr\Cache\CacheItemPoolInterface $cache): mixed;
+        public function __construct(Roave\BetterReflection\SourceLocator\Type\SourceLocator $wrappedSourceLocator, BumbleDocGen\ConfigurationInterface $configuration): mixed;
 
 
 
@@ -91,8 +91,8 @@ Method details:
             <td>-</td>
         </tr>
             <tr>
-            <td>$cache</td>
-            <td><a href='/vendor/psr/cache/src/CacheItemPoolInterface.php'>Psr\Cache\CacheItemPoolInterface</a></td>
+            <td>$configuration</td>
+            <td><a href='/BumbleDocGen/ConfigurationInterface.php'>BumbleDocGen\ConfigurationInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -105,7 +105,7 @@ ________
 
 .. _mlocateidentifier:
 
-* `# <mlocateidentifier_>`_  ``locateIdentifier``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L34>`_
+* `# <mlocateidentifier_>`_  ``locateIdentifier``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L35>`_
 .. code-block:: php
 
         public function locateIdentifier(Roave\BetterReflection\Reflector\Reflector $reflector, Roave\BetterReflection\Identifier\Identifier $identifier): Roave\BetterReflection\Reflection\Reflection|null;
@@ -149,7 +149,7 @@ ________
 
 .. _mlocateidentifiersbytype:
 
-* `# <mlocateidentifiersbytype_>`_  ``locateIdentifiersByType``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L87>`_
+* `# <mlocateidentifiersbytype_>`_  ``locateIdentifiersByType``   **|** `source code </BumbleDocGen/Parser/SourceLocator/Internal/CachedSourceLocator.php#L106>`_
 .. code-block:: php
 
         public function locateIdentifiersByType(Roave\BetterReflection\Reflector\Reflector $reflector, Roave\BetterReflection\Identifier\IdentifierType $identifierType): array;

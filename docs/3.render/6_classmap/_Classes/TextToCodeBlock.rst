@@ -1,6 +1,6 @@
 .. raw:: html
 
-  <embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> TextToCodeBlock<hr></embed>
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/6_classmap/index.rst">Render class map</a> <b>/</b> TextToCodeBlock<hr> </embed>
 
 
 Description of the `TextToCodeBlock </BumbleDocGen/Render/Twig/Filter/TextToCodeBlock.php>`_ class:

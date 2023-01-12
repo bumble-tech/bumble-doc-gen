@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/2_templateFillers/index.md">Template fillers</a> <b>/</b> TemplateFillerInterface<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/2_templateFillers/index.md">Template fillers</a> <b>/</b> TemplateFillerInterface<hr> </embed>
 
 Description of the `TemplateFillerInterface </BumbleDocGen/Render/TemplateFiller/TemplateFillerInterface.php>`_ class:
 -----------------------

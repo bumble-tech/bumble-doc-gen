@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> TwigFilterClassParserPlugin<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> TwigFilterClassParserPlugin<hr> </embed>
 
 Description of the `TwigFilterClassParserPlugin </SelfDoc/Configuration/Plugin/TwigFilterClassParser/TwigFilterClassParserPlugin.php>`_ class:
 -----------------------

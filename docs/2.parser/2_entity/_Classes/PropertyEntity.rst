@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/2_entity/index.md">Entities</a> <b>/</b> PropertyEntity<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/2_entity/index.md">Entities</a> <b>/</b> PropertyEntity<hr> </embed>
 
 Description of the `PropertyEntity </BumbleDocGen/Parser/Entity/PropertyEntity.php>`_ class:
 -----------------------

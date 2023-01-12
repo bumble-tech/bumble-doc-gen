@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.md">Source locators</a> <b>/</b> AsyncSourceLocator<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/4_sourceLocator/index.md">Source locators</a> <b>/</b> AsyncSourceLocator<hr> </embed>
 
 Description of the `AsyncSourceLocator </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php>`_ class:
 -----------------------
@@ -67,10 +67,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L19>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L16>`_
 .. code-block:: php
 
-        public function __construct(array $psr4FileMap, array $classMap, Psr\Cache\CacheItemPoolInterface|null $cache = NULL): mixed;
+        public function __construct(array $psr4FileMap, array $classMap): mixed;
 
 
 
@@ -98,11 +98,6 @@ Method details:
             <td>array</td>
             <td>-</td>
         </tr>
-            <tr>
-            <td>$cache</td>
-            <td><a href='/vendor/psr/cache/src/CacheItemPoolInterface.php'>Psr\Cache\CacheItemPoolInterface</a> | null</td>
-            <td>-</td>
-        </tr>
         </tbody>
     </table>
 
@@ -113,7 +108,7 @@ ________
 
 .. _mgetfinder:
 
-* `# <mgetfinder_>`_  ``getFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L29>`_
+* `# <mgetfinder_>`_  ``getFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L25>`_
 .. code-block:: php
 
         public function getFinder(): Symfony\Component\Finder\Finder|null;
@@ -130,7 +125,7 @@ ________
 
 .. _mconverttoreflectorsourcelocator:
 
-* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L34>`_
+* `# <mconverttoreflectorsourcelocator_>`_  ``convertToReflectorSourceLocator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/AsyncSourceLocator.php#L30>`_
 .. code-block:: php
 
         public function convertToReflectorSourceLocator(Roave\BetterReflection\SourceLocator\Ast\Locator $astLocator): Roave\BetterReflection\SourceLocator\Type\SourceLocator;

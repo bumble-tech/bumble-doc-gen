@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> VisibilityConditionModifier<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> VisibilityConditionModifier<hr> </embed>
 
 Description of the `VisibilityConditionModifier </BumbleDocGen/Parser/FilterCondition/CommonFilterCondition/VisibilityConditionModifier.php>`_ class:
 -----------------------

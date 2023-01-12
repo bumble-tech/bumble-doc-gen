@@ -1,4 +1,4 @@
-<embed><a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> LoadPluginsContent<hr></embed>
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/4.pluginSystem/index.md">Plugin system</a> <b>/</b> LoadPluginsContent<hr> </embed>
 
 Description of the `LoadPluginsContent </BumbleDocGen/Render/Twig/Function/LoadPluginsContent.php>`_ class:
 -----------------------
