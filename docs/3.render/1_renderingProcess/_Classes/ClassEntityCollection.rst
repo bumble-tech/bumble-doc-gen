@@ -1,4 +1,7 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/1_renderingProcess/index.md">Rendering process</a> <b>/</b> ClassEntityCollection<hr> </embed>
+.. raw:: html
+
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/1_renderingProcess/index.md">Rendering process</a> <b>/</b> ClassEntityCollection<hr> </embed>
+
 
 Description of the `ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection.php>`_ class:
 -----------------------

@@ -1,4 +1,7 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> Configuration<hr> </embed>
+.. raw:: html
+
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> Configuration<hr> </embed>
+
 
 Description of the `Configuration </SelfDoc/Configuration/Configuration.php>`_ class:
 -----------------------

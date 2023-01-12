@@ -1,4 +1,7 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> VisibilityConditionModifier<hr> </embed>
+.. raw:: html
+
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> VisibilityConditionModifier<hr> </embed>
+
 
 Description of the `VisibilityConditionModifier </BumbleDocGen/Parser/FilterCondition/CommonFilterCondition/VisibilityConditionModifier.php>`_ class:
 -----------------------

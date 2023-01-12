@@ -1,4 +1,7 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/5.configuration/index.md">Documentation generator configuration</a> <b>/</b> BaseConfiguration<hr> </embed>
+.. raw:: html
+
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/5.configuration/index.md">Documentation generator configuration</a> <b>/</b> BaseConfiguration<hr> </embed>
+
 
 Description of the `BaseConfiguration </BumbleDocGen/BaseConfiguration.php>`_ class:
 -----------------------

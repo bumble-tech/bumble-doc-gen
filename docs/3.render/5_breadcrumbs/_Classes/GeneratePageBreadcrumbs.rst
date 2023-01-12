@@ -1,4 +1,7 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/5_breadcrumbs/index.md">Breadcrumbs</a> <b>/</b> GeneratePageBreadcrumbs<hr> </embed>
+.. raw:: html
+
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/5_breadcrumbs/index.md">Breadcrumbs</a> <b>/</b> GeneratePageBreadcrumbs<hr> </embed>
+
 
 Description of the `GeneratePageBreadcrumbs </BumbleDocGen/Render/Twig/Function/GeneratePageBreadcrumbs.php>`_ class:
 -----------------------

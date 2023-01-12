@@ -1,4 +1,7 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/2_templateFillers/index.md">Template fillers</a> <b>/</b> ConfigurationInterface<hr> </embed>
+.. raw:: html
+
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/2_templateFillers/index.md">Template fillers</a> <b>/</b> ConfigurationInterface<hr> </embed>
+
 
 Description of the `ConfigurationInterface </BumbleDocGen/ConfigurationInterface.php>`_ class:
 -----------------------

@@ -1,4 +1,7 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/4_twigCustomFunctions/index.md">Template functions</a> <b>/</b> PrintClassEntityCollectionAsList<hr> </embed>
+.. raw:: html
+
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/3.render/index.md">Render</a> <b>/</b> <a href="/docs/3.render/4_twigCustomFunctions/index.md">Template functions</a> <b>/</b> PrintClassEntityCollectionAsList<hr> </embed>
+
 
 Description of the `PrintClassEntityCollectionAsList </BumbleDocGen/Render/Twig/Function/PrintClassEntityCollectionAsList.php>`_ class:
 -----------------------

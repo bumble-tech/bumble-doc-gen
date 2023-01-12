@@ -1,4 +1,7 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/3_entityFilterCondition/index.md">Entity filter conditions</a> <b>/</b> VisibilityCondition<hr> </embed>
+.. raw:: html
+
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/3_entityFilterCondition/index.md">Entity filter conditions</a> <b>/</b> VisibilityCondition<hr> </embed>
+
 
 Description of the `VisibilityCondition </BumbleDocGen/Parser/FilterCondition/ClassConstantFilterCondition/VisibilityCondition.php>`_ class:
 -----------------------

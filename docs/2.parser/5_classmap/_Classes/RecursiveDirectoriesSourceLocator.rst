@@ -1,4 +1,7 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> RecursiveDirectoriesSourceLocator<hr> </embed>
+.. raw:: html
+
+  <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/2.parser/index.md">Parser</a> <b>/</b> <a href="/docs/2.parser/5_classmap/index.md">Parser class map</a> <b>/</b> RecursiveDirectoriesSourceLocator<hr> </embed>
+
 
 Description of the `RecursiveDirectoriesSourceLocator </BumbleDocGen/Parser/SourceLocator/RecursiveDirectoriesSourceLocator.php>`_ class:
 -----------------------
