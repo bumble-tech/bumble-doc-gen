@@ -1,9 +1,9 @@
 {% set title = 'Section with subsections' %}
-{{ generatePageBreadcrumbs(title, _self) | endTextBySeparatorRst }}
+{{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Section with subsections example" | textToHeading('H1') }}
 
-{{ "{{ drawDocumentationMenu(_self) }}"  | textToCodeBlockRst('twig') }}
+{{ "{{ drawDocumentationMenu(_self) }}"  | textToCodeBlock('twig') }}
 
 **Documentation menu from current page only:**
 
