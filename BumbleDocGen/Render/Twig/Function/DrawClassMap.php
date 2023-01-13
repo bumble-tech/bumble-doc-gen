@@ -63,11 +63,16 @@ final class DrawClassMap
 
     public function getDirectoryStructure(ClassEntityCollection ...$classEntityCollections): array
     {
-        $directoryStructure = [];
+        $entities = [];
         foreach ($classEntityCollections as $classEntityCollection) {
             foreach ($classEntityCollection as $classEntity) {
-                $directoryStructure = $this->appendClassToDirectoryStructure($directoryStructure, $classEntity);
+                $entities[$classEntity->getName()] = $classEntity;
             }
+        }
+        ksort($entities, SORT_STRING);
+        $directoryStructure = [];
+        foreach ($entities as $classEntity) {
+            $directoryStructure = $this->appendClassToDirectoryStructure($directoryStructure, $classEntity);
         }
         return $directoryStructure;
     }
