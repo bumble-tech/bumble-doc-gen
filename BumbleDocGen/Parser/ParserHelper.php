@@ -186,7 +186,7 @@ final class ParserHelper
                 }
                 if (!$namespaceLevel && in_array($token[0], [T_CLASS, T_INTERFACE, T_TRAIT])) {
                     $classLevel = true;
-                } elseif (!$namespaceLevel && $classLevel && $token[0] === T_STRING) {
+                } elseif ($classLevel && $token[0] === T_STRING) {
                     return $namespace . '\\' . $token[1];
                 }
             }
