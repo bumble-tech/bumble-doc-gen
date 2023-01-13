@@ -321,6 +321,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->getReflection()->isEnum();
     }
 
+    public function getCasesNames(): array
+    {
+        $caseNames = [];
+        if($this->isEnum()) {
+            foreach ($this->getReflection()->getCases() as $case) {
+                $caseNames[] = $case->getName();
+            }
+        }
+        return $caseNames;
+    }
+
     public function getAbsoluteFileName(): ?string
     {
 
