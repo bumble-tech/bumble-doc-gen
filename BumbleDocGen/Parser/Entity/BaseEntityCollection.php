@@ -10,6 +10,7 @@ abstract class BaseEntityCollection implements \IteratorAggregate
 
     public function getIterator(): \Generator
     {
+        ksort($this->entities, SORT_STRING);
         yield from $this->entities;
     }
 
