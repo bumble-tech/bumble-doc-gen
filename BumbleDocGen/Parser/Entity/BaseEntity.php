@@ -53,7 +53,7 @@ abstract class BaseEntity
         return $reflection->getName();
     }
 
-    final public function getObjectId(): string
+    public function getObjectId(): string
     {
         return self::generateObjectIdByReflection($this->getReflection());
     }
