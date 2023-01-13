@@ -17,11 +17,12 @@ final class EntityDocRenderHelper
     public const CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION = 'only_cursor';
 
     public static function getEntityUrlData(
-        string $linkString,
+        string  $linkString,
         Context $context,
         ?string $defaultEntityClassName = null,
-        bool $createDocument = true,
-    ): array {
+        bool    $createDocument = true,
+    ): array
+    {
         static $pageLinksCache = [];
 
         $classEntityCollection = $context->getClassEntityCollection();
@@ -84,7 +85,7 @@ final class EntityDocRenderHelper
             $attributeParser = new AttributeParser(
                 $reflector, $context->getClassEntityCollection()->getLogger()
             );
-            $entity = ClassEntity::create(
+            $entity = ClassEntity::createByReflection(
                 $context->getConfiguration(),
                 $reflector,
                 $reflectionClass,
