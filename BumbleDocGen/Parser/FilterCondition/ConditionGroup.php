@@ -34,6 +34,7 @@ final class ConditionGroup implements ConditionInterface
                     return true;
                 }
             }
+            return false;
         }
         return true;
     }
