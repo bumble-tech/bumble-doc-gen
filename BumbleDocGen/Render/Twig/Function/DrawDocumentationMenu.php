@@ -6,6 +6,7 @@ namespace BumbleDocGen\Render\Twig\Function;
 
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Generate documentation menu in HTML or rst format. To generate the menu, the start page is taken,
@@ -47,17 +48,17 @@ final class DrawDocumentationMenu
         $breadcrumbsHelper = $this->context->getBreadcrumbsHelper();
         $templatesDir = $this->context->getConfiguration()->getTemplatesDir();
 
-        $allFiles = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator(
-                $templatesDir, \FilesystemIterator::SKIP_DOTS
-            )
-        );
-        foreach ($allFiles as $file) {
+        $finder = Finder::create()
+            ->name('*.twig')
+            ->ignoreVCS(true)
+            ->ignoreDotFiles(true)
+            ->ignoreUnreadableDirs()
+            ->sortByName()
+            ->in($templatesDir);
+
+        foreach ($finder->files() as $file) {
             /**@var \SplFileInfo $file */
             $filePatch = str_replace($templatesDir, '', $file->getRealPath());
-            if (!str_ends_with($filePatch, '.twig')) {
-                continue;
-            }
             $pageKey = null;
             foreach ($breadcrumbsHelper->getBreadcrumbs($filePatch) as $breadcrumb) {
                 if (!is_null($pageKey)) {
@@ -69,8 +70,7 @@ final class DrawDocumentationMenu
         }
 
         $drawPages = function (array $pagesData, int $currentDeep = 1) use ($structure, $maxDeep, &$drawPages): string {
-            ksort($pagesData);
-            $html = ' <ul>';
+            $html = '<ul>';
             foreach ($pagesData as $pageData) {
                 $html .= "<li>";
                 $html .= "<div><a href='{$pageData['url']}'>{$pageData['title']}</a></div>";
