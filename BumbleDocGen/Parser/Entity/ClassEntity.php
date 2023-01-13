@@ -16,18 +16,48 @@ use Roave\BetterReflection\Reflector\Reflector;
 class ClassEntity extends BaseEntity implements DocumentTransformableEntityInterface
 {
     private array $pluginsData = [];
+    private ?ReflectionClass $reflectionClass = null;
 
     protected function __construct(
         protected ConfigurationInterface $configuration,
         protected Reflector              $reflector,
-        protected ReflectionClass        $reflection,
+        protected string                 $className,
+        protected ?string                $relativeFileName,
         protected AttributeParser        $attributeParser
     )
     {
         parent::__construct($configuration, $reflector, $attributeParser);
     }
 
+    public function getObjectId(): string
+    {
+        return $this->className;
+    }
+
     public static function create(
+        ConfigurationInterface $configuration,
+        Reflector              $reflector,
+        string                 $className,
+        string                 $relativeFileName,
+        AttributeParser        $attributeParser,
+        bool                   $reloadCache = false
+    ): ClassEntity
+    {
+        static $classEntities = [];
+        $objectId = md5($relativeFileName);
+        if (!isset($classEntities[$objectId]) || $reloadCache) {
+            $classEntities[$objectId] = new static(
+                $configuration,
+                $reflector,
+                $className,
+                $relativeFileName,
+                $attributeParser
+            );
+        }
+        return $classEntities[$objectId];
+    }
+
+    public static function createByReflection(
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         ReflectionClass        $reflectionClass,
@@ -38,12 +68,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         static $classEntities = [];
         $objectId = static::generateObjectIdByReflection($reflectionClass);
         if (!isset($classEntities[$objectId]) || $reloadCache) {
+            $relativeFileName = $reflectionClass->getFileName() ? str_replace($configuration->getProjectRoot(), '', $reflectionClass->getFileName()) : null;
             $classEntities[$objectId] = new static(
                 $configuration,
                 $reflector,
-                $reflectionClass,
+                $reflectionClass->getName(),
+                $relativeFileName,
                 $attributeParser
             );
+            $classEntities[$objectId]->reflectionClass = $reflectionClass;
         }
         return $classEntities[$objectId];
     }
@@ -97,7 +130,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getReflection(): ReflectionClass
     {
-        return $this->reflection;
+        if (!$this->reflectionClass) {
+            $this->reflectionClass = $this->reflector->reflectClass($this->className);
+        }
+        return $this->reflectionClass;
     }
 
     public function getImplementingReflectionClass(): ReflectionClass
@@ -125,15 +161,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->getReflection()->getNamespaceName();
     }
 
-    public function getFileName(): string
+    public function getFileName(): ?string
     {
-        return str_replace($this->configuration->getProjectRoot(), '', $this->getReflection()->getFileName());
-    }
-
-    public function getFilePath(): string
-    {
-        $shortFileName = array_reverse(explode(DIRECTORY_SEPARATOR, $this->getFileName()))[0];
-        return rtrim(str_replace($shortFileName, '', $this->getFileName()), DIRECTORY_SEPARATOR);
+        return $this->relativeFileName;
     }
 
     public function getStartLine(): int
@@ -289,5 +319,16 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public function isEnum(): bool
     {
         return $this->getReflection()->isEnum();
+    }
+
+    public function getAbsoluteFileName(): ?string
+    {
+
+        return $this->relativeFileName ? $this->configuration->getProjectRoot() . $this->relativeFileName : null;
+    }
+
+    public function getFileContent(): string
+    {
+        return file_get_contents($this->getAbsoluteFileName());
     }
 }

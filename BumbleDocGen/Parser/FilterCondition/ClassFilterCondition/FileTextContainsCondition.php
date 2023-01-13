@@ -20,7 +20,7 @@ final class FileTextContainsCondition implements ConditionInterface
 
     public function canAddToCollection(): bool
     {
-        $fileContent = $this->classEntity->getReflection()->getLocatedSource()->getSource();
+        $fileContent = $this->classEntity->getFileContent();
         return str_contains($fileContent, $this->substring);
     }
 }

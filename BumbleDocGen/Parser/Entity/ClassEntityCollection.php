@@ -37,16 +37,12 @@ final class ClassEntityCollection extends BaseEntityCollection
         foreach ($configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
             $className = ParserHelper::getClassFromFile($file->getPathName());
             if ($className) {
-                $classReflection = $reflector->reflectClass($className);
-
-                $entityClassName = ClassEntity::class;
-                if ($classReflection->isEnum()) {
-                    $entityClassName = EnumEntity::class;
-                }
-                $classEntity = $entityClassName::create(
+                $relativeFileName = str_replace($configuration->getProjectRoot(), '', $file->getPathName());
+                $classEntity = ClassEntity::create(
                     $configuration,
                     $reflector,
-                    $classReflection,
+                    ltrim($className,'\\'),
+                    $relativeFileName,
                     $attributeParser
                 );
                 if ($configuration->classEntityFilterCondition($classEntity)->canAddToCollection()) {

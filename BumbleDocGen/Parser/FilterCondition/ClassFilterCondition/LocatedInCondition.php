@@ -20,7 +20,7 @@ final class LocatedInCondition implements ConditionInterface
 
     public function canAddToCollection(): bool
     {
-        $fileName = $this->classEntity->getReflection()->getFileName();
+        $fileName = $this->classEntity->getAbsoluteFileName();
         foreach ($this->directories as $directory) {
             if (str_starts_with($fileName, $directory)) {
                 return true;
