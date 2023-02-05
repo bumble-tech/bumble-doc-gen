@@ -277,11 +277,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         static $constantEntityCollection = [];
         if (!isset($constantEntityCollection[$this->getObjectId()])) {
-            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByReflectionClass(
+            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByClassEntity(
                 $this->configuration,
-                $this->reflector,
-                $this->getReflection(),
-                $this->attributeParser
+                $this
             );
         }
         return $constantEntityCollection[$this->getObjectId()];
@@ -375,11 +373,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public function getConstantsData(): array
     {
         $constants = [];
-        foreach ($this->getReflection()->getConstants() as $constant) {
+        foreach ($this->getReflection()->getReflectionConstants() as $constant) {
             $constants[] = [
                 'name' => $constant->getName(),
                 'declaringClass' => $constant->getDeclaringClass()->getName(),
-                'implementingClass' => $constant->getImplementingClass()->getName()
+                'implementingClass' => $constant->getDeclaringClass()->getName()
             ];
         }
         return $constants;

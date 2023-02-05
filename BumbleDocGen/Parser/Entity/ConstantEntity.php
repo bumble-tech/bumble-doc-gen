@@ -5,39 +5,41 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\AttributeParser;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionClassConstant;
-use Roave\BetterReflection\Reflector\Reflector;
 
 /**
  * Class constant entity
  */
 final class ConstantEntity extends BaseEntity
 {
+    private ?ReflectionClassConstant $reflectionClassConstant = null;
+
     private function __construct(
         protected ConfigurationInterface $configuration,
-        protected Reflector $reflector,
-        protected ReflectionClass $reflectionClass,
-        protected ReflectionClassConstant $reflection,
-        protected AttributeParser $attributeParser,
-    ) {
-        parent::__construct($configuration, $reflector, $attributeParser);
+        protected ClassEntity            $classEntity,
+        protected string                 $constantName,
+        protected string                 $declaringClassName,
+        protected string                 $implementingClassName,
+    )
+    {
+        parent::__construct($configuration, $classEntity->getReflector(), $classEntity->getAttributeParser());
     }
 
     public static function create(
         ConfigurationInterface $configuration,
-        Reflector $reflector,
-        ReflectionClass $reflectionClass,
-        ReflectionClassConstant $reflectionConstant,
-        AttributeParser $attributeParser,
-        bool $reloadCache = false
-    ): ConstantEntity {
+        ClassEntity            $classEntity,
+        string                 $constantName,
+        string                 $declaringClassName,
+        string                 $implementingClassName,
+        bool                   $reloadCache = false
+    ): ConstantEntity
+    {
         static $classEntities = [];
-        $objectId = self::generateObjectIdByReflection($reflectionConstant) . $reflectionClass->getName();
+        $objectId = "{$implementingClassName}:{$constantName}";
         if (!isset($classEntities[$objectId]) || $reloadCache) {
             $classEntities[$objectId] = new ConstantEntity(
-                $configuration, $reflector, $reflectionClass, $reflectionConstant, $attributeParser
+                $configuration, $classEntity, $constantName, $declaringClassName, $implementingClassName
             );
         }
         return $classEntities[$objectId];
@@ -45,12 +47,15 @@ final class ConstantEntity extends BaseEntity
 
     public function getReflection(): ReflectionClassConstant
     {
-        return $this->reflection;
+        if (!$this->reflectionClassConstant) {
+            $this->reflectionClassConstant = $this->classEntity->getReflection()->getReflectionConstant($this->constantName);
+        }
+        return $this->reflectionClassConstant;
     }
 
     public function getImplementingReflectionClass(): ReflectionClass
     {
-        return $this->reflection->getDeclaringClass();
+        return $this->getReflection()->getDeclaringClass();
     }
 
     protected function getDocCommentReflectionRecursive(): ReflectionClassConstant
@@ -63,7 +68,7 @@ final class ConstantEntity extends BaseEntity
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
         if (!isset($docCommentsCache[$objectId])) {
-            $docCommentsCache[$objectId] = $this->reflection->getDocComment() ?: ' ';
+            $docCommentsCache[$objectId] = $this->getReflection()->getDocComment() ?: ' ';
         }
         return $docCommentsCache[$objectId];
     }
