@@ -34,11 +34,11 @@ abstract class BaseEntity
 
     abstract public function getImplementingReflectionClass(): ReflectionClass;
 
-    abstract protected function getDocCommentRecursive(): string;
+    #[Cache\CacheableMethod] abstract protected function getDocCommentRecursive(): string;
 
     abstract protected function getDocCommentReflectionRecursive(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
 
-    abstract public function getDescription(): string;
+    #[Cache\CacheableMethod] abstract public function getDescription(): string;
 
     public function getAttributeParser(): AttributeParser
     {
@@ -55,7 +55,10 @@ abstract class BaseEntity
 
     public function getObjectId(): string
     {
-        return self::generateObjectIdByReflection($this->getReflection());
+        if (method_exists($this, 'getImplementingClassName')) {
+            return "{$this->getImplementingClassName()}:{$this->getName()}";
+        }
+        return $this->getName();
     }
 
     protected function prettyVarExport(mixed $expression): string
@@ -74,7 +77,7 @@ abstract class BaseEntity
         );
     }
 
-    final public function getDocBlock(): DocBlock
+    #[Cache\CacheableMethod] final public function getDocBlock(): DocBlock
     {
         static $docBlocks = [];
         $objectId = $this->getObjectId();
@@ -85,7 +88,7 @@ abstract class BaseEntity
         return $docBlocks[$objectId];
     }
 
-    public function isInternal(): bool
+    #[Cache\CacheableMethod] public function isInternal(): bool
     {
         static $isInternalCache = [];
         $objectId = $this->getObjectId();
@@ -97,7 +100,7 @@ abstract class BaseEntity
         return $isInternalCache[$objectId];
     }
 
-    public function isDeprecated(): bool
+    #[Cache\CacheableMethod] public function isDeprecated(): bool
     {
         static $isDeprecatedCache = [];
         $objectId = $this->getObjectId();
@@ -109,7 +112,7 @@ abstract class BaseEntity
         return $isDeprecatedCache[$objectId];
     }
 
-    public function hasDescriptionLinks(): bool
+    #[Cache\CacheableMethod] public function hasDescriptionLinks(): bool
     {
         $docBlock = $this->getDocBlock();
         return preg_match_all('/(\@see )(.*?)( |}|])/', $this->getDescription() . ' ') ||
@@ -130,7 +133,7 @@ abstract class BaseEntity
     /**
      * @return array<int,array{name:string, description:string|null, url:string|null}>
      */
-    public function getDescriptionLinks(?Context $context = null): array
+    #[Cache\CacheableMethod] public function getDescriptionLinks(?Context $context = null): array
     {
         static $linksCache = [];
         $objectId = $this->getObjectId() .
@@ -231,7 +234,7 @@ abstract class BaseEntity
         return $linksCache[$objectId];
     }
 
-    public function hasThrows(): bool
+    #[Cache\CacheableMethod] public function hasThrows(): bool
     {
         $docBlock = $this->getDocBlock();
         return count($docBlock->getTagsByName('throws')) > 0;
@@ -240,7 +243,7 @@ abstract class BaseEntity
     /**
      * @return array<int,array{name:string, description:string|null}>
      */
-    public function getThrows(?Context $context = null): array
+    #[Cache\CacheableMethod] public function getThrows(?Context $context = null): array
     {
         static $throwsCache = [];
         $objectId = $this->getObjectId() .
@@ -288,7 +291,7 @@ abstract class BaseEntity
         return $throwsCache[$objectId];
     }
 
-    public function hasExamples(): bool
+    #[Cache\CacheableMethod] public function hasExamples(): bool
     {
         $docBlock = $this->getDocBlock();
         return count($docBlock->getTagsByName('example')) > 0;
@@ -297,7 +300,7 @@ abstract class BaseEntity
     /**
      * @return array<int,array{example:string}>
      */
-    public function getExamples(): array
+    #[Cache\CacheableMethod] public function getExamples(): array
     {
         static $examplesCache = [];
         $objectId = $this->getObjectId();
@@ -316,13 +319,13 @@ abstract class BaseEntity
         return $examplesCache[$objectId];
     }
 
-    public function getFirstExample(): string
+    #[Cache\CacheableMethod] public function getFirstExample(): string
     {
         $examples = $this->getExamples();
         return $examples[0]['example'] ?? '';
     }
 
-    public function getDocNote(): string
+    #[Cache\CacheableMethod] public function getDocNote(): string
     {
         static $docNoteCache = [];
         $objectId = $this->getObjectId();
