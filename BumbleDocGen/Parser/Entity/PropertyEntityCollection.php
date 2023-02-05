@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
+
 final class PropertyEntityCollection extends BaseEntityCollection
 {
     public static function createByClassEntity(ClassEntity $classEntity): PropertyEntityCollection
     {
         $propertyEntityCollection = new PropertyEntityCollection();
+
+        $propertyEntityClassName = CacheableEntityWrapper::createForPropertyEntity();
         foreach ($classEntity->getPropertiesData() as $propertyData) {
-            $propertyEntity = PropertyEntity::create(
+            $propertyEntity = $propertyEntityClassName::create(
                 $classEntity,
                 $propertyData['name'],
                 $propertyData['declaringClass'],

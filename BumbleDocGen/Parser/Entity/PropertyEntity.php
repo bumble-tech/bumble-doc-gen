@@ -10,7 +10,7 @@ use Roave\BetterReflection\Reflection\ReflectionProperty;
 /**
  * Class property entity
  */
-final class PropertyEntity extends BaseEntity
+class PropertyEntity extends BaseEntity
 {
     private ?ReflectionProperty $reflectionProperty = null;
 
@@ -35,7 +35,7 @@ final class PropertyEntity extends BaseEntity
         static $classEntities = [];
         $objectId = "{$implementingClassName}:{$propertyName}";
         if (!isset($classEntities[$objectId]) || $reloadCache) {
-            $classEntities[$objectId] = new PropertyEntity(
+            $classEntities[$objectId] = new static(
                 $classEntity, $propertyName, $declaringClassName, $implementingClassName
             );
         }
@@ -82,7 +82,7 @@ final class PropertyEntity extends BaseEntity
         return $docCommentsReflectionCache[$objectId];
     }
 
-    protected function getDocCommentRecursive(): string
+    #[Cache\CacheableMethod] protected function getDocCommentRecursive(): string
     {
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
@@ -95,10 +95,15 @@ final class PropertyEntity extends BaseEntity
 
     public function getName(): string
     {
-        return $this->getReflection()->getName();
+        return $this->propertyName;
     }
 
-    public function getFileName(): ?string
+    public function getImplementingClassName(): string
+    {
+        return $this->implementingClassName;
+    }
+
+    #[Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getReflection()->getImplementingClass()->getFileName();
         if (!str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
@@ -111,12 +116,12 @@ final class PropertyEntity extends BaseEntity
         );
     }
 
-    public function getLine(): int
+    #[Cache\CacheableMethod] public function getLine(): int
     {
         return $this->getReflection()->getStartLine();
     }
 
-    public function getType(): string
+    #[Cache\CacheableMethod] public function getType(): string
     {
         $type = $this->getReflection()->getType();
         $typeString = 'mixed';
@@ -139,7 +144,7 @@ final class PropertyEntity extends BaseEntity
         return $typeString;
     }
 
-    public function getModifiersString(): string
+    #[Cache\CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
         if ($this->getReflection()->isPrivate()) {
@@ -160,33 +165,28 @@ final class PropertyEntity extends BaseEntity
         return implode(' ', $modifiersString);
     }
 
-    public function isImplementedInParentClass(): bool
+    #[Cache\CacheableMethod] public function isImplementedInParentClass(): bool
     {
         return $this->getImplementingClassName() !== $this->classEntity->getName();
     }
 
-    public function getImplementingClassName(): string
-    {
-        return $this->implementingClassName;
-    }
-
-    public function getDescription(): string
+    #[Cache\CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return trim($docBlock->getSummary());
     }
 
-    public function isPublic(): bool
+    #[Cache\CacheableMethod] public function isPublic(): bool
     {
         return $this->getReflection()->isPublic();
     }
 
-    public function isProtected(): bool
+    #[Cache\CacheableMethod] public function isProtected(): bool
     {
         return $this->getReflection()->isProtected();
     }
 
-    public function isPrivate(): bool
+    #[Cache\CacheableMethod] public function isPrivate(): bool
     {
         return $this->getReflection()->isPrivate();
     }
