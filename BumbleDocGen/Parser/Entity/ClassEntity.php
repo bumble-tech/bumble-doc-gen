@@ -303,9 +303,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!isset($methodEntityCollection[$this->getObjectId()])) {
             $methodEntityCollection[$this->getObjectId()] = MethodEntityCollection::createByClassEntity(
                 $this->configuration,
-                $this->reflector,
-                $this,
-                $this->attributeParser
+                $this
             );
         }
         return $methodEntityCollection[$this->getObjectId()];

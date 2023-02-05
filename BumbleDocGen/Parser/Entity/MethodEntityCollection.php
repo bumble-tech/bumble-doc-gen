@@ -15,20 +15,16 @@ final class MethodEntityCollection extends BaseEntityCollection
 {
     public static function createByClassEntity(
         ConfigurationInterface $configuration,
-        Reflector $reflector,
         ClassEntity $classEntity,
-        AttributeParser $attributeParser
     ): MethodEntityCollection {
         $methodEntityCollection = new MethodEntityCollection();
-        $logger = $configuration->getLogger();
-        $reflectionClass = $classEntity->getReflection();
-        foreach ($reflectionClass->getMethods() as $reflectionMethod) {
+        foreach ($classEntity->getMethodsData() as $methodData) {
             $methodEntity = MethodEntity::create(
                 $configuration,
-                $reflector,
-                $reflectionClass,
-                $reflectionMethod,
-                $attributeParser
+                $classEntity,
+                $methodData['name'],
+                $methodData['declaringClass'],
+                $methodData['implementingClass']
             );
             if (
                 $configuration->methodEntityFilterCondition($methodEntity)->canAddToCollection()
@@ -37,6 +33,7 @@ final class MethodEntityCollection extends BaseEntityCollection
             }
         }
 
+        $logger = $configuration->getLogger();
         $docBlock = $classEntity->getDocBlock();
         $methodsBlocks = $docBlock->getTagsByName('method');
         if ($methodsBlocks) {
@@ -45,8 +42,7 @@ final class MethodEntityCollection extends BaseEntityCollection
                     /**@var \phpDocumentor\Reflection\DocBlock\Tags\Method $methodsBlock */
                     $methodEntity = DynamicMethodEntity::createByAnnotationMethod(
                         $configuration,
-                        $reflector,
-                        $reflectionClass,
+                        $classEntity,
                         $methodsBlock
                     );
                     $methodEntityCollection->add($methodEntity);

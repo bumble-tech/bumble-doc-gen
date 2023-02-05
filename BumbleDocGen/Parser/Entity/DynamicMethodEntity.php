@@ -18,19 +18,17 @@ final class DynamicMethodEntity implements MethodEntityInterface
 {
     private function __construct(
         private ConfigurationInterface $configuration,
-        private Reflector $reflector,
-        private ReflectionClass $reflectionClass,
+        private ClassEntity $classEntity,
         private Method $annotationMethod
     ) {
     }
 
     public static function createByAnnotationMethod(
         ConfigurationInterface $configuration,
-        Reflector $reflector,
-        ReflectionClass $reflectionClass,
+        ClassEntity $classEntity,
         Method $annotationMethod
     ): DynamicMethodEntity {
-        $dynamicMethodEntity = new DynamicMethodEntity($configuration, $reflector, $reflectionClass, $annotationMethod);
+        $dynamicMethodEntity = new DynamicMethodEntity($configuration, $classEntity, $annotationMethod);
         $dynamicMethodEntity->getCallMethod();
         return $dynamicMethodEntity;
     }
@@ -51,9 +49,9 @@ final class DynamicMethodEntity implements MethodEntityInterface
     private function getCallMethod(): ReflectionMethod
     {
         if ($this->isStatic()) {
-            $callMethod = $this->reflectionClass->getMethod('__callStatic');
+            $callMethod = $this->classEntity->getReflection()->getMethod('__callStatic');
         } else {
-            $callMethod = $this->reflectionClass->getMethod('__call');
+            $callMethod = $this->classEntity->getReflection()->getMethod('__call');
         }
         return $callMethod;
     }
@@ -94,12 +92,12 @@ final class DynamicMethodEntity implements MethodEntityInterface
         $returnType = (string)$this->annotationMethod->getReturnType();
         $returnType = ltrim($returnType, '\\');
         if (!str_contains($returnType, '\\')) {
-            $uses = ParserHelper::getUsesList($this->reflectionClass);
+            $uses = ParserHelper::getUsesList($this->classEntity->getReflection());
             if (isset($uses[$returnType])) {
                 $returnType = $uses[$returnType];
             } else {
-                $newClassName = "{$this->reflectionClass->getNamespaceName()}\\{$returnType}";
-                if (ParserHelper::isClassLoaded($this->reflector, $newClassName)) {
+                $newClassName = "{$this->classEntity->getReflection()->getNamespaceName()}\\{$returnType}";
+                if (ParserHelper::isClassLoaded($this->classEntity->getReflector(), $newClassName)) {
                     $returnType = $newClassName;
                 }
             }

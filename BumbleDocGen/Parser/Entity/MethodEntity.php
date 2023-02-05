@@ -5,52 +5,57 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\AttributeParser;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
-use Roave\BetterReflection\Reflector\Reflector;
 
 /**
  * Class method entity
  */
 final class MethodEntity extends BaseEntity implements MethodEntityInterface
 {
+    private ?ReflectionMethod $reflectionMethod = null;
+
     private function __construct(
         protected ConfigurationInterface $configuration,
-        protected Reflector $reflector,
-        protected ReflectionClass $reflectionClass,
-        protected ReflectionMethod $reflection,
-        protected AttributeParser $attributeParser
-    ) {
-        parent::__construct($configuration, $reflector, $attributeParser);
+        protected ClassEntity            $classEntity,
+        protected string                 $methodName,
+        protected string                 $declaringClassName,
+        protected string                 $implementingClassName,
+    )
+    {
+        parent::__construct($configuration, $classEntity->getReflector(), $classEntity->getAttributeParser());
     }
 
     public static function create(
         ConfigurationInterface $configuration,
-        Reflector $reflector,
-        ReflectionClass $reflectionClass,
-        ReflectionMethod $reflectionMethod,
-        AttributeParser $attributeParser,
-        bool $reloadCache = false
-    ): MethodEntity {
-        static $classEntities = [];
-        $objectId = self::generateObjectIdByReflection($reflectionMethod) . $reflectionClass->getName();
-        if (!isset($classEntities[$objectId]) || $reloadCache) {
-            $classEntities[$objectId] = new MethodEntity(
-                $configuration, $reflector, $reflectionClass, $reflectionMethod, $attributeParser
+        ClassEntity            $classEntity,
+        string                 $methodName,
+        string                 $declaringClassName,
+        string                 $implementingClassName,
+        bool                   $reloadCache = false
+    ): MethodEntity
+    {
+        static $entities = [];
+        $objectId = "{$implementingClassName}:{$methodName}";
+        if (!isset($entities[$objectId]) || $reloadCache) {
+            $entities[$objectId] = new MethodEntity(
+                $configuration, $classEntity, $methodName, $declaringClassName, $implementingClassName
             );
         }
-        return $classEntities[$objectId];
+        return $entities[$objectId];
     }
 
     public function getReflection(): ReflectionMethod
     {
-        return $this->reflection;
+        if (!$this->reflectionMethod) {
+            $this->reflectionMethod = $this->classEntity->getReflection()->getMethod($this->methodName);
+        }
+        return $this->reflectionMethod;
     }
 
     public function getImplementingReflectionClass(): ReflectionClass
     {
-        return $this->reflection->getImplementingClass();
+        return $this->getReflection()->getImplementingClass();
     }
 
     protected function getDocCommentReflectionRecursive(): ReflectionMethod
@@ -83,7 +88,7 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
                 }
                 return $reflectionMethod;
             };
-            $docCommentsReflectionCache[$objectId] = $getDocCommentReflection($this->reflection);
+            $docCommentsReflectionCache[$objectId] = $getDocCommentReflection($this->getReflection());
         }
         return $docCommentsReflectionCache[$objectId];
     }
@@ -100,7 +105,7 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     public function getName(): string
     {
-        return $this->getReflection()->getName();
+        return $this->methodName;
     }
 
     public function getFileName(): ?string
@@ -254,12 +259,12 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     public function isImplementedInParentClass(): bool
     {
-        return $this->getImplementingClassName() !== $this->reflectionClass->getName();
+        return $this->getImplementingClassName() !== $this->classEntity->getReflection()->getName();
     }
 
     public function getImplementingClassName(): string
     {
-        return $this->getImplementingReflectionClass()->getName();
+        return $this->implementingClassName;
     }
 
     public function getDescription(): string
