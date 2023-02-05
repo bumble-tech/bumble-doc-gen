@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
+
 final class ConstantEntityCollection extends BaseEntityCollection
 {
     public static function createByClassEntity(
@@ -11,8 +13,10 @@ final class ConstantEntityCollection extends BaseEntityCollection
     ): ConstantEntityCollection
     {
         $constantEntityCollection = new ConstantEntityCollection();
+
+        $constantEntityClassName = CacheableEntityWrapper::createForConstantEntity();
         foreach ($classEntity->getConstantsData() as $constantData) {
-            $constantEntity = ConstantEntity::create(
+            $constantEntity = $constantEntityClassName::create(
                 $classEntity,
                 $constantData['name'],
                 $constantData['declaringClass'],

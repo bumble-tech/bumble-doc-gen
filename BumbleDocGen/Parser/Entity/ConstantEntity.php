@@ -10,7 +10,7 @@ use Roave\BetterReflection\Reflection\ReflectionClassConstant;
 /**
  * Class constant entity
  */
-final class ConstantEntity extends BaseEntity
+class ConstantEntity extends BaseEntity
 {
     private ?ReflectionClassConstant $reflectionClassConstant = null;
 
@@ -35,7 +35,7 @@ final class ConstantEntity extends BaseEntity
         static $classEntities = [];
         $objectId = "{$implementingClassName}:{$constantName}";
         if (!isset($classEntities[$objectId]) || $reloadCache) {
-            $classEntities[$objectId] = new ConstantEntity(
+            $classEntities[$objectId] = new static(
                 $classEntity, $constantName, $declaringClassName, $implementingClassName
             );
         }
@@ -55,12 +55,17 @@ final class ConstantEntity extends BaseEntity
         return $this->getReflection()->getDeclaringClass();
     }
 
+    public function getImplementingClassName(): string
+    {
+        return $this->implementingClassName;
+    }
+
     protected function getDocCommentReflectionRecursive(): ReflectionClassConstant
     {
         return $this->getReflection();
     }
 
-    protected function getDocCommentRecursive(): string
+    #[Cache\CacheableMethod] protected function getDocCommentRecursive(): string
     {
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
@@ -72,10 +77,10 @@ final class ConstantEntity extends BaseEntity
 
     public function getName(): string
     {
-        return $this->getReflection()->getName();
+        return $this->constantName;
     }
 
-    public function getFileName(): ?string
+    #[Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getReflection()->getDeclaringClass()->getFileName();
         if (!str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
@@ -88,28 +93,28 @@ final class ConstantEntity extends BaseEntity
         );
     }
 
-    public function getLine(): int
+    #[Cache\CacheableMethod] public function getLine(): int
     {
         return $this->getReflection()->getStartLine();
     }
 
-    public function getDescription(): string
+    #[Cache\CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return $docBlock->getSummary();
     }
 
-    public function isPublic(): bool
+    #[Cache\CacheableMethod] public function isPublic(): bool
     {
         return $this->getReflection()->isPublic();
     }
 
-    public function isProtected(): bool
+    #[Cache\CacheableMethod] public function isProtected(): bool
     {
         return $this->getReflection()->isProtected();
     }
 
-    public function isPrivate(): bool
+    #[Cache\CacheableMethod] public function isPrivate(): bool
     {
         return $this->getReflection()->isPrivate();
     }
