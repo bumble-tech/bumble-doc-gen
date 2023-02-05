@@ -33,8 +33,8 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetfinder">getFinder</a> </li>
                 <li><a href="#mconverttoreflectorsourcelocator">convertToReflectorSourceLocator</a> </li>
+                <li><a href="#mgetfinder">getFinder</a> </li>
         </ol>
 
 
@@ -55,23 +55,6 @@ Method details:
 -----------------------
 
 
-
-.. _mgetfinder:
-
-* `# <mgetfinder_>`_  ``getFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L13>`_
-.. code-block:: php
-
-        public function getFinder(): Symfony\Component\Finder\Finder|null;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php>`_ | null
-
-________
 
 .. _mconverttoreflectorsourcelocator:
 
@@ -106,6 +89,23 @@ ________
 
 
 **Return value:** `Roave\\BetterReflection\\SourceLocator\\Type\\SourceLocator </vendor/roave/better-reflection/src/SourceLocator/Type/SourceLocator\.php>`_
+
+________
+
+.. _mgetfinder:
+
+* `# <mgetfinder_>`_  ``getFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php#L13>`_
+.. code-block:: php
+
+        public function getFinder(): Symfony\Component\Finder\Finder|null;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php>`_ | null
 
 ________
 

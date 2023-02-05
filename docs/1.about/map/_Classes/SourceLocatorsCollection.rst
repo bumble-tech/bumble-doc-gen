@@ -42,10 +42,10 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetiterator">getIterator</a> - <i>Retrieve an external iterator</i></li>
                 <li><a href="#madd">add</a> </li>
                 <li><a href="#mconverttoreflectorsourcelocatorslist">convertToReflectorSourceLocatorsList</a> </li>
                 <li><a href="#mgetcommonfinder">getCommonFinder</a> </li>
+                <li><a href="#mgetiterator">getIterator</a> - <i>Retrieve an external iterator</i></li>
         </ol>
 
 
@@ -66,72 +66,6 @@ Method details:
 -----------------------
 
 
-
-.. _mgetiterator:
-
-* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L15>`_
-.. code-block:: php
-
-        public function getIterator(): Generator;
-
-
-..
-
-    Retrieve an external iterator
-
-
-**Parameters:** not specified
-
-
-**Return value:** Generator
-
-
-**Throws:**
-
-#. **\\Exception** - on failure.
-
-
-**See:**
-
-#. `https://php\.net/manual/en/iteratoraggregate\.getiterator\.php <https://php.net/manual/en/iteratoraggregate.getiterator.php>`_ 
-
-________
-
-.. _mcreate:
-
-* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L20>`_
-.. code-block:: php
-
-        public static function create(BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface $sourceLocators): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$sourceLocators</td>
-            <td><a href='/BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
-
-________
 
 .. _madd:
 
@@ -205,6 +139,42 @@ ________
 
 ________
 
+.. _mcreate:
+
+* `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L20>`_
+.. code-block:: php
+
+        public static function create(BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface $sourceLocators): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$sourceLocators</td>
+            <td><a href='/BumbleDocGen/Parser/SourceLocator/SourceLocatorInterface.php'>BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
+
+________
+
 .. _mgetcommonfinder:
 
 * `# <mgetcommonfinder_>`_  ``getCommonFinder``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L44>`_
@@ -219,6 +189,36 @@ ________
 
 
 **Return value:** `Symfony\\Component\\Finder\\Finder </vendor/symfony/finder/Finder\.php>`_
+
+________
+
+.. _mgetiterator:
+
+* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection.php#L15>`_
+.. code-block:: php
+
+        public function getIterator(): Generator;
+
+
+..
+
+    Retrieve an external iterator
+
+
+**Parameters:** not specified
+
+
+**Return value:** Generator
+
+
+**Throws:**
+
+#. **\\Exception** - on failure.
+
+
+**See:**
+
+#. `https://php\.net/manual/en/iteratoraggregate\.getiterator\.php <https://php.net/manual/en/iteratoraggregate.getiterator.php>`_ 
 
 ________
 

@@ -64,6 +64,23 @@ Method details:
 
 
 
+.. _mcanaddtocollection:
+
+* `# <mcanaddtocollection_>`_  ``canAddToCollection``   **|** `source code </BumbleDocGen/Parser/FilterCondition/ConditionGroup.php#L23>`_
+.. code-block:: php
+
+        public function canAddToCollection(): bool;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** bool
+
+________
+
 .. _mcreate:
 
 * `# <mcreate_>`_  ``create``   **|** `source code </BumbleDocGen/Parser/FilterCondition/ConditionGroup.php#L15>`_
@@ -102,23 +119,6 @@ Method details:
 
 
 **Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionGroup </BumbleDocGen/Parser/FilterCondition/ConditionGroup\.php>`_
-
-________
-
-.. _mcanaddtocollection:
-
-* `# <mcanaddtocollection_>`_  ``canAddToCollection``   **|** `source code </BumbleDocGen/Parser/FilterCondition/ConditionGroup.php#L23>`_
-.. code-block:: php
-
-        public function canAddToCollection(): bool;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** bool
 
 ________
 

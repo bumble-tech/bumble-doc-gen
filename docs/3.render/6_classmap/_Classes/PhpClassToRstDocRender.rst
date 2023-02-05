@@ -45,9 +45,9 @@ Methods:
 .. raw:: html
 
   <ol>
+                <li><a href="#mgetrenderedtext">getRenderedText</a> - <i>Get rendered documentation for an entity</i></li>
                 <li><a href="#misavailableforentity">isAvailableForEntity</a> - <i>Can this render be used to create entity documentation</i></li>
                 <li><a href="#msetcontext">setContext</a> </li>
-                <li><a href="#mgetrenderedtext">getRenderedText</a> - <i>Get rendered documentation for an entity</i></li>
         </ol>
 
 
@@ -60,8 +60,8 @@ Constants:
 .. raw:: html
 
     <ul>
-            <li><a name="qblock-after-main-info" href="#qblock-after-main-info">#</a> <code>BLOCK_AFTER_MAIN_INFO</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L20">source code</a> </li>
             <li><a name="qblock-after-header" href="#qblock-after-header">#</a> <code>BLOCK_AFTER_HEADER</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L21">source code</a> </li>
+            <li><a name="qblock-after-main-info" href="#qblock-after-main-info">#</a> <code>BLOCK_AFTER_MAIN_INFO</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L20">source code</a> </li>
             <li><a name="qblock-before-details" href="#qblock-before-details">#</a> <code>BLOCK_BEFORE_DETAILS</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L22">source code</a> </li>
         </ul>
 
@@ -95,6 +95,45 @@ Method details:
 
 
 **Return value:** mixed
+
+________
+
+.. _mgetrenderedtext:
+
+* `# <mgetrenderedtext_>`_  ``getRenderedText``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L52>`_
+.. code-block:: php
+
+        public function getRenderedText(BumbleDocGen\Render\Context\DocumentedEntityWrapper $entityWrapper): string;
+
+
+..
+
+    Get rendered documentation for an entity
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$entityWrapper</td>
+            <td><a href='/BumbleDocGen/Render/Context/DocumentedEntityWrapper.php'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td>The class whose documentation was requested</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** string
 
 ________
 
@@ -170,45 +209,6 @@ ________
 
 
 **Return value:** void
-
-________
-
-.. _mgetrenderedtext:
-
-* `# <mgetrenderedtext_>`_  ``getRenderedText``   **|** `source code </BumbleDocGen/Render/EntityDocRender/PhpClassToRst/PhpClassToRstDocRender.php#L52>`_
-.. code-block:: php
-
-        public function getRenderedText(BumbleDocGen\Render\Context\DocumentedEntityWrapper $entityWrapper): string;
-
-
-..
-
-    Get rendered documentation for an entity
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$entityWrapper</td>
-            <td><a href='/BumbleDocGen/Render/Context/DocumentedEntityWrapper.php'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
-            <td>The class whose documentation was requested</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** string
 
 ________
 

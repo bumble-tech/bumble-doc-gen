@@ -46,8 +46,8 @@ Methods:
 
   <ol>
                 <li><a href="#mgetcontent">getContent</a> </li>
-                <li><a href="#msetcontent">setContent</a> </li>
                 <li><a href="#mgetcontext">getContext</a> </li>
+                <li><a href="#msetcontent">setContent</a> </li>
         </ol>
 
 
@@ -127,6 +127,23 @@ ________
 
 ________
 
+.. _mgetcontext:
+
+* `# <mgetcontext_>`_  ``getContext``   **|** `source code </BumbleDocGen/Plugin/Event/Render/BeforeCreatingDocFile.php#L29>`_
+.. code-block:: php
+
+        public function getContext(): BumbleDocGen\Render\Context\Context;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Render\\Context\\Context </BumbleDocGen/Render/Context/Context\.php>`_
+
+________
+
 .. _msetcontent:
 
 * `# <msetcontent_>`_  ``setContent``   **|** `source code </BumbleDocGen/Plugin/Event/Render/BeforeCreatingDocFile.php#L24>`_
@@ -160,23 +177,6 @@ ________
 
 
 **Return value:** void
-
-________
-
-.. _mgetcontext:
-
-* `# <mgetcontext_>`_  ``getContext``   **|** `source code </BumbleDocGen/Plugin/Event/Render/BeforeCreatingDocFile.php#L29>`_
-.. code-block:: php
-
-        public function getContext(): BumbleDocGen\Render\Context\Context;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Render\\Context\\Context </BumbleDocGen/Render/Context/Context\.php>`_
 
 ________
 

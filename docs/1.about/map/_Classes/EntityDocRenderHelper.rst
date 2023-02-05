@@ -46,9 +46,9 @@ Constants:
 .. raw:: html
 
     <ul>
-            <li><a name="qclass-entity-short-link-option" href="#qclass-entity-short-link-option">#</a> <code>CLASS_ENTITY_SHORT_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L15">source code</a> </li>
             <li><a name="qclass-entity-full-link-option" href="#qclass-entity-full-link-option">#</a> <code>CLASS_ENTITY_FULL_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L16">source code</a> </li>
             <li><a name="qclass-entity-only-cursor-link-option" href="#qclass-entity-only-cursor-link-option">#</a> <code>CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L17">source code</a> </li>
+            <li><a name="qclass-entity-short-link-option" href="#qclass-entity-short-link-option">#</a> <code>CLASS_ENTITY_SHORT_LINK_OPTION</code>   <b>|</b> <a href="/BumbleDocGen/Render/EntityDocRender/EntityDocRenderHelper.php#L15">source code</a> </li>
         </ul>
 
 

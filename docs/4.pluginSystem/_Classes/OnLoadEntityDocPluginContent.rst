@@ -50,12 +50,12 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetclassentity">getClassEntity</a> </li>
-                <li><a href="#mgetblockcontent">getBlockContent</a> </li>
-                <li><a href="#mgetblocktype">getBlockType</a> </li>
-                <li><a href="#mgetcontext">getContext</a> </li>
                 <li><a href="#maddblockcontentpluginresult">addBlockContentPluginResult</a> </li>
+                <li><a href="#mgetblockcontent">getBlockContent</a> </li>
                 <li><a href="#mgetblockcontentpluginresults">getBlockContentPluginResults</a> </li>
+                <li><a href="#mgetblocktype">getBlockType</a> </li>
+                <li><a href="#mgetclassentity">getClassEntity</a> </li>
+                <li><a href="#mgetcontext">getContext</a> </li>
         </ol>
 
 
@@ -128,74 +128,6 @@ Method details:
 
 ________
 
-.. _mgetclassentity:
-
-* `# <mgetclassentity_>`_  ``getClassEntity``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L29>`_
-.. code-block:: php
-
-        public function getClassEntity(): BumbleDocGen\Parser\Entity\ClassEntity;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </BumbleDocGen/Parser/Entity/ClassEntity\.php>`_
-
-________
-
-.. _mgetblockcontent:
-
-* `# <mgetblockcontent_>`_  ``getBlockContent``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L34>`_
-.. code-block:: php
-
-        public function getBlockContent(): string;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** string
-
-________
-
-.. _mgetblocktype:
-
-* `# <mgetblocktype_>`_  ``getBlockType``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L39>`_
-.. code-block:: php
-
-        public function getBlockType(): string;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** string
-
-________
-
-.. _mgetcontext:
-
-* `# <mgetcontext_>`_  ``getContext``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L44>`_
-.. code-block:: php
-
-        public function getContext(): BumbleDocGen\Render\Context\Context;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Render\\Context\\Context </BumbleDocGen/Render/Context/Context\.php>`_
-
-________
-
 .. _maddblockcontentpluginresult:
 
 * `# <maddblockcontentpluginresult_>`_  ``addBlockContentPluginResult``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L49>`_
@@ -232,6 +164,23 @@ ________
 
 ________
 
+.. _mgetblockcontent:
+
+* `# <mgetblockcontent_>`_  ``getBlockContent``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L34>`_
+.. code-block:: php
+
+        public function getBlockContent(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
 .. _mgetblockcontentpluginresults:
 
 * `# <mgetblockcontentpluginresults_>`_  ``getBlockContentPluginResults``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L54>`_
@@ -246,6 +195,57 @@ ________
 
 
 **Return value:** array
+
+________
+
+.. _mgetblocktype:
+
+* `# <mgetblocktype_>`_  ``getBlockType``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L39>`_
+.. code-block:: php
+
+        public function getBlockType(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _mgetclassentity:
+
+* `# <mgetclassentity_>`_  ``getClassEntity``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L29>`_
+.. code-block:: php
+
+        public function getClassEntity(): BumbleDocGen\Parser\Entity\ClassEntity;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </BumbleDocGen/Parser/Entity/ClassEntity\.php>`_
+
+________
+
+.. _mgetcontext:
+
+* `# <mgetcontext_>`_  ``getContext``   **|** `source code </BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php#L44>`_
+.. code-block:: php
+
+        public function getContext(): BumbleDocGen\Render\Context\Context;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Render\\Context\\Context </BumbleDocGen/Render/Context/Context\.php>`_
 
 ________
 

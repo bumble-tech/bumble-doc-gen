@@ -44,16 +44,16 @@ Methods:
   <ol>
                 <li><a href="#madd">add</a> </li>
                 <li><a href="#maddwithoutpreparation">addWithoutPreparation</a> </li>
-                <li><a href="#mget">get</a> </li>
-                <li><a href="#mgetentitybyclassname">getEntityByClassName</a> </li>
-                <li><a href="#mgetreflector">getReflector</a> </li>
-                <li><a href="#mgetlogger">getLogger</a> </li>
                 <li><a href="#mfilterbyinterfaces">filterByInterfaces</a> </li>
+                <li><a href="#mfilterbynameregularexpression">filterByNameRegularExpression</a> </li>
                 <li><a href="#mfilterbyparentclassnames">filterByParentClassNames</a> </li>
                 <li><a href="#mfilterbypaths">filterByPaths</a> </li>
-                <li><a href="#mfilterbynameregularexpression">filterByNameRegularExpression</a> </li>
+                <li><a href="#mget">get</a> </li>
+                <li><a href="#mgetentitybyclassname">getEntityByClassName</a> </li>
+                <li><a href="#mgetlogger">getLogger</a> </li>
                 <li><a href="#mgetonlyinstantiable">getOnlyInstantiable</a> </li>
                 <li><a href="#mgetonlyinterfaces">getOnlyInterfaces</a> </li>
+                <li><a href="#mgetreflector">getReflector</a> </li>
         </ol>
 
 
@@ -74,6 +74,83 @@ Method details:
 -----------------------
 
 
+
+.. _madd:
+
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L57>`_
+.. code-block:: php
+
+        public function add(BumbleDocGen\Parser\Entity\ClassEntity $classEntity, bool $reload = false): BumbleDocGen\Parser\Entity\ClassEntityCollection;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$classEntity</td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reload</td>
+            <td>bool</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
+
+________
+
+.. _maddwithoutpreparation:
+
+* `# <maddwithoutpreparation_>`_  ``addWithoutPreparation``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L68>`_
+.. code-block:: php
+
+        public function addWithoutPreparation(BumbleDocGen\Parser\Entity\ClassEntity $classEntity): BumbleDocGen\Parser\Entity\ClassEntityCollection;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$classEntity</td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
+
+________
 
 .. _mcreatebyreflector:
 
@@ -126,192 +203,9 @@ Method details:
 
 ________
 
-.. _madd:
-
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L61>`_
-.. code-block:: php
-
-        public function add(BumbleDocGen\Parser\Entity\ClassEntity $classEntity, bool $reload = false): BumbleDocGen\Parser\Entity\ClassEntityCollection;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$classEntity</td>
-            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$reload</td>
-            <td>bool</td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
-
-________
-
-.. _maddwithoutpreparation:
-
-* `# <maddwithoutpreparation_>`_  ``addWithoutPreparation``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L72>`_
-.. code-block:: php
-
-        public function addWithoutPreparation(BumbleDocGen\Parser\Entity\ClassEntity $classEntity): BumbleDocGen\Parser\Entity\ClassEntityCollection;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$classEntity</td>
-            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
-
-________
-
-.. _mget:
-
-* `# <mget_>`_  ``get``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L78>`_
-.. code-block:: php
-
-        public function get(string $objectId): BumbleDocGen\Parser\Entity\ClassEntity|null;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$objectId</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </BumbleDocGen/Parser/Entity/ClassEntity\.php>`_ | null
-
-________
-
-.. _mgetentitybyclassname:
-
-* `# <mgetentitybyclassname_>`_  ``getEntityByClassName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L83>`_
-.. code-block:: php
-
-        public function getEntityByClassName(string $className): BumbleDocGen\Parser\Entity\ClassEntity|null;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$className</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </BumbleDocGen/Parser/Entity/ClassEntity\.php>`_ | null
-
-________
-
-.. _mgetreflector:
-
-* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L90>`_
-.. code-block:: php
-
-        public function getReflector(): Roave\BetterReflection\Reflector\Reflector;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Roave\\BetterReflection\\Reflector\\Reflector </vendor/roave/better-reflection/src/Reflector/Reflector\.php>`_
-
-________
-
-.. _mgetlogger:
-
-* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L95>`_
-.. code-block:: php
-
-        public function getLogger(): Psr\Log\LoggerInterface;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Psr\\Log\\LoggerInterface </vendor/psr/log/src/LoggerInterface\.php>`_
-
-________
-
 .. _mfilterbyinterfaces:
 
-* `# <mfilterbyinterfaces_>`_  ``filterByInterfaces``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L103>`_
+* `# <mfilterbyinterfaces_>`_  ``filterByInterfaces``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L99>`_
 .. code-block:: php
 
         public function filterByInterfaces(array $interfaces): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -345,9 +239,45 @@ ________
 
 ________
 
+.. _mfilterbynameregularexpression:
+
+* `# <mfilterbynameregularexpression_>`_  ``filterByNameRegularExpression``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L143>`_
+.. code-block:: php
+
+        public function filterByNameRegularExpression(string $regexPattern): BumbleDocGen\Parser\Entity\ClassEntityCollection;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$regexPattern</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
+
+________
+
 .. _mfilterbyparentclassnames:
 
-* `# <mfilterbyparentclassnames_>`_  ``filterByParentClassNames``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L117>`_
+* `# <mfilterbyparentclassnames_>`_  ``filterByParentClassNames``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L113>`_
 .. code-block:: php
 
         public function filterByParentClassNames(array $parentClassNames): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -383,7 +313,7 @@ ________
 
 .. _mfilterbypaths:
 
-* `# <mfilterbypaths_>`_  ``filterByPaths``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L131>`_
+* `# <mfilterbypaths_>`_  ``filterByPaths``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L127>`_
 .. code-block:: php
 
         public function filterByPaths(array $paths): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -417,12 +347,12 @@ ________
 
 ________
 
-.. _mfilterbynameregularexpression:
+.. _mget:
 
-* `# <mfilterbynameregularexpression_>`_  ``filterByNameRegularExpression``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L147>`_
+* `# <mget_>`_  ``get``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L74>`_
 .. code-block:: php
 
-        public function filterByNameRegularExpression(string $regexPattern): BumbleDocGen\Parser\Entity\ClassEntityCollection;
+        public function get(string $objectId): BumbleDocGen\Parser\Entity\ClassEntity|null;
 
 
 
@@ -441,7 +371,7 @@ ________
     </thead>
     <tbody>
             <tr>
-            <td>$regexPattern</td>
+            <td>$objectId</td>
             <td>string</td>
             <td>-</td>
         </tr>
@@ -449,13 +379,66 @@ ________
     </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </BumbleDocGen/Parser/Entity/ClassEntity\.php>`_ | null
+
+________
+
+.. _mgetentitybyclassname:
+
+* `# <mgetentitybyclassname_>`_  ``getEntityByClassName``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L79>`_
+.. code-block:: php
+
+        public function getEntityByClassName(string $className): BumbleDocGen\Parser\Entity\ClassEntity|null;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$className</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </BumbleDocGen/Parser/Entity/ClassEntity\.php>`_ | null
+
+________
+
+.. _mgetlogger:
+
+* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L91>`_
+.. code-block:: php
+
+        public function getLogger(): Psr\Log\LoggerInterface;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Psr\\Log\\LoggerInterface </vendor/psr/log/src/LoggerInterface\.php>`_
 
 ________
 
 .. _mgetonlyinstantiable:
 
-* `# <mgetonlyinstantiable_>`_  ``getOnlyInstantiable``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L161>`_
+* `# <mgetonlyinstantiable_>`_  ``getOnlyInstantiable``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L157>`_
 .. code-block:: php
 
         public function getOnlyInstantiable(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -472,7 +455,7 @@ ________
 
 .. _mgetonlyinterfaces:
 
-* `# <mgetonlyinterfaces_>`_  ``getOnlyInterfaces``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L175>`_
+* `# <mgetonlyinterfaces_>`_  ``getOnlyInterfaces``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L171>`_
 .. code-block:: php
 
         public function getOnlyInterfaces(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
@@ -484,6 +467,23 @@ ________
 
 
 **Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
+
+________
+
+.. _mgetreflector:
+
+* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/Entity/ClassEntityCollection.php#L86>`_
+.. code-block:: php
+
+        public function getReflector(): Roave\BetterReflection\Reflector\Reflector;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Roave\\BetterReflection\\Reflector\\Reflector </vendor/roave/better-reflection/src/Reflector/Reflector\.php>`_
 
 ________
 

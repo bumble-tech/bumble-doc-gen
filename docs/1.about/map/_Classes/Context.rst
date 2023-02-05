@@ -45,16 +45,16 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#msetcurrenttemplatefilepatch">setCurrentTemplateFilePatch</a> - <i>Saving the path to the template file that is currently being worked on in the context</i></li>
-                <li><a href="#mgetcurrenttemplatefilepatch">getCurrentTemplateFilePatch</a> - <i>Getting the path to the template file that is currently being worked on</i></li>
-                <li><a href="#miscurrenttemplaterst">isCurrentTemplateRst</a> </li>
-                <li><a href="#miscurrenttemplatemd">isCurrentTemplateMd</a> </li>
-                <li><a href="#mgetreflector">getReflector</a> </li>
-                <li><a href="#mgetconfiguration">getConfiguration</a> </li>
-                <li><a href="#mgetclassentitycollection">getClassEntityCollection</a> </li>
-                <li><a href="#mgetentitywrapperscollection">getEntityWrappersCollection</a> </li>
                 <li><a href="#mgetbreadcrumbshelper">getBreadcrumbsHelper</a> </li>
+                <li><a href="#mgetclassentitycollection">getClassEntityCollection</a> </li>
+                <li><a href="#mgetconfiguration">getConfiguration</a> </li>
+                <li><a href="#mgetcurrenttemplatefilepatch">getCurrentTemplateFilePatch</a> - <i>Getting the path to the template file that is currently being worked on</i></li>
+                <li><a href="#mgetentitywrapperscollection">getEntityWrappersCollection</a> </li>
                 <li><a href="#mgetplugineventdispatcher">getPluginEventDispatcher</a> </li>
+                <li><a href="#mgetreflector">getReflector</a> </li>
+                <li><a href="#miscurrenttemplatemd">isCurrentTemplateMd</a> </li>
+                <li><a href="#miscurrenttemplaterst">isCurrentTemplateRst</a> </li>
+                <li><a href="#msetcurrenttemplatefilepatch">setCurrentTemplateFilePatch</a> - <i>Saving the path to the template file that is currently being worked on in the context</i></li>
         </ol>
 
 
@@ -127,6 +127,162 @@ Method details:
 
 ________
 
+.. _mgetbreadcrumbshelper:
+
+* `# <mgetbreadcrumbshelper_>`_  ``getBreadcrumbsHelper``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L79>`_
+.. code-block:: php
+
+        public function getBreadcrumbsHelper(): BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Render\\Breadcrumbs\\BreadcrumbsHelper </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper\.php>`_
+
+________
+
+.. _mgetclassentitycollection:
+
+* `# <mgetclassentitycollection_>`_  ``getClassEntityCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L69>`_
+.. code-block:: php
+
+        public function getClassEntityCollection(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
+
+________
+
+.. _mgetconfiguration:
+
+* `# <mgetconfiguration_>`_  ``getConfiguration``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L64>`_
+.. code-block:: php
+
+        public function getConfiguration(): BumbleDocGen\ConfigurationInterface;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\ConfigurationInterface </BumbleDocGen/ConfigurationInterface\.php>`_
+
+________
+
+.. _mgetcurrenttemplatefilepatch:
+
+* `# <mgetcurrenttemplatefilepatch_>`_  ``getCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L44>`_
+.. code-block:: php
+
+        public function getCurrentTemplateFilePatch(): string;
+
+
+..
+
+    Getting the path to the template file that is currently being worked on
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _mgetentitywrapperscollection:
+
+* `# <mgetentitywrapperscollection_>`_  ``getEntityWrappersCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L74>`_
+.. code-block:: php
+
+        public function getEntityWrappersCollection(): BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </BumbleDocGen/Render/Context/DocumentedEntityWrappersCollection\.php>`_
+
+________
+
+.. _mgetplugineventdispatcher:
+
+* `# <mgetplugineventdispatcher_>`_  ``getPluginEventDispatcher``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L84>`_
+.. code-block:: php
+
+        public function getPluginEventDispatcher(): BumbleDocGen\Plugin\PluginEventDispatcher;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Plugin\\PluginEventDispatcher </BumbleDocGen/Plugin/PluginEventDispatcher\.php>`_
+
+________
+
+.. _mgetreflector:
+
+* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L59>`_
+.. code-block:: php
+
+        public function getReflector(): Roave\BetterReflection\Reflector\Reflector;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Roave\\BetterReflection\\Reflector\\Reflector </vendor/roave/better-reflection/src/Reflector/Reflector\.php>`_
+
+________
+
+.. _miscurrenttemplatemd:
+
+* `# <miscurrenttemplatemd_>`_  ``isCurrentTemplateMd``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L54>`_
+.. code-block:: php
+
+        public function isCurrentTemplateMd(): bool;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** bool
+
+________
+
+.. _miscurrenttemplaterst:
+
+* `# <miscurrenttemplaterst_>`_  ``isCurrentTemplateRst``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L49>`_
+.. code-block:: php
+
+        public function isCurrentTemplateRst(): bool;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** bool
+
+________
+
 .. _msetcurrenttemplatefilepatch:
 
 * `# <msetcurrenttemplatefilepatch_>`_  ``setCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L36>`_
@@ -163,162 +319,6 @@ ________
 
 
 **Return value:** void
-
-________
-
-.. _mgetcurrenttemplatefilepatch:
-
-* `# <mgetcurrenttemplatefilepatch_>`_  ``getCurrentTemplateFilePatch``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L44>`_
-.. code-block:: php
-
-        public function getCurrentTemplateFilePatch(): string;
-
-
-..
-
-    Getting the path to the template file that is currently being worked on
-
-
-**Parameters:** not specified
-
-
-**Return value:** string
-
-________
-
-.. _miscurrenttemplaterst:
-
-* `# <miscurrenttemplaterst_>`_  ``isCurrentTemplateRst``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L49>`_
-.. code-block:: php
-
-        public function isCurrentTemplateRst(): bool;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** bool
-
-________
-
-.. _miscurrenttemplatemd:
-
-* `# <miscurrenttemplatemd_>`_  ``isCurrentTemplateMd``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L54>`_
-.. code-block:: php
-
-        public function isCurrentTemplateMd(): bool;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** bool
-
-________
-
-.. _mgetreflector:
-
-* `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L59>`_
-.. code-block:: php
-
-        public function getReflector(): Roave\BetterReflection\Reflector\Reflector;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Roave\\BetterReflection\\Reflector\\Reflector </vendor/roave/better-reflection/src/Reflector/Reflector\.php>`_
-
-________
-
-.. _mgetconfiguration:
-
-* `# <mgetconfiguration_>`_  ``getConfiguration``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L64>`_
-.. code-block:: php
-
-        public function getConfiguration(): BumbleDocGen\ConfigurationInterface;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\ConfigurationInterface </BumbleDocGen/ConfigurationInterface\.php>`_
-
-________
-
-.. _mgetclassentitycollection:
-
-* `# <mgetclassentitycollection_>`_  ``getClassEntityCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L69>`_
-.. code-block:: php
-
-        public function getClassEntityCollection(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
-
-________
-
-.. _mgetentitywrapperscollection:
-
-* `# <mgetentitywrapperscollection_>`_  ``getEntityWrappersCollection``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L74>`_
-.. code-block:: php
-
-        public function getEntityWrappersCollection(): BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Render\\Context\\DocumentedEntityWrappersCollection </BumbleDocGen/Render/Context/DocumentedEntityWrappersCollection\.php>`_
-
-________
-
-.. _mgetbreadcrumbshelper:
-
-* `# <mgetbreadcrumbshelper_>`_  ``getBreadcrumbsHelper``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L79>`_
-.. code-block:: php
-
-        public function getBreadcrumbsHelper(): BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Render\\Breadcrumbs\\BreadcrumbsHelper </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper\.php>`_
-
-________
-
-.. _mgetplugineventdispatcher:
-
-* `# <mgetplugineventdispatcher_>`_  ``getPluginEventDispatcher``   **|** `source code </BumbleDocGen/Render/Context/Context.php#L84>`_
-.. code-block:: php
-
-        public function getPluginEventDispatcher(): BumbleDocGen\Plugin\PluginEventDispatcher;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Plugin\\PluginEventDispatcher </BumbleDocGen/Plugin/PluginEventDispatcher\.php>`_
 
 ________
 

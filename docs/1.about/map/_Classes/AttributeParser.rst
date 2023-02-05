@@ -42,11 +42,11 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mparseannotations">parseAnnotations</a> </li>
+                <li><a href="#mgetannotationifissubclassof">getAnnotationIfIsSubclassOf</a> </li>
                 <li><a href="#mgetdocblockfactory">getDocBlockFactory</a> </li>
                 <li><a href="#mhasannotationifissubclassof">hasAnnotationIfIsSubclassOf</a> </li>
-                <li><a href="#mgetannotationifissubclassof">getAnnotationIfIsSubclassOf</a> </li>
                 <li><a href="#mhasattributeifissubclassof">hasAttributeIfIsSubclassOf</a> </li>
+                <li><a href="#mparseannotations">parseAnnotations</a> </li>
         </ol>
 
 
@@ -109,12 +109,12 @@ Method details:
 
 ________
 
-.. _mparseannotations:
+.. _mgetannotationifissubclassof:
 
-* `# <mparseannotations_>`_  ``parseAnnotations``   **|** `source code </BumbleDocGen/Parser/AttributeParser.php#L25>`_
+* `# <mgetannotationifissubclassof_>`_  ``getAnnotationIfIsSubclassOf``   **|** `source code </BumbleDocGen/Parser/AttributeParser.php#L88>`_
 .. code-block:: php
 
-        public function parseAnnotations(string $docComment): array;
+        public function getAnnotationIfIsSubclassOf(string $docComment, string $className): object|null;
 
 
 
@@ -137,11 +137,16 @@ ________
             <td>string</td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$className</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
         </tbody>
     </table>
 
 
-**Return value:** array
+**Return value:** object | null
 
 ________
 
@@ -203,47 +208,6 @@ ________
 
 ________
 
-.. _mgetannotationifissubclassof:
-
-* `# <mgetannotationifissubclassof_>`_  ``getAnnotationIfIsSubclassOf``   **|** `source code </BumbleDocGen/Parser/AttributeParser.php#L88>`_
-.. code-block:: php
-
-        public function getAnnotationIfIsSubclassOf(string $docComment, string $className): object|null;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$docComment</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$className</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** object | null
-
-________
-
 .. _mhasattributeifissubclassof:
 
 * `# <mhasattributeifissubclassof_>`_  ``hasAttributeIfIsSubclassOf``   **|** `source code </BumbleDocGen/Parser/AttributeParser.php#L99>`_
@@ -282,6 +246,42 @@ ________
 
 
 **Return value:** bool
+
+________
+
+.. _mparseannotations:
+
+* `# <mparseannotations_>`_  ``parseAnnotations``   **|** `source code </BumbleDocGen/Parser/AttributeParser.php#L25>`_
+.. code-block:: php
+
+        public function parseAnnotations(string $docComment): array;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$docComment</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** array
 
 ________
 

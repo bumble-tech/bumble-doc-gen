@@ -33,9 +33,9 @@ Methods:
 .. raw:: html
 
   <ol>
+                <li><a href="#maftercreationclassentitycollection">afterCreationClassEntityCollection</a> </li>
                 <li><a href="#mgetsubscribedevents">getSubscribedEvents</a> - <i>Returns an array of event names this subscriber wants to listen to.</i></li>
                 <li><a href="#monloadentitydocplugincontentevent">onLoadEntityDocPluginContentEvent</a> </li>
-                <li><a href="#maftercreationclassentitycollection">afterCreationClassEntityCollection</a> </li>
         </ol>
 
 
@@ -66,6 +66,42 @@ Method details:
 -----------------------
 
 
+
+.. _maftercreationclassentitycollection:
+
+* `# <maftercreationclassentitycollection_>`_  ``afterCreationClassEntityCollection``   **|** `source code </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L51>`_
+.. code-block:: php
+
+        public function afterCreationClassEntityCollection(BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection $event): void;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$event</td>
+            <td><a href='/BumbleDocGen/Plugin/Event/Parser/AfterCreationClassEntityCollection.php'>BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** void
+
+________
 
 .. _mgetsubscribedevents:
 
@@ -113,42 +149,6 @@ ________
             <tr>
             <td>$event</td>
             <td><a href='/BumbleDocGen/Plugin/Event/Render/OnLoadEntityDocPluginContent.php'>BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** void
-
-________
-
-.. _maftercreationclassentitycollection:
-
-* `# <maftercreationclassentitycollection_>`_  ``afterCreationClassEntityCollection``   **|** `source code </SelfDoc/Configuration/Plugin/TwigFunctionClassParser/TwigFunctionClassParserPlugin.php#L51>`_
-.. code-block:: php
-
-        public function afterCreationClassEntityCollection(BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection $event): void;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$event</td>
-            <td><a href='/BumbleDocGen/Plugin/Event/Parser/AfterCreationClassEntityCollection.php'>BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>

@@ -65,6 +65,47 @@ Method details:
 
 
 
+.. _madd:
+
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntityCollection.php#L38>`_
+.. code-block:: php
+
+        public function add(BumbleDocGen\Parser\Entity\ConstantEntity $constantEntity, bool $reload = false): BumbleDocGen\Parser\Entity\ConstantEntityCollection;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$constantEntity</td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ConstantEntity.php'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reload</td>
+            <td>bool</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </BumbleDocGen/Parser/Entity/ConstantEntityCollection\.php>`_
+
+________
+
 .. _mcreatebyreflectionclass:
 
 * `# <mcreatebyreflectionclass_>`_  ``createByReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntityCollection.php#L14>`_
@@ -106,47 +147,6 @@ Method details:
             <tr>
             <td>$attributeParser</td>
             <td><a href='/BumbleDocGen/Parser/AttributeParser.php'>BumbleDocGen\Parser\AttributeParser</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ConstantEntityCollection </BumbleDocGen/Parser/Entity/ConstantEntityCollection\.php>`_
-
-________
-
-.. _madd:
-
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntityCollection.php#L38>`_
-.. code-block:: php
-
-        public function add(BumbleDocGen\Parser\Entity\ConstantEntity $constantEntity, bool $reload = false): BumbleDocGen\Parser\Entity\ConstantEntityCollection;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$constantEntity</td>
-            <td><a href='/BumbleDocGen/Parser/Entity/ConstantEntity.php'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$reload</td>
-            <td>bool</td>
             <td>-</td>
         </tr>
         </tbody>

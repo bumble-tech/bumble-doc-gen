@@ -65,6 +65,47 @@ Method details:
 
 
 
+.. _madd:
+
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntityCollection.php#L38>`_
+.. code-block:: php
+
+        public function add(BumbleDocGen\Parser\Entity\PropertyEntity $propertyEntity, bool $reload = false): BumbleDocGen\Parser\Entity\PropertyEntityCollection;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$propertyEntity</td>
+            <td><a href='/BumbleDocGen/Parser/Entity/PropertyEntity.php'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reload</td>
+            <td>bool</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </BumbleDocGen/Parser/Entity/PropertyEntityCollection\.php>`_
+
+________
+
 .. _mcreatebyreflectionclass:
 
 * `# <mcreatebyreflectionclass_>`_  ``createByReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntityCollection.php#L14>`_
@@ -106,47 +147,6 @@ Method details:
             <tr>
             <td>$attributeParser</td>
             <td><a href='/BumbleDocGen/Parser/AttributeParser.php'>BumbleDocGen\Parser\AttributeParser</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\PropertyEntityCollection </BumbleDocGen/Parser/Entity/PropertyEntityCollection\.php>`_
-
-________
-
-.. _madd:
-
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/PropertyEntityCollection.php#L38>`_
-.. code-block:: php
-
-        public function add(BumbleDocGen\Parser\Entity\PropertyEntity $propertyEntity, bool $reload = false): BumbleDocGen\Parser\Entity\PropertyEntityCollection;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$propertyEntity</td>
-            <td><a href='/BumbleDocGen/Parser/Entity/PropertyEntity.php'>BumbleDocGen\Parser\Entity\PropertyEntity</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$reload</td>
-            <td>bool</td>
             <td>-</td>
         </tr>
         </tbody>

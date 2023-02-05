@@ -45,21 +45,21 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetreflection">getReflection</a> </li>
-                <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
-                <li><a href="#mgetname">getName</a> </li>
+                <li><a href="#mgetdescription">getDescription</a> </li>
                 <li><a href="#mgetfilename">getFileName</a> </li>
+                <li><a href="#mgetimplementingclassname">getImplementingClassName</a> </li>
+                <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
                 <li><a href="#mgetline">getLine</a> </li>
                 <li><a href="#mgetmodifiersstring">getModifiersString</a> </li>
-                <li><a href="#mgetreturntype">getReturnType</a> </li>
-                <li><a href="#mparseannotationparams">parseAnnotationParams</a> </li>
+                <li><a href="#mgetname">getName</a> </li>
                 <li><a href="#mgetparameters">getParameters</a> </li>
                 <li><a href="#mgetparametersstring">getParametersString</a> </li>
-                <li><a href="#misimplementedinparentclass">isImplementedInParentClass</a> </li>
-                <li><a href="#mgetimplementingclassname">getImplementingClassName</a> </li>
-                <li><a href="#mgetdescription">getDescription</a> </li>
-                <li><a href="#misinitialization">isInitialization</a> </li>
+                <li><a href="#mgetreflection">getReflection</a> </li>
+                <li><a href="#mgetreturntype">getReturnType</a> </li>
                 <li><a href="#misdynamic">isDynamic</a> </li>
+                <li><a href="#misimplementedinparentclass">isImplementedInParentClass</a> </li>
+                <li><a href="#misinitialization">isInitialization</a> </li>
+                <li><a href="#mparseannotationparams">parseAnnotationParams</a> </li>
         </ol>
 
 
@@ -142,46 +142,12 @@ Method details:
 
 ________
 
-.. _mgetreflection:
+.. _mgetdescription:
 
-* `# <mgetreflection_>`_  ``getReflection``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L46>`_
+* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L265>`_
 .. code-block:: php
 
-        public function getReflection(): Roave\BetterReflection\Reflection\ReflectionMethod;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionMethod </vendor/roave/better-reflection/src/Reflection/ReflectionMethod\.php>`_
-
-________
-
-.. _mgetimplementingreflectionclass:
-
-* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L51>`_
-.. code-block:: php
-
-        public function getImplementingReflectionClass(): Roave\BetterReflection\Reflection\ReflectionClass;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
-
-________
-
-.. _mgetname:
-
-* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L101>`_
-.. code-block:: php
-
-        public function getName(): string;
+        public function getDescription(): string;
 
 
 
@@ -207,6 +173,40 @@ ________
 
 
 **Return value:** string | null
+
+________
+
+.. _mgetimplementingclassname:
+
+* `# <mgetimplementingclassname_>`_  ``getImplementingClassName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L260>`_
+.. code-block:: php
+
+        public function getImplementingClassName(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _mgetimplementingreflectionclass:
+
+* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L51>`_
+.. code-block:: php
+
+        public function getImplementingReflectionClass(): Roave\BetterReflection\Reflection\ReflectionClass;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
 
 ________
 
@@ -244,12 +244,12 @@ ________
 
 ________
 
-.. _mgetreturntype:
+.. _mgetname:
 
-* `# <mgetreturntype_>`_  ``getReturnType``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L145>`_
+* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L101>`_
 .. code-block:: php
 
-        public function getReturnType(): string;
+        public function getName(): string;
 
 
 
@@ -258,42 +258,6 @@ ________
 
 
 **Return value:** string
-
-________
-
-.. _mparseannotationparams:
-
-* `# <mparseannotationparams_>`_  ``parseAnnotationParams``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L165>`_
-.. code-block:: php
-
-        public static function parseAnnotationParams(array $params): array;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$params</td>
-            <td>array</td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** array
 
 ________
 
@@ -331,6 +295,57 @@ ________
 
 ________
 
+.. _mgetreflection:
+
+* `# <mgetreflection_>`_  ``getReflection``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L46>`_
+.. code-block:: php
+
+        public function getReflection(): Roave\BetterReflection\Reflection\ReflectionMethod;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionMethod </vendor/roave/better-reflection/src/Reflection/ReflectionMethod\.php>`_
+
+________
+
+.. _mgetreturntype:
+
+* `# <mgetreturntype_>`_  ``getReturnType``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L145>`_
+.. code-block:: php
+
+        public function getReturnType(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _misdynamic:
+
+* `# <misdynamic_>`_  ``isDynamic``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L287>`_
+.. code-block:: php
+
+        public function isDynamic(): bool;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** bool
+
+________
+
 .. _misimplementedinparentclass:
 
 * `# <misimplementedinparentclass_>`_  ``isImplementedInParentClass``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L255>`_
@@ -345,40 +360,6 @@ ________
 
 
 **Return value:** bool
-
-________
-
-.. _mgetimplementingclassname:
-
-* `# <mgetimplementingclassname_>`_  ``getImplementingClassName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L260>`_
-.. code-block:: php
-
-        public function getImplementingClassName(): string;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** string
-
-________
-
-.. _mgetdescription:
-
-* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L265>`_
-.. code-block:: php
-
-        public function getDescription(): string;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** string
 
 ________
 
@@ -399,20 +380,39 @@ ________
 
 ________
 
-.. _misdynamic:
+.. _mparseannotationparams:
 
-* `# <misdynamic_>`_  ``isDynamic``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L287>`_
+* `# <mparseannotationparams_>`_  ``parseAnnotationParams``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntity.php#L165>`_
 .. code-block:: php
 
-        public function isDynamic(): bool;
+        public static function parseAnnotationParams(array $params): array;
 
 
 
 
-**Parameters:** not specified
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$params</td>
+            <td>array</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
 
 
-**Return value:** bool
+**Return value:** array
 
 ________
 

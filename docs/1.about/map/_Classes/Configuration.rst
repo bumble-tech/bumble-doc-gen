@@ -36,13 +36,13 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetprojectroot">getProjectRoot</a> - <i>Get project root (absolute path)</i></li>
-                <li><a href="#mgettemplatesdir">getTemplatesDir</a> - <i>Directory with documentation templates (absolute path)</i></li>
-                <li><a href="#mgetoutputdirbaseurl">getOutputDirBaseUrl</a> - <i>Base URL of the generated document</i></li>
-                <li><a href="#mgetsourcelocators">getSourceLocators</a> - <i>Get a collection of source locators</i></li>
                 <li><a href="#mclassentityfiltercondition">classEntityFilterCondition</a> </li>
-                <li><a href="#mgetplugins">getPlugins</a> </li>
                 <li><a href="#mgetcachedir">getCacheDir</a> </li>
+                <li><a href="#mgetoutputdirbaseurl">getOutputDirBaseUrl</a> - <i>Base URL of the generated document</i></li>
+                <li><a href="#mgetplugins">getPlugins</a> </li>
+                <li><a href="#mgetprojectroot">getProjectRoot</a> - <i>Get project root (absolute path)</i></li>
+                <li><a href="#mgetsourcelocators">getSourceLocators</a> - <i>Get a collection of source locators</i></li>
+                <li><a href="#mgettemplatesdir">getTemplatesDir</a> - <i>Directory with documentation templates (absolute path)</i></li>
         </ol>
 
 
@@ -63,86 +63,6 @@ Method details:
 -----------------------
 
 
-
-.. _mgetprojectroot:
-
-* `# <mgetprojectroot_>`_  ``getProjectRoot``   **|** `source code </SelfDoc/Configuration/Configuration.php#L19>`_
-.. code-block:: php
-
-        public function getProjectRoot(): string;
-
-
-..
-
-    Get project root \(absolute path\)
-
-
-**Parameters:** not specified
-
-
-**Return value:** string
-
-________
-
-.. _mgettemplatesdir:
-
-* `# <mgettemplatesdir_>`_  ``getTemplatesDir``   **|** `source code </SelfDoc/Configuration/Configuration.php#L24>`_
-.. code-block:: php
-
-        public function getTemplatesDir(): string;
-
-
-..
-
-    Directory with documentation templates \(absolute path\)
-
-
-**Parameters:** not specified
-
-
-**Return value:** string
-
-________
-
-.. _mgetoutputdirbaseurl:
-
-* `# <mgetoutputdirbaseurl_>`_  ``getOutputDirBaseUrl``   **|** `source code </SelfDoc/Configuration/Configuration.php#L29>`_
-.. code-block:: php
-
-        public function getOutputDirBaseUrl(): string;
-
-
-..
-
-    Base URL of the generated document
-
-
-**Parameters:** not specified
-
-
-**Return value:** string
-
-________
-
-.. _mgetsourcelocators:
-
-* `# <mgetsourcelocators_>`_  ``getSourceLocators``   **|** `source code </SelfDoc/Configuration/Configuration.php#L34>`_
-.. code-block:: php
-
-        public function getSourceLocators(): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
-
-
-..
-
-    Get a collection of source locators
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
-
-________
 
 .. _mclassentityfiltercondition:
 
@@ -180,6 +100,43 @@ ________
 
 ________
 
+.. _mgetcachedir:
+
+* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </SelfDoc/Configuration/Configuration.php#L57>`_
+.. code-block:: php
+
+        public function getCacheDir(): string|null;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string | null
+
+________
+
+.. _mgetoutputdirbaseurl:
+
+* `# <mgetoutputdirbaseurl_>`_  ``getOutputDirBaseUrl``   **|** `source code </SelfDoc/Configuration/Configuration.php#L29>`_
+.. code-block:: php
+
+        public function getOutputDirBaseUrl(): string;
+
+
+..
+
+    Base URL of the generated document
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
 .. _mgetplugins:
 
 * `# <mgetplugins_>`_  ``getPlugins``   **|** `source code </SelfDoc/Configuration/Configuration.php#L49>`_
@@ -197,20 +154,63 @@ ________
 
 ________
 
-.. _mgetcachedir:
+.. _mgetprojectroot:
 
-* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </SelfDoc/Configuration/Configuration.php#L57>`_
+* `# <mgetprojectroot_>`_  ``getProjectRoot``   **|** `source code </SelfDoc/Configuration/Configuration.php#L19>`_
 .. code-block:: php
 
-        public function getCacheDir(): string|null;
+        public function getProjectRoot(): string;
 
 
+..
+
+    Get project root \(absolute path\)
 
 
 **Parameters:** not specified
 
 
-**Return value:** string | null
+**Return value:** string
+
+________
+
+.. _mgetsourcelocators:
+
+* `# <mgetsourcelocators_>`_  ``getSourceLocators``   **|** `source code </SelfDoc/Configuration/Configuration.php#L34>`_
+.. code-block:: php
+
+        public function getSourceLocators(): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
+
+
+..
+
+    Get a collection of source locators
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
+
+________
+
+.. _mgettemplatesdir:
+
+* `# <mgettemplatesdir_>`_  ``getTemplatesDir``   **|** `source code </SelfDoc/Configuration/Configuration.php#L24>`_
+.. code-block:: php
+
+        public function getTemplatesDir(): string;
+
+
+..
+
+    Directory with documentation templates \(absolute path\)
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
 
 ________
 

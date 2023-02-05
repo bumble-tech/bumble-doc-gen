@@ -44,8 +44,8 @@ Methods:
   <ol>
                 <li><a href="#madd">add</a> </li>
                 <li><a href="#mget">get</a> </li>
-                <li><a href="#mgetinitializations">getInitializations</a> </li>
                 <li><a href="#mgetallexceptinitializations">getAllExceptInitializations</a> </li>
+                <li><a href="#mgetinitializations">getInitializations</a> </li>
         </ol>
 
 
@@ -66,6 +66,47 @@ Method details:
 -----------------------
 
 
+
+.. _madd:
+
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L62>`_
+.. code-block:: php
+
+        public function add(BumbleDocGen\Parser\Entity\MethodEntityInterface $methodEntity, bool $reload = false): BumbleDocGen\Parser\Entity\MethodEntityCollection;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$methodEntity</td>
+            <td><a href='/BumbleDocGen/Parser/Entity/MethodEntityInterface.php'>BumbleDocGen\Parser\Entity\MethodEntityInterface</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reload</td>
+            <td>bool</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </BumbleDocGen/Parser/Entity/MethodEntityCollection\.php>`_
+
+________
 
 .. _mcreatebyclassentity:
 
@@ -118,47 +159,6 @@ Method details:
 
 ________
 
-.. _madd:
-
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L62>`_
-.. code-block:: php
-
-        public function add(BumbleDocGen\Parser\Entity\MethodEntityInterface $methodEntity, bool $reload = false): BumbleDocGen\Parser\Entity\MethodEntityCollection;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$methodEntity</td>
-            <td><a href='/BumbleDocGen/Parser/Entity/MethodEntityInterface.php'>BumbleDocGen\Parser\Entity\MethodEntityInterface</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$reload</td>
-            <td>bool</td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\MethodEntityCollection </BumbleDocGen/Parser/Entity/MethodEntityCollection\.php>`_
-
-________
-
 .. _mget:
 
 * `# <mget_>`_  ``get``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L71>`_
@@ -195,12 +195,12 @@ ________
 
 ________
 
-.. _mgetinitializations:
+.. _mgetallexceptinitializations:
 
-* `# <mgetinitializations_>`_  ``getInitializations``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L76>`_
+* `# <mgetallexceptinitializations_>`_  ``getAllExceptInitializations``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L88>`_
 .. code-block:: php
 
-        public function getInitializations(): BumbleDocGen\Parser\Entity\MethodEntityCollection;
+        public function getAllExceptInitializations(): BumbleDocGen\Parser\Entity\MethodEntityCollection;
 
 
 
@@ -212,12 +212,12 @@ ________
 
 ________
 
-.. _mgetallexceptinitializations:
+.. _mgetinitializations:
 
-* `# <mgetallexceptinitializations_>`_  ``getAllExceptInitializations``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L88>`_
+* `# <mgetinitializations_>`_  ``getInitializations``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityCollection.php#L76>`_
 .. code-block:: php
 
-        public function getAllExceptInitializations(): BumbleDocGen\Parser\Entity\MethodEntityCollection;
+        public function getInitializations(): BumbleDocGen\Parser\Entity\MethodEntityCollection;
 
 
 

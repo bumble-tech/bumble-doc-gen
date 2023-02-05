@@ -36,22 +36,22 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetprojectroot">getProjectRoot</a> - <i>Get project root (absolute path)</i></li>
-                <li><a href="#mgetsourcelocators">getSourceLocators</a> - <i>Get a collection of source locators</i></li>
-                <li><a href="#mgettemplatesdir">getTemplatesDir</a> - <i>Directory with documentation templates (absolute path)</i></li>
-                <li><a href="#mgetoutputdir">getOutputDir</a> - <i>Directory where the documentation will be generated (absolute path)</i></li>
-                <li><a href="#mgetoutputdirbaseurl">getOutputDirBaseUrl</a> - <i>Base URL of the generated document</i></li>
-                <li><a href="#mgetcachedir">getCacheDir</a> </li>
-                <li><a href="#mclearoutputdirbeforedocgeneration">clearOutputDirBeforeDocGeneration</a> </li>
-                <li><a href="#mclassentityfiltercondition">classEntityFilterCondition</a> </li>
                 <li><a href="#mclassconstantentityfiltercondition">classConstantEntityFilterCondition</a> </li>
-                <li><a href="#mmethodentityfiltercondition">methodEntityFilterCondition</a> </li>
-                <li><a href="#mpropertyentityfiltercondition">propertyEntityFilterCondition</a> </li>
-                <li><a href="#mgetplugins">getPlugins</a> </li>
-                <li><a href="#mgettemplatefillers">getTemplateFillers</a> </li>
+                <li><a href="#mclassentityfiltercondition">classEntityFilterCondition</a> </li>
+                <li><a href="#mclearoutputdirbeforedocgeneration">clearOutputDirBeforeDocGeneration</a> </li>
+                <li><a href="#mgetcachedir">getCacheDir</a> </li>
                 <li><a href="#mgetentitydocrenderscollection">getEntityDocRendersCollection</a> </li>
                 <li><a href="#mgetlogger">getLogger</a> </li>
+                <li><a href="#mgetoutputdir">getOutputDir</a> - <i>Directory where the documentation will be generated (absolute path)</i></li>
+                <li><a href="#mgetoutputdirbaseurl">getOutputDirBaseUrl</a> - <i>Base URL of the generated document</i></li>
+                <li><a href="#mgetplugins">getPlugins</a> </li>
+                <li><a href="#mgetprojectroot">getProjectRoot</a> - <i>Get project root (absolute path)</i></li>
                 <li><a href="#mgetsourcelocatorcacheitempool">getSourceLocatorCacheItemPool</a> </li>
+                <li><a href="#mgetsourcelocators">getSourceLocators</a> - <i>Get a collection of source locators</i></li>
+                <li><a href="#mgettemplatefillers">getTemplateFillers</a> </li>
+                <li><a href="#mgettemplatesdir">getTemplatesDir</a> - <i>Directory with documentation templates (absolute path)</i></li>
+                <li><a href="#mmethodentityfiltercondition">methodEntityFilterCondition</a> </li>
+                <li><a href="#mpropertyentityfiltercondition">propertyEntityFilterCondition</a> </li>
         </ol>
 
 
@@ -73,63 +73,143 @@ Method details:
 
 
 
-.. _mgetprojectroot:
+.. _mclassconstantentityfiltercondition:
 
-* `# <mgetprojectroot_>`_  ``getProjectRoot``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L27>`_
+* `# <mclassconstantentityfiltercondition_>`_  ``classConstantEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L55>`_
 .. code-block:: php
 
-        public function getProjectRoot(): string;
+        public function classConstantEntityFilterCondition(BumbleDocGen\Parser\Entity\ConstantEntity $constantEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
 
-..
-
-    Get project root \(absolute path\)
 
 
-**Parameters:** not specified
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$constantEntity</td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ConstantEntity.php'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
 
 
-**Return value:** string
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </BumbleDocGen/Parser/FilterCondition/ConditionInterface\.php>`_
 
 ________
 
-.. _mgetsourcelocators:
+.. _mclassentityfiltercondition:
 
-* `# <mgetsourcelocators_>`_  ``getSourceLocators``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L32>`_
+* `# <mclassentityfiltercondition_>`_  ``classEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L53>`_
 .. code-block:: php
 
-        public function getSourceLocators(): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
+        public function classEntityFilterCondition(BumbleDocGen\Parser\Entity\ClassEntity $classEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
 
-..
-
-    Get a collection of source locators
 
 
-**Parameters:** not specified
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$classEntity</td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
 
 
-**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
+**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </BumbleDocGen/Parser/FilterCondition/ConditionInterface\.php>`_
 
 ________
 
-.. _mgettemplatesdir:
+.. _mclearoutputdirbeforedocgeneration:
 
-* `# <mgettemplatesdir_>`_  ``getTemplatesDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L37>`_
+* `# <mclearoutputdirbeforedocgeneration_>`_  ``clearOutputDirBeforeDocGeneration``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L51>`_
 .. code-block:: php
 
-        public function getTemplatesDir(): string;
+        public function clearOutputDirBeforeDocGeneration(): bool;
 
 
-..
-
-    Directory with documentation templates \(absolute path\)
 
 
 **Parameters:** not specified
 
 
-**Return value:** string
+**Return value:** bool
+
+________
+
+.. _mgetcachedir:
+
+* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L49>`_
+.. code-block:: php
+
+        public function getCacheDir(): string|null;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string | null
+
+________
+
+.. _mgetentitydocrenderscollection:
+
+* `# <mgetentitydocrenderscollection_>`_  ``getEntityDocRendersCollection``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L65>`_
+.. code-block:: php
+
+        public function getEntityDocRendersCollection(): BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </BumbleDocGen/Render/EntityDocRender/EntityDocRendersCollection\.php>`_
+
+________
+
+.. _mgetlogger:
+
+* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L67>`_
+.. code-block:: php
+
+        public function getLogger(): Psr\Log\LoggerInterface;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Psr\\Log\\LoggerInterface </vendor/psr/log/src/LoggerInterface\.php>`_
 
 ________
 
@@ -173,12 +253,12 @@ ________
 
 ________
 
-.. _mgetcachedir:
+.. _mgetplugins:
 
-* `# <mgetcachedir_>`_  ``getCacheDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L49>`_
+* `# <mgetplugins_>`_  ``getPlugins``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L61>`_
 .. code-block:: php
 
-        public function getCacheDir(): string|null;
+        public function getPlugins(): BumbleDocGen\Plugin\PluginsCollection;
 
 
 
@@ -186,16 +266,36 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** string | null
+**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </BumbleDocGen/Plugin/PluginsCollection\.php>`_
 
 ________
 
-.. _mclearoutputdirbeforedocgeneration:
+.. _mgetprojectroot:
 
-* `# <mclearoutputdirbeforedocgeneration_>`_  ``clearOutputDirBeforeDocGeneration``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L51>`_
+* `# <mgetprojectroot_>`_  ``getProjectRoot``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L27>`_
 .. code-block:: php
 
-        public function clearOutputDirBeforeDocGeneration(): bool;
+        public function getProjectRoot(): string;
+
+
+..
+
+    Get project root \(absolute path\)
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _mgetsourcelocatorcacheitempool:
+
+* `# <mgetsourcelocatorcacheitempool_>`_  ``getSourceLocatorCacheItemPool``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L69>`_
+.. code-block:: php
+
+        public function getSourceLocatorCacheItemPool(): Psr\Cache\CacheItemPoolInterface;
 
 
 
@@ -203,79 +303,64 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** bool
+**Return value:** `Psr\\Cache\\CacheItemPoolInterface </vendor/psr/cache/src/CacheItemPoolInterface\.php>`_
 
 ________
 
-.. _mclassentityfiltercondition:
+.. _mgetsourcelocators:
 
-* `# <mclassentityfiltercondition_>`_  ``classEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L53>`_
+* `# <mgetsourcelocators_>`_  ``getSourceLocators``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L32>`_
 .. code-block:: php
 
-        public function classEntityFilterCondition(BumbleDocGen\Parser\Entity\ClassEntity $classEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
+        public function getSourceLocators(): BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 
 
+..
+
+    Get a collection of source locators
 
 
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$classEntity</td>
-            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntity.php'>BumbleDocGen\Parser\Entity\ClassEntity</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
+**Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </BumbleDocGen/Parser/FilterCondition/ConditionInterface\.php>`_
+**Return value:** `BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorsCollection </BumbleDocGen/Parser/SourceLocator/SourceLocatorsCollection\.php>`_
 
 ________
 
-.. _mclassconstantentityfiltercondition:
+.. _mgettemplatefillers:
 
-* `# <mclassconstantentityfiltercondition_>`_  ``classConstantEntityFilterCondition``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L55>`_
+* `# <mgettemplatefillers_>`_  ``getTemplateFillers``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L63>`_
 .. code-block:: php
 
-        public function classConstantEntityFilterCondition(BumbleDocGen\Parser\Entity\ConstantEntity $constantEntity): BumbleDocGen\Parser\FilterCondition\ConditionInterface;
+        public function getTemplateFillers(): BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
 
 
 
 
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$constantEntity</td>
-            <td><a href='/BumbleDocGen/Parser/Entity/ConstantEntity.php'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
+**Parameters:** not specified
 
 
-**Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </BumbleDocGen/Parser/FilterCondition/ConditionInterface\.php>`_
+**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </BumbleDocGen/Render/TemplateFiller/TemplateFillersCollection\.php>`_
+
+________
+
+.. _mgettemplatesdir:
+
+* `# <mgettemplatesdir_>`_  ``getTemplatesDir``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L37>`_
+.. code-block:: php
+
+        public function getTemplatesDir(): string;
+
+
+..
+
+    Directory with documentation templates \(absolute path\)
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
 
 ________
 
@@ -348,91 +433,6 @@ ________
 
 
 **Return value:** `BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface </BumbleDocGen/Parser/FilterCondition/ConditionInterface\.php>`_
-
-________
-
-.. _mgetplugins:
-
-* `# <mgetplugins_>`_  ``getPlugins``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L61>`_
-.. code-block:: php
-
-        public function getPlugins(): BumbleDocGen\Plugin\PluginsCollection;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </BumbleDocGen/Plugin/PluginsCollection\.php>`_
-
-________
-
-.. _mgettemplatefillers:
-
-* `# <mgettemplatefillers_>`_  ``getTemplateFillers``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L63>`_
-.. code-block:: php
-
-        public function getTemplateFillers(): BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </BumbleDocGen/Render/TemplateFiller/TemplateFillersCollection\.php>`_
-
-________
-
-.. _mgetentitydocrenderscollection:
-
-* `# <mgetentitydocrenderscollection_>`_  ``getEntityDocRendersCollection``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L65>`_
-.. code-block:: php
-
-        public function getEntityDocRendersCollection(): BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRendersCollection </BumbleDocGen/Render/EntityDocRender/EntityDocRendersCollection\.php>`_
-
-________
-
-.. _mgetlogger:
-
-* `# <mgetlogger_>`_  ``getLogger``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L67>`_
-.. code-block:: php
-
-        public function getLogger(): Psr\Log\LoggerInterface;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Psr\\Log\\LoggerInterface </vendor/psr/log/src/LoggerInterface\.php>`_
-
-________
-
-.. _mgetsourcelocatorcacheitempool:
-
-* `# <mgetsourcelocatorcacheitempool_>`_  ``getSourceLocatorCacheItemPool``   **|** `source code </BumbleDocGen/ConfigurationInterface.php#L69>`_
-.. code-block:: php
-
-        public function getSourceLocatorCacheItemPool(): Psr\Cache\CacheItemPoolInterface;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Psr\\Cache\\CacheItemPoolInterface </vendor/psr/cache/src/CacheItemPoolInterface\.php>`_
 
 ________
 

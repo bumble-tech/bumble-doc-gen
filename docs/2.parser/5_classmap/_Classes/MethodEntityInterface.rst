@@ -33,17 +33,17 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetname">getName</a> </li>
+                <li><a href="#mgetdescription">getDescription</a> </li>
                 <li><a href="#mgetfilename">getFileName</a> </li>
+                <li><a href="#mgetimplementingclassname">getImplementingClassName</a> </li>
                 <li><a href="#mgetline">getLine</a> </li>
                 <li><a href="#mgetmodifiersstring">getModifiersString</a> </li>
-                <li><a href="#mgetreturntype">getReturnType</a> </li>
+                <li><a href="#mgetname">getName</a> </li>
                 <li><a href="#mgetparameters">getParameters</a> </li>
                 <li><a href="#mgetparametersstring">getParametersString</a> </li>
-                <li><a href="#mgetimplementingclassname">getImplementingClassName</a> </li>
-                <li><a href="#mgetdescription">getDescription</a> </li>
-                <li><a href="#misinitialization">isInitialization</a> </li>
+                <li><a href="#mgetreturntype">getReturnType</a> </li>
                 <li><a href="#misdynamic">isDynamic</a> </li>
+                <li><a href="#misinitialization">isInitialization</a> </li>
         </ol>
 
 
@@ -65,12 +65,12 @@ Method details:
 
 
 
-.. _mgetname:
+.. _mgetdescription:
 
-* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L10>`_
+* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L26>`_
 .. code-block:: php
 
-        public function getName(): string;
+        public function getDescription(): string;
 
 
 
@@ -96,6 +96,23 @@ ________
 
 
 **Return value:** string | null
+
+________
+
+.. _mgetimplementingclassname:
+
+* `# <mgetimplementingclassname_>`_  ``getImplementingClassName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L24>`_
+.. code-block:: php
+
+        public function getImplementingClassName(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
 
 ________
 
@@ -133,12 +150,12 @@ ________
 
 ________
 
-.. _mgetreturntype:
+.. _mgetname:
 
-* `# <mgetreturntype_>`_  ``getReturnType``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L18>`_
+* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L10>`_
 .. code-block:: php
 
-        public function getReturnType(): string;
+        public function getName(): string;
 
 
 
@@ -184,12 +201,12 @@ ________
 
 ________
 
-.. _mgetimplementingclassname:
+.. _mgetreturntype:
 
-* `# <mgetimplementingclassname_>`_  ``getImplementingClassName``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L24>`_
+* `# <mgetreturntype_>`_  ``getReturnType``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L18>`_
 .. code-block:: php
 
-        public function getImplementingClassName(): string;
+        public function getReturnType(): string;
 
 
 
@@ -201,29 +218,12 @@ ________
 
 ________
 
-.. _mgetdescription:
+.. _misdynamic:
 
-* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L26>`_
+* `# <misdynamic_>`_  ``isDynamic``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L30>`_
 .. code-block:: php
 
-        public function getDescription(): string;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** string
-
-________
-
-.. _misinitialization:
-
-* `# <misinitialization_>`_  ``isInitialization``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L28>`_
-.. code-block:: php
-
-        public function isInitialization(): bool;
+        public function isDynamic(): bool;
 
 
 
@@ -235,12 +235,12 @@ ________
 
 ________
 
-.. _misdynamic:
+.. _misinitialization:
 
-* `# <misdynamic_>`_  ``isDynamic``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L30>`_
+* `# <misinitialization_>`_  ``isInitialization``   **|** `source code </BumbleDocGen/Parser/Entity/MethodEntityInterface.php#L28>`_
 .. code-block:: php
 
-        public function isDynamic(): bool;
+        public function isInitialization(): bool;
 
 
 

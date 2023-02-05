@@ -45,9 +45,9 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgettemplatetitle">getTemplateTitle</a> - <i>Get the name of a template by its URL.</i></li>
-                <li><a href="#mgettemplatelinkkey">getTemplateLinkKey</a> </li>
                 <li><a href="#mgetbreadcrumbs">getBreadcrumbs</a> - <i>Get breadcrumbs as an array</i></li>
+                <li><a href="#mgettemplatelinkkey">getTemplateLinkKey</a> </li>
+                <li><a href="#mgettemplatetitle">getTemplateTitle</a> - <i>Get the name of a template by its URL.</i></li>
                 <li><a href="#mrenderbreadcrumbs">renderBreadcrumbs</a> - <i>Returns an HTML string with rendered breadcrumbs</i></li>
         </ol>
 
@@ -121,6 +121,86 @@ Method details:
 
 ________
 
+.. _mgetbreadcrumbs:
+
+* `# <mgetbreadcrumbs_>`_  ``getBreadcrumbs``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L132>`_
+.. code-block:: php
+
+        public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): array;
+
+
+..
+
+    Get breadcrumbs as an array
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$filePatch</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$fromCurrent</td>
+            <td>bool</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** array
+
+________
+
+.. _mgettemplatelinkkey:
+
+* `# <mgettemplatelinkkey_>`_  ``getTemplateLinkKey``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L114>`_
+.. code-block:: php
+
+        public function getTemplateLinkKey(string $templateName): string|null;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$templateName</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** string | null
+
+________
+
 .. _mgettemplatetitle:
 
 * `# <mgettemplatetitle_>`_  ``getTemplateTitle``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L104>`_
@@ -169,86 +249,6 @@ ________
     $breadcrumbsHelper->getTemplateTitle() == 'Some template title'; // is true
 
 
-
-________
-
-.. _mgettemplatelinkkey:
-
-* `# <mgettemplatelinkkey_>`_  ``getTemplateLinkKey``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L114>`_
-.. code-block:: php
-
-        public function getTemplateLinkKey(string $templateName): string|null;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$templateName</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** string | null
-
-________
-
-.. _mgetbreadcrumbs:
-
-* `# <mgetbreadcrumbs_>`_  ``getBreadcrumbs``   **|** `source code </BumbleDocGen/Render/Breadcrumbs/BreadcrumbsHelper.php#L132>`_
-.. code-block:: php
-
-        public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): array;
-
-
-..
-
-    Get breadcrumbs as an array
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$filePatch</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$fromCurrent</td>
-            <td>bool</td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** array
 
 ________
 

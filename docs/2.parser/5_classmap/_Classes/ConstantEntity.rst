@@ -45,12 +45,12 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetreflection">getReflection</a> </li>
-                <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
-                <li><a href="#mgetname">getName</a> </li>
-                <li><a href="#mgetfilename">getFileName</a> </li>
-                <li><a href="#mgetline">getLine</a> </li>
                 <li><a href="#mgetdescription">getDescription</a> </li>
+                <li><a href="#mgetfilename">getFileName</a> </li>
+                <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
+                <li><a href="#mgetline">getLine</a> </li>
+                <li><a href="#mgetname">getName</a> </li>
+                <li><a href="#mgetreflection">getReflection</a> </li>
         </ol>
 
 
@@ -133,46 +133,12 @@ Method details:
 
 ________
 
-.. _mgetreflection:
+.. _mgetdescription:
 
-* `# <mgetreflection_>`_  ``getReflection``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L46>`_
+* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L94>`_
 .. code-block:: php
 
-        public function getReflection(): Roave\BetterReflection\Reflection\ReflectionClassConstant;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClassConstant </vendor/roave/better-reflection/src/Reflection/ReflectionClassConstant\.php>`_
-
-________
-
-.. _mgetimplementingreflectionclass:
-
-* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L51>`_
-.. code-block:: php
-
-        public function getImplementingReflectionClass(): Roave\BetterReflection\Reflection\ReflectionClass;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
-
-________
-
-.. _mgetname:
-
-* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L71>`_
-.. code-block:: php
-
-        public function getName(): string;
+        public function getDescription(): string;
 
 
 
@@ -201,6 +167,23 @@ ________
 
 ________
 
+.. _mgetimplementingreflectionclass:
+
+* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L51>`_
+.. code-block:: php
+
+        public function getImplementingReflectionClass(): Roave\BetterReflection\Reflection\ReflectionClass;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
+
+________
+
 .. _mgetline:
 
 * `# <mgetline_>`_  ``getLine``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L89>`_
@@ -218,12 +201,12 @@ ________
 
 ________
 
-.. _mgetdescription:
+.. _mgetname:
 
-* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L94>`_
+* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L71>`_
 .. code-block:: php
 
-        public function getDescription(): string;
+        public function getName(): string;
 
 
 
@@ -232,6 +215,23 @@ ________
 
 
 **Return value:** string
+
+________
+
+.. _mgetreflection:
+
+* `# <mgetreflection_>`_  ``getReflection``   **|** `source code </BumbleDocGen/Parser/Entity/ConstantEntity.php#L46>`_
+.. code-block:: php
+
+        public function getReflection(): Roave\BetterReflection\Reflection\ReflectionClassConstant;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClassConstant </vendor/roave/better-reflection/src/Reflection/ReflectionClassConstant\.php>`_
 
 ________
 

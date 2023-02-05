@@ -3,7 +3,7 @@
   <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/1.about/index.md">About documentation generator</a> <b>/</b> <a href="/docs/1.about/map/index.md">BumbleDocGen class map</a> <b>/</b> VisibilityCondition<hr> </embed>
 
 
-Description of the `VisibilityCondition </BumbleDocGen/Parser/FilterCondition/MethodFilterCondition/VisibilityCondition.php>`_ class:
+Description of the `VisibilityCondition </BumbleDocGen/Parser/FilterCondition/ClassConstantFilterCondition/VisibilityCondition.php>`_ class:
 -----------------------
 
 
@@ -13,14 +13,14 @@ Description of the `VisibilityCondition </BumbleDocGen/Parser/FilterCondition/Me
 
 .. code-block:: php
 
-    namespace BumbleDocGen\Parser\FilterCondition\MethodFilterCondition;
+    namespace BumbleDocGen\Parser\FilterCondition\ClassConstantFilterCondition;
 
     final class VisibilityCondition implements BumbleDocGen\Parser\FilterCondition\ConditionInterface
 
 
 ..
 
-        Method access modifier check
+        Constant access modifier check
 
 
 
@@ -69,10 +69,10 @@ Method details:
 
 .. _m-construct:
 
-* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/FilterCondition/MethodFilterCondition/VisibilityCondition.php#L16>`_
+* `# <m-construct_>`_  ``__construct``   **|** `source code </BumbleDocGen/Parser/FilterCondition/ClassConstantFilterCondition/VisibilityCondition.php#L16>`_
 .. code-block:: php
 
-        public function __construct(BumbleDocGen\Parser\Entity\MethodEntity $methodEntity, string $visibilityModifier = BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier::PUBLIC): mixed;
+        public function __construct(BumbleDocGen\Parser\Entity\ConstantEntity $constantEntity, string $visibilityModifier = BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier::PUBLIC): mixed;
 
 
 
@@ -91,8 +91,8 @@ Method details:
     </thead>
     <tbody>
             <tr>
-            <td>$methodEntity</td>
-            <td><a href='/BumbleDocGen/Parser/Entity/MethodEntity.php'>BumbleDocGen\Parser\Entity\MethodEntity</a></td>
+            <td>$constantEntity</td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ConstantEntity.php'>BumbleDocGen\Parser\Entity\ConstantEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -110,7 +110,7 @@ ________
 
 .. _mcanaddtocollection:
 
-* `# <mcanaddtocollection_>`_  ``canAddToCollection``   **|** `source code </BumbleDocGen/Parser/FilterCondition/MethodFilterCondition/VisibilityCondition.php#L22>`_
+* `# <mcanaddtocollection_>`_  ``canAddToCollection``   **|** `source code </BumbleDocGen/Parser/FilterCondition/ClassConstantFilterCondition/VisibilityCondition.php#L22>`_
 .. code-block:: php
 
         public function canAddToCollection(): bool;

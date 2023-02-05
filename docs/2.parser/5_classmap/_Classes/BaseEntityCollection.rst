@@ -88,7 +88,7 @@ ________
 
 .. _misempty:
 
-* `# <misempty_>`_  ``isEmpty``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntityCollection.php#L16>`_
+* `# <misempty_>`_  ``isEmpty``   **|** `source code </BumbleDocGen/Parser/Entity/BaseEntityCollection.php#L17>`_
 .. code-block:: php
 
         public function isEmpty(): bool;

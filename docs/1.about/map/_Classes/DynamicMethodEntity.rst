@@ -45,19 +45,19 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetname">getName</a> </li>
-                <li><a href="#misstatic">isStatic</a> </li>
+                <li><a href="#mgetdescription">getDescription</a> </li>
                 <li><a href="#mgetfilename">getFileName</a> </li>
+                <li><a href="#mgetimplementingclassname">getImplementingClassName</a> </li>
+                <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
                 <li><a href="#mgetline">getLine</a> </li>
                 <li><a href="#mgetmodifiersstring">getModifiersString</a> </li>
-                <li><a href="#mgetreturntype">getReturnType</a> </li>
+                <li><a href="#mgetname">getName</a> </li>
                 <li><a href="#mgetparameters">getParameters</a> </li>
                 <li><a href="#mgetparametersstring">getParametersString</a> </li>
-                <li><a href="#mgetimplementingreflectionclass">getImplementingReflectionClass</a> </li>
-                <li><a href="#mgetimplementingclassname">getImplementingClassName</a> </li>
-                <li><a href="#mgetdescription">getDescription</a> </li>
-                <li><a href="#misinitialization">isInitialization</a> </li>
+                <li><a href="#mgetreturntype">getReturnType</a> </li>
                 <li><a href="#misdynamic">isDynamic</a> </li>
+                <li><a href="#misinitialization">isInitialization</a> </li>
+                <li><a href="#misstatic">isStatic</a> </li>
         </ol>
 
 
@@ -130,12 +130,12 @@ Method details:
 
 ________
 
-.. _mgetname:
+.. _mgetdescription:
 
-* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L38>`_
+* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L148>`_
 .. code-block:: php
 
-        public function getName(): string;
+        public function getDescription(): string;
 
 
 
@@ -144,23 +144,6 @@ ________
 
 
 **Return value:** string
-
-________
-
-.. _misstatic:
-
-* `# <misstatic_>`_  ``isStatic``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L43>`_
-.. code-block:: php
-
-        public function isStatic(): bool;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** bool
 
 ________
 
@@ -178,6 +161,40 @@ ________
 
 
 **Return value:** string | null
+
+________
+
+.. _mgetimplementingclassname:
+
+* `# <mgetimplementingclassname_>`_  ``getImplementingClassName``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L143>`_
+.. code-block:: php
+
+        public function getImplementingClassName(): string;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** string
+
+________
+
+.. _mgetimplementingreflectionclass:
+
+* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L137>`_
+.. code-block:: php
+
+        public function getImplementingReflectionClass(): Roave\BetterReflection\Reflection\ReflectionClass;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
 
 ________
 
@@ -215,12 +232,12 @@ ________
 
 ________
 
-.. _mgetreturntype:
+.. _mgetname:
 
-* `# <mgetreturntype_>`_  ``getReturnType``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L92>`_
+* `# <mgetname_>`_  ``getName``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L38>`_
 .. code-block:: php
 
-        public function getReturnType(): string;
+        public function getName(): string;
 
 
 
@@ -266,29 +283,12 @@ ________
 
 ________
 
-.. _mgetimplementingreflectionclass:
+.. _mgetreturntype:
 
-* `# <mgetimplementingreflectionclass_>`_  ``getImplementingReflectionClass``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L137>`_
+* `# <mgetreturntype_>`_  ``getReturnType``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L92>`_
 .. code-block:: php
 
-        public function getImplementingReflectionClass(): Roave\BetterReflection\Reflection\ReflectionClass;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `Roave\\BetterReflection\\Reflection\\ReflectionClass </vendor/roave/better-reflection/src/Reflection/ReflectionClass\.php>`_
-
-________
-
-.. _mgetimplementingclassname:
-
-* `# <mgetimplementingclassname_>`_  ``getImplementingClassName``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L143>`_
-.. code-block:: php
-
-        public function getImplementingClassName(): string;
+        public function getReturnType(): string;
 
 
 
@@ -300,12 +300,12 @@ ________
 
 ________
 
-.. _mgetdescription:
+.. _misdynamic:
 
-* `# <mgetdescription_>`_  ``getDescription``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L148>`_
+* `# <misdynamic_>`_  ``isDynamic``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L165>`_
 .. code-block:: php
 
-        public function getDescription(): string;
+        public function isDynamic(): bool;
 
 
 
@@ -313,7 +313,7 @@ ________
 **Parameters:** not specified
 
 
-**Return value:** string
+**Return value:** bool
 
 ________
 
@@ -334,12 +334,12 @@ ________
 
 ________
 
-.. _misdynamic:
+.. _misstatic:
 
-* `# <misdynamic_>`_  ``isDynamic``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L165>`_
+* `# <misstatic_>`_  ``isStatic``   **|** `source code </BumbleDocGen/Parser/Entity/DynamicMethodEntity.php#L43>`_
 .. code-block:: php
 
-        public function isDynamic(): bool;
+        public function isStatic(): bool;
 
 
 

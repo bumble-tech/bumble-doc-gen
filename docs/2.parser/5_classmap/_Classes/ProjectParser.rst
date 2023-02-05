@@ -45,8 +45,8 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mparse">parse</a> </li>
                 <li><a href="#mgetreflector">getReflector</a> </li>
+                <li><a href="#mparse">parse</a> </li>
         </ol>
 
 
@@ -109,23 +109,6 @@ Method details:
 
 ________
 
-.. _mparse:
-
-* `# <mparse_>`_  ``parse``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L53>`_
-.. code-block:: php
-
-        public function parse(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
-
-________
-
 .. _mgetreflector:
 
 * `# <mgetreflector_>`_  ``getReflector``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L64>`_
@@ -140,6 +123,23 @@ ________
 
 
 **Return value:** `Roave\\BetterReflection\\Reflector\\Reflector </vendor/roave/better-reflection/src/Reflector/Reflector\.php>`_
+
+________
+
+.. _mparse:
+
+* `# <mparse_>`_  ``parse``   **|** `source code </BumbleDocGen/Parser/ProjectParser.php#L53>`_
+.. code-block:: php
+
+        public function parse(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
 
 ________
 

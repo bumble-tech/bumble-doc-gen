@@ -46,8 +46,8 @@ Methods:
 
   <ol>
                 <li><a href="#mchangecontext">changeContext</a> </li>
-                <li><a href="#mgetfunctions">getFunctions</a> - <i>List of custom functions</i></li>
                 <li><a href="#mgetfilters">getFilters</a> - <i>List of custom filters</i></li>
+                <li><a href="#mgetfunctions">getFunctions</a> - <i>List of custom functions</i></li>
         </ol>
 
 
@@ -141,26 +141,6 @@ ________
 
 ________
 
-.. _mgetfunctions:
-
-* `# <mgetfunctions_>`_  ``getFunctions``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L44>`_
-.. code-block:: php
-
-        public function getFunctions(): array;
-
-
-..
-
-    List of custom functions
-
-
-**Parameters:** not specified
-
-
-**Return value:** array
-
-________
-
 .. _mgetfilters:
 
 * `# <mgetfilters_>`_  ``getFilters``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L81>`_
@@ -172,6 +152,26 @@ ________
 ..
 
     List of custom filters
+
+
+**Parameters:** not specified
+
+
+**Return value:** array
+
+________
+
+.. _mgetfunctions:
+
+* `# <mgetfunctions_>`_  ``getFunctions``   **|** `source code </BumbleDocGen/Render/Twig/MainExtension.php#L44>`_
+.. code-block:: php
+
+        public function getFunctions(): array;
+
+
+..
+
+    List of custom functions
 
 
 **Parameters:** not specified

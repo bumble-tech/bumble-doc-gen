@@ -5,26 +5,21 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\AttributeParser;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflector\Reflector;
 
 final class PropertyEntityCollection extends BaseEntityCollection
 {
-    public static function createByReflectionClass(
+    public static function createByClassEntity(
         ConfigurationInterface $configuration,
-        Reflector $reflector,
-        ReflectionClass $reflectionClass,
-        AttributeParser $attributeParser,
+        ClassEntity $classEntity
     ): PropertyEntityCollection {
         $propertyEntityCollection = new PropertyEntityCollection();
-        foreach ($reflectionClass->getProperties() as $propertyReflection) {
+        foreach ($classEntity->getPropertiesData() as $propertyData) {
             $propertyEntity = PropertyEntity::create(
                 $configuration,
-                $reflector,
-                $reflectionClass,
-                $propertyReflection,
-                $attributeParser
+                $classEntity,
+                $propertyData['name'],
+                $propertyData['declaringClass'],
+                $propertyData['implementingClass']
             );
             if (
                 $configuration->propertyEntityFilterCondition($propertyEntity)->canAddToCollection()

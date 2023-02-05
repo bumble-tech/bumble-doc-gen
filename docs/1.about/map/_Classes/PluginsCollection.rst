@@ -42,9 +42,9 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetiterator">getIterator</a> - <i>Retrieve an external iterator</i></li>
                 <li><a href="#madd">add</a> </li>
                 <li><a href="#mget">get</a> </li>
+                <li><a href="#mgetiterator">getIterator</a> - <i>Retrieve an external iterator</i></li>
         </ol>
 
 
@@ -66,33 +66,39 @@ Method details:
 
 
 
-.. _mgetiterator:
+.. _madd:
 
-* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Plugin/PluginsCollection.php#L12>`_
+* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Plugin/PluginsCollection.php#L26>`_
 .. code-block:: php
 
-        public function getIterator(): Generator;
+        public function add(BumbleDocGen\Plugin\PluginInterface $plugin): BumbleDocGen\Plugin\PluginsCollection;
 
 
-..
-
-    Retrieve an external iterator
 
 
-**Parameters:** not specified
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$plugin</td>
+            <td><a href='/BumbleDocGen/Plugin/PluginInterface.php'>BumbleDocGen\Plugin\PluginInterface</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
 
 
-**Return value:** Generator
-
-
-**Throws:**
-
-#. **\\Exception** - on failure.
-
-
-**See:**
-
-#. `https://php\.net/manual/en/iteratoraggregate\.getiterator\.php <https://php.net/manual/en/iteratoraggregate.getiterator.php>`_ 
+**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </BumbleDocGen/Plugin/PluginsCollection\.php>`_
 
 ________
 
@@ -121,42 +127,6 @@ ________
     <tbody>
             <tr>
             <td>$plugins</td>
-            <td><a href='/BumbleDocGen/Plugin/PluginInterface.php'>BumbleDocGen\Plugin\PluginInterface</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Plugin\\PluginsCollection </BumbleDocGen/Plugin/PluginsCollection\.php>`_
-
-________
-
-.. _madd:
-
-* `# <madd_>`_  ``add``   **|** `source code </BumbleDocGen/Plugin/PluginsCollection.php#L26>`_
-.. code-block:: php
-
-        public function add(BumbleDocGen\Plugin\PluginInterface $plugin): BumbleDocGen\Plugin\PluginsCollection;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$plugin</td>
             <td><a href='/BumbleDocGen/Plugin/PluginInterface.php'>BumbleDocGen\Plugin\PluginInterface</a></td>
             <td>-</td>
         </tr>
@@ -201,6 +171,36 @@ ________
 
 
 **Return value:** `BumbleDocGen\\Plugin\\PluginInterface </BumbleDocGen/Plugin/PluginInterface\.php>`_ | null
+
+________
+
+.. _mgetiterator:
+
+* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Plugin/PluginsCollection.php#L12>`_
+.. code-block:: php
+
+        public function getIterator(): Generator;
+
+
+..
+
+    Retrieve an external iterator
+
+
+**Parameters:** not specified
+
+
+**Return value:** Generator
+
+
+**Throws:**
+
+#. **\\Exception** - on failure.
+
+
+**See:**
+
+#. `https://php\.net/manual/en/iteratoraggregate\.getiterator\.php <https://php.net/manual/en/iteratoraggregate.getiterator.php>`_ 
 
 ________
 

@@ -70,8 +70,8 @@ Methods:
 
   <ol>
                 <li><a href="#m-invoke">__invoke</a> </li>
-                <li><a href="#mgetdirectorystructure">getDirectoryStructure</a> </li>
                 <li><a href="#mconvertdirectorystructuretoformattedstring">convertDirectoryStructureToFormattedString</a> </li>
+                <li><a href="#mgetdirectorystructure">getDirectoryStructure</a> </li>
         </ol>
 
 
@@ -165,45 +165,9 @@ ________
 
 ________
 
-.. _mgetdirectorystructure:
-
-* `# <mgetdirectorystructure_>`_  ``getDirectoryStructure``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawClassMap.php#L64>`_
-.. code-block:: php
-
-        public function getDirectoryStructure(BumbleDocGen\Parser\Entity\ClassEntityCollection $classEntityCollections): array;
-
-
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$classEntityCollections</td>
-            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntityCollection.php'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** array
-
-________
-
 .. _mconvertdirectorystructuretoformattedstring:
 
-* `# <mconvertdirectorystructuretoformattedstring_>`_  ``convertDirectoryStructureToFormattedString``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawClassMap.php#L91>`_
+* `# <mconvertdirectorystructuretoformattedstring_>`_  ``convertDirectoryStructureToFormattedString``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawClassMap.php#L96>`_
 .. code-block:: php
 
         public function convertDirectoryStructureToFormattedString(array $structure, string $prefix = '│', string $path = '/'): string;
@@ -244,6 +208,42 @@ ________
 
 
 **Return value:** string
+
+________
+
+.. _mgetdirectorystructure:
+
+* `# <mgetdirectorystructure_>`_  ``getDirectoryStructure``   **|** `source code </BumbleDocGen/Render/Twig/Function/DrawClassMap.php#L64>`_
+.. code-block:: php
+
+        public function getDirectoryStructure(BumbleDocGen\Parser\Entity\ClassEntityCollection $classEntityCollections): array;
+
+
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$classEntityCollections</td>
+            <td><a href='/BumbleDocGen/Parser/Entity/ClassEntityCollection.php'>BumbleDocGen\Parser\Entity\ClassEntityCollection</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** array
 
 ________
 

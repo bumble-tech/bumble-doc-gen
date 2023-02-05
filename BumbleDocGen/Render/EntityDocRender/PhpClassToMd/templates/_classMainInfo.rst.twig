@@ -1,0 +1,39 @@
+{% if classEntity.isInternal() %}**:warning: Is internal** {% endif %}{% if classEntity.isDeprecated() %} **:no_entry: Deprecated** {% endif %}
+
+
+.. code-block:: php
+
+    namespace {{ classEntity.getNamespaceName() }};
+
+    {{ classEntity.getModifiersString() }} {{ classEntity.getShortName() }}{% if classEntity.getExtends() %} extends {{ classEntity.getExtends() }}{% endif %}{% if classEntity.getInterfacesString() %} implements {{ classEntity.getInterfacesString() }}{% endif %}
+
+
+
+{% if classEntity.getDescription() %}
+..
+
+    {{ classEntity.getDescription()|addIndentFromLeft|quotemeta|removeLineBrakes|raw }}
+{% endif %}
+{% if classEntity.hasDescriptionLinks() %}
+
+
+See:
+
+{% for link in classEntity.getDescriptionLinks(renderContext) %}
+#. {% if link.url %}`{{ link.name|quotemeta }} <{{ link.url }}>`_{% else %}{{ link.name|quotemeta }}{% endif %} {% if link.description %}- {{ link.description|removeLineBrakes }}{% endif %}
+
+{% endfor %}
+{% endif %}
+{% if classEntity.hasExamples() %}
+
+
+**Examples of using:**
+
+{% for exampleData in classEntity.getExamples() %}
+.. code-block:: php
+
+    {{ exampleData.example|addIndentFromLeft }}
+
+
+{% endfor %}
+{% endif %}

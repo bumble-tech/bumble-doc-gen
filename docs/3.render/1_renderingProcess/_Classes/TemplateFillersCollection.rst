@@ -33,8 +33,8 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#msetfortemplate">setForTemplate</a> - <i>Add a set of fillers for the template</i></li>
                 <li><a href="#mgetparametersfortemplate">getParametersForTemplate</a> - <i>Get all parameters for a template, obtained using all its fillers</i></li>
+                <li><a href="#msetfortemplate">setForTemplate</a> - <i>Add a set of fillers for the template</i></li>
         </ol>
 
 
@@ -55,50 +55,6 @@ Method details:
 -----------------------
 
 
-
-.. _msetfortemplate:
-
-* `# <msetfortemplate_>`_  ``setForTemplate``   **|** `source code </BumbleDocGen/Render/TemplateFiller/TemplateFillersCollection.php#L17>`_
-.. code-block:: php
-
-        public function setForTemplate(string $templateName, BumbleDocGen\Render\TemplateFiller\TemplateFillerInterface $templateFillers): BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
-
-
-..
-
-    Add a set of fillers for the template
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$templateName</td>
-            <td>string</td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$templateFillers</td>
-            <td><a href='/BumbleDocGen/Render/TemplateFiller/TemplateFillerInterface.php'>BumbleDocGen\Render\TemplateFiller\TemplateFillerInterface</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </BumbleDocGen/Render/TemplateFiller/TemplateFillersCollection\.php>`_
-
-________
 
 .. _mgetparametersfortemplate:
 
@@ -141,6 +97,50 @@ ________
 
 
 **Return value:** array
+
+________
+
+.. _msetfortemplate:
+
+* `# <msetfortemplate_>`_  ``setForTemplate``   **|** `source code </BumbleDocGen/Render/TemplateFiller/TemplateFillersCollection.php#L17>`_
+.. code-block:: php
+
+        public function setForTemplate(string $templateName, BumbleDocGen\Render\TemplateFiller\TemplateFillerInterface $templateFillers): BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
+
+
+..
+
+    Add a set of fillers for the template
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$templateName</td>
+            <td>string</td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$templateFillers</td>
+            <td><a href='/BumbleDocGen/Render/TemplateFiller/TemplateFillerInterface.php'>BumbleDocGen\Render\TemplateFiller\TemplateFillerInterface</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** `BumbleDocGen\\Render\\TemplateFiller\\TemplateFillersCollection </BumbleDocGen/Render/TemplateFiller/TemplateFillersCollection\.php>`_
 
 ________
 

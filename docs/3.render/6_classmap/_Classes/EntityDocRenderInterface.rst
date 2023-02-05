@@ -36,9 +36,9 @@ Methods:
 .. raw:: html
 
   <ol>
+                <li><a href="#mgetrenderedtext">getRenderedText</a> - <i>Get rendered documentation for an entity</i></li>
                 <li><a href="#misavailableforentity">isAvailableForEntity</a> - <i>Can this render be used to create entity documentation</i></li>
                 <li><a href="#msetcontext">setContext</a> </li>
-                <li><a href="#mgetrenderedtext">getRenderedText</a> - <i>Get rendered documentation for an entity</i></li>
         </ol>
 
 
@@ -59,6 +59,45 @@ Method details:
 -----------------------
 
 
+
+.. _mgetrenderedtext:
+
+* `# <mgetrenderedtext_>`_  ``getRenderedText``   **|** `source code </BumbleDocGen/Render/EntityDocRender/EntityDocRenderInterface.php#L31>`_
+.. code-block:: php
+
+        public function getRenderedText(BumbleDocGen\Render\Context\DocumentedEntityWrapper $entityWrapper): string;
+
+
+..
+
+    Get rendered documentation for an entity
+
+
+**Parameters:**
+
+.. raw:: html
+
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$entityWrapper</td>
+            <td><a href='/BumbleDocGen/Render/Context/DocumentedEntityWrapper.php'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
+            <td>The class whose documentation was requested</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+**Return value:** string
+
+________
 
 .. _misavailableforentity:
 
@@ -132,45 +171,6 @@ ________
 
 
 **Return value:** void
-
-________
-
-.. _mgetrenderedtext:
-
-* `# <mgetrenderedtext_>`_  ``getRenderedText``   **|** `source code </BumbleDocGen/Render/EntityDocRender/EntityDocRenderInterface.php#L31>`_
-.. code-block:: php
-
-        public function getRenderedText(BumbleDocGen\Render\Context\DocumentedEntityWrapper $entityWrapper): string;
-
-
-..
-
-    Get rendered documentation for an entity
-
-
-**Parameters:**
-
-.. raw:: html
-
-    <table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$entityWrapper</td>
-            <td><a href='/BumbleDocGen/Render/Context/DocumentedEntityWrapper.php'>BumbleDocGen\Render\Context\DocumentedEntityWrapper</a></td>
-            <td>The class whose documentation was requested</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-**Return value:** string
 
 ________
 

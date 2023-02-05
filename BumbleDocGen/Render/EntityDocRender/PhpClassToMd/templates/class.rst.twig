@@ -1,0 +1,87 @@
+{{ generatePageBreadcrumbs(classEntity.getShortName(), generationInitiatorFilePath, false) | htmlToRst }}
+
+{% include '_classHeader.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
+
+
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToRst\\PhpClassToRstDocRender::BLOCK_AFTER_HEADER')) }}
+
+
+{% include '_classMainInfo.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
+
+
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToRst\\PhpClassToRstDocRender::BLOCK_AFTER_MAIN_INFO')) }}
+
+{% if classEntity.getCasesNames() %}
+Cases:
+-----------------------
+
+{% include '_enumCases.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
+{% endif %}
+
+{% if not classEntity.getMethodEntityCollection().getInitializations().isEmpty() %}
+Initialization methods:
+-----------------------
+
+
+{% include '_methods.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection().getInitializations(), 'renderContext': renderContext} only %}
+{% endif %}
+
+
+{% if not classEntity.getMethodEntityCollection().getAllExceptInitializations().isEmpty() %}
+Methods:
+-----------------------
+
+
+{% include '_methods.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection().getAllExceptInitializations(), 'renderContext': renderContext} only %}
+{% endif %}
+
+
+{% if classEntity.hasTraits() %}
+Traits:
+-----------------------
+
+
+{% include '_traits.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
+{% endif %}
+
+
+{% if not classEntity.getConstantEntityCollection().isEmpty() %}
+Constants:
+-----------------------
+
+
+{% include '_constants.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
+{% endif %}
+
+
+{% if not classEntity.getPropertyEntityCollection().isEmpty() %}
+Properties:
+-----------------------
+
+
+{% include '_properties.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
+{% endif %}
+
+
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToRst\\PhpClassToRstDocRender::BLOCK_BEFORE_DETAILS')) }}
+
+
+--------------------
+
+
+{% if not classEntity.getPropertyEntityCollection().isEmpty() %}
+Property details:
+-----------------------
+
+
+{% include '_property_details.rst.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
+{% endif %}
+
+
+{% if not classEntity.getMethodEntityCollection().isEmpty() %}
+Method details:
+-----------------------
+
+
+{% include '_method_details.rst.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection(), 'renderContext': renderContext} only %}
+{% endif %}

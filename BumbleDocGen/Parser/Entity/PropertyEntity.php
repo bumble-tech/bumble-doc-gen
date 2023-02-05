@@ -5,40 +5,41 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\AttributeParser;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
-use Roave\BetterReflection\Reflector\Reflector;
 
 /**
  * Class property entity
  */
 final class PropertyEntity extends BaseEntity
 {
+    private ?ReflectionProperty $reflectionProperty = null;
 
     private function __construct(
         protected ConfigurationInterface $configuration,
-        protected Reflector $reflector,
-        protected ReflectionClass $reflectionClass,
-        protected ReflectionProperty $reflection,
-        protected AttributeParser $attributeParser
-    ) {
-        parent::__construct($configuration, $reflector, $attributeParser);
+        protected ClassEntity            $classEntity,
+        protected string                 $propertyName,
+        protected string                 $declaringClassName,
+        protected string                 $implementingClassName,
+    )
+    {
+        parent::__construct($configuration, $classEntity->getReflector(), $classEntity->getAttributeParser());
     }
 
     public static function create(
         ConfigurationInterface $configuration,
-        Reflector $reflector,
-        ReflectionClass $reflectionClass,
-        ReflectionProperty $reflectionProperty,
-        AttributeParser $attributeParser,
-        bool $reloadCache = false
-    ): PropertyEntity {
+        ClassEntity            $classEntity,
+        string                 $propertyName,
+        string                 $declaringClassName,
+        string                 $implementingClassName,
+        bool                   $reloadCache = false
+    ): PropertyEntity
+    {
         static $classEntities = [];
-        $objectId = self::generateObjectIdByReflection($reflectionProperty) . $reflectionClass->getName();
+        $objectId = "{$implementingClassName}:{$propertyName}";
         if (!isset($classEntities[$objectId]) || $reloadCache) {
             $classEntities[$objectId] = new PropertyEntity(
-                $configuration, $reflector, $reflectionClass, $reflectionProperty, $attributeParser
+                $configuration, $classEntity, $propertyName, $declaringClassName, $implementingClassName
             );
         }
         return $classEntities[$objectId];
@@ -46,12 +47,15 @@ final class PropertyEntity extends BaseEntity
 
     public function getReflection(): ReflectionProperty
     {
-        return $this->reflection;
+        if (!$this->reflectionProperty) {
+            $this->reflectionProperty = $this->classEntity->getReflection()->getProperty($this->propertyName);
+        }
+        return $this->reflectionProperty;
     }
 
     public function getImplementingReflectionClass(): ReflectionClass
     {
-        return $this->reflection->getImplementingClass();
+        return $this->getReflection()->getImplementingClass();
     }
 
     protected function getDocCommentReflectionRecursive(): ReflectionProperty
@@ -76,7 +80,7 @@ final class PropertyEntity extends BaseEntity
                 }
                 return $reflectionProperty;
             };
-            $docCommentsReflectionCache[$objectId] = $getDocCommentReflection($this->reflection);
+            $docCommentsReflectionCache[$objectId] = $getDocCommentReflection($this->getReflection());
         }
         return $docCommentsReflectionCache[$objectId];
     }
@@ -161,12 +165,12 @@ final class PropertyEntity extends BaseEntity
 
     public function isImplementedInParentClass(): bool
     {
-        return $this->getImplementingClassName() !== $this->reflectionClass->getName();
+        return $this->getImplementingClassName() !== $this->classEntity->getName();
     }
 
     public function getImplementingClassName(): string
     {
-        return $this->getImplementingReflectionClass()->getName();
+        return $this->implementingClassName;
     }
 
     public function getDescription(): string

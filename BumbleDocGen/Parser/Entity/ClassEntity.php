@@ -81,6 +81,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $classEntities[$objectId];
     }
 
+    public function getReflector(): Reflector
+    {
+        return $this->reflector;
+    }
+
     protected function getDocCommentReflectionRecursive(): ReflectionClass
     {
         static $docCommentsReflectionCache = [];
@@ -286,11 +291,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         static $propertyEntityCollection = [];
         if (!isset($propertyEntityCollection[$this->getObjectId()])) {
-            $propertyEntityCollection[$this->getObjectId()] = PropertyEntityCollection::createByReflectionClass(
+            $propertyEntityCollection[$this->getObjectId()] = PropertyEntityCollection::createByClassEntity(
                 $this->configuration,
-                $this->reflector,
-                $this->getReflection(),
-                $this->attributeParser
+                $this
             );
         }
         return $propertyEntityCollection[$this->getObjectId()];
@@ -324,7 +327,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public function getCasesNames(): array
     {
         $caseNames = [];
-        if($this->isEnum()) {
+        if ($this->isEnum()) {
             foreach ($this->getReflection()->getCases() as $case) {
                 $caseNames[] = $case->getName();
             }
@@ -341,5 +344,44 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public function getFileContent(): string
     {
         return file_get_contents($this->getAbsoluteFileName());
+    }
+
+    public function getMethodsData(): array
+    {
+        $methods = [];
+        foreach ($this->getReflection()->getMethods() as $method) {
+            $methods[] = [
+                'name' => $method->getName(),
+                'declaringClass' => $method->getDeclaringClass()->getName(),
+                'implementingClass' => $method->getImplementingClass()->getName()
+            ];
+        }
+        return $methods;
+    }
+
+    public function getPropertiesData(): array
+    {
+        $properties = [];
+        foreach ($this->getReflection()->getProperties() as $property) {
+            $properties[] = [
+                'name' => $property->getName(),
+                'declaringClass' => $property->getDeclaringClass()->getName(),
+                'implementingClass' => $property->getImplementingClass()->getName()
+            ];
+        }
+        return $properties;
+    }
+
+    public function getConstantsData(): array
+    {
+        $constants = [];
+        foreach ($this->getReflection()->getConstants() as $constant) {
+            $constants[] = [
+                'name' => $constant->getName(),
+                'declaringClass' => $constant->getDeclaringClass()->getName(),
+                'implementingClass' => $constant->getImplementingClass()->getName()
+            ];
+        }
+        return $constants;
     }
 }

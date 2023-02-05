@@ -33,9 +33,9 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetiterator">getIterator</a> - <i>Retrieve an external iterator</i></li>
                 <li><a href="#madd">add</a> </li>
                 <li><a href="#mgetfirstmatchingrender">getFirstMatchingRender</a> </li>
+                <li><a href="#mgetiterator">getIterator</a> - <i>Retrieve an external iterator</i></li>
         </ol>
 
 
@@ -56,36 +56,6 @@ Method details:
 -----------------------
 
 
-
-.. _mgetiterator:
-
-* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Render/EntityDocRender/EntityDocRendersCollection.php#L14>`_
-.. code-block:: php
-
-        public function getIterator(): Generator;
-
-
-..
-
-    Retrieve an external iterator
-
-
-**Parameters:** not specified
-
-
-**Return value:** Generator
-
-
-**Throws:**
-
-#. **\\Exception** - on failure.
-
-
-**See:**
-
-#. `https://php\.net/manual/en/iteratoraggregate\.getiterator\.php <https://php.net/manual/en/iteratoraggregate.getiterator.php>`_ 
-
-________
 
 .. _madd:
 
@@ -156,6 +126,36 @@ ________
 
 
 **Return value:** `BumbleDocGen\\Render\\EntityDocRender\\EntityDocRenderInterface </BumbleDocGen/Render/EntityDocRender/EntityDocRenderInterface\.php>`_ | null
+
+________
+
+.. _mgetiterator:
+
+* `# <mgetiterator_>`_  ``getIterator``   **|** `source code </BumbleDocGen/Render/EntityDocRender/EntityDocRendersCollection.php#L14>`_
+.. code-block:: php
+
+        public function getIterator(): Generator;
+
+
+..
+
+    Retrieve an external iterator
+
+
+**Parameters:** not specified
+
+
+**Return value:** Generator
+
+
+**Throws:**
+
+#. **\\Exception** - on failure.
+
+
+**See:**
+
+#. `https://php\.net/manual/en/iteratoraggregate\.getiterator\.php <https://php.net/manual/en/iteratoraggregate.getiterator.php>`_ 
 
 ________
 

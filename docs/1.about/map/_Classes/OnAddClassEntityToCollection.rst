@@ -45,8 +45,8 @@ Methods:
 .. raw:: html
 
   <ol>
-                <li><a href="#mgetclassentitycollection">getClassEntityCollection</a> </li>
                 <li><a href="#mgetclassentity">getClassEntity</a> </li>
+                <li><a href="#mgetclassentitycollection">getClassEntityCollection</a> </li>
         </ol>
 
 
@@ -109,23 +109,6 @@ Method details:
 
 ________
 
-.. _mgetclassentitycollection:
-
-* `# <mgetclassentitycollection_>`_  ``getClassEntityCollection``   **|** `source code </BumbleDocGen/Plugin/Event/Parser/OnAddClassEntityToCollection.php#L22>`_
-.. code-block:: php
-
-        public function getClassEntityCollection(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
-
-
-
-
-**Parameters:** not specified
-
-
-**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
-
-________
-
 .. _mgetclassentity:
 
 * `# <mgetclassentity_>`_  ``getClassEntity``   **|** `source code </BumbleDocGen/Plugin/Event/Parser/OnAddClassEntityToCollection.php#L27>`_
@@ -140,6 +123,23 @@ ________
 
 
 **Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntity </BumbleDocGen/Parser/Entity/ClassEntity\.php>`_
+
+________
+
+.. _mgetclassentitycollection:
+
+* `# <mgetclassentitycollection_>`_  ``getClassEntityCollection``   **|** `source code </BumbleDocGen/Plugin/Event/Parser/OnAddClassEntityToCollection.php#L22>`_
+.. code-block:: php
+
+        public function getClassEntityCollection(): BumbleDocGen\Parser\Entity\ClassEntityCollection;
+
+
+
+
+**Parameters:** not specified
+
+
+**Return value:** `BumbleDocGen\\Parser\\Entity\\ClassEntityCollection </BumbleDocGen/Parser/Entity/ClassEntityCollection\.php>`_
 
 ________
 
