@@ -175,4 +175,19 @@ final class PropertyEntity extends BaseEntity
         $docBlock = $this->getDocBlock();
         return trim($docBlock->getSummary());
     }
+
+    public function isPublic(): bool
+    {
+        return $this->getReflection()->isPublic();
+    }
+
+    public function isProtected(): bool
+    {
+        return $this->getReflection()->isProtected();
+    }
+
+    public function isPrivate(): bool
+    {
+        return $this->getReflection()->isPrivate();
+    }
 }

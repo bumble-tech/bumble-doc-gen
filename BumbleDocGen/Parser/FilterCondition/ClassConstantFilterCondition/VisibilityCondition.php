@@ -15,17 +15,17 @@ final class VisibilityCondition implements ConditionInterface
 {
     public function __construct(
         private ConstantEntity $constantEntity,
-        private string $visibilityModifier = VisibilityConditionModifier::PUBLIC
-    ) {
+        private string         $visibilityModifier = VisibilityConditionModifier::PUBLIC
+    )
+    {
     }
 
     public function canAddToCollection(): bool
     {
-        $reflectionClassConstant = $this->constantEntity->getReflection();
         return match ($this->visibilityModifier) {
-            VisibilityConditionModifier::PUBLIC => $reflectionClassConstant->isPublic(),
-            VisibilityConditionModifier::PROTECTED => $reflectionClassConstant->isProtected(),
-            VisibilityConditionModifier::PRIVATE => $reflectionClassConstant->isPrivate(),
+            VisibilityConditionModifier::PUBLIC => $this->constantEntity->isPublic(),
+            VisibilityConditionModifier::PROTECTED => $this->constantEntity->isProtected(),
+            VisibilityConditionModifier::PRIVATE => $this->constantEntity->isPrivate(),
             VisibilityConditionModifier::NONE => false
         };
     }

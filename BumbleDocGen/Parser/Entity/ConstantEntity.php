@@ -98,4 +98,19 @@ final class ConstantEntity extends BaseEntity
         $docBlock = $this->getDocBlock();
         return $docBlock->getSummary();
     }
+
+    public function isPublic(): bool
+    {
+        return $this->getReflection()->isPublic();
+    }
+
+    public function isProtected(): bool
+    {
+        return $this->getReflection()->isProtected();
+    }
+
+    public function isPrivate(): bool
+    {
+        return $this->getReflection()->isPrivate();
+    }
 }
