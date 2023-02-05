@@ -11,7 +11,9 @@ interface MethodEntityInterface
 
     public function getFileName(): ?string;
 
-    public function getLine(): int;
+    public function getStartLine(): int;
+
+    public function getEndLine(): int;
 
     public function getModifiersString(): string;
 
@@ -26,6 +28,12 @@ interface MethodEntityInterface
     public function getDescription(): string;
 
     public function isInitialization(): bool;
+
+    public function isPublic(): bool;
+
+    public function isProtected(): bool;
+
+    public function isPrivate(): bool;
 
     public function isDynamic(): bool;
 }

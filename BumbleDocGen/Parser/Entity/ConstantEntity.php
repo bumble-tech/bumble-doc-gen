@@ -98,11 +98,6 @@ class ConstantEntity extends BaseEntity
         );
     }
 
-    #[Cache\CacheableMethod] public function getLine(): int
-    {
-        return $this->getReflection()->getStartLine();
-    }
-
     #[Cache\CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
@@ -122,5 +117,15 @@ class ConstantEntity extends BaseEntity
     #[Cache\CacheableMethod] public function isPrivate(): bool
     {
         return $this->getReflection()->isPrivate();
+    }
+
+    #[Cache\CacheableMethod] public function getStartLine(): int
+    {
+        return $this->getReflection()->getStartLine();
+    }
+
+    #[Cache\CacheableMethod] public function getEndLine(): int
+    {
+        return $this->getReflection()->getEndLine();
     }
 }

@@ -75,10 +75,16 @@ class DynamicMethodEntity implements MethodEntityInterface
         );
     }
 
-    #[Cache\CacheableMethod] public function getLine(): int
+    #[Cache\CacheableMethod] public function getStartLine(): int
     {
         $callMethod = $this->getCallMethod();
         return $callMethod->getStartLine();
+    }
+
+    #[Cache\CacheableMethod] public function getEndLine(): int
+    {
+        $callMethod = $this->getCallMethod();
+        return $callMethod->getEndLine();
     }
 
     #[Cache\CacheableMethod] public function getModifiersString(): string
@@ -163,6 +169,21 @@ class DynamicMethodEntity implements MethodEntityInterface
             $this->getImplementingReflectionClass()->getShortName(),
         ];
         return $this->isStatic() && in_array($this->getReturnType(), $initializationReturnTypes);
+    }
+
+    public function isPublic(): bool
+    {
+        return true;
+    }
+
+    public function isProtected(): bool
+    {
+        return false;
+    }
+
+    public function isPrivate(): bool
+    {
+        return false;
     }
 
     public function isDynamic(): bool

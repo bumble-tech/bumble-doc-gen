@@ -40,7 +40,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
         return $this;
     }
 
-    public function get(string $key): ?PropertyEntity
+    public function get(string $key): ?ConstantEntity
     {
         return $this->entities[$key] ?? null;
     }
