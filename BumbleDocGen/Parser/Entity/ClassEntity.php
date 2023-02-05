@@ -386,4 +386,19 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         return $this->getReflection()->isInterface();
     }
+
+    #[Cache\CacheableMethod] public function hasMethod(string $method): bool
+    {
+        return array_key_exists($method, $this->getMethodsData());
+    }
+
+    #[Cache\CacheableMethod] public function hasProperty(string $property): bool
+    {
+        return array_key_exists($property, $this->getPropertiesData());
+    }
+
+    #[Cache\CacheableMethod] public function hasConstant(string $constant): bool
+    {
+        return array_key_exists($constant, $this->getConstantsData());
+    }
 }

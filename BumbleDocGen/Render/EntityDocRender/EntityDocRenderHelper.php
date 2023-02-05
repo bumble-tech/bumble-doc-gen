@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\EntityDocRender;
 
 use BumbleDocGen\Parser\AttributeParser;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
@@ -70,9 +71,9 @@ final class EntityDocRenderHelper
         ) {
             $cursorTmpName = str_replace(['$', '(', ')'], '', $className);
             if (
-                $defaultEntity->getReflection()->hasMethod($cursorTmpName) ||
-                $defaultEntity->getReflection()->hasProperty($cursorTmpName) ||
-                $defaultEntity->getReflection()->hasConstant($cursorTmpName)
+                $defaultEntity->hasMethod($cursorTmpName) ||
+                $defaultEntity->hasProperty($cursorTmpName) ||
+                $defaultEntity->hasConstant($cursorTmpName)
             ) {
                 $classData[1] = $cursorTmpName;
                 $entity = $defaultEntity;
@@ -85,7 +86,8 @@ final class EntityDocRenderHelper
             $attributeParser = new AttributeParser(
                 $reflector, $context->getClassEntityCollection()->getLogger()
             );
-            $entity = ClassEntity::createByReflection(
+            $classEntityClassName = CacheableEntityWrapper::createForClassEntity();
+            $entity = $classEntityClassName::createByReflection(
                 $context->getConfiguration(),
                 $reflector,
                 $reflectionClass,
@@ -98,14 +100,14 @@ final class EntityDocRenderHelper
             if (isset($classData[1])) {
                 $cursorTarget = str_replace(['$', '(', ')'], '', $classData[1]);
                 if (
-                    str_ends_with($classData[1], '()') || $entity->getReflection()->hasMethod($cursorTarget)
+                    str_ends_with($classData[1], '()') || $entity->hasMethod($cursorTarget)
                 ) {
                     $cursor = 'm' . str_replace('()', '', $classData[1]);
                 } elseif (
-                    str_starts_with($classData[1], '$') || $entity->getReflection()->hasProperty($classData[1])
+                    str_starts_with($classData[1], '$') || $entity->hasProperty($classData[1])
                 ) {
                     $cursor = 'p' . str_replace('$', '', $classData[1]);
-                } elseif ($entity->getReflection()->hasConstant($classData[1])) {
+                } elseif ($entity->hasConstant($classData[1])) {
                     $cursor = 'q' . $classData[1];
                 }
             }
