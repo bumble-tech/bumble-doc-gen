@@ -67,4 +67,6 @@ interface ConfigurationInterface
     public function getLogger(): LoggerInterface;
 
     public function getSourceLocatorCacheItemPool(): CacheItemPoolInterface;
+
+    public function getEntityCacheItemPool(): CacheItemPoolInterface;
 }

@@ -12,6 +12,68 @@ use Nette\PhpGenerator\Parameter;
 
 final class CacheableEntityWrapper
 {
+    private const DEPENDENCIES_CACHE_KEY = '__entityDependencies';
+
+    private static array $filesDependenciesCache = [];
+
+    private static function loadEntityDependencies(ClassEntity $classEntity): array
+    {
+        $parentClassNames = $classEntity->getReflection()->getParentClassNames();
+        $traitClassNames = $classEntity->getReflection()->getTraitNames();
+        $interfaceNames = $classEntity->getReflection()->getInterfaceNames();
+
+        $fileDependencies = [];
+        $classNames = array_unique(array_merge($parentClassNames, $traitClassNames, $interfaceNames));
+        $classNames[] = $classEntity->getName();
+        foreach ($classNames as $className) {
+            $reflectionClass = $classEntity->getReflector()->reflectClass($className);
+            $fileName = $reflectionClass->getFileName();
+            if ($fileName) {
+                $relativeFileName = str_replace($classEntity->getConfiguration()->getProjectRoot(), '', $reflectionClass->getFileName());
+                $fileDependencies[$relativeFileName] = md5_file($fileName);
+            }
+        }
+        return $fileDependencies;
+    }
+
+    public static function getAndCacheEntityDependencies(ClassEntity $classEntity, bool $reload = false): array
+    {
+        $cacheItemPool = $classEntity->getConfiguration()->getEntityCacheItemPool();
+        $className = $classEntity->getName();
+
+        if (empty(self::$filesDependenciesCache)) {
+            if ($cacheItemPool->hasItem(self::DEPENDENCIES_CACHE_KEY)) {
+                self::$filesDependenciesCache = $cacheItemPool->getItem(self::DEPENDENCIES_CACHE_KEY)->get();
+            }
+        }
+
+        if (!isset(self::$filesDependenciesCache[$className]) || $reload) {
+            self::$filesDependenciesCache[$className] = self::loadEntityDependencies($classEntity);
+            $cacheItemPool = $classEntity->getConfiguration()->getEntityCacheItemPool();
+            $cacheItem = $cacheItemPool->getItem(self::DEPENDENCIES_CACHE_KEY);
+            $cacheItem->set(self::$filesDependenciesCache);
+            $cacheItemPool->saveDeferred($cacheItem);
+        }
+        return self::$filesDependenciesCache[$className];
+    }
+
+    public static function entityCacheIsOutdated(ClassEntity $classEntity): bool
+    {
+        static $filesCacheState = [];
+        $className = $classEntity->getName();
+        if (!isset($filesCacheState[$className])) {
+            $projectRoot = $classEntity->getConfiguration()->getProjectRoot();
+            $filesCacheState[$className] = false;
+            foreach (self::getAndCacheEntityDependencies($classEntity) as $relativeFileName => $hashFile) {
+                if (md5_file("{$projectRoot}{$relativeFileName}") !== $hashFile) {
+                    $filesCacheState[$className] = true;
+                    break;
+                }
+            }
+        }
+        return $filesCacheState[$className];
+    }
+
     private static function createForEntity(string $className, string $wrapperName): string
     {
         static $entityWrapperClassNames = [];
@@ -48,13 +110,25 @@ final class CacheableEntityWrapper
                             $cacheKey = \'' . $cacheKey . '\' . str_replace(["\\\\", ":"], "_", $this->getObjectId());
                             if(!isset($cache[$cacheKey])){
                                 $cacheItemPool = $this->configuration->getEntityCacheItemPool();
-                                if ($cacheItemPool->hasItem($cacheKey)) {
-                                    $result = $cacheItemPool->getItem($cacheKey)->get();
+                                
+                                if(is_subclass_of($this, \BumbleDocGen\Parser\Entity\ClassEntity::class)) {
+                                    $classEntity = $this;
+                                }
+                                else {
+                                    $classEntity = $this->getClassEntity();
+                                }
+                                
+                                $cacheItem = $cacheItemPool->getItem($cacheKey);
+                                if (
+                                    $cacheItemPool->hasItem($cacheKey) && 
+                                    !\BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper::entityCacheIsOutdated($classEntity)
+                                ) {
+                                    $result = $cacheItem->get();
                                 } else {
                                     $result = parent::' . $method->getName() . '(...func_get_args());
-                                    $cacheItem = $cacheItemPool->getItem($cacheKey);
                                     $cacheItem->set($result);
                                     $cacheItemPool->save($cacheItem);
+                                    \BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper::getAndCacheEntityDependencies($classEntity, true);
                                 }
                                 $cache[$cacheKey] = $result;
                             }

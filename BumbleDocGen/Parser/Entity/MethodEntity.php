@@ -50,6 +50,11 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->reflectionMethod;
     }
 
+    public function getClassEntity(): ClassEntity
+    {
+        return $this->classEntity;
+    }
+
     public function getImplementingReflectionClass(): ReflectionClass
     {
         return $this->getReflection()->getImplementingClass();

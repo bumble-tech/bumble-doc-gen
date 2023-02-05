@@ -42,6 +42,11 @@ class PropertyEntity extends BaseEntity
         return $classEntities[$objectId];
     }
 
+    public function getClassEntity(): ClassEntity
+    {
+        return $this->classEntity;
+    }
+
     public function getReflection(): ReflectionProperty
     {
         if (!$this->reflectionProperty) {
