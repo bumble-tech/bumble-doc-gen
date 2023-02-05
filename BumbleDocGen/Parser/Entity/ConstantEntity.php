@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
-use BumbleDocGen\ConfigurationInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionClassConstant;
 
@@ -16,30 +15,28 @@ final class ConstantEntity extends BaseEntity
     private ?ReflectionClassConstant $reflectionClassConstant = null;
 
     private function __construct(
-        protected ConfigurationInterface $configuration,
-        protected ClassEntity            $classEntity,
-        protected string                 $constantName,
-        protected string                 $declaringClassName,
-        protected string                 $implementingClassName,
+        protected ClassEntity $classEntity,
+        protected string      $constantName,
+        protected string      $declaringClassName,
+        protected string      $implementingClassName,
     )
     {
-        parent::__construct($configuration, $classEntity->getReflector(), $classEntity->getAttributeParser());
+        parent::__construct($classEntity->getConfiguration(), $classEntity->getReflector(), $classEntity->getAttributeParser());
     }
 
     public static function create(
-        ConfigurationInterface $configuration,
-        ClassEntity            $classEntity,
-        string                 $constantName,
-        string                 $declaringClassName,
-        string                 $implementingClassName,
-        bool                   $reloadCache = false
+        ClassEntity $classEntity,
+        string      $constantName,
+        string      $declaringClassName,
+        string      $implementingClassName,
+        bool        $reloadCache = false
     ): ConstantEntity
     {
         static $classEntities = [];
         $objectId = "{$implementingClassName}:{$constantName}";
         if (!isset($classEntities[$objectId]) || $reloadCache) {
             $classEntities[$objectId] = new ConstantEntity(
-                $configuration, $classEntity, $constantName, $declaringClassName, $implementingClassName
+                $classEntity, $constantName, $declaringClassName, $implementingClassName
             );
         }
         return $classEntities[$objectId];

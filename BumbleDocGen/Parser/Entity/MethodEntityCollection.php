@@ -4,23 +4,17 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
-use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\AttributeParser;
-use Roave\BetterReflection\Reflector\Reflector;
-
 /**
  * @implements \IteratorAggregate<int, MethodEntity>
  */
 final class MethodEntityCollection extends BaseEntityCollection
 {
-    public static function createByClassEntity(
-        ConfigurationInterface $configuration,
-        ClassEntity $classEntity,
-    ): MethodEntityCollection {
+    public static function createByClassEntity(ClassEntity $classEntity): MethodEntityCollection
+    {
         $methodEntityCollection = new MethodEntityCollection();
+        $configuration = $classEntity->getConfiguration();
         foreach ($classEntity->getMethodsData() as $methodData) {
             $methodEntity = MethodEntity::create(
-                $configuration,
                 $classEntity,
                 $methodData['name'],
                 $methodData['declaringClass'],
@@ -40,11 +34,7 @@ final class MethodEntityCollection extends BaseEntityCollection
             foreach ($methodsBlocks as $methodsBlock) {
                 try {
                     /**@var \phpDocumentor\Reflection\DocBlock\Tags\Method $methodsBlock */
-                    $methodEntity = DynamicMethodEntity::createByAnnotationMethod(
-                        $configuration,
-                        $classEntity,
-                        $methodsBlock
-                    );
+                    $methodEntity = DynamicMethodEntity::createByAnnotationMethod($classEntity, $methodsBlock);
                     $methodEntityCollection->add($methodEntity);
                 } catch (\Exception $e) {
                     $logger->error($e->getMessage());

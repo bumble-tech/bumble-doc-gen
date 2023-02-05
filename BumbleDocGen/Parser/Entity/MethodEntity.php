@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
-use BumbleDocGen\ConfigurationInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 
@@ -16,30 +15,28 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
     private ?ReflectionMethod $reflectionMethod = null;
 
     private function __construct(
-        protected ConfigurationInterface $configuration,
-        protected ClassEntity            $classEntity,
-        protected string                 $methodName,
-        protected string                 $declaringClassName,
-        protected string                 $implementingClassName,
+        protected ClassEntity $classEntity,
+        protected string      $methodName,
+        protected string      $declaringClassName,
+        protected string      $implementingClassName,
     )
     {
-        parent::__construct($configuration, $classEntity->getReflector(), $classEntity->getAttributeParser());
+        parent::__construct($classEntity->getConfiguration(), $classEntity->getReflector(), $classEntity->getAttributeParser());
     }
 
     public static function create(
-        ConfigurationInterface $configuration,
-        ClassEntity            $classEntity,
-        string                 $methodName,
-        string                 $declaringClassName,
-        string                 $implementingClassName,
-        bool                   $reloadCache = false
+        ClassEntity $classEntity,
+        string      $methodName,
+        string      $declaringClassName,
+        string      $implementingClassName,
+        bool        $reloadCache = false
     ): MethodEntity
     {
         static $entities = [];
         $objectId = "{$implementingClassName}:{$methodName}";
         if (!isset($entities[$objectId]) || $reloadCache) {
             $entities[$objectId] = new MethodEntity(
-                $configuration, $classEntity, $methodName, $declaringClassName, $implementingClassName
+                $classEntity, $methodName, $declaringClassName, $implementingClassName
             );
         }
         return $entities[$objectId];

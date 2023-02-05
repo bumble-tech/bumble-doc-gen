@@ -4,25 +4,22 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
-use BumbleDocGen\ConfigurationInterface;
-
 final class ConstantEntityCollection extends BaseEntityCollection
 {
     public static function createByClassEntity(
-        ConfigurationInterface $configuration,
         ClassEntity $classEntity
-    ): ConstantEntityCollection {
+    ): ConstantEntityCollection
+    {
         $constantEntityCollection = new ConstantEntityCollection();
         foreach ($classEntity->getConstantsData() as $constantData) {
             $constantEntity = ConstantEntity::create(
-                $configuration,
                 $classEntity,
                 $constantData['name'],
                 $constantData['declaringClass'],
                 $constantData['implementingClass']
             );
             if (
-                $configuration->classConstantEntityFilterCondition($constantEntity)->canAddToCollection()
+                $classEntity->getConfiguration()->classConstantEntityFilterCondition($constantEntity)->canAddToCollection()
             ) {
                 $constantEntityCollection->add($constantEntity);
             }

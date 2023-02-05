@@ -8,7 +8,6 @@ use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\ParserHelper;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
-use Roave\BetterReflection\Reflector\Reflector;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 
 /**
@@ -18,17 +17,18 @@ final class DynamicMethodEntity implements MethodEntityInterface
 {
     private function __construct(
         private ConfigurationInterface $configuration,
-        private ClassEntity $classEntity,
-        private Method $annotationMethod
-    ) {
+        private ClassEntity            $classEntity,
+        private Method                 $annotationMethod
+    )
+    {
     }
 
     public static function createByAnnotationMethod(
-        ConfigurationInterface $configuration,
         ClassEntity $classEntity,
-        Method $annotationMethod
-    ): DynamicMethodEntity {
-        $dynamicMethodEntity = new DynamicMethodEntity($configuration, $classEntity, $annotationMethod);
+        Method      $annotationMethod
+    ): DynamicMethodEntity
+    {
+        $dynamicMethodEntity = new DynamicMethodEntity($classEntity->getConfiguration(), $classEntity, $annotationMethod);
         $dynamicMethodEntity->getCallMethod();
         return $dynamicMethodEntity;
     }

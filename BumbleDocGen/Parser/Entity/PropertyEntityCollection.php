@@ -4,25 +4,20 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
-use BumbleDocGen\ConfigurationInterface;
-
 final class PropertyEntityCollection extends BaseEntityCollection
 {
-    public static function createByClassEntity(
-        ConfigurationInterface $configuration,
-        ClassEntity $classEntity
-    ): PropertyEntityCollection {
+    public static function createByClassEntity(ClassEntity $classEntity): PropertyEntityCollection
+    {
         $propertyEntityCollection = new PropertyEntityCollection();
         foreach ($classEntity->getPropertiesData() as $propertyData) {
             $propertyEntity = PropertyEntity::create(
-                $configuration,
                 $classEntity,
                 $propertyData['name'],
                 $propertyData['declaringClass'],
                 $propertyData['implementingClass']
             );
             if (
-                $configuration->propertyEntityFilterCondition($propertyEntity)->canAddToCollection()
+                $classEntity->getConfiguration()->propertyEntityFilterCondition($propertyEntity)->canAddToCollection()
             ) {
                 $propertyEntityCollection->add($propertyEntity);
             }

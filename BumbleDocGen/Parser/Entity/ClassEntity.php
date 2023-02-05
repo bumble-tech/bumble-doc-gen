@@ -86,6 +86,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->reflector;
     }
 
+    public function getConfiguration(): ConfigurationInterface
+    {
+        return $this->configuration;
+    }
+
     protected function getDocCommentReflectionRecursive(): ReflectionClass
     {
         static $docCommentsReflectionCache = [];
@@ -277,10 +282,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         static $constantEntityCollection = [];
         if (!isset($constantEntityCollection[$this->getObjectId()])) {
-            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByClassEntity(
-                $this->configuration,
-                $this
-            );
+            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByClassEntity($this);
         }
         return $constantEntityCollection[$this->getObjectId()];
     }
@@ -289,10 +291,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         static $propertyEntityCollection = [];
         if (!isset($propertyEntityCollection[$this->getObjectId()])) {
-            $propertyEntityCollection[$this->getObjectId()] = PropertyEntityCollection::createByClassEntity(
-                $this->configuration,
-                $this
-            );
+            $propertyEntityCollection[$this->getObjectId()] = PropertyEntityCollection::createByClassEntity($this);
         }
         return $propertyEntityCollection[$this->getObjectId()];
     }
@@ -301,10 +300,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         static $methodEntityCollection = [];
         if (!isset($methodEntityCollection[$this->getObjectId()])) {
-            $methodEntityCollection[$this->getObjectId()] = MethodEntityCollection::createByClassEntity(
-                $this->configuration,
-                $this
-            );
+            $methodEntityCollection[$this->getObjectId()] = MethodEntityCollection::createByClassEntity($this);
         }
         return $methodEntityCollection[$this->getObjectId()];
     }
