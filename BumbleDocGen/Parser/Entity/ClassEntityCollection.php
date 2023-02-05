@@ -6,6 +6,7 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\Plugin\Event\Parser\OnAddClassEntityToCollection;
@@ -34,11 +35,12 @@ final class ClassEntityCollection extends BaseEntityCollection
         $logger = $configuration->getLogger();
         $classEntityCollection = new ClassEntityCollection($configuration, $reflector, $pluginEventDispatcher, $logger);
 
+        $classEntityClassName = CacheableEntityWrapper::createForClassEntity();
         foreach ($configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
             $className = ParserHelper::getClassFromFile($file->getPathName());
             if ($className) {
                 $relativeFileName = str_replace($configuration->getProjectRoot(), '', $file->getPathName());
-                $classEntity = ClassEntity::create(
+                $classEntity = $classEntityClassName::create(
                     $configuration,
                     $reflector,
                     ltrim($className,'\\'),

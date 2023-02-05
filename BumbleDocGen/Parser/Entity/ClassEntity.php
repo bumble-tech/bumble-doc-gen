@@ -116,7 +116,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $docCommentsReflectionCache[$objectId];
     }
 
-    protected function getDocCommentRecursive(): string
+    #[Cache\CacheableMethod] protected function getDocCommentRecursive(): string
     {
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
@@ -158,35 +158,35 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getName(): string
     {
-        return $this->getReflection()->getName();
+        return $this->className;
     }
 
-    public function getShortName(): string
+    #[Cache\CacheableMethod] public function getShortName(): string
     {
         return $this->getReflection()->getShortName();
     }
 
-    public function getNamespaceName(): string
+    #[Cache\CacheableMethod] public function getNamespaceName(): string
     {
         return $this->getReflection()->getNamespaceName();
     }
 
-    public function getFileName(): ?string
+    #[Cache\CacheableMethod] public function getFileName(): ?string
     {
         return $this->relativeFileName;
     }
 
-    public function getStartLine(): int
+    #[Cache\CacheableMethod] public function getStartLine(): int
     {
         return $this->getReflection()->getStartLine();
     }
 
-    public function getEndLine(): int
+    #[Cache\CacheableMethod] public function getEndLine(): int
     {
         return $this->getReflection()->getEndLine();
     }
 
-    public function getModifiersString(): string
+    #[Cache\CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
 
@@ -214,7 +214,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return implode(' ', $modifiersString);
     }
 
-    public function getExtends(): ?string
+    #[Cache\CacheableMethod] public function getExtends(): ?string
     {
         static $extends = [];
         $objectId = $this->getObjectId();
@@ -229,7 +229,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $extends[$objectId];
     }
 
-    public function getInterfaces(): array
+    #[Cache\CacheableMethod] public function getInterfaces(): array
     {
         static $interfaces = [];
         $objectId = $this->getObjectId();
@@ -243,7 +243,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @return string[]
      */
-    public function getParentClassNames(): array
+    #[Cache\CacheableMethod] public function getParentClassNames(): array
     {
         static $parentClassNames = [];
         $objectId = $this->getObjectId();
@@ -258,12 +258,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $parentClassNames[$objectId];
     }
 
-    public function getInterfacesString(): string
+    #[Cache\CacheableMethod] public function getInterfacesString(): string
     {
         return implode(', ', $this->getInterfaces());
     }
 
-    public function getTraitsNames(): array
+    #[Cache\CacheableMethod] public function getTraitsNames(): array
     {
         static $traits = [];
         $objectId = $this->getObjectId();
@@ -273,7 +273,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $traits[$objectId];
     }
 
-    public function hasTraits(): bool
+    #[Cache\CacheableMethod] public function hasTraits(): bool
     {
         return count($this->getTraitsNames()) > 0;
     }
@@ -305,18 +305,18 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $methodEntityCollection[$this->getObjectId()];
     }
 
-    public function getDescription(): string
+    #[Cache\CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return $docBlock->getSummary();
     }
 
-    public function isEnum(): bool
+    #[Cache\CacheableMethod] public function isEnum(): bool
     {
         return $this->getReflection()->isEnum();
     }
 
-    public function getCasesNames(): array
+    #[Cache\CacheableMethod] public function getCasesNames(): array
     {
         $caseNames = [];
         if ($this->isEnum()) {
@@ -338,7 +338,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return file_get_contents($this->getAbsoluteFileName());
     }
 
-    public function getMethodsData(): array
+    #[Cache\CacheableMethod] public function getMethodsData(): array
     {
         $methods = [];
         foreach ($this->getReflection()->getMethods() as $method) {
@@ -351,7 +351,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $methods;
     }
 
-    public function getPropertiesData(): array
+    #[Cache\CacheableMethod] public function getPropertiesData(): array
     {
         $properties = [];
         foreach ($this->getReflection()->getProperties() as $property) {
@@ -364,7 +364,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $properties;
     }
 
-    public function getConstantsData(): array
+    #[Cache\CacheableMethod] public function getConstantsData(): array
     {
         $constants = [];
         foreach ($this->getReflection()->getReflectionConstants() as $constant) {
