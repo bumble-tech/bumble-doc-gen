@@ -10,7 +10,7 @@ use Roave\BetterReflection\Reflection\ReflectionMethod;
 /**
  * Class method entity
  */
-final class MethodEntity extends BaseEntity implements MethodEntityInterface
+class MethodEntity extends BaseEntity implements MethodEntityInterface
 {
     private ?ReflectionMethod $reflectionMethod = null;
 
@@ -35,7 +35,7 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         static $entities = [];
         $objectId = "{$implementingClassName}:{$methodName}";
         if (!isset($entities[$objectId]) || $reloadCache) {
-            $entities[$objectId] = new MethodEntity(
+            $entities[$objectId] = new static(
                 $classEntity, $methodName, $declaringClassName, $implementingClassName
             );
         }
@@ -90,7 +90,7 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $docCommentsReflectionCache[$objectId];
     }
 
-    protected function getDocCommentRecursive(): string
+    #[Cache\CacheableMethod] protected function getDocCommentRecursive(): string
     {
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
@@ -105,7 +105,7 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->methodName;
     }
 
-    public function getFileName(): ?string
+    #[Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getReflection()->getImplementingClass()->getFileName();
         if (!$fullFileName || !str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
@@ -119,12 +119,12 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         );
     }
 
-    public function getLine(): int
+    #[Cache\CacheableMethod] public function getLine(): int
     {
         return $this->getReflection()->getStartLine();
     }
 
-    public function getModifiersString(): string
+    #[Cache\CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
         if ($this->getReflection()->isPrivate()) {
@@ -144,7 +144,7 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         return implode(' ', $modifiersString);
     }
 
-    public function getReturnType(): string
+    #[Cache\CacheableMethod] public function getReturnType(): string
     {
         $type = $this->getReflection()->getReturnType();
         if ($type) {
@@ -164,7 +164,7 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
     /**
      * @param \phpDocumentor\Reflection\DocBlock\Tags\Param[] $params
      */
-    public static function parseAnnotationParams(array $params): array
+    #[Cache\CacheableMethod] public static function parseAnnotationParams(array $params): array
     {
         $paramsFromDoc = [];
         foreach ($params as $param) {
@@ -183,13 +183,13 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $paramsFromDoc;
     }
 
-    private function isArrayAnnotationType(string $annotationType): bool
+    #[Cache\CacheableMethod] private function isArrayAnnotationType(string $annotationType): bool
     {
         return preg_match('/^([a-zA-Z\\_]+)(\[\])$/', $annotationType) ||
             preg_match('/^(array)(<|{)(.*)(>|})$/', $annotationType);
     }
 
-    public function getParameters(): array
+    #[Cache\CacheableMethod] public function getParameters(): array
     {
         $parameters = [];
         $docBlock = $this->getDocBlock();
@@ -244,7 +244,7 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $parameters;
     }
 
-    public function getParametersString(): string
+    #[Cache\CacheableMethod] public function getParametersString(): string
     {
         $parameters = [];
         foreach ($this->getParameters() as $parameterData) {
@@ -254,7 +254,7 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         return implode(', ', $parameters);
     }
 
-    public function isImplementedInParentClass(): bool
+    #[Cache\CacheableMethod] public function isImplementedInParentClass(): bool
     {
         return $this->getImplementingClassName() !== $this->classEntity->getReflection()->getName();
     }
@@ -264,13 +264,13 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->implementingClassName;
     }
 
-    public function getDescription(): string
+    #[Cache\CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return trim($docBlock->getSummary());
     }
 
-    public function isInitialization(): bool
+    #[Cache\CacheableMethod] public function isInitialization(): bool
     {
         if ($this->getReflection()->getName() === '__construct') {
             return true;
@@ -291,17 +291,17 @@ final class MethodEntity extends BaseEntity implements MethodEntityInterface
         return false;
     }
 
-    public function isPublic(): bool
+    #[Cache\CacheableMethod] public function isPublic(): bool
     {
         return $this->getReflection()->isPublic();
     }
 
-    public function isProtected(): bool
+    #[Cache\CacheableMethod] public function isProtected(): bool
     {
         return $this->getReflection()->isProtected();
     }
 
-    public function isPrivate(): bool
+    #[Cache\CacheableMethod] public function isPrivate(): bool
     {
         return $this->getReflection()->isPrivate();
     }

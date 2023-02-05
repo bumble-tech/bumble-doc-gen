@@ -13,7 +13,7 @@ use phpDocumentor\Reflection\DocBlock\Tags\Method;
 /**
  * Method obtained by parsing the "method" annotation
  */
-final class DynamicMethodEntity implements MethodEntityInterface
+class DynamicMethodEntity implements MethodEntityInterface
 {
     private function __construct(
         private ConfigurationInterface $configuration,
@@ -28,17 +28,17 @@ final class DynamicMethodEntity implements MethodEntityInterface
         Method      $annotationMethod
     ): DynamicMethodEntity
     {
-        $dynamicMethodEntity = new DynamicMethodEntity($classEntity->getConfiguration(), $classEntity, $annotationMethod);
+        $dynamicMethodEntity = new static($classEntity->getConfiguration(), $classEntity, $annotationMethod);
         $dynamicMethodEntity->getCallMethod();
         return $dynamicMethodEntity;
     }
 
-    public function getName(): string
+    #[Cache\CacheableMethod] public function getName(): string
     {
         return $this->annotationMethod->getMethodName();
     }
 
-    public function isStatic(): bool
+    #[Cache\CacheableMethod] public function isStatic(): bool
     {
         return $this->annotationMethod->isStatic();
     }
@@ -56,7 +56,7 @@ final class DynamicMethodEntity implements MethodEntityInterface
         return $callMethod;
     }
 
-    public function getFileName(): ?string
+    #[Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getImplementingReflectionClass()->getFileName();
         if (!$fullFileName || !str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
@@ -70,13 +70,13 @@ final class DynamicMethodEntity implements MethodEntityInterface
         );
     }
 
-    public function getLine(): int
+    #[Cache\CacheableMethod] public function getLine(): int
     {
         $callMethod = $this->getCallMethod();
         return $callMethod->getStartLine();
     }
 
-    public function getModifiersString(): string
+    #[Cache\CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
         $modifiersString[] = 'public';
@@ -87,7 +87,7 @@ final class DynamicMethodEntity implements MethodEntityInterface
         return implode(' ', $modifiersString);
     }
 
-    public function getReturnType(): string
+    #[Cache\CacheableMethod] public function getReturnType(): string
     {
         $returnType = (string)$this->annotationMethod->getReturnType();
         $returnType = ltrim($returnType, '\\');
@@ -105,7 +105,7 @@ final class DynamicMethodEntity implements MethodEntityInterface
         return $returnType;
     }
 
-    public function getParameters(): array
+    #[Cache\CacheableMethod] public function getParameters(): array
     {
         $parameters = [];
         if ($this->annotationMethod->getArguments()) {
@@ -122,7 +122,7 @@ final class DynamicMethodEntity implements MethodEntityInterface
         return $parameters;
     }
 
-    public function getParametersString(): string
+    #[Cache\CacheableMethod] public function getParametersString(): string
     {
         $parameters = [];
         foreach ($this->getParameters() as $parameterData) {
@@ -138,17 +138,17 @@ final class DynamicMethodEntity implements MethodEntityInterface
         return $callMethod->getImplementingClass();
     }
 
-    public function getImplementingClassName(): string
+    #[Cache\CacheableMethod] public function getImplementingClassName(): string
     {
         return $this->getImplementingReflectionClass()->getName();
     }
 
-    public function getDescription(): string
+    #[Cache\CacheableMethod] public function getDescription(): string
     {
         return (string)$this->annotationMethod->getDescription();
     }
 
-    public function isInitialization(): bool
+    #[Cache\CacheableMethod] public function isInitialization(): bool
     {
         $initializationReturnTypes = [
             'self',
