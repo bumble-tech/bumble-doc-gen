@@ -13,10 +13,10 @@ final class PropertyEntityCollection extends BaseEntityCollection
         $propertyEntityCollection = new PropertyEntityCollection();
 
         $propertyEntityClassName = CacheableEntityWrapper::createForPropertyEntity();
-        foreach ($classEntity->getPropertiesData() as $propertyData) {
+        foreach ($classEntity->getPropertiesData() as $name => $propertyData) {
             $propertyEntity = $propertyEntityClassName::create(
                 $classEntity,
-                $propertyData['name'],
+                $name,
                 $propertyData['declaringClass'],
                 $propertyData['implementingClass']
             );

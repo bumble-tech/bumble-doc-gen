@@ -17,10 +17,10 @@ final class MethodEntityCollection extends BaseEntityCollection
         $configuration = $classEntity->getConfiguration();
 
         $methodEntityClassName = CacheableEntityWrapper::createForMethodEntity();
-        foreach ($classEntity->getMethodsData() as $methodData) {
+        foreach ($classEntity->getMethodsData() as $name => $methodData) {
             $methodEntity = $methodEntityClassName::create(
                 $classEntity,
-                $methodData['name'],
+                $name,
                 $methodData['declaringClass'],
                 $methodData['implementingClass']
             );

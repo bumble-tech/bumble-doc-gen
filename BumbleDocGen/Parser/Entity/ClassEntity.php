@@ -342,8 +342,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $methods = [];
         foreach ($this->getReflection()->getMethods() as $method) {
-            $methods[] = [
-                'name' => $method->getName(),
+            $name = $method->getName();
+            $methods[$name] = [
                 'declaringClass' => $method->getDeclaringClass()->getName(),
                 'implementingClass' => $method->getImplementingClass()->getName()
             ];
@@ -355,8 +355,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $properties = [];
         foreach ($this->getReflection()->getProperties() as $property) {
-            $properties[] = [
-                'name' => $property->getName(),
+            $name = $property->getName();
+            $properties[$name] = [
                 'declaringClass' => $property->getDeclaringClass()->getName(),
                 'implementingClass' => $property->getImplementingClass()->getName()
             ];
@@ -368,12 +368,22 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $constants = [];
         foreach ($this->getReflection()->getReflectionConstants() as $constant) {
-            $constants[] = [
-                'name' => $constant->getName(),
+            $name = $constant->getName();
+            $constants[$name] = [
                 'declaringClass' => $constant->getDeclaringClass()->getName(),
                 'implementingClass' => $constant->getDeclaringClass()->getName()
             ];
         }
         return $constants;
+    }
+
+    #[Cache\CacheableMethod] public function isInstantiable(): bool
+    {
+        return $this->getReflection()->isInstantiable();
+    }
+
+    #[Cache\CacheableMethod] public function isInterface(): bool
+    {
+        return $this->getReflection()->isInterface();
     }
 }

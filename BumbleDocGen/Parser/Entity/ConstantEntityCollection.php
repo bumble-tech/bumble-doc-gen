@@ -15,10 +15,10 @@ final class ConstantEntityCollection extends BaseEntityCollection
         $constantEntityCollection = new ConstantEntityCollection();
 
         $constantEntityClassName = CacheableEntityWrapper::createForConstantEntity();
-        foreach ($classEntity->getConstantsData() as $constantData) {
+        foreach ($classEntity->getConstantsData() as $name => $constantData) {
             $constantEntity = $constantEntityClassName::create(
                 $classEntity,
-                $constantData['name'],
+                $name,
                 $constantData['declaringClass'],
                 $constantData['implementingClass']
             );

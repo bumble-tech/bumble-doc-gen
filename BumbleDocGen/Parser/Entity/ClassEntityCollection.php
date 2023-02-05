@@ -163,7 +163,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
-            if ($classEntity->getReflection()->isInstantiable()) {
+            if ($classEntity->isInstantiable()) {
                 $classEntityCollection->addWithoutPreparation($classEntity);
             }
         }
@@ -177,7 +177,7 @@ final class ClassEntityCollection extends BaseEntityCollection
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
-            if ($classEntity->getReflection()->isInterface()) {
+            if ($classEntity->isInterface()) {
                 $classEntityCollection->addWithoutPreparation($classEntity);
             }
         }
