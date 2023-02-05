@@ -107,7 +107,8 @@ final class CacheableEntityWrapper
 
                         $newMethod->setBody('
                             static $cache = [];
-                            $cacheKey = \'' . $cacheKey . '\' . str_replace(["\\\\", ":"], "_", $this->getObjectId());
+                            $funcArgs = func_get_args();
+                            $cacheKey = \'' . $cacheKey . '\' . md5(json_encode($funcArgs)) . str_replace(["\\\\", ":"], "_", $this->getObjectId());
                             if(!isset($cache[$cacheKey])){
                                 $cacheItemPool = $this->configuration->getEntityCacheItemPool();
                                 
@@ -125,7 +126,7 @@ final class CacheableEntityWrapper
                                 ) {
                                     $result = $cacheItem->get();
                                 } else {
-                                    $result = parent::' . $method->getName() . '(...func_get_args());
+                                    $result = parent::' . $method->getName() . '(...$funcArgs);
                                     $cacheItem->set($result);
                                     $cacheItemPool->save($cacheItem);
                                     \BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper::getAndCacheEntityDependencies($classEntity, true);
