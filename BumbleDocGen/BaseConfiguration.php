@@ -45,7 +45,8 @@ abstract class BaseConfiguration implements ConfigurationInterface
 
     public function classConstantEntityFilterCondition(
         ConstantEntity $constantEntity
-    ): ConditionInterface {
+    ): ConditionInterface
+    {
         return new ClassConstantVisibilityCondition(
             $constantEntity, VisibilityConditionModifier::PUBLIC
         );
@@ -53,7 +54,8 @@ abstract class BaseConfiguration implements ConfigurationInterface
 
     public function methodEntityFilterCondition(
         MethodEntity $methodEntity
-    ): ConditionInterface {
+    ): ConditionInterface
+    {
         return ConditionGroup::create(
             ConditionGroupTypeEnum::AND,
             new MethodVisibilityCondition(
@@ -67,7 +69,8 @@ abstract class BaseConfiguration implements ConfigurationInterface
 
     public function propertyEntityFilterCondition(
         PropertyEntity $propertyEntity
-    ): ConditionInterface {
+    ): ConditionInterface
+    {
         return new PropertyVisibilityCondition(
             $propertyEntity, VisibilityConditionModifier::PUBLIC
         );
@@ -125,5 +128,10 @@ abstract class BaseConfiguration implements ConfigurationInterface
     public function getSourceLocatorCacheItemPool(): CacheItemPoolInterface
     {
         return $this->getCacheItemPool('sourceLocator');
+    }
+
+    public function getEntityCacheItemPool(): CacheItemPoolInterface
+    {
+        return $this->getCacheItemPool('entity');
     }
 }
