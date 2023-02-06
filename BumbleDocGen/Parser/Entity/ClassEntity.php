@@ -373,7 +373,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     #[Cache\CacheableMethod] public function isSubclassOf(string $className): bool
     {
-        $className = ltrim('\\', str_replace('\\\\','\\', $className));
+        $className = ltrim(str_replace('\\\\','\\', $className), '\\');
 
         $parentClassNames = $this->getParentClassNames();
         $interfacesNames = $this->getInterfaces();
