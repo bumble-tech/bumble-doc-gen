@@ -84,37 +84,22 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] final public function getDocBlock(): DocBlock
     {
-        static $docBlocks = [];
-        $objectId = $this->getObjectId();
-        if (!isset($docBlocks[$objectId])) {
-            $docBlockFactory = $this->attributeParser->getDocBlockFactory();
-            $docBlocks[$objectId] = $docBlockFactory->create($this->getDocCommentRecursive() ?: ' ');
-        }
-        return $docBlocks[$objectId];
+        $docBlockFactory = $this->attributeParser->getDocBlockFactory();
+        return $docBlockFactory->create($this->getDocCommentRecursive() ?: ' ');
     }
 
     #[Cache\CacheableMethod] public function isInternal(): bool
     {
-        static $isInternalCache = [];
-        $objectId = $this->getObjectId();
-        if (!isset($isInternalCache[$objectId])) {
-            $docBlock = $this->getDocBlock();
-            $internalBlock = $docBlock->getTagsByName('internal')[0] ?? null;
-            $isInternalCache[$objectId] = (bool)$internalBlock;
-        }
-        return $isInternalCache[$objectId];
+        $docBlock = $this->getDocBlock();
+        $internalBlock = $docBlock->getTagsByName('internal')[0] ?? null;
+        return (bool)$internalBlock;
     }
 
     #[Cache\CacheableMethod] public function isDeprecated(): bool
     {
-        static $isDeprecatedCache = [];
-        $objectId = $this->getObjectId();
-        if (!isset($isDeprecatedCache[$objectId])) {
-            $docBlock = $this->getDocBlock();
-            $internalBlock = $docBlock->getTagsByName('deprecated')[0] ?? null;
-            $isDeprecatedCache[$objectId] = (bool)$internalBlock;
-        }
-        return $isDeprecatedCache[$objectId];
+        $docBlock = $this->getDocBlock();
+        $internalBlock = $docBlock->getTagsByName('deprecated')[0] ?? null;
+        return (bool)$internalBlock;
     }
 
     #[Cache\CacheableMethod] public function hasDescriptionLinks(): bool
@@ -307,21 +292,16 @@ abstract class BaseEntity
      */
     #[Cache\CacheableMethod] public function getExamples(): array
     {
-        static $examplesCache = [];
-        $objectId = $this->getObjectId();
-        if (!isset($examplesCache[$objectId])) {
-            $examples = [];
-            $docBlock = $this->getDocBlock();
-            foreach ($docBlock->getTagsByName('example') as $example) {
-                try {
-                    $examples[] = ['example' => (string)$example];
-                } catch (\Exception $e) {
-                    $this->logger->error($e->getMessage());
-                }
+        $examples = [];
+        $docBlock = $this->getDocBlock();
+        foreach ($docBlock->getTagsByName('example') as $example) {
+            try {
+                $examples[] = ['example' => (string)$example];
+            } catch (\Exception $e) {
+                $this->logger->error($e->getMessage());
             }
-            $examplesCache[$objectId] = $examples;
         }
-        return $examplesCache[$objectId];
+        return $examples;
     }
 
     #[Cache\CacheableMethod] public function getFirstExample(): string
@@ -332,12 +312,7 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] public function getDocNote(): string
     {
-        static $docNoteCache = [];
-        $objectId = $this->getObjectId();
-        if (!isset($docNoteCache[$objectId])) {
-            $docBlock = $this->getDocBlock();
-            $docNoteCache[$objectId] = (string)($docBlock->getTagsByName('note')[0] ?? '');
-        }
-        return $docNoteCache[$objectId];
+        $docBlock = $this->getDocBlock();
+        return (string)($docBlock->getTagsByName('note')[0] ?? '');
     }
 }
