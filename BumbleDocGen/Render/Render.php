@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
@@ -143,5 +144,6 @@ final class Render
             file_put_contents($filePatch, $content);
             $logger->info("Saving `{$filePatch}`");
         }
+        $this->classEntityCollection->updateEntitiesCache();
     }
 }
