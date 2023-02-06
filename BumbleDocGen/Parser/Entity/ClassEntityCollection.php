@@ -76,6 +76,7 @@ final class ClassEntityCollection extends BaseEntityCollection
 
     public function get(string $objectId): ?ClassEntity
     {
+        $objectId = ltrim(str_replace('\\\\', '\\', $objectId), '\\');
         return $this->entities[$objectId] ?? null;
     }
 
