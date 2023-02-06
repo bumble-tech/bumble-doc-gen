@@ -113,14 +113,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     #[Cache\CacheableMethod] protected function getDocCommentRecursive(): string
     {
-        static $docCommentsCache = [];
-        $objectId = $this->getObjectId();
-        if (!isset($docCommentsCache[$objectId])) {
-            $reflectionClass = $this->getDocCommentReflectionRecursive();
-            $docCommentsCache[$objectId] = $reflectionClass->getDocComment() ?: ' ';
-        }
-
-        return $docCommentsCache[$objectId];
+        $reflectionClass = $this->getDocCommentReflectionRecursive();
+        return $reflectionClass->getDocComment() ?: ' ';
     }
 
     public function loadPluginData(string $pluginKey, array $data): void
@@ -211,28 +205,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     #[Cache\CacheableMethod] public function getExtends(): ?string
     {
-        static $extends = [];
-        $objectId = $this->getObjectId();
-        if (!isset($extends[$objectId])) {
-            $reflection = $this->getReflection();
-            if ($reflection->isInterface()) {
-                $extends[$objectId] = $reflection->getInterfaceNames()[0] ?? null;
-            } else {
-                $extends[$objectId] = $reflection->getParentClass()?->getName();
-            }
+        $reflection = $this->getReflection();
+        if ($reflection->isInterface()) {
+            return $reflection->getInterfaceNames()[0] ?? null;
         }
-        return $extends[$objectId];
+        return $reflection->getParentClass()?->getName();
     }
 
     #[Cache\CacheableMethod] public function getInterfaces(): array
     {
-        static $interfaces = [];
-        $objectId = $this->getObjectId();
-        if (!isset($interfaces[$objectId])) {
-            $reflection = $this->getReflection();
-            $interfaces[$objectId] = !$reflection->isInterface() ? $reflection->getInterfaceNames() : [];
-        }
-        return $interfaces[$objectId];
+        $reflection = $this->getReflection();
+        return !$reflection->isInterface() ? $reflection->getInterfaceNames() : [];
     }
 
     /**
@@ -240,17 +223,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     #[Cache\CacheableMethod] public function getParentClassNames(): array
     {
-        static $parentClassNames = [];
-        $objectId = $this->getObjectId();
-        if (!isset($parentClassNames[$objectId])) {
-            $reflection = $this->getReflection();
-            if ($reflection->isInterface()) {
-                $parentClassNames[$objectId] = $reflection->getInterfaceNames();
-            } else {
-                $parentClassNames[$objectId] = $reflection->getParentClassNames();
-            }
+        $reflection = $this->getReflection();
+        if ($reflection->isInterface()) {
+            return $reflection->getInterfaceNames();
         }
-        return $parentClassNames[$objectId];
+        return $reflection->getParentClassNames();
     }
 
     #[Cache\CacheableMethod] public function getInterfacesString(): string
@@ -260,12 +237,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     #[Cache\CacheableMethod] public function getTraitsNames(): array
     {
-        static $traits = [];
-        $objectId = $this->getObjectId();
-        if (!isset($traits[$objectId])) {
-            $traits[$objectId] = $this->getReflection()->getTraitNames();
-        }
-        return $traits[$objectId];
+        return $this->getReflection()->getTraitNames();
     }
 
     #[Cache\CacheableMethod] public function hasTraits(): bool
