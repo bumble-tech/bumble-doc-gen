@@ -49,6 +49,7 @@ final class CacheableEntityWrapperFactory
 
                         $cacheKey = "{$wrapperName}_{$method->getName()}";
 
+                        $expiresAfter = time() + $cacheableMethodAttr->newInstance()->getCacheSeconds();
                         $newMethod->setBody('
                             $funcArgs = func_get_args();
                             $cacheKey = \'' . $cacheKey . '\' . md5(json_encode($funcArgs)) . $this->getObjectId();
@@ -58,7 +59,8 @@ final class CacheableEntityWrapperFactory
                             if(!is_array($result) || !array_key_exists($internalDataKey, $result) || $this->entityCacheIsOutdated()) {
                                 $methodReturnValue = parent::' . $method->getName() . '(...$funcArgs);
                                 $result = [
-                                    $internalDataKey => $methodReturnValue
+                                    $internalDataKey => $methodReturnValue,
+                                    "__expires_after__" => ' . $expiresAfter . '
                                 ];
                                 $this->addValueToCache($cacheKey, $result);
                             }

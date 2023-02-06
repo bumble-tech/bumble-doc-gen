@@ -12,4 +12,9 @@ class CacheableMethod
     public function __construct(public int $cacheSeconds = 604800)
     {
     }
+
+    public function getCacheSeconds(): int
+    {
+        return $this->cacheSeconds;
+    }
 }

@@ -111,6 +111,12 @@ trait CacheableEntityWrapperTrait
                 !$this->entityCacheIsOutdated()
             ) {
                 $cacheValues = $cacheItemPool->getItem($cacheKey)->get();
+                $time = time();
+                foreach ($cacheValues as $key => $cacheValue) {
+                    if (isset($cacheValue['__expires_after__']) && $cacheValue['__expires_after__'] < $time) {
+                        unset($cacheValues[$key]);
+                    }
+                }
             }
             EntityCacheStorageHelper::setCacheValues($cacheKey, $cacheValues);
         }

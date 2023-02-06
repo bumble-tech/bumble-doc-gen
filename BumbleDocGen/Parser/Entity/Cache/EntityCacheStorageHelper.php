@@ -46,6 +46,7 @@ final class EntityCacheStorageHelper
         foreach (EntityCacheStorageHelper::getAllCacheValues() as $cacheKey => $cacheData) {
             $cacheItem = $cacheItemPool->getItem($cacheKey);
             $cacheItem->set($cacheData);
+            $cacheItem->expiresAfter(604800);
             $cacheItemPool->saveDeferred($cacheItem);
         }
         $cacheItemPool->commit();
