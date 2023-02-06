@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Twig\Function;
 
 use BumbleDocGen\Parser\AttributeParser;
-use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
@@ -71,8 +71,8 @@ final class GetDocumentedClassUrl
                         $attributeParser = new AttributeParser(
                             $reflector, $this->context->getClassEntityCollection()->getLogger()
                         );
-                        $classEntityClassName = CacheableEntityWrapper::createForClassEntity();
-                        $classEntity = $classEntityClassName::createByReflection(
+
+                        $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
                             $this->context->getConfiguration(),
                             $reflector,
                             $reflectionClass,

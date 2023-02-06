@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity\Cache;
 
+use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Parser\AttributeParser;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\Entity\ConstantEntity;
 use BumbleDocGen\Parser\Entity\MethodEntity;
 use BumbleDocGen\Parser\Entity\PropertyEntity;
 use Nette\PhpGenerator\Parameter;
+use Roave\BetterReflection\Reflection\ReflectionClass;
+use Roave\BetterReflection\Reflector\Reflector;
 
-final class CacheableEntityWrapper
+final class CacheableEntityWrapperFactory
 {
     private static function createForEntity(string $className, string $wrapperName): string
     {
@@ -70,23 +74,95 @@ final class CacheableEntityWrapper
         return $entityWrapperClassNames[$wrapperName];
     }
 
-    public static function createForPropertyEntity(): string
+    public static function createPropertyEntity(
+        ClassEntity $classEntity,
+        string      $propertyName,
+        string      $declaringClassName,
+        string      $implementingClassName,
+        bool        $reloadCache = false
+    ): PropertyEntity
     {
-        return self::createForEntity(PropertyEntity::class, 'PropertyEntityWrapper');
+        $wrapperClassName = self::createForEntity(PropertyEntity::class, 'PropertyEntityWrapper');
+        return $wrapperClassName::create(
+            $classEntity,
+            $propertyName,
+            $declaringClassName,
+            $implementingClassName,
+            $reloadCache
+        );
     }
 
-    public static function createForConstantEntity(): string
+    public static function createConstantEntity(
+        ClassEntity $classEntity,
+        string      $constantName,
+        string      $declaringClassName,
+        string      $implementingClassName,
+        bool        $reloadCache = false
+    ): ConstantEntity
     {
-        return self::createForEntity(ConstantEntity::class, 'ConstantEntityWrapper');
+        $wrapperClassName = self::createForEntity(ConstantEntity::class, 'ConstantEntityWrapper');
+        return $wrapperClassName::create(
+            $classEntity,
+            $constantName,
+            $declaringClassName,
+            $implementingClassName,
+            $reloadCache
+        );
     }
 
-    public static function createForMethodEntity(): string
+    public static function createMethodEntity(
+        ClassEntity $classEntity,
+        string      $methodName,
+        string      $declaringClassName,
+        string      $implementingClassName,
+        bool        $reloadCache = false
+    ): MethodEntity
     {
-        return self::createForEntity(MethodEntity::class, 'MethodEntityWrapper');
+        $wrapperClassName = self::createForEntity(MethodEntity::class, 'MethodEntityWrapper');
+        return $wrapperClassName::create(
+            $classEntity,
+            $methodName,
+            $declaringClassName,
+            $implementingClassName,
+            $reloadCache
+        );
     }
 
-    public static function createForClassEntity(): string
+    public static function createClassEntity(
+        ConfigurationInterface $configuration,
+        Reflector              $reflector,
+        string                 $className,
+        string                 $relativeFileName,
+        AttributeParser        $attributeParser,
+        bool                   $reloadCache = false
+    ): ClassEntity
     {
-        return self::createForEntity(ClassEntity::class, 'ClassEntityWrapper');
+        $wrapperClassName = self::createForEntity(ClassEntity::class, 'ClassEntityWrapper');
+        return $wrapperClassName::create(
+            $configuration,
+            $reflector,
+            $className,
+            $relativeFileName,
+            $attributeParser,
+            $reloadCache
+        );
+    }
+
+    public static function createClassEntityByReflection(
+        ConfigurationInterface $configuration,
+        Reflector              $reflector,
+        ReflectionClass        $reflectionClass,
+        AttributeParser        $attributeParser,
+        bool                   $reloadCache = false
+    ): ClassEntity
+    {
+        $wrapperClassName = self::createForEntity(ClassEntity::class, 'ClassEntityWrapper');
+        return $wrapperClassName::createByReflection(
+            $configuration,
+            $reflector,
+            $reflectionClass,
+            $attributeParser,
+            $reloadCache
+        );
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
-use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 
 /**
  * @implements \IteratorAggregate<int, MethodEntity>
@@ -16,9 +16,8 @@ final class MethodEntityCollection extends BaseEntityCollection
         $methodEntityCollection = new MethodEntityCollection();
         $configuration = $classEntity->getConfiguration();
 
-        $methodEntityClassName = CacheableEntityWrapper::createForMethodEntity();
         foreach ($classEntity->getMethodsData() as $name => $methodData) {
-            $methodEntity = $methodEntityClassName::create(
+            $methodEntity = CacheableEntityWrapperFactory::createMethodEntity(
                 $classEntity,
                 $name,
                 $methodData['declaringClass'],

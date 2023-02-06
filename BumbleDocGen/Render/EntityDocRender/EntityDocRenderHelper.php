@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\EntityDocRender;
 
 use BumbleDocGen\Parser\AttributeParser;
-use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
@@ -86,8 +86,8 @@ final class EntityDocRenderHelper
             $attributeParser = new AttributeParser(
                 $reflector, $context->getClassEntityCollection()->getLogger()
             );
-            $classEntityClassName = CacheableEntityWrapper::createForClassEntity();
-            $entity = $classEntityClassName::createByReflection(
+
+            $entity = CacheableEntityWrapperFactory::createClassEntityByReflection(
                 $context->getConfiguration(),
                 $reflector,
                 $reflectionClass,
