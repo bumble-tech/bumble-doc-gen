@@ -380,4 +380,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
         return in_array($className, array_merge($parentClassNames, $interfacesNames));
     }
+
+    #[Cache\CacheableMethod] public function getConstant(string $name): string|array|int|bool|null|float
+    {
+        return $this->getReflection()->getConstant($name);
+    }
 }
