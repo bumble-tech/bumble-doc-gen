@@ -30,6 +30,11 @@ abstract class BaseEntity
         $this->logger = $this->configuration->getLogger();
     }
 
+    public function getConfiguration(): ConfigurationInterface
+    {
+        return $this->configuration;
+    }
+
     abstract public function getReflection(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
 
     abstract public function getImplementingReflectionClass(): ReflectionClass;
@@ -55,8 +60,8 @@ abstract class BaseEntity
 
     public function getObjectId(): string
     {
-        if (method_exists($this, 'getImplementingClassName')) {
-            return "{$this->getImplementingClassName()}:{$this->getName()}";
+        if (method_exists($this, 'getClassEntity')) {
+            return "{$this->getClassEntity()->getName()}:{$this->getName()}";
         }
         return $this->getName();
     }

@@ -86,11 +86,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->reflector;
     }
 
-    public function getConfiguration(): ConfigurationInterface
-    {
-        return $this->configuration;
-    }
-
     protected function getDocCommentReflectionRecursive(): ReflectionClass
     {
         static $docCommentsReflectionCache = [];

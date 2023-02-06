@@ -33,7 +33,7 @@ class PropertyEntity extends BaseEntity
     ): PropertyEntity
     {
         static $classEntities = [];
-        $objectId = "{$implementingClassName}:{$propertyName}";
+        $objectId = "{$classEntity->getName()}:{$propertyName}";
         if (!isset($classEntities[$objectId]) || $reloadCache) {
             $classEntities[$objectId] = new static(
                 $classEntity, $propertyName, $declaringClassName, $implementingClassName

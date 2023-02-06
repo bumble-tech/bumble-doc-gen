@@ -33,7 +33,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     ): MethodEntity
     {
         static $entities = [];
-        $objectId = "{$implementingClassName}:{$methodName}";
+        $objectId = "{$classEntity->getName()}:{$methodName}";
         if (!isset($entities[$objectId]) || $reloadCache) {
             $entities[$objectId] = new static(
                 $classEntity, $methodName, $declaringClassName, $implementingClassName
@@ -256,7 +256,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     #[Cache\CacheableMethod] public function isImplementedInParentClass(): bool
     {
-        return $this->getImplementingClassName() !== $this->classEntity->getReflection()->getName();
+        return $this->getImplementingClassName() !== $this->classEntity->getName();
     }
 
     public function getImplementingClassName(): string

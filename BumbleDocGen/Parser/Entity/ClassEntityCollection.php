@@ -7,6 +7,8 @@ namespace BumbleDocGen\Parser\Entity;
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
 use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperInterface;
+use BumbleDocGen\Parser\Entity\Cache\EntityCacheStorageHelper;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\Plugin\Event\Parser\OnAddClassEntityToCollection;
@@ -43,7 +45,7 @@ final class ClassEntityCollection extends BaseEntityCollection
                 $classEntity = $classEntityClassName::create(
                     $configuration,
                     $reflector,
-                    ltrim($className,'\\'),
+                    ltrim($className, '\\'),
                     $relativeFileName,
                     $attributeParser
                 );
@@ -182,5 +184,18 @@ final class ClassEntityCollection extends BaseEntityCollection
             }
         }
         return $classEntityCollection;
+    }
+
+    public function updateEntitiesCache(): void
+    {
+        foreach ($this as $classEntity) {
+            if (
+                is_a($classEntity, CacheableEntityWrapperInterface::class) &&
+                $classEntity->entityCacheIsOutdated()
+            ) {
+                $classEntity->reloadEntityDependenciesCache();
+            }
+        }
+        EntityCacheStorageHelper::saveCache($this->configuration);
     }
 }

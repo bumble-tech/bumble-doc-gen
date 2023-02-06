@@ -33,7 +33,7 @@ class ConstantEntity extends BaseEntity
     ): ConstantEntity
     {
         static $classEntities = [];
-        $objectId = "{$implementingClassName}:{$constantName}";
+        $objectId = "{$classEntity->getName()}:{$constantName}";
         if (!isset($classEntities[$objectId]) || $reloadCache) {
             $classEntities[$objectId] = new static(
                 $classEntity, $constantName, $declaringClassName, $implementingClassName
