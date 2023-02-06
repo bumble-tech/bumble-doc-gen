@@ -315,4 +315,9 @@ abstract class BaseEntity
         $docBlock = $this->getDocBlock();
         return (string)($docBlock->getTagsByName('note')[0] ?? '');
     }
+
+    #[Cache\CacheableMethod] public function getDocComment(): string
+    {
+        return $this->getReflection()->getDocComment();
+    }
 }
