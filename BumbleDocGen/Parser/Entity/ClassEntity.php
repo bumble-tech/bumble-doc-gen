@@ -129,6 +129,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getReflection(): ReflectionClass
     {
+        $this->getConfiguration()->getLogger()->error(1);
+
         if (!$this->reflectionClass) {
             $this->reflectionClass = $this->reflector->reflectClass($this->className);
         }
@@ -367,5 +369,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     #[Cache\CacheableMethod] public function hasConstant(string $constant): bool
     {
         return array_key_exists($constant, $this->getConstantsData());
+    }
+
+    #[Cache\CacheableMethod] public function isSubclassOf(string $className): bool
+    {
+        $className = ltrim('\\', str_replace('\\\\','\\', $className));
+
+        $parentClassNames = $this->getParentClassNames();
+        $interfacesNames = $this->getInterfaces();
+
+        return in_array($className, array_merge($parentClassNames, $interfacesNames));
     }
 }
