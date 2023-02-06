@@ -9,7 +9,7 @@ trait CacheableEntityWrapperTrait
 {
     abstract function getConfiguration(): ConfigurationInterface;
 
-    protected function getCurrentClassEntity(): ?ClassEntity
+    public function getCurrentClassEntity(): ?ClassEntity
     {
         $classEntity = null;
         if (method_exists($this, 'getClassEntity')) {
@@ -26,14 +26,16 @@ trait CacheableEntityWrapperTrait
 
         $classEntity = $this->getCurrentClassEntity();
         if ($classEntity) {
-            $parentClassNames = $classEntity->getReflection()->getParentClassNames();
-            $traitClassNames = $classEntity->getReflection()->getTraitNames();
-            $interfaceNames = $classEntity->getReflection()->getInterfaceNames();
+            $currentClassEntityReflection = $classEntity->getReflection();
+            $parentClassNames = $currentClassEntityReflection->getParentClassNames();
+            $traitClassNames = $currentClassEntityReflection->getTraitNames();
+            $interfaceNames = $currentClassEntityReflection->getInterfaceNames();
 
             $classNames = array_unique(array_merge($parentClassNames, $traitClassNames, $interfaceNames));
-            $classNames[] = $classEntity->getName();
-            foreach ($classNames as $className) {
-                $reflectionClass = $classEntity->getReflector()->reflectClass($className);
+
+            $reflections = array_map(fn($className) => $classEntity->getReflector()->reflectClass($className), $classNames);
+            $reflections[] = $currentClassEntityReflection;
+            foreach ($reflections as $reflectionClass) {
                 $fileName = $reflectionClass->getFileName();
                 if ($fileName) {
                     $relativeFileName = str_replace($classEntity->getConfiguration()->getProjectRoot(), '', $reflectionClass->getFileName());
