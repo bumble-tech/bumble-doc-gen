@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity\Cache;
 
-use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\Entity\ConstantEntity;
 use BumbleDocGen\Parser\Entity\MethodEntity;
@@ -49,13 +48,17 @@ final class CacheableEntityWrapper
                         $newMethod->setBody('
                             $funcArgs = func_get_args();
                             $cacheKey = \'' . $cacheKey . '\' . md5(json_encode($funcArgs)) . $this->getObjectId();
+                            $internalDataKey = "__data__";
                             
                             $result = $this->getCacheValue($cacheKey);
-                            if(is_null($result)) {
-                                $result = parent::' . $method->getName() . '(...$funcArgs);
+                            if(!is_array($result) || !array_key_exists($internalDataKey, $result) || $this->entityCacheIsOutdated()) {
+                                $methodReturnValue = parent::' . $method->getName() . '(...$funcArgs);
+                                $result = [
+                                    $internalDataKey => $methodReturnValue
+                                ];
                                 $this->addValueToCache($cacheKey, $result);
                             }
-                            return $result;
+                            return $result[$internalDataKey];
                         ');
                     }
                 }
