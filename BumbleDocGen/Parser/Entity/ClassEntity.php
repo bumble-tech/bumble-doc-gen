@@ -373,7 +373,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     #[Cache\CacheableMethod] public function isSubclassOf(string $className): bool
     {
-        $className = ltrim(str_replace('\\\\','\\', $className), '\\');
+        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
 
         $parentClassNames = $this->getParentClassNames();
         $interfacesNames = $this->getInterfaces();
@@ -384,5 +384,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     #[Cache\CacheableMethod] public function getConstant(string $name): string|array|int|bool|null|float
     {
         return $this->getReflection()->getConstant($name);
+    }
+
+    #[Cache\CacheableMethod] public function implementsInterface(string $interfaceName): bool
+    {
+        $interfaceName = ltrim(str_replace('\\\\', '\\', $interfaceName), '\\');
+        return in_array($interfaceName, $this->getInterfaces());
     }
 }
