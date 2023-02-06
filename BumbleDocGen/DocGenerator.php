@@ -24,8 +24,28 @@ final class DocGenerator
      */
     public static function generateDocumentation(ConfigurationInterface $configuration): void
     {
+        $start = microtime(true);
+        $memory = memory_get_usage();
+
         $pluginEventDispatcher = new PluginEventDispatcher($configuration);
         $classEntityCollection = ProjectParser::create($configuration, $pluginEventDispatcher)->parse();
         (new Render($configuration, $classEntityCollection, $pluginEventDispatcher))->run();
+
+        $logger = $configuration->getLogger();
+        $time = microtime(true) - $start;
+        $logger->notice("Time of execution: {$time} sec.");
+        $memory = memory_get_usage() - $memory;
+        $logger->notice('Memory:' . self::bitesToString($memory));
+    }
+
+    private static function bitesToString(int $bites): string
+    {
+        $i = 0;
+        while (floor($bites / 1024) > 0) {
+            $i++;
+            $bites /= 1024;
+        }
+        $name = ['bites', 'KB', 'MB'];
+        return round($bites, 2) . ' ' . $name[$i];
     }
 }
