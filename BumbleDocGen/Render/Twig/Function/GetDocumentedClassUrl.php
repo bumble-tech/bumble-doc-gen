@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Function;
 
+use BumbleDocGen\Parser\AttributeParser;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapper;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
-use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
-
-use function PHPUnit\Framework\matches;
 
 /**
  * Get the URL of a documented class by its name. If the class is found, next to the file where this method was called,
@@ -66,11 +65,25 @@ final class GetDocumentedClassUrl
                     $url = $urlCaches[$key];
                 } else {
                     $configuration = $this->context->getConfiguration();
-                    $reflection = $reflector->reflectClass($className);
-                    $url = $reflection->getFileName() ? str_replace(
+
+                    if(!$classEntity){
+                        $reflectionClass = $reflector->reflectClass($className);
+                        $attributeParser = new AttributeParser(
+                            $reflector, $this->context->getClassEntityCollection()->getLogger()
+                        );
+                        $classEntityClassName = CacheableEntityWrapper::createForClassEntity();
+                        $classEntity = $classEntityClassName::createByReflection(
+                            $this->context->getConfiguration(),
+                            $reflector,
+                            $reflectionClass,
+                            $attributeParser
+                        );
+                    }
+
+                    $url = $classEntity->getFileName() ? str_replace(
                         $configuration->getProjectRoot(),
                         '',
-                        $reflection->getFileName()
+                        $classEntity->getFileName()
                     ) : '';
 
                     if ($url && mb_strlen($cursor) > 2) {
@@ -78,9 +91,9 @@ final class GetDocumentedClassUrl
                         $cursor = ltrim($cursor, $firstLetter);
                         try {
                             $line = match ($firstLetter) {
-                                'm' => $reflection->getMethod($cursor)?->getStartLine(),
-                                'p' => $reflection->getProperty($cursor)?->getStartLine(),
-                                'q' => $reflection->getReflectionConstant($cursor)?->getStartLine(),
+                                'm' => $classEntity->getMethodEntityCollection()->get($cursor)?->getStartLine(),
+                                'p' => $classEntity->getPropertyEntityCollection()->get($cursor)?->getStartLine(),
+                                'q' => $classEntity->getConstantEntityCollection()->get($cursor)?->getStartLine(),
                                 default => 0,
                             };
                         } catch (\Exception) {
