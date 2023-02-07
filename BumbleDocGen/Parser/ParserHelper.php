@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser;
 
+use Nette\PhpGenerator\GlobalFunction;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 use Roave\BetterReflection\Reflector\Reflector;
@@ -125,11 +126,12 @@ final class ParserHelper
     }
 
     public static function parseFullClassName(
-        string $searchClassName,
-        Reflector $reflector,
+        string          $searchClassName,
+        Reflector       $reflector,
         ReflectionClass $reflectionClass,
-        bool $extended = true
-    ): string {
+        bool            $extended = true
+    ): string
+    {
         static $parsedFullClassNameCache = [];
         $classNameParts = explode('::', $searchClassName);
         $searchClassName = $classNameParts[0];
@@ -194,9 +196,13 @@ final class ParserHelper
         return null;
     }
 
-    public static function getMethodReturnValue(Reflector $reflector, ReflectionMethod $reflection): mixed
+    public static function getMethodReturnValue(
+        Reflector        $reflector,
+        ReflectionClass  $reflectionClass,
+        ReflectionMethod $reflectionMethod
+    ): mixed
     {
-        if (preg_match('/(return )([^;]+)/', $reflection->getBodyCode(), $matches)) {
+        if (preg_match('/(return )([^;]+)/', $reflectionMethod->getBodyCode(), $matches)) {
             if (
                 str_contains($matches[2], '::') && !str_contains($matches[2], '"') && !str_contains($matches[2], '\'')
             ) {
@@ -204,23 +210,62 @@ final class ParserHelper
                     $nextClass = null;
                     $parts = explode('::', $matches[2]);
                     if ($parts[0] === 'parent') {
-                        $nextClass = $reflection->getImplementingClass()->getParentClass();
+                        $nextClass = $reflectionMethod->getImplementingClass()->getParentClass();
                     } elseif ($parts[0] === 'self') {
-                        $nextClass = $reflection->getImplementingClass();
+                        $nextClass = $reflectionMethod->getImplementingClass();
                     } elseif (self::isClassLoaded($reflector, $parts[0])) {
                         $nextClass = $reflector->reflectClass($parts[0]);
                     }
 
-                    if ($nextClass && str_contains($parts[1], '(')) {
-                        $methodName = explode('(', $parts[1])[0];
-                        $nextReflection = $nextClass->getMethod($methodName);
-                        return self::getMethodReturnValue($reflector, $nextReflection);
+                    if ($nextClass) {
+                        if (str_contains($parts[1], '(')) {
+                            $methodName = explode('(', $parts[1])[0];
+                            $nextReflection = $nextClass->getMethod($methodName);
+                            return self::getMethodReturnValue($reflector, $reflectionClass, $nextReflection);
+                        } elseif (!preg_match('/([-+:\/ ])/', $parts[1])) {
+                            return $nextClass->getConstant($parts[1]);
+                        }
+                        $reflectionClass = $nextClass;
                     }
                 } catch (\Exception) {
                 }
             }
 
-            return str_replace(['\'', '"'], '', trim($matches[2]));
+            $value = preg_replace_callback(
+                '/([$]?)([a-zA-Z_\\\\]+)((::)|(->))([\s\S]([^ -+\-;])+)(([^)]?)+[)])?/',
+                function (array $matches) use ($reflector, $reflectionClass) {
+                    if ($matches[1]) {
+                        return $matches[0];
+                    }
+                    if (substr_count($matches[0], '->') > 1) {
+                        return $matches[0];
+                    }
+
+                    $nextClass = $reflectionClass;
+                    if (!in_array($matches[2], ['static', 'self', 'partner', 'this'])) {
+                        $nextClass = $reflector->reflectClass($matches[2]);
+                    }
+
+                    if (isset($matches[8])) {
+                        return self::getMethodReturnValue($reflector, $nextClass, $nextClass->getMethod($matches[6]));
+                    } else {
+                        return $nextClass->getConstant($matches[6]);
+                    }
+                },
+                trim($matches[2])
+            );
+
+            if ($value && !str_contains($value, '::') && !str_contains($value, '$this->')) {
+                try {
+                    $fName = 'x' . uniqid();
+                    $fn = new GlobalFunction($fName);
+                    $fn->setBody("return {$value};");
+                    eval((string)$fn);
+                    return $fName();
+                } catch (\Exception) {
+                }
+            }
+            return $value;
         }
         return null;
     }
