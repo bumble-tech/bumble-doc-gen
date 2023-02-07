@@ -19,6 +19,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     private array $pluginsData = [];
     private ?ReflectionClass $reflectionClass = null;
     private bool $relativeFileNameLoaded = false;
+    private bool $isClassLoad = false;
 
     protected function __construct(
         protected ConfigurationInterface $configuration,
@@ -83,6 +84,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $attributeParser
             );
             $classEntities[$objectId]->reflectionClass = $reflectionClass;
+            $classEntities[$objectId]->isClassLoad = true;
         }
         return $classEntities[$objectId];
     }
@@ -135,8 +137,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getReflection(): ReflectionClass
     {
-        $this->getConfiguration()->getLogger()->error(1);
-
         if (!$this->reflectionClass) {
             $this->reflectionClass = $this->reflector->reflectClass($this->className);
         }
@@ -163,7 +163,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function isClassLoad(): bool
     {
-        return ParserHelper::isClassLoaded($this->reflector, $this->getName());
+        if (!$this->isClassLoad) {
+            $this->isClassLoad = ParserHelper::isClassLoaded($this->reflector, $this->getName());
+        }
+        return $this->isClassLoad;
     }
 
     #[Cache\CacheableMethod] public function classDataCanBeLoaded(): bool
