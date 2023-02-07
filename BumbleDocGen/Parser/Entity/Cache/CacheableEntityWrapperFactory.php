@@ -168,6 +168,29 @@ final class CacheableEntityWrapperFactory
         );
     }
 
+    public static function createSubClassEntity(
+        string                 $subClassEntity,
+        ConfigurationInterface $configuration,
+        Reflector              $reflector,
+        string                 $className,
+        ?string                $relativeFileName,
+        AttributeParser        $attributeParser,
+        bool                   $reloadCache = false
+    ): ClassEntity
+    {
+        $classNameParts = explode('\\', $subClassEntity);
+        $subClassEntityName = end($classNameParts);
+        $wrapperClassName = self::createForEntity($subClassEntity, "{$subClassEntityName}Wrapper");
+        return $wrapperClassName::create(
+            $configuration,
+            $reflector,
+            $className,
+            $relativeFileName,
+            $attributeParser,
+            $reloadCache
+        );
+    }
+
     public static function createSubClassEntityByReflection(
         string                 $subClassEntity,
         ConfigurationInterface $configuration,
