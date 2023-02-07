@@ -111,7 +111,7 @@ class PropertyEntity extends BaseEntity
     #[Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getReflection()->getImplementingClass()->getFileName();
-        if (!str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
+        if (!$fullFileName) {
             return null;
         }
         return str_replace(
