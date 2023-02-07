@@ -6,6 +6,7 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
+use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
@@ -155,6 +156,19 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public function getName(): string
     {
         return $this->className;
+    }
+
+    /**
+     * @internal
+     */
+    public function isClassLoad(): bool
+    {
+        return ParserHelper::isClassLoaded($this->reflector, $this->getName());
+    }
+
+    #[Cache\CacheableMethod] public function classDataCanBeLoaded(): bool
+    {
+        return $this->isClassLoad();
     }
 
     #[Cache\CacheableMethod] public function getShortName(): string
