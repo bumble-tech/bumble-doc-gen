@@ -4,6 +4,7 @@ namespace BumbleDocGen\Parser\Entity\Cache;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\Parser\ParserHelper;
 
 trait CacheableEntityWrapperTrait
 {
@@ -82,8 +83,19 @@ trait CacheableEntityWrapperTrait
             if (!isset($filesCacheState[$className])) {
                 $projectRoot = $classEntity->getConfiguration()->getProjectRoot();
                 $filesCacheState[$className] = false;
+                if (!ParserHelper::isCorrectClassName($className)) {
+                    return false;
+                }
+
+                if (!$this->getEntityDependencies()) {
+                    $filesCacheState[$className] = true;
+                    $this->getConfiguration()->getLogger()->error("Unable to load {$className} class dependencies");
+                    return true;
+                }
+
                 foreach ($this->getEntityDependencies() as $relativeFileName => $hashFile) {
-                    if (md5_file("{$projectRoot}{$relativeFileName}") !== $hashFile) {
+                    $filePath = "{$projectRoot}{$relativeFileName}";
+                    if (!file_exists($filePath) || md5_file($filePath) !== $hashFile) {
                         $filesCacheState[$className] = true;
                         break;
                     }
