@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
+use BumbleDocGen\Parser\ParserHelper;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 
@@ -314,5 +315,14 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     #[Cache\CacheableMethod] public function getEndLine(): int
     {
         return $this->getReflection()->getEndLine();
+    }
+
+    #[Cache\CacheableMethod] public function getFirstReturnValue(): mixed
+    {
+        return ParserHelper::getMethodReturnValue(
+            $this->reflector,
+            $this->getClassEntity()->getReflection(),
+            $this->getReflection()
+        );
     }
 }
