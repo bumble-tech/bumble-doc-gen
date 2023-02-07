@@ -94,7 +94,7 @@ final class Render
                 $content = $twig->render($filePatch, [
                     'classEntityCollection' => $this->classEntityCollection,
                     'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
-                        $this->classEntityCollection->getReflector(),
+                        $this->classEntityCollection,
                         $filePatch
                     ),
                 ]);

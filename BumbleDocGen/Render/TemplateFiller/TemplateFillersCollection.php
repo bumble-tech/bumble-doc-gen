@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\TemplateFiller;
 
-use Roave\BetterReflection\Reflector\Reflector;
+use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 
 final class TemplateFillersCollection
 {
@@ -15,9 +15,10 @@ final class TemplateFillersCollection
      * Add a set of fillers for the template
      */
     public function setForTemplate(
-        string $templateName,
+        string                  $templateName,
         TemplateFillerInterface ...$templateFillers
-    ): TemplateFillersCollection {
+    ): TemplateFillersCollection
+    {
         $this->templateFillers[$templateName] = $templateFillers;
         return $this;
     }
@@ -25,11 +26,11 @@ final class TemplateFillersCollection
     /**
      * Get all parameters for a template, obtained using all its fillers
      */
-    public function getParametersForTemplate(Reflector $reflector, string $templateName): array
+    public function getParametersForTemplate(ClassEntityCollection $classEntityCollection, string $templateName): array
     {
         $parameters = [];
         foreach ($this->templateFillers[$templateName] ?? [] as $item) {
-            $parameters = array_merge($parameters, $item->getTemplateParameters($reflector, $templateName));
+            $parameters = array_merge($parameters, $item->getTemplateParameters($classEntityCollection, $templateName));
         }
         return $parameters;
     }
