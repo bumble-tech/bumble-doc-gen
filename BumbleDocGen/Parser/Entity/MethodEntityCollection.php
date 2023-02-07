@@ -11,9 +11,13 @@ use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
  */
 final class MethodEntityCollection extends BaseEntityCollection
 {
+    public function __construct(private ClassEntity $classEntity)
+    {
+    }
+
     public static function createByClassEntity(ClassEntity $classEntity): MethodEntityCollection
     {
-        $methodEntityCollection = new MethodEntityCollection();
+        $methodEntityCollection = new MethodEntityCollection($classEntity);
         $configuration = $classEntity->getConfiguration();
 
         foreach ($classEntity->getMethodsData() as $name => $methodData) {
@@ -62,9 +66,26 @@ final class MethodEntityCollection extends BaseEntityCollection
         return $this->entities[$key] ?? null;
     }
 
+    public function unsafeGet(string $key): ?MethodEntity
+    {
+        $methodEntity = $this->get($key);
+        if (!$methodEntity) {
+            $methodData = $this->classEntity->getMethodsData()[$key] ?? null;
+            if (is_array($methodData)) {
+                return CacheableEntityWrapperFactory::createMethodEntity(
+                    $this->classEntity,
+                    $key,
+                    $methodData['declaringClass'],
+                    $methodData['implementingClass']
+                );
+            }
+        }
+        return $methodEntity;
+    }
+
     public function getInitializations(): MethodEntityCollection
     {
-        $methodEntityCollection = new MethodEntityCollection();
+        $methodEntityCollection = new MethodEntityCollection($this->classEntity);
         foreach ($this as $methodEntity) {
             /**@var MethodEntity $methodEntity */
             if ($methodEntity->isInitialization()) {
@@ -76,7 +97,7 @@ final class MethodEntityCollection extends BaseEntityCollection
 
     public function getAllExceptInitializations(): MethodEntityCollection
     {
-        $methodEntityCollection = new MethodEntityCollection();
+        $methodEntityCollection = new MethodEntityCollection($this->classEntity);
         foreach ($this as $methodEntity) {
             /**@var MethodEntity $methodEntity */
             if (!$methodEntity->isInitialization()) {
