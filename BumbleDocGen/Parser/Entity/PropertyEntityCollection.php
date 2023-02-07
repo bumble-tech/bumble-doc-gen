@@ -8,9 +8,13 @@ use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 
 final class PropertyEntityCollection extends BaseEntityCollection
 {
+    public function __construct(private ClassEntity $classEntity)
+    {
+    }
+
     public static function createByClassEntity(ClassEntity $classEntity): PropertyEntityCollection
     {
-        $propertyEntityCollection = new PropertyEntityCollection();
+        $propertyEntityCollection = new PropertyEntityCollection($classEntity);
 
         foreach ($classEntity->getPropertiesData() as $name => $propertyData) {
             $propertyEntity = CacheableEntityWrapperFactory::createPropertyEntity(
@@ -40,5 +44,22 @@ final class PropertyEntityCollection extends BaseEntityCollection
     public function get(string $key): ?PropertyEntity
     {
         return $this->entities[$key] ?? null;
+    }
+
+    public function unsafeGet(string $key): ?PropertyEntity
+    {
+        $propertyEntity = $this->get($key);
+        if (!$propertyEntity) {
+            $propertyData = $this->classEntity->getPropertiesData()[$key] ?? null;
+            if (is_array($propertyData)) {
+                return CacheableEntityWrapperFactory::createPropertyEntity(
+                    $this->classEntity,
+                    $key,
+                    $propertyData['declaringClass'],
+                    $propertyData['implementingClass']
+                );
+            }
+        }
+        return $propertyEntity;
     }
 }
