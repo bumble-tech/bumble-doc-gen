@@ -200,4 +200,9 @@ class PropertyEntity extends BaseEntity
     {
         return $this->getReflection()->getEndLine();
     }
+
+    #[Cache\CacheableMethod] public function getDefaultValue(): string|array|int|bool|null|float
+    {
+        return $this->getReflection()->getDefaultValue();
+    }
 }
