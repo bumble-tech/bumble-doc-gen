@@ -232,7 +232,7 @@ final class ParserHelper
             }
 
             $value = preg_replace_callback(
-                '/([$]?)([a-zA-Z_\\\\]+)((::)|(->))([\s\S]([^ -+\-;])+)(([^)]?)+[)])?/',
+                '/([$]?)([a-zA-Z_\\\\]+)((::)|(->))([\s\S]([^ -+\-;\]])+)(([^)]?)+[)])?/',
                 function (array $matches) use ($reflector, $reflectionClass) {
                     if ($matches[1]) {
                         return $matches[0];
@@ -249,7 +249,8 @@ final class ParserHelper
                     if (isset($matches[8])) {
                         return self::getMethodReturnValue($reflector, $nextClass, $nextClass->getMethod($matches[6]));
                     } else {
-                        return $nextClass->getConstant($matches[6]);
+                        $constantValue = $nextClass->getConstant($matches[6]);
+                        return is_string($constantValue) ? "'{$constantValue}'" : $constantValue;
                     }
                 },
                 trim($matches[2])
@@ -259,6 +260,7 @@ final class ParserHelper
                 try {
                     $fName = 'x' . uniqid();
                     $fn = new GlobalFunction($fName);
+                    $value = str_replace(['(', ')'], '', $value);
                     $fn->setBody("return {$value};");
                     eval((string)$fn);
                     return $fName();
