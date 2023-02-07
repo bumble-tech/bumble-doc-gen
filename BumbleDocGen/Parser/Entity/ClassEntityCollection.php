@@ -102,11 +102,9 @@ final class ClassEntityCollection extends BaseEntityCollection
         return $classEntity;
     }
 
-    public function getEntityByClassName(string $className): ?ClassEntity
+    public function getEntityByClassName(string $className, bool $createIfNotExists = true): ?ClassEntity
     {
-        $reflection = $this->getReflector()->reflectClass($className);
-        $objectId = ClassEntity::generateObjectIdByReflection($reflection);
-        return $this->get($objectId);
+        return $createIfNotExists ? $this->getLoadedOrCreateNew($className) : $this->get($className);
     }
 
     public function getReflector(): Reflector
