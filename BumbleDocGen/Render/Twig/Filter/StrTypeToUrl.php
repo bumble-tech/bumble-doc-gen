@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Filter;
 
-use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 
@@ -41,20 +40,17 @@ final class StrTypeToUrl
         $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
 
         $preparedTypes = [];
-        $reflector = $this->context->getReflector();
-        $configuration = $this->context->getConfiguration();
         $types = explode('|', $text);
         foreach ($types as $type) {
-            if (ParserHelper::isClassLoaded($reflector, $type)) {
-                $reflectionOfLink = $reflector->reflectClass($type);
-                $fullFileName = $reflectionOfLink->getFileName();
-                if ($fullFileName && str_starts_with($fullFileName, $configuration->getProjectRoot())) {
+            $entityClassOfLink = $this->context->getClassEntityCollection()->getLoadedOrCreateNew($type);
+            if ($entityClassOfLink->classDataCanBeLoaded()) {
+                if ($entityClassOfLink->getAbsoluteFileName()) {
                     $link = $getDocumentedClassUrlFunction($type, '', $createDocument);
 
                     if ($useShortLinkVersion) {
-                        $type = $reflectionOfLink->getShortName();
+                        $type = $entityClassOfLink->getShortName();
                     } else {
-                        $type = $reflectionOfLink->getName();
+                        $type = $entityClassOfLink->getName();
                     }
 
                     if ($templateType == 'rst') {

@@ -48,14 +48,15 @@ final class GetDocumentedClassUrl
      */
     public function __invoke(string $className, string $cursor = '', bool $createDocument = true): string
     {
-        $reflector = $this->context->getReflector();
-        if (ParserHelper::isClassLoaded($reflector, $className)) {
-            $classEntity = $this->context->getClassEntityCollection()->getEntityByClassName($className);
-            if (!is_null($classEntity) && $createDocument) {
+        $classEntityCollection = $this->context->getClassEntityCollection();
+        $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
+        if ($classEntity->classDataCanBeLoaded()) {
+            if ($createDocument) {
                 $documentedClass = new DocumentedEntityWrapper(
                     $classEntity, $this->context->getCurrentTemplateFilePatch()
                 );
                 $this->context->getEntityWrappersCollection()->add($documentedClass);
+                $classEntityCollection->add($classEntity);
                 $url = $this->context->getConfiguration()->getOutputDirBaseUrl() . $documentedClass->getDocUrl();
             } else {
                 static $urlCaches = [];
@@ -64,28 +65,7 @@ final class GetDocumentedClassUrl
                 if (array_key_exists($key, $urlCaches)) {
                     $url = $urlCaches[$key];
                 } else {
-                    $configuration = $this->context->getConfiguration();
-
-                    if(!$classEntity){
-                        $reflectionClass = $reflector->reflectClass($className);
-                        $attributeParser = new AttributeParser(
-                            $reflector, $this->context->getClassEntityCollection()->getLogger()
-                        );
-
-                        $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
-                            $this->context->getConfiguration(),
-                            $reflector,
-                            $reflectionClass,
-                            $attributeParser
-                        );
-                    }
-
-                    $url = $classEntity->getFileName() ? str_replace(
-                        $configuration->getProjectRoot(),
-                        '',
-                        $classEntity->getFileName()
-                    ) : '';
-
+                    $url = $classEntity->getFileName();
                     if ($url && mb_strlen($cursor) > 2) {
                         $firstLetter = mb_substr($cursor, 0, 1);
                         $cursor = ltrim($cursor, $firstLetter);
