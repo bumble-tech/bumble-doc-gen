@@ -17,6 +17,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 {
     private array $pluginsData = [];
     private ?ReflectionClass $reflectionClass = null;
+    private bool $relativeFileNameLoaded = false;
 
     protected function __construct(
         protected ConfigurationInterface $configuration,
@@ -27,6 +28,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     )
     {
         parent::__construct($configuration, $reflector, $attributeParser);
+        if ($relativeFileName) {
+            $this->relativeFileNameLoaded = true;
+        }
     }
 
     public function getObjectId(): string
@@ -38,13 +42,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         string                 $className,
-        string                 $relativeFileName,
+        ?string                $relativeFileName,
         AttributeParser        $attributeParser,
         bool                   $reloadCache = false
     ): ClassEntity
     {
         static $classEntities = [];
-        $objectId = md5($relativeFileName);
+        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
+        $objectId = md5($className);
         if (!isset($classEntities[$objectId]) || $reloadCache) {
             $classEntities[$objectId] = new static(
                 $configuration,
@@ -129,6 +134,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getReflection(): ReflectionClass
     {
+        $this->getConfiguration()->getLogger()->error(1);
+
         if (!$this->reflectionClass) {
             $this->reflectionClass = $this->reflector->reflectClass($this->className);
         }
@@ -162,6 +169,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     #[Cache\CacheableMethod] public function getFileName(): ?string
     {
+        if (!$this->relativeFileNameLoaded) {
+            $this->relativeFileNameLoaded = true;
+            $this->relativeFileName = $this->getReflection()->getFileName();
+        }
         return $this->relativeFileName;
     }
 
@@ -296,8 +307,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getAbsoluteFileName(): ?string
     {
-
-        return $this->relativeFileName ? $this->configuration->getProjectRoot() . $this->relativeFileName : null;
+        $relativeFileName = $this->getFileName();
+        return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 
     public function getFileContent(): string

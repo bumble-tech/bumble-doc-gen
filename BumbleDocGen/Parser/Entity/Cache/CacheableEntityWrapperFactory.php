@@ -134,7 +134,7 @@ final class CacheableEntityWrapperFactory
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         string                 $className,
-        string                 $relativeFileName,
+        ?string                $relativeFileName,
         AttributeParser        $attributeParser,
         bool                   $reloadCache = false
     ): ClassEntity
@@ -169,7 +169,7 @@ final class CacheableEntityWrapperFactory
     }
 
     public static function createSubClassEntityByReflection(
-        string $subClassEntity,
+        string                 $subClassEntity,
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         ReflectionClass        $reflectionClass,
