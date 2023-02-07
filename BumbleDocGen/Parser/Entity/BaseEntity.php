@@ -137,6 +137,9 @@ abstract class BaseEntity
 
             $docCommentImplementingClass = $this->getDocCommentImplementingClass();
             foreach ($docBlock->getTagsByName('see') as $seeBlock) {
+                if (!method_exists($seeBlock, 'getReference')) {
+                    continue;
+                }
                 try {
                     $name = (string)$seeBlock->getReference();
                     $description = (string)$seeBlock->getDescription();
