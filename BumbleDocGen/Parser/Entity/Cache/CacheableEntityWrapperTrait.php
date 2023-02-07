@@ -25,7 +25,7 @@ trait CacheableEntityWrapperTrait
         $fileDependencies = [];
 
         $classEntity = $this->getCurrentClassEntity();
-        if ($classEntity) {
+        if ($classEntity && $classEntity->isClassLoad()) {
             $currentClassEntityReflection = $classEntity->getReflection();
             $parentClassNames = $currentClassEntityReflection->getParentClassNames();
             $traitClassNames = $currentClassEntityReflection->getTraitNames();
@@ -98,7 +98,7 @@ trait CacheableEntityWrapperTrait
     protected function getCacheKey(): string
     {
         $currentClassEntity = $this->getCurrentClassEntity();
-        return $currentClassEntity ? str_replace(["\\", ":"], "_", $this->getCurrentClassEntity()->getName()) : '';
+        return $currentClassEntity ? str_replace(["\\", ":", '\n', '/'], "_", $this->getCurrentClassEntity()->getName()) : '';
     }
 
     public function getCacheValues(): array
