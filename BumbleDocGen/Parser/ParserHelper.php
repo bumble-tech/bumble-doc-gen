@@ -57,7 +57,7 @@ final class ParserHelper
     private static function checkIsClassName(string $name): bool
     {
         if (
-            !(bool)preg_match(
+            !preg_match(
                 '/^(?=_*[A-z]+)[A-z0-9]+$/',
                 $name
             )
@@ -71,11 +71,17 @@ final class ParserHelper
         return mb_strtolower($chr, "UTF-8") != $chr;
     }
 
-    public static function isClassLoaded(Reflector $reflector, string $className): bool
+    public static function isCorrectClassName(string $className): bool
     {
         if (self::isBuiltInType($className) || in_array($className, self::getBuiltInClassNames())) {
             return false;
-        } elseif (self::checkIsClassName($className)) {
+        }
+        return self::checkIsClassName($className);
+    }
+
+    public static function isClassLoaded(Reflector $reflector, string $className): bool
+    {
+        if (self::isCorrectClassName($className)) {
             try {
                 $reflector->reflectClass($className);
                 return true;
