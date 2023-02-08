@@ -6,6 +6,7 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
+use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
@@ -123,7 +124,11 @@ abstract class BaseEntity
     /**
      * @return array<int,array{name:string, description:string|null, url:string|null}>
      */
-    #[Cache\CacheableMethod] public function getDescriptionLinks(?Context $context = null): array
+    #[Cache\CacheableMethod(
+        Cache\CacheableMethod::MONTH_SECONDS,
+        RenderContextCacheKeyGenerator::class
+    )]
+    public function getDescriptionLinks(?Context $context = null): array
     {
         static $linksCache = [];
         $objectId = $this->getObjectId() .
@@ -236,7 +241,11 @@ abstract class BaseEntity
     /**
      * @return array<int,array{name:string, description:string|null}>
      */
-    #[Cache\CacheableMethod] public function getThrows(?Context $context = null): array
+    #[Cache\CacheableMethod(
+        Cache\CacheableMethod::MONTH_SECONDS,
+        RenderContextCacheKeyGenerator::class
+    )]
+    public function getThrows(?Context $context = null): array
     {
         static $throwsCache = [];
         $objectId = $this->getObjectId() .
