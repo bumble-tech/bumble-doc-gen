@@ -270,6 +270,20 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $reflection->getParentClassNames();
     }
 
+    #[Cache\CacheableMethod] public function getParentClassName(): ?string
+    {
+        return $this->getReflection()->getParentClass()?->getName();
+    }
+
+    public function getParentClass(ClassEntityCollection $classEntityPool): ?ClassEntity
+    {
+        $parentClassName = $this->getParentClassName();
+        if (!$parentClassName) {
+            return null;
+        }
+        return $classEntityPool->getLoadedOrCreateNew($parentClassName);
+    }
+
     #[Cache\CacheableMethod] public function getInterfacesString(): string
     {
         return implode(', ', $this->getInterfaces());
