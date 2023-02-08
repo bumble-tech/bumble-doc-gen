@@ -91,13 +91,19 @@ final class ClassEntityCollection extends BaseEntityCollection
     {
         $classEntity = $this->get($objectId);
         if (!$classEntity) {
-            $classEntity = CacheableEntityWrapperFactory::createClassEntity(
-                $this->configuration,
-                $this->reflector,
-                ltrim($objectId, '\\'),
-                null,
-                $this->attributeParser
-            );
+            static $loadedUnsafe = [];
+            if (isset($loadUnsafe[$objectId])) {
+                $loadedUnsafe = $loadUnsafe[$objectId];
+            } else {
+                $classEntity = CacheableEntityWrapperFactory::createClassEntity(
+                    $this->configuration,
+                    $this->reflector,
+                    ltrim($objectId, '\\'),
+                    null,
+                    $this->attributeParser
+                );
+                $loadedUnsafe[$objectId] = $classEntity;
+            }
         }
         return $classEntity;
     }
