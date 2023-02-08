@@ -47,12 +47,18 @@ final class CacheableEntityWrapperFactory
                         }
                         $newMethod->setParameters($parameters);
 
-                        $cacheKey = "{$wrapperName}_{$method->getName()}";
+                        $cacheNamespace = "{$wrapperName}_{$method->getName()}";
 
-                        $expiresAfter = time() + $cacheableMethodAttr->newInstance()->getCacheSeconds();
+                        $cacheableMethodAttrObj = $cacheableMethodAttr->newInstance();
+                        $expiresAfter = time() + $cacheableMethodAttrObj->getCacheSeconds();
                         $newMethod->setBody('
                             $funcArgs = func_get_args();
-                            $cacheKey = \'' . $cacheKey . '\' . md5(json_encode($funcArgs)) . $this->getObjectId();
+                            $cacheKey = \\' . $cacheableMethodAttrObj->getCacheKeyGeneratorClass() . '::generateKey(
+                                \'' . $cacheNamespace . '\',
+                                $this,
+                                $funcArgs
+                            );
+                            
                             $internalDataKey = "__data__";
                             
                             $result = $this->getCacheValue($cacheKey);
