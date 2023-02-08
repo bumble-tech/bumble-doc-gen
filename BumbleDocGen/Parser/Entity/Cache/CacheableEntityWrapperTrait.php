@@ -89,7 +89,7 @@ trait CacheableEntityWrapperTrait
 
                 if (!$this->getEntityDependencies()) {
                     $filesCacheState[$className] = true;
-                    $this->getConfiguration()->getLogger()->error("Unable to load {$className} class dependencies");
+                    $this->getConfiguration()->getLogger()->warning("Unable to load {$className} class dependencies");
                     return true;
                 }
 
