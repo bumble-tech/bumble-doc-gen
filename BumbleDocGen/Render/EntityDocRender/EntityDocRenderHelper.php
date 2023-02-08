@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\EntityDocRender;
 
-use BumbleDocGen\Parser\AttributeParser;
-use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\Entity\ClassEntity;
-use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 
@@ -78,21 +75,6 @@ final class EntityDocRenderHelper
                 $classData[1] = $cursorTmpName;
                 $entity = $defaultEntity;
             }
-        }
-
-        $reflector = $context->getClassEntityCollection()->getReflector();
-        if (!$entity && ParserHelper::isClassLoaded($reflector, $className)) {
-            $reflectionClass = $reflector->reflectClass($className);
-            $attributeParser = new AttributeParser(
-                $reflector, $context->getClassEntityCollection()->getLogger()
-            );
-
-            $entity = CacheableEntityWrapperFactory::createClassEntityByReflection(
-                $context->getConfiguration(),
-                $reflector,
-                $reflectionClass,
-                $attributeParser
-            );
         }
 
         if ($entity) {

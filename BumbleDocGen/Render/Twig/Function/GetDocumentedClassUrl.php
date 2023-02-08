@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Function;
 
-use BumbleDocGen\Parser\AttributeParser;
-use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
@@ -86,6 +84,10 @@ final class GetDocumentedClassUrl
             }
 
             return $url;
+        } elseif (ParserHelper::isCorrectClassName($className)) {
+            $this->context->getConfiguration()->getLogger()->warning(
+                "GetDocumentedClassUrl: Class {$className} not found in specified sources"
+            );
         }
         return self::DEFAULT_URL;
     }

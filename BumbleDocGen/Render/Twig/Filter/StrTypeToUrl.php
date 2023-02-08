@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Filter;
 
+use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 
@@ -34,9 +35,10 @@ final class StrTypeToUrl
     public function __invoke(
         string $text,
         string $templateType = 'rst',
-        bool $useShortLinkVersion = false,
-        bool $createDocument = false
-    ): string {
+        bool   $useShortLinkVersion = false,
+        bool   $createDocument = false
+    ): string
+    {
         $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
 
         $preparedTypes = [];
@@ -60,6 +62,11 @@ final class StrTypeToUrl
                     }
                 }
             } else {
+                if (ParserHelper::isCorrectClassName($type)) {
+                    $this->context->getConfiguration()->getLogger()->warning(
+                        "StrTypeToUrl: Class {$type} not found in specified sources"
+                    );
+                }
                 $preparedTypes[] = $type;
             }
         }
