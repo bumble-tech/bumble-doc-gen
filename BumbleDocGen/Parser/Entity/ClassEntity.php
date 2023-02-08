@@ -308,6 +308,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $constantEntityCollection[$this->getObjectId()];
     }
 
+    public function getConstantEntity(string $constantName, bool $unsafe = true): ?ConstantEntity
+    {
+        $constantEntityCollection = $this->getConstantEntityCollection();
+        if ($unsafe) {
+            return $constantEntityCollection->unsafeGet($constantName);
+        }
+        return $constantEntityCollection->get($constantName);
+    }
+
     public function getPropertyEntityCollection(): PropertyEntityCollection
     {
         static $propertyEntityCollection = [];
@@ -317,6 +326,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $propertyEntityCollection[$this->getObjectId()];
     }
 
+    public function getPropertyEntity(string $propertyName, bool $unsafe = true): ?PropertyEntity
+    {
+        $propertyEntityCollection = $this->getPropertyEntityCollection();
+        if ($unsafe) {
+            return $propertyEntityCollection->unsafeGet($propertyName);
+        }
+        return $propertyEntityCollection->get($propertyName);
+    }
+
     public function getMethodEntityCollection(): MethodEntityCollection
     {
         static $methodEntityCollection = [];
@@ -324,6 +342,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $methodEntityCollection[$this->getObjectId()] = MethodEntityCollection::createByClassEntity($this);
         }
         return $methodEntityCollection[$this->getObjectId()];
+    }
+
+    public function getMethodEntity(string $methodName, bool $unsafe = true): ?MethodEntity
+    {
+        $methodEntityCollection = $this->getMethodEntityCollection();
+        if ($unsafe) {
+            return $methodEntityCollection->unsafeGet($methodName);
+        }
+        return $methodEntityCollection->get($methodName);
     }
 
     #[Cache\CacheableMethod] public function getDescription(): string
