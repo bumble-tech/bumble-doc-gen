@@ -108,6 +108,15 @@ class PropertyEntity extends BaseEntity
         return $this->implementingClassName;
     }
 
+    public function getImplementingClass(ClassEntityCollection $classEntityPool): ?ClassEntity
+    {
+        $implementingClassName = $this->getImplementingClassName();
+        if (!$implementingClassName) {
+            return null;
+        }
+        return $classEntityPool->getLoadedOrCreateNew($implementingClassName);
+    }
+
     #[Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getReflection()->getImplementingClass()->getFileName();

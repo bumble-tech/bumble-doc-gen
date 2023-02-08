@@ -61,6 +61,15 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->getReflection()->getImplementingClass();
     }
 
+    public function getImplementingClass(ClassEntityCollection $classEntityPool): ?ClassEntity
+    {
+        $implementingClassName = $this->getImplementingClassName();
+        if (!$implementingClassName) {
+            return null;
+        }
+        return $classEntityPool->getLoadedOrCreateNew($implementingClassName);
+    }
+
     protected function getDocCommentReflectionRecursive(): ReflectionMethod
     {
         static $docCommentsReflectionCache = [];

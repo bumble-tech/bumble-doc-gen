@@ -171,6 +171,11 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->isStatic() && in_array($this->getReturnType(), $initializationReturnTypes);
     }
 
+    public function getImplementingClass(ClassEntityCollection $classEntityPool): ?ClassEntity
+    {
+        return $this->classEntity;
+    }
+
     public function isPublic(): bool
     {
         return true;

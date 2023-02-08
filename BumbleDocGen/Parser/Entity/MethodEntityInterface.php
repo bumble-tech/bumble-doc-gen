@@ -40,4 +40,6 @@ interface MethodEntityInterface
     public function getFirstReturnValue(): mixed;
 
     public function getBodyCode(): string;
+
+    public function getImplementingClass(ClassEntityCollection $classEntityPool): ?ClassEntity;
 }

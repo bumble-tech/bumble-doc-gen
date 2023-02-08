@@ -65,6 +65,15 @@ class ConstantEntity extends BaseEntity
         return $this->implementingClassName;
     }
 
+    public function getImplementingClass(ClassEntityCollection $classEntityPool): ?ClassEntity
+    {
+        $implementingClassName = $this->getImplementingClassName();
+        if (!$implementingClassName) {
+            return null;
+        }
+        return $classEntityPool->getLoadedOrCreateNew($implementingClassName);
+    }
+
     protected function getDocCommentReflectionRecursive(): ReflectionClassConstant
     {
         return $this->getReflection();
