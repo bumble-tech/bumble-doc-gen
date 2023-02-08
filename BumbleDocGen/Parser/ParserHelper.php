@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser;
 
+use BumbleDocGen\Parser\Entity\ClassEntity;
 use Nette\PhpGenerator\GlobalFunction;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
@@ -121,6 +122,45 @@ final class ParserHelper
                 array_merge(
                     $reflectionClass->getParentClassNames(),
                     $reflectionClass->getInterfaceNames()
+                ) as $className
+            ) {
+                $key = array_reverse(explode('\\', $className))[0];
+                $uses[$key] = $className;
+            }
+        }
+
+        return $uses;
+    }
+
+    public static function getUsesListByClassEntity(ClassEntity $classEntity, bool $extended = true): array
+    {
+        static $classContentCache = [];
+        $fileName = $classEntity->getAbsoluteFileName();
+        if (!$fileName) {
+            return [];
+        }
+        if (!isset($classContentCache[$fileName])) {
+            $classContentCache[$fileName] = file_get_contents($fileName);
+        }
+        $uses = [];
+        if (
+            preg_match_all(
+                '/(use )(.*)(;)/',
+                $classContentCache[$fileName],
+                $matches
+            )
+        ) {
+            foreach ($matches[2] as $className) {
+                $key = array_reverse(explode('\\', $className))[0];
+                $uses[$key] = $className;
+            }
+        }
+
+        if ($extended) {
+            foreach (
+                array_merge(
+                    $classEntity->getParentClassNames(),
+                    $classEntity->getInterfaceNames()
                 ) as $className
             ) {
                 $key = array_reverse(explode('\\', $className))[0];
