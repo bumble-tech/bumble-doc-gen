@@ -36,4 +36,8 @@ interface MethodEntityInterface
     public function isPrivate(): bool;
 
     public function isDynamic(): bool;
+
+    public function getFirstReturnValue(): mixed;
+
+    public function getBodyCode(): string;
 }

@@ -190,4 +190,14 @@ class DynamicMethodEntity implements MethodEntityInterface
     {
         return true;
     }
+
+    public function getFirstReturnValue(): mixed
+    {
+        return null;
+    }
+
+    public function getBodyCode(): string
+    {
+        return '';
+    }
 }

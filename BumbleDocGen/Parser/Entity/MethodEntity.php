@@ -325,4 +325,9 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             $this->getReflection()
         );
     }
+
+    #[Cache\CacheableMethod] public function getBodyCode(): string
+    {
+        return $this->getReflection()->getBodyCode();
+    }
 }
