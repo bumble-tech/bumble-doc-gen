@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\Parser\ParserHelper;
+use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 
@@ -162,11 +163,18 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         } else {
             $docBlock = $this->getDocBlock();
             $returnType = $docBlock->getTagsByName('return');
-            $type = (string)($returnType[0] ?? 'mixed');
+            $returnType = $returnType[0] ?? null;
+
+            $type = (string)($returnType ?: 'mixed');
+            if (is_a($returnType, InvalidTag::class)) {
+                if (str_starts_with($type, 'array')) {
+                    return 'array';
+                }
+                return 'mixed';
+            }
             $type = preg_replace_callback(['/({)([^{}]*)(})/', '/(\[)([^\[\]]*)(\])/'], function ($condition) {
                 return str_replace(' ', '', $condition[0]);
             }, $type);
-            $type = explode(' ', $type)[0];
         }
         return $type;
     }
