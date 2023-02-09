@@ -1,9 +1,13 @@
-Settings:
-=======================
+<h2>Settings:</h2>
 
 {% set twigFilterData = classEntity.getPluginData('twigFilterClassParserPlugin') %}
-==============  ================
-name            value
-==============  ================
-Filter name     **{{ twigFilterData.name }}**
-==============  ================
+<table>
+    <tr>
+        <th>name</th>
+        <th>value</th>
+    </tr>
+    <tr>
+        <td>Filter name:</td>
+        <td><b>{{ twigFilterData.name }}</b></td>
+    </tr>
+</table>
