@@ -119,15 +119,9 @@ final class Render
 
         foreach ($context->getEntityWrappersCollection() as $entityWrapper) {
             /**@var \BumbleDocGen\Render\Context\DocumentedEntityWrapper $entityWrapper * */
-            $docRender = $this->configuration->getEntityDocRendersCollection()->getFirstMatchingRender($entityWrapper);
-            if (!$docRender) {
-                $logger->warning(
-                    "Skipping `{$entityWrapper->getDocumentTransformableEntity()->getName()}`. Render not found."
-                );
-                continue;
-            }
 
             $context->setCurrentTemplateFilePatch($entityWrapper->getInitiatorFilePath());
+            $docRender = $entityWrapper->getDocRender();
             $docRender->setContext($context);
 
             $content = $docRender->getRenderedText($entityWrapper);

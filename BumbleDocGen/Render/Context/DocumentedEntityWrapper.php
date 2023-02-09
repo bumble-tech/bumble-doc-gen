@@ -4,19 +4,39 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Context;
 
+use BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
+
 /**
  * Wrapper for the class that was requested for documentation
  */
 final class DocumentedEntityWrapper
 {
+    private EntityDocRenderInterface $docRender;
+
     /**
      * @param DocumentTransformableEntityInterface $documentTransformableEntity An entity that is allowed to be documented
      * @param string $initiatorFilePath The file in which the documentation of the entity was requested
      */
     public function __construct(
         private DocumentTransformableEntityInterface $documentTransformableEntity,
-        private string $initiatorFilePath
-    ) {
+        private string                               $initiatorFilePath
+    )
+    {
+        $configuration = $documentTransformableEntity->getConfiguration();
+        $docRender = $configuration->getEntityDocRendersCollection()->getFirstMatchingRender($this);
+        if (!$docRender) {
+            $docRender = new PhpClassToMdDocRender();
+            $configuration->getLogger()->warning(
+                "Render for file `{$documentTransformableEntity->getName()}` not found. Uses render PhpClassToMdDocRender by default."
+            );
+        }
+        $this->docRender = $docRender;
+    }
+
+    public function getDocRender(): EntityDocRenderInterface
+    {
+        return $this->docRender;
     }
 
     /**
@@ -51,9 +71,9 @@ final class DocumentedEntityWrapper
     /**
      * The name of the file to be generated
      */
-    public function getFileName(string $fileExtension = 'rst'): string
+    public function getFileName(): string
     {
-        return "{$this->getUniqueFileName()}.{$fileExtension}";
+        return "{$this->getUniqueFileName()}.{$this->docRender->getDocFileExtension()}";
     }
 
     /**
