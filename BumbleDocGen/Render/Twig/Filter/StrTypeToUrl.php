@@ -16,6 +16,10 @@ use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
  */
 final class StrTypeToUrl
 {
+    public const TEMPLATE_TYPE_FROM_CONTEXT = 'context';
+    public const TEMPLATE_TYPE_HTML = 'html';
+    public const TEMPLATE_TYPE_RST = 'rst';
+
     /**
      * @param Context $context Render context
      */
@@ -34,7 +38,7 @@ final class StrTypeToUrl
      */
     public function __invoke(
         string $text,
-        string $templateType = 'rst',
+        string $templateType = self::TEMPLATE_TYPE_FROM_CONTEXT,
         bool   $useShortLinkVersion = false,
         bool   $createDocument = false
     ): string
@@ -55,7 +59,11 @@ final class StrTypeToUrl
                         $type = $entityClassOfLink->getName();
                     }
 
-                    if ($templateType == 'rst') {
+                    if ($templateType == self::TEMPLATE_TYPE_FROM_CONTEXT) {
+                        $templateType = $this->context->isCurrentTemplateRst() ? self::TEMPLATE_TYPE_RST : self::TEMPLATE_TYPE_HTML;
+                    }
+
+                    if ($templateType == self::TEMPLATE_TYPE_RST) {
                         $preparedTypes[] = "`{$type} <{$link}>`_";
                     } else {
                         $preparedTypes[] = "<a href='{$link}'>{$type}</a>";
