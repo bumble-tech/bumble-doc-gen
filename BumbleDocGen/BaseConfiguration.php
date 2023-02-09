@@ -20,7 +20,7 @@ use BumbleDocGen\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin;
 use BumbleDocGen\Plugin\CorePlugin\PageLinker\PageRstLinkerPlugin;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
-use BumbleDocGen\Render\EntityDocRender\PhpClassToRst\PhpClassToRstDocRender;
+use BumbleDocGen\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -94,7 +94,7 @@ abstract class BaseConfiguration implements ConfigurationInterface
         static $entityDocRendersCollection = null;
         if (!$entityDocRendersCollection) {
             $entityDocRendersCollection = new EntityDocRendersCollection();
-            $entityDocRendersCollection->add(new PhpClassToRstDocRender());
+            $entityDocRendersCollection->add(new PhpClassToMdDocRender());
         }
         return $entityDocRendersCollection;
     }
