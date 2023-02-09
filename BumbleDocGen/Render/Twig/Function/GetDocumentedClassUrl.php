@@ -57,30 +57,28 @@ final class GetDocumentedClassUrl
                 $classEntityCollection->add($classEntity);
                 $url = $this->context->getConfiguration()->getOutputDirBaseUrl() . $documentedClass->getDocUrl();
             } else {
-                static $urlCaches = [];
+                $url = $classEntity->getFileName();
+            }
 
-                $key = $className . $cursor;
-                if (array_key_exists($key, $urlCaches)) {
-                    $url = $urlCaches[$key];
+            if (mb_strlen($cursor) > 2) {
+                $firstLetter = mb_substr($cursor, 0, 1);
+                $cursor = ltrim($cursor, $firstLetter);
+                if ($createDocument) {
+                    $line = match ($firstLetter) {
+                        'm' => $classEntity->getMethodEntityCollection()->get($cursor)?->getStartLine(),
+                        'p' => $classEntity->getPropertyEntityCollection()->get($cursor)?->getStartLine(),
+                        'q' => $classEntity->getConstantEntityCollection()->get($cursor)?->getStartLine(),
+                        default => 0,
+                    };
                 } else {
-                    $url = $classEntity->getFileName();
-                    if ($url && mb_strlen($cursor) > 2) {
-                        $firstLetter = mb_substr($cursor, 0, 1);
-                        $cursor = ltrim($cursor, $firstLetter);
-                        try {
-                            $line = match ($firstLetter) {
-                                'm' => $classEntity->getMethodEntityCollection()->get($cursor)?->getStartLine(),
-                                'p' => $classEntity->getPropertyEntityCollection()->get($cursor)?->getStartLine(),
-                                'q' => $classEntity->getConstantEntityCollection()->get($cursor)?->getStartLine(),
-                                default => 0,
-                            };
-                        } catch (\Exception) {
-                            $line = 0;
-                        }
-                        $url .= $line ? "L{$line}" : '';
-                    }
-                    $urlCaches[$key] = $url;
+                    $line = match ($firstLetter) {
+                        'm' => $classEntity->getMethodEntityCollection()->unsafeGet($cursor)?->getStartLine(),
+                        'p' => $classEntity->getPropertyEntityCollection()->unsafeGet($cursor)?->getStartLine(),
+                        'q' => $classEntity->getConstantEntityCollection()->unsafeGet($cursor)?->getStartLine(),
+                        default => 0,
+                    };
                 }
+                $url .= $line ? "L{$line}" : '';
             }
 
             return $url;
