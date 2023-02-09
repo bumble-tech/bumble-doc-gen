@@ -121,6 +121,11 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->methodName;
     }
 
+    #[Cache\CacheableMethod] public function isConstructor(): bool
+    {
+        return $this->getReflection()->isConstructor();
+    }
+
     #[Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getReflection()->getImplementingClass()->getFileName();
