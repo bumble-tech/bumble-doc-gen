@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser;
 
+use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use Nette\PhpGenerator\GlobalFunction;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -316,5 +317,15 @@ final class ParserHelper
             return $value;
         }
         return null;
+    }
+
+    public static function getFilesInGit(ConfigurationInterface $configuration): array
+    {
+        static $gitFiles = null;
+        if (is_null($gitFiles)) {
+            exec("cd {$configuration->getProjectRoot()} && git ls-files", $output);
+            $gitFiles = array_flip($output);
+        }
+        return $gitFiles;
     }
 }
