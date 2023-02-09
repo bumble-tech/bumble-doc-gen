@@ -57,4 +57,9 @@ class PhpClassToRstDocRender implements EntityDocRenderInterface
             'renderContext' => $this->context,
         ]);
     }
+
+    public function getDocFileExtension(): string
+    {
+        return 'rst';
+    }
 }

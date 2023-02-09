@@ -32,6 +32,11 @@ class PhpClassToMdDocRender implements EntityDocRenderInterface
         $this->twig = new Environment($loader);
     }
 
+    public function getDocFileExtension(): string
+    {
+        return 'md';
+    }
+
     public function isAvailableForEntity(DocumentedEntityWrapper $entityWrapper): bool
     {
         return is_a($entityWrapper->getDocumentTransformableEntity(), ClassEntity::class);

@@ -29,4 +29,6 @@ interface EntityDocRenderInterface
      * @return string
      */
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string;
+
+    public function getDocFileExtension(): string;
 }
