@@ -1,0 +1,35 @@
+{% if not classEntity.getPropertyEntityCollection().isEmpty() %}
+<h2>Property details:</h2>
+
+{% for propertyEntity in classEntity.getPropertyEntityCollection() %}
+
+* <a name="p{{ propertyEntity.getName() | prepareSourceLink }}" href="#p{{ propertyEntity.getName() | prepareSourceLink }}">#</a>
+ <b>${{ propertyEntity.getName() }}</b>
+ {% if propertyEntity.isInternal() %}<b>:warning:</b> Is internal {% endif %} {% if propertyEntity.isDeprecated() %}<b>:no_entry:</b> Deprecated {% endif %}
+ {% if propertyEntity.getFileName() %} **|** <a href="{{ propertyEntity.getFileName() }}#L{{ propertyEntity.getStartLine() }}">source code</a>{% endif %}
+
+```php
+{% if propertyEntity.isImplementedInParentClass() %}
+// Implemented in \{{ propertyEntity.getImplementingClassName() }}
+
+{% endif %}
+{{ propertyEntity.getModifiersString() }} ${{ propertyEntity.getName() }};
+
+```
+
+{% if propertyEntity.getDescription() %}<blockquote>{{ propertyEntity.getDescription() }}</blockquote>{% endif %}
+
+{% if propertyEntity.hasDescriptionLinks() %}
+
+See:
+<ul>
+{% for link in propertyEntity.getDescriptionLinks(renderContext) %}
+    <li>
+        <a {% if link.url %}href="{{ link.url }}"{% endif %}>{{ link.name }}</a>{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% endfor %}
+{% endif %}

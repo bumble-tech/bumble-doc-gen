@@ -1,0 +1,9 @@
+{% if classEntity.hasTraits() %}
+<h2>Traits:</h2>
+
+<ul>
+    {% for traitName in classEntity.getTraitsNames() %}
+    <li><b>{{ traitName | strTypeToUrl }}</b></li>
+    {% endfor %}
+</ul>
+{% endif %}
