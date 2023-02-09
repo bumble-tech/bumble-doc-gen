@@ -94,6 +94,13 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->reflector;
     }
 
+    public function isInGit(): bool
+    {
+        $filesInGit = ParserHelper::getFilesInGit($this->getConfiguration());
+        $fileName = ltrim($this->getFileName(), DIRECTORY_SEPARATOR);
+        return isset($filesInGit[$fileName]);
+    }
+
     protected function getDocCommentReflectionRecursive(): ReflectionClass
     {
         static $docCommentsReflectionCache = [];
