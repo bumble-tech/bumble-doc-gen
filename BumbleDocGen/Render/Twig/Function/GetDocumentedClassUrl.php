@@ -60,7 +60,7 @@ final class GetDocumentedClassUrl
                 $classEntityCollection->add($classEntity);
                 $url = $this->context->getConfiguration()->getOutputDirBaseUrl() . $documentedClass->getDocUrl();
             } else {
-                $url = $classEntity->getFileName();
+                $url = $classEntity->getFileSourceLink(false);
             }
 
             if (mb_strlen($cursor) > 2) {
