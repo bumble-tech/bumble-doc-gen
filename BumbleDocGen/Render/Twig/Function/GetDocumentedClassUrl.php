@@ -81,7 +81,7 @@ final class GetDocumentedClassUrl
                         default => 0,
                     };
                 }
-                $url .= $line ? "L{$line}" : '';
+                $url .= $line ? "#L{$line}" : '';
             }
 
             return $url;
