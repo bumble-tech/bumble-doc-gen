@@ -21,6 +21,8 @@ use BumbleDocGen\Plugin\CorePlugin\PageLinker\PageRstLinkerPlugin;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
 use BumbleDocGen\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
+use BumbleDocGen\Render\PageLinkProcessor\BasePageLinkProcessor;
+use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -128,6 +130,15 @@ abstract class BaseConfiguration implements ConfigurationInterface
     public function getEntityCacheItemPool(): CacheItemPoolInterface
     {
         return $this->getCacheItemPool('entity');
+    }
+
+    public function getPageLinkProcessor(): PageLinkProcessorInterface
+    {
+        static $pageLinkProcessor = null;
+        if (is_null($pageLinkProcessor)) {
+            $pageLinkProcessor = new BasePageLinkProcessor($this);
+        }
+        return $pageLinkProcessor;
     }
 
     public function getGitClientPath(): string

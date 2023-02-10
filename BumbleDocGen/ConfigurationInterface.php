@@ -12,6 +12,7 @@ use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
+use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
@@ -69,6 +70,8 @@ interface ConfigurationInterface
     public function getSourceLocatorCacheItemPool(): CacheItemPoolInterface;
 
     public function getEntityCacheItemPool(): CacheItemPoolInterface;
+
+    public function getPageLinkProcessor(): PageLinkProcessorInterface;
 
     public function getGitClientPath(): string;
 
