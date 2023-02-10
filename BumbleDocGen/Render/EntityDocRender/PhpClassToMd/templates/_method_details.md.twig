@@ -6,7 +6,7 @@
 * <a name="m{{ methodEntity.getName() | prepareSourceLink }}" href="#m{{ methodEntity.getName() | prepareSourceLink }}">#</a>
  <b>{{ methodEntity.getName() }}</b>
  {% if methodEntity.isInternal() %}<b>:warning:</b> Is internal {% endif %} {% if methodEntity.isDeprecated() %}<b>:no_entry:</b> Deprecated {% endif %}
- {% if methodEntity.getFileName() %} **|** <a href="{{ methodEntity.getFileName() }}#L{{ methodEntity.getStartLine() }}">source code</a>{% endif %}
+ {% if methodEntity.getFileSourceLink() %} **|** <a href="{{ methodEntity.getFileSourceLink() }}">source code</a>{% endif %}
 
 
 ```php

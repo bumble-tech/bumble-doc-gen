@@ -191,9 +191,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->getReflection()->getNamespaceName();
     }
 
-    /**
-     * Returns the relative path to a file if it can be retrieved and if the file is in the project directory
-     */
     #[Cache\CacheableMethod] public function getFileName(): ?string
     {
         if (!$this->relativeFileNameLoaded) {

@@ -46,6 +46,22 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] abstract public function getDescription(): string;
 
+    /**
+     * Returns the relative path to a file if it can be retrieved and if the file is in the project directory
+     */
+    #[Cache\CacheableMethod] abstract public function getFileName(): ?string;
+
+    #[Cache\CacheableMethod] abstract public function getStartLine(): int;
+
+    public function getFileSourceLink(): ?string
+    {
+        $fileName = $this->getFileName();
+        if (!$fileName) {
+            return null;
+        }
+        return $this->configuration->getFileSourceBaseUrl() . $fileName . "#L{$this->getStartLine()}";
+    }
+
     public function getAttributeParser(): AttributeParser
     {
         return $this->attributeParser;

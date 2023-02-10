@@ -6,7 +6,7 @@
 * <a name="p{{ propertyEntity.getName() | prepareSourceLink }}" href="#p{{ propertyEntity.getName() | prepareSourceLink }}">#</a>
  <b>${{ propertyEntity.getName() }}</b>
  {% if propertyEntity.isInternal() %}<b>:warning:</b> Is internal {% endif %} {% if propertyEntity.isDeprecated() %}<b>:no_entry:</b> Deprecated {% endif %}
- {% if propertyEntity.getFileName() %} **|** <a href="{{ propertyEntity.getFileName() }}#L{{ propertyEntity.getStartLine() }}">source code</a>{% endif %}
+ {% if propertyEntity.getFileSourceLink() %} **|** <a href="{{ propertyEntity.getFileSourceLink() }}">source code</a>{% endif %}
 
 ```php
 {% if propertyEntity.isImplementedInParentClass() %}

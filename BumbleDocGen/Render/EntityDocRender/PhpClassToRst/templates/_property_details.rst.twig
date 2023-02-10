@@ -2,7 +2,7 @@
 
 .. _p{{ propertyEntity.getName()|prepareSourceLink }}:
 
-* `# <p{{ propertyEntity.getName()|prepareSourceLink }}_>`_ ``${{ propertyEntity.getName() }}`` {% if propertyEntity.isInternal() %}**:warning:** Is internal {% endif %} {% if propertyEntity.isDeprecated() %}**:no_entry:** Deprecated {% endif %} {% if propertyEntity.getFileName() %}**|** `source code <{{ propertyEntity.getFileName() }}#L{{ propertyEntity.getStartLine() }}>`_ {% endif %}
+* `# <p{{ propertyEntity.getName()|prepareSourceLink }}_>`_ ``${{ propertyEntity.getName() }}`` {% if propertyEntity.isInternal() %}**:warning:** Is internal {% endif %} {% if propertyEntity.isDeprecated() %}**:no_entry:** Deprecated {% endif %} {% if propertyEntity.getFileSourceLink() %}**|** `source code <{{ propertyEntity.getFileSourceLink() }}>`_ {% endif %}
 
 .. code-block:: php
 
