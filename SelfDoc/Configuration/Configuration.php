@@ -11,6 +11,7 @@ use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\RecursiveDirectoriesSourceLocator;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginsCollection;
+use BumbleDocGen\Render\PageLinkProcessor\BasePageLinkProcessor;
 use BumbleDocGen\Render\PageLinkProcessor\GithubPagesLinkProcessor;
 use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin;
@@ -65,14 +66,15 @@ final class Configuration extends BaseConfiguration
     {
         static $pageLinkProcessor = null;
         if (is_null($pageLinkProcessor)) {
-            $pageLinkProcessor = new GithubPagesLinkProcessor($this);
+            $pageLinkProcessor = new BasePageLinkProcessor($this);
         }
         return $pageLinkProcessor;
     }
 
     public function getFileSourceBaseUrl(): ?string
     {
-        return 'https://***REMOVED***/blob/master';
+        //return 'https://***REMOVED***/blob/master';
+        return "/docs";
     }
 
     public function getOutputDirBaseUrl(): string
