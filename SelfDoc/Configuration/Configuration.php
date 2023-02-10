@@ -11,6 +11,8 @@ use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\RecursiveDirectoriesSourceLocator;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginsCollection;
+use BumbleDocGen\Render\PageLinkProcessor\GithubPagesLinkProcessor;
+use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin;
 use SelfDoc\Configuration\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin;
 
@@ -57,6 +59,15 @@ final class Configuration extends BaseConfiguration
     public function getCacheDir(): ?string
     {
         return dirname(__DIR__) . '/__cache';
+    }
+
+    public function getPageLinkProcessor(): PageLinkProcessorInterface
+    {
+        static $pageLinkProcessor = null;
+        if (is_null($pageLinkProcessor)) {
+            $pageLinkProcessor = new GithubPagesLinkProcessor($this);
+        }
+        return $pageLinkProcessor;
     }
 
     public function getFileSourceBaseUrl(): ?string
