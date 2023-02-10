@@ -26,9 +26,9 @@ final class Configuration extends BaseConfiguration
         return __DIR__ . '/templates';
     }
 
-    public function getOutputDirBaseUrl(): string
+    public function getOutputDir(): string
     {
-        return '/docs';
+        return "{$this->getProjectRoot()}/docs";
     }
 
     public function getSourceLocators(): SourceLocatorsCollection
@@ -62,5 +62,10 @@ final class Configuration extends BaseConfiguration
     public function getFileSourceBaseUrl(): ?string
     {
         return 'https://***REMOVED***/blob/master';
+    }
+
+    public function getOutputDirBaseUrl(): string
+    {
+        return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen';
     }
 }
