@@ -58,4 +58,9 @@ final class Configuration extends BaseConfiguration
     {
         return dirname(__DIR__) . '/__cache';
     }
+
+    public function getFileSourceBaseUrl(): ?string
+    {
+        return 'https://***REMOVED***/blob/master';
+    }
 }
