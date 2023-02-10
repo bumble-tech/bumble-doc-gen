@@ -139,7 +139,7 @@ final class BreadcrumbsHelper
             }
             $filePatch = str_replace('.twig', '', $filePatch);
             $breadcrumbs[] = [
-                'url' => $this->configuration->getOutputDirBaseUrl() . $filePatch,
+                'url' => $this->configuration->getPageLinkProcessor()->getAbsoluteUrl($filePatch),
                 'title' => $this->getTemplateTitle($filePatch),
             ];
         } while ($filePatch = $this->getPrevPage($filePatch));

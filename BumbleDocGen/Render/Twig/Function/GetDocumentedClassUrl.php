@@ -58,7 +58,7 @@ final class GetDocumentedClassUrl
                 );
                 $this->context->getEntityWrappersCollection()->add($documentedClass);
                 $classEntityCollection->add($classEntity);
-                $url = $this->context->getConfiguration()->getOutputDirBaseUrl() . $documentedClass->getDocUrl();
+                $url = $this->context->getConfiguration()->getPageLinkProcessor()->getAbsoluteUrl($documentedClass->getDocUrl());
             } else {
                 $url = $classEntity->getFileSourceLink(false);
             }
