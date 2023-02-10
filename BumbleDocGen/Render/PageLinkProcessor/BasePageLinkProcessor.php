@@ -14,6 +14,7 @@ class BasePageLinkProcessor implements PageLinkProcessorInterface
 
     public function getAbsoluteUrl(string $relativeUrl): string
     {
+        $relativeUrl = ltrim($relativeUrl, '/');
         return "{$this->configuration->getOutputDirBaseUrl()}{$relativeUrl}";
     }
 }

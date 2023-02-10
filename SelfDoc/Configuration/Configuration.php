@@ -77,6 +77,6 @@ final class Configuration extends BaseConfiguration
 
     public function getOutputDirBaseUrl(): string
     {
-        return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen';
+        return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen/';
     }
 }

@@ -20,7 +20,8 @@ class GithubPagesLinkProcessor implements PageLinkProcessorInterface
 
     public function getAbsoluteUrl(string $relativeUrl): string
     {
-        $relativeUrl = str_replace($this->docFilesExtensions, '', $relativeUrl);
+        $relativeUrl = ltrim($relativeUrl, '/');
+        $relativeUrl = str_replace($this->docFilesExtensions, '.html', $relativeUrl);
         return "{$this->configuration->getOutputDirBaseUrl()}{$relativeUrl}";
     }
 }
