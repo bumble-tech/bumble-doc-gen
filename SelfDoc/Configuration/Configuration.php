@@ -73,12 +73,12 @@ final class Configuration extends BaseConfiguration
 
     public function getFileSourceBaseUrl(): ?string
     {
-        //return 'https://***REMOVED***/blob/master';
-        return "/docs";
+        return 'https://***REMOVED***/blob/master';
     }
 
     public function getOutputDirBaseUrl(): string
     {
-        return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen/';
+        //return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen/';
+        return "/docs";
     }
 }
