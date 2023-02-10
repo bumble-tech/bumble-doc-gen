@@ -38,11 +38,6 @@ abstract class BaseConfiguration implements ConfigurationInterface
         return true;
     }
 
-    public function getOutputDir(): string
-    {
-        return "{$this->getProjectRoot()}{$this->getOutputDirBaseUrl()}";
-    }
-
     public function classConstantEntityFilterCondition(
         ConstantEntity $constantEntity
     ): ConditionInterface
