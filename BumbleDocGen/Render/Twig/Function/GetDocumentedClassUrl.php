@@ -11,7 +11,7 @@ use BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
 
 /**
  * Get the URL of a documented class by its name. If the class is found, next to the file where this method was called,
- * the `_Classes` directory will be created, in which the documented class file will be created
+ * the `classes` directory will be created, in which the documented class file will be created
  *
  * @note This function initiates the creation of documents for the displayed classes
  * @see DocumentedEntityWrapper

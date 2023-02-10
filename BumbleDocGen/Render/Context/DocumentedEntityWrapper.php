@@ -92,7 +92,7 @@ final class DocumentedEntityWrapper
         $pathParts = explode('/', $this->initiatorFilePath);
         array_pop($pathParts);
         $path = implode('/', $pathParts);
-        return "{$path}/_Classes/{$this->getFileName()}";
+        return "{$path}/classes/{$this->getFileName()}";
     }
 
     public function getInitiatorFilePath(): string
