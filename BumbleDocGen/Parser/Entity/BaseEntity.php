@@ -53,13 +53,13 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] abstract public function getStartLine(): int;
 
-    public function getFileSourceLink(): ?string
+    public function getFileSourceLink(bool $withLine = true): ?string
     {
         $fileName = $this->getFileName();
         if (!$fileName) {
             return null;
         }
-        return $this->configuration->getFileSourceBaseUrl() . $fileName . "#L{$this->getStartLine()}";
+        return $this->configuration->getFileSourceBaseUrl() . $fileName . ($withLine ? "#L{$this->getStartLine()}" : '');
     }
 
     public function getAttributeParser(): AttributeParser
