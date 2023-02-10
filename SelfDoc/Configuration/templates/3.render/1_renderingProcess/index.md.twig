@@ -64,7 +64,7 @@ For breadcrumbs we have class <a>BreadcrumbsHelper</a>
 
 The **generatePageBreadcrumbs** function is also available in each template:
 
-{{ '{{ generatePageBreadcrumbs(title, _self) }}' | textToCodeBlock('twig') }}
+{{ '<pre>&#123;&#123; generatePageBreadcrumbs(title, _self) &#125;&#125;</pre>' }}
 
 With it, you can generate breadcrumbs for the template, for example, in the example shown, breadcrumbs are generated for the current page
 
@@ -81,6 +81,6 @@ You need to add a page title for several reasons: the title text is involved in 
 
 To add a title to a template, add the following code:
 
-<b>``&#123;% set title = 'Some title' %&#125;``</b>
+{{ "<pre>&#123;% set title = 'Some title' %&#125;</pre>" }}
 
 *:warning:* If the title is not set, the name of the directory will be used as the title.

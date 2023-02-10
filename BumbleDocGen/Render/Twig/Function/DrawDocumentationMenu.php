@@ -88,6 +88,7 @@ final class DrawDocumentationMenu
 
         if ($startPageKey) {
             $startPageKey = str_starts_with('/', $startPageKey) ? $startPageKey : "/{$startPageKey}";
+            $startPageKey = str_replace('//', '/', $startPageKey);
             $startPageKey = $this->context->getConfiguration()->getPageLinkProcessor()->getAbsoluteUrl($startPageKey);
         } else {
             $startPageKey = array_key_first($structure);
