@@ -71,4 +71,6 @@ interface ConfigurationInterface
     public function getEntityCacheItemPool(): CacheItemPoolInterface;
 
     public function getGitClientPath(): string;
+
+    public function getFileSourceBaseUrl(): ?string;
 }
