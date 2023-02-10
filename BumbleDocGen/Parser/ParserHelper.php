@@ -323,7 +323,8 @@ final class ParserHelper
     {
         static $gitFiles = null;
         if (is_null($gitFiles)) {
-            exec("cd {$configuration->getProjectRoot()} && git ls-files", $output);
+            $gitClient = $configuration->getGitClientPath();
+            exec("cd {$configuration->getProjectRoot()} && {$gitClient} ls-files", $output);
             $gitFiles = array_flip($output);
         }
         return $gitFiles;

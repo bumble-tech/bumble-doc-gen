@@ -134,4 +134,9 @@ abstract class BaseConfiguration implements ConfigurationInterface
     {
         return $this->getCacheItemPool('entity');
     }
+
+    public function getGitClientPath(): string
+    {
+        return 'git';
+    }
 }
