@@ -9,6 +9,6 @@ and also gives you the ability to get breadcrumbs for the current page in html f
 
 In templates, you can use the built-in function <a>GeneratePageBreadcrumbs</a>, which turns the rendered breadcrumbs into rst or html format:
 
-{{ '{{ generatePageBreadcrumbs(title, _self) }}' | textToCodeBlock('twig') }}
+{{ '<pre>&#123;&#123; generatePageBreadcrumbs(title, _self) &#125;&#125;</pre>' }}
 
 With this function, you can generate breadcrumbs for the template, for example, in the example shown, breadcrumbs are generated for the current page
