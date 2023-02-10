@@ -170,13 +170,13 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             $returnType = $docBlock->getTagsByName('return');
             $returnType = $returnType[0] ?? null;
 
-            $type = (string)($returnType ?: 'mixed');
-            if (is_a($returnType, InvalidTag::class)) {
-                if (str_starts_with($type, 'array')) {
+            if ($returnType && is_a($returnType, InvalidTag::class)) {
+                if (str_starts_with((string)$returnType, 'array')) {
                     return 'array';
                 }
                 return 'mixed';
             }
+            $type = $returnType ? (string)$returnType->getType() : 'mixed';
             $type = preg_replace_callback(['/({)([^{}]*)(})/', '/(\[)([^\[\]]*)(\])/'], function ($condition) {
                 return str_replace(' ', '', $condition[0]);
             }, $type);
