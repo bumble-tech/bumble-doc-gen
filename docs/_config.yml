@@ -1,3 +1,6 @@
 markdown: GFM
 name: ""
 title: null
+
+theme: minima
+show_excerpts: true
