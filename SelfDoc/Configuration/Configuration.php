@@ -66,7 +66,7 @@ final class Configuration extends BaseConfiguration
     {
         static $pageLinkProcessor = null;
         if (is_null($pageLinkProcessor)) {
-            $pageLinkProcessor = new BasePageLinkProcessor($this);
+            $pageLinkProcessor = new GithubPagesLinkProcessor($this);
         }
         return $pageLinkProcessor;
     }
@@ -78,7 +78,7 @@ final class Configuration extends BaseConfiguration
 
     public function getOutputDirBaseUrl(): string
     {
-        //return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen/';
-        return "/docs";
+        return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen/';
+        //return "/docs";
     }
 }
