@@ -24,7 +24,10 @@
 <script>
     Array.from(document.getElementsByTagName('a')).forEach(h => {
         if(h.getAttribute('href') === '#') {
+            let span = document.createElement('span');
+            span.innerHTML = h.innerHTML;
             h.setAttribute('href', '')
+            h.parentNode.replaceChild(span, h);
         }
         else if(h.getAttribute('href').startsWith('/docs')) {
             let newHref = h.getAttribute('href').replace('/docs', "https://***REMOVED***/pages/bumble-tech/bumble-doc-gen");
