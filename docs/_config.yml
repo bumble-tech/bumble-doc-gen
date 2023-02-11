@@ -1,4 +1,11 @@
 markdown: GFM
 name: ""
 title: null
-theme: minima
+remote_theme: tuur29/pages-themes-cayman
+darkmode: true
+buttons:
+  zip_hide: true
+  tar_hide: true
+  github_hide: true
+plugins:
+  - jekyll-remote-theme
