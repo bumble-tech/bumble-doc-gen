@@ -64,24 +64,19 @@ final class GetDocumentedClassUrl
             }
 
             if (mb_strlen($cursor) > 2) {
-                $firstLetter = mb_substr($cursor, 0, 1);
-                $cursor = ltrim($cursor, $firstLetter);
                 if ($createDocument) {
-                    $line = match ($firstLetter) {
-                        'm' => $classEntity->getMethodEntityCollection()->get($cursor)?->getStartLine(),
-                        'p' => $classEntity->getPropertyEntityCollection()->get($cursor)?->getStartLine(),
-                        'q' => $classEntity->getConstantEntityCollection()->get($cursor)?->getStartLine(),
-                        default => 0,
-                    };
+                    $url .= $cursor ? "#{$cursor}" : '';
                 } else {
+                    $firstLetter = mb_substr($cursor, 0, 1);
+                    $cursor = ltrim($cursor, $firstLetter);
                     $line = match ($firstLetter) {
                         'm' => $classEntity->getMethodEntityCollection()->unsafeGet($cursor)?->getStartLine(),
                         'p' => $classEntity->getPropertyEntityCollection()->unsafeGet($cursor)?->getStartLine(),
                         'q' => $classEntity->getConstantEntityCollection()->unsafeGet($cursor)?->getStartLine(),
                         default => 0,
                     };
+                    $url .= $line ? "#L{$line}" : '';
                 }
-                $url .= $line ? "#L{$line}" : '';
             }
 
             return $url;
