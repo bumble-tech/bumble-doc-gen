@@ -10,6 +10,7 @@ use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
+use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -137,115 +138,119 @@ abstract class BaseEntity
         return $implementingReflectionClass;
     }
 
-    /**
-     * @return array<int,array{name:string, description:string|null, url:string|null}>
-     */
     #[Cache\CacheableMethod(
         Cache\CacheableMethod::MONTH_SECONDS,
         RenderContextCacheKeyGenerator::class
     )]
-    public function getDescriptionLinks(?Context $context = null): array
+    public function getDescriptionLinksData(?Context $context = null): array
     {
-        static $linksCache = [];
-        $objectId = $this->getObjectId() .
-            ($context ? spl_object_id($context) . $context->getCurrentTemplateFilePatch() : '');
-        if (!isset($linksCache[$objectId])) {
-            $links = [];
-            $docBlock = $this->getDocBlock();
-            $getLinkKey = function (?string $url, ?string $name): string {
-                return md5($url . $name);
-            };
+        $links = [];
+        $docBlock = $this->getDocBlock();
+        $docCommentImplementingClass = $this->getDocCommentImplementingClass();
 
-            $docCommentImplementingClass = $this->getDocCommentImplementingClass();
-            foreach ($docBlock->getTagsByName('see') as $seeBlock) {
-                if (!method_exists($seeBlock, 'getReference')) {
-                    continue;
-                }
-                try {
-                    $name = (string)$seeBlock->getReference();
-                    $description = (string)$seeBlock->getDescription();
-                    $url = null;
-                    if (filter_var($name, FILTER_VALIDATE_URL)) {
-                        $url = $name;
-                    } elseif (str_starts_with($name, '\\') && $context) {
-
-                        $className = $name;
-
-                        // fixing annotations bug. Result always started with `\\`
-                        if (!str_contains($this->getDocCommentRecursive(), $name)) {
-                            $className = ParserHelper::parseFullClassName(
-                                $name,
-                                $this->reflector,
-                                $docCommentImplementingClass
-                            );
-                        }
-
-                        $data = EntityDocRenderHelper::getEntityUrlData(
-                            $className,
-                            $context,
-                            $this->getImplementingReflectionClass()->getName()
-                        );
-                        $url = $data['url'];
-                        $name = $data['title'];
-                    }
-                    $key = $getLinkKey($url, $name);
-                    $links[$key] = [
-                        'url' => $url,
+        foreach ($docBlock->getTagsByName('see') as $seeBlock) {
+            if (!method_exists($seeBlock, 'getReference')) {
+                continue;
+            }
+            try {
+                $name = (string)$seeBlock->getReference();
+                $description = (string)$seeBlock->getDescription();
+                if (filter_var($name, FILTER_VALIDATE_URL)) {
+                    $links[] = [
+                        'url' => $name,
                         'name' => $name,
                         'description' => $description,
                     ];
-                } catch (\Exception $e) {
-                    $this->logger->error($e->getMessage());
-                }
-            }
+                } elseif (str_starts_with($name, '\\') && $context) {
 
-            $description = $this->getDescription();
-            if (preg_match_all('/(\@see )(.*?)( |}|])/', $description . ' ', $matches)) {
-                foreach ($matches[2] as $name) {
-                    $url = null;
-                    if (filter_var($name, FILTER_VALIDATE_URL)) {
-                        $url = $name;
-                    } elseif ($context) {
+                    $className = $name;
+
+                    // fixing annotations bug. Result always started with `\\`
+                    if (!str_contains($this->getDocCommentRecursive(), $name)) {
                         $className = ParserHelper::parseFullClassName(
                             $name,
                             $this->reflector,
                             $docCommentImplementingClass
                         );
-                        $data = EntityDocRenderHelper::getEntityUrlData(
-                            $className,
-                            $context,
-                            $this->getImplementingReflectionClass()->getName()
-                        );
-                        $url = $data['url'];
-                        $name = $data['title'];
                     }
-                    $key = $getLinkKey($url, $name);
-                    $links[$key] = [
-                        'url' => $url,
+
+                    $data = EntityDocRenderHelper::getEntityDataByLink(
+                        $className,
+                        $context,
+                        $this->getImplementingReflectionClass()->getName()
+                    );
+                    $links[] = [
+                        'entityData' => $data,
+                        'url' => null,
+                        'name' => $data['title'],
+                        'description' => $description,
+                    ];
+                }
+            } catch (\Exception $e) {
+                $this->logger->error($e->getMessage());
+            }
+        }
+
+        $description = $this->getDescription();
+        if (preg_match_all('/(\@see )(.*?)( |}|])/', $description . ' ', $matches)) {
+            foreach ($matches[2] as $name) {
+                if (filter_var($name, FILTER_VALIDATE_URL)) {
+                    $links[] = [
+                        'url' => $name,
                         'name' => $name,
                         'description' => '',
                     ];
-                }
-            }
-
-            foreach ($docBlock->getTagsByName('link') as $linkBlock) {
-                try {
-                    $description = (string)$linkBlock->getDescription();
-                    $url = $linkBlock->getLink();
-                    $key = $getLinkKey($url, $url);
-                    $links[$key] = [
-                        'url' => $url,
-                        'name' => $url,
+                } elseif ($context) {
+                    $className = ParserHelper::parseFullClassName(
+                        $name,
+                        $this->reflector,
+                        $docCommentImplementingClass
+                    );
+                    $data = EntityDocRenderHelper::getEntityDataByLink(
+                        $className,
+                        $context,
+                        $this->getImplementingReflectionClass()->getName()
+                    );
+                    $links[] = [
+                        'entityData' => $data,
+                        'url' => null,
+                        'name' => $data['title'],
                         'description' => $description,
                     ];
-                } catch (\Exception $e) {
-                    $this->logger->error($e->getMessage());
                 }
             }
-
-            $linksCache[$objectId] = $links;
         }
-        return $linksCache[$objectId];
+
+        foreach ($docBlock->getTagsByName('link') as $linkBlock) {
+            try {
+                $description = (string)$linkBlock->getDescription();
+                $url = $linkBlock->getLink();
+                $links[] = [
+                    'url' => $url,
+                    'name' => $url,
+                    'description' => $description,
+                ];
+            } catch (\Exception $e) {
+                $this->logger->error($e->getMessage());
+            }
+        }
+
+        return $links;
+    }
+
+    public function getDescriptionLinks(?Context $context = null): array
+    {
+        $linksData = $this->getDescriptionLinksData($context);
+        $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
+        foreach ($linksData as $key => $data) {
+            if (!isset($data['url'])) {
+                $linksData[$key]['url'] = null;
+            }
+            if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
+                $linksData[$key]['url'] = $getDocumentedClassUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
+            }
+        }
+        return $linksData;
     }
 
     #[Cache\CacheableMethod] public function hasThrows(): bool
@@ -254,59 +259,57 @@ abstract class BaseEntity
         return count($docBlock->getTagsByName('throws')) > 0;
     }
 
-    /**
-     * @return array<int,array{name:string, description:string|null}>
-     */
     #[Cache\CacheableMethod(
         Cache\CacheableMethod::MONTH_SECONDS,
         RenderContextCacheKeyGenerator::class
     )]
-    public function getThrows(?Context $context = null): array
+    public function getThrowsData(?Context $context = null): array
     {
-        static $throwsCache = [];
-        $objectId = $this->getObjectId() .
-            ($context ? spl_object_id($context) . $context->getCurrentTemplateFilePatch() : '');
-        if (!isset($throwsCache[$objectId])) {
-            $throws = [];
+        $throws = [];
+        $implementingReflectionClass = $this->getDocCommentImplementingClass();
+        $docBlock = $this->getDocBlock();
+        foreach ($docBlock->getTagsByName('throws') as $throwBlock) {
             try {
-                $implementingReflectionClass = $this->getDocCommentImplementingClass();
-                $docBlock = $this->getDocBlock();
-                foreach ($docBlock->getTagsByName('throws') as $throwBlock) {
-                    try {
-                        $names = explode('|', (string)$throwBlock->getType());
-                        foreach ($names as $name) {
-                            $className = ParserHelper::parseFullClassName(
-                                $name,
-                                $this->reflector,
-                                $implementingReflectionClass
-                            );
-                            $url = null;
-                            if ($context) {
-                                $data = EntityDocRenderHelper::getEntityUrlData(
-                                    $className,
-                                    $context,
-                                    $this->getImplementingReflectionClass()->getName()
-                                );
-                                $url = $data['url'];
-                                $name = $data['title'];
-                            }
-
-                            $throws[] = [
-                                'name' => $name,
-                                'url' => $url,
-                                'description' => (string)$throwBlock->getDescription(),
-                            ];
-                        }
-                    } catch (\Exception $e) {
-                        $this->logger->error($e->getMessage());
+                $names = explode('|', (string)$throwBlock->getType());
+                foreach ($names as $name) {
+                    $className = ParserHelper::parseFullClassName(
+                        $name,
+                        $this->reflector,
+                        $implementingReflectionClass
+                    );
+                    $throwData = [
+                        'name' => $className,
+                        'description' => (string)$throwBlock->getDescription(),
+                    ];
+                    if ($context) {
+                        $throwData['entityData'] = EntityDocRenderHelper::getEntityDataByLink(
+                            $className,
+                            $context,
+                            $this->getImplementingReflectionClass()->getName()
+                        );
                     }
+                    $throws[] = $throwData;
                 }
             } catch (\Exception $e) {
                 $this->logger->error($e->getMessage());
             }
-            $throwsCache[$objectId] = $throws;
         }
-        return $throwsCache[$objectId];
+        return $throws;
+    }
+
+    public function getThrows(?Context $context = null): array
+    {
+        $throwsData = $this->getThrowsData($context);
+        $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
+        foreach ($throwsData as $key => $data) {
+            if (!isset($data['url'])) {
+                $throwsData[$key]['url'] = null;
+            }
+            if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
+                $throwsData[$key]['url'] = $getDocumentedClassUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
+            }
+        }
+        return $throwsData;
     }
 
     #[Cache\CacheableMethod] public function hasExamples(): bool
