@@ -134,7 +134,7 @@ final class Render
             if (!is_dir($newDirName)) {
                 mkdir($newDirName, 0755, true);
             }
-            file_put_contents($filePatch, $content);
+            file_put_contents($filePatch, "<!-- {% raw %} -->\n{$content}\n<!-- {% endraw %} -->");
             $logger->info("Saving `{$filePatch}`");
         }
         $this->classEntityCollection->updateEntitiesCache();
