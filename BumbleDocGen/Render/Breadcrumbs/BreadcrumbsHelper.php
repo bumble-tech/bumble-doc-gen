@@ -94,6 +94,12 @@ final class BreadcrumbsHelper
      * Get the name of a template by its URL.
      * Only templates with .twig extension are processed.
      * The title is parsed from the `title` variable in the template
+     *
+     * @example
+     *  // variable in template:
+     *  // {% set title = 'Some template title' %}
+     *
+     *  $breadcrumbsHelper->getTemplateTitle() == 'Some template title'; // is true
      */
     public function getTemplateTitle(string $templateName): string
     {
