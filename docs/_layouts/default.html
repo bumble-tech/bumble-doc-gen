@@ -28,6 +28,7 @@
         }
         else if(h.getAttribute('href').startsWith('/docs')) {
             let newHref = h.getAttribute('href').replace('/docs', "https://***REMOVED***/pages/bumble-tech/bumble-doc-gen");
+            newHref = newHref.replace('readme.md', 'index.html').replace('md', 'html')
             h.setAttribute('href', newHref)
         }
     })
