@@ -135,7 +135,7 @@ abstract class BasePageLinker implements PluginInterface
             }
         }
 
-        $entityUrlData = EntityDocRenderHelper::getEntityUrlData($linkString, $context);
+        $entityUrlData = EntityDocRenderHelper::getEntityUrlDataByLink($linkString, $context);
         if ($entityUrlData['url']) {
             $linkString = explode('|', $linkString)[0];
             $className = explode('::', $linkString)[0];

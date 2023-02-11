@@ -14,11 +14,10 @@ final class EntityDocRenderHelper
     public const CLASS_ENTITY_FULL_LINK_OPTION = 'full_form';
     public const CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION = 'only_cursor';
 
-    public static function getEntityUrlData(
+    public static function getEntityDataByLink(
         string  $linkString,
         Context $context,
         ?string $defaultEntityClassName = null,
-        bool    $createDocument = true,
     ): array
     {
         static $pageLinksCache = [];
@@ -63,9 +62,9 @@ final class EntityDocRenderHelper
             ]) || !isset($classData[1]);
 
         if (
-            !$entity && $needToUseDefaultEntity && $defaultEntityClassName &&
-            $defaultEntity = $classEntityCollection->getEntityByClassName($defaultEntityClassName)
+            !$entity && $needToUseDefaultEntity && $defaultEntityClassName
         ) {
+            $defaultEntity = $classEntityCollection->getLoadedOrCreateNew($defaultEntityClassName);
             $cursorTmpName = str_replace(['$', '(', ')'], '', $className);
             if (
                 $defaultEntity->hasMethod($cursorTmpName) ||
@@ -93,9 +92,6 @@ final class EntityDocRenderHelper
                     $cursor = 'q' . $classData[1];
                 }
             }
-
-            $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
-
             if (in_array(self::CLASS_ENTITY_SHORT_LINK_OPTION, $linkOptions)) {
                 $linkString = $entity->getShortName() . (isset($classData[1]) ? "::{$classData[1]}" : '');
             } elseif (in_array(self::CLASS_ENTITY_FULL_LINK_OPTION, $linkOptions)) {
@@ -103,16 +99,31 @@ final class EntityDocRenderHelper
             } elseif (in_array(self::CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION, $linkOptions) && isset($classData[1])) {
                 $linkString = $classData[1];
             }
-
-            $url = $getDocumentedClassUrl($entity->getName(), $cursor, $createDocument);
             return [
-                'url' => $url,
+                'entityName' => $entity->getName(),
+                'cursor' => $cursor,
                 'title' => $linkString,
             ];
         }
         return [
-            'url' => null,
+            'entityName' => null,
+            'cursor' => null,
             'title' => $linkString,
         ];
+    }
+
+    public static function getEntityUrlDataByLink(
+        string  $linkString,
+        Context $context,
+        ?string $defaultEntityClassName = null,
+        bool    $createDocument = true
+    ): array
+    {
+        $data = self::getEntityDataByLink($linkString, $context, $defaultEntityClassName);
+        if ($data['entityName'] ?? null) {
+            $getDocumentedClassUrl = new GetDocumentedClassUrl($context, $createDocument);
+            $data['url'] = $getDocumentedClassUrl($data['entityName'], $data['cursor']);
+        }
+        return $data;
     }
 }

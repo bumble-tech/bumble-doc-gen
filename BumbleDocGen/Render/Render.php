@@ -134,6 +134,7 @@ final class Render
             if (!is_dir($newDirName)) {
                 mkdir($newDirName, 0755, true);
             }
+            // tmp hack to fix gitHub pages
             file_put_contents($filePatch, "<!-- {% raw %} -->\n{$content}\n<!-- {% endraw %} -->");
             $logger->info("Saving `{$filePatch}`");
         }
