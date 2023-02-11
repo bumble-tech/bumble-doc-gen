@@ -66,6 +66,11 @@ final class MethodEntityCollection extends BaseEntityCollection
         return $this->entities[$key] ?? null;
     }
 
+    public function has(string $key): bool
+    {
+        return array_key_exists($key, $this->entities);
+    }
+
     public function unsafeGet(string $key): ?MethodEntity
     {
         $methodEntity = $this->get($key);
