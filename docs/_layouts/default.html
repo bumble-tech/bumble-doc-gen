@@ -23,9 +23,10 @@
 
 <script>
     Array.from(
-        document.querySelectorAll('h1,h2,h3,h4,h5,h6')
+        document.querySelectorAll('h2,h3,h4,h5,h6')
     ).forEach(h => {
-        h.setAttribute('id', h.innerHTML)
+        let id = h.innerHTML.split('').filter(char => /[a-zA-Z]/.test(char)).join('')
+        h.setAttribute('id', id)
         h.addEventListener('click', e => {
             window.location.hash = e.target.getAttribute('id');
         });
