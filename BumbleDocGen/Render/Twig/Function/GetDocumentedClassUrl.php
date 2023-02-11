@@ -8,6 +8,7 @@ use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
+use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 
 /**
  * Get the URL of a documented class by its name. If the class is found, next to the file where this method was called,
@@ -65,7 +66,8 @@ final class GetDocumentedClassUrl
 
             if (mb_strlen($cursor) > 2) {
                 if ($createDocument) {
-                    $url .= $cursor ? "#{$cursor}" : '';
+                    $prepareSourceLink = new PrepareSourceLink();
+                    $url .= $cursor ? "#{$prepareSourceLink($cursor)}" : '';
                 } else {
                     $firstLetter = mb_substr($cursor, 0, 1);
                     $cursor = ltrim($cursor, $firstLetter);
