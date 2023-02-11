@@ -12,7 +12,6 @@ use BumbleDocGen\Parser\SourceLocator\RecursiveDirectoriesSourceLocator;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\PageLinkProcessor\BasePageLinkProcessor;
-use BumbleDocGen\Render\PageLinkProcessor\GithubPagesLinkProcessor;
 use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin;
 use SelfDoc\Configuration\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin;
@@ -66,7 +65,7 @@ final class Configuration extends BaseConfiguration
     {
         static $pageLinkProcessor = null;
         if (is_null($pageLinkProcessor)) {
-            $pageLinkProcessor = new GithubPagesLinkProcessor($this);
+            $pageLinkProcessor = new BasePageLinkProcessor($this);
         }
         return $pageLinkProcessor;
     }
@@ -78,7 +77,7 @@ final class Configuration extends BaseConfiguration
 
     public function getOutputDirBaseUrl(): string
     {
-        return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen/';
-        //return "/docs";
+        //return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen';
+        return "/docs";
     }
 }

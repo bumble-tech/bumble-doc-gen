@@ -22,10 +22,23 @@
 </main>
 
 <script>
-    Array.from(
-        document.querySelectorAll('h1,h2,h3,h4,h5,h6')
-    ).forEach(h => {
-        h.setAttribute('id', h.innerHTML)
+    Array.from(document.getElementsByTagName('a')).forEach(h => {
+        if(h.getAttribute('href') === '#') {
+            let span = document.createElement('span');
+            span.innerHTML = h.innerHTML;
+            h.setAttribute('href', '')
+            h.parentNode.replaceChild(span, h);
+        }
+        else if(h.getAttribute('href').startsWith('/docs')) {
+            let newHref = h.getAttribute('href').replace('/docs', "https://***REMOVED***/pages/bumble-tech/bumble-doc-gen");
+            newHref = newHref.replace('readme.md', 'index.html').replace('md', 'html')
+            h.setAttribute('href', newHref)
+        }
+    })
+
+    Array.from(document.querySelectorAll('h2,h3,h4,h5,h6')).forEach(h => {
+        let id = h.innerHTML.split('').filter(char => /[a-zA-Z]/.test(char)).join('')
+        h.setAttribute('id', id)
         h.addEventListener('click', e => {
             window.location.hash = e.target.getAttribute('id');
         });
