@@ -9,3 +9,6 @@ buttons:
   github_hide: true
 plugins:
   - jekyll-remote-theme
+github:
+  is_project_page: false
+title-heading: false
