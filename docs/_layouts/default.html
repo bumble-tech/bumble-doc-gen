@@ -22,9 +22,17 @@
 </main>
 
 <script>
-    Array.from(
-        document.querySelectorAll('h2,h3,h4,h5,h6')
-    ).forEach(h => {
+    Array.from(document.getElementsByTagName('a')).forEach(h => {
+        if(h.getAttribute('href') === '#') {
+            h.setAttribute('href', '')
+        }
+        else if(h.getAttribute('href').startsWith('/docs')) {
+            let newHref = h.getAttribute('href').replace('/docs', "https://***REMOVED***/pages/bumble-tech/bumble-doc-gen");
+            h.setAttribute('href', newHref)
+        }
+    })
+
+    Array.from(document.querySelectorAll('h2,h3,h4,h5,h6')).forEach(h => {
         let id = h.innerHTML.split('').filter(char => /[a-zA-Z]/.test(char)).join('')
         h.setAttribute('id', id)
         h.addEventListener('click', e => {
