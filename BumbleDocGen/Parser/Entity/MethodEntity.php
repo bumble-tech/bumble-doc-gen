@@ -260,7 +260,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 'type' => $this->prepareTypeString($type),
                 'expectedType' => $expectedType,
                 'name' => $name,
-                'defaultValue' => $defaultValue,
+                'defaultValue' => $this->prepareTypeString($defaultValue),
                 'description' => $description,
             ];
         }
