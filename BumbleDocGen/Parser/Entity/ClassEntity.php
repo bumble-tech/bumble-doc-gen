@@ -94,6 +94,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->reflector;
     }
 
+    /**
+     * Checking if class file is in git repository
+     */
     public function isInGit(): bool
     {
         $filesInGit = ParserHelper::getFilesInGit($this->getConfiguration());
@@ -176,6 +179,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->isClassLoad;
     }
 
+    /**
+     * Checking if it is possible to get the entity data ( is the specified class loaded )
+     */
     #[Cache\CacheableMethod] public function classDataCanBeLoaded(): bool
     {
         return $this->isClassLoad();

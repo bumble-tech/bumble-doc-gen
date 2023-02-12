@@ -37,6 +37,9 @@ abstract class BaseEntity
         return $this->configuration;
     }
 
+    /**
+     * @internal
+     */
     abstract public function getReflection(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
 
     abstract public function getImplementingReflectionClass(): ReflectionClass;
@@ -87,6 +90,9 @@ abstract class BaseEntity
         return $reflection->getName();
     }
 
+    /**
+     * Get entity unique ID
+     */
     public function getObjectId(): string
     {
         if (method_exists($this, 'getClassEntity')) {
@@ -153,7 +159,7 @@ abstract class BaseEntity
         Cache\CacheableMethod::MONTH_SECONDS,
         RenderContextCacheKeyGenerator::class
     )]
-    public function getDescriptionLinksData(?Context $context = null): array
+    protected function getDescriptionLinksData(?Context $context = null): array
     {
         $links = [];
         $docBlock = $this->getDocBlock();
@@ -249,6 +255,9 @@ abstract class BaseEntity
         return $links;
     }
 
+    /**
+     * Get parsed links from description and doc blocks `see` and `link`
+     */
     public function getDescriptionLinks(?Context $context = null): array
     {
         $linksData = $this->getDescriptionLinksData($context);
@@ -274,7 +283,7 @@ abstract class BaseEntity
         Cache\CacheableMethod::MONTH_SECONDS,
         RenderContextCacheKeyGenerator::class
     )]
-    public function getThrowsData(?Context $context = null): array
+    protected function getThrowsData(?Context $context = null): array
     {
         $throws = [];
         $implementingReflectionClass = $this->getDocCommentImplementingClass();
@@ -308,6 +317,9 @@ abstract class BaseEntity
         return $throws;
     }
 
+    /**
+     * Get parsed throws from `throws` doc block
+     */
     public function getThrows(?Context $context = null): array
     {
         $throwsData = $this->getThrowsData($context);
@@ -330,6 +342,8 @@ abstract class BaseEntity
     }
 
     /**
+     * Get parsed examples from `examples` doc block
+     *
      * @return array<int,array{example:string}>
      */
     #[Cache\CacheableMethod] public function getExamples(): array
@@ -346,6 +360,9 @@ abstract class BaseEntity
         return $examples;
     }
 
+    /**
+     * Get first example from @examples doc block
+     */
     #[Cache\CacheableMethod] public function getFirstExample(): string
     {
         $examples = $this->getExamples();
@@ -358,6 +375,9 @@ abstract class BaseEntity
         return (string)($docBlock->getTagsByName('note')[0] ?? '');
     }
 
+    /**
+     * Get the doc comment of an entity
+     */
     #[Cache\CacheableMethod] public function getDocComment(): string
     {
         return $this->getReflection()->getDocComment();
