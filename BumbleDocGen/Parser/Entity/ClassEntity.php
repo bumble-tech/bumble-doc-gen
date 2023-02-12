@@ -484,8 +484,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
         $parentClassNames = $this->getParentClassNames();
         $interfacesNames = $this->getInterfaces();
-
-        return in_array($className, array_merge($parentClassNames, $interfacesNames));
+        $allClasses = array_map(
+            fn($interface) => ltrim($interface, '\\'), array_merge($parentClassNames, $interfacesNames)
+        );
+        return in_array($className, $allClasses);
     }
 
     #[Cache\CacheableMethod] public function getConstant(string $name): string|array|int|bool|null|float
@@ -496,7 +498,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     #[Cache\CacheableMethod] public function implementsInterface(string $interfaceName): bool
     {
         $interfaceName = ltrim(str_replace('\\\\', '\\', $interfaceName), '\\');
-        return in_array($interfaceName, $this->getInterfaces());
+        $interfaces = array_map(
+            fn($interface) => ltrim($interface, '\\'), $this->getInterfaces()
+        );
+        return in_array($interfaceName, $interfaces);
     }
 
     #[Cache\CacheableMethod] public function getConstants(): array
