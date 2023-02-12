@@ -6,7 +6,6 @@ namespace BumbleDocGen\Render\Twig;
 
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
-use BumbleDocGen\Render\Twig\Filter\EndTextBySeparatorRst;
 use BumbleDocGen\Render\Twig\Filter\FixStrSize;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
@@ -19,6 +18,7 @@ use BumbleDocGen\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentedClassLink;
 use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
+use BumbleDocGen\Render\Twig\Function\GetClassMethodsBodyCode;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use BumbleDocGen\Render\Twig\Function\IsSubclassOf;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
@@ -68,6 +68,13 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
             new \Twig\TwigFunction(
                 'drawDocumentedClassLink',
                 new DrawDocumentedClassLink($this->context),
+                [
+                    'is_safe' => ['html'],
+                ]
+            ),
+            new \Twig\TwigFunction(
+                'getClassMethodsBodyCode',
+                new GetClassMethodsBodyCode($this->context),
                 [
                     'is_safe' => ['html'],
                 ]
