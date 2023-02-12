@@ -44,3 +44,11 @@ Several plugins have been written to create this document. They can be considere
 
 {{ drawClassMap( classEntityCollection.filterByPaths(['/SelfDoc/Configuration/Plugin'])) }}
 
+```php
+{{
+    getClassMethodsBodyCode(
+        '\\SelfDoc\\Configuration\\Plugin\\TwigFunctionClassParser\\TwigFunctionClassParserPlugin',
+        [ 'getSubscribedEvents', 'onLoadEntityDocPluginContentEvent', 'afterCreationClassEntityCollection' ]
+    )
+}}
+```
