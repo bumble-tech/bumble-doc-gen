@@ -56,7 +56,7 @@ final class StrTypeToUrl
                     if ($useShortLinkVersion) {
                         $type = $entityClassOfLink->getShortName();
                     } else {
-                        $type = $entityClassOfLink->getName();
+                        $type = "\\{$entityClassOfLink->getName()}";
                     }
 
                     if ($templateType == self::TEMPLATE_TYPE_FROM_CONTEXT) {

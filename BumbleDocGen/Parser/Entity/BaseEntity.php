@@ -54,6 +54,17 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] abstract public function getStartLine(): int;
 
+    protected function prepareTypeString(string $type): string
+    {
+        $types = explode('|', $type);
+        foreach ($types as $k => $t) {
+            if (str_contains($t, '\\') && !str_starts_with($t, '\\')) {
+                $types[$k] = "\\{$t}";
+            }
+        }
+        return implode('|', $types);
+    }
+
     public function getFileSourceLink(bool $withLine = true): ?string
     {
         $fileName = $this->getFileName();

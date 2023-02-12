@@ -181,7 +181,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 return str_replace(' ', '', $condition[0]);
             }, $type);
         }
-        return $type;
+        return $this->prepareTypeString($type);
     }
 
     /**
@@ -257,7 +257,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             } catch (\Exception) {
             }
             $parameters[] = [
-                'type' => $type,
+                'type' => $this->prepareTypeString($type),
                 'expectedType' => $expectedType,
                 'name' => $name,
                 'defaultValue' => $defaultValue,

@@ -251,15 +251,20 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $reflection = $this->getReflection();
         if ($reflection->isInterface()) {
-            return $reflection->getInterfaceNames()[0] ?? null;
+            $extends = $reflection->getInterfaceNames()[0] ?? null;
+        } else {
+            $extends = $reflection->getParentClass()?->getName();
         }
-        return $reflection->getParentClass()?->getName();
+        if ($extends) {
+            $extends = "\\{$extends}";
+        }
+        return $extends;
     }
 
     #[Cache\CacheableMethod] public function getInterfaces(): array
     {
         $reflection = $this->getReflection();
-        return !$reflection->isInterface() ? $reflection->getInterfaceNames() : [];
+        return !$reflection->isInterface() ? array_map(fn($interfaceName) => "\\{$interfaceName}", $reflection->getInterfaceNames()) : [];
     }
 
     /**
@@ -269,9 +274,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $reflection = $this->getReflection();
         if ($reflection->isInterface()) {
-            return $reflection->getInterfaceNames();
+            $parentClassNames = $reflection->getInterfaceNames();
+        } else {
+            $parentClassNames = $reflection->getParentClassNames();
         }
-        return $reflection->getParentClassNames();
+        return array_map(fn($parentClassName) => "\\{$parentClassName}", $parentClassNames);
     }
 
     /**

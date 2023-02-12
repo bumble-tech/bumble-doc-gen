@@ -150,7 +150,7 @@ class PropertyEntity extends BaseEntity
                 $typeString = implode('|', $typesFromDoc);
             }
         }
-        return $typeString;
+        return $this->prepareTypeString($typeString);
     }
 
     #[Cache\CacheableMethod] public function getModifiersString(): string
