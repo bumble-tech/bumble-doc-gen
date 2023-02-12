@@ -131,9 +131,18 @@ final class ClassEntityCollection extends BaseEntityCollection
         $classEntityCollection = new ClassEntityCollection(
             $this->configuration, $this->reflector, $this->pluginEventDispatcher, $this->attributeParser, $this->logger
         );
+        $interfaces = array_map(
+            fn($interface) => ltrim(
+                str_replace('\\\\', '\\', $interface),
+                '\\'
+            ), $interfaces
+        );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
-            if (array_intersect($interfaces, $classEntity->getInterfaces())) {
+            $entityInterfaces = array_map(
+                fn($interface) => ltrim($interface, '\\'), $classEntity->getInterfaces()
+            );
+            if (array_intersect($interfaces, $entityInterfaces)) {
                 $classEntityCollection->addWithoutPreparation($classEntity);
             }
         }
@@ -145,9 +154,18 @@ final class ClassEntityCollection extends BaseEntityCollection
         $classEntityCollection = new ClassEntityCollection(
             $this->configuration, $this->reflector, $this->pluginEventDispatcher, $this->attributeParser, $this->logger
         );
+        $parentClassNames = array_map(
+            fn($parentClassName) => ltrim(
+                str_replace('\\\\', '\\', $parentClassName),
+                '\\'
+            ), $parentClassNames
+        );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
-            if (array_intersect($parentClassNames, $classEntity->getParentClassNames())) {
+            $entityParentClassNames = array_map(
+                fn($parentClassName) => ltrim($parentClassName, '\\'), $classEntity->getParentClassNames()
+            );
+            if (array_intersect($parentClassNames, $entityParentClassNames)) {
                 $classEntityCollection->addWithoutPreparation($classEntity);
             }
         }
