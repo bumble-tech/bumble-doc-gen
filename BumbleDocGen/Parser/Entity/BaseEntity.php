@@ -6,6 +6,7 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\AttributeParser;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
@@ -61,8 +62,18 @@ abstract class BaseEntity
     {
         $types = explode('|', $type);
         foreach ($types as $k => $t) {
-            if (str_contains($t, '\\') && !str_starts_with($t, '\\')) {
-                $types[$k] = "\\{$t}";
+            if ($t && !str_starts_with($t, '\\')) {
+                if (str_contains($t, '\\')) {
+                    $types[$k] = "\\{$t}";
+                } elseif (ParserHelper::isCorrectClassName($t) && CacheableEntityWrapperFactory::createClassEntity(
+                        $this->configuration,
+                        $this->reflector,
+                        $t,
+                        null,
+                        $this->attributeParser
+                    )->classDataCanBeLoaded()) {
+                    $types[$k] = "\\{$t}";
+                }
             }
         }
         return implode('|', $types);
