@@ -76,7 +76,13 @@ final class Render
         );
         $twig->addExtension(new MainExtension($context));
 
-        $finder = Finder::create()->in($templateFolder)->ignoreDotFiles(true)->ignoreVCSIgnored(true)->files();
+        $finder = Finder::create()
+            ->in($templateFolder)
+            ->ignoreDotFiles(true)
+            ->ignoreVCSIgnored(true)
+            ->reverseSorting()
+            ->sortByName()
+            ->files();
 
         $logger = $this->configuration->getLogger();
         $outputDir = $this->configuration->getOutputDir();
