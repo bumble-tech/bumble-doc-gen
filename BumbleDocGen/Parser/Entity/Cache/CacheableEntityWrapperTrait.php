@@ -8,6 +8,8 @@ use BumbleDocGen\Parser\ParserHelper;
 
 trait CacheableEntityWrapperTrait
 {
+    private string $cacheVersion = 'v1';
+
     abstract function getConfiguration(): ConfigurationInterface;
 
     public function getCurrentClassEntity(): ?ClassEntity
@@ -106,11 +108,10 @@ trait CacheableEntityWrapperTrait
         return false;
     }
 
-
     protected function getCacheKey(): string
     {
         $currentClassEntity = $this->getCurrentClassEntity();
-        return $currentClassEntity ? str_replace(["\\", ":", '\n', '/'], "_", $this->getCurrentClassEntity()->getName()) : '';
+        return $currentClassEntity ? str_replace(["\\", ":", '\n', '/'], "_{$this->cacheVersion}_", $this->getCurrentClassEntity()->getName()) : '';
     }
 
     public function getCacheValues(): array
