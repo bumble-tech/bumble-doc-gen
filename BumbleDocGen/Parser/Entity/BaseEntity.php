@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\AttributeParser;
 use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Parser\ParserHelper;
@@ -27,7 +26,6 @@ abstract class BaseEntity
     protected function __construct(
         protected ConfigurationInterface $configuration,
         protected Reflector              $reflector,
-        protected AttributeParser        $attributeParser
     )
     {
         $this->logger = $this->configuration->getLogger();
@@ -69,8 +67,7 @@ abstract class BaseEntity
                         $this->configuration,
                         $this->reflector,
                         $t,
-                        null,
-                        $this->attributeParser
+                        null
                     )->classDataCanBeLoaded()) {
                     $types[$k] = "\\{$t}";
                 }
@@ -86,11 +83,6 @@ abstract class BaseEntity
             return null;
         }
         return $this->configuration->getFileSourceBaseUrl() . $fileName . ($withLine ? "#L{$this->getStartLine()}" : '');
-    }
-
-    public function getAttributeParser(): AttributeParser
-    {
-        return $this->attributeParser;
     }
 
     public static function generateObjectIdByReflection(ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant $reflection): string

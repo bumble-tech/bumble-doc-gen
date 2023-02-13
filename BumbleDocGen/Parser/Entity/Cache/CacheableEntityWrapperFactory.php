@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity\Cache;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\AttributeParser;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\Entity\ConstantEntity;
 use BumbleDocGen\Parser\Entity\MethodEntity;
@@ -141,7 +140,6 @@ final class CacheableEntityWrapperFactory
         Reflector              $reflector,
         string                 $className,
         ?string                $relativeFileName,
-        AttributeParser        $attributeParser,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -151,7 +149,6 @@ final class CacheableEntityWrapperFactory
             $reflector,
             $className,
             $relativeFileName,
-            $attributeParser,
             $reloadCache
         );
     }
@@ -160,7 +157,6 @@ final class CacheableEntityWrapperFactory
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         ReflectionClass        $reflectionClass,
-        AttributeParser        $attributeParser,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -169,7 +165,6 @@ final class CacheableEntityWrapperFactory
             $configuration,
             $reflector,
             $reflectionClass,
-            $attributeParser,
             $reloadCache
         );
     }
@@ -180,7 +175,6 @@ final class CacheableEntityWrapperFactory
         Reflector              $reflector,
         string                 $className,
         ?string                $relativeFileName,
-        AttributeParser        $attributeParser,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -192,7 +186,6 @@ final class CacheableEntityWrapperFactory
             $reflector,
             $className,
             $relativeFileName,
-            $attributeParser,
             $reloadCache
         );
     }
@@ -202,7 +195,6 @@ final class CacheableEntityWrapperFactory
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         ReflectionClass        $reflectionClass,
-        AttributeParser        $attributeParser,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -213,7 +205,6 @@ final class CacheableEntityWrapperFactory
             $configuration,
             $reflector,
             $reflectionClass,
-            $attributeParser,
             $reloadCache
         );
     }

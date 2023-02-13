@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\AttributeParser;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -26,10 +25,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         protected Reflector              $reflector,
         protected string                 $className,
         protected ?string                $relativeFileName,
-        protected AttributeParser        $attributeParser
     )
     {
-        parent::__construct($configuration, $reflector, $attributeParser);
+        parent::__construct($configuration, $reflector);
         if ($relativeFileName) {
             $this->relativeFileNameLoaded = true;
         }
@@ -45,7 +43,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         Reflector              $reflector,
         string                 $className,
         ?string                $relativeFileName,
-        AttributeParser        $attributeParser,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -58,7 +55,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $reflector,
                 $className,
                 $relativeFileName,
-                $attributeParser
             );
         }
         return $classEntities[$objectId];
@@ -68,7 +64,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         ReflectionClass        $reflectionClass,
-        AttributeParser        $attributeParser,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -81,7 +76,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $reflector,
                 $reflectionClass->getName(),
                 $relativeFileName,
-                $attributeParser
             );
             $classEntities[$objectId]->reflectionClass = $reflectionClass;
             $classEntities[$objectId]->isClassLoad = true;

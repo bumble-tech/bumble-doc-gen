@@ -51,11 +51,9 @@ final class ProjectParser
 
     public function parse(): ClassEntityCollection
     {
-        $attributeParser = new AttributeParser($this->reflector, $this->logger);
         return ClassEntityCollection::createByReflector(
             $this->configuration,
             $this->reflector,
-            $attributeParser,
             $this->pluginEventDispatcher
         );
     }
