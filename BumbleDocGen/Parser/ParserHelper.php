@@ -243,6 +243,80 @@ final class ParserHelper
         return null;
     }
 
+    protected static function getRawValue(
+        Reflector        $reflector,
+        ReflectionClass  $reflectionClass,
+        ReflectionMethod $reflectionMethod,
+        string           $condition
+    )
+    {
+        $prepareReturnValue = function (mixed $value): mixed {
+            if (!is_string($value) || str_contains($value, ':') || str_contains($value, '->')) {
+                return $value;
+            }
+            return "'{$value}'";
+        };
+        if (
+            str_contains($condition, '::') && !str_contains($condition, '"') && !str_contains($condition, '\'')
+        ) {
+            try {
+                $nextClass = null;
+                $parts = explode('::', $condition);
+                if ($parts[0] === 'parent') {
+                    $nextClass = $reflectionMethod->getImplementingClass()->getParentClass();
+                } elseif ($parts[0] === 'self') {
+                    $nextClass = $reflectionMethod->getImplementingClass();
+                } elseif (self::isClassLoaded($reflector, $parts[0])) {
+                    $nextClass = $reflector->reflectClass($parts[0]);
+                }
+
+                if ($nextClass) {
+                    if (str_contains($parts[1], '(') && !str_contains($parts[1], ' ') && !str_contains($parts[1], '.')) {
+                        $methodName = explode('(', $parts[1])[0];
+                        $nextReflection = $nextClass->getMethod($methodName);
+                        $methodValue = self::getMethodReturnValue($reflector, $reflectionClass, $nextReflection);
+                        return $prepareReturnValue($methodValue);
+                    } elseif (!preg_match('/([-+:\/ ])/', $parts[1])) {
+                        $constantValue = $nextClass->getConstant($parts[1]);
+                        return $prepareReturnValue($constantValue);
+                    }
+                    $reflectionClass = $nextClass;
+                }
+            } catch (\Exception) {
+            }
+        }
+
+        $value = preg_replace_callback(
+            '/([$]?)([a-zA-Z_\\\\]+)((::)|(->))([\s\S]([^ -+\-;\]])+)(([^)]?)+[)])?/',
+            function (array $matches) use ($reflector, $reflectionClass, $prepareReturnValue) {
+                if ($matches[1] && $matches[2] != 'this') {
+                    return $matches[0];
+                }
+                if (substr_count($matches[0], '->') > 1) {
+                    return $matches[0];
+                }
+
+                $nextClass = $reflectionClass;
+                if (!in_array($matches[2], ['static', 'self', 'partner', 'this'])) {
+                    $nextClass = $reflector->reflectClass($matches[2]);
+                }
+
+                if (isset($matches[8]) && $nextClass->hasMethod($matches[6])) {
+                    $methodValue = self::getMethodReturnValue($reflector, $nextClass, $nextClass->getMethod($matches[6]));
+                    return $prepareReturnValue($methodValue);
+                } elseif ($nextClass->hasConstant($matches[6])) {
+                    $constantValue = $nextClass->getConstant($matches[6]);
+                    return $prepareReturnValue($constantValue);
+                } else {
+                    return $matches[0];
+                }
+            },
+            $condition
+        );
+
+        return $value;
+    }
+
     public static function getMethodReturnValue(
         Reflector        $reflector,
         ReflectionClass  $reflectionClass,
@@ -250,58 +324,23 @@ final class ParserHelper
     ): mixed
     {
         if (preg_match('/(return )([^;]+)/', $reflectionMethod->getBodyCode(), $matches)) {
-            if (
-                str_contains($matches[2], '::') && !str_contains($matches[2], '"') && !str_contains($matches[2], '\'')
-            ) {
-                try {
-                    $nextClass = null;
-                    $parts = explode('::', $matches[2]);
-                    if ($parts[0] === 'parent') {
-                        $nextClass = $reflectionMethod->getImplementingClass()->getParentClass();
-                    } elseif ($parts[0] === 'self') {
-                        $nextClass = $reflectionMethod->getImplementingClass();
-                    } elseif (self::isClassLoaded($reflector, $parts[0])) {
-                        $nextClass = $reflector->reflectClass($parts[0]);
-                    }
+            $savedParts = [];
+            $i = 0;
+            $preparedConditions = preg_replace_callback("/((\")(.*?)(\"))|((')(.*?)('))/", function (array $matches) use (&$savedParts, &$i) {
+                $value = array_key_exists(7, $matches) ? $matches[7] : $matches[3];
+                $savedParts[++$i] = $value;
+                return "'[%{$i}%]'";
+            }, $matches[2]);
 
-                    if ($nextClass) {
-                        if (str_contains($parts[1], '(')) {
-                            $methodName = explode('(', $parts[1])[0];
-                            $nextReflection = $nextClass->getMethod($methodName);
-                            return self::getMethodReturnValue($reflector, $reflectionClass, $nextReflection);
-                        } elseif (!preg_match('/([-+:\/ ])/', $parts[1])) {
-                            return $nextClass->getConstant($parts[1]);
-                        }
-                        $reflectionClass = $nextClass;
-                    }
-                } catch (\Exception) {
+            $conditions = explode('.', $preparedConditions);
+            $values = [];
+            foreach ($conditions as $condition) {
+                foreach ($savedParts as $i => $savedPart) {
+                    $condition = str_replace("[%{$i}%]", $savedPart, $condition);
                 }
+                $values[] = self::getRawValue($reflector, $reflectionClass, $reflectionMethod, trim($condition));
             }
-
-            $value = preg_replace_callback(
-                '/([$]?)([a-zA-Z_\\\\]+)((::)|(->))([\s\S]([^ -+\-;\]])+)(([^)]?)+[)])?/',
-                function (array $matches) use ($reflector, $reflectionClass) {
-                    if ($matches[1]) {
-                        return $matches[0];
-                    }
-                    if (substr_count($matches[0], '->') > 1) {
-                        return $matches[0];
-                    }
-
-                    $nextClass = $reflectionClass;
-                    if (!in_array($matches[2], ['static', 'self', 'partner', 'this'])) {
-                        $nextClass = $reflector->reflectClass($matches[2]);
-                    }
-
-                    if (isset($matches[8])) {
-                        return self::getMethodReturnValue($reflector, $nextClass, $nextClass->getMethod($matches[6]));
-                    } else {
-                        $constantValue = $nextClass->getConstant($matches[6]);
-                        return is_string($constantValue) ? "'{$constantValue}'" : $constantValue;
-                    }
-                },
-                trim($matches[2])
-            );
+            $value = implode(' . ', $values);
 
             if ($value && !str_contains($value, '::') && !str_contains($value, '$this->')) {
                 try {
