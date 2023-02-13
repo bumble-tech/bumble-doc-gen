@@ -130,7 +130,10 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] final public function getDocBlock(): DocBlock
     {
-        $docBlockFactory = $this->attributeParser->getDocBlockFactory();
+        static $docBlockFactory = null;
+        if (is_null($docBlockFactory)) {
+            $docBlockFactory = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
+        }
         return $docBlockFactory->create($this->getDocCommentRecursive() ?: ' ');
     }
 
