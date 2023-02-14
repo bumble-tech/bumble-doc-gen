@@ -176,6 +176,16 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->classEntity;
     }
 
+    public function getShortName(): string
+    {
+        return $this->getName();
+    }
+
+    public function getNamespaceName(): string
+    {
+        return $this->getClassEntity()->getNamespaceName();
+    }
+
     public function isPublic(): bool
     {
         return true;

@@ -65,12 +65,7 @@ class PropertyEntity extends BaseEntity
 
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
-        $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
-            $this->configuration,
-            $this->reflector,
-            $this->getDocCommentReflectionRecursive()->getImplementingClass(),
-            $this->getClassEntityCollection()
-        );
+        $classEntity = $this->getDocCommentEntity()->getClassEntity();
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
@@ -79,29 +74,30 @@ class PropertyEntity extends BaseEntity
         return $this->getReflection()->getImplementingClass();
     }
 
-    protected function getDocCommentReflectionRecursive(): ReflectionProperty
+    protected function getDocCommentEntity(): PropertyEntity
     {
         static $docCommentsReflectionCache = [];
         $objectId = $this->getObjectId();
         if (!isset($docCommentsReflectionCache[$objectId])) {
-            $getDocCommentReflection = function (ReflectionProperty $reflectionProperty) use (&$getDocCommentReflection
-            ): ReflectionProperty {
-                $docComment = $reflectionProperty->getDocComment();
-                if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
-                    try {
-                        $parentClass = $reflectionProperty->getImplementingClass()->getParentClass();
-                        $propertyName = $reflectionProperty->getName();
-                        if ($parentClass && $parentClass->hasProperty($propertyName)) {
-                            $parentReflectionProperty = $parentClass->getProperty($propertyName);
-                            $reflectionProperty = $getDocCommentReflection($parentReflectionProperty);
+            $docComment = $this->getDocComment();
+            $reflectionProperty = $this;
+            if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
+                $implementingClass = $this->getImplementingClass();
+                $parentClass = $this->getImplementingClass()->getParentClass();
+                $propertyName = $this->getName();
+                if ($parentClass && $parentClass->hasProperty($propertyName)) {
+                    $parentReflectionProperty = $parentClass->getPropertyEntity($propertyName);
+                    $reflectionProperty = $parentReflectionProperty->getDocCommentEntity();
+                } else {
+                    foreach ($implementingClass->getInterfacesEntities() as $interface) {
+                        if ($interface->hasProperty($propertyName)) {
+                            $reflectionProperty = $interface->getPropertyEntity($propertyName);
+                            break;
                         }
-                    } catch (\Exception $e) {
-                        $this->getLogger()->error($e->getMessage());
                     }
                 }
-                return $reflectionProperty;
-            };
-            $docCommentsReflectionCache[$objectId] = $getDocCommentReflection($this->getReflection());
+            }
+            $docCommentsReflectionCache[$objectId] = $reflectionProperty;
         }
         return $docCommentsReflectionCache[$objectId];
     }
@@ -111,7 +107,7 @@ class PropertyEntity extends BaseEntity
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
         if (!isset($docCommentsCache[$objectId])) {
-            $docCommentsCache[$objectId] = $this->getDocCommentReflectionRecursive()->getDocComment() ?: ' ';
+            $docCommentsCache[$objectId] = $this->getDocCommentEntity()->getDocComment() ?: ' ';
         }
 
         return $docCommentsCache[$objectId];
@@ -120,6 +116,16 @@ class PropertyEntity extends BaseEntity
     public function getName(): string
     {
         return $this->propertyName;
+    }
+
+    public function getShortName(): string
+    {
+        return $this->getName();
+    }
+
+    public function getNamespaceName(): string
+    {
+        return $this->getClassEntity()->getNamespaceName();
     }
 
     public function getImplementingClassName(): string

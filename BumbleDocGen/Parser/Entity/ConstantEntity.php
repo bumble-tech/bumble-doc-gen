@@ -52,12 +52,7 @@ class ConstantEntity extends BaseEntity
 
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
-        $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
-            $this->configuration,
-            $this->reflector,
-            $this->getDocCommentReflectionRecursive()->getImplementingClass(),
-            $this->getClassEntityCollection()
-        );
+        $classEntity = $this->getDocCommentEntity()->getClassEntity();
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
@@ -89,9 +84,9 @@ class ConstantEntity extends BaseEntity
         return $this->getClassEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
-    protected function getDocCommentReflectionRecursive(): ReflectionClassConstant
+    protected function getDocCommentEntity(): ConstantEntity
     {
-        return $this->getReflection();
+        return $this;
     }
 
     #[Cache\CacheableMethod] protected function getDocCommentRecursive(): string
@@ -99,7 +94,7 @@ class ConstantEntity extends BaseEntity
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
         if (!isset($docCommentsCache[$objectId])) {
-            $docCommentsCache[$objectId] = $this->getReflection()->getDocComment() ?: ' ';
+            $docCommentsCache[$objectId] = $this->getDocCommentEntity()->getDocComment() ?: ' ';
         }
         return $docCommentsCache[$objectId];
     }
@@ -107,6 +102,16 @@ class ConstantEntity extends BaseEntity
     public function getName(): string
     {
         return $this->constantName;
+    }
+
+    public function getShortName(): string
+    {
+        return $this->getName();
+    }
+
+    public function getNamespaceName(): string
+    {
+        return $this->getClassEntity()->getNamespaceName();
     }
 
     #[Cache\CacheableMethod] public function getFileName(): ?string

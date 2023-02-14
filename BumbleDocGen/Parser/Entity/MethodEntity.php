@@ -66,12 +66,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
-        $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
-            $this->configuration,
-            $this->reflector,
-            $this->getDocCommentReflectionRecursive()->getCurrentClass(),
-            $this->getClassEntityCollection()
-        );
+        $classEntity = $this->getDocCommentEntity()->getClassEntity();
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
@@ -85,37 +80,40 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->getClassEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
-    protected function getDocCommentReflectionRecursive(): ReflectionMethod
+    public function getShortName(): string
+    {
+        return $this->getName();
+    }
+
+    public function getNamespaceName(): string
+    {
+        return $this->getClassEntity()->getNamespaceName();
+    }
+
+    protected function getDocCommentEntity(): MethodEntity
     {
         static $docCommentsReflectionCache = [];
         $objectId = $this->getObjectId();
         if (!isset($docCommentsReflectionCache[$objectId])) {
-            $getDocCommentReflection = function (ReflectionMethod $reflectionMethod) use (&$getDocCommentReflection
-            ): ReflectionMethod {
-                $docComment = $reflectionMethod->getDocComment();
-                if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
-                    try {
-                        $implementingClass = $reflectionMethod->getImplementingClass();
-                        $parentClass = $reflectionMethod->getImplementingClass()->getParentClass();
-                        $methodName = $reflectionMethod->getShortName();
-                        if ($parentClass && $parentClass->hasMethod($methodName)) {
-                            $parentReflectionMethod = $parentClass->getMethod($methodName);
-                            $reflectionMethod = $getDocCommentReflection($parentReflectionMethod);
-                        } else {
-                            foreach ($implementingClass->getInterfaces() as $interface) {
-                                if ($interface->hasMethod($methodName)) {
-                                    $reflectionMethod = $interface->getMethod($methodName);
-                                    break;
-                                }
-                            }
+            $docComment = $this->getDocComment();
+            $reflectionMethod = $this;
+            if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
+                $implementingClass = $this->getImplementingClass();
+                $parentClass = $this->getImplementingClass()->getParentClass();
+                $methodName = $this->getName();
+                if ($parentClass && $parentClass->hasMethod($methodName)) {
+                    $parentReflectionMethod = $parentClass->getMethodEntity($methodName);
+                    $reflectionMethod = $parentReflectionMethod->getDocCommentEntity();
+                } else {
+                    foreach ($implementingClass->getInterfacesEntities() as $interface) {
+                        if ($interface->hasMethod($methodName)) {
+                            $reflectionMethod = $interface->getMethodEntity($methodName);
+                            break;
                         }
-                    } catch (\Exception $e) {
-                        $this->getLogger()->error($e->getMessage());
                     }
                 }
-                return $reflectionMethod;
-            };
-            $docCommentsReflectionCache[$objectId] = $getDocCommentReflection($this->getReflection());
+            }
+            $docCommentsReflectionCache[$objectId] = $reflectionMethod;
         }
         return $docCommentsReflectionCache[$objectId];
     }
@@ -125,7 +123,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
         if (!isset($docCommentsCache[$objectId])) {
-            $docCommentsCache[$objectId] = $this->getDocCommentReflectionRecursive()->getDocComment() ?: ' ';
+            $docCommentsCache[$objectId] = $this->getDocCommentEntity()->getDocComment() ?: ' ';
         }
         return $docCommentsCache[$objectId];
     }

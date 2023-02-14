@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
@@ -47,7 +46,7 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] abstract protected function getDocCommentRecursive(): string;
 
-    abstract protected function getDocCommentReflectionRecursive(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
+    abstract protected function getDocCommentEntity(): ClassEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
     #[Cache\CacheableMethod] abstract public function getDescription(): string;
 
@@ -155,17 +154,6 @@ abstract class BaseEntity
             count($docBlock->getTagsByName('see')) || count($docBlock->getTagsByName('link'));
     }
 
-    private function getDocCommentImplementingClass(): ReflectionClass
-    {
-        $implementingReflection = $this->getDocCommentReflectionRecursive();
-        if (method_exists($implementingReflection, 'getImplementingClass')) {
-            $implementingReflectionClass = $implementingReflection->getImplementingClass();
-        } else {
-            $implementingReflectionClass = $implementingReflection;
-        }
-        return $implementingReflectionClass;
-    }
-
     #[Cache\CacheableMethod(
         Cache\CacheableMethod::MONTH_SECONDS,
         RenderContextCacheKeyGenerator::class
@@ -174,7 +162,7 @@ abstract class BaseEntity
     {
         $links = [];
         $docBlock = $this->getDocBlock();
-        $docCommentImplementingClass = $this->getDocCommentImplementingClass();
+        $docCommentImplementingClass = $this->getDocCommentEntity();
 
         foreach ($docBlock->getTagsByName('see') as $seeBlock) {
             if (!method_exists($seeBlock, 'getReference')) {
@@ -233,10 +221,11 @@ abstract class BaseEntity
                         'description' => '',
                     ];
                 } elseif ($context) {
+                    $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getClassEntity();
                     $className = ParserHelper::parseFullClassName(
                         $name,
                         $this->reflector,
-                        $docCommentImplementingClass
+                        $currentClassEntity->getReflection()
                     );
                     $data = EntityDocRenderHelper::getEntityDataByLink(
                         $className,
@@ -301,7 +290,7 @@ abstract class BaseEntity
     protected function getThrowsData(?Context $context = null): array
     {
         $throws = [];
-        $implementingReflectionClass = $this->getDocCommentImplementingClass();
+        $implementingReflectionClass = $this->getDocCommentEntity()->getClassEntity()->getReflection();
         $docBlock = $this->getDocBlock();
         foreach ($docBlock->getTagsByName('throws') as $throwBlock) {
             try {

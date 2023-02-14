@@ -102,12 +102,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
-        $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
-            $this->configuration,
-            $this->reflector,
-            $this->getDocCommentReflectionRecursive(),
-            $this->getClassEntityCollection()
-        );
+        $classEntity = $this->getDocCommentEntity();
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
@@ -121,35 +116,27 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return isset($filesInGit[$fileName]);
     }
 
-    protected function getDocCommentReflectionRecursive(): ReflectionClass
+    protected function getDocCommentEntity(): ClassEntity
     {
-        static $docCommentsReflectionCache = [];
+        static $docCommentClassEntityCache = [];
         $objectId = $this->getObjectId();
-        if (!isset($docCommentsReflectionCache[$objectId])) {
-            $getDocCommentReflection = function (ReflectionClass $reflectionClass) use (&$getDocCommentReflection
-            ): ReflectionClass {
-                $docComment = $reflectionClass->getDocComment();
-                if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
-                    try {
-                        $parentReflectionClass = $reflectionClass->getParentClass();
-                        if ($parentReflectionClass) {
-                            $reflectionClass = $getDocCommentReflection($parentReflectionClass);
-                        }
-                    } catch (\Exception $e) {
-                        $this->getLogger()->error($e->getMessage());
-                    }
+        if (!isset($docCommentClassEntityCache[$objectId])) {
+            $docComment = $this->getDocComment();
+            $classEntity = $this;
+            if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
+                $parentReflectionClass = $this->getParentClass();
+                if ($parentReflectionClass) {
+                    $classEntity = $parentReflectionClass->getDocCommentEntity();
                 }
-                return $reflectionClass;
-            };
-            $docCommentsReflectionCache[$objectId] = $getDocCommentReflection($this->getReflection());
+            }
+            $docCommentClassEntityCache[$objectId] = $classEntity;
         }
-        return $docCommentsReflectionCache[$objectId];
+        return $docCommentClassEntityCache[$objectId];
     }
 
     #[Cache\CacheableMethod] protected function getDocCommentRecursive(): string
     {
-        $reflectionClass = $this->getDocCommentReflectionRecursive();
-        return $reflectionClass->getDocComment() ?: ' ';
+        return $this->getDocCommentEntity()->getDocComment() ?: ' ';
     }
 
     public function loadPluginData(string $pluginKey, array $data): void
@@ -164,9 +151,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function getReflection(): ReflectionClass
     {
+        static $classReflections = [];
+        if (isset($classReflections[$this->className])) {
+            return $classReflections[$this->className];
+        }
         if (!$this->reflectionClass) {
             $this->reflectionClass = $this->reflector->reflectClass($this->className);
         }
+        $classReflections[$this->className] = $this->reflectionClass;
         return $this->reflectionClass;
     }
 
@@ -288,6 +280,18 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $reflection = $this->getReflection();
         return !$reflection->isInterface() ? array_map(fn($interfaceName) => "\\{$interfaceName}", $reflection->getInterfaceNames()) : [];
+    }
+
+    /**
+     * @return ClassEntity[]
+     */
+    public function getInterfacesEntities(): array
+    {
+        $interfacesEntities = [];
+        foreach ($this->getInterfaces() as $interfaceClassName) {
+            $interfacesEntities[] = $this->getClassEntityCollection()->getLoadedOrCreateNew($interfaceClassName);
+        }
+        return $interfacesEntities;
     }
 
     /**
