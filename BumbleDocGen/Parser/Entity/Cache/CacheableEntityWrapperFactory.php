@@ -139,7 +139,7 @@ final class CacheableEntityWrapperFactory
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         string                 $className,
-        ?string                $relativeFileName,
+        ?string                $relativeFileName = null,
         bool                   $reloadCache = false
     ): ClassEntity
     {
