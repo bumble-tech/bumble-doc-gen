@@ -7,6 +7,9 @@ namespace BumbleDocGen\Parser;
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntity;
 use Nette\PhpGenerator\GlobalFunction;
+use phpDocumentor\Reflection\DocBlock;
+use phpDocumentor\Reflection\DocBlockFactory;
+use phpDocumentor\Reflection\Types\ContextFactory;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 use Roave\BetterReflection\Reflector\Reflector;
@@ -21,6 +24,7 @@ final class ParserHelper
         'bool',
         'boolean',
         'null',
+        'NULL',
         'mixed',
         'void',
         'self',
@@ -32,18 +36,36 @@ final class ParserHelper
         '[]',
     ];
 
+    private static array $predefinedClassesInterfaces = [
+        \Traversable::class,
+        \Iterator::class,
+        \IteratorAggregate::class,
+        \Throwable::class,
+        \ArrayAccess::class,
+        \Serializable::class,
+        \Closure::class,
+        \Generator::class
+    ];
+
     public static function getBuiltInClassNames(): array
     {
         static $classNames = [];
         if (!$classNames) {
-            foreach (get_declared_classes() as $className) {
+            $builtInClassNames = array_merge(self::$predefinedClassesInterfaces, get_declared_classes());
+            foreach ($builtInClassNames as $className) {
                 if (str_starts_with(ltrim($className, '\\'), 'Composer')) {
                     break;
                 }
-                $classNames[] = $className;
+                $classNames[$className] = $className;
             }
         }
         return $classNames;
+    }
+
+    public static function isBuiltInClass(string $className): bool
+    {
+        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
+        return array_key_exists($className, self::getBuiltInClassNames());
     }
 
     public static function isBuiltInType(string $name): bool
@@ -73,9 +95,9 @@ final class ParserHelper
         return mb_strtolower($chr, "UTF-8") != $chr;
     }
 
-    public static function isCorrectClassName(string $className): bool
+    public static function isCorrectClassName(string $className, bool $checkBuiltIns = true): bool
     {
-        if (self::isBuiltInType($className) || in_array($className, self::getBuiltInClassNames())) {
+        if (self::isBuiltInType($className) || ($checkBuiltIns && self::isBuiltInClass($className))) {
             return false;
         }
         return self::checkIsClassName($className);
@@ -367,5 +389,55 @@ final class ParserHelper
             $gitFiles = array_flip($output);
         }
         return $gitFiles;
+    }
+
+    public static function getDocBlock(ClassEntity $classEntity, string $docComment): DocBlock
+    {
+        static $docBlockFactory = null;
+        if (is_null($docBlockFactory)) {
+            $docBlockFactory = DocBlockFactory::createInstance();
+        }
+
+        static $docBlocksCache = [];
+        $docComment = $docComment ?: ' ';
+        $cacheKey = md5("{$classEntity->getName()}{$docComment}");
+        if (!isset($docBlocksCache[$cacheKey])) {
+            $docBlocksCache[$cacheKey] = $docBlockFactory->create(
+                $docComment,
+                self::getDocBlockContext($classEntity)
+            );
+        }
+        return $docBlocksCache[$cacheKey];
+    }
+
+    public static function getDocBlockContext(ClassEntity $classEntity): \phpDocumentor\Reflection\Types\Context
+    {
+        static $contexts = [];
+        if (!array_key_exists($classEntity->getName(), $contexts)) {
+            $tmpContext = (new ContextFactory)->createForNamespace(
+                $classEntity->getNamespaceName(),
+                $classEntity->getFileContent()
+            );
+            $aliases = $tmpContext->getNamespaceAliases();
+            foreach (array_merge(
+                         $classEntity->getParentClassNames(),
+                         $classEntity->getInterfaceNames(),
+                         $classEntity->getTraitsNames(),
+                         self::$predefinedClassesInterfaces
+                     ) as $parentClassName) {
+                if (str_contains($parentClassName, '\\')) {
+                    $parentClassNameParts = explode('\\', $parentClassName);
+                    $name = array_pop($parentClassNameParts);
+                    if (!isset($aliases[$name])) {
+                        $aliases[$name] = $parentClassName;
+                    }
+                }
+            }
+            $contexts[$classEntity->getName()] = new \phpDocumentor\Reflection\Types\Context(
+                $tmpContext->getNamespace(),
+                $aliases
+            );
+        }
+        return $contexts[$classEntity->getName()];
     }
 }
