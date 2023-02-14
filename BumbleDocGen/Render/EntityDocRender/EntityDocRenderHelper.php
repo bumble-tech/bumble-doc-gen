@@ -18,6 +18,7 @@ final class EntityDocRenderHelper
         string  $linkString,
         Context $context,
         ?string $defaultEntityClassName = null,
+        bool    $useUnsafeShortNames = true
     ): array
     {
         static $pageLinksCache = [];
@@ -28,11 +29,18 @@ final class EntityDocRenderHelper
 
         if (!isset($pageLinksCache[$cacheKey])) {
             $pageLinks = [];
+            $unsafeLinks = [];
             foreach ($context->getClassEntityCollection() as $classEntity) {
                 /**@var ClassEntity $classEntity */
                 $pageLinks[$classEntity->getShortName()] = $classEntity;
+                if (array_key_exists($classEntity->getShortName(), $pageLinks) && !$useUnsafeShortNames) {
+                    $unsafeLinks[$classEntity->getShortName()] = $classEntity->getShortName();
+                }
                 $pageLinks[$classEntity->getFileName()] = $classEntity;
                 $pageLinks[$classEntity->getName()] = $classEntity;
+            }
+            foreach ($unsafeLinks as $unsafeLink) {
+                unset($pageLinks[$unsafeLink]);
             }
             $pageLinksCache[$cacheKey] = $pageLinks;
         } else {
@@ -73,6 +81,13 @@ final class EntityDocRenderHelper
             ) {
                 $classData[1] = $cursorTmpName;
                 $entity = $defaultEntity;
+            }
+        }
+
+        if (!$entity) {
+            $nextEntity = $classEntityCollection->getLoadedOrCreateNew($className);
+            if ($nextEntity->classDataCanBeLoaded() && $nextEntity->isInGit()) {
+                $entity = $nextEntity;
             }
         }
 
@@ -121,8 +136,8 @@ final class EntityDocRenderHelper
     {
         $data = self::getEntityDataByLink($linkString, $context, $defaultEntityClassName);
         if ($data['entityName'] ?? null) {
-            $getDocumentedClassUrl = new GetDocumentedClassUrl($context, $createDocument);
-            $data['url'] = $getDocumentedClassUrl($data['entityName'], $data['cursor']);
+            $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
+            $data['url'] = $getDocumentedClassUrl($data['entityName'], $data['cursor'], $createDocument);
         }
         return $data;
     }

@@ -197,7 +197,8 @@ abstract class BaseEntity
                     $data = EntityDocRenderHelper::getEntityDataByLink(
                         $className,
                         $context,
-                        $this->getImplementingReflectionClass()->getName()
+                        $this->getImplementingReflectionClass()->getName(),
+                        false
                     );
                     $links[] = [
                         'entityData' => $data,
@@ -230,7 +231,8 @@ abstract class BaseEntity
                     $data = EntityDocRenderHelper::getEntityDataByLink(
                         $className,
                         $context,
-                        $this->getImplementingReflectionClass()->getName()
+                        $this->getImplementingReflectionClass()->getName(),
+                        false
                     );
                     $links[] = [
                         'entityData' => $data,
@@ -309,7 +311,8 @@ abstract class BaseEntity
                         $throwData['entityData'] = EntityDocRenderHelper::getEntityDataByLink(
                             $className,
                             $context,
-                            $this->getImplementingReflectionClass()->getName()
+                            $this->getImplementingReflectionClass()->getName(),
+                            false
                         );
                     }
                     $throws[] = $throwData;

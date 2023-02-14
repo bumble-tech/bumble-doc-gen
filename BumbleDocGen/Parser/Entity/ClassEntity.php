@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use phpDocumentor\Reflection\DocBlock;
+use Roave\BetterReflection\Identifier\Identifier;
+use Roave\BetterReflection\Identifier\IdentifierType;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
+use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
 
 /**
  * Class entity
@@ -19,6 +21,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 {
     private array $pluginsData = [];
     private ?ReflectionClass $reflectionClass = null;
+    private ?SourceLocator $customSourceLocator = null;
     private bool $relativeFileNameLoaded = false;
     private bool $isClassLoad = false;
 
@@ -111,6 +114,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function isInGit(): bool
     {
+        if (!$this->getFileName()) {
+            return false;
+        }
         $filesInGit = ParserHelper::getFilesInGit($this->getConfiguration());
         $fileName = ltrim($this->getFileName(), DIRECTORY_SEPARATOR);
         return isset($filesInGit[$fileName]);
@@ -149,6 +155,34 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->pluginsData[$pluginKey] ?? null;
     }
 
+    private function getReflectionByCustomSourceLocator(): ?ReflectionClass
+    {
+        if (!$this->customSourceLocator) {
+            return null;
+        }
+        $identifier = new Identifier($this->className, new IdentifierType(IdentifierType::IDENTIFIER_CLASS));
+        /**
+         * @var ReflectionClass|null $reflection
+         */
+        $reflection = $this->customSourceLocator->locateIdentifier(
+            $this->getReflector(),
+            $identifier
+        );
+        $this->isClassLoad = true;
+        return $reflection;
+    }
+
+    /**
+     * @internal
+     */
+    public function setCustomSourceLocator(SourceLocator $customSourceLocator): void
+    {
+        $this->customSourceLocator = $customSourceLocator;
+    }
+
+    /**
+     * @throws \Exception
+     */
     public function getReflection(): ReflectionClass
     {
         static $classReflections = [];
@@ -156,7 +190,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             return $classReflections[$this->className];
         }
         if (!$this->reflectionClass) {
-            $this->reflectionClass = $this->reflector->reflectClass($this->className);
+            if ($this->customSourceLocator) {
+                $this->reflectionClass = $this->getReflectionByCustomSourceLocator();
+            } else {
+                $this->reflectionClass = $this->reflector->reflectClass($this->className);
+            }
+        }
+        if (!$this->reflectionClass) {
+            throw new \Exception("'{$this->className}' could not be found in the located source ");
         }
         $classReflections[$this->className] = $this->reflectionClass;
         return $this->reflectionClass;
@@ -183,7 +224,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public function isClassLoad(): bool
     {
         if (!$this->isClassLoad) {
-            $this->isClassLoad = ParserHelper::isClassLoaded($this->reflector, $this->getName());
+            try {
+                $this->isClassLoad = ParserHelper::isCorrectClassName($this->getName()) && $this->getReflection();
+            } catch (\Exception) {
+                $this->isClassLoad = false;
+            }
         }
         return $this->isClassLoad;
     }
