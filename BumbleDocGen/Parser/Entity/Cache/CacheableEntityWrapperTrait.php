@@ -85,7 +85,7 @@ trait CacheableEntityWrapperTrait
             if (!isset($filesCacheState[$className])) {
                 $projectRoot = $classEntity->getConfiguration()->getProjectRoot();
                 $filesCacheState[$className] = false;
-                if (!ParserHelper::isCorrectClassName($className)) {
+                if (!ParserHelper::isCorrectClassName($className) || ParserHelper::isBuiltInClass($className)) {
                     return false;
                 }
 
