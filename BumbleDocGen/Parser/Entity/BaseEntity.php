@@ -58,21 +58,33 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] abstract public function getStartLine(): int;
 
+    #[Cache\CacheableMethod] abstract public function getDocBlock(): DocBlock;
+
     protected function prepareTypeString(string $type): string
     {
+        static $cache = [];
         $types = explode('|', $type);
         foreach ($types as $k => $t) {
-            if ($t && !str_starts_with($t, '\\')) {
-                if (str_contains($t, '\\')) {
-                    $types[$k] = "\\{$t}";
-                } elseif (ParserHelper::isCorrectClassName($t) && CacheableEntityWrapperFactory::createClassEntity(
-                        $this->configuration,
-                        $this->reflector,
-                        $t,
-                        null
-                    )->classDataCanBeLoaded()) {
-                    $types[$k] = "\\{$t}";
+            $cacheKey = md5($t);
+            if (!isset($cache[$cacheKey])) {
+                if ($t && !str_starts_with($t, '\\')) {
+                    if (
+                        str_contains($t, '\\') ||
+                        preg_match('/^([A-Z]+)([a-zA-Z_0-9]+)$/', $t) && ParserHelper::isCorrectClassName($t, false)
+                    ) {
+                        $types[$k] = "\\{$t}";
+                    } elseif (ParserHelper::isCorrectClassName($t) && CacheableEntityWrapperFactory::createClassEntity(
+                            $this->configuration,
+                            $this->reflector,
+                            $t,
+                            null
+                        )->classDataCanBeLoaded()) {
+                        $types[$k] = "\\{$t}";
+                    }
                 }
+                $cache[$cacheKey] = $types[$k];
+            } else {
+                $types[$k] = $cache[$cacheKey];
             }
         }
         return implode('|', $types);
@@ -120,15 +132,6 @@ abstract class BaseEntity
             ' ',
             preg_replace(array_keys($patterns), array_values($patterns), $export)
         );
-    }
-
-    #[Cache\CacheableMethod] final public function getDocBlock(): DocBlock
-    {
-        static $docBlockFactory = null;
-        if (is_null($docBlockFactory)) {
-            $docBlockFactory = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
-        }
-        return $docBlockFactory->create($this->getDocCommentRecursive() ?: ' ');
     }
 
     #[Cache\CacheableMethod] public function isInternal(): bool
@@ -187,18 +190,22 @@ abstract class BaseEntity
                         'description' => $description,
                     ];
                 } elseif (str_starts_with($name, '\\') && $context) {
+                    if (!str_contains($name, '::')) {
+                        // tmp hack to fix methods declared as global functions
+                        if (str_contains($name, '(') || str_contains($name, '$')) {
+                            $name = str_replace(
+                                "{$docCommentImplementingClass->getNamespaceName()}\\",
+                                "{$docCommentImplementingClass->getName()}::",
+                                $name
+                            );
+                        }
+                    }
+                    $name = str_replace([
+                        'self::',
+                        '$this->'
+                    ], "{$docCommentImplementingClass->getShortName()}::", $name);
 
                     $className = $name;
-
-                    // fixing annotations bug. Result always started with `\\`
-                    if (!str_contains($this->getDocCommentRecursive(), $name)) {
-                        $className = ParserHelper::parseFullClassName(
-                            $name,
-                            $this->reflector,
-                            $docCommentImplementingClass
-                        );
-                    }
-
                     $data = EntityDocRenderHelper::getEntityDataByLink(
                         $className,
                         $context,

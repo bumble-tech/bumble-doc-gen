@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\ParserHelper;
+use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
@@ -55,6 +57,16 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     public function getClassEntity(): ClassEntity
     {
         return $this->classEntity;
+    }
+
+    #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
+    {
+        $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
+            $this->configuration,
+            $this->reflector,
+            $this->getDocCommentReflectionRecursive()->getCurrentClass()
+        );
+        return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
     public function getImplementingReflectionClass(): ReflectionClass
@@ -221,7 +233,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
          * @var \phpDocumentor\Reflection\DocBlock\Tags\Param[] $params
          */
         $params = $docBlock->getTagsByName('param');
-        $typesFromDoc = $this::parseAnnotationParams($params);
+        $typesFromDoc = $this->parseAnnotationParams($params);
         foreach ($this->getReflection()->getParameters() as $param) {
             try {
                 $param->getType();

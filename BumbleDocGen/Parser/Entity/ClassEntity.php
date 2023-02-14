@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
+use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
 
@@ -86,6 +88,16 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public function getReflector(): Reflector
     {
         return $this->reflector;
+    }
+
+    #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
+    {
+        $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
+            $this->configuration,
+            $this->reflector,
+            $this->getDocCommentReflectionRecursive()
+        );
+        return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
     /**
@@ -403,9 +415,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 
-    public function getFileContent(): string
+    #[Cache\CacheableMethod] public function getFileContent(): string
     {
-        return file_get_contents($this->getAbsoluteFileName());
+        return $this->getAbsoluteFileName() ? file_get_contents($this->getAbsoluteFileName()) : '';
     }
 
     #[Cache\CacheableMethod] public function getMethodsData(): array

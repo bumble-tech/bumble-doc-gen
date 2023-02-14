@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
+use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
+use BumbleDocGen\Parser\ParserHelper;
+use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
 
@@ -53,6 +56,16 @@ class PropertyEntity extends BaseEntity
             $this->reflectionProperty = $this->classEntity->getReflection()->getProperty($this->propertyName);
         }
         return $this->reflectionProperty;
+    }
+
+    #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
+    {
+        $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
+            $this->configuration,
+            $this->reflector,
+            $this->getDocCommentReflectionRecursive()->getImplementingClass()
+        );
+        return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
     public function getImplementingReflectionClass(): ReflectionClass
