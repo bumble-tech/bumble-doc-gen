@@ -21,19 +21,21 @@ use Roave\BetterReflection\Reflector\Reflector;
 
 abstract class BaseEntity
 {
-    protected LoggerInterface $logger;
-
     protected function __construct(
         protected ConfigurationInterface $configuration,
         protected Reflector              $reflector,
     )
     {
-        $this->logger = $this->configuration->getLogger();
     }
 
     public function getConfiguration(): ConfigurationInterface
     {
         return $this->configuration;
+    }
+
+    public function getLogger(): LoggerInterface
+    {
+        return $this->getConfiguration()->getLogger();
     }
 
     /**
@@ -210,7 +212,7 @@ abstract class BaseEntity
                     ];
                 }
             } catch (\Exception $e) {
-                $this->logger->error($e->getMessage());
+                $this->getLogger()->error($e->getMessage());
             }
         }
 
@@ -254,7 +256,7 @@ abstract class BaseEntity
                     'description' => $description,
                 ];
             } catch (\Exception $e) {
-                $this->logger->error($e->getMessage());
+                $this->getLogger()->error($e->getMessage());
             }
         }
 
@@ -317,7 +319,7 @@ abstract class BaseEntity
                     $throws[] = $throwData;
                 }
             } catch (\Exception $e) {
-                $this->logger->error($e->getMessage());
+                $this->getLogger()->error($e->getMessage());
             }
         }
         return $throws;
@@ -360,7 +362,7 @@ abstract class BaseEntity
             try {
                 $examples[] = ['example' => (string)$example];
             } catch (\Exception $e) {
-                $this->logger->error($e->getMessage());
+                $this->getLogger()->error($e->getMessage());
             }
         }
         return $examples;

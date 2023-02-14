@@ -77,7 +77,7 @@ class PropertyEntity extends BaseEntity
                             $reflectionProperty = $getDocCommentReflection($parentReflectionProperty);
                         }
                     } catch (\Exception $e) {
-                        $this->logger->error($e->getMessage());
+                        $this->getLogger()->error($e->getMessage());
                     }
                 }
                 return $reflectionProperty;
@@ -143,7 +143,7 @@ class PropertyEntity extends BaseEntity
                 try {
                     $typesFromDoc[] = (string)$param->getType();
                 } catch (\Exception $e) {
-                    $this->logger->error($e->getMessage());
+                    $this->getLogger()->error($e->getMessage());
                 }
             }
             if ($typesFromDoc) {

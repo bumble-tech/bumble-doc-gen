@@ -96,7 +96,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                             }
                         }
                     } catch (\Exception $e) {
-                        $this->logger->error($e->getMessage());
+                        $this->getLogger()->error($e->getMessage());
                     }
                 }
                 return $reflectionMethod;

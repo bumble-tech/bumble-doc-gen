@@ -20,8 +20,7 @@ final class ClassEntityCollection extends BaseEntityCollection
     private function __construct(
         private ConfigurationInterface $configuration,
         private Reflector              $reflector,
-        private PluginEventDispatcher  $pluginEventDispatcher,
-        private LoggerInterface        $logger
+        private PluginEventDispatcher  $pluginEventDispatcher
     )
     {
     }
@@ -32,12 +31,10 @@ final class ClassEntityCollection extends BaseEntityCollection
         PluginEventDispatcher  $pluginEventDispatcher
     ): ClassEntityCollection
     {
-        $logger = $configuration->getLogger();
         $classEntityCollection = new ClassEntityCollection(
             $configuration,
             $reflector,
-            $pluginEventDispatcher,
-            $logger
+            $pluginEventDispatcher
         );
 
         foreach ($configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
@@ -63,7 +60,7 @@ final class ClassEntityCollection extends BaseEntityCollection
     {
         $key = $classEntity->getObjectId();
         if (!isset($this->entities[$key]) || $reload) {
-            $this->logger->info("Parsing {$classEntity->getFileName()} file");
+            $this->getLogger()->info("Parsing {$classEntity->getFileName()} file");
             $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
             $this->entities[$key] = $classEntity;
         }
@@ -114,7 +111,7 @@ final class ClassEntityCollection extends BaseEntityCollection
 
     public function getLogger(): LoggerInterface
     {
-        return $this->logger;
+        return $this->configuration->getLogger();
     }
 
     /**
@@ -123,7 +120,7 @@ final class ClassEntityCollection extends BaseEntityCollection
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher, $this->logger
+            $this->configuration, $this->reflector, $this->pluginEventDispatcher
         );
         $interfaces = array_map(
             fn($interface) => ltrim(
@@ -146,7 +143,7 @@ final class ClassEntityCollection extends BaseEntityCollection
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher, $this->logger
+            $this->configuration, $this->reflector, $this->pluginEventDispatcher
         );
         $parentClassNames = array_map(
             fn($parentClassName) => ltrim(
@@ -169,7 +166,7 @@ final class ClassEntityCollection extends BaseEntityCollection
     public function filterByPaths(array $paths): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher, $this->logger
+            $this->configuration, $this->reflector, $this->pluginEventDispatcher
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
@@ -185,7 +182,7 @@ final class ClassEntityCollection extends BaseEntityCollection
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher, $this->logger
+            $this->configuration, $this->reflector, $this->pluginEventDispatcher
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
@@ -199,7 +196,7 @@ final class ClassEntityCollection extends BaseEntityCollection
     public function getOnlyInstantiable(): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher, $this->logger
+            $this->configuration, $this->reflector, $this->pluginEventDispatcher
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
@@ -213,7 +210,7 @@ final class ClassEntityCollection extends BaseEntityCollection
     public function getOnlyInterfaces(): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher, $this->logger
+            $this->configuration, $this->reflector, $this->pluginEventDispatcher
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */

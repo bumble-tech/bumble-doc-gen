@@ -113,7 +113,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                             $reflectionClass = $getDocCommentReflection($parentReflectionClass);
                         }
                     } catch (\Exception $e) {
-                        $this->logger->error($e->getMessage());
+                        $this->getLogger()->error($e->getMessage());
                     }
                 }
                 return $reflectionClass;
