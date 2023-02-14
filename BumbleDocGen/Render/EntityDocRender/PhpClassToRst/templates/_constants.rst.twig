@@ -1,8 +1,0 @@
-
-.. raw:: html
-
-    <ul>
-    {% for constantEntity in classEntity.getConstantEntityCollection() %}
-        <li><a name="q{{ constantEntity.getName()|prepareSourceLink }}" href="#q{{ constantEntity.getName()|prepareSourceLink }}">#</a> <code>{{ constantEntity.getName() }}</code> {% if constantEntity.isInternal() %}:warning: Is internal {% endif %} {% if constantEntity.isDeprecated() %}:no_entry: Deprecated {% endif %} {% if constantEntity.getFileSourceLink() %}<b>|</b> <a href="{{ constantEntity.getFileSourceLink() }}">source code</a> {% endif %}</li>
-    {% endfor %}
-    </ul>

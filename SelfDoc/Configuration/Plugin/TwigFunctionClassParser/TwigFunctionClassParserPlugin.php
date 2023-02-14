@@ -9,7 +9,7 @@ use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Plugin\PluginInterface;
-use BumbleDocGen\Render\EntityDocRender\PhpClassToRst\PhpClassToRstDocRender;
+use BumbleDocGen\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 use BumbleDocGen\Render\Twig\MainExtension;
 use Roave\BetterReflection\Reflector\Reflector;
 use Twig\Environment;
@@ -31,7 +31,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
     {
         if (
-            $event->getBlockType() !== PhpClassToRstDocRender::BLOCK_AFTER_MAIN_INFO ||
+            $event->getBlockType() !== PhpClassToMdDocRender::BLOCK_AFTER_MAIN_INFO ||
             !$this->isCustomTwigFunction($event->getClassEntity())
         ) {
             return;
