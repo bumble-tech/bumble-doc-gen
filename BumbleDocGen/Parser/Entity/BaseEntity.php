@@ -60,6 +60,8 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] abstract public function getDocBlock(): DocBlock;
 
+    abstract protected function getClassEntityCollection(): ClassEntityCollection;
+
     protected function prepareTypeString(string $type): string
     {
         static $cache = [];

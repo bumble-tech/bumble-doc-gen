@@ -6,7 +6,6 @@ namespace BumbleDocGen\Parser\Entity;
 
 interface MethodEntityInterface
 {
-
     public function getName(): string;
 
     public function getFileName(): ?string;
@@ -41,5 +40,5 @@ interface MethodEntityInterface
 
     public function getBodyCode(): string;
 
-    public function getImplementingClass(ClassEntityCollection $classEntityPool): ?ClassEntity;
+    public function getImplementingClass(): ClassEntity;
 }

@@ -25,6 +25,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     protected function __construct(
         protected ConfigurationInterface $configuration,
         protected Reflector              $reflector,
+        protected ClassEntityCollection  $classEntityCollection,
         protected string                 $className,
         protected ?string                $relativeFileName,
     )
@@ -43,6 +44,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public static function create(
         ConfigurationInterface $configuration,
         Reflector              $reflector,
+        ClassEntityCollection  $classEntityCollection,
         string                 $className,
         ?string                $relativeFileName,
         bool                   $reloadCache = false
@@ -55,6 +57,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $classEntities[$objectId] = new static(
                 $configuration,
                 $reflector,
+                $classEntityCollection,
                 $className,
                 $relativeFileName,
             );
@@ -66,6 +69,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         ReflectionClass        $reflectionClass,
+        ClassEntityCollection  $classEntityCollection,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -76,6 +80,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $classEntities[$objectId] = new static(
                 $configuration,
                 $reflector,
+                $classEntityCollection,
                 $reflectionClass->getName(),
                 $relativeFileName,
             );
@@ -90,12 +95,18 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->reflector;
     }
 
+    protected function getClassEntityCollection(): ClassEntityCollection
+    {
+        return $this->classEntityCollection;
+    }
+
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
             $this->configuration,
             $this->reflector,
-            $this->getDocCommentReflectionRecursive()
+            $this->getDocCommentReflectionRecursive(),
+            $this->getClassEntityCollection()
         );
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
@@ -306,13 +317,13 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->getReflection()->getParentClass()?->getName();
     }
 
-    public function getParentClass(ClassEntityCollection $classEntityPool): ?ClassEntity
+    public function getParentClass(): ?ClassEntity
     {
         $parentClassName = $this->getParentClassName();
         if (!$parentClassName) {
             return null;
         }
-        return $classEntityPool->getLoadedOrCreateNew($parentClassName);
+        return $this->getClassEntityCollection()->getLoadedOrCreateNew($parentClassName);
     }
 
     #[Cache\CacheableMethod] public function getInterfacesString(): string

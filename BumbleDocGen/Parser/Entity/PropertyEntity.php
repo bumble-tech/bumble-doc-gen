@@ -58,12 +58,18 @@ class PropertyEntity extends BaseEntity
         return $this->reflectionProperty;
     }
 
+    protected function getClassEntityCollection(): ClassEntityCollection
+    {
+        return $this->getClassEntity()->getClassEntityCollection();
+    }
+
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
             $this->configuration,
             $this->reflector,
-            $this->getDocCommentReflectionRecursive()->getImplementingClass()
+            $this->getDocCommentReflectionRecursive()->getImplementingClass(),
+            $this->getClassEntityCollection()
         );
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
@@ -121,13 +127,9 @@ class PropertyEntity extends BaseEntity
         return $this->implementingClassName;
     }
 
-    public function getImplementingClass(ClassEntityCollection $classEntityPool): ?ClassEntity
+    public function getImplementingClass(): ClassEntity
     {
-        $implementingClassName = $this->getImplementingClassName();
-        if (!$implementingClassName) {
-            return null;
-        }
-        return $classEntityPool->getLoadedOrCreateNew($implementingClassName);
+        return $this->getClassEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
     #[Cache\CacheableMethod] public function getFileName(): ?string

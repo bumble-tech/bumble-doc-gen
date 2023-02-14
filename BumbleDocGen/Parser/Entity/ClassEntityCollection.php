@@ -44,6 +44,7 @@ final class ClassEntityCollection extends BaseEntityCollection
                 $classEntity = CacheableEntityWrapperFactory::createClassEntity(
                     $configuration,
                     $reflector,
+                    $classEntityCollection,
                     ltrim($className, '\\'),
                     $relativeFileName,
                 );
@@ -90,8 +91,8 @@ final class ClassEntityCollection extends BaseEntityCollection
                 $classEntity = CacheableEntityWrapperFactory::createClassEntity(
                     $this->configuration,
                     $this->reflector,
+                    $this,
                     ltrim($objectId, '\\'),
-                    null,
                 );
                 $loadedUnsafe[$objectId] = $classEntity;
             }

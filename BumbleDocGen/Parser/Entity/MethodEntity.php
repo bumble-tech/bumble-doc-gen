@@ -59,12 +59,18 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->classEntity;
     }
 
+    protected function getClassEntityCollection(): ClassEntityCollection
+    {
+        return $this->getClassEntity()->getClassEntityCollection();
+    }
+
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = CacheableEntityWrapperFactory::createClassEntityByReflection(
             $this->configuration,
             $this->reflector,
-            $this->getDocCommentReflectionRecursive()->getCurrentClass()
+            $this->getDocCommentReflectionRecursive()->getCurrentClass(),
+            $this->getClassEntityCollection()
         );
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
@@ -74,13 +80,9 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->getReflection()->getImplementingClass();
     }
 
-    public function getImplementingClass(ClassEntityCollection $classEntityPool): ?ClassEntity
+    public function getImplementingClass(): ClassEntity
     {
-        $implementingClassName = $this->getImplementingClassName();
-        if (!$implementingClassName) {
-            return null;
-        }
-        return $classEntityPool->getLoadedOrCreateNew($implementingClassName);
+        return $this->getClassEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
     protected function getDocCommentReflectionRecursive(): ReflectionMethod

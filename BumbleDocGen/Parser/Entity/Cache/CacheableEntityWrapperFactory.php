@@ -6,6 +6,7 @@ namespace BumbleDocGen\Parser\Entity\Cache;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Parser\Entity\ConstantEntity;
 use BumbleDocGen\Parser\Entity\MethodEntity;
 use BumbleDocGen\Parser\Entity\PropertyEntity;
@@ -138,6 +139,7 @@ final class CacheableEntityWrapperFactory
     public static function createClassEntity(
         ConfigurationInterface $configuration,
         Reflector              $reflector,
+        ClassEntityCollection  $classEntityCollection,
         string                 $className,
         ?string                $relativeFileName = null,
         bool                   $reloadCache = false
@@ -147,6 +149,7 @@ final class CacheableEntityWrapperFactory
         return $wrapperClassName::create(
             $configuration,
             $reflector,
+            $classEntityCollection,
             $className,
             $relativeFileName,
             $reloadCache
@@ -157,6 +160,7 @@ final class CacheableEntityWrapperFactory
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         ReflectionClass        $reflectionClass,
+        ClassEntityCollection  $classEntityCollection,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -165,6 +169,7 @@ final class CacheableEntityWrapperFactory
             $configuration,
             $reflector,
             $reflectionClass,
+            $classEntityCollection,
             $reloadCache
         );
     }
@@ -173,6 +178,7 @@ final class CacheableEntityWrapperFactory
         string                 $subClassEntity,
         ConfigurationInterface $configuration,
         Reflector              $reflector,
+        ClassEntityCollection  $classEntityCollection,
         string                 $className,
         ?string                $relativeFileName,
         bool                   $reloadCache = false
@@ -184,6 +190,7 @@ final class CacheableEntityWrapperFactory
         return $wrapperClassName::create(
             $configuration,
             $reflector,
+            $classEntityCollection,
             $className,
             $relativeFileName,
             $reloadCache
@@ -195,6 +202,7 @@ final class CacheableEntityWrapperFactory
         ConfigurationInterface $configuration,
         Reflector              $reflector,
         ReflectionClass        $reflectionClass,
+        ClassEntityCollection  $classEntityCollection,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -205,6 +213,7 @@ final class CacheableEntityWrapperFactory
             $configuration,
             $reflector,
             $reflectionClass,
+            $classEntityCollection,
             $reloadCache
         );
     }
