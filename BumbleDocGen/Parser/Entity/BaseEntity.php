@@ -75,12 +75,10 @@ abstract class BaseEntity
                         preg_match('/^([A-Z]+)([a-zA-Z_0-9]+)$/', $t) && ParserHelper::isCorrectClassName($t, false)
                     ) {
                         $types[$k] = "\\{$t}";
-                    } elseif (ParserHelper::isCorrectClassName($t) && CacheableEntityWrapperFactory::createClassEntity(
-                            $this->configuration,
-                            $this->reflector,
-                            $t,
-                            null
-                        )->classDataCanBeLoaded()) {
+                    } elseif (
+                        ParserHelper::isCorrectClassName($t) &&
+                        $this->getClassEntityCollection()->getLoadedOrCreateNew($t)->classDataCanBeLoaded()
+                    ) {
                         $types[$k] = "\\{$t}";
                     }
                 }
