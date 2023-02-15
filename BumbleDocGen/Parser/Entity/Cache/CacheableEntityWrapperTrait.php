@@ -78,7 +78,6 @@ trait CacheableEntityWrapperTrait
 
     public function entityCacheIsOutdated(): bool
     {
-        return true;
         static $filesCacheState = [];
         $classEntity = $this->getCurrentClassEntity();
         if ($classEntity) {
