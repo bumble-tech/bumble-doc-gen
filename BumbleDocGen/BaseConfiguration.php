@@ -17,6 +17,7 @@ use BumbleDocGen\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentCla
 use BumbleDocGen\Parser\FilterCondition\MethodFilterCondition\VisibilityCondition as MethodVisibilityCondition;
 use BumbleDocGen\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondition as PropertyVisibilityCondition;
 use BumbleDocGen\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin;
+use BumbleDocGen\Plugin\CorePlugin\BasePhpStubber\PsrClassesStubberPlugin;
 use BumbleDocGen\Plugin\CorePlugin\BasePhpStubber\TwigStubberPlugin;
 use BumbleDocGen\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter;
 use BumbleDocGen\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin;
@@ -83,7 +84,8 @@ abstract class BaseConfiguration implements ConfigurationInterface
             new PageHtmlLinkerPlugin($this->getLogger()),
             new LastPageCommitter(),
             new BasePhpStubberPlugin(),
-            new TwigStubberPlugin()
+            new TwigStubberPlugin(),
+            new PsrClassesStubberPlugin()
         );
     }
 
