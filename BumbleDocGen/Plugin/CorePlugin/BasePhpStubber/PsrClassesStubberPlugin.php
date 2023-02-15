@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Plugin\CorePlugin\BasePhpStubber;
 
+use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
 use BumbleDocGen\Plugin\PluginInterface;
 
@@ -13,6 +14,7 @@ final class PsrClassesStubberPlugin implements PluginInterface
     {
         return [
             OnGettingResourceLink::class => 'onGettingResourceLink',
+            OnCheckIsClassEntityCanBeLoad::class => 'onCheckIsClassEntityCanBeLoad',
         ];
     }
 
@@ -20,11 +22,13 @@ final class PsrClassesStubberPlugin implements PluginInterface
     {
         if (!$event->getResourceUrl()) {
             $resourceName = $event->getResourceName();
+            if (!str_starts_with($resourceName, '\\')) {
+                $resourceName = "\\{$resourceName}";
+            }
             if (str_starts_with($resourceName, '\\Psr\\Cache\\')) {
                 $resourceName = str_replace(['\\Psr\\Cache\\', '\\'], ['', '/'], $resourceName);
                 $event->setResourceUrl("https://github.com/php-fig/cache/blob/master/src/{$resourceName}.php");
             } elseif (str_starts_with($resourceName, '\\Psr\\Log\\')) {
-                // $event->getContext()->getConfiguration()->getLogger()->error($resourceName);
                 $resourceName = str_replace(['\\Psr\\Log\\', '\\'], ['', '/'], $resourceName);
                 $event->setResourceUrl("https://github.com/php-fig/log/blob/master/src/{$resourceName}.php");
             } elseif (str_starts_with($resourceName, '\\Psr\\EventDispatcher\\')) {
@@ -46,6 +50,16 @@ final class PsrClassesStubberPlugin implements PluginInterface
                 $resourceName = str_replace(['\\Psr\\Http\\Server\\', '\\'], ['', '/'], $resourceName);
                 $event->setResourceUrl("https://github.com/php-fig/http-server-middleware/blob/master/src/{$resourceName}.php");
             }
+        }
+    }
+
+    final public function onCheckIsClassEntityCanBeLoad(OnCheckIsClassEntityCanBeLoad $event): void
+    {
+        if (
+            str_starts_with($event->getEntity()->getName(), 'Psr\\') ||
+            str_starts_with($event->getEntity()->getName(), '\\Psr\\')
+        ) {
+            $event->disableClassLoading();
         }
     }
 }

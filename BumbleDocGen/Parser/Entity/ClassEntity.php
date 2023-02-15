@@ -6,6 +6,8 @@ namespace BumbleDocGen\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\ParserHelper;
+use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
+use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\BetterReflection;
@@ -228,6 +230,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     #[Cache\CacheableMethod] public function classDataCanBeLoaded(): bool
     {
+        if (!$this->getClassEntityCollection()->getPluginEventDispatcher()->dispatch(
+            new OnCheckIsClassEntityCanBeLoad($this)
+        )->isClassCanBeLoad()) {
+            $this->getLogger()->notice("Class {$this->getName()} skipped by plugin");
+            return false;
+        }
         return $this->isClassLoad();
     }
 

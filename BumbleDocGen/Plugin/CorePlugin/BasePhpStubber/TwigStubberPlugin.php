@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Plugin\CorePlugin\BasePhpStubber;
 
+use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
 use BumbleDocGen\Plugin\PluginInterface;
 
@@ -13,6 +14,7 @@ final class TwigStubberPlugin implements PluginInterface
     {
         return [
             OnGettingResourceLink::class => 'onGettingResourceLink',
+            OnCheckIsClassEntityCanBeLoad::class => 'onCheckIsClassEntityCanBeLoad',
         ];
     }
 
@@ -20,10 +22,23 @@ final class TwigStubberPlugin implements PluginInterface
     {
         if (!$event->getResourceUrl()) {
             $resourceName = $event->getResourceName();
+            if (!str_starts_with($resourceName, '\\')) {
+                $resourceName = "\\{$resourceName}";
+            }
             if (str_starts_with($resourceName, '\\Twig\\')) {
                 $resourceName = str_replace(['\\Twig\\', '\\'], ['', '/'], $resourceName);
                 $event->setResourceUrl("https://github.com/twigphp/Twig/blob/master/src/{$resourceName}.php");
             }
+        }
+    }
+
+    final public function onCheckIsClassEntityCanBeLoad(OnCheckIsClassEntityCanBeLoad $event): void
+    {
+        if (
+            str_starts_with($event->getEntity()->getName(), 'Twig\\') ||
+            str_starts_with($event->getEntity()->getName(), '\\Twig\\')
+        ) {
+            $event->disableClassLoading();
         }
     }
 }

@@ -25,6 +25,11 @@ final class ClassEntityCollection extends BaseEntityCollection
     {
     }
 
+    public function getPluginEventDispatcher(): PluginEventDispatcher
+    {
+        return $this->pluginEventDispatcher;
+    }
+
     public static function createByReflector(
         ConfigurationInterface $configuration,
         Reflector              $reflector,
