@@ -31,6 +31,8 @@ final class ParserHelper
         'static',
         'false',
         'true',
+        'never',
+        'object',
         'float',
         'callable',
         '[]',
@@ -40,11 +42,22 @@ final class ParserHelper
         \Traversable::class,
         \Iterator::class,
         \IteratorAggregate::class,
+        \IteratorIterator::class,
+        \OuterIterator::class,
+        \RecursiveIterator::class,
+        \SeekableIterator::class,
+        \SplObserver::class,
+        \SplSubject::class,
         \Throwable::class,
         \ArrayAccess::class,
         \Serializable::class,
         \Closure::class,
-        \Generator::class
+        \Generator::class,
+        \Countable::class,
+        \stdClass::class,
+        \WeakReference::class,
+        \WeakMap::class,
+        \Stringable::class
     ];
 
     public static function getBuiltInClassNames(): array
