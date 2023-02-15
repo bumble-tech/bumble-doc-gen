@@ -8,7 +8,7 @@ use BumbleDocGen\Parser\ParserHelper;
 
 trait CacheableEntityWrapperTrait
 {
-    private string $cacheVersion = 'v2';
+    private string $cacheVersion = 'v3';
 
     abstract function getConfiguration(): ConfigurationInterface;
 
