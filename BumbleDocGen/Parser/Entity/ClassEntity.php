@@ -8,11 +8,12 @@ use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use phpDocumentor\Reflection\DocBlock;
+use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Identifier\Identifier;
 use Roave\BetterReflection\Identifier\IdentifierType;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
-use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
+use Roave\BetterReflection\SourceLocator\Located\LocatedSource;
 
 /**
  * Class entity
@@ -21,7 +22,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 {
     private array $pluginsData = [];
     private ?ReflectionClass $reflectionClass = null;
-    private ?SourceLocator $customSourceLocator = null;
     private bool $relativeFileNameLoaded = false;
     private bool $isClassLoad = false;
 
@@ -155,31 +155,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->pluginsData[$pluginKey] ?? null;
     }
 
-    private function getReflectionByCustomSourceLocator(): ?ReflectionClass
-    {
-        if (!$this->customSourceLocator) {
-            return null;
-        }
-        $identifier = new Identifier($this->className, new IdentifierType(IdentifierType::IDENTIFIER_CLASS));
-        /**
-         * @var ReflectionClass|null $reflection
-         */
-        $reflection = $this->customSourceLocator->locateIdentifier(
-            $this->getReflector(),
-            $identifier
-        );
-        $this->isClassLoad = true;
-        return $reflection;
-    }
-
-    /**
-     * @internal
-     */
-    public function setCustomSourceLocator(SourceLocator $customSourceLocator): void
-    {
-        $this->customSourceLocator = $customSourceLocator;
-    }
-
     /**
      * @throws \Exception
      */
@@ -190,10 +165,25 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             return $classReflections[$this->className];
         }
         if (!$this->reflectionClass) {
-            if ($this->customSourceLocator) {
-                $this->reflectionClass = $this->getReflectionByCustomSourceLocator();
-            } else {
+            try {
                 $this->reflectionClass = $this->reflector->reflectClass($this->className);
+            } catch (\Exception) {
+            }
+            if (!$this->reflectionClass && $this->getFileName() && $this->getName()) {
+                $locatedSource = new LocatedSource(
+                    $this->getFileContent(),
+                    $this->getName(),
+                    $this->getAbsoluteFileName()
+                );
+                /**
+                 * @var ReflectionClass $reflectionClass
+                 */
+                $reflectionClass = (new BetterReflection())->astLocator()->findReflection(
+                    $this->getReflector(),
+                    $locatedSource,
+                    new Identifier($this->getName(), new IdentifierType(IdentifierType::IDENTIFIER_CLASS)),
+                );
+                $this->reflectionClass = $reflectionClass;
             }
         }
         if (!$this->reflectionClass) {
