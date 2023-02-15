@@ -14,6 +14,7 @@ use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\PageLinkProcessor\BasePageLinkProcessor;
 use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
+use SelfDoc\Configuration\Plugin\RoaveStubber\BetterReflectionStubberPlugin;
 use SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin;
 use SelfDoc\Configuration\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin;
 
@@ -54,6 +55,7 @@ final class Configuration extends BaseConfiguration
         $plugins = parent::getPlugins();
         $plugins->add(new TwigFunctionClassParserPlugin());
         $plugins->add(new TwigFilterClassParserPlugin());
+        $plugins->add(new BetterReflectionStubberPlugin());
         return $plugins;
     }
 
