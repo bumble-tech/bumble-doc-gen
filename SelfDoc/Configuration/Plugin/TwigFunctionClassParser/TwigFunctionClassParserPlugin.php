@@ -77,13 +77,13 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
         return str_starts_with($classEntity->getFileName(), self::TWIG_FUNCTION_DIRNAME);
     }
 
-    private function getAllUsedFunctions(Reflector $reflector): array
+    private function getAllUsedFunctions(ClassEntityCollection $classEntityCollection): array
     {
         static $functions = null;
         if (is_null($functions)) {
             $functions = [];
-            $mainExtensionReflection = $reflector->reflectClass(MainExtension::class);
-            $bodyCode = $mainExtensionReflection->getMethod('getFunctions')->getBodyCode();
+            $mainExtensionReflection = $classEntityCollection->getLoadedOrCreateNew(MainExtension::class);
+            $bodyCode = $mainExtensionReflection->getMethodEntity('getFunctions')->getBodyCode();
             preg_match_all('/(TwigFunction\(\')(\w+)(.*?)(new )(.*?)(\()/', $bodyCode, $matches);
             foreach ($matches[5] as $k => $match) {
                 $functions[$match] = [
@@ -97,9 +97,8 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     private function getFunctionData(ClassEntityCollection $classEntityCollection, string $className): ?array
     {
         static $functionsData = [];
-        $reflector = $classEntityCollection->getReflector();
         if (!array_key_exists($className, $functionsData)) {
-            $functions = $this->getAllUsedFunctions($reflector);
+            $functions = $this->getAllUsedFunctions($classEntityCollection);
             if (!str_starts_with($className, '\\')) {
                 $className = "\\{$className}";
             }

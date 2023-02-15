@@ -11,7 +11,6 @@ use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Plugin\PluginInterface;
 use BumbleDocGen\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 use BumbleDocGen\Render\Twig\MainExtension;
-use Roave\BetterReflection\Reflector\Reflector;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -77,13 +76,13 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         return str_starts_with($classEntity->getFileName(), self::TWIG_FILTER_DIRNAME);
     }
 
-    private function getAllUsedFilters(Reflector $reflector): array
+    private function getAllUsedFilters(ClassEntityCollection $classEntityCollection): array
     {
         static $filters = null;
         if (is_null($filters)) {
             $filters = [];
-            $mainExtensionReflection = $reflector->reflectClass(MainExtension::class);
-            $bodyCode = $mainExtensionReflection->getMethod('getFilters')->getBodyCode();
+            $mainExtensionReflection = $classEntityCollection->getLoadedOrCreateNew(MainExtension::class);
+            $bodyCode = $mainExtensionReflection->getMethodEntity('getFilters')->getBodyCode();
             preg_match_all('/(TwigFilter\(\')(\w+)([\', ]+)(\'|new )(.*?)(\(|\')/', $bodyCode, $matches);
             foreach ($matches[5] as $k => $match) {
                 $filters[$match] = [
@@ -97,9 +96,8 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     private function getFilterData(ClassEntityCollection $classEntityCollection, string $className): ?array
     {
         static $filtersData = [];
-        $reflector = $classEntityCollection->getReflector();
         if (!array_key_exists($className, $filtersData)) {
-            $filters = $this->getAllUsedFilters($reflector);
+            $filters = $this->getAllUsedFilters($classEntityCollection);
             if (!str_starts_with($className, '\\')) {
                 $className = "\\{$className}";
             }
