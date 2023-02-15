@@ -19,6 +19,7 @@ use BumbleDocGen\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondit
 use BumbleDocGen\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin;
 use BumbleDocGen\Plugin\CorePlugin\BasePhpStubber\ComposerStubberPlugin;
 use BumbleDocGen\Plugin\CorePlugin\BasePhpStubber\PsrClassesStubberPlugin;
+use BumbleDocGen\Plugin\CorePlugin\BasePhpStubber\SymfonyComponentStubberPlugin;
 use BumbleDocGen\Plugin\CorePlugin\BasePhpStubber\TwigStubberPlugin;
 use BumbleDocGen\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter;
 use BumbleDocGen\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin;
@@ -87,7 +88,8 @@ abstract class BaseConfiguration implements ConfigurationInterface
             new BasePhpStubberPlugin(),
             new TwigStubberPlugin(),
             new PsrClassesStubberPlugin(),
-            new ComposerStubberPlugin()
+            new ComposerStubberPlugin(),
+            new SymfonyComponentStubberPlugin()
         );
     }
 
