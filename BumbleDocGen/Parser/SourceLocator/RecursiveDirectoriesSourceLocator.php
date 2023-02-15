@@ -10,11 +10,12 @@ namespace BumbleDocGen\Parser\SourceLocator;
 final class RecursiveDirectoriesSourceLocator extends BaseSourceLocator
 {
     public function __construct(
-        array                   $directories,
-        array                   $exclude = []
+        array $directories,
+        array $exclude = [],
+        bool  $greedyLoad = true
     )
     {
-        parent::__construct();
+        parent::__construct($greedyLoad);
         $directories = array_filter($directories, function ($directory) {
             return is_dir($directory);
         });

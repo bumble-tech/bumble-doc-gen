@@ -12,5 +12,5 @@ interface SourceLocatorInterface
 {
     public function getFinder(): ?Finder;
 
-    public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator;
+    public function convertToReflectorSourceLocator(Locator $astLocator): ?SourceLocator;
 }

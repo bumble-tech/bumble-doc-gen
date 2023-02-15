@@ -36,7 +36,10 @@ final class SourceLocatorsCollection implements \IteratorAggregate
     {
         $reflectorSourceLocatorsList = [];
         foreach ($this->sourceLocators as $locator) {
-            $reflectorSourceLocatorsList[] = $locator->convertToReflectorSourceLocator($astLocator);
+            $reflectorSourceLocator = $locator->convertToReflectorSourceLocator($astLocator);
+            if ($reflectorSourceLocator) {
+                $reflectorSourceLocatorsList[] = $locator->convertToReflectorSourceLocator($astLocator);
+            }
         }
         return $reflectorSourceLocatorsList;
     }
@@ -45,7 +48,7 @@ final class SourceLocatorsCollection implements \IteratorAggregate
     {
         $finder = new Finder();
         foreach ($this->sourceLocators as $locator) {
-            if($f = $locator->getFinder()) {
+            if ($f = $locator->getFinder()) {
                 $finder->append($f);
             }
         }

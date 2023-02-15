@@ -9,9 +9,9 @@ namespace BumbleDocGen\Parser\SourceLocator;
  */
 final class FileIteratorSourceLocator extends BaseSourceLocator
 {
-    public function __construct(\Iterator $fileInfoIterator)
+    public function __construct(\Iterator $fileInfoIterator, bool $greedyLoad = true)
     {
-        parent::__construct();
+        parent::__construct($greedyLoad);
         $this->getFinder()->append($fileInfoIterator);
     }
 }

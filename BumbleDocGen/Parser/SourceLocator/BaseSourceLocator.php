@@ -12,7 +12,7 @@ abstract class BaseSourceLocator implements SourceLocatorInterface
 {
     private Finder $finder;
 
-    public function __construct()
+    public function __construct(private bool $greedyLoad = true)
     {
         $this->finder = new Finder();
         $this->finder->ignoreDotFiles(true)->ignoreVCSIgnored(true)->ignoreVCS(true)->files();
@@ -28,8 +28,11 @@ abstract class BaseSourceLocator implements SourceLocatorInterface
         return $this->finder;
     }
 
-    public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
+    public function convertToReflectorSourceLocator(Locator $astLocator): ?SourceLocator
     {
+        if (!$this->greedyLoad) {
+            return null;
+        }
         return new \Roave\BetterReflection\SourceLocator\Type\FileIteratorSourceLocator(
             $this->getIterator(), $astLocator
         );
