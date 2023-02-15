@@ -27,7 +27,7 @@ final class ComposerStubberPlugin implements PluginInterface
             }
             if (str_starts_with($resourceName, '\\Composer\\')) {
                 $resourceName = str_replace(['\\Composer\\', '\\'], ['', '/'], $resourceName);
-                $event->setResourceUrl("https://github.com/composer/composer/blob/master/src/{$resourceName}.php");
+                $event->setResourceUrl("https://github.com/composer/composer/blob/master/src/Composer/{$resourceName}.php");
             }
         }
     }
