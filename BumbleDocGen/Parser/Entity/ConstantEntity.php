@@ -52,7 +52,7 @@ class ConstantEntity extends BaseEntity
 
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
-        $classEntity = $this->getDocCommentEntity()->getClassEntity();
+        $classEntity = $this->getDocCommentEntity()->getImplementingClass();
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
