@@ -9,6 +9,7 @@ use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
+use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 
 /**
  * Get the URL of a documented class by its name. If the class is found, next to the file where this method was called,
@@ -47,6 +48,15 @@ final class GetDocumentedClassUrl
      */
     public function __invoke(string $className, string $cursor = '', bool $createDocument = true): string
     {
+        if (str_contains($className, ' ')) {
+            return self::DEFAULT_URL;
+        }
+
+        if (array_key_exists($className, StrTypeToUrl::$builtInUrls)) {
+            return StrTypeToUrl::$builtInUrls[$className];
+        } elseif (!str_starts_with($className, '\\') && array_key_exists("\\{$className}", StrTypeToUrl::$builtInUrls)) {
+            return StrTypeToUrl::$builtInUrls["\\{$className}"];
+        }
         $classEntityCollection = $this->context->getClassEntityCollection();
         $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
         if ($classEntity->classDataCanBeLoaded()) {

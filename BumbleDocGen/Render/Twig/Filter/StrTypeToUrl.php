@@ -20,7 +20,7 @@ final class StrTypeToUrl
     public const TEMPLATE_TYPE_HTML = 'html';
     public const TEMPLATE_TYPE_RST = 'rst';
 
-    private static array $builtInUrls = [
+    public static array $builtInUrls = [
         'array' => 'https://www.php.net/manual/en/language.types.array.php',
         'int' => 'https://www.php.net/manual/en/language.types.integer.php',
         'string' => 'https://www.php.net/manual/en/language.types.string.php',
@@ -58,6 +58,20 @@ final class StrTypeToUrl
         '\WeakReference' => 'https://www.php.net/manual/en/class.weakreference.php',
         '\WeakMap' => 'https://www.php.net/manual/en/class.weakmap.php',
         '\Stringable' => 'https://www.php.net/manual/en/class.stringable.php',
+        '\Exception' => 'https://www.php.net/manual/en/class.exception.php',
+        '\BadFunctionCallException' => 'https://www.php.net/manual/en/class.badfunctioncallexception.php',
+        '\BadMethodCallException' => 'https://www.php.net/manual/en/class.badmethodcallexception.php',
+        '\DomainException' => 'https://www.php.net/manual/en/class.domainexception.php',
+        '\InvalidArgumentException' => 'https://www.php.net/manual/en/class.invalidargumentexception.php',
+        '\LengthException' => 'https://www.php.net/manual/en/class.lengthexception.php',
+        '\LogicException' => 'https://www.php.net/manual/en/class.logicexception.php',
+        '\OutOfBoundsException' => 'https://www.php.net/manual/en/class.outofboundsexception.php',
+        '\OutOfRangeException' => 'https://www.php.net/manual/en/class.outofrangeexception.php',
+        '\OverflowException' => 'https://www.php.net/manual/en/class.overflowexception.php',
+        '\RangeException' => 'https://www.php.net/manual/en/class.rangeexception.php',
+        '\RuntimeException' => 'https://www.php.net/manual/en/class.runtimeexception.php',
+        '\UnderflowException' => 'https://www.php.net/manual/en/class.underflowexception.php',
+        '\UnexpectedValueException' => 'https://www.php.net/manual/en/class.unexpectedvalueexception.php'
     ];
 
     /**

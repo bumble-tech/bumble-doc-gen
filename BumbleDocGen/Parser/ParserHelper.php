@@ -57,7 +57,21 @@ final class ParserHelper
         \stdClass::class,
         \WeakReference::class,
         \WeakMap::class,
-        \Stringable::class
+        \Stringable::class,
+        \Exception::class,
+        \BadFunctionCallException::class,
+        \BadMethodCallException::class,
+        \DomainException::class,
+        \InvalidArgumentException::class,
+        \LengthException::class,
+        \LogicException::class,
+        \OutOfBoundsException::class,
+        \OutOfRangeException::class,
+        \OverflowException::class,
+        \RangeException::class,
+        \RuntimeException::class,
+        \UnderflowException::class,
+        \UnexpectedValueException::class,
     ];
 
     public static function getBuiltInClassNames(): array

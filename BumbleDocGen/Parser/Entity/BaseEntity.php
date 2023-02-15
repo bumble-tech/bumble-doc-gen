@@ -9,6 +9,7 @@ use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
+use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
@@ -165,7 +166,7 @@ abstract class BaseEntity
         $docCommentImplementingClass = $this->getDocCommentEntity();
 
         foreach ($docBlock->getTagsByName('see') as $seeBlock) {
-            if (!method_exists($seeBlock, 'getReference')) {
+            if (!is_a($seeBlock, DocBlock\Tags\See::class)) {
                 continue;
             }
             try {
@@ -174,6 +175,12 @@ abstract class BaseEntity
                 if (filter_var($name, FILTER_VALIDATE_URL)) {
                     $links[] = [
                         'url' => $name,
+                        'name' => $name,
+                        'description' => $description,
+                    ];
+                } elseif (array_key_exists($name, StrTypeToUrl::$builtInUrls)) {
+                    $links[] = [
+                        'url' => StrTypeToUrl::$builtInUrls[$name],
                         'name' => $name,
                         'description' => $description,
                     ];
@@ -221,6 +228,12 @@ abstract class BaseEntity
                         'name' => $name,
                         'description' => '',
                     ];
+                } elseif (array_key_exists($name, StrTypeToUrl::$builtInUrls)) {
+                    $links[] = [
+                        'url' => StrTypeToUrl::$builtInUrls[$name],
+                        'name' => $name,
+                        'description' => $description,
+                    ];
                 } elseif ($context) {
                     $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getClassEntity();
                     $className = ParserHelper::parseFullClassName(
@@ -245,17 +258,16 @@ abstract class BaseEntity
         }
 
         foreach ($docBlock->getTagsByName('link') as $linkBlock) {
-            try {
-                $description = (string)$linkBlock->getDescription();
-                $url = $linkBlock->getLink();
-                $links[] = [
-                    'url' => $url,
-                    'name' => $url,
-                    'description' => $description,
-                ];
-            } catch (\Exception $e) {
-                $this->getLogger()->error($e->getMessage());
+            if (!is_a($linkBlock, DocBlock\Tags\Link::class)) {
+                continue;
             }
+            $description = (string)$linkBlock->getDescription();
+            $url = $linkBlock->getLink();
+            $links[] = [
+                'url' => $url,
+                'name' => $url,
+                'description' => $description,
+            ];
         }
 
         return $links;
@@ -271,9 +283,12 @@ abstract class BaseEntity
         foreach ($linksData as $key => $data) {
             if (!isset($data['url'])) {
                 $linksData[$key]['url'] = null;
+            } else {
+                continue;
             }
             if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
                 $linksData[$key]['url'] = $getDocumentedClassUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
+                unset($data['entityData']);
             }
         }
         return $linksData;
@@ -295,9 +310,17 @@ abstract class BaseEntity
         $implementingReflectionClass = $this->getDocCommentEntity()->getClassEntity()->getReflection();
         $docBlock = $this->getDocBlock();
         foreach ($docBlock->getTagsByName('throws') as $throwBlock) {
-            try {
+            if (is_a($throwBlock, DocBlock\Tags\Throws::class)) {
                 $names = explode('|', (string)$throwBlock->getType());
                 foreach ($names as $name) {
+                    if (array_key_exists($name, StrTypeToUrl::$builtInUrls)) {
+                        $throws[] = [
+                            'url' => StrTypeToUrl::$builtInUrls[$name],
+                            'name' => $name,
+                            'description' => (string)$throwBlock->getDescription(),
+                        ];
+                        continue;
+                    }
                     $className = ParserHelper::parseFullClassName(
                         $name,
                         $this->reflector,
@@ -317,8 +340,6 @@ abstract class BaseEntity
                     }
                     $throws[] = $throwData;
                 }
-            } catch (\Exception $e) {
-                $this->getLogger()->error($e->getMessage());
             }
         }
         return $throws;
@@ -334,9 +355,12 @@ abstract class BaseEntity
         foreach ($throwsData as $key => $data) {
             if (!isset($data['url'])) {
                 $throwsData[$key]['url'] = null;
+            } else {
+                continue;
             }
             if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
                 $throwsData[$key]['url'] = $getDocumentedClassUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
+                unset($data['entityData']);
             }
         }
         return $throwsData;
