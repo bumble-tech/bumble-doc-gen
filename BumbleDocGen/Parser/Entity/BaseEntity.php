@@ -9,6 +9,7 @@ use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
+use BumbleDocGen\Render\RenderHelper;
 use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use phpDocumentor\Reflection\DocBlock;
@@ -178,9 +179,9 @@ abstract class BaseEntity
                         'name' => $name,
                         'description' => $description,
                     ];
-                } elseif (array_key_exists($name, StrTypeToUrl::$builtInUrls)) {
+                } elseif ($context && $url = RenderHelper::getPreloadResourceLink($name, $context)) {
                     $links[] = [
-                        'url' => StrTypeToUrl::$builtInUrls[$name],
+                        'url' => $url,
                         'name' => $name,
                         'description' => $description,
                     ];
@@ -228,9 +229,9 @@ abstract class BaseEntity
                         'name' => $name,
                         'description' => '',
                     ];
-                } elseif (array_key_exists($name, StrTypeToUrl::$builtInUrls)) {
+                } elseif ($context && $url = RenderHelper::getPreloadResourceLink($name, $context)) {
                     $links[] = [
-                        'url' => StrTypeToUrl::$builtInUrls[$name],
+                        'url' => $url,
                         'name' => $name,
                         'description' => $description,
                     ];
@@ -313,9 +314,9 @@ abstract class BaseEntity
             if (is_a($throwBlock, DocBlock\Tags\Throws::class)) {
                 $names = explode('|', (string)$throwBlock->getType());
                 foreach ($names as $name) {
-                    if (array_key_exists($name, StrTypeToUrl::$builtInUrls)) {
+                    if ($context && $url = RenderHelper::getPreloadResourceLink($name, $context)) {
                         $throws[] = [
-                            'url' => StrTypeToUrl::$builtInUrls[$name],
+                            'url' => $url,
                             'name' => $name,
                             'description' => (string)$throwBlock->getDescription(),
                         ];

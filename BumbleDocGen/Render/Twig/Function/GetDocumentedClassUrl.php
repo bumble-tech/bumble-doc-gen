@@ -8,6 +8,7 @@ use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
+use BumbleDocGen\Render\RenderHelper;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 
@@ -51,11 +52,9 @@ final class GetDocumentedClassUrl
         if (str_contains($className, ' ')) {
             return self::DEFAULT_URL;
         }
-
-        if (array_key_exists($className, StrTypeToUrl::$builtInUrls)) {
-            return StrTypeToUrl::$builtInUrls[$className];
-        } elseif (!str_starts_with($className, '\\') && array_key_exists("\\{$className}", StrTypeToUrl::$builtInUrls)) {
-            return StrTypeToUrl::$builtInUrls["\\{$className}"];
+        $preloadResourceLink = RenderHelper::getPreloadResourceLink($className, $this->context);
+        if ($preloadResourceLink) {
+            return $preloadResourceLink;
         }
         $classEntityCollection = $this->context->getClassEntityCollection();
         $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
