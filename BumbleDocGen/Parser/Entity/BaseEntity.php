@@ -10,7 +10,6 @@ use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
 use BumbleDocGen\Render\RenderHelper;
-use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
@@ -62,6 +61,8 @@ abstract class BaseEntity
     #[Cache\CacheableMethod] abstract public function getDocBlock(): DocBlock;
 
     abstract protected function getClassEntityCollection(): ClassEntityCollection;
+
+    abstract public function getEntityDependencies(): array;
 
     protected function prepareTypeString(string $type): string
     {

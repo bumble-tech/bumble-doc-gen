@@ -12,6 +12,8 @@ trait CacheableEntityWrapperTrait
 
     abstract function getConfiguration(): ConfigurationInterface;
 
+    abstract public function getEntityDependencies(): array;
+
     public function getCurrentClassEntity(): ?ClassEntity
     {
         $classEntity = null;
@@ -23,33 +25,7 @@ trait CacheableEntityWrapperTrait
         return $classEntity;
     }
 
-    private function loadEntityDependencies(): array
-    {
-        $fileDependencies = [];
-
-        $classEntity = $this->getCurrentClassEntity();
-        if ($classEntity && $classEntity->isClassLoad()) {
-            $currentClassEntityReflection = $classEntity->getReflection();
-            $parentClassNames = $currentClassEntityReflection->getParentClassNames();
-            $traitClassNames = $currentClassEntityReflection->getTraitNames();
-            $interfaceNames = $currentClassEntityReflection->getInterfaceNames();
-
-            $classNames = array_unique(array_merge($parentClassNames, $traitClassNames, $interfaceNames));
-
-            $reflections = array_map(fn($className) => $classEntity->getReflector()->reflectClass($className), $classNames);
-            $reflections[] = $currentClassEntityReflection;
-            foreach ($reflections as $reflectionClass) {
-                $fileName = $reflectionClass->getFileName();
-                if ($fileName) {
-                    $relativeFileName = str_replace($classEntity->getConfiguration()->getProjectRoot(), '', $reflectionClass->getFileName());
-                    $fileDependencies[$relativeFileName] = md5_file($fileName);
-                }
-            }
-        }
-        return $fileDependencies;
-    }
-
-    public function getEntityDependencies(): array
+    public function getCachedEntityDependencies(): array
     {
         $classEntity = $this->getCurrentClassEntity();
         $entityDependencies = [];
@@ -57,7 +33,7 @@ trait CacheableEntityWrapperTrait
             $filesDependenciesCacheKey = '__internalEntityDependencies';
             $entityDependencies = $this->getCacheValue($filesDependenciesCacheKey);
             if (is_null($entityDependencies)) {
-                $entityDependencies = self::loadEntityDependencies();
+                $entityDependencies = $this->getEntityDependencies();
                 $this->addValueToCache($filesDependenciesCacheKey, $entityDependencies);
             }
         }
@@ -71,7 +47,7 @@ trait CacheableEntityWrapperTrait
             $logger = $classEntity->getConfiguration()->getLogger();
             $logger->info("Caching {$classEntity->getFileName()} dependencies");
             $filesDependenciesCacheKey = '__internalEntityDependencies';
-            $entityDependencies = self::loadEntityDependencies();
+            $entityDependencies = $this->getEntityDependencies();
             $this->addValueToCache($filesDependenciesCacheKey, $entityDependencies);
         }
     }
@@ -89,13 +65,13 @@ trait CacheableEntityWrapperTrait
                     return false;
                 }
 
-                if (!$this->getEntityDependencies()) {
+                if (!$this->getCachedEntityDependencies()) {
                     $filesCacheState[$className] = true;
                     $this->getConfiguration()->getLogger()->warning("Unable to load {$className} class dependencies");
                     return true;
                 }
 
-                foreach ($this->getEntityDependencies() as $relativeFileName => $hashFile) {
+                foreach ($this->getCachedEntityDependencies() as $relativeFileName => $hashFile) {
                     $filePath = "{$projectRoot}{$relativeFileName}";
                     if (!file_exists($filePath) || md5_file($filePath) !== $hashFile) {
                         $filesCacheState[$className] = true;

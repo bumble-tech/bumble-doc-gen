@@ -50,6 +50,11 @@ class ConstantEntity extends BaseEntity
         return $this->classEntity->getClassEntityCollection();
     }
 
+    public function getEntityDependencies(): array
+    {
+        return $this->getClassEntity()->getEntityDependencies();
+    }
+
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();

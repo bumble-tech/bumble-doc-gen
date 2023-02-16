@@ -7,7 +7,6 @@ namespace BumbleDocGen\Parser\Entity;
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
-use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\BetterReflection;
@@ -103,6 +102,30 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     protected function getClassEntityCollection(): ClassEntityCollection
     {
         return $this->classEntityCollection;
+    }
+
+    public function getEntityDependencies(): array
+    {
+        $fileDependencies = [];
+        if ($this->isClassLoad()) {
+            $currentClassEntityReflection = $this->getReflection();
+            $parentClassNames = $currentClassEntityReflection->getParentClassNames();
+            $traitClassNames = $currentClassEntityReflection->getTraitNames();
+            $interfaceNames = $currentClassEntityReflection->getInterfaceNames();
+
+            $classNames = array_unique(array_merge($parentClassNames, $traitClassNames, $interfaceNames));
+
+            $reflections = array_map(fn($className) => $this->getReflector()->reflectClass($className), $classNames);
+            $reflections[] = $currentClassEntityReflection;
+            foreach ($reflections as $reflectionClass) {
+                $fileName = $reflectionClass->getFileName();
+                if ($fileName) {
+                    $relativeFileName = str_replace($this->getConfiguration()->getProjectRoot(), '', $reflectionClass->getFileName());
+                    $fileDependencies[$relativeFileName] = md5_file($fileName);
+                }
+            }
+        }
+        return $fileDependencies;
     }
 
     #[Cache\CacheableMethod] public function getDocBlock(): DocBlock

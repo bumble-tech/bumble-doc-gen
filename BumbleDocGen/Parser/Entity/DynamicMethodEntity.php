@@ -38,6 +38,11 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->classEntity;
     }
 
+    public function getEntityDependencies(): array
+    {
+        return $this->getClassEntity()->getEntityDependencies();
+    }
+
     #[Cache\CacheableMethod] public function getName(): string
     {
         return $this->annotationMethod->getMethodName();
