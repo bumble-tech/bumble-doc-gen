@@ -8,7 +8,6 @@ use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Parser\SourceLocator\Internal\CachedSourceLocator;
 use BumbleDocGen\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
-use Psr\Log\LoggerInterface;
 use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflector\DefaultReflector;
@@ -23,8 +22,7 @@ final class ProjectParser
     private function __construct(
         private Reflector              $reflector,
         private ConfigurationInterface $configuration,
-        private PluginEventDispatcher  $pluginEventDispatcher,
-        private LoggerInterface        $logger
+        private PluginEventDispatcher  $pluginEventDispatcher
     )
     {
     }
@@ -46,7 +44,7 @@ final class ProjectParser
         $sourceLocator = new CachedSourceLocator(new AggregateSourceLocator($sourceLocators), $configuration);
 
         $reflector = new DefaultReflector($sourceLocator);
-        return new self($reflector, $configuration, $pluginEventDispatcher, $configuration->getLogger());
+        return new self($reflector, $configuration, $pluginEventDispatcher);
     }
 
     public function parse(): ClassEntityCollection
@@ -56,10 +54,5 @@ final class ProjectParser
             $this->reflector,
             $this->pluginEventDispatcher
         );
-    }
-
-    public function getReflector(): Reflector
-    {
-        return $this->reflector;
     }
 }
