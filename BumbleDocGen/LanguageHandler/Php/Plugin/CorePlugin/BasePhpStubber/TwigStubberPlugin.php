@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Plugin\CorePlugin\BasePhpStubber;
+namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
 use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
 use BumbleDocGen\Plugin\PluginInterface;
 
-final class SymfonyComponentStubberPlugin implements PluginInterface
+final class TwigStubberPlugin implements PluginInterface
 {
     public static function getSubscribedEvents(): array
     {
@@ -25,19 +25,9 @@ final class SymfonyComponentStubberPlugin implements PluginInterface
             if (!str_starts_with($resourceName, '\\')) {
                 $resourceName = "\\{$resourceName}";
             }
-            if (str_starts_with($resourceName, '\\Symfony\\Component\\')) {
-                $resourceName = str_replace(['\\Symfony\\Component\\', '\\'], ['', '/'], $resourceName);
-
-                $resourceNameParts = explode('/', $resourceName);
-
-                $packageName = array_shift($resourceNameParts);
-                $resourceName = implode('/', $resourceNameParts);
-
-                $packageName = lcfirst($packageName);
-                $packageName = preg_replace("/[A-Z]/",  "-$0", $packageName);
-                $packageName = strtolower($packageName);
-
-                $event->setResourceUrl("https://github.com/symfony/{$packageName}/blob/master/{$resourceName}.php");
+            if (str_starts_with($resourceName, '\\Twig\\')) {
+                $resourceName = str_replace(['\\Twig\\', '\\'], ['', '/'], $resourceName);
+                $event->setResourceUrl("https://github.com/twigphp/Twig/blob/master/src/{$resourceName}.php");
             }
         }
     }
@@ -45,8 +35,8 @@ final class SymfonyComponentStubberPlugin implements PluginInterface
     final public function onCheckIsClassEntityCanBeLoad(OnCheckIsClassEntityCanBeLoad $event): void
     {
         if (
-            str_starts_with($event->getEntity()->getName(), 'Symfony\\Component\\') ||
-            str_starts_with($event->getEntity()->getName(), '\\Symfony\\Component\\')
+            str_starts_with($event->getEntity()->getName(), 'Twig\\') ||
+            str_starts_with($event->getEntity()->getName(), '\\Twig\\')
         ) {
             $event->disableClassLoading();
         }

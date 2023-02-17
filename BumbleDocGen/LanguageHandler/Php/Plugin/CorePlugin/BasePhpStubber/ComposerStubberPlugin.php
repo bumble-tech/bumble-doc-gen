@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Plugin\CorePlugin\BasePhpStubber;
+namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
 use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
 use BumbleDocGen\Plugin\PluginInterface;
 
-final class TwigStubberPlugin implements PluginInterface
+final class ComposerStubberPlugin implements PluginInterface
 {
     public static function getSubscribedEvents(): array
     {
@@ -25,9 +25,9 @@ final class TwigStubberPlugin implements PluginInterface
             if (!str_starts_with($resourceName, '\\')) {
                 $resourceName = "\\{$resourceName}";
             }
-            if (str_starts_with($resourceName, '\\Twig\\')) {
-                $resourceName = str_replace(['\\Twig\\', '\\'], ['', '/'], $resourceName);
-                $event->setResourceUrl("https://github.com/twigphp/Twig/blob/master/src/{$resourceName}.php");
+            if (str_starts_with($resourceName, '\\Composer\\')) {
+                $resourceName = str_replace(['\\Composer\\', '\\'], ['', '/'], $resourceName);
+                $event->setResourceUrl("https://github.com/composer/composer/blob/master/src/Composer/{$resourceName}.php");
             }
         }
     }
@@ -35,8 +35,8 @@ final class TwigStubberPlugin implements PluginInterface
     final public function onCheckIsClassEntityCanBeLoad(OnCheckIsClassEntityCanBeLoad $event): void
     {
         if (
-            str_starts_with($event->getEntity()->getName(), 'Twig\\') ||
-            str_starts_with($event->getEntity()->getName(), '\\Twig\\')
+            str_starts_with($event->getEntity()->getName(), 'Composer\\') ||
+            str_starts_with($event->getEntity()->getName(), '\\Composer\\')
         ) {
             $event->disableClassLoading();
         }

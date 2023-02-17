@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Plugin\CorePlugin\BasePhpStubber;
+namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
 use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
