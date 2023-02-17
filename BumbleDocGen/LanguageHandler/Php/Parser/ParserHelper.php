@@ -13,8 +13,6 @@ use phpDocumentor\Reflection\Types\ContextFactory;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 use Roave\BetterReflection\Reflector\Reflector;
-use function BumbleDocGen\Parser\mb_strtolower;
-use function BumbleDocGen\Parser\mb_substr;
 
 final class ParserHelper
 {
@@ -195,8 +193,8 @@ final class ParserHelper
 
         $name = explode('\\', $name);
         $name = end($name);
-        $chr = mb_substr($name, 0, 1, "UTF-8");
-        return mb_strtolower($chr, "UTF-8") != $chr;
+        $chr = \mb_substr($name, 0, 1, "UTF-8");
+        return \mb_strtolower($chr, "UTF-8") != $chr;
     }
 
     public static function isCorrectClassName(string $className, bool $checkBuiltIns = true): bool
