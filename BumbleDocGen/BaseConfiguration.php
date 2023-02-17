@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace BumbleDocGen;
 
 use Bramus\Monolog\Formatter\ColoredLineFormatter;
-use BumbleDocGen\Parser\Entity\ConstantEntity;
-use BumbleDocGen\Parser\Entity\MethodEntity;
-use BumbleDocGen\Parser\Entity\PropertyEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
 use BumbleDocGen\Parser\FilterCondition\ClassConstantFilterCondition\VisibilityCondition as ClassConstantVisibilityCondition;
 use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier;
 use BumbleDocGen\Parser\FilterCondition\ConditionGroup;

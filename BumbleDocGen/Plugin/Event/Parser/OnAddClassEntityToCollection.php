@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Plugin\Event\Parser;
 
-use BumbleDocGen\Parser\Entity\ClassEntity;
-use BumbleDocGen\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity;
 
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntityCollection;
+
 abstract class RootEntityCollection extends BaseEntityCollection
 {
     /**

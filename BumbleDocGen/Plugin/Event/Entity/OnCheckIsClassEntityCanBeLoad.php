@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Plugin\Event\Entity;
 
-use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use Symfony\Contracts\EventDispatcher\Event;
 
 final class OnCheckIsClassEntityCanBeLoad extends Event

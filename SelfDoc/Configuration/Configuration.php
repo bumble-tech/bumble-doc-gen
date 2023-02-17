@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace SelfDoc\Configuration;
 
 use BumbleDocGen\BaseConfiguration;
-use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\TrueCondition;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
-use BumbleDocGen\Parser\SourceLocator\AsyncSourceLocator;
 use BumbleDocGen\Parser\SourceLocator\RecursiveDirectoriesSourceLocator;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginsCollection;

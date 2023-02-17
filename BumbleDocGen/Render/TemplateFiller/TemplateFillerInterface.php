@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\TemplateFiller;
 
-use BumbleDocGen\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 
 interface TemplateFillerInterface
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\FilterCondition\ClassConstantFilterCondition;
 
-use BumbleDocGen\Parser\Entity\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 

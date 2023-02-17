@@ -3,7 +3,7 @@
 namespace BumbleDocGen\Parser\Entity\Cache;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\ParserHelper;
 
 trait CacheableEntityWrapperTrait
@@ -19,7 +19,7 @@ trait CacheableEntityWrapperTrait
         $classEntity = null;
         if (method_exists($this, 'getClassEntity')) {
             $classEntity = $this->getClassEntity();
-        } elseif (is_subclass_of($this, \BumbleDocGen\Parser\Entity\ClassEntity::class)) {
+        } elseif (is_subclass_of($this, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity::class)) {
             $classEntity = $this;
         }
         return $classEntity;

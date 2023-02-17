@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Plugin\CorePlugin\PageLinker;
 
-use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Plugin\PluginInterface;
 use BumbleDocGen\Render\Context\Context;

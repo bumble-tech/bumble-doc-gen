@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser\Entity\Cache;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\Entity\ClassEntity;
-use BumbleDocGen\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\Parser\Entity\ConstantEntity;
-use BumbleDocGen\Parser\Entity\MethodEntity;
-use BumbleDocGen\Parser\Entity\PropertyEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
 use Nette\PhpGenerator\Parameter;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;

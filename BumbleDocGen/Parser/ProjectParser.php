@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Parser\SourceLocator\Internal\CachedSourceLocator;
 use BumbleDocGen\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
-use BumbleDocGen\Parser\Entity\ClassEntityCollection;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\Reflector\Reflector;

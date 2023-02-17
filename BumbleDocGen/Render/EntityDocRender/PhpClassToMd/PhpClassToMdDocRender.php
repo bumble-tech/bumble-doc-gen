@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\EntityDocRender\PhpClassToMd;
 
-use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface;

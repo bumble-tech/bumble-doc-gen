@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\FilterCondition\MethodFilterCondition;
 
-use BumbleDocGen\Parser\Entity\MethodEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
 /**

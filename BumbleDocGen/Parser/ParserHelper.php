@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Parser;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use Nette\PhpGenerator\GlobalFunction;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;

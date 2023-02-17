@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Parser\Entity\Cache\CacheKey;
 
-use BumbleDocGen\Parser\Entity\BaseEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity;
 
 interface CacheKeyGeneratorInterface
 {

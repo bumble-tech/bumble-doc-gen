@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Function;
 
-use BumbleDocGen\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Render\Context\Context;
 

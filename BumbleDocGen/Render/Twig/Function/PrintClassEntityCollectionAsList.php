@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Function;
 
-use BumbleDocGen\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 

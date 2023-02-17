@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen;
 
-use BumbleDocGen\Parser\Entity\ClassEntity;
-use BumbleDocGen\Parser\Entity\ConstantEntity;
-use BumbleDocGen\Parser\Entity\MethodEntity;
-use BumbleDocGen\Parser\Entity\PropertyEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginsCollection;

@@ -35,7 +35,7 @@ $demoConfig = new class extends \BumbleDocGen\BaseConfiguration {
         );
     }
 
-    public function classEntityFilterCondition(\BumbleDocGen\Parser\Entity\ClassEntity $classEntity
+    public function classEntityFilterCondition(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity
     ): \BumbleDocGen\Parser\FilterCondition\ConditionInterface {
         return new \BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\TrueCondition();
     }
