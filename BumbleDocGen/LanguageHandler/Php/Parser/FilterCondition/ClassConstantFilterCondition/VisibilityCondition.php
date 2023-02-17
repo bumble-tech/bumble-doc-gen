@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\FilterCondition\ClassConstantFilterCondition;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
-use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier;
+use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
 /**

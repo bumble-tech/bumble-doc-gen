@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\FilterCondition\CommonFilterCondition;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition;
 
 final class VisibilityConditionModifier
 {

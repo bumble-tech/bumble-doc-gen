@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\FilterCondition\ClassFilterCondition;
+namespace BumbleDocGen\Parser\FilterCondition\CommonFilterCondition;
 
 use BumbleDocGen\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;

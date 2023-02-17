@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\FilterCondition\PropertyFilterCondition;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
-use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\VisibilityConditionModifier;
+use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
 /**
