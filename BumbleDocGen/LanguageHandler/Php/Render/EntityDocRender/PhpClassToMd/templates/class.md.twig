@@ -3,13 +3,13 @@
 {% include '_classHeader.md.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 
 
-{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToMd\\PhpClassToMdDocRender::BLOCK_AFTER_HEADER')) }}
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\LanguageHandler\\Php\\Render\\EntityDocRender\\PhpClassToMd\\PhpClassToMdDocRender::BLOCK_AFTER_HEADER')) }}
 
 
 {% include '_classMainInfo.md.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 
 
-{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToMd\\PhpClassToMdDocRender::BLOCK_AFTER_MAIN_INFO')) }}
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\LanguageHandler\\Php\\Render\\EntityDocRender\\PhpClassToMd\\PhpClassToMdDocRender::BLOCK_AFTER_MAIN_INFO')) }}
 
 
 {% include '_enumCases.md.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
@@ -24,7 +24,7 @@
 
 {% include '_properties.md.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 
-{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\Render\\EntityDocRender\\PhpClassToMd\\PhpClassToMdDocRender::BLOCK_BEFORE_DETAILS')) }}
+{{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\LanguageHandler\\Php\\Render\\EntityDocRender\\PhpClassToMd\\PhpClassToMdDocRender::BLOCK_BEFORE_DETAILS')) }}
 
 {% include '_property_details.md.twig' with {'classEntity': classEntity, 'renderContext': renderContext} only %}
 

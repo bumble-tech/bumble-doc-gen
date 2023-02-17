@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Render\EntityDocRender\PhpClassToMd;
+namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Context\Context;
@@ -13,7 +13,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 /**
- * Rendering PHP classes into md format documents (for display on github)
+ * Rendering PHP classes into md format documents (for display on GitHub)
  */
 class PhpClassToMdDocRender implements EntityDocRenderInterface
 {

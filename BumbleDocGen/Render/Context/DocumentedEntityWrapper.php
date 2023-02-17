@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Context;
 
+use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface;
-use BumbleDocGen\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 
 /**
  * Wrapper for the class that was requested for documentation

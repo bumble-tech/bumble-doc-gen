@@ -13,6 +13,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition as MethodOnlyFromCurrentClassCondition;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\VisibilityCondition as MethodVisibilityCondition;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondition as PropertyVisibilityCondition;
+use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 use BumbleDocGen\Parser\FilterCondition\ConditionGroup;
 use BumbleDocGen\Parser\FilterCondition\ConditionGroupTypeEnum;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
@@ -28,7 +29,6 @@ use BumbleDocGen\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin;
 use BumbleDocGen\Plugin\CorePlugin\PageLinker\PageRstLinkerPlugin;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
-use BumbleDocGen\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 use BumbleDocGen\Render\PageLinkProcessor\BasePageLinkProcessor;
 use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
