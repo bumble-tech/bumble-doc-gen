@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Render\EntityDocRender;
+namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\Render\Context\Context;

@@ -6,10 +6,10 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
 use BumbleDocGen\Parser\Entity\Cache;
 use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
 use BumbleDocGen\Render\RenderHelper;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use phpDocumentor\Reflection\DocBlock;

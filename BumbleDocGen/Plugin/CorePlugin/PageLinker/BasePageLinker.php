@@ -5,18 +5,14 @@ declare(strict_types=1);
 namespace BumbleDocGen\Plugin\CorePlugin\PageLinker;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
 use BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Plugin\PluginInterface;
 use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\EntityDocRender\EntityDocRenderHelper;
 use Psr\Log\LoggerInterface;
 
 abstract class BasePageLinker implements PluginInterface
 {
-    public const CLASS_ENTITY_SHORT_LINK_OPTION = 'short_form';
-    public const CLASS_ENTITY_FULL_LINK_OPTION = 'full_form';
-    public const CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION = 'only_cursor';
-
     private array $keyUsageCount = [];
 
     /**
