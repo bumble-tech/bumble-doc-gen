@@ -10,6 +10,7 @@ use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCan
 use BumbleDocGen\Parser\Entity\Cache;
 use BumbleDocGen\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
+use BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface;
 use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Identifier\Identifier;
@@ -593,5 +594,24 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     #[Cache\CacheableMethod] public function getConstants(): array
     {
         return $this->getReflection()->getImmediateConstants();
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function getDocRender(): EntityDocRenderInterface
+    {
+        static $renders = [];
+        $objectId = $this->getObjectId();
+        if (!isset($renders[$objectId])) {
+            $docRender = $this->getConfiguration()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
+            if (!$docRender) {
+                throw new \Exception(
+                    "Render for file `{$this->getName()}` not found"
+                );
+            }
+            $renders[$objectId] = $docRender;
+        }
+        return $renders[$objectId];
     }
 }

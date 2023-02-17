@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\EntityDocRender;
 
-use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
+use BumbleDocGen\Parser\Entity\RootEntityInterface;
 
 final class EntityDocRendersCollection implements \IteratorAggregate
 {
@@ -22,10 +22,10 @@ final class EntityDocRendersCollection implements \IteratorAggregate
         return $this;
     }
 
-    public function getFirstMatchingRender(DocumentedEntityWrapper $entityWrapper): ?EntityDocRenderInterface
+    public function getFirstMatchingRender(RootEntityInterface $entity): ?EntityDocRenderInterface
     {
         foreach ($this->entityDocRenders as $entityDocRender) {
-            if ($entityDocRender->isAvailableForEntity($entityWrapper)) {
+            if ($entityDocRender->isAvailableForEntity($entity)) {
                 return $entityDocRender;
             }
         }

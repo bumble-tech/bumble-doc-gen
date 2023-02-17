@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\EntityDocRender;
 
+use BumbleDocGen\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 
@@ -15,10 +16,10 @@ interface EntityDocRenderInterface
     /**
      * Can this render be used to create entity documentation
      *
-     * @param DocumentedEntityWrapper $entityWrapper The class whose documentation was requested
+     * @param RootEntityInterface $entity The class whose documentation was requested
      * @return bool
      */
-    public function isAvailableForEntity(DocumentedEntityWrapper $entityWrapper): bool;
+    public function isAvailableForEntity(RootEntityInterface $entity): bool;
 
     public function setContext(Context $context): void;
 

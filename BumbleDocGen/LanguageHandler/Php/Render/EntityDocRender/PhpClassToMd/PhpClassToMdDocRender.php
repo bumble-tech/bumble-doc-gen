@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface;
@@ -37,9 +38,9 @@ class PhpClassToMdDocRender implements EntityDocRenderInterface
         return 'md';
     }
 
-    public function isAvailableForEntity(DocumentedEntityWrapper $entityWrapper): bool
+    public function isAvailableForEntity(RootEntityInterface $entity): bool
     {
-        return is_a($entityWrapper->getDocumentTransformableEntity(), ClassEntity::class);
+        return is_a($entity, ClassEntity::class);
     }
 
     public function setContext(Context $context): void
