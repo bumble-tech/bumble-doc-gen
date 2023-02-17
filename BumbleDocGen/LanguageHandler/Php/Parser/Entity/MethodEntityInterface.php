@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\Entity;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 interface MethodEntityInterface
 {

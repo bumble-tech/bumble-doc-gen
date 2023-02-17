@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\Entity;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Parser\Entity\Cache;
 use BumbleDocGen\Parser\ParserHelper;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;

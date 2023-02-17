@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\Entity;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Parser\Entity\Cache;
 use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
