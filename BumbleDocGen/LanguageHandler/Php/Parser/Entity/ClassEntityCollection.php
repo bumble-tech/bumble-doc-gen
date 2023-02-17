@@ -6,12 +6,12 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperInterface;
 use BumbleDocGen\Parser\Entity\Cache\EntityCacheStorageHelper;
 use BumbleDocGen\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection;
-use BumbleDocGen\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflector\Reflector;

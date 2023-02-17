@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Plugin\Event\Entity;
+namespace BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use Symfony\Contracts\EventDispatcher\Event;

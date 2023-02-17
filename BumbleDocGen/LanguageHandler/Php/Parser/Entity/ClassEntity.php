@@ -6,9 +6,9 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Parser\Entity\Cache;
 use BumbleDocGen\Parser\Entity\RootEntityInterface;
-use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\BetterReflection;

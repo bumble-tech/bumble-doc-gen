@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SelfDoc\Configuration\Plugin\RoaveStubber;
 
-use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
 use BumbleDocGen\Plugin\PluginInterface;
 

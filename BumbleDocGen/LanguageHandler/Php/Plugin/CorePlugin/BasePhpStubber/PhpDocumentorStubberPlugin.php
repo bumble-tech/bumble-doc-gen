@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
-use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
 use BumbleDocGen\Plugin\PluginInterface;
 use phpDocumentor\Reflection\DocBlock;

@@ -6,8 +6,8 @@ namespace SelfDoc\Configuration\Plugin\TwigFilterClassParser;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
-use BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Plugin\PluginInterface;
 use BumbleDocGen\Render\Twig\MainExtension;
