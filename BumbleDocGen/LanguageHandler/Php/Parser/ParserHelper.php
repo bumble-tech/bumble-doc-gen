@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser;
+namespace BumbleDocGen\LanguageHandler\Php\Parser;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
@@ -13,6 +13,8 @@ use phpDocumentor\Reflection\Types\ContextFactory;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 use Roave\BetterReflection\Reflector\Reflector;
+use function BumbleDocGen\Parser\mb_strtolower;
+use function BumbleDocGen\Parser\mb_substr;
 
 final class ParserHelper
 {

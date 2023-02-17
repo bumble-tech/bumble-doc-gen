@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperInterface;
 use BumbleDocGen\Parser\Entity\Cache\EntityCacheStorageHelper;
 use BumbleDocGen\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;

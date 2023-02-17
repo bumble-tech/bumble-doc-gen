@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Function;
 
-use BumbleDocGen\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Render\RenderHelper;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
-use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 
 /**
  * Get the URL of a documented class by its name. If the class is found, next to the file where this method was called,

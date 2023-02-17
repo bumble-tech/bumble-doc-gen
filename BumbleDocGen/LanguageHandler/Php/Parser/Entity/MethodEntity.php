@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Parser\Entity\Cache;
-use BumbleDocGen\Parser\ParserHelper;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use Roave\BetterReflection\Reflection\ReflectionClass;

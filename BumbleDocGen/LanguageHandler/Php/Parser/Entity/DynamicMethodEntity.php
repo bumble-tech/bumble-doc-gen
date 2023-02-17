@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Parser\Entity\Cache;
-use BumbleDocGen\Parser\ParserHelper;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;

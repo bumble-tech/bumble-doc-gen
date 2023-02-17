@@ -4,7 +4,7 @@ namespace BumbleDocGen\Parser\Entity\Cache;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 
 trait CacheableEntityWrapperTrait
 {

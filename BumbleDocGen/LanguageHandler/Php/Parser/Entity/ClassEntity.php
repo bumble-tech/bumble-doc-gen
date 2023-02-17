@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Parser\Entity\Cache;
 use BumbleDocGen\Parser\Entity\RootEntityInterface;
-use BumbleDocGen\Parser\ParserHelper;
 use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use phpDocumentor\Reflection\DocBlock;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Filter;
 
-use BumbleDocGen\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\RenderHelper;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
