@@ -58,7 +58,7 @@ final class GetDocumentedClassUrl
         }
         $classEntityCollection = $this->context->getClassEntityCollection();
         $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
-        if ($classEntity->classDataCanBeLoaded()) {
+        if ($classEntity->entityDataCanBeLoaded()) {
             if (!$classEntity->isInGit()) {
                 return self::DEFAULT_URL;
             }

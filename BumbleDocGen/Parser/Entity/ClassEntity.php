@@ -19,7 +19,7 @@ use Roave\BetterReflection\SourceLocator\Located\LocatedSource;
 /**
  * Class entity
  */
-class ClassEntity extends BaseEntity implements DocumentTransformableEntityInterface
+class ClassEntity extends BaseEntity implements DocumentTransformableEntityInterface, RootEntityInterface
 {
     private array $pluginsData = [];
     private ?ReflectionClass $reflectionClass = null;
@@ -248,10 +248,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->isClassLoad;
     }
 
-    /**
-     * Checking if it is possible to get the entity data ( is the specified class loaded )
-     */
-    #[Cache\CacheableMethod] public function classDataCanBeLoaded(): bool
+    #[Cache\CacheableMethod] public function entityDataCanBeLoaded(): bool
     {
         if (!$this->getClassEntityCollection()->getPluginEventDispatcher()->dispatch(
             new OnCheckIsClassEntityCanBeLoad($this)

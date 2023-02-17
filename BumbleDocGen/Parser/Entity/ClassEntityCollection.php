@@ -15,7 +15,7 @@ use BumbleDocGen\Plugin\PluginEventDispatcher;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflector\Reflector;
 
-final class ClassEntityCollection extends BaseEntityCollection
+final class ClassEntityCollection extends RootEntityCollection
 {
     private function __construct(
         private ConfigurationInterface $configuration,

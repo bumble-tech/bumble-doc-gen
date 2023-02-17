@@ -60,7 +60,7 @@ final class StrTypeToUrl
             }
 
             $entityClassOfLink = $this->context->getClassEntityCollection()->getLoadedOrCreateNew($type);
-            if ($entityClassOfLink->classDataCanBeLoaded()) {
+            if ($entityClassOfLink->entityDataCanBeLoaded()) {
                 if ($entityClassOfLink->getAbsoluteFileName()) {
                     $link = $getDocumentedClassUrlFunction($type, '', $createDocument);
 

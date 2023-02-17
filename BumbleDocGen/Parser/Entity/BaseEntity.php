@@ -51,9 +51,6 @@ abstract class BaseEntity
 
     #[Cache\CacheableMethod] abstract public function getDescription(): string;
 
-    /**
-     * Returns the relative path to a file if it can be retrieved and if the file is in the project directory
-     */
     #[Cache\CacheableMethod] abstract public function getFileName(): ?string;
 
     #[Cache\CacheableMethod] abstract public function getStartLine(): int;
@@ -79,7 +76,7 @@ abstract class BaseEntity
                         $types[$k] = "\\{$t}";
                     } elseif (
                         ParserHelper::isCorrectClassName($t) &&
-                        $this->getClassEntityCollection()->getLoadedOrCreateNew($t)->classDataCanBeLoaded()
+                        $this->getClassEntityCollection()->getLoadedOrCreateNew($t)->entityDataCanBeLoaded()
                     ) {
                         $types[$k] = "\\{$t}";
                     }

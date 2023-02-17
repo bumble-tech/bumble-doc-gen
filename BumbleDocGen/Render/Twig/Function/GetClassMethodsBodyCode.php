@@ -32,7 +32,7 @@ final class GetClassMethodsBodyCode
     {
         $classEntityCollection = $this->context->getClassEntityCollection();
         $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
-        if ($classEntity->classDataCanBeLoaded()) {
+        if ($classEntity->entityDataCanBeLoaded()) {
             $methodsCode = [];
             $methodEntityCollection = $classEntity->getMethodEntityCollection();
             $addIndentFromLeft = new AddIndentFromLeft();
