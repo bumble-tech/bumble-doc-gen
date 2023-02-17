@@ -17,4 +17,10 @@ abstract class RootEntityCollection extends BaseEntityCollection
     {
         return $this->entities[$objectId] ?? null;
     }
+
+    /**
+     * @warning The entity obtained as a result of executing this method may not be available for loading
+     * @see RootEntityInterface::entityDataCanBeLoaded()
+     */
+    abstract public function getLoadedOrCreateNew($className): RootEntityInterface;
 }
