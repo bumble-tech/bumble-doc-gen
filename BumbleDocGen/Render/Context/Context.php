@@ -6,6 +6,7 @@ namespace BumbleDocGen\Render\Context;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
 
@@ -58,7 +59,15 @@ final class Context
         return $this->configuration;
     }
 
+    /**
+     * @deprecated replace to getRootEntityCollection()
+     */
     public function getClassEntityCollection(): ClassEntityCollection
+    {
+        return $this->classEntityCollection;
+    }
+
+    public function getRootEntityCollection(): RootEntityCollection
     {
         return $this->classEntityCollection;
     }
