@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\SourceLocator;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator;
 
+use BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface;
 use Roave\BetterReflection\SourceLocator\Ast\Locator;
 use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
 use Symfony\Component\Finder\Finder;
@@ -29,7 +30,7 @@ final class AsyncSourceLocator implements SourceLocatorInterface
 
     public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
     {
-        return new \BumbleDocGen\Parser\SourceLocator\Internal\SystemAsyncSourceLocator(
+        return new \BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\SystemAsyncSourceLocator(
             $astLocator, $this->psr4FileMap, $this->classMap,
         );
     }

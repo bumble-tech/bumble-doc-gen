@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\SourceLocator\Internal;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal;
 
 use BumbleDocGen\ConfigurationInterface;
 use Roave\BetterReflection\Identifier\Identifier;
@@ -12,7 +12,6 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
 use Roave\BetterReflection\SourceLocator\Located\LocatedSource;
 use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
-
 use function array_key_exists;
 use function spl_object_hash;
 use function sprintf;
@@ -101,7 +100,7 @@ final class CachedSourceLocator implements SourceLocator
     }
 
     /**
-     * @return list<Reflection>
+     * @return Reflection
      */
     public function locateIdentifiersByType(Reflector $reflector, IdentifierType $identifierType): array
     {

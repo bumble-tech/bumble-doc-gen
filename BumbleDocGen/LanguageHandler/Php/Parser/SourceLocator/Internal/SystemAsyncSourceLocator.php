@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Parser\SourceLocator\Internal;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal;
 
 use InvalidArgumentException;
 use Roave\BetterReflection\Identifier\Identifier;

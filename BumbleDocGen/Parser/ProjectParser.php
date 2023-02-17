@@ -6,7 +6,7 @@ namespace BumbleDocGen\Parser;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\Parser\SourceLocator\Internal\CachedSourceLocator;
+use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\CachedSourceLocator;
 use BumbleDocGen\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
 use Roave\BetterReflection\BetterReflection;
