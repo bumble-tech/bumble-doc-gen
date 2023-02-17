@@ -8,7 +8,6 @@ use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
-use Roave\BetterReflection\Reflector\Reflector;
 
 /**
  * Document rendering context
@@ -17,7 +16,6 @@ final class Context
 {
     private string $currentTemplateFilePath = '';
     private DocumentedEntityWrappersCollection $entityWrappersCollection;
-    private Reflector $reflector;
 
     public function __construct(
         private ConfigurationInterface $configuration,
@@ -27,7 +25,6 @@ final class Context
     )
     {
         $this->entityWrappersCollection = new DocumentedEntityWrappersCollection();
-        $this->reflector = $classEntityCollection->getReflector();
     }
 
     /**
@@ -54,11 +51,6 @@ final class Context
     public function isCurrentTemplateMd(): bool
     {
         return str_ends_with($this->getCurrentTemplateFilePatch(), '.md.twig');
-    }
-
-    public function getReflector(): Reflector
-    {
-        return $this->reflector;
     }
 
     public function getConfiguration(): ConfigurationInterface
