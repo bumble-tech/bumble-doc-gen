@@ -24,5 +24,5 @@ abstract class RootEntityCollection extends BaseEntityCollection
      */
     abstract public function getLoadedOrCreateNew(string $className): RootEntityInterface;
 
-    abstract public function findEntity(string $search): ?RootEntityInterface;
+    abstract public function findEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface;
 }

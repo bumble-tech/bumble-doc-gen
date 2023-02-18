@@ -242,8 +242,14 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     /**
-     * @param string $search Search query. For the search, only the main part is taken, up to the characters: `::`, `->`, `#`.
-     *  If the request refers to multiple existing entities, a warning will be shown and the first entity found will be used.
+     * @param string $search
+     *  Search query. For the search, only the main part is taken, up to the characters: `::`, `->`, `#`.
+     *  If the request refers to multiple existing entities and if unsafe keys are allowed,
+     *  a warning will be shown and the first entity found will be used.
+     *
+     * @param bool $useUnsafeKeys Whether to use search keys that can be used to find several entities
+     *
+     * @return ClassEntity|null
      *
      * @example
      *  $classEntityCollection->findEntity('App'); // class name
@@ -255,7 +261,7 @@ final class ClassEntityCollection extends RootEntityCollection
      *  $classEntityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/SelfDoc/Console/App.php'); // absolute path
      *  $classEntityCollection->findEntity('https://***REMOVED***/blob/master/SelfDoc/Console/App.php'); // source link
      */
-    public function findEntity(string $search): ?ClassEntity
+    public function findEntity(string $search, bool $useUnsafeKeys = true): ?ClassEntity
     {
         static $index = [];
         static $duplicates = [];
@@ -309,9 +315,13 @@ final class ClassEntityCollection extends RootEntityCollection
         }
 
         if (array_key_exists($foundKey, $duplicates)) {
-            $this->configuration->getLogger()->warning(
-                "ClassEntityCollection:findEntity: Key `{$foundKey}` refers to multiple entities. Use a unique search key to avoid mistakes"
-            );
+            if ($useUnsafeKeys) {
+                $this->configuration->getLogger()->warning(
+                    "ClassEntityCollection:findEntity: Key `{$foundKey}` refers to multiple entities. Use a unique search key to avoid mistakes"
+                );
+            } else {
+                return null;
+            }
         }
 
         return $entity;
