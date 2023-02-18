@@ -8,6 +8,7 @@ use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
+use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
 use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperInterface;
 use BumbleDocGen\Parser\Entity\Cache\EntityCacheStorageHelper;
@@ -267,6 +268,10 @@ final class ClassEntityCollection extends RootEntityCollection
         static $duplicates = [];
         static $lastCacheKey = null;
 
+        if (preg_match('/^((self|parent):|(\$(.*)->))/', $search)) {
+            return null;
+        }
+
         $lastKey = array_key_last($this->entities);
         if ($lastKey !== $lastCacheKey || !$index) {
             $lastCacheKey = $lastKey;
@@ -325,5 +330,22 @@ final class ClassEntityCollection extends RootEntityCollection
         }
 
         return $entity;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function gelEntityLinkData(
+        string  $rawLink,
+        ?string $defaultEntityName = null,
+        bool    $useUnsafeKeys = true
+    ): array
+    {
+        return EntityDocRenderHelper::getEntityDataByLink(
+            $rawLink,
+            $this,
+            $defaultEntityName,
+            $useUnsafeKeys
+        );
     }
 }

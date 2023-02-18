@@ -25,4 +25,13 @@ abstract class RootEntityCollection extends BaseEntityCollection
     abstract public function getLoadedOrCreateNew(string $className): RootEntityInterface;
 
     abstract public function findEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface;
+
+    /**
+     * @param string $rawLink Raw link to an entity or entity element
+     * @param string|null $defaultEntityName Entity name to use if the link does not contain a valid or existing entity name,
+     *  but only a cursor on an entity element
+     * @param bool $useUnsafeKeys
+     * @return array
+     */
+    abstract public function gelEntityLinkData(string $rawLink, ?string $defaultEntityName = null, bool $useUnsafeKeys = true): array;
 }
