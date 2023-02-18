@@ -16,7 +16,7 @@ use BumbleDocGen\Render\Twig\Filter\TextToCodeBlock;
 use BumbleDocGen\Render\Twig\Filter\TextToHeading;
 use BumbleDocGen\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
-use BumbleDocGen\Render\Twig\Function\DrawDocumentedClassLink;
+use BumbleDocGen\Render\Twig\Function\DrawDocumentedEntityLink;
 use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
 use BumbleDocGen\Render\Twig\Function\GetClassMethodsBodyCode;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
@@ -65,8 +65,8 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
                 ]
             ),
             new \Twig\TwigFunction(
-                'drawDocumentedClassLink',
-                new DrawDocumentedClassLink($this->context),
+                'drawDocumentedEntityLink',
+                new DrawDocumentedEntityLink($this->context),
                 [
                     'is_safe' => ['html'],
                 ]

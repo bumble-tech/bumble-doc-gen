@@ -12,7 +12,7 @@ use Symfony\Component\Finder\Finder;
  * Generate documentation menu in HTML or rst format. To generate the menu, the start page is taken,
  * and all links with this page are recursively collected for it, after which the html menu is created.
  *
- * @note This function initiates the creation of documents for the displayed classes
+ * @note This function initiates the creation of documents for the displayed entities
  * @see GetDocumentedEntityUrl
  *
  * @example {{ drawDocumentationMenu() }}

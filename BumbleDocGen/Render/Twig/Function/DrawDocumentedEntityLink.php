@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Function;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Render\Context\Context;
 
 /**
@@ -12,11 +12,11 @@ use BumbleDocGen\Render\Context\Context;
  *
  * @note This function initiates the creation of documents for the displayed classes
  *
- * @example {{ drawDocumentedClassLink($entity, 'getFunctions') }}
- * @example {{ drawDocumentedClassLink($entity) }}
- * @example {{ drawDocumentedClassLink($entity, '', false) }}
+ * @example {{ drawDocumentedEntityLink($entity, 'getFunctions()') }}
+ * @example {{ drawDocumentedEntityLink($entity) }}
+ * @example {{ drawDocumentedEntityLink($entity, '', false) }}
  */
-final class DrawDocumentedClassLink
+final class DrawDocumentedEntityLink
 {
     /**
      * @param Context $context Render context
@@ -26,14 +26,14 @@ final class DrawDocumentedClassLink
     }
 
     public function __invoke(
-        ClassEntity $classEntity,
-        string      $cursor = '',
-        bool        $useShortName = true
+        RootEntityInterface $entity,
+        string              $cursor = '',
+        bool                $useShortName = true
     ): string
     {
         $getDocumentedEntityUrlFunction = new GetDocumentedEntityUrl($this->context);
-        $url = $getDocumentedEntityUrlFunction($classEntity->getName(), $cursor);
-        $name = $useShortName ? $classEntity->getShortName() : $classEntity->getName();
+        $url = $getDocumentedEntityUrlFunction($entity->getName(), $cursor);
+        $name = $useShortName ? $entity->getShortName() : $entity->getName();
         if ($this->context->isCurrentTemplateRst()) {
             return "`{$name} <{$url}>`_";
         }
