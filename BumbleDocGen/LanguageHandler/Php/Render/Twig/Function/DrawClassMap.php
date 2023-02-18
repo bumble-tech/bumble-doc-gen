@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Render\Twig\Function;
+namespace BumbleDocGen\LanguageHandler\Php\Render\Twig\Function;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
+use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 
 /**
  * Generate class map in HTML or rst format

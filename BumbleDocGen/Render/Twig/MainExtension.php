@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig;
 
+use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\DrawClassMap;
+use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\GetClassMethodsBodyCode;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Render\Twig\Filter\FixStrSize;
@@ -14,13 +16,10 @@ use BumbleDocGen\Render\Twig\Filter\RemoveLineBrakes;
 use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 use BumbleDocGen\Render\Twig\Filter\TextToCodeBlock;
 use BumbleDocGen\Render\Twig\Filter\TextToHeading;
-use BumbleDocGen\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentedEntityLink;
 use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
-use BumbleDocGen\Render\Twig\Function\GetClassMethodsBodyCode;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\Render\Twig\Function\IsSubclassOf;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
 use BumbleDocGen\Render\Twig\Function\PrintClassEntityCollectionAsList;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Render\Twig\Function;
+namespace BumbleDocGen\LanguageHandler\Php\Render\Twig\Function;
 
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
