@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Function;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Render\Context\DocumentedEntityWrappersCollection;
+use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Render\RenderHelper;
-use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 
 /**
  * Get the URL of a documented class by its name. If the class is found, next to the file where this method was called,
@@ -36,63 +35,47 @@ final class GetDocumentedClassUrl
     }
 
     /**
-     * @param string $className
-     *  The full name of the class for which the URL will be retrieved.
-     *  If the class is not found, the DEFAULT_URL value will be returned.
+     * @param string $entityName
+     *  The full name of the entity for which the URL will be retrieved.
+     *  If the entity is not found, the DEFAULT_URL value will be returned.
      * @param string $cursor
-     *  Cursor on the page of the documented class (for example, the name of a method or property)
+     *  Cursor on the page of the documented entity (for example, the name of a method or property)
      * @param bool $createDocument
      *  If true, creates a class document. Otherwise, just gives a reference to the class code
      *
      * @return string
      */
-    public function __invoke(string $className, string $cursor = '', bool $createDocument = true): string
+    public function __invoke(string $entityName, string $cursor = '', bool $createDocument = true): string
     {
-        if (str_contains($className, ' ')) {
+        if (str_contains($entityName, ' ')) {
             return self::DEFAULT_URL;
         }
-        $preloadResourceLink = RenderHelper::getPreloadResourceLink($className, $this->context);
+        $preloadResourceLink = RenderHelper::getPreloadResourceLink($entityName, $this->context);
         if ($preloadResourceLink) {
             return $preloadResourceLink;
         }
-        $classEntityCollection = $this->context->getClassEntityCollection();
-        $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
-        if ($classEntity->entityDataCanBeLoaded()) {
-            if (!$classEntity->isInGit()) {
+        $rootEntityCollection = $this->context->getRootEntityCollection();
+        $entity = $rootEntityCollection->getLoadedOrCreateNew($entityName);
+        if ($entity->entityDataCanBeLoaded()) {
+            if (!$entity->isInGit()) {
                 return self::DEFAULT_URL;
-            }
-            if ($createDocument) {
+            } elseif ($createDocument && is_a($entity, DocumentTransformableEntityInterface::class)) {
                 $documentedClass = new DocumentedEntityWrapper(
-                    $classEntity, $this->context->getCurrentTemplateFilePatch()
+                    $entity, $this->context->getCurrentTemplateFilePatch()
                 );
                 $this->context->getEntityWrappersCollection()->add($documentedClass);
-                $classEntityCollection->add($classEntity);
+                $rootEntityCollection->add($entity);
                 $url = $this->context->getConfiguration()->getPageLinkProcessor()->getAbsoluteUrl($documentedClass->getDocUrl());
             } else {
-                $url = $classEntity->getFileSourceLink(false);
+                $url = $entity->getFileSourceLink(false);
             }
-
-            if (mb_strlen($cursor) > 2) {
-                if ($createDocument) {
-                    $prepareSourceLink = new PrepareSourceLink();
-                    $url .= $cursor ? "#{$prepareSourceLink($cursor)}" : '';
-                } else {
-                    $firstLetter = mb_substr($cursor, 0, 1);
-                    $cursor = ltrim($cursor, $firstLetter);
-                    $line = match ($firstLetter) {
-                        'm' => $classEntity->getMethodEntityCollection()->unsafeGet($cursor)?->getStartLine(),
-                        'p' => $classEntity->getPropertyEntityCollection()->unsafeGet($cursor)?->getStartLine(),
-                        'q' => $classEntity->getConstantEntityCollection()->unsafeGet($cursor)?->getStartLine(),
-                        default => 0,
-                    };
-                    $url .= $line ? "#L{$line}" : '';
-                }
+            if (!$url) {
+                return self::DEFAULT_URL;
             }
-
-            return $url;
-        } elseif (ParserHelper::isCorrectClassName($className)) {
+            return $url . $entity->cursorToDocAttributeLinkFragment($cursor);
+        } else {
             $this->context->getConfiguration()->getLogger()->warning(
-                "GetDocumentedClassUrl: Class {$className} not found in specified sources"
+                "GetDocumentedClassUrl: Entity {$entityName} not found in specified sources"
             );
         }
         return self::DEFAULT_URL;
