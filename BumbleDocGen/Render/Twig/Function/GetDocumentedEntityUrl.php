@@ -19,11 +19,11 @@ use BumbleDocGen\Render\RenderHelper;
  * @see DocumentedEntityWrappersCollection
  * @see Context::$entityWrappersCollection
  *
- * @example {{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}
- * @example {{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
- * @example {{ getDocumentedClassUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', '', false) }}
+ * @example {{ getDocumentedEntityUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}
+ * @example {{ getDocumentedEntityUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
+ * @example {{ getDocumentedEntityUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', '', false) }}
  */
-final class GetDocumentedClassUrl
+final class GetDocumentedEntityUrl
 {
     public const DEFAULT_URL = '#';
 
@@ -75,7 +75,7 @@ final class GetDocumentedClassUrl
             return $url . $entity->cursorToDocAttributeLinkFragment($cursor);
         } else {
             $this->context->getConfiguration()->getLogger()->warning(
-                "GetDocumentedClassUrl: Entity {$entityName} not found in specified sources"
+                "GetDocumentedEntityUrl: Entity {$entityName} not found in specified sources"
             );
         }
         return self::DEFAULT_URL;

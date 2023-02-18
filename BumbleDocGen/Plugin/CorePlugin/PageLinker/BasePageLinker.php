@@ -7,7 +7,7 @@ namespace BumbleDocGen\Plugin\CorePlugin\PageLinker;
 use BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Plugin\PluginInterface;
 use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
+use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 use Psr\Log\LoggerInterface;
 
 abstract class BasePageLinker implements PluginInterface
@@ -61,8 +61,8 @@ abstract class BasePageLinker implements PluginInterface
                 } else {
                     $entityUrlData = $context->getClassEntityCollection()->gelEntityLinkData($linkString);
                     if ($entityUrlData['entityName'] ?? null) {
-                        $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
-                        $entityUrlData['url'] = $getDocumentedClassUrl($entityUrlData['entityName'], $entityUrlData['cursor']);
+                        $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
+                        $entityUrlData['url'] = $getDocumentedEntityUrl($entityUrlData['entityName'], $entityUrlData['cursor']);
                         return $this->getFilledOutputTemplate($entityUrlData['title'], $entityUrlData['url']);
                     }
                 }

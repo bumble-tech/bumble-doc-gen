@@ -13,7 +13,7 @@ use Symfony\Component\Finder\Finder;
  * and all links with this page are recursively collected for it, after which the html menu is created.
  *
  * @note This function initiates the creation of documents for the displayed classes
- * @see GetDocumentedClassUrl
+ * @see GetDocumentedEntityUrl
  *
  * @example {{ drawDocumentationMenu() }}
  * @example {{ drawDocumentationMenu('/render/index.rst') }}

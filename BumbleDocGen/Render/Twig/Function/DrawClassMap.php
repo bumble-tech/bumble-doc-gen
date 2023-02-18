@@ -46,8 +46,8 @@ final class DrawClassMap
 
     protected function appendClassToDirectoryStructure(array $directoryStructure, ClassEntity $classEntity): array
     {
-        $getDocumentedClassUrl = new GetDocumentedClassUrl($this->context);
-        $this->fileClassmap[$classEntity->getFileName()] = $getDocumentedClassUrl($classEntity->getName());
+        $getDocumentedEntityUrl = new GetDocumentedEntityUrl($this->context);
+        $this->fileClassmap[$classEntity->getFileName()] = $getDocumentedEntityUrl($classEntity->getName());
         $fileName = ltrim($classEntity->getFileName(), DIRECTORY_SEPARATOR);
         $pathParts = array_reverse(explode(DIRECTORY_SEPARATOR, $fileName));
         $tmpStructure = [array_shift($pathParts)];

@@ -29,12 +29,12 @@ final class PrintClassEntityCollectionAsList
         bool                  $skipDescription = false
     ): string
     {
-        $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
+        $getDocumentedEntityUrlFunction = new GetDocumentedEntityUrl($this->context);
         $result = "<{$type}>";
         foreach ($classEntityCollection as $classEntity) {
             $description = $classEntity->getDescription();
             $descriptionText = !$skipDescription && $description ? " - {$description}" : '';
-            $result .= "<li><a href='{$getDocumentedClassUrlFunction($classEntity->getName())}'>{$classEntity->getShortName()}</a>{$descriptionText}</li>";
+            $result .= "<li><a href='{$getDocumentedEntityUrlFunction($classEntity->getName())}'>{$classEntity->getShortName()}</a>{$descriptionText}</li>";
         }
         $result .= "</{$type}>";
 

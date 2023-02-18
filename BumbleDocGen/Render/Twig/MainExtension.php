@@ -19,7 +19,7 @@ use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentedClassLink;
 use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
 use BumbleDocGen\Render\Twig\Function\GetClassMethodsBodyCode;
-use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
+use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\Render\Twig\Function\IsSubclassOf;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
 use BumbleDocGen\Render\Twig\Function\PrintClassEntityCollectionAsList;
@@ -44,7 +44,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new \Twig\TwigFunction('getDocumentedClassUrl', new GetDocumentedClassUrl($this->context), [
+            new \Twig\TwigFunction('getDocumentedEntityUrl', new GetDocumentedEntityUrl($this->context), [
                 'is_safe' => ['html'],
             ]),
             new \Twig\TwigFunction('drawClassMap', new DrawClassMap($this->context), ['is_safe' => ['html']]),

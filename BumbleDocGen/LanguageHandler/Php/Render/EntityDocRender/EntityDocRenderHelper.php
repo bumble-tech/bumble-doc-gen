@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
+use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 
 final class EntityDocRenderHelper
 {
@@ -100,8 +100,8 @@ final class EntityDocRenderHelper
     {
         $data = self::getEntityDataByLink($linkString, $context->getClassEntityCollection(), $defaultEntityClassName);
         if ($data['entityName'] ?? null) {
-            $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
-            $data['url'] = $getDocumentedClassUrl($data['entityName'], $data['cursor'], $createDocument);
+            $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
+            $data['url'] = $getDocumentedEntityUrl($data['entityName'], $data['cursor'], $createDocument);
         }
         return $data;
     }

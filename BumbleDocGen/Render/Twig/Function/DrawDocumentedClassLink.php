@@ -31,8 +31,8 @@ final class DrawDocumentedClassLink
         bool        $useShortName = true
     ): string
     {
-        $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
-        $url = $getDocumentedClassUrlFunction($classEntity->getName(), $cursor);
+        $getDocumentedEntityUrlFunction = new GetDocumentedEntityUrl($this->context);
+        $url = $getDocumentedEntityUrlFunction($classEntity->getName(), $cursor);
         $name = $useShortName ? $classEntity->getShortName() : $classEntity->getName();
         if ($this->context->isCurrentTemplateRst()) {
             return "`{$name} <{$url}>`_";

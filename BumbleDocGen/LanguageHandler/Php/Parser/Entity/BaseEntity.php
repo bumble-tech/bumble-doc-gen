@@ -6,12 +6,11 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
-use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
 use BumbleDocGen\Parser\Entity\Cache;
 use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\RenderHelper;
-use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
+use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -277,7 +276,7 @@ abstract class BaseEntity
     public function getDescriptionLinks(?Context $context = null): array
     {
         $linksData = $this->getDescriptionLinksData($context);
-        $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
+        $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
         foreach ($linksData as $key => $data) {
             if (!isset($data['url'])) {
                 $linksData[$key]['url'] = null;
@@ -285,7 +284,7 @@ abstract class BaseEntity
                 continue;
             }
             if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
-                $linksData[$key]['url'] = $getDocumentedClassUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
+                $linksData[$key]['url'] = $getDocumentedEntityUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
                 unset($data['entityData']);
             }
         }
@@ -348,7 +347,7 @@ abstract class BaseEntity
     public function getThrows(?Context $context = null): array
     {
         $throwsData = $this->getThrowsData($context);
-        $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
+        $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
         foreach ($throwsData as $key => $data) {
             if (!isset($data['url'])) {
                 $throwsData[$key]['url'] = null;
@@ -356,7 +355,7 @@ abstract class BaseEntity
                 continue;
             }
             if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
-                $throwsData[$key]['url'] = $getDocumentedClassUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
+                $throwsData[$key]['url'] = $getDocumentedEntityUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
                 unset($data['entityData']);
             }
         }

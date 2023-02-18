@@ -7,13 +7,13 @@ namespace BumbleDocGen\Render\Twig\Filter;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\RenderHelper;
-use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
+use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 
 /**
  * The filter converts the string with the data type into a link to the documented class, if possible.
  *
  * @note This filter initiates the creation of documents for the displayed classes
- * @see GetDocumentedClassUrl
+ * @see GetDocumentedEntityUrl
  */
 final class StrTypeToUrl
 {
@@ -44,7 +44,7 @@ final class StrTypeToUrl
         bool   $createDocument = false
     ): string
     {
-        $getDocumentedClassUrlFunction = new GetDocumentedClassUrl($this->context);
+        $getDocumentedEntityUrlFunction = new GetDocumentedEntityUrl($this->context);
 
         $preparedTypes = [];
         $types = explode('|', $text);
@@ -62,7 +62,7 @@ final class StrTypeToUrl
             $entityClassOfLink = $this->context->getClassEntityCollection()->getLoadedOrCreateNew($type);
             if ($entityClassOfLink->entityDataCanBeLoaded()) {
                 if ($entityClassOfLink->getAbsoluteFileName()) {
-                    $link = $getDocumentedClassUrlFunction($type, '', $createDocument);
+                    $link = $getDocumentedEntityUrlFunction($type, '', $createDocument);
 
                     if ($useShortLinkVersion) {
                         $type = $entityClassOfLink->getShortName();
