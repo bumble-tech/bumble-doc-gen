@@ -11,6 +11,7 @@ use BumbleDocGen\Parser\Entity\Cache;
 use BumbleDocGen\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Render\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
 use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Identifier\Identifier;
@@ -613,5 +614,41 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $renders[$objectId] = $docRender;
         }
         return $renders[$objectId];
+    }
+
+    public function cursorToDocAttributeLinkFragment(string $cursor, bool $isForDocument = true): string
+    {
+        if (!$cursor || !preg_match(
+                '/^(((\$)(([a-zA-Z_])([a-zA-Z_0-9]+)))|(([a-zA-Z_])([a-zA-Z_0-9]+))|((([a-zA-Z_])([a-zA-Z_0-9]+))\(\)))$/',
+                $cursor,
+                $matches,
+                PREG_UNMATCHED_AS_NULL
+            )) {
+            return '';
+        }
+
+        $prefix = null;
+        if ($attributeName = $matches[7]) {
+            // is constant
+            $prefix = 'q';
+        } elseif ($attributeName = $matches[4]) {
+            // is property
+            $prefix = 'p';
+        } elseif ($attributeName = $matches[11]) {
+            // is method
+            $prefix = 'm';
+        }
+
+        if ($isForDocument) {
+            $prepareSourceLink = new PrepareSourceLink();
+            return "#{$prefix}{$prepareSourceLink($attributeName)}";
+        }
+        $line = match ($prefix) {
+            'm' => $this->getMethodEntity($attributeName)?->getStartLine(),
+            'p' => $this->getPropertyEntity($attributeName)?->getStartLine(),
+            'q' => $this->getConstantEntity($attributeName)?->getStartLine(),
+            default => 0,
+        };
+        return $line ? "#L{$line}" : '';
     }
 }
