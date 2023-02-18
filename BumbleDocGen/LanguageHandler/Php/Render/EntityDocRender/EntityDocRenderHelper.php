@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 
@@ -15,22 +16,21 @@ final class EntityDocRenderHelper
     public const CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION = 'only_cursor';
 
     public static function getEntityDataByLink(
-        string  $linkString,
-        Context $context,
-        ?string $defaultEntityClassName = null,
-        bool    $useUnsafeShortNames = true
+        string                $linkString,
+        ClassEntityCollection $classEntityCollection,
+        ?string               $defaultEntityClassName = null,
+        bool                  $useUnsafeShortNames = true
     ): array
     {
         static $pageLinksCache = [];
 
-        $classEntityCollection = $context->getClassEntityCollection();
         $entitiesCount = count(iterator_to_array($classEntityCollection));
         $cacheKey = $entitiesCount . spl_object_id($classEntityCollection);
 
         if (!isset($pageLinksCache[$cacheKey])) {
             $pageLinks = [];
             $unsafeLinks = [];
-            foreach ($context->getClassEntityCollection() as $classEntity) {
+            foreach ($classEntityCollection as $classEntity) {
                 /**@var ClassEntity $classEntity */
                 $pageLinks[$classEntity->getShortName()] = $classEntity;
                 if (array_key_exists($classEntity->getShortName(), $pageLinks) && !$useUnsafeShortNames) {
@@ -134,7 +134,7 @@ final class EntityDocRenderHelper
         bool    $createDocument = true
     ): array
     {
-        $data = self::getEntityDataByLink($linkString, $context, $defaultEntityClassName);
+        $data = self::getEntityDataByLink($linkString, $context->getClassEntityCollection(), $defaultEntityClassName);
         if ($data['entityName'] ?? null) {
             $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
             $data['url'] = $getDocumentedClassUrl($data['entityName'], $data['cursor'], $createDocument);

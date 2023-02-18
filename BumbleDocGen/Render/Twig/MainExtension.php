@@ -54,7 +54,6 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
             new \Twig\TwigFunction('loadPluginsContent', new LoadPluginsContent($this->context), [
                 'is_safe' => ['html'],
             ]),
-            new \Twig\TwigFunction('isSubclassOf', new IsSubclassOf()),
             new \Twig\TwigFunction('generatePageBreadcrumbs', new GeneratePageBreadcrumbs($this->context), [
                 'is_safe' => ['html'],
             ]),

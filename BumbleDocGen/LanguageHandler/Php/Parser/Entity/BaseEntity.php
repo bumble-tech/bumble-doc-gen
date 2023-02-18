@@ -203,7 +203,7 @@ abstract class BaseEntity
                     $className = $name;
                     $data = EntityDocRenderHelper::getEntityDataByLink(
                         $className,
-                        $context,
+                        $this->getClassEntityCollection(),
                         $this->getImplementingReflectionClass()->getName(),
                         false
                     );
@@ -243,7 +243,7 @@ abstract class BaseEntity
                     );
                     $data = EntityDocRenderHelper::getEntityDataByLink(
                         $className,
-                        $context,
+                        $this->getClassEntityCollection(),
                         $this->getImplementingReflectionClass()->getName(),
                         false
                     );
