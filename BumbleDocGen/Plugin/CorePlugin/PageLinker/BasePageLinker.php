@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Plugin\CorePlugin\PageLinker;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
 use BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Plugin\PluginInterface;
 use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
 use Psr\Log\LoggerInterface;
 
 abstract class BasePageLinker implements PluginInterface
@@ -60,8 +59,10 @@ abstract class BasePageLinker implements PluginInterface
                     $this->checkKey($linkString, $this->logger);
                     return $this->getFilledOutputTemplate($breadcrumb['title'], $breadcrumb['url']);
                 } else {
-                    $entityUrlData = $this->getEntityUrlData($linkString, $context);
-                    if ($entityUrlData) {
+                    $entityUrlData = $context->getClassEntityCollection()->gelEntityLinkData($linkString);
+                    if ($entityUrlData['entityName'] ?? null) {
+                        $getDocumentedClassUrl = new GetDocumentedClassUrl($context);
+                        $entityUrlData['url'] = $getDocumentedClassUrl($entityUrlData['entityName'], $entityUrlData['cursor']);
                         return $this->getFilledOutputTemplate($entityUrlData['title'], $entityUrlData['url']);
                     }
                 }
@@ -111,37 +112,6 @@ abstract class BasePageLinker implements PluginInterface
             }
         }
         return $pageLinks;
-    }
-
-    private function getEntityUrlData(string $linkString, Context $context): ?array
-    {
-        static $pageLinks = null;
-        if (is_null($pageLinks)) {
-            $pageLinks = [];
-            foreach ($context->getClassEntityCollection() as $classEntity) {
-                /**@var ClassEntity $classEntity */
-                $this->keyUsageCount[$classEntity->getShortName()] ??= 0;
-                ++$this->keyUsageCount[$classEntity->getShortName()];
-
-                $this->keyUsageCount[$classEntity->getFileName()] ??= 0;
-                ++$this->keyUsageCount[$classEntity->getFileName()];
-
-                $this->keyUsageCount[$classEntity->getName()] ??= 0;
-                ++$this->keyUsageCount[$classEntity->getName()];
-            }
-        }
-
-        $entityUrlData = EntityDocRenderHelper::getEntityUrlDataByLink($linkString, $context);
-        if ($entityUrlData['url']) {
-            $linkString = explode('|', $linkString)[0];
-            $className = explode('::', $linkString)[0];
-
-            if (isset($pageLinks[$className])) {
-                $this->checkKey($className, $context->getConfiguration()->getLogger());
-            }
-            return $entityUrlData;
-        }
-        return null;
     }
 
     private function checkKey(string $key, LoggerInterface $logger): void

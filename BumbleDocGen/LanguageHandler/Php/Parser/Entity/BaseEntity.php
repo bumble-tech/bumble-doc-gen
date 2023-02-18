@@ -201,9 +201,8 @@ abstract class BaseEntity
                     ], "{$docCommentImplementingClass->getShortName()}::", $name);
 
                     $className = $name;
-                    $data = EntityDocRenderHelper::getEntityDataByLink(
+                    $data = $this->getClassEntityCollection()->gelEntityLinkData(
                         $className,
-                        $this->getClassEntityCollection(),
                         $this->getImplementingReflectionClass()->getName(),
                         false
                     );
@@ -241,9 +240,8 @@ abstract class BaseEntity
                         $this->reflector,
                         $currentClassEntity->getReflection()
                     );
-                    $data = EntityDocRenderHelper::getEntityDataByLink(
+                    $data = $this->getClassEntityCollection()->gelEntityLinkData(
                         $className,
-                        $this->getClassEntityCollection(),
                         $this->getImplementingReflectionClass()->getName(),
                         false
                     );
@@ -331,9 +329,8 @@ abstract class BaseEntity
                         'description' => (string)$throwBlock->getDescription(),
                     ];
                     if ($context) {
-                        $throwData['entityData'] = EntityDocRenderHelper::getEntityDataByLink(
+                        $throwData['entityData'] = $this->getClassEntityCollection()->gelEntityLinkData(
                             $className,
-                            $context,
                             $this->getImplementingReflectionClass()->getName(),
                             false
                         );

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedClassUrl;
@@ -18,39 +17,15 @@ final class EntityDocRenderHelper
     public static function getEntityDataByLink(
         string                $linkString,
         ClassEntityCollection $classEntityCollection,
-        ?string               $defaultEntityClassName = null,
-        bool                  $useUnsafeShortNames = true
+        ?string               $defaultEntityName = null,
+        bool                  $useUnsafeKeys = true
     ): array
     {
-        static $pageLinksCache = [];
-
-        $entitiesCount = count(iterator_to_array($classEntityCollection));
-        $cacheKey = $entitiesCount . spl_object_id($classEntityCollection);
-
-        if (!isset($pageLinksCache[$cacheKey])) {
-            $pageLinks = [];
-            $unsafeLinks = [];
-            foreach ($classEntityCollection as $classEntity) {
-                /**@var ClassEntity $classEntity */
-                $pageLinks[$classEntity->getShortName()] = $classEntity;
-                if (array_key_exists($classEntity->getShortName(), $pageLinks) && !$useUnsafeShortNames) {
-                    $unsafeLinks[$classEntity->getShortName()] = $classEntity->getShortName();
-                }
-                $pageLinks[$classEntity->getFileName()] = $classEntity;
-                $pageLinks[$classEntity->getName()] = $classEntity;
-            }
-            foreach ($unsafeLinks as $unsafeLink) {
-                unset($pageLinks[$unsafeLink]);
-            }
-            $pageLinksCache[$cacheKey] = $pageLinks;
-        } else {
-            $pageLinks = $pageLinksCache[$cacheKey];
-        }
-
         $explodedLinkString = explode('|', $linkString);
         $linkString = array_shift($explodedLinkString);
-
         $linkOptions = $explodedLinkString;
+
+        $entity = $classEntityCollection->findEntity($linkString, $useUnsafeKeys);
 
         if (str_contains($linkString, '->')) {
             $classData = explode('->', $linkString);
@@ -59,20 +34,9 @@ final class EntityDocRenderHelper
         }
         $className = ltrim($classData[0], '\\');
 
-        $entity = $pageLinks[$className] ?? null;
-
-        $needToUseDefaultEntity = !$entity || in_array($classData[0], [
-                'self',
-                'static',
-                'parent',
-                '$this',
-                'this',
-            ]) || !isset($classData[1]);
-
-        if (
-            !$entity && $needToUseDefaultEntity && $defaultEntityClassName
-        ) {
-            $defaultEntity = $classEntityCollection->getLoadedOrCreateNew($defaultEntityClassName);
+        $needToUseDefaultEntity = !$entity && $defaultEntityName && !isset($classData[1]);
+        if ($needToUseDefaultEntity) {
+            $defaultEntity = $classEntityCollection->getLoadedOrCreateNew($defaultEntityName);
             $cursorTmpName = str_replace(['$', '(', ')'], '', $className);
             if (
                 $defaultEntity->hasMethod($cursorTmpName) ||
@@ -98,13 +62,13 @@ final class EntityDocRenderHelper
                 if (
                     str_ends_with($classData[1], '()') || $entity->hasMethod($cursorTarget)
                 ) {
-                    $cursor = 'm' . str_replace('()', '', $classData[1]);
+                    $cursor = $classData[1];
                 } elseif (
-                    str_starts_with($classData[1], '$') || $entity->hasProperty($classData[1])
+                    str_starts_with($classData[1], '$') || $entity->hasProperty($cursorTarget)
                 ) {
-                    $cursor = 'p' . str_replace('$', '', $classData[1]);
+                    $cursor = $classData[1];
                 } elseif ($entity->hasConstant($classData[1])) {
-                    $cursor = 'q' . $classData[1];
+                    $cursor = $classData[1];
                 }
             }
             if (in_array(self::CLASS_ENTITY_SHORT_LINK_OPTION, $linkOptions)) {
