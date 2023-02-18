@@ -240,4 +240,80 @@ final class ClassEntityCollection extends RootEntityCollection
         }
         EntityCacheStorageHelper::saveCache($this->configuration);
     }
+
+    /**
+     * @param string $search Search query. For the search, only the main part is taken, up to the characters: `::`, `->`, `#`.
+     *  If the request refers to multiple existing entities, a warning will be shown and the first entity found will be used.
+     *
+     * @example
+     *  $classEntityCollection->findEntity('App'); // class name
+     *  $classEntityCollection->findEntity('SelfDoc\Console\App'); // class with namespace
+     *  $classEntityCollection->findEntity('\SelfDoc\Console\App'); // class with namespace
+     *  $classEntityCollection->findEntity('\SelfDoc\Console\App::test()'); // class with namespace and optional part
+     *  $classEntityCollection->findEntity('App.php'); // filename
+     *  $classEntityCollection->findEntity('/SelfDoc/Console/App.php'); // relative path
+     *  $classEntityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/SelfDoc/Console/App.php'); // absolute path
+     *  $classEntityCollection->findEntity('https://***REMOVED***/blob/master/SelfDoc/Console/App.php'); // source link
+     */
+    public function findEntity(string $search): ?ClassEntity
+    {
+        static $index = [];
+        static $duplicates = [];
+        static $lastCacheKey = null;
+
+        $lastKey = array_key_last($this->entities);
+        if ($lastKey !== $lastCacheKey || !$index) {
+            $lastCacheKey = $lastKey;
+            $index = [];
+            $duplicates = [];
+            foreach ($this->entities as $entity) {
+                $index[$entity->getName()] = $entity;
+                if ($entity->getFileName() && $entity->entityDataCanBeLoaded()) {
+                    $index[$entity->getFileName()] = $entity;
+                    $index[$entity->getAbsoluteFileName()] = $entity;
+                    $index[$entity->getFileSourceLink(false)] = $entity;
+
+                    $shortFileName = array_reverse(explode('/', $entity->getFileName()))[0];
+                    if (!isset($index[$shortFileName])) {
+                        $index[$shortFileName] = $entity;
+                    } else {
+                        $duplicates[$shortFileName] = $entity->getShortName();
+                    }
+                }
+
+                if (!isset($index[$entity->getShortName()])) {
+                    $index[$entity->getShortName()] = $entity;
+                } else {
+                    $duplicates[$entity->getShortName()] = $entity->getShortName();
+                }
+            }
+        }
+
+        $entity = null;
+        $foundKey = null;
+        if (array_key_exists($search, $index)) {
+            $entity = $index[$search];
+            $foundKey = $search;
+        } else {
+            $preparedSearch = preg_replace('/^(((http(s?))::)?([^-:]+))((::|->)(.*))/', '$1', $search);
+            if (array_key_exists($preparedSearch, $index)) {
+                $entity = $index[$preparedSearch];
+                $foundKey = $preparedSearch;
+            } elseif (
+                preg_match('/^(\/?)(([a-zA-Z_])([a-zA-Z_0-9\/]+))((::|->))?/', $preparedSearch, $matches) &&
+                isset($index[$matches[2]])
+            ) {
+                $entity = $index[$matches[2]];
+                $foundKey = $matches[2];
+            }
+        }
+
+        if (array_key_exists($foundKey, $duplicates)) {
+            $this->configuration->getLogger()->warning(
+                "ClassEntityCollection:findEntity: Key `{$foundKey}` refers to multiple entities. Use a unique search key to avoid mistakes"
+            );
+        }
+
+        return $entity;
+    }
 }

@@ -23,4 +23,6 @@ abstract class RootEntityCollection extends BaseEntityCollection
      * @see RootEntityInterface::entityDataCanBeLoaded()
      */
     abstract public function getLoadedOrCreateNew(string $className): RootEntityInterface;
+
+    abstract public function findEntity(string $search): ?RootEntityInterface;
 }
