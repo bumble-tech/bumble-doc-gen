@@ -8,6 +8,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
+use BumbleDocGen\Render\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 
 /**
@@ -16,13 +17,25 @@ use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
  * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/BumbleDocGen/Render'])) }}
  * @example {{ drawClassMap(classEntityCollection) }}
  */
-final class DrawClassMap
+final class DrawClassMap implements CustomFunctionInterface
 {
     /** @var array<string, string> */
     private array $fileClassmap;
 
     public function __construct(private Context $context)
     {
+    }
+
+    public static function getName(): string
+    {
+        return 'drawClassMap';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 
     /**

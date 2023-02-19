@@ -82,7 +82,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         if (is_null($filters)) {
             $filters = [];
             $mainExtensionReflection = $classEntityCollection->getLoadedOrCreateNew(MainExtension::class);
-            $bodyCode = $mainExtensionReflection->getMethodEntity('getFilters')->getBodyCode();
+            $bodyCode = $mainExtensionReflection->getMethodEntity('setDefaultFilters')->getBodyCode();
             preg_match_all('/(TwigFilter\(\')(\w+)([\', ]+)(\'|new )(.*?)(\(|\')/', $bodyCode, $matches);
             foreach ($matches[5] as $k => $match) {
                 $filters[$match] = [

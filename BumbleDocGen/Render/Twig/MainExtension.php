@@ -16,20 +16,34 @@ use BumbleDocGen\Render\Twig\Filter\RemoveLineBrakes;
 use BumbleDocGen\Render\Twig\Filter\StrTypeToUrl;
 use BumbleDocGen\Render\Twig\Filter\TextToCodeBlock;
 use BumbleDocGen\Render\Twig\Filter\TextToHeading;
+use BumbleDocGen\Render\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentationMenu;
 use BumbleDocGen\Render\Twig\Function\DrawDocumentedEntityLink;
 use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
 use BumbleDocGen\Render\Twig\Function\PrintEntityCollectionAsList;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 /**
  * This is an extension that is used to generate documents from templates
  */
 final class MainExtension extends \Twig\Extension\AbstractExtension
 {
+    /**
+     * @var TwigFunction[]
+     */
+    private array $functions = [];
+    /**
+     * @var TwigFilter[]
+     */
+    private array $filters = [];
+
     public function __construct(private Context $context)
     {
+        $this->setDefaultFunctions();
+        $this->setDefaultFilters();
     }
 
     public function changeContext(Context $context): void
@@ -38,42 +52,50 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     }
 
     /**
-     * List of custom functions
+     * CustomFunctionInterface
      */
-    public function getFunctions(): array
+    public function addFunctions(CustomFunctionInterface ...$functions): self
     {
-        return [
-            new \Twig\TwigFunction('getDocumentedEntityUrl', new GetDocumentedEntityUrl($this->context), [
-                'is_safe' => ['html'],
-            ]),
-            new \Twig\TwigFunction('drawClassMap', new DrawClassMap($this->context), ['is_safe' => ['html']]),
-            new \Twig\TwigFunction('drawDocumentationMenu', new DrawDocumentationMenu($this->context), [
-                'is_safe' => ['html']
-            ]),
-            new \Twig\TwigFunction('loadPluginsContent', new LoadPluginsContent($this->context), [
-                'is_safe' => ['html'],
-            ]),
-            new \Twig\TwigFunction('generatePageBreadcrumbs', new GeneratePageBreadcrumbs($this->context), [
-                'is_safe' => ['html'],
-            ]),
-            new \Twig\TwigFunction('printEntityCollectionAsList', new PrintEntityCollectionAsList($this->context), [
-                'is_safe' => ['html'],
-            ]),
-            new \Twig\TwigFunction('drawDocumentedEntityLink', new DrawDocumentedEntityLink($this->context), [
-                'is_safe' => ['html'],
-            ]),
-            new \Twig\TwigFunction('getClassMethodsBodyCode', new GetClassMethodsBodyCode($this->context), [
-                'is_safe' => ['html'],
-            ]),
-        ];
+        foreach ($functions as $function) {
+            $this->functions[$function::class] = new \Twig\TwigFunction(
+                $function->getName(),
+                $function,
+                $function->getOptions()
+            );
+        }
+        return $this;
     }
 
     /**
-     * List of custom filters
+     * CustomFilterInterface
      */
-    public function getFilters(): array
+    public function addFilters(TwigFilter ...$filters): self
     {
-        return [
+        foreach ($filters as $filter) {
+            $this->filters[] = $filter;
+        }
+        return $this;
+    }
+
+    public function setDefaultFunctions(): void
+    {
+        $this->functions = [];
+        $this->addFunctions(
+            new GetDocumentedEntityUrl($this->context),
+            new DrawClassMap($this->context),
+            new DrawDocumentationMenu($this->context),
+            new LoadPluginsContent($this->context),
+            new GeneratePageBreadcrumbs($this->context),
+            new PrintEntityCollectionAsList($this->context),
+            new DrawDocumentedEntityLink($this->context),
+            new GetClassMethodsBodyCode($this->context)
+        );
+    }
+
+    public function setDefaultFilters(): void
+    {
+        $this->filters = [];
+        $this->addFilters(
             new \Twig\TwigFilter('quotemeta', new Quotemeta(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('strTypeToUrl', new StrTypeToUrl($this->context), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('prepareSourceLink', new PrepareSourceLink()),
@@ -82,7 +104,23 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
             new \Twig\TwigFilter('fixStrSize', new FixStrSize(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('htmlToRst', new HtmlToRst(), ['is_safe' => ['html']]),
             new \Twig\TwigFilter('textToHeading', new TextToHeading($this->context), ['is_safe' => ['html']]),
-            new \Twig\TwigFilter('textToCodeBlock', new TextToCodeBlock($this->context), ['is_safe' => ['html']]),
-        ];
+            new \Twig\TwigFilter('textToCodeBlock', new TextToCodeBlock($this->context), ['is_safe' => ['html']])
+        );
+    }
+
+    /**
+     * List of custom functions
+     */
+    public function getFunctions(): array
+    {
+        return $this->functions;
+    }
+
+    /**
+     * List of custom filters
+     */
+    public function getFilters(): array
+    {
+        return $this->filters;
     }
 }

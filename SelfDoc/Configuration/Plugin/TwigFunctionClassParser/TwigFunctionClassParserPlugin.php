@@ -10,6 +10,7 @@ use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntit
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Plugin\PluginInterface;
+use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\MainExtension;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -82,11 +83,11 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
         if (is_null($functions)) {
             $functions = [];
             $mainExtensionReflection = $classEntityCollection->getLoadedOrCreateNew(MainExtension::class);
-            $bodyCode = $mainExtensionReflection->getMethodEntity('getFunctions')->getBodyCode();
-            preg_match_all('/(TwigFunction\(\')(\w+)(.*?)(new )(.*?)(\()/', $bodyCode, $matches);
-            foreach ($matches[5] as $k => $match) {
+            $bodyCode = $mainExtensionReflection->getMethodEntity('setDefaultFunctions')->getBodyCode();
+            preg_match_all('/(new )([^(]+)/', $bodyCode, $matches);
+            foreach ($matches[2] as $match) {
                 $functions[$match] = [
-                    'name' => $matches[2][$k],
+                    'name' => $match::getName(),
                 ];
             }
         }

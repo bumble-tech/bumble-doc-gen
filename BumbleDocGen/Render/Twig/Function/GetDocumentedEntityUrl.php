@@ -23,7 +23,7 @@ use BumbleDocGen\Render\RenderHelper;
  * @example {{ getDocumentedEntityUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
  * @example {{ getDocumentedEntityUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', '', false) }}
  */
-final class GetDocumentedEntityUrl
+final class GetDocumentedEntityUrl implements CustomFunctionInterface
 {
     public const DEFAULT_URL = '#';
 
@@ -32,6 +32,18 @@ final class GetDocumentedEntityUrl
      */
     public function __construct(private Context $context)
     {
+    }
+
+    public static function getName(): string
+    {
+        return 'getDocumentedEntityUrl';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 
     /**

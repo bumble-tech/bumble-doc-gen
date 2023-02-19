@@ -11,10 +11,22 @@ use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 /**
  * Outputting entity data as HTML or rst list
  */
-final class PrintEntityCollectionAsList
+final class PrintEntityCollectionAsList implements CustomFunctionInterface
 {
     public function __construct(private Context $context)
     {
+    }
+
+    public static function getName(): string
+    {
+        return 'printEntityCollectionAsList';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 
     /**

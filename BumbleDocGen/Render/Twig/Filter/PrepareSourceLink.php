@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Twig\Filter;
 
 /**
- * The filter converts the string into an anchor that can be used in a github document link
+ * The filter converts the string into an anchor that can be used in a GitHub document link
  */
 final class PrepareSourceLink
 {

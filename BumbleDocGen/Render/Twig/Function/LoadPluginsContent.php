@@ -15,13 +15,25 @@ use BumbleDocGen\Render\Context\Context;
  *
  * @example {{ loadPluginsContent('some text', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_HEADER')) }}
  */
-final class LoadPluginsContent
+final class LoadPluginsContent implements CustomFunctionInterface
 {
     /**
      * @param Context $context Render context
      */
     public function __construct(private Context $context)
     {
+    }
+
+    public static function getName(): string
+    {
+        return 'loadPluginsContent';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 
     /**

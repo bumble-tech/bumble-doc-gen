@@ -16,13 +16,25 @@ use BumbleDocGen\Render\Context\Context;
  * @example {{ drawDocumentedEntityLink($entity) }}
  * @example {{ drawDocumentedEntityLink($entity, '', false) }}
  */
-final class DrawDocumentedEntityLink
+final class DrawDocumentedEntityLink implements CustomFunctionInterface
 {
     /**
      * @param Context $context Render context
      */
     public function __construct(private Context $context)
     {
+    }
+
+    public static function getName(): string
+    {
+        return 'drawDocumentedEntityLink';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 
     public function __invoke(

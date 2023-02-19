@@ -74,7 +74,8 @@ final class Render
         $context = new Context(
             $this->configuration, $this->classEntityCollection, $breadcrumbsHelper, $this->pluginEventDispatcher
         );
-        $twig->addExtension(new MainExtension($context));
+        $mainExtension = new MainExtension($context);
+        $twig->addExtension($mainExtension);
 
         $finder = Finder::create()
             ->in($templateFolder)

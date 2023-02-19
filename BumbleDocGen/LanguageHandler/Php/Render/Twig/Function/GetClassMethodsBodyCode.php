@@ -6,19 +6,32 @@ namespace BumbleDocGen\LanguageHandler\Php\Render\Twig\Function;
 
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
+use BumbleDocGen\Render\Twig\Function\CustomFunctionInterface;
 
 /**
  * Get the code of the specified class methods as a formatted string
  *
  * @example {{ getClassMethodsBodyCode('\\BumbleDocGen\\Render\\Twig\\MainExtension', ['getFunctions']) }}
  */
-final class GetClassMethodsBodyCode
+final class GetClassMethodsBodyCode implements CustomFunctionInterface
 {
     /**
      * @param Context $context Render context
      */
     public function __construct(private Context $context)
     {
+    }
+
+    public static function getName(): string
+    {
+        return 'getClassMethodsBodyCode';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 
     /**
