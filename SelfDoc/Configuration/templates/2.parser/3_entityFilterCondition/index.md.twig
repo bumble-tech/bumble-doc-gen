@@ -44,30 +44,30 @@ To group conditions, there is a <a>ConditionGroup</a> in the documentation gener
 
 {{ "Common filter conditions" | textToHeading('H3') }}
 
-{{ printClassEntityCollectionAsList(
+{{ printEntityCollectionAsList(
     filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/CommonFilterCondition'])
 ) }}
 
 {{ "Class filter conditions" | textToHeading('H3') }}
 
-{{ printClassEntityCollectionAsList(
+{{ printEntityCollectionAsList(
     filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassFilterCondition'])
 ) }}
 
 {{ "Method filter conditions" | textToHeading('H3') }}
 
-{{ printClassEntityCollectionAsList(
+{{ printEntityCollectionAsList(
     filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/MethodFilterCondition'])
 ) }}
 
 {{ "Property filter conditions" | textToHeading('H3') }}
 
-{{ printClassEntityCollectionAsList(
+{{ printEntityCollectionAsList(
     filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/PropertyFilterCondition'])
 ) }}
 
 {{ "Class constant filter conditions" | textToHeading('H3') }}
 
-{{ printClassEntityCollectionAsList(
+{{ printEntityCollectionAsList(
     filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassConstantFilterCondition'])
 ) }}

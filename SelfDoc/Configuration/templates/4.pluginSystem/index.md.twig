@@ -33,7 +33,7 @@ If you decide to add a new plugin, there are a few things you need to do:
 {{ "Available plugin events" | textToHeading('H2') }}
 
 {% set pluginEvents = classEntityCollection.filterByPaths(['/BumbleDocGen/Plugin/Event']) %}
-{{ printClassEntityCollectionAsList( pluginEvents ) }}
+{{ printEntityCollectionAsList( pluginEvents ) }}
 
 *A plugin can handle multiple events*
 

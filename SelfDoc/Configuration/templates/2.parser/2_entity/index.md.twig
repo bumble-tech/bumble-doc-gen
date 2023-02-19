@@ -8,7 +8,7 @@ They are necessary so that in the template you can easily get any information ab
 
 {{ "Available entities" | textToHeading('H3') }}
 
-{{ printClassEntityCollectionAsList(
+{{ printEntityCollectionAsList(
     classEntityCollection.filterByParentClassNames(['BumbleDocGen\\Parser\\Entity\\BaseEntity'])
 ) }}
 
@@ -16,6 +16,6 @@ They are necessary so that in the template you can easily get any information ab
 
 To work with entities, we use collections, which have convenient ways to filter objects:
 
-{{ printClassEntityCollectionAsList(
+{{ printEntityCollectionAsList(
     classEntityCollection.filterByParentClassNames(['BumbleDocGen\\Parser\\Entity\\BaseEntityCollection'])
 ) }}

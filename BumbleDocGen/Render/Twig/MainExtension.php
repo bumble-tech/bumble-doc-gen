@@ -21,7 +21,7 @@ use BumbleDocGen\Render\Twig\Function\DrawDocumentedEntityLink;
 use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
-use BumbleDocGen\Render\Twig\Function\PrintClassEntityCollectionAsList;
+use BumbleDocGen\Render\Twig\Function\PrintEntityCollectionAsList;
 
 /**
  * This is an extension that is used to generate documents from templates
@@ -47,36 +47,24 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
                 'is_safe' => ['html'],
             ]),
             new \Twig\TwigFunction('drawClassMap', new DrawClassMap($this->context), ['is_safe' => ['html']]),
-            new \Twig\TwigFunction('drawDocumentationMenu',
-                new DrawDocumentationMenu($this->context),
-                ['is_safe' => ['html']]),
+            new \Twig\TwigFunction('drawDocumentationMenu', new DrawDocumentationMenu($this->context), [
+                'is_safe' => ['html']
+            ]),
             new \Twig\TwigFunction('loadPluginsContent', new LoadPluginsContent($this->context), [
                 'is_safe' => ['html'],
             ]),
             new \Twig\TwigFunction('generatePageBreadcrumbs', new GeneratePageBreadcrumbs($this->context), [
                 'is_safe' => ['html'],
             ]),
-            new \Twig\TwigFunction(
-                'printClassEntityCollectionAsList',
-                new PrintClassEntityCollectionAsList($this->context),
-                [
-                    'is_safe' => ['html'],
-                ]
-            ),
-            new \Twig\TwigFunction(
-                'drawDocumentedEntityLink',
-                new DrawDocumentedEntityLink($this->context),
-                [
-                    'is_safe' => ['html'],
-                ]
-            ),
-            new \Twig\TwigFunction(
-                'getClassMethodsBodyCode',
-                new GetClassMethodsBodyCode($this->context),
-                [
-                    'is_safe' => ['html'],
-                ]
-            ),
+            new \Twig\TwigFunction('printEntityCollectionAsList', new PrintEntityCollectionAsList($this->context), [
+                'is_safe' => ['html'],
+            ]),
+            new \Twig\TwigFunction('drawDocumentedEntityLink', new DrawDocumentedEntityLink($this->context), [
+                'is_safe' => ['html'],
+            ]),
+            new \Twig\TwigFunction('getClassMethodsBodyCode', new GetClassMethodsBodyCode($this->context), [
+                'is_safe' => ['html'],
+            ]),
         ];
     }
 
