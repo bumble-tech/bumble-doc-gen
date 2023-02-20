@@ -53,11 +53,6 @@ final class PhpHandler implements LanguageHandlerInterface
         return new self($configuration, $phpHandlerSettings, $reflector, $pluginEventDispatcher);
     }
 
-    public function getEntityDocRender(): EntityDocRenderInterface
-    {
-        return new PhpClassToMdDocRender();
-    }
-
     public function loadEntityCollection(): RootEntityCollection
     {
         return ClassEntityCollection::createByReflector(
