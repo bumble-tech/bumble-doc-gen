@@ -23,6 +23,7 @@ use BumbleDocGen\Render\Twig\Function\GeneratePageBreadcrumbs;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
 use BumbleDocGen\Render\Twig\Function\PrintEntityCollectionAsList;
+use Psr\Log\LoggerInterface;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
@@ -51,12 +52,21 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
         $this->context = $context;
     }
 
+    public function getLogger(): LoggerInterface
+    {
+        return $this->context->getConfiguration()->getLogger();
+    }
+
     /**
      * CustomFunctionInterface
      */
     public function addFunctions(CustomFunctionInterface ...$functions): self
     {
         foreach ($functions as $function) {
+            if (!is_callable($function)) {
+                $this->getLogger()->warning("Function {$function->getName()} must be callable to be used in filters");
+                continue;
+            }
             $this->functions[$function::class] = new \Twig\TwigFunction(
                 $function->getName(),
                 $function,
