@@ -10,7 +10,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
 
-interface PhpHandlerSettings
+interface PhpHandlerSettingsInterface
 {
     public function classConstantEntityFilterCondition(ConstantEntity $constantEntity): ConditionInterface;
 

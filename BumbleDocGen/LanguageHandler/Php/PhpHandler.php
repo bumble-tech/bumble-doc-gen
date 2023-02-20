@@ -30,10 +30,10 @@ use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 final class PhpHandler implements LanguageHandlerInterface
 {
     private function __construct(
-        private ConfigurationInterface $configuration,
-        private PhpHandlerSettings     $phpHandlerSettings,
-        private Reflector              $reflector,
-        private PluginEventDispatcher  $pluginEventDispatcher
+        private ConfigurationInterface      $configuration,
+        private PhpHandlerSettingsInterface $phpHandlerSettings,
+        private Reflector                   $reflector,
+        private PluginEventDispatcher       $pluginEventDispatcher
     )
     {
     }
@@ -45,7 +45,7 @@ final class PhpHandler implements LanguageHandlerInterface
 
     public static function create(
         ConfigurationInterface $configuration,
-        PhpHandlerSettings     $phpHandlerSettings
+        PhpHandlerSettingsInterface $phpHandlerSettings
     ): self
     {
         $betterReflection = (new BetterReflection());
