@@ -8,7 +8,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 
 final class TemplateFillersCollection
 {
-    /** @var array<string, TemplateFillerInterface[]> */
+    /** @var array<string, TemplateFillerInterface> */
     private array $templateFillers = [];
 
     /**
