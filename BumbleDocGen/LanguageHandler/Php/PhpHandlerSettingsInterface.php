@@ -19,4 +19,6 @@ interface PhpHandlerSettingsInterface
     public function propertyEntityFilterCondition(PropertyEntity $propertyEntity): ConditionInterface;
 
     public function getEntityDocRendersCollection(): EntityDocRendersCollection;
+
+    public function getFileSourceBaseUrl(): ?string;
 }
