@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler;
 
+use BumbleDocGen\Plugin\PluginsCollection;
+
 final class LanguageHandlersCollection implements \IteratorAggregate
 {
     /** @var array<int, LanguageHandlerInterface> */
@@ -32,5 +34,16 @@ final class LanguageHandlersCollection implements \IteratorAggregate
     public function get(string $key): ?LanguageHandlerInterface
     {
         return $this->languageHandlers[$key] ?? null;
+    }
+
+    public function getAllExtraPlugins(): PluginsCollection
+    {
+        $plugins = PluginsCollection::create();
+        foreach ($this->languageHandlers as $languageHandler) {
+            foreach ($languageHandler->getExtraPlugins() as $plugin) {
+                $plugins->add($plugin);
+            }
+        }
+        return $plugins;
     }
 }
