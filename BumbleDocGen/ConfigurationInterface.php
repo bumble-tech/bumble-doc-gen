@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen;
 
+use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
@@ -49,21 +50,46 @@ interface ConfigurationInterface
 
     public function getCacheDir(): ?string;
 
+    /**
+     * @deprecated
+     */
     public function clearOutputDirBeforeDocGeneration(): bool;
 
+    /**
+     * @deprecated
+     */
     public function classEntityFilterCondition(ClassEntity $classEntity): ConditionInterface;
 
+    /**
+     * @deprecated
+     */
     public function classConstantEntityFilterCondition(ConstantEntity $constantEntity): ConditionInterface;
 
+    /**
+     * @deprecated
+     */
     public function methodEntityFilterCondition(MethodEntity $methodEntity): ConditionInterface;
 
+    /**
+     * @deprecated
+     */
     public function propertyEntityFilterCondition(PropertyEntity $propertyEntity): ConditionInterface;
+
+    /**
+     * @deprecated
+     */
+    public function getEntityDocRendersCollection(): EntityDocRendersCollection;
+
+    /**
+     * @deprecated
+     */
+    public function getFileSourceBaseUrl(): ?string;
 
     public function getPlugins(): PluginsCollection;
 
     public function getTemplateFillers(): TemplateFillersCollection;
 
-    public function getEntityDocRendersCollection(): EntityDocRendersCollection;
+    public function getLanguageHandlersCollection(): LanguageHandlersCollection;
 
     public function getLogger(): LoggerInterface;
 
@@ -74,6 +100,4 @@ interface ConfigurationInterface
     public function getPageLinkProcessor(): PageLinkProcessorInterface;
 
     public function getGitClientPath(): string;
-
-    public function getFileSourceBaseUrl(): ?string;
 }

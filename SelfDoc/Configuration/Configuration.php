@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SelfDoc\Configuration;
 
 use BumbleDocGen\BaseConfiguration;
+use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\TrueCondition;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
@@ -70,6 +71,15 @@ final class Configuration extends BaseConfiguration
             $pageLinkProcessor = new BasePageLinkProcessor($this);
         }
         return $pageLinkProcessor;
+    }
+
+    public function getLanguageHandlersCollection(): LanguageHandlersCollection
+    {
+        static $languageHandlersCollection = null;
+        if (is_null($languageHandlersCollection)) {
+            return LanguageHandlersCollection::create();
+        }
+        return $languageHandlersCollection;
     }
 
     public function getFileSourceBaseUrl(): ?string
