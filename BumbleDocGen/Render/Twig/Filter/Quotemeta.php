@@ -7,7 +7,7 @@ namespace BumbleDocGen\Render\Twig\Filter;
  *
  * @see https://www.php.net/manual/en/function.quotemeta.php
  */
-final class Quotemeta
+final class Quotemeta implements CustomFilterInterface
 {
     /**
      * @param string $text Processed text
@@ -15,5 +15,17 @@ final class Quotemeta
     public function __invoke(string $text): string
     {
         return quotemeta($text);
+    }
+
+    public static function getName(): string
+    {
+        return 'quotemeta';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 }

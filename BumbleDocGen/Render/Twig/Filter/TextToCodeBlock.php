@@ -9,11 +9,23 @@ use BumbleDocGen\Render\Context\Context;
 /**
  * Convert text to code block
  */
-final class TextToCodeBlock
+final class TextToCodeBlock implements CustomFilterInterface
 {
 
     public function __construct(private Context $context)
     {
+    }
+
+    public static function getName(): string
+    {
+        return 'textToCodeBlock';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 
     /**

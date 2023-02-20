@@ -7,7 +7,7 @@ namespace BumbleDocGen\Render\Twig\Filter;
 /**
  * Filter adds indent from left
  */
-final class AddIndentFromLeft
+final class AddIndentFromLeft implements CustomFilterInterface
 {
     /**
      * @param string $text Processed text
@@ -19,5 +19,17 @@ final class AddIndentFromLeft
     {
         $indentText = str_repeat(' ', $identLength);
         return (!$skipFirstIdent ? $indentText : '') . implode("\n{$indentText}", explode("\n", $text));
+    }
+
+    public static function getName(): string
+    {
+        return 'addIndentFromLeft';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 }

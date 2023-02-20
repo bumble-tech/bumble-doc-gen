@@ -15,7 +15,7 @@ use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
  * @note This filter initiates the creation of documents for the displayed classes
  * @see GetDocumentedEntityUrl
  */
-final class StrTypeToUrl
+final class StrTypeToUrl implements CustomFilterInterface
 {
     public const TEMPLATE_TYPE_FROM_CONTEXT = 'context';
     public const TEMPLATE_TYPE_HTML = 'html';
@@ -26,6 +26,18 @@ final class StrTypeToUrl
      */
     public function __construct(private Context $context)
     {
+    }
+
+    public static function getName(): string
+    {
+        return 'strTypeToUrl';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 
     /**

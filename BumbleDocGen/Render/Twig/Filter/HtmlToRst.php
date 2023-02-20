@@ -5,7 +5,7 @@ namespace BumbleDocGen\Render\Twig\Filter;
 /**
  * Wraps an html string in an rst `..raw::html` construct, thus helping to display it.
  */
-final class HtmlToRst
+final class HtmlToRst implements CustomFilterInterface
 {
     /**
      * @param string $text Processed text
@@ -20,5 +20,17 @@ final class HtmlToRst
             return ".. raw:: html\n\n {$addIndentFromLeftFunction($text, 1)}\n";
         }
         return $text;
+    }
+
+    public static function getName(): string
+    {
+        return 'htmlToRst';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 }

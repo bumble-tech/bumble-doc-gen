@@ -8,6 +8,7 @@ use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\GetClassMethodsBodyCode;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
+use BumbleDocGen\Render\Twig\Filter\CustomFilterInterface;
 use BumbleDocGen\Render\Twig\Filter\FixStrSize;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 use BumbleDocGen\Render\Twig\Filter\PrepareSourceLink;
@@ -64,7 +65,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     {
         foreach ($functions as $function) {
             if (!is_callable($function)) {
-                $this->getLogger()->warning("Function {$function->getName()} must be callable to be used in filters");
+                $this->getLogger()->warning("Function {$function->getName()} must be callable to be used in twig functions");
                 continue;
             }
             $this->functions[$function::class] = new \Twig\TwigFunction(
@@ -79,10 +80,18 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     /**
      * CustomFilterInterface
      */
-    public function addFilters(TwigFilter ...$filters): self
+    public function addFilters(CustomFilterInterface ...$filters): self
     {
         foreach ($filters as $filter) {
-            $this->filters[] = $filter;
+            if (!is_callable($filter)) {
+                $this->getLogger()->warning("Filter {$filter->getName()} must be callable to be used in twig filters");
+                continue;
+            }
+            $this->filters[$filter::class] = new \Twig\TwigFilter(
+                $filter->getName(),
+                $filter,
+                $filter->getOptions()
+            );
         }
         return $this;
     }
@@ -106,15 +115,15 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     {
         $this->filters = [];
         $this->addFilters(
-            new \Twig\TwigFilter('quotemeta', new Quotemeta(), ['is_safe' => ['html']]),
-            new \Twig\TwigFilter('strTypeToUrl', new StrTypeToUrl($this->context), ['is_safe' => ['html']]),
-            new \Twig\TwigFilter('prepareSourceLink', new PrepareSourceLink()),
-            new \Twig\TwigFilter('removeLineBrakes', new RemoveLineBrakes()),
-            new \Twig\TwigFilter('addIndentFromLeft', new AddIndentFromLeft(), ['is_safe' => ['html']]),
-            new \Twig\TwigFilter('fixStrSize', new FixStrSize(), ['is_safe' => ['html']]),
-            new \Twig\TwigFilter('htmlToRst', new HtmlToRst(), ['is_safe' => ['html']]),
-            new \Twig\TwigFilter('textToHeading', new TextToHeading($this->context), ['is_safe' => ['html']]),
-            new \Twig\TwigFilter('textToCodeBlock', new TextToCodeBlock($this->context), ['is_safe' => ['html']])
+            new Quotemeta(),
+            new StrTypeToUrl($this->context),
+            new PrepareSourceLink(),
+            new RemoveLineBrakes(),
+            new AddIndentFromLeft(),
+            new FixStrSize(),
+            new HtmlToRst(),
+            new TextToHeading($this->context),
+            new TextToCodeBlock($this->context)
         );
     }
 

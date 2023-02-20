@@ -7,7 +7,7 @@ namespace BumbleDocGen\Render\Twig\Filter;
 /**
  * The filter pads the string with the specified characters on the right to the specified size
  */
-final class FixStrSize
+final class FixStrSize implements CustomFilterInterface
 {
     /**
      * @param string $text Processed text
@@ -24,5 +24,17 @@ final class FixStrSize
             }
         }
         return $text;
+    }
+
+    public static function getName(): string
+    {
+        return 'fixStrSize';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 }

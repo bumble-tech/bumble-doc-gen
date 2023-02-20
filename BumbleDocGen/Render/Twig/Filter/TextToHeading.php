@@ -9,7 +9,7 @@ use BumbleDocGen\Render\Context\Context;
 /**
  * Convert text to html or rst header
  */
-final class TextToHeading
+final class TextToHeading implements CustomFilterInterface
 {
     private array $templates = [
         'h1' => "<h1>%text%</h1>",
@@ -19,6 +19,18 @@ final class TextToHeading
 
     public function __construct(private Context $context)
     {
+    }
+
+    public static function getName(): string
+    {
+        return 'textToHeading';
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            'is_safe' => ['html'],
+        ];
     }
 
     /**
