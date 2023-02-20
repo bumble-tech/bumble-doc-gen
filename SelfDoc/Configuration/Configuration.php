@@ -7,6 +7,7 @@ namespace SelfDoc\Configuration;
 use BumbleDocGen\BaseConfiguration;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\PhpHandler;
 use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\TrueCondition;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\RecursiveDirectoriesSourceLocator;
@@ -77,7 +78,9 @@ final class Configuration extends BaseConfiguration
     {
         static $languageHandlersCollection = null;
         if (is_null($languageHandlersCollection)) {
-            return LanguageHandlersCollection::create();
+            return LanguageHandlersCollection::create(
+                PhpHandler::create($this, new PhpHandlerSettings())
+            );
         }
         return $languageHandlersCollection;
     }
