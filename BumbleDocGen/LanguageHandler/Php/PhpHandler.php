@@ -8,19 +8,11 @@ use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\CachedSourceLocator;
-use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin;
-use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\ComposerStubberPlugin;
-use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpDocumentorStubberPlugin;
-use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpUnitStubberPlugin;
-use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PsrClassesStubberPlugin;
-use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\SymfonyComponentStubberPlugin;
-use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\TwigStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\GetClassMethodsBodyCode;
 use BumbleDocGen\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
-use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Render\Twig\Function\CustomFunctionsCollection;
@@ -47,11 +39,11 @@ final class PhpHandler implements LanguageHandlerInterface
 
     public static function create(
         ConfigurationInterface      $configuration,
-        PhpHandlerSettingsInterface $phpHandlerSettings
+        PhpHandlerSettingsInterface $phpHandlerSettings,
+        PluginEventDispatcher       $pluginEventDispatcher
     ): self
     {
         $betterReflection = (new BetterReflection());
-        $pluginEventDispatcher = new PluginEventDispatcher($configuration);
         $sourceLocatorsCollection = $pluginEventDispatcher->dispatch(
             new OnLoadSourceLocatorsCollection($configuration->getSourceLocators())
         )->getSourceLocatorsCollection();
@@ -84,18 +76,5 @@ final class PhpHandler implements LanguageHandlerInterface
     public function getCustomTwigFilters(Context $context): CustomFiltersCollection
     {
         return CustomFiltersCollection::create();
-    }
-
-    public function getExtraPlugins(): PluginsCollection
-    {
-        return PluginsCollection::create(
-            new BasePhpStubberPlugin(),
-            new TwigStubberPlugin(),
-            new PsrClassesStubberPlugin(),
-            new ComposerStubberPlugin(),
-            new SymfonyComponentStubberPlugin(),
-            new PhpUnitStubberPlugin(),
-            new PhpDocumentorStubberPlugin()
-        );
     }
 }
