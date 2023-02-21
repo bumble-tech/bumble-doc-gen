@@ -7,8 +7,8 @@ namespace BumbleDocGen\LanguageHandler;
 use BumbleDocGen\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Twig\Filter\CustomFilterInterface;
-use BumbleDocGen\Render\Twig\Function\CustomFunctionInterface;
+use BumbleDocGen\Render\Twig\Filter\CustomFiltersCollection;
+use BumbleDocGen\Render\Twig\Function\CustomFunctionsCollection;
 
 interface LanguageHandlerInterface
 {
@@ -19,17 +19,13 @@ interface LanguageHandlerInterface
 
     /**
      * Additional twig functions that are added to the built-in ones when a language handler is included
-     *
-     * @return CustomFunctionInterface[]
      */
-    public function getCustomTwigFunctions(Context $context): array;
+    public function getCustomTwigFunctions(Context $context): CustomFunctionsCollection;
 
     /**
      * Additional twig filters that are added to the built-in ones when a language handler is included
-     *
-     * @return CustomFilterInterface[]
      */
-    public function getCustomTwigFilters(Context $context): array;
+    public function getCustomTwigFilters(Context $context): CustomFiltersCollection;
 
     /**
      * Additional plugins that will be added when the language handler is enabled

@@ -22,6 +22,8 @@ use BumbleDocGen\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\Context\Context;
+use BumbleDocGen\Render\Twig\Filter\CustomFiltersCollection;
+use BumbleDocGen\Render\Twig\Function\CustomFunctionsCollection;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\Reflector\Reflector;
@@ -44,7 +46,7 @@ final class PhpHandler implements LanguageHandlerInterface
     }
 
     public static function create(
-        ConfigurationInterface $configuration,
+        ConfigurationInterface      $configuration,
         PhpHandlerSettingsInterface $phpHandlerSettings
     ): self
     {
@@ -71,17 +73,17 @@ final class PhpHandler implements LanguageHandlerInterface
         );
     }
 
-    public function getCustomTwigFunctions(Context $context): array
+    public function getCustomTwigFunctions(Context $context): CustomFunctionsCollection
     {
-        return [
+        return CustomFunctionsCollection::create(
             new DrawClassMap($context),
             new GetClassMethodsBodyCode($context)
-        ];
+        );
     }
 
-    public function getCustomTwigFilters(Context $context): array
+    public function getCustomTwigFilters(Context $context): CustomFiltersCollection
     {
-        return [];
+        return CustomFiltersCollection::create();
     }
 
     public function getExtraPlugins(): PluginsCollection
