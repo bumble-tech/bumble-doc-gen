@@ -30,16 +30,14 @@ final class CustomFiltersCollection implements \IteratorAggregate
 
     public static function create(CustomFilterInterface ...$filters): CustomFiltersCollection
     {
-        $customFiltersCollection = new self();
-        foreach ($filters as $filter) {
-            $customFiltersCollection->add($filter);
-        }
-        return $customFiltersCollection;
+        return (new self())->add(...$filters);
     }
 
-    public function add(CustomFilterInterface $filter): CustomFiltersCollection
+    public function add(CustomFilterInterface ...$filters): CustomFiltersCollection
     {
-        $this->customFilters[$filter::class] = $filter;
+        foreach ($filters as $filter) {
+            $this->customFilters[$filter::class] = $filter;
+        }
         return $this;
     }
 

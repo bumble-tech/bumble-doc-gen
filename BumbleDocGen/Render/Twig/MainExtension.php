@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Twig;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\DrawClassMap;
-use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\GetClassMethodsBodyCode;
+use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
+use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Render\Twig\Filter\CustomFiltersCollection;
@@ -56,18 +56,29 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
         return $this->getConfiguration()->getLogger();
     }
 
+    public function getLanguageHandlersCollection(): LanguageHandlersCollection
+    {
+        return $this->getConfiguration()->getLanguageHandlersCollection(
+            $this->context->getPluginEventDispatcher()
+        );
+    }
+
     public function setDefaultFunctions(): void
     {
         $this->functions = CustomFunctionsCollection::create(
             new GetDocumentedEntityUrl($this->context),
-            new DrawClassMap($this->context),
             new DrawDocumentationMenu($this->context),
             new LoadPluginsContent($this->context),
             new GeneratePageBreadcrumbs($this->context),
             new PrintEntityCollectionAsList($this->context),
             new DrawDocumentedEntityLink($this->context),
-            new GetClassMethodsBodyCode($this->context)
         );
+        foreach ($this->getLanguageHandlersCollection() as $languageHandler) {
+            /**@var LanguageHandlerInterface $languageHandler */
+            $this->functions->add(...iterator_to_array(
+                $languageHandler->getCustomTwigFunctions($this->context)
+            ));
+        }
     }
 
     public function setDefaultFilters(): void
@@ -83,6 +94,12 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
             new TextToHeading($this->context),
             new TextToCodeBlock($this->context)
         );
+        foreach ($this->getLanguageHandlersCollection() as $languageHandler) {
+            /**@var LanguageHandlerInterface $languageHandler */
+            $this->filters->add(...iterator_to_array(
+                $languageHandler->getCustomTwigFilters($this->context)
+            ));
+        }
     }
 
     /**

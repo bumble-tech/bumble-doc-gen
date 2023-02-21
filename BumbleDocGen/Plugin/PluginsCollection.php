@@ -16,16 +16,14 @@ final class PluginsCollection implements \IteratorAggregate
 
     public static function create(PluginInterface ...$plugins): PluginsCollection
     {
-        $pluginsCollection = new self();
-        foreach ($plugins as $plugin) {
-            $pluginsCollection->add($plugin);
-        }
-        return $pluginsCollection;
+        return (new self())->add(...$plugins);
     }
 
-    public function add(PluginInterface $plugin): PluginsCollection
+    public function add(PluginInterface ...$plugins): PluginsCollection
     {
-        $this->plugins[$plugin::class] = $plugin;
+        foreach ($plugins as $plugin) {
+            $this->plugins[$plugin::class] = $plugin;
+        }
         return $this;
     }
 
