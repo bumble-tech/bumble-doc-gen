@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen;
 
 use Bramus\Monolog\Formatter\ColoredLineFormatter;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition\VisibilityCondition as ClassConstantVisibilityCondition;
-use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
-use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition as MethodOnlyFromCurrentClassCondition;
-use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\VisibilityCondition as MethodVisibilityCondition;
-use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondition as PropertyVisibilityCondition;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\ComposerStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpDocumentorStubberPlugin;
@@ -21,9 +13,6 @@ use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PsrClasses
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\SymfonyComponentStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\TwigStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
-use BumbleDocGen\Parser\FilterCondition\ConditionGroup;
-use BumbleDocGen\Parser\FilterCondition\ConditionGroupTypeEnum;
-use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter;
 use BumbleDocGen\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin;
 use BumbleDocGen\Plugin\CorePlugin\PageLinker\PageRstLinkerPlugin;
@@ -46,39 +35,6 @@ abstract class BaseConfiguration implements ConfigurationInterface
     public function clearOutputDirBeforeDocGeneration(): bool
     {
         return true;
-    }
-
-    public function classConstantEntityFilterCondition(
-        ConstantEntity $constantEntity
-    ): ConditionInterface
-    {
-        return new ClassConstantVisibilityCondition(
-            $constantEntity, VisibilityConditionModifier::PUBLIC
-        );
-    }
-
-    public function methodEntityFilterCondition(
-        MethodEntity $methodEntity
-    ): ConditionInterface
-    {
-        return ConditionGroup::create(
-            ConditionGroupTypeEnum::AND,
-            new MethodVisibilityCondition(
-                $methodEntity, VisibilityConditionModifier::PUBLIC
-            ),
-            new MethodOnlyFromCurrentClassCondition(
-                $methodEntity
-            )
-        );
-    }
-
-    public function propertyEntityFilterCondition(
-        PropertyEntity $propertyEntity
-    ): ConditionInterface
-    {
-        return new PropertyVisibilityCondition(
-            $propertyEntity, VisibilityConditionModifier::PUBLIC
-        );
     }
 
     public function getPlugins(): PluginsCollection

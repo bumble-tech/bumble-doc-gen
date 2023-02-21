@@ -25,7 +25,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
                 $constantData['implementingClass']
             );
             if (
-                $classEntity->getConfiguration()->classConstantEntityFilterCondition($constantEntity)->canAddToCollection()
+                $classEntity->getPhpHandlerSettings()->classConstantEntityFilterCondition($constantEntity)->canAddToCollection()
             ) {
                 $constantEntityCollection->add($constantEntity);
             }

@@ -111,6 +111,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->reflector;
     }
 
+    public function getPhpHandlerSettings(): PhpHandlerSettingsInterface
+    {
+        return $this->phpHandlerSettings;
+    }
+
     protected function getClassEntityCollection(): ClassEntityCollection
     {
         return $this->classEntityCollection;

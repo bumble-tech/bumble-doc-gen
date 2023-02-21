@@ -24,7 +24,7 @@ final class PropertyEntityCollection extends BaseEntityCollection
                 $propertyData['implementingClass']
             );
             if (
-                $classEntity->getConfiguration()->propertyEntityFilterCondition($propertyEntity)->canAddToCollection()
+                $classEntity->getPhpHandlerSettings()->propertyEntityFilterCondition($propertyEntity)->canAddToCollection()
             ) {
                 $propertyEntityCollection->add($propertyEntity);
             }

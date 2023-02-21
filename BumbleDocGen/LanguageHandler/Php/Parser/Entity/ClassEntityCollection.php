@@ -60,7 +60,7 @@ final class ClassEntityCollection extends RootEntityCollection
                     ltrim($className, '\\'),
                     $relativeFileName,
                 );
-                if ($configuration->classEntityFilterCondition($classEntity)->canAddToCollection()) {
+                if ($phpHandlerSettings->classEntityFilterCondition($classEntity)->canAddToCollection()) {
                     $classEntityCollection->add($classEntity);
                 }
             }

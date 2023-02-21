@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen;
 
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
-use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Plugin\PluginsCollection;
@@ -55,26 +50,6 @@ interface ConfigurationInterface
      * @deprecated
      */
     public function clearOutputDirBeforeDocGeneration(): bool;
-
-    /**
-     * @deprecated
-     */
-    public function classEntityFilterCondition(ClassEntity $classEntity): ConditionInterface;
-
-    /**
-     * @deprecated
-     */
-    public function classConstantEntityFilterCondition(ConstantEntity $constantEntity): ConditionInterface;
-
-    /**
-     * @deprecated
-     */
-    public function methodEntityFilterCondition(MethodEntity $methodEntity): ConditionInterface;
-
-    /**
-     * @deprecated
-     */
-    public function propertyEntityFilterCondition(PropertyEntity $propertyEntity): ConditionInterface;
 
     /**
      * @deprecated

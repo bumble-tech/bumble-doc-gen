@@ -6,7 +6,6 @@ namespace SelfDoc\Configuration;
 
 use BumbleDocGen\BaseConfiguration;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\PhpHandler;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\ComposerStubberPlugin;
@@ -15,8 +14,6 @@ use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpUnitStu
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PsrClassesStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\SymfonyComponentStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\TwigStubberPlugin;
-use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\TrueCondition;
-use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\RecursiveDirectoriesSourceLocator;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
@@ -52,11 +49,6 @@ final class Configuration extends BaseConfiguration
                 "{$this->getProjectRoot()}/SelfDoc",
             ], []),
         );
-    }
-
-    public function classEntityFilterCondition(ClassEntity $classEntity): ConditionInterface
-    {
-        return new TrueCondition();
     }
 
     public function getPlugins(): PluginsCollection

@@ -28,7 +28,7 @@ final class MethodEntityCollection extends BaseEntityCollection
                 $methodData['implementingClass']
             );
             if (
-                $configuration->methodEntityFilterCondition($methodEntity)->canAddToCollection()
+                $classEntity->getPhpHandlerSettings()->methodEntityFilterCondition($methodEntity)->canAddToCollection()
             ) {
                 $methodEntityCollection->add($methodEntity);
             }
