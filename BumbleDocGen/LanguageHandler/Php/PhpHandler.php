@@ -60,6 +60,7 @@ final class PhpHandler implements LanguageHandlerInterface
     {
         return ClassEntityCollection::createByReflector(
             $this->configuration,
+            $this->phpHandlerSettings,
             $this->reflector,
             $this->pluginEventDispatcher
         );

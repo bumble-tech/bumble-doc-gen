@@ -14,18 +14,18 @@ final class LanguageHandlersCollection implements \IteratorAggregate
         yield from $this->languageHandlers;
     }
 
-    public static function create(LanguageHandlerInterface ...$plugins): LanguageHandlersCollection
+    public static function create(LanguageHandlerInterface ...$languageHandlers): LanguageHandlersCollection
     {
         $languageHandlersCollection = new self();
-        foreach ($plugins as $plugin) {
-            $languageHandlersCollection->add($plugin);
+        foreach ($languageHandlers as $languageHandler) {
+            $languageHandlersCollection->add($languageHandler);
         }
         return $languageHandlersCollection;
     }
 
-    public function add(LanguageHandlerInterface $plugin): LanguageHandlersCollection
+    public function add(LanguageHandlerInterface $languageHandler): LanguageHandlersCollection
     {
-        $this->languageHandlers[$plugin::class] = $plugin;
+        $this->languageHandlers[$languageHandler::class] = $languageHandler;
         return $this;
     }
 

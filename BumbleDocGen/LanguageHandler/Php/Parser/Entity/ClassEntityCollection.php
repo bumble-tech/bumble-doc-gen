@@ -6,6 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
@@ -20,9 +21,10 @@ use Roave\BetterReflection\Reflector\Reflector;
 final class ClassEntityCollection extends RootEntityCollection
 {
     private function __construct(
-        private ConfigurationInterface $configuration,
-        private Reflector              $reflector,
-        private PluginEventDispatcher  $pluginEventDispatcher
+        private ConfigurationInterface        $configuration,
+        protected PhpHandlerSettingsInterface $phpHandlerSettings,
+        private Reflector                     $reflector,
+        private PluginEventDispatcher         $pluginEventDispatcher
     )
     {
     }
@@ -33,13 +35,15 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     public static function createByReflector(
-        ConfigurationInterface $configuration,
-        Reflector              $reflector,
-        PluginEventDispatcher  $pluginEventDispatcher
+        ConfigurationInterface      $configuration,
+        PhpHandlerSettingsInterface $phpHandlerSettings,
+        Reflector                   $reflector,
+        PluginEventDispatcher       $pluginEventDispatcher
     ): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
             $configuration,
+            $phpHandlerSettings,
             $reflector,
             $pluginEventDispatcher
         );
@@ -50,6 +54,7 @@ final class ClassEntityCollection extends RootEntityCollection
                 $relativeFileName = str_replace($configuration->getProjectRoot(), '', $file->getPathName());
                 $classEntity = CacheableEntityWrapperFactory::createClassEntity(
                     $configuration,
+                    $phpHandlerSettings,
                     $reflector,
                     $classEntityCollection,
                     ltrim($className, '\\'),
@@ -97,6 +102,7 @@ final class ClassEntityCollection extends RootEntityCollection
             } else {
                 $classEntity = CacheableEntityWrapperFactory::createClassEntity(
                     $this->configuration,
+                    $this->phpHandlerSettings,
                     $this->reflector,
                     $this,
                     ltrim($objectId, '\\'),
@@ -128,7 +134,7 @@ final class ClassEntityCollection extends RootEntityCollection
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher
+            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
         );
         $interfaces = array_map(
             fn($interface) => ltrim(
@@ -151,7 +157,7 @@ final class ClassEntityCollection extends RootEntityCollection
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher
+            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
         );
         $parentClassNames = array_map(
             fn($parentClassName) => ltrim(
@@ -174,7 +180,7 @@ final class ClassEntityCollection extends RootEntityCollection
     public function filterByPaths(array $paths): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher
+            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
@@ -190,7 +196,7 @@ final class ClassEntityCollection extends RootEntityCollection
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher
+            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
@@ -204,7 +210,7 @@ final class ClassEntityCollection extends RootEntityCollection
     public function getOnlyInstantiable(): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher
+            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
@@ -218,7 +224,7 @@ final class ClassEntityCollection extends RootEntityCollection
     public function getOnlyInterfaces(): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->reflector, $this->pluginEventDispatcher
+            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
         );
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */

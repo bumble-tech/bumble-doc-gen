@@ -6,13 +6,8 @@ namespace BumbleDocGen\Parser;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\CachedSourceLocator;
-use BumbleDocGen\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
+use BumbleDocGen\LanguageHandler\Php\PhpHandler;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
-use Roave\BetterReflection\BetterReflection;
-use Roave\BetterReflection\Reflector\DefaultReflector;
-use Roave\BetterReflection\Reflector\Reflector;
-use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 
 /**
  * Class for project parsing using source locators
@@ -20,7 +15,6 @@ use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 final class ProjectParser
 {
     private function __construct(
-        private Reflector              $reflector,
         private ConfigurationInterface $configuration,
         private PluginEventDispatcher  $pluginEventDispatcher
     )
@@ -32,27 +26,13 @@ final class ProjectParser
         PluginEventDispatcher  $pluginEventDispatcher
     ): ProjectParser
     {
-        $betterReflection = (new BetterReflection());
-
-        $sourceLocatorsCollection = $pluginEventDispatcher->dispatch(
-            new OnLoadSourceLocatorsCollection($configuration->getSourceLocators())
-        )->getSourceLocatorsCollection();
-
-        $locator = $betterReflection->astLocator();
-        $sourceLocators = $sourceLocatorsCollection->convertToReflectorSourceLocatorsList($locator);
-        $sourceLocators[] = $betterReflection->sourceLocator();
-        $sourceLocator = new CachedSourceLocator(new AggregateSourceLocator($sourceLocators), $configuration);
-
-        $reflector = new DefaultReflector($sourceLocator);
-        return new self($reflector, $configuration, $pluginEventDispatcher);
+        return new self($configuration, $pluginEventDispatcher);
     }
 
     public function parse(): ClassEntityCollection
     {
-        return ClassEntityCollection::createByReflector(
-            $this->configuration,
-            $this->reflector,
+        return $this->configuration->getLanguageHandlersCollection(
             $this->pluginEventDispatcher
-        );
+        )->get(PhpHandler::class)->getEntityCollection();
     }
 }

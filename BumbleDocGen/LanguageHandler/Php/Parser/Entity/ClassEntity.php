@@ -6,6 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Parser\Entity\Cache;
 use BumbleDocGen\Parser\Entity\RootEntityInterface;
@@ -31,11 +32,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     private bool $isClassLoad = false;
 
     protected function __construct(
-        protected ConfigurationInterface $configuration,
-        protected Reflector              $reflector,
-        protected ClassEntityCollection  $classEntityCollection,
-        protected string                 $className,
-        protected ?string                $relativeFileName,
+        protected ConfigurationInterface      $configuration,
+        protected PhpHandlerSettingsInterface $phpHandlerSettings,
+        protected Reflector                   $reflector,
+        protected ClassEntityCollection       $classEntityCollection,
+        protected string                      $className,
+        protected ?string                     $relativeFileName,
     )
     {
         parent::__construct($configuration, $reflector);
@@ -44,18 +46,20 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         }
     }
 
-    public function getObjectId(): string
+    public
+    function getObjectId(): string
     {
         return $this->className;
     }
 
     public static function create(
-        ConfigurationInterface $configuration,
-        Reflector              $reflector,
-        ClassEntityCollection  $classEntityCollection,
-        string                 $className,
-        ?string                $relativeFileName,
-        bool                   $reloadCache = false
+        ConfigurationInterface      $configuration,
+        PhpHandlerSettingsInterface $phpHandlerSettings,
+        Reflector                   $reflector,
+        ClassEntityCollection       $classEntityCollection,
+        string                      $className,
+        ?string                     $relativeFileName,
+        bool                        $reloadCache = false
     ): ClassEntity
     {
         static $classEntities = [];
@@ -64,21 +68,24 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!isset($classEntities[$objectId]) || $reloadCache) {
             $classEntities[$objectId] = new static(
                 $configuration,
+                $phpHandlerSettings,
                 $reflector,
                 $classEntityCollection,
                 $className,
                 $relativeFileName,
             );
         }
+
         return $classEntities[$objectId];
     }
 
     public static function createByReflection(
-        ConfigurationInterface $configuration,
-        Reflector              $reflector,
-        ReflectionClass        $reflectionClass,
-        ClassEntityCollection  $classEntityCollection,
-        bool                   $reloadCache = false
+        ConfigurationInterface      $configuration,
+        PhpHandlerSettingsInterface $phpHandlerSettings,
+        Reflector                   $reflector,
+        ReflectionClass             $reflectionClass,
+        ClassEntityCollection       $classEntityCollection,
+        bool                        $reloadCache = false
     ): ClassEntity
     {
         static $classEntities = [];
@@ -87,6 +94,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $relativeFileName = $reflectionClass->getFileName() ? str_replace($configuration->getProjectRoot(), '', $reflectionClass->getFileName()) : null;
             $classEntities[$objectId] = new static(
                 $configuration,
+                $phpHandlerSettings,
                 $reflector,
                 $classEntityCollection,
                 $reflectionClass->getName(),
