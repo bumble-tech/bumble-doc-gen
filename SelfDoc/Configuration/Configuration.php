@@ -8,10 +8,18 @@ use BumbleDocGen\BaseConfiguration;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\PhpHandler;
+use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin;
+use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\ComposerStubberPlugin;
+use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpDocumentorStubberPlugin;
+use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpUnitStubberPlugin;
+use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PsrClassesStubberPlugin;
+use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\SymfonyComponentStubberPlugin;
+use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\TwigStubberPlugin;
 use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\TrueCondition;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\RecursiveDirectoriesSourceLocator;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
+use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\PageLinkProcessor\BasePageLinkProcessor;
 use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
@@ -54,9 +62,18 @@ final class Configuration extends BaseConfiguration
     public function getPlugins(): PluginsCollection
     {
         $plugins = parent::getPlugins();
-        $plugins->add(new TwigFunctionClassParserPlugin());
-        $plugins->add(new TwigFilterClassParserPlugin());
-        $plugins->add(new BetterReflectionStubberPlugin());
+        $plugins->add(
+            new BasePhpStubberPlugin(),
+            new TwigStubberPlugin(),
+            new PsrClassesStubberPlugin(),
+            new ComposerStubberPlugin(),
+            new SymfonyComponentStubberPlugin(),
+            new PhpUnitStubberPlugin(),
+            new PhpDocumentorStubberPlugin(),
+            new TwigFunctionClassParserPlugin(),
+            new TwigFilterClassParserPlugin(),
+            new BetterReflectionStubberPlugin()
+        );
         return $plugins;
     }
 
@@ -74,12 +91,12 @@ final class Configuration extends BaseConfiguration
         return $pageLinkProcessor;
     }
 
-    public function getLanguageHandlersCollection(): LanguageHandlersCollection
+    public function getLanguageHandlersCollection(PluginEventDispatcher $pluginEventDispatcher): LanguageHandlersCollection
     {
         static $languageHandlersCollection = null;
         if (is_null($languageHandlersCollection)) {
             return LanguageHandlersCollection::create(
-                PhpHandler::create($this, new PhpHandlerSettings())
+                PhpHandler::create($this, new PhpHandlerSettings(), $pluginEventDispatcher)
             );
         }
         return $languageHandlersCollection;

@@ -11,6 +11,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
 use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
+use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Plugin\PluginsCollection;
 use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
 use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
@@ -89,7 +90,7 @@ interface ConfigurationInterface
 
     public function getTemplateFillers(): TemplateFillersCollection;
 
-    public function getLanguageHandlersCollection(): LanguageHandlersCollection;
+    public function getLanguageHandlersCollection(PluginEventDispatcher $pluginEventDispatcher): LanguageHandlersCollection;
 
     public function getLogger(): LoggerInterface;
 
