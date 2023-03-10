@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Function;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Render\Context\Context;
 
@@ -13,7 +13,7 @@ use BumbleDocGen\Render\Context\Context;
  *
  * @internal
  *
- * @example {{ loadPluginsContent('some text', classEntity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_HEADER')) }}
+ * @example {{ loadPluginsContent('some text', entity, constant('BumbleDocGen\\Plugin\\BaseTemplatePluginInterface::BLOCK_AFTER_HEADER')) }}
  */
 final class LoadPluginsContent implements CustomFunctionInterface
 {
@@ -38,17 +38,17 @@ final class LoadPluginsContent implements CustomFunctionInterface
 
     /**
      * @param string $content Content to be processed by plugins
-     * @param ClassEntity $classEntity The entity for which we process the content block
+     * @param RootEntityInterface $entity The entity for which we process the content block
      * @param string $blockType Content block type. @see BaseTemplatePluginInterface::BLOCK_*
      * @return string
      */
-    public function __invoke(string $content, ClassEntity $classEntity, string $blockType): string
+    public function __invoke(string $content, RootEntityInterface $entity, string $blockType): string
     {
         $pluginEventDispatcher = $this->context->getPluginEventDispatcher();
 
         $blockContentPluginResults = $pluginEventDispatcher->dispatch(
             new OnLoadEntityDocPluginContent(
-                $content, $classEntity, $blockType, $this->context
+                $content, $entity, $blockType, $this->context
             )
         )->getBlockContentPluginResults();
 

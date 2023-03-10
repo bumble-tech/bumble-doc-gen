@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
@@ -25,7 +25,7 @@ final class Render
 {
     public function __construct(
         private ConfigurationInterface $configuration,
-        private ClassEntityCollection $classEntityCollection,
+        private RootEntityCollection $rootEntityCollection,
         private PluginEventDispatcher $pluginEventDispatcher
     ) {
     }
@@ -72,7 +72,7 @@ final class Render
 
         $breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
         $context = new Context(
-            $this->configuration, $this->classEntityCollection, $breadcrumbsHelper, $this->pluginEventDispatcher
+            $this->configuration, $this->rootEntityCollection, $breadcrumbsHelper, $this->pluginEventDispatcher
         );
         $mainExtension = new MainExtension($context);
         $twig->addExtension($mainExtension);
@@ -99,9 +99,9 @@ final class Render
             if (str_ends_with($filePatch, '.twig')) {
                 $context->setCurrentTemplateFilePatch($filePatch);
                 $content = $twig->render($filePatch, [
-                    'classEntityCollection' => $this->classEntityCollection,
+                    'classEntityCollection' => $this->rootEntityCollection,
                     'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
-                        $this->classEntityCollection,
+                        $this->rootEntityCollection,
                         $filePatch
                     ),
                 ]);
@@ -145,6 +145,6 @@ final class Render
             file_put_contents($filePatch, "<!-- {% raw %} -->\n{$content}\n<!-- {% endraw %} -->");
             $logger->info("Saving `{$filePatch}`");
         }
-        $this->classEntityCollection->updateEntitiesCache();
+        $this->rootEntityCollection->updateEntitiesCache();
     }
 }

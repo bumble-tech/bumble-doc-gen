@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Function;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
 
@@ -30,23 +30,23 @@ final class PrintEntityCollectionAsList implements CustomFunctionInterface
     }
 
     /**
-     * @param ClassEntityCollection $classEntityCollection Processed entity collection
+     * @param RootEntityCollection $rootEntityCollection Processed entity collection
      * @param string $type List tag type
      * @param bool $skipDescription Don't print description
      * @return string
      */
     public function __invoke(
-        ClassEntityCollection $classEntityCollection,
+        RootEntityCollection $rootEntityCollection,
         string                $type = 'ul',
         bool                  $skipDescription = false
     ): string
     {
         $getDocumentedEntityUrlFunction = new GetDocumentedEntityUrl($this->context);
         $result = "<{$type}>";
-        foreach ($classEntityCollection as $classEntity) {
-            $description = $classEntity->getDescription();
+        foreach ($rootEntityCollection as $entity) {
+            $description = $entity->getDescription();
             $descriptionText = !$skipDescription && $description ? " - {$description}" : '';
-            $result .= "<li><a href='{$getDocumentedEntityUrlFunction($classEntity->getName())}'>{$classEntity->getShortName()}</a>{$descriptionText}</li>";
+            $result .= "<li><a href='{$getDocumentedEntityUrlFunction($entity->getName())}'>{$entity->getShortName()}</a>{$descriptionText}</li>";
         }
         $result .= "</{$type}>";
 

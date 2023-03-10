@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Render\Twig\Filter;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\RenderHelper;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
@@ -93,9 +92,9 @@ final class StrTypeToUrl implements CustomFilterInterface
                     }
                 }
             } else {
-                if (ParserHelper::isCorrectClassName($type)) {
+                if ($entityClassOfLink->isEntityNameValid($type)) {
                     $this->context->getConfiguration()->getLogger()->warning(
-                        "StrTypeToUrl: Class {$type} not found in specified sources"
+                        "StrTypeToUrl: Entity {$type} not found in specified sources"
                     );
                 }
                 $preparedTypes[] = $type;
