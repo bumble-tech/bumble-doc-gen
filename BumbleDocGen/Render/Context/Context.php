@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\Render\Context;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Render\Breadcrumbs\BreadcrumbsHelper;
@@ -20,7 +19,7 @@ final class Context
 
     public function __construct(
         private ConfigurationInterface $configuration,
-        private ClassEntityCollection  $classEntityCollection,
+        private RootEntityCollection   $rootEntityCollection,
         private BreadcrumbsHelper      $breadcrumbsHelper,
         private PluginEventDispatcher  $pluginEventDispatcher
     )
@@ -59,17 +58,9 @@ final class Context
         return $this->configuration;
     }
 
-    /**
-     * @deprecated replace to getRootEntityCollection()
-     */
-    public function getClassEntityCollection(): ClassEntityCollection
-    {
-        return $this->classEntityCollection;
-    }
-
     public function getRootEntityCollection(): RootEntityCollection
     {
-        return $this->classEntityCollection;
+        return $this->rootEntityCollection;
     }
 
     public function getEntityWrappersCollection(): DocumentedEntityWrappersCollection

@@ -32,6 +32,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
      *  but only a cursor on an entity element
      * @param bool $useUnsafeKeys
      * @return array
+     * @todo return object instead array
      */
     abstract public function gelEntityLinkData(string $rawLink, ?string $defaultEntityName = null, bool $useUnsafeKeys = true): array;
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 
@@ -15,17 +16,21 @@ final class EntityDocRenderHelper
     public const CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION = 'only_cursor';
 
     public static function getEntityDataByLink(
-        string                $linkString,
-        ClassEntityCollection $classEntityCollection,
-        ?string               $defaultEntityName = null,
-        bool                  $useUnsafeKeys = true
+        string               $linkString,
+        RootEntityCollection $rootEntityCollection,
+        ?string              $defaultEntityName = null,
+        bool                 $useUnsafeKeys = true
     ): array
     {
+        if (!is_a($rootEntityCollection, ClassEntityCollection::class)) {
+            return [];
+        }
+
         $explodedLinkString = explode('|', $linkString);
         $linkString = array_shift($explodedLinkString);
         $linkOptions = $explodedLinkString;
 
-        $entity = $classEntityCollection->findEntity($linkString, $useUnsafeKeys);
+        $entity = $rootEntityCollection->findEntity($linkString, $useUnsafeKeys);
 
         if (str_contains($linkString, '->')) {
             $classData = explode('->', $linkString);
@@ -36,7 +41,7 @@ final class EntityDocRenderHelper
 
         $needToUseDefaultEntity = !$entity && $defaultEntityName && !isset($classData[1]);
         if ($needToUseDefaultEntity) {
-            $defaultEntity = $classEntityCollection->getLoadedOrCreateNew($defaultEntityName);
+            $defaultEntity = $rootEntityCollection->getLoadedOrCreateNew($defaultEntityName);
             $cursorTmpName = str_replace(['$', '(', ')'], '', $className);
             if (
                 $defaultEntity->hasMethod($cursorTmpName) ||
@@ -49,7 +54,7 @@ final class EntityDocRenderHelper
         }
 
         if (!$entity) {
-            $nextEntity = $classEntityCollection->getLoadedOrCreateNew($className);
+            $nextEntity = $rootEntityCollection->getLoadedOrCreateNew($className);
             if ($nextEntity->entityDataCanBeLoaded() && $nextEntity->isInGit()) {
                 $entity = $nextEntity;
             }
@@ -98,7 +103,7 @@ final class EntityDocRenderHelper
         bool    $createDocument = true
     ): array
     {
-        $data = self::getEntityDataByLink($linkString, $context->getClassEntityCollection(), $defaultEntityClassName);
+        $data = self::getEntityDataByLink($linkString, $context->getRootEntityCollection(), $defaultEntityClassName);
         if ($data['entityName'] ?? null) {
             $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
             $data['url'] = $getDocumentedEntityUrl($data['entityName'], $data['cursor'], $createDocument);

@@ -71,7 +71,7 @@ final class StrTypeToUrl implements CustomFilterInterface
                 continue;
             }
 
-            $entityClassOfLink = $this->context->getClassEntityCollection()->getLoadedOrCreateNew($type);
+            $entityClassOfLink = $this->context->getRootEntityCollection()->getLoadedOrCreateNew($type);
             if ($entityClassOfLink->entityDataCanBeLoaded()) {
                 if ($entityClassOfLink->getAbsoluteFileName()) {
                     $link = $getDocumentedEntityUrlFunction($type, '', $createDocument);

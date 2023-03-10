@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Render\Twig\Function;
 
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Render\Twig\Function\CustomFunctionInterface;
@@ -43,7 +44,10 @@ final class GetClassMethodsBodyCode implements CustomFunctionInterface
      */
     public function __invoke(string $className, array $methodsNames): ?string
     {
-        $classEntityCollection = $this->context->getClassEntityCollection();
+        $classEntityCollection = $this->context->getRootEntityCollection();
+        if (!is_a($classEntityCollection, ClassEntityCollection::class)) {
+            return null;
+        }
         $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
         if ($classEntity->entityDataCanBeLoaded()) {
             $methodsCode = [];

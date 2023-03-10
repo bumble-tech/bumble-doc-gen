@@ -59,7 +59,7 @@ abstract class BasePageLinker implements PluginInterface
                     $this->checkKey($linkString, $this->logger);
                     return $this->getFilledOutputTemplate($breadcrumb['title'], $breadcrumb['url']);
                 } else {
-                    $entityUrlData = $context->getClassEntityCollection()->gelEntityLinkData($linkString);
+                    $entityUrlData = $context->getRootEntityCollection()->gelEntityLinkData($linkString);
                     if ($entityUrlData['entityName'] ?? null) {
                         $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
                         $entityUrlData['url'] = $getDocumentedEntityUrl($entityUrlData['entityName'], $entityUrlData['cursor']);
