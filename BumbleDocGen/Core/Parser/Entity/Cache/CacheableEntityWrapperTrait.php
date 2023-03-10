@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 
 trait CacheableEntityWrapperTrait
 {
@@ -14,22 +15,21 @@ trait CacheableEntityWrapperTrait
 
     abstract public function getEntityDependencies(): array;
 
-    public function getCurrentClassEntity(): ?ClassEntity
+    private function getCurrentRootEntity(): ?RootEntityInterface
     {
-        $classEntity = null;
-        if (method_exists($this, 'getClassEntity')) {
-            $classEntity = $this->getClassEntity();
-        } elseif (is_subclass_of($this, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity::class)) {
-            $classEntity = $this;
+        if (is_a($this, RootEntityInterface::class)) {
+            return $this;
+        } else if (method_exists($this, 'getRootEntity')) {
+            return $this->getRootEntity();
         }
-        return $classEntity;
+        return null;
     }
 
     public function getCachedEntityDependencies(): array
     {
-        $classEntity = $this->getCurrentClassEntity();
+        $entity = $this->getCurrentRootEntity();
         $entityDependencies = [];
-        if ($classEntity) {
+        if ($entity) {
             $filesDependenciesCacheKey = '__internalEntityDependencies';
             $entityDependencies = $this->getCacheValue($filesDependenciesCacheKey);
             if (is_null($entityDependencies)) {
@@ -42,10 +42,10 @@ trait CacheableEntityWrapperTrait
 
     public function reloadEntityDependenciesCache(): void
     {
-        $classEntity = $this->getCurrentClassEntity();
-        if ($classEntity) {
-            $logger = $classEntity->getConfiguration()->getLogger();
-            $logger->info("Caching {$classEntity->getFileName()} dependencies");
+        $entity = $this->getCurrentRootEntity();
+        if ($entity) {
+            $logger = $entity->getConfiguration()->getLogger();
+            $logger->info("Caching {$entity->getFileName()} dependencies");
             $filesDependenciesCacheKey = '__internalEntityDependencies';
             $entityDependencies = $this->getEntityDependencies();
             $this->addValueToCache($filesDependenciesCacheKey, $entityDependencies);
@@ -54,14 +54,14 @@ trait CacheableEntityWrapperTrait
 
     public function entityCacheIsOutdated(): bool
     {
-        static $filesCacheState = [];return true;
-        $classEntity = $this->getCurrentClassEntity();
-        if ($classEntity) {
-            $className = $classEntity->getName();
+        static $filesCacheState = [];
+        $entity = $this->getCurrentRootEntity();
+        if ($entity) {
+            $className = $entity->getName();
             if (!isset($filesCacheState[$className])) {
-                $projectRoot = $classEntity->getConfiguration()->getProjectRoot();
+                $projectRoot = $entity->getConfiguration()->getProjectRoot();
                 $filesCacheState[$className] = false;
-                if (!ParserHelper::isCorrectClassName($className) || ParserHelper::isBuiltInClass($className)) {
+                if (!$entity::isEntityNameValid($className)) {
                     return false;
                 }
 
@@ -86,8 +86,8 @@ trait CacheableEntityWrapperTrait
 
     protected function getCacheKey(): string
     {
-        $currentClassEntity = $this->getCurrentClassEntity();
-        return $currentClassEntity ? str_replace(["\\", ":", '\n', '/'], "_{$this->cacheVersion}_", $this->getCurrentClassEntity()->getName()) : '';
+        $currentRootEntity = $this->getCurrentRootEntity();
+        return $currentRootEntity ? str_replace(["\\", ":", '\n', '/'], "_{$this->cacheVersion}_", $this->getCurrentRootEntity()->getName()) : '';
     }
 
     public function getCacheValues(): array

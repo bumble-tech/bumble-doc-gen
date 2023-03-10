@@ -24,7 +24,7 @@ final class OnAddClassEntityToCollection extends Event
         return $this->classEntityCollection;
     }
 
-    public function getClassEntity(): ClassEntity
+    public function getRootEntity(): ClassEntity
     {
         return $this->classEntity;
     }

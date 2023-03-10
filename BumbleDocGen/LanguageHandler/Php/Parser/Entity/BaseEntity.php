@@ -112,8 +112,8 @@ abstract class BaseEntity implements CacheableEntityInterface
      */
     public function getObjectId(): string
     {
-        if (method_exists($this, 'getClassEntity')) {
-            return "{$this->getClassEntity()->getName()}:{$this->getName()}";
+        if (method_exists($this, 'getRootEntity')) {
+            return "{$this->getRootEntity()->getName()}:{$this->getName()}";
         }
         return $this->getName();
     }
@@ -155,8 +155,8 @@ abstract class BaseEntity implements CacheableEntityInterface
             count($docBlock->getTagsByName('see')) || count($docBlock->getTagsByName('link'));
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod(
-        \BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod::MONTH_SECONDS,
+    #[CacheableMethod(
+        CacheableMethod::MONTH_SECONDS,
         RenderContextCacheKeyGenerator::class
     )]
     protected function getDescriptionLinksData(?Context $context = null): array
@@ -234,7 +234,7 @@ abstract class BaseEntity implements CacheableEntityInterface
                         'description' => $description,
                     ];
                 } elseif ($context) {
-                    $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getClassEntity();
+                    $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
                     $className = ParserHelper::parseFullClassName(
                         $name,
                         $this->reflector,
@@ -298,14 +298,14 @@ abstract class BaseEntity implements CacheableEntityInterface
         return count($docBlock->getTagsByName('throws')) > 0;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod(
-        \BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod::MONTH_SECONDS,
+    #[CacheableMethod(
+        CacheableMethod::MONTH_SECONDS,
         RenderContextCacheKeyGenerator::class
     )]
     protected function getThrowsData(?Context $context = null): array
     {
         $throws = [];
-        $implementingReflectionClass = $this->getDocCommentEntity()->getClassEntity()->getReflection();
+        $implementingReflectionClass = $this->getDocCommentEntity()->getRootEntity()->getReflection();
         $docBlock = $this->getDocBlock();
         foreach ($docBlock->getTagsByName('throws') as $throwBlock) {
             if (is_a($throwBlock, DocBlock\Tags\Throws::class)) {

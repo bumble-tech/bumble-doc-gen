@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
-use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 
 final class ConstantEntityCollection extends BaseEntityCollection
 {
@@ -19,7 +19,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
     {
         $constantEntityCollection = new ConstantEntityCollection($classEntity);
         foreach ($classEntity->getConstantsData() as $name => $constantData) {
-            $constantEntity = CacheableEntityWrapperFactory::createConstantEntity(
+            $constantEntity = CacheablePhpEntityFactory::createConstantEntity(
                 $classEntity,
                 $name,
                 $constantData['declaringClass'],
@@ -59,7 +59,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
         if (!$constantEntity) {
             $constantsData = $this->classEntity->getConstantsData()[$key] ?? null;
             if (is_array($constantsData)) {
-                return CacheableEntityWrapperFactory::createConstantEntity(
+                return CacheablePhpEntityFactory::createConstantEntity(
                     $this->classEntity,
                     $key,
                     $constantsData['declaringClass'],

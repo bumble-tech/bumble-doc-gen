@@ -54,19 +54,19 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->reflectionMethod;
     }
 
-    public function getClassEntity(): ClassEntity
+    public function getRootEntity(): ClassEntity
     {
         return $this->classEntity;
     }
 
     public function getEntityDependencies(): array
     {
-        return $this->getClassEntity()->getEntityDependencies();
+        return $this->getRootEntity()->getEntityDependencies();
     }
 
     protected function getClassEntityCollection(): ClassEntityCollection
     {
-        return $this->getClassEntity()->getClassEntityCollection();
+        return $this->getRootEntity()->getClassEntityCollection();
     }
 
     #[CacheableMethod] public function getDocBlock(): DocBlock
@@ -92,7 +92,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     public function getNamespaceName(): string
     {
-        return $this->getClassEntity()->getNamespaceName();
+        return $this->getRootEntity()->getNamespaceName();
     }
 
     protected function getDocCommentEntity(): MethodEntity
@@ -360,7 +360,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     {
         return ParserHelper::getMethodReturnValue(
             $this->reflector,
-            $this->getClassEntity()->getReflection(),
+            $this->getRootEntity()->getReflection(),
             $this->getReflection()
         );
     }

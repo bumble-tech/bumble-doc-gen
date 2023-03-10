@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\EntityCacheStorageHelper;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntityCollection;
@@ -52,7 +52,7 @@ final class ClassEntityCollection extends RootEntityCollection
             $className = ParserHelper::getClassFromFile($file->getPathName());
             if ($className) {
                 $relativeFileName = str_replace($configuration->getProjectRoot(), '', $file->getPathName());
-                $classEntity = CacheableEntityWrapperFactory::createClassEntity(
+                $classEntity = CacheablePhpEntityFactory::createClassEntity(
                     $configuration,
                     $phpHandlerSettings,
                     $reflector,
@@ -100,7 +100,7 @@ final class ClassEntityCollection extends RootEntityCollection
             if (isset($loadUnsafe[$objectId])) {
                 $loadedUnsafe = $loadUnsafe[$objectId];
             } else {
-                $classEntity = CacheableEntityWrapperFactory::createClassEntity(
+                $classEntity = CacheablePhpEntityFactory::createClassEntity(
                     $this->configuration,
                     $this->phpHandlerSettings,
                     $this->reflector,

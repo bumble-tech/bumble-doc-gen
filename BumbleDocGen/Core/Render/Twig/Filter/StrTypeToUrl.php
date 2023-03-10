@@ -92,7 +92,7 @@ final class StrTypeToUrl implements CustomFilterInterface
                     }
                 }
             } else {
-                if ($entityClassOfLink->isEntityNameValid($type)) {
+                if ($entityClassOfLink::isEntityNameValid($type)) {
                     $this->context->getConfiguration()->getLogger()->warning(
                         "StrTypeToUrl: Entity {$type} not found in specified sources"
                     );

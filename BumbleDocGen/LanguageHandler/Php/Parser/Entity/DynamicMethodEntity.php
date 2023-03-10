@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
-use BumbleDocGen\Parser\Entity\Cache;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
@@ -34,22 +34,22 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $dynamicMethodEntity;
     }
 
-    public function getClassEntity(): ClassEntity
+    public function getRootEntity(): ClassEntity
     {
         return $this->classEntity;
     }
 
     public function getEntityDependencies(): array
     {
-        return $this->getClassEntity()->getEntityDependencies();
+        return $this->getRootEntity()->getEntityDependencies();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getName(): string
+    #[CacheableMethod] public function getName(): string
     {
         return $this->annotationMethod->getMethodName();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isStatic(): bool
+    #[CacheableMethod] public function isStatic(): bool
     {
         return $this->annotationMethod->isStatic();
     }
@@ -67,7 +67,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $callMethod;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFileName(): ?string
+    #[CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getImplementingReflectionClass()->getFileName();
         if (!$fullFileName || !str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
@@ -81,19 +81,19 @@ class DynamicMethodEntity implements MethodEntityInterface
         );
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getStartLine(): int
+    #[CacheableMethod] public function getStartLine(): int
     {
         $callMethod = $this->getCallMethod();
         return $callMethod->getStartLine();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getEndLine(): int
+    #[CacheableMethod] public function getEndLine(): int
     {
         $callMethod = $this->getCallMethod();
         return $callMethod->getEndLine();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getModifiersString(): string
+    #[CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
         $modifiersString[] = 'public';
@@ -104,7 +104,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         return implode(' ', $modifiersString);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getReturnType(): string
+    #[CacheableMethod] public function getReturnType(): string
     {
         $returnType = (string)$this->annotationMethod->getReturnType();
         $returnType = ltrim($returnType, '\\');
@@ -122,7 +122,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $returnType;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getParameters(): array
+    #[CacheableMethod] public function getParameters(): array
     {
         $parameters = [];
         if ($this->annotationMethod->getArguments()) {
@@ -139,7 +139,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $parameters;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getParametersString(): string
+    #[CacheableMethod] public function getParametersString(): string
     {
         $parameters = [];
         foreach ($this->getParameters() as $parameterData) {
@@ -155,17 +155,17 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $callMethod->getImplementingClass();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getImplementingClassName(): string
+    #[CacheableMethod] public function getImplementingClassName(): string
     {
         return $this->getImplementingReflectionClass()->getName();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDescription(): string
+    #[CacheableMethod] public function getDescription(): string
     {
         return (string)$this->annotationMethod->getDescription();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isInitialization(): bool
+    #[CacheableMethod] public function isInitialization(): bool
     {
         $initializationReturnTypes = [
             'self',
@@ -189,7 +189,7 @@ class DynamicMethodEntity implements MethodEntityInterface
 
     public function getNamespaceName(): string
     {
-        return $this->getClassEntity()->getNamespaceName();
+        return $this->getRootEntity()->getNamespaceName();
     }
 
     public function isPublic(): bool

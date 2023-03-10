@@ -52,7 +52,7 @@ class ConstantEntity extends BaseEntity
 
     public function getEntityDependencies(): array
     {
-        return $this->getClassEntity()->getEntityDependencies();
+        return $this->getRootEntity()->getEntityDependencies();
     }
 
     #[CacheableMethod] public function getDocBlock(): DocBlock
@@ -61,7 +61,7 @@ class ConstantEntity extends BaseEntity
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
-    public function getClassEntity(): ClassEntity
+    public function getRootEntity(): ClassEntity
     {
         return $this->classEntity;
     }
@@ -116,7 +116,7 @@ class ConstantEntity extends BaseEntity
 
     public function getNamespaceName(): string
     {
-        return $this->getClassEntity()->getNamespaceName();
+        return $this->getRootEntity()->getNamespaceName();
     }
 
     #[CacheableMethod] public function getFileName(): ?string
