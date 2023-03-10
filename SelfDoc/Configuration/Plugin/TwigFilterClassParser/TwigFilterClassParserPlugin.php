@@ -30,15 +30,19 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
     {
         if (
-            $event->getBlockType() !== PhpClassToMdDocRender::BLOCK_AFTER_MAIN_INFO ||
-            !$this->isCustomTwigFunction($event->getClassEntity())
+            $event->getBlockType() !== PhpClassToMdDocRender::BLOCK_AFTER_MAIN_INFO
         ) {
+            return;
+        }
+
+        $entity = $event->getEntity();
+        if (!is_a($entity, ClassEntity::class) || !$this->isCustomTwigFunction($event->getEntity())) {
             return;
         }
 
         try {
             $pluginResult = $this->getTwig()->render('twigFilterInfoBlock.twig', [
-                'classEntity' => $event->getClassEntity(),
+                'classEntity' => $entity,
             ]);
         } catch (\Exception) {
             $pluginResult = '';

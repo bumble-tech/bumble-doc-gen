@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Plugin\Event\Render;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\Function\LoadPluginsContent;
 use Symfony\Contracts\EventDispatcher\Event;
@@ -20,15 +21,15 @@ final class OnLoadEntityDocPluginContent extends Event
 
     public function __construct(
         private string $blockContent,
-        private ClassEntity $classEntity,
+        private RootEntityInterface $entity,
         private string $blockType,
         private Context $context
     ) {
     }
 
-    public function getClassEntity(): ClassEntity
+    public function getEntity(): ClassEntity
     {
-        return $this->classEntity;
+        return $this->entity;
     }
 
     public function getBlockContent(): string

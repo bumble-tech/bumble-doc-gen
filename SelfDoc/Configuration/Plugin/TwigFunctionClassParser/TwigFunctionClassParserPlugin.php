@@ -10,7 +10,6 @@ use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntit
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Plugin\PluginInterface;
-use BumbleDocGen\Render\Context\Context;
 use BumbleDocGen\Render\Twig\MainExtension;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -30,16 +29,18 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
 
     public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
     {
-        if (
-            $event->getBlockType() !== PhpClassToMdDocRender::BLOCK_AFTER_MAIN_INFO ||
-            !$this->isCustomTwigFunction($event->getClassEntity())
-        ) {
+        if ($event->getBlockType() !== PhpClassToMdDocRender::BLOCK_AFTER_MAIN_INFO) {
+            return;
+        }
+
+        $entity = $event->getEntity();
+        if (!is_a($entity, ClassEntity::class) || !$this->isCustomTwigFunction($event->getEntity())) {
             return;
         }
 
         try {
             $pluginResult = $this->getTwig()->render('twigFunctionInfoBlock.twig', [
-                'classEntity' => $event->getClassEntity(),
+                'classEntity' => $entity,
             ]);
         } catch (\Exception) {
             $pluginResult = '';
