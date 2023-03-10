@@ -7,7 +7,6 @@ namespace BumbleDocGen\Core\Plugin\Event\Render;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\Twig\Function\LoadPluginsContent;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -27,7 +26,7 @@ final class OnLoadEntityDocPluginContent extends Event
     ) {
     }
 
-    public function getEntity(): ClassEntity
+    public function getEntity(): RootEntityInterface
     {
         return $this->entity;
     }

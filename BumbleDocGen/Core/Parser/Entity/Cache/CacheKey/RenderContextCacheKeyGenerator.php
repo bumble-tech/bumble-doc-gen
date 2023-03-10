@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Parser\Entity\Cache\CacheKey;
 
 use BumbleDocGen\Core\Render\Context\Context;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity;
 
 final class RenderContextCacheKeyGenerator implements CacheKeyGeneratorInterface
 {
-    public static function generateKey(string $cacheNamespace, BaseEntity $entity, array $args): string
+    public static function generateKey(string $cacheNamespace, CacheableEntityInterface $entity, array $args): string
     {
         $args = array_map(function ($arg) {
             if (is_a($arg, Context::class)) {

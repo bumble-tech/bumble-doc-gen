@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Parser;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\PhpHandler;
 
 /**
@@ -29,7 +29,7 @@ final class ProjectParser
         return new self($configuration, $pluginEventDispatcher);
     }
 
-    public function parse(): ClassEntityCollection
+    public function parse(): RootEntityCollection
     {
         return $this->configuration->getLanguageHandlersCollection(
             $this->pluginEventDispatcher
