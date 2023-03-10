@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
+namespace BumbleDocGen\Core\Parser\Entity;
 
 abstract class BaseEntityCollection implements \IteratorAggregate
 {

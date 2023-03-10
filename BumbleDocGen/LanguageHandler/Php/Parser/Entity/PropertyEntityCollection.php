@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 
 final class PropertyEntityCollection extends BaseEntityCollection
