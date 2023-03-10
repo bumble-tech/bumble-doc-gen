@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Render\Twig\Function;
 
+use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Twig\Filter\HtmlToRst;
+use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
+use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Twig\Filter\HtmlToRst;
-use BumbleDocGen\Render\Twig\Function\CustomFunctionInterface;
-use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 
 /**
  * Generate class map in HTML or rst format

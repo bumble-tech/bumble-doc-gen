@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition;
 
+use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
-use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
 /**
  * Method access modifier check

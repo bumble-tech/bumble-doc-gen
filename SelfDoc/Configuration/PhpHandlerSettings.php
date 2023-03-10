@@ -2,6 +2,11 @@
 
 namespace SelfDoc\Configuration;
 
+use BumbleDocGen\Core\Parser\FilterCondition\CommonFilterCondition\TrueCondition;
+use BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup;
+use BumbleDocGen\Core\Parser\FilterCondition\ConditionGroupTypeEnum;
+use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
+use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
@@ -13,11 +18,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterConditio
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondition as PropertyVisibilityCondition;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
-use BumbleDocGen\Parser\FilterCondition\CommonFilterCondition\TrueCondition;
-use BumbleDocGen\Parser\FilterCondition\ConditionGroup;
-use BumbleDocGen\Parser\FilterCondition\ConditionGroupTypeEnum;
-use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
-use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
 
 final class PhpHandlerSettings implements PhpHandlerSettingsInterface
 {

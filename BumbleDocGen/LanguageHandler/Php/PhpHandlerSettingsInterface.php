@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php;
 
+use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
+use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
-use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
-use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
 
 /**
  * Additional settings for the PL handler

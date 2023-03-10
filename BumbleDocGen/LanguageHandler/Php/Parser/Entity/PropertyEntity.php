@@ -68,7 +68,7 @@ class PropertyEntity extends BaseEntity
         return $this->getClassEntity()->getClassEntityCollection();
     }
 
-    #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
@@ -107,7 +107,7 @@ class PropertyEntity extends BaseEntity
         return $docCommentsReflectionCache[$objectId];
     }
 
-    #[Cache\CacheableMethod] protected function getDocCommentRecursive(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] protected function getDocCommentRecursive(): string
     {
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
@@ -143,7 +143,7 @@ class PropertyEntity extends BaseEntity
         return $this->getClassEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
-    #[Cache\CacheableMethod] public function getFileName(): ?string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getReflection()->getImplementingClass()->getFileName();
         if (!$fullFileName) {
@@ -156,7 +156,7 @@ class PropertyEntity extends BaseEntity
         );
     }
 
-    #[Cache\CacheableMethod] public function getType(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getType(): string
     {
         $type = $this->getReflection()->getType();
         $typeString = 'mixed';
@@ -179,7 +179,7 @@ class PropertyEntity extends BaseEntity
         return $this->prepareTypeString($typeString);
     }
 
-    #[Cache\CacheableMethod] public function getModifiersString(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
         if ($this->getReflection()->isPrivate()) {
@@ -200,43 +200,43 @@ class PropertyEntity extends BaseEntity
         return implode(' ', $modifiersString);
     }
 
-    #[Cache\CacheableMethod] public function isImplementedInParentClass(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isImplementedInParentClass(): bool
     {
         return $this->getImplementingClassName() !== $this->classEntity->getName();
     }
 
-    #[Cache\CacheableMethod] public function getDescription(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return trim($docBlock->getSummary());
     }
 
-    #[Cache\CacheableMethod] public function isPublic(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isPublic(): bool
     {
         return $this->getReflection()->isPublic();
     }
 
-    #[Cache\CacheableMethod] public function isProtected(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isProtected(): bool
     {
         return $this->getReflection()->isProtected();
     }
 
-    #[Cache\CacheableMethod] public function isPrivate(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isPrivate(): bool
     {
         return $this->getReflection()->isPrivate();
     }
 
-    #[Cache\CacheableMethod] public function getStartLine(): int
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getStartLine(): int
     {
         return $this->getReflection()->getStartLine();
     }
 
-    #[Cache\CacheableMethod] public function getEndLine(): int
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getEndLine(): int
     {
         return $this->getReflection()->getEndLine();
     }
 
-    #[Cache\CacheableMethod] public function getDefaultValue(): string|array|int|bool|null|float
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDefaultValue(): string|array|int|bool|null|float
     {
         return $this->getReflection()->getDefaultValue();
     }

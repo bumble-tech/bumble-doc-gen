@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition;
 
+use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
-use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
 /**
  * Only properties that belong to the current class (not parent)

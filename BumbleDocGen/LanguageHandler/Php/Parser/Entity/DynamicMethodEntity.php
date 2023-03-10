@@ -44,12 +44,12 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->getClassEntity()->getEntityDependencies();
     }
 
-    #[Cache\CacheableMethod] public function getName(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getName(): string
     {
         return $this->annotationMethod->getMethodName();
     }
 
-    #[Cache\CacheableMethod] public function isStatic(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isStatic(): bool
     {
         return $this->annotationMethod->isStatic();
     }
@@ -67,7 +67,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $callMethod;
     }
 
-    #[Cache\CacheableMethod] public function getFileName(): ?string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getImplementingReflectionClass()->getFileName();
         if (!$fullFileName || !str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
@@ -81,19 +81,19 @@ class DynamicMethodEntity implements MethodEntityInterface
         );
     }
 
-    #[Cache\CacheableMethod] public function getStartLine(): int
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getStartLine(): int
     {
         $callMethod = $this->getCallMethod();
         return $callMethod->getStartLine();
     }
 
-    #[Cache\CacheableMethod] public function getEndLine(): int
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getEndLine(): int
     {
         $callMethod = $this->getCallMethod();
         return $callMethod->getEndLine();
     }
 
-    #[Cache\CacheableMethod] public function getModifiersString(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
         $modifiersString[] = 'public';
@@ -104,7 +104,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         return implode(' ', $modifiersString);
     }
 
-    #[Cache\CacheableMethod] public function getReturnType(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getReturnType(): string
     {
         $returnType = (string)$this->annotationMethod->getReturnType();
         $returnType = ltrim($returnType, '\\');
@@ -122,7 +122,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $returnType;
     }
 
-    #[Cache\CacheableMethod] public function getParameters(): array
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getParameters(): array
     {
         $parameters = [];
         if ($this->annotationMethod->getArguments()) {
@@ -139,7 +139,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $parameters;
     }
 
-    #[Cache\CacheableMethod] public function getParametersString(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getParametersString(): string
     {
         $parameters = [];
         foreach ($this->getParameters() as $parameterData) {
@@ -155,17 +155,17 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $callMethod->getImplementingClass();
     }
 
-    #[Cache\CacheableMethod] public function getImplementingClassName(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getImplementingClassName(): string
     {
         return $this->getImplementingReflectionClass()->getName();
     }
 
-    #[Cache\CacheableMethod] public function getDescription(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDescription(): string
     {
         return (string)$this->annotationMethod->getDescription();
     }
 
-    #[Cache\CacheableMethod] public function isInitialization(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isInitialization(): bool
     {
         $initializationReturnTypes = [
             'self',

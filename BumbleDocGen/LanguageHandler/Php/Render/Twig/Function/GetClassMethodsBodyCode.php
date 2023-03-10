@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Render\Twig\Function;
 
+use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Twig\Filter\AddIndentFromLeft;
+use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Twig\Filter\AddIndentFromLeft;
-use BumbleDocGen\Render\Twig\Function\CustomFunctionInterface;
 
 /**
  * Get the code of the specified class methods as a formatted string

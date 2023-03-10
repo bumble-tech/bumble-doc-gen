@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace BumbleDocGen;
 
+use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Plugin\PluginsCollection;
+use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
+use BumbleDocGen\Core\Render\PageLinkProcessor\PageLinkProcessorInterface;
+use BumbleDocGen\Core\Render\TemplateFiller\TemplateFillersCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
-use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
-use BumbleDocGen\Plugin\PluginEventDispatcher;
-use BumbleDocGen\Plugin\PluginsCollection;
-use BumbleDocGen\Render\EntityDocRender\EntityDocRendersCollection;
-use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
-use BumbleDocGen\Render\TemplateFiller\TemplateFillersCollection;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 

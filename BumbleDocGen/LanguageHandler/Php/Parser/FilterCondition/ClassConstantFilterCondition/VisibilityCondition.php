@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition;
 
+use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
-use BumbleDocGen\Parser\FilterCondition\ConditionInterface;
 
 /**
  * Constant access modifier check

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
+use BumbleDocGen\Core\Plugin\Event\Render\OnGettingResourceLink;
+use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
-use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
-use BumbleDocGen\Plugin\PluginInterface;
 
 final class SymfonyComponentStubberPlugin implements PluginInterface
 {

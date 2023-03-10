@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender;
 
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 
 final class EntityDocRenderHelper
 {

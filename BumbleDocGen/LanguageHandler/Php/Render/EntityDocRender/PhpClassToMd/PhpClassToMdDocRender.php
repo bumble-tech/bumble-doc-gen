@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd;
 
+use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
+use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper;
+use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Core\Render\Twig\MainExtension;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\Parser\Entity\RootEntityInterface;
-use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Context\DocumentedEntityWrapper;
-use BumbleDocGen\Render\EntityDocRender\EntityDocRenderInterface;
-use BumbleDocGen\Render\Twig\MainExtension;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 

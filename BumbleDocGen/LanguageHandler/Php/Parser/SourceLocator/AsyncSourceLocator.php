@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator;
 
-use BumbleDocGen\Parser\SourceLocator\SourceLocatorInterface;
+use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface;
 use Roave\BetterReflection\SourceLocator\Ast\Locator;
 use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
 use Symfony\Component\Finder\Finder;

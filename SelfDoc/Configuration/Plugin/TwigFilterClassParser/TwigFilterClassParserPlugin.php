@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace SelfDoc\Configuration\Plugin\TwigFilterClassParser;
 
+use BumbleDocGen\Core\Plugin\Event\Render\OnLoadEntityDocPluginContent;
+use BumbleDocGen\Core\Plugin\PluginInterface;
+use BumbleDocGen\Core\Render\Twig\MainExtension;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
-use BumbleDocGen\Plugin\Event\Render\OnLoadEntityDocPluginContent;
-use BumbleDocGen\Plugin\PluginInterface;
-use BumbleDocGen\Render\Twig\MainExtension;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 

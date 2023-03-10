@@ -5,6 +5,12 @@ declare(strict_types=1);
 namespace SelfDoc\Configuration;
 
 use BumbleDocGen\BaseConfiguration;
+use BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator;
+use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Plugin\PluginsCollection;
+use BumbleDocGen\Core\Render\PageLinkProcessor\BasePageLinkProcessor;
+use BumbleDocGen\Core\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use BumbleDocGen\LanguageHandler\Php\PhpHandler;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin;
@@ -14,12 +20,6 @@ use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpUnitStu
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PsrClassesStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\SymfonyComponentStubberPlugin;
 use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\TwigStubberPlugin;
-use BumbleDocGen\Parser\SourceLocator\RecursiveDirectoriesSourceLocator;
-use BumbleDocGen\Parser\SourceLocator\SourceLocatorsCollection;
-use BumbleDocGen\Plugin\PluginEventDispatcher;
-use BumbleDocGen\Plugin\PluginsCollection;
-use BumbleDocGen\Render\PageLinkProcessor\BasePageLinkProcessor;
-use BumbleDocGen\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use SelfDoc\Configuration\Plugin\RoaveStubber\BetterReflectionStubberPlugin;
 use SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin;
 use SelfDoc\Configuration\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin;

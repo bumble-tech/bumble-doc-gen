@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler;
 
-use BumbleDocGen\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Plugin\PluginEventDispatcher;
-use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\Twig\Filter\CustomFiltersCollection;
-use BumbleDocGen\Render\Twig\Function\CustomFunctionsCollection;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
+use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
 
 interface LanguageHandlerInterface
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen;
 
-use BumbleDocGen\Parser\ProjectParser;
-use BumbleDocGen\Plugin\PluginEventDispatcher;
-use BumbleDocGen\Render\Render;
+use BumbleDocGen\Core\Parser\ProjectParser;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Render\Render;
 
 /**
  * Class for generating documentation.

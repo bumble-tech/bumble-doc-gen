@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\Parser\Entity\Cache\CacheableEntityWrapperFactory;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 
 /**
  * @implements \IteratorAggregate<int, MethodEntity>

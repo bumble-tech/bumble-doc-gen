@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
+use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\RenderHelper;
+use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Parser\Entity\Cache;
-use BumbleDocGen\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
-use BumbleDocGen\Render\Context\Context;
-use BumbleDocGen\Render\RenderHelper;
-use BumbleDocGen\Render\Twig\Function\GetDocumentedEntityUrl;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -45,17 +45,17 @@ abstract class BaseEntity
 
     abstract public function getImplementingReflectionClass(): ReflectionClass;
 
-    #[Cache\CacheableMethod] abstract protected function getDocCommentRecursive(): string;
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract protected function getDocCommentRecursive(): string;
 
     abstract protected function getDocCommentEntity(): ClassEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
-    #[Cache\CacheableMethod] abstract public function getDescription(): string;
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract public function getDescription(): string;
 
-    #[Cache\CacheableMethod] abstract public function getFileName(): ?string;
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract public function getFileName(): ?string;
 
-    #[Cache\CacheableMethod] abstract public function getStartLine(): int;
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract public function getStartLine(): int;
 
-    #[Cache\CacheableMethod] abstract public function getDocBlock(): DocBlock;
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract public function getDocBlock(): DocBlock;
 
     abstract protected function getClassEntityCollection(): ClassEntityCollection;
 
@@ -133,29 +133,29 @@ abstract class BaseEntity
         );
     }
 
-    #[Cache\CacheableMethod] public function isInternal(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isInternal(): bool
     {
         $docBlock = $this->getDocBlock();
         $internalBlock = $docBlock->getTagsByName('internal')[0] ?? null;
         return (bool)$internalBlock;
     }
 
-    #[Cache\CacheableMethod] public function isDeprecated(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isDeprecated(): bool
     {
         $docBlock = $this->getDocBlock();
         $internalBlock = $docBlock->getTagsByName('deprecated')[0] ?? null;
         return (bool)$internalBlock;
     }
 
-    #[Cache\CacheableMethod] public function hasDescriptionLinks(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasDescriptionLinks(): bool
     {
         $docBlock = $this->getDocBlock();
         return preg_match_all('/(\@see )(.*?)( |}|])/', $this->getDescription() . ' ') ||
             count($docBlock->getTagsByName('see')) || count($docBlock->getTagsByName('link'));
     }
 
-    #[Cache\CacheableMethod(
-        Cache\CacheableMethod::MONTH_SECONDS,
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod(
+        \BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod::MONTH_SECONDS,
         RenderContextCacheKeyGenerator::class
     )]
     protected function getDescriptionLinksData(?Context $context = null): array
@@ -291,14 +291,14 @@ abstract class BaseEntity
         return $linksData;
     }
 
-    #[Cache\CacheableMethod] public function hasThrows(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasThrows(): bool
     {
         $docBlock = $this->getDocBlock();
         return count($docBlock->getTagsByName('throws')) > 0;
     }
 
-    #[Cache\CacheableMethod(
-        Cache\CacheableMethod::MONTH_SECONDS,
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod(
+        \BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod::MONTH_SECONDS,
         RenderContextCacheKeyGenerator::class
     )]
     protected function getThrowsData(?Context $context = null): array
@@ -362,7 +362,7 @@ abstract class BaseEntity
         return $throwsData;
     }
 
-    #[Cache\CacheableMethod] public function hasExamples(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasExamples(): bool
     {
         $docBlock = $this->getDocBlock();
         return count($docBlock->getTagsByName('example')) > 0;
@@ -373,7 +373,7 @@ abstract class BaseEntity
      *
      * @return array<int,array{example:string}>
      */
-    #[Cache\CacheableMethod] public function getExamples(): array
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getExamples(): array
     {
         $examples = [];
         $docBlock = $this->getDocBlock();
@@ -390,13 +390,13 @@ abstract class BaseEntity
     /**
      * Get first example from @examples doc block
      */
-    #[Cache\CacheableMethod] public function getFirstExample(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFirstExample(): string
     {
         $examples = $this->getExamples();
         return $examples[0]['example'] ?? '';
     }
 
-    #[Cache\CacheableMethod] public function getDocNote(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDocNote(): string
     {
         $docBlock = $this->getDocBlock();
         return (string)($docBlock->getTagsByName('note')[0] ?? '');
@@ -405,7 +405,7 @@ abstract class BaseEntity
     /**
      * Get the doc comment of an entity
      */
-    #[Cache\CacheableMethod] public function getDocComment(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDocComment(): string
     {
         return $this->getReflection()->getDocComment();
     }

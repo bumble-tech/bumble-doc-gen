@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
-use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
-use BumbleDocGen\Plugin\PluginInterface;
+use BumbleDocGen\Core\Plugin\Event\Render\OnGettingResourceLink;
+use BumbleDocGen\Core\Plugin\PluginInterface;
 
 final class BasePhpStubberPlugin implements PluginInterface
 {

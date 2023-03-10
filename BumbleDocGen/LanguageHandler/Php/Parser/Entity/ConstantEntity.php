@@ -55,7 +55,7 @@ class ConstantEntity extends BaseEntity
         return $this->getClassEntity()->getEntityDependencies();
     }
 
-    #[Cache\CacheableMethod] public function getDocBlock(): DocBlock
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
@@ -94,7 +94,7 @@ class ConstantEntity extends BaseEntity
         return $this;
     }
 
-    #[Cache\CacheableMethod] protected function getDocCommentRecursive(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] protected function getDocCommentRecursive(): string
     {
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
@@ -119,7 +119,7 @@ class ConstantEntity extends BaseEntity
         return $this->getClassEntity()->getNamespaceName();
     }
 
-    #[Cache\CacheableMethod] public function getFileName(): ?string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getReflection()->getDeclaringClass()->getFileName();
         if (!$fullFileName) {
@@ -132,33 +132,33 @@ class ConstantEntity extends BaseEntity
         );
     }
 
-    #[Cache\CacheableMethod] public function getDescription(): string
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return $docBlock->getSummary();
     }
 
-    #[Cache\CacheableMethod] public function isPublic(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isPublic(): bool
     {
         return $this->getReflection()->isPublic();
     }
 
-    #[Cache\CacheableMethod] public function isProtected(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isProtected(): bool
     {
         return $this->getReflection()->isProtected();
     }
 
-    #[Cache\CacheableMethod] public function isPrivate(): bool
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isPrivate(): bool
     {
         return $this->getReflection()->isPrivate();
     }
 
-    #[Cache\CacheableMethod] public function getStartLine(): int
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getStartLine(): int
     {
         return $this->getReflection()->getStartLine();
     }
 
-    #[Cache\CacheableMethod] public function getEndLine(): int
+    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getEndLine(): int
     {
         return $this->getReflection()->getEndLine();
     }
