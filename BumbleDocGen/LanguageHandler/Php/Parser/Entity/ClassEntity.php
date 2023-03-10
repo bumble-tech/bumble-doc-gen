@@ -12,7 +12,7 @@ use BumbleDocGen\Core\Render\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
-use BumbleDocGen\Parser\Entity\Cache;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Identifier\Identifier;
@@ -149,7 +149,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $fileDependencies;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDocBlock(): DocBlock
+    #[CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity();
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
@@ -186,7 +186,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $docCommentClassEntityCache[$objectId];
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] protected function getDocCommentRecursive(): string
+    #[CacheableMethod] protected function getDocCommentRecursive(): string
     {
         return $this->getDocCommentEntity()->getDocComment() ?: ' ';
     }
@@ -269,7 +269,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->isClassLoad;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function entityDataCanBeLoaded(): bool
+    #[CacheableMethod] public function entityDataCanBeLoaded(): bool
     {
         if (!$this->getClassEntityCollection()->getPluginEventDispatcher()->dispatch(
             new OnCheckIsClassEntityCanBeLoad($this)
@@ -280,17 +280,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->isClassLoad();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getShortName(): string
+    #[CacheableMethod] public function getShortName(): string
     {
         return $this->getReflection()->getShortName();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getNamespaceName(): string
+    #[CacheableMethod] public function getNamespaceName(): string
     {
         return $this->getReflection()->getNamespaceName();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFileName(): ?string
+    #[CacheableMethod] public function getFileName(): ?string
     {
         if (!$this->relativeFileNameLoaded) {
             $this->relativeFileNameLoaded = true;
@@ -308,17 +308,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->relativeFileName;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getStartLine(): int
+    #[CacheableMethod] public function getStartLine(): int
     {
         return $this->getReflection()->getStartLine();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getEndLine(): int
+    #[CacheableMethod] public function getEndLine(): int
     {
         return $this->getReflection()->getEndLine();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getModifiersString(): string
+    #[CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
 
@@ -346,7 +346,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return implode(' ', $modifiersString);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getExtends(): ?string
+    #[CacheableMethod] public function getExtends(): ?string
     {
         $reflection = $this->getReflection();
         if ($reflection->isInterface()) {
@@ -360,7 +360,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $extends;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getInterfaces(): array
+    #[CacheableMethod] public function getInterfaces(): array
     {
         $reflection = $this->getReflection();
         return !$reflection->isInterface() ? array_map(fn($interfaceName) => "\\{$interfaceName}", $reflection->getInterfaceNames()) : [];
@@ -381,7 +381,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @return string[]
      */
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getParentClassNames(): array
+    #[CacheableMethod] public function getParentClassNames(): array
     {
         $reflection = $this->getReflection();
         if ($reflection->isInterface()) {
@@ -395,12 +395,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @return string[]
      */
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getInterfaceNames(): array
+    #[CacheableMethod] public function getInterfaceNames(): array
     {
         return $this->getReflection()->getInterfaceNames();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getParentClassName(): ?string
+    #[CacheableMethod] public function getParentClassName(): ?string
     {
         return $this->getReflection()->getParentClass()?->getName();
     }
@@ -414,17 +414,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->getClassEntityCollection()->getLoadedOrCreateNew($parentClassName);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getInterfacesString(): string
+    #[CacheableMethod] public function getInterfacesString(): string
     {
         return implode(', ', $this->getInterfaces());
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getTraitsNames(): array
+    #[CacheableMethod] public function getTraitsNames(): array
     {
         return $this->getReflection()->getTraitNames();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasTraits(): bool
+    #[CacheableMethod] public function hasTraits(): bool
     {
         return count($this->getTraitsNames()) > 0;
     }
@@ -483,18 +483,18 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $methodEntityCollection->get($methodName);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDescription(): string
+    #[CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return $docBlock->getSummary();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isEnum(): bool
+    #[CacheableMethod] public function isEnum(): bool
     {
         return $this->getReflection()->isEnum();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getCasesNames(): array
+    #[CacheableMethod] public function getCasesNames(): array
     {
         $caseNames = [];
         if ($this->isEnum()) {
@@ -514,12 +514,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFileContent(): string
+    #[CacheableMethod] public function getFileContent(): string
     {
         return $this->getAbsoluteFileName() ? file_get_contents($this->getAbsoluteFileName()) : '';
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getMethodsData(): array
+    #[CacheableMethod] public function getMethodsData(): array
     {
         $methods = [];
         foreach ($this->getReflection()->getMethods() as $method) {
@@ -532,7 +532,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $methods;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getPropertiesData(): array
+    #[CacheableMethod] public function getPropertiesData(): array
     {
         $properties = [];
         foreach ($this->getReflection()->getProperties() as $property) {
@@ -545,7 +545,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $properties;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getConstantsData(): array
+    #[CacheableMethod] public function getConstantsData(): array
     {
         $constants = [];
         foreach ($this->getReflection()->getReflectionConstants() as $constant) {
@@ -558,32 +558,32 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $constants;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isInstantiable(): bool
+    #[CacheableMethod] public function isInstantiable(): bool
     {
         return $this->getReflection()->isInstantiable();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isInterface(): bool
+    #[CacheableMethod] public function isInterface(): bool
     {
         return $this->getReflection()->isInterface();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasMethod(string $method): bool
+    #[CacheableMethod] public function hasMethod(string $method): bool
     {
         return array_key_exists($method, $this->getMethodsData());
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasProperty(string $property): bool
+    #[CacheableMethod] public function hasProperty(string $property): bool
     {
         return array_key_exists($property, $this->getPropertiesData());
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasConstant(string $constant): bool
+    #[CacheableMethod] public function hasConstant(string $constant): bool
     {
         return array_key_exists($constant, $this->getConstantsData());
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isSubclassOf(string $className): bool
+    #[CacheableMethod] public function isSubclassOf(string $className): bool
     {
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
 
@@ -595,12 +595,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return in_array($className, $allClasses);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getConstant(string $name): string|array|int|bool|null|float
+    #[CacheableMethod] public function getConstant(string $name): string|array|int|bool|null|float
     {
         return $this->getReflection()->getConstant($name);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function implementsInterface(string $interfaceName): bool
+    #[CacheableMethod] public function implementsInterface(string $interfaceName): bool
     {
         $interfaceName = ltrim(str_replace('\\\\', '\\', $interfaceName), '\\');
         $interfaces = array_map(
@@ -609,7 +609,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return in_array($interfaceName, $interfaces);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getConstants(): array
+    #[CacheableMethod] public function getConstants(): array
     {
         return $this->getReflection()->getImmediateConstants();
     }

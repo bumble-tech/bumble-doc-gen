@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
-use BumbleDocGen\Parser\Entity\Cache;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -69,7 +69,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->getClassEntity()->getClassEntityCollection();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDocBlock(): DocBlock
+    #[CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();
         return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
@@ -123,7 +123,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $docCommentsReflectionCache[$objectId];
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] protected function getDocCommentRecursive(): string
+    #[CacheableMethod] protected function getDocCommentRecursive(): string
     {
         static $docCommentsCache = [];
         $objectId = $this->getObjectId();
@@ -138,12 +138,12 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->methodName;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isConstructor(): bool
+    #[CacheableMethod] public function isConstructor(): bool
     {
         return $this->getReflection()->isConstructor();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFileName(): ?string
+    #[CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getReflection()->getImplementingClass()->getFileName();
         if (!$fullFileName || !str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
@@ -157,7 +157,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         );
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getModifiersString(): string
+    #[CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
         if ($this->getReflection()->isPrivate()) {
@@ -177,7 +177,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return implode(' ', $modifiersString);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getReturnType(): string
+    #[CacheableMethod] public function getReturnType(): string
     {
         $type = $this->getReflection()->getReturnType();
         if ($type) {
@@ -204,7 +204,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     /**
      * @param \phpDocumentor\Reflection\DocBlock\Tags\Param[] $params
      */
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public static function parseAnnotationParams(array $params): array
+    #[CacheableMethod] public static function parseAnnotationParams(array $params): array
     {
         $paramsFromDoc = [];
         foreach ($params as $param) {
@@ -223,13 +223,13 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $paramsFromDoc;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] private function isArrayAnnotationType(string $annotationType): bool
+    #[CacheableMethod] private function isArrayAnnotationType(string $annotationType): bool
     {
         return preg_match('/^([a-zA-Z\\_]+)(\[\])$/', $annotationType) ||
             preg_match('/^(array)(<|{)(.*)(>|})$/', $annotationType);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getParameters(): array
+    #[CacheableMethod] public function getParameters(): array
     {
         $parameters = [];
         $docBlock = $this->getDocBlock();
@@ -284,7 +284,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $parameters;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getParametersString(): string
+    #[CacheableMethod] public function getParametersString(): string
     {
         $parameters = [];
         foreach ($this->getParameters() as $parameterData) {
@@ -294,7 +294,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return implode(', ', $parameters);
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isImplementedInParentClass(): bool
+    #[CacheableMethod] public function isImplementedInParentClass(): bool
     {
         return $this->getImplementingClassName() !== $this->classEntity->getName();
     }
@@ -304,13 +304,13 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->implementingClassName;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDescription(): string
+    #[CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return trim($docBlock->getSummary());
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isInitialization(): bool
+    #[CacheableMethod] public function isInitialization(): bool
     {
         if ($this->getReflection()->getName() === '__construct') {
             return true;
@@ -331,32 +331,32 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return false;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isPublic(): bool
+    #[CacheableMethod] public function isPublic(): bool
     {
         return $this->getReflection()->isPublic();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isProtected(): bool
+    #[CacheableMethod] public function isProtected(): bool
     {
         return $this->getReflection()->isProtected();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isPrivate(): bool
+    #[CacheableMethod] public function isPrivate(): bool
     {
         return $this->getReflection()->isPrivate();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getStartLine(): int
+    #[CacheableMethod] public function getStartLine(): int
     {
         return $this->getReflection()->getStartLine();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getEndLine(): int
+    #[CacheableMethod] public function getEndLine(): int
     {
         return $this->getReflection()->getEndLine();
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFirstReturnValue(): mixed
+    #[CacheableMethod] public function getFirstReturnValue(): mixed
     {
         return ParserHelper::getMethodReturnValue(
             $this->reflector,
@@ -365,7 +365,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         );
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getBodyCode(): string
+    #[CacheableMethod] public function getBodyCode(): string
     {
         return $this->getReflection()->getBodyCode();
     }

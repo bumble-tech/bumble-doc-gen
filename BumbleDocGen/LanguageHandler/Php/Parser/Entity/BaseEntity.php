@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
-use BumbleDocGen\Parser\Entity\Cache;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -45,17 +45,17 @@ abstract class BaseEntity
 
     abstract public function getImplementingReflectionClass(): ReflectionClass;
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract protected function getDocCommentRecursive(): string;
+    #[CacheableMethod] abstract protected function getDocCommentRecursive(): string;
 
     abstract protected function getDocCommentEntity(): ClassEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract public function getDescription(): string;
+    #[CacheableMethod] abstract public function getDescription(): string;
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract public function getFileName(): ?string;
+    #[CacheableMethod] abstract public function getFileName(): ?string;
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract public function getStartLine(): int;
+    #[CacheableMethod] abstract public function getStartLine(): int;
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] abstract public function getDocBlock(): DocBlock;
+    #[CacheableMethod] abstract public function getDocBlock(): DocBlock;
 
     abstract protected function getClassEntityCollection(): ClassEntityCollection;
 
@@ -133,21 +133,21 @@ abstract class BaseEntity
         );
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isInternal(): bool
+    #[CacheableMethod] public function isInternal(): bool
     {
         $docBlock = $this->getDocBlock();
         $internalBlock = $docBlock->getTagsByName('internal')[0] ?? null;
         return (bool)$internalBlock;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function isDeprecated(): bool
+    #[CacheableMethod] public function isDeprecated(): bool
     {
         $docBlock = $this->getDocBlock();
         $internalBlock = $docBlock->getTagsByName('deprecated')[0] ?? null;
         return (bool)$internalBlock;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasDescriptionLinks(): bool
+    #[CacheableMethod] public function hasDescriptionLinks(): bool
     {
         $docBlock = $this->getDocBlock();
         return preg_match_all('/(\@see )(.*?)( |}|])/', $this->getDescription() . ' ') ||
@@ -291,7 +291,7 @@ abstract class BaseEntity
         return $linksData;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasThrows(): bool
+    #[CacheableMethod] public function hasThrows(): bool
     {
         $docBlock = $this->getDocBlock();
         return count($docBlock->getTagsByName('throws')) > 0;
@@ -362,7 +362,7 @@ abstract class BaseEntity
         return $throwsData;
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function hasExamples(): bool
+    #[CacheableMethod] public function hasExamples(): bool
     {
         $docBlock = $this->getDocBlock();
         return count($docBlock->getTagsByName('example')) > 0;
@@ -373,7 +373,7 @@ abstract class BaseEntity
      *
      * @return array<int,array{example:string}>
      */
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getExamples(): array
+    #[CacheableMethod] public function getExamples(): array
     {
         $examples = [];
         $docBlock = $this->getDocBlock();
@@ -390,13 +390,13 @@ abstract class BaseEntity
     /**
      * Get first example from @examples doc block
      */
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getFirstExample(): string
+    #[CacheableMethod] public function getFirstExample(): string
     {
         $examples = $this->getExamples();
         return $examples[0]['example'] ?? '';
     }
 
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDocNote(): string
+    #[CacheableMethod] public function getDocNote(): string
     {
         $docBlock = $this->getDocBlock();
         return (string)($docBlock->getTagsByName('note')[0] ?? '');
@@ -405,7 +405,7 @@ abstract class BaseEntity
     /**
      * Get the doc comment of an entity
      */
-    #[\BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod] public function getDocComment(): string
+    #[CacheableMethod] public function getDocComment(): string
     {
         return $this->getReflection()->getDocComment();
     }
