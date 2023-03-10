@@ -10,6 +10,11 @@ namespace BumbleDocGen\Parser\Entity;
  */
 interface RootEntityInterface
 {
+    /**
+     * Check if entity name is valid
+     */
+    public static function isEntityNameValid(string $entityName): bool;
+
     public function getObjectId(): string;
 
     /**

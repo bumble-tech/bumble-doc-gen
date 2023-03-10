@@ -46,8 +46,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         }
     }
 
-    public
-    function getObjectId(): string
+    public static function isEntityNameValid(string $entityName): bool
+    {
+        return ParserHelper::isCorrectClassName($entityName);
+    }
+
+    public function getObjectId(): string
     {
         return $this->className;
     }
