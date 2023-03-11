@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\SourceLocator;
 
-use Roave\BetterReflection\SourceLocator\Ast\Locator;
 use Symfony\Component\Finder\Finder;
 
 final class SourceLocatorsCollection implements \IteratorAggregate
@@ -30,18 +29,6 @@ final class SourceLocatorsCollection implements \IteratorAggregate
     {
         $this->sourceLocators[] = $sourceLocator;
         return $this;
-    }
-
-    public function convertToReflectorSourceLocatorsList(Locator $astLocator): array
-    {
-        $reflectorSourceLocatorsList = [];
-        foreach ($this->sourceLocators as $locator) {
-            $reflectorSourceLocator = $locator->convertToReflectorSourceLocator($astLocator);
-            if ($reflectorSourceLocator) {
-                $reflectorSourceLocatorsList[] = $locator->convertToReflectorSourceLocator($astLocator);
-            }
-        }
-        return $reflectorSourceLocatorsList;
     }
 
     public function getCommonFinder(): Finder

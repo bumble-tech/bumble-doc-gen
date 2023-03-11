@@ -14,6 +14,7 @@ use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\CachedSourceLocator;
+use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\PhpSourceLocatorHelper;
 use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\GetClassMethodsBodyCode;
 use Roave\BetterReflection\BetterReflection;
@@ -49,7 +50,9 @@ final class PhpHandler implements LanguageHandlerInterface
         )->getSourceLocatorsCollection();
 
         $locator = $betterReflection->astLocator();
-        $sourceLocators = $sourceLocatorsCollection->convertToReflectorSourceLocatorsList($locator);
+        if (!$phpHandlerSettings->asyncSourceLoadingEnabled()) {
+            $sourceLocators[] = PhpSourceLocatorHelper::getReflectorSourceLocator($locator, $sourceLocatorsCollection);
+        }
         $sourceLocators[] = $betterReflection->sourceLocator();
         $sourceLocator = new CachedSourceLocator(new AggregateSourceLocator($sourceLocators), $configuration);
         $reflector = new DefaultReflector($sourceLocator);

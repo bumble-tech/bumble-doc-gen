@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\SourceLocator;
 
-use Roave\BetterReflection\SourceLocator\Ast\Locator;
-use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
 use Symfony\Component\Finder\Finder;
 
 abstract class BaseSourceLocator implements SourceLocatorInterface
 {
     private Finder $finder;
 
-    public function __construct(private bool $greedyLoad = true)
+    public function __construct()
     {
         $this->finder = new Finder();
         $this->finder->ignoreDotFiles(true)->ignoreVCSIgnored(true)->ignoreVCS(true)->files();
@@ -26,15 +24,5 @@ abstract class BaseSourceLocator implements SourceLocatorInterface
     public function getFinder(): Finder
     {
         return $this->finder;
-    }
-
-    public function convertToReflectorSourceLocator(Locator $astLocator): ?SourceLocator
-    {
-        if (!$this->greedyLoad) {
-            return null;
-        }
-        return new \Roave\BetterReflection\SourceLocator\Type\FileIteratorSourceLocator(
-            $this->getIterator(), $astLocator
-        );
     }
 }

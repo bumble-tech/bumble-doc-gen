@@ -9,11 +9,9 @@ namespace BumbleDocGen\Core\Parser\SourceLocator;
  */
 final class DirectorySourceLocator extends BaseSourceLocator
 {
-    public function __construct(
-        string $directory,
-        bool $greedyLoad = true
-    ) {
-        parent::__construct($greedyLoad);
+    public function __construct(string $directory)
+    {
+        parent::__construct();
         $this->getFinder()->in($directory)->depth("==0");
     }
 }

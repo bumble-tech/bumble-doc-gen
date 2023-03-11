@@ -73,4 +73,9 @@ final class PhpHandlerSettings implements PhpHandlerSettingsInterface
     {
         return 'https://***REMOVED***/blob/master';
     }
+
+    public function asyncSourceLoadingEnabled(): bool
+    {
+        return true;
+    }
 }

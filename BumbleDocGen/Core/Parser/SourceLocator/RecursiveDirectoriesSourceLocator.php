@@ -11,11 +11,10 @@ final class RecursiveDirectoriesSourceLocator extends BaseSourceLocator
 {
     public function __construct(
         array $directories,
-        array $exclude = [],
-        bool  $greedyLoad = true
+        array $exclude = []
     )
     {
-        parent::__construct($greedyLoad);
+        parent::__construct();
         $directories = array_filter($directories, function ($directory) {
             return is_dir($directory);
         });

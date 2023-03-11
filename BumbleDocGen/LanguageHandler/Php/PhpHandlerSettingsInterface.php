@@ -24,4 +24,6 @@ interface PhpHandlerSettingsInterface
     public function getEntityDocRendersCollection(): EntityDocRendersCollection;
 
     public function getFileSourceBaseUrl(): ?string;
+
+    public function asyncSourceLoadingEnabled(): bool;
 }
