@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity;
 
+use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperInterface;
+use BumbleDocGen\Core\Parser\Entity\Cache\EntityCacheStorageHelper;
+
 abstract class RootEntityCollection extends BaseEntityCollection
 {
     /**
@@ -17,6 +21,8 @@ abstract class RootEntityCollection extends BaseEntityCollection
     }
 
     abstract public static function getEntityCollectionName(): string;
+
+    abstract public function getConfiguration(): ConfigurationInterface;
 
     /**
      * @warning The entity obtained as a result of executing this method may not be available for loading
@@ -35,4 +41,17 @@ abstract class RootEntityCollection extends BaseEntityCollection
      * @todo return object instead array
      */
     abstract public function gelEntityLinkData(string $rawLink, ?string $defaultEntityName = null, bool $useUnsafeKeys = true): array;
+
+    public function updateEntitiesCache(): void
+    {
+        foreach ($this as $classEntity) {
+            if (
+                is_a($classEntity, CacheableEntityWrapperInterface::class) &&
+                $classEntity->entityCacheIsOutdated()
+            ) {
+                $classEntity->reloadEntityDependenciesCache();
+            }
+        }
+        EntityCacheStorageHelper::saveCache($this->getConfiguration());
+    }
 }

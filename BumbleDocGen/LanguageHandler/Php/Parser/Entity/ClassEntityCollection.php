@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperInterface;
-use BumbleDocGen\Core\Parser\Entity\Cache\EntityCacheStorageHelper;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
@@ -72,6 +70,11 @@ final class ClassEntityCollection extends RootEntityCollection
         }
         $pluginEventDispatcher->dispatch(new AfterCreationClassEntityCollection($classEntityCollection));
         return $classEntityCollection;
+    }
+
+    public function getConfiguration(): ConfigurationInterface
+    {
+        return $this->configuration;
     }
 
     public function add(ClassEntity $classEntity, bool $reload = false): ClassEntityCollection
@@ -238,19 +241,6 @@ final class ClassEntityCollection extends RootEntityCollection
             }
         }
         return $classEntityCollection;
-    }
-
-    public function updateEntitiesCache(): void
-    {
-        foreach ($this as $classEntity) {
-            if (
-                is_a($classEntity, CacheableEntityWrapperInterface::class) &&
-                $classEntity->entityCacheIsOutdated()
-            ) {
-                $classEntity->reloadEntityDependenciesCache();
-            }
-        }
-        EntityCacheStorageHelper::saveCache($this->configuration);
     }
 
     /**
