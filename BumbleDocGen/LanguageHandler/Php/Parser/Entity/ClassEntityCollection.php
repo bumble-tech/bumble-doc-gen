@@ -34,6 +34,11 @@ final class ClassEntityCollection extends RootEntityCollection
         return $this->pluginEventDispatcher;
     }
 
+    public static function getEntityCollectionName(): string
+    {
+        return 'classEntityCollection';
+    }
+
     public static function createByReflector(
         ConfigurationInterface      $configuration,
         PhpHandlerSettingsInterface $phpHandlerSettings,
