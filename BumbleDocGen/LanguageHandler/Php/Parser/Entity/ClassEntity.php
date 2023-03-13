@@ -120,7 +120,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->phpHandlerSettings;
     }
 
-    public function getClassEntityCollection(): ClassEntityCollection
+    public function getRootEntityCollection(): ClassEntityCollection
     {
         return $this->classEntityCollection;
     }
@@ -271,7 +271,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     #[CacheableMethod] public function entityDataCanBeLoaded(): bool
     {
-        if (!$this->getClassEntityCollection()->getPluginEventDispatcher()->dispatch(
+        if (!$this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
             new OnCheckIsClassEntityCanBeLoad($this)
         )->isClassCanBeLoad()) {
             $this->getLogger()->notice("Class {$this->getName()} skipped by plugin");
@@ -373,7 +373,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $interfacesEntities = [];
         foreach ($this->getInterfaces() as $interfaceClassName) {
-            $interfacesEntities[] = $this->getClassEntityCollection()->getLoadedOrCreateNew($interfaceClassName);
+            $interfacesEntities[] = $this->getRootEntityCollection()->getLoadedOrCreateNew($interfaceClassName);
         }
         return $interfacesEntities;
     }
@@ -411,7 +411,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!$parentClassName) {
             return null;
         }
-        return $this->getClassEntityCollection()->getLoadedOrCreateNew($parentClassName);
+        return $this->getRootEntityCollection()->getLoadedOrCreateNew($parentClassName);
     }
 
     #[CacheableMethod] public function getInterfacesString(): string

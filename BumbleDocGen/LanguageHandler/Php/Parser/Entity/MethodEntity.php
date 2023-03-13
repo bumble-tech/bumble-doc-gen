@@ -64,9 +64,9 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->getRootEntity()->getEntityDependencies();
     }
 
-    public function getClassEntityCollection(): ClassEntityCollection
+    public function getRootEntityCollection(): ClassEntityCollection
     {
-        return $this->getRootEntity()->getClassEntityCollection();
+        return $this->getRootEntity()->getRootEntityCollection();
     }
 
     #[CacheableMethod] public function getDocBlock(): DocBlock
@@ -82,7 +82,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     public function getImplementingClass(): ClassEntity
     {
-        return $this->getClassEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
+        return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
     public function getShortName(): string

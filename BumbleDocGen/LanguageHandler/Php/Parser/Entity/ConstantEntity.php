@@ -45,9 +45,9 @@ class ConstantEntity extends BaseEntity
         return $classEntities[$objectId];
     }
 
-    public function getClassEntityCollection(): ClassEntityCollection
+    public function getRootEntityCollection(): ClassEntityCollection
     {
-        return $this->classEntity->getClassEntityCollection();
+        return $this->classEntity->getRootEntityCollection();
     }
 
     public function getEntityDependencies(): array
@@ -86,7 +86,7 @@ class ConstantEntity extends BaseEntity
 
     public function getImplementingClass(): ClassEntity
     {
-        return $this->getClassEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
+        return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
     protected function getDocCommentEntity(): ConstantEntity

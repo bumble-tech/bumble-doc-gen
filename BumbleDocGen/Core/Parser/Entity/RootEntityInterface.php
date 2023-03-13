@@ -28,6 +28,11 @@ interface RootEntityInterface
     public function getEntityDependencies(): array;
 
     /**
+     * Get parent collection of entities
+     */
+    public function getRootEntityCollection(): RootEntityCollection;
+
+    /**
      * The entity file is in the git repository
      */
     public function isInGit(): bool;

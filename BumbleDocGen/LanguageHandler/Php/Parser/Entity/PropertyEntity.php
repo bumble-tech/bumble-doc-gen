@@ -63,9 +63,9 @@ class PropertyEntity extends BaseEntity
         return $this->reflectionProperty;
     }
 
-    public function getClassEntityCollection(): ClassEntityCollection
+    public function getRootEntityCollection(): ClassEntityCollection
     {
-        return $this->getRootEntity()->getClassEntityCollection();
+        return $this->getRootEntity()->getRootEntityCollection();
     }
 
     #[CacheableMethod] public function getDocBlock(): DocBlock
@@ -140,7 +140,7 @@ class PropertyEntity extends BaseEntity
 
     public function getImplementingClass(): ClassEntity
     {
-        return $this->getClassEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
+        return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
     #[CacheableMethod] public function getFileName(): ?string
