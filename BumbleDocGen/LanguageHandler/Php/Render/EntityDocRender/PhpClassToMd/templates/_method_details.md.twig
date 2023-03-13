@@ -41,7 +41,7 @@
     {% for parameter in methodEntity.getParameters() %}
         <tr>
             <td>${{ parameter.name }}</td>
-            <td>{{ parameter.expectedType | strTypeToUrl('html') }}</td>
+            <td>{{ parameter.expectedType | strTypeToUrl(methodEntity.getClassEntityCollection(), 'html') }}</td>
             <td>{% if parameter.description %}{{ parameter.description | addIndentFromLeft(1, true) }}{% else %}-{% endif %}</td>
         </tr>
     {% endfor %}
@@ -53,7 +53,7 @@
 
 {% if not methodEntity.isConstructor() %}
 {% if methodEntity.getReturnType() %}
-<b>Return value:</b> {{ methodEntity.getReturnType() | strTypeToUrl }}
+<b>Return value:</b> {{ methodEntity.getReturnType() | strTypeToUrl(methodEntity.getClassEntityCollection()) }}
 {% else %}
 <b>Return value:</b> not specified
 {% endif %}

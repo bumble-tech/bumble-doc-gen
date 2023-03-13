@@ -44,7 +44,7 @@ or
                 {% if loop.index == 1 %}
                     {% set rowspan = paramsCount * 2 - 1 %}
                     <td {% if rowspan > 1 %}rowspan="{{ rowspan }}"{% endif %}>
-                        <a href="{{ getDocumentedEntityUrl(filter.getName()) }}">{{ twigFilterData.name }}</a><br>
+                        <a href="{{ getDocumentedEntityUrl(classEntityCollection, filter.getName()) }}">{{ twigFilterData.name }}</a><br>
                         {% if filter.isInternal() %}<i><b>:warning: For internal use</b></i><br>{% endif %}
                         {{ filter.getDescription() | removeLineBrakes }}
                         {% if filter.getDocNote() %}<br><i><b>:warning: {{ filter.getDocNote() }}</b></i><br>{% endif %}
@@ -57,7 +57,7 @@ or
                         <b>${{ parameter.name }}</b>
                     </td>
                     <td>
-                        <i>{{ parameter.type | strTypeToUrl('html', true) }}</i>
+                        <i>{{ parameter.type | strTypeToUrl(classEntityCollection, 'html', true) }}</i>
                     </td>
                     <td>{{ parameter.description | removeLineBrakes }}</td>
                 {% endif %}

@@ -64,7 +64,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->getRootEntity()->getEntityDependencies();
     }
 
-    protected function getClassEntityCollection(): ClassEntityCollection
+    public function getClassEntityCollection(): ClassEntityCollection
     {
         return $this->getRootEntity()->getClassEntityCollection();
     }

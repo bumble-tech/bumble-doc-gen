@@ -45,7 +45,7 @@ class ConstantEntity extends BaseEntity
         return $classEntities[$objectId];
     }
 
-    protected function getClassEntityCollection(): ClassEntityCollection
+    public function getClassEntityCollection(): ClassEntityCollection
     {
         return $this->classEntity->getClassEntityCollection();
     }

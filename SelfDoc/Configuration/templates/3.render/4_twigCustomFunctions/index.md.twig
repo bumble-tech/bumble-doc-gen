@@ -37,7 +37,7 @@ We use the twig template engine, you can get more information about working with
       <tr>
          {% if loop.index == 1 %}
          <td rowspan="{{ paramsCount * 2 - 1 }}">
-            <a href="{{ getDocumentedEntityUrl(function.getName()) }}">{{ twigFunctionData.name }}</a><br>
+            <a href="{{ getDocumentedEntityUrl(classEntityCollection, function.getName()) }}">{{ twigFunctionData.name }}</a><br>
             {% if function.isInternal() %}<i><b>:warning: For internal use</b></i><br>{% endif %}
             {{ function.getDescription() | removeLineBrakes }}
             {% if function.getDocNote() %}<br><i><b>:warning: {{ function.getDocNote() }}</b></i><br>{% endif %}
@@ -47,7 +47,7 @@ We use the twig template engine, you can get more information about working with
             <b>${{ parameter.name }}</b>
          </td>
          <td>
-            <i>{{ parameter.type | strTypeToUrl('html', true) }}</i>
+            <i>{{ parameter.type | strTypeToUrl(classEntityCollection, 'html', true) }}</i>
          </td>
          <td>{{ parameter.description | removeLineBrakes }}</td>
       </tr>

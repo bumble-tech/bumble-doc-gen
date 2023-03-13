@@ -63,7 +63,7 @@ class PropertyEntity extends BaseEntity
         return $this->reflectionProperty;
     }
 
-    protected function getClassEntityCollection(): ClassEntityCollection
+    public function getClassEntityCollection(): ClassEntityCollection
     {
         return $this->getRootEntity()->getClassEntityCollection();
     }

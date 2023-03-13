@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Filter;
 
-use function BumbleDocGen\Render\Twig\Filter\mb_strlen;
+use function \mb_strlen;
 
 /**
  * The filter pads the string with the specified characters on the right to the specified size

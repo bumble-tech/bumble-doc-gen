@@ -120,7 +120,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->phpHandlerSettings;
     }
 
-    protected function getClassEntityCollection(): ClassEntityCollection
+    public function getClassEntityCollection(): ClassEntityCollection
     {
         return $this->classEntityCollection;
     }

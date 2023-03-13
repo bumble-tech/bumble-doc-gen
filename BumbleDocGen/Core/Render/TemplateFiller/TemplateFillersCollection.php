@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\TemplateFiller;
 
-use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 
 final class TemplateFillersCollection
 {
@@ -26,11 +26,11 @@ final class TemplateFillersCollection
     /**
      * Get all parameters for a template, obtained using all its fillers
      */
-    public function getParametersForTemplate(RootEntityCollection $rootEntityCollection, string $templateName): array
+    public function getParametersForTemplate(RootEntityCollectionsGroup $rootEntityCollectionsGroup, string $templateName): array
     {
         $parameters = [];
         foreach ($this->templateFillers[$templateName] ?? [] as $item) {
-            $parameters = array_merge($parameters, $item->getTemplateParameters($rootEntityCollection, $templateName));
+            $parameters = array_merge($parameters, $item->getTemplateParameters($rootEntityCollectionsGroup, $templateName));
         }
         return $parameters;
     }

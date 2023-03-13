@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Function;
 
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Render\Context\DocumentedEntityWrappersCollection;
@@ -19,9 +20,9 @@ use BumbleDocGen\Core\Render\RenderHelper;
  * @see DocumentedEntityWrappersCollection
  * @see Context::$entityWrappersCollection
  *
- * @example {{ getDocumentedEntityUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}
- * @example {{ getDocumentedEntityUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
- * @example {{ getDocumentedEntityUrl('\\BumbleDocGen\\Render\\Twig\\MainExtension', '', false) }}
+ * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}
+ * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
+ * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension', '', false) }}
  */
 final class GetDocumentedEntityUrl implements CustomFunctionInterface
 {
@@ -47,6 +48,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
     }
 
     /**
+     * @param RootEntityCollection $rootEntityCollection
      * @param string $entityName
      *  The full name of the entity for which the URL will be retrieved.
      *  If the entity is not found, the DEFAULT_URL value will be returned.
@@ -57,7 +59,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
      *
      * @return string
      */
-    public function __invoke(string $entityName, string $cursor = '', bool $createDocument = true): string
+    public function __invoke(RootEntityCollection $rootEntityCollection, string $entityName, string $cursor = '', bool $createDocument = true): string
     {
         if (str_contains($entityName, ' ')) {
             return self::DEFAULT_URL;
@@ -66,7 +68,6 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
         if ($preloadResourceLink) {
             return $preloadResourceLink;
         }
-        $rootEntityCollection = $this->context->getRootEntityCollection();
         $entity = $rootEntityCollection->getLoadedOrCreateNew($entityName);
         if ($entity->entityDataCanBeLoaded()) {
             if (!$entity->isInGit()) {

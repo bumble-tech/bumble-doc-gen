@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Filter;
 
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
@@ -41,6 +42,7 @@ final class StrTypeToUrl implements CustomFilterInterface
 
     /**
      * @param string $text Processed text
+     * @param RootEntityCollection $rootEntityCollection
      * @param string $templateType Display format. rst or html
      * @param bool $useShortLinkVersion Shorten or not the link name. When shortening, only the shortName of the class will be shown
      * @param bool $createDocument
@@ -50,6 +52,7 @@ final class StrTypeToUrl implements CustomFilterInterface
      */
     public function __invoke(
         string $text,
+        RootEntityCollection $rootEntityCollection,
         string $templateType = self::TEMPLATE_TYPE_FROM_CONTEXT,
         bool   $useShortLinkVersion = false,
         bool   $createDocument = false
@@ -70,10 +73,10 @@ final class StrTypeToUrl implements CustomFilterInterface
                 continue;
             }
 
-            $entityClassOfLink = $this->context->getRootEntityCollection()->getLoadedOrCreateNew($type);
+            $entityClassOfLink = $rootEntityCollection->getLoadedOrCreateNew($type);
             if ($entityClassOfLink->entityDataCanBeLoaded()) {
                 if ($entityClassOfLink->getAbsoluteFileName()) {
-                    $link = $getDocumentedEntityUrlFunction($type, '', $createDocument);
+                    $link = $getDocumentedEntityUrlFunction($rootEntityCollection, $type, '', $createDocument);
 
                     if ($useShortLinkVersion) {
                         $type = $entityClassOfLink->getShortName();

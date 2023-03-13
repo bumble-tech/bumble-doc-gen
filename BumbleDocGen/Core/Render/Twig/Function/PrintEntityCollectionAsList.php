@@ -46,7 +46,7 @@ final class PrintEntityCollectionAsList implements CustomFunctionInterface
         foreach ($rootEntityCollection as $entity) {
             $description = $entity->getDescription();
             $descriptionText = !$skipDescription && $description ? " - {$description}" : '';
-            $result .= "<li><a href='{$getDocumentedEntityUrlFunction($entity->getName())}'>{$entity->getShortName()}</a>{$descriptionText}</li>";
+            $result .= "<li><a href='{$getDocumentedEntityUrlFunction($rootEntityCollection, $entity->getName())}'>{$entity->getShortName()}</a>{$descriptionText}</li>";
         }
         $result .= "</{$type}>";
 

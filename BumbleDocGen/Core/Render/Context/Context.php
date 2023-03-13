@@ -6,6 +6,7 @@ namespace BumbleDocGen\Core\Render\Context;
 
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Render\Breadcrumbs\BreadcrumbsHelper;
 
@@ -18,10 +19,10 @@ final class Context
     private DocumentedEntityWrappersCollection $entityWrappersCollection;
 
     public function __construct(
-        private ConfigurationInterface $configuration,
-        private RootEntityCollection   $rootEntityCollection,
-        private BreadcrumbsHelper      $breadcrumbsHelper,
-        private PluginEventDispatcher  $pluginEventDispatcher
+        private ConfigurationInterface     $configuration,
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private BreadcrumbsHelper          $breadcrumbsHelper,
+        private PluginEventDispatcher      $pluginEventDispatcher
     )
     {
         $this->entityWrappersCollection = new DocumentedEntityWrappersCollection();
@@ -58,9 +59,14 @@ final class Context
         return $this->configuration;
     }
 
-    public function getRootEntityCollection(): RootEntityCollection
+    public function getRootEntityCollectionsGroup(): RootEntityCollectionsGroup
     {
-        return $this->rootEntityCollection;
+        return $this->rootEntityCollectionsGroup;
+    }
+
+    public function getRootEntityCollection(string $collectionName): ?RootEntityCollection
+    {
+        return $this->rootEntityCollectionsGroup->get($collectionName);
     }
 
     public function getEntityWrappersCollection(): DocumentedEntityWrappersCollection

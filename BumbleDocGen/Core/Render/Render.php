@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Render;
 
 use BumbleDocGen\ConfigurationInterface;
-use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Render\Breadcrumbs\BreadcrumbsHelper;
@@ -24,10 +24,11 @@ use Twig\Loader\FilesystemLoader;
 final class Render
 {
     public function __construct(
-        private ConfigurationInterface $configuration,
-        private RootEntityCollection $rootEntityCollection,
-        private PluginEventDispatcher $pluginEventDispatcher
-    ) {
+        private ConfigurationInterface     $configuration,
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private PluginEventDispatcher      $pluginEventDispatcher
+    )
+    {
     }
 
     /**
@@ -72,7 +73,10 @@ final class Render
 
         $breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
         $context = new Context(
-            $this->configuration, $this->rootEntityCollection, $breadcrumbsHelper, $this->pluginEventDispatcher
+            $this->configuration,
+            $this->rootEntityCollectionsGroup,
+            $breadcrumbsHelper,
+            $this->pluginEventDispatcher
         );
         $mainExtension = new MainExtension($context);
         $twig->addExtension($mainExtension);
@@ -92,19 +96,25 @@ final class Render
             $this->clearOutputDir($outputDir);
         }
 
+        $templateParams = [];
+        foreach ($this->rootEntityCollectionsGroup as $collectionName => $rootEntityCollection) {
+            $templateParams[$collectionName] = $rootEntityCollection;
+        }
+
         foreach ($finder as $templateFile) {
             /**@var \SplFileInfo $templateFile */
             $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
 
             if (str_ends_with($filePatch, '.twig')) {
                 $context->setCurrentTemplateFilePatch($filePatch);
-                $content = $twig->render($filePatch, [
-                    'classEntityCollection' => $this->rootEntityCollection,
-                    'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
-                        $this->rootEntityCollection,
-                        $filePatch
-                    ),
-                ]);
+                $content = $twig->render($filePatch,
+                    array_merge($templateParams, [
+                        'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
+                            $this->rootEntityCollectionsGroup,
+                            $filePatch
+                        ),
+                    ])
+                );
 
                 $content = $this->pluginEventDispatcher->dispatch(
                     new BeforeCreatingDocFile($content, $context)
@@ -145,6 +155,6 @@ final class Render
             file_put_contents($filePatch, "<!-- {% raw %} -->\n{$content}\n<!-- {% endraw %} -->");
             $logger->info("Saving `{$filePatch}`");
         }
-        $this->rootEntityCollection->updateEntitiesCache();
+        $this->rootEntityCollectionsGroup->updateAllEntitiesCache();
     }
 }

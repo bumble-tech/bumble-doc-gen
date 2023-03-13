@@ -285,7 +285,11 @@ abstract class BaseEntity implements CacheableEntityInterface
                 continue;
             }
             if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
-                $linksData[$key]['url'] = $getDocumentedEntityUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
+                $linksData[$key]['url'] = $getDocumentedEntityUrl(
+                    $this->getClassEntityCollection(),
+                    $data['entityData']['entityName'],
+                    $data['entityData']['cursor']
+                );
                 unset($data['entityData']);
             }
         }
@@ -356,7 +360,11 @@ abstract class BaseEntity implements CacheableEntityInterface
                 continue;
             }
             if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
-                $throwsData[$key]['url'] = $getDocumentedEntityUrl($data['entityData']['entityName'], $data['entityData']['cursor']);
+                $throwsData[$key]['url'] = $getDocumentedEntityUrl(
+                    $this->getClassEntityCollection(),
+                    $data['entityData']['entityName'],
+                    $data['entityData']['cursor']
+                );
                 unset($data['entityData']);
             }
         }

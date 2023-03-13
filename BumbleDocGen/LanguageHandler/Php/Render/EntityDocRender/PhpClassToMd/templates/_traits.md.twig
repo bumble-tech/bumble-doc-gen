@@ -3,7 +3,7 @@
 
 <ul>
     {% for traitName in classEntity.getTraitsNames() %}
-    <li><b>{{ traitName | strTypeToUrl }}</b></li>
+    <li><b>{{ traitName | strTypeToUrl(classEntity.getClassEntityCollection()) }}</b></li>
     {% endfor %}
 </ul>
 {% endif %}

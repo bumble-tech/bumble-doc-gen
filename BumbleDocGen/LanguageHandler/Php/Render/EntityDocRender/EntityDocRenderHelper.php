@@ -103,10 +103,11 @@ final class EntityDocRenderHelper
         bool    $createDocument = true
     ): array
     {
-        $data = self::getEntityDataByLink($linkString, $context->getRootEntityCollection(), $defaultEntityClassName);
+        $entityCollection = $context->getRootEntityCollection(ClassEntityCollection::getEntityCollectionName());
+        $data = self::getEntityDataByLink($linkString, $entityCollection, $defaultEntityClassName);
         if ($data['entityName'] ?? null) {
             $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
-            $data['url'] = $getDocumentedEntityUrl($data['entityName'], $data['cursor'], $createDocument);
+            $data['url'] = $getDocumentedEntityUrl($entityCollection, $data['entityName'], $data['cursor'], $createDocument);
         }
         return $data;
     }

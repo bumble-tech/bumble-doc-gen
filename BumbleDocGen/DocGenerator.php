@@ -28,12 +28,8 @@ final class DocGenerator
         $memory = memory_get_usage();
 
         $pluginEventDispatcher = new PluginEventDispatcher($configuration);
-        $classEntityCollectionsGroup = ProjectParser::create($configuration, $pluginEventDispatcher)->parse();
-        /**
-         * todo add work with all collections
-         */
-        $classEntityCollection = $classEntityCollectionsGroup->get('classEntityCollection');
-        (new Render($configuration, $classEntityCollection, $pluginEventDispatcher))->run();
+        $rootEntityCollectionsGroup = ProjectParser::create($configuration, $pluginEventDispatcher)->parse();
+        (new Render($configuration, $rootEntityCollectionsGroup, $pluginEventDispatcher))->run();
 
         $logger = $configuration->getLogger();
         $time = microtime(true) - $start;
