@@ -58,16 +58,6 @@ abstract class BaseConfiguration implements ConfigurationInterface
         return new TemplateFillersCollection();
     }
 
-    public function getEntityDocRendersCollection(): EntityDocRendersCollection
-    {
-        static $entityDocRendersCollection = null;
-        if (!$entityDocRendersCollection) {
-            $entityDocRendersCollection = new EntityDocRendersCollection();
-            $entityDocRendersCollection->add(new PhpClassToMdDocRender());
-        }
-        return $entityDocRendersCollection;
-    }
-
     public function getCacheDir(): ?string
     {
         return null;

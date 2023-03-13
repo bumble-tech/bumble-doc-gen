@@ -622,7 +622,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         static $renders = [];
         $objectId = $this->getObjectId();
         if (!isset($renders[$objectId])) {
-            $docRender = $this->getConfiguration()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
+            $docRender = $this->getPhpHandlerSettings()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
             if (!$docRender) {
                 throw new \Exception(
                     "Render for file `{$this->getName()}` not found"

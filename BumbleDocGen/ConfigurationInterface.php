@@ -54,11 +54,6 @@ interface ConfigurationInterface
     /**
      * @deprecated
      */
-    public function getEntityDocRendersCollection(): EntityDocRendersCollection;
-
-    /**
-     * @deprecated
-     */
     public function getFileSourceBaseUrl(): ?string;
 
     public function getPlugins(): PluginsCollection;
