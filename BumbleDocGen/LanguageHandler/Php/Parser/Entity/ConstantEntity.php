@@ -6,6 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionClassConstant;
@@ -43,6 +44,11 @@ class ConstantEntity extends BaseEntity
             );
         }
         return $classEntities[$objectId];
+    }
+
+    public function getPhpHandlerSettings(): PhpHandlerSettingsInterface
+    {
+        return $this->classEntity->getPhpHandlerSettings();
     }
 
     public function getRootEntityCollection(): ClassEntityCollection

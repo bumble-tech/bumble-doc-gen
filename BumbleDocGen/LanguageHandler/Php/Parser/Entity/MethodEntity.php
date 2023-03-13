@@ -6,6 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -57,6 +58,11 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     public function getRootEntity(): ClassEntity
     {
         return $this->classEntity;
+    }
+
+    public function getPhpHandlerSettings(): PhpHandlerSettingsInterface
+    {
+        return $this->classEntity->getPhpHandlerSettings();
     }
 
     public function getEntityDependencies(): array

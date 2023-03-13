@@ -6,6 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
@@ -48,6 +49,11 @@ class PropertyEntity extends BaseEntity
     public function getRootEntity(): ClassEntity
     {
         return $this->classEntity;
+    }
+
+    public function getPhpHandlerSettings(): PhpHandlerSettingsInterface
+    {
+        return $this->classEntity->getPhpHandlerSettings();
     }
 
     public function getEntityDependencies(): array

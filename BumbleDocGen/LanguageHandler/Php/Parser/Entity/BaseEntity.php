@@ -12,6 +12,7 @@ use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -62,6 +63,8 @@ abstract class BaseEntity implements CacheableEntityInterface
 
     abstract public function getEntityDependencies(): array;
 
+    abstract public function getPhpHandlerSettings(): PhpHandlerSettingsInterface;
+
     protected function prepareTypeString(string $type): string
     {
         static $cache = [];
@@ -96,7 +99,7 @@ abstract class BaseEntity implements CacheableEntityInterface
         if (!$fileName) {
             return null;
         }
-        return $this->configuration->getFileSourceBaseUrl() . $fileName . ($withLine ? "#L{$this->getStartLine()}" : '');
+        return $this->getPhpHandlerSettings()->getFileSourceBaseUrl() . $fileName . ($withLine ? "#L{$this->getStartLine()}" : '');
     }
 
     public static function generateObjectIdByReflection(ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant $reflection): string
