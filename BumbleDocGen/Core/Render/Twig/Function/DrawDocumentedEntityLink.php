@@ -44,7 +44,7 @@ final class DrawDocumentedEntityLink implements CustomFunctionInterface
     ): string
     {
         $getDocumentedEntityUrlFunction = new GetDocumentedEntityUrl($this->context);
-        $url = $getDocumentedEntityUrlFunction($entity->getName(), $cursor);
+        $url = $getDocumentedEntityUrlFunction($entity->getRootEntityCollection(), $entity->getName(), $cursor);
         $name = $useShortName ? $entity->getShortName() : $entity->getName();
         if ($this->context->isCurrentTemplateRst()) {
             return "`{$name} <{$url}>`_";
