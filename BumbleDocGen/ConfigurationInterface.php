@@ -51,11 +51,6 @@ interface ConfigurationInterface
      */
     public function clearOutputDirBeforeDocGeneration(): bool;
 
-    /**
-     * @deprecated
-     */
-    public function getFileSourceBaseUrl(): ?string;
-
     public function getPlugins(): PluginsCollection;
 
     public function getTemplateFillers(): TemplateFillersCollection;

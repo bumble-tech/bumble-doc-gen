@@ -94,11 +94,6 @@ final class Configuration extends BaseConfiguration
         return $languageHandlersCollection;
     }
 
-    public function getFileSourceBaseUrl(): ?string
-    {
-        return 'https://***REMOVED***/blob/master';
-    }
-
     public function getOutputDirBaseUrl(): string
     {
         //return 'https://***REMOVED***/pages/bumble-tech/bumble-doc-gen';

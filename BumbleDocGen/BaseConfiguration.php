@@ -107,9 +107,4 @@ abstract class BaseConfiguration implements ConfigurationInterface
     {
         return 'git';
     }
-
-    public function getFileSourceBaseUrl(): ?string
-    {
-        return null;
-    }
 }
