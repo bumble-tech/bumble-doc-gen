@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 
 trait CacheableEntityWrapperTrait
 {
-    private string $cacheVersion = 'v3';
+    private string $cacheVersion = 'v4';
 
     abstract function getConfiguration(): ConfigurationInterface;
 
@@ -57,29 +57,29 @@ trait CacheableEntityWrapperTrait
         static $filesCacheState = [];
         $entity = $this->getCurrentRootEntity();
         if ($entity) {
-            $className = $entity->getName();
-            if (!isset($filesCacheState[$className])) {
+            $entityName = $entity->getName();
+            if (!isset($filesCacheState[$entityName])) {
                 $projectRoot = $entity->getConfiguration()->getProjectRoot();
-                $filesCacheState[$className] = false;
-                if (!$entity::isEntityNameValid($className)) {
+                $filesCacheState[$entityName] = false;
+                if (!$entity::isEntityNameValid($entityName)) {
                     return false;
                 }
 
                 if (!$this->getCachedEntityDependencies()) {
-                    $filesCacheState[$className] = true;
-                    $this->getConfiguration()->getLogger()->warning("Unable to load {$className} class dependencies");
+                    $filesCacheState[$entityName] = true;
+                    $this->getConfiguration()->getLogger()->warning("Unable to load {$entityName} class dependencies");
                     return true;
                 }
 
                 foreach ($this->getCachedEntityDependencies() as $relativeFileName => $hashFile) {
                     $filePath = "{$projectRoot}{$relativeFileName}";
                     if (!file_exists($filePath) || md5_file($filePath) !== $hashFile) {
-                        $filesCacheState[$className] = true;
+                        $filesCacheState[$entityName] = true;
                         break;
                     }
                 }
             }
-            return $filesCacheState[$className];
+            return $filesCacheState[$entityName];
         }
         return false;
     }

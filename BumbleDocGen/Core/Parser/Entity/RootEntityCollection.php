@@ -28,7 +28,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
      * @warning The entity obtained as a result of executing this method may not be available for loading
      * @see RootEntityInterface::entityDataCanBeLoaded()
      */
-    abstract public function getLoadedOrCreateNew(string $className): RootEntityInterface;
+    abstract public function getLoadedOrCreateNew(string $entityName): RootEntityInterface;
 
     abstract public function findEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface;
 
@@ -44,12 +44,12 @@ abstract class RootEntityCollection extends BaseEntityCollection
 
     public function updateEntitiesCache(): void
     {
-        foreach ($this as $classEntity) {
+        foreach ($this as $entity) {
             if (
-                is_a($classEntity, CacheableEntityWrapperInterface::class) &&
-                $classEntity->entityCacheIsOutdated()
+                is_a($entity, CacheableEntityWrapperInterface::class) &&
+                $entity->entityCacheIsOutdated()
             ) {
-                $classEntity->reloadEntityDependenciesCache();
+                $entity->reloadEntityDependenciesCache();
             }
         }
         EntityCacheStorageHelper::saveCache($this->getConfiguration());

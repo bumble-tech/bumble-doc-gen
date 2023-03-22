@@ -73,15 +73,15 @@ final class StrTypeToUrl implements CustomFilterInterface
                 continue;
             }
 
-            $entityClassOfLink = $rootEntityCollection->getLoadedOrCreateNew($type);
-            if ($entityClassOfLink->entityDataCanBeLoaded()) {
-                if ($entityClassOfLink->getAbsoluteFileName()) {
+            $entityOfLink = $rootEntityCollection->getLoadedOrCreateNew($type);
+            if ($entityOfLink->entityDataCanBeLoaded()) {
+                if ($entityOfLink->getAbsoluteFileName()) {
                     $link = $getDocumentedEntityUrlFunction($rootEntityCollection, $type, '', $createDocument);
 
                     if ($useShortLinkVersion) {
-                        $type = $entityClassOfLink->getShortName();
+                        $type = $entityOfLink->getShortName();
                     } else {
-                        $type = "\\{$entityClassOfLink->getName()}";
+                        $type = "\\{$entityOfLink->getName()}";
                     }
 
                     if ($templateType == self::TEMPLATE_TYPE_FROM_CONTEXT) {
@@ -95,7 +95,7 @@ final class StrTypeToUrl implements CustomFilterInterface
                     }
                 }
             } else {
-                if ($entityClassOfLink::isEntityNameValid($type)) {
+                if ($entityOfLink::isEntityNameValid($type)) {
                     $this->context->getConfiguration()->getLogger()->warning(
                         "StrTypeToUrl: Entity {$type} not found in specified sources"
                     );

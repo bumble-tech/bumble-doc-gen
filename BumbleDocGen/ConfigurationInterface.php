@@ -7,7 +7,6 @@ namespace BumbleDocGen;
 use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Plugin\PluginsCollection;
-use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
 use BumbleDocGen\Core\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use BumbleDocGen\Core\Render\TemplateFiller\TemplateFillersCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
