@@ -26,5 +26,5 @@ All source locators must implement the <a>SourceLocatorInterface</a> interface.
 
 {{ "Built-in source locators" | textToHeading('H2') }}
 
-{% set sourceLocators = classEntityCollection.filterByInterfaces(['BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable() %}
+{% set sourceLocators = phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable() %}
 {{ printEntityCollectionAsList(sourceLocators) }}

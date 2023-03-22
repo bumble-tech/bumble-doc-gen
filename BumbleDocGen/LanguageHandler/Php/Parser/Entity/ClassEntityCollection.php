@@ -34,7 +34,7 @@ final class ClassEntityCollection extends RootEntityCollection
 
     public static function getEntityCollectionName(): string
     {
-        return 'classEntityCollection';
+        return 'phpClassEntityCollection';
     }
 
     public static function createByReflector(

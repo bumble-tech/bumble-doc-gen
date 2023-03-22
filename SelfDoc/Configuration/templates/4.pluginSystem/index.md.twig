@@ -32,7 +32,7 @@ If you decide to add a new plugin, there are a few things you need to do:
 
 {{ "Available plugin events" | textToHeading('H2') }}
 
-{% set pluginEvents = classEntityCollection.filterByPaths(['/BumbleDocGen/Plugin/Event']) %}
+{% set pluginEvents = phpClassEntityCollection.filterByPaths(['/BumbleDocGen/Plugin/Event']) %}
 {{ printEntityCollectionAsList( pluginEvents ) }}
 
 *A plugin can handle multiple events*
@@ -42,7 +42,7 @@ If you decide to add a new plugin, there are a few things you need to do:
 
 Several plugins have been written to create this document. They can be considered as an example:
 
-{{ drawClassMap( classEntityCollection.filterByPaths(['/SelfDoc/Configuration/Plugin'])) }}
+{{ drawClassMap( phpClassEntityCollection.filterByPaths(['/SelfDoc/Configuration/Plugin'])) }}
 
 ```php
 {{

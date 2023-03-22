@@ -40,7 +40,7 @@ To group conditions, there is a <a>ConditionGroup</a> in the documentation gener
 
 {{ "Built-in filter conditions" | textToHeading('H2') }}
 
-{% set filterConditions = classEntityCollection.filterByInterfaces(['BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
+{% set filterConditions = phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
 
 {{ "Common filter conditions" | textToHeading('H3') }}
 

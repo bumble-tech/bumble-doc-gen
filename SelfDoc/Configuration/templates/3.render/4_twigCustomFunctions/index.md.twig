@@ -30,14 +30,14 @@ We use the twig template engine, you can get more information about working with
       </tr>
    </thead>
    <tbody>
-    {% for function in classEntityCollection.filterByPaths(['/BumbleDocGen/Render/Twig/Function']) %}
+    {% for function in phpClassEntityCollection.filterByPaths(['/BumbleDocGen/Render/Twig/Function']) %}
     {% set twigFunctionData = function.getPluginData('twigFunctionClassParserPlugin') %}
     {% set paramsCount = twigFunctionData.parameters | length %}
     {% for parameter in twigFunctionData.parameters %}
       <tr>
          {% if loop.index == 1 %}
          <td rowspan="{{ paramsCount * 2 - 1 }}">
-            <a href="{{ getDocumentedEntityUrl(classEntityCollection, function.getName()) }}">{{ twigFunctionData.name }}</a><br>
+            <a href="{{ getDocumentedEntityUrl(phpClassEntityCollection, function.getName()) }}">{{ twigFunctionData.name }}</a><br>
             {% if function.isInternal() %}<i><b>:warning: For internal use</b></i><br>{% endif %}
             {{ function.getDescription() | removeLineBrakes }}
             {% if function.getDocNote() %}<br><i><b>:warning: {{ function.getDocNote() }}</b></i><br>{% endif %}
@@ -47,7 +47,7 @@ We use the twig template engine, you can get more information about working with
             <b>${{ parameter.name }}</b>
          </td>
          <td>
-            <i>{{ parameter.type | strTypeToUrl(classEntityCollection, 'html', true) }}</i>
+            <i>{{ parameter.type | strTypeToUrl(phpClassEntityCollection, 'html', true) }}</i>
          </td>
          <td>{{ parameter.description | removeLineBrakes }}</td>
       </tr>
