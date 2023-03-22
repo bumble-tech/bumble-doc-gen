@@ -32,4 +32,6 @@ interface EntityDocRenderInterface
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string;
 
     public function getDocFileExtension(): string;
+
+    public function getDocFileNamespace(): string;
 }

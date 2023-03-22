@@ -38,6 +38,11 @@ class PhpClassToMdDocRender implements EntityDocRenderInterface
         return 'md';
     }
 
+    public function getDocFileNamespace(): string
+    {
+        return 'classes';
+    }
+
     public function isAvailableForEntity(RootEntityInterface $entity): bool
     {
         return is_a($entity, ClassEntity::class);
