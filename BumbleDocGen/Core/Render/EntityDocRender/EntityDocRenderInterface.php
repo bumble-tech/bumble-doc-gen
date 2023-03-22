@@ -16,7 +16,7 @@ interface EntityDocRenderInterface
     /**
      * Can this render be used to create entity documentation
      *
-     * @param RootEntityInterface $entity The class whose documentation was requested
+     * @param RootEntityInterface $entity The entity whose documentation was requested
      * @return bool
      */
     public function isAvailableForEntity(RootEntityInterface $entity): bool;
@@ -26,7 +26,7 @@ interface EntityDocRenderInterface
     /**
      * Get rendered documentation for an entity
      *
-     * @param DocumentedEntityWrapper $entityWrapper The class whose documentation was requested
+     * @param DocumentedEntityWrapper $entityWrapper The entity whose documentation was requested
      * @return string
      */
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string;

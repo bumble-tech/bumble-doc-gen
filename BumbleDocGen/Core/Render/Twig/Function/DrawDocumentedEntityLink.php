@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Render\Context\Context;
 /**
  * Creates an entity link by object
  *
- * @note This function initiates the creation of documents for the displayed classes
+ * @note This function initiates the creation of documents for the displayed entities
  *
  * @example {{ drawDocumentedEntityLink($entity, 'getFunctions()') }}
  * @example {{ drawDocumentedEntityLink($entity) }}

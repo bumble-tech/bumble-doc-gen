@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Core\Render\Context\Context;
 
 /**
- * Process class template blocks with plugins. The method returns the content processed by plugins.
+ * Process entity template blocks with plugins. The method returns the content processed by plugins.
  *
  * @internal
  *

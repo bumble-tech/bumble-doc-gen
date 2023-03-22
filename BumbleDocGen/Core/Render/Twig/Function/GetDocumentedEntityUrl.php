@@ -12,7 +12,7 @@ use BumbleDocGen\Core\Render\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Render\RenderHelper;
 
 /**
- * Get the URL of a documented entity by its name. If the class is found, next to the file where this method was called,
+ * Get the URL of a documented entity by its name. If the entity is found, next to the file where this method was called,
  * the `EntityDocRenderInterface::getDocFileExtension()` directory will be created, in which the documented entity file will be created
  *
  * @note This function initiates the creation of documents for the displayed entities
@@ -55,7 +55,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
      * @param string $cursor
      *  Cursor on the page of the documented entity (for example, the name of a method or property)
      * @param bool $createDocument
-     *  If true, creates a class document. Otherwise, just gives a reference to the class code
+     *  If true, creates an entity document. Otherwise, just gives a reference to the entity code
      *
      * @return string
      */
@@ -73,12 +73,12 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
             if (!$entity->isInGit()) {
                 return self::DEFAULT_URL;
             } elseif ($createDocument && is_a($entity, DocumentTransformableEntityInterface::class)) {
-                $documentedClass = new DocumentedEntityWrapper(
+                $documentedEntity = new DocumentedEntityWrapper(
                     $entity, $this->context->getCurrentTemplateFilePatch()
                 );
-                $this->context->getEntityWrappersCollection()->add($documentedClass);
+                $this->context->getEntityWrappersCollection()->add($documentedEntity);
                 $rootEntityCollection->add($entity);
-                $url = $this->context->getConfiguration()->getPageLinkProcessor()->getAbsoluteUrl($documentedClass->getDocUrl());
+                $url = $this->context->getConfiguration()->getPageLinkProcessor()->getAbsoluteUrl($documentedEntity->getDocUrl());
             } else {
                 $url = $entity->getFileSourceLink(false);
             }

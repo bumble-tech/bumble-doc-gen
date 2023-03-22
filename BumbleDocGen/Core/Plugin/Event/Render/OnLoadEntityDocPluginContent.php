@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Render\Twig\Function\LoadPluginsContent;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Called when class documentation is generated (plugin content loading)
+ * Called when entity documentation is generated (plugin content loading)
  *
  * @see LoadPluginsContent
  */

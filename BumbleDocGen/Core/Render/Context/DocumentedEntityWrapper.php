@@ -7,7 +7,7 @@ namespace BumbleDocGen\Core\Render\Context;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 
 /**
- * Wrapper for the class that was requested for documentation
+ * Wrapper for the entity that was requested for documentation
  */
 final class DocumentedEntityWrapper
 {

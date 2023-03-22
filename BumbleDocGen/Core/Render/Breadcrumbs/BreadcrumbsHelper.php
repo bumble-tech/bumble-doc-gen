@@ -10,7 +10,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 /**
- * Helper class for working with breadcrumbs
+ * Helper entity for working with breadcrumbs
  */
 final class BreadcrumbsHelper
 {

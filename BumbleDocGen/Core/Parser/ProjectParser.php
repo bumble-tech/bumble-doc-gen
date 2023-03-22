@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 
 /**
- * Class for project parsing using source locators
+ * Entity for project parsing using source locators
  */
 final class ProjectParser
 {

@@ -10,9 +10,9 @@ use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 
 /**
- * The filter converts the string with the data type into a link to the documented class, if possible.
+ * The filter converts the string with the data type into a link to the documented entity, if possible.
  *
- * @note This filter initiates the creation of documents for the displayed classes
+ * @note This filter initiates the creation of documents for the displayed entities
  * @see GetDocumentedEntityUrl
  */
 final class StrTypeToUrl implements CustomFilterInterface
@@ -44,9 +44,9 @@ final class StrTypeToUrl implements CustomFilterInterface
      * @param string $text Processed text
      * @param RootEntityCollection $rootEntityCollection
      * @param string $templateType Display format. rst or html
-     * @param bool $useShortLinkVersion Shorten or not the link name. When shortening, only the shortName of the class will be shown
+     * @param bool $useShortLinkVersion Shorten or not the link name. When shortening, only the shortName of the entity will be shown
      * @param bool $createDocument
-     *  If true, creates a class document. Otherwise, just gives a reference to the class code
+     *  If true, creates an entity document. Otherwise, just gives a reference to the entity code
      *
      * @return string
      */

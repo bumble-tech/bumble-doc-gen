@@ -7,12 +7,12 @@ namespace BumbleDocGen\Core\Plugin\CorePlugin\PageLinker;
 /**
  * Adds URLs to empty links in HTML format;
  *  Links may contain:
- *  1) Short class name
- *  2) Full class name
- *  3) Relative link to the class file from the root directory of the project
+ *  1) Short entity name
+ *  2) Full entity name
+ *  3) Relative link to the entity file from the root directory of the project
  *  4) Page title ( title )
  *  5) Template key ( BreadcrumbsHelper::getTemplateLinkKey() )
- *  6) Relative reference to the class document from the root directory of the documentation
+ *  6) Relative reference to the entity document from the root directory of the documentation
  *
  * @example
  *  <a>Existent page name</a> => <a href="/docs/some/page/targetPage.html">Existent page name</a>

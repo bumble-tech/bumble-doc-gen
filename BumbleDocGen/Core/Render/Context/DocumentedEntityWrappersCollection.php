@@ -7,7 +7,7 @@ namespace BumbleDocGen\Core\Render\Context;
 final class DocumentedEntityWrappersCollection implements \IteratorAggregate
 {
     /** @var DocumentedEntityWrapper[] */
-    private array $documentedClasses = [];
+    private array $documentedEntities = [];
     private array $iteratorKeys = [];
 
     public function getIterator(): \Generator
@@ -15,16 +15,16 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate
         $i = 0;
         while (count($this->iteratorKeys) !== $i) {
             $iteratorKey = $this->iteratorKeys[$i];
-            yield $this->documentedClasses[$iteratorKey];
+            yield $this->documentedEntities[$iteratorKey];
             ++$i;
         }
     }
 
-    public function add(DocumentedEntityWrapper $documentedClass): DocumentedEntityWrappersCollection
+    public function add(DocumentedEntityWrapper $documentedEntity): DocumentedEntityWrappersCollection
     {
-        if (!isset($this->documentedClasses[$documentedClass->getKey()])) {
-            $this->documentedClasses[$documentedClass->getKey()] = $documentedClass;
-            $this->iteratorKeys[] = $documentedClass->getKey();
+        if (!isset($this->documentedEntities[$documentedEntity->getKey()])) {
+            $this->documentedEntities[$documentedEntity->getKey()] = $documentedEntity;
+            $this->iteratorKeys[] = $documentedEntity->getKey();
         }
         return $this;
     }
