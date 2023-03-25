@@ -22,7 +22,9 @@
         "bramus/monolog-colored-line-formatter": "^3.0",
         "phpunit/phpunit": "^9.5",
         "symfony/cache": "^6.0",
-        "symfony/event-dispatcher": "^6.0"
+        "symfony/event-dispatcher": "^6.0",
+        "php-di/php-di": "^7.0",
+        "ocramius/proxy-manager": "~2.0"
     },
     "autoload": {
         "psr-4": {
