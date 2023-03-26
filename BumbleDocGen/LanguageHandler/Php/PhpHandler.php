@@ -24,25 +24,13 @@ use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 
 final class PhpHandler implements LanguageHandlerInterface
 {
-    private function __construct(
+    private Reflector $reflector;
+
+    public function __construct(
         private ConfigurationInterface      $configuration,
         private PhpHandlerSettingsInterface $phpHandlerSettings,
-        private Reflector                   $reflector,
         private PluginEventDispatcher       $pluginEventDispatcher
     )
-    {
-    }
-
-    public static function getLanguageKey(): string
-    {
-        return 'php';
-    }
-
-    public static function create(
-        ConfigurationInterface      $configuration,
-        PhpHandlerSettingsInterface $phpHandlerSettings,
-        PluginEventDispatcher       $pluginEventDispatcher
-    ): self
     {
         $betterReflection = (new BetterReflection());
         $sourceLocatorsCollection = $pluginEventDispatcher->dispatch(
@@ -55,8 +43,12 @@ final class PhpHandler implements LanguageHandlerInterface
         }
         $sourceLocators[] = $betterReflection->sourceLocator();
         $sourceLocator = new CachedSourceLocator(new AggregateSourceLocator($sourceLocators), $configuration);
-        $reflector = new DefaultReflector($sourceLocator);
-        return new self($configuration, $phpHandlerSettings, $reflector, $pluginEventDispatcher);
+        $this->reflector = new DefaultReflector($sourceLocator);
+    }
+
+    public static function getLanguageKey(): string
+    {
+        return 'php';
     }
 
     public function getEntityCollection(): RootEntityCollection
