@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Configuration;
 
 use BumbleDocGen\Core\Configuration\ValueResolver\ValueResolverInterface;
+use InvalidArgumentException;
 use Symfony\Component\Yaml\Yaml;
 
 final class ConfigurationParameterBag
@@ -35,10 +36,13 @@ final class ConfigurationParameterBag
         $this->parameters[$name] = $value;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function get(string $name): mixed
     {
         if (!isset($this->parameters[$name])) {
-            throw new \InvalidArgumentException(sprintf('The parameter "%s" does not exist.', $name));
+            throw new InvalidArgumentException(sprintf('The parameter "%s" does not exist.', $name));
         }
         $value = $this->parameters[$name];
         foreach ($this->resolvers as $resolver) {
