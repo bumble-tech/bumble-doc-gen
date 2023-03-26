@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition;
 
+use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 
@@ -12,14 +13,11 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
  */
 final class OnlyFromCurrentClassCondition implements ConditionInterface
 {
-
-    public function __construct(
-        private MethodEntity $methodEntity
-    ) {
-    }
-
-    public function canAddToCollection(): bool
+    public function canAddToCollection(EntityInterface $entity): bool
     {
-        return !$this->methodEntity->isImplementedInParentClass();
+        if (!$entity instanceof MethodEntity) {
+            return false;
+        }
+        return !$entity->isImplementedInParentClass();
     }
 }

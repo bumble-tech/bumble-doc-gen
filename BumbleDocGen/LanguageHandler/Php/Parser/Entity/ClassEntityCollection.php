@@ -51,6 +51,7 @@ final class ClassEntityCollection extends RootEntityCollection
             $pluginEventDispatcher
         );
 
+        $classEntityFilter = $phpHandlerSettings->getClassEntityFilter();
         foreach ($configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
             $className = ParserHelper::getClassFromFile($file->getPathName());
             if ($className) {
@@ -63,7 +64,7 @@ final class ClassEntityCollection extends RootEntityCollection
                     ltrim($className, '\\'),
                     $relativeFileName,
                 );
-                if ($phpHandlerSettings->classEntityFilterCondition($classEntity)->canAddToCollection()) {
+                if ($classEntityFilter->canAddToCollection($classEntity)) {
                     $classEntityCollection->add($classEntity);
                 }
             }

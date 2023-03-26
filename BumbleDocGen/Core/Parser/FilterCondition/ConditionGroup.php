@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\FilterCondition;
 
+use BumbleDocGen\Core\Parser\Entity\EntityInterface;
+
 final class ConditionGroup implements ConditionInterface
 {
     /**
@@ -20,17 +22,17 @@ final class ConditionGroup implements ConditionInterface
         return $conditionGroup;
     }
 
-    public function canAddToCollection(): bool
+    public function canAddToCollection(EntityInterface $entity): bool
     {
         if ($this->groupType === ConditionGroupTypeEnum::AND) {
             foreach ($this->conditions as $condition) {
-                if (!$condition->canAddToCollection()) {
+                if (!$condition->canAddToCollection($entity)) {
                     return false;
                 }
             }
         } elseif ($this->groupType === ConditionGroupTypeEnum::OR) {
             foreach ($this->conditions as $condition) {
-                if ($condition->canAddToCollection()) {
+                if ($condition->canAddToCollection($entity)) {
                     return true;
                 }
             }

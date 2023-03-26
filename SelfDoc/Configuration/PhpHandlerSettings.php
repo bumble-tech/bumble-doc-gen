@@ -7,10 +7,6 @@ use BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionGroupTypeEnum;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition\VisibilityCondition as ClassConstantVisibilityCondition;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition as MethodOnlyFromCurrentClassCondition;
@@ -19,44 +15,46 @@ use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondit
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 
-final class PhpHandlerSettings implements PhpHandlerSettingsInterface
+class PhpHandlerSettings implements PhpHandlerSettingsInterface
 {
-    public function classEntityFilterCondition(ClassEntity $classEntity): ConditionInterface
+    public function getClassEntityFilter(): ConditionInterface
     {
-        return new TrueCondition();
+        static $classEntityFilter = null;
+        if (!$classEntityFilter) {
+            $classEntityFilter = new TrueCondition();
+        }
+        return $classEntityFilter;
     }
 
-    public function classConstantEntityFilterCondition(
-        ConstantEntity $constantEntity
-    ): ConditionInterface
+    public function getClassConstantEntityFilter(): ConditionInterface
     {
-        return new ClassConstantVisibilityCondition(
-            $constantEntity, VisibilityConditionModifier::PUBLIC
-        );
+        static $constantEntityFilter = null;
+        if (!$constantEntityFilter) {
+            $constantEntityFilter = new ClassConstantVisibilityCondition(VisibilityConditionModifier::PUBLIC);
+        }
+        return $constantEntityFilter;
     }
 
-    public function methodEntityFilterCondition(
-        MethodEntity $methodEntity
-    ): ConditionInterface
+    public function getMethodEntityFilter(): ConditionInterface
     {
-        return ConditionGroup::create(
-            ConditionGroupTypeEnum::AND,
-            new MethodVisibilityCondition(
-                $methodEntity, VisibilityConditionModifier::PUBLIC
-            ),
-            new MethodOnlyFromCurrentClassCondition(
-                $methodEntity
-            )
-        );
+        static $methodEntityFilter = null;
+        if (!$methodEntityFilter) {
+            $methodEntityFilter = ConditionGroup::create(
+                ConditionGroupTypeEnum::AND,
+                new MethodVisibilityCondition(VisibilityConditionModifier::PUBLIC),
+                new MethodOnlyFromCurrentClassCondition()
+            );
+        }
+        return $methodEntityFilter;
     }
 
-    public function propertyEntityFilterCondition(
-        PropertyEntity $propertyEntity
-    ): ConditionInterface
+    public function getPropertyEntityFilter(): ConditionInterface
     {
-        return new PropertyVisibilityCondition(
-            $propertyEntity, VisibilityConditionModifier::PUBLIC
-        );
+        static $propertyEntityFilter = null;
+        if (!$propertyEntityFilter) {
+            $propertyEntityFilter = new PropertyVisibilityCondition(VisibilityConditionModifier::PUBLIC);
+        }
+        return $propertyEntityFilter;
     }
 
     public function getEntityDocRendersCollection(): EntityDocRendersCollection

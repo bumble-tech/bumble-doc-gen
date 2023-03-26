@@ -18,6 +18,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
     ): ConstantEntityCollection
     {
         $constantEntityCollection = new ConstantEntityCollection($classEntity);
+        $classConstantEntityFilter = $classEntity->getPhpHandlerSettings()->getClassConstantEntityFilter();
         foreach ($classEntity->getConstantsData() as $name => $constantData) {
             $constantEntity = CacheablePhpEntityFactory::createConstantEntity(
                 $classEntity,
@@ -25,9 +26,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
                 $constantData['declaringClass'],
                 $constantData['implementingClass']
             );
-            if (
-                $classEntity->getPhpHandlerSettings()->classConstantEntityFilterCondition($constantEntity)->canAddToCollection()
-            ) {
+            if ($classConstantEntityFilter->canAddToCollection($constantEntity)) {
                 $constantEntityCollection->add($constantEntity);
             }
         }

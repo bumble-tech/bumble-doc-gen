@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition;
 
+use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
@@ -13,19 +14,19 @@ use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition
  */
 final class VisibilityCondition implements ConditionInterface
 {
-    public function __construct(
-        private PropertyEntity $propertyEntity,
-        private string         $visibilityModifier = VisibilityConditionModifier::PUBLIC
-    )
+    public function __construct(private string $visibilityModifier = VisibilityConditionModifier::PUBLIC)
     {
     }
 
-    public function canAddToCollection(): bool
+    public function canAddToCollection(EntityInterface $entity): bool
     {
+        if (!$entity instanceof PropertyEntity) {
+            return false;
+        }
         return match ($this->visibilityModifier) {
-            VisibilityConditionModifier::PUBLIC => $this->propertyEntity->isPublic(),
-            VisibilityConditionModifier::PROTECTED => $this->propertyEntity->isProtected(),
-            VisibilityConditionModifier::PRIVATE => $this->propertyEntity->isPrivate(),
+            VisibilityConditionModifier::PUBLIC => $entity->isPublic(),
+            VisibilityConditionModifier::PROTECTED => $entity->isProtected(),
+            VisibilityConditionModifier::PRIVATE => $entity->isPrivate(),
             VisibilityConditionModifier::NONE => false
         };
     }

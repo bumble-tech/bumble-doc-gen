@@ -21,6 +21,7 @@ final class MethodEntityCollection extends BaseEntityCollection
         $methodEntityCollection = new MethodEntityCollection($classEntity);
         $configuration = $classEntity->getConfiguration();
 
+        $methodEntityFilter = $classEntity->getPhpHandlerSettings()->getMethodEntityFilter();
         foreach ($classEntity->getMethodsData() as $name => $methodData) {
             $methodEntity = CacheablePhpEntityFactory::createMethodEntity(
                 $classEntity,
@@ -28,9 +29,7 @@ final class MethodEntityCollection extends BaseEntityCollection
                 $methodData['declaringClass'],
                 $methodData['implementingClass']
             );
-            if (
-                $classEntity->getPhpHandlerSettings()->methodEntityFilterCondition($methodEntity)->canAddToCollection()
-            ) {
+            if ($methodEntityFilter->canAddToCollection($methodEntity)) {
                 $methodEntityCollection->add($methodEntity);
             }
         }

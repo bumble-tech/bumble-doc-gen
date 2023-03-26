@@ -17,6 +17,7 @@ final class PropertyEntityCollection extends BaseEntityCollection
     {
         $propertyEntityCollection = new PropertyEntityCollection($classEntity);
 
+        $propertyEntityFilter = $classEntity->getPhpHandlerSettings()->getPropertyEntityFilter();
         foreach ($classEntity->getPropertiesData() as $name => $propertyData) {
             $propertyEntity = CacheablePhpEntityFactory::createPropertyEntity(
                 $classEntity,
@@ -24,9 +25,7 @@ final class PropertyEntityCollection extends BaseEntityCollection
                 $propertyData['declaringClass'],
                 $propertyData['implementingClass']
             );
-            if (
-                $classEntity->getPhpHandlerSettings()->propertyEntityFilterCondition($propertyEntity)->canAddToCollection()
-            ) {
+            if ($propertyEntityFilter->canAddToCollection($propertyEntity)) {
                 $propertyEntityCollection->add($propertyEntity);
             }
         }
