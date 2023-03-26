@@ -20,7 +20,7 @@ final class ConfigurationParameterBag
         $this->resolvers = $resolvers;
     }
 
-    public function loadFromYamlFiles(string ...$fileNames): void
+    public function loadFromFiles(string ...$fileNames): void
     {
         foreach ($fileNames as $fileName) {
             $parameters = Yaml::parseFile($fileName);
