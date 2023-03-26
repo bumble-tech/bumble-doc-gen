@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-interface MethodEntityInterface
+use BumbleDocGen\Core\Parser\Entity\EntityInterface;
+
+interface MethodEntityInterface extends EntityInterface
 {
     public function getName(): string;
 

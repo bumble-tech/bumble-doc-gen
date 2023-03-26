@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
@@ -220,5 +221,21 @@ class DynamicMethodEntity implements MethodEntityInterface
     public function getBodyCode(): string
     {
         return '';
+    }
+
+    public function getObjectId(): string
+    {
+        return "{$this->getRootEntity()->getName()}:{$this->getName()}";
+    }
+
+    public function getRootEntityCollection(): RootEntityCollection
+    {
+        return $this->getRootEntity()->getRootEntityCollection();
+    }
+
+    public function getAbsoluteFileName(): ?string
+    {
+        $relativeFileName = $this->getFileName();
+        return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 }

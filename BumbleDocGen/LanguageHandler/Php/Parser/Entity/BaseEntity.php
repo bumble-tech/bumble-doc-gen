@@ -7,6 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
+use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
@@ -21,7 +22,7 @@ use Roave\BetterReflection\Reflection\ReflectionMethod;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
 use Roave\BetterReflection\Reflector\Reflector;
 
-abstract class BaseEntity implements CacheableEntityInterface
+abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
     protected function __construct(
         protected ConfigurationInterface $configuration,
@@ -64,6 +65,15 @@ abstract class BaseEntity implements CacheableEntityInterface
     abstract public function getEntityDependencies(): array;
 
     abstract public function getPhpHandlerSettings(): PhpHandlerSettingsInterface;
+
+    /**
+     * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
+     */
+    public function getAbsoluteFileName(): ?string
+    {
+        $relativeFileName = $this->getFileName();
+        return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
+    }
 
     protected function prepareTypeString(string $type): string
     {

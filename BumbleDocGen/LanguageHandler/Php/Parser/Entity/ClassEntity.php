@@ -505,15 +505,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $caseNames;
     }
 
-    /**
-     * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
-     */
-    public function getAbsoluteFileName(): ?string
-    {
-        $relativeFileName = $this->getFileName();
-        return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
-    }
-
     #[CacheableMethod] public function getFileContent(): string
     {
         return $this->getAbsoluteFileName() ? file_get_contents($this->getAbsoluteFileName()) : '';
