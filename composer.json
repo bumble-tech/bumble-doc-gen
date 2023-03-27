@@ -30,7 +30,10 @@
     "autoload": {
         "psr-4": {
             "BumbleDocGen\\": "BumbleDocGen/"
-        }
+        },
+        "files": [
+            "BumbleDocGen/Core/utils.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
