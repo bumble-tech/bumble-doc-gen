@@ -11,15 +11,11 @@ final class ConditionGroup implements ConditionInterface
     /**
      * @var ConditionInterface[]
      */
-    private array $conditions = [];
-    private string $groupType = ConditionGroupTypeEnum::AND;
+    private array $conditions;
 
-    public static function create(string $groupType, ConditionInterface ...$conditions): ConditionGroup
+    public function __construct(private string $groupType, ConditionInterface ...$conditions)
     {
-        $conditionGroup = new self();
-        $conditionGroup->conditions = $conditions;
-        $conditionGroup->groupType = $groupType;
-        return $conditionGroup;
+        $this->conditions = $conditions;
     }
 
     public function canAddToCollection(EntityInterface $entity): bool
