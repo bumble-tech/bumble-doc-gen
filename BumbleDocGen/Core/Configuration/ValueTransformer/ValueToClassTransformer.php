@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Configuration\ValueTransformer;
 
 use DI\Container;
+use Psr\Log\LoggerInterface;
 
 final class ValueToClassTransformer implements ValueTransformerInterface
 {
-    public function __construct(private Container $diContainer)
+    public function __construct(private Container $diContainer, private LoggerInterface $logger)
     {
     }
 
@@ -30,7 +31,7 @@ final class ValueToClassTransformer implements ValueTransformerInterface
 
             $arguments = [];
             foreach ($value['arguments'] as $k => $argument) {
-                if($this->canTransform($argument)){
+                if ($this->canTransform($argument)) {
                     $argument = $this->transform($argument);
                 }
                 $arguments[$k] = $argument;
@@ -38,7 +39,7 @@ final class ValueToClassTransformer implements ValueTransformerInterface
 
             return new $value['class'](...$arguments);
         } catch (\Exception $e) {
-            var_dump($e->getMessage());die();
+            $this->logger->error($e->getMessage());
         }
         return null;
     }
