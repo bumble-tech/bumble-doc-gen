@@ -14,8 +14,11 @@ use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition
  */
 final class VisibilityCondition implements ConditionInterface
 {
-    public function __construct(private string $visibilityModifier = VisibilityConditionModifier::PUBLIC)
+    private array $visibilityModifiers;
+
+    public function __construct(string ...$visibilityModifiers)
     {
+        $this->visibilityModifiers = $visibilityModifiers;
     }
 
     public function canAddToCollection(EntityInterface $entity): bool
@@ -23,11 +26,16 @@ final class VisibilityCondition implements ConditionInterface
         if (!$entity instanceof MethodEntity) {
             return false;
         }
-        return match ($this->visibilityModifier) {
-            VisibilityConditionModifier::PUBLIC => $entity->isPublic(),
-            VisibilityConditionModifier::PROTECTED => $entity->isProtected(),
-            VisibilityConditionModifier::PRIVATE => $entity->isPrivate(),
-            VisibilityConditionModifier::NONE => false
-        };
+        foreach ($this->visibilityModifiers as $visibilityModifier) {
+            if (match ($visibilityModifier) {
+                VisibilityConditionModifier::PUBLIC => $entity->isPublic(),
+                VisibilityConditionModifier::PROTECTED => $entity->isProtected(),
+                VisibilityConditionModifier::PRIVATE => $entity->isPrivate(),
+                VisibilityConditionModifier::NONE => false
+            }) {
+                return true;
+            }
+        }
+        return false;
     }
 }
