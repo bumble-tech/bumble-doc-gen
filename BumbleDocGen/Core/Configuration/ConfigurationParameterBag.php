@@ -8,6 +8,8 @@ use BumbleDocGen\Core\Configuration\ValueResolver\ValueResolverInterface;
 use InvalidArgumentException;
 use Symfony\Component\Yaml\Yaml;
 
+use function BumbleDocGen\Core\is_associative_array;
+
 final class ConfigurationParameterBag
 {
     private array $parameters = [];
@@ -29,6 +31,19 @@ final class ConfigurationParameterBag
                 $this->set($name, $value);
             }
         }
+    }
+
+    public function getSubConfigurationParameterBag(string $parentKey): ConfigurationParameterBag
+    {
+        $configurationParameterBag = new ConfigurationParameterBag(...$this->resolvers);
+        $childParameters = $this->get($parentKey);
+        if (!is_associative_array($childParameters)) {
+            throw new InvalidArgumentException('The sub configuration value must be an associative array');
+        }
+        foreach ($childParameters as $name => $value) {
+            $configurationParameterBag->set($name, $value);
+        }
+        return $configurationParameterBag;
     }
 
     public function set(string $name, mixed $value): void
