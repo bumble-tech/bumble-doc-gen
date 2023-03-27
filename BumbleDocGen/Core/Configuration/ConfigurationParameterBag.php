@@ -48,7 +48,25 @@ final class ConfigurationParameterBag
 
     public function set(string $name, mixed $value): void
     {
-        $this->parameters[$name] = $value;
+        $keys = explode('.', $name);
+        foreach ($keys as $key) {
+            $value = [$key => $value];
+        }
+        $this->parameters = array_merge_recursive($value, $this->parameters);
+    }
+
+    public function addValueIfNotExists(string $name, mixed $value): void
+    {
+        $keys = array_reverse(explode('.', $name));
+        foreach ($keys as $key) {
+            $value = [$key => $value];
+        }
+        $this->parameters = array_replace_recursive($value, $this->parameters);
+    }
+
+    public function addValueFromFileIfNotExists(string $name, string $fileName): void
+    {
+        $this->addValueIfNotExists($name, Yaml::parseFile($fileName));
     }
 
     /**
