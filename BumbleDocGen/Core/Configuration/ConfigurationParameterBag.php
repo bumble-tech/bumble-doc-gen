@@ -56,10 +56,16 @@ final class ConfigurationParameterBag
      */
     public function get(string $name): mixed
     {
-        if (!isset($this->parameters[$name])) {
-            throw new InvalidArgumentException(sprintf('The parameter "%s" does not exist.', $name));
+        $keys = explode('.', $name);
+
+        $value = $this->parameters;
+        foreach ($keys as $key) {
+            if (!isset($value[$key])) {
+                throw new InvalidArgumentException(sprintf('The parameter "%s" does not exist.', $name));
+            }
+            $value = $value[$key];
         }
-        $value = $this->parameters[$name];
+
         foreach ($this->resolvers as $resolver) {
             $value = $resolver->resolveValue($this, $value);
         }
