@@ -27,9 +27,9 @@ final class PhpHandler implements LanguageHandlerInterface
     private Reflector $reflector;
 
     public function __construct(
-        private ConfigurationInterface      $configuration,
-        private PhpHandlerSettingsInterface $phpHandlerSettings,
-        private PluginEventDispatcher       $pluginEventDispatcher
+        private ConfigurationInterface $configuration,
+        private PhpHandlerSettings     $phpHandlerSettings,
+        private PluginEventDispatcher  $pluginEventDispatcher
     )
     {
         $betterReflection = (new BetterReflection());
