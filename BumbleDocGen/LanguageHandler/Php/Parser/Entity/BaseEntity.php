@@ -13,7 +13,7 @@ use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -64,7 +64,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     abstract public function getEntityDependencies(): array;
 
-    abstract public function getPhpHandlerSettings(): PhpHandlerSettingsInterface;
+    abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
 
     /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory

@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
-use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
@@ -19,10 +19,10 @@ use Roave\BetterReflection\Reflector\Reflector;
 final class ClassEntityCollection extends RootEntityCollection
 {
     private function __construct(
-        private ConfigurationInterface        $configuration,
-        protected PhpHandlerSettingsInterface $phpHandlerSettings,
-        private Reflector                     $reflector,
-        private PluginEventDispatcher         $pluginEventDispatcher
+        private ConfigurationInterface $configuration,
+        protected PhpHandlerSettings   $phpHandlerSettings,
+        private Reflector              $reflector,
+        private PluginEventDispatcher  $pluginEventDispatcher
     )
     {
     }
@@ -38,10 +38,10 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     public static function createByReflector(
-        ConfigurationInterface      $configuration,
-        PhpHandlerSettingsInterface $phpHandlerSettings,
-        Reflector                   $reflector,
-        PluginEventDispatcher       $pluginEventDispatcher
+        ConfigurationInterface $configuration,
+        PhpHandlerSettings     $phpHandlerSettings,
+        Reflector              $reflector,
+        PluginEventDispatcher  $pluginEventDispatcher
     ): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(

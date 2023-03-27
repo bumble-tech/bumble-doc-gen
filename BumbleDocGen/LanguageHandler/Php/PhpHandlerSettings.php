@@ -11,7 +11,7 @@ use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
 
-final class PhpHandlerSettings implements PhpHandlerSettingsInterface
+final class PhpHandlerSettings
 {
     public const SETTINGS_PREFIX = 'language_handlers.php.settings';
     public const DEFAULT_SETTINGS_FILE = __DIR__ . '/phpHandlerDefaultSettings.yaml';

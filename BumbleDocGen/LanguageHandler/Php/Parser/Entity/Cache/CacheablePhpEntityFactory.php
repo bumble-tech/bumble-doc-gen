@@ -11,7 +11,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
-use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettingsInterface;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
 
@@ -72,13 +72,13 @@ final class CacheablePhpEntityFactory
     }
 
     public static function createClassEntity(
-        ConfigurationInterface      $configuration,
-        PhpHandlerSettingsInterface $phpHandlerSettings,
-        Reflector                   $reflector,
-        ClassEntityCollection       $classEntityCollection,
-        string                      $className,
-        ?string                     $relativeFileName = null,
-        bool                        $reloadCache = false
+        ConfigurationInterface $configuration,
+        PhpHandlerSettings     $phpHandlerSettings,
+        Reflector              $reflector,
+        ClassEntityCollection  $classEntityCollection,
+        string                 $className,
+        ?string                $relativeFileName = null,
+        bool                   $reloadCache = false
     ): ClassEntity
     {
         $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ClassEntity::class, 'ClassEntityWrapper');
@@ -94,12 +94,12 @@ final class CacheablePhpEntityFactory
     }
 
     public static function createClassEntityByReflection(
-        ConfigurationInterface      $configuration,
-        PhpHandlerSettingsInterface $phpHandlerSettings,
-        Reflector                   $reflector,
-        ReflectionClass             $reflectionClass,
-        ClassEntityCollection       $classEntityCollection,
-        bool                        $reloadCache = false
+        ConfigurationInterface $configuration,
+        PhpHandlerSettings     $phpHandlerSettings,
+        Reflector              $reflector,
+        ReflectionClass        $reflectionClass,
+        ClassEntityCollection  $classEntityCollection,
+        bool                   $reloadCache = false
     ): ClassEntity
     {
         $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ClassEntity::class, 'ClassEntityWrapper');
@@ -114,14 +114,14 @@ final class CacheablePhpEntityFactory
     }
 
     public static function createSubClassEntity(
-        string                      $subClassEntity,
-        ConfigurationInterface      $configuration,
-        PhpHandlerSettingsInterface $phpHandlerSettings,
-        Reflector                   $reflector,
-        ClassEntityCollection       $classEntityCollection,
-        string                      $className,
-        ?string                     $relativeFileName,
-        bool                        $reloadCache = false
+        string                 $subClassEntity,
+        ConfigurationInterface $configuration,
+        PhpHandlerSettings     $phpHandlerSettings,
+        Reflector              $reflector,
+        ClassEntityCollection  $classEntityCollection,
+        string                 $className,
+        ?string                $relativeFileName,
+        bool                   $reloadCache = false
     ): ClassEntity
     {
         $classNameParts = explode('\\', $subClassEntity);
@@ -139,13 +139,13 @@ final class CacheablePhpEntityFactory
     }
 
     public static function createSubClassEntityByReflection(
-        string                      $subClassEntity,
-        ConfigurationInterface      $configuration,
-        PhpHandlerSettingsInterface $phpHandlerSettings,
-        Reflector                   $reflector,
-        ReflectionClass             $reflectionClass,
-        ClassEntityCollection       $classEntityCollection,
-        bool                        $reloadCache = false
+        string                 $subClassEntity,
+        ConfigurationInterface $configuration,
+        PhpHandlerSettings     $phpHandlerSettings,
+        Reflector              $reflector,
+        ReflectionClass        $reflectionClass,
+        ClassEntityCollection  $classEntityCollection,
+        bool                   $reloadCache = false
     ): ClassEntity
     {
         $classNameParts = explode('\\', $subClassEntity);
