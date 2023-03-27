@@ -87,7 +87,7 @@ trait CacheableEntityWrapperTrait
     protected function getCacheKey(): string
     {
         $currentRootEntity = $this->getCurrentRootEntity();
-        return $currentRootEntity ? str_replace(["\\", ":", '\n', '/'], "_{$this->cacheVersion}_", $this->getCurrentRootEntity()->getName()) : '';
+        return $currentRootEntity ? str_replace(["\\", ":", '\n', '/', '{', '}'], "_{$this->cacheVersion}_", $this->getCurrentRootEntity()->getName()) : '';
     }
 
     public function getCacheValues(): array
