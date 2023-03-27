@@ -1,0 +1,32 @@
+class_filter:
+  class: \BumbleDocGen\Core\Parser\FilterCondition\CommonFilterCondition\TrueCondition
+
+class_constant_filter:
+  class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition\VisibilityCondition
+  arguments:
+    - public
+    - protected
+
+method_filter:
+  class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
+  arguments:
+    - and
+    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\VisibilityCondition
+      arguments:
+        - public
+    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition
+
+property_filter:
+  class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
+  arguments:
+    - and
+    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondition
+      arguments:
+        - public
+    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\OnlyFromCurrentClassCondition
+
+doc_renders:
+  - class: \BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender
+
+file_source_base_url: null
+async_source_loading_enabled: true
