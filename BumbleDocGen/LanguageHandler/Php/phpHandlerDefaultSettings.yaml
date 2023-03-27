@@ -11,18 +11,14 @@ method_filter:
   class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
   arguments:
     - and
-    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\VisibilityCondition
-      arguments:
-        - public
+    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\IsPublicCondition
     - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition
 
 property_filter:
   class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
   arguments:
     - and
-    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondition
-      arguments:
-        - public
+    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\IsPublicCondition
     - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\OnlyFromCurrentClassCondition
 
 doc_renders:
