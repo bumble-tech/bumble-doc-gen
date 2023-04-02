@@ -13,29 +13,20 @@ use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
  */
 final class ProjectParser
 {
-    private function __construct(
-        private ConfigurationInterface $configuration,
-        private PluginEventDispatcher  $pluginEventDispatcher
+    public function __construct(
+        private ConfigurationInterface     $configuration,
+        private PluginEventDispatcher      $pluginEventDispatcher,
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup
     )
     {
     }
 
-    public static function create(
-        ConfigurationInterface $configuration,
-        PluginEventDispatcher  $pluginEventDispatcher
-    ): ProjectParser
+    public function parse(): void
     {
-        return new self($configuration, $pluginEventDispatcher);
-    }
-
-    public function parse(): RootEntityCollectionsGroup
-    {
-        $rootEntityCollectionsGroup = new RootEntityCollectionsGroup();
         foreach ($this->configuration->getLanguageHandlersCollection(
             $this->pluginEventDispatcher
         ) as $languageHandler) {
-            $rootEntityCollectionsGroup->add($languageHandler->getEntityCollection());
+            $this->rootEntityCollectionsGroup->add($languageHandler->getEntityCollection());
         }
-        return $rootEntityCollectionsGroup;
     }
 }

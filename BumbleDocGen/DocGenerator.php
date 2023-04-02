@@ -5,47 +5,44 @@ declare(strict_types=1);
 namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Parser\ProjectParser;
-use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Render\Render;
+use Monolog\Logger;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use function BumbleDocGen\Core\bites_int_to_string;
 
 /**
  * Class for generating documentation.
  */
 final class DocGenerator
 {
+    public function __construct(
+        private ProjectParser $parser,
+        private Render        $render,
+        private Logger        $logger
+    )
+    {
+    }
+
     /**
      * Generates documentation using configuration
      *
-     * @param ConfigurationInterface $configuration
-     * @return void
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
-    public static function generateDocumentation(ConfigurationInterface $configuration): void
+    public function generate(): void
     {
         $start = microtime(true);
         $memory = memory_get_usage();
 
-        $pluginEventDispatcher = new PluginEventDispatcher($configuration);
-        $rootEntityCollectionsGroup = ProjectParser::create($configuration, $pluginEventDispatcher)->parse();
-        (new Render($configuration, $rootEntityCollectionsGroup, $pluginEventDispatcher))->run();
+        $this->parser->parse();
+        $this->render->run();
 
-        $logger = $configuration->getLogger();
         $time = microtime(true) - $start;
-        $logger->notice("Time of execution: {$time} sec.");
+        $this->logger->notice("Time of execution: {$time} sec.");
         $memory = memory_get_usage() - $memory;
-        $logger->notice('Memory:' . self::bitesToString($memory));
-    }
-
-    private static function bitesToString(int $bites): string
-    {
-        $i = 0;
-        while (floor($bites / 1024) > 0) {
-            $i++;
-            $bites /= 1024;
-        }
-        $name = ['bites', 'KB', 'MB'];
-        return round($bites, 2) . ' ' . $name[$i];
+        $this->logger->notice('Memory:' . bites_int_to_string($memory));
     }
 }
