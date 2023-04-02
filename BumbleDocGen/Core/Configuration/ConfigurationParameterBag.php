@@ -27,9 +27,14 @@ final class ConfigurationParameterBag
     {
         foreach ($fileNames as $fileName) {
             $parameters = Yaml::parseFile($fileName);
-            foreach ($parameters as $name => $value) {
-                $this->set($name, $value);
-            }
+            $this->loadFromArray($parameters);
+        }
+    }
+
+    public function loadFromArray(array $parameters): void
+    {
+        foreach ($parameters as $name => $value) {
+            $this->set($name, $value);
         }
     }
 
@@ -78,7 +83,7 @@ final class ConfigurationParameterBag
 
         $value = $this->parameters;
         foreach ($keys as $key) {
-            if (!isset($value[$key])) {
+            if (!array_key_exists($key, $value)) {
                 throw new InvalidArgumentException(sprintf('The parameter "%s" does not exist.', $name));
             }
             $value = $value[$key];
