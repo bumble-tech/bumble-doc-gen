@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Plugin\Event\Render;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
-use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\Twig\Function\LoadPluginsContent;
 use Symfony\Contracts\EventDispatcher\Event;
 
@@ -21,8 +20,7 @@ final class OnLoadEntityDocPluginContent extends Event
     public function __construct(
         private string $blockContent,
         private RootEntityInterface $entity,
-        private string $blockType,
-        private Context $context
+        private string $blockType
     ) {
     }
 
@@ -39,11 +37,6 @@ final class OnLoadEntityDocPluginContent extends Event
     public function getBlockType(): string
     {
         return $this->blockType;
-    }
-
-    public function getContext(): Context
-    {
-        return $this->context;
     }
 
     public function addBlockContentPluginResult(string $pluginResult): void
