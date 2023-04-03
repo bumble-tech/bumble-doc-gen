@@ -11,7 +11,7 @@ use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
 use Psr\Log\LoggerInterface;
@@ -61,7 +61,7 @@ final class ClassEntityCollection extends RootEntityCollection
                 }
             }
         }
-        $this->pluginEventDispatcher->dispatch(new AfterCreationClassEntityCollection($this));
+        $this->pluginEventDispatcher->dispatch(new AfterLoadingClassEntityCollection($this));
     }
 
     public function getConfiguration(): Configuration

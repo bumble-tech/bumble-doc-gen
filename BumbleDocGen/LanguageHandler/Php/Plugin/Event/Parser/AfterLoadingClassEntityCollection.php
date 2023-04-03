@@ -10,7 +10,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 /**
  * The event is called after the initial creation of a collection of class entities
  */
-final class AfterCreationClassEntityCollection extends Event
+final class AfterLoadingClassEntityCollection extends Event
 {
     public function __construct(private ClassEntityCollection $classEntityCollection)
     {

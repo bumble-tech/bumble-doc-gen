@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Render\Twig\MainExtension;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterCreationClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -22,7 +22,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     public static function getSubscribedEvents()
     {
         return [
-            AfterCreationClassEntityCollection::class => 'afterCreationClassEntityCollection',
+            AfterLoadingClassEntityCollection::class => 'afterCreationClassEntityCollection',
             OnLoadEntityDocPluginContent::class => 'onLoadEntityDocPluginContentEvent',
         ];
     }
@@ -51,7 +51,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         $event->addBlockContentPluginResult($pluginResult);
     }
 
-    public function afterCreationClassEntityCollection(AfterCreationClassEntityCollection $event): void
+    public function afterCreationClassEntityCollection(AfterLoadingClassEntityCollection $event): void
     {
         foreach ($event->getClassEntityCollection() as $classEntity) {
             if ($this->isCustomTwigFunction($classEntity)) {
