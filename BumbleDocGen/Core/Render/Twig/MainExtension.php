@@ -7,23 +7,8 @@ namespace BumbleDocGen\Core\Render\Twig;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Render\Context\Context;
-use BumbleDocGen\Core\Render\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
-use BumbleDocGen\Core\Render\Twig\Filter\FixStrSize;
-use BumbleDocGen\Core\Render\Twig\Filter\HtmlToRst;
-use BumbleDocGen\Core\Render\Twig\Filter\PrepareSourceLink;
-use BumbleDocGen\Core\Render\Twig\Filter\Quotemeta;
-use BumbleDocGen\Core\Render\Twig\Filter\RemoveLineBrakes;
-use BumbleDocGen\Core\Render\Twig\Filter\StrTypeToUrl;
-use BumbleDocGen\Core\Render\Twig\Filter\TextToCodeBlock;
-use BumbleDocGen\Core\Render\Twig\Filter\TextToHeading;
 use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
-use BumbleDocGen\Core\Render\Twig\Function\DrawDocumentationMenu;
-use BumbleDocGen\Core\Render\Twig\Function\DrawDocumentedEntityLink;
-use BumbleDocGen\Core\Render\Twig\Function\GeneratePageBreadcrumbs;
-use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\Core\Render\Twig\Function\LoadPluginsContent;
-use BumbleDocGen\Core\Render\Twig\Function\PrintEntityCollectionAsList;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 
@@ -35,7 +20,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     private CustomFunctionsCollection $functions;
     private CustomFiltersCollection $filters;
 
-    public function __construct(private Context $context)
+    public function __construct(private Context $context, private Configuration $configuration)
     {
         $this->setDefaultFunctions();
         $this->setDefaultFilters();
@@ -59,14 +44,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
      */
     public function setDefaultFunctions(): void
     {
-        $this->functions = CustomFunctionsCollection::create(
-            new GetDocumentedEntityUrl($this->context),
-            new DrawDocumentationMenu($this->context),
-            new LoadPluginsContent($this->context),
-            new GeneratePageBreadcrumbs($this->context),
-            new PrintEntityCollectionAsList($this->context),
-            new DrawDocumentedEntityLink($this->context),
-        );
+        $this->functions = clone $this->configuration->getTwigFunctions();
         foreach ($this->getLanguageHandlersCollection() as $languageHandler) {
             /**@var LanguageHandlerInterface $languageHandler */
             $this->functions->add(...iterator_to_array(
@@ -75,19 +53,12 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
         }
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function setDefaultFilters(): void
     {
-        $this->filters = CustomFiltersCollection::create(
-            new Quotemeta(),
-            new StrTypeToUrl($this->context),
-            new PrepareSourceLink(),
-            new RemoveLineBrakes(),
-            new AddIndentFromLeft(),
-            new FixStrSize(),
-            new HtmlToRst(),
-            new TextToHeading($this->context),
-            new TextToCodeBlock($this->context)
-        );
+        $this->filters = clone $this->configuration->getTwigFilters();
         foreach ($this->getLanguageHandlersCollection() as $languageHandler) {
             /**@var LanguageHandlerInterface $languageHandler */
             $this->filters->add(...iterator_to_array(

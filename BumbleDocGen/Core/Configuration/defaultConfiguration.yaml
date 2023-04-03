@@ -10,6 +10,23 @@ page_link_processor:              # (PageLinkProcessorInterface) Link handler cl
 language_handlers:                # (array<LanguageHandlerInterface>) List of programming language handlers
 source_locators:                  # (array<SourceLocatorInterface>) List of source locators
 template_fillers:                 # (array<string,TemplateFillerInterface>) List of template fillers
+twig_functions:                   # (array<CustomFunctionInterface>)
+  - class: \BumbleDocGen\Core\Render\Twig\Function\DrawDocumentationMenu
+  - class: \BumbleDocGen\Core\Render\Twig\Function\DrawDocumentedEntityLink
+  - class: \BumbleDocGen\Core\Render\Twig\Function\GeneratePageBreadcrumbs
+  - class: \BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl
+  - class: \BumbleDocGen\Core\Render\Twig\Function\LoadPluginsContent
+  - class: \BumbleDocGen\Core\Render\Twig\Function\PrintEntityCollectionAsList
+twig_filters:                     # (array<CustomFilterInterface>)
+  - class: \BumbleDocGen\Core\Render\Twig\Filter\AddIndentFromLeft
+  - class: \BumbleDocGen\Core\Render\Twig\Filter\FixStrSize
+  - class: \BumbleDocGen\Core\Render\Twig\Filter\HtmlToRst
+  - class: \BumbleDocGen\Core\Render\Twig\Filter\PrepareSourceLink
+  - class: \BumbleDocGen\Core\Render\Twig\Filter\Quotemeta
+  - class: \BumbleDocGen\Core\Render\Twig\Filter\RemoveLineBrakes
+  - class: \BumbleDocGen\Core\Render\Twig\Filter\StrTypeToUrl
+  - class: \BumbleDocGen\Core\Render\Twig\Filter\TextToCodeBlock
+  - class: \BumbleDocGen\Core\Render\Twig\Filter\TextToHeading
 plugins:                          # (array<PluginInterface>|null) List of plugins
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter

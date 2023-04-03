@@ -15,6 +15,10 @@ use BumbleDocGen\Core\Plugin\PluginsCollection;
 use BumbleDocGen\Core\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use BumbleDocGen\Core\Render\TemplateFiller\TemplateFillerInterface;
 use BumbleDocGen\Core\Render\TemplateFiller\TemplateFillersCollection;
+use BumbleDocGen\Core\Render\Twig\Filter\CustomFilterInterface;
+use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
+use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
+use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use Psr\Cache\CacheItemPoolInterface;
@@ -222,5 +226,44 @@ final class Configuration
     public function clearOutputDirBeforeDocGeneration(): bool
     {
         return true;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getTwigFunctions(): CustomFunctionsCollection
+    {
+        static $customFunctionsCollection = null;
+        if (!$customFunctionsCollection) {
+            $customFunctions = $this->classListValueGetter->validateAndGet(
+                'twig_functions',
+                CustomFunctionInterface::class
+            );
+            $customFunctionsCollection = new CustomFunctionsCollection();
+            foreach ($customFunctions as $customFunction) {
+                $customFunctionsCollection->add($customFunction);
+            }
+        }
+        return $customFunctionsCollection;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getTwigFilters(): CustomFiltersCollection
+    {
+        static $customFiltersCollection = null;
+        if (!$customFiltersCollection) {
+            $customFilters = $this->classListValueGetter->validateAndGet(
+                'twig_filters',
+                CustomFilterInterface::class
+
+            );
+            $customFiltersCollection = new CustomFiltersCollection();
+            foreach ($customFilters as $customFilter) {
+                $customFiltersCollection->add($customFilter);
+            }
+        }
+        return $customFiltersCollection;
     }
 }
