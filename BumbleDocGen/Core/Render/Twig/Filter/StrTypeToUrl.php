@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Filter;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\RenderHelper;
@@ -21,10 +22,10 @@ final class StrTypeToUrl implements CustomFilterInterface
     public const TEMPLATE_TYPE_HTML = 'html';
     public const TEMPLATE_TYPE_RST = 'rst';
 
-    /**
-     * @param Context $context Render context
-     */
-    public function __construct(private Context $context)
+    public function __construct(
+        private Context $context,
+        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction
+    )
     {
     }
 
@@ -49,16 +50,17 @@ final class StrTypeToUrl implements CustomFilterInterface
      *  If true, creates an entity document. Otherwise, just gives a reference to the entity code
      *
      * @return string
+     * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
-        string $text,
+        string               $text,
         RootEntityCollection $rootEntityCollection,
-        string $templateType = self::TEMPLATE_TYPE_FROM_CONTEXT,
-        bool   $useShortLinkVersion = false,
-        bool   $createDocument = false
+        string               $templateType = self::TEMPLATE_TYPE_FROM_CONTEXT,
+        bool                 $useShortLinkVersion = false,
+        bool                 $createDocument = false
     ): string
     {
-        $getDocumentedEntityUrlFunction = new GetDocumentedEntityUrl($this->context);
+        $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
 
         $preparedTypes = [];
         $types = explode('|', $text);
