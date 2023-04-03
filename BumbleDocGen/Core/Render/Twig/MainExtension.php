@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Render\Twig;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
@@ -25,7 +26,6 @@ use BumbleDocGen\Core\Render\Twig\Function\LoadPluginsContent;
 use BumbleDocGen\Core\Render\Twig\Function\PrintEntityCollectionAsList;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
-use Psr\Log\LoggerInterface;
 
 /**
  * This is an extension that is used to generate documents from templates
@@ -41,28 +41,22 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
         $this->setDefaultFilters();
     }
 
-    public function changeContext(Context $context): void
-    {
-        $this->context = $context;
-    }
-
     public function getConfiguration(): Configuration
     {
         return $this->context->getConfiguration();
     }
 
-    public function getLogger(): LoggerInterface
-    {
-        return $this->getConfiguration()->getLogger();
-    }
-
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function getLanguageHandlersCollection(): LanguageHandlersCollection
     {
-        return $this->getConfiguration()->getLanguageHandlersCollection(
-            $this->context->getPluginEventDispatcher()
-        );
+        return $this->getConfiguration()->getLanguageHandlersCollection();
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function setDefaultFunctions(): void
     {
         $this->functions = CustomFunctionsCollection::create(

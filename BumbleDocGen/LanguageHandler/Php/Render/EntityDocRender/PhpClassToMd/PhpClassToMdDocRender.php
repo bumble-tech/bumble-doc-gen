@@ -11,6 +11,9 @@ use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\Twig\MainExtension;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 
 /**
@@ -23,14 +26,14 @@ class PhpClassToMdDocRender implements EntityDocRenderInterface
     public const BLOCK_BEFORE_DETAILS = 'before_details';
 
     private Environment $twig;
-    private ?Context $context = null;
 
-    public function __construct()
+    public function __construct(private Context $context, MainExtension $mainExtension)
     {
         $loader = new FilesystemLoader([
             __DIR__ . '/templates',
         ]);
         $this->twig = new Environment($loader);
+        $this->twig->addExtension($mainExtension);
     }
 
     public function getDocFileExtension(): string
@@ -48,18 +51,11 @@ class PhpClassToMdDocRender implements EntityDocRenderInterface
         return is_a($entity, ClassEntity::class);
     }
 
-    public function setContext(Context $context): void
-    {
-        static $mainExtension;
-        if (!$mainExtension) {
-            $mainExtension = new MainExtension($context);
-            $this->twig->addExtension($mainExtension);
-        } else {
-            $mainExtension->changeContext($context);
-        }
-        $this->context = $context;
-    }
-
+    /**
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws LoaderError
+     */
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string
     {
         return $this->twig->render('class.md.twig', [
