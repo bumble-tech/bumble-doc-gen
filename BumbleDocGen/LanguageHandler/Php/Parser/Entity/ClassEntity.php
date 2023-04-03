@@ -451,11 +451,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return count($this->getTraitsNames()) > 0;
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function getConstantEntityCollection(): ConstantEntityCollection
     {
         static $constantEntityCollection = [];
         if (!isset($constantEntityCollection[$this->getObjectId()])) {
-            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByClassEntity($this);
+            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByClassEntity($this, $this->cacheablePhpEntityFactory);
         }
         return $constantEntityCollection[$this->getObjectId()];
     }

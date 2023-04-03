@@ -4,23 +4,31 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 
 final class ConstantEntityCollection extends BaseEntityCollection
 {
-    public function __construct(private ClassEntity $classEntity)
+    public function __construct(
+        private ClassEntity               $classEntity,
+        private CacheablePhpEntityFactory $cacheablePhpEntityFactory
+    )
     {
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public static function createByClassEntity(
-        ClassEntity $classEntity
+        ClassEntity               $classEntity,
+        CacheablePhpEntityFactory $cacheablePhpEntityFactory
     ): ConstantEntityCollection
     {
-        $constantEntityCollection = new ConstantEntityCollection($classEntity);
+        $constantEntityCollection = new ConstantEntityCollection($classEntity, $cacheablePhpEntityFactory);
         $classConstantEntityFilter = $classEntity->getPhpHandlerSettings()->getClassConstantEntityFilter();
         foreach ($classEntity->getConstantsData() as $name => $constantData) {
-            $constantEntity = CacheablePhpEntityFactory::createConstantEntity(
+            $constantEntity = $cacheablePhpEntityFactory->createConstantEntity(
                 $classEntity,
                 $name,
                 $constantData['declaringClass'],
@@ -58,7 +66,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
         if (!$constantEntity) {
             $constantsData = $this->classEntity->getConstantsData()[$key] ?? null;
             if (is_array($constantsData)) {
-                return CacheablePhpEntityFactory::createConstantEntity(
+                return $this->cacheablePhpEntityFactory->createConstantEntity(
                     $this->classEntity,
                     $key,
                     $constantsData['declaringClass'],

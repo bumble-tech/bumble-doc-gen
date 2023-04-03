@@ -43,7 +43,7 @@ final class CacheablePhpEntityFactory
         );
     }
 
-    public static function createConstantEntity(
+    public function createConstantEntity(
         ClassEntity $classEntity,
         string      $constantName,
         string      $declaringClassName,
@@ -51,14 +51,18 @@ final class CacheablePhpEntityFactory
         bool        $reloadCache = false
     ): ConstantEntity
     {
-        $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ConstantEntity::class, 'ConstantEntityWrapper');
-        return $wrapperClassName::create(
-            $classEntity,
-            $constantName,
-            $declaringClassName,
-            $implementingClassName,
-            $reloadCache
-        );
+        static $wrapperClassName = null;
+        if (is_null($wrapperClassName)) {
+            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ConstantEntity::class, 'ConstantEntityWrapper');
+            $this->diContainer->set($wrapperClassName, \DI\factory([$wrapperClassName, 'create']));
+        }
+        return $this->diContainer->make($wrapperClassName, [
+            'classEntity' => $classEntity,
+            'constantName' => $constantName,
+            'declaringClassName' => $declaringClassName,
+            'implementingClassName' => $implementingClassName,
+            'reloadCache' => $reloadCache
+        ]);
     }
 
     /**
