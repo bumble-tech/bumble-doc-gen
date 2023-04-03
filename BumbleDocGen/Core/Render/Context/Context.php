@@ -57,11 +57,6 @@ final class Context
         return $this->configuration;
     }
 
-    public function getRootEntityCollectionsGroup(): RootEntityCollectionsGroup
-    {
-        return $this->rootEntityCollectionsGroup;
-    }
-
     public function getRootEntityCollection(string $collectionName): ?RootEntityCollection
     {
         return $this->rootEntityCollectionsGroup->get($collectionName);
