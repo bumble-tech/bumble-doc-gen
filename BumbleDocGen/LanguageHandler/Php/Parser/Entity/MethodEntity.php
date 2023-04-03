@@ -26,7 +26,12 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         protected string      $implementingClassName,
     )
     {
-        parent::__construct($classEntity->getConfiguration(), $classEntity->getReflector(), $classEntity->documentedEntityUrlFunction);
+        parent::__construct(
+            $classEntity->getConfiguration(),
+            $classEntity->getReflector(),
+            $classEntity->documentedEntityUrlFunction,
+            $classEntity->renderHelper
+        );
     }
 
     public static function create(

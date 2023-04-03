@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Render;
 
 use BumbleDocGen\Core\Plugin\Event\Render\OnGettingResourceLink;
-use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 
 final class RenderHelper
 {
-    public static function getPreloadResourceLink(string $resourceName, Context $context): ?string
+    public function __construct(private PluginEventDispatcher $pluginEventDispatcher)
     {
-        $pluginEventDispatcher = $context->getPluginEventDispatcher();
-        return $pluginEventDispatcher->dispatch(
-            new OnGettingResourceLink(
-                $resourceName, $context
-            )
+    }
+
+    public function getPreloadResourceLink(string $resourceName): ?string
+    {
+        return $this->pluginEventDispatcher->dispatch(
+            new OnGettingResourceLink($resourceName)
         )->getResourceUrl();
     }
 }

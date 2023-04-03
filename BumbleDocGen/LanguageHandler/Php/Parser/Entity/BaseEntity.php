@@ -7,9 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\CacheableEntityInterface;
-use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
-use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
@@ -28,7 +26,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     protected function __construct(
         protected Configuration          $configuration,
         protected ReflectorWrapper       $reflector,
-        protected GetDocumentedEntityUrl $documentedEntityUrlFunction
+        protected GetDocumentedEntityUrl $documentedEntityUrlFunction,
+        protected RenderHelper           $renderHelper
     )
     {
     }
@@ -170,11 +169,10 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             count($docBlock->getTagsByName('see')) || count($docBlock->getTagsByName('link'));
     }
 
-    #[CacheableMethod(
-        CacheableMethod::MONTH_SECONDS,
-        RenderContextCacheKeyGenerator::class
-    )]
-    protected function getDescriptionLinksData(?Context $context = null): array
+    /**
+     * @throws \Exception
+     */
+    #[CacheableMethod] protected function getDescriptionLinksData(): array
     {
         $links = [];
         $docBlock = $this->getDocBlock();
@@ -193,13 +191,13 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         'name' => $name,
                         'description' => $description,
                     ];
-                } elseif ($context && $url = RenderHelper::getPreloadResourceLink($name, $context)) {
+                } elseif ($url = $this->renderHelper->getPreloadResourceLink($name)) {
                     $links[] = [
                         'url' => $url,
                         'name' => $name,
                         'description' => $description,
                     ];
-                } elseif (str_starts_with($name, '\\') && $context) {
+                } elseif (str_starts_with($name, '\\')) {
                     if (!str_contains($name, '::')) {
                         // tmp hack to fix methods declared as global functions
                         if (str_contains($name, '(') || str_contains($name, '$')) {
@@ -242,31 +240,30 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         'name' => $name,
                         'description' => '',
                     ];
-                } elseif ($context && $url = RenderHelper::getPreloadResourceLink($name, $context)) {
+                } elseif ($url = $this->renderHelper->getPreloadResourceLink($name)) {
                     $links[] = [
                         'url' => $url,
                         'name' => $name,
                         'description' => $description,
                     ];
-                } elseif ($context) {
-                    $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
-                    $className = ParserHelper::parseFullClassName(
-                        $name,
-                        $this->reflector,
-                        $currentClassEntity->getReflection()
-                    );
-                    $data = $this->getRootEntityCollection()->gelEntityLinkData(
-                        $className,
-                        $this->getImplementingReflectionClass()->getName(),
-                        false
-                    );
-                    $links[] = [
-                        'entityData' => $data,
-                        'url' => null,
-                        'name' => $data['title'],
-                        'description' => $description,
-                    ];
                 }
+                $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
+                $className = ParserHelper::parseFullClassName(
+                    $name,
+                    $this->reflector,
+                    $currentClassEntity->getReflection()
+                );
+                $data = $this->getRootEntityCollection()->gelEntityLinkData(
+                    $className,
+                    $this->getImplementingReflectionClass()->getName(),
+                    false
+                );
+                $links[] = [
+                    'entityData' => $data,
+                    'url' => null,
+                    'name' => $data['title'],
+                    'description' => $description,
+                ];
             }
         }
 
@@ -289,10 +286,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * Get parsed links from description and doc blocks `see` and `link`
      * @throws InvalidConfigurationParameterException
+     * @throws \Exception
      */
-    public function getDescriptionLinks(?Context $context = null): array
+    public function getDescriptionLinks(): array
     {
-        $linksData = $this->getDescriptionLinksData($context);
+        $linksData = $this->getDescriptionLinksData();
         $getDocumentedEntityUrl = $this->documentedEntityUrlFunction;
         foreach ($linksData as $key => $data) {
             if (!isset($data['url'])) {
@@ -318,11 +316,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return count($docBlock->getTagsByName('throws')) > 0;
     }
 
-    #[CacheableMethod(
-        CacheableMethod::MONTH_SECONDS,
-        RenderContextCacheKeyGenerator::class
-    )]
-    protected function getThrowsData(?Context $context = null): array
+    #[CacheableMethod] protected function getThrowsData(): array
     {
         $throws = [];
         $implementingReflectionClass = $this->getDocCommentEntity()->getRootEntity()->getReflection();
@@ -331,7 +325,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             if (is_a($throwBlock, DocBlock\Tags\Throws::class)) {
                 $names = explode('|', (string)$throwBlock->getType());
                 foreach ($names as $name) {
-                    if ($context && $url = RenderHelper::getPreloadResourceLink($name, $context)) {
+                    if ($url = $this->renderHelper->getPreloadResourceLink($name)) {
                         $throws[] = [
                             'url' => $url,
                             'name' => $name,
@@ -348,13 +342,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         'name' => $className,
                         'description' => (string)$throwBlock->getDescription(),
                     ];
-                    if ($context) {
-                        $throwData['entityData'] = $this->getRootEntityCollection()->gelEntityLinkData(
-                            $className,
-                            $this->getImplementingReflectionClass()->getName(),
-                            false
-                        );
-                    }
+                    $throwData['entityData'] = $this->getRootEntityCollection()->gelEntityLinkData(
+                        $className,
+                        $this->getImplementingReflectionClass()->getName(),
+                        false
+                    );
                     $throws[] = $throwData;
                 }
             }
@@ -366,9 +358,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      * Get parsed throws from `throws` doc block
      * @throws InvalidConfigurationParameterException
      */
-    public function getThrows(?Context $context = null): array
+    public function getThrows(): array
     {
-        $throwsData = $this->getThrowsData($context);
+        $throwsData = $this->getThrowsData();
         $getDocumentedEntityUrl = $this->documentedEntityUrlFunction;
         foreach ($throwsData as $key => $data) {
             if (!isset($data['url'])) {

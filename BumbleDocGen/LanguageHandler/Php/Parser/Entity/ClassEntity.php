@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Render\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
@@ -37,12 +38,13 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         protected PhpHandlerSettings    $phpHandlerSettings,
         protected ReflectorWrapper      $reflector,
         protected ClassEntityCollection $classEntityCollection,
-        public GetDocumentedEntityUrl   $documentedEntityUrlFunction,
+        GetDocumentedEntityUrl          $documentedEntityUrlFunction,
+        RenderHelper                    $renderHelper,
         protected string                $className,
         protected ?string               $relativeFileName,
     )
     {
-        parent::__construct($configuration, $reflector, $documentedEntityUrlFunction);
+        parent::__construct($configuration, $reflector, $documentedEntityUrlFunction, $renderHelper);
         if ($relativeFileName) {
             $this->relativeFileNameLoaded = true;
         }
@@ -64,6 +66,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         ReflectorWrapper       $reflector,
         ClassEntityCollection  $classEntityCollection,
         GetDocumentedEntityUrl $documentedEntityUrlFunction,
+        RenderHelper           $renderHelper,
         string                 $className,
         ?string                $relativeFileName,
         bool                   $reloadCache = false
@@ -79,6 +82,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $reflector,
                 $classEntityCollection,
                 $documentedEntityUrlFunction,
+                $renderHelper,
                 $className,
                 $relativeFileName,
             );
@@ -94,6 +98,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         ReflectionClass        $reflectionClass,
         ClassEntityCollection  $classEntityCollection,
         GetDocumentedEntityUrl $documentedEntityUrlFunction,
+        RenderHelper           $renderHelper,
         bool                   $reloadCache = false
     ): ClassEntity
     {
@@ -107,6 +112,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $reflector,
                 $classEntityCollection,
                 $documentedEntityUrlFunction,
+                $renderHelper,
                 $reflectionClass->getName(),
                 $relativeFileName,
             );

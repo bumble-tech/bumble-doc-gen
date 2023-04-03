@@ -6,6 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
+use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
@@ -22,7 +23,8 @@ final class CacheablePhpEntityFactory
         private Configuration          $configuration,
         private PhpHandlerSettings     $phpHandlerSettings,
         private ReflectorWrapper       $reflector,
-        private GetDocumentedEntityUrl $documentedEntityUrlFunction
+        private GetDocumentedEntityUrl $documentedEntityUrlFunction,
+        private RenderHelper           $renderHelper
     )
     {
     }
@@ -95,6 +97,7 @@ final class CacheablePhpEntityFactory
             $this->reflector,
             $classEntityCollection,
             $this->documentedEntityUrlFunction,
+            $this->renderHelper,
             $className,
             $relativeFileName,
             $reloadCache
@@ -114,6 +117,7 @@ final class CacheablePhpEntityFactory
             $this->reflector,
             $reflectionClass,
             $this->documentedEntityUrlFunction,
+            $this->renderHelper,
             $classEntityCollection,
             $reloadCache
         );

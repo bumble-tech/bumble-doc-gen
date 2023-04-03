@@ -6,7 +6,6 @@ namespace BumbleDocGen\Core\Render\Twig\Filter;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use Monolog\Logger;
@@ -20,7 +19,7 @@ use Monolog\Logger;
 final class StrTypeToUrl implements CustomFilterInterface
 {
     public function __construct(
-        private Context                $context,
+        private RenderHelper           $renderHelper,
         private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
         private Logger                 $logger
     )
@@ -61,7 +60,7 @@ final class StrTypeToUrl implements CustomFilterInterface
         $preparedTypes = [];
         $types = explode('|', $text);
         foreach ($types as $type) {
-            $preloadResourceLink = RenderHelper::getPreloadResourceLink($type, $this->context);
+            $preloadResourceLink = $this->renderHelper->getPreloadResourceLink($type);
             if ($preloadResourceLink) {
                 $preparedTypes[] = "<a href='{$preloadResourceLink}'>{$type}</a>";
                 continue;

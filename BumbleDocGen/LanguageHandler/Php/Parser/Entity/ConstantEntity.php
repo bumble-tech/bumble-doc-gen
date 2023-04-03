@@ -25,7 +25,12 @@ class ConstantEntity extends BaseEntity
         protected string      $implementingClassName,
     )
     {
-        parent::__construct($classEntity->getConfiguration(), $classEntity->getReflector(), $classEntity->documentedEntityUrlFunction);
+        parent::__construct(
+            $classEntity->getConfiguration(),
+            $classEntity->getReflector(),
+            $classEntity->documentedEntityUrlFunction,
+            $classEntity->renderHelper
+        );
     }
 
     public static function create(
