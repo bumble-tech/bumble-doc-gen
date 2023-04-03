@@ -18,7 +18,7 @@ final class ConfigurationParameterBag
      */
     private array $resolvers = [];
 
-    public function __construct(ValueResolverInterface ...$resolvers)
+    public function __construct(array $resolvers)
     {
         $this->resolvers = $resolvers;
     }
@@ -64,7 +64,9 @@ final class ConfigurationParameterBag
     {
         $keys = array_reverse(explode('.', $name));
         foreach ($keys as $key) {
-            $value = [$key => $value];
+            if ($key) {
+                $value = [$key => $value];
+            }
         }
         $this->parameters = array_replace_recursive($value, $this->parameters);
     }
