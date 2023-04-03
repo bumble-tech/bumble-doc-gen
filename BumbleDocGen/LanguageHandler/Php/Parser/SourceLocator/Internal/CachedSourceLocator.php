@@ -99,9 +99,6 @@ final class CachedSourceLocator implements SourceLocator
         return $this->cacheByIdentifierKeyAndOid[$cacheKey] = $locateIdentifier;
     }
 
-    /**
-     * @return Reflection
-     */
     public function locateIdentifiersByType(Reflector $reflector, IdentifierType $identifierType): array
     {
         $cacheKey = sprintf(
