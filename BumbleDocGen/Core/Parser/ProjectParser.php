@@ -15,7 +15,6 @@ final class ProjectParser
 {
     public function __construct(
         private ConfigurationInterface     $configuration,
-        private PluginEventDispatcher      $pluginEventDispatcher,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup
     )
     {
@@ -23,9 +22,7 @@ final class ProjectParser
 
     public function parse(): void
     {
-        foreach ($this->configuration->getLanguageHandlersCollection(
-            $this->pluginEventDispatcher
-        ) as $languageHandler) {
+        foreach ($this->configuration->getLanguageHandlersCollection() as $languageHandler) {
             $this->rootEntityCollectionsGroup->add($languageHandler->getEntityCollection());
         }
     }

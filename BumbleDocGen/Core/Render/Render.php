@@ -110,7 +110,6 @@ final class Render
                 $content = $twig->render($filePatch,
                     array_merge($templateParams, [
                         'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
-                            $this->rootEntityCollectionsGroup,
                             $filePatch
                         ),
                     ])

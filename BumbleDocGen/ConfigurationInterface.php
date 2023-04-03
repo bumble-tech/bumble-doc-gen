@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
-use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Plugin\PluginsCollection;
 use BumbleDocGen\Core\Render\PageLinkProcessor\PageLinkProcessorInterface;
 use BumbleDocGen\Core\Render\TemplateFiller\TemplateFillersCollection;
@@ -54,7 +53,7 @@ interface ConfigurationInterface
 
     public function getTemplateFillers(): TemplateFillersCollection;
 
-    public function getLanguageHandlersCollection(PluginEventDispatcher $pluginEventDispatcher): LanguageHandlersCollection;
+    public function getLanguageHandlersCollection(): LanguageHandlersCollection;
 
     public function getLogger(): LoggerInterface;
 
