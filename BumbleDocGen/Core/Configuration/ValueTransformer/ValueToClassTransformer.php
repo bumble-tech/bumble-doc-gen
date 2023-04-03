@@ -6,6 +6,7 @@ namespace BumbleDocGen\Core\Configuration\ValueTransformer;
 
 use DI\Container;
 use Psr\Log\LoggerInterface;
+use function BumbleDocGen\Core\is_associative_array;
 
 final class ValueToClassTransformer implements ValueTransformerInterface
 {
@@ -36,8 +37,10 @@ final class ValueToClassTransformer implements ValueTransformerInterface
                 }
                 $arguments[$k] = $argument;
             }
-
-            return new $value['class'](...$arguments);
+            if (!is_associative_array($arguments)) {
+                return new $value['class'](...$arguments);
+            }
+            return $this->diContainer->make($value['class'], $arguments);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
         }
