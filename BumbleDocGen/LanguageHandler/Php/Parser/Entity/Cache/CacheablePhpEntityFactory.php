@@ -17,6 +17,14 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 
 final class CacheablePhpEntityFactory
 {
+    public function __construct(
+        private Configuration      $configuration,
+        private PhpHandlerSettings $phpHandlerSettings,
+        private ReflectorWrapper   $reflector
+    )
+    {
+    }
+
     public static function createPropertyEntity(
         ClassEntity $classEntity,
         string      $propertyName,
@@ -71,10 +79,7 @@ final class CacheablePhpEntityFactory
         );
     }
 
-    public static function createClassEntity(
-        Configuration         $configuration,
-        PhpHandlerSettings    $phpHandlerSettings,
-        ReflectorWrapper      $reflector,
+    public function createClassEntity(
         ClassEntityCollection $classEntityCollection,
         string                $className,
         ?string               $relativeFileName = null,
@@ -83,9 +88,9 @@ final class CacheablePhpEntityFactory
     {
         $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ClassEntity::class, 'ClassEntityWrapper');
         return $wrapperClassName::create(
-            $configuration,
-            $phpHandlerSettings,
-            $reflector,
+            $this->configuration,
+            $this->phpHandlerSettings,
+            $this->reflector,
             $classEntityCollection,
             $className,
             $relativeFileName,
@@ -93,10 +98,7 @@ final class CacheablePhpEntityFactory
         );
     }
 
-    public static function createClassEntityByReflection(
-        Configuration         $configuration,
-        PhpHandlerSettings    $phpHandlerSettings,
-        ReflectorWrapper      $reflector,
+    public function createClassEntityByReflection(
         ReflectionClass       $reflectionClass,
         ClassEntityCollection $classEntityCollection,
         bool                  $reloadCache = false
@@ -104,20 +106,17 @@ final class CacheablePhpEntityFactory
     {
         $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ClassEntity::class, 'ClassEntityWrapper');
         return $wrapperClassName::createByReflection(
-            $configuration,
-            $phpHandlerSettings,
-            $reflector,
+            $this->configuration,
+            $this->phpHandlerSettings,
+            $this->reflector,
             $reflectionClass,
             $classEntityCollection,
             $reloadCache
         );
     }
 
-    public static function createSubClassEntity(
+    public function createSubClassEntity(
         string                $subClassEntity,
-        Configuration         $configuration,
-        PhpHandlerSettings    $phpHandlerSettings,
-        ReflectorWrapper      $reflector,
         ClassEntityCollection $classEntityCollection,
         string                $className,
         ?string               $relativeFileName,
@@ -128,9 +127,9 @@ final class CacheablePhpEntityFactory
         $subClassEntityName = end($classNameParts);
         $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass($subClassEntity, "{$subClassEntityName}Wrapper");
         return $wrapperClassName::create(
-            $configuration,
-            $phpHandlerSettings,
-            $reflector,
+            $this->configuration,
+            $this->phpHandlerSettings,
+            $this->reflector,
             $classEntityCollection,
             $className,
             $relativeFileName,
@@ -138,11 +137,8 @@ final class CacheablePhpEntityFactory
         );
     }
 
-    public static function createSubClassEntityByReflection(
+    public function createSubClassEntityByReflection(
         string                $subClassEntity,
-        Configuration         $configuration,
-        PhpHandlerSettings    $phpHandlerSettings,
-        ReflectorWrapper      $reflector,
         ReflectionClass       $reflectionClass,
         ClassEntityCollection $classEntityCollection,
         bool                  $reloadCache = false
@@ -152,9 +148,9 @@ final class CacheablePhpEntityFactory
         $className = end($classNameParts);
         $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass($subClassEntity, "{$className}Wrapper");
         return $wrapperClassName::createByReflection(
-            $configuration,
-            $phpHandlerSettings,
-            $reflector,
+            $this->configuration,
+            $this->phpHandlerSettings,
+            $this->reflector,
             $reflectionClass,
             $classEntityCollection,
             $reloadCache

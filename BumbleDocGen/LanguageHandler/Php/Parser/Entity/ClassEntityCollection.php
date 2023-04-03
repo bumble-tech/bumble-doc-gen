@@ -9,21 +9,22 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
+use DI\Container;
 use Psr\Log\LoggerInterface;
 
 final class ClassEntityCollection extends RootEntityCollection
 {
     public function __construct(
-        private Configuration         $configuration,
-        protected PhpHandlerSettings  $phpHandlerSettings,
-        private ReflectorWrapper      $reflector,
-        private PluginEventDispatcher $pluginEventDispatcher
+        private Container                 $diContainer,
+        private Configuration             $configuration,
+        protected PhpHandlerSettings      $phpHandlerSettings,
+        private PluginEventDispatcher     $pluginEventDispatcher,
+        private CacheablePhpEntityFactory $cacheablePhpEntityFactory
     )
     {
     }
@@ -48,13 +49,10 @@ final class ClassEntityCollection extends RootEntityCollection
             $className = ParserHelper::getClassFromFile($file->getPathName());
             if ($className) {
                 $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $file->getPathName());
-                $classEntity = CacheablePhpEntityFactory::createClassEntity(
-                    $this->configuration,
-                    $this->phpHandlerSettings,
-                    $this->reflector,
+                $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
                     $this,
                     ltrim($className, '\\'),
-                    $relativeFileName,
+                    $relativeFileName
                 );
                 if ($classEntityFilter->canAddToCollection($classEntity)) {
                     $this->add($classEntity);
@@ -100,12 +98,9 @@ final class ClassEntityCollection extends RootEntityCollection
             if (isset($loadUnsafe[$objectId])) {
                 $loadedUnsafe = $loadUnsafe[$objectId];
             } else {
-                $classEntity = CacheablePhpEntityFactory::createClassEntity(
-                    $this->configuration,
-                    $this->phpHandlerSettings,
-                    $this->reflector,
+                $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
                     $this,
-                    ltrim($objectId, '\\'),
+                    ltrim($objectId, '\\')
                 );
                 $loadedUnsafe[$objectId] = $classEntity;
             }
@@ -118,11 +113,6 @@ final class ClassEntityCollection extends RootEntityCollection
         return $createIfNotExists ? $this->getLoadedOrCreateNew($className) : $this->get($className);
     }
 
-    public function getReflector(): ReflectorWrapper
-    {
-        return $this->reflector;
-    }
-
     public function getLogger(): LoggerInterface
     {
         return $this->configuration->getLogger();
@@ -133,9 +123,7 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
-        );
+        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
         $interfaces = array_map(
             fn($interface) => ltrim(
                 str_replace('\\\\', '\\', $interface),
@@ -156,9 +144,7 @@ final class ClassEntityCollection extends RootEntityCollection
 
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
-        );
+        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
         $parentClassNames = array_map(
             fn($parentClassName) => ltrim(
                 str_replace('\\\\', '\\', $parentClassName),
@@ -179,9 +165,7 @@ final class ClassEntityCollection extends RootEntityCollection
 
     public function filterByPaths(array $paths): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
-        );
+        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             foreach ($paths as $path) {
@@ -195,9 +179,7 @@ final class ClassEntityCollection extends RootEntityCollection
 
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
-        );
+        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if (preg_match($regexPattern, $classEntity->getShortName())) {
@@ -209,9 +191,7 @@ final class ClassEntityCollection extends RootEntityCollection
 
     public function getOnlyInstantiable(): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
-        );
+        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if ($classEntity->isInstantiable()) {
@@ -223,9 +203,7 @@ final class ClassEntityCollection extends RootEntityCollection
 
     public function getOnlyInterfaces(): ClassEntityCollection
     {
-        $classEntityCollection = new ClassEntityCollection(
-            $this->configuration, $this->phpHandlerSettings, $this->reflector, $this->pluginEventDispatcher
-        );
+        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
         foreach ($this as $classEntity) {
             /**@var ClassEntity $classEntity */
             if ($classEntity->isInterface()) {
