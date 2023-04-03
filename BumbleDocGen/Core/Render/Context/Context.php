@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Context;
 
-use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -17,7 +16,6 @@ final class Context
     private string $currentTemplateFilePath = '';
 
     public function __construct(
-        private Configuration              $configuration,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private PluginEventDispatcher      $pluginEventDispatcher
     )
@@ -48,11 +46,6 @@ final class Context
     public function isCurrentTemplateMd(): bool
     {
         return str_ends_with($this->getCurrentTemplateFilePatch(), '.md.twig');
-    }
-
-    public function getConfiguration(): Configuration
-    {
-        return $this->configuration;
     }
 
     public function getRootEntityCollection(string $collectionName): ?RootEntityCollection

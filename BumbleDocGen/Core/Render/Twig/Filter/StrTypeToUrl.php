@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
+use Monolog\Logger;
 
 /**
  * The filter converts the string with the data type into a link to the documented entity, if possible.
@@ -24,7 +25,8 @@ final class StrTypeToUrl implements CustomFilterInterface
 
     public function __construct(
         private Context $context,
-        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction
+        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private Logger $logger
     )
     {
     }
@@ -98,7 +100,7 @@ final class StrTypeToUrl implements CustomFilterInterface
                 }
             } else {
                 if ($entityOfLink::isEntityNameValid($type)) {
-                    $this->context->getConfiguration()->getLogger()->warning(
+                    $this->logger->warning(
                         "StrTypeToUrl: Entity {$type} not found in specified sources"
                     );
                 }

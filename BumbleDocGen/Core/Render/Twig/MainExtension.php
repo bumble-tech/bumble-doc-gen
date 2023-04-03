@@ -20,15 +20,13 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     private CustomFunctionsCollection $functions;
     private CustomFiltersCollection $filters;
 
-    public function __construct(private Context $context, private Configuration $configuration)
+    public function __construct(
+        private Context       $context,
+        private Configuration $configuration
+    )
     {
         $this->setDefaultFunctions();
         $this->setDefaultFilters();
-    }
-
-    public function getConfiguration(): Configuration
-    {
-        return $this->context->getConfiguration();
     }
 
     /**
@@ -36,7 +34,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
      */
     public function getLanguageHandlersCollection(): LanguageHandlersCollection
     {
-        return $this->getConfiguration()->getLanguageHandlersCollection();
+        return $this->configuration->getLanguageHandlersCollection();
     }
 
     /**
