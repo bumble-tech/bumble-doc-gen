@@ -3,7 +3,7 @@
 namespace BumbleDocGen\Core\Render\Twig\Filter;
 
 /**
- * Wraps an html string in an rst `..raw::html` construct, thus helping to display it.
+ * Wraps a html string in a rst `..raw::html` construct, thus helping to display it.
  */
 final class HtmlToRst implements CustomFilterInterface
 {
