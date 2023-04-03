@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Render;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
-use BumbleDocGen\Core\Render\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\Twig\MainExtension;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -26,7 +27,10 @@ final class Render
     public function __construct(
         private Configuration              $configuration,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private PluginEventDispatcher      $pluginEventDispatcher
+        private PluginEventDispatcher      $pluginEventDispatcher,
+        private Context                    $renderContext,
+        private MainExtension              $twigMainExtension,
+        private LoggerInterface            $logger
     )
     {
     }
@@ -37,7 +41,7 @@ final class Render
      * @see Configuration::clearOutputDirBeforeDocGeneration()
      * @see Configuration::getOutputDir()
      */
-    private function clearOutputDir(string $dir): bool
+    private function clearOutputDir(string $dir): void
     {
         if (is_dir($dir)) {
             $it = new \RecursiveIteratorIterator(
@@ -51,9 +55,8 @@ final class Render
                     unlink($file->getPathname());
                 }
             }
-            return rmdir($dir);
+            rmdir($dir);
         }
-        return false;
     }
 
     /**
@@ -62,6 +65,7 @@ final class Render
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
+     * @throws InvalidConfigurationParameterException
      */
     public function run(): void
     {
@@ -70,16 +74,7 @@ final class Render
             $templateFolder,
         ]);
         $twig = new Environment($loader);
-
-        $breadcrumbsHelper = new BreadcrumbsHelper($this->configuration);
-        $context = new Context(
-            $this->configuration,
-            $this->rootEntityCollectionsGroup,
-            $breadcrumbsHelper,
-            $this->pluginEventDispatcher
-        );
-        $mainExtension = new MainExtension($context);
-        $twig->addExtension($mainExtension);
+        $twig->addExtension($this->twigMainExtension);
 
         $finder = Finder::create()
             ->in($templateFolder)
@@ -89,7 +84,6 @@ final class Render
             ->sortByName()
             ->files();
 
-        $logger = $this->configuration->getLogger();
         $outputDir = $this->configuration->getOutputDir();
 
         if ($this->configuration->clearOutputDirBeforeDocGeneration()) {
@@ -106,7 +100,7 @@ final class Render
             $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
 
             if (str_ends_with($filePatch, '.twig')) {
-                $context->setCurrentTemplateFilePatch($filePatch);
+                $this->renderContext->setCurrentTemplateFilePatch($filePatch);
                 $content = $twig->render($filePatch,
                     array_merge($templateParams, [
                         'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
@@ -116,7 +110,7 @@ final class Render
                 );
 
                 $content = $this->pluginEventDispatcher->dispatch(
-                    new BeforeCreatingDocFile($content, $context)
+                    new BeforeCreatingDocFile($content, $this->renderContext)
                 )->getContent();
 
                 $filePatch = str_replace('.twig', '', $filePatch);
@@ -130,20 +124,18 @@ final class Render
                 mkdir($newDirName, 0755, true);
             }
             file_put_contents($filePatch, $content);
-            $logger->info("Saving `{$filePatch}`");
+            $this->logger->info("Saving `{$filePatch}`");
         }
 
-        foreach ($context->getEntityWrappersCollection() as $entityWrapper) {
+        foreach ($this->renderContext->getEntityWrappersCollection() as $entityWrapper) {
             /**@var \BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper $entityWrapper * */
-
-            $context->setCurrentTemplateFilePatch($entityWrapper->getInitiatorFilePath());
+            $this->renderContext->setCurrentTemplateFilePatch($entityWrapper->getInitiatorFilePath());
             $docRender = $entityWrapper->getDocRender();
-            $docRender->setContext($context);
 
             $content = $docRender->getRenderedText($entityWrapper);
             $filePatch = "{$outputDir}{$entityWrapper->getDocUrl()}";
             if (str_contains($filePatch, chr(0))) {
-                $logger->warning("Skipping `{$filePatch}`");
+                $this->logger->warning("Skipping `{$filePatch}`");
                 continue;
             }
             $newDirName = dirname($filePatch);
@@ -152,7 +144,7 @@ final class Render
             }
             // tmp hack to fix gitHub pages
             file_put_contents($filePatch, "<!-- {% raw %} -->\n{$content}\n<!-- {% endraw %} -->");
-            $logger->info("Saving `{$filePatch}`");
+            $this->logger->info("Saving `{$filePatch}`");
         }
         $this->rootEntityCollectionsGroup->updateAllEntitiesCache();
     }
