@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Render\Twig\Function;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Plugin\Event\Render\OnLoadEntityDocPluginContent;
-use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 
 /**
  * Process entity template blocks with plugins. The method returns the content processed by plugins.
@@ -17,10 +17,7 @@ use BumbleDocGen\Core\Render\Context\Context;
  */
 final class LoadPluginsContent implements CustomFunctionInterface
 {
-    /**
-     * @param Context $context Render context
-     */
-    public function __construct(private Context $context)
+    public function __construct(private PluginEventDispatcher $pluginEventDispatcher)
     {
     }
 
@@ -44,11 +41,9 @@ final class LoadPluginsContent implements CustomFunctionInterface
      */
     public function __invoke(string $content, RootEntityInterface $entity, string $blockType): string
     {
-        $pluginEventDispatcher = $this->context->getPluginEventDispatcher();
-
-        $blockContentPluginResults = $pluginEventDispatcher->dispatch(
+        $blockContentPluginResults = $this->pluginEventDispatcher->dispatch(
             new OnLoadEntityDocPluginContent(
-                $content, $entity, $blockType, $this->context
+                $content, $entity, $blockType
             )
         )->getBlockContentPluginResults();
 
