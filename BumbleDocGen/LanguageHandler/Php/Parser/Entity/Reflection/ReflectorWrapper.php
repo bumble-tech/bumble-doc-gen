@@ -18,6 +18,8 @@ use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 
 final class ReflectorWrapper implements Reflector
 {
+    private DefaultReflector $reflector;
+
     public function __construct(
         Configuration         $configuration,
         PhpHandlerSettings    $phpHandlerSettings,
