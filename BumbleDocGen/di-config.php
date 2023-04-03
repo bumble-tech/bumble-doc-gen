@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Configuration\ValueResolver\RefValueResolver;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
-use SelfDoc\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Configuration;
 
 return [
     ConfigurationInterface::class => \DI\get(Configuration::class),
@@ -36,12 +36,16 @@ return [
     LoggerInterface::class => \DI\get(Logger::class),
     ConfigurationParameterBag::class => \DI\autowire(ConfigurationParameterBag::class)
         ->constructor(
-            \DI\autowire(InternalValueResolver::class)
-                ->constructor(
-                    internalValuesMap: [
-                        'SCRIPT_COMMAND_DIR' => __DIR__
-                    ]
-                ),
-            \DI\autowire(RefValueResolver::class)
+            [
+                \DI\autowire(InternalValueResolver::class)
+                    ->constructor(
+                        internalValuesMap: [
+                            'DOC_GEN_LIB_PATH' => dirname(__DIR__),
+                            'UNIX_TIMESTAMP' => time(),
+                            'PHP_VERSION' => phpversion(),
+                        ]
+                    ),
+                \DI\autowire(RefValueResolver::class)
+            ]
         )
 ];
