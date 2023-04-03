@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
@@ -46,7 +46,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
         $this->context = $context;
     }
 
-    public function getConfiguration(): ConfigurationInterface
+    public function getConfiguration(): Configuration
     {
         return $this->context->getConfiguration();
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 
 /**
  * @internal
@@ -40,7 +40,7 @@ final class EntityCacheStorageHelper
         self::$cache[$cacheKey][$itemKey] = $value;
     }
 
-    public static function saveCache(ConfigurationInterface $configuration): void
+    public static function saveCache(Configuration $configuration): void
     {
         $cacheItemPool = $configuration->getEntityCacheItemPool();
         foreach (EntityCacheStorageHelper::getAllCacheValues() as $cacheKey => $cacheData) {

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
-use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 
 /**
  * Entity for project parsing using source locators
@@ -14,7 +13,7 @@ use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 final class ProjectParser
 {
     public function __construct(
-        private ConfigurationInterface     $configuration,
+        private Configuration              $configuration,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup
     )
     {

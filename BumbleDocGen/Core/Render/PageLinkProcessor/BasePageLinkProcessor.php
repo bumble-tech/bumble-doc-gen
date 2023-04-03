@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\PageLinkProcessor;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 
 class BasePageLinkProcessor implements PageLinkProcessorInterface
 {
-    public function __construct(private ConfigurationInterface $configuration)
+    public function __construct(private Configuration $configuration)
     {
     }
 

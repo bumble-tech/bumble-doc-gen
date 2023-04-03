@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
@@ -25,13 +25,13 @@ use Roave\BetterReflection\Reflector\Reflector;
 abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
     protected function __construct(
-        protected ConfigurationInterface $configuration,
-        protected Reflector              $reflector,
+        protected Configuration $configuration,
+        protected Reflector     $reflector,
     )
     {
     }
 
-    public function getConfiguration(): ConfigurationInterface
+    public function getConfiguration(): Configuration
     {
         return $this->configuration;
     }

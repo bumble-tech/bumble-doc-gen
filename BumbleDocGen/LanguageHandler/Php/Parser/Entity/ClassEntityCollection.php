@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
@@ -19,10 +19,10 @@ use Roave\BetterReflection\Reflector\Reflector;
 final class ClassEntityCollection extends RootEntityCollection
 {
     private function __construct(
-        private ConfigurationInterface $configuration,
-        protected PhpHandlerSettings   $phpHandlerSettings,
-        private Reflector              $reflector,
-        private PluginEventDispatcher  $pluginEventDispatcher
+        private Configuration         $configuration,
+        protected PhpHandlerSettings  $phpHandlerSettings,
+        private Reflector             $reflector,
+        private PluginEventDispatcher $pluginEventDispatcher
     )
     {
     }
@@ -38,10 +38,10 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     public static function createByReflector(
-        ConfigurationInterface $configuration,
-        PhpHandlerSettings     $phpHandlerSettings,
-        Reflector              $reflector,
-        PluginEventDispatcher  $pluginEventDispatcher
+        Configuration         $configuration,
+        PhpHandlerSettings    $phpHandlerSettings,
+        Reflector             $reflector,
+        PluginEventDispatcher $pluginEventDispatcher
     ): ClassEntityCollection
     {
         $classEntityCollection = new ClassEntityCollection(
@@ -73,7 +73,7 @@ final class ClassEntityCollection extends RootEntityCollection
         return $classEntityCollection;
     }
 
-    public function getConfiguration(): ConfigurationInterface
+    public function getConfiguration(): Configuration
     {
         return $this->configuration;
     }

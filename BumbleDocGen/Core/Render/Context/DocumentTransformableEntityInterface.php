@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Context;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 
 /**
@@ -12,7 +12,7 @@ use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
  */
 interface DocumentTransformableEntityInterface
 {
-    public function getConfiguration(): ConfigurationInterface;
+    public function getConfiguration(): Configuration;
 
     public function getName(): string;
 

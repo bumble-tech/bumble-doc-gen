@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Configuration;
 
-use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Configuration\ValueGetter\ClassListValueGetter;
 use BumbleDocGen\Core\Configuration\ValueGetter\ClassValueGetter;
@@ -25,7 +24,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 /**
  * Configuration wrapper for project documentation
  */
-final class Configuration implements ConfigurationInterface
+final class Configuration
 {
     public const DEFAULT_SETTINGS_FILE = __DIR__ . '/defaultConfiguration.yaml';
 

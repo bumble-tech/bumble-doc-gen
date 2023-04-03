@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -27,9 +27,9 @@ final class PhpHandler implements LanguageHandlerInterface
     private Reflector $reflector;
 
     public function __construct(
-        private ConfigurationInterface $configuration,
-        private PhpHandlerSettings     $phpHandlerSettings,
-        private PluginEventDispatcher  $pluginEventDispatcher
+        private Configuration         $configuration,
+        private PhpHandlerSettings    $phpHandlerSettings,
+        private PluginEventDispatcher $pluginEventDispatcher
     )
     {
         $betterReflection = (new BetterReflection());

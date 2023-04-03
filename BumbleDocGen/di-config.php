@@ -3,17 +3,14 @@
 declare(strict_types=1);
 
 use Bramus\Monolog\Formatter\ColoredLineFormatter;
-use BumbleDocGen\ConfigurationInterface;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\ValueResolver\InternalValueResolver;
 use BumbleDocGen\Core\Configuration\ValueResolver\RefValueResolver;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
-use BumbleDocGen\Core\Configuration\Configuration;
 
 return [
-    ConfigurationInterface::class => \DI\get(Configuration::class),
     Logger::class => \DI\autowire(Logger::class)
         ->constructor(
             name: 'Bumble doc gen',

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Context;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -19,7 +19,7 @@ final class Context
     private DocumentedEntityWrappersCollection $entityWrappersCollection;
 
     public function __construct(
-        private ConfigurationInterface     $configuration,
+        private Configuration              $configuration,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private BreadcrumbsHelper          $breadcrumbsHelper,
         private PluginEventDispatcher      $pluginEventDispatcher
@@ -54,7 +54,7 @@ final class Context
         return str_ends_with($this->getCurrentTemplateFilePatch(), '.md.twig');
     }
 
-    public function getConfiguration(): ConfigurationInterface
+    public function getConfiguration(): Configuration
     {
         return $this->configuration;
     }

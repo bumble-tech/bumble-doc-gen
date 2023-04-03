@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\PageLinkProcessor;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 
 class GithubPagesLinkProcessor implements PageLinkProcessorInterface
 {
     private array $docFilesExtensions;
 
     public function __construct(
-        private ConfigurationInterface $configuration,
-        array                          $docFilesExtensions = ['md', 'html']
+        private Configuration $configuration,
+        array                 $docFilesExtensions = ['md', 'html']
     )
     {
         $this->docFilesExtensions = array_map(fn($ext) => ".{$ext}", $docFilesExtensions);

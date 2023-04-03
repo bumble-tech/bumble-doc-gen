@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
@@ -72,13 +72,13 @@ final class CacheablePhpEntityFactory
     }
 
     public static function createClassEntity(
-        ConfigurationInterface $configuration,
-        PhpHandlerSettings     $phpHandlerSettings,
-        Reflector              $reflector,
-        ClassEntityCollection  $classEntityCollection,
-        string                 $className,
-        ?string                $relativeFileName = null,
-        bool                   $reloadCache = false
+        Configuration         $configuration,
+        PhpHandlerSettings    $phpHandlerSettings,
+        Reflector             $reflector,
+        ClassEntityCollection $classEntityCollection,
+        string                $className,
+        ?string               $relativeFileName = null,
+        bool                  $reloadCache = false
     ): ClassEntity
     {
         $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ClassEntity::class, 'ClassEntityWrapper');
@@ -94,12 +94,12 @@ final class CacheablePhpEntityFactory
     }
 
     public static function createClassEntityByReflection(
-        ConfigurationInterface $configuration,
-        PhpHandlerSettings     $phpHandlerSettings,
-        Reflector              $reflector,
-        ReflectionClass        $reflectionClass,
-        ClassEntityCollection  $classEntityCollection,
-        bool                   $reloadCache = false
+        Configuration         $configuration,
+        PhpHandlerSettings    $phpHandlerSettings,
+        Reflector             $reflector,
+        ReflectionClass       $reflectionClass,
+        ClassEntityCollection $classEntityCollection,
+        bool                  $reloadCache = false
     ): ClassEntity
     {
         $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ClassEntity::class, 'ClassEntityWrapper');
@@ -114,14 +114,14 @@ final class CacheablePhpEntityFactory
     }
 
     public static function createSubClassEntity(
-        string                 $subClassEntity,
-        ConfigurationInterface $configuration,
-        PhpHandlerSettings     $phpHandlerSettings,
-        Reflector              $reflector,
-        ClassEntityCollection  $classEntityCollection,
-        string                 $className,
-        ?string                $relativeFileName,
-        bool                   $reloadCache = false
+        string                $subClassEntity,
+        Configuration         $configuration,
+        PhpHandlerSettings    $phpHandlerSettings,
+        Reflector             $reflector,
+        ClassEntityCollection $classEntityCollection,
+        string                $className,
+        ?string               $relativeFileName,
+        bool                  $reloadCache = false
     ): ClassEntity
     {
         $classNameParts = explode('\\', $subClassEntity);
@@ -139,13 +139,13 @@ final class CacheablePhpEntityFactory
     }
 
     public static function createSubClassEntityByReflection(
-        string                 $subClassEntity,
-        ConfigurationInterface $configuration,
-        PhpHandlerSettings     $phpHandlerSettings,
-        Reflector              $reflector,
-        ReflectionClass        $reflectionClass,
-        ClassEntityCollection  $classEntityCollection,
-        bool                   $reloadCache = false
+        string                $subClassEntity,
+        Configuration         $configuration,
+        PhpHandlerSettings    $phpHandlerSettings,
+        Reflector             $reflector,
+        ReflectionClass       $reflectionClass,
+        ClassEntityCollection $classEntityCollection,
+        bool                  $reloadCache = false
     ): ClassEntity
     {
         $classNameParts = explode('\\', $subClassEntity);

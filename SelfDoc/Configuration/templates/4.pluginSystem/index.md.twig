@@ -11,7 +11,7 @@ Plugin system based on event model.
 
 {{ "Using plugins" | textToHeading('H2') }}
 
-Plugins can be added in documentation generator configuration, in method <a>ConfigurationInterface::getPlugins()</a>
+Plugins can be added in documentation generator configuration, in method <a>Configuration::getPlugins()</a>
 
 
 {{ "Adding a new plugin" | textToHeading('H2') }}
@@ -19,7 +19,7 @@ Plugins can be added in documentation generator configuration, in method <a>Conf
 If you decide to add a new plugin, there are a few things you need to do:
 
 *  Implement events handling in plugin class
-*  Add plugin to configuration <a>ConfigurationInterface::getPlugins()</a>:
+*  Add plugin to configuration <a>Configuration::getPlugins()</a>:
 
 {{ "public function getPlugins(): PluginsCollection
 {

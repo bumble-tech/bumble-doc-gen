@@ -3,13 +3,13 @@
 
 {{ "Parsing process" | textToHeading('H1') }}
 
-*  The parser goes through all files according to the rules set in the source locators. Source locator settings are taken from method <a>ConfigurationInterface::getSourceLocators()</a>
-*  Each class found using the resource locator is checked for documentability. The conditions for adding are obtained from the method <a>ConfigurationInterface::classEntityFilterCondition()</a>
+*  The parser goes through all files according to the rules set in the source locators. Source locator settings are taken from method <a>Configuration::getSourceLocators()</a>
+*  Each class found using the resource locator is checked for documentability. The conditions for adding are obtained from the method <a>Configuration::classEntityFilterCondition()</a>
 *  If the class can be documented, its methods, constants and properties are parsed for it. The ability to parse each attribute is checked using the appropriate methods:
 
-*  For constants - <a>ConfigurationInterface::classConstantEntityFilterCondition()</a>
-*  For properties - <a>ConfigurationInterface::propertyEntityFilterCondition()</a>
-*  For methods - <a>ConfigurationInterface::methodEntityFilterCondition()</a>
+*  For constants - <a>Configuration::classConstantEntityFilterCondition()</a>
+*  For properties - <a>Configuration::propertyEntityFilterCondition()</a>
+*  For methods - <a>Configuration::methodEntityFilterCondition()</a>
 
 *  The entity is processed using the <a>OnAddClassEntityToCollection</a> event
 *  The entity is added to the <a>ClassEntityCollection</a>

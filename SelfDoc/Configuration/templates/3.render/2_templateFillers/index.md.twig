@@ -13,7 +13,7 @@ If you decide to add a new template filler, there are a few things you need to d
 
 *  Add a new class that implements the <a>TemplateFillerInterface</a> interface
 *  In method <a>TemplateFillerInterface::getTemplateParameters()</a>, implement the return of the parameters that are expected in the template
-*  Add a new filler to the <a>TemplateFillersCollection::setForTemplate()</a> returned in the <a>ConfigurationInterface::getTemplateFillers()</a> method
+*  Add a new filler to the <a>TemplateFillersCollection::setForTemplate()</a> returned in the <a>Configuration::getTemplateFillers()</a> method
 
 After that, the data will be available in the template you connected it to in step 3.
 

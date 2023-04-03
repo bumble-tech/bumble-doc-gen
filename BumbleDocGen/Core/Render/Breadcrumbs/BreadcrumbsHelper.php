@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Breadcrumbs;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use Symfony\Component\Finder\Finder;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -20,12 +20,12 @@ final class BreadcrumbsHelper
     public const DEFAULT_PREV_PAGE_NAME_TEMPLATE = '/^((readme|index)\.(rst|md)\.twig)/';
 
     /**
-     * @param ConfigurationInterface $configuration
+     * @param Configuration $configuration
      * @param string $prevPageNameTemplate Index page for each child section
      */
     public function __construct(
-        private ConfigurationInterface $configuration,
-        private string                 $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
+        private Configuration $configuration,
+        private string        $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
     )
     {
     }

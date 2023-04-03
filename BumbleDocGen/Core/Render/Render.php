@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -18,13 +18,13 @@ use Twig\Loader\FilesystemLoader;
 /**
  * Generates and processes files from directory TemplatesDir saving them to directory OutputDir
  *
- * @see ConfigurationInterface::getTemplatesDir()
- * @see ConfigurationInterface::getOutputDir()
+ * @see Configuration::getTemplatesDir()
+ * @see Configuration::getOutputDir()
  */
 final class Render
 {
     public function __construct(
-        private ConfigurationInterface     $configuration,
+        private Configuration              $configuration,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private PluginEventDispatcher      $pluginEventDispatcher
     )
@@ -34,8 +34,8 @@ final class Render
     /**
      * Remove all files from OutputDir before rendering process
      *
-     * @see ConfigurationInterface::clearOutputDirBeforeDocGeneration()
-     * @see ConfigurationInterface::getOutputDir()
+     * @see Configuration::clearOutputDirBeforeDocGeneration()
+     * @see Configuration::getOutputDir()
      */
     private function clearOutputDir(string $dir): bool
     {

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 
 trait CacheableEntityWrapperTrait
 {
     private string $cacheVersion = 'v4';
 
-    abstract function getConfiguration(): ConfigurationInterface;
+    abstract function getConfiguration(): Configuration;
 
     abstract public function getEntityDependencies(): array;
 

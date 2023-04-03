@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use Roave\BetterReflection\Identifier\Identifier;
 use Roave\BetterReflection\Identifier\IdentifierType;
 use Roave\BetterReflection\Reflection\Reflection;
@@ -27,7 +27,7 @@ final class CachedSourceLocator implements SourceLocator
     /** @var array<string, list<Reflection>> indexed by reflector key and identifier type cache key */
     private array $cacheByIdentifierTypeKeyAndOid = [];
 
-    public function __construct(private SourceLocator $wrappedSourceLocator, private ConfigurationInterface $configuration)
+    public function __construct(private SourceLocator $wrappedSourceLocator, private Configuration $configuration)
     {
     }
 

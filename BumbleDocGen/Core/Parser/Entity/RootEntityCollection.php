@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\EntityCacheStorageHelper;
 
@@ -22,7 +22,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
 
     abstract public static function getEntityCollectionName(): string;
 
-    abstract public function getConfiguration(): ConfigurationInterface;
+    abstract public function getConfiguration(): Configuration;
 
     /**
      * @warning The entity obtained as a result of executing this method may not be available for loading

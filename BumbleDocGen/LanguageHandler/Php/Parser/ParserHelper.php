@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use Nette\PhpGenerator\GlobalFunction;
 use phpDocumentor\Reflection\DocBlock;
@@ -482,7 +483,10 @@ final class ParserHelper
         return null;
     }
 
-    public static function getFilesInGit(ConfigurationInterface $configuration): array
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public static function getFilesInGit(Configuration $configuration): array
     {
         static $gitFiles = null;
         if (is_null($gitFiles)) {

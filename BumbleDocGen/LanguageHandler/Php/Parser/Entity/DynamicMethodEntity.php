@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\ConfigurationInterface;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
@@ -18,9 +18,9 @@ use Roave\BetterReflection\Reflection\ReflectionMethod;
 class DynamicMethodEntity implements MethodEntityInterface
 {
     private function __construct(
-        private ConfigurationInterface $configuration,
-        private ClassEntity            $classEntity,
-        private Method                 $annotationMethod
+        private Configuration $configuration,
+        private ClassEntity   $classEntity,
+        private Method        $annotationMethod
     )
     {
     }
