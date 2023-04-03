@@ -4,22 +4,36 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 final class PropertyEntityCollection extends BaseEntityCollection
 {
-    public function __construct(private ClassEntity $classEntity)
+    public function __construct(
+        private ClassEntity               $classEntity,
+        private CacheablePhpEntityFactory $cacheablePhpEntityFactory
+    )
     {
     }
 
-    public static function createByClassEntity(ClassEntity $classEntity): PropertyEntityCollection
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public static function createByClassEntity(
+        ClassEntity               $classEntity,
+        CacheablePhpEntityFactory $cacheablePhpEntityFactory
+    ): PropertyEntityCollection
     {
-        $propertyEntityCollection = new PropertyEntityCollection($classEntity);
+        $propertyEntityCollection = new PropertyEntityCollection($classEntity, $cacheablePhpEntityFactory);
 
         $propertyEntityFilter = $classEntity->getPhpHandlerSettings()->getPropertyEntityFilter();
         foreach ($classEntity->getPropertiesData() as $name => $propertyData) {
-            $propertyEntity = CacheablePhpEntityFactory::createPropertyEntity(
+            $propertyEntity = $cacheablePhpEntityFactory->createPropertyEntity(
                 $classEntity,
                 $name,
                 $propertyData['declaringClass'],
@@ -51,13 +65,17 @@ final class PropertyEntityCollection extends BaseEntityCollection
         return array_key_exists($key, $this->entities);
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function unsafeGet(string $key): ?PropertyEntity
     {
         $propertyEntity = $this->get($key);
         if (!$propertyEntity) {
             $propertyData = $this->classEntity->getPropertiesData()[$key] ?? null;
             if (is_array($propertyData)) {
-                return CacheablePhpEntityFactory::createPropertyEntity(
+                return $this->cacheablePhpEntityFactory->createPropertyEntity(
                     $this->classEntity,
                     $key,
                     $propertyData['declaringClass'],

@@ -25,7 +25,11 @@ final class CacheablePhpEntityFactory
     {
     }
 
-    public static function createPropertyEntity(
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function createPropertyEntity(
         ClassEntity $classEntity,
         string      $propertyName,
         string      $declaringClassName,
@@ -33,14 +37,18 @@ final class CacheablePhpEntityFactory
         bool        $reloadCache = false
     ): PropertyEntity
     {
-        $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(PropertyEntity::class, 'PropertyEntityWrapper');
-        return $wrapperClassName::create(
-            $classEntity,
-            $propertyName,
-            $declaringClassName,
-            $implementingClassName,
-            $reloadCache
-        );
+        static $wrapperClassName = null;
+        if (is_null($wrapperClassName)) {
+            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(PropertyEntity::class, 'PropertyEntityWrapper');
+            $this->diContainer->set($wrapperClassName, \DI\factory([$wrapperClassName, 'create']));
+        }
+        return $this->diContainer->make($wrapperClassName, [
+            'classEntity' => $classEntity,
+            'propertyName' => $propertyName,
+            'declaringClassName' => $declaringClassName,
+            'implementingClassName' => $implementingClassName,
+            'reloadCache' => $reloadCache
+        ]);
     }
 
     public function createConstantEntity(

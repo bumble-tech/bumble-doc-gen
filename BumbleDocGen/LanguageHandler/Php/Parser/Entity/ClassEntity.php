@@ -458,11 +458,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         static $constantEntityCollection = [];
         if (!isset($constantEntityCollection[$this->getObjectId()])) {
-            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByClassEntity($this, $this->cacheablePhpEntityFactory);
+            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByClassEntity(
+                $this,
+                $this->cacheablePhpEntityFactory
+            );
         }
         return $constantEntityCollection[$this->getObjectId()];
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function getConstantEntity(string $constantName, bool $unsafe = true): ?ConstantEntity
     {
         $constantEntityCollection = $this->getConstantEntityCollection();
@@ -472,11 +478,19 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $constantEntityCollection->get($constantName);
     }
 
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
     public function getPropertyEntityCollection(): PropertyEntityCollection
     {
         static $propertyEntityCollection = [];
         if (!isset($propertyEntityCollection[$this->getObjectId()])) {
-            $propertyEntityCollection[$this->getObjectId()] = PropertyEntityCollection::createByClassEntity($this);
+            $propertyEntityCollection[$this->getObjectId()] = PropertyEntityCollection::createByClassEntity(
+                $this,
+                $this->cacheablePhpEntityFactory
+            );
         }
         return $propertyEntityCollection[$this->getObjectId()];
     }
@@ -507,6 +521,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $methodEntityCollection[$this->getObjectId()];
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     */
     public function getMethodEntity(string $methodName, bool $unsafe = true): ?MethodEntity
     {
         $methodEntityCollection = $this->getMethodEntityCollection();
