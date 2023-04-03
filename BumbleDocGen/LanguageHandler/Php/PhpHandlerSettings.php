@@ -13,6 +13,7 @@ use BumbleDocGen\Core\Configuration\ValueGetter\StringValueGetter;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
+use BumbleDocGen\Core\Render\Twig\Filter\CustomFilterInterface;
 use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
@@ -180,7 +181,7 @@ final class PhpHandlerSettings
         if (!$customFiltersCollection) {
             $customFilters = $this->classListValueGetter->validateAndGet(
                 $this->getSettingsKey('custom_twig_filters'),
-                CustomFunctionInterface::class
+                CustomFilterInterface::class
 
             );
             $customFiltersCollection = new CustomFiltersCollection();
