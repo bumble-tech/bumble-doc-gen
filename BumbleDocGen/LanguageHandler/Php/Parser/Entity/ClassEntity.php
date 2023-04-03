@@ -5,17 +5,22 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Render\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
+use DI\DependencyException;
+use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Identifier\Identifier;
@@ -34,14 +39,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     private bool $isClassLoad = false;
 
     protected function __construct(
-        protected Configuration         $configuration,
-        protected PhpHandlerSettings    $phpHandlerSettings,
-        protected ReflectorWrapper      $reflector,
-        protected ClassEntityCollection $classEntityCollection,
-        GetDocumentedEntityUrl          $documentedEntityUrlFunction,
-        RenderHelper                    $renderHelper,
-        protected string                $className,
-        protected ?string               $relativeFileName,
+        protected Configuration           $configuration,
+        protected PhpHandlerSettings      $phpHandlerSettings,
+        protected ReflectorWrapper        $reflector,
+        protected ClassEntityCollection   $classEntityCollection,
+        private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
+        GetDocumentedEntityUrl            $documentedEntityUrlFunction,
+        RenderHelper                      $renderHelper,
+        protected string                  $className,
+        protected ?string                 $relativeFileName,
     )
     {
         parent::__construct($configuration, $reflector, $documentedEntityUrlFunction, $renderHelper);
@@ -61,15 +67,16 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     public static function create(
-        Configuration          $configuration,
-        PhpHandlerSettings     $phpHandlerSettings,
-        ReflectorWrapper       $reflector,
-        ClassEntityCollection  $classEntityCollection,
-        GetDocumentedEntityUrl $documentedEntityUrlFunction,
-        RenderHelper           $renderHelper,
-        string                 $className,
-        ?string                $relativeFileName,
-        bool                   $reloadCache = false
+        Configuration             $configuration,
+        PhpHandlerSettings        $phpHandlerSettings,
+        ReflectorWrapper          $reflector,
+        ClassEntityCollection     $classEntityCollection,
+        CacheablePhpEntityFactory $cacheablePhpEntityFactory,
+        GetDocumentedEntityUrl    $documentedEntityUrlFunction,
+        RenderHelper              $renderHelper,
+        string                    $className,
+        ?string                   $relativeFileName,
+        bool                      $reloadCache = false
     ): ClassEntity
     {
         static $classEntities = [];
@@ -81,6 +88,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $phpHandlerSettings,
                 $reflector,
                 $classEntityCollection,
+                $cacheablePhpEntityFactory,
                 $documentedEntityUrlFunction,
                 $renderHelper,
                 $className,
@@ -92,14 +100,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     public static function createByReflection(
-        Configuration          $configuration,
-        PhpHandlerSettings     $phpHandlerSettings,
-        ReflectorWrapper       $reflector,
-        ReflectionClass        $reflectionClass,
-        ClassEntityCollection  $classEntityCollection,
-        GetDocumentedEntityUrl $documentedEntityUrlFunction,
-        RenderHelper           $renderHelper,
-        bool                   $reloadCache = false
+        Configuration             $configuration,
+        PhpHandlerSettings        $phpHandlerSettings,
+        ReflectorWrapper          $reflector,
+        ReflectionClass           $reflectionClass,
+        ClassEntityCollection     $classEntityCollection,
+        CacheablePhpEntityFactory $cacheablePhpEntityFactory,
+        GetDocumentedEntityUrl    $documentedEntityUrlFunction,
+        RenderHelper              $renderHelper,
+        bool                      $reloadCache = false
     ): ClassEntity
     {
         static $classEntities = [];
@@ -111,6 +120,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $phpHandlerSettings,
                 $reflector,
                 $classEntityCollection,
+                $cacheablePhpEntityFactory,
                 $documentedEntityUrlFunction,
                 $renderHelper,
                 $reflectionClass->getName(),
@@ -477,11 +487,19 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $propertyEntityCollection->get($propertyName);
     }
 
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
     public function getMethodEntityCollection(): MethodEntityCollection
     {
         static $methodEntityCollection = [];
         if (!isset($methodEntityCollection[$this->getObjectId()])) {
-            $methodEntityCollection[$this->getObjectId()] = MethodEntityCollection::createByClassEntity($this);
+            $methodEntityCollection[$this->getObjectId()] = MethodEntityCollection::createByClassEntity(
+                $this,
+                $this->cacheablePhpEntityFactory
+            );
         }
         return $methodEntityCollection[$this->getObjectId()];
     }

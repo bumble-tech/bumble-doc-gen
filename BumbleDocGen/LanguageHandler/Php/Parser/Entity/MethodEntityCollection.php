@@ -4,26 +4,41 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
+use DI\DependencyException;
+use DI\NotFoundException;
+use phpDocumentor\Reflection\DocBlock\Tags\Method;
 
 /**
  * @implements \IteratorAggregate<int, MethodEntity>
  */
 final class MethodEntityCollection extends BaseEntityCollection
 {
-    public function __construct(private ClassEntity $classEntity)
+    public function __construct(
+        private ClassEntity               $classEntity,
+        private CacheablePhpEntityFactory $cacheablePhpEntityFactory
+    )
     {
     }
 
-    public static function createByClassEntity(ClassEntity $classEntity): MethodEntityCollection
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public static function createByClassEntity(
+        ClassEntity               $classEntity,
+        CacheablePhpEntityFactory $cacheablePhpEntityFactory
+    ): MethodEntityCollection
     {
-        $methodEntityCollection = new MethodEntityCollection($classEntity);
+        $methodEntityCollection = new MethodEntityCollection($classEntity, $cacheablePhpEntityFactory);
         $configuration = $classEntity->getConfiguration();
 
         $methodEntityFilter = $classEntity->getPhpHandlerSettings()->getMethodEntityFilter();
         foreach ($classEntity->getMethodsData() as $name => $methodData) {
-            $methodEntity = CacheablePhpEntityFactory::createMethodEntity(
+            $methodEntity = $cacheablePhpEntityFactory->createMethodEntity(
                 $classEntity,
                 $name,
                 $methodData['declaringClass'],
@@ -40,7 +55,7 @@ final class MethodEntityCollection extends BaseEntityCollection
         if ($methodsBlocks) {
             foreach ($methodsBlocks as $methodsBlock) {
                 try {
-                    /**@var \phpDocumentor\Reflection\DocBlock\Tags\Method $methodsBlock */
+                    /**@var Method $methodsBlock */
                     $methodEntity = DynamicMethodEntity::createByAnnotationMethod($classEntity, $methodsBlock);
                     $methodEntityCollection->add($methodEntity);
                 } catch (\Exception $e) {
@@ -71,13 +86,17 @@ final class MethodEntityCollection extends BaseEntityCollection
         return array_key_exists($key, $this->entities);
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function unsafeGet(string $key): ?MethodEntity
     {
         $methodEntity = $this->get($key);
         if (!$methodEntity) {
             $methodData = $this->classEntity->getMethodsData()[$key] ?? null;
             if (is_array($methodData)) {
-                return CacheablePhpEntityFactory::createMethodEntity(
+                return $this->cacheablePhpEntityFactory->createMethodEntity(
                     $this->classEntity,
                     $key,
                     $methodData['declaringClass'],
@@ -90,7 +109,7 @@ final class MethodEntityCollection extends BaseEntityCollection
 
     public function getInitializations(): MethodEntityCollection
     {
-        $methodEntityCollection = new MethodEntityCollection($this->classEntity);
+        $methodEntityCollection = new MethodEntityCollection($this->classEntity, $this->cacheablePhpEntityFactory);
         foreach ($this as $methodEntity) {
             /**@var MethodEntity $methodEntity */
             if ($methodEntity->isInitialization()) {
@@ -102,7 +121,7 @@ final class MethodEntityCollection extends BaseEntityCollection
 
     public function getAllExceptInitializations(): MethodEntityCollection
     {
-        $methodEntityCollection = new MethodEntityCollection($this->classEntity);
+        $methodEntityCollection = new MethodEntityCollection($this->classEntity, $this->cacheablePhpEntityFactory);
         foreach ($this as $methodEntity) {
             /**@var MethodEntity $methodEntity */
             if (!$methodEntity->isInitialization()) {

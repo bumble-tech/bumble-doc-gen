@@ -61,7 +61,11 @@ final class CacheablePhpEntityFactory
         );
     }
 
-    public static function createMethodEntity(
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function createMethodEntity(
         ClassEntity $classEntity,
         string      $methodName,
         string      $declaringClassName,
@@ -69,14 +73,18 @@ final class CacheablePhpEntityFactory
         bool        $reloadCache = false
     ): MethodEntity
     {
-        $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(MethodEntity::class, 'MethodEntityWrapper');
-        return $wrapperClassName::create(
-            $classEntity,
-            $methodName,
-            $declaringClassName,
-            $implementingClassName,
-            $reloadCache
-        );
+        static $wrapperClassName = null;
+        if (is_null($wrapperClassName)) {
+            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(MethodEntity::class, 'MethodEntityWrapper');
+            $this->diContainer->set($wrapperClassName, \DI\factory([$wrapperClassName, 'create']));
+        }
+        return $this->diContainer->make($wrapperClassName, [
+            'classEntity' => $classEntity,
+            'methodName' => $methodName,
+            'declaringClassName' => $declaringClassName,
+            'implementingClassName' => $implementingClassName,
+            'reloadCache' => $reloadCache
+        ]);
     }
 
     /**
