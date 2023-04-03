@@ -10,14 +10,14 @@ page_link_processor:              # (PageLinkProcessorInterface) Link handler cl
 language_handlers:                # (array<LanguageHandlerInterface>) List of programming language handlers
 source_locators:                  # (array<SourceLocatorInterface>) List of source locators
 template_fillers:                 # (array<string,TemplateFillerInterface>) List of template fillers
-twig_functions:                   # (array<CustomFunctionInterface>)
+twig_functions:                   # (array<CustomFunctionInterface>) Functions that can be used in document templates
   - class: \BumbleDocGen\Core\Render\Twig\Function\DrawDocumentationMenu
   - class: \BumbleDocGen\Core\Render\Twig\Function\DrawDocumentedEntityLink
   - class: \BumbleDocGen\Core\Render\Twig\Function\GeneratePageBreadcrumbs
   - class: \BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl
   - class: \BumbleDocGen\Core\Render\Twig\Function\LoadPluginsContent
   - class: \BumbleDocGen\Core\Render\Twig\Function\PrintEntityCollectionAsList
-twig_filters:                     # (array<CustomFilterInterface>)
+twig_filters:                     # (array<CustomFilterInterface>) Filters that can be used in document templates
   - class: \BumbleDocGen\Core\Render\Twig\Filter\AddIndentFromLeft
   - class: \BumbleDocGen\Core\Render\Twig\Filter\FixStrSize
   - class: \BumbleDocGen\Core\Render\Twig\Filter\HtmlToRst
