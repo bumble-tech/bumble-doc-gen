@@ -7,6 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use Nette\PhpGenerator\GlobalFunction;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
@@ -206,7 +207,7 @@ final class ParserHelper
         return self::checkIsClassName($className);
     }
 
-    public static function isClassLoaded(Reflector $reflector, string $className): bool
+    public static function isClassLoaded(ReflectorWrapper $reflector, string $className): bool
     {
         if (self::isCorrectClassName($className)) {
             try {
@@ -298,10 +299,10 @@ final class ParserHelper
     }
 
     public static function parseFullClassName(
-        string          $searchClassName,
-        Reflector       $reflector,
-        ReflectionClass $reflectionClass,
-        bool            $extended = true
+        string           $searchClassName,
+        ReflectorWrapper $reflector,
+        ReflectionClass  $reflectionClass,
+        bool             $extended = true
     ): string
     {
         static $parsedFullClassNameCache = [];

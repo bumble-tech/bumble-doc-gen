@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Render\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\Twig\Filter\PrepareSourceLink;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
@@ -18,7 +19,6 @@ use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Identifier\Identifier;
 use Roave\BetterReflection\Identifier\IdentifierType;
 use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflector\Reflector;
 use Roave\BetterReflection\SourceLocator\Located\LocatedSource;
 
 /**
@@ -34,7 +34,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     protected function __construct(
         protected Configuration         $configuration,
         protected PhpHandlerSettings    $phpHandlerSettings,
-        protected Reflector             $reflector,
+        protected ReflectorWrapper      $reflector,
         protected ClassEntityCollection $classEntityCollection,
         protected string                $className,
         protected ?string               $relativeFileName,
@@ -59,7 +59,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public static function create(
         Configuration         $configuration,
         PhpHandlerSettings    $phpHandlerSettings,
-        Reflector             $reflector,
+        ReflectorWrapper      $reflector,
         ClassEntityCollection $classEntityCollection,
         string                $className,
         ?string               $relativeFileName,
@@ -86,7 +86,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public static function createByReflection(
         Configuration         $configuration,
         PhpHandlerSettings    $phpHandlerSettings,
-        Reflector             $reflector,
+        ReflectorWrapper      $reflector,
         ReflectionClass       $reflectionClass,
         ClassEntityCollection $classEntityCollection,
         bool                  $reloadCache = false
@@ -110,7 +110,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $classEntities[$objectId];
     }
 
-    public function getReflector(): Reflector
+    public function getReflector(): ReflectorWrapper
     {
         return $this->reflector;
     }

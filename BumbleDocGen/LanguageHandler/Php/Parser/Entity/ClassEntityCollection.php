@@ -9,20 +9,20 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflector\Reflector;
 
 final class ClassEntityCollection extends RootEntityCollection
 {
     public function __construct(
         private Configuration         $configuration,
         protected PhpHandlerSettings  $phpHandlerSettings,
-        private Reflector             $reflector,
+        private ReflectorWrapper      $reflector,
         private PluginEventDispatcher $pluginEventDispatcher
     )
     {
@@ -118,7 +118,7 @@ final class ClassEntityCollection extends RootEntityCollection
         return $createIfNotExists ? $this->getLoadedOrCreateNew($className) : $this->get($className);
     }
 
-    public function getReflector(): Reflector
+    public function getReflector(): ReflectorWrapper
     {
         return $this->reflector;
     }

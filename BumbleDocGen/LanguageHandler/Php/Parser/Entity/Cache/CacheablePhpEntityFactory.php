@@ -11,9 +11,9 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflector\Reflector;
 
 final class CacheablePhpEntityFactory
 {
@@ -74,7 +74,7 @@ final class CacheablePhpEntityFactory
     public static function createClassEntity(
         Configuration         $configuration,
         PhpHandlerSettings    $phpHandlerSettings,
-        Reflector             $reflector,
+        ReflectorWrapper      $reflector,
         ClassEntityCollection $classEntityCollection,
         string                $className,
         ?string               $relativeFileName = null,
@@ -96,7 +96,7 @@ final class CacheablePhpEntityFactory
     public static function createClassEntityByReflection(
         Configuration         $configuration,
         PhpHandlerSettings    $phpHandlerSettings,
-        Reflector             $reflector,
+        ReflectorWrapper      $reflector,
         ReflectionClass       $reflectionClass,
         ClassEntityCollection $classEntityCollection,
         bool                  $reloadCache = false
@@ -117,7 +117,7 @@ final class CacheablePhpEntityFactory
         string                $subClassEntity,
         Configuration         $configuration,
         PhpHandlerSettings    $phpHandlerSettings,
-        Reflector             $reflector,
+        ReflectorWrapper      $reflector,
         ClassEntityCollection $classEntityCollection,
         string                $className,
         ?string               $relativeFileName,
@@ -142,7 +142,7 @@ final class CacheablePhpEntityFactory
         string                $subClassEntity,
         Configuration         $configuration,
         PhpHandlerSettings    $phpHandlerSettings,
-        Reflector             $reflector,
+        ReflectorWrapper      $reflector,
         ReflectionClass       $reflectionClass,
         ClassEntityCollection $classEntityCollection,
         bool                  $reloadCache = false
