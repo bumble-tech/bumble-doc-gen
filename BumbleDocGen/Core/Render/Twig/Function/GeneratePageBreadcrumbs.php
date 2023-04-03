@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Function;
 
-use BumbleDocGen\Core\Render\Context\Context;
-use BumbleDocGen\Core\Render\Twig\Filter\HtmlToRst;
+use BumbleDocGen\Core\Render\Breadcrumbs\BreadcrumbsHelper;
 
 /**
  * Function to generate breadcrumbs on the page
  */
 final class GeneratePageBreadcrumbs implements CustomFunctionInterface
 {
-    /**
-     * @param Context $context Render context
-     */
-    public function __construct(private Context $context)
+    public function __construct(private BreadcrumbsHelper $breadcrumbsHelper)
     {
     }
 
@@ -47,17 +43,11 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
         bool   $skipFirstTemplatePage = true
     ): string
     {
-        $content = $this->context->getBreadcrumbsHelper()->renderBreadcrumbs(
+        $content = $this->breadcrumbsHelper->renderBreadcrumbs(
             $currentPageTitle,
             $templatePath,
             !$skipFirstTemplatePage
         );
-
-        $content = "<embed> {$content} </embed>";
-        if ($this->context->isCurrentTemplateRst()) {
-            $htmlToRstFunction = new HtmlToRst();
-            return $htmlToRstFunction($content);
-        }
-        return $content;
+        return "<embed> {$content} </embed>";
     }
 }
