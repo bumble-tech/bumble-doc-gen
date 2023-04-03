@@ -8,7 +8,6 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
-use BumbleDocGen\Core\Render\Breadcrumbs\BreadcrumbsHelper;
 
 /**
  * Document rendering context
@@ -21,7 +20,6 @@ final class Context
     public function __construct(
         private Configuration              $configuration,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private BreadcrumbsHelper          $breadcrumbsHelper,
         private PluginEventDispatcher      $pluginEventDispatcher
     )
     {
@@ -72,11 +70,6 @@ final class Context
     public function getEntityWrappersCollection(): DocumentedEntityWrappersCollection
     {
         return $this->entityWrappersCollection;
-    }
-
-    public function getBreadcrumbsHelper(): BreadcrumbsHelper
-    {
-        return $this->breadcrumbsHelper;
     }
 
     public function getPluginEventDispatcher(): PluginEventDispatcher
