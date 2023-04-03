@@ -10,6 +10,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Render\Twig\MainExtension;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
@@ -25,12 +26,13 @@ use Twig\Loader\FilesystemLoader;
 final class Render
 {
     public function __construct(
-        private Configuration              $configuration,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private PluginEventDispatcher      $pluginEventDispatcher,
-        private Context                    $renderContext,
-        private MainExtension              $twigMainExtension,
-        private LoggerInterface            $logger
+        private Configuration                      $configuration,
+        private RootEntityCollectionsGroup         $rootEntityCollectionsGroup,
+        private PluginEventDispatcher              $pluginEventDispatcher,
+        private Context                            $renderContext,
+        private MainExtension                      $twigMainExtension,
+        private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
+        private LoggerInterface                    $logger
     )
     {
     }
@@ -127,7 +129,7 @@ final class Render
             $this->logger->info("Saving `{$filePatch}`");
         }
 
-        foreach ($this->renderContext->getEntityWrappersCollection() as $entityWrapper) {
+        foreach ($this->documentedEntityWrappersCollection as $entityWrapper) {
             /**@var \BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper $entityWrapper * */
             $this->renderContext->setCurrentTemplateFilePatch($entityWrapper->getInitiatorFilePath());
             $docRender = $entityWrapper->getDocRender();
