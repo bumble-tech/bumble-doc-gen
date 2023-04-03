@@ -10,7 +10,6 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Render\Breadcrumbs\BreadcrumbsHelper;
-use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use Psr\Log\LoggerInterface;
 
@@ -39,11 +38,11 @@ abstract class BasePageLinker implements PluginInterface
     abstract function getOutputTemplate(): string;
 
     public function __construct(
-        private Configuration $configuration,
-        private BreadcrumbsHelper $breadcrumbsHelper,
+        private Configuration              $configuration,
+        private BreadcrumbsHelper          $breadcrumbsHelper,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private Context $context,
-        private LoggerInterface $logger,
+        private GetDocumentedEntityUrl     $getDocumentedEntityUrlFunction,
+        private LoggerInterface            $logger,
     )
     {
     }
@@ -55,6 +54,9 @@ abstract class BasePageLinker implements PluginInterface
         ];
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     final public function beforeCreatingDocFile(BeforeCreatingDocFile $event): void
     {
         $pageLinks = $this->getAllPageLinks();
@@ -71,7 +73,7 @@ abstract class BasePageLinker implements PluginInterface
                     foreach ($this->rootEntityCollectionsGroup as $rootEntityCollection) {
                         $entityUrlData = $rootEntityCollection->gelEntityLinkData($linkString);
                         if ($entityUrlData['entityName'] ?? null) {
-                            $getDocumentedEntityUrl = new GetDocumentedEntityUrl($this->context);
+                            $getDocumentedEntityUrl = $this->getDocumentedEntityUrlFunction;
                             $entityUrlData['url'] = $getDocumentedEntityUrl(
                                 $rootEntityCollection,
                                 $entityUrlData['entityName'],

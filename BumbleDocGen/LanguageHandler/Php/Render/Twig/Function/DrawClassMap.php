@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Render\Twig\Function;
 
-use BumbleDocGen\Core\Render\Context\Context;
-use BumbleDocGen\Core\Render\Twig\Filter\HtmlToRst;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
@@ -22,7 +22,10 @@ final class DrawClassMap implements CustomFunctionInterface
     /** @var array<string, string> */
     private array $fileClassmap;
 
-    public function __construct(private Context $context)
+    public function __construct(
+        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup
+    )
     {
     }
 
@@ -42,26 +45,25 @@ final class DrawClassMap implements CustomFunctionInterface
      * @param ClassEntityCollection ...$classEntityCollections
      *  The collection of entities for which the class map will be generated
      * @return string
+     * @throws InvalidConfigurationParameterException
      */
-    public function __invoke(ClassEntityCollection ...$classEntityCollections): string
+    public function __invoke(
+        ClassEntityCollection ...$classEntityCollections
+    ): string
     {
         $structure = $this->convertDirectoryStructureToFormattedString(
             $this->getDirectoryStructure(...$classEntityCollections),
         );
-
-        $content = "<embed> <pre>{$structure}</pre> </embed>";
-        if ($this->context->isCurrentTemplateRst()) {
-            $htmlToRstFunction = new HtmlToRst();
-            return $htmlToRstFunction($content);
-        }
-
-        return $content;
+        return "<embed> <pre>{$structure}</pre> </embed>";
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     protected function appendClassToDirectoryStructure(array $directoryStructure, ClassEntity $classEntity): array
     {
-        $getDocumentedEntityUrl = new GetDocumentedEntityUrl($this->context);
-        $entityCollection = $this->context->getRootEntityCollection(ClassEntityCollection::getEntityCollectionName());
+        $getDocumentedEntityUrl = $this->getDocumentedEntityUrlFunction;
+        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
         $this->fileClassmap[$classEntity->getFileName()] = $getDocumentedEntityUrl($entityCollection, $classEntity->getName());
         $fileName = ltrim($classEntity->getFileName(), DIRECTORY_SEPARATOR);
         $pathParts = array_reverse(explode(DIRECTORY_SEPARATOR, $fileName));
@@ -76,6 +78,9 @@ final class DrawClassMap implements CustomFunctionInterface
         return array_merge_recursive($directoryStructure, $tmpStructure);
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function getDirectoryStructure(ClassEntityCollection ...$classEntityCollections): array
     {
         $entities = [];

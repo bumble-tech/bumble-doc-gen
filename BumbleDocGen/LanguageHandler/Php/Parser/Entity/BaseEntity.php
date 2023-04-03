@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\RenderContextCacheKeyGenerator;
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
@@ -25,8 +26,9 @@ use Roave\BetterReflection\Reflection\ReflectionProperty;
 abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
     protected function __construct(
-        protected Configuration    $configuration,
-        protected ReflectorWrapper $reflector,
+        protected Configuration          $configuration,
+        protected ReflectorWrapper       $reflector,
+        protected GetDocumentedEntityUrl $documentedEntityUrlFunction
     )
     {
     }
@@ -286,11 +288,12 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Get parsed links from description and doc blocks `see` and `link`
+     * @throws InvalidConfigurationParameterException
      */
     public function getDescriptionLinks(?Context $context = null): array
     {
         $linksData = $this->getDescriptionLinksData($context);
-        $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
+        $getDocumentedEntityUrl = $this->documentedEntityUrlFunction;
         foreach ($linksData as $key => $data) {
             if (!isset($data['url'])) {
                 $linksData[$key]['url'] = null;
@@ -361,11 +364,12 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Get parsed throws from `throws` doc block
+     * @throws InvalidConfigurationParameterException
      */
     public function getThrows(?Context $context = null): array
     {
         $throwsData = $this->getThrowsData($context);
-        $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
+        $getDocumentedEntityUrl = $this->documentedEntityUrlFunction;
         foreach ($throwsData as $key => $data) {
             if (!isset($data['url'])) {
                 $throwsData[$key]['url'] = null;

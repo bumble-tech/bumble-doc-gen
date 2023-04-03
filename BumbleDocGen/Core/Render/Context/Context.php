@@ -15,7 +15,6 @@ use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 final class Context
 {
     private string $currentTemplateFilePath = '';
-    private DocumentedEntityWrappersCollection $entityWrappersCollection;
 
     public function __construct(
         private Configuration              $configuration,
@@ -23,7 +22,6 @@ final class Context
         private PluginEventDispatcher      $pluginEventDispatcher
     )
     {
-        $this->entityWrappersCollection = new DocumentedEntityWrappersCollection();
     }
 
     /**
@@ -60,11 +58,6 @@ final class Context
     public function getRootEntityCollection(string $collectionName): ?RootEntityCollection
     {
         return $this->rootEntityCollectionsGroup->get($collectionName);
-    }
-
-    public function getEntityWrappersCollection(): DocumentedEntityWrappersCollection
-    {
-        return $this->entityWrappersCollection;
     }
 
     public function getPluginEventDispatcher(): PluginEventDispatcher

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Function;
 
+use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Render\Context\Context;
 use BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper;
@@ -28,10 +30,11 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
 {
     public const DEFAULT_URL = '#';
 
-    /**
-     * @param Context $context Render context
-     */
-    public function __construct(private Context $context)
+    public function __construct(
+        private Context                            $context,
+        private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
+        private Configuration                      $configuration
+    )
     {
     }
 
@@ -58,6 +61,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
      *  If true, creates an entity document. Otherwise, just gives a reference to the entity code
      *
      * @return string
+     * @throws InvalidConfigurationParameterException
      */
     public function __invoke(RootEntityCollection $rootEntityCollection, string $entityName, string $cursor = '', bool $createDocument = true): string
     {
@@ -76,9 +80,9 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
                 $documentedEntity = new DocumentedEntityWrapper(
                     $entity, $this->context->getCurrentTemplateFilePatch()
                 );
-                $this->context->getEntityWrappersCollection()->add($documentedEntity);
+                $this->documentedEntityWrappersCollection->add($documentedEntity);
                 $rootEntityCollection->add($entity);
-                $url = $this->context->getConfiguration()->getPageLinkProcessor()->getAbsoluteUrl($documentedEntity->getDocUrl());
+                $url = $this->configuration->getPageLinkProcessor()->getAbsoluteUrl($documentedEntity->getDocUrl());
             } else {
                 $url = $entity->getFileSourceLink(false);
             }
@@ -87,7 +91,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
             }
             return $url . $entity->cursorToDocAttributeLinkFragment($cursor);
         } else {
-            $this->context->getConfiguration()->getLogger()->warning(
+            $this->configuration->getLogger()->warning(
                 "GetDocumentedEntityUrl: Entity {$entityName} not found in specified sources"
             );
         }

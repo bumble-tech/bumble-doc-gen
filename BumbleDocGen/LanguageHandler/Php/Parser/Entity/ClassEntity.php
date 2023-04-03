@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Render\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\Twig\Filter\PrepareSourceLink;
+use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
@@ -36,11 +37,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         protected PhpHandlerSettings    $phpHandlerSettings,
         protected ReflectorWrapper      $reflector,
         protected ClassEntityCollection $classEntityCollection,
+        public GetDocumentedEntityUrl   $documentedEntityUrlFunction,
         protected string                $className,
         protected ?string               $relativeFileName,
     )
     {
-        parent::__construct($configuration, $reflector);
+        parent::__construct($configuration, $reflector, $documentedEntityUrlFunction);
         if ($relativeFileName) {
             $this->relativeFileNameLoaded = true;
         }
@@ -57,13 +59,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     public static function create(
-        Configuration         $configuration,
-        PhpHandlerSettings    $phpHandlerSettings,
-        ReflectorWrapper      $reflector,
-        ClassEntityCollection $classEntityCollection,
-        string                $className,
-        ?string               $relativeFileName,
-        bool                  $reloadCache = false
+        Configuration          $configuration,
+        PhpHandlerSettings     $phpHandlerSettings,
+        ReflectorWrapper       $reflector,
+        ClassEntityCollection  $classEntityCollection,
+        GetDocumentedEntityUrl $documentedEntityUrlFunction,
+        string                 $className,
+        ?string                $relativeFileName,
+        bool                   $reloadCache = false
     ): ClassEntity
     {
         static $classEntities = [];
@@ -75,6 +78,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $phpHandlerSettings,
                 $reflector,
                 $classEntityCollection,
+                $documentedEntityUrlFunction,
                 $className,
                 $relativeFileName,
             );
@@ -84,12 +88,13 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     public static function createByReflection(
-        Configuration         $configuration,
-        PhpHandlerSettings    $phpHandlerSettings,
-        ReflectorWrapper      $reflector,
-        ReflectionClass       $reflectionClass,
-        ClassEntityCollection $classEntityCollection,
-        bool                  $reloadCache = false
+        Configuration          $configuration,
+        PhpHandlerSettings     $phpHandlerSettings,
+        ReflectorWrapper       $reflector,
+        ReflectionClass        $reflectionClass,
+        ClassEntityCollection  $classEntityCollection,
+        GetDocumentedEntityUrl $documentedEntityUrlFunction,
+        bool                   $reloadCache = false
     ): ClassEntity
     {
         static $classEntities = [];
@@ -101,6 +106,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $phpHandlerSettings,
                 $reflector,
                 $classEntityCollection,
+                $documentedEntityUrlFunction,
                 $reflectionClass->getName(),
                 $relativeFileName,
             );

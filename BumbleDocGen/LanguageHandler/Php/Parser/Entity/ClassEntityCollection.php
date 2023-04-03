@@ -24,7 +24,8 @@ final class ClassEntityCollection extends RootEntityCollection
         private Configuration             $configuration,
         protected PhpHandlerSettings      $phpHandlerSettings,
         private PluginEventDispatcher     $pluginEventDispatcher,
-        private CacheablePhpEntityFactory $cacheablePhpEntityFactory
+        private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
+        private EntityDocRenderHelper     $docRenderHelper
     )
     {
     }
@@ -312,7 +313,7 @@ final class ClassEntityCollection extends RootEntityCollection
         bool    $useUnsafeKeys = true
     ): array
     {
-        return EntityDocRenderHelper::getEntityDataByLink(
+        return $this->docRenderHelper->getEntityDataByLink(
             $rawLink,
             $this,
             $defaultEntityName,

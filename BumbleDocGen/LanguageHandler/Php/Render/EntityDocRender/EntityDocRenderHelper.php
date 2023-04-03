@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 
@@ -15,7 +16,14 @@ final class EntityDocRenderHelper
     public const CLASS_ENTITY_FULL_LINK_OPTION = 'full_form';
     public const CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION = 'only_cursor';
 
-    public static function getEntityDataByLink(
+    public function __construct(
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction
+    )
+    {
+    }
+
+    public function getEntityDataByLink(
         string               $linkString,
         RootEntityCollection $rootEntityCollection,
         ?string              $defaultEntityName = null,
@@ -96,17 +104,19 @@ final class EntityDocRenderHelper
         ];
     }
 
-    public static function getEntityUrlDataByLink(
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getEntityUrlDataByLink(
         string  $linkString,
-        Context $context,
         ?string $defaultEntityClassName = null,
         bool    $createDocument = true
     ): array
     {
-        $entityCollection = $context->getRootEntityCollection(ClassEntityCollection::getEntityCollectionName());
+        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
         $data = self::getEntityDataByLink($linkString, $entityCollection, $defaultEntityClassName);
         if ($data['entityName'] ?? null) {
-            $getDocumentedEntityUrl = new GetDocumentedEntityUrl($context);
+            $getDocumentedEntityUrl = $this->getDocumentedEntityUrlFunction;
             $data['url'] = $getDocumentedEntityUrl($entityCollection, $data['entityName'], $data['cursor'], $createDocument);
         }
         return $data;

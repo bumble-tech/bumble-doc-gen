@@ -25,7 +25,7 @@ class PropertyEntity extends BaseEntity
         protected string      $implementingClassName,
     )
     {
-        parent::__construct($classEntity->getConfiguration(), $classEntity->getReflector());
+        parent::__construct($classEntity->getConfiguration(), $classEntity->getReflector(), $classEntity->documentedEntityUrlFunction);
     }
 
     public static function create(
