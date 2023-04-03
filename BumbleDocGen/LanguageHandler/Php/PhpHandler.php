@@ -11,12 +11,10 @@ use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\DrawClassMap;
-use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\GetClassMethodsBodyCode;
 
 final class PhpHandler implements LanguageHandlerInterface
 {
-    public function __construct(private ClassEntityCollection $classEntityCollection)
+    public function __construct(private ClassEntityCollection $classEntityCollection, private PhpHandlerSettings $phpHandlerSettings)
     {
     }
 
@@ -36,16 +34,19 @@ final class PhpHandler implements LanguageHandlerInterface
         return $this->classEntityCollection;
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function getCustomTwigFunctions(Context $context): CustomFunctionsCollection
     {
-        return CustomFunctionsCollection::create(
-            new DrawClassMap($context),
-            new GetClassMethodsBodyCode($context)
-        );
+        return $this->phpHandlerSettings->getCustomTwigFunctions();
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function getCustomTwigFilters(Context $context): CustomFiltersCollection
     {
-        return CustomFiltersCollection::create();
+        return $this->phpHandlerSettings->getCustomTwigFilters();
     }
 }

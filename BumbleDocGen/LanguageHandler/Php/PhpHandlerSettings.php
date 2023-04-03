@@ -13,6 +13,9 @@ use BumbleDocGen\Core\Configuration\ValueGetter\StringValueGetter;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
+use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
+use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
+use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
 
 final class PhpHandlerSettings
 {
@@ -147,5 +150,44 @@ final class PhpHandlerSettings
             );
         }
         return $asyncSourceLoadingEnabled;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getCustomTwigFunctions(): CustomFunctionsCollection
+    {
+        static $customFunctionsCollection = null;
+        if (!$customFunctionsCollection) {
+            $customFunctions = $this->classListValueGetter->validateAndGet(
+                $this->getSettingsKey('custom_twig_functions'),
+                CustomFunctionInterface::class
+            );
+            $customFunctionsCollection = new CustomFunctionsCollection();
+            foreach ($customFunctions as $customFunction) {
+                $customFunctionsCollection->add($customFunction);
+            }
+        }
+        return $customFunctionsCollection;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getCustomTwigFilters(): CustomFiltersCollection
+    {
+        static $customFiltersCollection = null;
+        if (!$customFiltersCollection) {
+            $customFilters = $this->classListValueGetter->validateAndGet(
+                $this->getSettingsKey('custom_twig_filters'),
+                CustomFunctionInterface::class
+
+            );
+            $customFiltersCollection = new CustomFiltersCollection();
+            foreach ($customFilters as $customFilter) {
+                $customFiltersCollection->add($customFilter);
+            }
+        }
+        return $customFiltersCollection;
     }
 }

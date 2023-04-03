@@ -24,5 +24,11 @@ property_filter:
 doc_renders:
   - class: \BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender
 
+custom_twig_functions:
+  - class: \BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\DrawClassMap
+  - class: \BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\GetClassMethodsBodyCode
+
+custom_twig_filters:
+
 file_source_base_url: null
 async_source_loading_enabled: true
