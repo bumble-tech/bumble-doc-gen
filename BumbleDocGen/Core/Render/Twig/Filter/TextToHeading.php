@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Filter;
 
-use BumbleDocGen\Core\Render\Context\Context;
-
 /**
  * Convert text to html or rst header
  */
@@ -16,10 +14,6 @@ final class TextToHeading implements CustomFilterInterface
         'h2' => "<h2>%text%</h2>",
         'h3' => "<h3>%text%</h3>",
     ];
-
-    public function __construct(private Context $context)
-    {
-    }
 
     public static function getName(): string
     {
@@ -42,11 +36,6 @@ final class TextToHeading implements CustomFilterInterface
     {
         $template = $this->templates[strtolower($headingType)] ?? '%text%';
         $content = str_replace('%text%', $text, $template);
-        $content = "<embed> {$content} </embed>";
-        if ($this->context->isCurrentTemplateRst()) {
-            $htmlToRstFunction = new HtmlToRst();
-            return $htmlToRstFunction($content);
-        }
-        return $content;
+        return "<embed> {$content} </embed>";
     }
 }

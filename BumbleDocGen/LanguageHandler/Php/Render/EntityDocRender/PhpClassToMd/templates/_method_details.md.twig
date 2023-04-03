@@ -41,7 +41,7 @@
     {% for parameter in methodEntity.getParameters() %}
         <tr>
             <td>${{ parameter.name }}</td>
-            <td>{{ parameter.expectedType | strTypeToUrl(methodEntity.getRootEntityCollection(), 'html') }}</td>
+            <td>{{ parameter.expectedType | strTypeToUrl(methodEntity.getRootEntityCollection()) }}</td>
             <td>{% if parameter.description %}{{ parameter.description | addIndentFromLeft(1, true) }}{% else %}-{% endif %}</td>
         </tr>
     {% endfor %}

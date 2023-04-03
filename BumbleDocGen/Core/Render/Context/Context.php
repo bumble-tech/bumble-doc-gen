@@ -33,16 +33,6 @@ final class Context
         return $this->currentTemplateFilePath;
     }
 
-    public function isCurrentTemplateRst(): bool
-    {
-        return str_ends_with($this->getCurrentTemplateFilePatch(), '.rst.twig');
-    }
-
-    public function isCurrentTemplateMd(): bool
-    {
-        return str_ends_with($this->getCurrentTemplateFilePatch(), '.md.twig');
-    }
-
     public function getPluginEventDispatcher(): PluginEventDispatcher
     {
         return $this->pluginEventDispatcher;

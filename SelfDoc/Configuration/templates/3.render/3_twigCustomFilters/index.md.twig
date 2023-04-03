@@ -57,7 +57,7 @@ or
                         <b>${{ parameter.name }}</b>
                     </td>
                     <td>
-                        <i>{{ parameter.type | strTypeToUrl(phpClassEntityCollection, 'html', true) }}</i>
+                        <i>{{ parameter.type | strTypeToUrl(phpClassEntityCollection, true) }}</i>
                     </td>
                     <td>{{ parameter.description | removeLineBrakes }}</td>
                 {% endif %}

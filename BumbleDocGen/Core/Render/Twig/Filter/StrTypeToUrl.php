@@ -19,14 +19,10 @@ use Monolog\Logger;
  */
 final class StrTypeToUrl implements CustomFilterInterface
 {
-    public const TEMPLATE_TYPE_FROM_CONTEXT = 'context';
-    public const TEMPLATE_TYPE_HTML = 'html';
-    public const TEMPLATE_TYPE_RST = 'rst';
-
     public function __construct(
-        private Context $context,
+        private Context                $context,
         private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
-        private Logger $logger
+        private Logger                 $logger
     )
     {
     }
@@ -46,7 +42,6 @@ final class StrTypeToUrl implements CustomFilterInterface
     /**
      * @param string $text Processed text
      * @param RootEntityCollection $rootEntityCollection
-     * @param string $templateType Display format. rst or html
      * @param bool $useShortLinkVersion Shorten or not the link name. When shortening, only the shortName of the entity will be shown
      * @param bool $createDocument
      *  If true, creates an entity document. Otherwise, just gives a reference to the entity code
@@ -57,7 +52,6 @@ final class StrTypeToUrl implements CustomFilterInterface
     public function __invoke(
         string               $text,
         RootEntityCollection $rootEntityCollection,
-        string               $templateType = self::TEMPLATE_TYPE_FROM_CONTEXT,
         bool                 $useShortLinkVersion = false,
         bool                 $createDocument = false
     ): string
@@ -69,11 +63,7 @@ final class StrTypeToUrl implements CustomFilterInterface
         foreach ($types as $type) {
             $preloadResourceLink = RenderHelper::getPreloadResourceLink($type, $this->context);
             if ($preloadResourceLink) {
-                if ($templateType == self::TEMPLATE_TYPE_RST) {
-                    $preparedTypes[] = "`{$type} <{$preloadResourceLink}>`_";
-                } else {
-                    $preparedTypes[] = "<a href='{$preloadResourceLink}'>{$type}</a>";
-                }
+                $preparedTypes[] = "<a href='{$preloadResourceLink}'>{$type}</a>";
                 continue;
             }
 
@@ -87,16 +77,7 @@ final class StrTypeToUrl implements CustomFilterInterface
                     } else {
                         $type = "\\{$entityOfLink->getName()}";
                     }
-
-                    if ($templateType == self::TEMPLATE_TYPE_FROM_CONTEXT) {
-                        $templateType = $this->context->isCurrentTemplateRst() ? self::TEMPLATE_TYPE_RST : self::TEMPLATE_TYPE_HTML;
-                    }
-
-                    if ($templateType == self::TEMPLATE_TYPE_RST) {
-                        $preparedTypes[] = "`{$type} <{$link}>`_";
-                    } else {
-                        $preparedTypes[] = "<a href='{$link}'>{$type}</a>";
-                    }
+                    $preparedTypes[] = "<a href='{$link}'>{$type}</a>";
                 }
             } else {
                 if ($entityOfLink::isEntityNameValid($type)) {
