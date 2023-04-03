@@ -9,6 +9,8 @@ use BumbleDocGen\Core\Configuration\ValueResolver\RefValueResolver;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Configuration\Configuration;
 
 return [
     Logger::class => \DI\autowire(Logger::class)
@@ -44,5 +46,6 @@ return [
                     ),
                 \DI\autowire(RefValueResolver::class)
             ]
-        )
+        ),
+    PluginEventDispatcher::class => \DI\autowire(PluginEventDispatcher::class)->lazy(),
 ];

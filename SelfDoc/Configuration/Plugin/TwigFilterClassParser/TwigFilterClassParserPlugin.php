@@ -22,7 +22,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     public static function getSubscribedEvents()
     {
         return [
-            AfterLoadingClassEntityCollection::class => 'afterCreationClassEntityCollection',
+            AfterLoadingClassEntityCollection::class => 'afterLoadingClassEntityCollection',
             OnLoadEntityDocPluginContent::class => 'onLoadEntityDocPluginContentEvent',
         ];
     }
@@ -51,7 +51,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         $event->addBlockContentPluginResult($pluginResult);
     }
 
-    public function afterCreationClassEntityCollection(AfterLoadingClassEntityCollection $event): void
+    public function afterLoadingClassEntityCollection(AfterLoadingClassEntityCollection $event): void
     {
         foreach ($event->getClassEntityCollection() as $classEntity) {
             if ($this->isCustomTwigFunction($classEntity)) {
