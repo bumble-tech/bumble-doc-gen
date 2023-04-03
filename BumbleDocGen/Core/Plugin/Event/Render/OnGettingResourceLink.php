@@ -4,22 +4,14 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Plugin\Event\Render;
 
-use BumbleDocGen\Core\Render\Context\Context;
 use Symfony\Contracts\EventDispatcher\Event;
 
 final class OnGettingResourceLink extends Event
 {
     private ?string $resourceUrl = null;
 
-    public function __construct(
-        private string $resourceName, private Context $context
-    )
+    public function __construct(private string $resourceName)
     {
-    }
-
-    public function getContext(): Context
-    {
-        return $this->context;
     }
 
     public function getResourceName(): string
