@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Function;
 
-use BumbleDocGen\Core\Render\Context\Context;
-use BumbleDocGen\Core\Render\Twig\Filter\HtmlToRst;
+use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Render\Breadcrumbs\BreadcrumbsHelper;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Generate documentation menu in HTML or rst format. To generate the menu, the start page is taken,
+ * Generate documentation menu in HTML format. To generate the menu, the start page is taken,
  * and all links with this page are recursively collected for it, after which the html menu is created.
  *
  * @note This function initiates the creation of documents for the displayed entities
  * @see GetDocumentedEntityUrl
  *
  * @example {{ drawDocumentationMenu() }}
- * @example {{ drawDocumentationMenu('/render/index.rst') }}
+ * @example {{ drawDocumentationMenu('/render/index.mr') }}
  * @example {{ drawDocumentationMenu(_self) }}
  */
 final class DrawDocumentationMenu implements CustomFunctionInterface
 {
-    /**
-     * @param Context $context Render context
-     */
-    public function __construct(private Context $context)
+    public function __construct(private Configuration $configuration, private BreadcrumbsHelper $breadcrumbsHelper)
     {
     }
 
@@ -49,6 +47,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
      *  By default, this restriction is disabled.
      *
      * @return string
+     * @throws InvalidConfigurationParameterException
      */
     public function __invoke(?string $startPageKey = null, ?int $maxDeep = null): string
     {
@@ -57,8 +56,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
         }
 
         $structure = [];
-        $breadcrumbsHelper = $this->context->getBreadcrumbsHelper();
-        $templatesDir = $this->context->getConfiguration()->getTemplatesDir();
+        $templatesDir = $this->configuration->getTemplatesDir();
 
         $finder = Finder::create()
             ->name('*.twig')
@@ -72,7 +70,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
             /**@var \SplFileInfo $file */
             $filePatch = str_replace($templatesDir, '', $file->getRealPath());
             $pageKey = null;
-            foreach ($breadcrumbsHelper->getBreadcrumbs($filePatch) as $breadcrumb) {
+            foreach ($this->breadcrumbsHelper->getBreadcrumbs($filePatch) as $breadcrumb) {
                 if (!is_null($pageKey)) {
                     $structure[$pageKey][$breadcrumb['url']] = $breadcrumb;
                 }
@@ -101,17 +99,12 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
         if ($startPageKey) {
             $startPageKey = str_starts_with('/', $startPageKey) ? $startPageKey : "/{$startPageKey}";
             $startPageKey = str_replace('//', '/', $startPageKey);
-            $startPageKey = $this->context->getConfiguration()->getPageLinkProcessor()->getAbsoluteUrl($startPageKey);
+            $startPageKey = $this->configuration->getPageLinkProcessor()->getAbsoluteUrl($startPageKey);
         } else {
             $startPageKey = array_key_first($structure);
         }
 
         $content = isset($structure[$startPageKey]) ? $drawPages($structure[$startPageKey]) : '';
-        $content = "<embed> {$content} </embed>";
-        if ($this->context->isCurrentTemplateRst()) {
-            $htmlToRstFunction = new HtmlToRst();
-            return $htmlToRstFunction($content);
-        }
-        return $content;
+        return "<embed> {$content} </embed>";
     }
 }
