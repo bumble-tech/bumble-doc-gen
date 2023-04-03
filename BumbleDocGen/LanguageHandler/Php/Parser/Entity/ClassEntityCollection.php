@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
@@ -18,7 +19,7 @@ use Roave\BetterReflection\Reflector\Reflector;
 
 final class ClassEntityCollection extends RootEntityCollection
 {
-    private function __construct(
+    public function __construct(
         private Configuration         $configuration,
         protected PhpHandlerSettings  $phpHandlerSettings,
         private Reflector             $reflector,
@@ -37,40 +38,30 @@ final class ClassEntityCollection extends RootEntityCollection
         return 'phpClassEntityCollection';
     }
 
-    public static function createByReflector(
-        Configuration         $configuration,
-        PhpHandlerSettings    $phpHandlerSettings,
-        Reflector             $reflector,
-        PluginEventDispatcher $pluginEventDispatcher
-    ): ClassEntityCollection
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function loadClassEntities(): void
     {
-        $classEntityCollection = new ClassEntityCollection(
-            $configuration,
-            $phpHandlerSettings,
-            $reflector,
-            $pluginEventDispatcher
-        );
-
-        $classEntityFilter = $phpHandlerSettings->getClassEntityFilter();
-        foreach ($configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
+        $classEntityFilter = $this->phpHandlerSettings->getClassEntityFilter();
+        foreach ($this->configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
             $className = ParserHelper::getClassFromFile($file->getPathName());
             if ($className) {
-                $relativeFileName = str_replace($configuration->getProjectRoot(), '', $file->getPathName());
+                $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $file->getPathName());
                 $classEntity = CacheablePhpEntityFactory::createClassEntity(
-                    $configuration,
-                    $phpHandlerSettings,
-                    $reflector,
-                    $classEntityCollection,
+                    $this->configuration,
+                    $this->phpHandlerSettings,
+                    $this->reflector,
+                    $this,
                     ltrim($className, '\\'),
                     $relativeFileName,
                 );
                 if ($classEntityFilter->canAddToCollection($classEntity)) {
-                    $classEntityCollection->add($classEntity);
+                    $this->add($classEntity);
                 }
             }
         }
-        $pluginEventDispatcher->dispatch(new AfterCreationClassEntityCollection($classEntityCollection));
-        return $classEntityCollection;
+        $this->pluginEventDispatcher->dispatch(new AfterCreationClassEntityCollection($this));
     }
 
     public function getConfiguration(): Configuration

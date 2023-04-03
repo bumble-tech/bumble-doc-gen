@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -17,6 +18,9 @@ use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\CachedSourceL
 use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\PhpSourceLocatorHelper;
 use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\DrawClassMap;
 use BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\GetClassMethodsBodyCode;
+use DI\Container;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\Reflector\Reflector;
@@ -27,12 +31,13 @@ final class PhpHandler implements LanguageHandlerInterface
     private Reflector $reflector;
 
     public function __construct(
-        private Configuration         $configuration,
-        private PhpHandlerSettings    $phpHandlerSettings,
-        private PluginEventDispatcher $pluginEventDispatcher
+        Configuration         $configuration,
+        PhpHandlerSettings    $phpHandlerSettings,
+        PluginEventDispatcher $pluginEventDispatcher,
+        BetterReflection      $betterReflection,
+        private Container     $diContainer
     )
     {
-        $betterReflection = (new BetterReflection());
         $sourceLocatorsCollection = $pluginEventDispatcher->dispatch(
             new OnLoadSourceLocatorsCollection($configuration->getSourceLocators())
         )->getSourceLocatorsCollection();
@@ -51,14 +56,21 @@ final class PhpHandler implements LanguageHandlerInterface
         return 'php';
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
     public function getEntityCollection(): RootEntityCollection
     {
-        return ClassEntityCollection::createByReflector(
-            $this->configuration,
-            $this->phpHandlerSettings,
-            $this->reflector,
-            $this->pluginEventDispatcher
-        );
+        static $classEntityCollection = null;
+        if (is_null($classEntityCollection)) {
+            $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class, [
+                'reflector' => $this->reflector
+            ]);
+            $classEntityCollection->loadClassEntities();
+        }
+        return $classEntityCollection;
     }
 
     public function getCustomTwigFunctions(Context $context): CustomFunctionsCollection
