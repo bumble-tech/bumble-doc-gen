@@ -4,10 +4,12 @@ templates_dir:                    # (string) Path to directory with documentatio
 output_dir: "%project_root%/docs" # (string) Path to the directory where the finished documentation will be generated
 cache_dir:                        # (string|null) Path to the directory where the documentation generator cache will be saved
 output_dir_base_url: "/docs"      # (string) Basic part of url documentation. Used to form links in generated documents.
+git_client_path: "git"            # (string) Path to git client
 page_link_processor:              # (PageLinkProcessorInterface) Link handler class on documentation pages
   class: \BumbleDocGen\Core\Render\PageLinkProcessor\BasePageLinkProcessor
 language_handlers:                # (array<LanguageHandlerInterface>) List of programming language handlers
 source_locators:                  # (array<SourceLocatorInterface>) List of source locators
+template_fillers:                 # (array<string,TemplateFillerInterface>) List of template fillers
 plugins:                          # (array<PluginInterface>|null) List of plugins
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter
