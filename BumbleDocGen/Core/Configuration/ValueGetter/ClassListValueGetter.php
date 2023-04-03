@@ -22,12 +22,15 @@ final class ClassListValueGetter
      */
     public function validateAndGet(
         string $parameterName,
-        string $classInterfaceName
+        string $classInterfaceName,
+        bool   $nullable = true
     ): array
     {
         $preparedValues = [];
-
         $values = $this->parameterBag->get($parameterName);
+        if (is_null($values) && $nullable) {
+            $values = [];
+        }
         if (!is_array($values)) {
             throw new InvalidConfigurationParameterException("Parameter `{$parameterName}` must be an array");
         }
@@ -43,7 +46,7 @@ final class ClassListValueGetter
                     "Configuration parameter `{$parameterName}[{$i}]` must implement the `\\{$classInterfaceName}` interface"
                 );
             }
-            $preparedValues[] = $valueObject;
+            $preparedValues[$i] = $valueObject;
         }
         return $preparedValues;
     }
