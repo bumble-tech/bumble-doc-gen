@@ -7,7 +7,7 @@ namespace BumbleDocGen\Core\Render\Twig\Function;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Context\RenderContext;
 use BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Render\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Render\Context\DocumentTransformableEntityInterface;
@@ -20,7 +20,7 @@ use BumbleDocGen\Core\Render\RenderHelper;
  * @note This function initiates the creation of documents for the displayed entities
  * @see DocumentedEntityWrapper
  * @see DocumentedEntityWrappersCollection
- * @see Context::$entityWrappersCollection
+ * @see RenderContext::$entityWrappersCollection
  *
  * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}
  * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
@@ -31,7 +31,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
     public const DEFAULT_URL = '#';
 
     public function __construct(
-        private Context                            $context,
+        private RenderContext                      $context,
         private RenderHelper                       $renderHelper,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration

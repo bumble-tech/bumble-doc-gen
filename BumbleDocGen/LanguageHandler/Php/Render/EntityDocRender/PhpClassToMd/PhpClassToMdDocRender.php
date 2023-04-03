@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
-use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Context\RenderContext;
 use BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\Twig\MainExtension;
@@ -27,7 +27,7 @@ class PhpClassToMdDocRender implements EntityDocRenderInterface
 
     private Environment $twig;
 
-    public function __construct(private Context $context, MainExtension $mainExtension)
+    public function __construct(private RenderContext $context, MainExtension $mainExtension)
     {
         $loader = new FilesystemLoader([
             __DIR__ . '/templates',

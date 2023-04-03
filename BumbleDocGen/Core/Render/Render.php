@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
-use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Context\RenderContext;
 use BumbleDocGen\Core\Render\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Render\Twig\MainExtension;
 use Psr\Log\LoggerInterface;
@@ -29,7 +29,7 @@ final class Render
         private Configuration                      $configuration,
         private RootEntityCollectionsGroup         $rootEntityCollectionsGroup,
         private PluginEventDispatcher              $pluginEventDispatcher,
-        private Context                            $renderContext,
+        private RenderContext                      $renderContext,
         private MainExtension                      $twigMainExtension,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private LoggerInterface                    $logger

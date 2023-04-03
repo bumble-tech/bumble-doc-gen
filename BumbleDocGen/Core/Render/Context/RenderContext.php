@@ -7,7 +7,7 @@ namespace BumbleDocGen\Core\Render\Context;
 /**
  * Document rendering context
  */
-final class Context
+final class RenderContext
 {
     private string $currentTemplateFilePath = '';
 

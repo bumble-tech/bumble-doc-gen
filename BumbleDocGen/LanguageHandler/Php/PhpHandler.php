@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Context\RenderContext;
 use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
@@ -37,7 +37,7 @@ final class PhpHandler implements LanguageHandlerInterface
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getCustomTwigFunctions(Context $context): CustomFunctionsCollection
+    public function getCustomTwigFunctions(RenderContext $context): CustomFunctionsCollection
     {
         return $this->phpHandlerSettings->getCustomTwigFunctions();
     }
@@ -45,7 +45,7 @@ final class PhpHandler implements LanguageHandlerInterface
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getCustomTwigFilters(Context $context): CustomFiltersCollection
+    public function getCustomTwigFilters(RenderContext $context): CustomFiltersCollection
     {
         return $this->phpHandlerSettings->getCustomTwigFilters();
     }

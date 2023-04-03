@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Render\Twig;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Render\Context\Context;
+use BumbleDocGen\Core\Render\Context\RenderContext;
 use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
@@ -21,7 +21,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     private CustomFiltersCollection $filters;
 
     public function __construct(
-        private Context       $context,
+        private RenderContext $context,
         private Configuration $configuration
     )
     {
