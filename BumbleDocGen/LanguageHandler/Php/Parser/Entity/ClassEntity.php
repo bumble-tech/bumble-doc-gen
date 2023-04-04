@@ -13,6 +13,7 @@ use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
@@ -87,8 +88,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
+     * {@inheritDoc}
      * @throws InvalidConfigurationParameterException
-     * @throws \Exception
+     * @throws ReflectionException
      */
     public function getEntityDependencies(): array
     {
@@ -123,6 +125,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * Checking if class file is in git repository
      * @throws InvalidConfigurationParameterException
+     * @throws ReflectionException
      */
     public function isInGit(): bool
     {
@@ -168,7 +171,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * {@inheritDoc}
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     public function getReflection(): ReflectionClass
     {
@@ -199,14 +204,16 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             }
         }
         if (!$this->reflectionClass) {
-            throw new \Exception("'{$this->className}' could not be found in the located source ");
+            throw new ReflectionException("'{$this->className}' could not be found in the located source ");
         }
         $classReflections[$this->className] = $this->reflectionClass;
         return $this->reflectionClass;
     }
 
+
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     public function getImplementingReflectionClass(): ReflectionClass
     {
@@ -250,7 +257,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getShortName(): string
     {
@@ -258,7 +266,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getNamespaceName(): string
     {
@@ -266,8 +275,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
+     * {@inheritDoc}
      * @throws InvalidConfigurationParameterException
-     * @throws \Exception
+     * @throws ReflectionException
      */
     #[CacheableMethod] public function getFileName(): ?string
     {
@@ -288,7 +298,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
     {
@@ -296,7 +307,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
     {
@@ -304,7 +316,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getModifiersString(): string
     {
@@ -335,7 +348,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getExtends(): ?string
     {
@@ -351,8 +365,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $extends;
     }
 
+
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getInterfaces(): array
     {
@@ -360,8 +376,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return !$reflection->isInterface() ? array_map(fn($interfaceName) => "\\{$interfaceName}", $reflection->getInterfaceNames()) : [];
     }
 
+
     /**
      * @return ClassEntity[]
+     *
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
      */
     public function getInterfacesEntities(): array
     {
@@ -374,7 +396,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * @return string[]
-     * @throws \Exception
+     *
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getParentClassNames(): array
     {
@@ -387,9 +411,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return array_map(fn($parentClassName) => "\\{$parentClassName}", $parentClassNames);
     }
 
+
     /**
      * @return string[]
-     * @throws \Exception
+     *
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getInterfaceNames(): array
     {
@@ -397,7 +424,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getParentClassName(): ?string
     {
@@ -405,7 +433,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
      */
     public function getParentClass(): ?ClassEntity
     {
@@ -416,13 +447,18 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($parentClassName);
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function getInterfacesString(): string
     {
         return implode(', ', $this->getInterfaces());
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getTraitsNames(): array
     {
@@ -430,7 +466,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function hasTraits(): bool
     {
@@ -533,7 +570,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isEnum(): bool
     {
@@ -541,7 +579,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getCasesNames(): array
     {
@@ -560,7 +599,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getMethodsData(): array
     {
@@ -576,7 +616,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getPropertiesData(): array
     {
@@ -592,7 +633,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getConstantsData(): array
     {
@@ -608,7 +650,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isInstantiable(): bool
     {
@@ -616,30 +659,44 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isInterface(): bool
     {
         return $this->getReflection()->isInterface();
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function hasMethod(string $method): bool
     {
         return array_key_exists($method, $this->getMethodsData());
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function hasProperty(string $property): bool
     {
         return array_key_exists($property, $this->getPropertiesData());
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function hasConstant(string $constant): bool
     {
         return array_key_exists($constant, $this->getConstantsData());
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isSubclassOf(string $className): bool
     {
@@ -654,13 +711,18 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getConstant(string $name): string|array|int|bool|null|float
     {
         return $this->getReflection()->getConstant($name);
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function implementsInterface(string $interfaceName): bool
     {
         $interfaceName = ltrim(str_replace('\\\\', '\\', $interfaceName), '\\');
@@ -671,7 +733,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getConstants(): array
     {
@@ -679,6 +742,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
+     * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
     public function getDocRender(): EntityDocRenderInterface
