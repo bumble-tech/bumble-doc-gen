@@ -28,7 +28,7 @@ final class AsyncSourceLocator implements SourceLocatorInterface
         return null;
     }
 
-    public function convertToReflectorSourceLocator(Locator $astLocator): SourceLocator
+    public function getSourceLocator(Locator $astLocator): SourceLocator
     {
         return new \BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\SystemAsyncSourceLocator(
             $astLocator, $this->psr4FileMap, $this->classMap,
