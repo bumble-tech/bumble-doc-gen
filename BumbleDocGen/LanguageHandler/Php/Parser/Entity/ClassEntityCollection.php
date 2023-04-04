@@ -14,7 +14,6 @@ use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
-use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
@@ -22,7 +21,6 @@ use Psr\Log\LoggerInterface;
 final class ClassEntityCollection extends RootEntityCollection
 {
     public function __construct(
-        private Container                 $diContainer,
         private Configuration             $configuration,
         protected PhpHandlerSettings      $phpHandlerSettings,
         private PluginEventDispatcher     $pluginEventDispatcher,
@@ -99,6 +97,7 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     /**
+     * {@inheritDoc}
      * @throws DependencyException
      * @throws NotFoundException
      */
@@ -137,69 +136,64 @@ final class ClassEntityCollection extends RootEntityCollection
 
     /**
      * @param string[] $interfaces
-     *
-     * @throws DependencyException
-     * @throws NotFoundException
+     * @throws \Exception
      */
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
     {
-        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
+        $classEntityCollection = clone $this;
         $interfaces = array_map(
             fn($interface) => ltrim(
                 str_replace('\\\\', '\\', $interface),
                 '\\'
             ), $interfaces
         );
-        foreach ($this as $classEntity) {
+        foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             $entityInterfaces = array_map(
                 fn($interface) => ltrim($interface, '\\'), $classEntity->getInterfaces()
             );
-            if (array_intersect($interfaces, $entityInterfaces)) {
-                $classEntityCollection->addWithoutPreparation($classEntity);
+            if (!array_intersect($interfaces, $entityInterfaces)) {
+                $classEntityCollection->remove($objectId);
             }
         }
         return $classEntityCollection;
     }
 
     /**
-     * @throws DependencyException
-     * @throws NotFoundException
+     * @throws \Exception
      */
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
     {
-        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
+        $classEntityCollection = clone $this;
         $parentClassNames = array_map(
             fn($parentClassName) => ltrim(
                 str_replace('\\\\', '\\', $parentClassName),
                 '\\'
             ), $parentClassNames
         );
-        foreach ($this as $classEntity) {
+        foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             $entityParentClassNames = array_map(
                 fn($parentClassName) => ltrim($parentClassName, '\\'), $classEntity->getParentClassNames()
             );
-            if (array_intersect($parentClassNames, $entityParentClassNames)) {
-                $classEntityCollection->addWithoutPreparation($classEntity);
+            if (!array_intersect($parentClassNames, $entityParentClassNames)) {
+                $classEntityCollection->remove($objectId);
             }
         }
         return $classEntityCollection;
     }
 
     /**
-     * @throws DependencyException
-     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function filterByPaths(array $paths): ClassEntityCollection
     {
-        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
-        foreach ($this as $classEntity) {
+        $classEntityCollection = clone $this;
+        foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             foreach ($paths as $path) {
-                if (str_starts_with($classEntity->getFileName(), $path)) {
-                    $classEntityCollection->addWithoutPreparation($classEntity);
+                if (!str_starts_with($classEntity->getFileName(), $path)) {
+                    $classEntityCollection->remove($objectId);
                 }
             }
         }
@@ -207,32 +201,30 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     /**
-     * @throws DependencyException
-     * @throws NotFoundException
+     * @throws \Exception
      */
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
-        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
-        foreach ($this as $classEntity) {
+        $classEntityCollection = clone $this;
+        foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
-            if (preg_match($regexPattern, $classEntity->getShortName())) {
-                $classEntityCollection->addWithoutPreparation($classEntity);
+            if (!preg_match($regexPattern, $classEntity->getShortName())) {
+                $classEntityCollection->remove($objectId);
             }
         }
         return $classEntityCollection;
     }
 
     /**
-     * @throws DependencyException
-     * @throws NotFoundException
+     * @throws \Exception
      */
     public function getOnlyInstantiable(): ClassEntityCollection
     {
-        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
-        foreach ($this as $classEntity) {
+        $classEntityCollection = clone $this;
+        foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
-            if ($classEntity->isInstantiable()) {
-                $classEntityCollection->addWithoutPreparation($classEntity);
+            if (!$classEntity->isInstantiable()) {
+                $classEntityCollection->remove($objectId);
             }
         }
         return $classEntityCollection;
@@ -245,11 +237,11 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function getOnlyInterfaces(): ClassEntityCollection
     {
-        $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
-        foreach ($this as $classEntity) {
+        $classEntityCollection = clone $this;
+        foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
-            if ($classEntity->isInterface()) {
-                $classEntityCollection->addWithoutPreparation($classEntity);
+            if (!$classEntity->isInterface()) {
+                $classEntityCollection->remove($objectId);
             }
         }
         return $classEntityCollection;
