@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
@@ -72,6 +73,7 @@ final class ClassEntityCollection extends RootEntityCollection
 
     /**
      * @throws InvalidConfigurationParameterException
+     * @throws Exception\ReflectionException
      */
     public function add(ClassEntity $classEntity, bool $reload = false): ClassEntityCollection
     {
@@ -133,10 +135,11 @@ final class ClassEntityCollection extends RootEntityCollection
         return $this->configuration->getLogger();
     }
 
-
     /**
      * @param string[] $interfaces
-     * @throws \Exception
+     *
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
     {
@@ -160,7 +163,8 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
     {
@@ -184,6 +188,7 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     /**
+     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function filterByPaths(array $paths): ClassEntityCollection
@@ -201,7 +206,8 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
@@ -216,7 +222,8 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     /**
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     public function getOnlyInstantiable(): ClassEntityCollection
     {
@@ -231,9 +238,8 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     * @throws \Exception
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     public function getOnlyInterfaces(): ClassEntityCollection
     {
