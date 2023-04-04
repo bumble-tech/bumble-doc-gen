@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
+use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Render\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
@@ -18,7 +22,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
-use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
@@ -44,6 +47,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         protected ReflectorWrapper        $reflector,
         protected ClassEntityCollection   $classEntityCollection,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
+        private LocalObjectCache          $localObjectCache,
         GetDocumentedEntityUrl            $documentedEntityUrlFunction,
         RenderHelper                      $renderHelper,
         protected string                  $className,
@@ -116,6 +120,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $fileDependencies;
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity();
@@ -124,6 +134,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * Checking if class file is in git repository
+     *
      * @throws InvalidConfigurationParameterException
      * @throws ReflectionException
      */
@@ -137,24 +148,37 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return isset($filesInGit[$fileName]);
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     protected function getDocCommentEntity(): ClassEntity
     {
-        static $docCommentClassEntityCache = [];
         $objectId = $this->getObjectId();
-        if (!isset($docCommentClassEntityCache[$objectId])) {
-            $docComment = $this->getDocComment();
-            $classEntity = $this;
-            if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
-                $parentReflectionClass = $this->getParentClass();
-                if ($parentReflectionClass) {
-                    $classEntity = $parentReflectionClass->getDocCommentEntity();
-                }
-            }
-            $docCommentClassEntityCache[$objectId] = $classEntity;
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $docCommentClassEntityCache[$objectId];
+        $docComment = $this->getDocComment();
+        $classEntity = $this;
+        if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
+            $parentReflectionClass = $this->getParentClass();
+            if ($parentReflectionClass) {
+                $classEntity = $parentReflectionClass->getDocCommentEntity();
+            }
+        }
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $classEntity);
+        return $classEntity;
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] protected function getDocCommentRecursive(): string
     {
         return $this->getDocCommentEntity()->getDocComment() ?: ' ';
@@ -177,9 +201,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function getReflection(): ReflectionClass
     {
-        static $classReflections = [];
-        if (isset($classReflections[$this->className])) {
-            return $classReflections[$this->className];
+        $objectId = $this->getObjectId();
+        try {
+            $this->reflectionClass = $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->reflectionClass;
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         if (!$this->reflectionClass) {
             try {
@@ -206,7 +232,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!$this->reflectionClass) {
             throw new ReflectionException("'{$this->className}' could not be found in the located source ");
         }
-        $classReflections[$this->className] = $this->reflectionClass;
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $this->reflectionClass);
         return $this->reflectionClass;
     }
 
@@ -479,14 +505,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function getConstantEntityCollection(): ConstantEntityCollection
     {
-        static $constantEntityCollection = [];
-        if (!isset($constantEntityCollection[$this->getObjectId()])) {
-            $constantEntityCollection[$this->getObjectId()] = ConstantEntityCollection::createByClassEntity(
-                $this,
-                $this->cacheablePhpEntityFactory
-            );
+        $objectId = $this->getObjectId();
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $constantEntityCollection[$this->getObjectId()];
+        $constantEntityCollection = ConstantEntityCollection::createByClassEntity(
+            $this,
+            $this->cacheablePhpEntityFactory
+        );
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $constantEntityCollection);
+        return $constantEntityCollection;
     }
 
     /**
@@ -508,14 +537,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function getPropertyEntityCollection(): PropertyEntityCollection
     {
-        static $propertyEntityCollection = [];
-        if (!isset($propertyEntityCollection[$this->getObjectId()])) {
-            $propertyEntityCollection[$this->getObjectId()] = PropertyEntityCollection::createByClassEntity(
-                $this,
-                $this->cacheablePhpEntityFactory
-            );
+        $objectId = $this->getObjectId();
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $propertyEntityCollection[$this->getObjectId()];
+        $propertyEntityCollection = PropertyEntityCollection::createByClassEntity(
+            $this,
+            $this->cacheablePhpEntityFactory
+        );
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $propertyEntityCollection);
+        return $propertyEntityCollection;
     }
 
     /**
@@ -539,14 +571,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function getMethodEntityCollection(): MethodEntityCollection
     {
-        static $methodEntityCollection = [];
-        if (!isset($methodEntityCollection[$this->getObjectId()])) {
-            $methodEntityCollection[$this->getObjectId()] = MethodEntityCollection::createByClassEntity(
-                $this,
-                $this->cacheablePhpEntityFactory
-            );
+        $objectId = $this->getObjectId();
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $methodEntityCollection[$this->getObjectId()];
+        $methodEntityCollection = MethodEntityCollection::createByClassEntity(
+            $this,
+            $this->cacheablePhpEntityFactory
+        );
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $methodEntityCollection);
+        return $methodEntityCollection;
     }
 
     /**
@@ -747,18 +782,19 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function getDocRender(): EntityDocRenderInterface
     {
-        static $renders = [];
         $objectId = $this->getObjectId();
-        if (!isset($renders[$objectId])) {
-            $docRender = $this->getPhpHandlerSettings()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
-            if (!$docRender) {
-                throw new \Exception(
-                    "Render for file `{$this->getName()}` not found"
-                );
-            }
-            $renders[$objectId] = $docRender;
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $renders[$objectId];
+        $docRender = $this->getPhpHandlerSettings()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
+        if (!$docRender) {
+            throw new \Exception(
+                "Render for file `{$this->getName()}` not found"
+            );
+        }
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $docRender);
+        return $docRender;
     }
 
     /**
