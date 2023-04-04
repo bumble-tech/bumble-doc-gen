@@ -20,6 +20,11 @@ abstract class RootEntityCollection extends BaseEntityCollection
         return $this->entities[$objectId] ?? null;
     }
 
+    public function remove(string $objectId): void
+    {
+        unset($this->entities[$objectId]);
+    }
+
     abstract public static function getEntityCollectionName(): string;
 
     abstract public function getConfiguration(): Configuration;
