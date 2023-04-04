@@ -37,7 +37,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     private bool $relativeFileNameLoaded = false;
     private bool $isClassLoad = false;
 
-    protected function __construct(
+    public function __construct(
         protected Configuration           $configuration,
         protected PhpHandlerSettings      $phpHandlerSettings,
         protected ReflectorWrapper        $reflector,
@@ -65,73 +65,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->className;
     }
 
-    public static function create(
-        Configuration             $configuration,
-        PhpHandlerSettings        $phpHandlerSettings,
-        ReflectorWrapper          $reflector,
-        ClassEntityCollection     $classEntityCollection,
-        CacheablePhpEntityFactory $cacheablePhpEntityFactory,
-        GetDocumentedEntityUrl    $documentedEntityUrlFunction,
-        RenderHelper              $renderHelper,
-        string                    $className,
-        ?string                   $relativeFileName,
-        bool                      $reloadCache = false
-    ): ClassEntity
+    public function setReflectionClass(ReflectionClass $reflectionClass): void
     {
-        static $classEntities = [];
-        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
-        $objectId = md5($className);
-        if (!isset($classEntities[$objectId]) || $reloadCache) {
-            $classEntities[$objectId] = new static(
-                $configuration,
-                $phpHandlerSettings,
-                $reflector,
-                $classEntityCollection,
-                $cacheablePhpEntityFactory,
-                $documentedEntityUrlFunction,
-                $renderHelper,
-                $className,
-                $relativeFileName,
-            );
-        }
-
-        return $classEntities[$objectId];
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    public static function createByReflection(
-        Configuration             $configuration,
-        PhpHandlerSettings        $phpHandlerSettings,
-        ReflectorWrapper          $reflector,
-        ReflectionClass           $reflectionClass,
-        ClassEntityCollection     $classEntityCollection,
-        CacheablePhpEntityFactory $cacheablePhpEntityFactory,
-        GetDocumentedEntityUrl    $documentedEntityUrlFunction,
-        RenderHelper              $renderHelper,
-        bool                      $reloadCache = false
-    ): ClassEntity
-    {
-        static $classEntities = [];
-        $objectId = static::generateObjectIdByReflection($reflectionClass);
-        if (!isset($classEntities[$objectId]) || $reloadCache) {
-            $relativeFileName = $reflectionClass->getFileName() ? str_replace($configuration->getProjectRoot(), '', $reflectionClass->getFileName()) : null;
-            $classEntities[$objectId] = new static(
-                $configuration,
-                $phpHandlerSettings,
-                $reflector,
-                $classEntityCollection,
-                $cacheablePhpEntityFactory,
-                $documentedEntityUrlFunction,
-                $renderHelper,
-                $reflectionClass->getName(),
-                $relativeFileName,
-            );
-            $classEntities[$objectId]->reflectionClass = $reflectionClass;
-            $classEntities[$objectId]->isClassLoad = true;
-        }
-        return $classEntities[$objectId];
+        $this->reflectionClass = $reflectionClass;
+        $this->isClassLoad = true;
     }
 
     public function getReflector(): ReflectorWrapper
@@ -151,6 +88,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * @throws InvalidConfigurationParameterException
+     * @throws \Exception
      */
     public function getEntityDependencies(): array
     {

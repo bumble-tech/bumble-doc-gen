@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache;
 
+use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
@@ -20,6 +22,7 @@ final class CacheablePhpEntityFactory
 {
     public function __construct(
         private ReflectorWrapper $reflector,
+        private Configuration    $configuration,
         private Container        $diContainer
     )
     {
@@ -110,23 +113,26 @@ final class CacheablePhpEntityFactory
         bool                  $reloadCache = false
     ): ClassEntity
     {
-        static $wrapperClassName = null;
-        if (is_null($wrapperClassName)) {
-            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ClassEntity::class, 'ClassEntityWrapper');
-            $this->diContainer->set($wrapperClassName, \DI\factory([$wrapperClassName, 'create']));
+        static $classEntities = [];
+        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
+        $objectId = md5($className);
+        if (!isset($classEntities[$objectId]) || $reloadCache) {
+            $wrapperClassName = $this->createAndRegisterWrapper(ClassEntity::class);
+            $classEntities[$objectId] = $this->diContainer->make($wrapperClassName, [
+                'reflector' => $this->reflector,
+                'classEntityCollection' => $classEntityCollection,
+                'className' => $className,
+                'relativeFileName' => $relativeFileName,
+                'reloadCache' => $reloadCache
+            ]);
         }
-        return $this->diContainer->make($wrapperClassName, [
-            'reflector' => $this->reflector,
-            'classEntityCollection' => $classEntityCollection,
-            'className' => $className,
-            'relativeFileName' => $relativeFileName,
-            'reloadCache' => $reloadCache
-        ]);
+        return $classEntities[$objectId];
     }
 
     /**
      * @throws DependencyException
      * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
      */
     public function createClassEntityByReflection(
         ReflectionClass       $reflectionClass,
@@ -134,17 +140,12 @@ final class CacheablePhpEntityFactory
         bool                  $reloadCache = false
     ): ClassEntity
     {
-        static $wrapperClassName = null;
-        if (is_null($wrapperClassName)) {
-            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ClassEntity::class, 'ClassEntityRWrapper');
-            $this->diContainer->set($wrapperClassName, \DI\factory([$wrapperClassName, 'createByReflection']));
-        }
-        return $this->diContainer->make($wrapperClassName, [
-            'reflector' => $this->reflector,
-            'classEntityCollection' => $classEntityCollection,
-            'reflectionClass' => $reflectionClass,
-            'reloadCache' => $reloadCache
-        ]);
+        $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName() ?? '');
+        $relativeFileName = $relativeFileName ?: null;
+        $className = $reflectionClass->getName();
+        $classEntity = $this->createClassEntity($classEntityCollection, $className, $relativeFileName, $reloadCache);
+        $classEntity->setReflectionClass($reflectionClass);
+        return $classEntity;
     }
 
     /**
@@ -159,25 +160,31 @@ final class CacheablePhpEntityFactory
         bool                  $reloadCache = false
     ): ClassEntity
     {
-        static $wrapperClassName = [];
-        $classNameParts = explode('\\', $subClassEntity);
-        $subClassEntityName = end($classNameParts);
-        if (!array_key_exists($subClassEntityName, $wrapperClassName)) {
-            $wrapperClassName[$subClassEntityName] = CacheableEntityWrapperFactory::createWrappedEntityClass($subClassEntity, "{$subClassEntityName}Wrapper");
-            $this->diContainer->set($wrapperClassName[$subClassEntityName], \DI\factory([$wrapperClassName, 'create']));
+        if (!is_a($subClassEntity, ClassEntity::class, true)) {
+            throw new \Exception(
+                'The class must inherit from `BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity`'
+            );
         }
-        return $this->diContainer->make($wrapperClassName[$subClassEntityName], [
-            'reflector' => $this->reflector,
-            'classEntityCollection' => $classEntityCollection,
-            'className' => $className,
-            'relativeFileName' => $relativeFileName,
-            'reloadCache' => $reloadCache
-        ]);
+        static $classEntities = [];
+        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
+        $objectId = md5($className);
+        if (!isset($classEntities[$objectId]) || $reloadCache) {
+            $wrapperClassName = $this->createAndRegisterWrapper($subClassEntity);
+            $classEntities[$objectId] = $this->diContainer->make($wrapperClassName, [
+                'reflector' => $this->reflector,
+                'classEntityCollection' => $classEntityCollection,
+                'className' => $className,
+                'relativeFileName' => $relativeFileName,
+                'reloadCache' => $reloadCache
+            ]);
+        }
+        return $classEntities[$objectId];
     }
 
     /**
      * @throws DependencyException
      * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
      */
     public function createSubClassEntityByReflection(
         string                $subClassEntity,
@@ -186,18 +193,33 @@ final class CacheablePhpEntityFactory
         bool                  $reloadCache = false
     ): ClassEntity
     {
-        static $wrapperClassName = [];
-        $classNameParts = explode('\\', $subClassEntity);
-        $subClassEntityName = end($classNameParts);
-        if (!array_key_exists($subClassEntityName, $wrapperClassName)) {
-            $wrapperClassName[$subClassEntityName] = CacheableEntityWrapperFactory::createWrappedEntityClass($subClassEntity, "{$subClassEntityName}RWrapper");
-            $this->diContainer->set($wrapperClassName[$subClassEntityName], \DI\factory([$wrapperClassName, 'createByReflection']));
+        $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName() ?? '');
+        $relativeFileName = $relativeFileName ?: null;
+        $className = $reflectionClass->getName();
+        $classEntity = $this->createSubClassEntity(
+            $subClassEntity,
+            $classEntityCollection,
+            $className,
+            $relativeFileName,
+            $reloadCache
+        );
+        $classEntity->setReflectionClass($reflectionClass);
+        return $classEntity;
+    }
+
+    private function createAndRegisterWrapper(string $classEntity): string
+    {
+        static $wrapperClassNames = [];
+        if (!isset($wrapperClassNames[$classEntity])) {
+            $classNameParts = explode('\\', $classEntity);
+            $classEntityName = end($classNameParts);
+            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(
+                $classEntity,
+                "{$classEntityName}Wrapper"
+            );
+            $this->diContainer->set($wrapperClassName, \DI\autowire($wrapperClassName));
+            $wrapperClassNames[$classEntity] = $wrapperClassName;
         }
-        return $this->diContainer->make($wrapperClassName[$subClassEntityName], [
-            'reflector' => $this->reflector,
-            'classEntityCollection' => $classEntityCollection,
-            'reflectionClass' => $reflectionClass,
-            'reloadCache' => $reloadCache
-        ]);
+        return $wrapperClassNames[$classEntity];
     }
 }

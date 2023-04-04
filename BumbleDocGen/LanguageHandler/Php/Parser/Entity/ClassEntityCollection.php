@@ -15,6 +15,8 @@ use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntity
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
 use DI\Container;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
 
 final class ClassEntityCollection extends RootEntityCollection
@@ -41,6 +43,8 @@ final class ClassEntityCollection extends RootEntityCollection
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function loadClassEntities(): void
@@ -68,6 +72,9 @@ final class ClassEntityCollection extends RootEntityCollection
         return $this->configuration;
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function add(ClassEntity $classEntity, bool $reload = false): ClassEntityCollection
     {
         $key = $classEntity->getObjectId();
@@ -91,6 +98,10 @@ final class ClassEntityCollection extends RootEntityCollection
         return $this->entities[$objectId] ?? null;
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function getLoadedOrCreateNew(string $objectId): ClassEntity
     {
         $classEntity = $this->get($objectId);
@@ -109,6 +120,10 @@ final class ClassEntityCollection extends RootEntityCollection
         return $classEntity;
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function getEntityByClassName(string $className, bool $createIfNotExists = true): ?ClassEntity
     {
         return $createIfNotExists ? $this->getLoadedOrCreateNew($className) : $this->get($className);
@@ -119,8 +134,12 @@ final class ClassEntityCollection extends RootEntityCollection
         return $this->configuration->getLogger();
     }
 
+
     /**
      * @param string[] $interfaces
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
      */
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
     {
@@ -143,6 +162,10 @@ final class ClassEntityCollection extends RootEntityCollection
         return $classEntityCollection;
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
     {
         $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
@@ -164,6 +187,11 @@ final class ClassEntityCollection extends RootEntityCollection
         return $classEntityCollection;
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
     public function filterByPaths(array $paths): ClassEntityCollection
     {
         $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
@@ -178,6 +206,10 @@ final class ClassEntityCollection extends RootEntityCollection
         return $classEntityCollection;
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
         $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
@@ -190,6 +222,10 @@ final class ClassEntityCollection extends RootEntityCollection
         return $classEntityCollection;
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function getOnlyInstantiable(): ClassEntityCollection
     {
         $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
@@ -202,6 +238,11 @@ final class ClassEntityCollection extends RootEntityCollection
         return $classEntityCollection;
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws \Exception
+     */
     public function getOnlyInterfaces(): ClassEntityCollection
     {
         $classEntityCollection = $this->diContainer->make(ClassEntityCollection::class);
