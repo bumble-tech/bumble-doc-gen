@@ -54,6 +54,10 @@ final class CacheablePhpEntityFactory
         ]);
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function createConstantEntity(
         ClassEntity $classEntity,
         string      $constantName,
@@ -62,18 +66,19 @@ final class CacheablePhpEntityFactory
         bool        $reloadCache = false
     ): ConstantEntity
     {
-        static $wrapperClassName = null;
-        if (is_null($wrapperClassName)) {
-            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(ConstantEntity::class, 'ConstantEntityWrapper');
-            $this->diContainer->set($wrapperClassName, \DI\factory([$wrapperClassName, 'create']));
+        static $constantsEntities = [];
+        $objectId = "{$classEntity->getName()}:{$constantName}";
+        if (!isset($constantsEntities[$objectId]) || $reloadCache) {
+            $wrapperClassName = $this->createAndRegisterWrapper(ConstantEntity::class);
+            $constantsEntities[$objectId] = $this->diContainer->make($wrapperClassName, [
+                'classEntity' => $classEntity,
+                'constantName' => $constantName,
+                'declaringClassName' => $declaringClassName,
+                'implementingClassName' => $implementingClassName,
+                'reloadCache' => $reloadCache
+            ]);
         }
-        return $this->diContainer->make($wrapperClassName, [
-            'classEntity' => $classEntity,
-            'constantName' => $constantName,
-            'declaringClassName' => $declaringClassName,
-            'implementingClassName' => $implementingClassName,
-            'reloadCache' => $reloadCache
-        ]);
+        return $constantsEntities[$objectId];
     }
 
     /**

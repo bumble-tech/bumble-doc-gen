@@ -18,7 +18,7 @@ class ConstantEntity extends BaseEntity
 {
     private ?ReflectionClassConstant $reflectionClassConstant = null;
 
-    private function __construct(
+    public function __construct(
         protected ClassEntity $classEntity,
         protected string      $constantName,
         protected string      $declaringClassName,
@@ -31,24 +31,6 @@ class ConstantEntity extends BaseEntity
             $classEntity->documentedEntityUrlFunction,
             $classEntity->renderHelper
         );
-    }
-
-    public static function create(
-        ClassEntity $classEntity,
-        string      $constantName,
-        string      $declaringClassName,
-        string      $implementingClassName,
-        bool        $reloadCache = false
-    ): ConstantEntity
-    {
-        static $classEntities = [];
-        $objectId = "{$classEntity->getName()}:{$constantName}";
-        if (!isset($classEntities[$objectId]) || $reloadCache) {
-            $classEntities[$objectId] = new static(
-                $classEntity, $constantName, $declaringClassName, $implementingClassName
-            );
-        }
-        return $classEntities[$objectId];
     }
 
     public function getPhpHandlerSettings(): PhpHandlerSettings
