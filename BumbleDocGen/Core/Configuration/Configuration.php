@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Configuration;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Configuration\ValueGetter\ClassListValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\ClassValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\StringValueGetter;
+use BumbleDocGen\Core\Configuration\ValueGetter\ConfigClassListValueGetter;
+use BumbleDocGen\Core\Configuration\ValueGetter\ConfigClassValueGetter;
+use BumbleDocGen\Core\Configuration\ValueGetter\ConfigStringValueGetter;
 use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface;
 use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginInterface;
@@ -33,11 +33,11 @@ final class Configuration
     public const DEFAULT_SETTINGS_FILE = __DIR__ . '/defaultConfiguration.yaml';
 
     public function __construct(
-        ConfigurationParameterBag    $parameterBag,
-        private LoggerInterface      $logger,
-        private StringValueGetter    $stringValueGetter,
-        private ClassListValueGetter $classListValueGetter,
-        private ClassValueGetter     $classValueGetter
+        ConfigurationParameterBag          $parameterBag,
+        private LoggerInterface            $logger,
+        private ConfigStringValueGetter    $stringValueGetter,
+        private ConfigClassListValueGetter $classListValueGetter,
+        private ConfigClassValueGetter     $classValueGetter
     )
     {
         $parameterBag->addValueFromFileIfNotExists(

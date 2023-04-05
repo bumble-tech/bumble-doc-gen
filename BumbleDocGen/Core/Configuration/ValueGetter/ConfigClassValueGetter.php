@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Configuration\ValueTransformer\ValueToClassTransformer;
 
-final class ClassValueGetter
+final class ConfigClassValueGetter
 {
     public function __construct(
         private ValueToClassTransformer   $valueToClassTransformer,

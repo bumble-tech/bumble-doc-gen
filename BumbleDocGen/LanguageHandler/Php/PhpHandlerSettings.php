@@ -6,10 +6,10 @@ namespace BumbleDocGen\LanguageHandler\Php;
 
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Configuration\ValueGetter\BooleanValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\ClassListValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\ClassValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\StringValueGetter;
+use BumbleDocGen\Core\Configuration\ValueGetter\ConfigBooleanValueGetter;
+use BumbleDocGen\Core\Configuration\ValueGetter\ConfigClassListValueGetter;
+use BumbleDocGen\Core\Configuration\ValueGetter\ConfigClassValueGetter;
+use BumbleDocGen\Core\Configuration\ValueGetter\ConfigStringValueGetter;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
@@ -24,11 +24,11 @@ final class PhpHandlerSettings
     public const DEFAULT_SETTINGS_FILE = __DIR__ . '/phpHandlerDefaultSettings.yaml';
 
     public function __construct(
-        ConfigurationParameterBag    $parameterBag,
-        private ClassListValueGetter $classListValueGetter,
-        private ClassValueGetter     $classValueGetter,
-        private BooleanValueGetter   $booleanValueGetter,
-        private StringValueGetter    $stringValueGetter
+        ConfigurationParameterBag          $parameterBag,
+        private ConfigClassListValueGetter $classListValueGetter,
+        private ConfigClassValueGetter     $classValueGetter,
+        private ConfigBooleanValueGetter   $booleanValueGetter,
+        private ConfigStringValueGetter    $stringValueGetter
     )
     {
         $parameterBag->addValueFromFileIfNotExists(

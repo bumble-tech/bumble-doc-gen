@@ -7,7 +7,7 @@ namespace BumbleDocGen\Core\Configuration\ValueGetter;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 
-final class StringValueGetter
+final class ConfigStringValueGetter
 {
     public function __construct(private ConfigurationParameterBag $parameterBag)
     {
