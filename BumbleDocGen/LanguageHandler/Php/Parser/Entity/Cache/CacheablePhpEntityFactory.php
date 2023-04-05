@@ -40,8 +40,7 @@ final class CacheablePhpEntityFactory
         ClassEntity $classEntity,
         string      $propertyName,
         string      $declaringClassName,
-        string      $implementingClassName,
-        bool        $reloadCache = false
+        string      $implementingClassName
     ): PropertyEntity
     {
         static $wrapperClassName = null;
@@ -53,8 +52,7 @@ final class CacheablePhpEntityFactory
             'classEntity' => $classEntity,
             'propertyName' => $propertyName,
             'declaringClassName' => $declaringClassName,
-            'implementingClassName' => $implementingClassName,
-            'reloadCache' => $reloadCache
+            'implementingClassName' => $implementingClassName
         ]);
     }
 
@@ -95,22 +93,23 @@ final class CacheablePhpEntityFactory
         ClassEntity $classEntity,
         string      $methodName,
         string      $declaringClassName,
-        string      $implementingClassName,
-        bool        $reloadCache = false
+        string      $implementingClassName
     ): MethodEntity
     {
-        static $wrapperClassName = null;
-        if (is_null($wrapperClassName)) {
-            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(MethodEntity::class, 'MethodEntityWrapper');
-            $this->diContainer->set($wrapperClassName, \DI\factory([$wrapperClassName, 'create']));
+        $objectId = "{$classEntity->getName()}:{$methodName}";
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $this->diContainer->make($wrapperClassName, [
+        $wrapperClassName = $this->createAndRegisterWrapper(MethodEntity::class);
+        $methodEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'methodName' => $methodName,
             'declaringClassName' => $declaringClassName,
-            'implementingClassName' => $implementingClassName,
-            'reloadCache' => $reloadCache
+            'implementingClassName' => $implementingClassName
         ]);
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $methodEntity);
+        return $methodEntity;
     }
 
     /**
@@ -120,8 +119,7 @@ final class CacheablePhpEntityFactory
     public function createClassEntity(
         ClassEntityCollection $classEntityCollection,
         string                $className,
-        ?string               $relativeFileName = null,
-        bool                  $reloadCache = false
+        ?string               $relativeFileName = null
     ): ClassEntity
     {
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
@@ -135,8 +133,7 @@ final class CacheablePhpEntityFactory
             'reflector' => $this->reflector,
             'classEntityCollection' => $classEntityCollection,
             'className' => $className,
-            'relativeFileName' => $relativeFileName,
-            'reloadCache' => $reloadCache
+            'relativeFileName' => $relativeFileName
         ]);
         $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $classEntity);
         return $classEntity;
@@ -149,14 +146,13 @@ final class CacheablePhpEntityFactory
      */
     public function createClassEntityByReflection(
         ReflectionClass       $reflectionClass,
-        ClassEntityCollection $classEntityCollection,
-        bool                  $reloadCache = false
+        ClassEntityCollection $classEntityCollection
     ): ClassEntity
     {
         $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName() ?? '');
         $relativeFileName = $relativeFileName ?: null;
         $className = $reflectionClass->getName();
-        $classEntity = $this->createClassEntity($classEntityCollection, $className, $relativeFileName, $reloadCache);
+        $classEntity = $this->createClassEntity($classEntityCollection, $className, $relativeFileName);
         $classEntity->setReflectionClass($reflectionClass);
         return $classEntity;
     }
@@ -169,8 +165,7 @@ final class CacheablePhpEntityFactory
         string                $subClassEntity,
         ClassEntityCollection $classEntityCollection,
         string                $className,
-        ?string               $relativeFileName,
-        bool                  $reloadCache = false
+        ?string               $relativeFileName
     ): ClassEntity
     {
         if (!is_a($subClassEntity, ClassEntity::class, true)) {
@@ -189,8 +184,7 @@ final class CacheablePhpEntityFactory
             'reflector' => $this->reflector,
             'classEntityCollection' => $classEntityCollection,
             'className' => $className,
-            'relativeFileName' => $relativeFileName,
-            'reloadCache' => $reloadCache
+            'relativeFileName' => $relativeFileName
         ]);
         $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $classEntity);
         return $classEntity;
@@ -204,8 +198,7 @@ final class CacheablePhpEntityFactory
     public function createSubClassEntityByReflection(
         string                $subClassEntity,
         ReflectionClass       $reflectionClass,
-        ClassEntityCollection $classEntityCollection,
-        bool                  $reloadCache = false
+        ClassEntityCollection $classEntityCollection
     ): ClassEntity
     {
         $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName() ?? '');
@@ -215,8 +208,7 @@ final class CacheablePhpEntityFactory
             $subClassEntity,
             $classEntityCollection,
             $className,
-            $relativeFileName,
-            $reloadCache
+            $relativeFileName
         );
         $classEntity->setReflectionClass($reflectionClass);
         return $classEntity;

@@ -19,7 +19,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 {
     private ?ReflectionMethod $reflectionMethod = null;
 
-    private function __construct(
+    public function __construct(
         protected ClassEntity $classEntity,
         protected string      $methodName,
         protected string      $declaringClassName,
@@ -32,24 +32,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             $classEntity->documentedEntityUrlFunction,
             $classEntity->renderHelper
         );
-    }
-
-    public static function create(
-        ClassEntity $classEntity,
-        string      $methodName,
-        string      $declaringClassName,
-        string      $implementingClassName,
-        bool        $reloadCache = false
-    ): MethodEntity
-    {
-        static $entities = [];
-        $objectId = "{$classEntity->getName()}:{$methodName}";
-        if (!isset($entities[$objectId]) || $reloadCache) {
-            $entities[$objectId] = new static(
-                $classEntity, $methodName, $declaringClassName, $implementingClassName
-            );
-        }
-        return $entities[$objectId];
     }
 
     public function getReflection(): ReflectionMethod
