@@ -38,6 +38,9 @@ return [
                 \DI\autowire(InternalValueResolver::class)
                     ->constructor(
                         internalValuesMap: [
+                            'WORKING_DIR' => getcwd(),
+                            'TMP_DIR' => sys_get_temp_dir() . '/bumbleDocGen',
+                            'DOC_GEN_VERSION' => \BumbleDocGen\DocGenerator::VERSION,
                             'DOC_GEN_LIB_PATH' => dirname(__DIR__),
                             'UNIX_TIMESTAMP' => time(),
                             'PHP_VERSION' => phpversion(),
