@@ -16,7 +16,7 @@ final class LocalObjectCache
      */
     private function getCallerCacheKey(): string
     {
-        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3);
         $callerClassName = $backtrace[2]['class'] ?? null;
         $callerMethodName = $backtrace[2]['function'] ?? null;
         if (is_null($callerClassName) || is_null($callerMethodName)) {
