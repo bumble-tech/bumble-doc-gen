@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache;
 
+use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
+use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
@@ -23,6 +26,7 @@ final class CacheablePhpEntityFactory
     public function __construct(
         private ReflectorWrapper $reflector,
         private Configuration    $configuration,
+        private LocalObjectCache $localObjectCache,
         private Container        $diContainer
     )
     {
@@ -66,19 +70,21 @@ final class CacheablePhpEntityFactory
         bool        $reloadCache = false
     ): ConstantEntity
     {
-        static $constantsEntities = [];
         $objectId = "{$classEntity->getName()}:{$constantName}";
-        if (!isset($constantsEntities[$objectId]) || $reloadCache) {
-            $wrapperClassName = $this->createAndRegisterWrapper(ConstantEntity::class);
-            $constantsEntities[$objectId] = $this->diContainer->make($wrapperClassName, [
-                'classEntity' => $classEntity,
-                'constantName' => $constantName,
-                'declaringClassName' => $declaringClassName,
-                'implementingClassName' => $implementingClassName,
-                'reloadCache' => $reloadCache
-            ]);
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $constantsEntities[$objectId];
+        $wrapperClassName = $this->createAndRegisterWrapper(ConstantEntity::class);
+        $constantEntity = $this->diContainer->make($wrapperClassName, [
+            'classEntity' => $classEntity,
+            'constantName' => $constantName,
+            'declaringClassName' => $declaringClassName,
+            'implementingClassName' => $implementingClassName,
+            'reloadCache' => $reloadCache
+        ]);
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $constantEntity);
+        return $constantEntity;
     }
 
     /**
@@ -118,20 +124,22 @@ final class CacheablePhpEntityFactory
         bool                  $reloadCache = false
     ): ClassEntity
     {
-        static $classEntities = [];
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
         $objectId = md5($className);
-        if (!isset($classEntities[$objectId]) || $reloadCache) {
-            $wrapperClassName = $this->createAndRegisterWrapper(ClassEntity::class);
-            $classEntities[$objectId] = $this->diContainer->make($wrapperClassName, [
-                'reflector' => $this->reflector,
-                'classEntityCollection' => $classEntityCollection,
-                'className' => $className,
-                'relativeFileName' => $relativeFileName,
-                'reloadCache' => $reloadCache
-            ]);
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $classEntities[$objectId];
+        $wrapperClassName = $this->createAndRegisterWrapper(ClassEntity::class);
+        $classEntity = $this->diContainer->make($wrapperClassName, [
+            'reflector' => $this->reflector,
+            'classEntityCollection' => $classEntityCollection,
+            'className' => $className,
+            'relativeFileName' => $relativeFileName,
+            'reloadCache' => $reloadCache
+        ]);
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $classEntity);
+        return $classEntity;
     }
 
     /**
@@ -170,20 +178,22 @@ final class CacheablePhpEntityFactory
                 'The class must inherit from `BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity`'
             );
         }
-        static $classEntities = [];
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
         $objectId = md5($className);
-        if (!isset($classEntities[$objectId]) || $reloadCache) {
-            $wrapperClassName = $this->createAndRegisterWrapper($subClassEntity);
-            $classEntities[$objectId] = $this->diContainer->make($wrapperClassName, [
-                'reflector' => $this->reflector,
-                'classEntityCollection' => $classEntityCollection,
-                'className' => $className,
-                'relativeFileName' => $relativeFileName,
-                'reloadCache' => $reloadCache
-            ]);
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $classEntities[$objectId];
+        $wrapperClassName = $this->createAndRegisterWrapper($subClassEntity);
+        $classEntity = $this->diContainer->make($wrapperClassName, [
+            'reflector' => $this->reflector,
+            'classEntityCollection' => $classEntityCollection,
+            'className' => $className,
+            'relativeFileName' => $relativeFileName,
+            'reloadCache' => $reloadCache
+        ]);
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $classEntity);
+        return $classEntity;
     }
 
     /**
@@ -212,19 +222,20 @@ final class CacheablePhpEntityFactory
         return $classEntity;
     }
 
-    private function createAndRegisterWrapper(string $classEntity): string
+    private function createAndRegisterWrapper(string $entityClassName): string
     {
-        static $wrapperClassNames = [];
-        if (!isset($wrapperClassNames[$classEntity])) {
-            $classNameParts = explode('\\', $classEntity);
-            $classEntityName = end($classNameParts);
-            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(
-                $classEntity,
-                "{$classEntityName}Wrapper"
-            );
-            $this->diContainer->set($wrapperClassName, \DI\autowire($wrapperClassName));
-            $wrapperClassNames[$classEntity] = $wrapperClassName;
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($entityClassName);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $wrapperClassNames[$classEntity];
+        $classNameParts = explode('\\', $entityClassName);
+        $classEntityName = end($classNameParts);
+        $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(
+            $entityClassName,
+            "{$classEntityName}Wrapper"
+        );
+        $this->diContainer->set($wrapperClassName, \DI\autowire($wrapperClassName));
+        $this->localObjectCache->cacheCurrentMethodResultSilently($entityClassName, $wrapperClassName);
+        return $wrapperClassName;
     }
 }
