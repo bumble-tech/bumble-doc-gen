@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\ProjectParser;
 use BumbleDocGen\Core\Render\Render;
 use Monolog\Logger;
@@ -17,6 +18,8 @@ use function BumbleDocGen\Core\bites_int_to_string;
  */
 final class DocGenerator
 {
+    public const VERSION = '1.0.0';
+
     public function __construct(
         private ProjectParser $parser,
         private Render        $render,
@@ -28,9 +31,10 @@ final class DocGenerator
     /**
      * Generates documentation using configuration
      *
-     * @throws LoaderError
-     * @throws RuntimeError
      * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     * @throws InvalidConfigurationParameterException
      */
     public function generate(): void
     {
