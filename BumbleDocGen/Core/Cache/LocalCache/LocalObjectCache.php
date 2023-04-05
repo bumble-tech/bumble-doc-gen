@@ -13,6 +13,7 @@ final class LocalObjectCache
 
     /**
      * @throws InvalidCallContextException
+     * @warning The call stack of this method is important!
      */
     private function getCallerCacheKey(): string
     {
@@ -37,7 +38,8 @@ final class LocalObjectCache
     public function cacheCurrentMethodResultSilently(?string $objectId, mixed $methodResult): void
     {
         try {
-            $this->cacheCurrentMethodResult($objectId, $methodResult);
+            $cacheKey = $this->getCallerCacheKey();
+            $this->cache[$cacheKey][$objectId] = $methodResult;
         } catch (\Exception) {
         }
     }
