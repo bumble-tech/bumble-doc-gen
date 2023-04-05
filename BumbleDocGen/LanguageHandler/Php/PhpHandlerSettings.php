@@ -6,10 +6,6 @@ namespace BumbleDocGen\LanguageHandler\Php;
 
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Configuration\ValueGetter\ConfigBooleanValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\ConfigClassListValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\ConfigClassValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\ConfigStringValueGetter;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
@@ -23,13 +19,7 @@ final class PhpHandlerSettings
     public const SETTINGS_PREFIX = 'language_handlers.php.settings';
     public const DEFAULT_SETTINGS_FILE = __DIR__ . '/phpHandlerDefaultSettings.yaml';
 
-    public function __construct(
-        ConfigurationParameterBag          $parameterBag,
-        private ConfigClassListValueGetter $classListValueGetter,
-        private ConfigClassValueGetter     $classValueGetter,
-        private ConfigBooleanValueGetter   $booleanValueGetter,
-        private ConfigStringValueGetter    $stringValueGetter
-    )
+    public function __construct(private ConfigurationParameterBag $parameterBag)
     {
         $parameterBag->addValueFromFileIfNotExists(
             self::SETTINGS_PREFIX,
@@ -50,7 +40,7 @@ final class PhpHandlerSettings
         static $classEntityFilter = null;
         if (!$classEntityFilter) {
             /** @var ConditionInterface $classEntityFilter */
-            $classEntityFilter = $this->classValueGetter->validateAndGet(
+            $classEntityFilter = $this->parameterBag->validateAndGetClassValue(
                 $this->getSettingsKey('class_filter'),
                 ConditionInterface::class
             );
@@ -66,7 +56,7 @@ final class PhpHandlerSettings
         static $constantEntityFilter = null;
         if (!$constantEntityFilter) {
             /** @var ConditionInterface $constantEntityFilter */
-            $constantEntityFilter = $this->classValueGetter->validateAndGet(
+            $constantEntityFilter = $this->parameterBag->validateAndGetClassValue(
                 $this->getSettingsKey('class_constant_filter'),
                 ConditionInterface::class
             );
@@ -82,7 +72,7 @@ final class PhpHandlerSettings
         static $methodEntityFilter = null;
         if (!$methodEntityFilter) {
             /** @var ConditionInterface $methodEntityFilter */
-            $methodEntityFilter = $this->classValueGetter->validateAndGet(
+            $methodEntityFilter = $this->parameterBag->validateAndGetClassValue(
                 $this->getSettingsKey('method_filter'),
                 ConditionInterface::class
             );
@@ -98,7 +88,7 @@ final class PhpHandlerSettings
         static $propertyEntityFilter = null;
         if (!$propertyEntityFilter) {
             /** @var ConditionInterface $propertyEntityFilter */
-            $propertyEntityFilter = $this->classValueGetter->validateAndGet(
+            $propertyEntityFilter = $this->parameterBag->validateAndGetClassValue(
                 $this->getSettingsKey('property_filter'),
                 ConditionInterface::class
             );
@@ -114,7 +104,7 @@ final class PhpHandlerSettings
         static $entityDocRendersCollection = null;
         if (!$entityDocRendersCollection) {
             $entityDocRendersCollection = new EntityDocRendersCollection();
-            $entityDocRenders = $this->classListValueGetter->validateAndGet(
+            $entityDocRenders = $this->parameterBag->validateAndGetClassListValue(
                 $this->getSettingsKey('doc_renders'),
                 EntityDocRenderInterface::class
             );
@@ -132,7 +122,7 @@ final class PhpHandlerSettings
     {
         static $fileSourceBaseUrl = -1;
         if ($fileSourceBaseUrl === -1) {
-            $fileSourceBaseUrl = $this->stringValueGetter->validateAndGet(
+            $fileSourceBaseUrl = $this->parameterBag->validateAndGetStringValue(
                 $this->getSettingsKey('file_source_base_url')
             );
         }
@@ -146,7 +136,7 @@ final class PhpHandlerSettings
     {
         static $asyncSourceLoadingEnabled = null;
         if (is_null($asyncSourceLoadingEnabled)) {
-            $asyncSourceLoadingEnabled = $this->booleanValueGetter->validateAndGet(
+            $asyncSourceLoadingEnabled = $this->parameterBag->validateAndGetBooleanValue(
                 $this->getSettingsKey('async_source_loading_enabled')
             );
         }
@@ -160,7 +150,7 @@ final class PhpHandlerSettings
     {
         static $customFunctionsCollection = null;
         if (!$customFunctionsCollection) {
-            $customFunctions = $this->classListValueGetter->validateAndGet(
+            $customFunctions = $this->parameterBag->validateAndGetClassListValue(
                 $this->getSettingsKey('custom_twig_functions'),
                 CustomFunctionInterface::class
             );
@@ -179,7 +169,7 @@ final class PhpHandlerSettings
     {
         static $customFiltersCollection = null;
         if (!$customFiltersCollection) {
-            $customFilters = $this->classListValueGetter->validateAndGet(
+            $customFilters = $this->parameterBag->validateAndGetClassListValue(
                 $this->getSettingsKey('custom_twig_filters'),
                 CustomFilterInterface::class
 

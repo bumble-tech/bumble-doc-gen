@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Configuration;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Configuration\ValueGetter\ConfigClassListValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\ConfigClassValueGetter;
-use BumbleDocGen\Core\Configuration\ValueGetter\ConfigStringValueGetter;
 use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface;
 use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginInterface;
@@ -33,11 +30,8 @@ final class Configuration
     public const DEFAULT_SETTINGS_FILE = __DIR__ . '/defaultConfiguration.yaml';
 
     public function __construct(
-        ConfigurationParameterBag          $parameterBag,
-        private LoggerInterface            $logger,
-        private ConfigStringValueGetter    $stringValueGetter,
-        private ConfigClassListValueGetter $classListValueGetter,
-        private ConfigClassValueGetter     $classValueGetter
+        private ConfigurationParameterBag $parameterBag,
+        private LoggerInterface           $logger
     )
     {
         $parameterBag->addValueFromFileIfNotExists(
@@ -53,7 +47,7 @@ final class Configuration
     {
         static $projectRoot = null;
         if (is_null($projectRoot)) {
-            $projectRoot = $this->stringValueGetter->validateAndGet('project_root', false);
+            $projectRoot = $this->parameterBag->validateAndGetStringValue('project_root', false);
         }
         return $projectRoot;
     }
@@ -65,7 +59,7 @@ final class Configuration
     {
         static $cachedSourceLocatorsCollection = null;
         if (!$cachedSourceLocatorsCollection) {
-            $sourceLocators = $this->classListValueGetter->validateAndGet(
+            $sourceLocators = $this->parameterBag->validateAndGetClassListValue(
                 'source_locators',
                 SourceLocatorInterface::class
             );
@@ -81,7 +75,7 @@ final class Configuration
     {
         static $templatesDir = null;
         if (is_null($templatesDir)) {
-            $templatesDir = $this->stringValueGetter->validateAndGet('templates_dir', false);
+            $templatesDir = $this->parameterBag->validateAndGetStringValue('templates_dir', false);
         }
         return $templatesDir;
     }
@@ -93,7 +87,7 @@ final class Configuration
     {
         static $outputDir = null;
         if (is_null($outputDir)) {
-            $outputDir = $this->stringValueGetter->validateAndGet('output_dir', false);
+            $outputDir = $this->parameterBag->validateAndGetStringValue('output_dir', false);
         }
         return $outputDir;
     }
@@ -105,7 +99,7 @@ final class Configuration
     {
         static $outputDirBaseUrl = null;
         if (is_null($outputDirBaseUrl)) {
-            $outputDirBaseUrl = $this->stringValueGetter->validateAndGet('output_dir_base_url', false);
+            $outputDirBaseUrl = $this->parameterBag->validateAndGetStringValue('output_dir_base_url', false);
         }
         return $outputDirBaseUrl;
     }
@@ -117,7 +111,7 @@ final class Configuration
     {
         static $cachedLanguageHandlersCollection = null;
         if (!$cachedLanguageHandlersCollection) {
-            $languageHandlers = $this->classListValueGetter->validateAndGet(
+            $languageHandlers = $this->parameterBag->validateAndGetClassListValue(
                 'language_handlers',
                 LanguageHandlerInterface::class,
                 false
@@ -134,7 +128,7 @@ final class Configuration
     {
         static $cachedPlugins = null;
         if (!$cachedPlugins) {
-            $pluginsList = $this->classListValueGetter->validateAndGet(
+            $pluginsList = $this->parameterBag->validateAndGetClassListValue(
                 'plugins',
                 PluginInterface::class
             );
@@ -150,7 +144,7 @@ final class Configuration
     {
         static $cachedTemplateFillersCollection = null;
         if (!$cachedTemplateFillersCollection) {
-            $templateFillers = $this->classListValueGetter->validateAndGet(
+            $templateFillers = $this->parameterBag->validateAndGetClassListValue(
                 'template_fillers',
                 TemplateFillerInterface::class
             );
@@ -166,7 +160,7 @@ final class Configuration
     {
         static $cacheDir = -1;
         if ($cacheDir === -1) {
-            $cacheDir = $this->stringValueGetter->validateAndGet('cache_dir');
+            $cacheDir = $this->parameterBag->validateAndGetStringValue('cache_dir');
         }
         return $cacheDir;
     }
@@ -203,7 +197,7 @@ final class Configuration
         static $pageLinkProcessor = null;
         if (is_null($pageLinkProcessor)) {
             /** @var PageLinkProcessorInterface $pageLinkProcessor */
-            $pageLinkProcessor = $this->classValueGetter->validateAndGet(
+            $pageLinkProcessor = $this->parameterBag->validateAndGetClassValue(
                 'page_link_processor',
                 PageLinkProcessorInterface::class
             );
@@ -218,7 +212,7 @@ final class Configuration
     {
         static $gitClientPath = null;
         if (is_null($gitClientPath)) {
-            $gitClientPath = $this->stringValueGetter->validateAndGet('git_client_path', false);
+            $gitClientPath = $this->parameterBag->validateAndGetStringValue('git_client_path', false);
         }
         return $gitClientPath;
     }
@@ -235,7 +229,7 @@ final class Configuration
     {
         static $customFunctionsCollection = null;
         if (!$customFunctionsCollection) {
-            $customFunctions = $this->classListValueGetter->validateAndGet(
+            $customFunctions = $this->parameterBag->validateAndGetClassListValue(
                 'twig_functions',
                 CustomFunctionInterface::class
             );
@@ -254,7 +248,7 @@ final class Configuration
     {
         static $customFiltersCollection = null;
         if (!$customFiltersCollection) {
-            $customFilters = $this->classListValueGetter->validateAndGet(
+            $customFilters = $this->parameterBag->validateAndGetClassListValue(
                 'twig_filters',
                 CustomFilterInterface::class
 

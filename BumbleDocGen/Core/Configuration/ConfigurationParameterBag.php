@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Configuration;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Configuration\ValueResolver\ValueResolverInterface;
+use BumbleDocGen\Core\Configuration\ValueTransformer\ValueToClassTransformer;
 use InvalidArgumentException;
 use Symfony\Component\Yaml\Yaml;
 
@@ -13,14 +15,15 @@ use function BumbleDocGen\Core\is_associative_array;
 final class ConfigurationParameterBag
 {
     private array $parameters = [];
-    /**
-     * @var ValueResolverInterface[]
-     */
-    private array $resolvers = [];
 
-    public function __construct(array $resolvers)
+    /**
+     * @param ValueResolverInterface[] $resolvers
+     */
+    public function __construct(
+        private ValueToClassTransformer $valueToClassTransformer,
+        private array                   $resolvers
+    )
     {
-        $this->resolvers = $resolvers;
     }
 
     public function loadFromFiles(string ...$fileNames): void
@@ -40,7 +43,7 @@ final class ConfigurationParameterBag
 
     public function getSubConfigurationParameterBag(string $parentKey): ConfigurationParameterBag
     {
-        $configurationParameterBag = new ConfigurationParameterBag(...$this->resolvers);
+        $configurationParameterBag = new ConfigurationParameterBag($this->valueToClassTransformer, $this->resolvers);
         $childParameters = $this->get($parentKey);
         if (!is_associative_array($childParameters)) {
             throw new InvalidArgumentException('The sub configuration value must be an associative array');
@@ -109,5 +112,95 @@ final class ConfigurationParameterBag
             $parameters[$name] = $this->get($name);
         }
         return $parameters;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function validateAndGetStringValue(
+        string $parameterName,
+        bool   $nullable = true
+    ): ?string
+    {
+        $value = $this->get($parameterName);
+        if (!$nullable && !is_string($value)) {
+            throw new InvalidConfigurationParameterException(
+                "Configuration parameter `{$parameterName}` must contain string"
+            );
+        } elseif (!is_string($value) && !is_null($value)) {
+            throw new InvalidConfigurationParameterException(
+                "Configuration parameter `{$parameterName}` must contain string or null"
+            );
+        }
+        return $value;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function validateAndGetClassValue(
+        string $parameterName,
+        string $classInterfaceName
+    ): object
+    {
+        $value = $this->get($parameterName);
+        $valueObject = $this->valueToClassTransformer->transform($value);
+        if (is_null($valueObject)) {
+            throw new InvalidConfigurationParameterException(
+                "Configuration parameter `{$parameterName}` must contain the name of class"
+            );
+        }
+        if (!$valueObject instanceof $classInterfaceName) {
+            throw new InvalidConfigurationParameterException(
+                "Configuration parameter `{$parameterName}` must implement the `\\{$classInterfaceName}` interface"
+            );
+        }
+        return $valueObject;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function validateAndGetClassListValue(
+        string $parameterName,
+        string $classInterfaceName,
+        bool   $nullable = true
+    ): array
+    {
+        $preparedValues = [];
+        $values = $this->get($parameterName);
+        if (is_null($values) && $nullable) {
+            $values = [];
+        }
+        if (!is_array($values)) {
+            throw new InvalidConfigurationParameterException("Parameter `{$parameterName}` must be an array");
+        }
+        foreach ($values as $i => $value) {
+            $valueObject = $this->valueToClassTransformer->transform($value);
+            if (is_null($valueObject)) {
+                throw new InvalidConfigurationParameterException(
+                    "Configuration parameter `{$parameterName}[{$i}]` must contain the name of class"
+                );
+            }
+            if (!$valueObject instanceof $classInterfaceName) {
+                throw new InvalidConfigurationParameterException(
+                    "Configuration parameter `{$parameterName}[{$i}]` must implement the `\\{$classInterfaceName}` interface"
+                );
+            }
+            $preparedValues[$i] = $valueObject;
+        }
+        return $preparedValues;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function validateAndGetBooleanValue(string $parameterName): bool
+    {
+        $value = $this->get($parameterName);
+        if (!is_bool($value)) {
+            throw new InvalidConfigurationParameterException("Parameter `{$parameterName}` must be boolean");
+        }
+        return $value;
     }
 }

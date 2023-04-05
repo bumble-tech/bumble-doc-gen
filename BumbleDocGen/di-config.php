@@ -34,7 +34,7 @@ return [
     LoggerInterface::class => \DI\get(Logger::class),
     ConfigurationParameterBag::class => \DI\autowire(ConfigurationParameterBag::class)
         ->constructor(
-            [
+            resolvers: [
                 \DI\autowire(InternalValueResolver::class)
                     ->constructor(
                         internalValuesMap: [
