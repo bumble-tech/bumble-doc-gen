@@ -43,17 +43,20 @@ final class CacheablePhpEntityFactory
         string      $implementingClassName
     ): PropertyEntity
     {
-        static $wrapperClassName = null;
-        if (is_null($wrapperClassName)) {
-            $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(PropertyEntity::class, 'PropertyEntityWrapper');
-            $this->diContainer->set($wrapperClassName, \DI\factory([$wrapperClassName, 'create']));
+        $objectId = "{$classEntity->getName()}:{$propertyName}";
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $this->diContainer->make($wrapperClassName, [
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(PropertyEntity::class);
+        $propertyEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'propertyName' => $propertyName,
             'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName
         ]);
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $propertyEntity);
+        return $propertyEntity;
     }
 
     /**
@@ -73,7 +76,7 @@ final class CacheablePhpEntityFactory
             return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        $wrapperClassName = $this->createAndRegisterWrapper(ConstantEntity::class);
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(ConstantEntity::class);
         $constantEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'constantName' => $constantName,
@@ -101,7 +104,7 @@ final class CacheablePhpEntityFactory
             return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        $wrapperClassName = $this->createAndRegisterWrapper(MethodEntity::class);
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(MethodEntity::class);
         $methodEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'methodName' => $methodName,
@@ -128,7 +131,7 @@ final class CacheablePhpEntityFactory
             return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        $wrapperClassName = $this->createAndRegisterWrapper(ClassEntity::class);
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(ClassEntity::class);
         $classEntity = $this->diContainer->make($wrapperClassName, [
             'reflector' => $this->reflector,
             'classEntityCollection' => $classEntityCollection,
@@ -179,7 +182,7 @@ final class CacheablePhpEntityFactory
             return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        $wrapperClassName = $this->createAndRegisterWrapper($subClassEntity);
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper($subClassEntity);
         $classEntity = $this->diContainer->make($wrapperClassName, [
             'reflector' => $this->reflector,
             'classEntityCollection' => $classEntityCollection,
@@ -214,7 +217,7 @@ final class CacheablePhpEntityFactory
         return $classEntity;
     }
 
-    private function createAndRegisterWrapper(string $entityClassName): string
+    private function getOrCreateEntityClassWrapper(string $entityClassName): string
     {
         try {
             return $this->localObjectCache->getCurrentMethodCachedResult($entityClassName);
@@ -226,7 +229,6 @@ final class CacheablePhpEntityFactory
             $entityClassName,
             "{$classEntityName}Wrapper"
         );
-        $this->diContainer->set($wrapperClassName, \DI\autowire($wrapperClassName));
         $this->localObjectCache->cacheCurrentMethodResultSilently($entityClassName, $wrapperClassName);
         return $wrapperClassName;
     }

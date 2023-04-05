@@ -18,7 +18,7 @@ class PropertyEntity extends BaseEntity
 {
     private ?ReflectionProperty $reflectionProperty = null;
 
-    private function __construct(
+    public function __construct(
         protected ClassEntity $classEntity,
         protected string      $propertyName,
         protected string      $declaringClassName,
@@ -31,24 +31,6 @@ class PropertyEntity extends BaseEntity
             $classEntity->documentedEntityUrlFunction,
             $classEntity->renderHelper
         );
-    }
-
-    public static function create(
-        ClassEntity $classEntity,
-        string      $propertyName,
-        string      $declaringClassName,
-        string      $implementingClassName,
-        bool        $reloadCache = false
-    ): PropertyEntity
-    {
-        static $classEntities = [];
-        $objectId = "{$classEntity->getName()}:{$propertyName}";
-        if (!isset($classEntities[$objectId]) || $reloadCache) {
-            $classEntities[$objectId] = new static(
-                $classEntity, $propertyName, $declaringClassName, $implementingClassName
-            );
-        }
-        return $classEntities[$objectId];
     }
 
     public function getRootEntity(): ClassEntity
