@@ -578,7 +578,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         }
         $methodEntityCollection = MethodEntityCollection::createByClassEntity(
             $this,
-            $this->cacheablePhpEntityFactory
+            $this->cacheablePhpEntityFactory,
+            $this->getLogger()
         );
         $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $methodEntityCollection);
         return $methodEntityCollection;

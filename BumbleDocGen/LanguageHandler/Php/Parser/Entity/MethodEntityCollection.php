@@ -7,9 +7,11 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
+use Psr\Log\LoggerInterface;
 
 /**
  * @implements \IteratorAggregate<int, MethodEntity>
@@ -18,22 +20,25 @@ final class MethodEntityCollection extends BaseEntityCollection
 {
     public function __construct(
         private ClassEntity               $classEntity,
-        private CacheablePhpEntityFactory $cacheablePhpEntityFactory
+        private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
+        private LoggerInterface           $logger
     )
     {
     }
 
     /**
+     * @throws ReflectionException
      * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
      */
     public static function createByClassEntity(
         ClassEntity               $classEntity,
-        CacheablePhpEntityFactory $cacheablePhpEntityFactory
+        CacheablePhpEntityFactory $cacheablePhpEntityFactory,
+        LoggerInterface           $logger
     ): MethodEntityCollection
     {
-        $methodEntityCollection = new MethodEntityCollection($classEntity, $cacheablePhpEntityFactory);
+        $methodEntityCollection = new MethodEntityCollection($classEntity, $cacheablePhpEntityFactory, $logger);
         $configuration = $classEntity->getConfiguration();
 
         $methodEntityFilter = $classEntity->getPhpHandlerSettings()->getMethodEntityFilter();
@@ -69,26 +74,23 @@ final class MethodEntityCollection extends BaseEntityCollection
 
     public function add(MethodEntityInterface $methodEntity, bool $reload = false): MethodEntityCollection
     {
-        $key = $methodEntity->getName();
-        if (!isset($this->entities[$key]) || $reload) {
-            $this->entities[$key] = $methodEntity;
+        $objectId = $methodEntity->getObjectId();
+        if (!isset($this->entities[$objectId]) || $reload) {
+            $this->entities[$objectId] = $methodEntity;
         }
         return $this;
     }
 
-    public function get(string $key): ?MethodEntity
+    public function get(string $objectId): ?MethodEntity
     {
-        return $this->entities[$key] ?? null;
-    }
-
-    public function has(string $key): bool
-    {
-        return array_key_exists($key, $this->entities);
+        return $this->entities[$objectId] ?? null;
     }
 
     /**
-     * @throws DependencyException
      * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
      */
     public function unsafeGet(string $key): ?MethodEntity
     {
@@ -109,11 +111,15 @@ final class MethodEntityCollection extends BaseEntityCollection
 
     public function getInitializations(): MethodEntityCollection
     {
-        $methodEntityCollection = new MethodEntityCollection($this->classEntity, $this->cacheablePhpEntityFactory);
-        foreach ($this as $methodEntity) {
-            /**@var MethodEntity $methodEntity */
-            if ($methodEntity->isInitialization()) {
-                $methodEntityCollection->add($methodEntity);
+        $methodEntityCollection = clone $this;
+        foreach ($this as $objectId => $methodEntity) {
+            try {
+                /**@var MethodEntity $methodEntity */
+                if (!$methodEntity->isInitialization()) {
+                    $methodEntityCollection->remove($objectId);
+                }
+            } catch (\Exception $e) {
+                $this->logger->warning($e->getMessage());
             }
         }
         return $methodEntityCollection;
@@ -121,11 +127,15 @@ final class MethodEntityCollection extends BaseEntityCollection
 
     public function getAllExceptInitializations(): MethodEntityCollection
     {
-        $methodEntityCollection = new MethodEntityCollection($this->classEntity, $this->cacheablePhpEntityFactory);
-        foreach ($this as $methodEntity) {
-            /**@var MethodEntity $methodEntity */
-            if (!$methodEntity->isInitialization()) {
-                $methodEntityCollection->add($methodEntity);
+        $methodEntityCollection = clone $this;
+        foreach ($this as $objectId => $methodEntity) {
+            try {
+                /**@var MethodEntity $methodEntity */
+                if ($methodEntity->isInitialization()) {
+                    $methodEntityCollection->remove($objectId);
+                }
+            } catch (\Exception $e) {
+                $this->logger->warning($e->getMessage());
             }
         }
         return $methodEntityCollection;
