@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
@@ -20,6 +21,7 @@ final class MethodEntityCollection extends BaseEntityCollection
 {
     public function __construct(
         private ClassEntity               $classEntity,
+        private PhpHandlerSettings        $phpHandlerSettings,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
         private LoggerInterface           $logger
     )
@@ -32,44 +34,34 @@ final class MethodEntityCollection extends BaseEntityCollection
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    public static function createByClassEntity(
-        ClassEntity               $classEntity,
-        CacheablePhpEntityFactory $cacheablePhpEntityFactory,
-        LoggerInterface           $logger
-    ): MethodEntityCollection
+    public function loadMethodEntities(): void
     {
-        $methodEntityCollection = new MethodEntityCollection($classEntity, $cacheablePhpEntityFactory, $logger);
-        $configuration = $classEntity->getConfiguration();
-
-        $methodEntityFilter = $classEntity->getPhpHandlerSettings()->getMethodEntityFilter();
-        foreach ($classEntity->getMethodsData() as $name => $methodData) {
-            $methodEntity = $cacheablePhpEntityFactory->createMethodEntity(
-                $classEntity,
+        $methodEntityFilter = $this->phpHandlerSettings->getMethodEntityFilter();
+        foreach ($this->classEntity->getMethodsData() as $name => $methodData) {
+            $methodEntity = $this->cacheablePhpEntityFactory->createMethodEntity(
+                $this->classEntity,
                 $name,
                 $methodData['declaringClass'],
                 $methodData['implementingClass']
             );
             if ($methodEntityFilter->canAddToCollection($methodEntity)) {
-                $methodEntityCollection->add($methodEntity);
+                $this->add($methodEntity);
             }
         }
 
-        $logger = $configuration->getLogger();
-        $docBlock = $classEntity->getDocBlock();
+        $docBlock = $this->classEntity->getDocBlock();
         $methodsBlocks = $docBlock->getTagsByName('method');
         if ($methodsBlocks) {
             foreach ($methodsBlocks as $methodsBlock) {
                 try {
                     /**@var Method $methodsBlock */
-                    $methodEntity = DynamicMethodEntity::createByAnnotationMethod($classEntity, $methodsBlock);
-                    $methodEntityCollection->add($methodEntity);
+                    $methodEntity = DynamicMethodEntity::createByAnnotationMethod($this->classEntity, $methodsBlock);
+                    $this->add($methodEntity);
                 } catch (\Exception $e) {
-                    $logger->error($e->getMessage());
+                    $this->logger->error($e->getMessage());
                 }
             }
         }
-
-        return $methodEntityCollection;
     }
 
     public function add(MethodEntityInterface $methodEntity, bool $reload = false): MethodEntityCollection

@@ -22,6 +22,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
+use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
@@ -50,6 +51,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         private LocalObjectCache          $localObjectCache,
         GetDocumentedEntityUrl            $documentedEntityUrlFunction,
         RenderHelper                      $renderHelper,
+        private Container                 $diContainer,
         protected string                  $className,
         protected ?string                 $relativeFileName,
     )
@@ -501,6 +503,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function getConstantEntityCollection(): ConstantEntityCollection
@@ -519,6 +524,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function getConstantEntity(string $constantName, bool $unsafe = true): ?ConstantEntity
@@ -534,6 +542,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
+     * @throws ReflectionException
      */
     public function getPropertyEntityCollection(): PropertyEntityCollection
     {
@@ -554,6 +563,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws ReflectionException
      */
     public function getPropertyEntity(string $propertyName, bool $unsafe = true): ?PropertyEntity
     {
@@ -568,6 +578,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
+     * @throws ReflectionException
      */
     public function getMethodEntityCollection(): MethodEntityCollection
     {
@@ -576,11 +587,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        $methodEntityCollection = MethodEntityCollection::createByClassEntity(
-            $this,
-            $this->cacheablePhpEntityFactory,
-            $this->getLogger()
-        );
+        $methodEntityCollection = $this->diContainer->make(MethodEntityCollection::class, [
+            'classEntity' => $this
+        ]);
+        $methodEntityCollection->loadMethodEntities();
         $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $methodEntityCollection);
         return $methodEntityCollection;
     }
@@ -589,6 +599,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws ReflectionException
      */
     public function getMethodEntity(string $methodName, bool $unsafe = true): ?MethodEntity
     {
@@ -599,6 +610,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $methodEntityCollection->get($methodName);
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
@@ -799,9 +816,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
+     * @throws ReflectionException
      * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
      */
     public function cursorToDocAttributeLinkFragment(string $cursor, bool $isForDocument = true): string
     {
