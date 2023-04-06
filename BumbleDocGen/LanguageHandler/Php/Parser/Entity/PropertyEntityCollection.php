@@ -50,21 +50,16 @@ final class PropertyEntityCollection extends BaseEntityCollection
 
     public function add(PropertyEntity $propertyEntity, bool $reload = false): PropertyEntityCollection
     {
-        $key = $propertyEntity->getName();
-        if (!isset($this->entities[$key]) || $reload) {
-            $this->entities[$key] = $propertyEntity;
+        $objectId = $propertyEntity->getObjectId();
+        if (!isset($this->entities[$objectId]) || $reload) {
+            $this->entities[$objectId] = $propertyEntity;
         }
         return $this;
     }
 
-    public function get(string $key): ?PropertyEntity
+    public function get(string $objectId): ?PropertyEntity
     {
-        return $this->entities[$key] ?? null;
-    }
-
-    public function has(string $key): bool
-    {
-        return array_key_exists($key, $this->entities);
+        return $this->entities[$objectId] ?? null;
     }
 
     /**
