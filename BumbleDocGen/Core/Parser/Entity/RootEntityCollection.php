@@ -15,9 +15,9 @@ abstract class RootEntityCollection extends BaseEntityCollection
      */
     protected array $entities = [];
 
-    public function get(string $objectId): ?RootEntityInterface
+    public function get(string $objectName): ?RootEntityInterface
     {
-        return $this->entities[$objectId] ?? null;
+        return $this->entities[$objectName] ?? null;
     }
 
     abstract public static function getEntityCollectionName(): string;
@@ -28,7 +28,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
      * @warning The entity obtained as a result of executing this method may not be available for loading
      * @see RootEntityInterface::entityDataCanBeLoaded()
      */
-    abstract public function getLoadedOrCreateNew(string $entityName): RootEntityInterface;
+    abstract public function getLoadedOrCreateNew(string $objectName): RootEntityInterface;
 
     abstract public function findEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface;
 

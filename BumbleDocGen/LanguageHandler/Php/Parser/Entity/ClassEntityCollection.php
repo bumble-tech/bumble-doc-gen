@@ -44,6 +44,7 @@ final class ClassEntityCollection extends RootEntityCollection
     /**
      * @throws NotFoundException
      * @throws DependencyException
+     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function loadClassEntities(): void
@@ -77,25 +78,25 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function add(ClassEntity $classEntity, bool $reload = false): ClassEntityCollection
     {
-        $key = $classEntity->getObjectId();
-        if (!isset($this->entities[$key]) || $reload) {
+        $className = $classEntity->getName();
+        if (!isset($this->entities[$className]) || $reload) {
             $this->getLogger()->info("Parsing {$classEntity->getFileName()} file");
             $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
-            $this->entities[$key] = $classEntity;
+            $this->entities[$className] = $classEntity;
         }
         return $this;
     }
 
     public function addWithoutPreparation(ClassEntity $classEntity): ClassEntityCollection
     {
-        $this->entities[$classEntity->getObjectId()] = $classEntity;
+        $this->entities[$classEntity->getName()] = $classEntity;
         return $this;
     }
 
-    public function get(string $objectId): ?ClassEntity
+    public function get(string $objectName): ?ClassEntity
     {
-        $objectId = ltrim(str_replace('\\\\', '\\', $objectId), '\\');
-        return $this->entities[$objectId] ?? null;
+        $objectName = ltrim(str_replace('\\\\', '\\', $objectName), '\\');
+        return $this->entities[$objectName] ?? null;
     }
 
     /**
@@ -103,19 +104,19 @@ final class ClassEntityCollection extends RootEntityCollection
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function getLoadedOrCreateNew(string $objectId): ClassEntity
+    public function getLoadedOrCreateNew(string $objectName): ClassEntity
     {
-        $classEntity = $this->get($objectId);
+        $classEntity = $this->get($objectName);
         if (!$classEntity) {
             static $loadedUnsafe = [];
-            if (isset($loadUnsafe[$objectId])) {
-                $loadedUnsafe = $loadUnsafe[$objectId];
+            if (isset($loadUnsafe[$objectName])) {
+                $loadedUnsafe = $loadUnsafe[$objectName];
             } else {
                 $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
                     $this,
-                    ltrim($objectId, '\\')
+                    ltrim($objectName, '\\')
                 );
-                $loadedUnsafe[$objectId] = $classEntity;
+                $loadedUnsafe[$objectName] = $classEntity;
             }
         }
         return $classEntity;

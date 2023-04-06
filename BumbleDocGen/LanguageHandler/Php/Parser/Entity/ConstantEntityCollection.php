@@ -7,6 +7,9 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 final class ConstantEntityCollection extends BaseEntityCollection
 {
@@ -18,6 +21,9 @@ final class ConstantEntityCollection extends BaseEntityCollection
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public static function createByClassEntity(
@@ -43,32 +49,33 @@ final class ConstantEntityCollection extends BaseEntityCollection
 
     public function add(ConstantEntity $constantEntity, bool $reload = false): ConstantEntityCollection
     {
-        $key = $constantEntity->getName();
-        if (!isset($this->entities[$key]) || $reload) {
-            $this->entities[$key] = $constantEntity;
+        $constantName = $constantEntity->getName();
+        if (!isset($this->entities[$constantName]) || $reload) {
+            $this->entities[$constantName] = $constantEntity;
         }
         return $this;
     }
 
-    public function get(string $key): ?ConstantEntity
+    public function get(string $constantName): ?ConstantEntity
     {
-        return $this->entities[$key] ?? null;
+        return $this->entities[$constantName] ?? null;
     }
 
-    public function has(string $key): bool
+    /**
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function unsafeGet(string $constantName): ?ConstantEntity
     {
-        return array_key_exists($key, $this->entities);
-    }
-
-    public function unsafeGet(string $key): ?ConstantEntity
-    {
-        $constantEntity = $this->get($key);
+        $constantEntity = $this->get($constantName);
         if (!$constantEntity) {
-            $constantsData = $this->classEntity->getConstantsData()[$key] ?? null;
+            $constantsData = $this->classEntity->getConstantsData()[$constantName] ?? null;
             if (is_array($constantsData)) {
                 return $this->cacheablePhpEntityFactory->createConstantEntity(
                     $this->classEntity,
-                    $key,
+                    $constantName,
                     $constantsData['declaringClass'],
                     $constantsData['implementingClass']
                 );

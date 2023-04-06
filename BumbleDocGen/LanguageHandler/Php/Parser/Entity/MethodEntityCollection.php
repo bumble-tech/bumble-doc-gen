@@ -74,16 +74,16 @@ final class MethodEntityCollection extends BaseEntityCollection
 
     public function add(MethodEntityInterface $methodEntity, bool $reload = false): MethodEntityCollection
     {
-        $objectId = $methodEntity->getObjectId();
-        if (!isset($this->entities[$objectId]) || $reload) {
-            $this->entities[$objectId] = $methodEntity;
+        $methodName = $methodEntity->getName();
+        if (!isset($this->entities[$methodName]) || $reload) {
+            $this->entities[$methodName] = $methodEntity;
         }
         return $this;
     }
 
-    public function get(string $objectId): ?MethodEntity
+    public function get(string $objectName): ?MethodEntity
     {
-        return $this->entities[$objectId] ?? null;
+        return $this->entities[$objectName] ?? null;
     }
 
     /**
@@ -92,15 +92,15 @@ final class MethodEntityCollection extends BaseEntityCollection
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function unsafeGet(string $key): ?MethodEntity
+    public function unsafeGet(string $objectName): ?MethodEntity
     {
-        $methodEntity = $this->get($key);
+        $methodEntity = $this->get($objectName);
         if (!$methodEntity) {
-            $methodData = $this->classEntity->getMethodsData()[$key] ?? null;
+            $methodData = $this->classEntity->getMethodsData()[$objectName] ?? null;
             if (is_array($methodData)) {
                 return $this->cacheablePhpEntityFactory->createMethodEntity(
                     $this->classEntity,
-                    $key,
+                    $objectName,
                     $methodData['declaringClass'],
                     $methodData['implementingClass']
                 );

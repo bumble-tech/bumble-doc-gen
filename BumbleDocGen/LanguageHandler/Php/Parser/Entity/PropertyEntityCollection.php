@@ -50,16 +50,16 @@ final class PropertyEntityCollection extends BaseEntityCollection
 
     public function add(PropertyEntity $propertyEntity, bool $reload = false): PropertyEntityCollection
     {
-        $objectId = $propertyEntity->getObjectId();
-        if (!isset($this->entities[$objectId]) || $reload) {
-            $this->entities[$objectId] = $propertyEntity;
+        $propertyName = $propertyEntity->getName();
+        if (!isset($this->entities[$propertyName]) || $reload) {
+            $this->entities[$propertyName] = $propertyEntity;
         }
         return $this;
     }
 
-    public function get(string $objectId): ?PropertyEntity
+    public function get(string $objectName): ?PropertyEntity
     {
-        return $this->entities[$objectId] ?? null;
+        return $this->entities[$objectName] ?? null;
     }
 
     /**
@@ -68,15 +68,15 @@ final class PropertyEntityCollection extends BaseEntityCollection
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function unsafeGet(string $key): ?PropertyEntity
+    public function unsafeGet(string $objectName): ?PropertyEntity
     {
-        $propertyEntity = $this->get($key);
+        $propertyEntity = $this->get($objectName);
         if (!$propertyEntity) {
-            $propertyData = $this->classEntity->getPropertiesData()[$key] ?? null;
+            $propertyData = $this->classEntity->getPropertiesData()[$objectName] ?? null;
             if (is_array($propertyData)) {
                 return $this->cacheablePhpEntityFactory->createPropertyEntity(
                     $this->classEntity,
-                    $key,
+                    $objectName,
                     $propertyData['declaringClass'],
                     $propertyData['implementingClass']
                 );
