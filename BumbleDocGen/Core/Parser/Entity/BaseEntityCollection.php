@@ -14,6 +14,21 @@ abstract class BaseEntityCollection implements \IteratorAggregate
         yield from $this->entities;
     }
 
+    public function get(string $objectId): ?EntityInterface
+    {
+        return $this->entities[$objectId] ?? null;
+    }
+
+    public function remove(string $objectId): void
+    {
+        unset($this->entities[$objectId]);
+    }
+
+    public function has(string $objectId): bool
+    {
+        return array_key_exists($objectId, $this->entities);
+    }
+
     public function isEmpty(): bool
     {
         return empty($this->entities);
