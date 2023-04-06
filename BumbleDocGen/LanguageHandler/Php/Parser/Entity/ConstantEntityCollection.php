@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -15,6 +16,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
 {
     public function __construct(
         private ClassEntity               $classEntity,
+        private PhpHandlerSettings        $phpHandlerSettings,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory
     )
     {
@@ -26,25 +28,20 @@ final class ConstantEntityCollection extends BaseEntityCollection
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public static function createByClassEntity(
-        ClassEntity               $classEntity,
-        CacheablePhpEntityFactory $cacheablePhpEntityFactory
-    ): ConstantEntityCollection
+    public function loadConstantEntities(): void
     {
-        $constantEntityCollection = new ConstantEntityCollection($classEntity, $cacheablePhpEntityFactory);
-        $classConstantEntityFilter = $classEntity->getPhpHandlerSettings()->getClassConstantEntityFilter();
-        foreach ($classEntity->getConstantsData() as $name => $constantData) {
-            $constantEntity = $cacheablePhpEntityFactory->createConstantEntity(
-                $classEntity,
+        $classConstantEntityFilter = $this->phpHandlerSettings->getClassConstantEntityFilter();
+        foreach ($this->classEntity->getConstantsData() as $name => $constantData) {
+            $constantEntity = $this->cacheablePhpEntityFactory->createConstantEntity(
+                $this->classEntity,
                 $name,
                 $constantData['declaringClass'],
                 $constantData['implementingClass']
             );
             if ($classConstantEntityFilter->canAddToCollection($constantEntity)) {
-                $constantEntityCollection->add($constantEntity);
+                $this->add($constantEntity);
             }
         }
-        return $constantEntityCollection;
     }
 
     public function add(ConstantEntity $constantEntity, bool $reload = false): ConstantEntityCollection
@@ -56,9 +53,9 @@ final class ConstantEntityCollection extends BaseEntityCollection
         return $this;
     }
 
-    public function get(string $constantName): ?ConstantEntity
+    public function get(string $objectName): ?ConstantEntity
     {
-        return $this->entities[$constantName] ?? null;
+        return $this->entities[$objectName] ?? null;
     }
 
     /**
