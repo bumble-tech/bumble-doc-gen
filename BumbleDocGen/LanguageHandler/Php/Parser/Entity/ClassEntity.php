@@ -47,7 +47,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         protected PhpHandlerSettings      $phpHandlerSettings,
         protected ReflectorWrapper        $reflector,
         protected ClassEntityCollection   $classEntityCollection,
-        private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
         private LocalObjectCache          $localObjectCache,
         GetDocumentedEntityUrl            $documentedEntityUrlFunction,
         RenderHelper                      $renderHelper,

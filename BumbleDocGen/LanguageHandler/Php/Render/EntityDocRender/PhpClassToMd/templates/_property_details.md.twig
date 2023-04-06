@@ -23,7 +23,7 @@
 
 See:
 <ul>
-{% for link in propertyEntity.getDescriptionLinks(renderContext) %}
+{% for link in propertyEntity.getDescriptionLinks() %}
     <li>
         <a {% if link.url %}href="{{ link.url }}"{% endif %}>{{ link.name }}</a>{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
     </li>

@@ -14,7 +14,7 @@ namespace {{ classEntity.getNamespaceName() }};
 
 See:
 <ul>
-{% for link in classEntity.getDescriptionLinks(renderContext) %}
+{% for link in classEntity.getDescriptionLinks() %}
     <li>
         <a {% if link.url %}href="{{ link.url }}"{% endif %}>{{ link.name }}</a>{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
     </li>

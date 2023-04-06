@@ -63,7 +63,7 @@
 
 <b>Throws:</b>
 <ul>
-{% for throw in methodEntity.getThrows(renderContext) %}
+{% for throw in methodEntity.getThrows() %}
 <li>
     <a {% if throw.url %}href="{{ throw.url }}"{% endif %}>{{ throw.name }}</a>{% if throw.description %} - {{ throw.description | removeLineBrakes }} {% endif %}
 </li>
@@ -76,7 +76,7 @@
 
 <b>See:</b>
 <ul>
-{% for link in methodEntity.getDescriptionLinks(renderContext) %}
+{% for link in methodEntity.getDescriptionLinks() %}
     <li>
         <a {% if link.url %}href="{{ link.url }}"{% endif %}>{{ link.name }}</a>{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
     </li>
