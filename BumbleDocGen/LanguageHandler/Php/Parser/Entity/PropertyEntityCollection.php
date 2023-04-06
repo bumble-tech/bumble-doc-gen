@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -15,6 +16,7 @@ final class PropertyEntityCollection extends BaseEntityCollection
 {
     public function __construct(
         private ClassEntity               $classEntity,
+        private PhpHandlerSettings        $phpHandlerSettings,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory
     )
     {
@@ -26,26 +28,20 @@ final class PropertyEntityCollection extends BaseEntityCollection
      * @throws NotFoundException
      * @throws ReflectionException
      */
-    public static function createByClassEntity(
-        ClassEntity               $classEntity,
-        CacheablePhpEntityFactory $cacheablePhpEntityFactory
-    ): PropertyEntityCollection
+    public function loadPropertyEntities(): void
     {
-        $propertyEntityCollection = new PropertyEntityCollection($classEntity, $cacheablePhpEntityFactory);
-
-        $propertyEntityFilter = $classEntity->getPhpHandlerSettings()->getPropertyEntityFilter();
-        foreach ($classEntity->getPropertiesData() as $name => $propertyData) {
-            $propertyEntity = $cacheablePhpEntityFactory->createPropertyEntity(
-                $classEntity,
+        $propertyEntityFilter = $this->phpHandlerSettings->getPropertyEntityFilter();
+        foreach ($this->classEntity->getPropertiesData() as $name => $propertyData) {
+            $propertyEntity = $this->cacheablePhpEntityFactory->createPropertyEntity(
+                $this->classEntity,
                 $name,
                 $propertyData['declaringClass'],
                 $propertyData['implementingClass']
             );
             if ($propertyEntityFilter->canAddToCollection($propertyEntity)) {
-                $propertyEntityCollection->add($propertyEntity);
+                $this->add($propertyEntity);
             }
         }
-        return $propertyEntityCollection;
     }
 
     public function add(PropertyEntity $propertyEntity, bool $reload = false): PropertyEntityCollection

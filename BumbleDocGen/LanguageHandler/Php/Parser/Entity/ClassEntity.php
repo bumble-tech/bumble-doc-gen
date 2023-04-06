@@ -551,10 +551,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        $propertyEntityCollection = PropertyEntityCollection::createByClassEntity(
-            $this,
-            $this->cacheablePhpEntityFactory
-        );
+        $propertyEntityCollection = $this->diContainer->make(PropertyEntityCollection::class, [
+            'classEntity' => $this
+        ]);
+        $propertyEntityCollection->loadPropertyEntities();
         $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $propertyEntityCollection);
         return $propertyEntityCollection;
     }
