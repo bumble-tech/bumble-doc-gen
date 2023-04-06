@@ -7,6 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -23,6 +24,7 @@ final class PropertyEntityCollection extends BaseEntityCollection
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
+     * @throws ReflectionException
      */
     public static function createByClassEntity(
         ClassEntity               $classEntity,
@@ -66,8 +68,10 @@ final class PropertyEntityCollection extends BaseEntityCollection
     }
 
     /**
-     * @throws DependencyException
      * @throws NotFoundException
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     public function unsafeGet(string $key): ?PropertyEntity
     {
