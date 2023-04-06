@@ -16,7 +16,6 @@ use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
