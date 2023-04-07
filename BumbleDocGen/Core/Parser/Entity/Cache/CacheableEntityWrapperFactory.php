@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use Nette\PhpGenerator\Parameter;
@@ -21,7 +20,7 @@ final class CacheableEntityWrapperFactory
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $wrapperName);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
 
         $namespaceName = 'BumbleDocGen\\Core\\Parser\\Entity\\Cache';

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Configuration;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
@@ -51,7 +50,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $projectRoot = $this->parameterBag->validateAndGetStringValue('project_root', false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $projectRoot);
@@ -65,7 +64,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $sourceLocators = $this->parameterBag->validateAndGetClassListValue(
             'source_locators',
@@ -83,7 +82,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $templatesDir = $this->parameterBag->validateAndGetStringValue('templates_dir', false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $templatesDir);
@@ -97,7 +96,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $outputDir = $this->parameterBag->validateAndGetStringValue('output_dir', false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $outputDir);
@@ -111,7 +110,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $outputDirBaseUrl = $this->parameterBag->validateAndGetStringValue('output_dir_base_url', false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $outputDirBaseUrl);
@@ -125,7 +124,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $languageHandlers = $this->parameterBag->validateAndGetClassListValue(
             'language_handlers',
@@ -144,7 +143,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $pluginsList = $this->parameterBag->validateAndGetClassListValue(
             'plugins',
@@ -162,7 +161,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $templateFillers = $this->parameterBag->validateAndGetClassListValue(
             'template_fillers',
@@ -180,7 +179,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $cacheDir = $this->parameterBag->validateAndGetStringValue('cache_dir');
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheDir);
@@ -199,7 +198,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $cacheNamespace);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $cacheItemPool = new FilesystemAdapter($cacheNamespace, 604800, $this->getCacheDir());
         $this->localObjectCache->cacheMethodResult(__METHOD__, $cacheNamespace, $cacheItemPool);
@@ -229,7 +228,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         /** @var PageLinkProcessorInterface $pageLinkProcessor */
         $pageLinkProcessor = $this->parameterBag->validateAndGetClassValue(
@@ -247,7 +246,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $gitClientPath = $this->parameterBag->validateAndGetStringValue('git_client_path', false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $gitClientPath);
@@ -266,7 +265,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $customFunctions = $this->parameterBag->validateAndGetClassListValue(
             'twig_functions',
@@ -287,7 +286,7 @@ final class Configuration
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
             'twig_filters',

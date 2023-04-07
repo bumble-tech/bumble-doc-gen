@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
@@ -45,7 +44,7 @@ final class PhpHandlerSettings
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         /** @var ConditionInterface $classEntityFilter */
         $classEntityFilter = $this->parameterBag->validateAndGetClassValue(
@@ -63,7 +62,7 @@ final class PhpHandlerSettings
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         /** @var ConditionInterface $constantEntityFilter */
         $constantEntityFilter = $this->parameterBag->validateAndGetClassValue(
@@ -81,7 +80,7 @@ final class PhpHandlerSettings
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         /** @var ConditionInterface $methodEntityFilter */
         $methodEntityFilter = $this->parameterBag->validateAndGetClassValue(
@@ -99,7 +98,7 @@ final class PhpHandlerSettings
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         /** @var ConditionInterface $propertyEntityFilter */
         $propertyEntityFilter = $this->parameterBag->validateAndGetClassValue(
@@ -117,7 +116,7 @@ final class PhpHandlerSettings
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $entityDocRendersCollection = new EntityDocRendersCollection();
         $entityDocRenders = $this->parameterBag->validateAndGetClassListValue(
@@ -138,7 +137,7 @@ final class PhpHandlerSettings
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $fileSourceBaseUrl = $this->parameterBag->validateAndGetStringValue(
             $this->getSettingsKey('file_source_base_url')
@@ -154,7 +153,7 @@ final class PhpHandlerSettings
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $asyncSourceLoadingEnabled = $this->parameterBag->validateAndGetBooleanValue(
             $this->getSettingsKey('async_source_loading_enabled')
@@ -170,7 +169,7 @@ final class PhpHandlerSettings
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $customFunctions = $this->parameterBag->validateAndGetClassListValue(
             $this->getSettingsKey('custom_twig_functions'),
@@ -191,7 +190,7 @@ final class PhpHandlerSettings
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
             $this->getSettingsKey('custom_twig_filters'),

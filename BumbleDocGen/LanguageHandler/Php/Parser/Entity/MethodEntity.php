@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
@@ -148,7 +147,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $docComment = $this->getDocComment();
         $reflectionMethod = $this;
@@ -183,7 +182,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $docComment = $this->getDocCommentEntity()->getDocComment() ?: ' ';
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docComment);

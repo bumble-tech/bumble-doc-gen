@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
@@ -49,7 +48,7 @@ final class CacheablePhpEntityFactory
         $objectId = "{$classEntity->getName()}:{$propertyName}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(PropertyEntity::class);
         $propertyEntity = $this->diContainer->make($wrapperClassName, [
@@ -77,7 +76,7 @@ final class CacheablePhpEntityFactory
         $objectId = "{$classEntity->getName()}:{$constantName}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(ConstantEntity::class);
         $constantEntity = $this->diContainer->make($wrapperClassName, [
@@ -105,7 +104,7 @@ final class CacheablePhpEntityFactory
         $objectId = "{$classEntity->getName()}:{$methodName}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(MethodEntity::class);
         $methodEntity = $this->diContainer->make($wrapperClassName, [
@@ -130,7 +129,7 @@ final class CacheablePhpEntityFactory
         $objectId = "{$classEntity->getName()}:{$annotationMethod->getName()}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(DynamicMethodEntity::class);
         $methodEntity = $this->diContainer->make($wrapperClassName, [
@@ -155,7 +154,7 @@ final class CacheablePhpEntityFactory
         $objectId = md5($className);
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(ClassEntity::class);
         $classEntity = $this->diContainer->make($wrapperClassName, [
@@ -206,7 +205,7 @@ final class CacheablePhpEntityFactory
         $objectId = md5($className);
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper($subClassEntity);
         $classEntity = $this->diContainer->make($wrapperClassName, [
@@ -247,7 +246,7 @@ final class CacheablePhpEntityFactory
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $entityClassName);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $classNameParts = explode('\\', $entityClassName);
         $classEntityName = end($classNameParts);

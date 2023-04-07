@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Breadcrumbs;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
@@ -43,7 +42,7 @@ final class BreadcrumbsHelper
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateName);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $outputDir = $this->configuration->getTemplatesDir();
         $filePath = "{$outputDir}{$templateName}";
@@ -68,7 +67,7 @@ final class BreadcrumbsHelper
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateName);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $code = $this->loadTemplateContent($templateName);
         if (preg_match_all('/({%)( ?)(set)( )(prevPage)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {

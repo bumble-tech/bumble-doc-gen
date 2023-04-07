@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
@@ -170,7 +169,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $docComment = $this->getDocComment();
         $classEntity = $this;
@@ -216,7 +215,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         try {
             $this->reflectionClass = $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
             return $this->reflectionClass;
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         if (!$this->reflectionClass) {
             try {
@@ -522,7 +521,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $constantEntityCollection = $this->diContainer->make(ConstantEntityCollection::class, [
             'classEntity' => $this
@@ -558,7 +557,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $propertyEntityCollection = $this->diContainer->make(PropertyEntityCollection::class, [
             'classEntity' => $this
@@ -594,7 +593,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $methodEntityCollection = $this->diContainer->make(MethodEntityCollection::class, [
             'classEntity' => $this
@@ -812,7 +811,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $docRender = $this->getPhpHandlerSettings()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
         if (!$docRender) {

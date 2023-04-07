@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use Composer\Autoload\ClassLoader;
@@ -49,7 +48,7 @@ final class SystemAsyncSourceLocator extends AbstractSourceLocator
         $key = md5(serialize($psr4FileMap) . serialize($classMap));
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $key);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $classLoader = new ClassLoader();
         foreach ($psr4FileMap as $prefix => $path) {

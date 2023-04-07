@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
@@ -236,7 +235,7 @@ final class ParserHelper
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $fileName);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $classContentCache = file_get_contents($fileName);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $fileName, $classContentCache);
@@ -331,7 +330,7 @@ final class ParserHelper
 
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $key);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
 
         $trimmedName = ltrim($searchClassName, '\\');
@@ -509,7 +508,7 @@ final class ParserHelper
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $gitClient = $this->configuration->getGitClientPath();
         exec("cd {$this->configuration->getProjectRoot()} && {$gitClient} ls-files", $output);
@@ -522,7 +521,7 @@ final class ParserHelper
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $docBlockFactory = DocBlockFactory::createInstance();
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $docBlockFactory);
@@ -539,7 +538,7 @@ final class ParserHelper
         $cacheKey = md5("{$classEntity->getName()}{$docComment}");
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $cacheKey);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $docBlock = $this->getDocBlockFactory()->create(
             $docComment,
@@ -557,7 +556,7 @@ final class ParserHelper
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $classEntity->getName());
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
 
         $tmpContext = (new ContextFactory)->createForNamespace(

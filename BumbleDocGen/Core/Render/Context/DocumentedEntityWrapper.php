@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Context;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
@@ -45,7 +44,7 @@ final class DocumentedEntityWrapper
         try {
             $usedKeysCounter = $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $fileKey);
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $usedKeysCounter ??= [];
         $fileName = $this->documentTransformableEntity->getShortName();

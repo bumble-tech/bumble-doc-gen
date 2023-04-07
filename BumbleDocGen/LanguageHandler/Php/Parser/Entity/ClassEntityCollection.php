@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
@@ -115,7 +114,7 @@ final class ClassEntityCollection extends RootEntityCollection
         if (!$classEntity) {
             try {
                 return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectName);
-            } catch (ObjectNotFoundException|InvalidCallContextException) {
+            } catch (ObjectNotFoundException) {
             }
             $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
                 $this,
@@ -287,7 +286,7 @@ final class ClassEntityCollection extends RootEntityCollection
         $cacheData = [];
         try {
             $cacheData = $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        } catch (ObjectNotFoundException) {
         }
         $index = $cacheData['index'] ?? [];
         $duplicates = $cacheData['duplicates'] ?? [];
