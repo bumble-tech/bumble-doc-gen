@@ -378,7 +378,7 @@ final class ParserHelper
         return null;
     }
 
-    protected static function getRawValue(
+    protected function getRawValue(
         Reflector        $reflector,
         ReflectionClass  $reflectionClass,
         ReflectionMethod $reflectionMethod,
@@ -409,7 +409,7 @@ final class ParserHelper
                     if (str_contains($parts[1], '(') && !str_contains($parts[1], ' ') && !str_contains($parts[1], '.')) {
                         $methodName = explode('(', $parts[1])[0];
                         $nextReflection = $nextClass->getMethod($methodName);
-                        $methodValue = self::getMethodReturnValue($reflector, $reflectionClass, $nextReflection);
+                        $methodValue = $this->getMethodReturnValue($reflector, $reflectionClass, $nextReflection);
                         return $prepareReturnValue($methodValue);
                     } elseif (!preg_match('/([-+:\/ ])/', $parts[1])) {
                         $constantValue = $nextClass->getConstant($parts[1]);
@@ -437,7 +437,7 @@ final class ParserHelper
                 }
 
                 if (isset($matches[8]) && $nextClass->hasMethod($matches[6])) {
-                    $methodValue = self::getMethodReturnValue($reflector, $nextClass, $nextClass->getMethod($matches[6]));
+                    $methodValue = $this->getMethodReturnValue($reflector, $nextClass, $nextClass->getMethod($matches[6]));
                     return $prepareReturnValue($methodValue);
                 } elseif ($nextClass->hasConstant($matches[6])) {
                     $constantValue = $nextClass->getConstant($matches[6]);
@@ -452,7 +452,7 @@ final class ParserHelper
         return $value;
     }
 
-    public static function getMethodReturnValue(
+    public function getMethodReturnValue(
         Reflector        $reflector,
         ReflectionClass  $reflectionClass,
         ReflectionMethod $reflectionMethod
