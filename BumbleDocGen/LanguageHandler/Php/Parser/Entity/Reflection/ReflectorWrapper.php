@@ -3,6 +3,7 @@
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\CachedSourceLocator;
@@ -20,6 +21,9 @@ final class ReflectorWrapper implements Reflector
 {
     private DefaultReflector $reflector;
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function __construct(
         Configuration         $configuration,
         PhpHandlerSettings    $phpHandlerSettings,
