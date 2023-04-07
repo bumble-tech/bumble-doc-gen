@@ -4,22 +4,30 @@ declare(strict_types=1);
 
 namespace SelfDoc\Configuration\Plugin\TwigFilterClassParser;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Render\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Render\Twig\MainExtension;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 final class TwigFilterClassParserPlugin implements PluginInterface
 {
     private const TWIG_FILTER_DIRNAME = '/BumbleDocGen/Render/Twig/Filter';
     public const PLUGIN_KEY = 'twigFilterClassParserPlugin';
 
-    public static function getSubscribedEvents()
+    public function __construct(
+        private FilterClassPluginTwigEnvironment $twigEnvironment
+    )
+    {
+    }
+
+    public static function getSubscribedEvents(): array
     {
         return [
             AfterLoadingClassEntityCollection::class => 'afterLoadingClassEntityCollection',
@@ -27,6 +35,10 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         ];
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
     {
         if (
@@ -41,7 +53,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         }
 
         try {
-            $pluginResult = $this->getTwig()->render('twigFilterInfoBlock.twig', [
+            $pluginResult = $this->twigEnvironment->render('twigFilterInfoBlock.twig', [
                 'classEntity' => $entity,
             ]);
         } catch (\Exception) {
@@ -51,6 +63,12 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         $event->addBlockContentPluginResult($pluginResult);
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     */
     public function afterLoadingClassEntityCollection(AfterLoadingClassEntityCollection $event): void
     {
         foreach ($event->getClassEntityCollection() as $classEntity) {
@@ -63,23 +81,21 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         }
     }
 
-    private function getTwig(): Environment
-    {
-        static $twig;
-        if (!$twig) {
-            $loader = new FilesystemLoader([
-                __DIR__ . '/templates/',
-            ]);
-            $twig = new Environment($loader);
-        }
-        return $twig;
-    }
-
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     private function isCustomTwigFunction(ClassEntity $classEntity): bool
     {
         return str_starts_with($classEntity->getFileName(), self::TWIG_FILTER_DIRNAME);
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     private function getAllUsedFilters(ClassEntityCollection $classEntityCollection): array
     {
         static $filters = null;
@@ -97,6 +113,12 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         return $filters;
     }
 
+    /**
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
     private function getFilterData(ClassEntityCollection $classEntityCollection, string $className): ?array
     {
         static $filtersData = [];
