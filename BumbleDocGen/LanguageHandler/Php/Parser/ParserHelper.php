@@ -15,7 +15,6 @@ use phpDocumentor\Reflection\DocBlockFactory;
 use phpDocumentor\Reflection\Types\ContextFactory;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
-use Roave\BetterReflection\Reflector\Reflector;
 
 final class ParserHelper
 {
@@ -152,7 +151,10 @@ final class ParserHelper
         'DOMXPath',
     ];
 
-    public function __construct()
+    public function __construct(
+        private Configuration    $configuration,
+        private ReflectorWrapper $reflector
+    )
     {
     }
 
@@ -379,7 +381,6 @@ final class ParserHelper
     }
 
     protected function getRawValue(
-        Reflector        $reflector,
         ReflectionClass  $reflectionClass,
         ReflectionMethod $reflectionMethod,
         string           $condition
@@ -401,15 +402,15 @@ final class ParserHelper
                     $nextClass = $reflectionMethod->getImplementingClass()->getParentClass();
                 } elseif ($parts[0] === 'self') {
                     $nextClass = $reflectionMethod->getImplementingClass();
-                } elseif (self::isClassLoaded($reflector, $parts[0])) {
-                    $nextClass = $reflector->reflectClass($parts[0]);
+                } elseif (self::isClassLoaded($this->reflector, $parts[0])) {
+                    $nextClass = $this->reflector->reflectClass($parts[0]);
                 }
 
                 if ($nextClass) {
                     if (str_contains($parts[1], '(') && !str_contains($parts[1], ' ') && !str_contains($parts[1], '.')) {
                         $methodName = explode('(', $parts[1])[0];
                         $nextReflection = $nextClass->getMethod($methodName);
-                        $methodValue = $this->getMethodReturnValue($reflector, $reflectionClass, $nextReflection);
+                        $methodValue = $this->getMethodReturnValue($reflectionClass, $nextReflection);
                         return $prepareReturnValue($methodValue);
                     } elseif (!preg_match('/([-+:\/ ])/', $parts[1])) {
                         $constantValue = $nextClass->getConstant($parts[1]);
@@ -423,7 +424,7 @@ final class ParserHelper
 
         $value = preg_replace_callback(
             '/([$]?)([a-zA-Z_\\\\]+)((::)|(->))([\s\S]([^ -+\-;\]])+)(([^)]?)+[)])?/',
-            function (array $matches) use ($reflector, $reflectionClass, $prepareReturnValue) {
+            function (array $matches) use ($reflectionClass, $prepareReturnValue) {
                 if ($matches[1] && $matches[2] != 'this') {
                     return $matches[0];
                 }
@@ -433,11 +434,11 @@ final class ParserHelper
 
                 $nextClass = $reflectionClass;
                 if (!in_array($matches[2], ['static', 'self', 'partner', 'this'])) {
-                    $nextClass = $reflector->reflectClass($matches[2]);
+                    $nextClass = $this->reflector->reflectClass($matches[2]);
                 }
 
                 if (isset($matches[8]) && $nextClass->hasMethod($matches[6])) {
-                    $methodValue = $this->getMethodReturnValue($reflector, $nextClass, $nextClass->getMethod($matches[6]));
+                    $methodValue = $this->getMethodReturnValue($nextClass, $nextClass->getMethod($matches[6]));
                     return $prepareReturnValue($methodValue);
                 } elseif ($nextClass->hasConstant($matches[6])) {
                     $constantValue = $nextClass->getConstant($matches[6]);
@@ -453,7 +454,6 @@ final class ParserHelper
     }
 
     public function getMethodReturnValue(
-        Reflector        $reflector,
         ReflectionClass  $reflectionClass,
         ReflectionMethod $reflectionMethod
     ): mixed
@@ -473,7 +473,7 @@ final class ParserHelper
                 foreach ($savedParts as $i => $savedPart) {
                     $condition = str_replace("[%{$i}%]", $savedPart, $condition);
                 }
-                $values[] = self::getRawValue($reflector, $reflectionClass, $reflectionMethod, trim($condition));
+                $values[] = self::getRawValue($reflectionClass, $reflectionMethod, trim($condition));
             }
             $value = implode(' . ', $values);
 
@@ -496,12 +496,12 @@ final class ParserHelper
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getFilesInGit(Configuration $configuration): array
+    public function getFilesInGit(): array
     {
         static $gitFiles = null;
         if (is_null($gitFiles)) {
-            $gitClient = $configuration->getGitClientPath();
-            exec("cd {$configuration->getProjectRoot()} && {$gitClient} ls-files", $output);
+            $gitClient = $this->configuration->getGitClientPath();
+            exec("cd {$this->configuration->getProjectRoot()} && {$gitClient} ls-files", $output);
             $gitFiles = array_flip($output);
         }
         return $gitFiles;

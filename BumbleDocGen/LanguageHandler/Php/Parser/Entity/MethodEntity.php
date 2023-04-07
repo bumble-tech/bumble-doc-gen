@@ -466,7 +466,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     #[CacheableMethod] public function getFirstReturnValue(): mixed
     {
         return $this->parserHelper->getMethodReturnValue(
-            $this->reflector,
             $this->getRootEntity()->getReflection(),
             $this->getReflection()
         );
