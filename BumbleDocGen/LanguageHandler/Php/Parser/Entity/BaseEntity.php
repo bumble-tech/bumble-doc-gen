@@ -122,14 +122,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $this->getPhpHandlerSettings()->getFileSourceBaseUrl() . $fileName . ($withLine ? "#L{$this->getStartLine()}" : '');
     }
 
-    public static function generateObjectIdByReflection(ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant $reflection): string
-    {
-        if (method_exists($reflection, 'getImplementingClass')) {
-            return "{$reflection->getImplementingClass()->getName()}:{$reflection->getName()}";
-        }
-        return $reflection->getName();
-    }
-
     /**
      * Get entity unique ID
      */
