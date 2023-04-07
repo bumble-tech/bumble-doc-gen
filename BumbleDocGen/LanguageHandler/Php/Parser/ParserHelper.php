@@ -214,11 +214,11 @@ final class ParserHelper
         return self::checkIsClassName($className);
     }
 
-    public static function isClassLoaded(ReflectorWrapper $reflector, string $className): bool
+    public function isClassLoaded(string $className): bool
     {
         if (self::isCorrectClassName($className)) {
             try {
-                $reflector->reflectClass($className);
+                $this->reflector->reflectClass($className);
                 return true;
             } catch (\Exception) {
             }
@@ -328,7 +328,7 @@ final class ParserHelper
             } elseif (isset($uses[$searchClassName])) {
                 $className = $uses[$searchClassName];
             } elseif (
-                str_contains($searchClassName, '\\') && ParserHelper::isClassLoaded($this->reflector, $searchClassName)
+                str_contains($searchClassName, '\\') && $this->isClassLoaded($searchClassName)
             ) {
                 $className = $searchClassName;
             } elseif (
@@ -338,7 +338,7 @@ final class ParserHelper
                 )
             ) {
                 $className = "{$reflectionClass->getNamespaceName()}{$searchClassName}";
-                if (!ParserHelper::isClassLoaded($this->reflector, $className)) {
+                if (!$this->isClassLoaded($className)) {
                     $className = $searchClassName;
                 }
             } else {
@@ -401,7 +401,7 @@ final class ParserHelper
                     $nextClass = $reflectionMethod->getImplementingClass()->getParentClass();
                 } elseif ($parts[0] === 'self') {
                     $nextClass = $reflectionMethod->getImplementingClass();
-                } elseif (self::isClassLoaded($this->reflector, $parts[0])) {
+                } elseif ($this->isClassLoaded($parts[0])) {
                     $nextClass = $this->reflector->reflectClass($parts[0]);
                 }
 

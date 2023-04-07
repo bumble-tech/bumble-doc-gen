@@ -21,6 +21,7 @@ class DynamicMethodEntity implements MethodEntityInterface
 {
     private function __construct(
         private Configuration $configuration,
+        private ParserHelper  $parserHelper,
         private ClassEntity   $classEntity,
         private Method        $annotationMethod
     )
@@ -138,7 +139,7 @@ class DynamicMethodEntity implements MethodEntityInterface
                 $returnType = $uses[$returnType];
             } else {
                 $newClassName = "{$this->classEntity->getReflection()->getNamespaceName()}\\{$returnType}";
-                if (ParserHelper::isClassLoaded($this->classEntity->getReflector(), $newClassName)) {
+                if ($this->parserHelper->isClassLoaded($newClassName)) {
                     $returnType = $newClassName;
                 }
             }
