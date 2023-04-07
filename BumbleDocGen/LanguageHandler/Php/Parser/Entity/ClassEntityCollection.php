@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
+use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
@@ -23,11 +26,12 @@ final class ClassEntityCollection extends RootEntityCollection
 {
     public function __construct(
         private Configuration             $configuration,
-        protected PhpHandlerSettings      $phpHandlerSettings,
+        private PhpHandlerSettings        $phpHandlerSettings,
         private ParserHelper              $parserHelper,
         private PluginEventDispatcher     $pluginEventDispatcher,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
-        private EntityDocRenderHelper     $docRenderHelper
+        private EntityDocRenderHelper     $docRenderHelper,
+        private LocalObjectCache          $localObjectCache
     )
     {
     }
@@ -109,16 +113,15 @@ final class ClassEntityCollection extends RootEntityCollection
     {
         $classEntity = $this->get($objectName);
         if (!$classEntity) {
-            static $loadedUnsafe = [];
-            if (isset($loadUnsafe[$objectName])) {
-                $loadedUnsafe = $loadUnsafe[$objectName];
-            } else {
-                $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
-                    $this,
-                    ltrim($objectName, '\\')
-                );
-                $loadedUnsafe[$objectName] = $classEntity;
+            try {
+                return $this->localObjectCache->getCurrentMethodCachedResult($objectName);
+            } catch (ObjectNotFoundException|InvalidCallContextException) {
             }
+            $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
+                $this,
+                ltrim($objectName, '\\')
+            );
+            $this->localObjectCache->cacheCurrentMethodResultSilently($objectName, $classEntity);
         }
         return $classEntity;
     }
@@ -277,13 +280,18 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function findEntity(string $search, bool $useUnsafeKeys = true): ?ClassEntity
     {
-        static $index = [];
-        static $duplicates = [];
-        static $lastCacheKey = null;
-
         if (preg_match('/^((self|parent):|(\$(.*)->))/', $search)) {
             return null;
         }
+
+        $cacheData = [];
+        try {
+            $cacheData = $this->localObjectCache->getCurrentMethodCachedResult('');
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        }
+        $index = $cacheData['index'] ?? [];
+        $duplicates = $cacheData['duplicates'] ?? [];
+        $lastCacheKey = $cacheData['lastCacheKey'] ?? null;
 
         $lastKey = array_key_last($this->entities);
         if ($lastKey !== $lastCacheKey || !$index) {
@@ -331,6 +339,12 @@ final class ClassEntityCollection extends RootEntityCollection
                 $foundKey = $matches[2];
             }
         }
+
+        $this->localObjectCache->cacheCurrentMethodResultSilently('', [
+            'index' => $index,
+            'duplicates' => $duplicates,
+            'lastCacheKey' => $lastCacheKey,
+        ]);
 
         if (array_key_exists($foundKey, $duplicates)) {
             if ($useUnsafeKeys) {
