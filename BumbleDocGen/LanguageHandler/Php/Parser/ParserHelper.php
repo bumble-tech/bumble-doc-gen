@@ -496,7 +496,7 @@ final class ParserHelper
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public static function getFilesInGit(Configuration $configuration): array
+    public function getFilesInGit(Configuration $configuration): array
     {
         static $gitFiles = null;
         if (is_null($gitFiles)) {

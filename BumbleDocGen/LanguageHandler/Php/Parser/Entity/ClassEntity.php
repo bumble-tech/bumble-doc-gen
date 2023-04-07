@@ -144,7 +144,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!$this->getFileName()) {
             return false;
         }
-        $filesInGit = ParserHelper::getFilesInGit($this->getConfiguration());
+        $filesInGit = $this->parserHelper->getFilesInGit($this->getConfiguration());
         $fileName = ltrim($this->getFileName(), DIRECTORY_SEPARATOR);
         return isset($filesInGit[$fileName]);
     }
