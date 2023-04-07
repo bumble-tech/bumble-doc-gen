@@ -77,7 +77,7 @@ class PropertyEntity extends BaseEntity
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function getReflection(): ReflectionProperty
+    protected function getReflection(): ReflectionProperty
     {
         if (!$this->reflectionProperty) {
             $this->reflectionProperty = $this->classEntity->getReflection()->getProperty($this->propertyName);

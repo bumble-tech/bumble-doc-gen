@@ -209,7 +209,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function getReflection(): ReflectionClass
+    protected function getReflection(): ReflectionClass
     {
         $objectId = $this->getObjectId();
         try {

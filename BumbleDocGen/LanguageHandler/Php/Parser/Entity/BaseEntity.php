@@ -50,7 +50,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      * @throws InvalidConfigurationParameterException
      * @internal
      */
-    abstract public function getReflection(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
+    abstract protected function getReflection(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
 
     abstract public function getImplementingReflectionClass(): ReflectionClass;
 

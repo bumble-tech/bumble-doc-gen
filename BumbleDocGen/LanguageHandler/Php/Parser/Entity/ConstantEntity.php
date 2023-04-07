@@ -95,7 +95,7 @@ class ConstantEntity extends BaseEntity
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function getReflection(): ReflectionClassConstant
+    protected function getReflection(): ReflectionClassConstant
     {
         if (!$this->reflectionClassConstant) {
             $this->reflectionClassConstant = $this->classEntity->getReflection()->getReflectionConstant($this->constantName);

@@ -60,7 +60,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function getReflection(): ReflectionMethod
+    protected function getReflection(): ReflectionMethod
     {
         if (!$this->reflectionMethod) {
             $this->reflectionMethod = $this->classEntity->getReflection()->getMethod($this->methodName);
