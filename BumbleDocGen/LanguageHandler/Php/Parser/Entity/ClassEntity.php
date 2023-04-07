@@ -57,7 +57,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         private ?string               $relativeFileName,
     )
     {
-        parent::__construct($configuration, $reflector, $documentedEntityUrlFunction, $renderHelper, $logger);
+        parent::__construct(
+            $configuration,
+            $reflector,
+            $documentedEntityUrlFunction,
+            $renderHelper,
+            $parserHelper,
+            $logger
+        );
         if ($relativeFileName) {
             $this->relativeFileNameLoaded = true;
         }

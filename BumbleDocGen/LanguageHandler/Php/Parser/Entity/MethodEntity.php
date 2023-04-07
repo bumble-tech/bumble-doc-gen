@@ -51,6 +51,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             $reflectorWrapper,
             $documentedEntityUrlFunction,
             $renderHelper,
+            $parserHelper,
             $logger
         );
     }

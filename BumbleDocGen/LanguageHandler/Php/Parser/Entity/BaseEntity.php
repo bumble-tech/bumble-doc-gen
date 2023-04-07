@@ -31,6 +31,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         private ReflectorWrapper       $reflector,
         private GetDocumentedEntityUrl $documentedEntityUrlFunction,
         private RenderHelper           $renderHelper,
+        private ParserHelper           $parserHelper,
         private LoggerInterface        $logger
     )
     {

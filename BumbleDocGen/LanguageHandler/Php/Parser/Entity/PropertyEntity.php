@@ -49,6 +49,7 @@ class PropertyEntity extends BaseEntity
             $reflectorWrapper,
             $documentedEntityUrlFunction,
             $renderHelper,
+            $parserHelper,
             $logger
         );
     }

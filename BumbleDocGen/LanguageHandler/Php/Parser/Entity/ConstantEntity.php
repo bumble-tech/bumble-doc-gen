@@ -49,6 +49,7 @@ class ConstantEntity extends BaseEntity
             $reflectorWrapper,
             $documentedEntityUrlFunction,
             $renderHelper,
+            $parserHelper,
             $logger
         );
     }
