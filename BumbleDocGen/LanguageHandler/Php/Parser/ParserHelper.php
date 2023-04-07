@@ -227,7 +227,7 @@ final class ParserHelper
         return false;
     }
 
-    public static function getUsesList(ReflectionClass $reflectionClass, bool $extended = true): array
+    public function getUsesList(ReflectionClass $reflectionClass, bool $extended = true): array
     {
         static $classContentCache = [];
         $fileName = $reflectionClass->getFileName();
@@ -322,7 +322,7 @@ final class ParserHelper
         $key = $reflectionClass->getName() . $searchClassName;
         if (!isset($parsedFullClassNameCache[$key])) {
             $trimmedName = ltrim($searchClassName, '\\');
-            $uses = self::getUsesList($reflectionClass, $extended);
+            $uses = $this->getUsesList($reflectionClass, $extended);
             if (isset($uses[$trimmedName])) {
                 $className = $uses[$trimmedName];
             } elseif (isset($uses[$searchClassName])) {

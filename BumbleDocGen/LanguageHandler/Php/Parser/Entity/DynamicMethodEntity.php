@@ -121,7 +121,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         $returnType = (string)$this->annotationMethod->getReturnType();
         $returnType = ltrim($returnType, '\\');
         if (!str_contains($returnType, '\\')) {
-            $uses = ParserHelper::getUsesList($this->classEntity->getReflection());
+            $uses = $this->parserHelper->getUsesList($this->classEntity->getReflection());
             if (isset($uses[$returnType])) {
                 $returnType = $uses[$returnType];
             } else {
