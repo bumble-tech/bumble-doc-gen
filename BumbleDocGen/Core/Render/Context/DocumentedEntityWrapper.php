@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Context;
 
+use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
+use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
 
 /**
@@ -17,6 +20,7 @@ final class DocumentedEntityWrapper
      */
     public function __construct(
         private DocumentTransformableEntityInterface $documentTransformableEntity,
+        private LocalObjectCache                     $localObjectCache,
         private string                               $initiatorFilePath
     )
     {
@@ -37,23 +41,25 @@ final class DocumentedEntityWrapper
 
     private function getUniqueFileName(): string
     {
-        static $fileNames = [];
-        static $usedKeysCounter = [];
-
         $fileKey = $this->getKey();
-        if (!isset($fileNames[$fileKey])) {
-            $fileName = $this->documentTransformableEntity->getShortName();
-            $counterKey = "{$this->initiatorFilePath}{$fileName}";
-
-            if (!isset($usedKeysCounter[$counterKey])) {
-                $usedKeysCounter[$counterKey] = 1;
-            } else {
-                $usedKeysCounter[$counterKey] += 1;
-                $fileName .= '_' . $usedKeysCounter[$counterKey];
-            }
-            $fileNames[$fileKey] = $fileName;
+        try {
+            $usedKeysCounter = $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getCurrentMethodCachedResult($fileKey);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $fileNames[$fileKey];
+        $usedKeysCounter ??= [];
+        $fileName = $this->documentTransformableEntity->getShortName();
+        $counterKey = "{$this->initiatorFilePath}{$fileName}";
+
+        if (!isset($usedKeysCounter[$counterKey])) {
+            $usedKeysCounter[$counterKey] = 1;
+        } else {
+            $usedKeysCounter[$counterKey] += 1;
+            $fileName .= '_' . $usedKeysCounter[$counterKey];
+        }
+        $this->localObjectCache->cacheCurrentMethodResultSilently('', $usedKeysCounter);
+        $this->localObjectCache->cacheCurrentMethodResultSilently($fileKey, $fileName);
+        return $fileName;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Function;
 
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
@@ -12,6 +13,9 @@ use BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Render\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Render\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Render\RenderHelper;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 /**
  * Get the URL of a documented entity by its name. If the entity is found, next to the file where this method was called,
@@ -34,7 +38,8 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
         private RenderContext                      $context,
         private RenderHelper                       $renderHelper,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
-        private Configuration                      $configuration
+        private Configuration                      $configuration,
+        private LocalObjectCache                   $localObjectCache
     )
     {
     }
@@ -62,7 +67,10 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
      *  If true, creates an entity document. Otherwise, just gives a reference to the entity code
      *
      * @return string
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     * @throws ReflectionException
      */
     public function __invoke(RootEntityCollection $rootEntityCollection, string $entityName, string $cursor = '', bool $createDocument = true): string
     {
@@ -79,7 +87,9 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
                 return self::DEFAULT_URL;
             } elseif ($createDocument && is_a($entity, DocumentTransformableEntityInterface::class)) {
                 $documentedEntity = new DocumentedEntityWrapper(
-                    $entity, $this->context->getCurrentTemplateFilePatch()
+                    $entity,
+                    $this->localObjectCache,
+                    $this->context->getCurrentTemplateFilePatch()
                 );
                 $this->documentedEntityWrappersCollection->add($documentedEntity);
                 $rootEntityCollection->add($entity);
