@@ -20,6 +20,9 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     private CustomFunctionsCollection $functions;
     private CustomFiltersCollection $filters;
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function __construct(
         private RenderContext $context,
         private Configuration $configuration

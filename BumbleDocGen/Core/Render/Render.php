@@ -9,13 +9,15 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Render\Context\RenderContext;
 use BumbleDocGen\Core\Render\Context\DocumentedEntityWrappersCollection;
-use BumbleDocGen\Core\Render\Twig\MainExtension;
+use BumbleDocGen\Core\Render\Twig\MainTwigEnvironment;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Generates and processes files from directory TemplatesDir saving them to directory OutputDir
@@ -30,7 +32,7 @@ final class Render
         private RootEntityCollectionsGroup         $rootEntityCollectionsGroup,
         private PluginEventDispatcher              $pluginEventDispatcher,
         private RenderContext                      $renderContext,
-        private MainExtension                      $twigMainExtension,
+        private MainTwigEnvironment                $twig,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private LoggerInterface                    $logger
     )
@@ -64,20 +66,14 @@ final class Render
     /**
      * Starting the rendering process
      *
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      * @throws InvalidConfigurationParameterException
      */
     public function run(): void
     {
         $templateFolder = $this->configuration->getTemplatesDir();
-        $loader = new FilesystemLoader([
-            $templateFolder,
-        ]);
-        $twig = new Environment($loader);
-        $twig->addExtension($this->twigMainExtension);
-
         $finder = Finder::create()
             ->in($templateFolder)
             ->ignoreDotFiles(true)
@@ -103,7 +99,7 @@ final class Render
 
             if (str_ends_with($filePatch, '.twig')) {
                 $this->renderContext->setCurrentTemplateFilePatch($filePatch);
-                $content = $twig->render($filePatch,
+                $content = $this->twig->render($filePatch,
                     array_merge($templateParams, [
                         'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
                             $filePatch
@@ -130,7 +126,7 @@ final class Render
         }
 
         foreach ($this->documentedEntityWrappersCollection as $entityWrapper) {
-            /**@var \BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper $entityWrapper * */
+            /**@var DocumentedEntityWrapper $entityWrapper * */
             $this->renderContext->setCurrentTemplateFilePatch($entityWrapper->getInitiatorFilePath());
             $docRender = $entityWrapper->getDocRender();
 
