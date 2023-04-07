@@ -26,10 +26,11 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 final class CacheablePhpEntityFactory
 {
     public function __construct(
-        private ReflectorWrapper $reflector,
-        private Configuration    $configuration,
-        private LocalObjectCache $localObjectCache,
-        private Container        $diContainer
+        private CacheableEntityWrapperFactory $cacheableEntityWrapperFactory,
+        private ReflectorWrapper              $reflector,
+        private Configuration                 $configuration,
+        private LocalObjectCache              $localObjectCache,
+        private Container                     $diContainer
     )
     {
     }
@@ -250,7 +251,7 @@ final class CacheablePhpEntityFactory
         }
         $classNameParts = explode('\\', $entityClassName);
         $classEntityName = end($classNameParts);
-        $wrapperClassName = CacheableEntityWrapperFactory::createWrappedEntityClass(
+        $wrapperClassName = $this->cacheableEntityWrapperFactory->createWrappedEntityClass(
             $entityClassName,
             "{$classEntityName}Wrapper"
         );

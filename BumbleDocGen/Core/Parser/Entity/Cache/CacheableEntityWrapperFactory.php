@@ -8,7 +8,11 @@ use Nette\PhpGenerator\Parameter;
 
 final class CacheableEntityWrapperFactory
 {
-    public static function createWrappedEntityClass(string $className, string $wrapperName): string
+    public function __construct()
+    {
+    }
+
+    public function createWrappedEntityClass(string $className, string $wrapperName): string
     {
         static $entityWrapperClassNames = [];
 
