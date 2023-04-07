@@ -25,6 +25,7 @@ use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
+use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Identifier\Identifier;
 use Roave\BetterReflection\Identifier\IdentifierType;
@@ -42,20 +43,21 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     private bool $isClassLoad = false;
 
     public function __construct(
-        protected Configuration         $configuration,
-        protected PhpHandlerSettings    $phpHandlerSettings,
-        protected ReflectorWrapper      $reflector,
-        protected ClassEntityCollection $classEntityCollection,
-        private ParserHelper            $parserHelper,
-        private LocalObjectCache        $localObjectCache,
-        GetDocumentedEntityUrl          $documentedEntityUrlFunction,
-        RenderHelper                    $renderHelper,
-        private Container               $diContainer,
-        protected string                $className,
-        protected ?string               $relativeFileName,
+        Configuration                 $configuration,
+        private PhpHandlerSettings    $phpHandlerSettings,
+        private ReflectorWrapper      $reflector,
+        private ClassEntityCollection $classEntityCollection,
+        private ParserHelper          $parserHelper,
+        private LocalObjectCache      $localObjectCache,
+        GetDocumentedEntityUrl        $documentedEntityUrlFunction,
+        RenderHelper                  $renderHelper,
+        private Container             $diContainer,
+        private LoggerInterface       $logger,
+        private string                $className,
+        private ?string               $relativeFileName,
     )
     {
-        parent::__construct($configuration, $reflector, $documentedEntityUrlFunction, $renderHelper);
+        parent::__construct($configuration, $reflector, $documentedEntityUrlFunction, $renderHelper, $logger);
         if ($relativeFileName) {
             $this->relativeFileNameLoaded = true;
         }
@@ -277,7 +279,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!$this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
             new OnCheckIsClassEntityCanBeLoad($this)
         )->isClassCanBeLoad()) {
-            $this->getLogger()->notice("Class {$this->getName()} skipped by plugin");
+            $this->logger->notice("Class {$this->getName()} skipped by plugin");
             return false;
         }
         return $this->isClassLoad();

@@ -7,14 +7,19 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Render\RenderHelper;
+use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
+use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
 
@@ -26,19 +31,25 @@ class PropertyEntity extends BaseEntity
     private ?ReflectionProperty $reflectionProperty = null;
 
     public function __construct(
-        protected ClassEntity    $classEntity,
+        private Configuration    $configuration,
+        private ClassEntity      $classEntity,
         private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
-        protected string         $propertyName,
-        protected string         $declaringClassName,
-        protected string         $implementingClassName,
+        private LoggerInterface  $logger,
+        ReflectorWrapper         $reflectorWrapper,
+        RenderHelper             $renderHelper,
+        GetDocumentedEntityUrl   $documentedEntityUrlFunction,
+        private string           $propertyName,
+        private string           $declaringClassName,
+        private string           $implementingClassName,
     )
     {
         parent::__construct(
-            $classEntity->getConfiguration(),
-            $classEntity->getReflector(),
-            $classEntity->documentedEntityUrlFunction,
-            $classEntity->renderHelper
+            $configuration,
+            $reflectorWrapper,
+            $documentedEntityUrlFunction,
+            $renderHelper,
+            $logger
         );
     }
 
@@ -221,7 +232,7 @@ class PropertyEntity extends BaseEntity
                 try {
                     $typesFromDoc[] = (string)$param->getType();
                 } catch (\Exception $e) {
-                    $this->getLogger()->error($e->getMessage());
+                    $this->logger->error($e->getMessage());
                 }
             }
             if ($typesFromDoc) {

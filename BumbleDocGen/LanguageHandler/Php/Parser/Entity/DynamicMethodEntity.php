@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
@@ -25,6 +27,9 @@ class DynamicMethodEntity implements MethodEntityInterface
     {
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function createByAnnotationMethod(
         ClassEntity $classEntity,
         Method      $annotationMethod
@@ -40,6 +45,10 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->classEntity;
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     public function getEntityDependencies(): array
     {
         return $this->getRootEntity()->getEntityDependencies();
@@ -68,6 +77,10 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $callMethod;
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     * @throws \Exception
+     */
     #[CacheableMethod] public function getFileName(): ?string
     {
         $fullFileName = $this->getImplementingReflectionClass()->getFileName();
@@ -82,12 +95,18 @@ class DynamicMethodEntity implements MethodEntityInterface
         );
     }
 
+    /**
+     * @throws \Exception
+     */
     #[CacheableMethod] public function getStartLine(): int
     {
         $callMethod = $this->getCallMethod();
         return $callMethod->getStartLine();
     }
 
+    /**
+     * @throws \Exception
+     */
     #[CacheableMethod] public function getEndLine(): int
     {
         $callMethod = $this->getCallMethod();
@@ -105,6 +124,10 @@ class DynamicMethodEntity implements MethodEntityInterface
         return implode(' ', $modifiersString);
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function getReturnType(): string
     {
         $returnType = (string)$this->annotationMethod->getReturnType();
@@ -150,12 +173,18 @@ class DynamicMethodEntity implements MethodEntityInterface
         return implode(', ', $parameters);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function getImplementingReflectionClass(): ReflectionClass
     {
         $callMethod = $this->getCallMethod();
         return $callMethod->getImplementingClass();
     }
 
+    /**
+     * @throws \Exception
+     */
     #[CacheableMethod] public function getImplementingClassName(): string
     {
         return $this->getImplementingReflectionClass()->getName();
@@ -166,6 +195,12 @@ class DynamicMethodEntity implements MethodEntityInterface
         return (string)$this->annotationMethod->getDescription();
     }
 
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     * @throws \Exception
+     */
     #[CacheableMethod] public function isInitialization(): bool
     {
         $initializationReturnTypes = [
@@ -188,6 +223,10 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->getName();
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     public function getNamespaceName(): string
     {
         return $this->getRootEntity()->getNamespaceName();
@@ -233,6 +272,9 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->getRootEntity()->getRootEntityCollection();
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function getAbsoluteFileName(): ?string
     {
         $relativeFileName = $this->getFileName();

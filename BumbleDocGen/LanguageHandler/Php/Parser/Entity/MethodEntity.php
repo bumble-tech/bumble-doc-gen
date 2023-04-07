@@ -7,8 +7,12 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Render\RenderHelper;
+use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
@@ -17,6 +21,7 @@ use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
+use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 
@@ -28,19 +33,25 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     private ?ReflectionMethod $reflectionMethod = null;
 
     public function __construct(
-        protected ClassEntity    $classEntity,
+        private Configuration    $configuration,
+        private ClassEntity      $classEntity,
         private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
-        protected string         $methodName,
-        protected string         $declaringClassName,
-        protected string         $implementingClassName,
+        LoggerInterface          $logger,
+        ReflectorWrapper         $reflectorWrapper,
+        RenderHelper             $renderHelper,
+        GetDocumentedEntityUrl   $documentedEntityUrlFunction,
+        private string           $methodName,
+        private string           $declaringClassName,
+        private string           $implementingClassName,
     )
     {
         parent::__construct(
             $classEntity->getConfiguration(),
-            $classEntity->getReflector(),
-            $classEntity->documentedEntityUrlFunction,
-            $classEntity->renderHelper
+            $reflectorWrapper,
+            $documentedEntityUrlFunction,
+            $renderHelper,
+            $logger
         );
     }
 

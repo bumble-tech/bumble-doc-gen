@@ -10,10 +10,13 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Render\RenderHelper;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
+use DI\DependencyException;
+use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -24,10 +27,11 @@ use Roave\BetterReflection\Reflection\ReflectionProperty;
 abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
     protected function __construct(
-        protected Configuration          $configuration,
-        protected ReflectorWrapper       $reflector,
-        protected GetDocumentedEntityUrl $documentedEntityUrlFunction,
-        protected RenderHelper           $renderHelper
+        private Configuration          $configuration,
+        private ReflectorWrapper       $reflector,
+        private GetDocumentedEntityUrl $documentedEntityUrlFunction,
+        private RenderHelper           $renderHelper,
+        private LoggerInterface        $logger
     )
     {
     }
@@ -37,12 +41,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $this->configuration;
     }
 
-    public function getLogger(): LoggerInterface
-    {
-        return $this->getConfiguration()->getLogger();
-    }
-
     /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      * @internal
      */
     abstract public function getReflection(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
@@ -69,6 +70,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
+     * @throws InvalidConfigurationParameterException
      */
     public function getAbsoluteFileName(): ?string
     {
@@ -76,6 +78,10 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     protected function prepareTypeString(string $type): string
     {
         static $cache = [];
@@ -104,6 +110,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return implode('|', $types);
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function getFileSourceLink(bool $withLine = true): ?string
     {
         $fileName = $this->getFileName();
@@ -227,7 +236,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                     ];
                 }
             } catch (\Exception $e) {
-                $this->getLogger()->error($e->getMessage());
+                $this->logger->error($e->getMessage());
             }
         }
 
@@ -291,23 +300,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     public function getDescriptionLinks(): array
     {
         $linksData = $this->getDescriptionLinksData();
-        $getDocumentedEntityUrl = $this->documentedEntityUrlFunction;
-        foreach ($linksData as $key => $data) {
-            if (!isset($data['url'])) {
-                $linksData[$key]['url'] = null;
-            } else {
-                continue;
-            }
-            if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
-                $linksData[$key]['url'] = $getDocumentedEntityUrl(
-                    $this->getRootEntityCollection(),
-                    $data['entityData']['entityName'],
-                    $data['entityData']['cursor']
-                );
-                unset($data['entityData']);
-            }
-        }
-        return $linksData;
+        return $this->fillInLinkDataWithUrls($linksData);
     }
 
     #[CacheableMethod] public function hasThrows(): bool
@@ -316,6 +309,10 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return count($docBlock->getTagsByName('throws')) > 0;
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] protected function getThrowsData(): array
     {
         $throws = [];
@@ -356,28 +353,37 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Get parsed throws from `throws` doc block
+     *
+     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getThrows(): array
     {
         $throwsData = $this->getThrowsData();
-        $getDocumentedEntityUrl = $this->documentedEntityUrlFunction;
-        foreach ($throwsData as $key => $data) {
+        return $this->fillInLinkDataWithUrls($throwsData);
+    }
+
+    private function fillInLinkDataWithUrls(array $linkData): array
+    {
+        foreach ($linkData as $key => $data) {
             if (!isset($data['url'])) {
                 $throwsData[$key]['url'] = null;
             } else {
                 continue;
             }
             if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
-                $throwsData[$key]['url'] = $getDocumentedEntityUrl(
-                    $this->getRootEntityCollection(),
-                    $data['entityData']['entityName'],
-                    $data['entityData']['cursor']
+                $linkData[$key]['url'] = call_user_func_array(
+                    callback: $this->documentedEntityUrlFunction,
+                    args: [
+                        $this->getRootEntityCollection(),
+                        $data['entityData']['entityName'],
+                        $data['entityData']['cursor']
+                    ]
                 );
                 unset($data['entityData']);
             }
         }
-        return $throwsData;
+        return $linkData;
     }
 
     #[CacheableMethod] public function hasExamples(): bool
@@ -399,7 +405,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             try {
                 $examples[] = ['example' => (string)$example];
             } catch (\Exception $e) {
-                $this->getLogger()->error($e->getMessage());
+                $this->logger->error($e->getMessage());
             }
         }
         return $examples;
@@ -420,8 +426,12 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return (string)($docBlock->getTagsByName('note')[0] ?? '');
     }
 
+
     /**
      * Get the doc comment of an entity
+     *
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getDocComment(): string
     {
