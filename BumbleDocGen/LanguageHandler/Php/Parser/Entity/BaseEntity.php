@@ -52,7 +52,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     #[CacheableMethod] abstract protected function getDocCommentRecursive(): string;
 
-    abstract protected function getDocCommentEntity(): ClassEntity|MethodEntity|PropertyEntity|ConstantEntity;
+    abstract public function getDocCommentEntity(): ClassEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
     #[CacheableMethod] abstract public function getDescription(): string;
 

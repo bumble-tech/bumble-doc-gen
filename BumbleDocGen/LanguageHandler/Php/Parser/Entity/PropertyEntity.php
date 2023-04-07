@@ -116,7 +116,7 @@ class PropertyEntity extends BaseEntity
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getDocCommentEntity(): PropertyEntity
+    public function getDocCommentEntity(): PropertyEntity
     {
         $objectId = $this->getObjectId();
         try {

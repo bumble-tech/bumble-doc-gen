@@ -141,7 +141,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getDocCommentEntity(): MethodEntity
+    public function getDocCommentEntity(): MethodEntity
     {
         $objectId = $this->getObjectId();
         try {

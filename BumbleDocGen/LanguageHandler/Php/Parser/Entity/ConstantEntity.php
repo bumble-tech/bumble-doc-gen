@@ -125,7 +125,7 @@ class ConstantEntity extends BaseEntity
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
-    protected function getDocCommentEntity(): ConstantEntity
+    public function getDocCommentEntity(): ConstantEntity
     {
         return $this;
     }

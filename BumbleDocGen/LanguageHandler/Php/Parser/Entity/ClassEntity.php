@@ -157,7 +157,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getDocCommentEntity(): ClassEntity
+    public function getDocCommentEntity(): ClassEntity
     {
         $objectId = $this->getObjectId();
         try {
