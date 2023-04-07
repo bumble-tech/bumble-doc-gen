@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser;
 
+use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
+use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
@@ -12,6 +15,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use Nette\PhpGenerator\GlobalFunction;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
+use phpDocumentor\Reflection\Types\Context;
 use phpDocumentor\Reflection\Types\ContextFactory;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
@@ -153,7 +157,8 @@ final class ParserHelper
 
     public function __construct(
         private Configuration    $configuration,
-        private ReflectorWrapper $reflector
+        private ReflectorWrapper $reflector,
+        private LocalObjectCache $localObjectCache
     )
     {
     }
@@ -227,21 +232,29 @@ final class ParserHelper
         return false;
     }
 
+    public function getFileContent(string $fileName): string
+    {
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($fileName);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        }
+        $classContentCache = file_get_contents($fileName);
+        $this->localObjectCache->cacheCurrentMethodResultSilently($fileName, $classContentCache);
+        return $classContentCache;
+    }
+
     public function getUsesList(ReflectionClass $reflectionClass, bool $extended = true): array
     {
-        static $classContentCache = [];
         $fileName = $reflectionClass->getFileName();
         if (!$fileName) {
             return [];
         }
-        if (!isset($classContentCache[$fileName])) {
-            $classContentCache[$fileName] = file_get_contents($fileName);
-        }
+        $classContentCache = $this->getFileContent($fileName);
         $uses = [];
         if (
             preg_match_all(
                 '/(use )(.*)(;)/',
-                $classContentCache[$fileName],
+                $classContentCache,
                 $matches
             )
         ) {
@@ -272,19 +285,16 @@ final class ParserHelper
      */
     public function getUsesListByClassEntity(ClassEntity $classEntity, bool $extended = true): array
     {
-        static $classContentCache = [];
         $fileName = $classEntity->getAbsoluteFileName();
         if (!$fileName) {
             return [];
         }
-        if (!isset($classContentCache[$fileName])) {
-            $classContentCache[$fileName] = file_get_contents($fileName);
-        }
+        $classContentCache = $this->getFileContent($fileName);
         $uses = [];
         if (
             preg_match_all(
                 '/(use )(.*)(;)/',
-                $classContentCache[$fileName],
+                $classContentCache,
                 $matches
             )
         ) {
@@ -310,48 +320,48 @@ final class ParserHelper
     }
 
     public function parseFullClassName(
-        string           $searchClassName,
-        ReflectionClass  $reflectionClass,
-        bool             $extended = true
+        string          $searchClassName,
+        ReflectionClass $reflectionClass,
+        bool            $extended = true
     ): string
     {
-        static $parsedFullClassNameCache = [];
         $classNameParts = explode('::', $searchClassName);
         $searchClassName = $classNameParts[0];
-
         $key = $reflectionClass->getName() . $searchClassName;
-        if (!isset($parsedFullClassNameCache[$key])) {
-            $trimmedName = ltrim($searchClassName, '\\');
-            $uses = $this->getUsesList($reflectionClass, $extended);
-            if (isset($uses[$trimmedName])) {
-                $className = $uses[$trimmedName];
-            } elseif (isset($uses[$searchClassName])) {
-                $className = $uses[$searchClassName];
-            } elseif (
-                str_contains($searchClassName, '\\') && $this->isClassLoaded($searchClassName)
-            ) {
-                $className = $searchClassName;
-            } elseif (
-                !str_starts_with(
-                    $searchClassName,
-                    '\\' . $reflectionClass->getNamespaceName()
-                )
-            ) {
-                $className = "{$reflectionClass->getNamespaceName()}{$searchClassName}";
-                if (!$this->isClassLoaded($className)) {
-                    $className = $searchClassName;
-                }
-            } else {
-                $className = $searchClassName;
-            }
 
-            $parsedFullClassNameCache[$key] = $className;
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($key);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
 
-        $className = $parsedFullClassNameCache[$key];
+        $trimmedName = ltrim($searchClassName, '\\');
+        $uses = $this->getUsesList($reflectionClass, $extended);
+        if (isset($uses[$trimmedName])) {
+            $className = $uses[$trimmedName];
+        } elseif (isset($uses[$searchClassName])) {
+            $className = $uses[$searchClassName];
+        } elseif (
+            str_contains($searchClassName, '\\') && $this->isClassLoaded($searchClassName)
+        ) {
+            $className = $searchClassName;
+        } elseif (
+            !str_starts_with(
+                $searchClassName,
+                '\\' . $reflectionClass->getNamespaceName()
+            )
+        ) {
+            $className = "{$reflectionClass->getNamespaceName()}{$searchClassName}";
+            if (!$this->isClassLoaded($className)) {
+                $className = $searchClassName;
+            }
+        } else {
+            $className = $searchClassName;
+        }
+
         if (isset($classNameParts[1])) {
             $className = "{$className}::$classNameParts[1]";
         }
+        $this->localObjectCache->cacheCurrentMethodResultSilently($key, $className);
         return $className;
     }
 
@@ -497,13 +507,26 @@ final class ParserHelper
      */
     public function getFilesInGit(): array
     {
-        static $gitFiles = null;
-        if (is_null($gitFiles)) {
-            $gitClient = $this->configuration->getGitClientPath();
-            exec("cd {$this->configuration->getProjectRoot()} && {$gitClient} ls-files", $output);
-            $gitFiles = array_flip($output);
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult('');
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
+        $gitClient = $this->configuration->getGitClientPath();
+        exec("cd {$this->configuration->getProjectRoot()} && {$gitClient} ls-files", $output);
+        $gitFiles = array_flip($output);
+        $this->localObjectCache->cacheCurrentMethodResultSilently('', $gitFiles);
         return $gitFiles;
+    }
+
+    private function getDocBlockFactory(): DocBlockFactory
+    {
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult('');
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        }
+        $docBlockFactory = DocBlockFactory::createInstance();
+        $this->localObjectCache->cacheCurrentMethodResultSilently('', $docBlockFactory);
+        return $docBlockFactory;
     }
 
     /**
@@ -512,55 +535,55 @@ final class ParserHelper
      */
     public function getDocBlock(ClassEntity $classEntity, string $docComment): DocBlock
     {
-        static $docBlockFactory = null;
-        if (is_null($docBlockFactory)) {
-            $docBlockFactory = DocBlockFactory::createInstance();
-        }
-
-        static $docBlocksCache = [];
         $docComment = $docComment ?: ' ';
         $cacheKey = md5("{$classEntity->getName()}{$docComment}");
-        if (!isset($docBlocksCache[$cacheKey])) {
-            $docBlocksCache[$cacheKey] = $docBlockFactory->create(
-                $docComment,
-                $this->getDocBlockContext($classEntity)
-            );
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($cacheKey);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
-        return $docBlocksCache[$cacheKey];
+        $docBlock = $this->getDocBlockFactory()->create(
+            $docComment,
+            $this->getDocBlockContext($classEntity)
+        );
+        $this->localObjectCache->cacheCurrentMethodResultSilently($cacheKey, $docBlock);
+        return $docBlock;
     }
 
     /**
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlockContext(ClassEntity $classEntity): \phpDocumentor\Reflection\Types\Context
+    public function getDocBlockContext(ClassEntity $classEntity): Context
     {
-        static $contexts = [];
-        if (!array_key_exists($classEntity->getName(), $contexts)) {
-            $tmpContext = (new ContextFactory)->createForNamespace(
-                $classEntity->getNamespaceName(),
-                $classEntity->getFileContent()
-            );
-            $aliases = $tmpContext->getNamespaceAliases();
-            foreach (array_merge(
-                         $classEntity->getParentClassNames(),
-                         $classEntity->getInterfaceNames(),
-                         $classEntity->getTraitsNames(),
-                         self::$predefinedClassesInterfaces
-                     ) as $parentClassName) {
-                if (str_contains($parentClassName, '\\')) {
-                    $parentClassNameParts = explode('\\', $parentClassName);
-                    $name = array_pop($parentClassNameParts);
-                    if (!isset($aliases[$name])) {
-                        $aliases[$name] = $parentClassName;
-                    }
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($classEntity->getName());
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        }
+
+        $tmpContext = (new ContextFactory)->createForNamespace(
+            $classEntity->getNamespaceName(),
+            $classEntity->getFileContent()
+        );
+        $aliases = $tmpContext->getNamespaceAliases();
+        foreach (array_merge(
+                     $classEntity->getParentClassNames(),
+                     $classEntity->getInterfaceNames(),
+                     $classEntity->getTraitsNames(),
+                     self::$predefinedClassesInterfaces
+                 ) as $parentClassName) {
+            if (str_contains($parentClassName, '\\')) {
+                $parentClassNameParts = explode('\\', $parentClassName);
+                $name = array_pop($parentClassNameParts);
+                if (!isset($aliases[$name])) {
+                    $aliases[$name] = $parentClassName;
                 }
             }
-            $contexts[$classEntity->getName()] = new \phpDocumentor\Reflection\Types\Context(
-                $tmpContext->getNamespace(),
-                $aliases
-            );
         }
-        return $contexts[$classEntity->getName()];
+        $context = new Context(
+            $tmpContext->getNamespace(),
+            $aliases
+        );
+        $this->localObjectCache->cacheCurrentMethodResultSilently($classEntity->getName(), $context);
+        return $context;
     }
 }
