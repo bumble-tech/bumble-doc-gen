@@ -151,6 +151,10 @@ final class ParserHelper
         'DOMXPath',
     ];
 
+    public function __construct()
+    {
+    }
+
     public static function getBuiltInClassNames(): array
     {
         static $classNames = [];
@@ -498,7 +502,7 @@ final class ParserHelper
         return $gitFiles;
     }
 
-    public static function getDocBlock(ClassEntity $classEntity, string $docComment): DocBlock
+    public function getDocBlock(ClassEntity $classEntity, string $docComment): DocBlock
     {
         static $docBlockFactory = null;
         if (is_null($docBlockFactory)) {

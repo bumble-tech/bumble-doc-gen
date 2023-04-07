@@ -42,16 +42,17 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     private bool $isClassLoad = false;
 
     public function __construct(
-        protected Configuration           $configuration,
-        protected PhpHandlerSettings      $phpHandlerSettings,
-        protected ReflectorWrapper        $reflector,
-        protected ClassEntityCollection   $classEntityCollection,
-        private LocalObjectCache          $localObjectCache,
-        GetDocumentedEntityUrl            $documentedEntityUrlFunction,
-        RenderHelper                      $renderHelper,
-        private Container                 $diContainer,
-        protected string                  $className,
-        protected ?string                 $relativeFileName,
+        protected Configuration         $configuration,
+        protected PhpHandlerSettings    $phpHandlerSettings,
+        protected ReflectorWrapper      $reflector,
+        protected ClassEntityCollection $classEntityCollection,
+        private ParserHelper            $parserHelper,
+        private LocalObjectCache        $localObjectCache,
+        GetDocumentedEntityUrl          $documentedEntityUrlFunction,
+        RenderHelper                    $renderHelper,
+        private Container               $diContainer,
+        protected string                $className,
+        protected ?string               $relativeFileName,
     )
     {
         parent::__construct($configuration, $reflector, $documentedEntityUrlFunction, $renderHelper);
@@ -129,7 +130,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     #[CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity();
-        return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
+        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
     /**

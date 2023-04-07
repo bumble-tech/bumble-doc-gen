@@ -29,6 +29,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     public function __construct(
         protected ClassEntity    $classEntity,
+        private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
         protected string         $methodName,
         protected string         $declaringClassName,
@@ -81,12 +82,14 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws DependencyException
+     * @throws ReflectionException
      * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();
-        return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
+        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
     /**

@@ -27,6 +27,7 @@ class ConstantEntity extends BaseEntity
 
     public function __construct(
         protected ClassEntity    $classEntity,
+        private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
         protected string         $constantName,
         protected string         $declaringClassName,
@@ -67,7 +68,7 @@ class ConstantEntity extends BaseEntity
     #[CacheableMethod] public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();
-        return ParserHelper::getDocBlock($classEntity, $this->getDocCommentRecursive());
+        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
     public function getRootEntity(): ClassEntity
