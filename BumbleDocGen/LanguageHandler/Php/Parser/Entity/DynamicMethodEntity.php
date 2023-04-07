@@ -19,26 +19,13 @@ use Roave\BetterReflection\Reflection\ReflectionMethod;
  */
 class DynamicMethodEntity implements MethodEntityInterface
 {
-    private function __construct(
+    public function __construct(
         private Configuration $configuration,
         private ParserHelper  $parserHelper,
         private ClassEntity   $classEntity,
         private Method        $annotationMethod
     )
     {
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public static function createByAnnotationMethod(
-        ClassEntity $classEntity,
-        Method      $annotationMethod
-    ): DynamicMethodEntity
-    {
-        $dynamicMethodEntity = new static($classEntity->getConfiguration(), $classEntity, $annotationMethod);
-        $dynamicMethodEntity->getCallMethod();
-        return $dynamicMethodEntity;
     }
 
     public function getRootEntity(): ClassEntity
@@ -68,7 +55,7 @@ class DynamicMethodEntity implements MethodEntityInterface
     /**
      * @throws \Exception
      */
-    private function getCallMethod(): ReflectionMethod
+    public function getCallMethod(): ReflectionMethod
     {
         if ($this->isStatic()) {
             $callMethod = $this->classEntity->getReflection()->getMethod('__callStatic');

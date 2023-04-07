@@ -13,12 +13,14 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\DynamicMethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
+use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 
 final class CacheablePhpEntityFactory
@@ -110,6 +112,29 @@ final class CacheablePhpEntityFactory
             'methodName' => $methodName,
             'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName
+        ]);
+        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $methodEntity);
+        return $methodEntity;
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function createDynamicMethodEntity(
+        ClassEntity $classEntity,
+        Method      $annotationMethod
+    ): DynamicMethodEntity
+    {
+        $objectId = "{$classEntity->getName()}:{$annotationMethod->getName()}";
+        try {
+            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
+        }
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(DynamicMethodEntity::class);
+        $methodEntity = $this->diContainer->make($wrapperClassName, [
+            'classEntity' => $classEntity,
+            'annotationMethod' => $annotationMethod,
         ]);
         $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $methodEntity);
         return $methodEntity;
