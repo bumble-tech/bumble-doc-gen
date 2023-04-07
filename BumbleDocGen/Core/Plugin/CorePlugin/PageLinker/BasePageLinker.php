@@ -109,7 +109,7 @@ abstract class BasePageLinker implements PluginInterface
     private function getAllPageLinks(): array
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $pageLinks = [];
@@ -141,7 +141,7 @@ abstract class BasePageLinker implements PluginInterface
                 }
             }
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $pageLinks);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $pageLinks);
         return $pageLinks;
     }
 

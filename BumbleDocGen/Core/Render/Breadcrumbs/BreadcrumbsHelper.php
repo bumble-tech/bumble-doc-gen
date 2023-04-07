@@ -42,7 +42,7 @@ final class BreadcrumbsHelper
     private function loadTemplateContent(string $templateName): string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($templateName);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateName);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $outputDir = $this->configuration->getTemplatesDir();
@@ -57,7 +57,7 @@ final class BreadcrumbsHelper
             return $templateContentCache[$templateName];
         }
         $templateContent = file_get_contents($filePath);
-        $this->localObjectCache->cacheCurrentMethodResultSilently($templateName, $templateContent);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $templateContent);
         return $templateContent;
     }
 
@@ -67,7 +67,7 @@ final class BreadcrumbsHelper
     private function getPrevPage(string $templateName): ?string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($templateName);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateName);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $code = $this->loadTemplateContent($templateName);
@@ -102,7 +102,7 @@ final class BreadcrumbsHelper
                 $prevPage = $subPath . "/{$indexFile}";
             }
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently($templateName, $prevPage);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $prevPage);
         return $prevPage;
     }
 

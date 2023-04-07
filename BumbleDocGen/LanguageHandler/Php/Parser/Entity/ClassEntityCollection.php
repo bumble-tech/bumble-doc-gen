@@ -114,14 +114,14 @@ final class ClassEntityCollection extends RootEntityCollection
         $classEntity = $this->get($objectName);
         if (!$classEntity) {
             try {
-                return $this->localObjectCache->getCurrentMethodCachedResult($objectName);
+                return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectName);
             } catch (ObjectNotFoundException|InvalidCallContextException) {
             }
             $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
                 $this,
                 ltrim($objectName, '\\')
             );
-            $this->localObjectCache->cacheCurrentMethodResultSilently($objectName, $classEntity);
+            $this->localObjectCache->cacheMethodResult(__METHOD__, $objectName, $classEntity);
         }
         return $classEntity;
     }
@@ -286,7 +286,7 @@ final class ClassEntityCollection extends RootEntityCollection
 
         $cacheData = [];
         try {
-            $cacheData = $this->localObjectCache->getCurrentMethodCachedResult('');
+            $cacheData = $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $index = $cacheData['index'] ?? [];
@@ -340,7 +340,7 @@ final class ClassEntityCollection extends RootEntityCollection
             }
         }
 
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', [
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', [
             'index' => $index,
             'duplicates' => $duplicates,
             'lastCacheKey' => $lastCacheKey,

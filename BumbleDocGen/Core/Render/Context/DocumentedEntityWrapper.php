@@ -43,8 +43,8 @@ final class DocumentedEntityWrapper
     {
         $fileKey = $this->getKey();
         try {
-            $usedKeysCounter = $this->localObjectCache->getCurrentMethodCachedResult('');
-            return $this->localObjectCache->getCurrentMethodCachedResult($fileKey);
+            $usedKeysCounter = $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $fileKey);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $usedKeysCounter ??= [];
@@ -57,8 +57,8 @@ final class DocumentedEntityWrapper
             $usedKeysCounter[$counterKey] += 1;
             $fileName .= '_' . $usedKeysCounter[$counterKey];
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $usedKeysCounter);
-        $this->localObjectCache->cacheCurrentMethodResultSilently($fileKey, $fileName);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $usedKeysCounter);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $fileKey, $fileName);
         return $fileName;
     }
 

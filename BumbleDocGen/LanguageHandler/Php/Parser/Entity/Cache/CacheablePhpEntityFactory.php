@@ -48,7 +48,7 @@ final class CacheablePhpEntityFactory
     {
         $objectId = "{$classEntity->getName()}:{$propertyName}";
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(PropertyEntity::class);
@@ -58,7 +58,7 @@ final class CacheablePhpEntityFactory
             'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName
         ]);
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $propertyEntity);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $propertyEntity);
         return $propertyEntity;
     }
 
@@ -76,7 +76,7 @@ final class CacheablePhpEntityFactory
     {
         $objectId = "{$classEntity->getName()}:{$constantName}";
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(ConstantEntity::class);
@@ -87,7 +87,7 @@ final class CacheablePhpEntityFactory
             'implementingClassName' => $implementingClassName,
             'reloadCache' => $reloadCache
         ]);
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $constantEntity);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $constantEntity);
         return $constantEntity;
     }
 
@@ -104,7 +104,7 @@ final class CacheablePhpEntityFactory
     {
         $objectId = "{$classEntity->getName()}:{$methodName}";
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(MethodEntity::class);
@@ -114,7 +114,7 @@ final class CacheablePhpEntityFactory
             'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName
         ]);
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $methodEntity);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntity);
         return $methodEntity;
     }
 
@@ -129,7 +129,7 @@ final class CacheablePhpEntityFactory
     {
         $objectId = "{$classEntity->getName()}:{$annotationMethod->getName()}";
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(DynamicMethodEntity::class);
@@ -137,7 +137,7 @@ final class CacheablePhpEntityFactory
             'classEntity' => $classEntity,
             'annotationMethod' => $annotationMethod,
         ]);
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $methodEntity);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntity);
         return $methodEntity;
     }
 
@@ -154,7 +154,7 @@ final class CacheablePhpEntityFactory
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
         $objectId = md5($className);
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(ClassEntity::class);
@@ -164,7 +164,7 @@ final class CacheablePhpEntityFactory
             'className' => $className,
             'relativeFileName' => $relativeFileName
         ]);
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $classEntity);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $classEntity);
         return $classEntity;
     }
 
@@ -205,7 +205,7 @@ final class CacheablePhpEntityFactory
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
         $objectId = md5($className);
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper($subClassEntity);
@@ -215,7 +215,7 @@ final class CacheablePhpEntityFactory
             'className' => $className,
             'relativeFileName' => $relativeFileName
         ]);
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $classEntity);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $classEntity);
         return $classEntity;
     }
 
@@ -246,7 +246,7 @@ final class CacheablePhpEntityFactory
     private function getOrCreateEntityClassWrapper(string $entityClassName): string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($entityClassName);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $entityClassName);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $classNameParts = explode('\\', $entityClassName);
@@ -255,7 +255,7 @@ final class CacheablePhpEntityFactory
             $entityClassName,
             "{$classEntityName}Wrapper"
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently($entityClassName, $wrapperClassName);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $entityClassName, $wrapperClassName);
         return $wrapperClassName;
     }
 }

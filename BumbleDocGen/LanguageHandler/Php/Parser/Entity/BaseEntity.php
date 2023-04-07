@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
+use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\CacheableEntityInterface;
@@ -29,6 +32,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     protected function __construct(
         private Configuration          $configuration,
         private ReflectorWrapper       $reflector,
+        private LocalObjectCache       $localObjectCache,
         private GetDocumentedEntityUrl $documentedEntityUrlFunction,
         private RenderHelper           $renderHelper,
         private ParserHelper           $parserHelper,
@@ -69,6 +73,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
 
+    final protected function getLocalObjectCache(): LocalObjectCache
+    {
+        return $this->localObjectCache;
+    }
+
     /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
      * @throws InvalidConfigurationParameterException
@@ -85,7 +94,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      */
     protected function prepareTypeString(string $type): string
     {
-        static $cache = [];
+        try {
+            $cache = $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
+            $cache = [];
+        }
         $types = explode('|', $type);
         foreach ($types as $k => $t) {
             $cacheKey = md5($t);
@@ -108,6 +121,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                 $types[$k] = $cache[$cacheKey];
             }
         }
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cache);
         return implode('|', $types);
     }
 

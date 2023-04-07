@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
+use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 
 trait CacheableEntityWrapperTrait
@@ -14,6 +17,8 @@ trait CacheableEntityWrapperTrait
     abstract function getConfiguration(): Configuration;
 
     abstract public function getEntityDependencies(): array;
+
+    abstract protected function getLocalObjectCache(): LocalObjectCache;
 
     private function getCurrentRootEntity(): ?RootEntityInterface
     {
@@ -52,36 +57,39 @@ trait CacheableEntityWrapperTrait
         }
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function entityCacheIsOutdated(): bool
     {
-        static $filesCacheState = [];
         $entity = $this->getCurrentRootEntity();
-        if ($entity) {
-            $entityName = $entity->getName();
-            if (!isset($filesCacheState[$entityName])) {
-                $projectRoot = $entity->getConfiguration()->getProjectRoot();
-                $filesCacheState[$entityName] = false;
-                if (!$entity::isEntityNameValid($entityName)) {
-                    return false;
-                }
+        $entityName = $entity?->getName();
+        if (!$entity || !$entity->isEntityNameValid($entityName)) {
+            return false;
+        }
 
-                if (!$this->getCachedEntityDependencies()) {
-                    $filesCacheState[$entityName] = true;
-                    $this->getConfiguration()->getLogger()->warning("Unable to load {$entityName} entity dependencies");
-                    return true;
-                }
+        try {
+            return $this->getLocalObjectCache()->getMethodCachedResult(__METHOD__, $entityName);
+        } catch (ObjectNotFoundException) {
+        }
 
-                foreach ($this->getCachedEntityDependencies() as $relativeFileName => $hashFile) {
-                    $filePath = "{$projectRoot}{$relativeFileName}";
-                    if (!file_exists($filePath) || md5_file($filePath) !== $hashFile) {
-                        $filesCacheState[$entityName] = true;
-                        break;
-                    }
+        $this->getLocalObjectCache()->cacheMethodResult(__METHOD__, $entityName, false);
+        if (!$this->getCachedEntityDependencies()) {
+            $entityCacheIsOutdated = true;
+            $this->getConfiguration()->getLogger()->warning("Unable to load {$entityName} entity dependencies");
+        } else {
+            $entityCacheIsOutdated = false;
+            $projectRoot = $entity->getConfiguration()->getProjectRoot();
+            foreach ($this->getCachedEntityDependencies() as $relativeFileName => $hashFile) {
+                $filePath = "{$projectRoot}{$relativeFileName}";
+                if (!file_exists($filePath) || md5_file($filePath) !== $hashFile) {
+                    $entityCacheIsOutdated = true;
+                    break;
                 }
             }
-            return $filesCacheState[$entityName];
         }
-        return false;
+        $this->getLocalObjectCache()->cacheMethodResult(__METHOD__, $entityName, $entityCacheIsOutdated);
+        return $entityCacheIsOutdated;
     }
 
     protected function getCacheKey(): string

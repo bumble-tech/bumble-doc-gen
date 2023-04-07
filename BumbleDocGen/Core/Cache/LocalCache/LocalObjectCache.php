@@ -4,56 +4,25 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Cache\LocalCache;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 
 final class LocalObjectCache
 {
     private array $cache = [];
 
-    /**
-     * @throws InvalidCallContextException
-     * @warning The call stack of this method is important!
-     */
-    private function getCallerCacheKey(): string
+    public function cacheMethodResult(string $methodKey, string $objectId, mixed $methodResult): void
     {
-        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3);
-        $callerClassName = $backtrace[2]['class'] ?? null;
-        $callerMethodName = $backtrace[2]['function'] ?? null;
-        if (is_null($callerClassName) || is_null($callerMethodName)) {
-            throw new InvalidCallContextException();
-        }
-        return "{$callerClassName}::{$callerMethodName}";
-    }
-
-    /**
-     * @throws InvalidCallContextException
-     */
-    public function cacheCurrentMethodResult(?string $objectId, mixed $methodResult): void
-    {
-        $cacheKey = $this->getCallerCacheKey();
-        $this->cache[$cacheKey][$objectId] = $methodResult;
-    }
-
-    public function cacheCurrentMethodResultSilently(?string $objectId, mixed $methodResult): void
-    {
-        try {
-            $cacheKey = $this->getCallerCacheKey();
-            $this->cache[$cacheKey][$objectId] = $methodResult;
-        } catch (\Exception) {
-        }
+        $this->cache[$methodKey][$objectId] = $methodResult;
     }
 
     /**
      * @throws ObjectNotFoundException
-     * @throws InvalidCallContextException
      */
-    public function getCurrentMethodCachedResult(?string $objectId): mixed
+    public function getMethodCachedResult(string $methodKey, string $objectId): mixed
     {
-        $cacheKey = $this->getCallerCacheKey();
-        if (!array_key_exists($cacheKey, $this->cache) || !array_key_exists($objectId, $this->cache[$cacheKey])) {
+        if (!array_key_exists($methodKey, $this->cache) || !array_key_exists($objectId, $this->cache[$methodKey])) {
             throw new ObjectNotFoundException();
         }
-        return $this->cache[$cacheKey][$objectId];
+        return $this->cache[$methodKey][$objectId];
     }
 }

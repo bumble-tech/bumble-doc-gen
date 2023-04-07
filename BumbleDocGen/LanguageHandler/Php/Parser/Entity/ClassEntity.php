@@ -60,6 +60,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         parent::__construct(
             $configuration,
             $reflector,
+            $localObjectCache,
             $documentedEntityUrlFunction,
             $renderHelper,
             $parserHelper,
@@ -168,7 +169,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $objectId = $this->getObjectId();
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $docComment = $this->getDocComment();
@@ -179,7 +180,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $classEntity = $parentReflectionClass->getDocCommentEntity();
             }
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $classEntity);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $classEntity);
         return $classEntity;
     }
 
@@ -213,7 +214,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $objectId = $this->getObjectId();
         try {
-            $this->reflectionClass = $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            $this->reflectionClass = $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
             return $this->reflectionClass;
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
@@ -242,7 +243,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!$this->reflectionClass) {
             throw new ReflectionException("'{$this->className}' could not be found in the located source ");
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $this->reflectionClass);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $this->reflectionClass);
         return $this->reflectionClass;
     }
 
@@ -520,14 +521,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $objectId = $this->getObjectId();
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $constantEntityCollection = $this->diContainer->make(ConstantEntityCollection::class, [
             'classEntity' => $this
         ]);
         $constantEntityCollection->loadConstantEntities();
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $constantEntityCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $constantEntityCollection);
         return $constantEntityCollection;
     }
 
@@ -556,14 +557,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $objectId = $this->getObjectId();
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $propertyEntityCollection = $this->diContainer->make(PropertyEntityCollection::class, [
             'classEntity' => $this
         ]);
         $propertyEntityCollection->loadPropertyEntities();
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $propertyEntityCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $propertyEntityCollection);
         return $propertyEntityCollection;
     }
 
@@ -592,14 +593,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $objectId = $this->getObjectId();
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $methodEntityCollection = $this->diContainer->make(MethodEntityCollection::class, [
             'classEntity' => $this
         ]);
         $methodEntityCollection->loadMethodEntities();
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $methodEntityCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntityCollection);
         return $methodEntityCollection;
     }
 
@@ -810,7 +811,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $objectId = $this->getObjectId();
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $docRender = $this->getPhpHandlerSettings()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
@@ -819,7 +820,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 "Render for file `{$this->getName()}` not found"
             );
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $docRender);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docRender);
         return $docRender;
     }
 

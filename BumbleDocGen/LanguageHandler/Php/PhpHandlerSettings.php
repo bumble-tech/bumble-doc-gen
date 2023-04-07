@@ -44,7 +44,7 @@ final class PhpHandlerSettings
     public function getClassEntityFilter(): ConditionInterface
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         /** @var ConditionInterface $classEntityFilter */
@@ -52,7 +52,7 @@ final class PhpHandlerSettings
             $this->getSettingsKey('class_filter'),
             ConditionInterface::class
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $classEntityFilter);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $classEntityFilter);
         return $classEntityFilter;
     }
 
@@ -62,7 +62,7 @@ final class PhpHandlerSettings
     public function getClassConstantEntityFilter(): ConditionInterface
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         /** @var ConditionInterface $constantEntityFilter */
@@ -70,7 +70,7 @@ final class PhpHandlerSettings
             $this->getSettingsKey('class_constant_filter'),
             ConditionInterface::class
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $constantEntityFilter);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $constantEntityFilter);
         return $constantEntityFilter;
     }
 
@@ -80,7 +80,7 @@ final class PhpHandlerSettings
     public function getMethodEntityFilter(): ConditionInterface
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         /** @var ConditionInterface $methodEntityFilter */
@@ -88,7 +88,7 @@ final class PhpHandlerSettings
             $this->getSettingsKey('method_filter'),
             ConditionInterface::class
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $methodEntityFilter);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $methodEntityFilter);
         return $methodEntityFilter;
     }
 
@@ -98,7 +98,7 @@ final class PhpHandlerSettings
     public function getPropertyEntityFilter(): ConditionInterface
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         /** @var ConditionInterface $propertyEntityFilter */
@@ -106,7 +106,7 @@ final class PhpHandlerSettings
             $this->getSettingsKey('property_filter'),
             ConditionInterface::class
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $propertyEntityFilter);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $propertyEntityFilter);
         return $propertyEntityFilter;
     }
 
@@ -116,7 +116,7 @@ final class PhpHandlerSettings
     public function getEntityDocRendersCollection(): EntityDocRendersCollection
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $entityDocRendersCollection = new EntityDocRendersCollection();
@@ -127,7 +127,7 @@ final class PhpHandlerSettings
         foreach ($entityDocRenders as $entityDocRender) {
             $entityDocRendersCollection->add($entityDocRender);
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $entityDocRendersCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $entityDocRendersCollection);
         return $entityDocRendersCollection;
     }
 
@@ -137,13 +137,13 @@ final class PhpHandlerSettings
     public function getFileSourceBaseUrl(): ?string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $fileSourceBaseUrl = $this->parameterBag->validateAndGetStringValue(
             $this->getSettingsKey('file_source_base_url')
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $fileSourceBaseUrl);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $fileSourceBaseUrl);
         return $fileSourceBaseUrl;
     }
 
@@ -153,13 +153,13 @@ final class PhpHandlerSettings
     public function asyncSourceLoadingEnabled(): bool
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $asyncSourceLoadingEnabled = $this->parameterBag->validateAndGetBooleanValue(
             $this->getSettingsKey('async_source_loading_enabled')
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $asyncSourceLoadingEnabled);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $asyncSourceLoadingEnabled);
         return $asyncSourceLoadingEnabled;
     }
 
@@ -169,7 +169,7 @@ final class PhpHandlerSettings
     public function getCustomTwigFunctions(): CustomFunctionsCollection
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $customFunctions = $this->parameterBag->validateAndGetClassListValue(
@@ -180,7 +180,7 @@ final class PhpHandlerSettings
         foreach ($customFunctions as $customFunction) {
             $customFunctionsCollection->add($customFunction);
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $customFunctionsCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $customFunctionsCollection);
         return $customFunctionsCollection;
     }
 
@@ -190,7 +190,7 @@ final class PhpHandlerSettings
     public function getCustomTwigFilters(): CustomFiltersCollection
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
@@ -202,7 +202,7 @@ final class PhpHandlerSettings
         foreach ($customFilters as $customFilter) {
             $customFiltersCollection->add($customFilter);
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $customFiltersCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $customFiltersCollection);
         return $customFiltersCollection;
     }
 }

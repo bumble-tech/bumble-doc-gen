@@ -50,11 +50,11 @@ final class Configuration
     public function getProjectRoot(): string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $projectRoot = $this->parameterBag->validateAndGetStringValue('project_root', false);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $projectRoot);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $projectRoot);
         return $projectRoot;
     }
 
@@ -64,7 +64,7 @@ final class Configuration
     public function getSourceLocators(): SourceLocatorsCollection
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $sourceLocators = $this->parameterBag->validateAndGetClassListValue(
@@ -72,7 +72,7 @@ final class Configuration
             SourceLocatorInterface::class
         );
         $cachedSourceLocatorsCollection = SourceLocatorsCollection::create(...$sourceLocators);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $cachedSourceLocatorsCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cachedSourceLocatorsCollection);
         return $cachedSourceLocatorsCollection;
     }
 
@@ -82,11 +82,11 @@ final class Configuration
     public function getTemplatesDir(): string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $templatesDir = $this->parameterBag->validateAndGetStringValue('templates_dir', false);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $templatesDir);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $templatesDir);
         return $templatesDir;
     }
 
@@ -96,11 +96,11 @@ final class Configuration
     public function getOutputDir(): string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $outputDir = $this->parameterBag->validateAndGetStringValue('output_dir', false);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $outputDir);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $outputDir);
         return $outputDir;
     }
 
@@ -110,11 +110,11 @@ final class Configuration
     public function getOutputDirBaseUrl(): string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $outputDirBaseUrl = $this->parameterBag->validateAndGetStringValue('output_dir_base_url', false);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $outputDirBaseUrl);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $outputDirBaseUrl);
         return $outputDirBaseUrl;
     }
 
@@ -124,7 +124,7 @@ final class Configuration
     public function getLanguageHandlersCollection(): LanguageHandlersCollection
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $languageHandlers = $this->parameterBag->validateAndGetClassListValue(
@@ -133,7 +133,7 @@ final class Configuration
             false
         );
         $cachedLanguageHandlersCollection = LanguageHandlersCollection::create(...$languageHandlers);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $cachedLanguageHandlersCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cachedLanguageHandlersCollection);
         return $cachedLanguageHandlersCollection;
     }
 
@@ -143,7 +143,7 @@ final class Configuration
     public function getPlugins(): PluginsCollection
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $pluginsList = $this->parameterBag->validateAndGetClassListValue(
@@ -151,7 +151,7 @@ final class Configuration
             PluginInterface::class
         );
         $cachedPlugins = PluginsCollection::create(...$pluginsList);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $cachedPlugins);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cachedPlugins);
         return $cachedPlugins;
     }
 
@@ -161,7 +161,7 @@ final class Configuration
     public function getTemplateFillers(): TemplateFillersCollection
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $templateFillers = $this->parameterBag->validateAndGetClassListValue(
@@ -169,7 +169,7 @@ final class Configuration
             TemplateFillerInterface::class
         );
         $cachedTemplateFillersCollection = TemplateFillersCollection::create(...$templateFillers);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $cachedTemplateFillersCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cachedTemplateFillersCollection);
         return $cachedTemplateFillersCollection;
     }
 
@@ -179,11 +179,11 @@ final class Configuration
     public function getCacheDir(): ?string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $cacheDir = $this->parameterBag->validateAndGetStringValue('cache_dir');
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $cacheDir);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheDir);
         return $cacheDir;
     }
 
@@ -198,11 +198,11 @@ final class Configuration
     private function getCacheItemPool(string $cacheNamespace): CacheItemPoolInterface
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($cacheNamespace);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $cacheNamespace);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $cacheItemPool = new FilesystemAdapter($cacheNamespace, 604800, $this->getCacheDir());
-        $this->localObjectCache->cacheCurrentMethodResultSilently($cacheNamespace, $cacheItemPool);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $cacheNamespace, $cacheItemPool);
         return $cacheItemPool;
     }
 
@@ -228,7 +228,7 @@ final class Configuration
     public function getPageLinkProcessor(): PageLinkProcessorInterface
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         /** @var PageLinkProcessorInterface $pageLinkProcessor */
@@ -236,7 +236,7 @@ final class Configuration
             'page_link_processor',
             PageLinkProcessorInterface::class
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $pageLinkProcessor);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $pageLinkProcessor);
         return $pageLinkProcessor;
     }
 
@@ -246,11 +246,11 @@ final class Configuration
     public function getGitClientPath(): string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $gitClientPath = $this->parameterBag->validateAndGetStringValue('git_client_path', false);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $gitClientPath);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $gitClientPath);
         return $gitClientPath;
     }
 
@@ -265,7 +265,7 @@ final class Configuration
     public function getTwigFunctions(): CustomFunctionsCollection
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $customFunctions = $this->parameterBag->validateAndGetClassListValue(
@@ -276,7 +276,7 @@ final class Configuration
         foreach ($customFunctions as $customFunction) {
             $customFunctionsCollection->add($customFunction);
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $customFunctionsCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $customFunctionsCollection);
         return $customFunctionsCollection;
     }
 
@@ -286,7 +286,7 @@ final class Configuration
     public function getTwigFilters(): CustomFiltersCollection
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
@@ -298,7 +298,7 @@ final class Configuration
         foreach ($customFilters as $customFilter) {
             $customFiltersCollection->add($customFilter);
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $customFiltersCollection);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $customFiltersCollection);
         return $customFiltersCollection;
     }
 }

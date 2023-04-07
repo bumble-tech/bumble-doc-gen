@@ -235,11 +235,11 @@ final class ParserHelper
     public function getFileContent(string $fileName): string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($fileName);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $fileName);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $classContentCache = file_get_contents($fileName);
-        $this->localObjectCache->cacheCurrentMethodResultSilently($fileName, $classContentCache);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $fileName, $classContentCache);
         return $classContentCache;
     }
 
@@ -330,7 +330,7 @@ final class ParserHelper
         $key = $reflectionClass->getName() . $searchClassName;
 
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($key);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $key);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
 
@@ -361,7 +361,7 @@ final class ParserHelper
         if (isset($classNameParts[1])) {
             $className = "{$className}::$classNameParts[1]";
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently($key, $className);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $key, $className);
         return $className;
     }
 
@@ -508,24 +508,24 @@ final class ParserHelper
     public function getFilesInGit(): array
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $gitClient = $this->configuration->getGitClientPath();
         exec("cd {$this->configuration->getProjectRoot()} && {$gitClient} ls-files", $output);
         $gitFiles = array_flip($output);
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $gitFiles);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $gitFiles);
         return $gitFiles;
     }
 
     private function getDocBlockFactory(): DocBlockFactory
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult('');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $docBlockFactory = DocBlockFactory::createInstance();
-        $this->localObjectCache->cacheCurrentMethodResultSilently('', $docBlockFactory);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $docBlockFactory);
         return $docBlockFactory;
     }
 
@@ -538,14 +538,14 @@ final class ParserHelper
         $docComment = $docComment ?: ' ';
         $cacheKey = md5("{$classEntity->getName()}{$docComment}");
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($cacheKey);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $cacheKey);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $docBlock = $this->getDocBlockFactory()->create(
             $docComment,
             $this->getDocBlockContext($classEntity)
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently($cacheKey, $docBlock);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $cacheKey, $docBlock);
         return $docBlock;
     }
 
@@ -556,7 +556,7 @@ final class ParserHelper
     public function getDocBlockContext(ClassEntity $classEntity): Context
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($classEntity->getName());
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $classEntity->getName());
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
 
@@ -583,7 +583,7 @@ final class ParserHelper
             $tmpContext->getNamespace(),
             $aliases
         );
-        $this->localObjectCache->cacheCurrentMethodResultSilently($classEntity->getName(), $context);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $classEntity->getName(), $context);
         return $context;
     }
 }

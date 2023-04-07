@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
@@ -20,12 +21,18 @@ use Roave\BetterReflection\Reflection\ReflectionMethod;
 class DynamicMethodEntity implements MethodEntityInterface
 {
     public function __construct(
-        private Configuration $configuration,
-        private ParserHelper  $parserHelper,
-        private ClassEntity   $classEntity,
-        private Method        $annotationMethod
+        private Configuration    $configuration,
+        private ParserHelper     $parserHelper,
+        private LocalObjectCache $localObjectCache,
+        private ClassEntity      $classEntity,
+        private Method           $annotationMethod
     )
     {
+    }
+
+    protected function getLocalObjectCache(): LocalObjectCache
+    {
+        return $this->localObjectCache;
     }
 
     public function getRootEntity(): ClassEntity

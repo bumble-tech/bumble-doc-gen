@@ -20,7 +20,7 @@ final class CacheableEntityWrapperFactory
     public function createWrappedEntityClass(string $className, string $wrapperName): string
     {
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($wrapperName);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $wrapperName);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
 
@@ -81,7 +81,7 @@ final class CacheableEntityWrapperFactory
 
         eval((string)$namespace);
         $entityWrapperClassName = "{$namespaceName}\\$wrapperName";
-        $this->localObjectCache->cacheCurrentMethodResultSilently($wrapperName, $entityWrapperClassName);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $wrapperName, $entityWrapperClassName);
         return $entityWrapperClassName;
     }
 }

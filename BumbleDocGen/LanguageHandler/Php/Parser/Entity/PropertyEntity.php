@@ -47,6 +47,7 @@ class PropertyEntity extends BaseEntity
         parent::__construct(
             $configuration,
             $reflectorWrapper,
+            $localObjectCache,
             $documentedEntityUrlFunction,
             $renderHelper,
             $parserHelper,
@@ -121,7 +122,7 @@ class PropertyEntity extends BaseEntity
     {
         $objectId = $this->getObjectId();
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $docComment = $this->getDocComment();
@@ -142,7 +143,7 @@ class PropertyEntity extends BaseEntity
                 }
             }
         }
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $reflectionProperty);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $reflectionProperty);
         return $reflectionProperty;
     }
 
@@ -156,11 +157,11 @@ class PropertyEntity extends BaseEntity
     {
         $objectId = $this->getObjectId();
         try {
-            return $this->localObjectCache->getCurrentMethodCachedResult($objectId);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
         $docComment = $this->getDocCommentEntity()->getDocComment() ?: ' ';
-        $this->localObjectCache->cacheCurrentMethodResultSilently($objectId, $docComment);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docComment);
         return $docComment;
     }
 
