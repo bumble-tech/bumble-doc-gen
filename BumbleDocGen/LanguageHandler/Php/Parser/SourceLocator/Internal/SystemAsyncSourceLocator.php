@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal;
 
+use BumbleDocGen\Core\Cache\LocalCache\Exception\InvalidCallContextException;
+use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
+use Composer\Autoload\ClassLoader;
 use InvalidArgumentException;
 use Roave\BetterReflection\Identifier\Identifier;
 use Roave\BetterReflection\SourceLocator\Ast\Locator;
@@ -17,10 +21,12 @@ use Roave\BetterReflection\SourceLocator\Type\AbstractSourceLocator;
 final class SystemAsyncSourceLocator extends AbstractSourceLocator
 {
     public function __construct(
-        Locator $astLocator,
-        private array $psr4FileMap,
-        private array $classMap
-    ) {
+        Locator                  $astLocator,
+        private LocalObjectCache $localObjectCache,
+        private array            $psr4FileMap,
+        private array            $classMap
+    )
+    {
         parent::__construct($astLocator);
     }
 
@@ -38,26 +44,25 @@ final class SystemAsyncSourceLocator extends AbstractSourceLocator
         return $this->getLocatedSource($identifier->getName());
     }
 
-    public static function getClassLoader(array $psr4FileMap, array $classMap): \Composer\Autoload\ClassLoader
+    public function getClassLoader(array $psr4FileMap, array $classMap): ClassLoader
     {
-        static $classLoaders = [];
         $key = md5(serialize($psr4FileMap) . serialize($classMap));
-        if (!array_key_exists($key, $classLoaders)) {
-            $classLoader = new \Composer\Autoload\ClassLoader();
-            foreach ($psr4FileMap as $prefix => $path) {
-                $classLoader->addPsr4($prefix, $path);
-            }
-            $classLoader->addClassMap($classMap);
-            $classLoaders[$key] = $classLoader;
-        } else {
-            $classLoader = $classLoaders[$key];
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $key);
+        } catch (ObjectNotFoundException|InvalidCallContextException) {
         }
+        $classLoader = new ClassLoader();
+        foreach ($psr4FileMap as $prefix => $path) {
+            $classLoader->addPsr4($prefix, $path);
+        }
+        $classLoader->addClassMap($classMap);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $key, $classLoader);
         return $classLoader;
     }
 
     public function getLocatedSource(string $className): ?LocatedSource
     {
-        $classLoader = self::getClassLoader($this->psr4FileMap, $this->classMap);
+        $classLoader = $this->getClassLoader($this->psr4FileMap, $this->classMap);
         if ($fileName = $classLoader->findFile($className)) {
             return new LocatedSource(
                 file_get_contents($fileName), $className, $fileName
