@@ -250,9 +250,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                     ];
                 }
                 $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
-                $className = ParserHelper::parseFullClassName(
+                $className = $this->parserHelper->parseFullClassName(
                     $name,
-                    $this->reflector,
                     $currentClassEntity->getReflection()
                 );
                 $data = $this->getRootEntityCollection()->gelEntityLinkData(
@@ -323,9 +322,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         ];
                         continue;
                     }
-                    $className = ParserHelper::parseFullClassName(
+                    $className = $this->parserHelper->parseFullClassName(
                         $name,
-                        $this->reflector,
                         $implementingReflectionClass
                     );
                     $throwData = [

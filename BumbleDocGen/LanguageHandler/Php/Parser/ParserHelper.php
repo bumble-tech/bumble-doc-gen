@@ -309,9 +309,8 @@ final class ParserHelper
         return $uses;
     }
 
-    public static function parseFullClassName(
+    public function parseFullClassName(
         string           $searchClassName,
-        ReflectorWrapper $reflector,
         ReflectionClass  $reflectionClass,
         bool             $extended = true
     ): string
@@ -329,7 +328,7 @@ final class ParserHelper
             } elseif (isset($uses[$searchClassName])) {
                 $className = $uses[$searchClassName];
             } elseif (
-                str_contains($searchClassName, '\\') && ParserHelper::isClassLoaded($reflector, $searchClassName)
+                str_contains($searchClassName, '\\') && ParserHelper::isClassLoaded($this->reflector, $searchClassName)
             ) {
                 $className = $searchClassName;
             } elseif (
@@ -339,7 +338,7 @@ final class ParserHelper
                 )
             ) {
                 $className = "{$reflectionClass->getNamespaceName()}{$searchClassName}";
-                if (!ParserHelper::isClassLoaded($reflector, $className)) {
+                if (!ParserHelper::isClassLoaded($this->reflector, $className)) {
                     $className = $searchClassName;
                 }
             } else {
