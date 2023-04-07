@@ -7,6 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use Nette\PhpGenerator\GlobalFunction;
 use phpDocumentor\Reflection\DocBlock;
@@ -263,7 +264,11 @@ final class ParserHelper
         return $uses;
     }
 
-    public static function getUsesListByClassEntity(ClassEntity $classEntity, bool $extended = true): array
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getUsesListByClassEntity(ClassEntity $classEntity, bool $extended = true): array
     {
         static $classContentCache = [];
         $fileName = $classEntity->getAbsoluteFileName();
