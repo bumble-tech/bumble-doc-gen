@@ -507,6 +507,10 @@ final class ParserHelper
         return $gitFiles;
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     public function getDocBlock(ClassEntity $classEntity, string $docComment): DocBlock
     {
         static $docBlockFactory = null;
@@ -520,13 +524,17 @@ final class ParserHelper
         if (!isset($docBlocksCache[$cacheKey])) {
             $docBlocksCache[$cacheKey] = $docBlockFactory->create(
                 $docComment,
-                self::getDocBlockContext($classEntity)
+                $this->getDocBlockContext($classEntity)
             );
         }
         return $docBlocksCache[$cacheKey];
     }
 
-    public static function getDocBlockContext(ClassEntity $classEntity): \phpDocumentor\Reflection\Types\Context
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getDocBlockContext(ClassEntity $classEntity): \phpDocumentor\Reflection\Types\Context
     {
         static $contexts = [];
         if (!array_key_exists($classEntity->getName(), $contexts)) {
