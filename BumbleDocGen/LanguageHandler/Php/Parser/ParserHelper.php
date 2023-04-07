@@ -354,7 +354,7 @@ final class ParserHelper
         return $className;
     }
 
-    public static function getClassFromFile($file): ?string
+    public function getClassFromFile($file): ?string
     {
         if (str_ends_with($file, '.php')) {
             $content = file_get_contents($file);

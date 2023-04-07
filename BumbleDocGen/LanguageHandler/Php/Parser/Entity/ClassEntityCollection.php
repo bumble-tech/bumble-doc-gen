@@ -24,6 +24,7 @@ final class ClassEntityCollection extends RootEntityCollection
     public function __construct(
         private Configuration             $configuration,
         protected PhpHandlerSettings      $phpHandlerSettings,
+        private ParserHelper              $parserHelper,
         private PluginEventDispatcher     $pluginEventDispatcher,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
         private EntityDocRenderHelper     $docRenderHelper
@@ -51,7 +52,7 @@ final class ClassEntityCollection extends RootEntityCollection
     {
         $classEntityFilter = $this->phpHandlerSettings->getClassEntityFilter();
         foreach ($this->configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
-            $className = ParserHelper::getClassFromFile($file->getPathName());
+            $className = $this->parserHelper->getClassFromFile($file->getPathName());
             if ($className) {
                 $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $file->getPathName());
                 $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
