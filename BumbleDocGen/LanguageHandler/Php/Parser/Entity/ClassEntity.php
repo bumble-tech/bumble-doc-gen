@@ -215,7 +215,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             return $this->reflectionClass;
         }
         $objectId = $this->getObjectId();
-        $this->getConfiguration()->getLogger()->error($objectId);
         try {
             $this->reflectionClass = $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
             return $this->reflectionClass;
