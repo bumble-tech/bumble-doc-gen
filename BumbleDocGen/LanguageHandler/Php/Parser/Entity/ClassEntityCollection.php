@@ -318,6 +318,11 @@ final class ClassEntityCollection extends RootEntityCollection
                     $duplicates[$entity->getShortName()] = $entity->getShortName();
                 }
             }
+            $this->localObjectCache->cacheMethodResult(__METHOD__, '', [
+                'index' => $index,
+                'duplicates' => $duplicates,
+                'lastCacheKey' => $lastCacheKey,
+            ]);
         }
 
         $entity = null;
@@ -338,12 +343,6 @@ final class ClassEntityCollection extends RootEntityCollection
                 $foundKey = $matches[2];
             }
         }
-
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', [
-            'index' => $index,
-            'duplicates' => $duplicates,
-            'lastCacheKey' => $lastCacheKey,
-        ]);
 
         if (array_key_exists($foundKey, $duplicates)) {
             if ($useUnsafeKeys) {

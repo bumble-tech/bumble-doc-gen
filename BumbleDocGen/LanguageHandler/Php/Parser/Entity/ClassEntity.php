@@ -211,7 +211,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     protected function getReflection(): ReflectionClass
     {
+        if ($this->reflectionClass) {
+            return $this->reflectionClass;
+        }
         $objectId = $this->getObjectId();
+        $this->getConfiguration()->getLogger()->error($objectId);
         try {
             $this->reflectionClass = $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
             return $this->reflectionClass;
@@ -222,7 +226,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 $this->reflectionClass = $this->reflector->reflectClass($this->className);
             } catch (\Exception) {
             }
-            if (!$this->reflectionClass && $this->getFileName() && $this->getName()) {
+            if (!$this->reflectionClass && $this->relativeFileNameLoaded && $this->getName()) {
                 $locatedSource = new LocatedSource(
                     $this->getFileContent(),
                     $this->getName(),

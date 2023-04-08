@@ -40,22 +40,19 @@ final class BreadcrumbsHelper
      */
     private function loadTemplateContent(string $templateName): string
     {
+        $outputDir = $this->configuration->getTemplatesDir();
+        $filePath = "{$outputDir}{$templateName}";
+        if (!str_ends_with($filePath, '.twig')) {
+            $templateName .= '.twig';
+            return $this->loadTemplateContent($templateName);
+        }
+
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateName);
         } catch (ObjectNotFoundException) {
         }
-        $outputDir = $this->configuration->getTemplatesDir();
-        $filePath = "{$outputDir}{$templateName}";
-        if (!file_exists($filePath)) {
-            if (!str_ends_with($filePath, '.twig')) {
-                $templateName .= '.twig';
-                $templateContentCache[$templateName] = $this->loadTemplateContent($templateName);
-            } else {
-                $templateContentCache[$templateName] = '';
-            }
-            return $templateContentCache[$templateName];
-        }
-        $templateContent = file_get_contents($filePath);
+
+        $templateContent = file_get_contents($filePath) ?: '';
         $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $templateContent);
         return $templateContent;
     }
@@ -71,7 +68,9 @@ final class BreadcrumbsHelper
         }
         $code = $this->loadTemplateContent($templateName);
         if (preg_match_all('/({%)( ?)(set)( )(prevPage)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
-            return array_reverse($matches[8])[0];
+            $prevPage = array_reverse($matches[8])[0];
+            $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $prevPage);
+            return $prevPage;
         }
         $pathParts = explode('/', $templateName);
         array_pop($pathParts);

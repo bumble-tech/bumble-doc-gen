@@ -116,11 +116,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                     }
                 }
                 $cache[$cacheKey] = $types[$k];
+                $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cache);
             } else {
                 $types[$k] = $cache[$cacheKey];
             }
         }
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cache);
         return implode('|', $types);
     }
 
