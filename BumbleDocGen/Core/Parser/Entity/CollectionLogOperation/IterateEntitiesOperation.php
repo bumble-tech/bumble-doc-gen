@@ -10,10 +10,13 @@ final class IterateEntitiesOperation implements OperationInterface
 
     public function __construct(array $entities)
     {
-        foreach ($entities as $entity) {
-            $this->entities[] = [
-                'name' => $entity->getName(),
-            ];
+        foreach ($entities as $position => $entity) {
+            $this->entities[$entity->getName()] = $position;
         }
+    }
+
+    public function hasEntity(string $entityName): bool
+    {
+        return array_key_exists($entityName, $this->entities);
     }
 }
