@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 
 final class EntityDocRenderHelper
 {
@@ -18,11 +19,15 @@ final class EntityDocRenderHelper
 
     public function __construct(
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction
+        private GetDocumentedEntityUrl     $getDocumentedEntityUrlFunction
     )
     {
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     public function getEntityDataByLink(
         string               $linkString,
         RootEntityCollection $rootEntityCollection,
@@ -105,6 +110,7 @@ final class EntityDocRenderHelper
     }
 
     /**
+     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getEntityUrlDataByLink(
@@ -116,8 +122,15 @@ final class EntityDocRenderHelper
         $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
         $data = self::getEntityDataByLink($linkString, $entityCollection, $defaultEntityClassName);
         if ($data['entityName'] ?? null) {
-            $getDocumentedEntityUrl = $this->getDocumentedEntityUrlFunction;
-            $data['url'] = $getDocumentedEntityUrl($entityCollection, $data['entityName'], $data['cursor'], $createDocument);
+            $data['url'] = call_user_func_array(
+                $this->getDocumentedEntityUrlFunction,
+                [
+                    $entityCollection,
+                    $data['entityName'],
+                    $data['cursor'],
+                    $createDocument
+                ]
+            );
         }
         return $data;
     }
