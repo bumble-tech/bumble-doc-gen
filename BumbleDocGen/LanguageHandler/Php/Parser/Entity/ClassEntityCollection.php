@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Parser\Entity\LoggableRootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
@@ -21,7 +21,7 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
 
-final class ClassEntityCollection extends RootEntityCollection
+final class ClassEntityCollection extends LoggableRootEntityCollection
 {
     public function __construct(
         private Configuration             $configuration,
@@ -33,6 +33,7 @@ final class ClassEntityCollection extends RootEntityCollection
         private LocalObjectCache          $localObjectCache
     )
     {
+        parent::__construct();
     }
 
     public function getPluginEventDispatcher(): PluginEventDispatcher
@@ -97,18 +98,16 @@ final class ClassEntityCollection extends RootEntityCollection
         return $this;
     }
 
-    public function get(string $objectName): ?ClassEntity
+    protected function prepareObjectName(string $objectName): string
     {
-        $objectName = ltrim(str_replace('\\\\', '\\', $objectName), '\\');
-        return $this->entities[$objectName] ?? null;
+        return ltrim(str_replace('\\\\', '\\', $objectName), '\\');
     }
 
     /**
-     * {@inheritDoc}
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function getLoadedOrCreateNew(string $objectName): ClassEntity
+    public function _getLoadedOrCreateNew(string $objectName): ClassEntity
     {
         $classEntity = $this->get($objectName);
         if (!$classEntity) {
@@ -125,10 +124,6 @@ final class ClassEntityCollection extends RootEntityCollection
         return $classEntity;
     }
 
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
     public function getEntityByClassName(string $className, bool $createIfNotExists = true): ?ClassEntity
     {
         return $createIfNotExists ? $this->getLoadedOrCreateNew($className) : $this->get($className);
@@ -147,7 +142,7 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
     {
-        $classEntityCollection = clone $this;
+        $classEntityCollection = $this->cloneForFiltration();
         $interfaces = array_map(
             fn($interface) => ltrim(
                 str_replace('\\\\', '\\', $interface),
@@ -172,7 +167,7 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
     {
-        $classEntityCollection = clone $this;
+        $classEntityCollection = $this->cloneForFiltration();
         $parentClassNames = array_map(
             fn($parentClassName) => ltrim(
                 str_replace('\\\\', '\\', $parentClassName),
@@ -197,7 +192,7 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function filterByPaths(array $paths): ClassEntityCollection
     {
-        $classEntityCollection = clone $this;
+        $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             foreach ($paths as $path) {
@@ -215,7 +210,7 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
-        $classEntityCollection = clone $this;
+        $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             if (!preg_match($regexPattern, $classEntity->getShortName())) {
@@ -231,7 +226,7 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function getOnlyInstantiable(): ClassEntityCollection
     {
-        $classEntityCollection = clone $this;
+        $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             if (!$classEntity->isInstantiable()) {
@@ -247,7 +242,7 @@ final class ClassEntityCollection extends RootEntityCollection
      */
     public function getOnlyInterfaces(): ClassEntityCollection
     {
-        $classEntityCollection = clone $this;
+        $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             if (!$classEntity->isInterface()) {
@@ -277,7 +272,7 @@ final class ClassEntityCollection extends RootEntityCollection
      *  $classEntityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/SelfDoc/Console/App.php'); // absolute path
      *  $classEntityCollection->findEntity('https://***REMOVED***/blob/master/SelfDoc/Console/App.php'); // source link
      */
-    public function findEntity(string $search, bool $useUnsafeKeys = true): ?ClassEntity
+    public function _findEntity(string $search, bool $useUnsafeKeys = true): ?ClassEntity
     {
         if (preg_match('/^((self|parent):|(\$(.*)->))/', $search)) {
             return null;
@@ -359,8 +354,10 @@ final class ClassEntityCollection extends RootEntityCollection
 
     /**
      * @inheritDoc
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
-    public function gelEntityLinkData(
+    public function getEntityLinkData(
         string  $rawLink,
         ?string $defaultEntityName = null,
         bool    $useUnsafeKeys = true
