@@ -6,5 +6,4 @@ namespace BumbleDocGen\Core\Cache\LocalCache\Exception;
 
 final class ObjectNotFoundException extends \Exception
 {
-
 }
