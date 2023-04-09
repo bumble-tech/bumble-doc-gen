@@ -10,6 +10,9 @@ use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Render\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 /**
  * Generate class map in HTML or rst format
@@ -23,7 +26,7 @@ final class DrawClassMap implements CustomFunctionInterface
     private array $fileClassmap;
 
     public function __construct(
-        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private GetDocumentedEntityUrl     $getDocumentedEntityUrlFunction,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup
     )
     {
@@ -41,10 +44,15 @@ final class DrawClassMap implements CustomFunctionInterface
         ];
     }
 
+
     /**
      * @param ClassEntityCollection ...$classEntityCollections
      *  The collection of entities for which the class map will be generated
      * @return string
+     *
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
@@ -58,13 +66,19 @@ final class DrawClassMap implements CustomFunctionInterface
     }
 
     /**
+     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     protected function appendClassToDirectoryStructure(array $directoryStructure, ClassEntity $classEntity): array
     {
-        $getDocumentedEntityUrl = $this->getDocumentedEntityUrlFunction;
         $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
-        $this->fileClassmap[$classEntity->getFileName()] = $getDocumentedEntityUrl($entityCollection, $classEntity->getName());
+        $this->fileClassmap[$classEntity->getFileName()] = call_user_func_array(
+            callback: $this->getDocumentedEntityUrlFunction,
+            args: [
+                $entityCollection,
+                $classEntity->getName()
+            ]
+        );
         $fileName = ltrim($classEntity->getFileName(), DIRECTORY_SEPARATOR);
         $pathParts = array_reverse(explode(DIRECTORY_SEPARATOR, $fileName));
         $tmpStructure = [array_shift($pathParts)];
@@ -79,6 +93,9 @@ final class DrawClassMap implements CustomFunctionInterface
     }
 
     /**
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function getDirectoryStructure(ClassEntityCollection ...$classEntityCollections): array

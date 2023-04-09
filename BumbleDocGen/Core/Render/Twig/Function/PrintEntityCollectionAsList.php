@@ -41,12 +41,15 @@ final class PrintEntityCollectionAsList implements CustomFunctionInterface
         bool                 $skipDescription = false
     ): string
     {
-        $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
         $result = "<{$type}>";
         foreach ($rootEntityCollection as $entity) {
             $description = $entity->getDescription();
             $descriptionText = !$skipDescription && $description ? " - {$description}" : '';
-            $result .= "<li><a href='{$getDocumentedEntityUrlFunction($rootEntityCollection, $entity->getName())}'>{$entity->getShortName()}</a>{$descriptionText}</li>";
+            $entityDocUrl = call_user_func_array($this->getDocumentedEntityUrlFunction, [
+                $rootEntityCollection,
+                $entity->getName()
+            ]);
+            $result .= "<li><a href='{$entityDocUrl}'>{$entity->getShortName()}</a>{$descriptionText}</li>";
         }
         $result .= "</{$type}>";
         return "<embed> {$result} </embed>";

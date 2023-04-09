@@ -80,7 +80,7 @@ abstract class BasePageLinker implements PluginInterface
                     return $this->getFilledOutputTemplate($breadcrumb['title'], $breadcrumb['url']);
                 } else {
                     foreach ($this->rootEntityCollectionsGroup as $rootEntityCollection) {
-                        $entityUrlData = $rootEntityCollection->gelEntityLinkData($linkString);
+                        $entityUrlData = $rootEntityCollection->getEntityLinkData($linkString);
                         if ($entityUrlData['entityName'] ?? null) {
                             $getDocumentedEntityUrl = $this->getDocumentedEntityUrlFunction;
                             $entityUrlData['url'] = $getDocumentedEntityUrl(

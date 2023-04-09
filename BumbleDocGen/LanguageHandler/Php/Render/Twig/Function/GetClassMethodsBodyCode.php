@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Render\Twig\Function;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Render\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 /**
  * Get the code of the specified class methods as a formatted string
@@ -38,6 +42,11 @@ final class GetClassMethodsBodyCode implements CustomFunctionInterface
      *
      * @param array $methodsNames
      *  List of class methods whose code needs to be retrieved
+     *
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
      */
     public function __invoke(string $className, array $methodsNames): ?string
     {

@@ -40,7 +40,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
      * @return array
      * @todo return object instead array
      */
-    abstract public function gelEntityLinkData(string $rawLink, ?string $defaultEntityName = null, bool $useUnsafeKeys = true): array;
+    abstract public function getEntityLinkData(string $rawLink, ?string $defaultEntityName = null, bool $useUnsafeKeys = true): array;
 
     public function updateEntitiesCache(): void
     {

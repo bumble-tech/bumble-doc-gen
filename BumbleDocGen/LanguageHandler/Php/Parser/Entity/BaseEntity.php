@@ -229,7 +229,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                     ], "{$docCommentImplementingClass->getShortName()}::", $name);
 
                     $className = $name;
-                    $data = $this->getRootEntityCollection()->gelEntityLinkData(
+                    $data = $this->getRootEntityCollection()->getEntityLinkData(
                         $className,
                         $this->getImplementingReflectionClass()->getName(),
                         false
@@ -267,7 +267,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                     $name,
                     $currentClassEntity->getReflection()
                 );
-                $data = $this->getRootEntityCollection()->gelEntityLinkData(
+                $data = $this->getRootEntityCollection()->getEntityLinkData(
                     $className,
                     $this->getImplementingReflectionClass()->getName(),
                     false
@@ -343,7 +343,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         'name' => $className,
                         'description' => (string)$throwBlock->getDescription(),
                     ];
-                    $throwData['entityData'] = $this->getRootEntityCollection()->gelEntityLinkData(
+                    $throwData['entityData'] = $this->getRootEntityCollection()->getEntityLinkData(
                         $className,
                         $this->getImplementingReflectionClass()->getName(),
                         false
