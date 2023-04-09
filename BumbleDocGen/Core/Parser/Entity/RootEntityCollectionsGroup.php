@@ -26,6 +26,42 @@ final class RootEntityCollectionsGroup implements \IteratorAggregate
         return $this->rootEntityCollections[$collectionName] ?? null;
     }
 
+    public function clearOperationsLog(): void
+    {
+        foreach ($this->rootEntityCollections as $rootEntityCollection) {
+            if ($rootEntityCollection instanceof LoggableRootEntityCollection) {
+                $rootEntityCollection->clearOperationsLogCollection();
+            }
+        }
+    }
+
+    public function getOperationsLog(): array
+    {
+        $operationsLog = [];
+        foreach ($this->rootEntityCollections as $collectionName => $rootEntityCollection) {
+            if ($rootEntityCollection instanceof LoggableRootEntityCollection) {
+                $operationsLog[$collectionName] = $rootEntityCollection->getOperationsLogCollection();
+            } else {
+                $operationsLog[$collectionName] = null;
+            }
+        }
+        return $operationsLog;
+    }
+
+    public function getOperationsLogWithoutDuplicates(): array
+    {
+        $operationsLog = [];
+        foreach ($this->rootEntityCollections as $collectionName => $rootEntityCollection) {
+            if ($rootEntityCollection instanceof LoggableRootEntityCollection) {
+                $operationsLog[$collectionName] = $rootEntityCollection->getOperationsLogCollection();
+                $operationsLog[$collectionName]->removeSearchDuplicates();
+            } else {
+                $operationsLog[$collectionName] = null;
+            }
+        }
+        return $operationsLog;
+    }
+
     public function updateAllEntitiesCache(): void
     {
         foreach ($this->rootEntityCollections as $rootEntityCollection) {
