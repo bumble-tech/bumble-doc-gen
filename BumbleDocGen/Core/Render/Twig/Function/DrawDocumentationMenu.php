@@ -7,6 +7,7 @@ namespace BumbleDocGen\Core\Render\Twig\Function;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Render\Breadcrumbs\BreadcrumbsHelper;
+use BumbleDocGen\Core\Render\Context\RenderContext;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -22,7 +23,11 @@ use Symfony\Component\Finder\Finder;
  */
 final class DrawDocumentationMenu implements CustomFunctionInterface
 {
-    public function __construct(private Configuration $configuration, private BreadcrumbsHelper $breadcrumbsHelper)
+    public function __construct(
+        private Configuration     $configuration,
+        private BreadcrumbsHelper $breadcrumbsHelper,
+        private RenderContext     $renderContext
+    )
     {
     }
 
@@ -77,6 +82,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
                 $pageKey = $breadcrumb['url'];
                 $structure[$pageKey] ??= [];
             }
+            $this->renderContext->addFileDependency($file->getRealPath());
         }
 
         $drawPages = function (array $pagesData, int $currentDeep = 1) use ($structure, $maxDeep, &$drawPages): string {
