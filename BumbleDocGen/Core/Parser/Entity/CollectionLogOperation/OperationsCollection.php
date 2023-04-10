@@ -18,7 +18,11 @@ final class OperationsCollection implements \IteratorAggregate
 
     public function add(OperationInterface $operation): void
     {
-        $this->operations[] = $operation;
+        $key = $operation->getKey();
+        if (!array_key_exists($key, $this->operations)) {
+            $this->operations[$key] = $operation;
+        }
+        $this->operations[$key]->incrementUsageCount();
     }
 
     public function removeSearchDuplicates(): void

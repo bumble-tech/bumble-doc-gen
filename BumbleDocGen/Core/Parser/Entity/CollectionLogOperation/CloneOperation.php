@@ -6,6 +6,8 @@ namespace BumbleDocGen\Core\Parser\Entity\CollectionLogOperation;
 
 final class CloneOperation implements OperationInterface
 {
+    private int $usageCount = 0;
+
     public function __construct(
         private string               $function,
         private array                $args,
@@ -27,5 +29,15 @@ final class CloneOperation implements OperationInterface
     public function getFunction(): string
     {
         return $this->function;
+    }
+
+    public function getKey(): string
+    {
+        return 'cloneOperation' . uniqid();
+    }
+
+    public function incrementUsageCount(): void
+    {
+        ++$this->usageCount;
     }
 }

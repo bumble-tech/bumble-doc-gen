@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 
 final class SingleEntitySearchOperation implements OperationInterface
 {
+    private int $usageCount = 0;
     private ?string $entityName = null;
 
     public function __construct(
@@ -34,5 +35,15 @@ final class SingleEntitySearchOperation implements OperationInterface
     public function getEntityName(): ?string
     {
         return $this->entityName;
+    }
+
+    public function getKey(): string
+    {
+        return $this->functionName . md5(json_encode($this->args));
+    }
+
+    public function incrementUsageCount(): void
+    {
+        ++$this->usageCount;
     }
 }

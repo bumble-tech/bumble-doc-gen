@@ -6,4 +6,7 @@ namespace BumbleDocGen\Core\Parser\Entity\CollectionLogOperation;
 
 interface OperationInterface
 {
+    public function getKey(): string;
+
+    public function incrementUsageCount(): void;
 }
