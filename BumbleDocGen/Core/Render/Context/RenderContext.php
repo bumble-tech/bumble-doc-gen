@@ -9,6 +9,7 @@ namespace BumbleDocGen\Core\Render\Context;
  */
 final class RenderContext
 {
+    private array $dependencies = [];
     private string $currentTemplateFilePath = '';
 
     /**
@@ -25,5 +26,20 @@ final class RenderContext
     public function getCurrentTemplateFilePatch(): string
     {
         return $this->currentTemplateFilePath;
+    }
+
+    public function clearFilesDependencies(): void
+    {
+        $this->dependencies = [];
+    }
+
+    public function addFileDependency(string $fileName): void
+    {
+        $this->dependencies[$fileName] = md5_file($fileName);
+    }
+
+    public function getFilesDependencies(): array
+    {
+        return $this->dependencies;
     }
 }
