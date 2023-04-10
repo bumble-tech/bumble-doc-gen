@@ -300,4 +300,18 @@ final class Configuration
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $customFiltersCollection);
         return $customFiltersCollection;
     }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function cacheGeneratedDocuments(): bool
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $cacheGeneratedDocuments = $this->parameterBag->validateAndGetBooleanValue('cache_generated_documents');
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheGeneratedDocuments);
+        return $cacheGeneratedDocuments;
+    }
 }
