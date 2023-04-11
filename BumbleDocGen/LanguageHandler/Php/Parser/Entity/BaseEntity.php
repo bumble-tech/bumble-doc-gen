@@ -87,10 +87,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
     protected function prepareTypeString(string $type): string
     {
         try {
@@ -440,5 +436,10 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     #[CacheableMethod] public function getDocComment(): string
     {
         return $this->getReflection()->getDocComment();
+    }
+
+    public function entityCacheIsOutdated(): bool
+    {
+        return true;
     }
 }
