@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\CollectionLogOperation;
 
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 
 final class SingleEntitySearchOperation implements OperationInterface
@@ -45,5 +46,10 @@ final class SingleEntitySearchOperation implements OperationInterface
     public function incrementUsageCount(): void
     {
         ++$this->usageCount;
+    }
+
+    public function call(RootEntityCollection $rootEntityCollection): ?RootEntityInterface
+    {
+        return call_user_func_array([$rootEntityCollection, $this->functionName], $this->args);
     }
 }

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\CollectionLogOperation;
 
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
+
 final class IterateEntitiesOperation implements OperationInterface
 {
     private int $usageCount = 0;
@@ -29,5 +32,18 @@ final class IterateEntitiesOperation implements OperationInterface
     public function incrementUsageCount(): void
     {
         ++$this->usageCount;
+    }
+
+    public function getEntitiesData(): array
+    {
+        return $this->entities;
+    }
+
+    /**
+     * @return RootEntityInterface[]
+     */
+    public function call(RootEntityCollection $rootEntityCollection): array
+    {
+        return iterator_to_array($rootEntityCollection);
     }
 }

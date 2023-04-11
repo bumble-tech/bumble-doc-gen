@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\CollectionLogOperation;
 
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+
 final class CloneOperation implements OperationInterface
 {
     private int $usageCount = 0;
 
     public function __construct(
-        private string               $function,
+        private string               $functionName,
         private array                $args,
         private OperationsCollection $operationsCollection
     )
@@ -21,16 +23,6 @@ final class CloneOperation implements OperationInterface
         return $this->operationsCollection;
     }
 
-    public function getArgs(): array
-    {
-        return $this->args;
-    }
-
-    public function getFunction(): string
-    {
-        return $this->function;
-    }
-
     public function getKey(): string
     {
         return 'cloneOperation' . uniqid();
@@ -39,5 +31,10 @@ final class CloneOperation implements OperationInterface
     public function incrementUsageCount(): void
     {
         ++$this->usageCount;
+    }
+
+    public function call(RootEntityCollection $rootEntityCollection): RootEntityCollection
+    {
+        return call_user_func_array([$rootEntityCollection, $this->functionName], $this->args);
     }
 }
