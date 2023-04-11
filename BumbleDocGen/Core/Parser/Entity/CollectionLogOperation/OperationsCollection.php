@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\CollectionLogOperation;
 
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+
 final class OperationsCollection implements \IteratorAggregate
 {
     /**
@@ -88,5 +90,56 @@ final class OperationsCollection implements \IteratorAggregate
                 $operation->getOperationsCollection()->removeSearchDuplicates();
             }
         });
+    }
+
+    public function isFoundEntitiesCacheOutdated(RootEntityCollection $rootEntityCollection): bool
+    {
+        return $this->checkIsFoundEntitiesCacheOutdatedRecursive($rootEntityCollection, $this);
+    }
+
+    private function checkIsFoundEntitiesCacheOutdatedRecursive(
+        RootEntityCollection $rootEntityCollection,
+        OperationsCollection $operationsCollection,
+    ): bool
+    {
+        foreach ($operationsCollection->operations as $operation) {
+            if ($operation instanceof SingleEntitySearchOperation) {
+                $entity = $operation->call($rootEntityCollection);
+                if (is_null($operation->getEntityName()) && (is_null($entity) || $entity->entityCacheIsOutdated())) {
+                    continue;
+                }
+                if ($entity && !$entity::isEntityNameValid($entity?->getName())) {
+                    continue;
+                }
+                if ($operation->getEntityName() !== $entity?->getName()) {
+                    return true;
+                } elseif ($entity?->entityCacheIsOutdated()) {
+                    return true;
+                }
+
+            } elseif ($operation instanceof IterateEntitiesOperation) {
+                $entities = $operation->call($rootEntityCollection);
+                $entitiesData = $operation->getEntitiesData();
+                if (count($entitiesData) !== count($entities)) {
+                    return true;
+                }
+                foreach ($entities as $entity) {
+                    if (!array_key_exists($entity->getName(), $entitiesData) || $entity->entityCacheIsOutdated()) {
+                        return true;
+                    }
+                }
+            } elseif ($operation instanceof CloneOperation) {
+                $isOperationsCacheOutdated = $this->checkIsFoundEntitiesCacheOutdatedRecursive(
+                    $operation->call($rootEntityCollection),
+                    $operation->getOperationsCollection(),
+                );
+                if ($isOperationsCacheOutdated) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }
