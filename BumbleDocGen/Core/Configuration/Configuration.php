@@ -314,4 +314,16 @@ final class Configuration
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheGeneratedDocuments);
         return $cacheGeneratedDocuments;
     }
+
+    /**
+     * @throws \Exception
+     */
+    public function getWorkingDir(): string
+    {
+        $workingDir = getcwd();
+        if (!is_string($workingDir)) {
+            throw new \Exception('The working directory could not be obtained');
+        }
+        return $workingDir;
+    }
 }
