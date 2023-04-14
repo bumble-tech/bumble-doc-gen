@@ -40,7 +40,7 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate
         );
 
         $parentEntityName = $this->renderContext->getCurrentDocumentedEntityWrapper()?->getEntityName();
-        $this->documentedEntitiesRelations[$this->renderContext->getCurrentTemplateFilePatch()][$parentEntityName][$documentedEntity->getKey()] = [
+        $this->documentedEntitiesRelations[$this->renderContext->getCurrentTemplateFilePatch()][$parentEntityName][$documentedEntity->getEntityName()] = [
             'entity_name' => $documentedEntity->getEntityName(),
             'collection_name' => $documentedEntity->getDocumentTransformableEntity()->getRootEntityCollection()::getEntityCollectionName(),
         ];
