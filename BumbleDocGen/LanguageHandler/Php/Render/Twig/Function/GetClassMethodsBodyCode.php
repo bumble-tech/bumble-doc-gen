@@ -6,8 +6,8 @@ namespace BumbleDocGen\LanguageHandler\Php\Render\Twig\Function;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
-use BumbleDocGen\Core\Render\Twig\Filter\AddIndentFromLeft;
-use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
+use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
+use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;

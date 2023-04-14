@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Plugin\Event\Render;
 
-use BumbleDocGen\Core\Render\Context\RenderContext;
+use BumbleDocGen\Core\Renderer\Context\RenderContext;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**

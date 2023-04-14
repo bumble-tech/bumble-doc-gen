@@ -6,7 +6,7 @@ namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\ProjectParser;
-use BumbleDocGen\Core\Render\Render;
+use BumbleDocGen\Core\Renderer\Render;
 use Monolog\Logger;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
-use BumbleDocGen\Core\Render\Context\DocumentedEntityWrapper;
-use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
+use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRenderInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;

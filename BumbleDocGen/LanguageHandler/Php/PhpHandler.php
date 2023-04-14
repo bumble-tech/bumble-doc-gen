@@ -6,9 +6,9 @@ namespace BumbleDocGen\LanguageHandler\Php;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Render\Context\RenderContext;
-use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
-use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
+use BumbleDocGen\Core\Renderer\Context\RenderContext;
+use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
+use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;

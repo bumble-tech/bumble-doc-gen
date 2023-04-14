@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Plugin\Event\Render;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
-use BumbleDocGen\Core\Render\Twig\Function\LoadPluginsContent;
+use BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**

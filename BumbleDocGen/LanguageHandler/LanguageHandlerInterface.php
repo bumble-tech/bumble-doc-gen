@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Render\Context\RenderContext;
-use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
-use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
+use BumbleDocGen\Core\Renderer\Context\RenderContext;
+use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
+use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 
 interface LanguageHandlerInterface
 {

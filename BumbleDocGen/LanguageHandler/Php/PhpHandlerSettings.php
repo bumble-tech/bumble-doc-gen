@@ -9,12 +9,12 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
-use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRenderInterface;
-use BumbleDocGen\Core\Render\EntityDocRender\EntityDocRendersCollection;
-use BumbleDocGen\Core\Render\Twig\Filter\CustomFilterInterface;
-use BumbleDocGen\Core\Render\Twig\Filter\CustomFiltersCollection;
-use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionInterface;
-use BumbleDocGen\Core\Render\Twig\Function\CustomFunctionsCollection;
+use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRendersCollection;
+use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
+use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
+use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
+use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 
 final class PhpHandlerSettings
 {
