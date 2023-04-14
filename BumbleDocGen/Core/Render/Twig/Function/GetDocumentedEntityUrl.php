@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Render\Twig\Function;
 
-use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
@@ -35,11 +34,9 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
     public const DEFAULT_URL = '#';
 
     public function __construct(
-        private RenderContext                      $context,
         private RenderHelper                       $renderHelper,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration,
-        private LocalObjectCache                   $localObjectCache
     )
     {
     }
@@ -86,12 +83,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
             if (!$entity->isInGit()) {
                 return self::DEFAULT_URL;
             } elseif ($createDocument && is_a($entity, DocumentTransformableEntityInterface::class)) {
-                $documentedEntity = new DocumentedEntityWrapper(
-                    $entity,
-                    $this->localObjectCache,
-                    $this->context->getCurrentTemplateFilePatch()
-                );
-                $this->documentedEntityWrappersCollection->add($documentedEntity);
+                $documentedEntity = $this->documentedEntityWrappersCollection->createAndAddDocumentedEntityWrapper($entity);
                 $rootEntityCollection->add($entity);
                 $url = $this->configuration->getPageLinkProcessor()->getAbsoluteUrl($documentedEntity->getDocUrl());
             } else {
