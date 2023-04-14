@@ -38,6 +38,11 @@ final class DocumentedEntityWrapper
         return md5("{$this->documentTransformableEntity->getName()}{$this->initiatorFilePath}");
     }
 
+    public function getEntityName(): string
+    {
+        return $this->documentTransformableEntity->getName();
+    }
+
     private function getUniqueFileName(): string
     {
         $fileKey = $this->getKey();

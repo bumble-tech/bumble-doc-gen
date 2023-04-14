@@ -18,6 +18,8 @@ interface DocumentTransformableEntityInterface
 
     public function getShortName(): string;
 
+    public function entityCacheIsOutdated(): bool;
+
     public function getDocRender(): EntityDocRenderInterface;
 
     public function cursorToDocAttributeLinkFragment(string $cursor, bool $isForDocument = true): string;
