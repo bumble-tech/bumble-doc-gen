@@ -326,4 +326,9 @@ final class Configuration
         }
         return $workingDir;
     }
+
+    public function getDocGenLibDir(): string
+    {
+        return dirname(__DIR__, 2);
+    }
 }
