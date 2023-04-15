@@ -19,7 +19,7 @@ use Monolog\Logger;
 final class StrTypeToUrl implements CustomFilterInterface
 {
     public function __construct(
-        private RendererHelper         $renderHelper,
+        private RendererHelper         $rendererHelper,
         private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
         private Logger                 $logger
     )
@@ -60,7 +60,7 @@ final class StrTypeToUrl implements CustomFilterInterface
         $preparedTypes = [];
         $types = explode('|', $text);
         foreach ($types as $type) {
-            $preloadResourceLink = $this->renderHelper->getPreloadResourceLink($type);
+            $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($type);
             if ($preloadResourceLink) {
                 $preparedTypes[] = "<a href='{$preloadResourceLink}'>{$type}</a>";
                 continue;

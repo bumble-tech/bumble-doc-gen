@@ -49,7 +49,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         private ParserHelper          $parserHelper,
         private LocalObjectCache      $localObjectCache,
         GetDocumentedEntityUrl        $documentedEntityUrlFunction,
-        RendererHelper                $renderHelper,
+        RendererHelper                $rendererHelper,
         private Container             $diContainer,
         private LoggerInterface       $logger,
         private string                $className,
@@ -61,7 +61,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $reflector,
             $localObjectCache,
             $documentedEntityUrlFunction,
-            $renderHelper,
+            $rendererHelper,
             $parserHelper,
             $logger
         );

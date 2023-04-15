@@ -17,7 +17,7 @@ final class RendererContext
     private ?DocumentedEntityWrapper $currentDocumentedEntityWrapper = null;
 
     public function __construct(
-        private RendererHelper $renderHelper
+        private RendererHelper $rendererHelper
     )
     {
     }
@@ -59,7 +59,7 @@ final class RendererContext
      */
     public function addFileDependency(string $filePath): void
     {
-        $fileInternalLink = $this->renderHelper->filePathToFileInternalLink($filePath);
+        $fileInternalLink = $this->rendererHelper->filePathToFileInternalLink($filePath);
         $this->dependencies[$fileInternalLink] = md5_file($filePath);
     }
 

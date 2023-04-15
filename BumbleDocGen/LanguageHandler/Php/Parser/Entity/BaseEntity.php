@@ -33,7 +33,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         private ReflectorWrapper       $reflector,
         private LocalObjectCache       $localObjectCache,
         private GetDocumentedEntityUrl $documentedEntityUrlFunction,
-        private RendererHelper         $renderHelper,
+        private RendererHelper         $rendererHelper,
         private ParserHelper           $parserHelper,
         private LoggerInterface        $logger
     )
@@ -202,7 +202,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         'name' => $name,
                         'description' => $description,
                     ];
-                } elseif ($url = $this->renderHelper->getPreloadResourceLink($name)) {
+                } elseif ($url = $this->rendererHelper->getPreloadResourceLink($name)) {
                     $links[] = [
                         'url' => $url,
                         'name' => $name,
@@ -251,7 +251,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         'name' => $name,
                         'description' => '',
                     ];
-                } elseif ($url = $this->renderHelper->getPreloadResourceLink($name)) {
+                } elseif ($url = $this->rendererHelper->getPreloadResourceLink($name)) {
                     $links[] = [
                         'url' => $url,
                         'name' => $name,
@@ -323,7 +323,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             if (is_a($throwBlock, DocBlock\Tags\Throws::class)) {
                 $names = explode('|', (string)$throwBlock->getType());
                 foreach ($names as $name) {
-                    if ($url = $this->renderHelper->getPreloadResourceLink($name)) {
+                    if ($url = $this->rendererHelper->getPreloadResourceLink($name)) {
                         $throws[] = [
                             'url' => $url,
                             'name' => $name,

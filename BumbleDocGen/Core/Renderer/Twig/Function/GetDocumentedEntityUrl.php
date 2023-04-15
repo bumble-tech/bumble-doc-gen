@@ -34,7 +34,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
     public const DEFAULT_URL = '#';
 
     public function __construct(
-        private RendererHelper                     $renderHelper,
+        private RendererHelper                     $rendererHelper,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration,
     )
@@ -74,7 +74,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
         if (str_contains($entityName, ' ')) {
             return self::DEFAULT_URL;
         }
-        $preloadResourceLink = $this->renderHelper->getPreloadResourceLink($entityName);
+        $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($entityName);
         if ($preloadResourceLink) {
             return $preloadResourceLink;
         }

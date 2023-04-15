@@ -24,7 +24,7 @@ final class RendererIterator
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration,
         private SharedCompressedDocumentFileCache  $sharedCompressedDocumentFileCache,
-        private RendererHelper                     $renderHelper,
+        private RendererHelper                     $rendererHelper,
         private Logger                             $logger
     )
     {
@@ -215,7 +215,7 @@ final class RendererIterator
             return true;
         }
         foreach ($cachedFilesDependencies as $fileNameTemplate => $fileHash) {
-            $fileName = $this->renderHelper->fileInternalLinkToFilePath($fileNameTemplate);
+            $fileName = $this->rendererHelper->fileInternalLinkToFilePath($fileNameTemplate);
             if (md5_file($fileName) !== $fileHash) {
                 return true;
             }

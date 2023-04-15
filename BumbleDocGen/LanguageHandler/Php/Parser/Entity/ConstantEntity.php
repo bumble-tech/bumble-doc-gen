@@ -36,7 +36,7 @@ class ConstantEntity extends BaseEntity
         private LocalObjectCache $localObjectCache,
         LoggerInterface          $logger,
         ReflectorWrapper         $reflectorWrapper,
-        RendererHelper           $renderHelper,
+        RendererHelper           $rendererHelper,
         GetDocumentedEntityUrl   $documentedEntityUrlFunction,
         private string           $constantName,
         private string           $declaringClassName,
@@ -48,7 +48,7 @@ class ConstantEntity extends BaseEntity
             $reflectorWrapper,
             $localObjectCache,
             $documentedEntityUrlFunction,
-            $renderHelper,
+            $rendererHelper,
             $parserHelper,
             $logger
         );

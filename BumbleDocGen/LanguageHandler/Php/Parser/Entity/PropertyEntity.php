@@ -36,7 +36,7 @@ class PropertyEntity extends BaseEntity
         private LocalObjectCache $localObjectCache,
         private LoggerInterface  $logger,
         ReflectorWrapper         $reflectorWrapper,
-        RendererHelper           $renderHelper,
+        RendererHelper           $rendererHelper,
         GetDocumentedEntityUrl   $documentedEntityUrlFunction,
         private string           $propertyName,
         private string           $declaringClassName,
@@ -48,7 +48,7 @@ class PropertyEntity extends BaseEntity
             $reflectorWrapper,
             $localObjectCache,
             $documentedEntityUrlFunction,
-            $renderHelper,
+            $rendererHelper,
             $parserHelper,
             $logger
         );

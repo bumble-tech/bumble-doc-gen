@@ -38,7 +38,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         private LocalObjectCache $localObjectCache,
         LoggerInterface          $logger,
         ReflectorWrapper         $reflectorWrapper,
-        RendererHelper           $renderHelper,
+        RendererHelper           $rendererHelper,
         GetDocumentedEntityUrl   $documentedEntityUrlFunction,
         private string           $methodName,
         private string           $declaringClassName,
@@ -50,7 +50,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             $reflectorWrapper,
             $localObjectCache,
             $documentedEntityUrlFunction,
-            $renderHelper,
+            $rendererHelper,
             $parserHelper,
             $logger
         );
