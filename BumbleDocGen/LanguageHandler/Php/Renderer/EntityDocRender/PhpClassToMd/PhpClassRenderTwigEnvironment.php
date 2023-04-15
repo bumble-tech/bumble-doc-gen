@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd;
+namespace BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender\PhpClassToMd;
 
 use BumbleDocGen\Core\Renderer\Twig\MainExtension;
 use Twig\Environment;

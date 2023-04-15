@@ -16,7 +16,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
-use BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\EntityDocRenderHelper;
+use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender\EntityDocRenderHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Log\LoggerInterface;

@@ -22,11 +22,11 @@ property_filter:
     - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\OnlyFromCurrentClassCondition
 
 doc_renders:
-  - class: \BumbleDocGen\LanguageHandler\Php\Render\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender
+  - class: \BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender
 
 custom_twig_functions:
-  - class: \BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\DrawClassMap
-  - class: \BumbleDocGen\LanguageHandler\Php\Render\Twig\Function\GetClassMethodsBodyCode
+  - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\DrawClassMap
+  - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\GetClassMethodsBodyCode
 
 custom_twig_filters:
 
