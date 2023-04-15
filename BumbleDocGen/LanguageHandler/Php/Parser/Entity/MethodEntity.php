@@ -44,7 +44,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     )
     {
         parent::__construct(
-            $classEntity->getConfiguration(),
+            $configuration,
             $localObjectCache,
             $documentedEntityUrlFunction,
             $rendererHelper,
