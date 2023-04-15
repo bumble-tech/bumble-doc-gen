@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Parser\Entity\Cache\CacheKey;
 
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 
-final class RenderContextCacheKeyGenerator implements CacheKeyGeneratorInterface
+final class RendererContextCacheKeyGenerator implements CacheKeyGeneratorInterface
 {
     public static function generateKey(string $cacheNamespace, CacheableEntityInterface $entity, array $args): string
     {
