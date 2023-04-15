@@ -20,9 +20,6 @@ use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
-use Psr\Cache\CacheItemPoolInterface;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 /**
  * Configuration wrapper for project documentation
@@ -34,7 +31,6 @@ final class Configuration
     public function __construct(
         private ConfigurationParameterBag $parameterBag,
         private LocalObjectCache          $localObjectCache,
-        private LoggerInterface           $logger
     )
     {
         $parameterBag->addValueFromFileIfNotExists(
@@ -184,11 +180,6 @@ final class Configuration
         $cacheDir = $this->parameterBag->validateAndGetStringValue('cache_dir');
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheDir);
         return $cacheDir;
-    }
-
-    public function getLogger(): LoggerInterface
-    {
-        return $this->logger;
     }
 
     /**

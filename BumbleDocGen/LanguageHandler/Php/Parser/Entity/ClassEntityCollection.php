@@ -30,7 +30,8 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         private PluginEventDispatcher     $pluginEventDispatcher,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
         private EntityDocRendererHelper   $docRendererHelper,
-        private LocalObjectCache          $localObjectCache
+        private LocalObjectCache          $localObjectCache,
+        private LoggerInterface           $logger
     )
     {
         parent::__construct();
@@ -85,7 +86,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     {
         $className = $classEntity->getName();
         if (!isset($this->entities[$className]) || $reload) {
-            $this->getLogger()->info("Parsing {$classEntity->getFileName()} file");
+            $this->logger->info("Parsing {$classEntity->getFileName()} file");
             $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
             $this->entities[$className] = $classEntity;
         }
@@ -127,11 +128,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     public function getEntityByClassName(string $className, bool $createIfNotExists = true): ?ClassEntity
     {
         return $createIfNotExists ? $this->getLoadedOrCreateNew($className) : $this->get($className);
-    }
-
-    public function getLogger(): LoggerInterface
-    {
-        return $this->configuration->getLogger();
     }
 
     /**
@@ -341,7 +337,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
 
         if (array_key_exists($foundKey, $duplicates)) {
             if ($useUnsafeKeys) {
-                $this->configuration->getLogger()->warning(
+                $this->logger->warning(
                     "ClassEntityCollection:findEntity: Key `{$foundKey}` refers to multiple entities. Use a unique search key to avoid mistakes"
                 );
             } else {

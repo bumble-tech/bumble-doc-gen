@@ -15,6 +15,7 @@ use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
+use Monolog\Logger;
 
 /**
  * Get the URL of a documented entity by its name. If the entity is found, next to the file where this method was called,
@@ -37,6 +38,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
         private RendererHelper                     $rendererHelper,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration,
+        private Logger                             $logger
     )
     {
     }
@@ -94,7 +96,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
             }
             return $url . $entity->cursorToDocAttributeLinkFragment($cursor);
         } else {
-            $this->configuration->getLogger()->warning(
+            $this->logger->warning(
                 "GetDocumentedEntityUrl: Entity {$entityName} not found in specified sources"
             );
         }
