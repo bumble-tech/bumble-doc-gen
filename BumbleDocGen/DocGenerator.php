@@ -6,7 +6,7 @@ namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\ProjectParser;
-use BumbleDocGen\Core\Renderer\Render;
+use BumbleDocGen\Core\Renderer\Renderer;
 use Monolog\Logger;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -22,7 +22,7 @@ final class DocGenerator
 
     public function __construct(
         private ProjectParser $parser,
-        private Render        $render,
+        private Renderer      $render,
         private Logger        $logger
     )
     {

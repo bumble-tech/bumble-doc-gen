@@ -24,7 +24,7 @@ use Twig\Error\SyntaxError;
  * @see Configuration::getTemplatesDir()
  * @see Configuration::getOutputDir()
  */
-final class Render
+final class Renderer
 {
     public function __construct(
         private Configuration                     $configuration,
