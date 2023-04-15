@@ -11,7 +11,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 
-final class PhpClassRenderTwigEnvironment
+final class PhpClassRendererTwigEnvironment
 {
     private Environment $twig;
 

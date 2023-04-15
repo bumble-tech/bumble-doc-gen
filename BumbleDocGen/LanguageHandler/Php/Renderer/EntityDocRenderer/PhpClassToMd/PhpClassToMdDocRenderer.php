@@ -22,7 +22,7 @@ class PhpClassToMdDocRenderer implements EntityDocRendererInterface
     public const BLOCK_BEFORE_DETAILS = 'before_details';
 
     public function __construct(
-        private PhpClassRenderTwigEnvironment $classRenderTwig
+        private PhpClassRendererTwigEnvironment $classRendererTwig
     )
     {
     }
@@ -49,7 +49,7 @@ class PhpClassToMdDocRenderer implements EntityDocRendererInterface
      */
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string
     {
-        return $this->classRenderTwig->render('class.md.twig', [
+        return $this->classRendererTwig->render('class.md.twig', [
             'classEntity' => $entityWrapper->getDocumentTransformableEntity(),
             'generationInitiatorFilePath' => $entityWrapper->getInitiatorFilePath()
         ]);
