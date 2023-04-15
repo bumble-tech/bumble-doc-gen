@@ -32,7 +32,7 @@ final class Renderer
         private PluginEventDispatcher             $pluginEventDispatcher,
         private RenderContext                     $renderContext,
         private MainTwigEnvironment               $twig,
-        private RenderIterator                    $renderIterator,
+        private RendererIterator                  $renderIterator,
         private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
         private LoggerInterface                   $logger
     )

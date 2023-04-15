@@ -14,7 +14,7 @@ use BumbleDocGen\Core\Renderer\Context\RenderContext;
 use Monolog\Logger;
 use Symfony\Component\Finder\Finder;
 
-final class RenderIterator
+final class RendererIterator
 {
     private array $renderedFileNames = [];
 
