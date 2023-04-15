@@ -10,7 +10,7 @@ page_link_processor:              # (PageLinkProcessorInterface) Link handler cl
 language_handlers:                # (array<LanguageHandlerInterface>) List of programming language handlers
 source_locators:                  # (array<SourceLocatorInterface>) List of source locators
 template_fillers:                 # (array<string,TemplateFillerInterface>) List of template fillers
-cache_generated_documents: true   # (bool) Enable caching of generated documents
+use_shared_cache: true            # (bool) Enable cache usage of generated documents
 twig_functions:                   # (array<CustomFunctionInterface>) Functions that can be used in document templates
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawDocumentationMenu
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawDocumentedEntityLink

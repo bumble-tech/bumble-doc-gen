@@ -296,15 +296,15 @@ final class Configuration
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function cacheGeneratedDocuments(): bool
+    public function useSharedCache(): bool
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $cacheGeneratedDocuments = $this->parameterBag->validateAndGetBooleanValue('cache_generated_documents');
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheGeneratedDocuments);
-        return $cacheGeneratedDocuments;
+        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue('use_shared_cache');
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $useSharedCache);
+        return $useSharedCache;
     }
 
     /**

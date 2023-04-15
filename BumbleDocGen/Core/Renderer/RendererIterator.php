@@ -55,6 +55,7 @@ final class RendererIterator
             $this->markFileNameAsRendered($templateFileName);
 
             if (
+                !$this->configuration->useSharedCache() ||
                 !$this->isGeneratedDocumentExists($templateFileName) ||
                 $this->isFilesDependenciesCacheOutdated($templateFileName) ||
                 $this->isEntitiesOperationsLogCacheOutdated($templateFileName)
@@ -93,6 +94,7 @@ final class RendererIterator
             $this->markFileNameAsRendered($entityWrapper->getDocUrl());
 
             if (
+                !$this->configuration->useSharedCache() ||
                 !$this->isGeneratedEntityDocumentExists($entityWrapper) ||
                 $entityWrapper->getDocumentTransformableEntity()->entityCacheIsOutdated() ||
                 $this->isFilesDependenciesCacheOutdated($entityWrapper->getEntityName()) ||
