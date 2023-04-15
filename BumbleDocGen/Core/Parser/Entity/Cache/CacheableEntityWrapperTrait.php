@@ -4,21 +4,26 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
+use BumbleDocGen\Core\Cache\LocalCache\EntityCacheItemPool;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
+use DI\Attribute\Inject;
+use Psr\Cache\InvalidArgumentException;
+use Psr\Log\LoggerInterface;
 
 trait CacheableEntityWrapperTrait
 {
     private string $cacheVersion = 'v4';
 
-    abstract function getConfiguration(): Configuration;
+    #[Inject] private EntityCacheItemPool $entityCacheItemPool;
+    #[Inject] private Configuration $configuration;
+    #[Inject] private LoggerInterface $logger;
+    #[Inject] private LocalObjectCache $localObjectCache;
 
     abstract public function getEntityDependencies(): array;
-
-    abstract protected function getLocalObjectCache(): LocalObjectCache;
 
     private function getCurrentRootEntity(): ?RootEntityInterface
     {
@@ -30,6 +35,10 @@ trait CacheableEntityWrapperTrait
         return null;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws InvalidConfigurationParameterException
+     */
     public function getCachedEntityDependencies(): array
     {
         $entity = $this->getCurrentRootEntity();
@@ -49,8 +58,7 @@ trait CacheableEntityWrapperTrait
     {
         $entity = $this->getCurrentRootEntity();
         if ($entity) {
-            $logger = $entity->getConfiguration()->getLogger();
-            $logger->info("Caching {$entity->getFileName()} dependencies");
+            $this->logger->info("Caching {$entity->getFileName()} dependencies");
             $filesDependenciesCacheKey = '__internalEntityDependencies';
             $entityDependencies = $this->getEntityDependencies();
             $this->addValueToCache($filesDependenciesCacheKey, $entityDependencies);
@@ -59,6 +67,7 @@ trait CacheableEntityWrapperTrait
 
     /**
      * @throws InvalidConfigurationParameterException
+     * @throws InvalidArgumentException
      */
     public function entityCacheIsOutdated(): bool
     {
@@ -69,17 +78,17 @@ trait CacheableEntityWrapperTrait
         }
 
         try {
-            return $this->getLocalObjectCache()->getMethodCachedResult(__METHOD__, $entityName);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $entityName);
         } catch (ObjectNotFoundException) {
         }
 
-        $this->getLocalObjectCache()->cacheMethodResult(__METHOD__, $entityName, false);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, false);
         if (!$this->getCachedEntityDependencies()) {
             $entityCacheIsOutdated = true;
-            $this->getConfiguration()->getLogger()->warning("Unable to load {$entityName} entity dependencies");
+            $this->logger->warning("Unable to load {$entityName} entity dependencies");
         } else {
             $entityCacheIsOutdated = false;
-            $projectRoot = $entity->getConfiguration()->getProjectRoot();
+            $projectRoot = $this->configuration->getProjectRoot();
             foreach ($this->getCachedEntityDependencies() as $relativeFileName => $hashFile) {
                 $filePath = "{$projectRoot}{$relativeFileName}";
                 if (!file_exists($filePath) || md5_file($filePath) !== $hashFile) {
@@ -88,7 +97,7 @@ trait CacheableEntityWrapperTrait
                 }
             }
         }
-        $this->getLocalObjectCache()->cacheMethodResult(__METHOD__, $entityName, $entityCacheIsOutdated);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, $entityCacheIsOutdated);
         return $entityCacheIsOutdated;
     }
 
@@ -98,18 +107,21 @@ trait CacheableEntityWrapperTrait
         return $currentRootEntity ? str_replace(["\\", ":", '\n', '/', '{', '}'], "_{$this->cacheVersion}_", $this->getCurrentRootEntity()->getName()) : '';
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws InvalidConfigurationParameterException
+     */
     public function getCacheValues(): array
     {
         $cacheKey = $this->getCacheKey();
         $cacheValues = EntityCacheStorageHelper::getCacheValues($cacheKey);
         if (is_null($cacheValues)) {
             $cacheValues = [];
-            $cacheItemPool = $this->getConfiguration()->getEntityCacheItemPool();
             if (
-                $cacheItemPool->hasItem($cacheKey) &&
+                $this->entityCacheItemPool->hasItem($cacheKey) &&
                 !$this->entityCacheIsOutdated()
             ) {
-                $cacheValues = $cacheItemPool->getItem($cacheKey)->get();
+                $cacheValues = $this->entityCacheItemPool->getItem($cacheKey)->get();
                 $time = time();
                 foreach ($cacheValues as $key => $cacheValue) {
                     if (isset($cacheValue['__expires_after__']) && $cacheValue['__expires_after__'] < $time) {
@@ -122,6 +134,10 @@ trait CacheableEntityWrapperTrait
         return $cacheValues;
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     * @throws InvalidArgumentException
+     */
     public function getCacheValue(string $key): mixed
     {
         $cacheValues = $this->getCacheValues();

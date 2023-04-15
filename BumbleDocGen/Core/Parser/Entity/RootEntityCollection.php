@@ -7,6 +7,8 @@ namespace BumbleDocGen\Core\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\EntityCacheStorageHelper;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
 
 abstract class RootEntityCollection extends BaseEntityCollection
 {
@@ -42,7 +44,10 @@ abstract class RootEntityCollection extends BaseEntityCollection
      */
     abstract public function getEntityLinkData(string $rawLink, ?string $defaultEntityName = null, bool $useUnsafeKeys = true): array;
 
-    public function updateEntitiesCache(): void
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function updateEntitiesCache(CacheItemPoolInterface $cacheItemPool): void
     {
         foreach ($this as $entity) {
             if (
@@ -52,6 +57,6 @@ abstract class RootEntityCollection extends BaseEntityCollection
                 $entity->reloadEntityDependenciesCache();
             }
         }
-        EntityCacheStorageHelper::saveCache($this->getConfiguration());
+        EntityCacheStorageHelper::saveCache($cacheItemPool);
     }
 }

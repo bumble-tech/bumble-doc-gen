@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity;
 
+use BumbleDocGen\Core\Cache\LocalCache\EntityCacheItemPool;
+use Psr\Cache\InvalidArgumentException;
+
 final class RootEntityCollectionsGroup implements \IteratorAggregate
 {
     /**
      * @var RootEntityCollection[]
      */
     protected array $rootEntityCollections = [];
+
+    public function __construct(
+        private EntityCacheItemPool $entityCacheItemPool
+    )
+    {
+    }
 
     public function getIterator(): \Generator
     {
@@ -73,10 +82,13 @@ final class RootEntityCollectionsGroup implements \IteratorAggregate
         return false;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function updateAllEntitiesCache(): void
     {
         foreach ($this->rootEntityCollections as $rootEntityCollection) {
-            $rootEntityCollection->updateEntitiesCache();
+            $rootEntityCollection->updateEntitiesCache($this->entityCacheItemPool);
         }
     }
 }

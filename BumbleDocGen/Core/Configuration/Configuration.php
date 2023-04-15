@@ -194,28 +194,6 @@ final class Configuration
     /**
      * @throws InvalidConfigurationParameterException
      */
-    private function getCacheItemPool(string $cacheNamespace): CacheItemPoolInterface
-    {
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $cacheNamespace);
-        } catch (ObjectNotFoundException) {
-        }
-        $cacheItemPool = new FilesystemAdapter($cacheNamespace, 604800, $this->getCacheDir());
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $cacheNamespace, $cacheItemPool);
-        return $cacheItemPool;
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getEntityCacheItemPool(): CacheItemPoolInterface
-    {
-        return $this->getCacheItemPool('entity');
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function getPageLinkProcessor(): PageLinkProcessorInterface
     {
         try {

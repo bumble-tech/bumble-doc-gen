@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
-use BumbleDocGen\Core\Configuration\Configuration;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
 
 /**
  * @internal
@@ -40,9 +41,11 @@ final class EntityCacheStorageHelper
         self::$cache[$cacheKey][$itemKey] = $value;
     }
 
-    public static function saveCache(Configuration $configuration): void
+    /**
+     * @throws InvalidArgumentException
+     */
+    public static function saveCache(CacheItemPoolInterface $cacheItemPool): void
     {
-        $cacheItemPool = $configuration->getEntityCacheItemPool();
         foreach (EntityCacheStorageHelper::getAllCacheValues() as $cacheKey => $cacheData) {
             $cacheItem = $cacheItemPool->getItem($cacheKey);
             $cacheItem->set($cacheData);
