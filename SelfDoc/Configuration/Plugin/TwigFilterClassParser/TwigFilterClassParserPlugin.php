@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SelfDoc\Configuration\Plugin\TwigFilterClassParser;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Plugin\Event\Render\OnLoadEntityDocPluginContent;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Twig\MainExtension;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
@@ -18,7 +18,7 @@ use DI\NotFoundException;
 
 final class TwigFilterClassParserPlugin implements PluginInterface
 {
-    private const TWIG_FILTER_DIRNAME = '/BumbleDocGen/Render/Twig/Filter';
+    private const TWIG_FILTER_DIRNAME = '/BumbleDocGen/Renderer/Twig/Filter';
     public const PLUGIN_KEY = 'twigFilterClassParserPlugin';
 
     public function __construct(

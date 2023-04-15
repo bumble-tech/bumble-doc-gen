@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Core\Plugin\Event\Render;
+namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent;

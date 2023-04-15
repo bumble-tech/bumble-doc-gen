@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SelfDoc\Configuration\Plugin\TwigFunctionClassParser;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Plugin\Event\Render\OnLoadEntityDocPluginContent;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Twig\MainExtension;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
@@ -18,7 +18,7 @@ use DI\NotFoundException;
 
 final class TwigFunctionClassParserPlugin implements PluginInterface
 {
-    private const TWIG_FUNCTION_DIRNAME = '/BumbleDocGen/Render/Twig/Function';
+    private const TWIG_FUNCTION_DIRNAME = '/BumbleDocGen/Renderer/Twig/Function';
     public const PLUGIN_KEY = 'twigFunctionClassParserPlugin';
 
     public function __construct(

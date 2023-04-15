@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Core\Plugin\Event\Render;
+namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use Symfony\Contracts\EventDispatcher\Event;

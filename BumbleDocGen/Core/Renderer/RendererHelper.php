@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Renderer;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Plugin\Event\Render\OnGettingResourceLink;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 
 final class RendererHelper

@@ -36,7 +36,7 @@ or
     </tr>
     </thead>
     <tbody>
-    {% for filter in phpClassEntityCollection.filterByPaths(['/BumbleDocGen/Render/Twig/Filter']) %}
+    {% for filter in phpClassEntityCollection.filterByPaths(['/BumbleDocGen/Renderer/Twig/Filter']) %}
         {% set twigFilterData = filter.getPluginData('twigFilterClassParserPlugin') %}
         {% set paramsCount = twigFilterData.parameters | length %}
         {% for parameter in twigFilterData.parameters %}

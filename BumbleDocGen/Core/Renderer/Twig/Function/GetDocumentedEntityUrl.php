@@ -25,9 +25,9 @@ use DI\NotFoundException;
  * @see DocumentedEntityWrappersCollection
  * @see RendererContext::$entityWrappersCollection
  *
- * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}
- * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension') }}
- * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension', '', false) }}
+ * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', 'getFunctions') }}
+ * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Renderer\\Twig\\MainExtension') }}
+ * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', '', false) }}
  */
 final class GetDocumentedEntityUrl implements CustomFunctionInterface
 {

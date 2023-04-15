@@ -17,7 +17,7 @@ use DI\NotFoundException;
 /**
  * Generate class map in HTML or rst format
  *
- * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/BumbleDocGen/Render'])) }}
+ * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/BumbleDocGen/Renderer'])) }}
  * @example {{ drawClassMap(classEntityCollection) }}
  */
 final class DrawClassMap implements CustomFunctionInterface

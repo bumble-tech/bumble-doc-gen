@@ -16,7 +16,7 @@ use DI\NotFoundException;
 /**
  * Get the code of the specified class methods as a formatted string
  *
- * @example {{ getClassMethodsBodyCode('\\BumbleDocGen\\Render\\Twig\\MainExtension', ['getFunctions']) }}
+ * @example {{ getClassMethodsBodyCode('\\BumbleDocGen\\Renderer\\Twig\\MainExtension', ['getFunctions']) }}
  */
 final class GetClassMethodsBodyCode implements CustomFunctionInterface
 {
