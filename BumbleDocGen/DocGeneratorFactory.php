@@ -20,6 +20,7 @@ final class DocGeneratorFactory
     {
         $this->containerBuilder = new \DI\ContainerBuilder();
         $this->containerBuilder->useAutowiring(true);
+        $this->containerBuilder->useAttributes(true);
         $this->containerBuilder->addDefinitions($this->diConfig);
     }
 
