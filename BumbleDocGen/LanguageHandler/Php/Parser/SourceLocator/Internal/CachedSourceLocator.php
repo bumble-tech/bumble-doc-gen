@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal;
 
+use BumbleDocGen\Core\Cache\LocalCache\SourceLocatorCache;
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use Psr\Cache\InvalidArgumentException;
 use Roave\BetterReflection\Identifier\Identifier;
 use Roave\BetterReflection\Identifier\IdentifierType;
 use Roave\BetterReflection\Reflection\Reflection;
@@ -27,10 +30,18 @@ final class CachedSourceLocator implements SourceLocator
     /** @var array<string, list<Reflection>> indexed by reflector key and identifier type cache key */
     private array $cacheByIdentifierTypeKeyAndOid = [];
 
-    public function __construct(private SourceLocator $wrappedSourceLocator, private Configuration $configuration)
+    public function __construct(
+        private SourceLocator      $sourceLocator,
+        private Configuration      $configuration,
+        private SourceLocatorCache $cache
+    )
     {
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws InvalidConfigurationParameterException
+     */
     public function locateIdentifier(Reflector $reflector, Identifier $identifier): ?Reflection
     {
         $cacheKey = $this->identifierToCacheKey($identifier);
@@ -38,10 +49,9 @@ final class CachedSourceLocator implements SourceLocator
             return $this->cacheByIdentifierKeyAndOid[$cacheKey];
         }
 
-        $cache = $this->configuration->getSourceLocatorCacheItemPool();
         $locateIdentifier = null;
-        if ($cache->hasItem($cacheKey)) {
-            $cachedData = $cache->getItem($cacheKey)->get();
+        if ($this->cache->hasItem($cacheKey)) {
+            $cachedData = $this->cache->getItem($cacheKey)->get();
 
             $actualFileName = null;
             if ($cachedData['fileName']) {
@@ -67,18 +77,18 @@ final class CachedSourceLocator implements SourceLocator
                     $cachedData['namespaceAst']
                 );
             } else {
-                $cache->deleteItem($cacheKey);
+                $this->cache->deleteItem($cacheKey);
             }
         }
 
         if (is_null($locateIdentifier)) {
-            $locateIdentifier = $this->wrappedSourceLocator->locateIdentifier($reflector, $identifier);
+            $locateIdentifier = $this->sourceLocator->locateIdentifier($reflector, $identifier);
             if (is_a($locateIdentifier, ReflectionClass::class)) {
                 $node = $locateIdentifier->getAst();
                 $locatedSource = $locateIdentifier->getLocatedSource();
                 $namespaceAst = $locateIdentifier->getDeclaringNamespaceAst();
                 $className = get_class($locateIdentifier);
-                $cacheItem = $cache->getItem($cacheKey);
+                $cacheItem = $this->cache->getItem($cacheKey);
                 $actualFileName = $locateIdentifier->getFileName() ? str_replace($this->configuration->getProjectRoot(), '', $locateIdentifier->getFileName()) : null;
                 $cacheItem->set([
                     'className' => $className,
@@ -93,7 +103,7 @@ final class CachedSourceLocator implements SourceLocator
                 if (!$locateIdentifier->getFileName()) {
                     $cacheItem->expiresAfter(604800);
                 }
-                $cache->save($cacheItem);
+                $this->cache->save($cacheItem);
             }
         }
         return $this->cacheByIdentifierKeyAndOid[$cacheKey] = $locateIdentifier;
@@ -111,7 +121,7 @@ final class CachedSourceLocator implements SourceLocator
             return $this->cacheByIdentifierTypeKeyAndOid[$cacheKey];
         }
 
-        return $this->cacheByIdentifierTypeKeyAndOid[$cacheKey] = $this->wrappedSourceLocator->locateIdentifiersByType(
+        return $this->cacheByIdentifierTypeKeyAndOid[$cacheKey] = $this->sourceLocator->locateIdentifiersByType(
             $reflector,
             $identifierType
         );

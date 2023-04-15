@@ -208,14 +208,6 @@ final class Configuration
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getSourceLocatorCacheItemPool(): CacheItemPoolInterface
-    {
-        return $this->getCacheItemPool('sourceLocator');
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function getEntityCacheItemPool(): CacheItemPoolInterface
     {
         return $this->getCacheItemPool('entity');
