@@ -29,7 +29,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         private ParserHelper              $parserHelper,
         private PluginEventDispatcher     $pluginEventDispatcher,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
-        private EntityDocRendererHelper   $docRenderHelper,
+        private EntityDocRendererHelper   $docRendererHelper,
         private LocalObjectCache          $localObjectCache
     )
     {
@@ -363,7 +363,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         bool    $useUnsafeKeys = true
     ): array
     {
-        return $this->docRenderHelper->getEntityDataByLink(
+        return $this->docRendererHelper->getEntityDataByLink(
             $rawLink,
             $this,
             $defaultEntityName,
