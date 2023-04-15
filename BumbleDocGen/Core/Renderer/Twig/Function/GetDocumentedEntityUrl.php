@@ -18,7 +18,7 @@ use DI\NotFoundException;
 
 /**
  * Get the URL of a documented entity by its name. If the entity is found, next to the file where this method was called,
- * the `EntityDocRenderInterface::getDocFileExtension()` directory will be created, in which the documented entity file will be created
+ * the `EntityDocRendererInterface::getDocFileExtension()` directory will be created, in which the documented entity file will be created
  *
  * @note This function initiates the creation of documents for the displayed entities
  * @see DocumentedEntityWrapper

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Renderer\Context;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRendererInterface;
 
 /**
  * Interface for entities that can be generated into documents
@@ -20,7 +20,7 @@ interface DocumentTransformableEntityInterface
 
     public function entityCacheIsOutdated(): bool;
 
-    public function getDocRender(): EntityDocRenderInterface;
+    public function getDocRender(): EntityDocRendererInterface;
 
     public function cursorToDocAttributeLinkFragment(string $cursor, bool $isForDocument = true): string;
 }

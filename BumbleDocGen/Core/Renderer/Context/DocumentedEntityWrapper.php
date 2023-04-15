@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Renderer\Context;
 
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
-use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRendererInterface;
 
 /**
  * Wrapper for the entity that was requested for documentation
@@ -25,7 +25,7 @@ final class DocumentedEntityWrapper
     {
     }
 
-    public function getDocRender(): EntityDocRenderInterface
+    public function getDocRender(): EntityDocRendererInterface
     {
         return $this->documentTransformableEntity->getDocRender();
     }

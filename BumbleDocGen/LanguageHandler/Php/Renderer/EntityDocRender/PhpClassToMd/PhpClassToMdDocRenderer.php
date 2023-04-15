@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender\PhpClassToMd
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
-use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRendererInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -15,7 +15,7 @@ use Twig\Error\SyntaxError;
 /**
  * Rendering PHP classes into md format documents (for display on GitHub)
  */
-class PhpClassToMdDocRenderer implements EntityDocRenderInterface
+class PhpClassToMdDocRenderer implements EntityDocRendererInterface
 {
     public const BLOCK_AFTER_MAIN_INFO = 'after_main_info';
     public const BLOCK_AFTER_HEADER = 'after_header';

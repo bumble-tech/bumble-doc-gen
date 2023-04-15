@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 /**
  * Entity documentation renderer interface
  */
-interface EntityDocRenderInterface
+interface EntityDocRendererInterface
 {
     /**
      * Can this render be used to create entity documentation

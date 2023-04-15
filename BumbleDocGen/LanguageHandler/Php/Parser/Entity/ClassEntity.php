@@ -11,7 +11,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
-use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRenderInterface;
+use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRendererInterface;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
@@ -809,7 +809,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
-    public function getDocRender(): EntityDocRenderInterface
+    public function getDocRender(): EntityDocRendererInterface
     {
         $objectId = $this->getObjectId();
         try {

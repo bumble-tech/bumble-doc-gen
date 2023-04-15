@@ -9,8 +9,8 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
-use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRenderInterface;
-use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRendersCollection;
+use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRendererInterface;
+use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRenderersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
@@ -112,16 +112,16 @@ final class PhpHandlerSettings
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getEntityDocRendersCollection(): EntityDocRendersCollection
+    public function getEntityDocRendersCollection(): EntityDocRenderersCollection
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $entityDocRendersCollection = new EntityDocRendersCollection();
+        $entityDocRendersCollection = new EntityDocRenderersCollection();
         $entityDocRenders = $this->parameterBag->validateAndGetClassListValue(
             $this->getSettingsKey('doc_renders'),
-            EntityDocRenderInterface::class
+            EntityDocRendererInterface::class
         );
         foreach ($entityDocRenders as $entityDocRender) {
             $entityDocRendersCollection->add($entityDocRender);
