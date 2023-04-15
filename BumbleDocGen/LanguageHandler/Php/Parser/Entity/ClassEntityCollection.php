@@ -16,7 +16,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
-use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender\EntityDocRenderHelper;
+use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender\EntityDocRendererHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
@@ -29,7 +29,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         private ParserHelper              $parserHelper,
         private PluginEventDispatcher     $pluginEventDispatcher,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
-        private EntityDocRenderHelper     $docRenderHelper,
+        private EntityDocRendererHelper   $docRenderHelper,
         private LocalObjectCache          $localObjectCache
     )
     {

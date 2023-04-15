@@ -11,7 +11,7 @@ use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 
-final class EntityDocRenderHelper
+final class EntityDocRendererHelper
 {
     public const CLASS_ENTITY_SHORT_LINK_OPTION = 'short_form';
     public const CLASS_ENTITY_FULL_LINK_OPTION = 'full_form';
