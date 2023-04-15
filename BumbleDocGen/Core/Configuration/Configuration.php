@@ -214,11 +214,6 @@ final class Configuration
         return $gitClientPath;
     }
 
-    public function clearOutputDirBeforeDocGeneration(): bool
-    {
-        return true;
-    }
-
     /**
      * @throws InvalidConfigurationParameterException
      */
