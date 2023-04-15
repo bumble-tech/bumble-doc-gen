@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Renderer\Context;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Renderer\RenderHelper;
+use BumbleDocGen\Core\Renderer\RendererHelper;
 
 /**
  * Document rendering context
@@ -17,7 +17,7 @@ final class RenderContext
     private ?DocumentedEntityWrapper $currentDocumentedEntityWrapper = null;
 
     public function __construct(
-        private RenderHelper $renderHelper
+        private RendererHelper $renderHelper
     )
     {
     }

@@ -11,7 +11,7 @@ use BumbleDocGen\Core\Renderer\Context\RenderContext;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
-use BumbleDocGen\Core\Renderer\RenderHelper;
+use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -34,7 +34,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
     public const DEFAULT_URL = '#';
 
     public function __construct(
-        private RenderHelper                       $renderHelper,
+        private RendererHelper                     $renderHelper,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration,
     )

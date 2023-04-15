@@ -12,7 +12,7 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRenderInterface;
-use BumbleDocGen\Core\Renderer\RenderHelper;
+use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
@@ -49,7 +49,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         private ParserHelper          $parserHelper,
         private LocalObjectCache      $localObjectCache,
         GetDocumentedEntityUrl        $documentedEntityUrlFunction,
-        RenderHelper                  $renderHelper,
+        RendererHelper                $renderHelper,
         private Container             $diContainer,
         private LoggerInterface       $logger,
         private string                $className,

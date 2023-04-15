@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
-use BumbleDocGen\Core\Renderer\RenderHelper;
+use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
@@ -33,7 +33,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         private ReflectorWrapper       $reflector,
         private LocalObjectCache       $localObjectCache,
         private GetDocumentedEntityUrl $documentedEntityUrlFunction,
-        private RenderHelper           $renderHelper,
+        private RendererHelper         $renderHelper,
         private ParserHelper           $parserHelper,
         private LoggerInterface        $logger
     )

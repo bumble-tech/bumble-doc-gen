@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Renderer\RenderHelper;
+use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
@@ -38,7 +38,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         private LocalObjectCache $localObjectCache,
         LoggerInterface          $logger,
         ReflectorWrapper         $reflectorWrapper,
-        RenderHelper             $renderHelper,
+        RendererHelper           $renderHelper,
         GetDocumentedEntityUrl   $documentedEntityUrlFunction,
         private string           $methodName,
         private string           $declaringClassName,

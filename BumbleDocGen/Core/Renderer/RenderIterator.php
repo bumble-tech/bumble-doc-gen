@@ -24,7 +24,7 @@ final class RenderIterator
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration,
         private SharedCompressedDocumentFileCache  $sharedCompressedDocumentFileCache,
-        private RenderHelper                       $renderHelper,
+        private RendererHelper                     $renderHelper,
         private Logger                             $logger
     )
     {

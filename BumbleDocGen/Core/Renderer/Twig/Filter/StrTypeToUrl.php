@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Renderer\Twig\Filter;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Renderer\RenderHelper;
+use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use Monolog\Logger;
 
@@ -19,7 +19,7 @@ use Monolog\Logger;
 final class StrTypeToUrl implements CustomFilterInterface
 {
     public function __construct(
-        private RenderHelper           $renderHelper,
+        private RendererHelper         $renderHelper,
         private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
         private Logger                 $logger
     )

@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Plugin\Event\Render\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 
-final class RenderHelper
+final class RendererHelper
 {
     public function __construct(
         private PluginEventDispatcher $pluginEventDispatcher,
