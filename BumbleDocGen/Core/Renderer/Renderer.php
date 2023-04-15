@@ -112,6 +112,7 @@ final class Renderer
             $this->logger->info("Removing `{$file->getPathname()}` file");
         }
 
+        $this->sharedCompressedDocumentFileCache->removeNotUsedKeys();
         $this->sharedCompressedDocumentFileCache->saveChanges();
         $this->rootEntityCollectionsGroup->updateAllEntitiesCache();
     }

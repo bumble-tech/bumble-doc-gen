@@ -13,6 +13,7 @@ final class SharedCompressedDocumentFileCache
 
     private string $cacheFileName;
     private array $cacheData = [];
+    private array $usedKeys = [];
 
     /**
      * @throws InvalidConfigurationParameterException
@@ -37,12 +38,23 @@ final class SharedCompressedDocumentFileCache
 
     public function get(string $key, mixed $defaultValue = null): mixed
     {
+        $this->usedKeys[$key] = $key;
         return $this->cacheData[$key] ?? $defaultValue;
     }
 
     public function set(string $key, mixed $data): void
     {
+        $this->usedKeys[$key] = $key;
         $this->cacheData[$key] = $data;
+    }
+
+    public function removeNotUsedKeys(): void
+    {
+        $this->cacheData = array_filter(
+            $this->cacheData,
+            fn(string $key) => array_key_exists($key, $this->usedKeys),
+            ARRAY_FILTER_USE_KEY
+        );
     }
 
     /**
