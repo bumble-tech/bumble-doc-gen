@@ -58,7 +58,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         parent::__construct(
             $configuration,
-            $reflector,
             $localObjectCache,
             $documentedEntityUrlFunction,
             $rendererHelper,

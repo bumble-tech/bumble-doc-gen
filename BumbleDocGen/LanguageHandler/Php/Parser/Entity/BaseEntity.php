@@ -8,17 +8,14 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
-use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
-use DI\DependencyException;
-use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -30,7 +27,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
     protected function __construct(
         private Configuration          $configuration,
-        private ReflectorWrapper       $reflector,
         private LocalObjectCache       $localObjectCache,
         private GetDocumentedEntityUrl $documentedEntityUrlFunction,
         private RendererHelper         $rendererHelper,

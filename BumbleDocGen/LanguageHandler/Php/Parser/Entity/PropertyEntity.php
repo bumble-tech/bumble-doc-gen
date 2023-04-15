@@ -8,12 +8,12 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
-use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -35,7 +35,6 @@ class PropertyEntity extends BaseEntity
         private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
         private LoggerInterface  $logger,
-        ReflectorWrapper         $reflectorWrapper,
         RendererHelper           $rendererHelper,
         GetDocumentedEntityUrl   $documentedEntityUrlFunction,
         private string           $propertyName,
@@ -45,7 +44,6 @@ class PropertyEntity extends BaseEntity
     {
         parent::__construct(
             $configuration,
-            $reflectorWrapper,
             $localObjectCache,
             $documentedEntityUrlFunction,
             $rendererHelper,
