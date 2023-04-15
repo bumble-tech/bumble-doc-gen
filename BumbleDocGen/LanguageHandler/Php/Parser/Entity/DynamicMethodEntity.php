@@ -275,4 +275,9 @@ class DynamicMethodEntity implements MethodEntityInterface
         $relativeFileName = $this->getFileName();
         return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
+
+    public function entityCacheIsOutdated(): bool
+    {
+        return false;
+    }
 }
