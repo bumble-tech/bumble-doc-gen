@@ -12,7 +12,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender\PhpClassToMd\PhpClassToMdDocRenderer;
+use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer;
 use DI\DependencyException;
 use DI\NotFoundException;
 

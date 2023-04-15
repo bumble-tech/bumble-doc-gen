@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Core\Renderer\EntityDocRender;
+namespace BumbleDocGen\Core\Renderer\EntityDocRenderer;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 

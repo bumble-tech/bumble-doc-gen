@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Renderer\Context;
 
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
-use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRendererInterface;
+use BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
 
 /**
  * Wrapper for the entity that was requested for documentation

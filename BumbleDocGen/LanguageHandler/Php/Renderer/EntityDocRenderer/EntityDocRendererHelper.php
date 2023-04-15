@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender;
+namespace BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;

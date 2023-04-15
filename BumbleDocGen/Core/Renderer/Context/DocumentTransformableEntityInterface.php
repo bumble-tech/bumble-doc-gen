@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Renderer\Context;
 
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Renderer\EntityDocRender\EntityDocRendererInterface;
+use BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
 
 /**
  * Interface for entities that can be generated into documents
