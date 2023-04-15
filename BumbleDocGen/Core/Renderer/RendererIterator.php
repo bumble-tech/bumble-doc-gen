@@ -19,7 +19,7 @@ final class RendererIterator
     private array $renderedFileNames = [];
 
     public function __construct(
-        private RendererContext                    $renderContext,
+        private RendererContext                    $rendererContext,
         private RootEntityCollectionsGroup         $rootEntityCollectionsGroup,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration,
@@ -45,12 +45,12 @@ final class RendererIterator
             ->files();
 
         foreach ($finder as $templateFile) {
-            $this->renderContext->clearFilesDependencies();
+            $this->rendererContext->clearFilesDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
 
             $templateFileName = str_replace($templateFolder, '', $templateFile->getRealPath());
-            $this->renderContext->setCurrentTemplateFilePatch($templateFileName);
-            $this->renderContext->addFileDependency($templateFile->getRealPath());
+            $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
+            $this->rendererContext->addFileDependency($templateFile->getRealPath());
 
             $this->markFileNameAsRendered($templateFileName);
 
@@ -73,7 +73,7 @@ final class RendererIterator
 
             $this->sharedCompressedDocumentFileCache->set(
                 $this->getFilesDependenciesCacheKey($templateFileName),
-                $this->renderContext->getFilesDependencies()
+                $this->rendererContext->getFilesDependencies()
             );
         }
     }
@@ -85,10 +85,10 @@ final class RendererIterator
     {
         foreach ($this->documentedEntityWrappersCollection as $entityWrapper) {
             /** @var DocumentedEntityWrapper $entityWrapper */
-            $this->renderContext->clearFilesDependencies();
+            $this->rendererContext->clearFilesDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
 
-            $this->renderContext->setCurrentDocumentedEntityWrapper($entityWrapper);
+            $this->rendererContext->setCurrentDocumentedEntityWrapper($entityWrapper);
 
             $this->markFileNameAsRendered($entityWrapper->getDocUrl());
 
@@ -113,7 +113,7 @@ final class RendererIterator
 
             $this->sharedCompressedDocumentFileCache->set(
                 $this->getFilesDependenciesCacheKey($entityWrapper->getEntityName()),
-                $this->renderContext->getFilesDependencies()
+                $this->rendererContext->getFilesDependencies()
             );
         }
         $this->sharedCompressedDocumentFileCache->set(

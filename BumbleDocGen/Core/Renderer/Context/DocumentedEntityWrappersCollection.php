@@ -15,7 +15,7 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate
     private array $documentedEntitiesRelations = [];
 
     public function __construct(
-        private RendererContext  $renderContext,
+        private RendererContext  $rendererContext,
         private LocalObjectCache $localObjectCache
     )
     {
@@ -36,11 +36,11 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate
         $documentedEntity = new DocumentedEntityWrapper(
             $rootEntity,
             $this->localObjectCache,
-            $this->renderContext->getCurrentTemplateFilePatch()
+            $this->rendererContext->getCurrentTemplateFilePatch()
         );
 
-        $parentEntityName = $this->renderContext->getCurrentDocumentedEntityWrapper()?->getEntityName();
-        $this->documentedEntitiesRelations[$this->renderContext->getCurrentTemplateFilePatch()][$parentEntityName][$documentedEntity->getEntityName()] = [
+        $parentEntityName = $this->rendererContext->getCurrentDocumentedEntityWrapper()?->getEntityName();
+        $this->documentedEntitiesRelations[$this->rendererContext->getCurrentTemplateFilePatch()][$parentEntityName][$documentedEntity->getEntityName()] = [
             'entity_name' => $documentedEntity->getEntityName(),
             'collection_name' => $documentedEntity->getDocumentTransformableEntity()->getRootEntityCollection()::getEntityCollectionName(),
         ];

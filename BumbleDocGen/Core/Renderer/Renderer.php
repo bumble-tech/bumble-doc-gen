@@ -30,7 +30,7 @@ final class Renderer
         private Configuration                     $configuration,
         private RootEntityCollectionsGroup        $rootEntityCollectionsGroup,
         private PluginEventDispatcher             $pluginEventDispatcher,
-        private RendererContext                   $renderContext,
+        private RendererContext                   $rendererContext,
         private MainTwigEnvironment               $twig,
         private RendererIterator                  $renderIterator,
         private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
@@ -62,7 +62,7 @@ final class Renderer
             $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
 
             if (str_ends_with($filePatch, '.twig')) {
-                $this->renderContext->setCurrentTemplateFilePatch($filePatch);
+                $this->rendererContext->setCurrentTemplateFilePatch($filePatch);
                 $content = $this->twig->render($filePatch,
                     array_merge($templateParams, [
                         'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
@@ -72,7 +72,7 @@ final class Renderer
                 );
 
                 $content = $this->pluginEventDispatcher->dispatch(
-                    new BeforeCreatingDocFile($content, $this->renderContext)
+                    new BeforeCreatingDocFile($content, $this->rendererContext)
                 )->getContent();
 
                 $filePatch = str_replace('.twig', '', $filePatch);

@@ -26,7 +26,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
     public function __construct(
         private Configuration     $configuration,
         private BreadcrumbsHelper $breadcrumbsHelper,
-        private RendererContext $renderContext
+        private RendererContext $rendererContext
     )
     {
     }
@@ -82,7 +82,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
                 $pageKey = $breadcrumb['url'];
                 $structure[$pageKey] ??= [];
             }
-            $this->renderContext->addFileDependency($file->getRealPath());
+            $this->rendererContext->addFileDependency($file->getRealPath());
         }
 
         $drawPages = function (array $pagesData, int $currentDeep = 1) use ($structure, $maxDeep, &$drawPages): string {
