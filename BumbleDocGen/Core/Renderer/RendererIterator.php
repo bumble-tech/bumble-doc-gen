@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection;
-use BumbleDocGen\Core\Renderer\Context\RenderContext;
+use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use Monolog\Logger;
 use Symfony\Component\Finder\Finder;
 
@@ -19,7 +19,7 @@ final class RendererIterator
     private array $renderedFileNames = [];
 
     public function __construct(
-        private RenderContext                      $renderContext,
+        private RendererContext                    $renderContext,
         private RootEntityCollectionsGroup         $rootEntityCollectionsGroup,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration,

@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Renderer\RendererHelper;
 /**
  * Document rendering context
  */
-final class RenderContext
+final class RendererContext
 {
     private array $dependencies = [];
     private string $currentTemplateFilePath = '';

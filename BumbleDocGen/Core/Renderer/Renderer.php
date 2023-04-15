@@ -11,7 +11,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Render\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
-use BumbleDocGen\Core\Renderer\Context\RenderContext;
+use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use Psr\Log\LoggerInterface;
 use Twig\Error\LoaderError;
@@ -30,7 +30,7 @@ final class Renderer
         private Configuration                     $configuration,
         private RootEntityCollectionsGroup        $rootEntityCollectionsGroup,
         private PluginEventDispatcher             $pluginEventDispatcher,
-        private RenderContext                     $renderContext,
+        private RendererContext                   $renderContext,
         private MainTwigEnvironment               $twig,
         private RendererIterator                  $renderIterator,
         private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,

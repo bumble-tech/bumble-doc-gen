@@ -7,7 +7,7 @@ namespace BumbleDocGen\Core\Renderer\Twig\Function;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\Core\Renderer\Context\RenderContext;
+use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
@@ -23,7 +23,7 @@ use DI\NotFoundException;
  * @note This function initiates the creation of documents for the displayed entities
  * @see DocumentedEntityWrapper
  * @see DocumentedEntityWrappersCollection
- * @see RenderContext::$entityWrappersCollection
+ * @see RendererContext::$entityWrappersCollection
  *
  * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension', 'getFunctions') }}
  * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Render\\Twig\\MainExtension') }}

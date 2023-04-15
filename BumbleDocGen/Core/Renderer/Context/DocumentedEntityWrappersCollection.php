@@ -15,7 +15,7 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate
     private array $documentedEntitiesRelations = [];
 
     public function __construct(
-        private RenderContext    $renderContext,
+        private RendererContext  $renderContext,
         private LocalObjectCache $localObjectCache
     )
     {

@@ -7,7 +7,7 @@ namespace BumbleDocGen\Core\Renderer\Twig\Function;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
-use BumbleDocGen\Core\Renderer\Context\RenderContext;
+use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -26,7 +26,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
     public function __construct(
         private Configuration     $configuration,
         private BreadcrumbsHelper $breadcrumbsHelper,
-        private RenderContext     $renderContext
+        private RendererContext $renderContext
     )
     {
     }

@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Renderer\Twig;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Renderer\Context\RenderContext;
+use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
@@ -24,8 +24,8 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
      * @throws InvalidConfigurationParameterException
      */
     public function __construct(
-        private RenderContext $context,
-        private Configuration $configuration
+        private RendererContext $context,
+        private Configuration   $configuration
     )
     {
         $this->setDefaultFunctions();
