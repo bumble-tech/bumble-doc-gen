@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
@@ -13,7 +12,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionMethod;
 
 /**
  * Method obtained by parsing the "method" annotation
@@ -23,16 +21,10 @@ class DynamicMethodEntity implements MethodEntityInterface
     public function __construct(
         private Configuration    $configuration,
         private ParserHelper     $parserHelper,
-        private LocalObjectCache $localObjectCache,
         private ClassEntity      $classEntity,
         private Method           $annotationMethod
     )
     {
-    }
-
-    protected function getLocalObjectCache(): LocalObjectCache
-    {
-        return $this->localObjectCache;
     }
 
     public function getRootEntity(): ClassEntity
@@ -62,12 +54,12 @@ class DynamicMethodEntity implements MethodEntityInterface
     /**
      * @throws \Exception
      */
-    public function getCallMethod(): ReflectionMethod
+    public function getCallMethod(): MethodEntity
     {
         if ($this->isStatic()) {
-            $callMethod = $this->classEntity->getReflection()->getMethod('__callStatic');
+            $callMethod = $this->classEntity->getMethodEntity('__callStatic');
         } else {
-            $callMethod = $this->classEntity->getReflection()->getMethod('__call');
+            $callMethod = $this->classEntity->getMethodEntity('__call');
         }
         return $callMethod;
     }
@@ -128,11 +120,11 @@ class DynamicMethodEntity implements MethodEntityInterface
         $returnType = (string)$this->annotationMethod->getReturnType();
         $returnType = ltrim($returnType, '\\');
         if (!str_contains($returnType, '\\')) {
-            $uses = $this->parserHelper->getUsesList($this->classEntity->getReflection());
+            $uses = $this->parserHelper->getUsesListByClassEntity($this->classEntity);
             if (isset($uses[$returnType])) {
                 $returnType = $uses[$returnType];
             } else {
-                $newClassName = "{$this->classEntity->getReflection()->getNamespaceName()}\\{$returnType}";
+                $newClassName = "{$this->getNamespaceName()}\\{$returnType}";
                 if ($this->parserHelper->isClassLoaded($newClassName)) {
                     $returnType = $newClassName;
                 }
@@ -174,7 +166,7 @@ class DynamicMethodEntity implements MethodEntityInterface
     public function getImplementingReflectionClass(): ReflectionClass
     {
         $callMethod = $this->getCallMethod();
-        return $callMethod->getImplementingClass();
+        return $callMethod->getImplementingReflectionClass();
     }
 
     /**
