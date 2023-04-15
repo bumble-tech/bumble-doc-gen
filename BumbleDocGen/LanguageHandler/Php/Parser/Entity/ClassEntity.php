@@ -42,7 +42,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     private bool $isClassLoad = false;
 
     public function __construct(
-        Configuration                 $configuration,
+        private Configuration                 $configuration,
         private PhpHandlerSettings    $phpHandlerSettings,
         private ReflectorWrapper      $reflector,
         private ClassEntityCollection $classEntityCollection,
@@ -121,7 +121,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             foreach ($reflections as $reflectionClass) {
                 $fileName = $reflectionClass->getFileName();
                 if ($fileName) {
-                    $relativeFileName = str_replace($this->getConfiguration()->getProjectRoot(), '', $reflectionClass->getFileName());
+                    $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName());
                     $fileDependencies[$relativeFileName] = md5_file($fileName);
                 }
             }
@@ -322,7 +322,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!$this->relativeFileNameLoaded) {
             $this->relativeFileNameLoaded = true;
             $fileName = $this->getReflection()->getFileName();
-            $projectRoot = $this->getConfiguration()->getProjectRoot();
+            $projectRoot = $this->configuration->getProjectRoot();
             if (!$fileName || !str_starts_with($fileName, $projectRoot)) {
                 return null;
             }

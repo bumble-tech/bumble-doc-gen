@@ -36,11 +36,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     {
     }
 
-    public function getConfiguration(): Configuration
-    {
-        return $this->configuration;
-    }
-
     /**
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
@@ -67,11 +62,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     abstract public function getEntityDependencies(): array;
 
     abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
-
-    final protected function getLocalObjectCache(): LocalObjectCache
-    {
-        return $this->localObjectCache;
-    }
 
     /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
