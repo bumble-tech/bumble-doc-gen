@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 
 /**
- * Entity documentation render interface
+ * Entity documentation renderer interface
  */
 interface EntityDocRenderInterface
 {

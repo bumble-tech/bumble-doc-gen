@@ -816,14 +816,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        $docRender = $this->getPhpHandlerSettings()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
-        if (!$docRender) {
+        $docRenderer = $this->getPhpHandlerSettings()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
+        if (!$docRenderer) {
             throw new \Exception(
                 "Renderer for file `{$this->getName()}` not found"
             );
         }
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docRender);
-        return $docRender;
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docRenderer);
+        return $docRenderer;
     }
 
     /**
