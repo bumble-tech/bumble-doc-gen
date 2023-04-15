@@ -16,6 +16,7 @@ use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
+use DI\Attribute\Inject;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -25,13 +26,14 @@ use Roave\BetterReflection\Reflection\ReflectionProperty;
 
 abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
+    #[Inject] private GetDocumentedEntityUrl $documentedEntityUrlFunction;
+    #[Inject] private RendererHelper $rendererHelper;
+
     protected function __construct(
-        private Configuration          $configuration,
-        private LocalObjectCache       $localObjectCache,
-        private GetDocumentedEntityUrl $documentedEntityUrlFunction,
-        private RendererHelper         $rendererHelper,
-        private ParserHelper           $parserHelper,
-        private LoggerInterface        $logger
+        private Configuration    $configuration,
+        private LocalObjectCache $localObjectCache,
+        private ParserHelper     $parserHelper,
+        private LoggerInterface  $logger
     )
     {
     }

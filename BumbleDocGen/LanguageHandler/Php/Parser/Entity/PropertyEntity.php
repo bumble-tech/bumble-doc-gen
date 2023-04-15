@@ -9,8 +9,6 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use BumbleDocGen\Core\Renderer\RendererHelper;
-use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
@@ -34,8 +32,6 @@ class PropertyEntity extends BaseEntity
         private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
         private LoggerInterface  $logger,
-        RendererHelper           $rendererHelper,
-        GetDocumentedEntityUrl   $documentedEntityUrlFunction,
         private string           $propertyName,
         private string           $declaringClassName,
         private string           $implementingClassName,
@@ -44,8 +40,6 @@ class PropertyEntity extends BaseEntity
         parent::__construct(
             $configuration,
             $localObjectCache,
-            $documentedEntityUrlFunction,
-            $rendererHelper,
             $parserHelper,
             $logger
         );
@@ -185,10 +179,6 @@ class PropertyEntity extends BaseEntity
         return $this->implementingClassName;
     }
 
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
     public function getImplementingClass(): ClassEntity
     {
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());

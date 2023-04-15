@@ -9,8 +9,6 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use BumbleDocGen\Core\Renderer\RendererHelper;
-use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
@@ -36,8 +34,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
         LoggerInterface          $logger,
-        RendererHelper           $rendererHelper,
-        GetDocumentedEntityUrl   $documentedEntityUrlFunction,
         private string           $methodName,
         private string           $declaringClassName,
         private string           $implementingClassName,
@@ -46,8 +42,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         parent::__construct(
             $configuration,
             $localObjectCache,
-            $documentedEntityUrlFunction,
-            $rendererHelper,
             $parserHelper,
             $logger
         );

@@ -12,14 +12,13 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
-use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Filter\PrepareSourceLink;
-use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
+use DI\Attribute\Inject;
 use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -36,21 +35,20 @@ use Roave\BetterReflection\SourceLocator\Located\LocatedSource;
  */
 class ClassEntity extends BaseEntity implements DocumentTransformableEntityInterface, RootEntityInterface
 {
+    #[Inject] private Container $diContainer;
+
     private array $pluginsData = [];
     private ?ReflectionClass $reflectionClass = null;
     private bool $relativeFileNameLoaded = false;
     private bool $isClassLoad = false;
 
     public function __construct(
-        private Configuration                 $configuration,
+        private Configuration         $configuration,
         private PhpHandlerSettings    $phpHandlerSettings,
         private ReflectorWrapper      $reflector,
         private ClassEntityCollection $classEntityCollection,
         private ParserHelper          $parserHelper,
         private LocalObjectCache      $localObjectCache,
-        GetDocumentedEntityUrl        $documentedEntityUrlFunction,
-        RendererHelper                $rendererHelper,
-        private Container             $diContainer,
         private LoggerInterface       $logger,
         private string                $className,
         private ?string               $relativeFileName,
@@ -59,8 +57,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         parent::__construct(
             $configuration,
             $localObjectCache,
-            $documentedEntityUrlFunction,
-            $rendererHelper,
             $parserHelper,
             $logger
         );
