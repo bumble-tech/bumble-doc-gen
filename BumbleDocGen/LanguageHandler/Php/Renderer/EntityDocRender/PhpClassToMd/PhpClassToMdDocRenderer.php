@@ -15,7 +15,7 @@ use Twig\Error\SyntaxError;
 /**
  * Rendering PHP classes into md format documents (for display on GitHub)
  */
-class PhpClassToMdDocRender implements EntityDocRenderInterface
+class PhpClassToMdDocRenderer implements EntityDocRenderInterface
 {
     public const BLOCK_AFTER_MAIN_INFO = 'after_main_info';
     public const BLOCK_AFTER_HEADER = 'after_header';

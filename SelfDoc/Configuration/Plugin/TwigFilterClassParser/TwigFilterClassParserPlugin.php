@@ -12,7 +12,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender\PhpClassToMd\PhpClassToMdDocRender;
+use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRender\PhpClassToMd\PhpClassToMdDocRenderer;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -42,7 +42,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
     {
         if (
-            $event->getBlockType() !== PhpClassToMdDocRender::BLOCK_AFTER_MAIN_INFO
+            $event->getBlockType() !== PhpClassToMdDocRenderer::BLOCK_AFTER_MAIN_INFO
         ) {
             return;
         }
