@@ -816,7 +816,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        $docRenderer = $this->getPhpHandlerSettings()->getEntityDocRendersCollection()->getFirstMatchingRender($this);
+        $docRenderer = $this->getPhpHandlerSettings()->getEntityDocRenderersCollection()->getFirstMatchingRender($this);
         if (!$docRenderer) {
             throw new \Exception(
                 "Renderer for file `{$this->getName()}` not found"

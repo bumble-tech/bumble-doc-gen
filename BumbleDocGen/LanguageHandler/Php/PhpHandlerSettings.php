@@ -112,22 +112,22 @@ final class PhpHandlerSettings
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getEntityDocRendersCollection(): EntityDocRenderersCollection
+    public function getEntityDocRenderersCollection(): EntityDocRenderersCollection
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $entityDocRendersCollection = new EntityDocRenderersCollection();
-        $entityDocRenders = $this->parameterBag->validateAndGetClassListValue(
-            $this->getSettingsKey('doc_renders'),
+        $entityDocRenderersCollection = new EntityDocRenderersCollection();
+        $entityDocRenderers = $this->parameterBag->validateAndGetClassListValue(
+            $this->getSettingsKey('doc_renderers'),
             EntityDocRendererInterface::class
         );
-        foreach ($entityDocRenders as $entityDocRender) {
-            $entityDocRendersCollection->add($entityDocRender);
+        foreach ($entityDocRenderers as $entityDocRender) {
+            $entityDocRenderersCollection->add($entityDocRender);
         }
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $entityDocRendersCollection);
-        return $entityDocRendersCollection;
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $entityDocRenderersCollection);
+        return $entityDocRenderersCollection;
     }
 
     /**
