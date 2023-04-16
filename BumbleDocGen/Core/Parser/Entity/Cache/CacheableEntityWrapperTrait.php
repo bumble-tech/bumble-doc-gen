@@ -22,6 +22,7 @@ trait CacheableEntityWrapperTrait
     #[Inject] private Configuration $configuration;
     #[Inject] private LoggerInterface $logger;
     #[Inject] private LocalObjectCache $localObjectCache;
+    #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
 
     abstract public function getEntityDependencies(): array;
 
@@ -114,7 +115,7 @@ trait CacheableEntityWrapperTrait
     public function getCacheValues(): array
     {
         $cacheKey = $this->getCacheKey();
-        $cacheValues = EntityCacheStorageHelper::getCacheValues($cacheKey);
+        $cacheValues = $this->entityCacheStorageHelper->getCacheValues($cacheKey);
         if (is_null($cacheValues)) {
             $cacheValues = [];
             if (
@@ -129,7 +130,7 @@ trait CacheableEntityWrapperTrait
                     }
                 }
             }
-            EntityCacheStorageHelper::setCacheValues($cacheKey, $cacheValues);
+            $this->entityCacheStorageHelper->setCacheValues($cacheKey, $cacheValues);
         }
         return $cacheValues;
     }
@@ -147,6 +148,6 @@ trait CacheableEntityWrapperTrait
     public function addValueToCache(string $key, mixed $value): void
     {
         $cacheKey = $this->getCacheKey();
-        EntityCacheStorageHelper::addValueToCache($cacheKey, $key, $value);
+        $this->entityCacheStorageHelper->addValueToCache($cacheKey, $key, $value);
     }
 }

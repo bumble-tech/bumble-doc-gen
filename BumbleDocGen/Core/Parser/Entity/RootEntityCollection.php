@@ -7,14 +7,15 @@ namespace BumbleDocGen\Core\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\EntityCacheStorageHelper;
+use DI\Attribute\Inject;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
 
 abstract class RootEntityCollection extends BaseEntityCollection
 {
-    /**
-     * @var RootEntityInterface[]
-     */
+    #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
+
+    /** @var RootEntityInterface[] */
     protected array $entities = [];
 
     public function get(string $objectName): ?RootEntityInterface
@@ -47,7 +48,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
     /**
      * @throws InvalidArgumentException
      */
-    public function updateEntitiesCache(CacheItemPoolInterface $cacheItemPool): void
+    public function updateEntitiesCache(): void
     {
         foreach ($this as $entity) {
             if (
@@ -57,6 +58,6 @@ abstract class RootEntityCollection extends BaseEntityCollection
                 $entity->reloadEntityDependenciesCache();
             }
         }
-        EntityCacheStorageHelper::saveCache($cacheItemPool);
+        $this->entityCacheStorageHelper->saveCache();
     }
 }

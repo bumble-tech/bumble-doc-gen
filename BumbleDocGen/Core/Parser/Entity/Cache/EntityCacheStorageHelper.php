@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
-use Psr\Cache\CacheItemPoolInterface;
+use BumbleDocGen\Core\Cache\LocalCache\EntityCacheItemPool;
 use Psr\Cache\InvalidArgumentException;
 
 /**
@@ -12,46 +12,45 @@ use Psr\Cache\InvalidArgumentException;
  */
 final class EntityCacheStorageHelper
 {
-    private static array $cache = [];
+    private array $cache = [];
 
-    public static function getAllCacheValues(): array
+    public function __construct(private EntityCacheItemPool $cacheItemPool)
     {
-        return self::$cache;
     }
 
-    public static function getCacheValues(string $cacheKey): ?array
+    public function getAllCacheValues(): array
     {
-        return self::$cache[$cacheKey] ?? null;
+        return $this->cache;
     }
 
-    public static function setCacheValues(string $cacheKey, array $values): void
+    public function getCacheValues(string $cacheKey): ?array
+    {
+        return $this->cache[$cacheKey] ?? null;
+    }
+
+    public function setCacheValues(string $cacheKey, array $values): void
     {
         foreach ($values as $key => $value) {
-            self::addValueToCache($cacheKey, $key, $value);
+            $this->addValueToCache($cacheKey, $key, $value);
         }
     }
 
-    public static function getCacheValue(string $cacheKey, string $itemKey): mixed
+    public function addValueToCache(string $cacheKey, string $itemKey, mixed $value): void
     {
-        return self::$cache[$cacheKey][$itemKey] ?? null;
-    }
-
-    public static function addValueToCache(string $cacheKey, string $itemKey, mixed $value): void
-    {
-        self::$cache[$cacheKey][$itemKey] = $value;
+        $this->cache[$cacheKey][$itemKey] = $value;
     }
 
     /**
      * @throws InvalidArgumentException
      */
-    public static function saveCache(CacheItemPoolInterface $cacheItemPool): void
+    public function saveCache(): void
     {
-        foreach (EntityCacheStorageHelper::getAllCacheValues() as $cacheKey => $cacheData) {
-            $cacheItem = $cacheItemPool->getItem($cacheKey);
+        foreach ($this->getAllCacheValues() as $cacheKey => $cacheData) {
+            $cacheItem = $this->cacheItemPool->getItem($cacheKey);
             $cacheItem->set($cacheData);
             $cacheItem->expiresAfter(604800);
-            $cacheItemPool->saveDeferred($cacheItem);
+            $this->cacheItemPool->saveDeferred($cacheItem);
         }
-        $cacheItemPool->commit();
+        $this->cacheItemPool->commit();
     }
 }
