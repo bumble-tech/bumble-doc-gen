@@ -73,11 +73,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         $this->pluginEventDispatcher->dispatch(new AfterLoadingClassEntityCollection($this));
     }
 
-    public function getConfiguration(): Configuration
-    {
-        return $this->configuration;
-    }
-
     /**
      * @throws InvalidConfigurationParameterException
      * @throws Exception\ReflectionException
