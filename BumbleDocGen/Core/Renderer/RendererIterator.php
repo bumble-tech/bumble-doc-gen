@@ -60,6 +60,8 @@ final class RendererIterator
                 $this->isFilesDependenciesCacheOutdated($templateFileName) ||
                 $this->isEntitiesOperationsLogCacheOutdated($templateFileName)
             ) {
+                $this->rendererContext->clearFilesDependencies();
+                $this->rootEntityCollectionsGroup->clearOperationsLog();
                 yield $templateFile;
             } else {
                 $this->moveCachedDataToCurrentData($templateFileName);
@@ -101,6 +103,8 @@ final class RendererIterator
                 $this->isEntityRelationsCacheOutdated($entityWrapper) ||
                 $this->isEntitiesOperationsLogCacheOutdated($entityWrapper->getEntityName())
             ) {
+                $this->rendererContext->clearFilesDependencies();
+                $this->rootEntityCollectionsGroup->clearOperationsLog();
                 yield $entityWrapper;
             } else {
                 $this->moveCachedDataToCurrentData($entityWrapper->getInitiatorFilePath(), $entityWrapper->getEntityName());

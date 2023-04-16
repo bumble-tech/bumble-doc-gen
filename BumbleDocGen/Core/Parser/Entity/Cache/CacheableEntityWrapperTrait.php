@@ -7,6 +7,7 @@ namespace BumbleDocGen\Core\Parser\Entity\Cache;
 use BumbleDocGen\Core\Cache\LocalCache\EntityCacheItemPool;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
+use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
@@ -23,6 +24,7 @@ trait CacheableEntityWrapperTrait
     #[Inject] private LoggerInterface $logger;
     #[Inject] private LocalObjectCache $localObjectCache;
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
+    #[Inject] private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache;
 
     abstract public function getEntityDependencies(): array;
 
@@ -36,6 +38,11 @@ trait CacheableEntityWrapperTrait
         return null;
     }
 
+    private function getEntityDependenciesCacheKey(): string
+    {
+        return "__internalEntityDependencies{$this->getCacheKey()}";
+    }
+
     /**
      * @throws InvalidArgumentException
      * @throws InvalidConfigurationParameterException
@@ -45,11 +52,12 @@ trait CacheableEntityWrapperTrait
         $entity = $this->getCurrentRootEntity();
         $entityDependencies = [];
         if ($entity) {
-            $filesDependenciesCacheKey = '__internalEntityDependencies';
-            $entityDependencies = $this->getCacheValue($filesDependenciesCacheKey);
+            $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
+            $entityDependencies = $this->sharedCompressedDocumentFileCache->get($filesDependenciesCacheKey);
+
             if (is_null($entityDependencies)) {
                 $entityDependencies = $this->getEntityDependencies();
-                $this->addValueToCache($filesDependenciesCacheKey, $entityDependencies);
+                $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
             }
         }
         return $entityDependencies;
@@ -60,9 +68,9 @@ trait CacheableEntityWrapperTrait
         $entity = $this->getCurrentRootEntity();
         if ($entity) {
             $this->logger->info("Caching {$entity->getFileName()} dependencies");
-            $filesDependenciesCacheKey = '__internalEntityDependencies';
+            $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
             $entityDependencies = $this->getEntityDependencies();
-            $this->addValueToCache($filesDependenciesCacheKey, $entityDependencies);
+            $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
         }
     }
 
