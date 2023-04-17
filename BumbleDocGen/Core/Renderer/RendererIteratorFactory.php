@@ -62,6 +62,8 @@ final class RendererIteratorFactory
             ) {
                 $this->rendererContext->clearFilesDependencies();
                 $this->rootEntityCollectionsGroup->clearOperationsLog();
+                $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
+                $this->rendererContext->addFileDependency($templateFile->getRealPath());
                 yield $templateFile;
             } else {
                 $this->moveCachedDataToCurrentData($templateFileName);
@@ -95,11 +97,12 @@ final class RendererIteratorFactory
 
             $this->markFileNameAsRendered($entityWrapper->getDocUrl());
 
+            $filesDependenciesKey = "{$entityWrapper->getEntityName()}_{$entityWrapper->getInitiatorFilePath()}";
             if (
                 !$this->configuration->useSharedCache() ||
                 !$this->isGeneratedEntityDocumentExists($entityWrapper) ||
                 $entityWrapper->getDocumentTransformableEntity()->entityCacheIsOutdated() ||
-                $this->isFilesDependenciesCacheOutdated($entityWrapper->getEntityName()) ||
+                $this->isFilesDependenciesCacheOutdated($filesDependenciesKey) ||
                 $this->isEntityRelationsCacheOutdated($entityWrapper) ||
                 $this->isEntitiesOperationsLogCacheOutdated($entityWrapper->getEntityName())
             ) {
@@ -118,7 +121,7 @@ final class RendererIteratorFactory
             );
 
             $this->sharedCompressedDocumentFileCache->set(
-                $this->getFilesDependenciesCacheKey($entityWrapper->getEntityName()),
+                $this->getFilesDependenciesCacheKey($filesDependenciesKey),
                 $this->rendererContext->getFilesDependencies()
             );
         }
@@ -220,9 +223,23 @@ final class RendererIteratorFactory
         if (is_null($cachedFilesDependencies)) {
             return true;
         }
-        foreach ($cachedFilesDependencies as $fileNameTemplate => $fileHash) {
+        foreach ($cachedFilesDependencies as $fileNameTemplate => $cachedFileDependencyData) {
             $fileName = $this->rendererHelper->fileInternalLinkToFilePath($fileNameTemplate);
-            if (md5_file($fileName) !== $fileHash) {
+            $newHash = '';
+            if ($cachedFileDependencyData['contentFilterRegex'] && $cachedFileDependencyData['matchIndex']) {
+                if (
+                    preg_match(
+                        $cachedFileDependencyData['contentFilterRegex'],
+                        file_get_contents($fileName), $matches
+                    ) &&
+                    isset($matches[$cachedFileDependencyData['matchIndex']])
+                ) {
+                    $newHash = md5($matches[$cachedFileDependencyData['matchIndex']]);
+                }
+            } else {
+                $newHash = md5_file($fileName);
+            }
+            if ($newHash !== $cachedFileDependencyData['hash']) {
                 return true;
             }
         }
