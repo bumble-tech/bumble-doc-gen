@@ -205,11 +205,12 @@ final class ConfigurationParameterBag
     }
 
     /**
+     * @param string[] $fileExtensions
      * @throws InvalidConfigurationParameterException
      */
     public function validateAndGetFilePathValue(
         string $parameterName,
-        string $fileExtension,
+        array  $fileExtensions,
         bool   $nullable = true
     ): ?string
     {
@@ -226,14 +227,14 @@ final class ConfigurationParameterBag
         if (is_null($value)) {
             return null;
         }
-        if (!is_file($parameterName)) {
+        if (!is_file($value)) {
             throw new InvalidConfigurationParameterException(
                 "Configuration parameter `{$parameterName}` must contain exists file path"
             );
         }
-        if (!str_ends_with($parameterName, ".{$fileExtension}")) {
+        if (!preg_match('/(.*)(\.(' . implode('|', $fileExtensions) . '))$/', $value)) {
             throw new InvalidConfigurationParameterException(
-                "Configuration parameter `{$parameterName}` must contain path to file with extension `{$fileExtension}`"
+                "Configuration parameter `{$parameterName}` must contain path to file with extensions: `" . implode('|', $fileExtensions) . "`"
             );
         }
         return $value;

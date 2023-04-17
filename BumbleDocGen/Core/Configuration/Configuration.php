@@ -37,7 +37,10 @@ final class Configuration
     )
     {
         if ($parameterBag->has('parent_configuration')) {
-            $parentConfiguration = $parameterBag->validateAndGetFilePathValue('parent_configuration', 'yaml');
+            $parentConfiguration = $parameterBag->validateAndGetFilePathValue('parent_configuration', [
+                'yml',
+                'yaml'
+            ]);
             if ($parentConfiguration) {
                 $parameterBag->addValueFromFileIfNotExists(
                     '',
