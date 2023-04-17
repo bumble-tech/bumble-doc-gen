@@ -32,7 +32,7 @@ final class Renderer
         private PluginEventDispatcher             $pluginEventDispatcher,
         private RendererContext                   $rendererContext,
         private MainTwigEnvironment               $twig,
-        private RendererIterator                  $renderIterator,
+        private RendererIteratorFactory           $renderIteratorFactory,
         private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
         private LoggerInterface                   $logger
     )
@@ -57,7 +57,7 @@ final class Renderer
             $templateParams[$collectionName] = $rootEntityCollection;
         }
 
-        foreach ($this->renderIterator->getTemplatesWithOutdatedCache() as $templateFile) {
+        foreach ($this->renderIteratorFactory->getTemplatesWithOutdatedCache() as $templateFile) {
             /**@var \SplFileInfo $templateFile */
             $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
 
@@ -89,7 +89,7 @@ final class Renderer
             $this->logger->info("Saving `{$filePatch}`");
         }
 
-        foreach ($this->renderIterator->getDocumentedEntityWrappersWithOutdatedCache() as $entityWrapper) {
+        foreach ($this->renderIteratorFactory->getDocumentedEntityWrappersWithOutdatedCache() as $entityWrapper) {
             /** @var DocumentedEntityWrapper $entityWrapper */
 
             $content = $entityWrapper->getDocRender()->getRenderedText($entityWrapper);
@@ -107,7 +107,7 @@ final class Renderer
             $this->logger->info("Saving `{$filePatch}`");
         }
 
-        foreach ($this->renderIterator->getFilesToRemove() as $file) {
+        foreach ($this->renderIteratorFactory->getFilesToRemove() as $file) {
             unlink($file->getPathname());
             $this->logger->info("Removing `{$file->getPathname()}` file");
         }
