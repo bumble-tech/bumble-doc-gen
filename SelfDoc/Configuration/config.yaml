@@ -6,6 +6,7 @@ language_handlers:
     class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
     settings:
       file_source_base_url: 'https://***REMOVED***/blob/master'
+      async_source_loading_enabled: true
 source_locators:
   - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
     arguments:

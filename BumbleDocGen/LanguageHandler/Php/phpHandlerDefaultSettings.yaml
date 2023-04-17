@@ -31,4 +31,4 @@ custom_twig_functions:
 custom_twig_filters:
 
 file_source_base_url: null
-async_source_loading_enabled: true
+async_source_loading_enabled: false
