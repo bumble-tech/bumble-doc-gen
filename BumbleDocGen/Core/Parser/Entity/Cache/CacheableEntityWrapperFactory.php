@@ -53,27 +53,15 @@ final class CacheableEntityWrapperFactory
 
                         $cacheableMethodAttrObj = $cacheableMethodAttr->newInstance();
                         $expiresAfter = time() + $cacheableMethodAttrObj->getCacheSeconds();
-                        $newMethod->setBody('
-                            $funcArgs = func_get_args();
-                            $cacheKey = \\' . $cacheableMethodAttrObj->getCacheKeyGeneratorClass() . '::generateKey(
-                                \'' . $cacheNamespace . '\',
-                                $this,
-                                $funcArgs
+                        $newMethod->setBody("
+                            return \$this->getWrappedMethodResult(
+                                '{$method->getName()}', 
+                                func_get_args(), 
+                                '{$cacheableMethodAttrObj->getCacheKeyGeneratorClass()}',
+                                '{$cacheNamespace}',
+                                {$expiresAfter}
                             );
-                            
-                            $internalDataKey = "__data__";
-                            
-                            $result = $this->getCacheValue($cacheKey);
-                            if(!is_array($result) || !array_key_exists($internalDataKey, $result) || $this->entityCacheIsOutdated()) {
-                                $methodReturnValue = parent::' . $method->getName() . '(...$funcArgs);
-                                $result = [
-                                    $internalDataKey => $methodReturnValue,
-                                    "__expires_after__" => ' . $expiresAfter . '
-                                ];
-                                $this->addValueToCache($cacheKey, $result);
-                            }
-                            return $result[$internalDataKey];
-                        ');
+                        ");
                     }
                 }
             }

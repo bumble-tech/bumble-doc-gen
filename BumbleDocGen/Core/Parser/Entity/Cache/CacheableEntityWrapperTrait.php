@@ -5,23 +5,15 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
 use BumbleDocGen\Core\Cache\LocalCache\EntityCacheItemPool;
-use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
-use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
-use BumbleDocGen\Core\Configuration\Configuration;
 use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
-use Psr\Log\LoggerInterface;
 
 trait CacheableEntityWrapperTrait
 {
-    private string $cacheVersion = 'v4';
+    private string $cacheVersion = 'v5';
 
     #[Inject] private EntityCacheItemPool $entityCacheItemPool;
-    #[Inject] private Configuration $configuration;
-    #[Inject] private LoggerInterface $logger;
-    #[Inject] private LocalObjectCache $localObjectCache;
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
-    #[Inject] private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache;
 
     abstract public function getCacheKey(): string;
 
@@ -35,7 +27,37 @@ trait CacheableEntityWrapperTrait
     /**
      * @throws InvalidArgumentException
      */
-    public function getCacheValues(): array
+    final protected function getWrappedMethodResult(
+        string $methodName,
+        array  $funcArgs,
+        string $getCacheKeyGeneratorClassName,
+        string $cacheNamespace,
+        int    $cacheExpiresAfter
+    )
+    {
+        $cacheKey = $getCacheKeyGeneratorClassName::generateKey(
+            $cacheNamespace,
+            $this,
+            $funcArgs
+        );
+
+        $internalDataKey = "__data__";
+        $result = $this->getCacheValue($cacheKey);
+        if (!is_array($result) || !array_key_exists($internalDataKey, $result) || $this->entityCacheIsOutdated()) {
+            $methodReturnValue = call_user_func_array(['parent', $methodName], $funcArgs);
+            $result = [
+                $internalDataKey => $methodReturnValue,
+                "__expires_after__" => $cacheExpiresAfter
+            ];
+            $this->addValueToCache($cacheKey, $result);
+        }
+        return $result[$internalDataKey];
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    private function getCacheValues(): array
     {
         $cacheKey = $this->getVersionedCacheKey();
         $cacheValues = $this->entityCacheStorageHelper->getCacheValues($cacheKey);
@@ -61,13 +83,13 @@ trait CacheableEntityWrapperTrait
     /**
      * @throws InvalidArgumentException
      */
-    public function getCacheValue(string $key): mixed
+    private function getCacheValue(string $key): mixed
     {
         $cacheValues = $this->getCacheValues();
         return $cacheValues[$key] ?? null;
     }
 
-    public function addValueToCache(string $key, mixed $value): void
+    private function addValueToCache(string $key, mixed $value): void
     {
         $cacheKey = $this->getVersionedCacheKey();
         $this->entityCacheStorageHelper->addValueToCache($cacheKey, $key, $value);
