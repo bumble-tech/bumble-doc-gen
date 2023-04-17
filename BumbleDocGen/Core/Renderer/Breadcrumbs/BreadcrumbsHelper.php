@@ -166,6 +166,28 @@ final class BreadcrumbsHelper
     }
 
     /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getBreadcrumbsForTemplates(string $templateFilePatch, bool $fromCurrent = true): array
+    {
+        $breadcrumbs = [];
+        $filePatch = $templateFilePatch;
+        do {
+            $filePatch = str_replace('.twig', '', $filePatch);
+            if (!$fromCurrent) {
+                $fromCurrent = true;
+                continue;
+            }
+            $templateFilePatch = "{$this->configuration->getTemplatesDir()}{$filePatch}";
+            $breadcrumbs[] = [
+                'template' => "$templateFilePatch.twig",
+                'title' => $this->getTemplateTitle($filePatch),
+            ];
+        } while ($filePatch = $this->getPrevPage($filePatch));
+        return array_reverse($breadcrumbs);
+    }
+
+    /**
      * Returns an HTML string with rendered breadcrumbs
      *
      * @throws SyntaxError
