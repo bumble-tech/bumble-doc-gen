@@ -57,10 +57,27 @@ final class RendererContext
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function addFileDependency(string $filePath): void
+    public function addFileDependency(
+        string  $filePath,
+        ?string $contentFilterRegex = null,
+        ?int    $matchIndex = null
+    ): void
     {
+        $hash = '';
         $fileInternalLink = $this->rendererHelper->filePathToFileInternalLink($filePath);
-        $this->dependencies[$fileInternalLink] = md5_file($filePath);
+        if ($contentFilterRegex && $matchIndex) {
+            if (preg_match($contentFilterRegex, file_get_contents($filePath), $matches) && isset($matches[$matchIndex])) {
+                $hash = md5($matches[$matchIndex]);
+            }
+        } else {
+            $hash = md5_file($filePath);
+        }
+
+        $this->dependencies[$fileInternalLink] = [
+            'contentFilterRegex' => $contentFilterRegex,
+            'matchIndex' => $matchIndex,
+            'hash' => $hash
+        ];
     }
 
     public function getFilesDependencies(): array
