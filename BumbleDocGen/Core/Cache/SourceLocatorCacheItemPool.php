@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\Core\Cache\LocalCache;
+namespace BumbleDocGen\Core\Cache;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
@@ -10,7 +10,7 @@ use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-final class SourceLocatorCache implements CacheItemPoolInterface
+final class SourceLocatorCacheItemPool implements CacheItemPoolInterface
 {
     private CacheItemPoolInterface $cacheItemPool;
 

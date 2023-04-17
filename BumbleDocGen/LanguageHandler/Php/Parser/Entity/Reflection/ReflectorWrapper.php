@@ -2,7 +2,7 @@
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection;
 
-use BumbleDocGen\Core\Cache\LocalCache\SourceLocatorCache;
+use BumbleDocGen\Core\Cache\SourceLocatorCacheItemPool;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
@@ -29,7 +29,7 @@ final class ReflectorWrapper implements Reflector
         PhpHandlerSettings    $phpHandlerSettings,
         PluginEventDispatcher $pluginEventDispatcher,
         BetterReflection      $betterReflection,
-        SourceLocatorCache    $sourceLocatorCache
+        SourceLocatorCacheItemPool $sourceLocatorCache
     )
     {
         $sourceLocatorsCollection = $pluginEventDispatcher->dispatch(

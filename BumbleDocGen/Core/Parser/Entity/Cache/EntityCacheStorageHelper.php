@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
-use BumbleDocGen\Core\Cache\LocalCache\EntityCacheItemPool;
+use BumbleDocGen\Core\Cache\EntityCacheItemPool;
 use Psr\Cache\InvalidArgumentException;
 
 /**

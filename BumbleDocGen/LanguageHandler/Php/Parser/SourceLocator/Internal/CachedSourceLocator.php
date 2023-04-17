@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal;
 
-use BumbleDocGen\Core\Cache\LocalCache\SourceLocatorCache;
+use BumbleDocGen\Core\Cache\SourceLocatorCacheItemPool;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use Psr\Cache\InvalidArgumentException;
@@ -33,7 +33,7 @@ final class CachedSourceLocator implements SourceLocator
     public function __construct(
         private SourceLocator      $sourceLocator,
         private Configuration      $configuration,
-        private SourceLocatorCache $cache
+        private SourceLocatorCacheItemPool $cache
     )
     {
     }
