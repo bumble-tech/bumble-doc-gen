@@ -26,7 +26,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
     public function __construct(
         private Configuration     $configuration,
         private BreadcrumbsHelper $breadcrumbsHelper,
-        private RendererContext $rendererContext
+        private RendererContext   $rendererContext
     )
     {
     }
