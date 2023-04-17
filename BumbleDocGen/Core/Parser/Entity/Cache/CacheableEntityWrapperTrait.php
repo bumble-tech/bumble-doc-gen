@@ -27,12 +27,17 @@ trait CacheableEntityWrapperTrait
 
     abstract public function entityCacheIsOutdated(): bool;
 
+    private function getVersionedCacheKey(): string
+    {
+        return "{$this->cacheVersion}_{$this->getCacheKey()}";
+    }
+
     /**
      * @throws InvalidArgumentException
      */
     public function getCacheValues(): array
     {
-        $cacheKey = $this->getCacheKey();
+        $cacheKey = $this->getVersionedCacheKey();
         $cacheValues = $this->entityCacheStorageHelper->getCacheValues($cacheKey);
         if (is_null($cacheValues)) {
             $cacheValues = [];
@@ -64,7 +69,7 @@ trait CacheableEntityWrapperTrait
 
     public function addValueToCache(string $key, mixed $value): void
     {
-        $cacheKey = $this->getCacheKey();
+        $cacheKey = $this->getVersionedCacheKey();
         $this->entityCacheStorageHelper->addValueToCache($cacheKey, $key, $value);
     }
 }
