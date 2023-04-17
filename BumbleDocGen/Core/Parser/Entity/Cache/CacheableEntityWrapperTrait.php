@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
 use BumbleDocGen\Core\Cache\LocalCache\EntityCacheItemPool;
-use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
-use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -26,99 +23,12 @@ trait CacheableEntityWrapperTrait
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
     #[Inject] private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache;
 
-    abstract public function getEntityDependencies(): array;
+    abstract public function getCacheKey(): string;
 
-    private function getCurrentRootEntity(): ?RootEntityInterface
-    {
-        if (is_a($this, RootEntityInterface::class)) {
-            return $this;
-        } else if (method_exists($this, 'getRootEntity')) {
-            return $this->getRootEntity();
-        }
-        return null;
-    }
-
-    private function getEntityDependenciesCacheKey(): string
-    {
-        return "__internalEntityDependencies{$this->getCacheKey()}";
-    }
+    abstract public function entityCacheIsOutdated(): bool;
 
     /**
      * @throws InvalidArgumentException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getCachedEntityDependencies(): array
-    {
-        $entity = $this->getCurrentRootEntity();
-        $entityDependencies = [];
-        if ($entity) {
-            $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
-            $entityDependencies = $this->sharedCompressedDocumentFileCache->get($filesDependenciesCacheKey);
-
-            if (is_null($entityDependencies)) {
-                $entityDependencies = $this->getEntityDependencies();
-                $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
-            }
-        }
-        return $entityDependencies;
-    }
-
-    public function reloadEntityDependenciesCache(): void
-    {
-        $entity = $this->getCurrentRootEntity();
-        if ($entity) {
-            $this->logger->info("Caching {$entity->getFileName()} dependencies");
-            $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
-            $entityDependencies = $this->getEntityDependencies();
-            $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
-        }
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     * @throws InvalidArgumentException
-     */
-    public function entityCacheIsOutdated(): bool
-    {
-        $entity = $this->getCurrentRootEntity();
-        $entityName = $entity?->getName();
-        if (!$entity || !$entity->isEntityNameValid($entityName)) {
-            return false;
-        }
-
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $entityName);
-        } catch (ObjectNotFoundException) {
-        }
-
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, false);
-        if (!$this->getCachedEntityDependencies()) {
-            $entityCacheIsOutdated = true;
-            $this->logger->warning("Unable to load {$entityName} entity dependencies");
-        } else {
-            $entityCacheIsOutdated = false;
-            $projectRoot = $this->configuration->getProjectRoot();
-            foreach ($this->getCachedEntityDependencies() as $relativeFileName => $hashFile) {
-                $filePath = "{$projectRoot}{$relativeFileName}";
-                if (!file_exists($filePath) || md5_file($filePath) !== $hashFile) {
-                    $entityCacheIsOutdated = true;
-                    break;
-                }
-            }
-        }
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, $entityCacheIsOutdated);
-        return $entityCacheIsOutdated;
-    }
-
-    protected function getCacheKey(): string
-    {
-        $currentRootEntity = $this->getCurrentRootEntity();
-        return $currentRootEntity ? str_replace(["\\", ":", '\n', '/', '{', '}'], "_{$this->cacheVersion}_", $this->getCurrentRootEntity()->getName()) : '';
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     * @throws InvalidConfigurationParameterException
      */
     public function getCacheValues(): array
     {
@@ -144,7 +54,6 @@ trait CacheableEntityWrapperTrait
     }
 
     /**
-     * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
      */
     public function getCacheValue(string $key): mixed

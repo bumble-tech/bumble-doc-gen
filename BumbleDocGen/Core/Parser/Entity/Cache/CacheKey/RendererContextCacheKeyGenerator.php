@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache\CacheKey;
 
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 
 final class RendererContextCacheKeyGenerator implements CacheKeyGeneratorInterface

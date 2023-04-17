@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity;
 
-use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperInterface;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\EntityCacheStorageHelper;
 use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
@@ -48,7 +48,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
     {
         foreach ($this as $entity) {
             if (
-                is_a($entity, CacheableEntityWrapperInterface::class) &&
+                is_a($entity, CacheableEntityInterface::class) &&
                 $entity->entityCacheIsOutdated()
             ) {
                 $entity->reloadEntityDependenciesCache();

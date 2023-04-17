@@ -28,32 +28,32 @@ final class CacheableEntityWrapperFactory
         $namespace = new \Nette\PhpGenerator\PhpNamespace($namespaceName);
         $class = $namespace->addClass($wrapperName);
         $class->setExtends($className);
-        $class->addTrait(CacheableEntityWrapperTrait::class);
-        $class->addImplement(CacheableEntityWrapperInterface::class);
 
-        $reflectionClass = new \ReflectionClass($className);
-        foreach ($reflectionClass->getMethods() as $method) {
-            if (!$method->isFinal() && !$method->isStatic()) {
-                $cacheableMethodAttr = $method->getAttributes(CacheableMethod::class)[0] ?? null;
-                if ($cacheableMethodAttr) {
-                    $newMethod = $class->addMethod($method->getName())
-                        ->setStatic($method->isStatic())
-                        ->setVariadic($method->isVariadic())
-                        ->setReturnType((string)$method->getReturnType());
+        if (is_a($className, CacheableEntityInterface::class, true)) {
+            $class->addTrait(CacheableEntityWrapperTrait::class);
+            $reflectionClass = new \ReflectionClass($className);
+            foreach ($reflectionClass->getMethods() as $method) {
+                if (!$method->isFinal() && !$method->isStatic()) {
+                    $cacheableMethodAttr = $method->getAttributes(CacheableMethod::class)[0] ?? null;
+                    if ($cacheableMethodAttr) {
+                        $newMethod = $class->addMethod($method->getName())
+                            ->setStatic($method->isStatic())
+                            ->setVariadic($method->isVariadic())
+                            ->setReturnType((string)$method->getReturnType());
 
-                    $parameters = [];
-                    foreach ($method->getParameters() as $parameter) {
-                        $parameter = new Parameter($parameter->getName());
-                        $parameter->setDefaultValue($parameter->getDefaultValue());
-                        $parameters[] = $parameter;
-                    }
-                    $newMethod->setParameters($parameters);
+                        $parameters = [];
+                        foreach ($method->getParameters() as $parameter) {
+                            $parameter = new Parameter($parameter->getName());
+                            $parameter->setDefaultValue($parameter->getDefaultValue());
+                            $parameters[] = $parameter;
+                        }
+                        $newMethod->setParameters($parameters);
 
-                    $cacheNamespace = "{$wrapperName}_{$method->getName()}";
+                        $cacheNamespace = "{$wrapperName}_{$method->getName()}";
 
-                    $cacheableMethodAttrObj = $cacheableMethodAttr->newInstance();
-                    $expiresAfter = time() + $cacheableMethodAttrObj->getCacheSeconds();
-                    $newMethod->setBody('
+                        $cacheableMethodAttrObj = $cacheableMethodAttr->newInstance();
+                        $expiresAfter = time() + $cacheableMethodAttrObj->getCacheSeconds();
+                        $newMethod->setBody('
                             $funcArgs = func_get_args();
                             $cacheKey = \\' . $cacheableMethodAttrObj->getCacheKeyGeneratorClass() . '::generateKey(
                                 \'' . $cacheNamespace . '\',
@@ -74,6 +74,7 @@ final class CacheableEntityWrapperFactory
                             }
                             return $result[$internalDataKey];
                         ');
+                    }
                 }
             }
         }
