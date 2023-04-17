@@ -7,6 +7,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Parser\OnLoadSourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\CustomSourceLocatorInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\CachedSourceLocator;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use Roave\BetterReflection\BetterReflection;
@@ -25,10 +26,10 @@ final class ReflectorWrapper implements Reflector
      * @throws InvalidConfigurationParameterException
      */
     public function __construct(
-        Configuration         $configuration,
-        PhpHandlerSettings    $phpHandlerSettings,
-        PluginEventDispatcher $pluginEventDispatcher,
-        BetterReflection      $betterReflection,
+        Configuration              $configuration,
+        PhpHandlerSettings         $phpHandlerSettings,
+        PluginEventDispatcher      $pluginEventDispatcher,
+        BetterReflection           $betterReflection,
         SourceLocatorCacheItemPool $sourceLocatorCache
     )
     {
@@ -37,6 +38,13 @@ final class ReflectorWrapper implements Reflector
         )->getSourceLocatorsCollection();
 
         $locator = $betterReflection->astLocator();
+
+        foreach ($sourceLocatorsCollection as $sourceLocator) {
+            if (is_a($sourceLocator, CustomSourceLocatorInterface::class, true)) {
+                $sourceLocators[] = $sourceLocator->getSourceLocator($locator);
+            }
+        }
+
         if (!$phpHandlerSettings->asyncSourceLoadingEnabled()) {
             $sourceLocators[] = new \Roave\BetterReflection\SourceLocator\Type\FileIteratorSourceLocator(
                 new \ArrayIterator(iterator_to_array($sourceLocatorsCollection->getCommonFinder()->getIterator())),

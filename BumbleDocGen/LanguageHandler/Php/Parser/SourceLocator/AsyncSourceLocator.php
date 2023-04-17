@@ -13,7 +13,7 @@ use Symfony\Component\Finder\Finder;
 /**
  * Lazy loading classes. Cannot be used for initial parsing of files, only for getting specific documents
  */
-final class AsyncSourceLocator implements SourceLocatorInterface
+final class AsyncSourceLocator implements SourceLocatorInterface, CustomSourceLocatorInterface
 {
     public function __construct(
         private LocalObjectCache $localObjectCache,
