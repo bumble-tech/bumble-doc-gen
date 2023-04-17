@@ -203,4 +203,39 @@ final class ConfigurationParameterBag
         }
         return $value;
     }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function validateAndGetFilePathValue(
+        string $parameterName,
+        string $fileExtension,
+        bool   $nullable = true
+    ): ?string
+    {
+        $value = $this->get($parameterName);
+        if (!$nullable && !is_string($value)) {
+            throw new InvalidConfigurationParameterException(
+                "Configuration parameter `{$parameterName}` must contain string"
+            );
+        } elseif (!is_string($value) && !is_null($value)) {
+            throw new InvalidConfigurationParameterException(
+                "Configuration parameter `{$parameterName}` must contain string or null"
+            );
+        }
+        if (is_null($value)) {
+            return null;
+        }
+        if (!is_file($parameterName)) {
+            throw new InvalidConfigurationParameterException(
+                "Configuration parameter `{$parameterName}` must contain exists file path"
+            );
+        }
+        if (!str_ends_with($parameterName, ".{$fileExtension}")) {
+            throw new InvalidConfigurationParameterException(
+                "Configuration parameter `{$parameterName}` must contain path to file with extension `{$fileExtension}`"
+            );
+        }
+        return $value;
+    }
 }
