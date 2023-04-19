@@ -28,26 +28,11 @@ final class Configuration
 {
     public const DEFAULT_SETTINGS_FILE = __DIR__ . '/defaultConfiguration.yaml';
 
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function __construct(
         private ConfigurationParameterBag $parameterBag,
         private LocalObjectCache          $localObjectCache,
     )
     {
-        if ($parameterBag->has('parent_configuration')) {
-            $parentConfiguration = $parameterBag->validateAndGetFilePathValue('parent_configuration', [
-                'yml',
-                'yaml'
-            ]);
-            if ($parentConfiguration) {
-                $parameterBag->addValueFromFileIfNotExists(
-                    '',
-                    $parentConfiguration,
-                );
-            }
-        }
         $parameterBag->addValueFromFileIfNotExists(
             '',
             self::DEFAULT_SETTINGS_FILE,

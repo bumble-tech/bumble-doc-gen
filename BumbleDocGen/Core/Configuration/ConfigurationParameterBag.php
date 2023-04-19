@@ -7,8 +7,10 @@ namespace BumbleDocGen\Core\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Configuration\ValueResolver\ValueResolverInterface;
 use BumbleDocGen\Core\Configuration\ValueTransformer\ValueToClassTransformer;
+use DI\DependencyException;
+use DI\NotFoundException;
 use InvalidArgumentException;
-use Symfony\Component\Yaml\Yaml;
+use Noodlehaus\Config;
 
 use function BumbleDocGen\Core\is_associative_array;
 
@@ -26,12 +28,22 @@ final class ConfigurationParameterBag
     {
     }
 
+    public function getConfigValues(string ...$fileNames): array
+    {
+        $conf = Config::load($fileNames);
+        $parentConfigurationFile = $this->resolveValue($conf->get('parent_configuration'));
+        while ($parentConfigurationFile) {
+            $parentConfig = Config::load($parentConfigurationFile);
+            $parentConfigurationFile = $this->resolveValue($parentConfig->get('parent_configuration'));
+            $parentConfig->merge($conf);
+            $conf = $parentConfig;
+        }
+        return $conf->all();
+    }
+
     public function loadFromFiles(string ...$fileNames): void
     {
-        foreach ($fileNames as $fileName) {
-            $parameters = Yaml::parseFile($fileName);
-            $this->loadFromArray($parameters);
-        }
+        $this->loadFromArray($this->getConfigValues(...$fileNames));
     }
 
     public function loadFromArray(array $parameters): void
@@ -76,7 +88,7 @@ final class ConfigurationParameterBag
 
     public function addValueFromFileIfNotExists(string $name, string $fileName): void
     {
-        $this->addValueIfNotExists($name, Yaml::parseFile($fileName));
+        $this->addValueIfNotExists($name, $this->getConfigValues($fileName));
     }
 
     /**
@@ -93,7 +105,11 @@ final class ConfigurationParameterBag
             }
             $value = $value[$key];
         }
+        return $this->resolveValue($value);
+    }
 
+    public function resolveValue(mixed $value): mixed
+    {
         foreach ($this->resolvers as $resolver) {
             $value = $resolver->resolveValue($this, $value);
         }
@@ -136,7 +152,9 @@ final class ConfigurationParameterBag
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function validateAndGetClassValue(
         string $parameterName,
@@ -159,6 +177,8 @@ final class ConfigurationParameterBag
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function validateAndGetClassListValue(
