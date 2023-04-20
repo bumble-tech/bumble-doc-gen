@@ -247,7 +247,7 @@ final class ConfigurationParameterBag
                 "Configuration parameter `{$parameterName}` must contain path to file with extensions: `" . implode('|', $fileExtensions) . "`"
             );
         }
-        return $value;
+        return realpath($value);
     }
 
     /**
