@@ -233,16 +233,7 @@ final class ConfigurationParameterBag
         bool   $nullable = true
     ): ?string
     {
-        $value = $this->get($parameterName);
-        if (!$nullable && !is_string($value)) {
-            throw new InvalidConfigurationParameterException(
-                "Configuration parameter `{$parameterName}` must contain string"
-            );
-        } elseif (!is_string($value) && !is_null($value)) {
-            throw new InvalidConfigurationParameterException(
-                "Configuration parameter `{$parameterName}` must contain string or null"
-            );
-        }
+        $value = $this->validateAndGetStringValue($parameterName, $nullable);
         if (is_null($value)) {
             return null;
         }
@@ -257,6 +248,26 @@ final class ConfigurationParameterBag
             );
         }
         return $value;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function validateAndGetDirectoryPathValue(
+        string $parameterName,
+        bool   $nullable = true
+    ): ?string
+    {
+        $value = $this->validateAndGetStringValue($parameterName, $nullable);
+        if (is_null($value)) {
+            return null;
+        }
+        if (!is_dir($value)) {
+            throw new InvalidConfigurationParameterException(
+                "Configuration parameter `{$parameterName}` must contain exists dir path"
+            );
+        }
+        return realpath($value);
     }
 
     private function mergeConfigParams(array $params1, array $params2): array

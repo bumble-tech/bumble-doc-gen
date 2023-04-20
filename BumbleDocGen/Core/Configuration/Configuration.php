@@ -47,7 +47,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $projectRoot = $this->parameterBag->validateAndGetStringValue('project_root', false);
+        $projectRoot = $this->parameterBag->validateAndGetDirectoryPathValue('project_root', false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $projectRoot);
         return $projectRoot;
     }
@@ -81,7 +81,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $templatesDir = $this->parameterBag->validateAndGetStringValue('templates_dir', false);
+        $templatesDir = $this->parameterBag->validateAndGetDirectoryPathValue('templates_dir', false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $templatesDir);
         return $templatesDir;
     }
@@ -95,7 +95,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $outputDir = $this->parameterBag->validateAndGetStringValue('output_dir', false);
+        $outputDir = $this->parameterBag->validateAndGetDirectoryPathValue('output_dir', false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $outputDir);
         return $outputDir;
     }
@@ -184,7 +184,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $cacheDir = $this->parameterBag->validateAndGetStringValue('cache_dir');
+        $cacheDir = $this->parameterBag->validateAndGetDirectoryPathValue('cache_dir');
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheDir);
         return $cacheDir;
     }
