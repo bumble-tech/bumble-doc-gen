@@ -28,17 +28,16 @@ final class ConfigurationParameterBag
     {
     }
 
-    public function getConfigValues(string ...$fileNames): array
+    public function getConfigValues(string ...$configurationFiles): array
     {
-        $conf = Config::load($fileNames);
-        $parentConfigurationFile = $this->resolveValue($conf->get('parent_configuration'));
-        while ($parentConfigurationFile) {
-            $parentConfig = Config::load($parentConfigurationFile);
-            $parentConfigurationFile = $this->resolveValue($parentConfig->get('parent_configuration'));
-            $parentConfig->merge($conf);
-            $conf = $parentConfig;
-        }
-        return $conf->all();
+        $values = [];
+        do {
+            $conf = Config::load($configurationFiles);
+            $configurationFiles = $this->resolveValue($conf->get('parent_configuration'));
+            $values = $this->mergeConfigParams($values, $conf->all());
+        } while (!is_null($configurationFiles));
+
+        return $values;
     }
 
     public function loadFromFiles(string ...$fileNames): void
@@ -83,12 +82,12 @@ final class ConfigurationParameterBag
                 $value = [$key => $value];
             }
         }
-        $this->parameters = array_replace_recursive($value, $this->parameters);
+        $this->parameters = $this->mergeConfigParams($value, $this->parameters);
     }
 
-    public function addValueFromFileIfNotExists(string $name, string $fileName): void
+    public function addValueFromFileIfNotExists(string $name, string ...$fileNames): void
     {
-        $this->addValueIfNotExists($name, $this->getConfigValues($fileName));
+        $this->addValueIfNotExists($name, $this->getConfigValues(...$fileNames));
     }
 
     /**
@@ -258,5 +257,23 @@ final class ConfigurationParameterBag
             );
         }
         return $value;
+    }
+
+    private function mergeConfigParams(array $params1, array $params2): array
+    {
+        foreach ($params2 as $key => $param2Value) {
+            if (!array_key_exists($key, $params1)) {
+                $params1[$key] = $param2Value;
+            } elseif (is_null($param2Value)) {
+                continue;
+            } elseif (!is_array($params1[$key]) || !is_array($param2Value)) {
+                $params1[$key] = $param2Value;
+            } elseif (is_associative_array($params1[$key]) && is_associative_array($param2Value)) {
+                $params1[$key] = $this->mergeConfigParams($params1[$key], $param2Value);
+            } else {
+                $params1[$key] = array_merge($params1[$key], $param2Value);
+            }
+        }
+        return $params1;
     }
 }

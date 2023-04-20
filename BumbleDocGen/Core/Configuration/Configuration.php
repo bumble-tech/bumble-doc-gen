@@ -20,6 +20,8 @@ use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 /**
  * Configuration wrapper for project documentation
@@ -33,10 +35,7 @@ final class Configuration
         private LocalObjectCache          $localObjectCache,
     )
     {
-        $parameterBag->addValueFromFileIfNotExists(
-            '',
-            self::DEFAULT_SETTINGS_FILE,
-        );
+        $parameterBag->addValueFromFileIfNotExists('', self::DEFAULT_SETTINGS_FILE);
     }
 
     /**
@@ -54,7 +53,9 @@ final class Configuration
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getSourceLocators(): SourceLocatorsCollection
     {
@@ -114,6 +115,8 @@ final class Configuration
     }
 
     /**
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function getLanguageHandlersCollection(): LanguageHandlersCollection
@@ -133,7 +136,9 @@ final class Configuration
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getPlugins(): PluginsCollection
     {
@@ -151,7 +156,9 @@ final class Configuration
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getTemplateFillers(): TemplateFillersCollection
     {
@@ -183,7 +190,9 @@ final class Configuration
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getPageLinkProcessor(): PageLinkProcessorInterface
     {
@@ -215,7 +224,9 @@ final class Configuration
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getTwigFunctions(): CustomFunctionsCollection
     {
@@ -236,6 +247,8 @@ final class Configuration
     }
 
     /**
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function getTwigFilters(): CustomFiltersCollection

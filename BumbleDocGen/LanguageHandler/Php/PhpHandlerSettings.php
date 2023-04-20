@@ -15,6 +15,8 @@ use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 final class PhpHandlerSettings
 {
@@ -26,10 +28,7 @@ final class PhpHandlerSettings
         private LocalObjectCache          $localObjectCache
     )
     {
-        $parameterBag->addValueFromFileIfNotExists(
-            self::SETTINGS_PREFIX,
-            self::DEFAULT_SETTINGS_FILE,
-        );
+        $parameterBag->addValueFromFileIfNotExists('', self::DEFAULT_SETTINGS_FILE);
     }
 
     private function getSettingsKey(string $key): string
@@ -38,6 +37,8 @@ final class PhpHandlerSettings
     }
 
     /**
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function getClassEntityFilter(): ConditionInterface
@@ -56,6 +57,8 @@ final class PhpHandlerSettings
     }
 
     /**
+     * @throws DependencyException
+     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function getClassConstantEntityFilter(): ConditionInterface
@@ -74,7 +77,9 @@ final class PhpHandlerSettings
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getMethodEntityFilter(): ConditionInterface
     {
@@ -92,7 +97,9 @@ final class PhpHandlerSettings
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getPropertyEntityFilter(): ConditionInterface
     {
@@ -110,7 +117,9 @@ final class PhpHandlerSettings
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getEntityDocRenderersCollection(): EntityDocRenderersCollection
     {
@@ -163,7 +172,9 @@ final class PhpHandlerSettings
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getCustomTwigFunctions(): CustomFunctionsCollection
     {
@@ -184,7 +195,9 @@ final class PhpHandlerSettings
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getCustomTwigFilters(): CustomFiltersCollection
     {

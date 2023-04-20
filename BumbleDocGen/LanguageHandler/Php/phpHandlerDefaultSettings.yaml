@@ -1,34 +1,46 @@
-class_filter:
-  class: \BumbleDocGen\Core\Parser\FilterCondition\CommonFilterCondition\TrueCondition
+language_handlers:
+  php:
+    class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
+    settings:
+      class_filter:
+        class: \BumbleDocGen\Core\Parser\FilterCondition\CommonFilterCondition\TrueCondition
 
-class_constant_filter:
-  class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition\VisibilityCondition
-  arguments:
-    - public
-    - protected
+      class_constant_filter:
+        class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition\VisibilityCondition
+        arguments:
+          - public
+          - protected
 
-method_filter:
-  class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
-  arguments:
-    - and
-    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\IsPublicCondition
-    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition
+      method_filter:
+        class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
+        arguments:
+          - and
+          - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\IsPublicCondition
+          - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition
 
-property_filter:
-  class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
-  arguments:
-    - and
-    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\IsPublicCondition
-    - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\OnlyFromCurrentClassCondition
+      property_filter:
+        class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
+        arguments:
+          - and
+          - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\IsPublicCondition
+          - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\OnlyFromCurrentClassCondition
 
-doc_renderers:
-  - class: \BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer
+      doc_renderers:
+        - class: \BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer
 
-custom_twig_functions:
-  - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\DrawClassMap
-  - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\GetClassMethodsBodyCode
+      custom_twig_functions:
+        - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\DrawClassMap
+        - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\GetClassMethodsBodyCode
 
-custom_twig_filters:
+      custom_twig_filters:
 
-file_source_base_url: null
-async_source_loading_enabled: false
+      file_source_base_url: null
+      async_source_loading_enabled: false
+plugins:
+  - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin
+  - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\ComposerStubberPlugin
+  - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpDocumentorStubberPlugin
+  - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpUnitStubberPlugin
+  - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PsrClassesStubberPlugin
+  - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\SymfonyComponentStubberPlugin
+  - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\TwigStubberPlugin
