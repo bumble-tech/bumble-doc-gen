@@ -6,6 +6,7 @@ use Bramus\Monolog\Formatter\ColoredLineFormatter;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\ValueResolver\InternalValueResolver;
 use BumbleDocGen\Core\Configuration\ValueResolver\RefValueResolver;
+use BumbleDocGen\Core\Configuration\ValueResolver\ArgvValueResolver;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
@@ -35,6 +36,7 @@ return [
     ConfigurationParameterBag::class => \DI\autowire(ConfigurationParameterBag::class)
         ->constructor(
             resolvers: [
+                \DI\autowire(ArgvValueResolver::class),
                 \DI\autowire(InternalValueResolver::class)
                     ->constructor(
                         internalValuesMap: [
@@ -47,7 +49,7 @@ return [
                             'PHP_VERSION' => phpversion(),
                         ]
                     ),
-                \DI\autowire(RefValueResolver::class)
+                \DI\autowire(RefValueResolver::class),
             ]
         ),
     PluginEventDispatcher::class => \DI\autowire(PluginEventDispatcher::class)->lazy(),
