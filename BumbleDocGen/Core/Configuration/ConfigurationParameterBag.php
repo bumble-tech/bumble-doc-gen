@@ -34,9 +34,8 @@ final class ConfigurationParameterBag
         do {
             $conf = Config::load($configurationFiles);
             $configurationFiles = $this->resolveValue($conf->get('parent_configuration'));
-            $values = $this->mergeConfigParams($values, $conf->all());
+            $values = $this->mergeConfigParams($conf->all(), $values);
         } while (!is_null($configurationFiles));
-
         return $values;
     }
 
