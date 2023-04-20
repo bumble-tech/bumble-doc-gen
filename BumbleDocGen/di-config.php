@@ -42,6 +42,7 @@ return [
                             'TMP_DIR' => sys_get_temp_dir() . '/bumbleDocGen',
                             'DOC_GEN_VERSION' => \BumbleDocGen\DocGenerator::VERSION,
                             'DOC_GEN_LIB_PATH' => dirname(__DIR__),
+                            'DOC_DEFAULT_CONFIG_PATH' => \BumbleDocGen\Core\Configuration\Configuration::DEFAULT_SETTINGS_FILE,
                             'UNIX_TIMESTAMP' => time(),
                             'PHP_VERSION' => phpversion(),
                         ]
