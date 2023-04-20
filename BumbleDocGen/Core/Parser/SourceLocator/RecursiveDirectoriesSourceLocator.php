@@ -15,9 +15,11 @@ final class RecursiveDirectoriesSourceLocator extends BaseSourceLocator
     )
     {
         parent::__construct();
-        $directories = array_filter($directories, function ($directory) {
-            return is_dir($directory);
-        });
+        array_map(function (string $directory) {
+            if(!is_dir($directory)){
+                throw new \InvalidArgumentException("Directory `{$directory}` not found");
+            }
+        }, $directories);
         $this->getFinder()->in($directories)->exclude($exclude);
     }
 }

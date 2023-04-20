@@ -9,11 +9,12 @@ namespace BumbleDocGen\Core\Parser\SourceLocator;
  */
 final class SingleFileSourceLocator extends BaseSourceLocator
 {
-    public function __construct(
-        string $filename
-    )
+    public function __construct(string $filename)
     {
         parent::__construct();
+        if (!is_file($filename)) {
+            throw new \InvalidArgumentException("File `{$filename}` not found");
+        }
         $this->getFinder()->append([new \SplFileInfo($filename)]);
     }
 }
