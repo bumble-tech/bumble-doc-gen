@@ -56,7 +56,6 @@ final class MethodEntityCollection extends BaseEntityCollection
                 try {
                     /**@var Method $methodsBlock */
                     $methodEntity = $this->cacheablePhpEntityFactory->createDynamicMethodEntity($this->classEntity, $methodsBlock);
-                    $methodEntity->getCallMethod();
                     $this->add($methodEntity);
                 } catch (\Exception $e) {
                     $this->logger->error($e->getMessage());

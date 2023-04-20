@@ -126,7 +126,7 @@ final class CacheablePhpEntityFactory
         Method      $annotationMethod
     ): DynamicMethodEntity
     {
-        $objectId = "{$classEntity->getName()}:{$annotationMethod->getName()}";
+        $objectId = "{$classEntity->getName()}:{$annotationMethod->getMethodName()}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
