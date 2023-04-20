@@ -131,6 +131,8 @@ final class RendererIteratorFactory
                 $this->getFilesDependenciesCacheKey($filesDependenciesKey),
                 $this->rendererContext->getFilesDependencies()
             );
+            $this->rendererContext->clearFilesDependencies();
+            $this->rootEntityCollectionsGroup->clearOperationsLog();
         }
         $this->sharedCompressedDocumentFileCache->set(
             'entities_relations',
