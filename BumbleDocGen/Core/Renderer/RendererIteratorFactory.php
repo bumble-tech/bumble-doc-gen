@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Renderer;
 
+use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
@@ -23,8 +26,10 @@ final class RendererIteratorFactory
         private RootEntityCollectionsGroup         $rootEntityCollectionsGroup,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration                      $configuration,
+        private ConfigurationParameterBag          $configurationParameterBag,
         private SharedCompressedDocumentFileCache  $sharedCompressedDocumentFileCache,
         private RendererHelper                     $rendererHelper,
+        private LocalObjectCache                   $localObjectCache,
         private Logger                             $logger
     )
     {
@@ -57,6 +62,7 @@ final class RendererIteratorFactory
             if (
                 !$this->configuration->useSharedCache() ||
                 !$this->isGeneratedDocumentExists($templateFileName) ||
+                $this->isConfigurationVersionChanged() ||
                 $this->isFilesDependenciesCacheOutdated($templateFileName) ||
                 $this->isEntitiesOperationsLogCacheOutdated($templateFileName)
             ) {
@@ -101,6 +107,7 @@ final class RendererIteratorFactory
             if (
                 !$this->configuration->useSharedCache() ||
                 !$this->isGeneratedEntityDocumentExists($entityWrapper) ||
+                $this->isConfigurationVersionChanged() ||
                 $entityWrapper->getDocumentTransformableEntity()->entityCacheIsOutdated() ||
                 $this->isFilesDependenciesCacheOutdated($filesDependenciesKey) ||
                 $this->isEntityRelationsCacheOutdated($entityWrapper) ||
@@ -128,6 +135,10 @@ final class RendererIteratorFactory
         $this->sharedCompressedDocumentFileCache->set(
             'entities_relations',
             $this->documentedEntityWrappersCollection->getDocumentedEntitiesRelations()
+        );
+        $this->sharedCompressedDocumentFileCache->set(
+            'config_hash',
+            md5(serialize($this->configurationParameterBag->getAll()))
         );
     }
 
@@ -169,6 +180,19 @@ final class RendererIteratorFactory
         $this->renderedFileNames[$docFileName] = $docFileName;
     }
 
+    private function isConfigurationVersionChanged(): bool
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $configHash = md5(serialize($this->configurationParameterBag->getAll()));
+        $cachedConfigHash = $this->sharedCompressedDocumentFileCache->get('config_hash');
+        $isConfigChanged = $configHash !== $cachedConfigHash;
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $isConfigChanged);
+        return $isConfigChanged;
+    }
+
     private function isEntityRelationsCacheOutdated(DocumentedEntityWrapper $entityWrapper): bool
     {
         $cachedEntitiesRelations = $this->sharedCompressedDocumentFileCache->get('entities_relations', []);
@@ -181,14 +205,20 @@ final class RendererIteratorFactory
 
     private function isEntitiesOperationsLogCacheOutdated(string $templateFileName): bool
     {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateFileName);
+        } catch (ObjectNotFoundException) {
+        }
         $cachedOperationsLog = $this->sharedCompressedDocumentFileCache->get(
             $this->getOperationsLogCacheKey($templateFileName)
         );
         if (is_null($cachedOperationsLog)) {
-            return true;
+            $isEntitiesOperationsLogCacheOutdated = true;
+        } else {
+            $isEntitiesOperationsLogCacheOutdated = $this->rootEntityCollectionsGroup->isFoundEntitiesOperationsLogCacheOutdated($cachedOperationsLog);
         }
-
-        return $this->rootEntityCollectionsGroup->isFoundEntitiesOperationsLogCacheOutdated($cachedOperationsLog);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $isEntitiesOperationsLogCacheOutdated);
+        return $isEntitiesOperationsLogCacheOutdated;
     }
 
     /**
