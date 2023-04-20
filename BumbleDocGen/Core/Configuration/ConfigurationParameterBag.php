@@ -103,7 +103,21 @@ final class ConfigurationParameterBag
             }
             $value = $value[$key];
         }
-        return $this->resolveValue($value);
+        $value = $this->resolveValue($value);
+        if (is_array($value) || is_null($value)) {
+            return $value;
+        }
+        // handle OR operation
+        if (is_string($value)) {
+            $value = array_values(
+                array_filter(
+                    explode("\n", $value),
+                    fn(string $val) => mb_strlen($val) > 0
+                )
+            );
+            $value = $value[0] ?? null;
+        }
+        return $value;
     }
 
     public function resolveValue(mixed $value): mixed
