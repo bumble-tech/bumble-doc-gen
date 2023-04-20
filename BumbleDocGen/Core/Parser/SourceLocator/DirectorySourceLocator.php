@@ -12,6 +12,7 @@ final class DirectorySourceLocator extends BaseSourceLocator
     public function __construct(string $directory)
     {
         parent::__construct();
+        $directory = realpath($directory);
         if (!is_dir($directory)) {
             throw new \InvalidArgumentException("Directory `{$directory}` not found");
         }

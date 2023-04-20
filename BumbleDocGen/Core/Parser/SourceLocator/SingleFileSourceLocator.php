@@ -12,6 +12,7 @@ final class SingleFileSourceLocator extends BaseSourceLocator
     public function __construct(string $filename)
     {
         parent::__construct();
+        $filename = realpath($filename);
         if (!is_file($filename)) {
             throw new \InvalidArgumentException("File `{$filename}` not found");
         }

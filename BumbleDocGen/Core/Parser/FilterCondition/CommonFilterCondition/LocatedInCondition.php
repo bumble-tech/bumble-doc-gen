@@ -20,6 +20,7 @@ final class LocatedInCondition implements ConditionInterface
     {
         $fileName = $entity->getAbsoluteFileName();
         foreach ($this->directories as $directory) {
+            $directory = realpath($directory);
             if (str_starts_with($fileName, $directory)) {
                 return true;
             }
