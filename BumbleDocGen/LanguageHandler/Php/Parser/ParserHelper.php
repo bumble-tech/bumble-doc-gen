@@ -11,6 +11,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
+use Monolog\Logger;
 use Nette\PhpGenerator\GlobalFunction;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
@@ -157,7 +158,8 @@ final class ParserHelper
     public function __construct(
         private Configuration    $configuration,
         private ReflectorWrapper $reflector,
-        private LocalObjectCache $localObjectCache
+        private LocalObjectCache $localObjectCache,
+        private Logger           $logger
     )
     {
     }
@@ -540,10 +542,21 @@ final class ParserHelper
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $cacheKey);
         } catch (ObjectNotFoundException) {
         }
-        $docBlock = $this->getDocBlockFactory()->create(
-            $docComment,
-            $this->getDocBlockContext($classEntity)
-        );
+        try {
+            $docBlock = $this->getDocBlockFactory()->create(
+                $docComment,
+                $this->getDocBlockContext($classEntity)
+            );
+        } catch (\Exception $e) {
+            $this->logger->error(
+                "Class `{$classEntity->getName()}` DockBlock parsing error: {$e->getMessage()}. 
+                Doc block: {$docComment}"
+            );
+            $docBlock = $this->getDocBlockFactory()->create(
+                ' ',
+                $this->getDocBlockContext($classEntity)
+            );
+        }
         $this->localObjectCache->cacheMethodResult(__METHOD__, $cacheKey, $docBlock);
         return $docBlock;
     }
