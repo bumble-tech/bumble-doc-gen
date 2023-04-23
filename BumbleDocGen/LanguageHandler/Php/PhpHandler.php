@@ -41,7 +41,9 @@ final class PhpHandler implements LanguageHandlerInterface
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getCustomTwigFunctions(RendererContext $context): CustomFunctionsCollection
     {
@@ -49,7 +51,9 @@ final class PhpHandler implements LanguageHandlerInterface
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getCustomTwigFilters(RendererContext $context): CustomFiltersCollection
     {

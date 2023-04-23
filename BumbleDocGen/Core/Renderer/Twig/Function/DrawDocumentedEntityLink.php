@@ -6,6 +6,9 @@ namespace BumbleDocGen\Core\Renderer\Twig\Function;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 /**
  * Creates an entity link by object
@@ -35,6 +38,9 @@ final class DrawDocumentedEntityLink implements CustomFunctionInterface
     }
 
     /**
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(

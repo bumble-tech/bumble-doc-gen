@@ -8,6 +8,9 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Monolog\Logger;
 
 /**
@@ -38,6 +41,7 @@ final class StrTypeToUrl implements CustomFilterInterface
         ];
     }
 
+
     /**
      * @param string $text Processed text
      * @param RootEntityCollection $rootEntityCollection
@@ -46,6 +50,9 @@ final class StrTypeToUrl implements CustomFilterInterface
      *  If true, creates an entity document. Otherwise, just gives a reference to the entity code
      *
      * @return string
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
