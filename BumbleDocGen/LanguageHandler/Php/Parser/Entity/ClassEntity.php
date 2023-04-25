@@ -842,6 +842,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if ($attributeName = $matches[7]) {
             // is constant
             $prefix = 'q';
+            if (!array_key_exists($matches[7], $this->getConstantsData())) {
+                if (array_key_exists($matches[7], $this->getMethodsData())) {
+                    // is method
+                    $prefix = 'm';
+                } elseif (array_key_exists($matches[7], $this->getPropertiesData())) {
+                    // is property
+                    $prefix = 'p';
+                }
+            }
         } elseif ($attributeName = $matches[4]) {
             // is property
             $prefix = 'p';
