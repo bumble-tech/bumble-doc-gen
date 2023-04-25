@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Parser;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 /**
  * Entity for project parsing using source locators
@@ -19,6 +22,11 @@ final class ProjectParser
     {
     }
 
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
     public function parse(): void
     {
         foreach ($this->configuration->getLanguageHandlersCollection() as $languageHandler) {
