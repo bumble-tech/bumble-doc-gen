@@ -178,7 +178,15 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     {
         $links = [];
         $docBlock = $this->getDocBlock();
-        $docCommentImplementingClass = $this->getDocCommentEntity();
+        $getDocCommentEntity = $this->getDocCommentEntity();
+
+        if (is_a($getDocCommentEntity, ClassEntity::class)) {
+            $docCommentImplementingClass = $getDocCommentEntity;
+        } elseif (method_exists($getDocCommentEntity, 'getImplementingClass')) {
+            $docCommentImplementingClass = $getDocCommentEntity->getImplementingClass();
+        } else {
+            $docCommentImplementingClass = $getDocCommentEntity;
+        }
 
         foreach ($docBlock->getTagsByName('see') as $seeBlock) {
             if (!is_a($seeBlock, DocBlock\Tags\See::class)) {
@@ -248,23 +256,24 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         'name' => $name,
                         'description' => $description,
                     ];
+                } else {
+                    $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
+                    $className = $this->parserHelper->parseFullClassName(
+                        $name,
+                        $currentClassEntity->getReflection()
+                    );
+                    $data = $this->getRootEntityCollection()->getEntityLinkData(
+                        $className,
+                        $this->getImplementingReflectionClass()->getName(),
+                        false
+                    );
+                    $links[] = [
+                        'entityData' => $data,
+                        'url' => null,
+                        'name' => $data['title'],
+                        'description' => $description,
+                    ];
                 }
-                $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
-                $className = $this->parserHelper->parseFullClassName(
-                    $name,
-                    $currentClassEntity->getReflection()
-                );
-                $data = $this->getRootEntityCollection()->getEntityLinkData(
-                    $className,
-                    $this->getImplementingReflectionClass()->getName(),
-                    false
-                );
-                $links[] = [
-                    'entityData' => $data,
-                    'url' => null,
-                    'name' => $data['title'],
-                    'description' => $description,
-                ];
             }
         }
 
