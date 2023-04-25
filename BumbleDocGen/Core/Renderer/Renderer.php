@@ -13,6 +13,9 @@ use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
+use DI\DependencyException;
+use DI\NotFoundException;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -42,9 +45,12 @@ final class Renderer
     /**
      * Starting the rendering process
      *
-     * @throws LoaderError
+     * @throws InvalidArgumentException
      * @throws RuntimeError
+     * @throws LoaderError
+     * @throws DependencyException
      * @throws SyntaxError
+     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function run(): void

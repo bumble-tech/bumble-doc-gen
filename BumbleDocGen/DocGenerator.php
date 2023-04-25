@@ -7,7 +7,10 @@ namespace BumbleDocGen;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\ProjectParser;
 use BumbleDocGen\Core\Renderer\Renderer;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Monolog\Logger;
+use Psr\Cache\InvalidArgumentException;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -31,9 +34,12 @@ final class DocGenerator
     /**
      * Generates documentation using configuration
      *
-     * @throws SyntaxError
+     * @throws InvalidArgumentException
      * @throws RuntimeError
      * @throws LoaderError
+     * @throws DependencyException
+     * @throws SyntaxError
+     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function generate(): void
