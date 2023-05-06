@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
 use BumbleDocGen\Core\Renderer\Renderer;
 use DI\DependencyException;
@@ -24,11 +25,23 @@ final class DocGenerator
     public const VERSION = '1.0.0';
 
     public function __construct(
-        private ProjectParser $parser,
-        private Renderer      $render,
-        private Logger        $logger
+        private ProjectParser              $parser,
+        private Renderer                   $render,
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private Logger                     $logger
     )
     {
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function parseAndGetRootEntityCollectionsGroup(): RootEntityCollectionsGroup
+    {
+        $this->parser->parse();
+        return $this->rootEntityCollectionsGroup;
     }
 
     /**
