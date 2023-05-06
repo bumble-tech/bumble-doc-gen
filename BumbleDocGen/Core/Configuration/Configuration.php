@@ -95,7 +95,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $outputDir = $this->parameterBag->validateAndGetDirectoryPathValue('output_dir', false);
+        $outputDir = realpath($this->parameterBag->validateAndGetStringValue('output_dir', false));
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $outputDir);
         return $outputDir;
     }
