@@ -504,10 +504,15 @@ final class ParserHelper
         $docComment = $docComment ?: ' ';
         $cacheKey = md5("{$classEntity->getName()}{$docComment}");
         if (!isset($docBlocksCache[$cacheKey])) {
-            $docBlocksCache[$cacheKey] = $docBlockFactory->create(
-                $docComment,
-                self::getDocBlockContext($classEntity)
-            );
+            try {
+                $docBlocksCache[$cacheKey] = $docBlockFactory->create(
+                    $docComment,
+                    self::getDocBlockContext($classEntity)
+                );
+            }
+            catch (\Exception){
+                $docBlocksCache[$cacheKey] = $docBlockFactory->create(" ");
+            }
         }
         return $docBlocksCache[$cacheKey];
     }
