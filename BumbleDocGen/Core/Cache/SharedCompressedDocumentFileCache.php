@@ -25,7 +25,7 @@ final class SharedCompressedDocumentFileCache
         $this->cacheFileName = $this->configuration->getOutputDir() . '/' . self::FILE_NAME;
         try {
             if (file_exists($this->cacheFileName)) {
-                $this->cacheData = unserialize(gzuncompress(file_get_contents($this->cacheFileName))) ?: [];
+                $this->cacheData = unserialize(gzuncompress(base64_decode(file_get_contents($this->cacheFileName)))) ?: [];
             }
         } catch (\Exception) {
         }
@@ -64,6 +64,6 @@ final class SharedCompressedDocumentFileCache
     {
         $gitAttributesFile = $this->configuration->getOutputDir() . '/.gitattributes';
         file_put_contents($gitAttributesFile, self::FILE_NAME . ' merge=ours');
-        file_put_contents($this->cacheFileName, gzcompress(serialize($this->cacheData)));
+        file_put_contents($this->cacheFileName, base64_encode(gzcompress(serialize($this->cacheData))));
     }
 }
