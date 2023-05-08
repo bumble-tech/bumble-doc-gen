@@ -140,7 +140,7 @@ final class RendererIteratorFactory
         );
         $this->sharedCompressedDocumentFileCache->set(
             'config_hash',
-            md5(serialize($this->configurationParameterBag->getAll()))
+            md5(serialize($this->configurationParameterBag->getAll(false)))
         );
     }
 
