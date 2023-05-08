@@ -188,7 +188,7 @@ final class RendererIteratorFactory
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $configHash = md5(serialize($this->configurationParameterBag->getAll()));
+        $configHash = md5(serialize($this->configurationParameterBag->getAll(false)));
         $cachedConfigHash = $this->sharedCompressedDocumentFileCache->get('config_hash');
         $isConfigChanged = $configHash !== $cachedConfigHash;
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $isConfigChanged);

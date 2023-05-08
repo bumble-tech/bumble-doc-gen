@@ -92,7 +92,7 @@ final class ConfigurationParameterBag
     /**
      * @throws InvalidArgumentException
      */
-    public function get(string $name): mixed
+    public function get(string $name, bool $useResolvers = true): mixed
     {
         $keys = explode('.', $name);
 
@@ -103,7 +103,7 @@ final class ConfigurationParameterBag
             }
             $value = $value[$key];
         }
-        $value = $this->resolveValue($value);
+        $value = $useResolvers ? $this->resolveValue($value) : $value;
         if (is_array($value) || is_null($value)) {
             return $value;
         }
@@ -133,11 +133,11 @@ final class ConfigurationParameterBag
         return isset($this->parameters[$name]);
     }
 
-    public function getAll(): array
+    public function getAll(bool $useResolvers = true): array
     {
         $parameters = [];
         foreach ($this->parameters as $name => $value) {
-            $parameters[$name] = $this->get($name);
+            $parameters[$name] = $this->get($name, $useResolvers);
         }
         return $parameters;
     }
