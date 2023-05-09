@@ -25,7 +25,10 @@ final class SharedCompressedDocumentFileCache
         $this->cacheFileName = $this->configuration->getOutputDir() . '/' . self::FILE_NAME;
         try {
             if (file_exists($this->cacheFileName)) {
-                $this->cacheData = unserialize(gzuncompress(base64_decode(file_get_contents($this->cacheFileName)))) ?: [];
+                $serializedData = gzuncompress(base64_decode(file_get_contents($this->cacheFileName)));
+                if ($serializedData) {
+                    $this->cacheData = unserialize($serializedData) ?: [];
+                }
             }
         } catch (\Exception) {
         }
