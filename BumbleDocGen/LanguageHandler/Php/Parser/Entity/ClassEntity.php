@@ -335,6 +335,19 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
+    public function getFullFileName(): ?string
+    {
+        $fileName = $this->getFileName();
+        if (!$fileName) {
+            return $fileName;
+        }
+        return "{$this->configuration->getProjectRoot()}{$fileName}";
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function getStartLine(): int
     {
         return $this->getReflection()->getStartLine();
