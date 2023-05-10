@@ -19,6 +19,8 @@ use Symfony\Component\Finder\Finder;
 
 final class RendererIteratorFactory
 {
+    private const INTERNAL_CACHING_SYSTEM_VERSION = 1;
+
     private array $renderedFileNames = [];
 
     public function __construct(
@@ -62,6 +64,7 @@ final class RendererIteratorFactory
             if (
                 !$this->configuration->useSharedCache() ||
                 !$this->isGeneratedDocumentExists($templateFileName) ||
+                $this->isInternalCachingVersionChanged() ||
                 $this->isConfigurationVersionChanged() ||
                 $this->isFilesDependenciesCacheOutdated($templateFileName) ||
                 $this->isEntitiesOperationsLogCacheOutdated($templateFileName)
@@ -107,6 +110,7 @@ final class RendererIteratorFactory
             if (
                 !$this->configuration->useSharedCache() ||
                 !$this->isGeneratedEntityDocumentExists($entityWrapper) ||
+                $this->isInternalCachingVersionChanged() ||
                 $this->isConfigurationVersionChanged() ||
                 $entityWrapper->getDocumentTransformableEntity()->entityCacheIsOutdated() ||
                 $this->isFilesDependenciesCacheOutdated($filesDependenciesKey) ||
@@ -142,6 +146,10 @@ final class RendererIteratorFactory
             'config_hash',
             md5(serialize($this->configurationParameterBag->getAll(false)))
         );
+        $this->sharedCompressedDocumentFileCache->set(
+            'internal_caching_system_version',
+            self::INTERNAL_CACHING_SYSTEM_VERSION
+        );
     }
 
     /**
@@ -168,6 +176,18 @@ final class RendererIteratorFactory
             }
             yield $docFile;
         }
+    }
+
+    private function isInternalCachingVersionChanged(): bool
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $cachedInternalCachingSystemVersion = $this->sharedCompressedDocumentFileCache->get('internal_caching_system_version');
+        $isConfigChanged = self::INTERNAL_CACHING_SYSTEM_VERSION !== $cachedInternalCachingSystemVersion;
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $isConfigChanged);
+        return $isConfigChanged;
     }
 
     /**
