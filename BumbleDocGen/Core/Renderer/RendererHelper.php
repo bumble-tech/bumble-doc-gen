@@ -28,10 +28,11 @@ final class RendererHelper
             !str_starts_with($fileName, $this->configuration->getTemplatesDir()) &&
             !str_starts_with($fileName, $this->configuration->getOutputDir()) &&
             !str_starts_with($fileName, $this->configuration->getWorkingDir()) &&
+            !str_starts_with($fileName, $this->configuration->getProjectRoot()) &&
             !str_starts_with($fileName, $this->configuration->getDocGenLibDir())
         ) {
             throw new \InvalidArgumentException(
-                "File `{$fileName}` must belong to one of these directories: template_dir, output_dir, working_dir"
+                "File `{$fileName}` must belong to one of these directories: template_dir, output_dir, working_dir, project_root"
             );
         }
 
@@ -40,13 +41,15 @@ final class RendererHelper
                 $this->configuration->getTemplatesDir(),
                 $this->configuration->getOutputDir(),
                 $this->configuration->getWorkingDir(),
-                $this->configuration->getDocGenLibDir()
+                $this->configuration->getDocGenLibDir(),
+                $this->configuration->getProjectRoot(),
             ],
             [
                 '{%templates_dir%}',
                 '{%output_dir%}',
                 '{%working_dir%}',
-                '{%doc_gen_lib_dir%}'
+                '{%doc_gen_lib_dir%}',
+                '{%project_root%}',
             ],
             $fileName
         );
@@ -63,13 +66,15 @@ final class RendererHelper
                 '{%templates_dir%}',
                 '{%output_dir%}',
                 '{%working_dir%}',
-                '{%doc_gen_lib_dir%}'
+                '{%doc_gen_lib_dir%}',
+                '{%project_root%}',
             ],
             [
                 $this->configuration->getTemplatesDir(),
                 $this->configuration->getOutputDir(),
                 $this->configuration->getWorkingDir(),
-                $this->configuration->getDocGenLibDir()
+                $this->configuration->getDocGenLibDir(),
+                $this->configuration->getProjectRoot(),
             ],
             $fileInternalLink
         );
