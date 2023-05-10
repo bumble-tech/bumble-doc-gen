@@ -27,7 +27,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
      * @warning The entity obtained as a result of executing this method may not be available for loading
      * @see RootEntityInterface::entityDataCanBeLoaded()
      */
-    abstract public function getLoadedOrCreateNew(string $objectName): RootEntityInterface;
+    abstract public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): RootEntityInterface;
 
     abstract public function findEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface;
 

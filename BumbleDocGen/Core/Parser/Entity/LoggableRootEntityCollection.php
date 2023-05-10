@@ -92,10 +92,10 @@ abstract class LoggableRootEntityCollection extends RootEntityCollection
 
     abstract protected function _getLoadedOrCreateNew(string $objectName): RootEntityInterface;
 
-    final public function getLoadedOrCreateNew(string $objectName): RootEntityInterface
+    final public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): RootEntityInterface
     {
         $objectName = $this->prepareObjectName($objectName);
-        $result = $this->_getLoadedOrCreateNew($objectName);
+        $result = $this->_getLoadedOrCreateNew($objectName, $withAddClassEntityToCollectionEvent);
         $this->logOperation(
             new SingleEntitySearchOperation(
                 __FUNCTION__,

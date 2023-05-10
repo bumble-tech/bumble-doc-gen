@@ -285,7 +285,7 @@ final class RendererIteratorFactory
         foreach ($entitiesRelations as $entityData) {
             $entityName = $entityData['entity_name'];
             $collectionName = $entityData['collection_name'];
-            $entity = $this->rootEntityCollectionsGroup->get($collectionName)->getLoadedOrCreateNew($entityName);
+            $entity = $this->rootEntityCollectionsGroup->get($collectionName)->getLoadedOrCreateNew($entityName, true);
             $this->documentedEntityWrappersCollection->createAndAddDocumentedEntityWrapper($entity);
         }
     }

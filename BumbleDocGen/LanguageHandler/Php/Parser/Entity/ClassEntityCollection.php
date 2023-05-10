@@ -103,18 +103,22 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function _getLoadedOrCreateNew(string $objectName): ClassEntity
+    public function _getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): ClassEntity
     {
         $classEntity = $this->get($objectName);
         if (!$classEntity) {
             try {
-                return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectName);
+                $classEntity = $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectName);
             } catch (ObjectNotFoundException) {
+                $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
+                    $this,
+                    ltrim($objectName, '\\')
+                );
             }
-            $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
-                $this,
-                ltrim($objectName, '\\')
-            );
+
+            if($withAddClassEntityToCollectionEvent) {
+                $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
+            }
             $this->localObjectCache->cacheMethodResult(__METHOD__, $objectName, $classEntity);
         }
         return $classEntity;
