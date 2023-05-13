@@ -60,8 +60,12 @@ final class DocGenerator
         $start = microtime(true);
         $memory = memory_get_usage();
 
-        $this->parser->parse();
-        $this->render->run();
+        try {
+            $this->parser->parse();
+            $this->render->run();
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+        }
 
         $time = microtime(true) - $start;
         $this->logger->notice("Time of execution: {$time} sec.");

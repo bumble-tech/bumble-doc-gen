@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
+use Psr\Log\LoggerInterface;
 
 final class DocGeneratorFactory
 {
@@ -37,10 +38,16 @@ final class DocGeneratorFactory
     public function create(string ...$configurationFiles): DocGenerator
     {
         $diContainer = $this->containerBuilder->build();
-        /** @var ConfigurationParameterBag $configurationParameterBag */
-        $configurationParameterBag = $diContainer->get(ConfigurationParameterBag::class);
-        $configurationParameterBag->loadFromFiles(...$configurationFiles);
-        $configurationParameterBag->loadFromArray($this->customConfigurationParameters);
-        return $diContainer->get(DocGenerator::class);
+        $logger = $diContainer->get(LoggerInterface::class);
+        try {
+            /** @var ConfigurationParameterBag $configurationParameterBag */
+            $configurationParameterBag = $diContainer->get(ConfigurationParameterBag::class);
+            $configurationParameterBag->loadFromFiles(...$configurationFiles);
+            $configurationParameterBag->loadFromArray($this->customConfigurationParameters);
+            return $diContainer->get(DocGenerator::class);
+        } catch (\Exception $e) {
+            $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
+            throw new \RuntimeException($e->getMessage());
+        }
     }
 }
