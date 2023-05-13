@@ -22,6 +22,7 @@ use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
+use Psr\Log\LoggerInterface;
 
 /**
  * Configuration wrapper for project documentation
@@ -33,6 +34,7 @@ final class Configuration
     public function __construct(
         private ConfigurationParameterBag $parameterBag,
         private LocalObjectCache          $localObjectCache,
+        private LoggerInterface           $logger,
     )
     {
         $parameterBag->addValueFromFileIfNotExists('', self::DEFAULT_SETTINGS_FILE);
@@ -95,7 +97,18 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $outputDir = realpath($this->parameterBag->validateAndGetStringValue('output_dir', false));
+        $outputDir = $this->parameterBag->validateAndGetStringValue('output_dir', false);
+        $parentDir = dirname($outputDir);
+        if (!$parentDir || !is_dir($parentDir)) {
+            throw new InvalidConfigurationParameterException(
+                "`output_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+            );
+        }
+        if (!file_exists($outputDir)) {
+            $this->logger->notice("Creating `{$outputDir}` directory");
+            mkdir($outputDir);
+        }
+        $outputDir = realpath($outputDir);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $outputDir);
         return $outputDir;
     }
@@ -184,7 +197,19 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $cacheDir = realpath($this->parameterBag->validateAndGetStringValue('cache_dir'));
+
+        $cacheDir = $this->parameterBag->validateAndGetStringValue('cache_dir');
+        $parentDir = dirname($cacheDir);
+        if (!is_dir($parentDir)) {
+            throw new InvalidConfigurationParameterException(
+                "`cache_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+            );
+        }
+        if (!file_exists($cacheDir)) {
+            $this->logger->notice("Creating `{$cacheDir}` directory");
+            mkdir($cacheDir);
+        }
+        $cacheDir = realpath($cacheDir);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheDir);
         return $cacheDir;
     }
