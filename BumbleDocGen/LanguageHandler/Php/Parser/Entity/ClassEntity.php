@@ -159,7 +159,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function documentCreationAllowed(): bool
     {
-        return $this->isInGit();
+        return !$this->configuration->isCheckFileInGitBeforeCreatingDocEnabled() || $this->isInGit();
     }
 
     /**

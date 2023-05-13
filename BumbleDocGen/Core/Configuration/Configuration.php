@@ -310,6 +310,20 @@ final class Configuration
     }
 
     /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function isCheckFileInGitBeforeCreatingDocEnabled(): bool
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue('check_file_in_git_before_creating_doc');
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $useSharedCache);
+        return $useSharedCache;
+    }
+
+    /**
      * @throws \Exception
      */
     public function getWorkingDir(): string
