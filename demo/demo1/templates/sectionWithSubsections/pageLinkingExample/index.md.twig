@@ -1,0 +1,14 @@
+{% set title = 'Page linking example' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Page linking example" | textToHeading('H1') }}
+
+1) <a>InvalidArgumentException</a> - create a reference by short class name
+
+2) <a>Doctrine\Common\Annotations\AnnotationException</a> - creating a reference by full class name
+
+3) <a>Class map</a> - create a link to another page
+
+4) <a>/demo/demo1/docs/sectionWithSubsections/classListExample/index.md</a> - creating a link by file path
+
+5) <a>/demo/demo1/docs/sectionWithSubsections/classListExample/index2.md</a> - non-exists link case
