@@ -68,7 +68,7 @@ final class EntityDocRendererHelper
 
         if (!$entity) {
             $nextEntity = $rootEntityCollection->getLoadedOrCreateNew($className);
-            if ($nextEntity->entityDataCanBeLoaded() && $nextEntity->isInGit()) {
+            if ($nextEntity->entityDataCanBeLoaded() && $nextEntity->documentCreationAllowed()) {
                 $entity = $nextEntity;
             }
         }

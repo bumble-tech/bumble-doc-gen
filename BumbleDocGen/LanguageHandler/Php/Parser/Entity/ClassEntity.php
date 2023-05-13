@@ -154,6 +154,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function documentCreationAllowed(): bool
+    {
+        return $this->isInGit();
+    }
+
+    /**
      * @throws NotFoundException
      * @throws DependencyException
      * @throws ReflectionException
