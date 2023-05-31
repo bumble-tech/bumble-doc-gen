@@ -56,7 +56,10 @@ final class EntityDocRendererHelper
         if ($needToUseDefaultEntity) {
             $defaultEntity = $rootEntityCollection->getLoadedOrCreateNew($defaultEntityName);
             $cursorTmpName = str_replace(['$', '(', ')'], '', $className);
-            if (
+            if (!$defaultEntity->entityDataCanBeLoaded()) {
+                $entity = $defaultEntity;
+                $classData[1] = '';
+            } elseif (
                 $defaultEntity->hasMethod($cursorTmpName) ||
                 $defaultEntity->hasProperty($cursorTmpName) ||
                 $defaultEntity->hasConstant($cursorTmpName)
@@ -75,7 +78,7 @@ final class EntityDocRendererHelper
 
         if ($entity) {
             $cursor = '';
-            if (isset($classData[1])) {
+            if ($classData[1] ?? null) {
                 $cursorTarget = str_replace(['$', '(', ')'], '', $classData[1]);
                 if (
                     str_ends_with($classData[1], '()') || $entity->hasMethod($cursorTarget)
