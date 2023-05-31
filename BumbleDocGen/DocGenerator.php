@@ -64,7 +64,7 @@ final class DocGenerator
             $this->parser->parse();
             $this->render->run();
         } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->critical("{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{{$e->getTraceAsString()}}");
         }
 
         $time = microtime(true) - $start;
