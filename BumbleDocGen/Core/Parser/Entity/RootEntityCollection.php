@@ -46,8 +46,9 @@ abstract class RootEntityCollection extends BaseEntityCollection
      */
     public function updateEntitiesCache(): void
     {
-        foreach ($this as $entity) {
+        foreach ($this->entities as $entity) {
             if (
+                $entity->entityDataCanBeLoaded() &&
                 is_a($entity, CacheableEntityInterface::class) &&
                 $entity->entityCacheIsOutdated()
             ) {
