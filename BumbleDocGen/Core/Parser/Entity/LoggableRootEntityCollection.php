@@ -58,7 +58,7 @@ abstract class LoggableRootEntityCollection extends RootEntityCollection
     {
     }
 
-    final protected function cloneForFiltration(): static
+    final protected function cloneForFiltration(bool $onlyLoaded = true): static
     {
         $clone = clone $this;
         $backtrace = debug_backtrace(0, 2);
@@ -71,6 +71,13 @@ abstract class LoggableRootEntityCollection extends RootEntityCollection
             )
         );
         $clone->callerNameToSkipLogging = $backtrace[1]['function'];
+        if ($onlyLoaded) {
+            foreach ($clone->entities as $objectId => $rootEntity) {
+                if (!$rootEntity->entityDataCanBeLoaded()) {
+                    $clone->remove($objectId);
+                }
+            }
+        }
         return $clone;
     }
 
