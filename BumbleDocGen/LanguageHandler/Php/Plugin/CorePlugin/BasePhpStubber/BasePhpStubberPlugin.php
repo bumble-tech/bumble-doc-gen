@@ -148,7 +148,7 @@ final class BasePhpStubberPlugin implements PluginInterface
     {
         if (!$event->getResourceUrl()) {
             $resourceName = $event->getResourceName();
-            if (preg_match('/([{\[])/', $event->getResourceName())) {
+            if (preg_match('/([{\[])/', $resourceName) || preg_match('/^(array)([{<])/', $resourceName)) {
                 $resourceName = 'array';
             }
             if (array_key_exists($resourceName, self::$builtInUrls)) {
