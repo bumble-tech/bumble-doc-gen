@@ -23,6 +23,8 @@ use Psr\Log\LoggerInterface;
 
 final class ClassEntityCollection extends LoggableRootEntityCollection
 {
+    private array $entitiesNotHandledByPlugins = [];
+
     public function __construct(
         private Configuration             $configuration,
         private PhpHandlerSettings        $phpHandlerSettings,
@@ -80,10 +82,11 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     public function add(ClassEntity $classEntity, bool $reload = false): ClassEntityCollection
     {
         $className = $classEntity->getName();
-        if (!isset($this->entities[$className]) || $reload) {
+        if (!isset($this->entities[$className]) || $reload || isset($this->entitiesNotHandledByPlugins[$className])) {
             $this->logger->info("Parsing {$classEntity->getFileName()} file");
             $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
             $this->entities[$className] = $classEntity;
+            unset($this->entitiesNotHandledByPlugins[$className]);
         }
         return $this;
     }
@@ -107,19 +110,19 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     {
         $classEntity = $this->get($objectName);
         if (!$classEntity) {
-            try {
-                $classEntity = $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectName);
-            } catch (ObjectNotFoundException) {
-                $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
-                    $this,
-                    ltrim($objectName, '\\')
-                );
+            $objectName = ltrim($objectName, '\\');
+            $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
+                $this,
+                $objectName
+            );
+
+            if ($withAddClassEntityToCollectionEvent) {
+                $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
+            } else {
+                $this->entitiesNotHandledByPlugins[$objectName] = $objectName;
             }
 
-            if($withAddClassEntityToCollectionEvent) {
-                $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
-            }
-            $this->localObjectCache->cacheMethodResult(__METHOD__, $objectName, $classEntity);
+            $this->entities[$classEntity->getName()] = $classEntity;
         }
         return $classEntity;
     }
@@ -289,7 +292,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
             $duplicates = [];
             foreach ($this->entities as $entity) {
                 $index[$entity->getName()] = $entity;
-                if ($entity->getFileName() && $entity->entityDataCanBeLoaded()) {
+                if ($entity->entityDataCanBeLoaded() && $entity->getFileName()) {
                     $index[$entity->getFileName()] = $entity;
                     $index[$entity->getAbsoluteFileName()] = $entity;
                     $index[$entity->getFileSourceLink(false)] = $entity;
