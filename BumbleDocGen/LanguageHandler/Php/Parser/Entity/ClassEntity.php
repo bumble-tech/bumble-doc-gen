@@ -299,13 +299,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->isClassLoad();
     }
 
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
     #[CacheableMethod] public function getShortName(): string
     {
-        return $this->getReflection()->getShortName();
+        $nameParts = explode('\\', $this->getName());
+        return end($nameParts);
     }
 
     /**
