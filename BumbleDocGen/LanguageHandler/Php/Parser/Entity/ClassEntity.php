@@ -98,8 +98,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * {@inheritDoc}
-     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
     public function getEntityDependencies(): array
     {
