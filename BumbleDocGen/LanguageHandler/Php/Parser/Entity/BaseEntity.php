@@ -473,7 +473,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     {
         $entity = $this->getCurrentRootEntity();
         if ($entity) {
-            $this->logger->info("Caching {$entity->getFileName()} dependencies");
+            $this->logger->info("Caching {$entity->getName()} dependencies");
             $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
             $entityDependencies = $this->getEntityDependencies();
             $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
