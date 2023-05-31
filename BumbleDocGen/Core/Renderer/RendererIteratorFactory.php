@@ -98,6 +98,10 @@ final class RendererIteratorFactory
     public function getDocumentedEntityWrappersWithOutdatedCache(): \Generator
     {
         foreach ($this->documentedEntityWrappersCollection as $entityWrapper) {
+            if(!$entityWrapper->getDocumentTransformableEntity()->entityDataCanBeLoaded()){
+                continue;
+            }
+
             /** @var DocumentedEntityWrapper $entityWrapper */
             $this->rendererContext->clearFilesDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
