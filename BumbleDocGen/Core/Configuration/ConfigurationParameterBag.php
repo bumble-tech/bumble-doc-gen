@@ -139,6 +139,7 @@ final class ConfigurationParameterBag
         foreach ($this->parameters as $name => $value) {
             $parameters[$name] = $this->get($name, $useResolvers);
         }
+        ksort($parameters);
         return $parameters;
     }
 
