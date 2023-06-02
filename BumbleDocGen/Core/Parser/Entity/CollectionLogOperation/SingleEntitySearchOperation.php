@@ -38,9 +38,14 @@ final class SingleEntitySearchOperation implements OperationInterface
         return $this->entityName;
     }
 
+    public function getArgsHash(): string
+    {
+        return md5(json_encode($this->args));
+    }
+
     public function getKey(): string
     {
-        return $this->functionName . md5(json_encode($this->args));
+        return "{$this->functionName}{$this->getArgsHash()}";
     }
 
     public function incrementUsageCount(): void
