@@ -195,20 +195,14 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @throws NotFoundException
      * @throws ReflectionException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getFileName(): ?string
     {
-        $fullFileName = $this->getReflection()->getImplementingClass()->getFileName();
-        if (!$fullFileName || !str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
-            return null;
-        }
-        return str_replace(
-            $this->configuration->getProjectRoot(),
-            '',
-            $fullFileName
-        );
+        return $this->getImplementingClass()->getFileName();
     }
 
     /**

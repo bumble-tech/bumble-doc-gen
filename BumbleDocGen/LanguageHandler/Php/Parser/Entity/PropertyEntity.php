@@ -190,15 +190,7 @@ class PropertyEntity extends BaseEntity
      */
     #[CacheableMethod] public function getFileName(): ?string
     {
-        $fullFileName = $this->getReflection()->getImplementingClass()->getFileName();
-        if (!$fullFileName) {
-            return null;
-        }
-        return str_replace(
-            $this->configuration->getProjectRoot(),
-            '',
-            $fullFileName
-        );
+        return $this->getImplementingClass()->getFileName();
     }
 
     /**

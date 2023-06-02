@@ -158,20 +158,14 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
+     * @throws NotFoundException
      * @throws ReflectionException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getFileName(): ?string
     {
-        $fullFileName = $this->getReflection()->getDeclaringClass()->getFileName();
-        if (!$fullFileName) {
-            return null;
-        }
-        return str_replace(
-            $this->configuration->getProjectRoot(),
-            '',
-            $fullFileName
-        );
+        return $this->getImplementingClass()->getFileName();
     }
 
     /**

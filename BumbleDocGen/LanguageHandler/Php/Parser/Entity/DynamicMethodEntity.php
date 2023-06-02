@@ -10,6 +10,8 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
+use DI\DependencyException;
+use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 
@@ -19,10 +21,10 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 class DynamicMethodEntity implements MethodEntityInterface
 {
     public function __construct(
-        private Configuration    $configuration,
-        private ParserHelper     $parserHelper,
-        private ClassEntity      $classEntity,
-        private Method           $annotationMethod
+        private Configuration $configuration,
+        private ParserHelper  $parserHelper,
+        private ClassEntity   $classEntity,
+        private Method        $annotationMethod
     )
     {
     }
@@ -33,7 +35,9 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
+     * @throws NotFoundException
      * @throws ReflectionException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function getEntityDependencies(): array
@@ -70,16 +74,7 @@ class DynamicMethodEntity implements MethodEntityInterface
      */
     #[CacheableMethod] public function getFileName(): ?string
     {
-        $fullFileName = $this->getImplementingReflectionClass()->getFileName();
-        if (!$fullFileName || !str_starts_with($fullFileName, $this->configuration->getProjectRoot())) {
-            return null;
-        }
-
-        return str_replace(
-            $this->configuration->getProjectRoot(),
-            '',
-            $fullFileName
-        );
+        return $this->getImplementingClass()->getFileName();
     }
 
     /**
