@@ -53,7 +53,8 @@ final class DocumentedEntityWrapper
         }
         $usedKeysCounter ??= [];
         $fileName = $this->documentTransformableEntity->getShortName();
-        $counterKey = "{$this->initiatorFilePath}{$fileName}";
+        $initiatorFileDir = dirname($this->initiatorFilePath);
+        $counterKey = "{$initiatorFileDir}{$fileName}";
 
         if (!isset($usedKeysCounter[$counterKey])) {
             $usedKeysCounter[$counterKey] = 1;
