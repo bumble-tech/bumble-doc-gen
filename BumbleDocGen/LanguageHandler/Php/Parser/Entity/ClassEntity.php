@@ -673,6 +673,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $caseNames;
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function getFileContent(): string
     {
         return $this->getAbsoluteFileName() ? file_get_contents($this->getAbsoluteFileName()) : '';
@@ -723,7 +726,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $name = $constant->getName();
             $constants[$name] = [
                 'declaringClass' => $constant->getDeclaringClass()->getName(),
-                'implementingClass' => $constant->getDeclaringClass()->getName()
+                'implementingClass' => $constant->getImplementingClass()->getName()
             ];
         }
         return $constants;
