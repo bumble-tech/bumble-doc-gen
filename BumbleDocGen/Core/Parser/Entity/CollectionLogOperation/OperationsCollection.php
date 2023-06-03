@@ -29,7 +29,7 @@ final class OperationsCollection implements \IteratorAggregate
 
     public function removeSearchDuplicates(): void
     {
-        /** @var IterateEntitiesOperation[] $singleEntitySearchOperations */
+        /** @var IterateEntitiesOperation[] $iterateOperations */
         $iterateOperations = array_filter($this->operations, fn(OperationInterface $operation) => $operation instanceof IterateEntitiesOperation);
         /** @var SingleEntitySearchOperation[] $singleEntitySearchOperations */
         $singleEntitySearchOperations = array_filter($this->operations, fn(OperationInterface $operation) => $operation instanceof SingleEntitySearchOperation);
@@ -49,39 +49,17 @@ final class OperationsCollection implements \IteratorAggregate
         }
 
         if ($singleEntitySearchOperations) {
-            $findEntitySearchOperations = array_filter($singleEntitySearchOperations, fn(OperationInterface $operation) => $operation->getFunctionName() === 'findEntity');
-            $getLoadedOrCreateNewOperations = array_filter($singleEntitySearchOperations, fn(OperationInterface $operation) => $operation->getFunctionName() === 'getLoadedOrCreateNew');
-            $getOperations = array_filter($singleEntitySearchOperations, fn(OperationInterface $operation) => $operation->getFunctionName() === 'get');
+            $removeKey = function (string $key) use (&$singleEntitySearchOperations) {
+                unset($this->operations[$key]);
+                unset($singleEntitySearchOperations[$key]);
+            };
 
-            foreach ($findEntitySearchOperations as $findEntitySearchOperation) {
-                foreach ($getLoadedOrCreateNewOperations as $k => $getLoadedOrCreateNewOperation) {
-                    if (is_null($getLoadedOrCreateNewOperation->getEntityName())) {
-                        continue;
-                    }
-                    if ($findEntitySearchOperation->getEntityName() === $getLoadedOrCreateNewOperation->getEntityName()) {
-                        unset($getLoadedOrCreateNewOperations[$k]);
-                        unset($this->operations[$k]);
-                    }
-                }
-                foreach ($getOperations as $k => $getOperation) {
-                    if (is_null($getOperation->getEntityName())) {
-                        continue;
-                    }
-                    if ($findEntitySearchOperation->getEntityName() === $getOperation->getEntityName()) {
-                        unset($getOperations[$k]);
-                        unset($this->operations[$k]);
-                    }
-                }
-            }
-            foreach ($getLoadedOrCreateNewOperations as $getLoadedOrCreateNewOperation) {
-                foreach ($getOperations as $k => $getOperation) {
-                    if (is_null($getOperation->getEntityName())) {
-                        continue;
-                    }
-                    if ($getLoadedOrCreateNewOperation->getEntityName() === $getOperation->getEntityName()) {
-                        unset($getOperations[$k]);
-                        unset($this->operations[$k]);
-                    }
+            foreach ($singleEntitySearchOperations as $singleEntitySearchOperation) {
+                switch ($singleEntitySearchOperation->getFunctionName()) {
+                    case 'findEntity':
+                        $removeKey("getLoadedOrCreateNew{$singleEntitySearchOperation->getArgsHash()}");
+                    case 'getLoadedOrCreateNew':
+                        $removeKey("get{$singleEntitySearchOperation->getArgsHash()}");
                 }
             }
         }
