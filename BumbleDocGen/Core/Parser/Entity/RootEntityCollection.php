@@ -8,10 +8,12 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\EntityCacheStorageHelper;
 use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
+use Psr\Log\LoggerInterface;
 
 abstract class RootEntityCollection extends BaseEntityCollection
 {
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
+    #[Inject] private LoggerInterface $logger;
 
     /** @var RootEntityInterface[] */
     protected array $entities = [];
@@ -46,15 +48,21 @@ abstract class RootEntityCollection extends BaseEntityCollection
      */
     public function updateEntitiesCache(): void
     {
+        $needToSaveCache = false;
         foreach ($this->entities as $entity) {
-            if (
-                $entity->entityDataCanBeLoaded() &&
-                is_a($entity, CacheableEntityInterface::class) &&
-                $entity->entityCacheIsOutdated()
-            ) {
+            if (!is_a($entity, CacheableEntityInterface::class)) {
+                continue;
+            }
+            if ($entity->entityDataCanBeLoaded() && $entity->entityCacheIsOutdated()) {
                 $entity->reloadEntityDependenciesCache();
             }
+            if ($entity->isEntityDataCacheOutdated()) {
+                $needToSaveCache = true;
+            }
         }
-        $this->entityCacheStorageHelper->saveCache();
+        if ($needToSaveCache) {
+            $this->logger->info('Updating local cache');
+            $this->entityCacheStorageHelper->saveCache();
+        }
     }
 }

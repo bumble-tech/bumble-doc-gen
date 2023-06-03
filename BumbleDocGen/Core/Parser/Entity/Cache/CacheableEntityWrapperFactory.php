@@ -52,14 +52,13 @@ final class CacheableEntityWrapperFactory
                         $cacheNamespace = "{$wrapperName}_{$method->getName()}";
 
                         $cacheableMethodAttrObj = $cacheableMethodAttr->newInstance();
-                        $expiresAfter = time() + $cacheableMethodAttrObj->getCacheSeconds();
                         $newMethod->setBody("
                             return \$this->getWrappedMethodResult(
                                 '{$method->getName()}', 
                                 func_get_args(), 
                                 '{$cacheableMethodAttrObj->getCacheKeyGeneratorClass()}',
                                 '{$cacheNamespace}',
-                                {$expiresAfter}
+                                {$cacheableMethodAttrObj->getCacheSeconds()}
                             );
                         ");
                     }

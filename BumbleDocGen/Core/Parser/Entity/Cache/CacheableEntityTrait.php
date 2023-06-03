@@ -11,7 +11,11 @@ use Psr\Cache\InvalidArgumentException;
 
 trait CacheableEntityTrait
 {
-    private string $cacheVersion = 'v6';
+    private string $cacheVersion = 'v5';
+    private static string $dataKey = '__data__';
+    private static string $expiresTimeKey = '__expires_at__';
+
+    private bool $isCacheChanged = false;
 
     #[Inject] private EntityCacheItemPool $entityCacheItemPool;
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
@@ -42,7 +46,7 @@ trait CacheableEntityTrait
                 $cacheValues = $this->entityCacheItemPool->getItem($cacheKey)->get();
                 $time = time();
                 foreach ($cacheValues as $key => $cacheValue) {
-                    if (isset($cacheValue['__expires_after__']) && $cacheValue['__expires_after__'] < $time) {
+                    if (!isset($cacheValue[self::$expiresTimeKey]) || $cacheValue[self::$expiresTimeKey] < $time) {
                         unset($cacheValues[$key]);
                     }
                 }
@@ -59,7 +63,7 @@ trait CacheableEntityTrait
     final protected function getEntityCacheValue(string $key): mixed
     {
         $cacheValues = $this->getEntityCacheValues();
-        return $cacheValues[$key]['__data__'] ?? null;
+        return $cacheValues[$key][self::$dataKey] ?? null;
     }
 
     /**
@@ -68,17 +72,22 @@ trait CacheableEntityTrait
      */
     final protected function hasEntityCacheValue(string $key): bool
     {
-        $internalDataKey = "__data__";
         $cacheValues = $this->getEntityCacheValues();
-        return array_key_exists($key, $cacheValues) && is_array($cacheValues[$key]) && array_key_exists($internalDataKey, $cacheValues[$key]);
+        return array_key_exists($key, $cacheValues) && is_array($cacheValues[$key]) && array_key_exists(self::$dataKey, $cacheValues[$key]);
     }
 
     final protected function addEntityValueToCache(string $key, mixed $value, int $cacheExpiresAfter = 604800): void
     {
+        $this->isCacheChanged = true;
         $cacheKey = $this->getVersionedCacheKey();
         $this->entityCacheStorageHelper->addValueToCache($cacheKey, $key, [
-            "__data__" => $value,
-            "__expires_after__" => $cacheExpiresAfter
+            self::$dataKey => $value,
+            self::$expiresTimeKey => time() + $cacheExpiresAfter,
         ]);
+    }
+
+    final public function isEntityDataCacheOutdated(): bool
+    {
+        return $this->isCacheChanged;
     }
 }

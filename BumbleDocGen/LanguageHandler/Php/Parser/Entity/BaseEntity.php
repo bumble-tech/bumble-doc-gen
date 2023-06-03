@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
+use BumbleDocGen\Core\Cache\EntityCacheItemPool;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
@@ -21,6 +22,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\Attribute\Inject;
 use phpDocumentor\Reflection\DocBlock;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionClassConstant;
@@ -32,6 +34,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     use CacheableEntityTrait;
 
     #[Inject] private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache;
+    #[Inject] private EntityCacheItemPool $entityCacheItemPool;
     #[Inject] private GetDocumentedEntityUrl $documentedEntityUrlFunction;
     #[Inject] private RendererHelper $rendererHelper;
 
@@ -464,6 +467,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             if (is_null($entityDependencies)) {
                 $entityDependencies = $entity->getEntityDependencies();
                 $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
+                $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
             }
         }
         return $entityDependencies;
@@ -477,6 +481,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
             $entityDependencies = $entity->getEntityDependencies();
             $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
+            $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
         }
     }
 
@@ -518,6 +523,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * @throws InvalidConfigurationParameterException
+     * @throws InvalidArgumentException
      */
     final public function entityCacheIsOutdated(): bool
     {
@@ -570,6 +576,16 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                 }
             }
         }
+
+        if (!$entityCacheIsOutdated) {
+            $localDependencies = $this->getEntityCacheValue($this->getEntityDependenciesCacheKey());
+            if (!$localDependencies) {
+                $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $cachedDependencies);
+            } elseif (ksort($localDependencies) !== ksort($cachedDependencies)) {
+                $entityCacheIsOutdated = true;
+            }
+        }
+
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $dependenciesChecks);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, $entityCacheIsOutdated);
         return $entityCacheIsOutdated;
