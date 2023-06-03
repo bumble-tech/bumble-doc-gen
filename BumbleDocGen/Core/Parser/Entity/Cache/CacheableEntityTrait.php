@@ -12,8 +12,8 @@ use Psr\Cache\InvalidArgumentException;
 trait CacheableEntityTrait
 {
     private string $cacheVersion = 'v5';
-    private static string $dataKey = '__data__';
-    private static string $expiresTimeKey = '__expires_at__';
+    private static string $dataKey = 'd';
+    private static string $expiresTimeKey = 'e';
 
     private bool $isCacheChanged = false;
 
