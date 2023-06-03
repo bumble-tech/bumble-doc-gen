@@ -56,13 +56,13 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     abstract public function getImplementingReflectionClass(): ReflectionClass;
 
-    #[CacheableMethod] abstract protected function getDocCommentRecursive(): string;
+    abstract protected function getDocCommentRecursive(): string;
 
     abstract public function getDocCommentEntity(): ClassEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
-    #[CacheableMethod] abstract public function getDescription(): string;
+    abstract public function getDescription(): string;
 
-    #[CacheableMethod] abstract public function getFileName(): ?string;
+    abstract public function getFileName(): ?string;
 
     #[CacheableMethod] abstract public function getStartLine(): int;
 
@@ -154,21 +154,21 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         );
     }
 
-    #[CacheableMethod] public function isInternal(): bool
+    public function isInternal(): bool
     {
         $docBlock = $this->getDocBlock();
         $internalBlock = $docBlock->getTagsByName('internal')[0] ?? null;
         return (bool)$internalBlock;
     }
 
-    #[CacheableMethod] public function isDeprecated(): bool
+    public function isDeprecated(): bool
     {
         $docBlock = $this->getDocBlock();
         $internalBlock = $docBlock->getTagsByName('deprecated')[0] ?? null;
         return (bool)$internalBlock;
     }
 
-    #[CacheableMethod] public function hasDescriptionLinks(): bool
+    public function hasDescriptionLinks(): bool
     {
         $docBlock = $this->getDocBlock();
         return preg_match_all('/(\@see )(.*?)( |}|])/', $this->getDescription() . ' ') ||
@@ -308,7 +308,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $this->fillInLinkDataWithUrls($linksData);
     }
 
-    #[CacheableMethod] public function hasThrows(): bool
+    public function hasThrows(): bool
     {
         $docBlock = $this->getDocBlock();
         return count($docBlock->getTagsByName('throws')) > 0;
@@ -390,7 +390,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $linkData;
     }
 
-    #[CacheableMethod] public function hasExamples(): bool
+    public function hasExamples(): bool
     {
         $docBlock = $this->getDocBlock();
         return count($docBlock->getTagsByName('example')) > 0;
@@ -401,7 +401,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      *
      * @return array<int,array{example:string}>
      */
-    #[CacheableMethod] public function getExamples(): array
+    public function getExamples(): array
     {
         $examples = [];
         $docBlock = $this->getDocBlock();
@@ -418,13 +418,13 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * Get first example from @examples doc block
      */
-    #[CacheableMethod] public function getFirstExample(): string
+    public function getFirstExample(): string
     {
         $examples = $this->getExamples();
         return $examples[0]['example'] ?? '';
     }
 
-    #[CacheableMethod] public function getDocNote(): string
+    public function getDocNote(): string
     {
         $docBlock = $this->getDocBlock();
         return (string)($docBlock->getTagsByName('note')[0] ?? '');

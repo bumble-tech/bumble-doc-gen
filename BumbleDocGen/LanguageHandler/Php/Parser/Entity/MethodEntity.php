@@ -95,10 +95,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->getReflection()->getImplementingClass();
     }
 
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
     public function getImplementingClass(): ClassEntity
     {
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
@@ -176,22 +172,16 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->methodName;
     }
 
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    #[CacheableMethod] public function isConstructor(): bool
+    public function isConstructor(): bool
     {
-        return $this->getReflection()->isConstructor();
+        return $this->getName() === '__construct';
     }
 
     /**
-     * @throws NotFoundException
      * @throws ReflectionException
-     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getFileName(): ?string
+    public function getFileName(): ?string
     {
         return $this->getImplementingClass()->getFileName();
     }
@@ -200,18 +190,18 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getModifiersString(): string
+    public function getModifiersString(): string
     {
         $modifiersString = [];
-        if ($this->getReflection()->isPrivate()) {
+        if ($this->isPrivate()) {
             $modifiersString[] = 'private';
-        } elseif ($this->getReflection()->isProtected()) {
+        } elseif ($this->isProtected()) {
             $modifiersString[] = 'protected';
-        } elseif ($this->getReflection()->isPublic()) {
+        } elseif ($this->isPublic()) {
             $modifiersString[] = 'public';
         }
 
-        if ($this->getReflection()->isStatic()) {
+        if ($this->isStatic()) {
             $modifiersString[] = 'static';
         }
 
@@ -253,7 +243,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     /**
      * @param Param[] $params
      */
-    #[CacheableMethod] public static function parseAnnotationParams(array $params): array
+    public static function parseAnnotationParams(array $params): array
     {
         $paramsFromDoc = [];
         foreach ($params as $param) {
@@ -272,7 +262,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $paramsFromDoc;
     }
 
-    #[CacheableMethod] private function isArrayAnnotationType(string $annotationType): bool
+    private function isArrayAnnotationType(string $annotationType): bool
     {
         return preg_match('/^([a-zA-Z\\_]+)(\[\])$/', $annotationType) ||
             preg_match('/^(array)(<|{)(.*)(>|})$/', $annotationType);
@@ -345,7 +335,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getParametersString(): string
+    public function getParametersString(): string
     {
         $parameters = [];
         foreach ($this->getParameters() as $parameterData) {
@@ -355,7 +345,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return implode(', ', $parameters);
     }
 
-    #[CacheableMethod] public function isImplementedInParentClass(): bool
+    public function isImplementedInParentClass(): bool
     {
         return $this->getImplementingClassName() !== $this->classEntity->getName();
     }
@@ -366,10 +356,12 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws DependencyException
      * @throws NotFoundException
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getDescription(): string
+    public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return trim($docBlock->getSummary());
@@ -381,20 +373,23 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function isInitialization(): bool
+    public function isInitialization(): bool
     {
-        if ($this->getReflection()->getName() === '__construct') {
+        if ($this->isConstructor()) {
             return true;
         }
+
+        $nameParts = explode('\\', $this->getName());
+        $implementingClassShortName = end($nameParts);
 
         $initializationReturnTypes = [
             'self',
             'static',
             'this',
-            $this->getImplementingReflectionClass()->getName(),
-            $this->getImplementingReflectionClass()->getShortName(),
+            $this->getImplementingClassName(),
+            $implementingClassShortName,
         ];
-        return $this->getReflection()->isStatic() && in_array($this->getReturnType(), $initializationReturnTypes);
+        return $this->isStatic() && in_array($this->getReturnType(), $initializationReturnTypes);
     }
 
     public function isDynamic(): bool
@@ -409,6 +404,15 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     #[CacheableMethod] public function isPublic(): bool
     {
         return $this->getReflection()->isPublic();
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function isStatic(): bool
+    {
+        return $this->getReflection()->isStatic();
     }
 
     /**

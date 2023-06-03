@@ -301,7 +301,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->isClassLoad();
     }
 
-    #[CacheableMethod] public function getShortName(): string
+    public function getShortName(): string
     {
         $nameParts = explode('\\', $this->getName());
         return end($nameParts);
@@ -388,11 +388,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $modifiersString = [];
 
         $reflection = $this->getReflection();
-        if ($reflection->isFinal() && !$reflection->isEnum()) {
+        if ($reflection->isFinal() && !$this->isEnum()) {
             $modifiersString[] = 'final';
         }
 
-        $isInterface = $reflection->isInterface();
+        $isInterface = $this->isInterface();
         if ($isInterface) {
             $modifiersString[] = 'interface';
             return implode(' ', $modifiersString);
@@ -402,7 +402,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
         if ($reflection->isTrait()) {
             $modifiersString[] = 'trait';
-        } elseif ($reflection->isEnum()) {
+        } elseif ($this->isEnum()) {
             $modifiersString[] = 'enum';
         } else {
             $modifiersString[] = 'class';
@@ -415,13 +415,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getExtends(): ?string
+    public function getExtends(): ?string
     {
-        $reflection = $this->getReflection();
-        if ($reflection->isInterface()) {
-            $extends = $reflection->getInterfaceNames()[0] ?? null;
+        if ($this->isInterface()) {
+            $extends = $this->getInterfaceNames()[0] ?? null;
         } else {
-            $extends = $reflection->getParentClass()?->getName();
+            $extends = $this->getParentClassName();
         }
         if ($extends) {
             $extends = "\\{$extends}";
@@ -434,10 +433,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getInterfaces(): array
+    public function getInterfaces(): array
     {
-        $reflection = $this->getReflection();
-        return !$reflection->isInterface() ? array_map(fn($interfaceName) => "\\{$interfaceName}", $reflection->getInterfaceNames()) : [];
+        return !$this->isInterface() ? array_map(fn($interfaceName) => "\\{$interfaceName}", $this->getInterfaceNames()) : [];
     }
 
 
@@ -511,7 +509,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getInterfacesString(): string
+    public function getInterfacesString(): string
     {
         return implode(', ', $this->getInterfaces());
     }
@@ -529,7 +527,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function hasTraits(): bool
+    public function hasTraits(): bool
     {
         return count($this->getTraitsNames()) > 0;
     }
@@ -648,7 +646,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getDescription(): string
+    public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return $docBlock->getSummary();
@@ -681,9 +679,16 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getFileContent(): string
+    public function getFileContent(): string
     {
-        return $this->getAbsoluteFileName() ? file_get_contents($this->getAbsoluteFileName()) : '';
+        $objectId = $this->getObjectId();
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
+        } catch (ObjectNotFoundException) {
+        }
+        $fileContent = $this->getAbsoluteFileName() ? file_get_contents($this->getAbsoluteFileName()) : '';
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $fileContent);
+        return $fileContent;
     }
 
     /**
@@ -759,7 +764,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function hasMethod(string $method): bool
+    public function hasMethod(string $method): bool
     {
         return array_key_exists($method, $this->getMethodsData());
     }
@@ -768,7 +773,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function hasProperty(string $property): bool
+    public function hasProperty(string $property): bool
     {
         return array_key_exists($property, $this->getPropertiesData());
     }
@@ -777,7 +782,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function hasConstant(string $constant): bool
+    public function hasConstant(string $constant): bool
     {
         return array_key_exists($constant, $this->getConstantsData());
     }
@@ -786,7 +791,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function isSubclassOf(string $className): bool
+    public function isSubclassOf(string $className): bool
     {
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
 
@@ -811,7 +816,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function implementsInterface(string $interfaceName): bool
+    public function implementsInterface(string $interfaceName): bool
     {
         $interfaceName = ltrim(str_replace('\\\\', '\\', $interfaceName), '\\');
         $interfaces = array_map(

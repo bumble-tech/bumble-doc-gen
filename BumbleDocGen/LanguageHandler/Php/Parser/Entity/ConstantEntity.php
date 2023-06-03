@@ -30,7 +30,7 @@ class ConstantEntity extends BaseEntity
         Configuration            $configuration,
         private ClassEntity      $classEntity,
         private ParserHelper     $parserHelper,
-        private LocalObjectCache $localObjectCache,
+        LocalObjectCache $localObjectCache,
         LoggerInterface          $logger,
         private string           $constantName,
         private string           $declaringClassName,
@@ -56,8 +56,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws NotFoundException
-     * @throws DependencyException
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
@@ -98,10 +96,6 @@ class ConstantEntity extends BaseEntity
         return $this->implementingClassName;
     }
 
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
     public function getImplementingClass(): ClassEntity
     {
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
@@ -116,16 +110,9 @@ class ConstantEntity extends BaseEntity
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] protected function getDocCommentRecursive(): string
+    protected function getDocCommentRecursive(): string
     {
-        $objectId = $this->getObjectId();
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException) {
-        }
-        $docComment = $this->getDocCommentEntity()->getDocComment() ?: ' ';
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docComment);
-        return $docComment;
+        return $this->getDocCommentEntity()->getDocComment() ?: ' ';
     }
 
     public function getName(): string
@@ -148,23 +135,19 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws NotFoundException
      * @throws ReflectionException
-     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getFileName(): ?string
+    public function getFileName(): ?string
     {
         return $this->getImplementingClass()->getFileName();
     }
 
     /**
-     * @throws NotFoundException
      * @throws ReflectionException
-     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getDescription(): string
+    public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return $docBlock->getSummary();

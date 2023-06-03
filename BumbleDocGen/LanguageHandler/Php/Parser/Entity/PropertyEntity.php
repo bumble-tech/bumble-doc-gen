@@ -179,7 +179,7 @@ class PropertyEntity extends BaseEntity
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getFileName(): ?string
+    public function getFileName(): ?string
     {
         return $this->getImplementingClass()->getFileName();
     }
@@ -240,7 +240,7 @@ class PropertyEntity extends BaseEntity
         return implode(' ', $modifiersString);
     }
 
-    #[CacheableMethod] public function isImplementedInParentClass(): bool
+    public function isImplementedInParentClass(): bool
     {
         return $this->getImplementingClassName() !== $this->classEntity->getName();
     }
@@ -251,7 +251,7 @@ class PropertyEntity extends BaseEntity
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getDescription(): string
+    public function getDescription(): string
     {
         $docBlock = $this->getDocBlock();
         return trim($docBlock->getSummary());
