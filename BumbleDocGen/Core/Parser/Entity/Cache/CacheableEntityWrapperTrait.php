@@ -16,6 +16,8 @@ trait CacheableEntityWrapperTrait
 
     abstract public function entityCacheIsOutdated(): bool;
 
+    abstract public function getCachedEntityDependencies(): array;
+
     abstract protected function getEntityCacheValue(string $key): mixed;
 
     abstract protected function hasEntityCacheValue(string $key): bool;
@@ -44,7 +46,9 @@ trait CacheableEntityWrapperTrait
             $methodReturnValue = $this->getEntityCacheValue($cacheKey);
         } else {
             $methodReturnValue = call_user_func_array(['parent', $methodName], $funcArgs);
-            $this->addEntityValueToCache($cacheKey, $methodReturnValue, $cacheExpiresAfter);
+            if (count($this->getCachedEntityDependencies()) > 1) {
+                $this->addEntityValueToCache($cacheKey, $methodReturnValue, $cacheExpiresAfter);
+            }
         }
         return $methodReturnValue;
     }
