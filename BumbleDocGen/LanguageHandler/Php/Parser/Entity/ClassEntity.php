@@ -317,13 +317,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * {@inheritDoc}
-     * @throws InvalidConfigurationParameterException
      * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getFileName(): ?string
+    public function getRelativeFileName(bool $loadIfEmpty = true): ?string
     {
-        if (!$this->relativeFileNameLoaded) {
+        if (!$this->relativeFileNameLoaded && $loadIfEmpty) {
             $this->relativeFileNameLoaded = true;
             $fileName = $this->getReflection()->getFileName();
             $projectRoot = $this->configuration->getProjectRoot();
@@ -337,6 +336,16 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             );
         }
         return $this->relativeFileName;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @throws InvalidConfigurationParameterException
+     * @throws ReflectionException
+     */
+    #[CacheableMethod] public function getFileName(): ?string
+    {
+        return $this->getRelativeFileName();
     }
 
     /**
@@ -435,9 +444,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @return ClassEntity[]
      *
-     * @throws NotFoundException
      * @throws ReflectionException
-     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function getInterfacesEntities(): array
@@ -488,9 +495,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws NotFoundException
      * @throws ReflectionException
-     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function getParentClass(): ?ClassEntity

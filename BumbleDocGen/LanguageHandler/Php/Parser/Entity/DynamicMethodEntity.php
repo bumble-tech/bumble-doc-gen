@@ -10,8 +10,6 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use DI\DependencyException;
-use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 
@@ -32,17 +30,6 @@ class DynamicMethodEntity implements MethodEntityInterface
     public function getRootEntity(): ClassEntity
     {
         return $this->classEntity;
-    }
-
-    /**
-     * @throws NotFoundException
-     * @throws ReflectionException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getEntityDependencies(): array
-    {
-        return $this->getRootEntity()->getEntityDependencies();
     }
 
     #[CacheableMethod] public function getName(): string

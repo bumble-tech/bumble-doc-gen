@@ -5,26 +5,25 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
 use BumbleDocGen\Core\Cache\EntityCacheItemPool;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
 
 trait CacheableEntityWrapperTrait
 {
-    private string $cacheVersion = 'v5';
-
     #[Inject] private EntityCacheItemPool $entityCacheItemPool;
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
 
-    abstract public function getCacheKey(): string;
-
     abstract public function entityCacheIsOutdated(): bool;
 
-    private function getVersionedCacheKey(): string
-    {
-        return "{$this->cacheVersion}_{$this->getCacheKey()}";
-    }
+    abstract protected function getEntityCacheValue(string $key): mixed;
+
+    abstract protected function hasEntityCacheValue(string $key): bool;
+
+    abstract protected function addEntityValueToCache(string $key, mixed $value, int $cacheExpiresAfter): void;
 
     /**
+     * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
      */
     final protected function getWrappedMethodResult(
@@ -41,57 +40,12 @@ trait CacheableEntityWrapperTrait
             $funcArgs
         );
 
-        $internalDataKey = "__data__";
-        $result = $this->getCacheValue($cacheKey);
-        if (!is_array($result) || !array_key_exists($internalDataKey, $result) || $this->entityCacheIsOutdated()) {
+        if ($this->hasEntityCacheValue($cacheKey) && !$this->entityCacheIsOutdated()) {
+            $methodReturnValue = $this->getEntityCacheValue($cacheKey);
+        } else {
             $methodReturnValue = call_user_func_array(['parent', $methodName], $funcArgs);
-            $result = [
-                $internalDataKey => $methodReturnValue,
-                "__expires_after__" => $cacheExpiresAfter
-            ];
-            $this->addValueToCache($cacheKey, $result);
+            $this->addEntityValueToCache($cacheKey, $methodReturnValue, $cacheExpiresAfter);
         }
-        return $result[$internalDataKey];
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    private function getCacheValues(): array
-    {
-        $cacheKey = $this->getVersionedCacheKey();
-        $cacheValues = $this->entityCacheStorageHelper->getCacheValues($cacheKey);
-        if (is_null($cacheValues)) {
-            $cacheValues = [];
-            if (
-                $this->entityCacheItemPool->hasItem($cacheKey) &&
-                !$this->entityCacheIsOutdated()
-            ) {
-                $cacheValues = $this->entityCacheItemPool->getItem($cacheKey)->get();
-                $time = time();
-                foreach ($cacheValues as $key => $cacheValue) {
-                    if (isset($cacheValue['__expires_after__']) && $cacheValue['__expires_after__'] < $time) {
-                        unset($cacheValues[$key]);
-                    }
-                }
-            }
-            $this->entityCacheStorageHelper->setCacheValues($cacheKey, $cacheValues);
-        }
-        return $cacheValues;
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    private function getCacheValue(string $key): mixed
-    {
-        $cacheValues = $this->getCacheValues();
-        return $cacheValues[$key] ?? null;
-    }
-
-    private function addValueToCache(string $key, mixed $value): void
-    {
-        $cacheKey = $this->getVersionedCacheKey();
-        $this->entityCacheStorageHelper->addValueToCache($cacheKey, $key, $value);
+        return $methodReturnValue;
     }
 }

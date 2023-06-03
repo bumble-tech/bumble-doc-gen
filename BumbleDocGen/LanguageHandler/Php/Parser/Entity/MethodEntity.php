@@ -29,7 +29,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     private ?ReflectionMethod $reflectionMethod = null;
 
     public function __construct(
-        private Configuration    $configuration,
+        Configuration            $configuration,
         private ClassEntity      $classEntity,
         private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
@@ -67,15 +67,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     public function getPhpHandlerSettings(): PhpHandlerSettings
     {
         return $this->classEntity->getPhpHandlerSettings();
-    }
-
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getEntityDependencies(): array
-    {
-        return $this->getRootEntity()->getEntityDependencies();
     }
 
     public function getRootEntityCollection(): ClassEntityCollection

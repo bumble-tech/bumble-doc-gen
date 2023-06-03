@@ -9,11 +9,6 @@ interface EntityInterface
     public function getObjectId(): string;
 
     /**
-     * @return string[]
-     */
-    public function getEntityDependencies(): array;
-
-    /**
      * Get parent collection of entities
      */
     public function getRootEntityCollection(): RootEntityCollection;

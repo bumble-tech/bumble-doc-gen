@@ -10,8 +10,6 @@ interface CacheableEntityInterface
 
     public function getCacheKey(): string;
 
-    public function getEntityDependencies(): array;
-
     public function entityCacheIsOutdated(): bool;
 
     public function reloadEntityDependenciesCache(): void;

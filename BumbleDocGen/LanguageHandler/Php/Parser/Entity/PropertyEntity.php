@@ -27,7 +27,7 @@ class PropertyEntity extends BaseEntity
     private ?ReflectionProperty $reflectionProperty = null;
 
     public function __construct(
-        private Configuration    $configuration,
+        Configuration            $configuration,
         private ClassEntity      $classEntity,
         private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
@@ -53,15 +53,6 @@ class PropertyEntity extends BaseEntity
     public function getPhpHandlerSettings(): PhpHandlerSettings
     {
         return $this->classEntity->getPhpHandlerSettings();
-    }
-
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getEntityDependencies(): array
-    {
-        return $this->getRootEntity()->getEntityDependencies();
     }
 
     /**

@@ -21,6 +21,11 @@ interface RootEntityInterface extends EntityInterface
     public function entityDataCanBeLoaded(): bool;
 
     /**
+     * @return string[]
+     */
+    public function getEntityDependencies(): array;
+
+    /**
      * The entity file is in the git repository
      */
     public function isInGit(): bool;

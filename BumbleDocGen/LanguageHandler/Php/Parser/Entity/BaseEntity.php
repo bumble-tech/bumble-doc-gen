@@ -10,6 +10,7 @@ use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
+use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
@@ -28,6 +29,8 @@ use Roave\BetterReflection\Reflection\ReflectionProperty;
 
 abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
+    use CacheableEntityTrait;
+
     #[Inject] private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache;
     #[Inject] private GetDocumentedEntityUrl $documentedEntityUrlFunction;
     #[Inject] private RendererHelper $rendererHelper;
@@ -63,8 +66,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     #[CacheableMethod] abstract public function getDocBlock(): DocBlock;
 
     abstract public function getRootEntityCollection(): ClassEntityCollection;
-
-    abstract public function getEntityDependencies(): array;
 
     abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
 
@@ -460,9 +461,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         if ($entity) {
             $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
             $entityDependencies = $this->sharedCompressedDocumentFileCache->get($filesDependenciesCacheKey);
-
             if (is_null($entityDependencies)) {
-                $entityDependencies = $this->getEntityDependencies();
+                $entityDependencies = $entity->getEntityDependencies();
                 $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
             }
         }
@@ -475,9 +475,45 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         if ($entity) {
             $this->logger->info("Caching {$entity->getName()} dependencies");
             $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
-            $entityDependencies = $this->getEntityDependencies();
+            $entityDependencies = $entity->getEntityDependencies();
             $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
         }
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    private function isSubEntityFileCacheIsOutdated(string $dependenciesCacheKey): bool
+    {
+        if (!method_exists($this, 'getImplementingClassName') || !method_exists($this, 'getImplementingClass')) {
+            return true;
+        }
+        $key = $this->getImplementingClassName();
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $key);
+        } catch (ObjectNotFoundException) {
+        }
+        try {
+            $dependenciesChecks = $this->localObjectCache->getMethodCachedResult($dependenciesCacheKey, '');
+        } catch (ObjectNotFoundException) {
+            return false;
+        }
+        $implementingClass = $this->getImplementingClass();
+        $relativeFileName = $implementingClass->getRelativeFileName(false);
+        if (!isset($dependenciesChecks[$relativeFileName])) {
+            $dependenciesChecks[$relativeFileName] = true;
+            $cachedEntityDependencies = $this->getCachedEntityDependencies();
+            $hashFile = $cachedEntityDependencies[$relativeFileName] ?? '';
+            if ($hashFile) {
+                $projectRoot = $this->configuration->getProjectRoot();
+                $filePath = "{$projectRoot}{$relativeFileName}";
+                $dependenciesChecks[$relativeFileName] = !file_exists($filePath) || md5_file($filePath) !== $hashFile;
+                $this->localObjectCache->cacheMethodResult(__METHOD__, '', $dependenciesChecks);
+            }
+        }
+        $entityCacheIsOutdated = $dependenciesChecks[$relativeFileName];
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $key, $entityCacheIsOutdated);
+        return $entityCacheIsOutdated;
     }
 
     /**
@@ -490,27 +526,51 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         if (!$entity || !$entity->isEntityNameValid($entityName)) {
             return false;
         }
-
         try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $entityName);
+            $rootEntityResult = $this->localObjectCache->getMethodCachedResult(__METHOD__, $entityName);
+            if (!$rootEntityResult) {
+                return false;
+            } elseif (is_a($this, ClassEntity::class)) {
+                return true;
+            }
+            return $this->isSubEntityFileCacheIsOutdated(__METHOD__);
         } catch (ObjectNotFoundException) {
         }
 
+        try {
+            $dependenciesChecks = $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+            $dependenciesChecks = [];
+        }
+
         $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, false);
-        if (!$this->getCachedEntityDependencies()) {
+        $cachedDependencies = $this->getCachedEntityDependencies();
+        if (!$cachedDependencies) {
             $entityCacheIsOutdated = true;
             $this->logger->warning("Unable to load {$entityName} entity dependencies");
         } else {
             $entityCacheIsOutdated = false;
             $projectRoot = $this->configuration->getProjectRoot();
-            foreach ($this->getCachedEntityDependencies() as $relativeFileName => $hashFile) {
+            foreach ($cachedDependencies as $relativeFileName => $hashFile) {
                 $filePath = "{$projectRoot}{$relativeFileName}";
+                if (array_key_exists($filePath, $dependenciesChecks)) {
+                    if ($dependenciesChecks[$filePath]) {
+                        $entityCacheIsOutdated = true;
+                        break;
+                    }
+                    continue;
+                }
+
                 if (!file_exists($filePath) || md5_file($filePath) !== $hashFile) {
                     $entityCacheIsOutdated = true;
+                    $dependenciesChecks[$filePath] = true;
                     break;
+                } else {
+                    $dependenciesChecks[$filePath] = false;
                 }
             }
         }
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $dependenciesChecks);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, $entityCacheIsOutdated);
         return $entityCacheIsOutdated;
     }

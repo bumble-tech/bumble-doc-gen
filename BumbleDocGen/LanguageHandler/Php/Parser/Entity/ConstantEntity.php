@@ -27,7 +27,7 @@ class ConstantEntity extends BaseEntity
     private ?ReflectionClassConstant $reflectionClassConstant = null;
 
     public function __construct(
-        private Configuration    $configuration,
+        Configuration            $configuration,
         private ClassEntity      $classEntity,
         private ParserHelper     $parserHelper,
         private LocalObjectCache $localObjectCache,
@@ -54,16 +54,6 @@ class ConstantEntity extends BaseEntity
     {
         return $this->classEntity->getRootEntityCollection();
     }
-
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getEntityDependencies(): array
-    {
-        return $this->getRootEntity()->getEntityDependencies();
-    }
-
 
     /**
      * @throws NotFoundException
