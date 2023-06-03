@@ -578,8 +578,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         }
 
         if (!$entityCacheIsOutdated) {
-            $localDependencies = $this->getEntityCacheValue($this->getEntityDependenciesCacheKey());
-            if (!$localDependencies) {
+            $localDependencies = $this->getEntityCacheValue($this->getEntityDependenciesCacheKey()) ?? [];
+            if (!$localDependencies && $cachedDependencies) {
                 $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $cachedDependencies);
             } elseif (ksort($localDependencies) !== ksort($cachedDependencies)) {
                 $entityCacheIsOutdated = true;
