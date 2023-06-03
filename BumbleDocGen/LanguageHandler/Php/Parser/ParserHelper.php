@@ -290,7 +290,7 @@ final class ParserHelper
         if (!$fileName) {
             return [];
         }
-        $classContentCache = $this->getFileContent($fileName);
+        $classContentCache = $classEntity->getFileContent();
         $uses = [];
         if (
             preg_match_all(
