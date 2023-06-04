@@ -13,10 +13,11 @@ trait CacheableEntityWrapperTrait
 {
     #[Inject] private EntityCacheItemPool $entityCacheItemPool;
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
+    private bool $noCacheMode = false;
 
     abstract public function entityCacheIsOutdated(): bool;
 
-    abstract public function getCachedEntityDependencies(): array;
+    abstract public function isEntityFileCanBeLoad(): bool;
 
     abstract protected function getEntityCacheValue(string $key): mixed;
 
@@ -36,6 +37,10 @@ trait CacheableEntityWrapperTrait
         int    $cacheExpiresAfter
     )
     {
+        if ($this->noCacheMode) {
+            return call_user_func_array(['parent', $methodName], $funcArgs);
+        }
+
         $cacheKey = $getCacheKeyGeneratorClassName::generateKey(
             $cacheNamespace,
             $this,
@@ -46,9 +51,11 @@ trait CacheableEntityWrapperTrait
             $methodReturnValue = $this->getEntityCacheValue($cacheKey);
         } else {
             $methodReturnValue = call_user_func_array(['parent', $methodName], $funcArgs);
-            if (count($this->getCachedEntityDependencies()) > 1) {
+            $this->noCacheMode = true;
+            if ($this->isEntityFileCanBeLoad()) {
                 $this->addEntityValueToCache($cacheKey, $methodReturnValue, $cacheExpiresAfter);
             }
+            $this->noCacheMode = false;
         }
         return $methodReturnValue;
     }
