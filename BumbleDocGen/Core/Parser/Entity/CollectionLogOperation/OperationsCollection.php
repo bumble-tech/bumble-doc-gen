@@ -94,7 +94,7 @@ final class OperationsCollection implements \IteratorAggregate
                 $entityName = $entityName && $entity?->entityDataCanBeLoaded() ? $entityName : null;
                 if ($operation->getEntityName() !== $entityName) {
                     return true;
-                } elseif ($entity?->entityCacheIsOutdated()) {
+                } elseif ($entity?->entityCacheIsOutdated() && $entity?->entityDataCanBeLoaded()) {
                     return true;
                 }
 
