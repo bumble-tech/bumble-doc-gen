@@ -39,10 +39,7 @@ trait CacheableEntityTrait
         $cacheValues = $this->entityCacheStorageHelper->getCacheValues($cacheKey);
         if (is_null($cacheValues)) {
             $cacheValues = [];
-            if (
-                $this->entityCacheItemPool->hasItem($cacheKey) &&
-                !$this->entityCacheIsOutdated()
-            ) {
+            if ($this->entityCacheItemPool->hasItem($cacheKey)) {
                 $cacheValues = $this->entityCacheItemPool->getItem($cacheKey)->get();
                 $time = time();
                 foreach ($cacheValues as $key => $cacheValue) {
@@ -52,6 +49,9 @@ trait CacheableEntityTrait
                 }
             }
             $this->entityCacheStorageHelper->setCacheValues($cacheKey, $cacheValues);
+            if ($this->entityCacheIsOutdated()) {
+                $this->entityCacheStorageHelper->setCacheValues($cacheKey, []);
+            }
         }
         return $cacheValues;
     }
