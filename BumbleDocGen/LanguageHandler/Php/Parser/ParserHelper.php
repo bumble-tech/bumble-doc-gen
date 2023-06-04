@@ -233,53 +233,6 @@ final class ParserHelper
         return false;
     }
 
-    public function getFileContent(string $fileName): string
-    {
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $fileName);
-        } catch (ObjectNotFoundException) {
-        }
-        $classContentCache = file_get_contents($fileName);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $fileName, $classContentCache);
-        return $classContentCache;
-    }
-
-    public function getUsesList(ReflectionClass $reflectionClass, bool $extended = true): array
-    {
-        $fileName = $reflectionClass->getFileName();
-        if (!$fileName) {
-            return [];
-        }
-        $classContentCache = $this->getFileContent($fileName);
-        $uses = [];
-        if (
-            preg_match_all(
-                '/(use )(.*)(;)/',
-                $classContentCache,
-                $matches
-            )
-        ) {
-            foreach ($matches[2] as $className) {
-                $key = array_reverse(explode('\\', $className))[0];
-                $uses[$key] = $className;
-            }
-        }
-
-        if ($extended) {
-            foreach (
-                array_merge(
-                    $reflectionClass->getParentClassNames(),
-                    $reflectionClass->getInterfaceNames()
-                ) as $className
-            ) {
-                $key = array_reverse(explode('\\', $className))[0];
-                $uses[$key] = $className;
-            }
-        }
-
-        return $uses;
-    }
-
     /**
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
@@ -320,15 +273,19 @@ final class ParserHelper
         return $uses;
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     public function parseFullClassName(
-        string          $searchClassName,
-        ReflectionClass $reflectionClass,
-        bool            $extended = true
+        string      $searchClassName,
+        ClassEntity $parentClassEntity,
+        bool        $extended = true
     ): string
     {
         $classNameParts = explode('::', $searchClassName);
         $searchClassName = $classNameParts[0];
-        $key = $reflectionClass->getName() . $searchClassName;
+        $key = $parentClassEntity->getName() . $searchClassName;
 
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $key);
@@ -336,7 +293,7 @@ final class ParserHelper
         }
 
         $trimmedName = ltrim($searchClassName, '\\');
-        $uses = $this->getUsesList($reflectionClass, $extended);
+        $uses = $this->getUsesListByClassEntity($parentClassEntity, $extended);
         if (isset($uses[$trimmedName])) {
             $className = $uses[$trimmedName];
         } elseif (isset($uses[$searchClassName])) {
@@ -348,10 +305,10 @@ final class ParserHelper
         } elseif (
             !str_starts_with(
                 $searchClassName,
-                '\\' . $reflectionClass->getNamespaceName()
+                '\\' . $parentClassEntity->getNamespaceName()
             )
         ) {
-            $className = "{$reflectionClass->getNamespaceName()}{$searchClassName}";
+            $className = "{$parentClassEntity->getNamespaceName()}{$searchClassName}";
             if (!$this->isClassLoaded($className)) {
                 $className = $searchClassName;
             }

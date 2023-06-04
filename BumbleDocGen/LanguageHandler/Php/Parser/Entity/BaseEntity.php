@@ -168,11 +168,12 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return (bool)$internalBlock;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function hasDescriptionLinks(): bool
     {
-        $docBlock = $this->getDocBlock();
-        return preg_match_all('/(\@see )(.*?)( |}|])/', $this->getDescription() . ' ') ||
-            count($docBlock->getTagsByName('see')) || count($docBlock->getTagsByName('link'));
+        return count($this->getDescriptionLinksData()) > 0;
     }
 
     /**
@@ -227,16 +228,10 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         '$this->'
                     ], "{$docCommentImplementingClass->getShortName()}::", $name);
 
-                    $className = $name;
-                    $data = $this->getRootEntityCollection()->getEntityLinkData(
-                        $className,
-                        $this->getImplementingReflectionClass()->getName(),
-                        false
-                    );
                     $links[] = [
-                        'entityData' => $data,
+                        'className' => $name,
                         'url' => null,
-                        'name' => $data['title'],
+                        'name' => $name,
                         'description' => $description,
                     ];
                 }
@@ -264,17 +259,13 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                     $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
                     $className = $this->parserHelper->parseFullClassName(
                         $name,
-                        $currentClassEntity->getReflection()
+                        $currentClassEntity
                     );
-                    $data = $this->getRootEntityCollection()->getEntityLinkData(
-                        $className,
-                        $this->getImplementingReflectionClass()->getName(),
-                        false
-                    );
+
                     $links[] = [
-                        'entityData' => $data,
+                        'className' => $className,
                         'url' => null,
-                        'name' => $data['title'],
+                        'name' => $className,
                         'description' => $description,
                     ];
                 }
@@ -321,7 +312,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     #[CacheableMethod] protected function getThrowsData(): array
     {
         $throws = [];
-        $implementingReflectionClass = $this->getDocCommentEntity()->getRootEntity()->getReflection();
+        $implementingClassEntity = $this->getDocCommentEntity()->getRootEntity();
         $docBlock = $this->getDocBlock();
         foreach ($docBlock->getTagsByName('throws') as $throwBlock) {
             if (is_a($throwBlock, DocBlock\Tags\Throws::class)) {
@@ -337,17 +328,13 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                     }
                     $className = $this->parserHelper->parseFullClassName(
                         $name,
-                        $implementingReflectionClass
+                        $implementingClassEntity
                     );
                     $throwData = [
+                        'className' => $className,
                         'name' => $className,
                         'description' => (string)$throwBlock->getDescription(),
                     ];
-                    $throwData['entityData'] = $this->getRootEntityCollection()->getEntityLinkData(
-                        $className,
-                        $this->getImplementingReflectionClass()->getName(),
-                        false
-                    );
                     $throws[] = $throwData;
                 }
             }
@@ -367,24 +354,34 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $this->fillInLinkDataWithUrls($throwsData);
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     private function fillInLinkDataWithUrls(array $linkData): array
     {
         foreach ($linkData as $key => $data) {
             if (!isset($data['url'])) {
-                $throwsData[$key]['url'] = null;
+                $linkData[$key]['url'] = null;
             } else {
                 continue;
             }
-            if (($data['entityData'] ?? null) && $data['entityData']['entityName']) {
-                $linkData[$key]['url'] = call_user_func_array(
+            if (($data['className'] ?? null)) {
+                $entityData = $this->getRootEntityCollection()->getEntityLinkData(
+                    $data['className'],
+                    $this->getImplementingReflectionClass()->getName(),
+                    false
+                );
+                $linkData[$key]['url'] = $entityData['entityName'] ? call_user_func_array(
                     callback: $this->documentedEntityUrlFunction,
                     args: [
                         $this->getRootEntityCollection(),
-                        $data['entityData']['entityName'],
-                        $data['entityData']['cursor']
+                        $entityData['entityName'],
+                        $entityData['cursor']
                     ]
-                );
-                unset($data['entityData']);
+                ) : null;
+                $linkData[$key]['name'] = $entityData['title'];
+                unset($data['className']);
             }
         }
         return $linkData;
