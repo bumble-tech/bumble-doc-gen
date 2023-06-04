@@ -462,11 +462,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     #[CacheableMethod] public function getParentClassNames(): array
     {
-        $reflection = $this->getReflection();
-        if ($reflection->isInterface()) {
-            $parentClassNames = $reflection->getInterfaceNames();
+        if ($this->isInterface()) {
+            $parentClassNames = $this->getInterfaceNames();
         } else {
-            $parentClassNames = $reflection->getParentClassNames();
+            $parentClassNames = $this->getReflection()->getParentClassNames();
         }
         return array_map(fn($parentClassName) => "\\{$parentClassName}", $parentClassNames);
     }
