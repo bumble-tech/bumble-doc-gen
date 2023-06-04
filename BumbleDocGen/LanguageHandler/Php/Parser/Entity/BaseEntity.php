@@ -73,6 +73,16 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
 
     /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    final public function isEntityFileCanBeLoad(): bool
+    {
+        $rootEntity = $this->getCurrentRootEntity();
+        return $rootEntity->isClassLoad() && $rootEntity->getRelativeFileName();
+    }
+
+    /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
      * @throws InvalidConfigurationParameterException
      */
