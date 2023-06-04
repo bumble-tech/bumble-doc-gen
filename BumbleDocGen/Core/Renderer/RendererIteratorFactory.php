@@ -98,7 +98,7 @@ final class RendererIteratorFactory
     public function getDocumentedEntityWrappersWithOutdatedCache(): \Generator
     {
         foreach ($this->documentedEntityWrappersCollection as $entityWrapper) {
-            if(!$entityWrapper->getDocumentTransformableEntity()->entityDataCanBeLoaded()){
+            if (!$entityWrapper->getDocumentTransformableEntity()->entityDataCanBeLoaded()) {
                 continue;
             }
 
@@ -243,7 +243,7 @@ final class RendererIteratorFactory
         } else {
             $isEntitiesOperationsLogCacheOutdated = $this->rootEntityCollectionsGroup->isFoundEntitiesOperationsLogCacheOutdated($cachedOperationsLog);
         }
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $isEntitiesOperationsLogCacheOutdated);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $templateFileName, $isEntitiesOperationsLogCacheOutdated);
         return $isEntitiesOperationsLogCacheOutdated;
     }
 
