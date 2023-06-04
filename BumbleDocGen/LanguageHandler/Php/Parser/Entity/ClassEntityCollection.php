@@ -91,12 +91,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $this;
     }
 
-    public function addWithoutPreparation(ClassEntity $classEntity): ClassEntityCollection
-    {
-        $this->entities[$classEntity->getName()] = $classEntity;
-        return $this;
-    }
-
     protected function prepareObjectName(string $objectName): string
     {
         return ltrim(str_replace('\\\\', '\\', $objectName), '\\');
@@ -115,15 +109,16 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
                 $this,
                 $objectName
             );
-
-            if ($withAddClassEntityToCollectionEvent) {
-                $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
-            } else {
-                $this->entitiesNotHandledByPlugins[$objectName] = $objectName;
-            }
-
             $this->entities[$classEntity->getName()] = $classEntity;
         }
+
+        if ($withAddClassEntityToCollectionEvent && array_key_exists($objectName, $this->entitiesNotHandledByPlugins)) {
+            $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
+            unset($this->entitiesNotHandledByPlugins[$objectName]);
+        } else {
+            $this->entitiesNotHandledByPlugins[$objectName] = $objectName;
+        }
+
         return $classEntity;
     }
 
