@@ -215,7 +215,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getReflection(): ReflectionClass
+    final protected function getReflection(): ReflectionClass
     {
         if ($this->reflectionClass) {
             return $this->reflectionClass;
@@ -290,6 +290,10 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->isClassLoad;
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function entityDataCanBeLoaded(): bool
     {
         if (!$this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
@@ -298,7 +302,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $this->logger->notice("Class {$this->getName()} skipped by plugin");
             return false;
         }
-        return $this->isClassLoad();
+        return $this->isEntityFileCanBeLoad();
     }
 
     public function getShortName(): string
