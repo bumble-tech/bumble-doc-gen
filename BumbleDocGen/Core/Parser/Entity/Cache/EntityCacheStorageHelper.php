@@ -49,6 +49,11 @@ final class EntityCacheStorageHelper
         return $this->cache[$cacheKey] ?? null;
     }
 
+    public function resetAllCacheValues(string $cacheKey): void
+    {
+        $this->cache[$cacheKey] = [];
+    }
+
     public function setCacheValues(string $cacheKey, array $values): void
     {
         foreach ($values as $key => $value) {
