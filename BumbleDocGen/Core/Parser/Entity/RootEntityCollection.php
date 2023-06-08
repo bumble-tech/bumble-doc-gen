@@ -54,14 +54,17 @@ abstract class RootEntityCollection extends BaseEntityCollection
                 continue;
             }
             if ($entity->entityDataCanBeLoaded() && $entity->entityCacheIsOutdated()) {
+                $this->logger->info("Preparing {$entity->getName()} dependencies cache");
                 $entity->reloadEntityDependenciesCache();
             }
             if ($entity->isEntityDataCacheOutdated()) {
+                $this->logger->info("Removing {$entity->getName()} not used cache");
+                $entity->removeNotUsedEntityDataCache();
                 $needToSaveCache = true;
             }
         }
         if ($needToSaveCache) {
-            $this->logger->info('Updating local cache');
+            $this->logger->info('Updating local cache storage');
             $this->entityCacheStorageHelper->saveCache();
         }
     }

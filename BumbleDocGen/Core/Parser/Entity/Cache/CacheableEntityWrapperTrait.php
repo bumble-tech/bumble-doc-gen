@@ -5,23 +5,15 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
 
 trait CacheableEntityWrapperTrait
 {
-    #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
+    use CacheableEntityTrait;
+
     private bool $noCacheMode = false;
 
-    abstract public function entityCacheIsOutdated(): bool;
-
     abstract public function isEntityFileCanBeLoad(): bool;
-
-    abstract protected function getEntityCacheValue(string $key): mixed;
-
-    abstract protected function hasEntityCacheValue(string $key): bool;
-
-    abstract protected function addEntityValueToCache(string $key, mixed $value, int $cacheExpiresAfter): void;
 
     /**
      * @throws InvalidConfigurationParameterException

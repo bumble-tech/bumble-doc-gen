@@ -462,6 +462,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return "__internalEntityDependencies{$this->getCacheKey()}";
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     final public function getCachedEntityDependencies(): array
     {
         $entity = $this->getCurrentRootEntity();
@@ -478,11 +481,13 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $entityDependencies;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     final public function reloadEntityDependenciesCache(): void
     {
         $entity = $this->getCurrentRootEntity();
         if ($entity) {
-            $this->logger->info("Caching {$entity->getName()} dependencies");
             $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
             $entityDependencies = $entity->getEntityDependencies();
             $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
@@ -492,6 +497,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * @throws InvalidConfigurationParameterException
+     * @throws InvalidArgumentException
      */
     private function isSubEntityFileCacheIsOutdated(string $dependenciesCacheKey): bool
     {

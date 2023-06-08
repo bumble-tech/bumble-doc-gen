@@ -4,21 +4,15 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
-use BumbleDocGen\Core\Cache\EntityCacheItemPool;
-use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
 
 trait CacheableEntityTrait
 {
-    private string $cacheVersion = 'v5';
-    private static string $dataKey = 'd';
-    private static string $expiresTimeKey = 'e';
-
-    private bool $isCacheChanged = false;
-
-    #[Inject] private EntityCacheItemPool $entityCacheItemPool;
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
+
+    private string $cacheVersion = 'v5';
+    private bool $isCacheChanged = false;
 
     abstract public function getCacheKey(): string;
 
@@ -30,64 +24,68 @@ trait CacheableEntityTrait
     }
 
     /**
-     * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
      */
-    private function getEntityCacheValues(): array
+    protected function getEntityCacheValue(string $key): mixed
     {
-        $cacheKey = $this->getVersionedCacheKey();
-        $cacheValues = $this->entityCacheStorageHelper->getCacheValues($cacheKey);
-        if (is_null($cacheValues)) {
-            $cacheValues = [];
-            if ($this->entityCacheItemPool->hasItem($cacheKey)) {
-                $cacheValues = $this->entityCacheItemPool->getItem($cacheKey)->get();
-                $time = time();
-                foreach ($cacheValues as $key => $cacheValue) {
-                    if (!isset($cacheValue[self::$expiresTimeKey]) || $cacheValue[self::$expiresTimeKey] < $time) {
-                        unset($cacheValues[$key]);
-                    }
-                }
-            }
-            $this->entityCacheStorageHelper->setCacheValues($cacheKey, $cacheValues);
-            if ($this->entityCacheIsOutdated()) {
-                $this->entityCacheStorageHelper->setCacheValues($cacheKey, []);
-            }
-        }
-        return $cacheValues;
+        return $this->entityCacheStorageHelper->getItemValueFromCache($this->getVersionedCacheKey(), $key);
     }
 
     /**
-     * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
      */
-    final protected function getEntityCacheValue(string $key): mixed
+    protected function hasEntityCacheValue(string $key): bool
     {
-        $cacheValues = $this->getEntityCacheValues();
-        return $cacheValues[$key][self::$dataKey] ?? null;
+        $cacheValues = $this->entityCacheStorageHelper->getItemValues($this->getVersionedCacheKey());
+        return array_key_exists($key, $cacheValues) && is_array($cacheValues[$key]) && $cacheValues[$key];
     }
 
     /**
-     * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
      */
-    final protected function hasEntityCacheValue(string $key): bool
-    {
-        $cacheValues = $this->getEntityCacheValues();
-        return array_key_exists($key, $cacheValues) && is_array($cacheValues[$key]) && array_key_exists(self::$dataKey, $cacheValues[$key]);
-    }
-
-    final protected function addEntityValueToCache(string $key, mixed $value, int $cacheExpiresAfter = 604800): void
+    protected function addEntityValueToCache(string $key, mixed $value, int $cacheExpiresAfter = 604800): void
     {
         $this->isCacheChanged = true;
-        $cacheKey = $this->getVersionedCacheKey();
-        $this->entityCacheStorageHelper->addValueToCache($cacheKey, $key, [
-            self::$dataKey => $value,
-            self::$expiresTimeKey => time() + $cacheExpiresAfter,
-        ]);
+        $this->entityCacheStorageHelper->addItemValueToCache(
+            $this->getVersionedCacheKey(),
+            $key,
+            $value,
+            $cacheExpiresAfter
+        );
     }
 
-    final public function isEntityDataCacheOutdated(): bool
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function isEntityDataCacheOutdated(): bool
     {
-        return $this->isCacheChanged;
+        $cacheKey = $this->getVersionedCacheKey();
+        $values = $this->entityCacheStorageHelper->getItemValues($cacheKey);
+        $usedCacheItemsKeys = $this->entityCacheStorageHelper->getUsedCacheItemsKeys($cacheKey);
+        $isCacheChanged = $this->isCacheChanged || count($values) !== count($usedCacheItemsKeys);
+        if (!$isCacheChanged) {
+            foreach ($values as $k => $v) {
+                if (!array_key_exists($k, $usedCacheItemsKeys)) {
+                    $isCacheChanged = true;
+                    break;
+                }
+            }
+        }
+        return $isCacheChanged;
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function removeNotUsedEntityDataCache(): void
+    {
+        $cacheKey = $this->getVersionedCacheKey();
+        $cacheValues = $this->entityCacheStorageHelper->getItemValues($cacheKey);
+        $usedCacheItemsKeys = $this->entityCacheStorageHelper->getUsedCacheItemsKeys($cacheKey);
+        foreach ($cacheValues as $k => $v) {
+            if (!array_key_exists($k, $usedCacheItemsKeys)) {
+                $this->entityCacheStorageHelper->removeItemValueFromCache($cacheKey, $k);
+            }
+        }
     }
 }

@@ -13,6 +13,7 @@ use Psr\Cache\InvalidArgumentException;
 final class EntityCacheStorageHelper
 {
     private array $cache = [];
+    private array $usedCacheItems = [];
     private static string $dataKey = 'd';
     private static string $expiresTimeKey = 'e';
 
@@ -23,47 +24,66 @@ final class EntityCacheStorageHelper
     /**
      * @throws InvalidArgumentException
      */
-    public function loadCacheValuesFromStorage(string $cacheKey): array
+    private function initCacheByKey(string $cacheKey): void
     {
-        $cacheValues = [];
-        if ($this->cacheItemPool->hasItem($cacheKey)) {
-            $cacheValues = $this->cacheItemPool->getItem($cacheKey)->get();
+        $cacheValues = $this->cache[$cacheKey] ?? null;
+        if (is_null($cacheValues)) {
+            $this->cache[$cacheKey] = [];
+            $cacheValues = [];
+            if ($this->cacheItemPool->hasItem($cacheKey)) {
+                $cacheValues = $this->cacheItemPool->getItem($cacheKey)->get();
+            }
             $time = time();
             foreach ($cacheValues as $key => $cacheValue) {
                 if (!isset($cacheValue[self::$expiresTimeKey]) || $cacheValue[self::$expiresTimeKey] < $time) {
                     unset($cacheValues[$key]);
+                } else {
+                    $this->cache[$cacheKey][$key] = $cacheValue;
                 }
             }
         }
-        $this->setCacheValues($cacheKey, $cacheValues);
-        return $cacheValues;
     }
 
-    public function getAllCacheValues(): array
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function getItemValues(string $cacheKey): array
     {
-        return $this->cache;
+        $this->initCacheByKey($cacheKey);
+        return $this->cache[$cacheKey];
     }
 
-    public function getCacheValues(string $cacheKey): ?array
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function addItemValueToCache(string $cacheKey, string $itemKey, mixed $value, int $expiresAfter): void
     {
-        return $this->cache[$cacheKey] ?? null;
+        $this->initCacheByKey($cacheKey);
+        $this->usedCacheItems[$cacheKey][$itemKey] = 1;
+        $this->cache[$cacheKey][$itemKey] = [
+            self::$dataKey => $value,
+            self::$expiresTimeKey => time() + $expiresAfter,
+        ];
     }
 
-    public function resetAllCacheValues(string $cacheKey): void
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function getItemValueFromCache(string $cacheKey, string $itemKey): mixed
     {
-        $this->cache[$cacheKey] = [];
+        $cacheValues = $this->getItemValues($cacheKey);
+        $this->usedCacheItems[$cacheKey][$itemKey] = 1;
+        return $cacheValues[$itemKey][self::$dataKey] ?? null;
     }
 
-    public function setCacheValues(string $cacheKey, array $values): void
+    public function removeItemValueFromCache(string $cacheKey, string $itemKey): void
     {
-        foreach ($values as $key => $value) {
-            $this->addValueToCache($cacheKey, $key, $value);
-        }
+        unset($this->cache[$cacheKey][$itemKey]);
     }
 
-    public function addValueToCache(string $cacheKey, string $itemKey, mixed $value): void
+    public function getUsedCacheItemsKeys(string $cacheKey): array
     {
-        $this->cache[$cacheKey][$itemKey] = $value;
+        return $this->usedCacheItems[$cacheKey] ?? [];
     }
 
     /**
@@ -71,7 +91,7 @@ final class EntityCacheStorageHelper
      */
     public function saveCache(): void
     {
-        foreach ($this->getAllCacheValues() as $cacheKey => $cacheData) {
+        foreach ($this->cache as $cacheKey => $cacheData) {
             $cacheItem = $this->cacheItemPool->getItem($cacheKey);
             $cacheItem->set($cacheData);
             $cacheItem->expiresAfter(604800);
