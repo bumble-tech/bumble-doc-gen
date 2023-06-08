@@ -13,9 +13,30 @@ use Psr\Cache\InvalidArgumentException;
 final class EntityCacheStorageHelper
 {
     private array $cache = [];
+    private static string $dataKey = 'd';
+    private static string $expiresTimeKey = 'e';
 
     public function __construct(private EntityCacheItemPool $cacheItemPool)
     {
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function loadCacheValuesFromStorage(string $cacheKey): array
+    {
+        $cacheValues = [];
+        if ($this->cacheItemPool->hasItem($cacheKey)) {
+            $cacheValues = $this->cacheItemPool->getItem($cacheKey)->get();
+            $time = time();
+            foreach ($cacheValues as $key => $cacheValue) {
+                if (!isset($cacheValue[self::$expiresTimeKey]) || $cacheValue[self::$expiresTimeKey] < $time) {
+                    unset($cacheValues[$key]);
+                }
+            }
+        }
+        $this->setCacheValues($cacheKey, $cacheValues);
+        return $cacheValues;
     }
 
     public function getAllCacheValues(): array
