@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\Core\Cache\EntityCacheItemPool;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
@@ -34,7 +33,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     use CacheableEntityTrait;
 
     #[Inject] private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache;
-    #[Inject] private EntityCacheItemPool $entityCacheItemPool;
     #[Inject] private GetDocumentedEntityUrl $documentedEntityUrlFunction;
     #[Inject] private RendererHelper $rendererHelper;
 
@@ -66,7 +64,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     #[CacheableMethod] abstract public function getStartLine(): int;
 
-    #[CacheableMethod] abstract public function getDocBlock(): DocBlock;
+    abstract public function getDocBlock(): DocBlock;
 
     abstract public function getRootEntityCollection(): ClassEntityCollection;
 

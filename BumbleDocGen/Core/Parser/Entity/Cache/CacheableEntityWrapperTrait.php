@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity\Cache;
 
-use BumbleDocGen\Core\Cache\EntityCacheItemPool;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
 
 trait CacheableEntityWrapperTrait
 {
-    #[Inject] private EntityCacheItemPool $entityCacheItemPool;
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
     private bool $noCacheMode = false;
 
