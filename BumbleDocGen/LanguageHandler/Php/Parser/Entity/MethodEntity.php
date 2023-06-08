@@ -80,7 +80,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getDocBlock(): DocBlock
+    public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();
         return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
@@ -155,7 +155,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] protected function getDocCommentRecursive(): string
+    protected function getDocCommentRecursive(): string
     {
         $objectId = $this->getObjectId();
         try {

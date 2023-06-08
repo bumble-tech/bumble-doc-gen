@@ -133,7 +133,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getDocBlock(): DocBlock
+    public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity();
         return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
@@ -195,7 +195,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] protected function getDocCommentRecursive(): string
+    protected function getDocCommentRecursive(): string
     {
         return $this->getDocCommentEntity()->getDocComment() ?: ' ';
     }

@@ -59,7 +59,7 @@ class ConstantEntity extends BaseEntity
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getDocBlock(): DocBlock
+    public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();
         return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
