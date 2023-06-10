@@ -26,4 +26,12 @@ final class RendererDependencyFactory
     {
         return FileDependency::create($this->rendererHelper, $filePath, $contentFilterRegex, $matchIndex);
     }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function createDirectoryDependency(string $dirPath): DirectoryDependency
+    {
+        return DirectoryDependency::create($this->rendererHelper, $dirPath);
+    }
 }
