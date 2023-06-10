@@ -6,7 +6,11 @@ namespace BumbleDocGen\Core\Renderer\Twig\Function;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
+use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Function to generate breadcrumbs on the page
@@ -14,8 +18,9 @@ use BumbleDocGen\Core\Renderer\Context\RendererContext;
 final class GeneratePageBreadcrumbs implements CustomFunctionInterface
 {
     public function __construct(
-        private BreadcrumbsHelper $breadcrumbsHelper,
-        private RendererContext   $rendererContext
+        private BreadcrumbsHelper         $breadcrumbsHelper,
+        private RendererContext           $rendererContext,
+        private RendererDependencyFactory $dependencyFactory,
     )
     {
     }
@@ -41,6 +46,9 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
      *  current template, and the reference to it in breadcrumbs should not be clickable.
      *
      * @return string
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
@@ -57,11 +65,12 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
 
         $templatesBreadcrumbs = $this->breadcrumbsHelper->getBreadcrumbsForTemplates($templatePath, !$skipFirstTemplatePage);
         foreach ($templatesBreadcrumbs as $templateBreadcrumb) {
-            $this->rendererContext->addFileDependency(
+            $fileDependency = $this->dependencyFactory->createFileDependency(
                 filePath: $templateBreadcrumb['template'],
                 contentFilterRegex: '/({%)( ?)(set)( )(title)([ =]+)([\'"])(.*)(\'|")( %})/',
                 matchIndex: 8
             );
+            $this->rendererContext->addFileDependency($fileDependency);
         }
 
         return "<embed> {$content} </embed>";

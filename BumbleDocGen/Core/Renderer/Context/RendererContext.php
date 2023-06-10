@@ -4,23 +4,19 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Renderer\Context;
 
-use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Renderer\RendererHelper;
+use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyInterface;
 
 /**
  * Document rendering context
  */
 final class RendererContext
 {
+    /**
+     * @var RendererDependencyInterface[]
+     */
     private array $dependencies = [];
     private string $currentTemplateFilePath = '';
     private ?DocumentedEntityWrapper $currentDocumentedEntityWrapper = null;
-
-    public function __construct(
-        private RendererHelper $rendererHelper
-    )
-    {
-    }
 
     /**
      * Saving the path to the template file that is currently being worked on in the context
@@ -54,30 +50,9 @@ final class RendererContext
         $this->dependencies = [];
     }
 
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    public function addFileDependency(
-        string  $filePath,
-        ?string $contentFilterRegex = null,
-        ?int    $matchIndex = null
-    ): void
+    public function addFileDependency(RendererDependencyInterface $dependency): void
     {
-        $hash = '';
-        $fileInternalLink = $this->rendererHelper->filePathToFileInternalLink($filePath);
-        if ($contentFilterRegex && $matchIndex) {
-            if (preg_match($contentFilterRegex, file_get_contents($filePath), $matches) && isset($matches[$matchIndex])) {
-                $hash = md5($matches[$matchIndex]);
-            }
-        } else {
-            $hash = md5_file($filePath);
-        }
-
-        $this->dependencies[$fileInternalLink] = [
-            'contentFilterRegex' => $contentFilterRegex,
-            'matchIndex' => $matchIndex,
-            'hash' => $hash
-        ];
+        $this->dependencies[] = $dependency;
     }
 
     public function getFilesDependencies(): array

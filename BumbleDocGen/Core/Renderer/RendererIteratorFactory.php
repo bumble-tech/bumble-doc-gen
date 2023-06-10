@@ -11,6 +11,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
@@ -31,8 +32,9 @@ final class RendererIteratorFactory
         private ConfigurationParameterBag          $configurationParameterBag,
         private SharedCompressedDocumentFileCache  $sharedCompressedDocumentFileCache,
         private RendererHelper                     $rendererHelper,
+        private RendererDependencyFactory          $dependencyFactory,
         private LocalObjectCache                   $localObjectCache,
-        private Logger                             $logger
+        private Logger                             $logger,
     )
     {
     }
@@ -57,7 +59,10 @@ final class RendererIteratorFactory
 
             $templateFileName = str_replace($templateFolder, '', $templateFile->getRealPath());
             $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
-            $this->rendererContext->addFileDependency($templateFile->getRealPath());
+            $fileDependency = $this->dependencyFactory->createFileDependency(
+                filePath: $templateFile->getRealPath()
+            );
+            $this->rendererContext->addFileDependency($fileDependency);
 
             $this->markFileNameAsRendered($templateFileName);
 
@@ -72,7 +77,10 @@ final class RendererIteratorFactory
                 $this->rendererContext->clearFilesDependencies();
                 $this->rootEntityCollectionsGroup->clearOperationsLog();
                 $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
-                $this->rendererContext->addFileDependency($templateFile->getRealPath());
+                $fileDependency = $this->dependencyFactory->createFileDependency(
+                    filePath: $templateFile->getRealPath()
+                );
+                $this->rendererContext->addFileDependency($fileDependency);
                 yield $templateFile;
             } else {
                 $this->moveCachedDataToCurrentData($templateFileName);
@@ -279,23 +287,8 @@ final class RendererIteratorFactory
         if (is_null($cachedFilesDependencies)) {
             return true;
         }
-        foreach ($cachedFilesDependencies as $fileNameTemplate => $cachedFileDependencyData) {
-            $fileName = $this->rendererHelper->fileInternalLinkToFilePath($fileNameTemplate);
-            $newHash = '';
-            if ($cachedFileDependencyData['contentFilterRegex'] && $cachedFileDependencyData['matchIndex']) {
-                if (
-                    preg_match(
-                        $cachedFileDependencyData['contentFilterRegex'],
-                        file_get_contents($fileName), $matches
-                    ) &&
-                    isset($matches[$cachedFileDependencyData['matchIndex']])
-                ) {
-                    $newHash = md5($matches[$cachedFileDependencyData['matchIndex']]);
-                }
-            } else {
-                $newHash = md5_file($fileName);
-            }
-            if ($newHash !== $cachedFileDependencyData['hash']) {
+        foreach ($cachedFilesDependencies as $cachedFilesDependency) {
+            if (!is_object($cachedFilesDependency) || $cachedFilesDependency->isChanged($this->rendererHelper)) {
                 return true;
             }
         }

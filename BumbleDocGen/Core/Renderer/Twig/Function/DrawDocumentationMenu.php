@@ -7,7 +7,10 @@ namespace BumbleDocGen\Core\Renderer\Twig\Function;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
+use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -24,9 +27,10 @@ use Symfony\Component\Finder\Finder;
 final class DrawDocumentationMenu implements CustomFunctionInterface
 {
     public function __construct(
-        private Configuration     $configuration,
-        private BreadcrumbsHelper $breadcrumbsHelper,
-        private RendererContext   $rendererContext
+        private Configuration             $configuration,
+        private BreadcrumbsHelper         $breadcrumbsHelper,
+        private RendererContext           $rendererContext,
+        private RendererDependencyFactory $dependencyFactory,
     )
     {
     }
@@ -52,6 +56,8 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
      *  By default, this restriction is disabled.
      *
      * @return string
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(?string $startPageKey = null, ?int $maxDeep = null): string
@@ -82,7 +88,10 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
                 $pageKey = $breadcrumb['url'];
                 $structure[$pageKey] ??= [];
             }
-            $this->rendererContext->addFileDependency($file->getRealPath());
+            $fileDependency = $this->dependencyFactory->createFileDependency(
+                filePath: $file->getRealPath()
+            );
+            $this->rendererContext->addFileDependency($fileDependency);
         }
 
         $drawPages = function (array $pagesData, int $currentDeep = 1) use ($structure, $maxDeep, &$drawPages): string {
