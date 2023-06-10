@@ -69,6 +69,9 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
         $structure = [];
         $templatesDir = $this->configuration->getTemplatesDir();
 
+        $dirDependency = $this->dependencyFactory->createDirectoryDependency($templatesDir);
+        $this->rendererContext->addDependency($dirDependency);
+
         $finder = Finder::create()
             ->name('*.twig')
             ->ignoreVCS(true)
@@ -88,10 +91,6 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
                 $pageKey = $breadcrumb['url'];
                 $structure[$pageKey] ??= [];
             }
-            $fileDependency = $this->dependencyFactory->createFileDependency(
-                filePath: $file->getRealPath()
-            );
-            $this->rendererContext->addDependency($fileDependency);
         }
 
         $drawPages = function (array $pagesData, int $currentDeep = 1) use ($structure, $maxDeep, &$drawPages): string {
