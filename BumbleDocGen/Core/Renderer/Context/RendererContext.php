@@ -45,17 +45,17 @@ final class RendererContext
         return $this->currentDocumentedEntityWrapper;
     }
 
-    public function clearFilesDependencies(): void
+    public function clearDependencies(): void
     {
         $this->dependencies = [];
     }
 
-    public function addFileDependency(RendererDependencyInterface $dependency): void
+    public function addDependency(RendererDependencyInterface $dependency): void
     {
         $this->dependencies[] = $dependency;
     }
 
-    public function getFilesDependencies(): array
+    public function getDependencies(): array
     {
         return $this->dependencies;
     }

@@ -70,7 +70,7 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
                 contentFilterRegex: '/({%)( ?)(set)( )(title)([ =]+)([\'"])(.*)(\'|")( %})/',
                 matchIndex: 8
             );
-            $this->rendererContext->addFileDependency($fileDependency);
+            $this->rendererContext->addDependency($fileDependency);
         }
 
         return "<embed> {$content} </embed>";

@@ -91,7 +91,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
             $fileDependency = $this->dependencyFactory->createFileDependency(
                 filePath: $file->getRealPath()
             );
-            $this->rendererContext->addFileDependency($fileDependency);
+            $this->rendererContext->addDependency($fileDependency);
         }
 
         $drawPages = function (array $pagesData, int $currentDeep = 1) use ($structure, $maxDeep, &$drawPages): string {

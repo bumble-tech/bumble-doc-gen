@@ -54,7 +54,7 @@ final class RendererIteratorFactory
             ->files();
 
         foreach ($finder as $templateFile) {
-            $this->rendererContext->clearFilesDependencies();
+            $this->rendererContext->clearDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
 
             $templateFileName = str_replace($templateFolder, '', $templateFile->getRealPath());
@@ -62,7 +62,7 @@ final class RendererIteratorFactory
             $fileDependency = $this->dependencyFactory->createFileDependency(
                 filePath: $templateFile->getRealPath()
             );
-            $this->rendererContext->addFileDependency($fileDependency);
+            $this->rendererContext->addDependency($fileDependency);
 
             $this->markFileNameAsRendered($templateFileName);
 
@@ -74,13 +74,13 @@ final class RendererIteratorFactory
                 $this->isFilesDependenciesCacheOutdated($templateFileName) ||
                 $this->isEntitiesOperationsLogCacheOutdated($templateFileName)
             ) {
-                $this->rendererContext->clearFilesDependencies();
+                $this->rendererContext->clearDependencies();
                 $this->rootEntityCollectionsGroup->clearOperationsLog();
                 $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
                 $fileDependency = $this->dependencyFactory->createFileDependency(
                     filePath: $templateFile->getRealPath()
                 );
-                $this->rendererContext->addFileDependency($fileDependency);
+                $this->rendererContext->addDependency($fileDependency);
                 yield $templateFile;
             } else {
                 $this->moveCachedDataToCurrentData($templateFileName);
@@ -95,7 +95,7 @@ final class RendererIteratorFactory
 
             $this->sharedCompressedDocumentFileCache->set(
                 $this->getFilesDependenciesCacheKey($templateFileName),
-                $this->rendererContext->getFilesDependencies()
+                $this->rendererContext->getDependencies()
             );
         }
     }
@@ -111,7 +111,7 @@ final class RendererIteratorFactory
             }
 
             /** @var DocumentedEntityWrapper $entityWrapper */
-            $this->rendererContext->clearFilesDependencies();
+            $this->rendererContext->clearDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
 
             $this->rendererContext->setCurrentDocumentedEntityWrapper($entityWrapper);
@@ -129,7 +129,7 @@ final class RendererIteratorFactory
                 $this->isEntityRelationsCacheOutdated($entityWrapper) ||
                 $this->isEntitiesOperationsLogCacheOutdated($entityWrapper->getEntityName())
             ) {
-                $this->rendererContext->clearFilesDependencies();
+                $this->rendererContext->clearDependencies();
                 $this->rootEntityCollectionsGroup->clearOperationsLog();
                 yield $entityWrapper;
             } else {
@@ -145,9 +145,9 @@ final class RendererIteratorFactory
 
             $this->sharedCompressedDocumentFileCache->set(
                 $this->getFilesDependenciesCacheKey($filesDependenciesKey),
-                $this->rendererContext->getFilesDependencies()
+                $this->rendererContext->getDependencies()
             );
-            $this->rendererContext->clearFilesDependencies();
+            $this->rendererContext->clearDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
         }
         $this->sharedCompressedDocumentFileCache->set(
