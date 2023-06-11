@@ -12,9 +12,6 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 use function BumbleDocGen\Core\bites_int_to_string;
 
 /**
@@ -48,12 +45,6 @@ final class DocGenerator
      * Generates documentation using configuration
      *
      * @throws InvalidArgumentException
-     * @throws RuntimeError
-     * @throws LoaderError
-     * @throws DependencyException
-     * @throws SyntaxError
-     * @throws NotFoundException
-     * @throws InvalidConfigurationParameterException
      */
     public function generate(): void
     {
