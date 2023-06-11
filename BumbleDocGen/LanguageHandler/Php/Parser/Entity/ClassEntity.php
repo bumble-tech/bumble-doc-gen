@@ -23,6 +23,7 @@ use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
+use PhpParser\Node\Stmt\Interface_ as InterfaceNode;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Identifier\Identifier;
@@ -108,9 +109,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $fileDependencies = [];
         if ($this->isClassLoad()) {
             $currentClassEntityReflection = $this->getReflection();
-            $parentClassNames = $currentClassEntityReflection->getParentClassNames();
+            $parentClassNames = $this->getParentClassNames();
             $traitClassNames = $currentClassEntityReflection->getTraitNames();
-            $interfaceNames = $currentClassEntityReflection->getInterfaceNames();
+            $interfaceNames = $this->getInterfaceNames();
 
             $classNames = array_unique(array_merge($parentClassNames, $traitClassNames, $interfaceNames));
 
@@ -432,17 +433,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $extends;
     }
 
-
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getInterfaces(): array
-    {
-        return !$this->isInterface() ? array_map(fn($interfaceName) => "\\{$interfaceName}", $this->getInterfaceNames()) : [];
-    }
-
-
     /**
      * @return ClassEntity[]
      *
@@ -452,7 +442,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public function getInterfacesEntities(): array
     {
         $interfacesEntities = [];
-        foreach ($this->getInterfaces() as $interfaceClassName) {
+        foreach ($this->getInterfaceNames() as $interfaceClassName) {
             $interfacesEntities[] = $this->getRootEntityCollection()->getLoadedOrCreateNew($interfaceClassName);
         }
         return $interfacesEntities;
@@ -467,11 +457,18 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     #[CacheableMethod] public function getParentClassNames(): array
     {
         if ($this->isInterface()) {
-            $parentClassNames = $this->getInterfaceNames();
+            return $this->getInterfaceNames();
         } else {
-            $parentClassNames = $this->getReflection()->getParentClassNames();
+            try {
+                $parentClass = $this->getParentClass();
+                if ($parentClass?->getName()) {
+                    return array_merge(["\\{$parentClass->getName()}"], $parentClass->getParentClassNames());
+                }
+            } catch (\Exception $e) {
+                $this->logger->warning($e->getMessage());
+            }
         }
-        return array_map(fn($parentClassName) => "\\{$parentClassName}", $parentClassNames);
+        return [];
     }
 
 
@@ -483,7 +480,49 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     #[CacheableMethod] public function getInterfaceNames(): array
     {
-        return $this->getReflection()->getInterfaceNames();
+        // method $this->getReflection()->getInterfaceNames() is not suitable, because if at least
+        // one successor interface was not found in the sources, an error will be returned.
+        // We also need to get the maximum possible number of interfaces
+
+        if ($this->isTrait()) {
+            return [];
+        }
+        $objectId = $this->getObjectId();
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
+        } catch (ObjectNotFoundException) {
+        }
+
+        $interfaceNames = [];
+
+        $node = $this->getReflection()->getAst();
+        $nodes = $node instanceof InterfaceNode ? $node->extends : $node->implements;
+        $interfaces = array_map(static fn($n) => $n->toString(), $nodes ?? []);
+        foreach ($interfaces as $interfaceName) {
+            if ($interfaceName === $this->getName()) {
+                continue;
+            }
+            $parentInterfaceNames = [];
+            try {
+                $interfaceEntity = $this->getRootEntityCollection()->getLoadedOrCreateNew($interfaceName);
+                $parentInterfaceNames = $interfaceEntity->getInterfaceNames();
+            } catch (\Exception $e) {
+                $this->logger->error($e->getMessage());
+            }
+            $interfaceNames = array_merge($interfaceNames, ["\\{$interfaceName}"], $parentInterfaceNames);
+        }
+        if (!$this->isInterface() && $parentClass = $this->getParentClass()) {
+            $parentInterfaceNames = [];
+            try {
+                $parentInterfaceNames = $parentClass->getInterfaceNames();
+            } catch (\Exception $e) {
+                $this->logger->error($e->getMessage());
+            }
+            $interfaceNames = array_merge($interfaceNames, $parentInterfaceNames);
+        }
+        $interfaceNames = array_unique($interfaceNames);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $interfaceNames);
+        return $interfaceNames;
     }
 
     /**
@@ -492,6 +531,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     #[CacheableMethod] public function getParentClassName(): ?string
     {
+        if (!$this->isInterface() && !$this->isTrait()) {
+            return $this->getReflection()->getAst()->extends?->toString();
+        }
         return $this->getReflection()->getParentClass()?->getName();
     }
 
@@ -514,7 +556,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function getInterfacesString(): string
     {
-        return implode(', ', $this->getInterfaces());
+        return implode(', ', $this->getInterfaceNames());
     }
 
     /**
@@ -767,6 +809,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
+    #[CacheableMethod] public function isTrait(): bool
+    {
+        return $this->getReflection()->isTrait();
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     public function hasMethod(string $method): bool
     {
         return array_key_exists($method, $this->getMethodsData());
@@ -799,7 +850,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
 
         $parentClassNames = $this->getParentClassNames();
-        $interfacesNames = $this->getInterfaces();
+        $interfacesNames = $this->getInterfaceNames();
         $allClasses = array_map(
             fn($interface) => ltrim($interface, '\\'), array_merge($parentClassNames, $interfacesNames)
         );
@@ -823,7 +874,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $interfaceName = ltrim(str_replace('\\\\', '\\', $interfaceName), '\\');
         $interfaces = array_map(
-            fn($interface) => ltrim($interface, '\\'), $this->getInterfaces()
+            fn($interface) => ltrim($interface, '\\'), $this->getInterfaceNames()
         );
         return in_array($interfaceName, $interfaces);
     }

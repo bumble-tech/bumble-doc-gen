@@ -145,7 +145,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             $entityInterfaces = array_map(
-                fn($interface) => ltrim($interface, '\\'), $classEntity->getInterfaces()
+                fn($interface) => ltrim($interface, '\\'), $classEntity->getInterfaceNames()
             );
             if (!array_intersect($interfaces, $entityInterfaces)) {
                 $classEntityCollection->remove($objectId);
