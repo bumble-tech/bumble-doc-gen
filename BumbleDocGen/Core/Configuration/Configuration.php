@@ -83,7 +83,18 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $templatesDir = $this->parameterBag->validateAndGetDirectoryPathValue('templates_dir', false);
+        $templatesDir = $this->parameterBag->validateAndGetStringValue('templates_dir', false);
+        $parentDir = dirname($templatesDir);
+        if (!$parentDir || !is_dir($parentDir)) {
+            throw new InvalidConfigurationParameterException(
+                "`output_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+            );
+        }
+        if (!file_exists($templatesDir)) {
+            $this->logger->notice("Creating `{$templatesDir}` directory");
+            mkdir($templatesDir);
+        }
+        $templatesDir = realpath($templatesDir);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $templatesDir);
         return $templatesDir;
     }
