@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace BumbleDocGen;
 
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
 use BumbleDocGen\Core\Renderer\Renderer;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\TemplateGenerator\ChatGpt\TemplatesStructureGenerator;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
+use Tectalic\OpenAi\ClientException;
 use function BumbleDocGen\Core\bites_int_to_string;
 
 /**
@@ -22,6 +27,7 @@ final class DocGenerator
     public const VERSION = '1.0.0';
 
     public function __construct(
+        private Configuration              $configuration,
         private ProjectParser              $parser,
         private Renderer                   $render,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
@@ -39,6 +45,35 @@ final class DocGenerator
     {
         $this->parser->parse();
         return $this->rootEntityCollectionsGroup;
+    }
+
+    /**
+     * @throws ClientException
+     * @throws NotFoundException
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function generateProjectTemplatesStructure(?string $additionalPrompt = null): void
+    {
+        $this->parser->parse();
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+
+        $openaiClient = \Tectalic\OpenAi\Manager::build(
+            new \GuzzleHttp\Client(),
+            new \Tectalic\OpenAi\Authentication(getenv('OPENAI_API_KEY') ?: '')
+        );
+        $templatesStructureGenerator = new TemplatesStructureGenerator($openaiClient);
+        $structure = $templatesStructureGenerator->generateStructureByEntityCollection($entitiesCollection, $additionalPrompt);
+
+        foreach ($structure as $fileName => $title) {
+            $fileName = $this->configuration->getTemplatesDir() . $fileName;
+            $dirName = dirname($fileName);
+            if (!is_dir($dirName)) {
+                mkdir($dirName, 0755, true);
+            }
+            file_put_contents($fileName, "{% set title = '{$title}' %}\n");
+        }
     }
 
     /**
