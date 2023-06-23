@@ -84,7 +84,11 @@ final class DocGenerator
                 if (!is_dir($dirName)) {
                     mkdir($dirName, 0755, true);
                 }
-                file_put_contents($fileName, "{% set title = '{$title}' %}\n");
+                if (str_ends_with($fileName, 'readme.mt.twig')) {
+                    file_put_contents($fileName, "{% set title = '{$title}' %}\n");
+                } else {
+                    file_put_contents($fileName, "{% set title = '{$title}' %}\n{{ generatePageBreadcrumbs(title, _self) }}\n");
+                }
                 $this->logger->notice("Creating `{$fileName}` template");
             }
         }
