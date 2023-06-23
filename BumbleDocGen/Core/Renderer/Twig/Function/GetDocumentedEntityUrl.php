@@ -26,9 +26,14 @@ use Monolog\Logger;
  * @see DocumentedEntityWrappersCollection
  * @see RendererContext::$entityWrappersCollection
  *
- * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', 'getFunctions') }}
- * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Renderer\\Twig\\MainExtension') }}
- * @example {{ getDocumentedEntityUrl(entityCollection , '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', '', false) }}
+ * @example {{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', 'getFunctions') }}
+ *  The function returns a reference to the documented entity, anchored to the getFunctions method
+ *
+ * @example {{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension') }}
+ *  The function returns a reference to the documented entity MainExtension
+ *
+ * @example {{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', '', false) }}
+ *  The function returns a link to the file MainExtension
  */
 final class GetDocumentedEntityUrl implements CustomFunctionInterface
 {

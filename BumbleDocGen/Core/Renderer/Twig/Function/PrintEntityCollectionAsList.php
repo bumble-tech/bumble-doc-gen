@@ -8,7 +8,13 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 
 /**
- * Outputting entity data as HTML or rst list
+ * Outputting entity data as HTML list
+ *
+ * @example  {{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['ScriptFramework\\ScriptInterface', 'ScriptFramework\\TestScriptInterface'])) }}
+ *  The function will output a list of PHP classes that match the ScriptFramework\ScriptInterface and ScriptFramework\TestScriptInterface interfaces
+ *
+ * @example  {{ printEntityCollectionAsList(phpClassEntityCollection) }}
+ *  The function will list all documented PHP classes
  */
 final class PrintEntityCollectionAsList implements CustomFunctionInterface
 {
@@ -30,8 +36,8 @@ final class PrintEntityCollectionAsList implements CustomFunctionInterface
 
     /**
      * @param RootEntityCollection $rootEntityCollection Processed entity collection
-     * @param string $type List tag type
-     * @param bool $skipDescription Don't print description
+     * @param string $type List tag type (<ul>/<ol>)
+     * @param bool $skipDescription Don't print description of this entities
      * @return string
      * @throws InvalidConfigurationParameterException
      */

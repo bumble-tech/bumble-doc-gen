@@ -20,9 +20,10 @@ use Symfony\Component\Finder\Finder;
  * @note This function initiates the creation of documents for the displayed entities
  * @see GetDocumentedEntityUrl
  *
- * @example {{ drawDocumentationMenu() }}
- * @example {{ drawDocumentationMenu('/render/index.mr') }}
- * @example {{ drawDocumentationMenu(_self) }}
+ * @example {{ drawDocumentationMenu() }} - The menu contains links to all documents
+ * @example {{ drawDocumentationMenu('/render/index.md') }} - The menu contains links to all child documents from the /render/index.md file (for example /render/test/index.md)
+ * @example {{ drawDocumentationMenu(_self) }} - The menu contains links to all child documents from the file where this function was called
+ * @example {{ drawDocumentationMenu(_self, 2) }} - The menu contains links to all child documents from the file where this function was called, but no more than 2 in depth
  */
 final class DrawDocumentationMenu implements CustomFunctionInterface
 {
@@ -50,7 +51,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
     /**
      * @param null|string $startPageKey
      *  Relative path to the page from which the menu will be generated (only child pages will be taken into account).
-     *  By default, the main documentation page is used.
+     *  By default, the main documentation page (readme.md) is used.
      * @param null|int $maxDeep
      *  Maximum parsing depth of documented links starting from the current page.
      *  By default, this restriction is disabled.
