@@ -28,7 +28,8 @@
         "ocramius/proxy-manager": "~2.0",
         "symfony/yaml": "^6.0",
         "hassankhan/config": "^3.1",
-        "tectalic/openai": "^1.5"
+        "tectalic/openai": "^1.5",
+        "guzzlehttp/guzzle": "^7.7"
     },
     "autoload": {
         "psr-4": {
