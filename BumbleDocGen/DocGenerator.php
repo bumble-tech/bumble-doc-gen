@@ -68,13 +68,9 @@ final class DocGenerator
         );
 
         $templatesStructureGenerator = new TemplatesStructureGenerator($openaiClient);
-        $action = null;
-        $additionalPrompt = null;
 
         do {
-            if ($action === 'Regenerate') {
-                $additionalPrompt = $this->io->ask('Write instructions for more accurate documentation generation') ?: null;
-            }
+            $additionalPrompt = $this->io->ask('Write instructions for more accurate documentation generation ( or just skip this step )') ?: null;
             $this->logger->notice("Sending ChatGPT request");
             $structure = $templatesStructureGenerator->generateStructureByEntityCollection($entitiesCollection, $additionalPrompt);
             $structureAsString = implode("\n", array_map(fn($v, $k) => "{$k} => {$v}", $structure, array_keys($structure)));
