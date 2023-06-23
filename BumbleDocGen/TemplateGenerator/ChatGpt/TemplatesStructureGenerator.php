@@ -62,16 +62,16 @@ final class TemplatesStructureGenerator implements TemplatesStructureGeneratorIn
         )->toModel();
 
         $finalStructure = [
-            "/readme.md" => "About the project",
+            "/readme.md.twig" => "About the project",
         ];
 
         if ($content = $response->choices[0]->message->content ?? null) {
             $structure = json_decode($content);
             foreach ($structure as $dir => $docName) {
-                $finalStructure["{$dir}/index.md"] = $docName;
+                $finalStructure["{$dir}/index.md.twig"] = $docName;
             }
         }
-        $finalStructure["/tech/index.md"] = "Description of the technical part of the project";
+        $finalStructure["/tech/index.md.twig"] = "Description of the technical part of the project";
         return $finalStructure;
     }
 }
