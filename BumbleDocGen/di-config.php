@@ -11,6 +11,10 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use Symfony\Component\Console\Completion\CompletionInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Style\OutputStyle;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 return [
     Logger::class => \DI\autowire(Logger::class)
@@ -53,4 +57,9 @@ return [
             ]
         ),
     PluginEventDispatcher::class => \DI\autowire(PluginEventDispatcher::class)->lazy(),
+    OutputStyle::class => \DI\autowire(SymfonyStyle::class)
+        ->constructor(
+            input: \DI\autowire(CompletionInput::class),
+            output: \DI\autowire(ConsoleOutput::class),
+        ),
 ];
