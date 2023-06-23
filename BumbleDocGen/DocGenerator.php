@@ -17,6 +17,8 @@ use DI\NotFoundException;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Console\Style\OutputStyle;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 use Tectalic\OpenAi\ClientException;
 use function BumbleDocGen\Core\bites_int_to_string;
 
@@ -28,6 +30,7 @@ final class DocGenerator
     public const VERSION = '1.0.0';
 
     public function __construct(
+        private Filesystem                 $fs,
         private OutputStyle                $io,
         private Configuration              $configuration,
         private ProjectParser              $parser,
@@ -78,13 +81,23 @@ final class DocGenerator
         } while ($action == 'Regenerate');
 
         if ($action === 'Save') {
+            $templatesDir = $this->configuration->getTemplatesDir();
+            $finder = new Finder();
+            $finder->files()->in($this->configuration->getTemplatesDir());
+            if (
+                $finder->hasResults() &&
+                $this->io->confirm("Directory `{$templatesDir}` already contains files. Clean before saving new ones?")
+            ) {
+                $this->fs->remove([$templatesDir]);
+            }
+
             foreach ($structure as $fileName => $title) {
-                $fileName = $this->configuration->getTemplatesDir() . $fileName;
+                $fileName = $templatesDir . $fileName;
                 $dirName = dirname($fileName);
                 if (!is_dir($dirName)) {
-                    mkdir($dirName, 0755, true);
+                    $this->fs->mkdir($dirName, 0755);
                 }
-                if (str_ends_with($fileName, 'readme.mt.twig')) {
+                if (str_ends_with($fileName, 'readme.md.twig')) {
                     file_put_contents($fileName, "{% set title = '{$title}' %}\n");
                 } else {
                     file_put_contents($fileName, "{% set title = '{$title}' %}\n{{ generatePageBreadcrumbs(title, _self) }}\n");
