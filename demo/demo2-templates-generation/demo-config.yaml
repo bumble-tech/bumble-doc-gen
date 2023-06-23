@@ -1,0 +1,17 @@
+project_root: '%WORKING_DIR%/vendor/nikic/php-parser'
+templates_dir: '%WORKING_DIR%/demo/demo2-templates-generation/templates'
+cache_dir: '%WORKING_DIR%/demo/demo2-templates-generation/__cache'
+output_dir: "%WORKING_DIR%/demo/demo2-templates-generation/docs"
+output_dir_base_url: "/demo/demo2-templates-generation/docs"
+check_file_in_git_before_creating_doc: false
+language_handlers:
+  php:
+    class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
+    settings:
+      file_source_base_url: '#'
+      async_source_loading_enabled: true
+source_locators:
+  - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
+    arguments:
+      directories:
+        - "%project_root%"
