@@ -16,6 +16,7 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Console\Style\OutputStyle;
 use Tectalic\OpenAi\ClientException;
 use function BumbleDocGen\Core\bites_int_to_string;
 
@@ -27,6 +28,7 @@ final class DocGenerator
     public const VERSION = '1.0.0';
 
     public function __construct(
+        private OutputStyle                $io,
         private Configuration              $configuration,
         private ProjectParser              $parser,
         private Renderer                   $render,
@@ -54,25 +56,41 @@ final class DocGenerator
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function generateProjectTemplatesStructure(?string $additionalPrompt = null): void
+    public function generateProjectTemplatesStructure(): void
     {
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
 
+        $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
         $openaiClient = \Tectalic\OpenAi\Manager::build(
             new \GuzzleHttp\Client(),
-            new \Tectalic\OpenAi\Authentication(getenv('OPENAI_API_KEY') ?: '')
+            new \Tectalic\OpenAi\Authentication($openaiKey)
         );
-        $templatesStructureGenerator = new TemplatesStructureGenerator($openaiClient);
-        $structure = $templatesStructureGenerator->generateStructureByEntityCollection($entitiesCollection, $additionalPrompt);
 
-        foreach ($structure as $fileName => $title) {
-            $fileName = $this->configuration->getTemplatesDir() . $fileName;
-            $dirName = dirname($fileName);
-            if (!is_dir($dirName)) {
-                mkdir($dirName, 0755, true);
+        $templatesStructureGenerator = new TemplatesStructureGenerator($openaiClient);
+        $action = null;
+        $additionalPrompt = null;
+
+        do {
+            if ($action === 'Regenerate') {
+                $additionalPrompt = $this->io->ask('Write instructions for more accurate documentation generation') ?: null;
             }
-            file_put_contents($fileName, "{% set title = '{$title}' %}\n");
+            $this->logger->notice("Sending ChatGPT request");
+            $structure = $templatesStructureGenerator->generateStructureByEntityCollection($entitiesCollection, $additionalPrompt);
+            $structureAsString = implode("\n", array_map(fn($v, $k) => "{$k} => {$v}", $structure, array_keys($structure)));
+            $action = $this->io->choice("The proposed documentation structure is as follows:\n\n{$structureAsString}", ['Save', 'Regenerate', 'Cancel']);
+        } while ($action == 'Regenerate');
+
+        if ($action === 'Save') {
+            foreach ($structure as $fileName => $title) {
+                $fileName = $this->configuration->getTemplatesDir() . $fileName;
+                $dirName = dirname($fileName);
+                if (!is_dir($dirName)) {
+                    mkdir($dirName, 0755, true);
+                }
+                file_put_contents($fileName, "{% set title = '{$title}' %}\n");
+                $this->logger->notice("Creating `{$fileName}` template");
+            }
         }
     }
 
