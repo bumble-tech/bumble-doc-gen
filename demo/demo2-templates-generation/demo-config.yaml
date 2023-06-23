@@ -1,7 +1,6 @@
 project_root: '%DOC_GEN_LIB_PATH%'
 templates_dir: '%WORKING_DIR%/demo/demo2-templates-generation/templates'
 cache_dir: '%WORKING_DIR%/demo/demo2-templates-generation/__cache'
-check_file_in_git_before_creating_doc: false
 language_handlers:
   php:
     class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
