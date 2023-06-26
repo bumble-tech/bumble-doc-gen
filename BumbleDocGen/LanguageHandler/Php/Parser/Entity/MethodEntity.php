@@ -167,6 +167,17 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $docComment;
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getSignature(): string
+    {
+        return "{$this->getModifiersString()} {$this->getName()}({$this->getParametersString()})" . (!$this->isConstructor() ? ": {$this->getReturnType()}" : '');
+    }
+
     public function getName(): string
     {
         return $this->methodName;
@@ -470,5 +481,10 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     #[CacheableMethod] public function getBodyCode(): string
     {
         return $this->getReflection()->getBodyCode();
+    }
+
+    #[CacheableMethod] public function getDocComment(): string
+    {
+        return $this->getReflection()->getDocComment();
     }
 }
