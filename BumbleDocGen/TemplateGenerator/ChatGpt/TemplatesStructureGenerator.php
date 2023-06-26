@@ -14,7 +14,9 @@ use Tectalic\OpenAi\ClientException;
 
 final class TemplatesStructureGenerator
 {
-    public function __construct(private Client $openaiClient)
+    public const MODEL_GPT_4 = 'gpt-4';
+
+    public function __construct(private Client $openaiClient, private string $model = self::MODEL_GPT_4)
     {
     }
 
@@ -55,7 +57,7 @@ final class TemplatesStructureGenerator
 
         $response = $this->openaiClient->chatCompletions()->create(
             new \Tectalic\OpenAi\Models\ChatCompletions\CreateRequest([
-                'model' => 'gpt-4',
+                'model' => $this->model,
                 'messages' => $messages,
             ])
         )->toModel();
