@@ -26,13 +26,34 @@ final class MissingDocBlocksGenerator
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function hasMethodsWithoutDocBlocks(RootEntityInterface $rootEntity): bool
+    {
+        if (!is_a($rootEntity, ClassEntity::class)) {
+            throw new \InvalidArgumentException('Currently we can only work PHP class entities');
+        }
+        foreach ($rootEntity->getMethodEntityCollection() as $method) {
+            /** @var MethodEntity $method */
+            if ($method->getDocComment() || $method->isConstructor()) {
+                continue;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @throws ReflectionException
      * @throws DependencyException
      * @throws ClientException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    public function generateBocBlocksForMethodsWithoutIt(
+    public function generateDocBlocksForMethodsWithoutIt(
         RootEntityInterface $rootEntity,
         int                 $mode = self::MODE_READ_ONLY_SIGNATURES,
     ): array
@@ -87,7 +108,6 @@ comment;
         }
 
         $classSignature = "{$rootEntity->getModifiersString()} \\{$rootEntity->getName()}";
-
         $requestData = "/**{$rootEntity->getDescription()}*/\n{$classSignature}{\n" . implode("\n", $toRequest) . "\n}";
 
         $messages = [
