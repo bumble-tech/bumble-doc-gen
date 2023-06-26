@@ -155,7 +155,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getDocCommentRecursive(): string
+    public function getDocCommentRecursive(): string
     {
         $objectId = $this->getObjectId();
         try {
