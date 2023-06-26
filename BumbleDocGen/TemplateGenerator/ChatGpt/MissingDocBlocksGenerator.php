@@ -74,26 +74,26 @@ final class MissingDocBlocksGenerator
 
             if ($method->getDocCommentRecursive()) {
                 if ($method->getDescription()) {
-                    $methodsDockBlocks[$method->getName()] = <<<comment
-    /**
-     * {@inheritDoc}
-     */
-comment;
+                    $methodsDockBlocks[$method->getName()] = <<<docBlock
+/**
+ * {@inheritDoc}
+ */
+docBlock;
                     continue;
                 } else {
-                    $methodsDockBlocks[$method->getName()] = <<<comment
-    /**
-     * [insert]
-     * {@inheritDoc}
-     */
-comment;
+                    $methodsDockBlocks[$method->getName()] = <<<docBlock
+/**
+ * [insert]
+ * {@inheritDoc}
+ */
+docBlock;
                 }
             } else {
-                $methodsDockBlocks[$method->getName()] = <<<comment
-    /**
-     * [insert]
-     */
-comment;
+                $methodsDockBlocks[$method->getName()] = <<<docBlock
+/**
+ * [insert]
+ */
+docBlock;
             }
 
             if ($mode === self::MODE_READ_ONLY_SIGNATURES) {
@@ -104,7 +104,7 @@ comment;
         }
 
         if (!$toRequest) {
-            return [];
+            return $methodsDockBlocks;
         }
 
         $classSignature = "{$rootEntity->getModifiersString()} \\{$rootEntity->getName()}";
