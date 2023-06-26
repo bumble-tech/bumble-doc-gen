@@ -457,6 +457,15 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
+    #[CacheableMethod] public function getStartColumn(): int
+    {
+        return $this->getReflection()->getStartColumn();
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function getEndLine(): int
     {
         return $this->getReflection()->getEndLine();
