@@ -53,6 +53,8 @@ final class DocGenerator
     }
 
     /**
+     * Generate documentation structure with blank templates using AI tools
+     *
      * @throws ClientException
      * @throws NotFoundException
      * @throws ReflectionException
@@ -93,10 +95,9 @@ final class DocGenerator
 
             foreach ($structure as $fileName => $title) {
                 $fileName = $templatesDir . $fileName;
-                if (str_ends_with($fileName, 'readme.md.twig')) {
-                    $this->fs->appendToFile($fileName, "{% set title = '{$title}' %}\n");
-                } else {
-                    $this->fs->appendToFile($fileName, "{% set title = '{$title}' %}\n{{ generatePageBreadcrumbs(title, _self) }}\n");
+                $this->fs->appendToFile($fileName, "{% set title = '{$title}' %}\n");
+                if (!str_ends_with($fileName, 'readme.md.twig')) {
+                    $this->fs->appendToFile($fileName, "{{ generatePageBreadcrumbs(title, _self) }}\n");
                 }
                 $this->logger->notice("Creating `{$fileName}` template");
             }
