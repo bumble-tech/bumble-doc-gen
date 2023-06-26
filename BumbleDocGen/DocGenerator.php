@@ -93,14 +93,10 @@ final class DocGenerator
 
             foreach ($structure as $fileName => $title) {
                 $fileName = $templatesDir . $fileName;
-                $dirName = dirname($fileName);
-                if (!is_dir($dirName)) {
-                    $this->fs->mkdir($dirName, 0755);
-                }
                 if (str_ends_with($fileName, 'readme.md.twig')) {
-                    file_put_contents($fileName, "{% set title = '{$title}' %}\n");
+                    $this->fs->appendToFile($fileName, "{% set title = '{$title}' %}\n");
                 } else {
-                    file_put_contents($fileName, "{% set title = '{$title}' %}\n{{ generatePageBreadcrumbs(title, _self) }}\n");
+                    $this->fs->appendToFile($fileName, "{% set title = '{$title}' %}\n{{ generatePageBreadcrumbs(title, _self) }}\n");
                 }
                 $this->logger->notice("Creating `{$fileName}` template");
             }
