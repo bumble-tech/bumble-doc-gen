@@ -9,11 +9,10 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
-use BumbleDocGen\TemplateGenerator\TemplatesStructureGeneratorInterface;
 use Tectalic\OpenAi\Client;
 use Tectalic\OpenAi\ClientException;
 
-final class TemplatesStructureGenerator implements TemplatesStructureGeneratorInterface
+final class TemplatesStructureGenerator
 {
     public function __construct(private Client $openaiClient)
     {
