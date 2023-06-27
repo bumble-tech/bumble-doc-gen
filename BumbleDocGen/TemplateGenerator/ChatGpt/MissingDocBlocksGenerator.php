@@ -49,9 +49,9 @@ final class MissingDocBlocksGenerator
     /**
      * @throws ReflectionException
      * @throws DependencyException
-     * @throws ClientException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
+     * @throws ClientException
      */
     public function generateDocBlocksForMethodsWithoutIt(
         RootEntityInterface $rootEntity,
@@ -68,11 +68,22 @@ final class MissingDocBlocksGenerator
 
         foreach ($rootEntity->getMethodEntityCollection() as $method) {
             /** @var MethodEntity $method */
-            if ($method->getDocComment() || $method->isConstructor()) {
+            if ($method->isConstructor()) {
                 continue;
             }
 
-            if (strlen($method->getDocCommentRecursive()) > 1) {
+            if ($method->getDocComment() && $method->getDescription()) {
+                $prototype = $method->getPrototype();
+                $prototypeDocComment = $prototype?->getDocComment();
+                if ($prototypeDocComment && !str_contains(strtolower($prototypeDocComment), '@inheritdoc')) {
+                    $methodsDockBlocks[$method->getName()] = str_replace('*/', "*\n * {@inheritDoc}\n */", $prototypeDocComment);
+                }
+                continue;
+            }
+
+            if (!$method->getDescription() && $method->getDocComment()) {
+                $methodsDockBlocks[$method->getName()] = str_replace('/**', "/**\n * [insert]", $method->getDocComment());
+            } elseif (strlen($method->getDocCommentRecursive()) > 1) {
                 if ($method->getDescription()) {
                     $methodsDockBlocks[$method->getName()] = <<<docBlock
 /**
