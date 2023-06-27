@@ -77,7 +77,16 @@ final class DocGenerator
             new \Tectalic\OpenAi\Authentication($openaiKey)
         );
 
-        $templatesStructureGenerator = new TemplatesStructureGenerator($openaiClient);
+        $availableModels = array_values(array_filter(
+            array_map(
+                fn(array $v) => $v['id'],
+                $openaiClient->models()->list()->toArray()['data'] ?? []
+            ),
+            fn(string $v) => str_starts_with($v, "gpt-")
+        ));
+
+        $model = $this->io->choice("Choose GPT model from available", $availableModels);
+        $templatesStructureGenerator = new TemplatesStructureGenerator($openaiClient, $model);
 
         do {
             $additionalPrompt = $this->io->ask('Write instructions for more accurate documentation generation ( or just skip this step )') ?: null;
@@ -118,6 +127,10 @@ final class DocGenerator
      */
     public function addMissingDocBlocks(): void
     {
+        if (!$this->io->confirm("This command will change the source code of your project. Continue?")) {
+            return;
+        }
+
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
 
@@ -127,7 +140,16 @@ final class DocGenerator
             new \Tectalic\OpenAi\Authentication($openaiKey)
         );
 
-        $missingDocBlocksGenerator = new MissingDocBlocksGenerator($openaiClient, $this->parserHelper);
+        $availableModels = array_values(array_filter(
+            array_map(
+                fn(array $v) => $v['id'],
+                $openaiClient->models()->list()->toArray()['data'] ?? []
+            ),
+            fn(string $v) => str_starts_with($v, "gpt-")
+        ));
+
+        $model = $this->io->choice("Choose GPT model from available", $availableModels);
+        $missingDocBlocksGenerator = new MissingDocBlocksGenerator($openaiClient, $this->parserHelper, $model);
         foreach ($entitiesCollection as $entity) {
             /**@var ClassEntity $entity */
             if (!$missingDocBlocksGenerator->hasMethodsWithoutDocBlocks($entity)) {
