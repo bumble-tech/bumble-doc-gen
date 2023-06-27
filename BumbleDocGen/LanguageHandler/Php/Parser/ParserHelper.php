@@ -495,7 +495,7 @@ final class ParserHelper
     public function getDocBlock(ClassEntity $classEntity, string $docComment, ?int $lineNumber = null): DocBlock
     {
         $docComment = $docComment ?: ' ';
-        $cacheKey = md5("{$classEntity->getName()}{$docComment}");
+        $cacheKey = md5("{$classEntity->getName()}{$docComment}{$lineNumber}");
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $cacheKey);
         } catch (ObjectNotFoundException) {
