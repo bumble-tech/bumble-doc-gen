@@ -80,10 +80,14 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlock(): DocBlock
+    public function getDocBlock(bool $recursive = true): DocBlock
     {
-        $classEntity = $this->getDocCommentEntity()->getImplementingClass();
-        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive(), $this->getDocCommentRecursiveLine());
+        if ($recursive) {
+            $classEntity = $this->getDocCommentEntity()->getImplementingClass();
+            return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive(), $this->getDocCommentLineRecursive());
+        }
+        $classEntity = $this->getImplementingClass();
+        return $this->parserHelper->getDocBlock($classEntity, $this->getDocComment(), $this->getDocCommentLine());
     }
 
     /**
@@ -204,13 +208,22 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getDocCommentRecursiveLine(): ?int
+    #[CacheableMethod] public function getDocCommentLineRecursive(): ?int
     {
-        $classEntity = $this->getDocCommentEntity();
-        if ($classEntity->getDocCommentRecursive()) {
-            return $classEntity->getReflection()->getAst()->getDocComment()?->getStartLine();
+        $methodEntity = $this->getDocCommentEntity();
+        if ($methodEntity->getDocCommentRecursive()) {
+            return $methodEntity->getReflection()->getAst()->getDocComment()?->getStartLine();
         }
         return null;
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getDocCommentLine(): ?int
+    {
+        return $this->getReflection()->getAst()->getDocComment()?->getStartLine();
     }
 
     /**
