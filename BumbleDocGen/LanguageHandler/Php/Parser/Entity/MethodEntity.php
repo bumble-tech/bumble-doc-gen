@@ -150,6 +150,37 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getPrototype(): ?MethodEntity
+    {
+        $objectId = $this->getObjectId();
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
+        } catch (ObjectNotFoundException) {
+        }
+        $prototype = null;
+        $implementingClass = $this->getImplementingClass();
+        $parentClass = $this->getImplementingClass()->getParentClass();
+        $methodName = $this->getName();
+        if ($parentClass && $parentClass->hasMethod($methodName)) {
+            $prototype = $parentClass->getMethodEntity($methodName);
+        } else {
+            foreach ($implementingClass->getInterfacesEntities() as $interface) {
+                if ($interface->hasMethod($methodName)) {
+                    $prototype = $interface->getMethodEntity($methodName);
+                    break;
+                }
+            }
+        }
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $prototype);
+        return $prototype;
+    }
+
+    /**
      * @throws NotFoundException
      * @throws ReflectionException
      * @throws DependencyException
