@@ -300,7 +300,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!$this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
             new OnCheckIsClassEntityCanBeLoad($this)
         )->isClassCanBeLoad()) {
-            $this->logger->notice("Class {$this->getName()} skipped by plugin");
+            $this->logger->notice("Class `{$this->getName()}` loading skipped by plugin");
             return false;
         }
         return $this->isEntityFileCanBeLoad();
