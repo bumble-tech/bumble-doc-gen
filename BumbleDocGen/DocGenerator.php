@@ -152,7 +152,28 @@ final class DocGenerator
 
         $model = $this->io->choice("Choose GPT model from available", $availableModels);
         $missingDocBlocksGenerator = new MissingDocBlocksGenerator($openaiClient, $this->parserHelper, $model);
-        foreach ($entitiesCollection as $entity) {
+
+        $alreadyProcessedEntities = [];
+        $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (&$getEntities, &$alreadyProcessedEntities): \Generator {
+            foreach ($entitiesCollection as $classEntity) {
+                /**@var ClassEntity $classEntity */
+                if (!$classEntity->entityDataCanBeLoaded() || array_key_exists($classEntity->getName(), $alreadyProcessedEntities)) {
+                    continue;
+                }
+                $interfaces = $classEntity->getInterfacesEntities();
+                if ($interfaces) {
+                    yield from $getEntities($interfaces);
+                }
+                $parentClass = $classEntity->getParentClass();
+                if ($parentClass) {
+                    yield from $getEntities([$parentClass]);
+                }
+                $alreadyProcessedEntities[$classEntity->getName()] = 1;
+                yield $classEntity;
+            }
+        };
+
+        foreach ($getEntities($entitiesCollection) as $entity) {
             /**@var ClassEntity $entity */
             if (!$missingDocBlocksGenerator->hasMethodsWithoutDocBlocks($entity)) {
                 $this->logger->notice("Skipping `{$entity->getName()}`class. All methods are already documented");
