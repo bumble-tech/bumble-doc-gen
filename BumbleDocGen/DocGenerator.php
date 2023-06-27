@@ -119,6 +119,8 @@ final class DocGenerator
     }
 
     /**
+     * Generate missing docBlocks with ChatGPT for project class methods that are available for documentation
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws ReflectionException
