@@ -13,6 +13,7 @@ use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\TemplateGenerator\ChatGpt\MissingDocBlocksGenerator;
 use BumbleDocGen\TemplateGenerator\ChatGpt\TemplatesStructureGenerator;
 use DI\DependencyException;
@@ -37,6 +38,7 @@ final class DocGenerator
         private OutputStyle                $io,
         private Configuration              $configuration,
         private ProjectParser              $parser,
+        private ParserHelper               $parserHelper,
         private Renderer                   $render,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private Logger                     $logger
@@ -125,7 +127,7 @@ final class DocGenerator
             new \Tectalic\OpenAi\Authentication($openaiKey)
         );
 
-        $missingDocBlocksGenerator = new MissingDocBlocksGenerator($openaiClient);
+        $missingDocBlocksGenerator = new MissingDocBlocksGenerator($openaiClient, $this->parserHelper);
         foreach ($entitiesCollection as $entity) {
             /**@var ClassEntity $entity */
             if (!$missingDocBlocksGenerator->hasMethodsWithoutDocBlocks($entity)) {
@@ -142,7 +144,7 @@ final class DocGenerator
             $classFileLines = explode("\n", $classFileContent);
             foreach ($newBocBlocks as $method => $docBlock) {
                 $methodEntity = $entity->getMethodEntity($method);
-                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock()->getLocation()?->getLineNumber() : null;
+                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock(false)->getLocation()?->getLineNumber() : null;
                 $lineNumber = $lineNumber ?: $methodEntity->getStartLine();
 
                 foreach (file($entity->getFullFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
