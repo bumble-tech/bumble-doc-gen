@@ -132,8 +132,7 @@ final class MissingDocBlocksGenerator
             }
         }
 
-        if (!$toRequest) {
-
+        if ($toRequest) {
             $classSignature = "{$rootEntity->getModifiersString()} \\{$rootEntity->getName()}";
             $requestData = "/**{$rootEntity->getDescription()}*/\n{$classSignature}{\n" . implode("\n", $toRequest) . "\n}";
 
