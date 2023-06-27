@@ -72,7 +72,7 @@ final class MissingDocBlocksGenerator
                 continue;
             }
 
-            if ($method->getDocCommentRecursive()) {
+            if (strlen($method->getDocCommentRecursive()) > 1) {
                 if ($method->getDescription()) {
                     $methodsDockBlocks[$method->getName()] = <<<docBlock
 /**
