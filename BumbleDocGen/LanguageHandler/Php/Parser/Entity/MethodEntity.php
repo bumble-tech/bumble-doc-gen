@@ -83,7 +83,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     public function getDocBlock(): DocBlock
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();
-        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
+        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive(), $this->getDocCommentRecursiveLine());
     }
 
     /**
@@ -165,6 +165,21 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         $docComment = $this->getDocCommentEntity()->getDocComment() ?: ' ';
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docComment);
         return $docComment;
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getDocCommentRecursiveLine(): ?int
+    {
+        $classEntity = $this->getDocCommentEntity();
+        if ($classEntity->getDocCommentRecursive()) {
+            return $classEntity->getReflection()->getAst()->getDocComment()?->getStartLine();
+        }
+        return null;
     }
 
     /**
