@@ -7,3 +7,4 @@ composer.phar
 /demo/demo2-templates-generation/templates/
 /demo/demo2-templates-generation/__cache/
 /demo/demo2-templates-generation/docs/
+/demo/demo3-add-missing-doc-blocks/__cache/
