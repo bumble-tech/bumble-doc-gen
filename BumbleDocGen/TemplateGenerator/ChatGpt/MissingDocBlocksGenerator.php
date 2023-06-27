@@ -155,6 +155,9 @@ final class MissingDocBlocksGenerator
             )->toModel();
 
             $responseData = json_decode($response->choices[0]->message->content ?? "{}", true);
+            if (!$responseData) {
+                return [];
+            }
         }
 
         foreach ($methodsDockBlocks as $methodName => $block) {
