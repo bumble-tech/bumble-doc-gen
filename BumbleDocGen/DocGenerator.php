@@ -9,8 +9,11 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
 use BumbleDocGen\Core\Renderer\Renderer;
+use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\TemplateGenerator\ChatGpt\MissingDocBlocksGenerator;
 use BumbleDocGen\TemplateGenerator\ChatGpt\TemplatesStructureGenerator;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -101,6 +104,61 @@ final class DocGenerator
                 }
                 $this->logger->notice("Creating `{$fileName}` template");
             }
+        }
+    }
+
+    /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     * @throws ClientException
+     */
+    public function addMissingDocBlocks(): void
+    {
+        $this->parser->parse();
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+
+        $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
+        $openaiClient = \Tectalic\OpenAi\Manager::build(
+            new \GuzzleHttp\Client(),
+            new \Tectalic\OpenAi\Authentication($openaiKey)
+        );
+
+        $missingDocBlocksGenerator = new MissingDocBlocksGenerator($openaiClient);
+        foreach ($entitiesCollection as $entity) {
+            /**@var ClassEntity $entity */
+            if (!$missingDocBlocksGenerator->hasMethodsWithoutDocBlocks($entity)) {
+                $this->logger->notice("Skipping `{$entity->getName()}`class. All methods are already documented");
+            }
+            if (!$this->io->confirm("Start processing class `{$entity->getName()}`? Choose `no` to skip")) {
+                continue;
+            }
+            $this->logger->notice("Processing `{$entity->getName()}` class");
+            $newBocBlocks = $missingDocBlocksGenerator->generateDocBlocksForMethodsWithoutIt($entity);
+
+            $classFileContent = $entity->getFileContent();
+            $toReplace = [];
+            $classFileLines = explode("\n", $classFileContent);
+            foreach ($newBocBlocks as $method => $docBlock) {
+                $methodEntity = $entity->getMethodEntity($method);
+                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock()->getLocation()?->getLineNumber() : null;
+                $lineNumber = $lineNumber ?: $methodEntity->getStartLine();
+
+                foreach (file($entity->getFullFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
+                    if ($line + 1 === $lineNumber) {
+                        $classFileLines[$line] = "[%docBlock%{$method}%]{$lineContent}";
+                        break;
+                    }
+                }
+                $docBlock = (new AddIndentFromLeft())->__invoke($docBlock, $methodEntity->getStartColumn() - 1);
+                $toReplace["/(?:\[%docBlock%{$method}%\] *\/\*\*.*?(?= *\/)\/)|\[%docBlock%{$method}%\]/s"] = $docBlock . ($docCommentLine ? '' : "\n");
+            }
+
+            $classFileContent = implode("\n", $classFileLines);
+            $classFileContent = preg_replace(array_keys($toReplace), $toReplace, $classFileContent);
+            file_put_contents($entity->getFullFileName(), $classFileContent);
+            $this->logger->notice("DocBlocks added");
         }
     }
 
