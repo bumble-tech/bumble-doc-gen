@@ -37,7 +37,7 @@ final class TemplatesStructureGenerator
         $messages = [
             [
                 'role' => 'system',
-                'content' => file_get_contents(__DIR__ . '/prompts/structureGenerationStep1')
+                'content' => file_get_contents(__DIR__ . '/prompts/structureGeneration')
             ],
         ];
 
