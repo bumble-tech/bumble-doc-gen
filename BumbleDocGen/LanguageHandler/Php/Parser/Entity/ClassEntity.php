@@ -747,7 +747,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $name = $method->getName();
             $methods[$name] = [
                 'declaringClass' => $method->getDeclaringClass()->getName(),
-                'implementingClass' => $method->getImplementingClass()->getName()
+                'implementingClass' => $method->getLocatedSource()->getName(),
             ];
         }
         return $methods;
