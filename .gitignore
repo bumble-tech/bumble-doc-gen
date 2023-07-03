@@ -8,3 +8,6 @@ composer.phar
 /demo/demo2-templates-generation/__cache/
 /demo/demo2-templates-generation/docs/
 /demo/demo3-add-missing-doc-blocks/__cache/
+/demo/demo4-generating-readme-file/__cache/
+/demo/demo4-generating-readme-file/docs/
+/demo/demo4-generating-readme-file/templates/
