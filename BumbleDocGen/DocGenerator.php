@@ -15,6 +15,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\TemplateGenerator\ChatGpt\MissingDocBlocksGenerator;
+use BumbleDocGen\TemplateGenerator\ChatGpt\ReadmeTemplateFiller;
 use BumbleDocGen\TemplateGenerator\ChatGpt\TemplatesStructureGenerator;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -206,6 +207,90 @@ final class DocGenerator
             $classFileContent = preg_replace(array_keys($toReplace), $toReplace, $classFileContent);
             file_put_contents($entity->getFullFileName(), $classFileContent);
             $this->logger->notice("DocBlocks added");
+        }
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws ClientException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function fillInReadmeMdTemplate(): void
+    {
+        $this->io->note("Project analysis");
+        $this->parser->parse();
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+
+        $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
+        $openaiClient = \Tectalic\OpenAi\Manager::build(
+            new \GuzzleHttp\Client(),
+            new \Tectalic\OpenAi\Authentication($openaiKey)
+        );
+
+        $finder = new Finder();
+        $finder
+            ->files()
+            ->in($this->configuration->getProjectRoot())
+            ->ignoreVCS(true)
+            ->ignoreVCSIgnored(true)
+            ->ignoreDotFiles(true);
+
+        $composerJsonFile = array_keys(iterator_to_array($finder->name('composer.json')))[0] ?? null;
+        $this->logger->info("Composer settings file found: `{$composerJsonFile}`");
+        $this->io->note("The project has been analyzed. Preparing to generate a document");
+
+        $entryPoints = [];
+        do {
+            $entityName = $this->io->ask("Enter the name of the class that is the entry point of the documented project (or just skip this step)");
+            if ($entityName) {
+                $entity = $entitiesCollection->findEntity($entityName, false);
+                if (!$entity) {
+                    $this->io->text("Class `{$entityName}` not found, please try again");
+                    $action = 'Add more';
+                    continue;
+                }
+                $entryPoints[$entity->getName()] = $entity;
+            }
+            $action = null;
+            if ($entryPoints) {
+                do {
+                    $this->io->text(array_merge(["Entry-point classes:"], array_map(function ($v) {
+                        static $n = 0;
+                        ++$n;
+                        return "{$n}) {$v}";
+                    }, array_keys($entryPoints))));
+
+                    $action = $this->io->choice("Choose your next action", ['Continue', 'Add more', 'Remove last']);
+                    if ($action === 'Remove last') {
+                        array_pop($entryPoints);
+                    }
+                } while ($action === 'Remove last');
+            }
+        } while ($action !== 'Continue');
+
+        $additionalPrompt = $this->io->ask('Write instructions for more accurate documentation generation ( or just skip this step )');
+
+        $availableModels = array_values(array_filter(
+            array_map(
+                fn(array $v) => $v['id'],
+                $openaiClient->models()->list()->toArray()['data'] ?? []
+            ),
+            fn(string $v) => str_starts_with($v, "gpt-")
+        ));
+
+        $model = $this->io->choice("Choose GPT model from available", $availableModels, 'gpt-4');
+        $readmeTemplateFiller = new ReadmeTemplateFiller($openaiClient, $model);
+        $readmeFileContent = $readmeTemplateFiller->generateReadmeFileContent($entitiesCollection, $entryPoints, $composerJsonFile, $additionalPrompt);
+
+        $fileContent = "{% set title = 'About the project' %}\n{$readmeFileContent}";
+        $this->io->note("readme.md.twig file content generated:");
+        $this->io->text($fileContent);
+        if ($this->io->confirm('Save file?')) {
+            $readmeFilePath = $this->configuration->getTemplatesDir() . '/readme.md.twig';
+            file_put_contents($readmeFilePath, $fileContent);
+            $this->logger->notice("{$readmeFilePath} file saved.");
         }
     }
 
