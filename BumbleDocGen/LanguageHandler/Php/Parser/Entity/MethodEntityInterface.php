@@ -14,6 +14,8 @@ interface MethodEntityInterface extends EntityInterface
 
     public function getStartLine(): int;
 
+    public function getStartColumn(): int;
+
     public function getEndLine(): int;
 
     public function getModifiersString(): string;

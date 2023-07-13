@@ -80,10 +80,14 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlock(): DocBlock
+    public function getDocBlock(bool $recursive = true): DocBlock
     {
-        $classEntity = $this->getDocCommentEntity()->getImplementingClass();
-        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
+        if ($recursive) {
+            $classEntity = $this->getDocCommentEntity()->getImplementingClass();
+            return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive(), $this->getDocCommentLineRecursive());
+        }
+        $classEntity = $this->getImplementingClass();
+        return $this->parserHelper->getDocBlock($classEntity, $this->getDocComment(), $this->getDocCommentLine());
     }
 
     /**
@@ -150,12 +154,43 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getPrototype(): ?MethodEntity
+    {
+        $objectId = $this->getObjectId();
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
+        } catch (ObjectNotFoundException) {
+        }
+        $prototype = null;
+        $implementingClass = $this->getImplementingClass();
+        $parentClass = $this->getImplementingClass()->getParentClass();
+        $methodName = $this->getName();
+        if ($parentClass && $parentClass->hasMethod($methodName)) {
+            $prototype = $parentClass->getMethodEntity($methodName);
+        } else {
+            foreach ($implementingClass->getInterfacesEntities() as $interface) {
+                if ($interface->hasMethod($methodName)) {
+                    $prototype = $interface->getMethodEntity($methodName);
+                    break;
+                }
+            }
+        }
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $prototype);
+        return $prototype;
+    }
+
+    /**
      * @throws NotFoundException
      * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getDocCommentRecursive(): string
+    public function getDocCommentRecursive(): string
     {
         $objectId = $this->getObjectId();
         try {
@@ -165,6 +200,41 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         $docComment = $this->getDocCommentEntity()->getDocComment() ?: ' ';
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docComment);
         return $docComment;
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws ReflectionException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getDocCommentLineRecursive(): ?int
+    {
+        $methodEntity = $this->getDocCommentEntity();
+        if ($methodEntity->getDocCommentRecursive()) {
+            return $methodEntity->getReflection()->getAst()->getDocComment()?->getStartLine();
+        }
+        return null;
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getDocCommentLine(): ?int
+    {
+        return $this->getReflection()->getAst()->getDocComment()?->getStartLine();
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getSignature(): string
+    {
+        return "{$this->getModifiersString()} {$this->getName()}({$this->getParametersString()})" . (!$this->isConstructor() ? ": {$this->getReturnType()}" : '');
     }
 
     public function getName(): string
@@ -446,6 +516,15 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
+    #[CacheableMethod] public function getStartColumn(): int
+    {
+        return $this->getReflection()->getStartColumn();
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function getEndLine(): int
     {
         return $this->getReflection()->getEndLine();
@@ -470,5 +549,10 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     #[CacheableMethod] public function getBodyCode(): string
     {
         return $this->getReflection()->getBodyCode();
+    }
+
+    #[CacheableMethod] public function getDocComment(): string
+    {
+        return $this->getReflection()->getDocComment();
     }
 }

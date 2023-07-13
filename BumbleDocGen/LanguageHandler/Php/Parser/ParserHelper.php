@@ -15,6 +15,7 @@ use Monolog\Logger;
 use Nette\PhpGenerator\GlobalFunction;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
+use phpDocumentor\Reflection\Location;
 use phpDocumentor\Reflection\Types\Context;
 use phpDocumentor\Reflection\Types\ContextFactory;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -491,10 +492,10 @@ final class ParserHelper
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlock(ClassEntity $classEntity, string $docComment): DocBlock
+    public function getDocBlock(ClassEntity $classEntity, string $docComment, ?int $lineNumber = null): DocBlock
     {
         $docComment = $docComment ?: ' ';
-        $cacheKey = md5("{$classEntity->getName()}{$docComment}");
+        $cacheKey = md5("{$classEntity->getName()}{$docComment}{$lineNumber}");
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $cacheKey);
         } catch (ObjectNotFoundException) {
@@ -502,7 +503,8 @@ final class ParserHelper
         try {
             $docBlock = $this->getDocBlockFactory()->create(
                 $docComment,
-                $this->getDocBlockContext($classEntity)
+                $this->getDocBlockContext($classEntity),
+                !is_null($lineNumber) ? new Location($lineNumber) : null,
             );
         } catch (\Exception $e) {
             $this->logger->error(

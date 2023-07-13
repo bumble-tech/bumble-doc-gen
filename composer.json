@@ -27,7 +27,10 @@
         "php-di/php-di": "^7.0",
         "ocramius/proxy-manager": "~2.0",
         "symfony/yaml": "^6.0",
-        "hassankhan/config": "^3.1"
+        "hassankhan/config": "^3.1",
+        "tectalic/openai": "^1.5",
+        "guzzlehttp/guzzle": "^7.7",
+        "symfony/filesystem": "^6.0"
     },
     "autoload": {
         "psr-4": {
@@ -40,6 +43,11 @@
     "autoload-dev": {
         "psr-4": {
             "SelfDoc\\": "SelfDoc/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
         }
     }
 }

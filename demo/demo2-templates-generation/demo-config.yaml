@@ -1,0 +1,14 @@
+project_root: '%DOC_GEN_LIB_PATH%'
+templates_dir: '%WORKING_DIR%/demo/demo2-templates-generation/templates'
+cache_dir: '%WORKING_DIR%/demo/demo2-templates-generation/__cache'
+language_handlers:
+  php:
+    class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
+    settings:
+      file_source_base_url: '#'
+      async_source_loading_enabled: true
+source_locators:
+  - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
+    arguments:
+      directories:
+        - "%project_root%"

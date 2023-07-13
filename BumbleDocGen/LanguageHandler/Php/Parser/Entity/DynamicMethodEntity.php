@@ -75,6 +75,15 @@ class DynamicMethodEntity implements MethodEntityInterface
     /**
      * @throws \Exception
      */
+    public function getStartColumn(): int
+    {
+        $callMethod = $this->getCallMethod();
+        return $callMethod->getStartColumn();
+    }
+
+    /**
+     * @throws \Exception
+     */
     public function getEndLine(): int
     {
         $callMethod = $this->getCallMethod();
