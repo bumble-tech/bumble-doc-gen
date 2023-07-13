@@ -1,14 +1,70 @@
 {% set title = 'BumbleDocGen' %}
-{{ "Bumble Documentation Generator" | textToHeading('H1') }} <div class="hide_in_pages"><b><a href="https://***REMOVED***/pages/bumble-tech/bumble-doc-gen/index.html">Open the GitHub pages version of this document</a></b></div>
+<div class="hide_in_pages"><b><a href="https://***REMOVED***/pages/bumble-tech/bumble-doc-gen/index.html">Open the GitHub pages version of this document</a></b></div>
 
-This library was created in order to simplify the process of generating technical documentation for complex projects and simple projects.
-The main idea of the project is to allow library users to create handwritten documentation with dynamic blocks, the information for which is parsed from the code according to the rules specified in the configuration.
+# BumbleDocGen: A Documentation Generator for PHP projects
 
-The system is flexible and easily expandable, as you can see when you start working with it. Write your first documentation today! :)
+BumbleDocGen is a robust library for generating and maintaining documentation next to the code of large and small PHP projects. This tool analyzes your codebase and produces a comprehensive set of markdown documents, including descriptions of classes, methods, and properties alongside navigable internal links.
 
-<hr>
+## Installation
 
-{{ drawDocumentationMenu() }}
+Add the BumbleDocGen to the `composer.json` file of your project using the following command:
+
+```bash
+composer require bumble/doc-gen
+```
+
+## Core Features
+
+- Parsing:
+  BumbleDocGen scans your project by parsing PHP files, extracting comments, and providing detailed models of your code.
+
+- Rendering:
+  BumbleDocGen generates markdown content using templates and fills them with data obtained from parsing your code.
+
+- AI tools for documentation generation:
+  BumbleDocGen allows you to use a group of AI tools to help generate project documentation.
+
+## How to Use
+
+### Entry points
+
+BumbleDocGen's interface consists of mainly two classes: <a>DocGenerator</a> and <a>DocGeneratorFactory</a>.
+
+- <a>DocGenerator</a> provides main operations for generating the documents.
+
+  - `addMissingDocBlocks()`: This method creates missing docBlocks in your code.
+  - `fillInReadmeMdTemplate()`: This method prepares the `README.md` file using a predefined template.
+  - `generate()`: This method produces all necessary documentation.
+  - `generateProjectTemplatesStructure()`: This method creates a structure for project templates.
+  - `parseAndGetRootEntityCollectionsGroup()`: This method parses your project's files and collects information for the documentation.
+
+- <a>DocGeneratorFactory</a> provides a method for creating `DocGenerator` instance.
+
+  - `create(configurationFiles: string)`: This method creates a `DocGenerator` instance using provided configuration files.
+  - `setCustomConfigurationParameters(customConfigurationParameters: array)`: This method sets custom configuration parameters for the `DocGenerator` creation.
+
+### Example of Usage
+
+```php
+require_once 'vendor/autoload.php';
+
+use BumbleDocGen\DocGeneratorFactory;
+
+// Initialize the factory
+$factory = new DocGeneratorFactory();
+
+// Create a DocGenerator instance
+$docgen = $factory->create('/path/to/configuration/files');
+
+// Now call the desired operation
+$docgen->generate();
+```
+
+### For Further Documentation
+
+Please refer to the <a href="tech/index.md">Description of the technical part of the project</a> for a detailed explanation of all the classes and methods used.
+
+------------------
 
 **This documentation was generated using the Bumble Documentation Generator, and is an example of how it works.**
 
