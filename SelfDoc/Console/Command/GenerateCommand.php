@@ -7,6 +7,7 @@ namespace SelfDoc\Console\Command;
 use BumbleDocGen\DocGeneratorFactory;
 use DI\DependencyException;
 use DI\NotFoundException;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -25,18 +26,17 @@ final class GenerateCommand extends Command
      * @throws RuntimeError
      * @throws DependencyException
      * @throws LoaderError
+     * @throws InvalidArgumentException
      */
     protected function execute(
         \Symfony\Component\Console\Input\InputInterface   $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ): int
     {
-        $output->writeln('Parsing documentation process');
         $docGenerator = (new DocGeneratorFactory())->create(
             dirname(__DIR__, 2) . '/Configuration/config.yaml'
         );
         $docGenerator->generate();
-        $output->writeln('Documentation updated');
         return self::SUCCESS;
     }
 }
