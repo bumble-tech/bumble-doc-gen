@@ -33,6 +33,7 @@ use function BumbleDocGen\Core\bites_int_to_string;
 final class DocGenerator
 {
     public const VERSION = '1.0.0';
+    public const LOG_FILE_NAME = 'last_run.log';
 
     public function __construct(
         private Filesystem                 $fs,
@@ -45,6 +46,9 @@ final class DocGenerator
         private Logger                     $logger
     )
     {
+        if (file_exists(self::LOG_FILE_NAME)) {
+            unlink(self::LOG_FILE_NAME);
+        }
     }
 
     /**
