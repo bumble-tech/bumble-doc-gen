@@ -21,11 +21,11 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Style\OutputStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Tectalic\OpenAi\ClientException;
-use function BumbleDocGen\Core\bites_int_to_string;
 
 /**
  * Class for generating documentation.
@@ -306,7 +306,7 @@ final class DocGenerator
     public function generate(): void
     {
         $start = microtime(true);
-        $memory = memory_get_usage();
+        $memory = memory_get_usage(true);
 
         try {
             $this->parser->parse();
@@ -316,8 +316,13 @@ final class DocGenerator
         }
 
         $time = microtime(true) - $start;
-        $this->logger->notice("Time of execution: {$time} sec.");
-        $memory = memory_get_usage() - $memory;
-        $this->logger->notice('Memory:' . bites_int_to_string($memory));
+        $memory = memory_get_usage(true) - $memory;
+
+        $this->io->writeln("<info>Documentation successfully generated</>");
+        $this->io->table([], [
+            ['Execution time:', "<options=bold,underscore>{$time} sec.</>"],
+            ['Allocated memory:', '<options=bold,underscore>' . Helper::formatMemory(memory_get_usage(true)) . '</>'],
+            ['Command memory usage:', '<options=bold,underscore>' . Helper::formatMemory($memory) . '</>']
+        ]);
     }
 }
