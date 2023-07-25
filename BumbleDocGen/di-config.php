@@ -24,7 +24,7 @@ return [
                 \DI\autowire(StreamHandler::class)
                     ->constructor(
                         stream: 'php://stdout',
-                        level: Logger::INFO
+                        level: Logger::CRITICAL
                     )
                     ->method(
                         'setFormatter',
@@ -32,6 +32,19 @@ return [
                             ->constructor(
                                 colorScheme: null,
                                 format: '%level_name%: %message%'
+                            )
+                    ),
+                \DI\autowire(\Monolog\Handler\StreamHandler::class)
+                    ->constructor(
+                        stream: \BumbleDocGen\DocGenerator::LOG_FILE_NAME,
+                        level: Logger::DEBUG,
+                    )
+                    ->method(
+                        'setFormatter',
+                        \DI\autowire(\Monolog\Formatter\LineFormatter::class)
+                            ->constructor(
+                                dateFormat: 'Y-m-d H:i:s',
+                                format: "[%datetime%] > %level_name% > %message%\n",
                             )
                     )
             ]
