@@ -31,7 +31,8 @@ final class FileDependency implements RendererDependencyInterface
         $fileInternalLink = $rendererHelper->filePathToFileInternalLink($filePath);
         $hash = '';
         if ($contentFilterRegex && $matchIndex) {
-            if (preg_match($contentFilterRegex, file_get_contents($filePath), $matches) && isset($matches[$matchIndex])) {
+            $fileContent = @file_get_contents($filePath);
+            if ($fileContent && preg_match($contentFilterRegex, $fileContent, $matches) && isset($matches[$matchIndex])) {
                 $hash = md5($matches[$matchIndex]);
             }
         } else {
