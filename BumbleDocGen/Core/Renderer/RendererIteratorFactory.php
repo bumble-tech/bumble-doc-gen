@@ -10,12 +10,14 @@ use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Console\ProgressBarFactory;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use Monolog\Logger;
+use Symfony\Component\Console\Style\OutputStyle;
 use Symfony\Component\Finder\Finder;
 
 final class RendererIteratorFactory
@@ -34,6 +36,8 @@ final class RendererIteratorFactory
         private RendererHelper                     $rendererHelper,
         private RendererDependencyFactory          $dependencyFactory,
         private LocalObjectCache                   $localObjectCache,
+        private ProgressBarFactory                 $progressBarFactory,
+        private OutputStyle                        $io,
         private Logger                             $logger,
     )
     {
@@ -44,6 +48,9 @@ final class RendererIteratorFactory
      */
     public function getTemplatesWithOutdatedCache(): \Generator
     {
+        $pb = $this->progressBarFactory->createStylizedProgressBar();
+        $pb->setName('Generating main documentation pages');
+
         $templateFolder = $this->configuration->getTemplatesDir();
         $finder = Finder::create()
             ->in($templateFolder)
@@ -53,11 +60,13 @@ final class RendererIteratorFactory
             ->sortByName()
             ->files();
 
-        foreach ($finder as $templateFile) {
+        $skippedCount = 0;
+        foreach ($pb->iterate($finder) as $templateFile) {
+            $templateFileName = str_replace($templateFolder, '', $templateFile->getRealPath());
+            $pb->setStepDescription("Processing {$templateFileName} file");
             $this->rendererContext->clearDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
 
-            $templateFileName = str_replace($templateFolder, '', $templateFile->getRealPath());
             $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
             $fileDependency = $this->dependencyFactory->createFileDependency(
                 filePath: $templateFile->getRealPath()
@@ -85,6 +94,7 @@ final class RendererIteratorFactory
             } else {
                 $this->moveCachedDataToCurrentData($templateFileName);
                 $this->logger->info("Use cached version `{$templateFile->getRealPath()}`");
+                ++$skippedCount;
                 continue;
             }
 
@@ -98,6 +108,12 @@ final class RendererIteratorFactory
                 $this->rendererContext->getDependencies()
             );
         }
+
+        $processed = $finder->count() - $skippedCount;
+        $this->io->table([], [
+            ['Processed documents:', "<options=bold,underscore>{$processed}</>"],
+            ['Skipped (without changes):', "<options=bold,underscore>{$skippedCount}</>"],
+        ]);
     }
 
     /**
@@ -105,7 +121,12 @@ final class RendererIteratorFactory
      */
     public function getDocumentedEntityWrappersWithOutdatedCache(): \Generator
     {
-        foreach ($this->documentedEntityWrappersCollection as $entityWrapper) {
+        $pb = $this->progressBarFactory->createStylizedProgressBar();
+        $pb->setName('Generating entities documentation');
+
+        $skippedCount = 0;
+        foreach ($pb->iterate($this->documentedEntityWrappersCollection) as $entityWrapper) {
+            $pb->setStepDescription("Processing `{$entityWrapper->getEntityName()}` entity");
             if (!$entityWrapper->getDocumentTransformableEntity()->entityDataCanBeLoaded()) {
                 continue;
             }
@@ -135,6 +156,7 @@ final class RendererIteratorFactory
             } else {
                 $this->moveCachedDataToCurrentData($entityWrapper->getInitiatorFilePath(), $entityWrapper->getEntityName());
                 $this->logger->info("Use cached version `{$this->configuration->getOutputDir()}{$entityWrapper->getDocUrl()}`");
+                ++$skippedCount;
                 continue;
             }
 
@@ -162,6 +184,12 @@ final class RendererIteratorFactory
             'internal_caching_system_version',
             self::INTERNAL_CACHING_SYSTEM_VERSION
         );
+
+        $processed = count($this->documentedEntityWrappersCollection) - $skippedCount;
+        $this->io->table([], [
+            ['Processed entities:', "<options=bold,underscore>{$processed}</>"],
+            ['Skipped (without changes):', "<options=bold,underscore>{$skippedCount}</>"],
+        ]);
     }
 
     /**

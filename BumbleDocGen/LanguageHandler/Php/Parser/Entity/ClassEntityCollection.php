@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Console\ProgressBarFactory;
 use BumbleDocGen\Core\Parser\Entity\LoggableRootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
@@ -20,6 +21,7 @@ use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\EntityDocRendere
 use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Style\OutputStyle;
 
 final class ClassEntityCollection extends LoggableRootEntityCollection
 {
@@ -33,6 +35,8 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
         private EntityDocRendererHelper   $docRendererHelper,
         private LocalObjectCache          $localObjectCache,
+        private ProgressBarFactory        $progressBarFactory,
+        private OutputStyle               $io,
         private LoggerInterface           $logger
     )
     {
@@ -57,9 +61,17 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      */
     public function loadClassEntities(): void
     {
+        $pb = $this->progressBarFactory->createStylizedProgressBar();
+        $pb->setName('Loading PHP entities');
         $classEntityFilter = $this->phpHandlerSettings->getClassEntityFilter();
-        foreach ($this->configuration->getSourceLocators()->getCommonFinder()->files() as $file) {
-            $className = $this->parserHelper->getClassFromFile($file->getPathName());
+
+        $allFiles = iterator_to_array($this->configuration->getSourceLocators()->getCommonFinder()->files());
+        $addedFilesCount = 0;
+        foreach ($pb->iterate($allFiles) as $file) {
+            $pathName = $file->getPathName();
+            $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $pathName);
+            $pb->setStepDescription("Processing `{$relativeFileName}` file");
+            $className = $this->parserHelper->getClassFromFile($pathName);
             if ($className) {
                 $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $file->getPathName());
                 $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
@@ -69,10 +81,23 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
                 );
                 if ($classEntityFilter->canAddToCollection($classEntity)) {
                     $this->add($classEntity);
+                    ++$addedFilesCount;
                 }
             }
         }
         $this->pluginEventDispatcher->dispatch(new AfterLoadingClassEntityCollection($this));
+
+        $allFilesCount = count($allFiles);
+        $skipped = $allFilesCount - $addedFilesCount;
+        $totalAddedEntities = count($this->entities);
+        $addedByPlugins = $totalAddedEntities - $addedFilesCount;
+
+        $this->io->table([], [
+            ['Processed files:', "<options=bold,underscore>{$addedFilesCount}</>"],
+            ['Skipped files:', "<options=bold,underscore>{$skipped}</>"],
+            ['Entities added by plugins:', "<options=bold,underscore>{$addedByPlugins}</>"],
+            ['Total added entities:', "<options=bold,underscore>{$totalAddedEntities}</>"],
+        ]);
     }
 
     /**

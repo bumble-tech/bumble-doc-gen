@@ -11,3 +11,4 @@ composer.phar
 /demo/demo4-generating-readme-file/__cache/
 /demo/demo4-generating-readme-file/docs/
 /demo/demo4-generating-readme-file/templates/
+/last_run.log

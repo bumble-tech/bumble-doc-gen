@@ -7,7 +7,7 @@ namespace BumbleDocGen\Core\Renderer\Context;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 
-final class DocumentedEntityWrappersCollection implements \IteratorAggregate
+final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \Countable
 {
     /** @var DocumentedEntityWrapper[] */
     private array $documentedEntities = [];
@@ -54,5 +54,10 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate
     public function getDocumentedEntitiesRelations(): array
     {
         return $this->documentedEntitiesRelations;
+    }
+
+    public function count(): int
+    {
+        return count($this->iteratorKeys);
     }
 }
