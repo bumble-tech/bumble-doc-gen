@@ -19,6 +19,7 @@ twig_functions:                   # (array<CustomFunctionInterface>) Functions t
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\PrintEntityCollectionAsList
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentationPageUrl
 twig_filters:                     # (array<CustomFilterInterface>) Filters that can be used in document templates
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\FixStrSize
