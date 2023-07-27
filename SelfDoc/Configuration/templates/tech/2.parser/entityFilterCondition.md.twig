@@ -4,71 +4,56 @@
 
 {{ "Entity filter conditions" | textToHeading('H1') }}
 
-In order to determine whether an entity can be added to a collection (for example, <a>ClassEntity</a> in a <a>ClassEntityCollection</a> ), filter conditions must be used.
+Filters serve as a foundational mechanism within our documentation generator, dictating which segments of the source code are selected during the initial parsing phase.
+These rules facilitate a strategic extraction of elements, such as classes, methods, or constants, from the underlying codebase.
+By implementing these filters, users are endowed with the capability to customize the documentation output, ensuring that it precisely aligns with their requirements and expectations.
+This level of granularity not only streamlines the documentation process but also guarantees that the resultant documents are devoid of superfluous details, focusing solely on pertinent information.
 
-Filtering conditions must be set in the configuration:
+All filter conditions implement the <a>ConditionInterface</a> interface.
 
-*  For classes - <a>Configuration::classEntityFilterCondition()</a>
-*  For class constants - <a>Configuration::classConstantEntityFilterCondition()</a>
-*  For class properties - <a>Configuration::propertyEntityFilterCondition()</a>
-*  For class methods - <a>Configuration::methodEntityFilterCondition()</a>
+{{ "Filter conditions configuration" | textToHeading('H3') }}
 
-**Usage example:**
+Filter conditions are configured separately for language handlers.
+Here is an example configuration for PHP:
 
-{{ "public function classEntityFilterCondition(ClassEntity $classEntity): ConditionInterface
-{
-    return new TrueCondition();
-}" | textToCodeBlock('php') }}
+```yaml
+language_handlers:
+  php:
+    class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
+    settings:
+        class_filter:
+            class: \BumbleDocGen\Core\Parser\FilterCondition\CommonFilterCondition\TrueCondition
+        class_constant_filter:
+            class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition\VisibilityCondition
+            arguments:
+              - public
+              - protected
+        method_filter:
+            class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
+            arguments:
+               - and
+               - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\IsPublicCondition
+               - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition
+        property_filter:
+            class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
+            arguments:
+               - and
+               - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\IsPublicCondition
+               - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\OnlyFromCurrentClassCondition
+```
 
+{{ "Available filters" | textToHeading('H3') }}
 
-Any conditions must comply with interface <a>ConditionInterface</a>.
+{% set filterConditions = phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
 
-To group conditions, there is a <a>ConditionGroup</a> in the documentation generator:
-
-{{ "public function methodEntityFilterCondition(MethodEntity $methodEntity): ConditionInterface {
-    return ConditionGroup::create(
-        ConditionGroupTypeEnum::AND,
-        new MethodVisibilityCondition(
-            $methodEntity,
-            VisibilityConditionModifier::PUBLIC
-        ),
-        new MethodOnlyFromCurrentClassCondition(
-            $methodEntity
-        )
-    );
-}" | textToCodeBlock('php') }}
-
-
-{{ "Built-in filter conditions" | textToHeading('H2') }}
-
-{% set filterConditions = phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
-
-{{ "Common filter conditions" | textToHeading('H3') }}
+Common filtering conditions that are available for any entity:
 
 {{ printEntityCollectionAsList(
-    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/CommonFilterCondition'])
+    filterConditions.filterByPaths(['/BumbleDocGen/Core'])
 ) }}
 
-{{ "Class filter conditions" | textToHeading('H3') }}
+Filter condition for working with entities PHP language handler:
 
-{{ printEntityCollectionAsList(
-    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassFilterCondition'])
-) }}
-
-{{ "Method filter conditions" | textToHeading('H3') }}
-
-{{ printEntityCollectionAsList(
-    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/MethodFilterCondition'])
-) }}
-
-{{ "Property filter conditions" | textToHeading('H3') }}
-
-{{ printEntityCollectionAsList(
-    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/PropertyFilterCondition'])
-) }}
-
-{{ "Class constant filter conditions" | textToHeading('H3') }}
-
-{{ printEntityCollectionAsList(
-    filterConditions.filterByPaths(['/BumbleDocGen/Parser/FilterCondition/ClassConstantFilterCondition'])
+{{ printClassCollectionAsGroupedTable(
+    filterConditions.filterByPaths(['/BumbleDocGen/LanguageHandler/Php/Parser/FilterCondition'])
 ) }}
