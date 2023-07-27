@@ -18,7 +18,10 @@ use DI\NotFoundException;
 
 final class TwigFunctionClassParserPlugin implements PluginInterface
 {
-    private const TWIG_FUNCTION_DIRNAME = '/BumbleDocGen/Renderer/Twig/Function';
+    private const TWIG_FUNCTION_DIR_NAMES = [
+        '/BumbleDocGen/Core/Renderer/Twig/Function',
+        '/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function'
+    ];
     public const PLUGIN_KEY = 'twigFunctionClassParserPlugin';
 
     public function __construct(
@@ -85,7 +88,12 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
      */
     private function isCustomTwigFunction(ClassEntity $classEntity): bool
     {
-        return str_starts_with($classEntity->getFileName(), self::TWIG_FUNCTION_DIRNAME);
+        foreach (self::TWIG_FUNCTION_DIR_NAMES as $dirName) {
+            if (str_starts_with($classEntity->getFileName(), $dirName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
