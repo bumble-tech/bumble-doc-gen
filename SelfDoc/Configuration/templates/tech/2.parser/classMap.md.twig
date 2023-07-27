@@ -1,0 +1,11 @@
+{% set title = 'Parser class map' %}
+{% set prevPage = 'Parser' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Parser class map" | textToHeading('H1') }}
+
+{{ drawClassMap(
+        phpClassEntityCollection.filterByPaths(['/BumbleDocGen/Core/Parser']),
+        phpClassEntityCollection.filterByPaths(['/BumbleDocGen/LanguageHandler/Php/Parser']),
+    )
+}}

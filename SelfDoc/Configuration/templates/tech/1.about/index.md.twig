@@ -3,19 +3,33 @@
 
 {{ "How to use the library" | textToHeading('H1') }}
 
-To use the library, you need to follow only 3 steps:
+This documentation generator is a library that allows you to create handwritten documentation with dynamic blocks that are loaded from the project code or other places.
 
-*  Create a configuration file that implements the interface <a>Configuration</a>.
- To simplify this step, a basic configuration ( <a>BaseConfiguration</a> ) with the main settings has already been created, you can use it as a parent class.
+Flow of work with the documentation generation library:
 
-*  Add documentation templates. These templates are the basis for future documentation. An example of the implementation of templates can be found here: *SelfDoc/Configuration/templates*
+```mermaid
+ graph TD;
+    A(1. User wants to document the project)
+    B(2. Creates and fills documentation configuration file)
+    C(3. Creates templates for future documentation)
+    D(4. Generates documentation based on templates)
 
-*  Run the documentation creation script:
+    A --> B
+    B --> C
+    C --> D
 
-{{ "$configuration = new Configuration();
+    note1[Note: Documentation is placed next to the code according to settings]
+    D --> note1
 
-DocGenerator::generateDocumentation($configuration);" | textToCodeBlock('php') }}
+    click B "{{ getDocumentationPageUrl('DocGen configuration') }}" "Click to see the information about project configuration"
+    style B color:#539bf5
+```
 
+To start the documentation generation process, you need to call the following command:
+
+{{ "(new DocGeneratorFactory())->create($configFile)->generate()" | textToCodeBlock('php') }}
+
+After that, the process of parsing the project code according to the configuration will start, and then filling the templates with data and saving the finished result as final documents.
 
 {{ "Project сlass map" | textToHeading('H2') }}
 

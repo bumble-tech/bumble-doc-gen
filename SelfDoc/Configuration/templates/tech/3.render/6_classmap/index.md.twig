@@ -1,6 +1,0 @@
-{% set title = 'Renderer class map' %}
-{{ generatePageBreadcrumbs(title, _self) }}
-
-{{ "Renderer class map" | textToHeading('H1') }}
-
-{{ drawClassMap( phpClassEntityCollection.filterByPaths(['/BumbleDocGen/Renderer'])) }}

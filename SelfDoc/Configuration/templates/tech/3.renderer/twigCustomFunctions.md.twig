@@ -30,7 +30,10 @@ We use the twig template engine, you can get more information about working with
       </tr>
    </thead>
    <tbody>
-    {% for function in phpClassEntityCollection.filterByPaths(['/BumbleDocGen/Renderer/Twig/Function']) %}
+    {% for function in phpClassEntityCollection.filterByPaths([
+        '/BumbleDocGen/Core/Renderer/Twig/Function',
+        '/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function'
+    ]) %}
     {% set twigFunctionData = function.getPluginData('twigFunctionClassParserPlugin') %}
     {% set paramsCount = twigFunctionData.parameters | length %}
     {% for parameter in twigFunctionData.parameters %}
