@@ -15,6 +15,7 @@ source_locators:
         - "%project_root%/SelfDoc"
 twig_functions:
   - class: \SelfDoc\Configuration\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
+  - class: \SelfDoc\Configuration\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
 plugins:
   - class: \SelfDoc\Configuration\Plugin\RoaveStubber\BetterReflectionStubberPlugin
   - class: \SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
