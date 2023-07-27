@@ -340,6 +340,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
 
         $entity = null;
         $foundKey = null;
+        $search = ltrim($search, '\\');
         if (array_key_exists($search, $index)) {
             $entity = $index[$search];
             $foundKey = $search;
