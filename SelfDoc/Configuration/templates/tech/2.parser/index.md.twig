@@ -25,14 +25,14 @@ $rootEntityCollectionsGroup = $this->parser->parse();" | textToCodeBlock('php') 
 
 ```mermaid
  flowchart TD
-    Start((Start)) --> Init(<a href='../..{{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Core\\Parser\\ProjectParser') }}'>ProjectParser</a> initialization)
+    Start((Start)) --> Init(<b>ProjectParser</b> initialization)
     Init --> StartParsing(Starting the parsing process)
     StartParsing --> HandlerLoop(Entering the LanguageHandlers processing loop)
-    HandlerLoop --> NextHandler{Is there a \nnext <a href='../..{{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\LanguageHandler\\LanguageHandlerInterface') }}'>LanguageHandler</a> \nfor parsing entities?}
-    NextHandler -- Yes --> LoadSourceLocators(<a href='../..{{ getDocumentationPageUrl('Source locators') }}'>Loading SourceLocators for the current LanguageHandler</a>)
+    HandlerLoop --> NextHandler{Is there a \nnext <b>LanguageHandler</b> \nfor parsing entities?}
+    NextHandler -- Yes --> LoadSourceLocators(<b>Loading SourceLocators for the current LanguageHandler</b>)
     LoadSourceLocators --> GetFileList(Getting a list of files to bypass them)
-    GetFileList --> PopulateEntities(<a href='../..{{ getDocumentationPageUrl('Entity filter conditions') }}'>Filling the collection with entities obtained from files</a>)
+    GetFileList --> PopulateEntities(<b>Filling the collection with entities obtained from files</b>)
     PopulateEntities --> HandlerLoop
-    NextHandler -- No --> ReturnResult(We return the result of the parser - <a href='../..{{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Core\\Parser\\Entity\\RootEntityCollectionsGroup') }}'>RootEntityCollectionsGroup</a>)
+    NextHandler -- No --> ReturnResult(We return the result of the parser - <b>RootEntityCollectionsGroup</b>)
     ReturnResult --> Exit(((Exit)))
 ```

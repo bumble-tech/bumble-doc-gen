@@ -10,7 +10,7 @@ Flow of work with the documentation generation library:
 ```mermaid
  graph TD;
     A(1. User wants to document the project)
-    B(2. <a href='../..{{ getDocumentationPageUrl('DocGen configuration') }}'>Creates and fills documentation configuration file</a>)
+    B(2. Creates and fills documentation configuration file)
     C(3. Creates templates for future documentation)
     D(4. Generates documentation based on templates)
 
@@ -20,8 +20,6 @@ Flow of work with the documentation generation library:
 
     note1[Note: Documentation is placed next to the code according to settings]
     D --> note1
-
-    style B color:#539bf5
 ```
 
 To start the documentation generation process, you need to call the following command:
