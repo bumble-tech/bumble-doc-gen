@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Renderer\Twig\Function;
 
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
-use Symfony\Component\Console\Style\OutputStyle;
 
 /**
  * Displaying the content of a file or web resource
@@ -17,7 +16,7 @@ use Symfony\Component\Console\Style\OutputStyle;
  */
 final class FileGetContents implements CustomFunctionInterface
 {
-    public function __construct(private ConfigurationParameterBag $parameterBag, private OutputStyle $io)
+    public function __construct(private ConfigurationParameterBag $parameterBag)
     {
     }
 
