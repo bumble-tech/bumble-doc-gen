@@ -212,11 +212,15 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     {
         $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
+            $needToKeep = false;
             /**@var ClassEntity $classEntity */
             foreach ($paths as $path) {
-                if (!str_starts_with($classEntity->getFileName(), $path)) {
-                    $classEntityCollection->remove($objectId);
+                if (str_starts_with($classEntity->getFileName(), $path)) {
+                    $needToKeep = true;
                 }
+            }
+            if (!$needToKeep) {
+                $classEntityCollection->remove($objectId);
             }
         }
         return $classEntityCollection;
