@@ -1,2 +1,34 @@
 {% set title = 'DocGen configuration' %}
 {{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Configuration" | textToHeading('H1') }}
+
+Documentation generator configuration is stored in yaml files.
+During the generation process, the data from this file is loaded into the <a>Configuration</a> class, and the code works directly with it.
+
+{{ "Configuration file example" | textToHeading('H3') }}
+
+Let's look at an example of a real configuration in more detail:
+
+{{ fileGetContents('%templates_dir%/../config.yaml') | textToCodeBlock('yaml') }}
+
+In this example, we see the real configuration of the self-documentation of this project.
+
+**Here is an example of loading this configuration in PHP code:**
+
+{{ "// Single file
+$docGenerator = (new DocGeneratorFactory())->create('config.yaml');
+
+// Multiple files
+$docGenerator = (new DocGeneratorFactory())->create('config.yaml', 'config2.yaml', 'config3.yaml');
+" | textToCodeBlock('php') }}
+
+{{ "Default configurations with parameter descriptions" | textToHeading('H3') }}
+
+**Basic configuration** - Used by default as the parent configuration unless otherwise specified.
+
+{{ fileGetContents('%WORKING_DIR%/BumbleDocGen/Core/Configuration/defaultConfiguration.yaml') | textToCodeBlock('yaml') }}
+
+**PHP basic configuration** - Basic configuration for the PHP language handler.
+
+{{ fileGetContents('%WORKING_DIR%/BumbleDocGen/LanguageHandler/Php/phpHandlerDefaultSettings.yaml') | textToCodeBlock('yaml') }}

@@ -20,7 +20,7 @@ flowchart LR
  Start((Start)) --> Parse(Starting the file parsing process)
  Parse --> NextFileExists{Have \nthe next \nfile to \nprocess?}
  NextFileExists -- Yes --> EntityCheck{Does the file \ncontain an \nentity?}
- NextFileExists -- No --> Exit(((Loop exit)))
+ NextFileExists -- No --> Exit(((Exit)))
  EntityCheck -- Yes --> FilterCheck{Can the found entity \nbe added \naccording to the \nfilters condition?}
  EntityCheck -- No --> NextFileExists
  FilterCheck -- Yes --> AddEntity(Adding an entity to a collection)
