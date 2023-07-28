@@ -3,6 +3,36 @@
 
 {{ "Documentation parser" | textToHeading('H1') }}
 
-This section describes how entities are parsed to be used to generate documentation and populate dynamic blocks.
+Most often, we need <a>ProjectParser</a> in order to get a list of entities for documentation.
+But this is not the only use of this tool. The result of the parser's work (a collection of entities) can be used to programmatically analyze the project and perform any operations based on this analysis.
+For example, in our documentation generator, we also use the result of the parser in the tasks of generating documentation using AI tools.
+You can also use the parser for your own purposes other than generating documentation.
+
+In this section, we show how the parser works and what components it consists of.
+
+{{ "Description of the main components of the parser" | textToHeading('H3') }}
 
 {{ drawDocumentationMenu(_self) }}
+
+{{ "Starting the parsing process" | textToHeading('H3') }}
+
+{{ "$parser = new ProjectParser($configuration, $rootEntityCollectionsGroup);
+
+// Parsing the project and filling RootEntityCollectionsGroup with data
+$rootEntityCollectionsGroup = $this->parser->parse();" | textToCodeBlock('php') }}
+
+{{ "How it works" | textToHeading('H3') }}
+
+```mermaid
+ flowchart TD
+    Start((Start)) --> Init(<a href='{{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Core\\Parser\\ProjectParser') }}'>ProjectParser</a> initialization)
+    Init --> StartParsing(Starting the parsing process)
+    StartParsing --> HandlerLoop(Entering the LanguageHandlers processing loop)
+    HandlerLoop --> NextHandler{Is there a \nnext <a href='{{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\LanguageHandler\\LanguageHandlerInterface') }}'>LanguageHandler</a> \nfor parsing entities?}
+    NextHandler -- Yes --> LoadSourceLocators(<a href='{{ getDocumentationPageUrl('Source locators') }}'>Loading SourceLocators for the current LanguageHandler</a>)
+    LoadSourceLocators --> GetFileList(Getting a list of files to bypass them)
+    GetFileList --> PopulateEntities(<a href='{{ getDocumentationPageUrl('Entity filter conditions') }}'>Filling the collection with entities obtained from files</a>)
+    PopulateEntities --> HandlerLoop
+    NextHandler -- No --> ReturnResult(We return the result of the parser - <a href='{{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Core\\Parser\\Entity\\RootEntityCollectionsGroup') }}'>RootEntityCollectionsGroup</a>)
+    ReturnResult --> Exit(((Exit)))
+```

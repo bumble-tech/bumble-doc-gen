@@ -1,9 +1,10 @@
 {% set title = 'Breadcrumbs' %}
+{% set prevPage = 'Renderer' %}
 {{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Breadcrumbs" | textToHeading('H1') }}
 
-For breadcrumbs we have class <a>BreadcrumbsHelper</a>.
+For breadcrumbs, we have class <a>BreadcrumbsHelper</a>.
 It contains methods that allow you to get additional information from the templates, such as the title of the page,
 and also gives you the ability to get breadcrumbs for the current page in html format or as an array.
 
