@@ -16,6 +16,7 @@ source_locators:
 twig_functions:
   - class: \SelfDoc\Configuration\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
   - class: \SelfDoc\Configuration\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
+  - class: \SelfDoc\Configuration\Twig\CustomFunction\GetConfigParametersDescription
 plugins:
   - class: \SelfDoc\Configuration\Plugin\RoaveStubber\BetterReflectionStubberPlugin
   - class: \SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
