@@ -10,7 +10,7 @@ Flow of work with the documentation generation library:
 ```mermaid
  graph TD;
     A(1. User wants to document the project)
-    B(2. Creates and fills documentation configuration file)
+    B(2. <a href='../..{{ getDocumentationPageUrl('DocGen configuration') }}'>Creates and fills documentation configuration file</a>)
     C(3. Creates templates for future documentation)
     D(4. Generates documentation based on templates)
 
@@ -21,7 +21,6 @@ Flow of work with the documentation generation library:
     note1[Note: Documentation is placed next to the code according to settings]
     D --> note1
 
-    click B "{{ getDocumentationPageUrl('DocGen configuration') }}" "Click to see the information about project configuration"
     style B color:#539bf5
 ```
 
