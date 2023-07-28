@@ -27,10 +27,11 @@ final class ProjectParser
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
      */
-    public function parse(): void
+    public function parse(): RootEntityCollectionsGroup
     {
         foreach ($this->configuration->getLanguageHandlersCollection() as $languageHandler) {
             $this->rootEntityCollectionsGroup->add($languageHandler->getEntityCollection());
         }
+        return $this->rootEntityCollectionsGroup;
     }
 }
