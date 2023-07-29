@@ -1,36 +1,16 @@
-{% set title = 'Rendering process' %}
+{% set title = 'Template processing' %}
 {% set prevPage = 'Renderer' %}
 {{ generatePageBreadcrumbs(title, _self) }}
 
-{{ "Rendering process" | textToHeading('H1') }}
+{{ "Template processing" | textToHeading('H1') }}
 
-{{ "(new Renderer($configuration, $classEntityCollection, $pluginEventDispatcher))->run();" | textToCodeBlock('php') }}
 
-{{ "Start rendering:" | textToHeading('H2') }}
-
-Render passes through all files from the directory specified in method <a>Configuration::getTemplatesDir()</a>
-
-If the file ends with **.twig** then the file is processed, otherwise it is simply copied
-to the target directory obtained from method <a>Configuration::getOutputDirBaseUrl()</a>.
-We use twig to process templates.
-
-{{ "Adding class documentation:" | textToHeading('H2') }}
-
-If the template contains links to any classes *(for example, when calling the* <a>GetDocumentedEntityUrl</a> *function)*,
-as well as if they were parsed according to the rules in the
-<a>Configuration::getSourceLocators()</a> and <a>Configuration::classEntityFilterCondition()</a> methods, the **_Classes** directory
-is automatically created next to this file, in which automatically generated documentation for these classes.
-
-<hr>
-
-{{ "Variables available in doc templates" | textToHeading('H1') }}
+{{ "Variables available in doc templates" | textToHeading('H2') }}
 
 *  **classEntityCollection** - contains an instance of class <a>ClassEntityCollection</a>
 *  **fillersParameters** - contains an array obtained from method <a>TemplateFillersCollection::getParametersForTemplate()</a> You can read more about this on the <a>Template filters</a> page.
 
-<hr>
-
-{{ "Linking templates" | textToHeading('H1') }}
+{{ "Linking templates" | textToHeading('H2') }}
 
 
 One of the main requirements of the documentation is to be able to easily and quickly implement linking between pages.
@@ -61,7 +41,7 @@ will be replaced with this link:
 
 {{ "Breadcrumbs" | textToHeading('H2') }}
 
-For breadcrumbs we have class <a>BreadcrumbsHelper</a>
+For breadcrumbs, we have class <a>BreadcrumbsHelper</a>
 
 The **generatePageBreadcrumbs** function is also available in each template:
 
@@ -74,9 +54,7 @@ With it, you can generate breadcrumbs for the template, for example, in the exam
 
 We have functions and filters that can generate a reference for documented classes.
 
-<hr>
-
-{{ "Page title" | textToHeading('H1') }}
+{{ "Page title" | textToHeading('H2') }}
 
 You need to add a page title for several reasons: the title text is involved in menu generation and breadcrumb generation.
 

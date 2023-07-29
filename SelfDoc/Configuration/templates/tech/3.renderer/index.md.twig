@@ -1,8 +1,53 @@
 {% set title = 'Renderer' %}
 {{ generatePageBreadcrumbs(title, _self) }}
 
-{{ "Documentation render" | textToHeading('H1') }}
+{{ "Documentation renderer" | textToHeading('H1') }}
 
-This section describes how documents are rendered based on preset templates.
+Render passes through all files from the directory specified in configuration param `templates_dir`
+
+If the file ends with **.twig** then the file is processed, otherwise it is simply copied
+to the target directory obtained from configuration param `output_dir`.
+We use twig to process templates.
+
+{{ "More detailed description of render components" | textToHeading('H2') }}
 
 {{ drawDocumentationMenu(_self) }}
+
+{{ "Starting the rendering process" | textToHeading('H2') }}
+
+{{ "$renderer = new Renderer(...);
+
+// Starting the process of filling templates with data and saving finished documents
+$renderer->run();" | textToCodeBlock('php') }}
+
+{{ "How it works" | textToHeading('H2') }}
+
+```mermaid
+ flowchart TB
+  Start((Start)) --> InitRender(Initialization of Renderer)
+  InitRender --> StartRender(Start rendering process)
+  StartRender --> EnterLoop(Enter file processing loop from <b>templates_dir</b> directory)
+  subgraph TemplatesProcessing[Documentation templates processing]
+    EnterLoop --> NextFileExists{Have \nthe next \nfile to \nprocess?}
+    NextFileExists -- Yes --> CheckTwig{Is it a twig \ntemplate?}
+    CheckTwig -- No --> SaveAndNext(Save to <b>output_dir</b>)
+    CheckTwig -- Yes --> TemplateProcessing(Process template. Fill with content.)
+    SaveAndNext --> NextFileExists
+    TemplateProcessing --> CheckEntityLink{Does the \ntemplate have \nentity links?}
+    CheckEntityLink -- Yes --> AddToList(Add an entity to the list for documentation)
+    CheckEntityLink -- No --> SaveAndNext
+    AddToList --> SaveAndNext
+  end
+
+  subgraph EntityProcessing[Processing entities from \nthe list for documentation]
+    NextFileExists -- No --> StartEntityProcessing
+    StartEntityProcessing(Start processing \nentities from \ndocumentation list) --> FileToProcess{Is there a \nfile to process?}
+    FileToProcess -- Yes --> SaveEntityDoc
+    SaveEntityDoc[Save entity documentation] --> FileToProcess
+  end
+
+  FileToProcess -- No --> Exit(((Completing the \nrendering process)))
+
+  style TemplatesProcessing stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+  style EntityProcessing stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+```
