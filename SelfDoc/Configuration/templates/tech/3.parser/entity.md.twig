@@ -9,7 +9,7 @@ They help easily extract details about specific items from templates, allowing u
 
 Entities are always handled through collections. Collections are the result of the project parsing process and are available in both documentation templates and code.
 
-{{ "Examples of using collections in twig templates" | textToHeading('H3') }}
+{{ "Examples of using collections in twig templates" | textToHeading('H2') }}
 
 * Passing a collection to a function:
 
@@ -37,7 +37,7 @@ Entities are always handled through collections. Collections are the result of t
     {% endfor %}
 {% endfor %}" | textToCodeBlock('twig') }}
 
-{{ "Root entities collections" | textToHeading('H3') }}
+{{ "Root entities collections" | textToHeading('H2') }}
 
 To further facilitate the handling of these entities, we utilize entity collections.
 These collections not only group relevant entities together but also provide convenient methods for filtering and manipulating these entities.
@@ -64,7 +64,7 @@ The root collections (<a>RootEntityCollection</a>), which are directly accessibl
     {% endfor %}
 </table>
 
-{{ "Available entities" | textToHeading('H3') }}
+{{ "Available entities" | textToHeading('H2') }}
 
 Following is the list of available entities that are consistent with <a>EntityInterface</a> and can be created.
 These classes are a convenient wrapper for accessing data in templates:

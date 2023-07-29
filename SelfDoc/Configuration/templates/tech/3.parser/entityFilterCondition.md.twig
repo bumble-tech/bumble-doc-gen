@@ -11,7 +11,7 @@ This level of granularity not only streamlines the documentation process but als
 
 All filter conditions implement the <a>ConditionInterface</a> interface.
 
-{{ "Mechanism for adding entities to the collection" | textToHeading('H3') }}
+{{ "Mechanism for adding entities to the collection" | textToHeading('H2') }}
 
 For each language handler, according to the configuration, the following scheme is applicable:
 
@@ -33,10 +33,11 @@ flowchart LR
 The diagram shows the mechanism for adding root entities, but this also applies to the attributes of each entity,
 for example, for PHP there are rules for checking the possibility of adding methods, properties and constants.
 
-{{ "Filter conditions configuration" | textToHeading('H3') }}
+{{ "Filter conditions configuration" | textToHeading('H2') }}
 
 Filter conditions are configured separately for language handlers.
-Here is an example configuration for PHP:
+
+This is an example configuration for PHP, and here you can see the use of configuration conditions in a real configuration `BumbleDocGen/LanguageHandler/Php/phpHandlerDefaultSettings.yaml`:
 
 ```yaml
 language_handlers:
@@ -64,7 +65,7 @@ language_handlers:
                - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\OnlyFromCurrentClassCondition
 ```
 
-{{ "Available filters" | textToHeading('H3') }}
+{{ "Available filters" | textToHeading('H2') }}
 
 {% set filterConditions = phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
 

@@ -10,18 +10,18 @@ You can also use the parser for your own purposes other than generating document
 
 In this section, we show how the parser works and what components it consists of.
 
-{{ "Description of the main components of the parser" | textToHeading('H3') }}
+{{ "Description of the main components of the parser" | textToHeading('H2') }}
 
 {{ drawDocumentationMenu(_self) }}
 
-{{ "Starting the parsing process" | textToHeading('H3') }}
+{{ "Starting the parsing process" | textToHeading('H2') }}
 
 {{ "$parser = new ProjectParser($configuration, $rootEntityCollectionsGroup);
 
 // Parsing the project and filling RootEntityCollectionsGroup with data
 $rootEntityCollectionsGroup = $this->parser->parse();" | textToCodeBlock('php') }}
 
-{{ "How it works" | textToHeading('H3') }}
+{{ "How it works" | textToHeading('H2') }}
 
 ```mermaid
  flowchart TD
