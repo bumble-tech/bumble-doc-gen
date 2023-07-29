@@ -9,7 +9,7 @@ If the file ends with **.twig** then the file is processed, otherwise it is simp
 to the target directory obtained from configuration param `output_dir`.
 We use twig to process templates.
 
-{{ "More detailed description of render components" | textToHeading('H2') }}
+{{ "More detailed description of renderer components" | textToHeading('H2') }}
 
 {{ drawDocumentationMenu(_self) }}
 
@@ -21,6 +21,10 @@ We use twig to process templates.
 $renderer->run();" | textToCodeBlock('php') }}
 
 {{ "How it works" | textToHeading('H2') }}
+
+The process of rendering documents is divided into several stages. We separately generate documentation for templates that were pre-prepared by the user,
+and then create documentation for classes that the user refers to from document templates.
+This process is presented in the form of a diagram below.
 
 ```mermaid
  flowchart TB
@@ -41,7 +45,7 @@ $renderer->run();" | textToCodeBlock('php') }}
 
   subgraph EntityProcessing[Processing entities from \nthe list for documentation]
     NextFileExists -- No --> StartEntityProcessing
-    StartEntityProcessing(Start processing \nentities from \ndocumentation list) --> FileToProcess{Is there a \nfile to process?}
+    StartEntityProcessing(Start processing \nentities from \ndocumentation list) --> FileToProcess{Have \nthe next \nentity to \nprocess?}
     FileToProcess -- Yes --> SaveEntityDoc
     SaveEntityDoc[Save entity documentation] --> FileToProcess
   end

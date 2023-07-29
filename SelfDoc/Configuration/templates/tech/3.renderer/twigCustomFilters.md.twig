@@ -5,7 +5,7 @@
 {{ "Template filters" | textToHeading('H1') }}
 
 When generating pages, you can use filters that allow you to modify the content.
-Filters available during page generation are defined in method <a>MainExtension::getFilters()</a>
+Filters available during page generation are defined in <a href='{{ getDocumentationPageUrl('Configuration files') }}'>the configuration</a> ( `twig_filters` parameter )
 
 We use the twig template engine, you can get more information about working with filters here: https://twig.symfony.com/doc/1.x/advanced.html#filters
 
@@ -19,7 +19,26 @@ or
 {{ '<pre>&#123;&#123; someText | filter &#125;&#125;</pre>' }}
 
 
-{{ "Available template filters:" | textToHeading('H2') }}
+{{ "Configuration example" | textToHeading('H2') }}
+
+You can add your custom filters to the configuration like this:
+
+```yaml
+twig_filters:
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\FixStrSize
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\HtmlToRst
+```
+
+It is important to remember that when a template is inherited, custom filters are not overridden and augmented.
+This information is detailed on page <a>Configuration files</a>.
+
+{{ "Defautl template filters" | textToHeading('H2') }}
+
+Several filters are already defined in the base configuration.
+There are both general filters for all types of entities, and filters that only serve to process entities that belong to a particular PL.
+
+Here is a list of filters available by default:
 
 <table>
     <thead>
@@ -37,7 +56,13 @@ or
     </tr>
     </thead>
     <tbody>
-    {% for filter in phpClassEntityCollection.filterByPaths(['/BumbleDocGen/Renderer/Twig/Filter']) %}
+    {% for filter in phpClassEntityCollection.filterByPaths([
+            '/BumbleDocGen/Core/Renderer/Twig/Filter',
+            '/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Filter'
+        ])
+        .filterByInterfaces(['BumbleDocGen\\Core\\Renderer\\Twig\\Filter\\CustomFilterInterface'])
+        .getOnlyInstantiable()
+    %}
         {% set twigFilterData = filter.getPluginData('twigFilterClassParserPlugin') %}
         {% set paramsCount = twigFilterData.parameters | length %}
         {% for parameter in twigFilterData.parameters %}
