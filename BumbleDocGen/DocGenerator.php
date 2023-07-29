@@ -41,7 +41,7 @@ final class DocGenerator
         private Configuration              $configuration,
         private ProjectParser              $parser,
         private ParserHelper               $parserHelper,
-        private Renderer                   $render,
+        private Renderer                   $renderer,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private Logger                     $logger
     )
@@ -310,7 +310,7 @@ final class DocGenerator
 
         try {
             $this->parser->parse();
-            $this->render->run();
+            $this->renderer->run();
         } catch (\Exception $e) {
             $this->logger->critical("{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{{$e->getTraceAsString()}}");
         }
