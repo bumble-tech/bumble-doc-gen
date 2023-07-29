@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace SelfDoc\Configuration\Plugin\TwigFilterClassParser;
 
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Core\Plugin\PluginInterface;
+use BumbleDocGen\Core\Renderer\Context\RendererContext;
+use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
+use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Renderer\Twig\MainExtension;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
@@ -18,11 +22,16 @@ use DI\NotFoundException;
 
 final class TwigFilterClassParserPlugin implements PluginInterface
 {
-    private const TWIG_FILTER_DIRNAME = '/BumbleDocGen/Renderer/Twig/Filter';
+    private const TWIG_FILTER_DIR_NAMES = [
+        '/BumbleDocGen/Core/Renderer/Twig/Filter',
+        '/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Filter'
+    ];
     public const PLUGIN_KEY = 'twigFilterClassParserPlugin';
 
     public function __construct(
-        private FilterClassPluginTwigEnvironment $twigEnvironment
+        private FilterClassPluginTwigEnvironment $twigEnvironment,
+        private RendererContext                  $context,
+        private Configuration                    $configuration,
     )
     {
     }
@@ -48,7 +57,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         }
 
         $entity = $event->getEntity();
-        if (!is_a($entity, ClassEntity::class) || !$this->isCustomTwigFunction($event->getEntity())) {
+        if (!is_a($entity, ClassEntity::class) || !$this->isCustomTwigFilter($event->getEntity())) {
             return;
         }
 
@@ -72,7 +81,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     public function afterLoadingClassEntityCollection(AfterLoadingClassEntityCollection $event): void
     {
         foreach ($event->getClassEntityCollection() as $classEntity) {
-            if ($this->isCustomTwigFunction($classEntity)) {
+            if ($this->isCustomTwigFilter($classEntity)) {
                 $classEntity->loadPluginData(
                     self::PLUGIN_KEY,
                     $this->getFilterData($event->getClassEntityCollection(), $classEntity->getName()) ?? []
@@ -85,9 +94,14 @@ final class TwigFilterClassParserPlugin implements PluginInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    private function isCustomTwigFunction(ClassEntity $classEntity): bool
+    private function isCustomTwigFilter(ClassEntity $classEntity): bool
     {
-        return str_starts_with($classEntity->getFileName(), self::TWIG_FILTER_DIRNAME);
+        foreach (self::TWIG_FILTER_DIR_NAMES as $dirName) {
+            if (str_starts_with($classEntity->getFileName(), $dirName) && $classEntity->implementsInterface(CustomFilterInterface::class)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -96,18 +110,17 @@ final class TwigFilterClassParserPlugin implements PluginInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    private function getAllUsedFilters(ClassEntityCollection $classEntityCollection): array
+    private function getAllUsedFilters(): array
     {
         static $filters = null;
         if (is_null($filters)) {
             $filters = [];
-            $mainExtensionReflection = $classEntityCollection->getLoadedOrCreateNew(MainExtension::class);
-            $bodyCode = $mainExtensionReflection->getMethodEntity('setDefaultFilters')->getBodyCode();
-            preg_match_all('/(new )([^(]+)/', $bodyCode, $matches);
-            foreach ($matches[2] as $match) {
-                $filters[$match] = [
-                    'name' => $match::getName(),
-                ];
+            $twigFilters = iterator_to_array($this->configuration->getTwigFilters());
+            foreach ($this->configuration->getLanguageHandlersCollection() as $languageHandler) {
+                $twigFilters = array_merge($twigFilters, iterator_to_array($languageHandler->getCustomTwigFilters($this->context)));
+            }
+            foreach ($twigFilters as $filter) {
+                $filters[$filter::class] = $filter::getName();
             }
         }
         return $filters;
@@ -123,16 +136,12 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     {
         static $filtersData = [];
         if (!array_key_exists($className, $filtersData)) {
-            $filters = $this->getAllUsedFilters($classEntityCollection);
-            if (!str_starts_with($className, '\\')) {
-                $className = "\\{$className}";
-            }
-
+            $filters = $this->getAllUsedFilters();
             if (!isset($filters[$className])) {
                 return null;
             }
 
-            $functionData = $filters[$className];
+            $functionData['name'] = $filters[$className];
             $entity = $classEntityCollection->getEntityByClassName($className);
             $method = $entity->getMethodEntityCollection()->get('__invoke');
             $functionData['parameters'] = $method->getParameters();
