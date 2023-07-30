@@ -6,16 +6,22 @@
 
 Templates are `twig` files in which you can write both static text and dynamic blocks that will change from code changes or other required parameters.
 
-**An example of a template with fully static text:**
+**You can read more about template parts here:**
+
+{{ drawDocumentationMenu(_self) }}
+
+{{ "Examples" | textToHeading('H2') }}
+
+{{ "1) An example of a template with fully static text:" | textToHeading('H3') }}
 
 {{ "Some static text\nThis text does not change when the code is changed" | textToCodeBlock('twig') }}
 
 After generating the documentation, this page will look exactly like a template.
 
-**An example of a template with static text and dynamic blocks:**
+{{ "2) An example of a template with static text and dynamic blocks:" | textToHeading('H3') }}
 
 {{ "{% set title = 'Some page' %\}
-{% set prevPage = 'Prev page name' %\}
+{% set prevPage = 'Technical description of the project' %\}
 {{ generatePageBreadcrumbs(title, _self) }\}
 
 Some static text...
@@ -44,62 +50,6 @@ More static text...
 <b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Jul 29 17:43:49 2023 +0300<br><b>Page content update date:</b> Sun Jul 30 2023<br>Made with <a href=\'/docs/readme.md\'>Bumble Documentation Generator</div>
 ' | textToCodeBlock('html') }}
 
+This is how it looks on the GitHub:
+
 <img src="/docs/assets/doc_example.png?raw=true">
-
-{{ "Variables available in doc templates" | textToHeading('H2') }}
-
-*  **phpClassEntityCollection** - contains an instance of class <a>ClassEntityCollection</a>
-
-{{ "Linking templates" | textToHeading('H2') }}
-
-
-One of the main requirements of the documentation is to be able to easily and quickly implement linking between pages.
-We have several options for this:
-
-{{ "Completing blank links" | textToHeading('H2') }}
-
-Two plugins ( <a>PageRstLinkerPlugin</a> and <a>PageHtmlLinkerPlugin</a> ) have been added to the basic configuration,
-which process the text of the filled template before its result is written to a file, and fill in all empty links.
-
-For example, an empty rst link of this format:
-
-{{ '<pre>&lsquo;Existent page name&lsquo;_</pre>' }}
-
-will be replaced with this link:
-
-{{ '<pre>&lsquo;Existent page name &#8249;/docs/some/page/targetPage.rst&#8250;&lsquo;_</pre>' }}
-
-
-And for HTML or MD links like this:
-
-{{ '<pre>&lt;a&gt;Existent page name&lt;/a&gt;</pre>' }}
-
-will be replaced with this link:
-
-{{ '<pre>&lt;a href=&quot;/docs/some/page/targetPage.rst&quot;&gt;Existent page name&lt;/a&gt;</pre>' }}
-
-
-{{ "Breadcrumbs" | textToHeading('H2') }}
-
-For breadcrumbs, we have class <a>BreadcrumbsHelper</a>
-
-The **generatePageBreadcrumbs** function is also available in each template:
-
-{{ '<pre>&#123;&#123; generatePageBreadcrumbs(title, _self) &#125;&#125;</pre>' }}
-
-With it, you can generate breadcrumbs for the template, for example, in the example shown, breadcrumbs are generated for the current page
-
-
-{{ "Functions and filters" | textToHeading('H2') }}
-
-We have functions and filters that can generate a reference for documented classes.
-
-{{ "Page title" | textToHeading('H2') }}
-
-You need to add a page title for several reasons: the title text is involved in menu generation and breadcrumb generation.
-
-To add a title to a template, add the following code:
-
-{{ "<pre>&#123;% set title = 'Some title' %&#125;</pre>" }}
-
-*:warning:* If the title is not set, the name of the directory will be used as the title.

@@ -33,7 +33,7 @@ Here is how it is used in twig templates:
 To build breadcrumbs, the previously compiled project structure and the names of each template are used.
 The template name can be specified using the `title` variable:
 
-{{ "{% set prevPage = 'Some page title' %\}" | textToCodeBlock('twig') }}
+{{ "{% set title = 'Some page title' %\}" | textToCodeBlock('twig') }}
 
 Here is an example of the result of the `generatePageBreadcrumbs` function:
 
