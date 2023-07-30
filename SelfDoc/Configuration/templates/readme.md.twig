@@ -1,11 +1,11 @@
 {% set title = 'BumbleDocGen' %}
 <div class="hide_in_pages"><b><a href="https://***REMOVED***/pages/bumble-tech/bumble-doc-gen/index.html">Open the GitHub pages version of this document</a></b></div>
 
-# BumbleDocGen: A Documentation Generator for PHP projects
+{{ "BumbleDocGen: A Documentation Generator for PHP projects" | textToHeading('H1') }}
 
 BumbleDocGen is a robust library for generating and maintaining documentation next to the code of large and small PHP projects. This tool analyzes your codebase and produces a comprehensive set of markdown documents, including descriptions of classes, methods, and properties alongside navigable internal links.
 
-## Installation
+{{ "Installation" | textToHeading('H2') }}
 
 Add the BumbleDocGen to the `composer.json` file of your project using the following command:
 
@@ -13,7 +13,11 @@ Add the BumbleDocGen to the `composer.json` file of your project using the follo
 composer require bumble/doc-gen
 ```
 
-## Core Features
+{{ "Detailed technical description" | textToHeading('H2') }}
+
+Please refer to the <a href="tech/index.md">Description of the technical part of the project</a> for a detailed explanation of all the classes and methods used.
+
+{{ "Core Features" | textToHeading('H2') }}
 
 - Parsing:
   BumbleDocGen scans your project by parsing PHP files, extracting comments, and providing detailed models of your code.
@@ -24,9 +28,9 @@ composer require bumble/doc-gen
 - AI tools for documentation generation:
   BumbleDocGen allows you to use a group of AI tools to help generate project documentation.
 
-## How to Use
+{{ "How to Use" | textToHeading('H2') }}
 
-### Entry points
+{{ "Entry points" | textToHeading('H3') }}
 
 BumbleDocGen's interface consists of mainly two classes: <a>DocGenerator</a> and <a>DocGeneratorFactory</a>.
 
@@ -43,7 +47,7 @@ BumbleDocGen's interface consists of mainly two classes: <a>DocGenerator</a> and
   - `create(configurationFiles: string)`: This method creates a `DocGenerator` instance using provided configuration files.
   - `setCustomConfigurationParameters(customConfigurationParameters: array)`: This method sets custom configuration parameters for the `DocGenerator` creation.
 
-### Example of Usage
+{{ "Examples of usage" | textToHeading('H3') }}
 
 ```php
 require_once 'vendor/autoload.php';
@@ -59,10 +63,6 @@ $docgen = $factory->create('/path/to/configuration/files');
 // Now call the desired operation
 $docgen->generate();
 ```
-
-### For Further Documentation
-
-Please refer to the <a href="tech/index.md">Description of the technical part of the project</a> for a detailed explanation of all the classes and methods used.
 
 ------------------
 

@@ -3,52 +3,97 @@
 
 {{ "Plugin system" | textToHeading('H1') }}
 
-The documentation generator initially includes the possibility of expanding the functionality.
-Plugins allow you to add the necessary functionality to the system without changing its core.
+The documentation generator includes the ability to expand the functionality using plugins that allow you to add the necessary functionality to the system without changing its core.
 
-Plugin system based on event model.
+The system is built on the basis of an event model, each plugin class must implement <a>PluginInterface</a>.
 
+{{ "Configuration example" | textToHeading('H2') }}
 
-{{ "Using plugins" | textToHeading('H2') }}
+You can add your plugins to the configuration like this:
 
-Plugins can be added in documentation generator configuration, in method <a>Configuration::getPlugins()</a>
+```yaml
+plugins:
+  - class: \SelfDoc\Configuration\Plugin\RoaveStubber\BetterReflectionStubberPlugin
+  - class: \SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
+  - class: \SelfDoc\Configuration\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
+```
 
+{{ "Default plugins" | textToHeading('H2') }}
+
+Below are the plugins that are available by default when working with the library.
+Plugins for any programming languages work regardless of which language handler is configured in the configuration.
+
+<table>
+    <tr>
+        <th>Plugin</th>
+        <th>PL</th>
+        <th>Handles events</th>
+        <th>Description</th>
+    </tr>
+{% for pluginEntity in phpClassEntityCollection
+        .filterByPaths([
+            '/BumbleDocGen/Core',
+            '/BumbleDocGen/LanguageHandler',
+         ])
+        .filterByInterfaces(['BumbleDocGen\\Core\\Plugin\\PluginInterface'])
+        .getOnlyInstantiable()
+%}
+{% set match = pluginEntity.getFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+    <tr>
+        <td>{{ drawDocumentedEntityLink(pluginEntity) }}</td>
+        <td>{% if match[2] %}{{ match[2] | upper }}{% else %}any{% endif %}</td>
+        <td>
+            <ul>
+            {% for key in pluginEntity.getMethodEntity('getSubscribedEvents').getFirstReturnValue() | eval | keys %}
+                <li><a>{{ key }}|short_form</a></li>
+            {% endfor %}
+            </ul>
+        </td>
+        <td>{{ pluginEntity.getDescription() }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{{ "Default events" | textToHeading('H2') }}
+
+{{ printEntityCollectionAsList( phpClassEntityCollection
+        .filterByPaths([
+            '/BumbleDocGen/Core',
+            '/BumbleDocGen/LanguageHandler',
+         ])
+        .filterByParentClassNames(['Symfony\\Contracts\\EventDispatcher\\Event'])
+        .getOnlyInstantiable() ) }}
 
 {{ "Adding a new plugin" | textToHeading('H2') }}
 
 If you decide to add a new plugin, there are a few things you need to do:
 
-*  Implement events handling in plugin class
-*  Add plugin to configuration <a>Configuration::getPlugins()</a>:
-
-{{ "public function getPlugins(): PluginsCollection
-{
-    $plugins = parent::getPlugins();
-    $plugins->add(new TwigFunctionClassParserPlugin());
-    $plugins->add(new TwigFilterClassParserPlugin());
-    return $plugins;
-}" | textToCodeBlock('php') }}
-
-
-{{ "Available plugin events" | textToHeading('H2') }}
-
-{% set pluginEvents = phpClassEntityCollection.filterByPaths(['/BumbleDocGen/Plugin/Event']) %}
-{{ printEntityCollectionAsList( pluginEvents ) }}
-
-*A plugin can handle multiple events*
-
-
-{{ "Example" | textToHeading('H2') }}
-
-Several plugins have been written to create this document. They can be considered as an example:
-
-{{ drawClassMap( phpClassEntityCollection.filterByPaths(['/SelfDoc/Configuration/Plugin'])) }}
+{{ "1) Add plugin class and implement events handling" | textToHeading('H3') }}
 
 ```php
-{{
-    getClassMethodsBodyCode(
-        '\\SelfDoc\\Configuration\\Plugin\\TwigFunctionClassParser\\TwigFunctionClassParserPlugin',
-        [ 'getSubscribedEvents', 'onLoadEntityDocPluginContentEvent', 'afterLoadingClassEntityCollection' ]
-    )
-}}
+namespace Demo\Plugin\DemoFakeResourceLinkPlugin;
+
+final class DemoFakeResourceLinkPlugin implements \BumbleDocGen\Core\Plugin\PluginInterface
+{
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            \BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink::class => 'onGettingResourceLink',
+        ];
+    }
+
+    public function onGettingResourceLink(OnGettingResourceLink $event): void
+    {
+        if (!$event->getResourceUrl()) {
+            $event->setResourceUrl("https://google.com");
+        }
+    }
+}
+```
+
+{{ "1) Add the new plugin to the configuration" | textToHeading('H3') }}
+
+```yaml
+plugins:
+  - class: \Demo\Plugin\DemoFakeResourceLinkPlugin\DemoFakeResourceLinkPlugin
 ```
