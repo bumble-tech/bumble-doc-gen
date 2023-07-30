@@ -7,23 +7,21 @@ BumbleDocGen is a robust library for generating and maintaining documentation ne
 
 Add the BumbleDocGen to the `composer.json` file of your project using the following command:
 
-```bash
-composer require bumble/doc-gen
-```
+{{ 'composer require bumble/doc-gen' | textToCodeBlock('console') }}
 
 {{ "Detailed technical description" | textToHeading('H2') }}
 
-Please refer to the <a href="{{ getDocumentationPageUrl('Technical description of the project') }}">Description of the technical part of the project</a> for a detailed explanation of all the classes and methods used.
+💡Please refer to the <a href="{{ getDocumentationPageUrl('Technical description of the project') }}">Description of the technical part of the project</a> for a detailed explanation of all the classes and methods used.
 
 {{ "Core Features" | textToHeading('H2') }}
 
-- Parsing:
+- <b><a href="{{ getDocumentationPageUrl('Parser') }}">Parsing</a>:</b>
   BumbleDocGen scans your project by parsing PHP files, extracting comments, and providing detailed models of your code.
 
-- Rendering:
+- <b><a href="{{ getDocumentationPageUrl('Renderer') }}">Rendering</a>:</b>
   BumbleDocGen generates markdown content using templates and fills them with data obtained from parsing your code.
 
-- AI tools for documentation generation:
+- <b>AI tools for documentation generation:</b>
   BumbleDocGen allows you to use a group of AI tools to help generate project documentation.
 
 {{ "How to Use" | textToHeading('H2') }}
