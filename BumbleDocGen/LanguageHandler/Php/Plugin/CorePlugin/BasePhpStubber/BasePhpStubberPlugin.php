@@ -7,6 +7,9 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 
+/**
+ * Adding links to type documentation and documentation of built-in PHP classes
+ */
 final class BasePhpStubberPlugin implements PluginInterface
 {
     private static array $builtInUrls = [

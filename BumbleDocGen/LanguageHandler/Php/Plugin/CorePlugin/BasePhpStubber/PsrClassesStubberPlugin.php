@@ -8,6 +8,9 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 
+/**
+ * Adding links to the documentation of PHP classes in the \Psr namespace
+ */
 final class PsrClassesStubberPlugin implements PluginInterface
 {
     public static function getSubscribedEvents(): array

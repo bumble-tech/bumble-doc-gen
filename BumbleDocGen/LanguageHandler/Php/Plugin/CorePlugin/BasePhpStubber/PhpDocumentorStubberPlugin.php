@@ -17,6 +17,9 @@ use phpDocumentor\Reflection\Type;
 use phpDocumentor\Reflection\TypeResolver;
 use phpDocumentor\Reflection\Utils;
 
+/**
+ * Adding links to the documentation of PHP classes in the \phpDocumentor namespace
+ */
 final class PhpDocumentorStubberPlugin implements PluginInterface
 {
     public static function getSubscribedEvents(): array
