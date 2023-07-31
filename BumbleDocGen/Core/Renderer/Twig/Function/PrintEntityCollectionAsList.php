@@ -10,6 +10,8 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 /**
  * Outputting entity data as HTML list
  *
+ * @note This function initiates the creation of documents for the displayed entities
+ *
  * @example  {{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['ScriptFramework\\ScriptInterface', 'ScriptFramework\\TestScriptInterface'])) }}
  *  The function will output a list of PHP classes that match the ScriptFramework\ScriptInterface and ScriptFramework\TestScriptInterface interfaces
  *

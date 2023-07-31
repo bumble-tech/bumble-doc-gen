@@ -61,7 +61,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
     }
 
     /**
-     * @param RootEntityCollection $rootEntityCollection
+     * @param RootEntityCollection $rootEntityCollection Processed entity collection
      * @param string $entityName
      *  The full name of the entity for which the URL will be retrieved.
      *  If the entity is not found, the DEFAULT_URL value will be returned.

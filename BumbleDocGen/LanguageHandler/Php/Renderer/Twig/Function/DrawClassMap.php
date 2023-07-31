@@ -15,7 +15,9 @@ use DI\DependencyException;
 use DI\NotFoundException;
 
 /**
- * Generate class map in HTML or rst format
+ * Generate class map in HTML format
+ *
+ * @note This function initiates the creation of documents for the displayed entities
  *
  * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/BumbleDocGen/Renderer'])) }}
  * @example {{ drawClassMap(classEntityCollection) }}
