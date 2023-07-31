@@ -53,3 +53,34 @@ More static text...
 This is how it looks on the GitHub:
 
 <img src="/docs/assets/doc_example.png?raw=true">
+
+
+{{ "3) Another example of a dynamic block:" | textToHeading('H3') }}
+
+Output method description as a dynamic block:
+
+{{ "Some static text...
+
+Dynamic block:
+
+{\{ phpClassEntityCollection
+    .get('\\\\BumbleDocGen\\\\LanguageHandler\\\\LanguageHandlerInterface')
+    .getMethodEntity('getLanguageKey')
+    .getDescription()
+}\}
+
+More static text...
+" | textToCodeBlock('twig') }}
+
+Result after starting the documentation generation process:
+
+
+
+{{ "Some static text...
+
+Dynamic block:
+
+Unique language handler key
+
+More static text...
+" | textToCodeBlock('twig') }}
