@@ -14,6 +14,9 @@ use Noodlehaus\Config;
 
 use function BumbleDocGen\Core\is_associative_array;
 
+/**
+ * Wrapper for getting raw configuration file data
+ */
 final class ConfigurationParameterBag
 {
     private array $parameters = [];

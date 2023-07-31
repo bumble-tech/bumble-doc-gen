@@ -23,6 +23,9 @@ use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Style\OutputStyle;
 
+/**
+ * Collection of PHP class entities
+ */
 final class ClassEntityCollection extends LoggableRootEntityCollection
 {
     private array $entitiesNotHandledByPlugins = [];

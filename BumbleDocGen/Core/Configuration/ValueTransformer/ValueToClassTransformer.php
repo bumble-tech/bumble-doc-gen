@@ -9,6 +9,19 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use function BumbleDocGen\Core\is_associative_array;
 
+/**
+ * Standard text-to-class transformer
+ *
+ * @example # The list of class names will be converted to an array of objects
+ *  someKey:
+ *      - class: \Namespace\ClassName
+ *      - class: \Namespace\ClassName2
+ *
+ *
+ * @example # One class in configuration will be converted to one object
+ *  someKey:
+ *      class: \Namespace\ClassName
+ */
 final class ValueToClassTransformer implements ValueTransformerInterface
 {
     public function __construct(private Container $diContainer)
