@@ -12,8 +12,6 @@ use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Plugin\PluginsCollection;
 use BumbleDocGen\Core\Renderer\PageLinkProcessor\PageLinkProcessorInterface;
-use BumbleDocGen\Core\Renderer\TemplateFiller\TemplateFillerInterface;
-use BumbleDocGen\Core\Renderer\TemplateFiller\TemplateFillersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
