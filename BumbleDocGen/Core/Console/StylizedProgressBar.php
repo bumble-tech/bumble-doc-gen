@@ -56,11 +56,6 @@ final class StylizedProgressBar
 
     public function iterate(iterable $iterable, ?int $max = null): \Generator
     {
-        if (!is_countable($iterable)) {
-            var_dump(is_countable($iterable));
-            die();
-        }
-
         $i = 0;
         foreach ($this->progressBar->iterate($iterable, $max) as $key => $item) {
             $lastIterationNumber = is_countable($iterable) ? \count($iterable) : 0;
