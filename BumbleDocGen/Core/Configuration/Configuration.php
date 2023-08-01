@@ -180,26 +180,6 @@ final class Configuration
     }
 
     /**
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     * @throws NotFoundException
-     */
-    public function getTemplateFillers(): TemplateFillersCollection
-    {
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException) {
-        }
-        $templateFillers = $this->parameterBag->validateAndGetClassListValue(
-            'template_fillers',
-            TemplateFillerInterface::class
-        );
-        $cachedTemplateFillersCollection = TemplateFillersCollection::create(...$templateFillers);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cachedTemplateFillersCollection);
-        return $cachedTemplateFillersCollection;
-    }
-
-    /**
      * @throws InvalidConfigurationParameterException
      */
     public function getCacheDir(): ?string
