@@ -43,6 +43,16 @@ final class SingleEntitySearchOperation implements OperationInterface
         return md5(json_encode($this->args));
     }
 
+    public function getRequestedEntityName(): string
+    {
+        if ($this->entityName) {
+            return $this->entityName;
+        }
+
+        $className = ltrim(str_replace('\\\\', '\\', $this->args[0] ?? ''), '\\');
+        return explode(':', $className)[0];
+    }
+
     public function getKey(): string
     {
         return "{$this->functionName}{$this->getArgsHash()}";
