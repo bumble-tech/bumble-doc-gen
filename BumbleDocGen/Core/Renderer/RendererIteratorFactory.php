@@ -22,7 +22,7 @@ use Symfony\Component\Finder\Finder;
 
 final class RendererIteratorFactory
 {
-    private const INTERNAL_CACHING_SYSTEM_VERSION = 1;
+    private const INTERNAL_CACHING_SYSTEM_VERSION = 2;
 
     private array $renderedFileNames = [];
 
