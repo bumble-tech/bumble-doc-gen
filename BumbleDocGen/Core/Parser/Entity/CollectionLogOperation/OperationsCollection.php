@@ -12,6 +12,7 @@ final class OperationsCollection implements \IteratorAggregate
      * @var OperationInterface[]
      */
     protected array $operations = [];
+    private array $singleOperationsEntityCommands = [];
 
     public function getIterator(): \Traversable
     {
@@ -23,6 +24,10 @@ final class OperationsCollection implements \IteratorAggregate
         $key = $operation->getKey();
         if (!array_key_exists($key, $this->operations)) {
             $this->operations[$key] = $operation;
+            if (is_a($operation, SingleEntitySearchOperation::class)) {
+                $id = $operation->getRequestedEntityName();
+                $this->singleOperationsEntityCommands[$id][$operation->getFunctionName()] = 1;
+            }
         }
         $this->operations[$key]->incrementUsageCount();
     }
@@ -36,11 +41,11 @@ final class OperationsCollection implements \IteratorAggregate
 
         if ($iterateOperations) {
             foreach ($singleEntitySearchOperations as $k => $singleEntitySearchOperation) {
-                if (!$singleEntitySearchOperation->getEntityName()) {
+                if (!$singleEntitySearchOperation->getRequestedEntityName()) {
                     continue;
                 }
                 foreach ($iterateOperations as $iterateOperation) {
-                    if ($iterateOperation->hasEntity($singleEntitySearchOperation->getEntityName())) {
+                    if ($iterateOperation->hasEntity($singleEntitySearchOperation->getRequestedEntityName())) {
                         unset($this->operations[$k]);
                         unset($singleEntitySearchOperations[$k]);
                     }
@@ -49,17 +54,17 @@ final class OperationsCollection implements \IteratorAggregate
         }
 
         if ($singleEntitySearchOperations) {
-            $removeKey = function (string $key) use (&$singleEntitySearchOperations) {
-                unset($this->operations[$key]);
-                unset($singleEntitySearchOperations[$key]);
-            };
+            foreach ($singleEntitySearchOperations as $key => $singleEntitySearchOperation) {
+                $entityName = $singleEntitySearchOperation->getRequestedEntityName();
+                $usedCommands = $this->singleOperationsEntityCommands[$entityName] ?? [];
+                $functionName = $singleEntitySearchOperation->getFunctionName();
 
-            foreach ($singleEntitySearchOperations as $singleEntitySearchOperation) {
-                switch ($singleEntitySearchOperation->getFunctionName()) {
-                    case 'findEntity':
-                        $removeKey("getLoadedOrCreateNew{$singleEntitySearchOperation->getArgsHash()}");
-                    case 'getLoadedOrCreateNew':
-                        $removeKey("get{$singleEntitySearchOperation->getArgsHash()}");
+                if (isset($usedCommands['getLoadedOrCreateNew']) && $functionName !== 'getLoadedOrCreateNew') {
+                    unset($this->operations[$key]);
+                    unset($singleEntitySearchOperations[$key]);
+                } elseif (!isset($usedCommands['getLoadedOrCreateNew']) && isset($usedCommands['findEntity']) && $functionName !== 'findEntity') {
+                    unset($this->operations[$key]);
+                    unset($singleEntitySearchOperations[$key]);
                 }
             }
         }
@@ -122,5 +127,17 @@ final class OperationsCollection implements \IteratorAggregate
             }
         }
         return false;
+    }
+
+    public function __serialize(): array
+    {
+        return [
+            'operations' => $this->operations,
+        ];
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->operations = $data['operations'] ?? [];
     }
 }
