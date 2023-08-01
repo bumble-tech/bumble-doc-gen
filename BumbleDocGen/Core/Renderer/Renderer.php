@@ -69,13 +69,7 @@ final class Renderer
 
             if (str_ends_with($filePatch, '.twig')) {
                 $this->rendererContext->setCurrentTemplateFilePatch($filePatch);
-                $content = $this->twig->render($filePatch,
-                    array_merge($templateParams, [
-                        'fillersParameters' => $this->configuration->getTemplateFillers()->getParametersForTemplate(
-                            $filePatch
-                        ),
-                    ])
-                );
+                $content = $this->twig->render($filePatch, $templateParams);
 
                 $content = $this->pluginEventDispatcher->dispatch(
                     new BeforeCreatingDocFile($content, $this->rendererContext)
