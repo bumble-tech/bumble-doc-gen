@@ -6,6 +6,7 @@ namespace BumbleDocGen\Core\Renderer\Context\Dependency;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Renderer\RendererHelper;
+use Roave\BetterReflection\Util\FileHelper;
 
 final class FileDependency implements RendererDependencyInterface
 {
@@ -29,9 +30,13 @@ final class FileDependency implements RendererDependencyInterface
     ): FileDependency
     {
         $fileInternalLink = $rendererHelper->filePathToFileInternalLink($filePath);
+        if (!file_exists($filePath) || !is_readable($filePath)) {
+            return new self($fileInternalLink, '', $contentFilterRegex, $matchIndex);
+        }
+
         $hash = '';
         if ($contentFilterRegex && $matchIndex) {
-            $fileContent = @file_get_contents($filePath);
+            $fileContent = file_get_contents($filePath);
             if ($fileContent && preg_match($contentFilterRegex, $fileContent, $matches) && isset($matches[$matchIndex])) {
                 $hash = md5($matches[$matchIndex]);
             }
