@@ -883,6 +883,19 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
+    public function hasParentClass(string $parentClassName): bool
+    {
+        $parentClassName = ltrim(str_replace('\\\\', '\\', $parentClassName), '\\');
+        $parentClassNames = array_map(
+            fn($interface) => ltrim($interface, '\\'), $this->getParentClassNames()
+        );
+        return in_array($parentClassName, $parentClassNames);
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function getConstants(): array
     {
         return $this->getReflection()->getImmediateConstants();

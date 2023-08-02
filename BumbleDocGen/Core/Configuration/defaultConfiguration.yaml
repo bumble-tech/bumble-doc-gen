@@ -19,16 +19,18 @@ twig_functions:                   # (array<CustomFunctionInterface>) Functions t
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\PrintEntityCollectionAsList
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentationPageUrl
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\FileGetContents
 twig_filters:                     # (array<CustomFilterInterface>) Filters that can be used in document templates
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\FixStrSize
-  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\HtmlToRst
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\PrepareSourceLink
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\Quotemeta
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\RemoveLineBrakes
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\StrTypeToUrl
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\TextToCodeBlock
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\TextToHeading
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\PregMatch
 plugins:                          # (array<PluginInterface>|null) List of plugins
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter

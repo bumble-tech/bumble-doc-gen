@@ -38,6 +38,12 @@ final class DrawDocumentedEntityLink implements CustomFunctionInterface
     }
 
     /**
+     * @param RootEntityInterface $entity The entity for which we want to get the link
+     * @param string $cursor Reference to an element inside an entity, for example, the name of a function/constant/property
+     * @param bool $useShortName Use the full or short entity name in the link
+     *
+     * @return string Entity document HTML link
+     *
      * @throws NotFoundException
      * @throws ReflectionException
      * @throws DependencyException

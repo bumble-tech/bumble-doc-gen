@@ -6,6 +6,17 @@ namespace BumbleDocGen\Core\Configuration\ValueResolver;
 
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 
+/**
+ * We supplement the values by replacing the shortcodes with real values by
+ * the arguments passed to the script when running from the command line;
+ * Template: %argv:param_num% , where param_num is the number of the argument passed to the script
+ *
+ * @example # Configuration processing example.
+ *   # In case passing argument 3 => 'test'
+ *   output_dir: "%argv:3%/docs"
+ *
+ *   # After the value processing procedure, output_dir => "test/docs"
+ */
 final class ArgvValueResolver implements ValueResolverInterface
 {
     public function resolveValue(ConfigurationParameterBag $parameterBag, mixed $value): mixed

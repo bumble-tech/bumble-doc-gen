@@ -23,6 +23,9 @@ use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Style\OutputStyle;
 
+/**
+ * Collection of PHP class entities
+ */
 final class ClassEntityCollection extends LoggableRootEntityCollection
 {
     private array $entitiesNotHandledByPlugins = [];
@@ -212,11 +215,15 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     {
         $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
+            $needToKeep = false;
             /**@var ClassEntity $classEntity */
             foreach ($paths as $path) {
-                if (!str_starts_with($classEntity->getFileName(), $path)) {
-                    $classEntityCollection->remove($objectId);
+                if (str_starts_with($classEntity->getFileName(), $path)) {
+                    $needToKeep = true;
                 }
+            }
+            if (!$needToKeep) {
+                $classEntityCollection->remove($objectId);
             }
         }
         return $classEntityCollection;
@@ -340,6 +347,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
 
         $entity = null;
         $foundKey = null;
+        $search = ltrim($search, '\\');
         if (array_key_exists($search, $index)) {
             $entity = $index[$search];
             $foundKey = $search;

@@ -45,4 +45,9 @@ final class CustomFunctionsCollection implements \IteratorAggregate
     {
         return $this->customFunctions[$key] ?? null;
     }
+
+    public function has(string $key): bool
+    {
+        return !is_null($this->get($key));
+    }
 }

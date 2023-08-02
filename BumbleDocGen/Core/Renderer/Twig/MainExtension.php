@@ -73,7 +73,7 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
      */
     public function getFunctions(): \Generator
     {
-        return $this->functions->getTwigFunctions();
+        yield from $this->functions->getTwigFunctions();
     }
 
     /**

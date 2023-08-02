@@ -25,7 +25,7 @@ use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
 
 /**
- * Configuration wrapper for project documentation
+ * Configuration project documentation
  */
 final class Configuration
 {

@@ -8,6 +8,8 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -22,6 +24,8 @@ final class BreadcrumbsHelper
      * The name template of the file that will be the entry point when switching between pages
      */
     public const DEFAULT_PREV_PAGE_NAME_TEMPLATE = '/^((readme|index)\.(rst|md)\.twig)/';
+
+    private array $keyUsageCount = [];
 
     /**
      * @param string $prevPageNameTemplate Index page for each child section
@@ -58,6 +62,8 @@ final class BreadcrumbsHelper
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     private function getPrevPage(string $templateName): ?string
@@ -68,9 +74,12 @@ final class BreadcrumbsHelper
         }
         $code = $this->loadTemplateContent($templateName);
         if (preg_match_all('/({%)( ?)(set)( )(prevPage)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
-            $prevPage = array_reverse($matches[8])[0];
-            $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $prevPage);
-            return $prevPage;
+            $prevPageKey = array_reverse($matches[8])[0];
+            $prevPage = $this->getPageDocFileByKey($prevPageKey);
+            if ($prevPage) {
+                $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $prevPage);
+                return $prevPage;
+            }
         }
         $pathParts = explode('/', $templateName);
         array_pop($pathParts);
@@ -146,6 +155,8 @@ final class BreadcrumbsHelper
      * @param bool $fromCurrent
      *
      * @return array<int, array{url: string, title: string}>
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): array
@@ -166,6 +177,8 @@ final class BreadcrumbsHelper
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function getBreadcrumbsForTemplates(string $templateFilePatch, bool $fromCurrent = true): array
@@ -188,10 +201,110 @@ final class BreadcrumbsHelper
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getAllPageLinks(): array
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $pageLinks = [];
+        $templatesDir = $this->configuration->getTemplatesDir();
+
+        $addLinkKey = function (string $key, $value) use (&$pageLinks) {
+            $pageLinks[$key] = $value;
+            $this->keyUsageCount[$key] ??= 0;
+            ++$this->keyUsageCount[$key];
+            if (str_starts_with($key, '/')) {
+                $key = ltrim($key, '/');
+                $pageLinks[$key] = $value;
+                $this->keyUsageCount[$key] ??= 0;
+                ++$this->keyUsageCount[$key];
+            }
+        };
+
+        /**@var \SplFileInfo[] $allFiles */
+        $allFiles = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator(
+                $templatesDir, \FilesystemIterator::SKIP_DOTS
+            )
+        );
+        foreach ($allFiles as $file) {
+            $filePatch = str_replace($templatesDir, '', $file->getRealPath());
+            if (!str_ends_with($filePatch, '.twig')) {
+                continue;
+            }
+
+            $docFilePatch = str_replace('.twig', '', $filePatch);
+            $url = $this->configuration->getPageLinkProcessor()->getAbsoluteUrl($docFilePatch);
+            $title = $this->getTemplateTitle($filePatch);
+
+            $value = [
+                'url' => $url,
+                'title' => $title,
+                'doc_file' => $docFilePatch,
+            ];
+
+            $addLinkKey($filePatch, $value);
+            $addLinkKey($docFilePatch, $value);
+            $addLinkKey($url, $value);
+            $addLinkKey($title, $value);
+            $linkKey = $this->getTemplateLinkKey($filePatch);
+            if ($linkKey) {
+                $addLinkKey($linkKey, $value);
+            }
+        }
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $pageLinks);
+        return $pageLinks;
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function getPageDataByKey(string $key): ?array
+    {
+        $pageLinks = $this->getAllPageLinks();
+        if (!isset($pageLinks[$key])) {
+            return null;
+        }
+
+        return $pageLinks[$key];
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function getPageLinkByKey(string $key): ?string
+    {
+        $pageData = $this->getPageDataByKey($key);
+        return $pageData['url'] ?? null;
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function getPageDocFileByKey(string $key): ?string
+    {
+        $pageData = $this->getPageDataByKey($key);
+        return $pageData['doc_file'] ?? null;
+    }
+
+    /**
      * Returns an HTML string with rendered breadcrumbs
      *
      * @throws SyntaxError
+     * @throws NotFoundException
      * @throws RuntimeError
+     * @throws DependencyException
      * @throws LoaderError
      * @throws InvalidConfigurationParameterException
      */

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Renderer\Twig\Filter;
 
 /**
- * Convert text to html or rst header
+ * Convert text to html header
  */
 final class TextToHeading implements CustomFilterInterface
 {

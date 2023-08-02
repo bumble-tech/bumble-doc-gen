@@ -13,6 +13,12 @@ source_locators:
       directories:
         - "%project_root%/BumbleDocGen"
         - "%project_root%/SelfDoc"
+twig_filters:
+  - class: \SelfDoc\Configuration\Twig\CustomFilter\EvalString
+twig_functions:
+  - class: \SelfDoc\Configuration\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
+  - class: \SelfDoc\Configuration\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
+  - class: \SelfDoc\Configuration\Twig\CustomFunction\GetConfigParametersDescription
 plugins:
   - class: \SelfDoc\Configuration\Plugin\RoaveStubber\BetterReflectionStubberPlugin
   - class: \SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin

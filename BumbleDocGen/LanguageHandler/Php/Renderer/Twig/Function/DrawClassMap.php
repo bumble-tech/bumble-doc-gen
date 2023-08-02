@@ -15,7 +15,9 @@ use DI\DependencyException;
 use DI\NotFoundException;
 
 /**
- * Generate class map in HTML or rst format
+ * Generate class map in HTML format
+ *
+ * @note This function initiates the creation of documents for the displayed entities
  *
  * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/BumbleDocGen/Renderer'])) }}
  * @example {{ drawClassMap(classEntityCollection) }}
@@ -27,7 +29,7 @@ final class DrawClassMap implements CustomFunctionInterface
 
     public function __construct(
         private GetDocumentedEntityUrl     $getDocumentedEntityUrlFunction,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
     )
     {
     }
@@ -56,7 +58,7 @@ final class DrawClassMap implements CustomFunctionInterface
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
-        ClassEntityCollection ...$classEntityCollections
+        ClassEntityCollection ...$classEntityCollections,
     ): string
     {
         $structure = $this->convertDirectoryStructureToFormattedString(
@@ -139,6 +141,7 @@ final class DrawClassMap implements CustomFunctionInterface
         string $path = '/'
     ): string
     {
+        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
         $formattedString = '';
         $elementsCount = count($structure);
         $i = 0;
@@ -156,7 +159,14 @@ final class DrawClassMap implements CustomFunctionInterface
             } else {
                 $filepath = "{$path}{$line}";
                 $filepath = $this->fileClassmap[$filepath] ?? $filepath;
-                $formattedString .= "{$preparedPrefix}── <a href='{$filepath}'>{$line}</a>\n";
+                $classEntity = $entityCollection->findEntity("{$path}{$line}");
+                if ($description = $classEntity?->getDescription() ?: '') {
+                    $description = str_replace(["\r\n", "\r", "\n", "\t", '  '], ' ', strip_tags($description));
+                    $description = mb_strimwidth($description, 0, 100, "...");
+                    $description = "<i> — <samp>{$description}</samp></i>";
+                }
+
+                $formattedString .= "{$preparedPrefix}── <a href='{$filepath}'>{$line}</a> {$description}\n";
             }
         }
         return $formattedString;

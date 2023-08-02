@@ -6,6 +6,15 @@ namespace BumbleDocGen\Core\Configuration\ValueResolver;
 
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 
+/**
+ * We supplement the values by replacing the shortcodes with real values by the configuration key
+ *
+ * @example # Configuration processing example
+ *   project_root: "test"
+ *   output_dir: "%project_root%/docs"
+ *
+ *   # After the value processing procedure, output_dir => "test/docs"
+ */
 final class RefValueResolver implements ValueResolverInterface
 {
     public function resolveValue(ConfigurationParameterBag $parameterBag, mixed $value): mixed

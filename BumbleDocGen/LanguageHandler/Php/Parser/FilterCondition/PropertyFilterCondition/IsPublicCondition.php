@@ -8,6 +8,9 @@ use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
 
+/**
+ * Check is a public property or not
+ */
 final class IsPublicCondition implements ConditionInterface
 {
     private VisibilityCondition $visibilityCondition;

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace SelfDoc\Configuration\Plugin\TwigFunctionClassParser;
 
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Core\Plugin\PluginInterface;
-use BumbleDocGen\Core\Renderer\Twig\MainExtension;
+use BumbleDocGen\Core\Renderer\Context\RendererContext;
+use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
@@ -18,11 +20,16 @@ use DI\NotFoundException;
 
 final class TwigFunctionClassParserPlugin implements PluginInterface
 {
-    private const TWIG_FUNCTION_DIRNAME = '/BumbleDocGen/Renderer/Twig/Function';
+    private const TWIG_FUNCTION_DIR_NAMES = [
+        '/BumbleDocGen/Core/Renderer/Twig/Function',
+        '/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function'
+    ];
     public const PLUGIN_KEY = 'twigFunctionClassParserPlugin';
 
     public function __construct(
-        private FunctionClassPluginTwigEnvironment $twigEnvironment
+        private FunctionClassPluginTwigEnvironment $twigEnvironment,
+        private RendererContext                    $context,
+        private Configuration                      $configuration,
     )
     {
     }
@@ -70,7 +77,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     public function afterLoadingClassEntityCollection(AfterLoadingClassEntityCollection $event): void
     {
         foreach ($event->getClassEntityCollection() as $classEntity) {
-            if ($this->isCustomTwigFunction($classEntity)) {
+            if ($this->isCustomTwigFunction($classEntity) && $classEntity->isInstantiable()) {
                 $classEntity->loadPluginData(
                     self::PLUGIN_KEY,
                     $this->getFunctionData($event->getClassEntityCollection(), $classEntity->getName()) ?? []
@@ -85,7 +92,12 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
      */
     private function isCustomTwigFunction(ClassEntity $classEntity): bool
     {
-        return str_starts_with($classEntity->getFileName(), self::TWIG_FUNCTION_DIRNAME);
+        foreach (self::TWIG_FUNCTION_DIR_NAMES as $dirName) {
+            if (str_starts_with($classEntity->getFileName(), $dirName) && $classEntity->implementsInterface(CustomFunctionInterface::class)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -94,18 +106,17 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    private function getAllUsedFunctions(ClassEntityCollection $classEntityCollection): array
+    private function getAllUsedFunctions(): array
     {
         static $functions = null;
         if (is_null($functions)) {
             $functions = [];
-            $mainExtensionReflection = $classEntityCollection->getLoadedOrCreateNew(MainExtension::class);
-            $bodyCode = $mainExtensionReflection->getMethodEntity('setDefaultFunctions')->getBodyCode();
-            preg_match_all('/(new )([^(]+)/', $bodyCode, $matches);
-            foreach ($matches[2] as $match) {
-                $functions[$match] = [
-                    'name' => $match::getName(),
-                ];
+            $twigFunctions = iterator_to_array($this->configuration->getTwigFunctions());
+            foreach ($this->configuration->getLanguageHandlersCollection() as $languageHandler) {
+                $twigFunctions = array_merge($twigFunctions, iterator_to_array($languageHandler->getCustomTwigFunctions($this->context)));
+            }
+            foreach ($twigFunctions as $function) {
+                $functions[$function::class] = $function::getName();
             }
         }
         return $functions;
@@ -121,17 +132,16 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     {
         static $functionsData = [];
         if (!array_key_exists($className, $functionsData)) {
-            $functions = $this->getAllUsedFunctions($classEntityCollection);
-            if (!str_starts_with($className, '\\')) {
-                $className = "\\{$className}";
-            }
-
+            $functions = $this->getAllUsedFunctions();
             if (!isset($functions[$className])) {
                 return null;
             }
-
-            $functionData = $functions[$className];
             $entity = $classEntityCollection->getEntityByClassName($className);
+            if (str_starts_with($entity->getFileName(), '/SelfDoc')) {
+                return null;
+            }
+
+            $functionData['name'] = $functions[$className];
             $method = $entity->getMethodEntityCollection()->get('__invoke');
             $functionData['parameters'] = $method->getParameters();
             $functionsData[$className] = $functionData;
