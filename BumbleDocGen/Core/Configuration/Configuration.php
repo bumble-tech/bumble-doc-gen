@@ -12,8 +12,6 @@ use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Plugin\PluginsCollection;
 use BumbleDocGen\Core\Renderer\PageLinkProcessor\PageLinkProcessorInterface;
-use BumbleDocGen\Core\Renderer\TemplateFiller\TemplateFillerInterface;
-use BumbleDocGen\Core\Renderer\TemplateFiller\TemplateFillersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
@@ -177,26 +175,6 @@ final class Configuration
         $cachedPlugins = PluginsCollection::create(...$pluginsList);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cachedPlugins);
         return $cachedPlugins;
-    }
-
-    /**
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     * @throws NotFoundException
-     */
-    public function getTemplateFillers(): TemplateFillersCollection
-    {
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException) {
-        }
-        $templateFillers = $this->parameterBag->validateAndGetClassListValue(
-            'template_fillers',
-            TemplateFillerInterface::class
-        );
-        $cachedTemplateFillersCollection = TemplateFillersCollection::create(...$templateFillers);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cachedTemplateFillersCollection);
-        return $cachedTemplateFillersCollection;
     }
 
     /**
