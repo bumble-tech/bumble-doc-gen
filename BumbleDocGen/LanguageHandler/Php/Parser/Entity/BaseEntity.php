@@ -6,7 +6,6 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
-use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
@@ -32,7 +31,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
     use CacheableEntityTrait;
 
-    #[Inject] private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache;
     #[Inject] private GetDocumentedEntityUrl $documentedEntityUrlFunction;
     #[Inject] private RendererHelper $rendererHelper;
 
@@ -471,10 +469,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         $entityDependencies = [];
         if ($entity) {
             $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
-            $entityDependencies = $this->sharedCompressedDocumentFileCache->get($filesDependenciesCacheKey);
+            $entityDependencies = $this->getEntityCacheValue($filesDependenciesCacheKey);
             if (is_null($entityDependencies)) {
                 $entityDependencies = $entity->getEntityDependencies();
-                $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
                 $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
             }
         }
@@ -488,9 +485,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     {
         $entity = $this->getCurrentRootEntity();
         if ($entity) {
-            $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
             $entityDependencies = $entity->getEntityDependencies();
-            $this->sharedCompressedDocumentFileCache->set($filesDependenciesCacheKey, $entityDependencies);
             $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
         }
     }

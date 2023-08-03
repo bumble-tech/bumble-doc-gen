@@ -23,8 +23,11 @@ final class SharedCompressedDocumentFileCache
     )
     {
         $this->cacheFileName = $this->configuration->getOutputDir() . '/' . self::FILE_NAME;
+        if (!$this->configuration->useSharedCache()) {
+            return;
+        }
         try {
-            if (file_exists($this->cacheFileName)) {
+            if (file_exists($this->cacheFileName) && is_readable($this->cacheFileName)) {
                 $serializedData = gzuncompress(base64_decode(file_get_contents($this->cacheFileName)));
                 if ($serializedData) {
                     $this->cacheData = unserialize($serializedData) ?: [];
@@ -67,6 +70,12 @@ final class SharedCompressedDocumentFileCache
     {
         $gitAttributesFile = $this->configuration->getOutputDir() . '/.gitattributes';
         file_put_contents($gitAttributesFile, self::FILE_NAME . ' merge=ours');
+        if (!$this->configuration->useSharedCache()) {
+            if (file_exists($this->cacheFileName)) {
+                unlink($this->cacheFileName);
+            }
+            return;
+        }
         file_put_contents($this->cacheFileName, base64_encode(gzcompress(serialize($this->cacheData))));
     }
 }
