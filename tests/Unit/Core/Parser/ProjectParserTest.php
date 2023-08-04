@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\Unit\Core;
+namespace Test\Unit\Core\Parser;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
