@@ -20,7 +20,7 @@ final class RootEntityCollectionsGroup implements \IteratorAggregate
 
     public function add(RootEntityCollection $rootEntityCollection): void
     {
-        $this->rootEntityCollections[$rootEntityCollection::getEntityCollectionName()] = $rootEntityCollection;
+        $this->rootEntityCollections[$rootEntityCollection->getEntityCollectionName()] = $rootEntityCollection;
     }
 
     public function get(string $collectionName): ?RootEntityCollection

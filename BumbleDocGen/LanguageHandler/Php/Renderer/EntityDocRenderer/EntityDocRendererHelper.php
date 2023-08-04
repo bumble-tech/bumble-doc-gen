@@ -122,7 +122,7 @@ final class EntityDocRendererHelper
         bool    $createDocument = true
     ): array
     {
-        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
         $data = self::getEntityDataByLink($linkString, $entityCollection, $defaultEntityClassName);
         if ($data['entityName'] ?? null) {
             $data['url'] = call_user_func_array(

@@ -50,7 +50,7 @@ final class GetClassMethodsBodyCode implements CustomFunctionInterface
      */
     public function __invoke(string $className, array $methodsNames): ?string
     {
-        $classEntityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+        $classEntityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
         if (!is_a($classEntityCollection, ClassEntityCollection::class)) {
             return null;
         }

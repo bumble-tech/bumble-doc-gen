@@ -22,7 +22,7 @@ final class OnAddClassEntityToCollection extends Event implements OnlySingleExec
 
     public function getUniqueExecutionId(): string
     {
-        return "{$this->classEntity->getName()}{$this->classEntityCollection::getEntityCollectionName()}";
+        return "{$this->classEntity->getName()}{$this->classEntityCollection->getEntityCollectionName()}";
     }
 
     public function getClassEntityCollection(): ClassEntityCollection

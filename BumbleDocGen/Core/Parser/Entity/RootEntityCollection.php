@@ -23,7 +23,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
         return $this->entities[$objectName] ?? null;
     }
 
-    abstract public static function getEntityCollectionName(): string;
+    abstract public function getEntityCollectionName(): string;
 
     /**
      * @warning The entity obtained as a result of executing this method may not be available for loading

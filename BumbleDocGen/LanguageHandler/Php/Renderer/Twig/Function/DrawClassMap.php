@@ -73,7 +73,7 @@ final class DrawClassMap implements CustomFunctionInterface
      */
     protected function appendClassToDirectoryStructure(array $directoryStructure, ClassEntity $classEntity): array
     {
-        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
         $this->fileClassmap[$classEntity->getFileName()] = call_user_func_array(
             callback: $this->getDocumentedEntityUrlFunction,
             args: [
@@ -141,7 +141,7 @@ final class DrawClassMap implements CustomFunctionInterface
         string $path = '/'
     ): string
     {
-        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
         $formattedString = '';
         $elementsCount = count($structure);
         $i = 0;
