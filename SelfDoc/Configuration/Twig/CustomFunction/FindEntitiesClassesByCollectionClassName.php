@@ -28,7 +28,7 @@ final class FindEntitiesClassesByCollectionClassName implements CustomFunctionIn
      */
     public function __invoke(string $collectionName): array
     {
-        $classEntityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+        $classEntityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
         /**
          * @var ClassEntity $findCollectionEntity
