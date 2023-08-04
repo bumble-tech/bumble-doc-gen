@@ -2,14 +2,14 @@
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
-        bootstrap="Test/bootstrap.php"
+        bootstrap="tests/bootstrap.php"
         colors="true"
         executionOrder="random"
 >
     <coverage/>
     <testsuites>
         <testsuite name="unit">
-            <directory>./Test/Unit</directory>
+            <directory>./tests/Unit</directory>
         </testsuite>
     </testsuites>
     <php>
