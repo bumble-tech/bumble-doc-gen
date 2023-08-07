@@ -22,12 +22,12 @@ final class FileTextContainsConditionTest extends TestCase
         $entity1Stub->expects($this->once())->method('getFileContent')->willReturn("some search text");
 
         // Root entity
-        $falseCondition = new FileTextContainsCondition('search text');
-        self::assertTrue($falseCondition->canAddToCollection($entity1Stub));
+        $condition = new FileTextContainsCondition('search text');
+        self::assertTrue($condition->canAddToCollection($entity1Stub));
 
         // Not a root entity
         $entity2Stub = $this->createStub(EntityInterface::class);
-        self::assertFalse($falseCondition->canAddToCollection($entity2Stub));
+        self::assertFalse($condition->canAddToCollection($entity2Stub));
     }
 
     /**

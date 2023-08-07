@@ -17,7 +17,7 @@ final class TrueConditionTest extends TestCase
             $entityStub->expects($this->never())->method($classMethod);
         }
 
-        $falseCondition = new TrueCondition();
-        self::assertTrue($falseCondition->canAddToCollection($entityStub));
+        $condition = new TrueCondition();
+        self::assertTrue($condition->canAddToCollection($entityStub));
     }
 }
