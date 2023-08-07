@@ -45,7 +45,7 @@ final class FileTextContainsConditionTest extends TestCase
         }
 
         $falseCondition = new FileTextContainsCondition($substring);
-        self::assertEquals($falseCondition->canAddToCollection($entityStub), $expectedResult);
+        self::assertEquals($expectedResult, $falseCondition->canAddToCollection($entityStub));
     }
 
     public function providerCanAddToCollection(): array

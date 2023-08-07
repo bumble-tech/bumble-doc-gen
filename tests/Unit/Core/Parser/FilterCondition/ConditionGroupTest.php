@@ -26,7 +26,7 @@ final class ConditionGroupTest extends TestCase
         }
 
         $conditionGroup = new ConditionGroup($conditionGroupType, ...$conditions);
-        self::assertEquals($conditionGroup->canAddToCollection($entityStub), $expectedResult);
+        self::assertEquals($expectedResult, $conditionGroup->canAddToCollection($entityStub));
     }
 
     public function providerCanAddToCollection(): array

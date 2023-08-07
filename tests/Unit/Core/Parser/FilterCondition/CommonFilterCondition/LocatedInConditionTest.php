@@ -48,7 +48,7 @@ final class LocatedInConditionTest extends TestCase
             ));
 
         $condition = new LocatedInCondition($configurationStub, $configurationParameterBagStub, $locatedInDirectories);
-        self::assertEquals($condition->canAddToCollection($entityStub), $expectedResult);
+        self::assertEquals($expectedResult, $condition->canAddToCollection($entityStub));
     }
 
     public function providerCanAddToCollection(): array
