@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Test\Unit\Core\Parser\SourceLocator;
 
 use BumbleDocGen\Core\Parser\SourceLocator\DirectoriesSourceLocator;
-use Framework\CustomTestCase\SourceLocatorTestCase;
+use Test\Framework\CustomTestCase\SourceLocatorTestCase;
 
 final class DirectoriesSourceLocatorTest extends SourceLocatorTestCase
 {
@@ -14,7 +14,7 @@ final class DirectoriesSourceLocatorTest extends SourceLocatorTestCase
      */
     public function testGetFinder(array $inputDirs, array $outputDirs, ?string $expectExceptionMessage = null): void
     {
-        $expected = $this->createBaseFinder()->in($inputDirs);
+        $expected = $this->createBaseFinder()->depth("==0")->in($inputDirs);
         if (!is_null($expectExceptionMessage)) {
             self::expectExceptionMessage($expectExceptionMessage);
         }
