@@ -5,24 +5,16 @@ declare(strict_types=1);
 namespace Test\Unit\Core\Parser\SourceLocator;
 
 use BumbleDocGen\Core\Parser\SourceLocator\DirectoriesSourceLocator;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Finder\Finder;
+use Framework\CustomTestCase\SourceLocatorTestCase;
 
-final class DirectoriesSourceLocatorTest extends TestCase
+final class DirectoriesSourceLocatorTest extends SourceLocatorTestCase
 {
     /**
      * @dataProvider providerGetFinder
      */
     public function testGetFinder(array $inputDirs, array $outputDirs, ?string $expectExceptionMessage = null): void
     {
-        $expected = (new Finder())
-            ->ignoreDotFiles(true)
-            ->ignoreVCSIgnored(true)
-            ->ignoreVCS(true)
-            ->files()
-            ->depth("==0")
-            ->in($inputDirs);
-
+        $expected = $this->createBaseFinder()->in($inputDirs);
         if (!is_null($expectExceptionMessage)) {
             self::expectExceptionMessage($expectExceptionMessage);
         }
