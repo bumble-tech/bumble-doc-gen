@@ -22,12 +22,12 @@ abstract class BasePageLinker implements PluginInterface
      *
      * @example /(`)([^<>\n]+?)(`_)/m
      */
-    abstract function getLinkRegEx(): string;
+    abstract protected function getLinkRegEx(): string;
 
     /**
      * Group number of the regular expression that contains the text that will be used to search for the link
      */
-    abstract function getGroupRegExNumber(): int;
+    abstract protected function getGroupRegExNumber(): int;
 
     /**
      * Template of the result of processing an empty link by a plugin.
@@ -35,7 +35,7 @@ abstract class BasePageLinker implements PluginInterface
      *
      * @example `%title% <%url%>`_
      */
-    abstract function getOutputTemplate(): string;
+    abstract protected function getOutputTemplate(): string;
 
     public function __construct(
         private BreadcrumbsHelper          $breadcrumbsHelper,

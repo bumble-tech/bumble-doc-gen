@@ -22,17 +22,17 @@ namespace BumbleDocGen\Core\Plugin\CorePlugin\PageLinker;
  */
 final class PageHtmlLinkerPlugin extends BasePageLinker
 {
-    function getLinkRegEx(): string
+    protected function getLinkRegEx(): string
     {
         return '/(<a>)([^<>\n]+?)(<\/a>)/m';
     }
 
-    function getGroupRegExNumber(): int
+    protected function getGroupRegExNumber(): int
     {
         return 2;
     }
 
-    function getOutputTemplate(): string
+    protected function getOutputTemplate(): string
     {
         return '<a href="%url%">%title%</a>';
     }
