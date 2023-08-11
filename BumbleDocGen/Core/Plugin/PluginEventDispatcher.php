@@ -6,10 +6,8 @@ namespace BumbleDocGen\Core\Plugin;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use DI\Attribute\Inject;
 use DI\DependencyException;
 use DI\NotFoundException;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class PluginEventDispatcher extends EventDispatcher
