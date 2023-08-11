@@ -17,6 +17,7 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -37,6 +38,7 @@ final class Renderer
         private MainTwigEnvironment               $twig,
         private RendererIteratorFactory           $renderIteratorFactory,
         private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
+        private Filesystem                        $fs,
         private LoggerInterface                   $logger
     )
     {
@@ -83,9 +85,9 @@ final class Renderer
             $filePatch = "{$outputDir}{$filePatch}";
             $newDirName = dirname($filePatch);
             if (!is_dir($newDirName)) {
-                mkdir($newDirName, 0755, true);
+                $this->fs->mkdir($newDirName, 0755);
             }
-            file_put_contents($filePatch, $content);
+            $this->fs->dumpFile($filePatch, $content);
             $this->logger->info("Saving `{$filePatch}`");
         }
 
@@ -100,15 +102,15 @@ final class Renderer
             }
             $newDirName = dirname($filePatch);
             if (!is_dir($newDirName)) {
-                mkdir($newDirName, 0755, true);
+                $this->fs->mkdir($newDirName, 0755);
             }
             // tmp hack to fix gitHub pages
-            file_put_contents($filePatch, "<!-- {% raw %} -->\n{$content}\n<!-- {% endraw %} -->");
+            $this->fs->dumpFile($filePatch, "<!-- {% raw %} -->\n{$content}\n<!-- {% endraw %} -->");
             $this->logger->info("Saving `{$filePatch}`");
         }
 
         foreach ($this->renderIteratorFactory->getFilesToRemove() as $file) {
-            unlink($file->getPathname());
+            $this->fs->remove($file->getPathname());
             $this->logger->info("Removing `{$file->getPathname()}` file");
         }
 
