@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace SelfDoc\Console\Command;
 
-use BumbleDocGen\DocGenerator;
-use SelfDoc\Configuration\Configuration;
+use BumbleDocGen\DocGeneratorFactory;
+use DI\DependencyException;
+use DI\NotFoundException;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 final class GenerateCommand extends Command
 {
@@ -15,14 +20,23 @@ final class GenerateCommand extends Command
         $this->setName('generate');
     }
 
+    /**
+     * @throws SyntaxError
+     * @throws NotFoundException
+     * @throws RuntimeError
+     * @throws DependencyException
+     * @throws LoaderError
+     * @throws InvalidArgumentException
+     */
     protected function execute(
-        \Symfony\Component\Console\Input\InputInterface $input,
+        \Symfony\Component\Console\Input\InputInterface   $input,
         \Symfony\Component\Console\Output\OutputInterface $output
-    ): int {
-        $configuration = new Configuration();
-        $output->writeln('Parsing documentation process');
-        DocGenerator::generateDocumentation($configuration);
-        $output->writeln('Documentation updated');
+    ): int
+    {
+        $docGenerator = (new DocGeneratorFactory())->create(
+            dirname(__DIR__, 2) . '/Configuration/config.yaml'
+        );
+        $docGenerator->generate();
         return self::SUCCESS;
     }
 }

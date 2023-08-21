@@ -1,0 +1,35 @@
+parent_configuration:             # (string|null) Path to parent configuration file
+project_root:                     # (string) Path to the directory of the documented project (or part of the project)
+templates_dir:                    # (string) Path to directory with documentation templates
+output_dir: "%project_root%/docs" # (string) Path to the directory where the finished documentation will be generated
+cache_dir: '%WORKING_DIR%/__cache'# (string|null) Path to the directory where the documentation generator cache will be saved
+output_dir_base_url: "/docs"      # (string) Basic part of url documentation. Used to form links in generated documents.
+git_client_path: "git"            # (string) Path to git client
+check_file_in_git_before_creating_doc: true # (bool) Checking if a document exists in GIT before creating a document
+page_link_processor:              # (PageLinkProcessorInterface) Link handler class on documentation pages
+  class: \BumbleDocGen\Core\Renderer\PageLinkProcessor\BasePageLinkProcessor
+language_handlers:                # (array<LanguageHandlerInterface>) List of programming language handlers
+source_locators:                  # (array<SourceLocatorInterface>) List of source locators
+use_shared_cache: true            # (bool) Enable cache usage of generated documents
+twig_functions:                   # (array<CustomFunctionInterface>) Functions that can be used in document templates
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawDocumentationMenu
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawDocumentedEntityLink
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\GeneratePageBreadcrumbs
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\PrintEntityCollectionAsList
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentationPageUrl
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\FileGetContents
+twig_filters:                     # (array<CustomFilterInterface>) Filters that can be used in document templates
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\FixStrSize
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\PrepareSourceLink
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\Quotemeta
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\RemoveLineBrakes
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\StrTypeToUrl
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\TextToCodeBlock
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\TextToHeading
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\PregMatch
+plugins:                          # (array<PluginInterface>|null) List of plugins
+  - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin
+  - class: \BumbleDocGen\Core\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter

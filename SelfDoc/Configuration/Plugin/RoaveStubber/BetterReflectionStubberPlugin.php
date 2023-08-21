@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace SelfDoc\Configuration\Plugin\RoaveStubber;
 
-use BumbleDocGen\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
-use BumbleDocGen\Plugin\Event\Render\OnGettingResourceLink;
-use BumbleDocGen\Plugin\PluginInterface;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
+use BumbleDocGen\Core\Plugin\PluginInterface;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 
 final class BetterReflectionStubberPlugin implements PluginInterface
 {

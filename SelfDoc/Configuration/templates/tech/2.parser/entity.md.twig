@@ -1,0 +1,96 @@
+{% set title = 'Entities and entities collections' %}
+{% set prevPage = 'Parser' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Entities and entities collections" | textToHeading('H1') }}
+
+Entities are organized outcomes from parsing source code.
+They help easily extract details about specific items from templates, allowing users to quickly access and display the information they need.
+
+Entities are always handled through collections. Collections are the result of the project parsing process and are available in both documentation templates and code.
+
+{{ "Examples of using collections in twig templates" | textToHeading('H2') }}
+
+* Passing a collection to a function:
+
+{{ "{{ printEntityCollectionAsList(phpClassEntityCollection) }}" | textToCodeBlock('twig') }}
+
+* Filtering a collection and passing it to a function:
+
+{{ "{{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\Entity\\EntityInterface'])) }}" | textToCodeBlock('twig') }}
+
+* Saving a filtered collection to a variable:
+
+{{ "{{ {% set filteredCollection = phpClassEntityCollection.getOnlyInstantiable() %} }}" | textToCodeBlock('twig') }}
+
+* Using a collection in a for loop:
+
+{{ "{% for someClassEntity in phpClassEntityCollection %}
+    * {{ someClassEntity.getName() }}
+{% endfor %}" | textToCodeBlock('twig') }}
+
+* Output of all methods of all found entities in `className::methodName()` format:
+
+{{ "{% for someClassEntity in phpClassEntityCollection %}
+    {% for methodEntity in someClassEntity.getMethodEntityCollection() %}
+        * {{ someClassEntity.getName() }}::{{ methodEntity.getName() }}()
+    {% endfor %}
+{% endfor %}" | textToCodeBlock('twig') }}
+
+{{ "Root entities collections" | textToHeading('H2') }}
+
+To further facilitate the handling of these entities, we utilize entity collections.
+These collections not only group relevant entities together but also provide convenient methods for filtering and manipulating these entities.
+The root collections (<a>RootEntityCollection</a>), which are directly accessible in your templates, are as follows:
+
+<table>
+    <tr>
+        <th>Collection class</th>
+        <th>Name in twig template</th>
+        <th>PL</th>
+        <th>Description</th>
+    </tr>
+    {% for entityCollection in phpClassEntityCollection
+            .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\RootEntityCollection'])
+            .getOnlyInstantiable()
+            %}
+    {% set match = entityCollection.getFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+    <tr>
+        <td>{{ drawDocumentedEntityLink(entityCollection) }}</td>
+        <td><b>{{ entityCollection.getMethodEntity('getEntityCollectionName').getFirstReturnValue() }}</b></td>
+        <td>{{ match[2] | upper }}</td>
+        <td>{{ entityCollection.getDescription() }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{{ "Available entities" | textToHeading('H2') }}
+
+Following is the list of available entities that are consistent with <a>EntityInterface</a> and can be created.
+These classes are a convenient wrapper for accessing data in templates:
+
+<table>
+    <tr>
+        <th>Entity name</th>
+        <th>Collection name</th>
+        <th>Is root</th>
+        <th>PL</th>
+        <th>Description</th>
+    </tr>
+{% for entityCollection in phpClassEntityCollection
+    .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\BaseEntityCollection'])
+    .getOnlyInstantiable()
+%}
+    {% set match = entityCollection.getFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+    {% set entitiesClasses = findEntitiesClassesByCollectionClassName(entityCollection.getName()) %}
+    {% for entityClass in entitiesClasses %}
+    <tr>
+        <td>{{ drawDocumentedEntityLink(entityClass) }}</td>
+        <td>{{ drawDocumentedEntityLink(entityCollection) }}</td>
+        <td>{% if entityClass.implementsInterface('BumbleDocGen\\Core\\Parser\\Entity\\RootEntityInterface') %}yes{% else %}no{% endif %}</td>
+        <td>{{ match[2] | upper }}</td>
+        <td>{{ entityClass.getDescription() }}</td>
+    </tr>
+    {% endfor %}
+{% endfor %}
+</table>
