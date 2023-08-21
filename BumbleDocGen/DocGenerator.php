@@ -74,7 +74,7 @@ final class DocGenerator
     public function generateProjectTemplatesStructure(): void
     {
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
         $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
         $openaiClient = \Tectalic\OpenAi\Manager::build(
@@ -139,7 +139,7 @@ final class DocGenerator
         }
 
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
         $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
         $openaiClient = \Tectalic\OpenAi\Manager::build(
@@ -225,7 +225,7 @@ final class DocGenerator
     {
         $this->io->note("Project analysis");
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
         $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
         $openaiClient = \Tectalic\OpenAi\Manager::build(

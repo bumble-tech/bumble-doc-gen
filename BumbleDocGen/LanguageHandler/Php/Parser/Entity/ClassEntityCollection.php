@@ -28,6 +28,8 @@ use Symfony\Component\Console\Style\OutputStyle;
  */
 final class ClassEntityCollection extends LoggableRootEntityCollection
 {
+    public const NAME = 'phpClassEntityCollection';
+
     private array $entitiesNotHandledByPlugins = [];
 
     public function __construct(
@@ -51,9 +53,9 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $this->pluginEventDispatcher;
     }
 
-    public static function getEntityCollectionName(): string
+    public function getEntityCollectionName(): string
     {
-        return 'phpClassEntityCollection';
+        return self::NAME;
     }
 
     /**

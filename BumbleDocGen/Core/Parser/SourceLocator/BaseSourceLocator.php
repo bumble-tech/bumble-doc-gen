@@ -16,11 +16,6 @@ abstract class BaseSourceLocator implements SourceLocatorInterface
         $this->finder->ignoreDotFiles(true)->ignoreVCSIgnored(true)->ignoreVCS(true)->files();
     }
 
-    protected function getIterator(): \Iterator
-    {
-        return new \ArrayIterator(iterator_to_array($this->getFinder()->getIterator()));
-    }
-
     public function getFinder(): Finder
     {
         return $this->finder;
