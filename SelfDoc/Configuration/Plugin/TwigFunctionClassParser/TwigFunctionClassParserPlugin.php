@@ -93,7 +93,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     private function isCustomTwigFunction(ClassEntity $classEntity): bool
     {
         foreach (self::TWIG_FUNCTION_DIR_NAMES as $dirName) {
-            if (str_starts_with($classEntity->getFileName(), $dirName) && $classEntity->implementsInterface(CustomFunctionInterface::class)) {
+            if ($classEntity->implementsInterface(CustomFunctionInterface::class) && str_starts_with($classEntity->getFileName(), $dirName)) {
                 return true;
             }
         }
