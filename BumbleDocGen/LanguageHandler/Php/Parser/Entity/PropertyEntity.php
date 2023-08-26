@@ -27,16 +27,15 @@ class PropertyEntity extends BaseEntity
     private ?ReflectionProperty $reflectionProperty = null;
 
     public function __construct(
-        Configuration            $configuration,
-        private ClassEntity      $classEntity,
-        private ParserHelper     $parserHelper,
+        Configuration $configuration,
+        private ClassEntity $classEntity,
+        private ParserHelper $parserHelper,
         private LocalObjectCache $localObjectCache,
-        private LoggerInterface  $logger,
-        private string           $propertyName,
-        private string           $declaringClassName,
-        private string           $implementingClassName,
-    )
-    {
+        private LoggerInterface $logger,
+        private string $propertyName,
+        private string $declaringClassName,
+        private string $implementingClassName,
+    ) {
         parent::__construct(
             $configuration,
             $localObjectCache,

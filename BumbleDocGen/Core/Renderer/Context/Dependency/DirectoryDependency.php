@@ -13,8 +13,7 @@ final class DirectoryDependency implements RendererDependencyInterface
     public function __construct(
         private string $dirInternalLink,
         private string $hash,
-    )
-    {
+    ) {
     }
 
     /**
@@ -22,9 +21,8 @@ final class DirectoryDependency implements RendererDependencyInterface
      */
     public static function create(
         RendererHelper $rendererHelper,
-        string         $dirPath,
-    ): DirectoryDependency
-    {
+        string $dirPath,
+    ): DirectoryDependency {
         $dirInternalLink = $rendererHelper->filePathToFileInternalLink($dirPath);
         return new self($dirInternalLink, self::getDirHash($rendererHelper, $dirPath));
     }

@@ -33,18 +33,17 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     private array $entitiesNotHandledByPlugins = [];
 
     public function __construct(
-        private Configuration             $configuration,
-        private PhpHandlerSettings        $phpHandlerSettings,
-        private ParserHelper              $parserHelper,
-        private PluginEventDispatcher     $pluginEventDispatcher,
+        private Configuration $configuration,
+        private PhpHandlerSettings $phpHandlerSettings,
+        private ParserHelper $parserHelper,
+        private PluginEventDispatcher $pluginEventDispatcher,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
-        private EntityDocRendererHelper   $docRendererHelper,
-        private LocalObjectCache          $localObjectCache,
-        private ProgressBarFactory        $progressBarFactory,
-        private OutputStyle               $io,
-        private LoggerInterface           $logger
-    )
-    {
+        private EntityDocRendererHelper $docRendererHelper,
+        private LocalObjectCache $localObjectCache,
+        private ProgressBarFactory $progressBarFactory,
+        private OutputStyle $io,
+        private LoggerInterface $logger
+    ) {
         parent::__construct();
     }
 
@@ -130,7 +129,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function _getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): ClassEntity
+    public function internalGetLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): ClassEntity
     {
         $classEntity = $this->get($objectName);
         if (!$classEntity) {
@@ -170,12 +169,14 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
             fn($interface) => ltrim(
                 str_replace('\\\\', '\\', $interface),
                 '\\'
-            ), $interfaces
+            ),
+            $interfaces
         );
         foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             $entityInterfaces = array_map(
-                fn($interface) => ltrim($interface, '\\'), $classEntity->getInterfaceNames()
+                fn($interface) => ltrim($interface, '\\'),
+                $classEntity->getInterfaceNames()
             );
             if (!array_intersect($interfaces, $entityInterfaces)) {
                 $classEntityCollection->remove($objectId);
@@ -195,12 +196,14 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
             fn($parentClassName) => ltrim(
                 str_replace('\\\\', '\\', $parentClassName),
                 '\\'
-            ), $parentClassNames
+            ),
+            $parentClassNames
         );
         foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             $entityParentClassNames = array_map(
-                fn($parentClassName) => ltrim($parentClassName, '\\'), $classEntity->getParentClassNames()
+                fn($parentClassName) => ltrim($parentClassName, '\\'),
+                $classEntity->getParentClassNames()
             );
             if (!array_intersect($parentClassNames, $entityParentClassNames)) {
                 $classEntityCollection->remove($objectId);
@@ -299,7 +302,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      *  $classEntityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/SelfDoc/Console/App.php'); // absolute path
      *  $classEntityCollection->findEntity('https://***REMOVED***/blob/master/SelfDoc/Console/App.php'); // source link
      */
-    public function _findEntity(string $search, bool $useUnsafeKeys = true): ?ClassEntity
+    public function internalFindEntity(string $search, bool $useUnsafeKeys = true): ?ClassEntity
     {
         if (preg_match('/^((self|parent):|(\$(.*)->))/', $search)) {
             return null;
@@ -386,11 +389,10 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      * @throws InvalidConfigurationParameterException
      */
     public function getEntityLinkData(
-        string  $rawLink,
+        string $rawLink,
         ?string $defaultEntityName = null,
-        bool    $useUnsafeKeys = true
-    ): array
-    {
+        bool $useUnsafeKeys = true
+    ): array {
         return $this->docRendererHelper->getEntityDataByLink(
             $rawLink,
             $this,

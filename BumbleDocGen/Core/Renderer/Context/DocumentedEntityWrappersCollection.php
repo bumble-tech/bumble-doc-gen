@@ -15,10 +15,9 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \C
     private array $documentedEntitiesRelations = [];
 
     public function __construct(
-        private RendererContext  $rendererContext,
+        private RendererContext $rendererContext,
         private LocalObjectCache $localObjectCache
-    )
-    {
+    ) {
     }
 
     public function getIterator(): \Generator

@@ -23,12 +23,14 @@ final class VisibilityConditionTest extends TestCase
     {
         $entityStub = $this->createStub(ConstantEntity::class);
         foreach (get_class_methods(ConstantEntity::class) as $classMethod) {
-            if (!in_array($classMethod, [
+            if (
+                !in_array($classMethod, [
                 '__construct',
                 'isPublic',
                 'isProtected',
                 'isPrivate',
-            ])) {
+                ])
+            ) {
                 $entityStub->expects($this->never())->method($classMethod);
             }
         }

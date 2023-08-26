@@ -27,12 +27,14 @@ final class VisibilityCondition implements ConditionInterface
             return false;
         }
         foreach ($this->visibilityModifiers as $visibilityModifier) {
-            if (match ($visibilityModifier) {
+            if (
+                match ($visibilityModifier) {
                 VisibilityConditionModifier::PUBLIC => $entity->isPublic(),
                 VisibilityConditionModifier::PROTECTED => $entity->isProtected(),
                 VisibilityConditionModifier::PRIVATE => $entity->isPrivate(),
                 VisibilityConditionModifier::NONE => false
-            }) {
+                }
+            ) {
                 return true;
             }
         }

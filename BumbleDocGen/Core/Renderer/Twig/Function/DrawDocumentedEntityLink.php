@@ -51,10 +51,9 @@ final class DrawDocumentedEntityLink implements CustomFunctionInterface
      */
     public function __invoke(
         RootEntityInterface $entity,
-        string              $cursor = '',
-        bool                $useShortName = true
-    ): string
-    {
+        string $cursor = '',
+        bool $useShortName = true
+    ): string {
         $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
         $url = $getDocumentedEntityUrlFunction($entity->getRootEntityCollection(), $entity->getName(), $cursor);
         $name = $useShortName ? $entity->getShortName() : $entity->getName();

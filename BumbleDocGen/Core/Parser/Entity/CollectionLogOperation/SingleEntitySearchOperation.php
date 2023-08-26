@@ -13,11 +13,10 @@ final class SingleEntitySearchOperation implements OperationInterface
     private ?string $entityName = null;
 
     public function __construct(
-        private string       $functionName,
-        private array        $args,
+        private string $functionName,
+        private array $args,
         ?RootEntityInterface $entity
-    )
-    {
+    ) {
         if ($entity?->entityDataCanBeLoaded()) {
             $this->entityName = $entity->getObjectId();
         }

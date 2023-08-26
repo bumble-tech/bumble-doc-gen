@@ -24,9 +24,8 @@ final class GetDocumentationPageUrl implements CustomFunctionInterface
 
     public function __construct(
         private BreadcrumbsHelper $breadcrumbsHelper,
-        private LoggerInterface   $logger,
-    )
-    {
+        private LoggerInterface $logger,
+    ) {
     }
 
     public static function getName(): string

@@ -16,10 +16,9 @@ final class CacheableMethod
     public const MONTH_SECONDS = self::DAY_SECONDS * 30;
 
     public function __construct(
-        private int    $cacheSeconds = self::MONTH_SECONDS,
+        private int $cacheSeconds = self::MONTH_SECONDS,
         private string $cacheKeyGeneratorClass = DefaultCacheKeyGenerator::class
-    )
-    {
+    ) {
         if (!is_a($cacheKeyGeneratorClass, CacheKeyGeneratorInterface::class, true)) {
             throw new \InvalidArgumentException(
                 'Argument $cacheKeyGeneratorClass must implement the ' . CacheKeyGeneratorInterface::class . ' interface. ' .

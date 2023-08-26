@@ -15,11 +15,10 @@ use DI\NotFoundException;
 final class PropertyEntityCollection extends BaseEntityCollection
 {
     public function __construct(
-        private ClassEntity               $classEntity,
-        private PhpHandlerSettings        $phpHandlerSettings,
+        private ClassEntity $classEntity,
+        private PhpHandlerSettings $phpHandlerSettings,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory
-    )
-    {
+    ) {
     }
 
     /**

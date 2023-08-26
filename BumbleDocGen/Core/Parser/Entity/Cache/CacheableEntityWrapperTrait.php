@@ -21,12 +21,11 @@ trait CacheableEntityWrapperTrait
      */
     final protected function getWrappedMethodResult(
         string $methodName,
-        array  $funcArgs,
+        array $funcArgs,
         string $getCacheKeyGeneratorClassName,
         string $cacheNamespace,
-        int    $cacheExpiresAfter
-    )
-    {
+        int $cacheExpiresAfter
+    ) {
         if ($this->noCacheMode) {
             return call_user_func_array(['parent', $methodName], $funcArgs);
         }

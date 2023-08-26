@@ -17,8 +17,7 @@ final class DocGeneratorFactory
 
     public function __construct(
         private string $diConfig = __DIR__ . '/di-config.php'
-    )
-    {
+    ) {
         $this->containerBuilder = new \DI\ContainerBuilder();
         $this->containerBuilder->useAutowiring(true);
         $this->containerBuilder->useAttributes(true);

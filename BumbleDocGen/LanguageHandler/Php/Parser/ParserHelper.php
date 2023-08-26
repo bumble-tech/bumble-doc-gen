@@ -157,12 +157,11 @@ final class ParserHelper
     ];
 
     public function __construct(
-        private Configuration    $configuration,
+        private Configuration $configuration,
         private ReflectorWrapper $reflector,
         private LocalObjectCache $localObjectCache,
-        private Logger           $logger
-    )
-    {
+        private Logger $logger
+    ) {
     }
 
     public static function getBuiltInClassNames(): array
@@ -279,11 +278,10 @@ final class ParserHelper
      * @throws InvalidConfigurationParameterException
      */
     public function parseFullClassName(
-        string      $searchClassName,
+        string $searchClassName,
         ClassEntity $parentClassEntity,
-        bool        $extended = true
-    ): string
-    {
+        bool $extended = true
+    ): string {
         $classNameParts = explode('::', $searchClassName);
         $searchClassName = $classNameParts[0];
         $key = $parentClassEntity->getName() . $searchClassName;
@@ -349,11 +347,10 @@ final class ParserHelper
     }
 
     protected function getRawValue(
-        ReflectionClass  $reflectionClass,
+        ReflectionClass $reflectionClass,
         ReflectionMethod $reflectionMethod,
-        string           $condition
-    )
-    {
+        string $condition
+    ) {
         $prepareReturnValue = function (mixed $value): mixed {
             if (!is_string($value) || str_contains($value, ':') || str_contains($value, '->')) {
                 return $value;
@@ -422,10 +419,9 @@ final class ParserHelper
     }
 
     public function getMethodReturnValue(
-        ReflectionClass  $reflectionClass,
+        ReflectionClass $reflectionClass,
         ReflectionMethod $reflectionMethod
-    ): mixed
-    {
+    ): mixed {
         if (preg_match('/(return )([^;]+)/', $reflectionMethod->getBodyCode(), $matches)) {
             $savedParts = [];
             $i = 0;
@@ -531,17 +527,19 @@ final class ParserHelper
         } catch (ObjectNotFoundException) {
         }
 
-        $tmpContext = (new ContextFactory)->createForNamespace(
+        $tmpContext = (new ContextFactory())->createForNamespace(
             $classEntity->getNamespaceName(),
             $classEntity->getFileContent()
         );
         $aliases = $tmpContext->getNamespaceAliases();
-        foreach (array_merge(
-                     $classEntity->getParentClassNames(),
-                     $classEntity->getInterfaceNames(),
-                     $classEntity->getTraitsNames(),
-                     self::$predefinedClassesInterfaces
-                 ) as $parentClassName) {
+        foreach (
+            array_merge(
+                $classEntity->getParentClassNames(),
+                $classEntity->getInterfaceNames(),
+                $classEntity->getTraitsNames(),
+                self::$predefinedClassesInterfaces
+            ) as $parentClassName
+        ) {
             if (str_contains($parentClassName, '\\')) {
                 $parentClassNameParts = explode('\\', $parentClassName);
                 $name = array_pop($parentClassNameParts);

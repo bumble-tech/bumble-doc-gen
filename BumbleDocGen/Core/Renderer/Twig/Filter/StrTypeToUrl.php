@@ -22,11 +22,10 @@ use Monolog\Logger;
 final class StrTypeToUrl implements CustomFilterInterface
 {
     public function __construct(
-        private RendererHelper         $rendererHelper,
+        private RendererHelper $rendererHelper,
         private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
-        private Logger                 $logger
-    )
-    {
+        private Logger $logger
+    ) {
     }
 
     public static function getName(): string
@@ -56,12 +55,11 @@ final class StrTypeToUrl implements CustomFilterInterface
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
-        string               $text,
+        string $text,
         RootEntityCollection $rootEntityCollection,
-        bool                 $useShortLinkVersion = false,
-        bool                 $createDocument = false
-    ): string
-    {
+        bool $useShortLinkVersion = false,
+        bool $createDocument = false
+    ): string {
         $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
 
         $preparedTypes = [];

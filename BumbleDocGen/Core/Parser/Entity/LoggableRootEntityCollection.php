@@ -97,12 +97,12 @@ abstract class LoggableRootEntityCollection extends RootEntityCollection
         return $result;
     }
 
-    abstract protected function _getLoadedOrCreateNew(string $objectName): RootEntityInterface;
+    abstract protected function internalGetLoadedOrCreateNew(string $objectName): RootEntityInterface;
 
     final public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): RootEntityInterface
     {
         $objectName = $this->prepareObjectName($objectName);
-        $result = $this->_getLoadedOrCreateNew($objectName, $withAddClassEntityToCollectionEvent);
+        $result = $this->internalGetLoadedOrCreateNew($objectName, $withAddClassEntityToCollectionEvent);
         $this->logOperation(
             new SingleEntitySearchOperation(
                 __FUNCTION__,
@@ -113,11 +113,11 @@ abstract class LoggableRootEntityCollection extends RootEntityCollection
         return $result;
     }
 
-    abstract protected function _findEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface;
+    abstract protected function internalFindEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface;
 
     final public function findEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface
     {
-        $result = $this->_findEntity($search, $useUnsafeKeys);
+        $result = $this->internalFindEntity($search, $useUnsafeKeys);
         $this->logOperation(new SingleEntitySearchOperation(__FUNCTION__, func_get_args(), $result));
         return $result;
     }

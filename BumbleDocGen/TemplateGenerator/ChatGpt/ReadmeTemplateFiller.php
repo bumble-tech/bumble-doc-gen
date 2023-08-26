@@ -21,8 +21,7 @@ final class ReadmeTemplateFiller
     public function __construct(
         private Client $openaiClient,
         private string $model = self::MODEL_GPT_4,
-    )
-    {
+    ) {
     }
 
 
@@ -40,11 +39,10 @@ final class ReadmeTemplateFiller
      */
     public function generateReadmeFileContent(
         RootEntityCollection $rootEntityCollection,
-        array                $entryPoints = [],
-        ?string              $composerJsonFile = null,
-        ?string              $additionalPrompt = null,
-    ): string
-    {
+        array $entryPoints = [],
+        ?string $composerJsonFile = null,
+        ?string $additionalPrompt = null,
+    ): string {
         if (!is_a($rootEntityCollection, ClassEntityCollection::class)) {
             throw new \InvalidArgumentException('Currently we can only work with collections of PHP entities');
         }

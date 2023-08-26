@@ -38,13 +38,15 @@ final class PhpDocumentorStubberPlugin implements PluginInterface
                 $resourceName = "\\{$resourceName}";
             }
             if (str_starts_with($resourceName, '\\phpDocumentor\\Reflection\\')) {
-                if (in_array(ltrim($resourceName, '\\'), [
+                if (
+                    in_array(ltrim($resourceName, '\\'), [
                         DocBlock::class,
                         DocBlockFactory::class,
                         DocBlockFactoryInterface::class,
                         Utils::class,
                         PcreException::class,
-                    ]) || str_starts_with($resourceName, '\\phpDocumentor\\Reflection\\DocBlock\\')) {
+                    ]) || str_starts_with($resourceName, '\\phpDocumentor\\Reflection\\DocBlock\\')
+                ) {
                     $resource = str_replace(['\\phpDocumentor\\Reflection\\', '\\'], ['', '/'], $resourceName);
                     $event->setResourceUrl("https://github.com/phpDocumentor/ReflectionDocBlock/blob/master/src/{$resource}.php");
                     return;

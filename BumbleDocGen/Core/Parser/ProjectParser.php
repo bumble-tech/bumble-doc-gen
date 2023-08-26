@@ -16,10 +16,9 @@ use DI\NotFoundException;
 final class ProjectParser
 {
     public function __construct(
-        private Configuration              $configuration,
+        private Configuration $configuration,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup
-    )
-    {
+    ) {
     }
 
     /**

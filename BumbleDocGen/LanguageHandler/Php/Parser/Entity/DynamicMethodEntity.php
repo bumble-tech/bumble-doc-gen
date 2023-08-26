@@ -19,11 +19,10 @@ class DynamicMethodEntity implements MethodEntityInterface
 {
     public function __construct(
         private Configuration $configuration,
-        private ParserHelper  $parserHelper,
-        private ClassEntity   $classEntity,
-        private Method        $annotationMethod
-    )
-    {
+        private ParserHelper $parserHelper,
+        private ClassEntity $classEntity,
+        private Method $annotationMethod
+    ) {
     }
 
     public function getRootEntity(): ClassEntity

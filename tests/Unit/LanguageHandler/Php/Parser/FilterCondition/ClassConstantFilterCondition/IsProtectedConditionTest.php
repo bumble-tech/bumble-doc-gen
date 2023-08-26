@@ -22,10 +22,12 @@ final class IsProtectedConditionTest extends TestCase
     {
         $entityStub = $this->createStub(ConstantEntity::class);
         foreach (get_class_methods(ConstantEntity::class) as $classMethod) {
-            if (!in_array($classMethod, [
+            if (
+                !in_array($classMethod, [
                 '__construct',
                 'isProtected',
-            ])) {
+                ])
+            ) {
                 $entityStub->expects($this->never())->method($classMethod);
             }
         }

@@ -23,8 +23,7 @@ class PhpClassToMdDocRenderer implements EntityDocRendererInterface
 
     public function __construct(
         private PhpClassRendererTwigEnvironment $classRendererTwig
-    )
-    {
+    ) {
     }
 
     public function getDocFileExtension(): string

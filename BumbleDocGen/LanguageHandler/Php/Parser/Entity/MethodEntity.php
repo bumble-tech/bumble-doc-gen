@@ -29,16 +29,15 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     private ?ReflectionMethod $reflectionMethod = null;
 
     public function __construct(
-        Configuration            $configuration,
-        private ClassEntity      $classEntity,
-        private ParserHelper     $parserHelper,
+        Configuration $configuration,
+        private ClassEntity $classEntity,
+        private ParserHelper $parserHelper,
         private LocalObjectCache $localObjectCache,
-        LoggerInterface          $logger,
-        private string           $methodName,
-        private string           $declaringClassName,
-        private string           $implementingClassName,
-    )
-    {
+        LoggerInterface $logger,
+        private string $methodName,
+        private string $declaringClassName,
+        private string $implementingClassName,
+    ) {
         parent::__construct(
             $configuration,
             $localObjectCache,

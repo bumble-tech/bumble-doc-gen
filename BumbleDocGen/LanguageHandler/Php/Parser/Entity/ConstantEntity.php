@@ -27,16 +27,15 @@ class ConstantEntity extends BaseEntity
     private ?ReflectionClassConstant $reflectionClassConstant = null;
 
     public function __construct(
-        Configuration            $configuration,
-        private ClassEntity      $classEntity,
-        private ParserHelper     $parserHelper,
+        Configuration $configuration,
+        private ClassEntity $classEntity,
+        private ParserHelper $parserHelper,
         LocalObjectCache $localObjectCache,
-        LoggerInterface          $logger,
-        private string           $constantName,
-        private string           $declaringClassName,
-        private string           $implementingClassName,
-    )
-    {
+        LoggerInterface $logger,
+        private string $constantName,
+        private string $declaringClassName,
+        private string $implementingClassName,
+    ) {
         parent::__construct(
             $configuration,
             $localObjectCache,

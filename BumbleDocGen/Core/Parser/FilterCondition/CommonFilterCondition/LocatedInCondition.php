@@ -16,11 +16,10 @@ use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 final class LocatedInCondition implements ConditionInterface
 {
     public function __construct(
-        private Configuration             $configuration,
+        private Configuration $configuration,
         private ConfigurationParameterBag $parameterBag,
-        private array                     $directories = [],
-    )
-    {
+        private array $directories = [],
+    ) {
     }
 
     /**
