@@ -43,7 +43,9 @@ final class LoadPluginsContent implements CustomFunctionInterface
     {
         $blockContentPluginResults = $this->pluginEventDispatcher->dispatch(
             new OnLoadEntityDocPluginContent(
-                $content, $entity, $blockType
+                $content,
+                $entity,
+                $blockType
             )
         )->getBlockContentPluginResults();
 

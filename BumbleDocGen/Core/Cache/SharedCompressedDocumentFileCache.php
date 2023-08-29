@@ -20,8 +20,7 @@ final class SharedCompressedDocumentFileCache
      */
     public function __construct(
         private Configuration $configuration
-    )
-    {
+    ) {
         $this->cacheFileName = $this->configuration->getOutputDir() . '/' . self::FILE_NAME;
         if (!$this->configuration->useSharedCache()) {
             return;

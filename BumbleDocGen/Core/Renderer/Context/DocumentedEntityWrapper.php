@@ -19,10 +19,9 @@ final class DocumentedEntityWrapper
      */
     public function __construct(
         private DocumentTransformableEntityInterface $documentTransformableEntity,
-        private LocalObjectCache                     $localObjectCache,
-        private string                               $initiatorFilePath
-    )
-    {
+        private LocalObjectCache $localObjectCache,
+        private string $initiatorFilePath
+    ) {
     }
 
     public function getDocRender(): EntityDocRendererInterface

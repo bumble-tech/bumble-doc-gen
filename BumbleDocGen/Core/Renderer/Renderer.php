@@ -31,17 +31,16 @@ use Twig\Error\SyntaxError;
 final class Renderer
 {
     public function __construct(
-        private Configuration                     $configuration,
-        private RootEntityCollectionsGroup        $rootEntityCollectionsGroup,
-        private PluginEventDispatcher             $pluginEventDispatcher,
-        private RendererContext                   $rendererContext,
-        private MainTwigEnvironment               $twig,
-        private RendererIteratorFactory           $renderIteratorFactory,
+        private Configuration $configuration,
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private PluginEventDispatcher $pluginEventDispatcher,
+        private RendererContext $rendererContext,
+        private MainTwigEnvironment $twig,
+        private RendererIteratorFactory $renderIteratorFactory,
         private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
-        private Filesystem                        $fs,
-        private LoggerInterface                   $logger
-    )
-    {
+        private Filesystem $fs,
+        private LoggerInterface $logger
+    ) {
     }
 
     /**

@@ -40,12 +40,11 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
     public const DEFAULT_URL = '#';
 
     public function __construct(
-        private RendererHelper                     $rendererHelper,
+        private RendererHelper $rendererHelper,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
-        private Configuration                      $configuration,
-        private Logger                             $logger
-    )
-    {
+        private Configuration $configuration,
+        private Logger $logger
+    ) {
     }
 
     public static function getName(): string

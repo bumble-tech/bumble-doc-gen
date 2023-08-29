@@ -15,6 +15,7 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Reflector;
 use Roave\BetterReflection\SourceLocator\Located\LocatedSource;
 use Roave\BetterReflection\SourceLocator\Type\SourceLocator;
+
 use function array_key_exists;
 use function spl_object_hash;
 use function sprintf;
@@ -31,11 +32,10 @@ final class CachedSourceLocator implements SourceLocator
     private array $cacheByIdentifierTypeKeyAndOid = [];
 
     public function __construct(
-        private SourceLocator      $sourceLocator,
-        private Configuration      $configuration,
+        private SourceLocator $sourceLocator,
+        private Configuration $configuration,
         private SourceLocatorCacheItemPool $cache
-    )
-    {
+    ) {
     }
 
     /**
@@ -63,7 +63,6 @@ final class CachedSourceLocator implements SourceLocator
                     file_exists($actualFileName) && md5_file($actualFileName) === $cachedData['fileHash']) &&
                 isset($cachedData['locatedSourceSource']) && isset($cachedData['locatedSourceName'])
             ) {
-
                 $locatedSource = new LocatedSource(
                     $cachedData['locatedSourceSource'],
                     $cachedData['locatedSourceName'],

@@ -17,10 +17,9 @@ final class AsyncSourceLocator implements SourceLocatorInterface, CustomSourceLo
 {
     public function __construct(
         private LocalObjectCache $localObjectCache,
-        private array            $psr4FileMap,
-        private array            $classMap
-    )
-    {
+        private array $psr4FileMap,
+        private array $classMap
+    ) {
     }
 
     /**
@@ -34,7 +33,10 @@ final class AsyncSourceLocator implements SourceLocatorInterface, CustomSourceLo
     public function getSourceLocator(Locator $astLocator): SourceLocator
     {
         return new \BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\SystemAsyncSourceLocator(
-            $astLocator, $this->localObjectCache, $this->psr4FileMap, $this->classMap,
+            $astLocator,
+            $this->localObjectCache,
+            $this->psr4FileMap,
+            $this->classMap,
         );
     }
 }

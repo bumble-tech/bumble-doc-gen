@@ -25,9 +25,8 @@ final class PhpHandlerSettings
 
     public function __construct(
         private ConfigurationParameterBag $parameterBag,
-        private LocalObjectCache          $localObjectCache
-    )
-    {
+        private LocalObjectCache $localObjectCache
+    ) {
         $parameterBag->addValueFromFileIfNotExists('', self::DEFAULT_SETTINGS_FILE);
     }
 
@@ -208,7 +207,6 @@ final class PhpHandlerSettings
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
             $this->getSettingsKey('custom_twig_filters'),
             CustomFilterInterface::class
-
         );
         $customFiltersCollection = new CustomFiltersCollection();
         foreach ($customFilters as $customFilter) {

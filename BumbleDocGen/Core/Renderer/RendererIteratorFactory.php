@@ -27,20 +27,19 @@ final class RendererIteratorFactory
     private array $renderedFileNames = [];
 
     public function __construct(
-        private RendererContext                    $rendererContext,
-        private RootEntityCollectionsGroup         $rootEntityCollectionsGroup,
+        private RendererContext $rendererContext,
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
-        private Configuration                      $configuration,
-        private ConfigurationParameterBag          $configurationParameterBag,
-        private SharedCompressedDocumentFileCache  $sharedCompressedDocumentFileCache,
-        private RendererHelper                     $rendererHelper,
-        private RendererDependencyFactory          $dependencyFactory,
-        private LocalObjectCache                   $localObjectCache,
-        private ProgressBarFactory                 $progressBarFactory,
-        private OutputStyle                        $io,
-        private Logger                             $logger,
-    )
-    {
+        private Configuration $configuration,
+        private ConfigurationParameterBag $configurationParameterBag,
+        private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
+        private RendererHelper $rendererHelper,
+        private RendererDependencyFactory $dependencyFactory,
+        private LocalObjectCache $localObjectCache,
+        private ProgressBarFactory $progressBarFactory,
+        private OutputStyle $io,
+        private Logger $logger,
+    ) {
     }
 
     /**

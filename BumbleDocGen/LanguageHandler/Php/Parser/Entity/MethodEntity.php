@@ -29,16 +29,15 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     private ?ReflectionMethod $reflectionMethod = null;
 
     public function __construct(
-        Configuration            $configuration,
-        private ClassEntity      $classEntity,
-        private ParserHelper     $parserHelper,
+        private Configuration $configuration,
+        private ClassEntity $classEntity,
+        private ParserHelper $parserHelper,
         private LocalObjectCache $localObjectCache,
-        LoggerInterface          $logger,
-        private string           $methodName,
-        private string           $declaringClassName,
-        private string           $implementingClassName,
-    )
-    {
+        LoggerInterface $logger,
+        private string $methodName,
+        private string $declaringClassName,
+        private string $implementingClassName,
+    ) {
         parent::__construct(
             $configuration,
             $localObjectCache,
@@ -343,6 +342,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws \Exception
      */
     #[CacheableMethod] public function getParameters(): array
     {
@@ -388,6 +388,15 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 $defaultValue = $param->getDefaultValueConstantName();
             } catch (\Exception) {
             }
+
+            $defaultValue = str_replace(
+                [
+                    $this->configuration->getWorkingDir(),
+                    $this->configuration->getProjectRoot(),
+                ],
+                '',
+                $defaultValue
+            );
             $parameters[] = [
                 'type' => $this->prepareTypeString($type),
                 'expectedType' => $expectedType,

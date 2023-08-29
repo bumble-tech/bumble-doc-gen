@@ -20,12 +20,11 @@ use Roave\BetterReflection\SourceLocator\Type\AbstractSourceLocator;
 final class SystemAsyncSourceLocator extends AbstractSourceLocator
 {
     public function __construct(
-        Locator                  $astLocator,
+        Locator $astLocator,
         private LocalObjectCache $localObjectCache,
-        private array            $psr4FileMap,
-        private array            $classMap
-    )
-    {
+        private array $psr4FileMap,
+        private array $classMap
+    ) {
         parent::__construct($astLocator);
     }
 
@@ -64,7 +63,9 @@ final class SystemAsyncSourceLocator extends AbstractSourceLocator
         $classLoader = $this->getClassLoader($this->psr4FileMap, $this->classMap);
         if ($fileName = $classLoader->findFile($className)) {
             return new LocatedSource(
-                file_get_contents($fileName), $className, $fileName
+                file_get_contents($fileName),
+                $className,
+                $fileName
             );
         }
         return null;

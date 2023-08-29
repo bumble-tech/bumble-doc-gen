@@ -27,9 +27,8 @@ final class TemplatesStructureGenerator
      */
     public function generateStructureByEntityCollection(
         RootEntityCollection $rootEntityCollection,
-        ?string              $additionalPrompt = null,
-    ): array
-    {
+        ?string $additionalPrompt = null,
+    ): array {
         if (!is_a($rootEntityCollection, ClassEntityCollection::class)) {
             throw new \InvalidArgumentException('Currently we can only work with collections of PHP entities');
         }

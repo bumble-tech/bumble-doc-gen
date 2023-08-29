@@ -22,8 +22,7 @@ final class MainTwigEnvironment
     public function __construct(
         Configuration $configuration,
         MainExtension $mainExtension
-    )
-    {
+    ) {
         $templateFolder = $configuration->getTemplatesDir();
         $loader = new FilesystemLoader([$templateFolder]);
         $this->twig = new Environment($loader);

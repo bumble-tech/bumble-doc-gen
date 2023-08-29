@@ -28,10 +28,9 @@ final class DrawClassMap implements CustomFunctionInterface
     private array $fileClassmap;
 
     public function __construct(
-        private GetDocumentedEntityUrl     $getDocumentedEntityUrlFunction,
+        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-    )
-    {
+    ) {
     }
 
     public static function getName(): string
@@ -59,8 +58,7 @@ final class DrawClassMap implements CustomFunctionInterface
      */
     public function __invoke(
         ClassEntityCollection ...$classEntityCollections,
-    ): string
-    {
+    ): string {
         $structure = $this->convertDirectoryStructureToFormattedString(
             $this->getDirectoryStructure(...$classEntityCollections),
         );
@@ -136,11 +134,10 @@ final class DrawClassMap implements CustomFunctionInterface
     }
 
     public function convertDirectoryStructureToFormattedString(
-        array  $structure,
+        array $structure,
         string $prefix = '│',
         string $path = '/'
-    ): string
-    {
+    ): string {
         $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
         $formattedString = '';
         $elementsCount = count($structure);

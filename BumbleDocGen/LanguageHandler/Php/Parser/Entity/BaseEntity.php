@@ -35,12 +35,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     #[Inject] private RendererHelper $rendererHelper;
 
     protected function __construct(
-        private Configuration    $configuration,
+        private Configuration $configuration,
         private LocalObjectCache $localObjectCache,
-        private ParserHelper     $parserHelper,
-        private LoggerInterface  $logger
-    )
-    {
+        private ParserHelper $parserHelper,
+        private LoggerInterface $logger
+    ) {
     }
 
     /**
@@ -449,7 +448,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     {
         if (is_a($this, RootEntityInterface::class)) {
             return $this;
-        } else if (method_exists($this, 'getRootEntity')) {
+        } elseif (method_exists($this, 'getRootEntity')) {
             return $this->getRootEntity();
         }
         return null;

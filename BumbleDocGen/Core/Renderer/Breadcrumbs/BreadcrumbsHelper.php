@@ -31,12 +31,11 @@ final class BreadcrumbsHelper
      * @param string $prevPageNameTemplate Index page for each child section
      */
     public function __construct(
-        private Configuration              $configuration,
-        private LocalObjectCache           $localObjectCache,
+        private Configuration $configuration,
+        private LocalObjectCache $localObjectCache,
         private BreadcrumbsTwigEnvironment $breadcrumbsTwig,
-        private string                     $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
-    )
-    {
+        private string $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
+    ) {
     }
 
     /**
@@ -229,7 +228,8 @@ final class BreadcrumbsHelper
         /**@var \SplFileInfo[] $allFiles */
         $allFiles = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator(
-                $templatesDir, \FilesystemIterator::SKIP_DOTS
+                $templatesDir,
+                \FilesystemIterator::SKIP_DOTS
             )
         );
         foreach ($allFiles as $file) {

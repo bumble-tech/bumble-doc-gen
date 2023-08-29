@@ -18,11 +18,10 @@ use Twig\Error\SyntaxError;
 final class GeneratePageBreadcrumbs implements CustomFunctionInterface
 {
     public function __construct(
-        private BreadcrumbsHelper         $breadcrumbsHelper,
-        private RendererContext           $rendererContext,
+        private BreadcrumbsHelper $breadcrumbsHelper,
+        private RendererContext $rendererContext,
         private RendererDependencyFactory $dependencyFactory,
-    )
-    {
+    ) {
     }
 
     public static function getName(): string
@@ -54,9 +53,8 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
     public function __invoke(
         string $currentPageTitle,
         string $templatePath,
-        bool   $skipFirstTemplatePage = true
-    ): string
-    {
+        bool $skipFirstTemplatePage = true
+    ): string {
         $content = $this->breadcrumbsHelper->renderBreadcrumbs(
             $currentPageTitle,
             $templatePath,

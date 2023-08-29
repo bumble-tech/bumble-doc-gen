@@ -83,8 +83,7 @@ final class OperationsCollection implements \IteratorAggregate
     private function checkIsFoundEntitiesCacheOutdatedRecursive(
         RootEntityCollection $rootEntityCollection,
         OperationsCollection $operationsCollection,
-    ): bool
-    {
+    ): bool {
         foreach ($operationsCollection->operations as $operation) {
             if ($operation instanceof SingleEntitySearchOperation) {
                 $entity = $operation->call($rootEntityCollection);
@@ -102,7 +101,6 @@ final class OperationsCollection implements \IteratorAggregate
                 } elseif ($entity?->entityCacheIsOutdated() && $entity?->entityDataCanBeLoaded()) {
                     return true;
                 }
-
             } elseif ($operation instanceof IterateEntitiesOperation) {
                 $entities = $operation->call($rootEntityCollection);
                 $entitiesData = $operation->getEntitiesData();
