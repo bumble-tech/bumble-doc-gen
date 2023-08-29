@@ -20,12 +20,11 @@ use Psr\Log\LoggerInterface;
 final class MethodEntityCollection extends BaseEntityCollection
 {
     public function __construct(
-        private ClassEntity               $classEntity,
-        private PhpHandlerSettings        $phpHandlerSettings,
+        private ClassEntity $classEntity,
+        private PhpHandlerSettings $phpHandlerSettings,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
-        private LoggerInterface           $logger
-    )
-    {
+        private LoggerInterface $logger
+    ) {
     }
 
     /**

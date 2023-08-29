@@ -26,9 +26,8 @@ final class ConfigurationParameterBag
      */
     public function __construct(
         private ValueToClassTransformer $valueToClassTransformer,
-        private array                   $resolvers
-    )
-    {
+        private array $resolvers
+    ) {
     }
 
     public function getConfigValues(string ...$configurationFiles): array
@@ -151,9 +150,8 @@ final class ConfigurationParameterBag
      */
     public function validateAndGetStringValue(
         string $parameterName,
-        bool   $nullable = true
-    ): ?string
-    {
+        bool $nullable = true
+    ): ?string {
         $value = $this->get($parameterName);
         if (!$nullable && !is_string($value)) {
             throw new InvalidConfigurationParameterException(
@@ -175,8 +173,7 @@ final class ConfigurationParameterBag
     public function validateAndGetClassValue(
         string $parameterName,
         string $classInterfaceName
-    ): object
-    {
+    ): object {
         $value = $this->get($parameterName);
         $valueObject = $this->valueToClassTransformer->transform($value);
         if (is_null($valueObject)) {
@@ -200,9 +197,8 @@ final class ConfigurationParameterBag
     public function validateAndGetClassListValue(
         string $parameterName,
         string $classInterfaceName,
-        bool   $nullable = true
-    ): array
-    {
+        bool $nullable = true
+    ): array {
         $preparedValues = [];
         $values = $this->get($parameterName);
         if (is_null($values) && $nullable) {
@@ -246,10 +242,9 @@ final class ConfigurationParameterBag
      */
     public function validateAndGetFilePathValue(
         string $parameterName,
-        array  $fileExtensions,
-        bool   $nullable = true
-    ): ?string
-    {
+        array $fileExtensions,
+        bool $nullable = true
+    ): ?string {
         $value = $this->validateAndGetStringValue($parameterName, $nullable);
         if (is_null($value)) {
             return null;
@@ -272,9 +267,8 @@ final class ConfigurationParameterBag
      */
     public function validateAndGetDirectoryPathValue(
         string $parameterName,
-        bool   $nullable = true
-    ): ?string
-    {
+        bool $nullable = true
+    ): ?string {
         $value = $this->validateAndGetStringValue($parameterName, $nullable);
         if (is_null($value)) {
             return null;

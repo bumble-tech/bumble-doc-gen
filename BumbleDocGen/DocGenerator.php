@@ -36,16 +36,15 @@ final class DocGenerator
     public const LOG_FILE_NAME = 'last_run.log';
 
     public function __construct(
-        private Filesystem                 $fs,
-        private OutputStyle                $io,
-        private Configuration              $configuration,
-        private ProjectParser              $parser,
-        private ParserHelper               $parserHelper,
-        private Renderer                   $renderer,
+        private Filesystem $fs,
+        private OutputStyle $io,
+        private Configuration $configuration,
+        private ProjectParser $parser,
+        private ParserHelper $parserHelper,
+        private Renderer $renderer,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private Logger                     $logger
-    )
-    {
+        private Logger $logger
+    ) {
         if (file_exists(self::LOG_FILE_NAME)) {
             unlink(self::LOG_FILE_NAME);
         }
@@ -317,6 +316,7 @@ final class DocGenerator
 
         $time = microtime(true) - $start;
         $memory = memory_get_usage(true) - $memory;
+
 
         $this->io->writeln("<info>Documentation successfully generated</>");
         $this->io->table([], [

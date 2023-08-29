@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Renderer\Twig\Filter;
 
-use function \mb_strtolower;
+use function mb_strtolower;
 
 /**
  * The filter converts the string into an anchor that can be used in a GitHub document link

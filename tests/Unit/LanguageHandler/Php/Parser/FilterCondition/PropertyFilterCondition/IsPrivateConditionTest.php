@@ -22,10 +22,12 @@ final class IsPrivateConditionTest extends TestCase
     {
         $entityStub = $this->createStub(PropertyEntity::class);
         foreach (get_class_methods(PropertyEntity::class) as $classMethod) {
-            if (!in_array($classMethod, [
+            if (
+                !in_array($classMethod, [
                 '__construct',
                 'isPrivate',
-            ])) {
+                ])
+            ) {
                 $entityStub->expects($this->never())->method($classMethod);
             }
         }

@@ -11,12 +11,11 @@ use Roave\BetterReflection\Util\FileHelper;
 final class FileDependency implements RendererDependencyInterface
 {
     public function __construct(
-        private string  $fileInternalLink,
-        private string  $hash,
+        private string $fileInternalLink,
+        private string $hash,
         private ?string $contentFilterRegex,
-        private ?int    $matchIndex,
-    )
-    {
+        private ?int $matchIndex,
+    ) {
     }
 
     /**
@@ -24,11 +23,10 @@ final class FileDependency implements RendererDependencyInterface
      */
     public static function create(
         RendererHelper $rendererHelper,
-        string         $filePath,
-        ?string        $contentFilterRegex,
-        ?int           $matchIndex,
-    ): FileDependency
-    {
+        string $filePath,
+        ?string $contentFilterRegex,
+        ?int $matchIndex,
+    ): FileDependency {
         $fileInternalLink = $rendererHelper->filePathToFileInternalLink($filePath);
         if (!file_exists($filePath) || !is_readable($filePath)) {
             return new self($fileInternalLink, '', $contentFilterRegex, $matchIndex);
@@ -75,7 +73,8 @@ final class FileDependency implements RendererDependencyInterface
             if (
                 preg_match(
                     $this->contentFilterRegex,
-                    file_get_contents($fileName), $matches
+                    file_get_contents($fileName),
+                    $matches
                 ) &&
                 isset($matches[$this->matchIndex])
             ) {

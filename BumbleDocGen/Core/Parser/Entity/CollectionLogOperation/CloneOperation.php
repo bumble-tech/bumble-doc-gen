@@ -11,11 +11,10 @@ final class CloneOperation implements OperationInterface
     private int $usageCount = 0;
 
     public function __construct(
-        private string               $functionName,
-        private array                $args,
+        private string $functionName,
+        private array $args,
         private OperationsCollection $operationsCollection
-    )
-    {
+    ) {
     }
 
     public function getOperationsCollection(): OperationsCollection

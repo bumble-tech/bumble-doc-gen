@@ -13,9 +13,8 @@ final class RendererHelper
 {
     public function __construct(
         private PluginEventDispatcher $pluginEventDispatcher,
-        private Configuration         $configuration
-    )
-    {
+        private Configuration $configuration
+    ) {
     }
 
     /**

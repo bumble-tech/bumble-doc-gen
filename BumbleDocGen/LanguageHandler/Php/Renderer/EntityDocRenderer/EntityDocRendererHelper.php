@@ -19,9 +19,8 @@ final class EntityDocRendererHelper
 
     public function __construct(
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private GetDocumentedEntityUrl     $getDocumentedEntityUrlFunction
-    )
-    {
+        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction
+    ) {
     }
 
     /**
@@ -29,12 +28,11 @@ final class EntityDocRendererHelper
      * @throws InvalidConfigurationParameterException
      */
     public function getEntityDataByLink(
-        string               $linkString,
+        string $linkString,
         RootEntityCollection $rootEntityCollection,
-        ?string              $defaultEntityName = null,
-        bool                 $useUnsafeKeys = true
-    ): array
-    {
+        ?string $defaultEntityName = null,
+        bool $useUnsafeKeys = true
+    ): array {
         if (!is_a($rootEntityCollection, ClassEntityCollection::class)) {
             return [];
         }
@@ -117,11 +115,10 @@ final class EntityDocRendererHelper
      * @throws InvalidConfigurationParameterException
      */
     public function getEntityUrlDataByLink(
-        string  $linkString,
+        string $linkString,
         ?string $defaultEntityClassName = null,
-        bool    $createDocument = true
-    ): array
-    {
+        bool $createDocument = true
+    ): array {
         $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
         $data = self::getEntityDataByLink($linkString, $entityCollection, $defaultEntityClassName);
         if ($data['entityName'] ?? null) {

@@ -19,8 +19,7 @@ final class EntityCacheItemPool implements CacheItemPoolInterface
      */
     public function __construct(
         Configuration $configuration
-    )
-    {
+    ) {
         $entityNamespaceKey = md5($configuration->getOutputDir());
         $this->cacheItemPool = new FilesystemAdapter(
             "entity_{$entityNamespaceKey}",

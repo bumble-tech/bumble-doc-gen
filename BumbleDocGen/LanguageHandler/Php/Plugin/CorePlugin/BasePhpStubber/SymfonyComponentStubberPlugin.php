@@ -37,7 +37,7 @@ final class SymfonyComponentStubberPlugin implements PluginInterface
                 $resourceName = implode('/', $resourceNameParts);
 
                 $packageName = lcfirst($packageName);
-                $packageName = preg_replace("/[A-Z]/",  "-$0", $packageName);
+                $packageName = preg_replace("/[A-Z]/", "-$0", $packageName);
                 $packageName = strtolower($packageName);
 
                 $event->setResourceUrl("https://github.com/symfony/{$packageName}/blob/master/{$resourceName}.php");

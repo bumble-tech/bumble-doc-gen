@@ -13,7 +13,7 @@ final class DirectoriesSourceLocator extends BaseSourceLocator
     {
         parent::__construct();
         $directories = array_map(function (string $directory) {
-            if(!is_dir($directory)){
+            if (!is_dir($directory)) {
                 throw new \InvalidArgumentException("Directory `{$directory}` not found");
             }
             return realpath($directory);

@@ -23,11 +23,10 @@ final class MissingDocBlocksGenerator
     public const MODE_READ_ALL_CODE = 2;
 
     public function __construct(
-        private Client       $openaiClient,
+        private Client $openaiClient,
         private ParserHelper $parserHelper,
-        private string       $model = self::MODEL_GPT_4,
-    )
-    {
+        private string $model = self::MODEL_GPT_4,
+    ) {
     }
 
     /**
@@ -60,9 +59,8 @@ final class MissingDocBlocksGenerator
      */
     public function generateDocBlocksForMethodsWithoutIt(
         RootEntityInterface $rootEntity,
-        int                 $mode = self::MODE_READ_ONLY_SIGNATURES,
-    ): array
-    {
+        int $mode = self::MODE_READ_ONLY_SIGNATURES,
+    ): array {
 
         if (!is_a($rootEntity, ClassEntity::class)) {
             throw new \InvalidArgumentException('Currently we can only work PHP class entities');

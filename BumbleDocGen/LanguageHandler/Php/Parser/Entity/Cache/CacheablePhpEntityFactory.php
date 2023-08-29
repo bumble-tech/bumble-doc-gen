@@ -26,12 +26,11 @@ final class CacheablePhpEntityFactory
 {
     public function __construct(
         private CacheableEntityWrapperFactory $cacheableEntityWrapperFactory,
-        private ReflectorWrapper              $reflector,
-        private Configuration                 $configuration,
-        private LocalObjectCache              $localObjectCache,
-        private Container                     $diContainer
-    )
-    {
+        private ReflectorWrapper $reflector,
+        private Configuration $configuration,
+        private LocalObjectCache $localObjectCache,
+        private Container $diContainer
+    ) {
     }
 
     /**
@@ -40,11 +39,10 @@ final class CacheablePhpEntityFactory
      */
     public function createPropertyEntity(
         ClassEntity $classEntity,
-        string      $propertyName,
-        string      $declaringClassName,
-        string      $implementingClassName
-    ): PropertyEntity
-    {
+        string $propertyName,
+        string $declaringClassName,
+        string $implementingClassName
+    ): PropertyEntity {
         $objectId = "{$classEntity->getName()}:{$propertyName}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
@@ -67,12 +65,11 @@ final class CacheablePhpEntityFactory
      */
     public function createConstantEntity(
         ClassEntity $classEntity,
-        string      $constantName,
-        string      $declaringClassName,
-        string      $implementingClassName,
-        bool        $reloadCache = false
-    ): ConstantEntity
-    {
+        string $constantName,
+        string $declaringClassName,
+        string $implementingClassName,
+        bool $reloadCache = false
+    ): ConstantEntity {
         $objectId = "{$classEntity->getName()}:{$constantName}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
@@ -96,11 +93,10 @@ final class CacheablePhpEntityFactory
      */
     public function createMethodEntity(
         ClassEntity $classEntity,
-        string      $methodName,
-        string      $declaringClassName,
-        string      $implementingClassName
-    ): MethodEntity
-    {
+        string $methodName,
+        string $declaringClassName,
+        string $implementingClassName
+    ): MethodEntity {
         $objectId = "{$classEntity->getName()}:{$methodName}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
@@ -123,9 +119,8 @@ final class CacheablePhpEntityFactory
      */
     public function createDynamicMethodEntity(
         ClassEntity $classEntity,
-        Method      $annotationMethod
-    ): DynamicMethodEntity
-    {
+        Method $annotationMethod
+    ): DynamicMethodEntity {
         $objectId = "{$classEntity->getName()}:{$annotationMethod->getMethodName()}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
@@ -146,10 +141,9 @@ final class CacheablePhpEntityFactory
      */
     public function createClassEntity(
         ClassEntityCollection $classEntityCollection,
-        string                $className,
-        ?string               $relativeFileName = null
-    ): ClassEntity
-    {
+        string $className,
+        ?string $relativeFileName = null
+    ): ClassEntity {
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
         $objectId = md5($className);
         try {
@@ -173,10 +167,9 @@ final class CacheablePhpEntityFactory
      * @throws InvalidConfigurationParameterException
      */
     public function createClassEntityByReflection(
-        ReflectionClass       $reflectionClass,
+        ReflectionClass $reflectionClass,
         ClassEntityCollection $classEntityCollection
-    ): ClassEntity
-    {
+    ): ClassEntity {
         $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName() ?? '');
         $relativeFileName = $relativeFileName ?: null;
         $className = $reflectionClass->getName();
@@ -190,12 +183,11 @@ final class CacheablePhpEntityFactory
      * @throws NotFoundException
      */
     public function createSubClassEntity(
-        string                $subClassEntity,
+        string $subClassEntity,
         ClassEntityCollection $classEntityCollection,
-        string                $className,
-        ?string               $relativeFileName
-    ): ClassEntity
-    {
+        string $className,
+        ?string $relativeFileName
+    ): ClassEntity {
         if (!is_a($subClassEntity, ClassEntity::class, true)) {
             throw new \Exception(
                 'The class must inherit from `BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity`'
@@ -224,11 +216,10 @@ final class CacheablePhpEntityFactory
      * @throws InvalidConfigurationParameterException
      */
     public function createSubClassEntityByReflection(
-        string                $subClassEntity,
-        ReflectionClass       $reflectionClass,
+        string $subClassEntity,
+        ReflectionClass $reflectionClass,
         ClassEntityCollection $classEntityCollection
-    ): ClassEntity
-    {
+    ): ClassEntity {
         $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName() ?? '');
         $relativeFileName = $relativeFileName ?: null;
         $className = $reflectionClass->getName();

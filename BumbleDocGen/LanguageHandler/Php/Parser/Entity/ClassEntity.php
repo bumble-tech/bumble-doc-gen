@@ -44,17 +44,16 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     private bool $isClassLoad = false;
 
     public function __construct(
-        private Configuration         $configuration,
-        private PhpHandlerSettings    $phpHandlerSettings,
-        private ReflectorWrapper      $reflector,
+        private Configuration $configuration,
+        private PhpHandlerSettings $phpHandlerSettings,
+        private ReflectorWrapper $reflector,
         private ClassEntityCollection $classEntityCollection,
-        private ParserHelper          $parserHelper,
-        private LocalObjectCache      $localObjectCache,
-        private LoggerInterface       $logger,
-        private string                $className,
-        private ?string               $relativeFileName,
-    )
-    {
+        private ParserHelper $parserHelper,
+        private LocalObjectCache $localObjectCache,
+        private LoggerInterface $logger,
+        private string $className,
+        private ?string $relativeFileName,
+    ) {
         parent::__construct(
             $configuration,
             $localObjectCache,
@@ -297,9 +296,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     #[CacheableMethod] public function entityDataCanBeLoaded(): bool
     {
-        if (!$this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
-            new OnCheckIsClassEntityCanBeLoad($this)
-        )->isClassCanBeLoad()) {
+        if (
+            !$this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
+                new OnCheckIsClassEntityCanBeLoad($this)
+            )->isClassCanBeLoad()
+        ) {
             $this->logger->notice("Class `{$this->getName()}` loading skipped by plugin");
             return false;
         }
@@ -852,7 +853,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $parentClassNames = $this->getParentClassNames();
         $interfacesNames = $this->getInterfaceNames();
         $allClasses = array_map(
-            fn($interface) => ltrim($interface, '\\'), array_merge($parentClassNames, $interfacesNames)
+            fn($interface) => ltrim($interface, '\\'),
+            array_merge($parentClassNames, $interfacesNames)
         );
         return in_array($className, $allClasses);
     }
@@ -874,7 +876,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $interfaceName = ltrim(str_replace('\\\\', '\\', $interfaceName), '\\');
         $interfaces = array_map(
-            fn($interface) => ltrim($interface, '\\'), $this->getInterfaceNames()
+            fn($interface) => ltrim($interface, '\\'),
+            $this->getInterfaceNames()
         );
         return in_array($interfaceName, $interfaces);
     }
@@ -887,7 +890,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $parentClassName = ltrim(str_replace('\\\\', '\\', $parentClassName), '\\');
         $parentClassNames = array_map(
-            fn($interface) => ltrim($interface, '\\'), $this->getParentClassNames()
+            fn($interface) => ltrim($interface, '\\'),
+            $this->getParentClassNames()
         );
         return in_array($parentClassName, $parentClassNames);
     }
@@ -930,12 +934,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     public function cursorToDocAttributeLinkFragment(string $cursor, bool $isForDocument = true): string
     {
-        if (!$cursor || !preg_match(
+        if (
+            !$cursor || !preg_match(
                 '/^(((\$)(([a-zA-Z_])([a-zA-Z_0-9]+)))|(([a-zA-Z_])([a-zA-Z_0-9]+))|((([a-zA-Z_])([a-zA-Z_0-9]+))\(\)))$/',
                 $cursor,
                 $matches,
                 PREG_UNMATCHED_AS_NULL
-            )) {
+            )
+        ) {
             return '';
         }
 

@@ -31,10 +31,9 @@ final class Configuration
 
     public function __construct(
         private ConfigurationParameterBag $parameterBag,
-        private LocalObjectCache          $localObjectCache,
-        private LoggerInterface           $logger,
-    )
-    {
+        private LocalObjectCache $localObjectCache,
+        private LoggerInterface $logger,
+    ) {
         $parameterBag->addValueFromFileIfNotExists('', self::DEFAULT_SETTINGS_FILE);
     }
 
@@ -274,7 +273,6 @@ final class Configuration
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
             'twig_filters',
             CustomFilterInterface::class
-
         );
         $customFiltersCollection = new CustomFiltersCollection();
         foreach ($customFilters as $customFilter) {

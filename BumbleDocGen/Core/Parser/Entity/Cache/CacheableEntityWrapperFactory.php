@@ -12,8 +12,7 @@ final class CacheableEntityWrapperFactory
 {
     public function __construct(
         private LocalObjectCache $localObjectCache
-    )
-    {
+    ) {
     }
 
     public function createWrappedEntityClass(string $className, string $wrapperName): string

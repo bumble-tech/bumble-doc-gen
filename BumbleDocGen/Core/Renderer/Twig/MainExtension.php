@@ -25,9 +25,8 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
      */
     public function __construct(
         private RendererContext $context,
-        private Configuration   $configuration
-    )
-    {
+        private Configuration $configuration
+    ) {
         $this->setDefaultFunctions();
         $this->setDefaultFilters();
     }

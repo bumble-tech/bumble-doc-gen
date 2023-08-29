@@ -19,8 +19,7 @@ final class SourceLocatorCacheItemPool implements CacheItemPoolInterface
      */
     public function __construct(
         Configuration $configuration
-    )
-    {
+    ) {
         $this->cacheItemPool = new FilesystemAdapter(
             'sourceLocator',
             604800,

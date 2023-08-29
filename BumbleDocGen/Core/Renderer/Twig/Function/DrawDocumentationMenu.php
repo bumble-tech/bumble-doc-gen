@@ -28,12 +28,11 @@ use Symfony\Component\Finder\Finder;
 final class DrawDocumentationMenu implements CustomFunctionInterface
 {
     public function __construct(
-        private Configuration             $configuration,
-        private BreadcrumbsHelper         $breadcrumbsHelper,
-        private RendererContext           $rendererContext,
+        private Configuration $configuration,
+        private BreadcrumbsHelper $breadcrumbsHelper,
+        private RendererContext $rendererContext,
         private RendererDependencyFactory $dependencyFactory,
-    )
-    {
+    ) {
     }
 
     public static function getName(): string

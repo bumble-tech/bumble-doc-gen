@@ -11,19 +11,17 @@ final class RendererDependencyFactory
 {
     public function __construct(
         private RendererHelper $rendererHelper,
-    )
-    {
+    ) {
     }
 
     /**
      * @throws InvalidConfigurationParameterException
      */
     public function createFileDependency(
-        string  $filePath,
+        string $filePath,
         ?string $contentFilterRegex = null,
-        ?int    $matchIndex = null,
-    ): FileDependency
-    {
+        ?int $matchIndex = null,
+    ): FileDependency {
         return FileDependency::create($this->rendererHelper, $filePath, $contentFilterRegex, $matchIndex);
     }
 

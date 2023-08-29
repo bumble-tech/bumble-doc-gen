@@ -12,9 +12,8 @@ final class RecursiveDirectoriesSourceLocator extends BaseSourceLocator
     public function __construct(
         array $directories,
         array $exclude = [],
-        bool  $abortExecutionIfPartOfDirsNotExists = true,
-    )
-    {
+        bool $abortExecutionIfPartOfDirsNotExists = true,
+    ) {
         parent::__construct();
 
         if (!$abortExecutionIfPartOfDirsNotExists) {

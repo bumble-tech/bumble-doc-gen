@@ -27,13 +27,12 @@ final class ReflectorWrapper implements Reflector
     private ?DefaultReflector $reflector = null;
 
     public function __construct(
-        private Configuration              $configuration,
-        private PhpHandlerSettings         $phpHandlerSettings,
-        private PluginEventDispatcher      $pluginEventDispatcher,
-        private BetterReflection           $betterReflection,
+        private Configuration $configuration,
+        private PhpHandlerSettings $phpHandlerSettings,
+        private PluginEventDispatcher $pluginEventDispatcher,
+        private BetterReflection $betterReflection,
         private SourceLocatorCacheItemPool $sourceLocatorCache
-    )
-    {
+    ) {
     }
 
     /**

@@ -46,11 +46,10 @@ final class PrintEntityCollectionAsList implements CustomFunctionInterface
      */
     public function __invoke(
         RootEntityCollection $rootEntityCollection,
-        string               $type = 'ul',
-        bool                 $skipDescription = false,
-        bool                 $useFullName = false,
-    ): string
-    {
+        string $type = 'ul',
+        bool $skipDescription = false,
+        bool $useFullName = false,
+    ): string {
         $result = "<{$type}>";
         foreach ($rootEntityCollection as $entity) {
             $description = $entity->getDescription();

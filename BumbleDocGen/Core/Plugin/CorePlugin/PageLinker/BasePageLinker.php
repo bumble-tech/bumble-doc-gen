@@ -38,12 +38,11 @@ abstract class BasePageLinker implements PluginInterface
     abstract protected function getOutputTemplate(): string;
 
     public function __construct(
-        private BreadcrumbsHelper          $breadcrumbsHelper,
+        private BreadcrumbsHelper $breadcrumbsHelper,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private GetDocumentedEntityUrl     $getDocumentedEntityUrlFunction,
-        private LoggerInterface            $logger,
-    )
-    {
+        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private LoggerInterface $logger,
+    ) {
     }
 
     public static function getSubscribedEvents(): array

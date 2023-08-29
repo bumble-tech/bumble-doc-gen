@@ -12,9 +12,8 @@ class GithubPagesLinkProcessor implements PageLinkProcessorInterface
 
     public function __construct(
         private Configuration $configuration,
-        array                 $docFilesExtensions = ['md', 'html']
-    )
-    {
+        array $docFilesExtensions = ['md', 'html']
+    ) {
         $this->docFilesExtensions = array_map(fn($ext) => ".{$ext}", $docFilesExtensions);
     }
 
