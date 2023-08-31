@@ -9,7 +9,7 @@ This tool analyzes your codebase and produces a comprehensive set of Markdown do
 Add the BumbleDocGen to the `composer.json` file of your project using the following command:
 
 ```console
- composer require bumble/doc-gen
+ composer require bumble-tech/bumble-doc-gen
 ```
 
 
