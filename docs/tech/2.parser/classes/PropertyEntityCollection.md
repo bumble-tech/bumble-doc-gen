@@ -1,0 +1,278 @@
+<!-- {% raw %} -->
+<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entity.md">Entities and entities collections</a> <b>/</b> PropertyEntityCollection<hr> </embed>
+
+<h1>
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntityCollection.php#L15">PropertyEntityCollection</a> class:
+</h1>
+
+
+
+
+
+```php
+namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
+
+final class PropertyEntityCollection extends \BumbleDocGen\Core\Parser\Entity\BaseEntityCollection implements \IteratorAggregate, \Traversable
+```
+
+
+
+
+
+
+
+
+<h2>Initialization methods:</h2>
+
+<ol>
+<li>
+    <a href="#m-construct">__construct</a>
+    </li>
+</ol>
+
+<h2>Methods:</h2>
+
+<ol>
+<li>
+    <a href="#madd">add</a>
+    </li>
+<li>
+    <a href="#mget">get</a>
+    </li>
+<li>
+    <a href="#mloadpropertyentities">loadPropertyEntities</a>
+    </li>
+<li>
+    <a href="#munsafeget">unsafeGet</a>
+    </li>
+</ol>
+
+
+
+
+
+
+
+<h2>Method details:</h2>
+
+<div class='method_description-block'>
+
+<ul>
+<li><a name="m-construct" href="#m-construct">#</a>
+ <b>__construct</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntityCollection.php#L17">source code</a></li>
+</ul>
+
+```php
+public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, \BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings $phpHandlerSettings, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory $cacheablePhpEntityFactory);
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$classEntity</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$phpHandlerSettings</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php'>\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$cacheablePhpEntityFactory</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="madd" href="#madd">#</a>
+ <b>add</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntityCollection.php#L46">source code</a></li>
+</ul>
+
+```php
+public function add(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity $propertyEntity, bool $reload = false): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntityCollection;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$propertyEntity</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$reload</td>
+            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntityCollection</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mget" href="#mget">#</a>
+ <b>get</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntityCollection.php#L55">source code</a></li>
+</ul>
+
+```php
+public function get(string $objectName): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity|null;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$objectName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mloadpropertyentities" href="#mloadpropertyentities">#</a>
+ <b>loadPropertyEntities</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntityCollection.php#L30">source code</a></li>
+</ul>
+
+```php
+public function loadPropertyEntities(): void;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="#">\DI\DependencyException</a></li>
+
+<li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+<li>
+    <a href="#">\DI\NotFoundException</a></li>
+
+<li>
+    <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="munsafeget" href="#munsafeget">#</a>
+ <b>unsafeGet</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntityCollection.php#L66">source code</a></li>
+</ul>
+
+```php
+public function unsafeGet(string $objectName): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity|null;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$objectName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/PropertyEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="#">\DI\NotFoundException</a></li>
+
+<li>
+    <a href="#">\DI\DependencyException</a></li>
+
+<li>
+    <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+
+<li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+
+<!-- {% endraw %} -->
