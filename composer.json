@@ -1,13 +1,19 @@
 {
-    "name": "bumble/doc-gen",
+    "name": "bumble-tech/bumble-doc-gen",
     "description": "Documentation generator next to the code for large and small php projects",
     "type": "project",
+    "license": "Apache-2.0",
+    "keywords": ["documentation-generator", "phpdoc", "cli-tool", "documentation", "docs", "docs", "llms", "chatgpt", "php"],
+    "homepage": "https://github.com/bumble-tech/bumble-doc-gen",
     "authors": [
         {
             "name": "Filipp Shcherbanich",
             "email": "filipp.shcherbanich@team.bumble.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/bumble-tech/bumble-doc-gen/issues"
+    },
     "require": {
         "php": "^8.0.0",
         "ext-zlib": "*",
