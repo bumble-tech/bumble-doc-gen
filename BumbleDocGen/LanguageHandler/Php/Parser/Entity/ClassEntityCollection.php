@@ -300,7 +300,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      *  $classEntityCollection->findEntity('App.php'); // filename
      *  $classEntityCollection->findEntity('/SelfDoc/Console/App.php'); // relative path
      *  $classEntityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/SelfDoc/Console/App.php'); // absolute path
-     *  $classEntityCollection->findEntity('https://***REMOVED***/blob/master/SelfDoc/Console/App.php'); // source link
+     *  $classEntityCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/SelfDoc/Console/App.php'); // source link
      */
     public function internalFindEntity(string $search, bool $useUnsafeKeys = true): ?ClassEntity
     {
