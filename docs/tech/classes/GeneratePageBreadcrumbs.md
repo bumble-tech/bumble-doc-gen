@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GeneratePageBreadcrumbs<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L18">GeneratePageBreadcrumbs</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L18">GeneratePageBreadcrumbs</a> class:
 </h1>
 
 
@@ -67,7 +67,7 @@ final class GeneratePageBreadcrumbs implements \BumbleDocGen\Core\Renderer\Twig\
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -89,17 +89,17 @@ public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsH
     <tbody>
             <tr>
             <td>$breadcrumbsHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$rendererContext</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php'>\BumbleDocGen\Core\Renderer\Context\RendererContext</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php'>\BumbleDocGen\Core\Renderer\Context\RendererContext</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$dependencyFactory</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/RendererDependencyFactory.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyFactory.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -114,7 +114,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsH
 <ul>
 <li><a name="m-invoke" href="#m-invoke">#</a>
  <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L53">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L53">source code</a></li>
 </ul>
 
 ```php
@@ -180,7 +180,7 @@ public function __invoke(string $currentPageTitle, string $templatePath, bool $s
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -201,7 +201,7 @@ public static function getName(): string;
 <ul>
 <li><a name="mgetoptions" href="#mgetoptions">#</a>
  <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L32">source code</a></li>
 </ul>
 
 ```php

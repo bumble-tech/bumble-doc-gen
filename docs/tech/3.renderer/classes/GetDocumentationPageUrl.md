@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/twigCustomFunctions.md">Template functions</a> <b>/</b> GetDocumentationPageUrl<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L21">GetDocumentationPageUrl</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L21">GetDocumentationPageUrl</a> class:
 </h1>
 
 
@@ -82,7 +82,7 @@ final class GetDocumentationPageUrl implements \BumbleDocGen\Core\Renderer\Twig\
 <ul>
             <li><a name="qdefault-url"
                href="#qdefault-url">#</a>
-            <code>DEFAULT_URL</code>                   <b>|</b> <a href="/BumbleDocGen/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L23">source
+            <code>DEFAULT_URL</code>                   <b>|</b> <a href="/src/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L23">source
                     code</a> </li>
     </ul>
 
@@ -97,7 +97,7 @@ final class GetDocumentationPageUrl implements \BumbleDocGen\Core\Renderer\Twig\
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L25">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L25">source code</a></li>
 </ul>
 
 ```php
@@ -119,7 +119,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsH
     <tbody>
             <tr>
             <td>$breadcrumbsHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -139,7 +139,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsH
 <ul>
 <li><a name="m-invoke" href="#m-invoke">#</a>
  <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L53">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L53">source code</a></li>
 </ul>
 
 ```php
@@ -191,7 +191,7 @@ public function __invoke(string $key): string;
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L31">source code</a></li>
 </ul>
 
 ```php
@@ -212,7 +212,7 @@ public static function getName(): string;
 <ul>
 <li><a name="mgetoptions" href="#mgetoptions">#</a>
  <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L36">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L36">source code</a></li>
 </ul>
 
 ```php

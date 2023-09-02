@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> OnlySingleExecutionEvent<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/OnlySingleExecutionEvent.php#L7">OnlySingleExecutionEvent</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/OnlySingleExecutionEvent.php#L7">OnlySingleExecutionEvent</a> class:
 </h1>
 
 
@@ -44,7 +44,7 @@ interface OnlySingleExecutionEvent
 <ul>
 <li><a name="mgetuniqueexecutionid" href="#mgetuniqueexecutionid">#</a>
  <b>getUniqueExecutionId</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/OnlySingleExecutionEvent.php#L9">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/OnlySingleExecutionEvent.php#L9">source code</a></li>
 </ul>
 
 ```php

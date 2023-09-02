@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> MainTwigEnvironment<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/MainTwigEnvironment.php#L15">MainTwigEnvironment</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L15">MainTwigEnvironment</a> class:
 </h1>
 
 
@@ -51,7 +51,7 @@ final class MainTwigEnvironment
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/MainTwigEnvironment.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L22">source code</a></li>
 </ul>
 
 ```php
@@ -73,12 +73,12 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$mainExtension</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/MainExtension.php'>\BumbleDocGen\Core\Renderer\Twig\MainExtension</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainExtension.php'>\BumbleDocGen\Core\Renderer\Twig\MainExtension</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -100,7 +100,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mrender" href="#mrender">#</a>
  <b>render</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/MainTwigEnvironment.php#L37">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L37">source code</a></li>
 </ul>
 
 ```php

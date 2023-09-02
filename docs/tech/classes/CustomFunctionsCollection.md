@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CustomFunctionsCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L7">CustomFunctionsCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L7">CustomFunctionsCollection</a> class:
 </h1>
 
 
@@ -59,7 +59,7 @@ final class CustomFunctionsCollection implements \IteratorAggregate, \Traversabl
 <ul>
 <li><a name="madd" href="#madd">#</a>
  <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L36">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L36">source code</a></li>
 </ul>
 
 ```php
@@ -81,13 +81,13 @@ public function add(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInte
     <tbody>
             <tr>
             <td>$filters</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection</a>
 
 
 </div>
@@ -97,7 +97,7 @@ public function add(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInte
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L31">source code</a></li>
 </ul>
 
 ```php
@@ -119,13 +119,13 @@ public static function create(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFu
     <tbody>
             <tr>
             <td>$filters</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection</a>
 
 
 </div>
@@ -135,7 +135,7 @@ public static function create(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFu
 <ul>
 <li><a name="mget" href="#mget">#</a>
  <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L44">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L44">source code</a></li>
 </ul>
 
 ```php
@@ -163,7 +163,7 @@ public function get(string $key): \BumbleDocGen\Core\Renderer\Twig\Function\Cust
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 </div>
@@ -173,7 +173,7 @@ public function get(string $key): \BumbleDocGen\Core\Renderer\Twig\Function\Cust
 <ul>
 <li><a name="mgetiterator" href="#mgetiterator">#</a>
  <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L12">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L12">source code</a></li>
 </ul>
 
 ```php
@@ -207,7 +207,7 @@ public function getIterator(): \Generator;
 <ul>
 <li><a name="mgettwigfunctions" href="#mgettwigfunctions">#</a>
  <b>getTwigFunctions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L17">source code</a></li>
 </ul>
 
 ```php
@@ -228,7 +228,7 @@ public function getTwigFunctions(): \Generator;
 <ul>
 <li><a name="mhas" href="#mhas">#</a>
  <b>has</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L49">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L49">source code</a></li>
 </ul>
 
 ```php

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> EntityDocRendererInterface<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L13">EntityDocRendererInterface</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L13">EntityDocRendererInterface</a> class:
 </h1>
 
 
@@ -53,7 +53,7 @@ interface EntityDocRendererInterface
 <ul>
 <li><a name="mgetdocfileextension" href="#mgetdocfileextension">#</a>
  <b>getDocFileExtension</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L31">source code</a></li>
 </ul>
 
 ```php
@@ -74,7 +74,7 @@ public function getDocFileExtension(): string;
 <ul>
 <li><a name="mgetdocfilenamespace" href="#mgetdocfilenamespace">#</a>
  <b>getDocFileNamespace</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L33">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L33">source code</a></li>
 </ul>
 
 ```php
@@ -95,7 +95,7 @@ public function getDocFileNamespace(): string;
 <ul>
 <li><a name="mgetrenderedtext" href="#mgetrenderedtext">#</a>
  <b>getRenderedText</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L29">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L29">source code</a></li>
 </ul>
 
 ```php
@@ -117,7 +117,7 @@ public function getRenderedText(\BumbleDocGen\Core\Renderer\Context\DocumentedEn
     <tbody>
             <tr>
             <td>$entityWrapper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a></td>
             <td>The entity whose documentation was requested</td>
         </tr>
         </tbody>
@@ -133,7 +133,7 @@ public function getRenderedText(\BumbleDocGen\Core\Renderer\Context\DocumentedEn
 <ul>
 <li><a name="misavailableforentity" href="#misavailableforentity">#</a>
  <b>isAvailableForEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php#L21">source code</a></li>
 </ul>
 
 ```php
@@ -155,7 +155,7 @@ public function isAvailableForEntity(\BumbleDocGen\Core\Parser\Entity\RootEntity
     <tbody>
             <tr>
             <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
             <td>The entity whose documentation was requested</td>
         </tr>
         </tbody>

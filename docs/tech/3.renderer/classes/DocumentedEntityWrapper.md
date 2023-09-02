@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/twigCustomFunctions.md">Template functions</a> <b>/</b> DocumentedEntityWrapper<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php#L14">DocumentedEntityWrapper</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L14">DocumentedEntityWrapper</a> class:
 </h1>
 
 
@@ -69,7 +69,7 @@ final class DocumentedEntityWrapper
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -91,12 +91,12 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\DocumentTransfor
     <tbody>
             <tr>
             <td>$documentTransformableEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentTransformableEntityInterface.php'>\BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentTransformableEntityInterface.php'>\BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface</a></td>
             <td>An entity that is allowed to be documented</td>
         </tr>
             <tr>
             <td>$localObjectCache</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -116,7 +116,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\DocumentTransfor
 <ul>
 <li><a name="mgetdocrender" href="#mgetdocrender">#</a>
  <b>getDocRender</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -127,7 +127,7 @@ public function getDocRender(): \BumbleDocGen\Core\Renderer\EntityDocRenderer\En
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface</a>
 
 
 </div>
@@ -137,7 +137,7 @@ public function getDocRender(): \BumbleDocGen\Core\Renderer\EntityDocRenderer\En
 <ul>
 <li><a name="mgetdocurl" href="#mgetdocurl">#</a>
  <b>getDocUrl</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php#L88">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L88">source code</a></li>
 </ul>
 
 ```php
@@ -158,7 +158,7 @@ public function getDocUrl(): string;
 <ul>
 <li><a name="mgetdocumenttransformableentity" href="#mgetdocumenttransformableentity">#</a>
  <b>getDocumentTransformableEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php#L80">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L80">source code</a></li>
 </ul>
 
 ```php
@@ -169,7 +169,7 @@ public function getDocumentTransformableEntity(): \BumbleDocGen\Core\Renderer\Co
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentTransformableEntityInterface.php'>\BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentTransformableEntityInterface.php'>\BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface</a>
 
 
 </div>
@@ -179,7 +179,7 @@ public function getDocumentTransformableEntity(): \BumbleDocGen\Core\Renderer\Co
 <ul>
 <li><a name="mgetentityname" href="#mgetentityname">#</a>
  <b>getEntityName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php#L40">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L40">source code</a></li>
 </ul>
 
 ```php
@@ -200,7 +200,7 @@ public function getEntityName(): string;
 <ul>
 <li><a name="mgetfilename" href="#mgetfilename">#</a>
  <b>getFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php#L72">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L72">source code</a></li>
 </ul>
 
 ```php
@@ -221,7 +221,7 @@ public function getFileName(): string;
 <ul>
 <li><a name="mgetinitiatorfilepath" href="#mgetinitiatorfilepath">#</a>
  <b>getInitiatorFilePath</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php#L96">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L96">source code</a></li>
 </ul>
 
 ```php
@@ -242,7 +242,7 @@ public function getInitiatorFilePath(): string;
 <ul>
 <li><a name="mgetkey" href="#mgetkey">#</a>
  <b>getKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L35">source code</a></li>
 </ul>
 
 ```php

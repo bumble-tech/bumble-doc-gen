@@ -184,7 +184,7 @@ Here is a list of filters available by default:
                         <b>$rootEntityCollection</b>
                     </td>
                     <td>
-                        <i><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php'>RootEntityCollection</a></i>
+                        <i><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>RootEntityCollection</a></i>
                     </td>
                     <td></td>
                             </tr>
@@ -263,4 +263,4 @@ Here is a list of filters available by default:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Mon Jul 31 08:23:27 2023 +0300<br><b>Page content update date:</b> Thu Aug 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 19:26:06 2023 +0300<br><b>Page content update date:</b> Sat Sep 02 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>

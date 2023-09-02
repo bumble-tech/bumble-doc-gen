@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/1.configuration/readme.md">Configuration files</a> <b>/</b> PrintEntityCollectionAsList<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L21">PrintEntityCollectionAsList</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L21">PrintEntityCollectionAsList</a> class:
 </h1>
 
 
@@ -82,7 +82,7 @@ The function will list all documented PHP classes
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L23">source code</a></li>
 </ul>
 
 ```php
@@ -104,7 +104,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumen
     <tbody>
             <tr>
             <td>$getDocumentedEntityUrlFunction</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php'>\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php'>\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -119,7 +119,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumen
 <ul>
 <li><a name="m-invoke" href="#m-invoke">#</a>
  <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L47">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L47">source code</a></li>
 </ul>
 
 ```php
@@ -141,7 +141,7 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
     <tbody>
             <tr>
             <td>$rootEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
             <td>Processed entity collection</td>
         </tr>
             <tr>
@@ -179,7 +179,7 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -200,7 +200,7 @@ public static function getName(): string;
 <ul>
 <li><a name="mgetoptions" href="#mgetoptions">#</a>
  <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L32">source code</a></li>
 </ul>
 
 ```php

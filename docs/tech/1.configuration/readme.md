@@ -25,7 +25,7 @@ Let's look at an example of a real configuration in more detail:
    - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
      arguments:
        directories:
-         - "%project_root%/BumbleDocGen"
+         - "%project_root%/src"
          - "%project_root%/SelfDoc"
  twig_filters:
    - class: \SelfDoc\Configuration\Twig\CustomFilter\EvalString
@@ -100,7 +100,7 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
     <tr>
         <td><b>cache_dir</b></td>
         <td><i>string|null</i></td>
-        <td>'%WORKING_DIR%/__cache'</td>
+        <td>'%WORKING_DIR%/.bumbleDocGenCache'</td>
         <td>Path to the directory where the documentation generator cache will be saved</td>
     </tr>
     <tr>
@@ -212,4 +212,4 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> Sean McNamara &lt;sean.mcnamara@team.bumble.com&gt;<br><b>Last modified date:</b>   Mon Aug 21 10:01:18 2023 +0100<br><b>Page content update date:</b> Thu Aug 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 19:26:06 2023 +0300<br><b>Page content update date:</b> Sat Sep 02 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> OperationsCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L9">OperationsCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L9">OperationsCollection</a> class:
 </h1>
 
 
@@ -59,7 +59,7 @@ final class OperationsCollection implements \IteratorAggregate, \Traversable
 <ul>
 <li><a name="m-serialize" href="#m-serialize">#</a>
  <b>__serialize</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L130">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L130">source code</a></li>
 </ul>
 
 ```php
@@ -80,7 +80,7 @@ public function __serialize(): array;
 <ul>
 <li><a name="m-unserialize" href="#m-unserialize">#</a>
  <b>__unserialize</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L137">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L137">source code</a></li>
 </ul>
 
 ```php
@@ -118,7 +118,7 @@ public function __unserialize(array $data): void;
 <ul>
 <li><a name="madd" href="#madd">#</a>
  <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L22">source code</a></li>
 </ul>
 
 ```php
@@ -140,7 +140,7 @@ public function add(\BumbleDocGen\Core\Parser\Entity\CollectionLogOperation\Oper
     <tbody>
             <tr>
             <td>$operation</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/OperationInterface.php'>\BumbleDocGen\Core\Parser\Entity\CollectionLogOperation\OperationInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationInterface.php'>\BumbleDocGen\Core\Parser\Entity\CollectionLogOperation\OperationInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -156,7 +156,7 @@ public function add(\BumbleDocGen\Core\Parser\Entity\CollectionLogOperation\Oper
 <ul>
 <li><a name="mgetiterator" href="#mgetiterator">#</a>
  <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L17">source code</a></li>
 </ul>
 
 ```php
@@ -190,7 +190,7 @@ public function getIterator(): \Traversable;
 <ul>
 <li><a name="misfoundentitiescacheoutdated" href="#misfoundentitiescacheoutdated">#</a>
  <b>isFoundEntitiesCacheOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L78">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L78">source code</a></li>
 </ul>
 
 ```php
@@ -212,7 +212,7 @@ public function isFoundEntitiesCacheOutdated(\BumbleDocGen\Core\Parser\Entity\Ro
     <tbody>
             <tr>
             <td>$rootEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -228,7 +228,7 @@ public function isFoundEntitiesCacheOutdated(\BumbleDocGen\Core\Parser\Entity\Ro
 <ul>
 <li><a name="mremovesearchduplicates" href="#mremovesearchduplicates">#</a>
  <b>removeSearchDuplicates</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L35">source code</a></li>
 </ul>
 
 ```php

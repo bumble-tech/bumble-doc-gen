@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> TemplatesStructureGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L15">TemplatesStructureGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L15">TemplatesStructureGenerator</a> class:
 </h1>
 
 
@@ -43,7 +43,7 @@ final class TemplatesStructureGenerator
 <ul>
             <li><a name="qmodel-gpt-4"
                href="#qmodel-gpt-4">#</a>
-            <code>MODEL_GPT_4</code>                   <b>|</b> <a href="/BumbleDocGen/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L17">source
+            <code>MODEL_GPT_4</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L17">source
                     code</a> </li>
     </ul>
 
@@ -58,7 +58,7 @@ final class TemplatesStructureGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L19">source code</a></li>
 </ul>
 
 ```php
@@ -100,7 +100,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model
 <ul>
 <li><a name="mgeneratestructurebyentitycollection" href="#mgeneratestructurebyentitycollection">#</a>
  <b>generateStructureByEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L28">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L28">source code</a></li>
 </ul>
 
 ```php
@@ -122,7 +122,7 @@ public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\En
     <tbody>
             <tr>
             <td>$rootEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
             <td>-</td>
         </tr>
             <tr>

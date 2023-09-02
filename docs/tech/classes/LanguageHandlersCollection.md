@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> LanguageHandlersCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlersCollection.php#L7">LanguageHandlersCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlersCollection.php#L7">LanguageHandlersCollection</a> class:
 </h1>
 
 
@@ -53,7 +53,7 @@ final class LanguageHandlersCollection implements \IteratorAggregate, \Traversab
 <ul>
 <li><a name="madd" href="#madd">#</a>
  <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlersCollection.php#L26">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlersCollection.php#L26">source code</a></li>
 </ul>
 
 ```php
@@ -75,13 +75,13 @@ public function add(\BumbleDocGen\LanguageHandler\LanguageHandlerInterface $lang
     <tbody>
             <tr>
             <td>$languageHandler</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlerInterface.php'>\BumbleDocGen\LanguageHandler\LanguageHandlerInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlerInterface.php'>\BumbleDocGen\LanguageHandler\LanguageHandlerInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlersCollection.php'>\BumbleDocGen\LanguageHandler\LanguageHandlersCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlersCollection.php'>\BumbleDocGen\LanguageHandler\LanguageHandlersCollection</a>
 
 
 </div>
@@ -91,7 +91,7 @@ public function add(\BumbleDocGen\LanguageHandler\LanguageHandlerInterface $lang
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlersCollection.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlersCollection.php#L17">source code</a></li>
 </ul>
 
 ```php
@@ -113,13 +113,13 @@ public static function create(\BumbleDocGen\LanguageHandler\LanguageHandlerInter
     <tbody>
             <tr>
             <td>$languageHandlers</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlerInterface.php'>\BumbleDocGen\LanguageHandler\LanguageHandlerInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlerInterface.php'>\BumbleDocGen\LanguageHandler\LanguageHandlerInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlersCollection.php'>\BumbleDocGen\LanguageHandler\LanguageHandlersCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlersCollection.php'>\BumbleDocGen\LanguageHandler\LanguageHandlersCollection</a>
 
 
 </div>
@@ -129,7 +129,7 @@ public static function create(\BumbleDocGen\LanguageHandler\LanguageHandlerInter
 <ul>
 <li><a name="mget" href="#mget">#</a>
  <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlersCollection.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlersCollection.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -157,7 +157,7 @@ public function get(string $key): \BumbleDocGen\LanguageHandler\LanguageHandlerI
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlerInterface.php'>\BumbleDocGen\LanguageHandler\LanguageHandlerInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlerInterface.php'>\BumbleDocGen\LanguageHandler\LanguageHandlerInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 </div>
@@ -167,7 +167,7 @@ public function get(string $key): \BumbleDocGen\LanguageHandler\LanguageHandlerI
 <ul>
 <li><a name="mgetiterator" href="#mgetiterator">#</a>
  <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/LanguageHandlersCollection.php#L12">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlersCollection.php#L12">source code</a></li>
 </ul>
 
 ```php

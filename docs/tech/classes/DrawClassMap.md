@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DrawClassMap<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L25">DrawClassMap</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L25">DrawClassMap</a> class:
 </h1>
 
 
@@ -21,7 +21,7 @@ final class DrawClassMap implements \BumbleDocGen\Core\Renderer\Twig\Function\Cu
 <b>Examples of using:</b>
 
 ```php
-{{ drawClassMap(classEntityCollection.filterByPaths(['/BumbleDocGen/Renderer'])) }}
+{{ drawClassMap(classEntityCollection.filterByPaths(['/src/Renderer'])) }}
 
 ```
 
@@ -86,7 +86,7 @@ final class DrawClassMap implements \BumbleDocGen\Core\Renderer\Twig\Function\Cu
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L30">source code</a></li>
 </ul>
 
 ```php
@@ -108,12 +108,12 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumen
     <tbody>
             <tr>
             <td>$getDocumentedEntityUrlFunction</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php'>\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php'>\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$rootEntityCollectionsGroup</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -128,7 +128,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumen
 <ul>
 <li><a name="m-invoke" href="#m-invoke">#</a>
  <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L59">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L59">source code</a></li>
 </ul>
 
 ```php
@@ -150,7 +150,7 @@ public function __invoke(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEn
     <tbody>
             <tr>
             <td>$classEntityCollections</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
             <td>The collection of entities for which the class map will be generated</td>
         </tr>
         </tbody>
@@ -182,7 +182,7 @@ public function __invoke(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEn
 <ul>
 <li><a name="mconvertdirectorystructuretoformattedstring" href="#mconvertdirectorystructuretoformattedstring">#</a>
  <b>convertDirectoryStructureToFormattedString</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L136">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L136">source code</a></li>
 </ul>
 
 ```php
@@ -230,7 +230,7 @@ public function convertDirectoryStructureToFormattedString(array $structure, str
 <ul>
 <li><a name="mgetdirectorystructure" href="#mgetdirectorystructure">#</a>
  <b>getDirectoryStructure</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L101">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L101">source code</a></li>
 </ul>
 
 ```php
@@ -252,7 +252,7 @@ public function getDirectoryStructure(\BumbleDocGen\LanguageHandler\Php\Parser\E
     <tbody>
             <tr>
             <td>$classEntityCollections</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -284,7 +284,7 @@ public function getDirectoryStructure(\BumbleDocGen\LanguageHandler\Php\Parser\E
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L36">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L36">source code</a></li>
 </ul>
 
 ```php
@@ -305,7 +305,7 @@ public static function getName(): string;
 <ul>
 <li><a name="mgetoptions" href="#mgetoptions">#</a>
  <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L41">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L41">source code</a></li>
 </ul>
 
 ```php

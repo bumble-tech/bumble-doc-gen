@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> EntityDocRenderersCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php#L9">EntityDocRenderersCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php#L9">EntityDocRenderersCollection</a> class:
 </h1>
 
 
@@ -50,7 +50,7 @@ final class EntityDocRenderersCollection implements \IteratorAggregate, \Travers
 <ul>
 <li><a name="madd" href="#madd">#</a>
  <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php#L19">source code</a></li>
 </ul>
 
 ```php
@@ -72,13 +72,13 @@ public function add(\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRende
     <tbody>
             <tr>
             <td>$entityDocRenderer</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRenderersCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRenderersCollection</a>
 
 
 </div>
@@ -88,7 +88,7 @@ public function add(\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRende
 <ul>
 <li><a name="mgetfirstmatchingrender" href="#mgetfirstmatchingrender">#</a>
  <b>getFirstMatchingRender</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php#L25">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php#L25">source code</a></li>
 </ul>
 
 ```php
@@ -110,13 +110,13 @@ public function getFirstMatchingRender(\BumbleDocGen\Core\Parser\Entity\RootEnti
     <tbody>
             <tr>
             <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 </div>
@@ -126,7 +126,7 @@ public function getFirstMatchingRender(\BumbleDocGen\Core\Parser\Entity\RootEnti
 <ul>
 <li><a name="mgetiterator" href="#mgetiterator">#</a>
  <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php#L14">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php#L14">source code</a></li>
 </ul>
 
 ```php

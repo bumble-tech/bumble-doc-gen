@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> MissingDocBlocksGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L18">MissingDocBlocksGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L18">MissingDocBlocksGenerator</a> class:
 </h1>
 
 
@@ -46,15 +46,15 @@ final class MissingDocBlocksGenerator
 <ul>
             <li><a name="qmodel-gpt-4"
                href="#qmodel-gpt-4">#</a>
-            <code>MODEL_GPT_4</code>                   <b>|</b> <a href="/BumbleDocGen/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L20">source
+            <code>MODEL_GPT_4</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L20">source
                     code</a> </li>
             <li><a name="qmode-read-all-code"
                href="#qmode-read-all-code">#</a>
-            <code>MODE_READ_ALL_CODE</code>                   <b>|</b> <a href="/BumbleDocGen/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L23">source
+            <code>MODE_READ_ALL_CODE</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L23">source
                     code</a> </li>
             <li><a name="qmode-read-only-signatures"
                href="#qmode-read-only-signatures">#</a>
-            <code>MODE_READ_ONLY_SIGNATURES</code>                   <b>|</b> <a href="/BumbleDocGen/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L22">source
+            <code>MODE_READ_ONLY_SIGNATURES</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L22">source
                     code</a> </li>
     </ul>
 
@@ -69,7 +69,7 @@ final class MissingDocBlocksGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L25">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L25">source code</a></li>
 </ul>
 
 ```php
@@ -96,7 +96,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen
         </tr>
             <tr>
             <td>$parserHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/ParserHelper.php'>\BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php'>\BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -116,7 +116,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen
 <ul>
 <li><a name="mgeneratedocblocksformethodswithoutit" href="#mgeneratedocblocksformethodswithoutit">#</a>
  <b>generateDocBlocksForMethodsWithoutIt</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L60">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L60">source code</a></li>
 </ul>
 
 ```php
@@ -138,7 +138,7 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
     <tbody>
             <tr>
             <td>$rootEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -178,7 +178,7 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
 <ul>
 <li><a name="mhasmethodswithoutdocblocks" href="#mhasmethodswithoutdocblocks">#</a>
  <b>hasMethodsWithoutDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L38">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L38">source code</a></li>
 </ul>
 
 ```php
@@ -200,7 +200,7 @@ public function hasMethodsWithoutDocBlocks(\BumbleDocGen\Core\Parser\Entity\Root
     <tbody>
             <tr>
             <td>$rootEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>

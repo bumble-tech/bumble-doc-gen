@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CacheableEntityWrapperFactory<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheableEntityWrapperFactory.php#L11">CacheableEntityWrapperFactory</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityWrapperFactory.php#L11">CacheableEntityWrapperFactory</a> class:
 </h1>
 
 
@@ -51,7 +51,7 @@ final class CacheableEntityWrapperFactory
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheableEntityWrapperFactory.php#L13">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityWrapperFactory.php#L13">source code</a></li>
 </ul>
 
 ```php
@@ -73,7 +73,7 @@ public function __construct(\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache
     <tbody>
             <tr>
             <td>$localObjectCache</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -88,7 +88,7 @@ public function __construct(\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache
 <ul>
 <li><a name="mcreatewrappedentityclass" href="#mcreatewrappedentityclass">#</a>
  <b>createWrappedEntityClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheableEntityWrapperFactory.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityWrapperFactory.php#L18">source code</a></li>
 </ul>
 
 ```php

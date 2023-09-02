@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> EntityDocRendererHelper<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L14">EntityDocRendererHelper</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L14">EntityDocRendererHelper</a> class:
 </h1>
 
 
@@ -46,15 +46,15 @@ final class EntityDocRendererHelper
 <ul>
             <li><a name="qclass-entity-full-link-option"
                href="#qclass-entity-full-link-option">#</a>
-            <code>CLASS_ENTITY_FULL_LINK_OPTION</code>                   <b>|</b> <a href="/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L17">source
+            <code>CLASS_ENTITY_FULL_LINK_OPTION</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L17">source
                     code</a> </li>
             <li><a name="qclass-entity-only-cursor-link-option"
                href="#qclass-entity-only-cursor-link-option">#</a>
-            <code>CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION</code>                   <b>|</b> <a href="/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L18">source
+            <code>CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L18">source
                     code</a> </li>
             <li><a name="qclass-entity-short-link-option"
                href="#qclass-entity-short-link-option">#</a>
-            <code>CLASS_ENTITY_SHORT_LINK_OPTION</code>                   <b>|</b> <a href="/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L16">source
+            <code>CLASS_ENTITY_SHORT_LINK_OPTION</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L16">source
                     code</a> </li>
     </ul>
 
@@ -69,7 +69,7 @@ final class EntityDocRendererHelper
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -91,12 +91,12 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\RootEntityCollectio
     <tbody>
             <tr>
             <td>$rootEntityCollectionsGroup</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$getDocumentedEntityUrlFunction</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php'>\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php'>\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -111,7 +111,7 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\RootEntityCollectio
 <ul>
 <li><a name="mgetentitydatabylink" href="#mgetentitydatabylink">#</a>
  <b>getEntityDataByLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L30">source code</a></li>
 </ul>
 
 ```php
@@ -138,7 +138,7 @@ public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parse
         </tr>
             <tr>
             <td>$rootEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -174,7 +174,7 @@ public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parse
 <ul>
 <li><a name="mgetentityurldatabylink" href="#mgetentityurldatabylink">#</a>
  <b>getEntityUrlDataByLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L117">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L117">source code</a></li>
 </ul>
 
 ```php

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ValueTransformerInterface<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueTransformer/ValueTransformerInterface.php#L10">ValueTransformerInterface</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueTransformerInterface.php#L10">ValueTransformerInterface</a> class:
 </h1>
 
 
@@ -47,7 +47,7 @@ interface ValueTransformerInterface
 <ul>
 <li><a name="mcantransform" href="#mcantransform">#</a>
  <b>canTransform</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueTransformer/ValueTransformerInterface.php#L12">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueTransformerInterface.php#L12">source code</a></li>
 </ul>
 
 ```php
@@ -85,7 +85,7 @@ public function canTransform(mixed $value): bool;
 <ul>
 <li><a name="mtransform" href="#mtransform">#</a>
  <b>transform</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueTransformer/ValueTransformerInterface.php#L14">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueTransformerInterface.php#L14">source code</a></li>
 </ul>
 
 ```php

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entity.md">Entities and entities collections</a> <b>/</b> RootEntityCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php#L13">RootEntityCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L13">RootEntityCollection</a> class:
 </h1>
 
 
@@ -39,7 +39,19 @@ abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Bas
     <a href="#mgetentitylinkdata">getEntityLinkData</a>
     </li>
 <li>
+    <a href="#mgetiterator">getIterator</a>
+    - <i>Retrieve an external iterator</i></li>
+<li>
     <a href="#mgetloadedorcreatenew">getLoadedOrCreateNew</a>
+    </li>
+<li>
+    <a href="#mhas">has</a>
+    </li>
+<li>
+    <a href="#misempty">isEmpty</a>
+    </li>
+<li>
+    <a href="#mremove">remove</a>
     </li>
 <li>
     <a href="#mupdateentitiescache">updateEntitiesCache</a>
@@ -59,7 +71,7 @@ abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Bas
 <ul>
 <li><a name="mfindentity" href="#mfindentity">#</a>
  <b>findEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php#L34">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L34">source code</a></li>
 </ul>
 
 ```php
@@ -92,7 +104,7 @@ public function findEntity(string $search, bool $useUnsafeKeys = true): \BumbleD
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 </div>
@@ -102,7 +114,7 @@ public function findEntity(string $search, bool $useUnsafeKeys = true): \BumbleD
 <ul>
 <li><a name="mget" href="#mget">#</a>
  <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L21">source code</a></li>
 </ul>
 
 ```php
@@ -130,7 +142,7 @@ public function get(string $objectName): \BumbleDocGen\Core\Parser\Entity\RootEn
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 </div>
@@ -140,7 +152,7 @@ public function get(string $objectName): \BumbleDocGen\Core\Parser\Entity\RootEn
 <ul>
 <li><a name="mgetentitycollectionname" href="#mgetentitycollectionname">#</a>
  <b>getEntityCollectionName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php#L26">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L26">source code</a></li>
 </ul>
 
 ```php
@@ -161,7 +173,7 @@ public function getEntityCollectionName(): string;
 <ul>
 <li><a name="mgetentitylinkdata" href="#mgetentitylinkdata">#</a>
  <b>getEntityLinkData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php#L44">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L44">source code</a></li>
 </ul>
 
 ```php
@@ -208,9 +220,45 @@ public function getEntityLinkData(string $rawLink, string|null $defaultEntityNam
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgetiterator" href="#mgetiterator">#</a>
+ <b>getIterator</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L11">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\BaseEntityCollection
+
+public function getIterator(): \Generator;
+```
+
+<blockquote>Retrieve an external iterator</blockquote>
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
+
+</ul>
+
+
+<b>See:</b>
+<ul>
+    <li>
+        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
+</ul>
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgetloadedorcreatenew" href="#mgetloadedorcreatenew">#</a>
  <b>getLoadedOrCreateNew</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -243,7 +291,7 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a>
 
 
 
@@ -257,9 +305,112 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mhas" href="#mhas">#</a>
+ <b>has</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L27">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\BaseEntityCollection
+
+public function has(string $objectName): bool;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$objectName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="misempty" href="#misempty">#</a>
+ <b>isEmpty</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\BaseEntityCollection
+
+public function isEmpty(): bool;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mremove" href="#mremove">#</a>
+ <b>remove</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L22">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\BaseEntityCollection
+
+public function remove(string $objectName): void;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$objectName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mupdateentitiescache" href="#mupdateentitiescache">#</a>
  <b>updateEntitiesCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php#L49">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L49">source code</a></li>
 </ul>
 
 ```php

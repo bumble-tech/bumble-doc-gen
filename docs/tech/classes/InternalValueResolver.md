@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> InternalValueResolver<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueResolver/InternalValueResolver.php#L18">InternalValueResolver</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueResolver/InternalValueResolver.php#L18">InternalValueResolver</a> class:
 </h1>
 
 
@@ -63,7 +63,7 @@ output_dir: "%WORKING_DIR%/docs"
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueResolver/InternalValueResolver.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueResolver/InternalValueResolver.php#L23">source code</a></li>
 </ul>
 
 ```php
@@ -100,7 +100,7 @@ public function __construct(array $internalValuesMap);
 <ul>
 <li><a name="mresolvevalue" href="#mresolvevalue">#</a>
  <b>resolveValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueResolver/InternalValueResolver.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueResolver/InternalValueResolver.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -122,7 +122,7 @@ public function resolveValue(\BumbleDocGen\Core\Configuration\ConfigurationParam
     <tbody>
             <tr>
             <td>$parameterBag</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php'>\BumbleDocGen\Core\Configuration\ConfigurationParameterBag</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php'>\BumbleDocGen\Core\Configuration\ConfigurationParameterBag</a></td>
             <td>-</td>
         </tr>
             <tr>
