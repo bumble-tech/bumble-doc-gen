@@ -13,3 +13,4 @@ composer.phar
 /last_run.log
 /.phpunit.result.cache
 /demo/demo2-templates-generation/templates/
+/.bumbleDocGenCache/
