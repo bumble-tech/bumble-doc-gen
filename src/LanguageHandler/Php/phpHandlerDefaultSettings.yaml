@@ -12,11 +12,7 @@ language_handlers:
           - protected
 
       method_filter:
-        class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
-        arguments:
-          - and
-          - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\IsPublicCondition
-          - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition
+        class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\IsPublicCondition
 
       property_filter:
         class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
