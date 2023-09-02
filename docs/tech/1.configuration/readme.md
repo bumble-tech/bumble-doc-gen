@@ -12,9 +12,11 @@ During the generation process, the data from these files is loaded into the <a h
 Let's look at an example of a real configuration in more detail:
 
 ```yaml
- project_root: '%DOC_GEN_LIB_PATH%'
- templates_dir: '%DOC_GEN_LIB_PATH%/SelfDoc/Configuration/templates'
- cache_dir: '%project_root%/SelfDoc/__cache'
+ project_root: '%WORKING_DIR%'
+ templates_dir: '%project_root%/selfdoc/templates'
+ output_dir: "%project_root%/docs"
+ cache_dir: '%project_root%/.bumbleDocGenCache'
+ output_dir_base_url: "/docs"
  language_handlers:
    php:
      class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
@@ -26,17 +28,17 @@ Let's look at an example of a real configuration in more detail:
      arguments:
        directories:
          - "%project_root%/src"
-         - "%project_root%/SelfDoc"
+         - "%project_root%/selfdoc"
  twig_filters:
-   - class: \SelfDoc\Configuration\Twig\CustomFilter\EvalString
+   - class: \SelfDocConfig\Twig\CustomFilter\EvalString
  twig_functions:
-   - class: \SelfDoc\Configuration\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
-   - class: \SelfDoc\Configuration\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
-   - class: \SelfDoc\Configuration\Twig\CustomFunction\GetConfigParametersDescription
+   - class: \SelfDocConfig\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
+   - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
+   - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
  plugins:
-   - class: \SelfDoc\Configuration\Plugin\RoaveStubber\BetterReflectionStubberPlugin
-   - class: \SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
-   - class: \SelfDoc\Configuration\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
+   - class: \SelfDocConfig\Plugin\RoaveStubber\BetterReflectionStubberPlugin
+   - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
+   - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
  
 ```
 
@@ -212,4 +214,4 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 19:26:06 2023 +0300<br><b>Page content update date:</b> Sat Sep 02 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Sat Sep 02 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>

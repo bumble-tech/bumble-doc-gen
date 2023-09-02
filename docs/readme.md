@@ -71,11 +71,11 @@ $docgen->generate();
 To update this documentation, run the following command:
 
 ```console
- php SelfDoc/docGen.php generate
+ ./bin/bumbleDocGen generate
 ```
 
 
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Thu Aug 31 16:33:11 2023 +0300<br><b>Page content update date:</b> Sat Sep 02 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Sat Sep 02 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>

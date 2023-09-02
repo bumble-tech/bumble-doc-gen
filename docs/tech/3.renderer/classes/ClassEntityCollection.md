@@ -952,13 +952,13 @@ public function internalFindEntity(string $search, bool $useUnsafeKeys = true): 
 
 ```php
 $classEntityCollection->findEntity('App'); // class name
-$classEntityCollection->findEntity('SelfDoc\Console\App'); // class with namespace
-$classEntityCollection->findEntity('\SelfDoc\Console\App'); // class with namespace
-$classEntityCollection->findEntity('\SelfDoc\Console\App::test()'); // class with namespace and optional part
+$classEntityCollection->findEntity('BumbleDocGen\Console\App'); // class with namespace
+$classEntityCollection->findEntity('\BumbleDocGen\Console\App'); // class with namespace
+$classEntityCollection->findEntity('\BumbleDocGen\Console\App::test()'); // class with namespace and optional part
 $classEntityCollection->findEntity('App.php'); // filename
-$classEntityCollection->findEntity('/SelfDoc/Console/App.php'); // relative path
-$classEntityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/SelfDoc/Console/App.php'); // absolute path
-$classEntityCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/SelfDoc/Console/App.php'); // source link
+$classEntityCollection->findEntity('/BumbleDocGen/Console/App.php'); // relative path
+$classEntityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/BumbleDocGen/Console/App.php'); // absolute path
+$classEntityCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Console/App.php'); // source link
 ```
 
 </div>
