@@ -12,7 +12,7 @@ Source locators are set in the configuration:
      arguments:
        directories:
          - "%project_root%/src"
-         - "%project_root%/SelfDoc"
+         - "%project_root%/selfdoc"
 ```
 
 
