@@ -55,7 +55,7 @@
     "autoload-dev": {
         "psr-4": {
             "Test\\": "tests/",
-            "SelfDoc\\": "SelfDoc/"
+            "SelfDocConfig\\": "selfdoc/"
         }
     },
     "config": {

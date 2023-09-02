@@ -22,9 +22,9 @@ You can add your custom functions to the configuration like this:
 
 ```yaml
 twig_functions:
-  - class: \SelfDoc\Configuration\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
-  - class: \SelfDoc\Configuration\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
-  - class: \SelfDoc\Configuration\Twig\CustomFunction\GetConfigParametersDescription
+  - class: \SelfDocConfig\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
+  - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
+  - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
 ```
 
 It is important to remember that when a template is inherited, custom functions are not overridden and augmented.

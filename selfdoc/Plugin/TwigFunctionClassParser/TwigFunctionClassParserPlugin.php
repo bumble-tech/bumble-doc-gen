@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace SelfDoc\Configuration\Plugin\TwigFilterClassParser;
+namespace SelfDocConfig\Plugin\TwigFunctionClassParser;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
-use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
+use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
@@ -18,16 +18,16 @@ use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\Php
 use DI\DependencyException;
 use DI\NotFoundException;
 
-final class TwigFilterClassParserPlugin implements PluginInterface
+final class TwigFunctionClassParserPlugin implements PluginInterface
 {
-    private const TWIG_FILTER_DIR_NAMES = [
-        '/src/Core/Renderer/Twig/Filter',
-        '/src/LanguageHandler/Php/Renderer/Twig/Filter'
+    private const TWIG_FUNCTION_DIR_NAMES = [
+        '/src/Core/Renderer/Twig/Function',
+        '/src/LanguageHandler/Php/Renderer/Twig/Function'
     ];
-    public const PLUGIN_KEY = 'twigFilterClassParserPlugin';
+    public const PLUGIN_KEY = 'twigFunctionClassParserPlugin';
 
     public function __construct(
-        private FilterClassPluginTwigEnvironment $twigEnvironment,
+        private FunctionClassPluginTwigEnvironment $twigEnvironment,
         private RendererContext $context,
         private Configuration $configuration,
     ) {
@@ -47,19 +47,17 @@ final class TwigFilterClassParserPlugin implements PluginInterface
      */
     public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
     {
-        if (
-            $event->getBlockType() !== PhpClassToMdDocRenderer::BLOCK_AFTER_MAIN_INFO
-        ) {
+        if ($event->getBlockType() !== PhpClassToMdDocRenderer::BLOCK_AFTER_MAIN_INFO) {
             return;
         }
 
         $entity = $event->getEntity();
-        if (!is_a($entity, ClassEntity::class) || !$this->isCustomTwigFilter($event->getEntity())) {
+        if (!is_a($entity, ClassEntity::class) || !$this->isCustomTwigFunction($event->getEntity())) {
             return;
         }
 
         try {
-            $pluginResult = $this->twigEnvironment->render('twigFilterInfoBlock.twig', [
+            $pluginResult = $this->twigEnvironment->render('twigFunctionInfoBlock.twig', [
                 'classEntity' => $entity,
             ]);
         } catch (\Exception) {
@@ -71,17 +69,17 @@ final class TwigFilterClassParserPlugin implements PluginInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
+     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function afterLoadingClassEntityCollection(AfterLoadingClassEntityCollection $event): void
     {
         foreach ($event->getClassEntityCollection() as $classEntity) {
-            if ($this->isCustomTwigFilter($classEntity)) {
+            if ($this->isCustomTwigFunction($classEntity) && $classEntity->isInstantiable()) {
                 $classEntity->loadPluginData(
                     self::PLUGIN_KEY,
-                    $this->getFilterData($event->getClassEntityCollection(), $classEntity->getName()) ?? []
+                    $this->getFunctionData($event->getClassEntityCollection(), $classEntity->getName()) ?? []
                 );
             }
         }
@@ -91,10 +89,10 @@ final class TwigFilterClassParserPlugin implements PluginInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    private function isCustomTwigFilter(ClassEntity $classEntity): bool
+    private function isCustomTwigFunction(ClassEntity $classEntity): bool
     {
-        foreach (self::TWIG_FILTER_DIR_NAMES as $dirName) {
-            if (str_starts_with($classEntity->getFileName(), $dirName) && $classEntity->implementsInterface(CustomFilterInterface::class)) {
+        foreach (self::TWIG_FUNCTION_DIR_NAMES as $dirName) {
+            if ($classEntity->implementsInterface(CustomFunctionInterface::class) && str_starts_with($classEntity->getFileName(), $dirName)) {
                 return true;
             }
         }
@@ -107,43 +105,46 @@ final class TwigFilterClassParserPlugin implements PluginInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    private function getAllUsedFilters(): array
+    private function getAllUsedFunctions(): array
     {
-        static $filters = null;
-        if (is_null($filters)) {
-            $filters = [];
-            $twigFilters = iterator_to_array($this->configuration->getTwigFilters());
+        static $functions = null;
+        if (is_null($functions)) {
+            $functions = [];
+            $twigFunctions = iterator_to_array($this->configuration->getTwigFunctions());
             foreach ($this->configuration->getLanguageHandlersCollection() as $languageHandler) {
-                $twigFilters = array_merge($twigFilters, iterator_to_array($languageHandler->getCustomTwigFilters($this->context)));
+                $twigFunctions = array_merge($twigFunctions, iterator_to_array($languageHandler->getCustomTwigFunctions($this->context)));
             }
-            foreach ($twigFilters as $filter) {
-                $filters[$filter::class] = $filter::getName();
+            foreach ($twigFunctions as $function) {
+                $functions[$function::class] = $function::getName();
             }
         }
-        return $filters;
+        return $functions;
     }
 
     /**
-     * @throws DependencyException
      * @throws ReflectionException
+     * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    private function getFilterData(ClassEntityCollection $classEntityCollection, string $className): ?array
+    private function getFunctionData(ClassEntityCollection $classEntityCollection, string $className): ?array
     {
-        static $filtersData = [];
-        if (!array_key_exists($className, $filtersData)) {
-            $filters = $this->getAllUsedFilters();
-            if (!isset($filters[$className])) {
+        static $functionsData = [];
+        if (!array_key_exists($className, $functionsData)) {
+            $functions = $this->getAllUsedFunctions();
+            if (!isset($functions[$className])) {
+                return null;
+            }
+            $entity = $classEntityCollection->getEntityByClassName($className);
+            if (str_starts_with($entity->getFileName(), '/SelfDoc')) {
                 return null;
             }
 
-            $functionData['name'] = $filters[$className];
-            $entity = $classEntityCollection->getEntityByClassName($className);
+            $functionData['name'] = $functions[$className];
             $method = $entity->getMethodEntityCollection()->get('__invoke');
             $functionData['parameters'] = $method->getParameters();
-            $filtersData[$className] = $functionData;
+            $functionsData[$className] = $functionData;
         }
-        return $filtersData[$className];
+        return $functionsData[$className];
     }
 }

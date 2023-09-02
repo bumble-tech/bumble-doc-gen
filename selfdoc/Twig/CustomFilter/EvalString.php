@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SelfDoc\Configuration\Twig\CustomFilter;
+namespace SelfDocConfig\Twig\CustomFilter;
 
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
 

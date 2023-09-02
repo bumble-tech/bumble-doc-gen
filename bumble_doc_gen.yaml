@@ -1,5 +1,8 @@
 project_root: '%WORKING_DIR%'
-templates_dir: '%project_root%/SelfDoc/Configuration/templates'
+templates_dir: '%project_root%/selfdoc/templates'
+output_dir: "%project_root%/docs"
+cache_dir: '%project_root%/.bumbleDocGenCache'
+output_dir_base_url: "/docs"
 language_handlers:
   php:
     class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
@@ -11,14 +14,14 @@ source_locators:
     arguments:
       directories:
         - "%project_root%/src"
-        - "%project_root%/SelfDoc"
+        - "%project_root%/selfdoc"
 twig_filters:
-  - class: \SelfDoc\Configuration\Twig\CustomFilter\EvalString
+  - class: \SelfDocConfig\Twig\CustomFilter\EvalString
 twig_functions:
-  - class: \SelfDoc\Configuration\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
-  - class: \SelfDoc\Configuration\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
-  - class: \SelfDoc\Configuration\Twig\CustomFunction\GetConfigParametersDescription
+  - class: \SelfDocConfig\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
+  - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
+  - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
 plugins:
-  - class: \SelfDoc\Configuration\Plugin\RoaveStubber\BetterReflectionStubberPlugin
-  - class: \SelfDoc\Configuration\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
-  - class: \SelfDoc\Configuration\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
+  - class: \SelfDocConfig\Plugin\RoaveStubber\BetterReflectionStubberPlugin
+  - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
+  - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin

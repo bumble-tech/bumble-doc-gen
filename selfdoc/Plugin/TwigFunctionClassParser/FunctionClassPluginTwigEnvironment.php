@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SelfDoc\Configuration\Plugin\TwigFilterClassParser;
+namespace SelfDocConfig\Plugin\TwigFunctionClassParser;
 
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -10,7 +10,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 
-final class FilterClassPluginTwigEnvironment
+final class FunctionClassPluginTwigEnvironment
 {
     private Environment $twig;
 

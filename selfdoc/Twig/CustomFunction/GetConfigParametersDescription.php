@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SelfDoc\Configuration\Twig\CustomFunction;
+namespace SelfDocConfig\Twig\CustomFunction;
 
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SelfDoc\Configuration\Plugin\RoaveStubber;
+namespace SelfDocConfig\Plugin\RoaveStubber;
 
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;

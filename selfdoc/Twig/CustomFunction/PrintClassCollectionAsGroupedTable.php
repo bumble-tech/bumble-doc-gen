@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SelfDoc\Configuration\Twig\CustomFunction;
+namespace SelfDocConfig\Twig\CustomFunction;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
