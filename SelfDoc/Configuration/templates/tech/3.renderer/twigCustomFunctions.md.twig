@@ -54,8 +54,8 @@ Here is a list of functions available by default:
    </thead>
    <tbody>
     {% for function in phpClassEntityCollection.filterByPaths([
-            '/BumbleDocGen/Core/Renderer/Twig/Function',
-            '/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function'
+            '/src/Core/Renderer/Twig/Function',
+            '/src/LanguageHandler/Php/Renderer/Twig/Function'
         ])
         .filterByInterfaces(['BumbleDocGen\\Core\\Renderer\\Twig\\Function\\CustomFunctionInterface'])
         .getOnlyInstantiable()

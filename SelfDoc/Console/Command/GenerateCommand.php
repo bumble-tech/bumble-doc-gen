@@ -29,10 +29,9 @@ final class GenerateCommand extends Command
      * @throws InvalidArgumentException
      */
     protected function execute(
-        \Symfony\Component\Console\Input\InputInterface   $input,
+        \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
-    ): int
-    {
+    ): int {
         $docGenerator = (new DocGeneratorFactory())->create(
             dirname(__DIR__, 2) . '/Configuration/config.yaml'
         );

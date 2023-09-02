@@ -21,17 +21,16 @@ use DI\NotFoundException;
 final class TwigFunctionClassParserPlugin implements PluginInterface
 {
     private const TWIG_FUNCTION_DIR_NAMES = [
-        '/BumbleDocGen/Core/Renderer/Twig/Function',
-        '/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function'
+        '/src/Core/Renderer/Twig/Function',
+        '/src/LanguageHandler/Php/Renderer/Twig/Function'
     ];
     public const PLUGIN_KEY = 'twigFunctionClassParserPlugin';
 
     public function __construct(
         private FunctionClassPluginTwigEnvironment $twigEnvironment,
-        private RendererContext                    $context,
-        private Configuration                      $configuration,
-    )
-    {
+        private RendererContext $context,
+        private Configuration $configuration,
+    ) {
     }
 
     public static function getSubscribedEvents(): array

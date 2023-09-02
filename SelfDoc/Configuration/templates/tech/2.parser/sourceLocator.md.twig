@@ -12,7 +12,7 @@ Source locators are set in the configuration:
   - class: \\BumbleDocGen\\Core\\Parser\\SourceLocator\\RecursiveDirectoriesSourceLocator
     arguments:
       directories:
-        - "%project_root%/BumbleDocGen"
+        - "%project_root%/src"
         - "%project_root%/SelfDoc"' | textToCodeBlock('yaml') }}
 
 You can create your own source locators or use any existing ones. All source locators must implement the <a>SourceLocatorInterface</a> interface.
@@ -24,7 +24,7 @@ You can create your own source locators or use any existing ones. All source loc
 {{ printEntityCollectionAsList(
     phpClassEntityCollection
         .filterByInterfaces(['BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface'])
-        .filterByPaths(['/BumbleDocGen/Core/Parser'])
+        .filterByPaths(['/src/Core/Parser'])
         .getOnlyInstantiable()
 ) }}
 
@@ -33,6 +33,6 @@ You can create your own source locators or use any existing ones. All source loc
 {{ printEntityCollectionAsList(
     phpClassEntityCollection
         .filterByInterfaces(['BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface'])
-        .filterByPaths(['/BumbleDocGen/LanguageHandler/Php/Parser'])
+        .filterByPaths(['/src/LanguageHandler/Php/Parser'])
         .getOnlyInstantiable()
 ) }}

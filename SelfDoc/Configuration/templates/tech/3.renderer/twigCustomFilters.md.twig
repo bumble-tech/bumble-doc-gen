@@ -56,8 +56,8 @@ Here is a list of filters available by default:
     </thead>
     <tbody>
     {% for filter in phpClassEntityCollection.filterByPaths([
-            '/BumbleDocGen/Core/Renderer/Twig/Filter',
-            '/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Filter'
+            '/src/Core/Renderer/Twig/Filter',
+            '/src/LanguageHandler/Php/Renderer/Twig/Filter'
         ])
         .filterByInterfaces(['BumbleDocGen\\Core\\Renderer\\Twig\\Filter\\CustomFilterInterface'])
         .getOnlyInstantiable()

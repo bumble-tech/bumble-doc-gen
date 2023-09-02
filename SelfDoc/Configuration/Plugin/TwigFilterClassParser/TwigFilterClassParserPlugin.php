@@ -21,17 +21,16 @@ use DI\NotFoundException;
 final class TwigFilterClassParserPlugin implements PluginInterface
 {
     private const TWIG_FILTER_DIR_NAMES = [
-        '/BumbleDocGen/Core/Renderer/Twig/Filter',
-        '/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Filter'
+        '/src/Core/Renderer/Twig/Filter',
+        '/src/LanguageHandler/Php/Renderer/Twig/Filter'
     ];
     public const PLUGIN_KEY = 'twigFilterClassParserPlugin';
 
     public function __construct(
         private FilterClassPluginTwigEnvironment $twigEnvironment,
-        private RendererContext                  $context,
-        private Configuration                    $configuration,
-    )
-    {
+        private RendererContext $context,
+        private Configuration $configuration,
+    ) {
     }
 
     public static function getSubscribedEvents(): array

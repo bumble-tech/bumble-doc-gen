@@ -32,8 +32,8 @@ Plugins for any programming languages work regardless of which language handler 
     </tr>
 {% for pluginEntity in phpClassEntityCollection
         .filterByPaths([
-            '/BumbleDocGen/Core',
-            '/BumbleDocGen/LanguageHandler',
+            '/src/Core',
+            '/src/LanguageHandler',
          ])
         .filterByInterfaces(['BumbleDocGen\\Core\\Plugin\\PluginInterface'])
         .getOnlyInstantiable()
@@ -58,8 +58,8 @@ Plugins for any programming languages work regardless of which language handler 
 
 {{ printEntityCollectionAsList( phpClassEntityCollection
         .filterByPaths([
-            '/BumbleDocGen/Core',
-            '/BumbleDocGen/LanguageHandler',
+            '/src/Core',
+            '/src/LanguageHandler',
          ])
         .filterByParentClassNames(['Symfony\\Contracts\\EventDispatcher\\Event'])
         .getOnlyInstantiable() ) }}

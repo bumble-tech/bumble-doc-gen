@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use Noodlehaus\Config;
+
 use function BumbleDocGen\Core\is_associative_array;
 
 final class GetConfigParametersDescription implements CustomFunctionInterface

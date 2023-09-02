@@ -11,7 +11,7 @@ source_locators:
   - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
     arguments:
       directories:
-        - "%project_root%/BumbleDocGen"
+        - "%project_root%/src"
         - "%project_root%/SelfDoc"
 twig_filters:
   - class: \SelfDoc\Configuration\Twig\CustomFilter\EvalString

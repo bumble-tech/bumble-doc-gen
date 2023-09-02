@@ -72,11 +72,11 @@ language_handlers:
 Common filtering conditions that are available for any entity:
 
 {{ printEntityCollectionAsList(
-    filterConditions.filterByPaths(['/BumbleDocGen/Core'])
+    filterConditions.filterByPaths(['/src/Core'])
 ) }}
 
 Filter condition for working with entities PHP language handler:
 
 {{ printClassCollectionAsGroupedTable(
-    filterConditions.filterByPaths(['/BumbleDocGen/LanguageHandler/Php/Parser/FilterCondition'])
+    filterConditions.filterByPaths(['/src/LanguageHandler/Php/Parser/FilterCondition'])
 ) }}

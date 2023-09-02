@@ -19,7 +19,7 @@ use DI\NotFoundException;
  *
  * @note This function initiates the creation of documents for the displayed entities
  *
- * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/BumbleDocGen/Renderer'])) }}
+ * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/src/Renderer'])) }}
  * @example {{ drawClassMap(classEntityCollection) }}
  */
 final class DrawClassMap implements CustomFunctionInterface
