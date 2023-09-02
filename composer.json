@@ -63,5 +63,8 @@
             "php-http/discovery": true,
             "captainhook/plugin-composer": true
         }
-    }
+    },
+    "bin": [
+        "bin/bumbleDocGen"
+    ]
 }
