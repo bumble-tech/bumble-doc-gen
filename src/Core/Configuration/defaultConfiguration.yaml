@@ -2,7 +2,7 @@ parent_configuration:             # (string|null) Path to parent configuration f
 project_root:                     # (string) Path to the directory of the documented project (or part of the project)
 templates_dir:                    # (string) Path to directory with documentation templates
 output_dir: "%project_root%/docs" # (string) Path to the directory where the finished documentation will be generated
-cache_dir: '%WORKING_DIR%/__cache'# (string|null) Path to the directory where the documentation generator cache will be saved
+cache_dir: '%WORKING_DIR%/.bumbleDocGenCache'# (string|null) Path to the directory where the documentation generator cache will be saved
 output_dir_base_url: "/docs"      # (string) Basic part of url documentation. Used to form links in generated documents.
 git_client_path: "git"            # (string) Path to git client
 check_file_in_git_before_creating_doc: true # (bool) Checking if a document exists in GIT before creating a document
