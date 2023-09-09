@@ -113,9 +113,9 @@ final class Configuration
             );
         }
 
-        if (!is_writable($outputDir)) {
+        if (!is_writable($parentDir)) {
             throw new InvalidConfigurationParameterException(
-                "The directory specified in configuration `output_dir` is not writable"
+                "`output_dir` cannot be created because parent directory `{$parentDir}` is not writable"
             );
         }
 
