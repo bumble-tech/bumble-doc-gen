@@ -112,6 +112,13 @@ final class Configuration
                 "`output_dir` cannot be created because parent directory `{$parentDir}` does not exist"
             );
         }
+
+        if (!is_writable($outputDir)) {
+            throw new InvalidConfigurationParameterException(
+                "The directory specified in configuration `output_dir` is not writable"
+            );
+        }
+
         if (!file_exists($outputDir)) {
             $this->logger->notice("Creating `{$outputDir}` directory");
             mkdir($outputDir);
