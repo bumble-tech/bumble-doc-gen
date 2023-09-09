@@ -72,7 +72,7 @@ final class ConfigurationParameterBag
         foreach ($keys as $key) {
             $value = [$key => $value];
         }
-        $this->parameters = array_merge_recursive($value, $this->parameters);
+        $this->parameters = $this->mergeConfigParams($this->parameters, $value);
     }
 
     public function addValueIfNotExists(string $name, mixed $value): void
