@@ -3,6 +3,20 @@
 
 ini_set('memory_limit', '-1');
 
-require_once __DIR__ . '/../vendor/autoload.php';
+$dir = __DIR__;
+$autoloadFound = false;
+while ($dir !== DIRECTORY_SEPARATOR) {
+    $autoloadFileName = realpath($dir . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php');
+    $autoloadFound = file_exists($autoloadFileName) && is_readable($autoloadFileName);
+    if ($autoloadFound) {
+        require $autoloadFileName;
+        break;
+    }
+    $dir = dirname($dir);
+}
+
+if (!$autoloadFound) {
+    die('Composer autoload.php file not found.');
+}
 
 (new \BumbleDocGen\Console\App())->run();
