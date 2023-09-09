@@ -24,6 +24,13 @@ final class GenerateCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'Path to the configuration file, specified as absolute or relative to the working directory.',
                 'bumble_doc_gen.yaml'
+            )
+            ->addOption(
+                'project_root',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Configuration parameter: path to the directory of the documented project',
+                ''
             );
     }
 
@@ -40,8 +47,23 @@ final class GenerateCommand extends Command
         if (Path::isRelative($configFile)) {
             $configFile = getcwd() . DIRECTORY_SEPARATOR . $configFile;
         }
-        $docGenerator = (new DocGeneratorFactory())->create($configFile);
-        $docGenerator->generate();
+        $docGeneratorFactory = (new DocGeneratorFactory());
+
+        $docGeneratorFactory->setCustomConfigurationParameters(
+            $this->getCustomConfigurationParameters($input)
+        );
+
+        $docGeneratorFactory->create($configFile)->generate();
         return self::SUCCESS;
+    }
+
+    private function getCustomConfigurationParameters(\Symfony\Component\Console\Input\InputInterface $input): array
+    {
+        $customConfigurationParameters = [];
+        $projectRoot = $input->getOption('project_root');
+        if ($projectRoot) {
+            $customConfigurationParameters['project_root'] = $projectRoot;
+        }
+        return $customConfigurationParameters;
     }
 }
