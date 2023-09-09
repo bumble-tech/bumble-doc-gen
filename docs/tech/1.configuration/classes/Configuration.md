@@ -150,7 +150,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\ConfigurationParame
 <ul>
 <li><a name="mgetcachedir" href="#mgetcachedir">#</a>
  <b>getCacheDir</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L182">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L189">source code</a></li>
 </ul>
 
 ```php
@@ -178,7 +178,7 @@ public function getCacheDir(): string|null;
 <ul>
 <li><a name="mgetdocgenlibdir" href="#mgetdocgenlibdir">#</a>
  <b>getDocGenLibDir</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L325">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L332">source code</a></li>
 </ul>
 
 ```php
@@ -199,7 +199,7 @@ public function getDocGenLibDir(): string;
 <ul>
 <li><a name="mgetgitclientpath" href="#mgetgitclientpath">#</a>
  <b>getGitClientPath</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L228">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L235">source code</a></li>
 </ul>
 
 ```php
@@ -227,7 +227,7 @@ public function getGitClientPath(): string;
 <ul>
 <li><a name="mgetlanguagehandlerscollection" href="#mgetlanguagehandlerscollection">#</a>
  <b>getLanguageHandlersCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L143">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L150">source code</a></li>
 </ul>
 
 ```php
@@ -289,7 +289,7 @@ public function getOutputDir(): string;
 <ul>
 <li><a name="mgetoutputdirbaseurl" href="#mgetoutputdirbaseurl">#</a>
  <b>getOutputDirBaseUrl</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L127">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L134">source code</a></li>
 </ul>
 
 ```php
@@ -317,7 +317,7 @@ public function getOutputDirBaseUrl(): string;
 <ul>
 <li><a name="mgetpagelinkprocessor" href="#mgetpagelinkprocessor">#</a>
  <b>getPageLinkProcessor</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L210">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L217">source code</a></li>
 </ul>
 
 ```php
@@ -351,7 +351,7 @@ public function getPageLinkProcessor(): \BumbleDocGen\Core\Renderer\PageLinkProc
 <ul>
 <li><a name="mgetplugins" href="#mgetplugins">#</a>
  <b>getPlugins</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L164">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L171">source code</a></li>
 </ul>
 
 ```php
@@ -475,7 +475,7 @@ public function getTemplatesDir(): string;
 <ul>
 <li><a name="mgettwigfilters" href="#mgettwigfilters">#</a>
  <b>getTwigFilters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L267">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L274">source code</a></li>
 </ul>
 
 ```php
@@ -509,7 +509,7 @@ public function getTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\Custom
 <ul>
 <li><a name="mgettwigfunctions" href="#mgettwigfunctions">#</a>
  <b>getTwigFunctions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L244">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L251">source code</a></li>
 </ul>
 
 ```php
@@ -543,7 +543,7 @@ public function getTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Function\Cu
 <ul>
 <li><a name="mgetworkingdir" href="#mgetworkingdir">#</a>
  <b>getWorkingDir</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L316">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L323">source code</a></li>
 </ul>
 
 ```php
@@ -571,7 +571,7 @@ public function getWorkingDir(): string;
 <ul>
 <li><a name="mischeckfileingitbeforecreatingdocenabled" href="#mischeckfileingitbeforecreatingdocenabled">#</a>
  <b>isCheckFileInGitBeforeCreatingDocEnabled</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L302">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L309">source code</a></li>
 </ul>
 
 ```php
@@ -599,7 +599,7 @@ public function isCheckFileInGitBeforeCreatingDocEnabled(): bool;
 <ul>
 <li><a name="musesharedcache" href="#musesharedcache">#</a>
  <b>useSharedCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L288">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L295">source code</a></li>
 </ul>
 
 ```php

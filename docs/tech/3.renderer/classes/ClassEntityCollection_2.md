@@ -248,10 +248,10 @@ public function add(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity 
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_3.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 </ul>
 
@@ -319,10 +319,10 @@ public function filterByInterfaces(array $interfaces): \BumbleDocGen\LanguageHan
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_3.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -367,10 +367,10 @@ public function filterByNameRegularExpression(string $regexPattern): \BumbleDocG
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_3.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -415,10 +415,10 @@ public function filterByParentClassNames(array $parentClassNames): \BumbleDocGen
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_3.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -463,10 +463,10 @@ public function filterByPaths(array $paths): \BumbleDocGen\LanguageHandler\Php\P
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_3.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -779,10 +779,10 @@ public function getOnlyInstantiable(): \BumbleDocGen\LanguageHandler\Php\Parser\
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_3.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -810,10 +810,10 @@ public function getOnlyInterfaces(): \BumbleDocGen\LanguageHandler\Php\Parser\En
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_3.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1067,10 +1067,10 @@ public function loadClassEntities(): void;
     <a href="#">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_3.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
