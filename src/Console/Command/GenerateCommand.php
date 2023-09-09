@@ -11,6 +11,8 @@ use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Filesystem\Path;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 final class GenerateCommand extends Command
 {
@@ -38,7 +40,7 @@ final class GenerateCommand extends Command
                 $optionName,
                 null,
                 InputOption::VALUE_OPTIONAL,
-                "Config parameter: {$description}"
+                "<fg=magenta;options=bold>Config parameter:</> {$description}"
             );
         }
     }
@@ -49,8 +51,8 @@ final class GenerateCommand extends Command
      * @throws InvalidArgumentException
      */
     protected function execute(
-        \Symfony\Component\Console\Input\InputInterface $input,
-        \Symfony\Component\Console\Output\OutputInterface $output
+        InputInterface $input,
+        OutputInterface $output
     ): int {
         $docGeneratorFactory = (new DocGeneratorFactory());
         $docGeneratorFactory->setCustomConfigurationParameters(
@@ -68,7 +70,7 @@ final class GenerateCommand extends Command
         return self::SUCCESS;
     }
 
-    private function getCustomConfigurationParameters(\Symfony\Component\Console\Input\InputInterface $input): array
+    private function getCustomConfigurationParameters(InputInterface $input): array
     {
         $customConfigurationParameters = [];
         foreach ($this->customConfigOptions as $optionName => $description) {
