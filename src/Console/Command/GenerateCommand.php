@@ -14,6 +14,13 @@ use Symfony\Component\Filesystem\Path;
 
 final class GenerateCommand extends Command
 {
+    private array $customConfigOptions = [
+        'project_root' => 'Path to the directory of the documented project',
+        'templates_dir' => 'Path to directory with documentation templates',
+        'output_dir' => 'Path to the directory where the finished documentation will be generated',
+        'cache_dir' => 'Configuration parameter: Path to the directory where the documentation generator cache will be saved',
+    ];
+
     protected function configure(): void
     {
         $this->setName('generate')
@@ -21,17 +28,19 @@ final class GenerateCommand extends Command
             ->addOption(
                 'config',
                 'c',
-                InputOption::VALUE_OPTIONAL,
-                'Path to the configuration file, specified as absolute or relative to the working directory.',
+                InputOption::VALUE_NEGATABLE,
+                'Path to the configuration file, specified as absolute or relative to the working directory <fg=yellow;>[default: "bumble_doc_gen.yaml"]</>',
                 'bumble_doc_gen.yaml'
-            )
-            ->addOption(
-                'project_root',
+            );
+
+        foreach ($this->customConfigOptions as $optionName => $description) {
+            $this->addOption(
+                $optionName,
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'Configuration parameter: path to the directory of the documented project',
-                ''
+                "Config parameter: {$description}"
             );
+        }
     }
 
     /**
@@ -43,26 +52,30 @@ final class GenerateCommand extends Command
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ): int {
-        $configFile = $input->getOption('config');
-        if (Path::isRelative($configFile)) {
-            $configFile = getcwd() . DIRECTORY_SEPARATOR . $configFile;
-        }
         $docGeneratorFactory = (new DocGeneratorFactory());
-
         $docGeneratorFactory->setCustomConfigurationParameters(
             $this->getCustomConfigurationParameters($input)
         );
 
-        $docGeneratorFactory->create($configFile)->generate();
+        $configFile = $input->getOption('config');
+        if ($configFile && Path::isRelative($configFile)) {
+            $configFile = getcwd() . DIRECTORY_SEPARATOR . $configFile;
+            $docGeneratorFactory->create($configFile)->generate();
+        } else {
+            $docGeneratorFactory->create()->generate();
+        }
+
         return self::SUCCESS;
     }
 
     private function getCustomConfigurationParameters(\Symfony\Component\Console\Input\InputInterface $input): array
     {
         $customConfigurationParameters = [];
-        $projectRoot = $input->getOption('project_root');
-        if ($projectRoot) {
-            $customConfigurationParameters['project_root'] = $projectRoot;
+        foreach ($this->customConfigOptions as $optionName => $description) {
+            $optionValue = $input->getOption($optionName);
+            if (!is_null($optionValue)) {
+                $customConfigurationParameters[$optionName] = $optionValue;
+            }
         }
         return $customConfigurationParameters;
     }
