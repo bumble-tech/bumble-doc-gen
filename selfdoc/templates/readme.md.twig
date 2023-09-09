@@ -47,6 +47,8 @@ BumbleDocGen's interface consists of mainly two classes: <a>DocGenerator</a> and
 
 {{ "Examples of usage" | textToHeading('H3') }}
 
+1) Working with a library in a PHP file
+
 ```php
 require_once 'vendor/autoload.php';
 
@@ -60,6 +62,19 @@ $docgen = $factory->create('/path/to/configuration/files');
 
 // Now call the desired operation
 $docgen->generate();
+```
+
+2) Working with the library through a console application
+
+```bash
+# List of available commands
+./vendor/bin/bumbleDocGen list
+
+# Documentation generation example
+./vendor/bin/bumbleDocGen generate -c <path to config file>
+
+# Getting detailed information about a command
+./vendor/bin/bumbleDocGen generate -h
 ```
 
 ------------------
