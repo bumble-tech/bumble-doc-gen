@@ -34,7 +34,7 @@ final class DocGeneratorFactory
      * @throws NotFoundException
      * @throws \Exception
      */
-    public function create(string ...$configurationFiles): DocGenerator
+    public function create(?string ...$configurationFiles): DocGenerator
     {
         $diContainer = $this->containerBuilder->build();
         $logger = $diContainer->get(LoggerInterface::class);
