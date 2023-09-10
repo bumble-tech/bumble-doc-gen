@@ -65,7 +65,7 @@
 <ul>
 {% for throw in methodEntity.getThrows() %}
 <li>
-    <a {% if throw.url %}href="{{ throw.url }}"{% endif %}>{{ throw.name }}</a>{% if throw.description %} - {{ throw.description | removeLineBrakes }} {% endif %}
+    <a {% if throw.url and throw.url != '#' %}href="{{ throw.url }}"{% endif %}>{{ throw.name }}</a>{% if throw.description %} - {{ throw.description | removeLineBrakes }} {% endif %}
 </li>
 
 {% endfor %}
