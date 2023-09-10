@@ -46,7 +46,7 @@ final class LastPageCommitter implements PluginInterface
             $author = str_replace('Author:', '<b>Last page committer:</b>', htmlspecialchars($output[1]));
             $date = str_replace('Date:', '<b>Last modified date:</b>', $output[2]);
             $contentRegenerationDate = '<b>Page content update date:</b> ' . date('D M d Y');
-            $content .= "\n\n<div id='page_committer_info'>\n<hr>\n{$author}<br>{$date}<br>{$contentRegenerationDate}<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>";
+            $content .= "\n\n<div id='page_committer_info'>\n<hr>\n{$author}<br>{$date}<br>{$contentRegenerationDate}<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>";
         }
         $event->setContent($content);
     }
