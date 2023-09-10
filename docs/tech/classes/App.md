@@ -1294,7 +1294,7 @@ public function setDispatcher(\Symfony\Contracts\EventDispatcher\EventDispatcher
     <tbody>
             <tr>
             <td>$dispatcher</td>
-            <td><a href='#'>\Symfony\Contracts\EventDispatcher\EventDispatcherInterface</a></td>
+            <td>\Symfony\Contracts\EventDispatcher\EventDispatcherInterface</td>
             <td>-</td>
         </tr>
         </tbody>

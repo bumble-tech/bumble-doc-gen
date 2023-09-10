@@ -94,7 +94,7 @@ public function __construct(\DI\Container $diContainer);
     <tbody>
             <tr>
             <td>$diContainer</td>
-            <td><a href='#'>\DI\Container</a></td>
+            <td>\DI\Container</td>
             <td>-</td>
         </tr>
         </tbody>
@@ -181,10 +181,10 @@ public function transform(mixed $value): object|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 

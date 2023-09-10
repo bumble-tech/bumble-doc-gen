@@ -91,7 +91,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen
     <tbody>
             <tr>
             <td>$openaiClient</td>
-            <td><a href='#'>\Tectalic\OpenAi\Client</a></td>
+            <td>\Tectalic\OpenAi\Client</td>
             <td>-</td>
         </tr>
             <tr>
@@ -158,16 +158,16 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\Tectalic\OpenAi\ClientException</a></li>
+    <a >\Tectalic\OpenAi\ClientException</a></li>
 
 </ul>
 
@@ -212,10 +212,10 @@ public function hasMethodsWithoutDocBlocks(\BumbleDocGen\Core\Parser\Entity\Root
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>

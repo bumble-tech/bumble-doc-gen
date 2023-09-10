@@ -134,7 +134,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
         </tr>
             <tr>
             <td>$logger</td>
-            <td><a href='#'>\Monolog\Logger</a></td>
+            <td>\Monolog\Logger</td>
             <td>-</td>
         </tr>
         </tbody>

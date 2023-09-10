@@ -80,7 +80,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model
     <tbody>
             <tr>
             <td>$openaiClient</td>
-            <td><a href='#'>\Tectalic\OpenAi\Client</a></td>
+            <td>\Tectalic\OpenAi\Client</td>
             <td>-</td>
         </tr>
             <tr>
@@ -139,7 +139,7 @@ public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\En
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\Tectalic\OpenAi\ClientException</a></li>
+    <a >\Tectalic\OpenAi\ClientException</a></li>
 
 <li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
