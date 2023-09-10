@@ -23,7 +23,7 @@ final class BreadcrumbsHelper
     /**
      * The name template of the file that will be the entry point when switching between pages
      */
-    public const DEFAULT_PREV_PAGE_NAME_TEMPLATE = '/^((readme|index)\.(rst|md)\.twig)/';
+    public const DEFAULT_PREV_PAGE_NAME_TEMPLATE = '/^((readme|index)\.(rst|md)\.twig)/i';
 
     private array $keyUsageCount = [];
 
