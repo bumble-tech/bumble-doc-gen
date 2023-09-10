@@ -95,7 +95,7 @@ public function add(\BumbleDocGen\LanguageHandler\LanguageHandlerInterface $lang
 </ul>
 
 ```php
-public static function create(\BumbleDocGen\LanguageHandler\LanguageHandlerInterface $languageHandlers): \BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
+public static function create(\BumbleDocGen\LanguageHandler\LanguageHandlerInterface ...$languageHandlers): \BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 ```
 
 
@@ -112,7 +112,7 @@ public static function create(\BumbleDocGen\LanguageHandler\LanguageHandlerInter
     </thead>
     <tbody>
             <tr>
-            <td>$languageHandlers</td>
+            <td>$languageHandlers <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlerInterface.php'>\BumbleDocGen\LanguageHandler\LanguageHandlerInterface</a></td>
             <td>-</td>
         </tr>

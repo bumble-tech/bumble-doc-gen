@@ -95,7 +95,7 @@ public function add(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterfa
 </ul>
 
 ```php
-public static function create(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface $sourceLocators): \BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
+public static function create(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface ...$sourceLocators): \BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
 ```
 
 
@@ -112,7 +112,7 @@ public static function create(\BumbleDocGen\Core\Parser\SourceLocator\SourceLoca
     </thead>
     <tbody>
             <tr>
-            <td>$sourceLocators</td>
+            <td>$sourceLocators <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorInterface.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface</a></td>
             <td>-</td>
         </tr>

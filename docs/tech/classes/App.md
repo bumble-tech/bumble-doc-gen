@@ -1396,7 +1396,7 @@ public function setName(string $name): mixed;
 ```php
 // Implemented in Symfony\Component\Console\Application
 
-public function setSignalsToDispatchEvent(int $signalsToDispatchEvent): mixed;
+public function setSignalsToDispatchEvent(int ...$signalsToDispatchEvent): mixed;
 ```
 
 
@@ -1413,7 +1413,7 @@ public function setSignalsToDispatchEvent(int $signalsToDispatchEvent): mixed;
     </thead>
     <tbody>
             <tr>
-            <td>$signalsToDispatchEvent</td>
+            <td>$signalsToDispatchEvent <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a></td>
             <td>-</td>
         </tr>

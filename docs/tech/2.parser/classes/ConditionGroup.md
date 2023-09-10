@@ -56,7 +56,7 @@ In the case of OR, it is enough to successfully check at least one condition, in
 </ul>
 
 ```php
-public function __construct(string $groupType, \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface $conditions);
+public function __construct(string $groupType, \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface ...$conditions);
 ```
 
 
@@ -78,7 +78,7 @@ public function __construct(string $groupType, \BumbleDocGen\Core\Parser\FilterC
             <td>-</td>
         </tr>
             <tr>
-            <td>$conditions</td>
+            <td>$conditions <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a></td>
             <td>-</td>
         </tr>

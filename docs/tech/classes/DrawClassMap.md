@@ -234,7 +234,7 @@ public function convertDirectoryStructureToFormattedString(array $structure, str
 </ul>
 
 ```php
-public function getDirectoryStructure(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollections): array;
+public function getDirectoryStructure(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection ...$classEntityCollections): array;
 ```
 
 
@@ -251,7 +251,7 @@ public function getDirectoryStructure(\BumbleDocGen\LanguageHandler\Php\Parser\E
     </thead>
     <tbody>
             <tr>
-            <td>$classEntityCollections</td>
+            <td>$classEntityCollections <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
             <td>-</td>
         </tr>

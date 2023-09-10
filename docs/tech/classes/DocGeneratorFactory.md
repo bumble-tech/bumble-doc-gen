@@ -95,7 +95,7 @@ public function __construct(string $diConfig = '/src/di-config.php');
 </ul>
 
 ```php
-public function create(string|null $configurationFiles): \BumbleDocGen\DocGenerator;
+public function create(string|null ...$configurationFiles): \BumbleDocGen\DocGenerator;
 ```
 
 
@@ -112,7 +112,7 @@ public function create(string|null $configurationFiles): \BumbleDocGen\DocGenera
     </thead>
     <tbody>
             <tr>
-            <td>$configurationFiles</td>
+            <td>$configurationFiles <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>

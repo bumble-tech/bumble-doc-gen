@@ -63,7 +63,7 @@ final class CustomFunctionsCollection implements \IteratorAggregate, \Traversabl
 </ul>
 
 ```php
-public function add(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface $filters): \BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
+public function add(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface ...$filters): \BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 ```
 
 
@@ -80,7 +80,7 @@ public function add(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInte
     </thead>
     <tbody>
             <tr>
-            <td>$filters</td>
+            <td>$filters <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a></td>
             <td>-</td>
         </tr>
@@ -101,7 +101,7 @@ public function add(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInte
 </ul>
 
 ```php
-public static function create(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface $filters): \BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
+public static function create(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface ...$filters): \BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 ```
 
 
@@ -118,7 +118,7 @@ public static function create(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFu
     </thead>
     <tbody>
             <tr>
-            <td>$filters</td>
+            <td>$filters <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a></td>
             <td>-</td>
         </tr>

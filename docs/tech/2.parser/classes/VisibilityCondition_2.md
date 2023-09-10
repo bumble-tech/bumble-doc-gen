@@ -55,7 +55,7 @@ final class VisibilityCondition implements \BumbleDocGen\Core\Parser\FilterCondi
 </ul>
 
 ```php
-public function __construct(string $visibilityModifiers);
+public function __construct(string ...$visibilityModifiers);
 ```
 
 
@@ -72,7 +72,7 @@ public function __construct(string $visibilityModifiers);
     </thead>
     <tbody>
             <tr>
-            <td>$visibilityModifiers</td>
+            <td>$visibilityModifiers <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>

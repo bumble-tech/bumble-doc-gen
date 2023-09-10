@@ -145,7 +145,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\ValueTransformer\Va
 </ul>
 
 ```php
-public function addValueFromFileIfNotExists(string $name, string $fileNames): void;
+public function addValueFromFileIfNotExists(string $name, string ...$fileNames): void;
 ```
 
 
@@ -167,7 +167,7 @@ public function addValueFromFileIfNotExists(string $name, string $fileNames): vo
             <td>-</td>
         </tr>
             <tr>
-            <td>$fileNames</td>
+            <td>$fileNames <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
@@ -319,7 +319,7 @@ public function getAll(bool $useResolvers = true): array;
 </ul>
 
 ```php
-public function getConfigValues(string $configurationFiles): array;
+public function getConfigValues(string ...$configurationFiles): array;
 ```
 
 
@@ -336,7 +336,7 @@ public function getConfigValues(string $configurationFiles): array;
     </thead>
     <tbody>
             <tr>
-            <td>$configurationFiles</td>
+            <td>$configurationFiles <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
@@ -471,7 +471,7 @@ public function loadFromArray(array $parameters): void;
 </ul>
 
 ```php
-public function loadFromFiles(string $fileNames): void;
+public function loadFromFiles(string ...$fileNames): void;
 ```
 
 
@@ -488,7 +488,7 @@ public function loadFromFiles(string $fileNames): void;
     </thead>
     <tbody>
             <tr>
-            <td>$fileNames</td>
+            <td>$fileNames <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
