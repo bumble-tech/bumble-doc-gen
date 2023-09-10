@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> DocGeneratorFactory<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> DocGeneratorFactory<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L13">DocGeneratorFactory</a> class:
