@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RootEntityCollectionsGroup<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RootEntityCollectionsGroup<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php#L9">RootEntityCollectionsGroup</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php#L9">RootEntityCollectionsGroup</a> class:
 </h1>
 
 
@@ -65,7 +65,7 @@ final class RootEntityCollectionsGroup implements \IteratorAggregate, \Traversab
 <ul>
 <li><a name="madd" href="#madd">#</a>
  <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php#L21">source code</a></li>
 </ul>
 
 ```php
@@ -87,7 +87,7 @@ public function add(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootE
     <tbody>
             <tr>
             <td>$rootEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -103,7 +103,7 @@ public function add(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootE
 <ul>
 <li><a name="mclearoperationslog" href="#mclearoperationslog">#</a>
  <b>clearOperationsLog</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php#L31">source code</a></li>
 </ul>
 
 ```php
@@ -124,7 +124,7 @@ public function clearOperationsLog(): void;
 <ul>
 <li><a name="mget" href="#mget">#</a>
  <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php#L26">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php#L26">source code</a></li>
 </ul>
 
 ```php
@@ -152,7 +152,7 @@ public function get(string $collectionName): \BumbleDocGen\Core\Parser\Entity\Ro
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 </div>
@@ -162,7 +162,7 @@ public function get(string $collectionName): \BumbleDocGen\Core\Parser\Entity\Ro
 <ul>
 <li><a name="mgetiterator" href="#mgetiterator">#</a>
  <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php#L16">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php#L16">source code</a></li>
 </ul>
 
 ```php
@@ -196,7 +196,7 @@ public function getIterator(): \Generator;
 <ul>
 <li><a name="mgetoperationslog" href="#mgetoperationslog">#</a>
  <b>getOperationsLog</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php#L40">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php#L40">source code</a></li>
 </ul>
 
 ```php
@@ -217,7 +217,7 @@ public function getOperationsLog(): array;
 <ul>
 <li><a name="mgetoperationslogwithoutduplicates" href="#mgetoperationslogwithoutduplicates">#</a>
  <b>getOperationsLogWithoutDuplicates</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php#L53">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php#L53">source code</a></li>
 </ul>
 
 ```php
@@ -238,7 +238,7 @@ public function getOperationsLogWithoutDuplicates(): array;
 <ul>
 <li><a name="misfoundentitiesoperationslogcacheoutdated" href="#misfoundentitiesoperationslogcacheoutdated">#</a>
  <b>isFoundEntitiesOperationsLogCacheOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php#L67">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php#L67">source code</a></li>
 </ul>
 
 ```php
@@ -276,7 +276,7 @@ public function isFoundEntitiesOperationsLogCacheOutdated(array $classEntityColl
 <ul>
 <li><a name="mupdateallentitiescache" href="#mupdateallentitiescache">#</a>
  <b>updateAllEntitiesCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php#L81">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php#L81">source code</a></li>
 </ul>
 
 ```php

@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CachedSourceLocator<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CachedSourceLocator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/Internal/CachedSourceLocator.php#L26">CachedSourceLocator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/Internal/CachedSourceLocator.php#L26">CachedSourceLocator</a> class:
 </h1>
 
 
@@ -54,7 +54,7 @@ final class CachedSourceLocator implements \Roave\BetterReflection\SourceLocator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/Internal/CachedSourceLocator.php#L34">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/Internal/CachedSourceLocator.php#L34">source code</a></li>
 </ul>
 
 ```php
@@ -81,12 +81,12 @@ public function __construct(\Roave\BetterReflection\SourceLocator\Type\SourceLoc
         </tr>
             <tr>
             <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$cache</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/SourceLocatorCacheItemPool.php'>\BumbleDocGen\Core\Cache\SourceLocatorCacheItemPool</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/SourceLocatorCacheItemPool.php'>\BumbleDocGen\Core\Cache\SourceLocatorCacheItemPool</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -101,7 +101,7 @@ public function __construct(\Roave\BetterReflection\SourceLocator\Type\SourceLoc
 <ul>
 <li><a name="mlocateidentifier" href="#mlocateidentifier">#</a>
  <b>locateIdentifier</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/Internal/CachedSourceLocator.php#L45">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/Internal/CachedSourceLocator.php#L45">source code</a></li>
 </ul>
 
 ```php
@@ -154,7 +154,7 @@ public function locateIdentifier(\Roave\BetterReflection\Reflector\Reflector $re
 <ul>
 <li><a name="mlocateidentifiersbytype" href="#mlocateidentifiersbytype">#</a>
  <b>locateIdentifiersByType</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/Internal/CachedSourceLocator.php#L111">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/Internal/CachedSourceLocator.php#L111">source code</a></li>
 </ul>
 
 ```php

@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> EntityCacheItemPool<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> EntityCacheItemPool<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L13">EntityCacheItemPool</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L13">EntityCacheItemPool</a> class:
 </h1>
 
 
@@ -75,7 +75,7 @@ final class EntityCacheItemPool implements \Psr\Cache\CacheItemPoolInterface
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -97,7 +97,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -119,7 +119,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mclear" href="#mclear">#</a>
  <b>clear</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L46">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L46">source code</a></li>
 </ul>
 
 ```php
@@ -140,7 +140,7 @@ public function clear(): bool;
 <ul>
 <li><a name="mcommit" href="#mcommit">#</a>
  <b>commit</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L71">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L71">source code</a></li>
 </ul>
 
 ```php
@@ -161,7 +161,7 @@ public function commit(): bool;
 <ul>
 <li><a name="mdeleteitem" href="#mdeleteitem">#</a>
  <b>deleteItem</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L51">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L51">source code</a></li>
 </ul>
 
 ```php
@@ -206,7 +206,7 @@ public function deleteItem(string $key): bool;
 <ul>
 <li><a name="mdeleteitems" href="#mdeleteitems">#</a>
  <b>deleteItems</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L56">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L56">source code</a></li>
 </ul>
 
 ```php
@@ -251,7 +251,7 @@ public function deleteItems(array $keys): bool;
 <ul>
 <li><a name="mgetitem" href="#mgetitem">#</a>
  <b>getItem</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L31">source code</a></li>
 </ul>
 
 ```php
@@ -296,7 +296,7 @@ public function getItem(string $key): \Psr\Cache\CacheItemInterface;
 <ul>
 <li><a name="mgetitems" href="#mgetitems">#</a>
  <b>getItems</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L36">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L36">source code</a></li>
 </ul>
 
 ```php
@@ -341,7 +341,7 @@ public function getItems(array $keys = [ ]): iterable;
 <ul>
 <li><a name="mhasitem" href="#mhasitem">#</a>
  <b>hasItem</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L41">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L41">source code</a></li>
 </ul>
 
 ```php
@@ -386,7 +386,7 @@ public function hasItem(string $key): bool;
 <ul>
 <li><a name="msave" href="#msave">#</a>
  <b>save</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L61">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L61">source code</a></li>
 </ul>
 
 ```php
@@ -424,7 +424,7 @@ public function save(\Psr\Cache\CacheItemInterface $item): bool;
 <ul>
 <li><a name="msavedeferred" href="#msavedeferred">#</a>
  <b>saveDeferred</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php#L66">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php#L66">source code</a></li>
 </ul>
 
 ```php

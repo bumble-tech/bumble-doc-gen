@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PageLinkProcessorInterface<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PageLinkProcessorInterface<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/PageLinkProcessor/PageLinkProcessorInterface.php#L5">PageLinkProcessorInterface</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/PageLinkProcessor/PageLinkProcessorInterface.php#L5">PageLinkProcessorInterface</a> class:
 </h1>
 
 
@@ -44,7 +44,7 @@ interface PageLinkProcessorInterface
 <ul>
 <li><a name="mgetabsoluteurl" href="#mgetabsoluteurl">#</a>
  <b>getAbsoluteUrl</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/PageLinkProcessor/PageLinkProcessorInterface.php#L7">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/PageLinkProcessor/PageLinkProcessorInterface.php#L7">source code</a></li>
 </ul>
 
 ```php

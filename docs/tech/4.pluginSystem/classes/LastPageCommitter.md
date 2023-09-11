@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/4.pluginSystem/readme.md">Plugin system</a> <b>/</b> LastPageCommitter<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/4.pluginSystem/readme.md">Plugin system</a> <b>/</b> LastPageCommitter<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/CorePlugin/LastPageCommitter/LastPageCommitter.php#L16">LastPageCommitter</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/LastPageCommitter/LastPageCommitter.php#L16">LastPageCommitter</a> class:
 </h1>
 
 
@@ -54,7 +54,7 @@ final class LastPageCommitter implements \BumbleDocGen\Core\Plugin\PluginInterfa
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/CorePlugin/LastPageCommitter/LastPageCommitter.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/LastPageCommitter/LastPageCommitter.php#L18">source code</a></li>
 </ul>
 
 ```php
@@ -76,12 +76,12 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
     <tbody>
             <tr>
             <td>$context</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php'>\BumbleDocGen\Core\Renderer\Context\RendererContext</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php'>\BumbleDocGen\Core\Renderer\Context\RendererContext</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -96,7 +96,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
 <ul>
 <li><a name="mbeforecreatingdocfile" href="#mbeforecreatingdocfile">#</a>
  <b>beforeCreatingDocFile</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/CorePlugin/LastPageCommitter/LastPageCommitter.php#L34">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/LastPageCommitter/LastPageCommitter.php#L34">source code</a></li>
 </ul>
 
 ```php
@@ -118,7 +118,7 @@ public function beforeCreatingDocFile(\BumbleDocGen\Core\Plugin\Event\Renderer\B
     <tbody>
             <tr>
             <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php'>\BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php'>\BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -141,7 +141,7 @@ public function beforeCreatingDocFile(\BumbleDocGen\Core\Plugin\Event\Renderer\B
 <ul>
 <li><a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a>
  <b>getSubscribedEvents</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/CorePlugin/LastPageCommitter/LastPageCommitter.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/LastPageCommitter/LastPageCommitter.php#L24">source code</a></li>
 </ul>
 
 ```php

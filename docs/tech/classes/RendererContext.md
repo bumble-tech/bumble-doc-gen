@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RendererContext<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RendererContext<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php#L12">RendererContext</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L12">RendererContext</a> class:
 </h1>
 
 
@@ -62,7 +62,7 @@ final class RendererContext
 <ul>
 <li><a name="madddependency" href="#madddependency">#</a>
  <b>addDependency</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php#L53">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L53">source code</a></li>
 </ul>
 
 ```php
@@ -84,7 +84,7 @@ public function addDependency(\BumbleDocGen\Core\Renderer\Context\Dependency\Ren
     <tbody>
             <tr>
             <td>$dependency</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/RendererDependencyInterface.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyInterface.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -100,7 +100,7 @@ public function addDependency(\BumbleDocGen\Core\Renderer\Context\Dependency\Ren
 <ul>
 <li><a name="mcleardependencies" href="#mcleardependencies">#</a>
  <b>clearDependencies</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php#L48">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L48">source code</a></li>
 </ul>
 
 ```php
@@ -121,7 +121,7 @@ public function clearDependencies(): void;
 <ul>
 <li><a name="mgetcurrentdocumentedentitywrapper" href="#mgetcurrentdocumentedentitywrapper">#</a>
  <b>getCurrentDocumentedEntityWrapper</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php#L43">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L43">source code</a></li>
 </ul>
 
 ```php
@@ -132,7 +132,7 @@ public function getCurrentDocumentedEntityWrapper(): \BumbleDocGen\Core\Renderer
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 </div>
@@ -142,7 +142,7 @@ public function getCurrentDocumentedEntityWrapper(): \BumbleDocGen\Core\Renderer
 <ul>
 <li><a name="mgetcurrenttemplatefilepatch" href="#mgetcurrenttemplatefilepatch">#</a>
  <b>getCurrentTemplateFilePatch</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -163,7 +163,7 @@ public function getCurrentTemplateFilePatch(): string;
 <ul>
 <li><a name="mgetdependencies" href="#mgetdependencies">#</a>
  <b>getDependencies</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php#L58">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L58">source code</a></li>
 </ul>
 
 ```php
@@ -184,7 +184,7 @@ public function getDependencies(): array;
 <ul>
 <li><a name="msetcurrentdocumentedentitywrapper" href="#msetcurrentdocumentedentitywrapper">#</a>
  <b>setCurrentDocumentedEntityWrapper</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php#L37">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L37">source code</a></li>
 </ul>
 
 ```php
@@ -206,7 +206,7 @@ public function setCurrentDocumentedEntityWrapper(\BumbleDocGen\Core\Renderer\Co
     <tbody>
             <tr>
             <td>$currentDocumentedEntityWrapper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -222,7 +222,7 @@ public function setCurrentDocumentedEntityWrapper(\BumbleDocGen\Core\Renderer\Co
 <ul>
 <li><a name="msetcurrenttemplatefilepatch" href="#msetcurrenttemplatefilepatch">#</a>
  <b>setCurrentTemplateFilePatch</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/RendererContext.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L24">source code</a></li>
 </ul>
 
 ```php

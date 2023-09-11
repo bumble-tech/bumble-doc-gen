@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CacheableMethod<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CacheableMethod<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheableMethod.php#L11">CacheableMethod</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableMethod.php#L11">CacheableMethod</a> class:
 </h1>
 
 
@@ -46,15 +46,15 @@ final class CacheableMethod
 <ul>
             <li><a name="qday-seconds"
                href="#qday-seconds">#</a>
-            <code>DAY_SECONDS</code>                   <b>|</b> <a href="/BumbleDocGen/Core/Parser/Entity/Cache/CacheableMethod.php#L15">source
+            <code>DAY_SECONDS</code>                   <b>|</b> <a href="/src/Core/Parser/Entity/Cache/CacheableMethod.php#L15">source
                     code</a> </li>
             <li><a name="qhour-seconds"
                href="#qhour-seconds">#</a>
-            <code>HOUR_SECONDS</code>                   <b>|</b> <a href="/BumbleDocGen/Core/Parser/Entity/Cache/CacheableMethod.php#L14">source
+            <code>HOUR_SECONDS</code>                   <b>|</b> <a href="/src/Core/Parser/Entity/Cache/CacheableMethod.php#L14">source
                     code</a> </li>
             <li><a name="qmonth-seconds"
                href="#qmonth-seconds">#</a>
-            <code>MONTH_SECONDS</code>                   <b>|</b> <a href="/BumbleDocGen/Core/Parser/Entity/Cache/CacheableMethod.php#L16">source
+            <code>MONTH_SECONDS</code>                   <b>|</b> <a href="/src/Core/Parser/Entity/Cache/CacheableMethod.php#L16">source
                     code</a> </li>
     </ul>
 
@@ -69,7 +69,7 @@ final class CacheableMethod
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheableMethod.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableMethod.php#L18">source code</a></li>
 </ul>
 
 ```php
@@ -111,7 +111,7 @@ public function __construct(int $cacheSeconds = \BumbleDocGen\Core\Parser\Entity
 <ul>
 <li><a name="mgetcachekeygeneratorclass" href="#mgetcachekeygeneratorclass">#</a>
  <b>getCacheKeyGeneratorClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheableMethod.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableMethod.php#L35">source code</a></li>
 </ul>
 
 ```php
@@ -132,7 +132,7 @@ public function getCacheKeyGeneratorClass(): string;
 <ul>
 <li><a name="mgetcacheseconds" href="#mgetcacheseconds">#</a>
  <b>getCacheSeconds</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheableMethod.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableMethod.php#L30">source code</a></li>
 </ul>
 
 ```php

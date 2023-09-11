@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> EntityCacheStorageHelper<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> EntityCacheStorageHelper<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L13">EntityCacheStorageHelper</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L13">EntityCacheStorageHelper</a> class:
 </h1>
 
 
@@ -66,7 +66,7 @@ final class EntityCacheStorageHelper
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -88,7 +88,7 @@ public function __construct(\BumbleDocGen\Core\Cache\EntityCacheItemPool $cacheI
     <tbody>
             <tr>
             <td>$cacheItemPool</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/EntityCacheItemPool.php'>\BumbleDocGen\Core\Cache\EntityCacheItemPool</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/EntityCacheItemPool.php'>\BumbleDocGen\Core\Cache\EntityCacheItemPool</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -103,7 +103,7 @@ public function __construct(\BumbleDocGen\Core\Cache\EntityCacheItemPool $cacheI
 <ul>
 <li><a name="madditemvaluetocache" href="#madditemvaluetocache">#</a>
  <b>addItemValueToCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L59">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L59">source code</a></li>
 </ul>
 
 ```php
@@ -163,7 +163,7 @@ public function addItemValueToCache(string $cacheKey, string $itemKey, mixed $va
 <ul>
 <li><a name="mgetitemvaluefromcache" href="#mgetitemvaluefromcache">#</a>
  <b>getItemValueFromCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L72">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L72">source code</a></li>
 </ul>
 
 ```php
@@ -213,7 +213,7 @@ public function getItemValueFromCache(string $cacheKey, string $itemKey): mixed;
 <ul>
 <li><a name="mgetitemvalues" href="#mgetitemvalues">#</a>
  <b>getItemValues</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L50">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L50">source code</a></li>
 </ul>
 
 ```php
@@ -258,7 +258,7 @@ public function getItemValues(string $cacheKey): array;
 <ul>
 <li><a name="mgetusedcacheitemskeys" href="#mgetusedcacheitemskeys">#</a>
  <b>getUsedCacheItemsKeys</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L84">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L84">source code</a></li>
 </ul>
 
 ```php
@@ -296,7 +296,7 @@ public function getUsedCacheItemsKeys(string $cacheKey): array;
 <ul>
 <li><a name="mremoveitemvaluefromcache" href="#mremoveitemvaluefromcache">#</a>
  <b>removeItemValueFromCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L79">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L79">source code</a></li>
 </ul>
 
 ```php
@@ -339,7 +339,7 @@ public function removeItemValueFromCache(string $cacheKey, string $itemKey): voi
 <ul>
 <li><a name="msavecache" href="#msavecache">#</a>
  <b>saveCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L92">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/EntityCacheStorageHelper.php#L92">source code</a></li>
 </ul>
 
 ```php

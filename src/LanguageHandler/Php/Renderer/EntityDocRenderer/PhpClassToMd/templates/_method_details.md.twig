@@ -1,0 +1,101 @@
+{% if not methodEntityCollection.isEmpty() %}
+<h2>Method details:</h2>
+
+{% for methodEntity in methodEntityCollection %}
+<div class='method_description-block'>
+
+<ul>
+<li><a name="m{{ methodEntity.getName() | prepareSourceLink }}" href="#m{{ methodEntity.getName() | prepareSourceLink }}">#</a>
+ <b>{{ methodEntity.getName() }}</b>
+ {% if methodEntity.isInternal() %}<b>:warning:</b> Is internal {% endif %} {% if methodEntity.isDeprecated() %}<b>:no_entry:</b> Deprecated {% endif %}
+ {% if methodEntity.getFileSourceLink() %} <b>|</b> <a href="{{ methodEntity.getFileSourceLink() }}">source code</a>{% endif %}</li>
+</ul>
+
+```php
+{% if methodEntity.isImplementedInParentClass() %}
+// Implemented in {{ methodEntity.getImplementingClassName() }}
+
+{% elseif  methodEntity.isDynamic() %}
+// Implemented in {{ methodEntity.getImplementingClassName() }}::{% if methodEntity.isStatic() %}__callStatic(){% else %}__call(){% endif %}
+
+
+{% endif %}
+{{ methodEntity.getModifiersString() | raw }} {{ methodEntity.getName() }}({{ methodEntity.getParametersString() | raw }}){% if not methodEntity.isConstructor() %}: {{ methodEntity.getReturnType() | raw }}{% endif %};
+```
+
+{% if methodEntity.getDescription() %}<blockquote>{{ methodEntity.getDescription() }}</blockquote>{% endif %}
+
+
+{% if methodEntity.getParameters() %}
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for parameter in methodEntity.getParameters() %}
+        <tr>
+            <td>${{ parameter.name }}{% if parameter.isVariadic %} <i>(variadic)</i>{% endif %}</td>
+            <td>{{ parameter.expectedType | strTypeToUrl(methodEntity.getRootEntityCollection()) }}</td>
+            <td>{% if parameter.description %}{{ parameter.description | addIndentFromLeft(1, true) }}{% else %}-{% endif %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<b>Parameters:</b> not specified
+{% endif %}
+
+{% if not methodEntity.isConstructor() %}
+{% if methodEntity.getReturnType() %}
+<b>Return value:</b> {{ methodEntity.getReturnType() | strTypeToUrl(methodEntity.getRootEntityCollection()) }}
+{% else %}
+<b>Return value:</b> not specified
+{% endif %}
+{% endif %}
+
+{% if methodEntity.hasThrows() %}
+
+<b>Throws:</b>
+<ul>
+{% for throw in methodEntity.getThrows() %}
+<li>
+    <a {% if throw.url and throw.url != '#' %}href="{{ throw.url }}"{% endif %}>{{ throw.name }}</a>{% if throw.description %} - {{ throw.description | removeLineBrakes }} {% endif %}
+</li>
+
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if methodEntity.hasDescriptionLinks() %}
+
+<b>See:</b>
+<ul>
+{% for link in methodEntity.getDescriptionLinks() %}
+    <li>
+        <a {% if link.url %}href="{{ link.url }}"{% endif %}>{{ link.name }}</a>{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if methodEntity.hasExamples() %}
+
+
+<b>Examples of using:</b>
+
+{% for exampleData in methodEntity.getExamples() %}
+```php
+{{ exampleData.example | raw }}
+```
+
+{% endfor %}
+{% endif %}
+</div>
+<hr>
+{% endfor %}
+{% endif %}

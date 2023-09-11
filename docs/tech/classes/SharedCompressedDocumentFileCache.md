@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> SharedCompressedDocumentFileCache<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> SharedCompressedDocumentFileCache<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/SharedCompressedDocumentFileCache.php#L10">SharedCompressedDocumentFileCache</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/SharedCompressedDocumentFileCache.php#L10">SharedCompressedDocumentFileCache</a> class:
 </h1>
 
 
@@ -63,7 +63,7 @@ final class SharedCompressedDocumentFileCache
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/SharedCompressedDocumentFileCache.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/SharedCompressedDocumentFileCache.php#L21">source code</a></li>
 </ul>
 
 ```php
@@ -85,7 +85,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -107,7 +107,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mget" href="#mget">#</a>
  <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/SharedCompressedDocumentFileCache.php#L44">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/SharedCompressedDocumentFileCache.php#L44">source code</a></li>
 </ul>
 
 ```php
@@ -150,7 +150,7 @@ public function get(string $key, mixed $defaultValue = NULL): mixed;
 <ul>
 <li><a name="mgetcachefilename" href="#mgetcachefilename">#</a>
  <b>getCacheFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/SharedCompressedDocumentFileCache.php#L39">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/SharedCompressedDocumentFileCache.php#L39">source code</a></li>
 </ul>
 
 ```php
@@ -171,7 +171,7 @@ public function getCacheFileName(): string;
 <ul>
 <li><a name="mremovenotusedkeys" href="#mremovenotusedkeys">#</a>
  <b>removeNotUsedKeys</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/SharedCompressedDocumentFileCache.php#L56">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/SharedCompressedDocumentFileCache.php#L56">source code</a></li>
 </ul>
 
 ```php
@@ -192,7 +192,7 @@ public function removeNotUsedKeys(): void;
 <ul>
 <li><a name="msavechanges" href="#msavechanges">#</a>
  <b>saveChanges</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/SharedCompressedDocumentFileCache.php#L68">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/SharedCompressedDocumentFileCache.php#L68">source code</a></li>
 </ul>
 
 ```php
@@ -220,7 +220,7 @@ public function saveChanges(): void;
 <ul>
 <li><a name="mset" href="#mset">#</a>
  <b>set</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/SharedCompressedDocumentFileCache.php#L50">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/SharedCompressedDocumentFileCache.php#L50">source code</a></li>
 </ul>
 
 ```php

@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CustomSourceLocatorInterface<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CustomSourceLocatorInterface<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/CustomSourceLocatorInterface.php#L10">CustomSourceLocatorInterface</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/CustomSourceLocatorInterface.php#L10">CustomSourceLocatorInterface</a> class:
 </h1>
 
 
@@ -44,7 +44,7 @@ interface CustomSourceLocatorInterface
 <ul>
 <li><a name="mgetsourcelocator" href="#mgetsourcelocator">#</a>
  <b>getSourceLocator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/CustomSourceLocatorInterface.php#L12">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/CustomSourceLocatorInterface.php#L12">source code</a></li>
 </ul>
 
 ```php

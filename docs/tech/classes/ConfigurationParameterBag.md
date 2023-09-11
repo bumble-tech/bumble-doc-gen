@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ConfigurationParameterBag<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ConfigurationParameterBag<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L20">ConfigurationParameterBag</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L20">ConfigurationParameterBag</a> class:
 </h1>
 
 
@@ -99,7 +99,7 @@ final class ConfigurationParameterBag
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -121,7 +121,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\ValueTransformer\Va
     <tbody>
             <tr>
             <td>$valueToClassTransformer</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueTransformer/ValueToClassTransformer.php'>\BumbleDocGen\Core\Configuration\ValueTransformer\ValueToClassTransformer</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php'>\BumbleDocGen\Core\Configuration\ValueTransformer\ValueToClassTransformer</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -141,11 +141,11 @@ public function __construct(\BumbleDocGen\Core\Configuration\ValueTransformer\Va
 <ul>
 <li><a name="maddvaluefromfileifnotexists" href="#maddvaluefromfileifnotexists">#</a>
  <b>addValueFromFileIfNotExists</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L89">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L89">source code</a></li>
 </ul>
 
 ```php
-public function addValueFromFileIfNotExists(string $name, string $fileNames): void;
+public function addValueFromFileIfNotExists(string $name, string ...$fileNames): void;
 ```
 
 
@@ -167,7 +167,7 @@ public function addValueFromFileIfNotExists(string $name, string $fileNames): vo
             <td>-</td>
         </tr>
             <tr>
-            <td>$fileNames</td>
+            <td>$fileNames <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
@@ -184,7 +184,7 @@ public function addValueFromFileIfNotExists(string $name, string $fileNames): vo
 <ul>
 <li><a name="maddvalueifnotexists" href="#maddvalueifnotexists">#</a>
  <b>addValueIfNotExists</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L78">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L78">source code</a></li>
 </ul>
 
 ```php
@@ -227,7 +227,7 @@ public function addValueIfNotExists(string $name, mixed $value): void;
 <ul>
 <li><a name="mget" href="#mget">#</a>
  <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L97">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L97">source code</a></li>
 </ul>
 
 ```php
@@ -277,7 +277,7 @@ public function get(string $name, bool $useResolvers = true): mixed;
 <ul>
 <li><a name="mgetall" href="#mgetall">#</a>
  <b>getAll</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L138">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L138">source code</a></li>
 </ul>
 
 ```php
@@ -315,11 +315,11 @@ public function getAll(bool $useResolvers = true): array;
 <ul>
 <li><a name="mgetconfigvalues" href="#mgetconfigvalues">#</a>
  <b>getConfigValues</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L33">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L33">source code</a></li>
 </ul>
 
 ```php
-public function getConfigValues(string $configurationFiles): array;
+public function getConfigValues(string ...$configurationFiles): array;
 ```
 
 
@@ -336,7 +336,7 @@ public function getConfigValues(string $configurationFiles): array;
     </thead>
     <tbody>
             <tr>
-            <td>$configurationFiles</td>
+            <td>$configurationFiles <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
@@ -353,7 +353,7 @@ public function getConfigValues(string $configurationFiles): array;
 <ul>
 <li><a name="mgetsubconfigurationparameterbag" href="#mgetsubconfigurationparameterbag">#</a>
  <b>getSubConfigurationParameterBag</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L56">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L56">source code</a></li>
 </ul>
 
 ```php
@@ -381,7 +381,7 @@ public function getSubConfigurationParameterBag(string $parentKey): \BumbleDocGe
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php'>\BumbleDocGen\Core\Configuration\ConfigurationParameterBag</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php'>\BumbleDocGen\Core\Configuration\ConfigurationParameterBag</a>
 
 
 </div>
@@ -391,7 +391,7 @@ public function getSubConfigurationParameterBag(string $parentKey): \BumbleDocGe
 <ul>
 <li><a name="mhas" href="#mhas">#</a>
  <b>has</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L133">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L133">source code</a></li>
 </ul>
 
 ```php
@@ -429,7 +429,7 @@ public function has(mixed $name): bool;
 <ul>
 <li><a name="mloadfromarray" href="#mloadfromarray">#</a>
  <b>loadFromArray</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L49">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L49">source code</a></li>
 </ul>
 
 ```php
@@ -467,11 +467,11 @@ public function loadFromArray(array $parameters): void;
 <ul>
 <li><a name="mloadfromfiles" href="#mloadfromfiles">#</a>
  <b>loadFromFiles</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L44">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L44">source code</a></li>
 </ul>
 
 ```php
-public function loadFromFiles(string $fileNames): void;
+public function loadFromFiles(string ...$fileNames): void;
 ```
 
 
@@ -488,7 +488,7 @@ public function loadFromFiles(string $fileNames): void;
     </thead>
     <tbody>
             <tr>
-            <td>$fileNames</td>
+            <td>$fileNames <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
@@ -505,7 +505,7 @@ public function loadFromFiles(string $fileNames): void;
 <ul>
 <li><a name="mresolvevalue" href="#mresolvevalue">#</a>
  <b>resolveValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L125">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L125">source code</a></li>
 </ul>
 
 ```php
@@ -543,7 +543,7 @@ public function resolveValue(mixed $value): mixed;
 <ul>
 <li><a name="mset" href="#mset">#</a>
  <b>set</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L69">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L69">source code</a></li>
 </ul>
 
 ```php
@@ -586,7 +586,7 @@ public function set(string $name, mixed $value): void;
 <ul>
 <li><a name="mvalidateandgetbooleanvalue" href="#mvalidateandgetbooleanvalue">#</a>
  <b>validateAndGetBooleanValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L230">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L230">source code</a></li>
 </ul>
 
 ```php
@@ -631,7 +631,7 @@ public function validateAndGetBooleanValue(string $parameterName): bool;
 <ul>
 <li><a name="mvalidateandgetclasslistvalue" href="#mvalidateandgetclasslistvalue">#</a>
  <b>validateAndGetClassListValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L197">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L197">source code</a></li>
 </ul>
 
 ```php
@@ -675,10 +675,10 @@ public function validateAndGetClassListValue(string $parameterName, string $clas
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -692,7 +692,7 @@ public function validateAndGetClassListValue(string $parameterName, string $clas
 <ul>
 <li><a name="mvalidateandgetclassvalue" href="#mvalidateandgetclassvalue">#</a>
  <b>validateAndGetClassValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L173">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L173">source code</a></li>
 </ul>
 
 ```php
@@ -731,13 +731,13 @@ public function validateAndGetClassValue(string $parameterName, string $classInt
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -748,7 +748,7 @@ public function validateAndGetClassValue(string $parameterName, string $classInt
 <ul>
 <li><a name="mvalidateandgetdirectorypathvalue" href="#mvalidateandgetdirectorypathvalue">#</a>
  <b>validateAndGetDirectoryPathValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L268">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L268">source code</a></li>
 </ul>
 
 ```php
@@ -798,7 +798,7 @@ public function validateAndGetDirectoryPathValue(string $parameterName, bool $nu
 <ul>
 <li><a name="mvalidateandgetfilepathvalue" href="#mvalidateandgetfilepathvalue">#</a>
  <b>validateAndGetFilePathValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L243">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L243">source code</a></li>
 </ul>
 
 ```php
@@ -853,7 +853,7 @@ public function validateAndGetFilePathValue(string $parameterName, array $fileEx
 <ul>
 <li><a name="mvalidateandgetstringvalue" href="#mvalidateandgetstringvalue">#</a>
  <b>validateAndGetStringValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php#L151">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L151">source code</a></li>
 </ul>
 
 ```php

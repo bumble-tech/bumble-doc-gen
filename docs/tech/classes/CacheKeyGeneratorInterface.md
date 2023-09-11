@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CacheKeyGeneratorInterface<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CacheKeyGeneratorInterface<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheKey/CacheKeyGeneratorInterface.php#L9">CacheKeyGeneratorInterface</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheKey/CacheKeyGeneratorInterface.php#L9">CacheKeyGeneratorInterface</a> class:
 </h1>
 
 
@@ -44,7 +44,7 @@ interface CacheKeyGeneratorInterface
 <ul>
 <li><a name="mgeneratekey" href="#mgeneratekey">#</a>
  <b>generateKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheKey/CacheKeyGeneratorInterface.php#L11">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheKey/CacheKeyGeneratorInterface.php#L11">source code</a></li>
 </ul>
 
 ```php
@@ -71,7 +71,7 @@ public static function generateKey(string $cacheNamespace, \BumbleDocGen\Core\Pa
         </tr>
             <tr>
             <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheableEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface</a></td>
             <td>-</td>
         </tr>
             <tr>

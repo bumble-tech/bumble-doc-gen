@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> SingleEntitySearchOperation<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> SingleEntitySearchOperation<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L10">SingleEntitySearchOperation</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L10">SingleEntitySearchOperation</a> class:
 </h1>
 
 
@@ -72,7 +72,7 @@ final class SingleEntitySearchOperation implements \BumbleDocGen\Core\Parser\Ent
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L15">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L15">source code</a></li>
 </ul>
 
 ```php
@@ -104,7 +104,7 @@ public function __construct(string $functionName, array $args, \BumbleDocGen\Cor
         </tr>
             <tr>
             <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -119,7 +119,7 @@ public function __construct(string $functionName, array $args, \BumbleDocGen\Cor
 <ul>
 <li><a name="mcall" href="#mcall">#</a>
  <b>call</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L65">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L65">source code</a></li>
 </ul>
 
 ```php
@@ -141,13 +141,13 @@ public function call(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $root
     <tbody>
             <tr>
             <td>$rootEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 </div>
@@ -157,7 +157,7 @@ public function call(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $root
 <ul>
 <li><a name="mgetargs" href="#mgetargs">#</a>
  <b>getArgs</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L30">source code</a></li>
 </ul>
 
 ```php
@@ -178,7 +178,7 @@ public function getArgs(): array;
 <ul>
 <li><a name="mgetargshash" href="#mgetargshash">#</a>
  <b>getArgsHash</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L40">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L40">source code</a></li>
 </ul>
 
 ```php
@@ -199,7 +199,7 @@ public function getArgsHash(): string;
 <ul>
 <li><a name="mgetentityname" href="#mgetentityname">#</a>
  <b>getEntityName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L35">source code</a></li>
 </ul>
 
 ```php
@@ -220,7 +220,7 @@ public function getEntityName(): string|null;
 <ul>
 <li><a name="mgetfunctionname" href="#mgetfunctionname">#</a>
  <b>getFunctionName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L25">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L25">source code</a></li>
 </ul>
 
 ```php
@@ -241,7 +241,7 @@ public function getFunctionName(): string;
 <ul>
 <li><a name="mgetkey" href="#mgetkey">#</a>
  <b>getKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L55">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L55">source code</a></li>
 </ul>
 
 ```php
@@ -262,7 +262,7 @@ public function getKey(): string;
 <ul>
 <li><a name="mgetrequestedentityname" href="#mgetrequestedentityname">#</a>
  <b>getRequestedEntityName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L45">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L45">source code</a></li>
 </ul>
 
 ```php
@@ -283,7 +283,7 @@ public function getRequestedEntityName(): string;
 <ul>
 <li><a name="mincrementusagecount" href="#mincrementusagecount">#</a>
  <b>incrementUsageCount</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L60">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/SingleEntitySearchOperation.php#L60">source code</a></li>
 </ul>
 
 ```php

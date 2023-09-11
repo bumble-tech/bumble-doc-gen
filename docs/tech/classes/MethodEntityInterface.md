@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> MethodEntityInterface<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> MethodEntityInterface<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L9">MethodEntityInterface</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L9">MethodEntityInterface</a> class:
 </h1>
 
 
@@ -26,6 +26,12 @@ interface MethodEntityInterface extends \\BumbleDocGen\Core\Parser\Entity\Entity
 <h2>Methods:</h2>
 
 <ol>
+<li>
+    <a href="#mentitycacheisoutdated">entityCacheIsOutdated</a>
+    </li>
+<li>
+    <a href="#mgetabsolutefilename">getAbsoluteFileName</a>
+    - <i>Returns the absolute path to a file if it can be retrieved and if the file is in the project directory</i></li>
 <li>
     <a href="#mgetbodycode">getBodyCode</a>
     </li>
@@ -54,6 +60,9 @@ interface MethodEntityInterface extends \\BumbleDocGen\Core\Parser\Entity\Entity
     <a href="#mgetname">getName</a>
     </li>
 <li>
+    <a href="#mgetobjectid">getObjectId</a>
+    </li>
+<li>
     <a href="#mgetparameters">getParameters</a>
     </li>
 <li>
@@ -61,6 +70,12 @@ interface MethodEntityInterface extends \\BumbleDocGen\Core\Parser\Entity\Entity
     </li>
 <li>
     <a href="#mgetreturntype">getReturnType</a>
+    </li>
+<li>
+    <a href="#mgetrootentitycollection">getRootEntityCollection</a>
+    - <i>Get parent collection of entities</i></li>
+<li>
+    <a href="#mgetshortname">getShortName</a>
     </li>
 <li>
     <a href="#mgetstartcolumn">getStartColumn</a>
@@ -96,9 +111,55 @@ interface MethodEntityInterface extends \\BumbleDocGen\Core\Parser\Entity\Entity
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mentitycacheisoutdated" href="#mentitycacheisoutdated">#</a>
+ <b>entityCacheIsOutdated</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L30">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
+
+public function entityCacheIsOutdated(): bool;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mgetabsolutefilename" href="#mgetabsolutefilename">#</a>
+ <b>getAbsoluteFileName</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L28">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
+
+public function getAbsoluteFileName(): string|null;
+```
+
+<blockquote>Returns the absolute path to a file if it can be retrieved and if the file is in the project directory</blockquote>
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgetbodycode" href="#mgetbodycode">#</a>
  <b>getBodyCode</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L45">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L45">source code</a></li>
 </ul>
 
 ```php
@@ -119,7 +180,7 @@ public function getBodyCode(): string;
 <ul>
 <li><a name="mgetdescription" href="#mgetdescription">#</a>
  <b>getDescription</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L31">source code</a></li>
 </ul>
 
 ```php
@@ -140,7 +201,7 @@ public function getDescription(): string;
 <ul>
 <li><a name="mgetendline" href="#mgetendline">#</a>
  <b>getEndLine</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L19">source code</a></li>
 </ul>
 
 ```php
@@ -161,7 +222,7 @@ public function getEndLine(): int;
 <ul>
 <li><a name="mgetfilename" href="#mgetfilename">#</a>
  <b>getFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L13">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L13">source code</a></li>
 </ul>
 
 ```php
@@ -182,7 +243,7 @@ public function getFileName(): string|null;
 <ul>
 <li><a name="mgetfirstreturnvalue" href="#mgetfirstreturnvalue">#</a>
  <b>getFirstReturnValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L43">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L43">source code</a></li>
 </ul>
 
 ```php
@@ -203,7 +264,7 @@ public function getFirstReturnValue(): mixed;
 <ul>
 <li><a name="mgetimplementingclass" href="#mgetimplementingclass">#</a>
  <b>getImplementingClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L47">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L47">source code</a></li>
 </ul>
 
 ```php
@@ -214,7 +275,7 @@ public function getImplementingClass(): \BumbleDocGen\LanguageHandler\Php\Parser
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a>
 
 
 </div>
@@ -224,7 +285,7 @@ public function getImplementingClass(): \BumbleDocGen\LanguageHandler\Php\Parser
 <ul>
 <li><a name="mgetimplementingclassname" href="#mgetimplementingclassname">#</a>
  <b>getImplementingClassName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L29">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L29">source code</a></li>
 </ul>
 
 ```php
@@ -245,7 +306,7 @@ public function getImplementingClassName(): string;
 <ul>
 <li><a name="mgetmodifiersstring" href="#mgetmodifiersstring">#</a>
  <b>getModifiersString</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L21">source code</a></li>
 </ul>
 
 ```php
@@ -266,7 +327,7 @@ public function getModifiersString(): string;
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L11">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L11">source code</a></li>
 </ul>
 
 ```php
@@ -285,9 +346,32 @@ public function getName(): string;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgetobjectid" href="#mgetobjectid">#</a>
+ <b>getObjectId</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L9">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
+
+public function getObjectId(): string;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgetparameters" href="#mgetparameters">#</a>
  <b>getParameters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L25">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L25">source code</a></li>
 </ul>
 
 ```php
@@ -308,7 +392,7 @@ public function getParameters(): array;
 <ul>
 <li><a name="mgetparametersstring" href="#mgetparametersstring">#</a>
  <b>getParametersString</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -329,7 +413,7 @@ public function getParametersString(): string;
 <ul>
 <li><a name="mgetreturntype" href="#mgetreturntype">#</a>
  <b>getReturnType</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L23">source code</a></li>
 </ul>
 
 ```php
@@ -348,9 +432,55 @@ public function getReturnType(): string;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgetrootentitycollection" href="#mgetrootentitycollection">#</a>
+ <b>getRootEntityCollection</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L14">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
+
+public function getRootEntityCollection(): \BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+```
+
+<blockquote>Get parent collection of entities</blockquote>
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mgetshortname" href="#mgetshortname">#</a>
+ <b>getShortName</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L18">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
+
+public function getShortName(): string;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgetstartcolumn" href="#mgetstartcolumn">#</a>
  <b>getStartColumn</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L17">source code</a></li>
 </ul>
 
 ```php
@@ -371,7 +501,7 @@ public function getStartColumn(): int;
 <ul>
 <li><a name="mgetstartline" href="#mgetstartline">#</a>
  <b>getStartLine</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L15">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L15">source code</a></li>
 </ul>
 
 ```php
@@ -392,7 +522,7 @@ public function getStartLine(): int;
 <ul>
 <li><a name="misdynamic" href="#misdynamic">#</a>
  <b>isDynamic</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L41">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L41">source code</a></li>
 </ul>
 
 ```php
@@ -413,7 +543,7 @@ public function isDynamic(): bool;
 <ul>
 <li><a name="misinitialization" href="#misinitialization">#</a>
  <b>isInitialization</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L33">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L33">source code</a></li>
 </ul>
 
 ```php
@@ -434,7 +564,7 @@ public function isInitialization(): bool;
 <ul>
 <li><a name="misprivate" href="#misprivate">#</a>
  <b>isPrivate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L39">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L39">source code</a></li>
 </ul>
 
 ```php
@@ -455,7 +585,7 @@ public function isPrivate(): bool;
 <ul>
 <li><a name="misprotected" href="#misprotected">#</a>
  <b>isProtected</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L37">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L37">source code</a></li>
 </ul>
 
 ```php
@@ -476,7 +606,7 @@ public function isProtected(): bool;
 <ul>
 <li><a name="mispublic" href="#mispublic">#</a>
  <b>isPublic</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntityInterface.php#L35">source code</a></li>
 </ul>
 
 ```php

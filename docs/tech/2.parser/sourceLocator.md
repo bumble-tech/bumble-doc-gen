@@ -1,4 +1,4 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> Source locators<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> Source locators<hr> </embed>
 
 <embed> <h1>Source locators</h1> </embed>
 
@@ -11,8 +11,8 @@ Source locators are set in the configuration:
    - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
      arguments:
        directories:
-         - "%project_root%/BumbleDocGen"
-         - "%project_root%/SelfDoc"
+         - "%project_root%/src"
+         - "%project_root%/selfdoc"
 ```
 
 
@@ -30,4 +30,4 @@ You can create your own source locators or use any existing ones. All source loc
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Jul 29 13:26:44 2023 +0300<br><b>Page content update date:</b> Thu Aug 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:09:56 2023 +0300<br><b>Page content update date:</b> Sun Sep 10 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

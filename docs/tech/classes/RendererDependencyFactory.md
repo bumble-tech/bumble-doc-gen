@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RendererDependencyFactory<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RendererDependencyFactory<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/RendererDependencyFactory.php#L10">RendererDependencyFactory</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyFactory.php#L10">RendererDependencyFactory</a> class:
 </h1>
 
 
@@ -54,7 +54,7 @@ final class RendererDependencyFactory
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/RendererDependencyFactory.php#L12">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyFactory.php#L12">source code</a></li>
 </ul>
 
 ```php
@@ -76,7 +76,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\RendererHelper $renderer
     <tbody>
             <tr>
             <td>$rendererHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -91,7 +91,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\RendererHelper $renderer
 <ul>
 <li><a name="mcreatedirectorydependency" href="#mcreatedirectorydependency">#</a>
  <b>createDirectoryDependency</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/RendererDependencyFactory.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyFactory.php#L31">source code</a></li>
 </ul>
 
 ```php
@@ -119,7 +119,7 @@ public function createDirectoryDependency(string $dirPath): \BumbleDocGen\Core\R
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/DirectoryDependency.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\DirectoryDependency</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/DirectoryDependency.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\DirectoryDependency</a>
 
 
 <b>Throws:</b>
@@ -136,7 +136,7 @@ public function createDirectoryDependency(string $dirPath): \BumbleDocGen\Core\R
 <ul>
 <li><a name="mcreatefiledependency" href="#mcreatefiledependency">#</a>
  <b>createFileDependency</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/RendererDependencyFactory.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyFactory.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -174,7 +174,7 @@ public function createFileDependency(string $filePath, string|null $contentFilte
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/FileDependency.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\FileDependency</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/FileDependency.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\FileDependency</a>
 
 
 <b>Throws:</b>

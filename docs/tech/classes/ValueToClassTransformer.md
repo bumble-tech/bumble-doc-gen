@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ValueToClassTransformer<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ValueToClassTransformer<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L26">ValueToClassTransformer</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L26">ValueToClassTransformer</a> class:
 </h1>
 
 
@@ -72,7 +72,7 @@ someKey:
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L28">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L28">source code</a></li>
 </ul>
 
 ```php
@@ -94,7 +94,7 @@ public function __construct(\DI\Container $diContainer);
     <tbody>
             <tr>
             <td>$diContainer</td>
-            <td><a href='#'>\DI\Container</a></td>
+            <td>\DI\Container</td>
             <td>-</td>
         </tr>
         </tbody>
@@ -109,7 +109,7 @@ public function __construct(\DI\Container $diContainer);
 <ul>
 <li><a name="mcantransform" href="#mcantransform">#</a>
  <b>canTransform</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -147,7 +147,7 @@ public function canTransform(mixed $value): bool;
 <ul>
 <li><a name="mtransform" href="#mtransform">#</a>
  <b>transform</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L41">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L41">source code</a></li>
 </ul>
 
 ```php
@@ -181,10 +181,10 @@ public function transform(mixed $value): object|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 

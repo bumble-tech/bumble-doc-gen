@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> OnLoadEntityDocPluginContent<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> OnLoadEntityDocPluginContent<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L16">OnLoadEntityDocPluginContent</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L16">OnLoadEntityDocPluginContent</a> class:
 </h1>
 
 
@@ -54,6 +54,12 @@ See:
 <li>
     <a href="#mgetentity">getEntity</a>
     </li>
+<li>
+    <a href="#mispropagationstopped">isPropagationStopped</a>
+    - <i>Is propagation stopped?</i></li>
+<li>
+    <a href="#mstoppropagation">stopPropagation</a>
+    - <i>Stops the propagation of the event to further event listeners.</i></li>
 </ol>
 
 
@@ -69,7 +75,7 @@ See:
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -96,7 +102,7 @@ public function __construct(string $blockContent, \BumbleDocGen\Core\Parser\Enti
         </tr>
             <tr>
             <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -116,7 +122,7 @@ public function __construct(string $blockContent, \BumbleDocGen\Core\Parser\Enti
 <ul>
 <li><a name="maddblockcontentpluginresult" href="#maddblockcontentpluginresult">#</a>
  <b>addBlockContentPluginResult</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L42">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L42">source code</a></li>
 </ul>
 
 ```php
@@ -154,7 +160,7 @@ public function addBlockContentPluginResult(string $pluginResult): void;
 <ul>
 <li><a name="mgetblockcontent" href="#mgetblockcontent">#</a>
  <b>getBlockContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -175,7 +181,7 @@ public function getBlockContent(): string;
 <ul>
 <li><a name="mgetblockcontentpluginresults" href="#mgetblockcontentpluginresults">#</a>
  <b>getBlockContentPluginResults</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L47">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L47">source code</a></li>
 </ul>
 
 ```php
@@ -196,7 +202,7 @@ public function getBlockContentPluginResults(): array;
 <ul>
 <li><a name="mgetblocktype" href="#mgetblocktype">#</a>
  <b>getBlockType</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L37">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L37">source code</a></li>
 </ul>
 
 ```php
@@ -217,7 +223,7 @@ public function getBlockType(): string;
 <ul>
 <li><a name="mgetentity" href="#mgetentity">#</a>
  <b>getEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -228,7 +234,53 @@ public function getEntity(): \BumbleDocGen\Core\Parser\Entity\RootEntityInterfac
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mispropagationstopped" href="#mispropagationstopped">#</a>
+ <b>isPropagationStopped</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/vendor/symfony/event-dispatcher-contracts/Event.php#L38">source code</a></li>
+</ul>
+
+```php
+// Implemented in Symfony\Contracts\EventDispatcher\Event
+
+public function isPropagationStopped(): bool;
+```
+
+<blockquote>Is propagation stopped?</blockquote>
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mstoppropagation" href="#mstoppropagation">#</a>
+ <b>stopPropagation</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/vendor/symfony/event-dispatcher-contracts/Event.php#L50">source code</a></li>
+</ul>
+
+```php
+// Implemented in Symfony\Contracts\EventDispatcher\Event
+
+public function stopPropagation(): void;
+```
+
+<blockquote>Stops the propagation of the event to further event listeners.</blockquote>
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
 
 </div>

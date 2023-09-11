@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> IterateEntitiesOperation<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> IterateEntitiesOperation<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L10">IterateEntitiesOperation</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L10">IterateEntitiesOperation</a> class:
 </h1>
 
 
@@ -63,7 +63,7 @@ final class IterateEntitiesOperation implements \BumbleDocGen\Core\Parser\Entity
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L15">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L15">source code</a></li>
 </ul>
 
 ```php
@@ -100,7 +100,7 @@ public function __construct(array $entities);
 <ul>
 <li><a name="mcall" href="#mcall">#</a>
  <b>call</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L45">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L45">source code</a></li>
 </ul>
 
 ```php
@@ -122,7 +122,7 @@ public function call(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $root
     <tbody>
             <tr>
             <td>$rootEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -138,7 +138,7 @@ public function call(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $root
 <ul>
 <li><a name="mgetentitiesdata" href="#mgetentitiesdata">#</a>
  <b>getEntitiesData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L37">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L37">source code</a></li>
 </ul>
 
 ```php
@@ -159,7 +159,7 @@ public function getEntitiesData(): array;
 <ul>
 <li><a name="mgetkey" href="#mgetkey">#</a>
  <b>getKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -180,7 +180,7 @@ public function getKey(): string;
 <ul>
 <li><a name="mhasentity" href="#mhasentity">#</a>
  <b>hasEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L22">source code</a></li>
 </ul>
 
 ```php
@@ -218,7 +218,7 @@ public function hasEntity(string $entityName): bool;
 <ul>
 <li><a name="mincrementusagecount" href="#mincrementusagecount">#</a>
  <b>incrementUsageCount</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/IterateEntitiesOperation.php#L32">source code</a></li>
 </ul>
 
 ```php

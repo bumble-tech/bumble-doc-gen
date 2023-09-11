@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DirectoryDependency<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DirectoryDependency<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/DirectoryDependency.php#L11">DirectoryDependency</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/DirectoryDependency.php#L11">DirectoryDependency</a> class:
 </h1>
 
 
@@ -54,7 +54,7 @@ final class DirectoryDependency implements \BumbleDocGen\Core\Renderer\Context\D
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/DirectoryDependency.php#L13">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/DirectoryDependency.php#L13">source code</a></li>
 </ul>
 
 ```php
@@ -96,7 +96,7 @@ public function __construct(string $dirInternalLink, string $hash);
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/DirectoryDependency.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/DirectoryDependency.php#L22">source code</a></li>
 </ul>
 
 ```php
@@ -118,7 +118,7 @@ public static function create(\BumbleDocGen\Core\Renderer\RendererHelper $render
     <tbody>
             <tr>
             <td>$rendererHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -129,7 +129,7 @@ public static function create(\BumbleDocGen\Core\Renderer\RendererHelper $render
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/DirectoryDependency.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\DirectoryDependency</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/DirectoryDependency.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\DirectoryDependency</a>
 
 
 <b>Throws:</b>
@@ -146,7 +146,7 @@ public static function create(\BumbleDocGen\Core\Renderer\RendererHelper $render
 <ul>
 <li><a name="mischanged" href="#mischanged">#</a>
  <b>isChanged</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/DirectoryDependency.php#L54">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/DirectoryDependency.php#L54">source code</a></li>
 </ul>
 
 ```php
@@ -168,7 +168,7 @@ public function isChanged(\BumbleDocGen\Core\Renderer\RendererHelper $rendererHe
     <tbody>
             <tr>
             <td>$rendererHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
             <td>-</td>
         </tr>
         </tbody>

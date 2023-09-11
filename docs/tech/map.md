@@ -1,8 +1,12 @@
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> Class map<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> Class map<hr> </embed>
 
 Directory layout ( only documented files shown ):
 
-<embed> <pre>└──<b>BumbleDocGen</b>/
+<embed> <pre>└──<b>src</b>/
+│  ├──<b>Console</b>/
+│  │  ├──<b>Command</b>/
+│  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  └── <a href='/docs/tech/classes/App.md'>App.php</a> <i> — <samp>An Application is the container for a collection of commands.</samp></i>
 │  ├──<b>Core</b>/
 │  │  ├──<b>Cache</b>/
 │  │  │  ├──<b>LocalCache</b>/
@@ -229,4 +233,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Jul 29 13:26:44 2023 +0300<br><b>Page content update date:</b> Thu Aug 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Sun Sep 10 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
