@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> Configuration<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> Configuration<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L28">Configuration</a> class:
@@ -334,13 +334,13 @@ public function getPageLinkProcessor(): \BumbleDocGen\Core\Renderer\PageLinkProc
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -368,13 +368,13 @@ public function getPlugins(): \BumbleDocGen\Core\Plugin\PluginsCollection;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -430,13 +430,13 @@ public function getSourceLocators(): \BumbleDocGen\Core\Parser\SourceLocator\Sou
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -492,10 +492,10 @@ public function getTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\Custom
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -526,13 +526,13 @@ public function getTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Function\Cu
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 

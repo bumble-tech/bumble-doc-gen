@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entity.md">Entities and entities collections</a> <b>/</b> ClassEntityCollection<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entity.md">Entities and entities collections</a> <b>/</b> ClassEntityCollection<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L29">ClassEntityCollection</a> class:
@@ -1007,10 +1007,10 @@ public function internalGetLoadedOrCreateNew(string $objectName, bool $withAddCl
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -1061,10 +1061,10 @@ public function loadClassEntities(): void;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>

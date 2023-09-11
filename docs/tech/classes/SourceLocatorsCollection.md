@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> SourceLocatorsCollection<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> SourceLocatorsCollection<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L9">SourceLocatorsCollection</a> class:
@@ -95,7 +95,7 @@ public function add(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterfa
 </ul>
 
 ```php
-public static function create(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface $sourceLocators): \BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
+public static function create(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface ...$sourceLocators): \BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
 ```
 
 
@@ -112,7 +112,7 @@ public static function create(\BumbleDocGen\Core\Parser\SourceLocator\SourceLoca
     </thead>
     <tbody>
             <tr>
-            <td>$sourceLocators</td>
+            <td>$sourceLocators <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorInterface.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface</a></td>
             <td>-</td>
         </tr>

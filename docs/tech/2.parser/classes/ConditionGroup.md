@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entityFilterCondition.md">Entity filter conditions</a> <b>/</b> ConditionGroup<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entityFilterCondition.md">Entity filter conditions</a> <b>/</b> ConditionGroup<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionGroup.php#L13">ConditionGroup</a> class:
@@ -56,7 +56,7 @@ In the case of OR, it is enough to successfully check at least one condition, in
 </ul>
 
 ```php
-public function __construct(string $groupType, \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface $conditions);
+public function __construct(string $groupType, \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface ...$conditions);
 ```
 
 
@@ -78,7 +78,7 @@ public function __construct(string $groupType, \BumbleDocGen\Core\Parser\FilterC
             <td>-</td>
         </tr>
             <tr>
-            <td>$conditions</td>
+            <td>$conditions <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a></td>
             <td>-</td>
         </tr>

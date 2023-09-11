@@ -40,7 +40,7 @@
     <tbody>
     {% for parameter in methodEntity.getParameters() %}
         <tr>
-            <td>${{ parameter.name }}</td>
+            <td>${{ parameter.name }}{% if parameter.isVariadic %} <i>(variadic)</i>{% endif %}</td>
             <td>{{ parameter.expectedType | strTypeToUrl(methodEntity.getRootEntityCollection()) }}</td>
             <td>{% if parameter.description %}{{ parameter.description | addIndentFromLeft(1, true) }}{% else %}-{% endif %}</td>
         </tr>
@@ -65,7 +65,7 @@
 <ul>
 {% for throw in methodEntity.getThrows() %}
 <li>
-    <a {% if throw.url %}href="{{ throw.url }}"{% endif %}>{{ throw.name }}</a>{% if throw.description %} - {{ throw.description | removeLineBrakes }} {% endif %}
+    <a {% if throw.url and throw.url != '#' %}href="{{ throw.url }}"{% endif %}>{{ throw.name }}</a>{% if throw.description %} - {{ throw.description | removeLineBrakes }} {% endif %}
 </li>
 
 {% endfor %}

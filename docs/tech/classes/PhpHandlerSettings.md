@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PhpHandlerSettings<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PhpHandlerSettings<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L21">PhpHandlerSettings</a> class:
@@ -173,10 +173,10 @@ public function getClassConstantEntityFilter(): \BumbleDocGen\Core\Parser\Filter
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -207,10 +207,10 @@ public function getClassEntityFilter(): \BumbleDocGen\Core\Parser\FilterConditio
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -241,13 +241,13 @@ public function getCustomTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -275,13 +275,13 @@ public function getCustomTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Funct
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -309,13 +309,13 @@ public function getEntityDocRenderersCollection(): \BumbleDocGen\Core\Renderer\E
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -371,13 +371,13 @@ public function getMethodEntityFilter(): \BumbleDocGen\Core\Parser\FilterConditi
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -405,13 +405,13 @@ public function getPropertyEntityFilter(): \BumbleDocGen\Core\Parser\FilterCondi
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 

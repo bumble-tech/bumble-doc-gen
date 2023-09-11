@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entityFilterCondition.md">Entity filter conditions</a> <b>/</b> VisibilityCondition<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entityFilterCondition.md">Entity filter conditions</a> <b>/</b> VisibilityCondition<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/FilterCondition/MethodFilterCondition/VisibilityCondition.php#L15">VisibilityCondition</a> class:
@@ -55,7 +55,7 @@ final class VisibilityCondition implements \BumbleDocGen\Core\Parser\FilterCondi
 </ul>
 
 ```php
-public function __construct(string $visibilityModifiers);
+public function __construct(string ...$visibilityModifiers);
 ```
 
 
@@ -72,7 +72,7 @@ public function __construct(string $visibilityModifiers);
     </thead>
     <tbody>
             <tr>
-            <td>$visibilityModifiers</td>
+            <td>$visibilityModifiers <i>(variadic)</i></td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>

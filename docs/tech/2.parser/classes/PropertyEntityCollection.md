@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entity.md">Entities and entities collections</a> <b>/</b> PropertyEntityCollection<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entity.md">Entities and entities collections</a> <b>/</b> PropertyEntityCollection<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PropertyEntityCollection.php#L15">PropertyEntityCollection</a> class:
@@ -316,13 +316,13 @@ public function loadPropertyEntities(): void;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
@@ -410,10 +410,10 @@ public function unsafeGet(string $objectName): \BumbleDocGen\LanguageHandler\Php
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>

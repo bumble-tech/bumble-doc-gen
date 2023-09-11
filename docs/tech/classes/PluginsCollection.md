@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PluginsCollection<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PluginsCollection<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginsCollection.php#L7">PluginsCollection</a> class:
@@ -57,7 +57,7 @@ final class PluginsCollection implements \IteratorAggregate, \Traversable
 </ul>
 
 ```php
-public function add(\BumbleDocGen\Core\Plugin\PluginInterface $plugins): \BumbleDocGen\Core\Plugin\PluginsCollection;
+public function add(\BumbleDocGen\Core\Plugin\PluginInterface ...$plugins): \BumbleDocGen\Core\Plugin\PluginsCollection;
 ```
 
 
@@ -74,7 +74,7 @@ public function add(\BumbleDocGen\Core\Plugin\PluginInterface $plugins): \Bumble
     </thead>
     <tbody>
             <tr>
-            <td>$plugins</td>
+            <td>$plugins <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginInterface.php'>\BumbleDocGen\Core\Plugin\PluginInterface</a></td>
             <td>-</td>
         </tr>
@@ -95,7 +95,7 @@ public function add(\BumbleDocGen\Core\Plugin\PluginInterface $plugins): \Bumble
 </ul>
 
 ```php
-public static function create(\BumbleDocGen\Core\Plugin\PluginInterface $plugins): \BumbleDocGen\Core\Plugin\PluginsCollection;
+public static function create(\BumbleDocGen\Core\Plugin\PluginInterface ...$plugins): \BumbleDocGen\Core\Plugin\PluginsCollection;
 ```
 
 
@@ -112,7 +112,7 @@ public static function create(\BumbleDocGen\Core\Plugin\PluginInterface $plugins
     </thead>
     <tbody>
             <tr>
-            <td>$plugins</td>
+            <td>$plugins <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginInterface.php'>\BumbleDocGen\Core\Plugin\PluginInterface</a></td>
             <td>-</td>
         </tr>

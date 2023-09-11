@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ParserHelper<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ParserHelper<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L24">ParserHelper</a> class:
@@ -121,7 +121,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
         </tr>
             <tr>
             <td>$logger</td>
-            <td><a href='#'>\Monolog\Logger</a></td>
+            <td>\Monolog\Logger</td>
             <td>-</td>
         </tr>
         </tbody>

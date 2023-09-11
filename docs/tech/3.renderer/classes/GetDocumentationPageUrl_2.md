@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/templates.md">How to create documentation templates?</a> <b>/</b> <a href="/docs/tech/3.renderer/templatesLinking.md">Linking templates</a> <b>/</b> GetDocumentationPageUrl<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/templates.md">How to create documentation templates?</a> <b>/</b> <a href="/docs/tech/3.renderer/templatesLinking.md">Linking templates</a> <b>/</b> GetDocumentationPageUrl<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentationPageUrl.php#L21">GetDocumentationPageUrl</a> class:
@@ -174,13 +174,13 @@ public function __invoke(string $key): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 </ul>
 

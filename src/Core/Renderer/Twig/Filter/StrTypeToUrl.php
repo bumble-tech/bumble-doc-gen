@@ -81,7 +81,12 @@ final class StrTypeToUrl implements CustomFilterInterface
                     } else {
                         $type = "\\{$entityOfLink->getName()}";
                     }
-                    $preparedTypes[] = "<a href='{$link}'>{$type}</a>";
+
+                    if ($link && $link !== '#') {
+                        $preparedTypes[] = "<a href='{$link}'>{$type}</a>";
+                    } else {
+                        $preparedTypes[] = $type;
+                    }
                 }
             } else {
                 if ($entityOfLink::isEntityNameValid($type)) {

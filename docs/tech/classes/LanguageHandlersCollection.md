@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> LanguageHandlersCollection<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> LanguageHandlersCollection<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlersCollection.php#L7">LanguageHandlersCollection</a> class:
@@ -95,7 +95,7 @@ public function add(\BumbleDocGen\LanguageHandler\LanguageHandlerInterface $lang
 </ul>
 
 ```php
-public static function create(\BumbleDocGen\LanguageHandler\LanguageHandlerInterface $languageHandlers): \BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
+public static function create(\BumbleDocGen\LanguageHandler\LanguageHandlerInterface ...$languageHandlers): \BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 ```
 
 
@@ -112,7 +112,7 @@ public static function create(\BumbleDocGen\LanguageHandler\LanguageHandlerInter
     </thead>
     <tbody>
             <tr>
-            <td>$languageHandlers</td>
+            <td>$languageHandlers <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlerInterface.php'>\BumbleDocGen\LanguageHandler\LanguageHandlerInterface</a></td>
             <td>-</td>
         </tr>

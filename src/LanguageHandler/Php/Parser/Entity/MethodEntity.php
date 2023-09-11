@@ -20,6 +20,7 @@ use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
+use Symfony\Component\Console\Style\OutputStyle;
 
 /**
  * Class method entity
@@ -400,6 +401,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             $parameters[] = [
                 'type' => $this->prepareTypeString($type),
                 'expectedType' => $expectedType,
+                'isVariadic' => $param->isVariadic(),
                 'name' => $name,
                 'defaultValue' => $this->prepareTypeString($defaultValue),
                 'description' => $description,
@@ -418,7 +420,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     {
         $parameters = [];
         foreach ($this->getParameters() as $parameterData) {
-            $parameters[] = "{$parameterData['type']} \${$parameterData['name']}" .
+            $variadicPart = ($parameterData['isVariadic'] ?? false) ? '...' : '';
+            $parameters[] = "{$parameterData['type']} {$variadicPart}\${$parameterData['name']}" .
                 ($parameterData['defaultValue'] ? " = {$parameterData['defaultValue']}" : '');
         }
         return implode(', ', $parameters);

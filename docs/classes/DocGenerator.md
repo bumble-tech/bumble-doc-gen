@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> DocGenerator<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> DocGenerator<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L33">DocGenerator</a> class:
@@ -131,7 +131,7 @@ public function __construct(\Symfony\Component\Filesystem\Filesystem $fs, \Symfo
         </tr>
             <tr>
             <td>$logger</td>
-            <td><a href='#'>\Monolog\Logger</a></td>
+            <td>\Monolog\Logger</td>
             <td>-</td>
         </tr>
         </tbody>
@@ -163,10 +163,10 @@ public function addMissingDocBlocks(): void;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
@@ -175,7 +175,7 @@ public function addMissingDocBlocks(): void;
     <a href="/docs/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a href="#">\Tectalic\OpenAi\ClientException</a></li>
+    <a >\Tectalic\OpenAi\ClientException</a></li>
 
 </ul>
 
@@ -206,13 +206,13 @@ public function fillInReadmeMdTemplate(): void;
     <a href="/docs/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="#">\Tectalic\OpenAi\ClientException</a></li>
+    <a >\Tectalic\OpenAi\ClientException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -271,16 +271,16 @@ public function generateProjectTemplatesStructure(): void;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\Tectalic\OpenAi\ClientException</a></li>
+    <a >\Tectalic\OpenAi\ClientException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -311,10 +311,10 @@ public function parseAndGetRootEntityCollectionsGroup(): \BumbleDocGen\Core\Pars
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="#">\DI\DependencyException</a></li>
+    <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="#">\DI\NotFoundException</a></li>
+    <a >\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
