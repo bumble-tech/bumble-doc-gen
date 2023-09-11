@@ -1,0 +1,82 @@
+{% set title = 'Entity filter conditions' %}
+{% set prevPage = 'Parser' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Entity filter conditions" | textToHeading('H1') }}
+
+Filters serve as a foundational mechanism within our documentation generator, dictating which segments of the source code are selected during the initial parsing phase.
+These rules facilitate a strategic extraction of elements, such as classes, methods, or constants, from the underlying codebase.
+By implementing these filters, users are endowed with the capability to customize the documentation output, ensuring that it precisely aligns with their requirements and expectations.
+This level of granularity not only streamlines the documentation process but also guarantees that the resultant documents are devoid of superfluous details, focusing solely on pertinent information.
+
+All filter conditions implement the <a>ConditionInterface</a> interface.
+
+{{ "Mechanism for adding entities to the collection" | textToHeading('H2') }}
+
+For each language handler, according to the configuration, the following scheme is applicable:
+
+```mermaid
+flowchart LR
+ Start((Start)) --> Parse(Starting the file parsing process)
+ Parse --> NextFileExists{Have \nthe next \nfile to \nprocess?}
+ NextFileExists -- Yes --> EntityCheck{Does the file \ncontain an \nentity?}
+ NextFileExists -- No --> Exit(((Exit)))
+ EntityCheck -- Yes --> FilterCheck{Can the found entity \nbe added \naccording to the \nfilters condition?}
+ EntityCheck -- No --> NextFileExists
+ FilterCheck -- Yes --> AddEntity(Adding an entity to a collection)
+ FilterCheck -- No --> NextFileExists
+ AddEntity --> NextFileExists
+
+ style FilterCheck color:red
+```
+
+The diagram shows the mechanism for adding root entities, but this also applies to the attributes of each entity,
+for example, for PHP there are rules for checking the possibility of adding methods, properties and constants.
+
+{{ "Filter conditions configuration" | textToHeading('H2') }}
+
+Filter conditions are configured separately for language handlers.
+
+This is an example configuration for PHP, and here you can see the use of configuration conditions in a real configuration `BumbleDocGen/LanguageHandler/Php/phpHandlerDefaultSettings.yaml`:
+
+```yaml
+language_handlers:
+  php:
+    class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
+    settings:
+        class_filter:
+            class: \BumbleDocGen\Core\Parser\FilterCondition\CommonFilterCondition\TrueCondition
+        class_constant_filter:
+            class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition\VisibilityCondition
+            arguments:
+              - public
+              - protected
+        method_filter:
+            class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
+            arguments:
+               - and
+               - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\IsPublicCondition
+               - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\OnlyFromCurrentClassCondition
+        property_filter:
+            class: \BumbleDocGen\Core\Parser\FilterCondition\ConditionGroup
+            arguments:
+               - and
+               - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\IsPublicCondition
+               - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\OnlyFromCurrentClassCondition
+```
+
+{{ "Available filters" | textToHeading('H2') }}
+
+{% set filterConditions = phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
+
+Common filtering conditions that are available for any entity:
+
+{{ printEntityCollectionAsList(
+    filterConditions.filterByPaths(['/src/Core'])
+) }}
+
+Filter condition for working with entities PHP language handler:
+
+{{ printClassCollectionAsGroupedTable(
+    filterConditions.filterByPaths(['/src/LanguageHandler/Php/Parser/FilterCondition'])
+) }}

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GetClassMethodsBodyCode<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L21">GetClassMethodsBodyCode</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L21">GetClassMethodsBodyCode</a> class:
 </h1>
 
 
@@ -75,7 +75,7 @@ final class GetClassMethodsBodyCode implements \BumbleDocGen\Core\Renderer\Twig\
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L23">source code</a></li>
 </ul>
 
 ```php
@@ -97,7 +97,7 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\RootEntityCollectio
     <tbody>
             <tr>
             <td>$rootEntityCollectionsGroup</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/RootEntityCollectionsGroup.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -112,7 +112,7 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\RootEntityCollectio
 <ul>
 <li><a name="m-invoke" href="#m-invoke">#</a>
  <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L51">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L51">source code</a></li>
 </ul>
 
 ```php
@@ -171,7 +171,7 @@ public function __invoke(string $className, array $methodsNames): string|null;
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -192,7 +192,7 @@ public static function getName(): string;
 <ul>
 <li><a name="mgetoptions" href="#mgetoptions">#</a>
  <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L32">source code</a></li>
 </ul>
 
 ```php

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/sourceLocator.md">Source locators</a> <b>/</b> AsyncSourceLocator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/AsyncSourceLocator.php#L16">AsyncSourceLocator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/AsyncSourceLocator.php#L16">AsyncSourceLocator</a> class:
 </h1>
 
 
@@ -54,7 +54,7 @@ final class AsyncSourceLocator implements \BumbleDocGen\Core\Parser\SourceLocato
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/AsyncSourceLocator.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/AsyncSourceLocator.php#L18">source code</a></li>
 </ul>
 
 ```php
@@ -76,7 +76,7 @@ public function __construct(\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache
     <tbody>
             <tr>
             <td>$localObjectCache</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -101,7 +101,7 @@ public function __construct(\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache
 <ul>
 <li><a name="mgetfinder" href="#mgetfinder">#</a>
  <b>getFinder</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/AsyncSourceLocator.php#L28">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/AsyncSourceLocator.php#L28">source code</a></li>
 </ul>
 
 ```php
@@ -122,7 +122,7 @@ public function getFinder(): \Symfony\Component\Finder\Finder|null;
 <ul>
 <li><a name="mgetsourcelocator" href="#mgetsourcelocator">#</a>
  <b>getSourceLocator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/SourceLocator/AsyncSourceLocator.php#L33">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/SourceLocator/AsyncSourceLocator.php#L33">source code</a></li>
 </ul>
 
 ```php

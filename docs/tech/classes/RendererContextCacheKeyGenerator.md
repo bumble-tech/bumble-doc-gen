@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RendererContextCacheKeyGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheKey/RendererContextCacheKeyGenerator.php#L10">RendererContextCacheKeyGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheKey/RendererContextCacheKeyGenerator.php#L10">RendererContextCacheKeyGenerator</a> class:
 </h1>
 
 
@@ -44,7 +44,7 @@ final class RendererContextCacheKeyGenerator implements \BumbleDocGen\Core\Parse
 <ul>
 <li><a name="mgeneratekey" href="#mgeneratekey">#</a>
  <b>generateKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheKey/RendererContextCacheKeyGenerator.php#L12">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheKey/RendererContextCacheKeyGenerator.php#L12">source code</a></li>
 </ul>
 
 ```php
@@ -71,7 +71,7 @@ public static function generateKey(string $cacheNamespace, \BumbleDocGen\Core\Pa
         </tr>
             <tr>
             <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/Cache/CacheableEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface</a></td>
             <td>-</td>
         </tr>
             <tr>

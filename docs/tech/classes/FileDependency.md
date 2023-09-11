@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> FileDependency<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/FileDependency.php#L11">FileDependency</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/FileDependency.php#L11">FileDependency</a> class:
 </h1>
 
 
@@ -60,7 +60,7 @@ final class FileDependency implements \BumbleDocGen\Core\Renderer\Context\Depend
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/FileDependency.php#L13">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/FileDependency.php#L13">source code</a></li>
 </ul>
 
 ```php
@@ -112,7 +112,7 @@ public function __construct(string $fileInternalLink, string $hash, string|null 
 <ul>
 <li><a name="m-serialize" href="#m-serialize">#</a>
  <b>__serialize</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/FileDependency.php#L47">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/FileDependency.php#L47">source code</a></li>
 </ul>
 
 ```php
@@ -133,7 +133,7 @@ public function __serialize(): array;
 <ul>
 <li><a name="m-unserialize" href="#m-unserialize">#</a>
  <b>__unserialize</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/FileDependency.php#L57">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/FileDependency.php#L57">source code</a></li>
 </ul>
 
 ```php
@@ -171,7 +171,7 @@ public function __unserialize(array $data): void;
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/FileDependency.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/FileDependency.php#L24">source code</a></li>
 </ul>
 
 ```php
@@ -193,7 +193,7 @@ public static function create(\BumbleDocGen\Core\Renderer\RendererHelper $render
     <tbody>
             <tr>
             <td>$rendererHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -214,7 +214,7 @@ public static function create(\BumbleDocGen\Core\Renderer\RendererHelper $render
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/FileDependency.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\FileDependency</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/FileDependency.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\FileDependency</a>
 
 
 <b>Throws:</b>
@@ -231,7 +231,7 @@ public static function create(\BumbleDocGen\Core\Renderer\RendererHelper $render
 <ul>
 <li><a name="mischanged" href="#mischanged">#</a>
  <b>isChanged</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Context/Dependency/FileDependency.php#L68">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/FileDependency.php#L68">source code</a></li>
 </ul>
 
 ```php
@@ -253,7 +253,7 @@ public function isChanged(\BumbleDocGen\Core\Renderer\RendererHelper $rendererHe
     <tbody>
             <tr>
             <td>$rendererHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
             <td>-</td>
         </tr>
         </tbody>

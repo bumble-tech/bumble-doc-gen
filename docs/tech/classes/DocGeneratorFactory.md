@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DocGeneratorFactory<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/DocGeneratorFactory.php#L13">DocGeneratorFactory</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L13">DocGeneratorFactory</a> class:
 </h1>
 
 
@@ -54,11 +54,11 @@ final class DocGeneratorFactory
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/DocGeneratorFactory.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L18">source code</a></li>
 </ul>
 
 ```php
-public function __construct(string $diConfig = '/BumbleDocGen/di-config.php');
+public function __construct(string $diConfig = '/src/di-config.php');
 ```
 
 
@@ -91,11 +91,11 @@ public function __construct(string $diConfig = '/BumbleDocGen/di-config.php');
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/DocGeneratorFactory.php#L37">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L37">source code</a></li>
 </ul>
 
 ```php
-public function create(string $configurationFiles): \BumbleDocGen\DocGenerator;
+public function create(string|null $configurationFiles): \BumbleDocGen\DocGenerator;
 ```
 
 
@@ -113,13 +113,13 @@ public function create(string $configurationFiles): \BumbleDocGen\DocGenerator;
     <tbody>
             <tr>
             <td>$configurationFiles</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/DocGenerator.php'>\BumbleDocGen\DocGenerator</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php'>\BumbleDocGen\DocGenerator</a>
 
 
 <b>Throws:</b>
@@ -142,7 +142,7 @@ public function create(string $configurationFiles): \BumbleDocGen\DocGenerator;
 <ul>
 <li><a name="msetcustomconfigurationparameters" href="#msetcustomconfigurationparameters">#</a>
  <b>setCustomConfigurationParameters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/DocGeneratorFactory.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L27">source code</a></li>
 </ul>
 
 ```php

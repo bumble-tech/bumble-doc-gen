@@ -49,6 +49,8 @@ BumbleDocGen's interface consists of mainly two classes: <a href="/docs/classes/
 
 <embed> <h3>Examples of usage</h3> </embed>
 
+1) Working with a library in a PHP file
+
 ```php
 require_once 'vendor/autoload.php';
 
@@ -64,6 +66,19 @@ $docgen = $factory->create('/path/to/configuration/files');
 $docgen->generate();
 ```
 
+2) Working with the library through a console application
+
+```bash
+# List of available commands
+./vendor/bin/bumbleDocGen list
+
+# Documentation generation example
+./vendor/bin/bumbleDocGen generate -c <path to config file>
+
+# Getting detailed information about a command
+./vendor/bin/bumbleDocGen generate -h
+```
+
 ------------------
 
 **This documentation was generated using the Bumble Documentation Generator, and is an example of how it works.**
@@ -71,11 +86,11 @@ $docgen->generate();
 To update this documentation, run the following command:
 
 ```console
- php SelfDoc/docGen.php generate
+ ./bin/bumbleDocGen generate
 ```
 
 
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sun Jul 30 16:49:10 2023 +0300<br><b>Page content update date:</b> Thu Aug 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Sat Sep 09 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>

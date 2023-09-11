@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/breadcrumbs.md">Documentation structure and breadcrumbs</a> <b>/</b> BreadcrumbsHelper<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L21">BreadcrumbsHelper</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L21">BreadcrumbsHelper</a> class:
 </h1>
 
 
@@ -67,7 +67,7 @@ final class BreadcrumbsHelper
 <ul>
             <li><a name="qdefault-prev-page-name-template"
                href="#qdefault-prev-page-name-template">#</a>
-            <code>DEFAULT_PREV_PAGE_NAME_TEMPLATE</code>                   <b>|</b> <a href="/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L26">source
+            <code>DEFAULT_PREV_PAGE_NAME_TEMPLATE</code>                   <b>|</b> <a href="/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L26">source
                     code</a> </li>
     </ul>
 
@@ -82,7 +82,7 @@ final class BreadcrumbsHelper
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L33">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L33">source code</a></li>
 </ul>
 
 ```php
@@ -104,17 +104,17 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
     <tbody>
             <tr>
             <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$localObjectCache</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$breadcrumbsTwig</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsTwigEnvironment.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsTwigEnvironment.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -134,7 +134,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mgetallpagelinks" href="#mgetallpagelinks">#</a>
  <b>getAllPageLinks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L207">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L207">source code</a></li>
 </ul>
 
 ```php
@@ -157,7 +157,7 @@ public function getAllPageLinks(): array;
     <a href="#">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -168,7 +168,7 @@ public function getAllPageLinks(): array;
 <ul>
 <li><a name="mgetbreadcrumbs" href="#mgetbreadcrumbs">#</a>
  <b>getBreadcrumbs</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L161">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L161">source code</a></li>
 </ul>
 
 ```php
@@ -213,7 +213,7 @@ public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): arr
     <a href="#">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -224,7 +224,7 @@ public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): arr
 <ul>
 <li><a name="mgetbreadcrumbsfortemplates" href="#mgetbreadcrumbsfortemplates">#</a>
  <b>getBreadcrumbsForTemplates</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L183">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L183">source code</a></li>
 </ul>
 
 ```php
@@ -269,7 +269,7 @@ public function getBreadcrumbsForTemplates(string $templateFilePatch, bool $from
     <a href="#">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -280,7 +280,7 @@ public function getBreadcrumbsForTemplates(string $templateFilePatch, bool $from
 <ul>
 <li><a name="mgetpagedatabykey" href="#mgetpagedatabykey">#</a>
  <b>getPageDataByKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L269">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L269">source code</a></li>
 </ul>
 
 ```php
@@ -317,7 +317,7 @@ public function getPageDataByKey(string $key): array|null;
     <a href="#">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="#">\DI\NotFoundException</a></li>
@@ -331,7 +331,7 @@ public function getPageDataByKey(string $key): array|null;
 <ul>
 <li><a name="mgetpagedocfilebykey" href="#mgetpagedocfilebykey">#</a>
  <b>getPageDocFileByKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L295">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L295">source code</a></li>
 </ul>
 
 ```php
@@ -368,7 +368,7 @@ public function getPageDocFileByKey(string $key): string|null;
     <a href="#">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="#">\DI\NotFoundException</a></li>
@@ -382,7 +382,7 @@ public function getPageDocFileByKey(string $key): string|null;
 <ul>
 <li><a name="mgetpagelinkbykey" href="#mgetpagelinkbykey">#</a>
  <b>getPageLinkByKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L284">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L284">source code</a></li>
 </ul>
 
 ```php
@@ -419,7 +419,7 @@ public function getPageLinkByKey(string $key): string|null;
     <a href="#">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="#">\DI\NotFoundException</a></li>
@@ -433,7 +433,7 @@ public function getPageLinkByKey(string $key): string|null;
 <ul>
 <li><a name="mgettemplatelinkkey" href="#mgettemplatelinkkey">#</a>
  <b>getTemplateLinkKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L140">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L140">source code</a></li>
 </ul>
 
 ```php
@@ -467,7 +467,7 @@ public function getTemplateLinkKey(string $templateName): string|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -478,7 +478,7 @@ public function getTemplateLinkKey(string $templateName): string|null;
 <ul>
 <li><a name="mgettemplatetitle" href="#mgettemplatetitle">#</a>
  <b>getTemplateTitle</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L127">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L127">source code</a></li>
 </ul>
 
 ```php
@@ -512,7 +512,7 @@ public function getTemplateTitle(string $templateName): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -534,7 +534,7 @@ $breadcrumbsHelper->getTemplateTitle() == 'Some template title'; // is true
 <ul>
 <li><a name="mrenderbreadcrumbs" href="#mrenderbreadcrumbs">#</a>
  <b>renderBreadcrumbs</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L311">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L311">source code</a></li>
 </ul>
 
 ```php
@@ -593,7 +593,7 @@ public function renderBreadcrumbs(string $currentPageTitle, string $filePatch, b
     <a href="https://github.com/twigphp/Twig/blob/master/src/Error/LoaderError.php">\Twig\Error\LoaderError</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entityFilterCondition.md">Entity filter conditions</a> <b>/</b> FalseCondition<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/FilterCondition/CommonFilterCondition/FalseCondition.php#L13">FalseCondition</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/CommonFilterCondition/FalseCondition.php#L13">FalseCondition</a> class:
 </h1>
 
 
@@ -44,7 +44,7 @@ final class FalseCondition implements \BumbleDocGen\Core\Parser\FilterCondition\
 <ul>
 <li><a name="mcanaddtocollection" href="#mcanaddtocollection">#</a>
  <b>canAddToCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/FilterCondition/CommonFilterCondition/FalseCondition.php#L15">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/CommonFilterCondition/FalseCondition.php#L15">source code</a></li>
 </ul>
 
 ```php
@@ -66,7 +66,7 @@ public function canAddToCollection(\BumbleDocGen\Core\Parser\Entity\EntityInterf
     <tbody>
             <tr>
             <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/EntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\EntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\EntityInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> IsPrivateCondition<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/FilterCondition/PropertyFilterCondition/IsPrivateCondition.php#L14">IsPrivateCondition</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/FilterCondition/PropertyFilterCondition/IsPrivateCondition.php#L14">IsPrivateCondition</a> class:
 </h1>
 
 
@@ -51,7 +51,7 @@ final class IsPrivateCondition implements \BumbleDocGen\Core\Parser\FilterCondit
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/FilterCondition/PropertyFilterCondition/IsPrivateCondition.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/FilterCondition/PropertyFilterCondition/IsPrivateCondition.php#L18">source code</a></li>
 </ul>
 
 ```php
@@ -71,7 +71,7 @@ public function __construct();
 <ul>
 <li><a name="mcanaddtocollection" href="#mcanaddtocollection">#</a>
  <b>canAddToCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Parser/FilterCondition/PropertyFilterCondition/IsPrivateCondition.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/FilterCondition/PropertyFilterCondition/IsPrivateCondition.php#L23">source code</a></li>
 </ul>
 
 ```php
@@ -93,7 +93,7 @@ public function canAddToCollection(\BumbleDocGen\Core\Parser\Entity\EntityInterf
     <tbody>
             <tr>
             <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/Entity/EntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\EntityInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\EntityInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>

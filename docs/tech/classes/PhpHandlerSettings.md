@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PhpHandlerSettings<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L21">PhpHandlerSettings</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L21">PhpHandlerSettings</a> class:
 </h1>
 
 
@@ -67,11 +67,11 @@ final class PhpHandlerSettings
 <ul>
             <li><a name="qdefault-settings-file"
                href="#qdefault-settings-file">#</a>
-            <code>DEFAULT_SETTINGS_FILE</code>                   <b>|</b> <a href="/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L24">source
+            <code>DEFAULT_SETTINGS_FILE</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/PhpHandlerSettings.php#L24">source
                     code</a> </li>
             <li><a name="qsettings-prefix"
                href="#qsettings-prefix">#</a>
-            <code>SETTINGS_PREFIX</code>                   <b>|</b> <a href="/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L23">source
+            <code>SETTINGS_PREFIX</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/PhpHandlerSettings.php#L23">source
                     code</a> </li>
     </ul>
 
@@ -86,7 +86,7 @@ final class PhpHandlerSettings
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L26">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L26">source code</a></li>
 </ul>
 
 ```php
@@ -108,12 +108,12 @@ public function __construct(\BumbleDocGen\Core\Configuration\ConfigurationParame
     <tbody>
             <tr>
             <td>$parameterBag</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/ConfigurationParameterBag.php'>\BumbleDocGen\Core\Configuration\ConfigurationParameterBag</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php'>\BumbleDocGen\Core\Configuration\ConfigurationParameterBag</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$localObjectCache</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -128,7 +128,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\ConfigurationParame
 <ul>
 <li><a name="masyncsourceloadingenabled" href="#masyncsourceloadingenabled">#</a>
  <b>asyncSourceLoadingEnabled</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L160">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L160">source code</a></li>
 </ul>
 
 ```php
@@ -156,7 +156,7 @@ public function asyncSourceLoadingEnabled(): bool;
 <ul>
 <li><a name="mgetclassconstantentityfilter" href="#mgetclassconstantentityfilter">#</a>
  <b>getClassConstantEntityFilter</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L63">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L63">source code</a></li>
 </ul>
 
 ```php
@@ -167,7 +167,7 @@ public function getClassConstantEntityFilter(): \BumbleDocGen\Core\Parser\Filter
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
 
 
 <b>Throws:</b>
@@ -190,7 +190,7 @@ public function getClassConstantEntityFilter(): \BumbleDocGen\Core\Parser\Filter
 <ul>
 <li><a name="mgetclassentityfilter" href="#mgetclassentityfilter">#</a>
  <b>getClassEntityFilter</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L43">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L43">source code</a></li>
 </ul>
 
 ```php
@@ -201,7 +201,7 @@ public function getClassEntityFilter(): \BumbleDocGen\Core\Parser\FilterConditio
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
 
 
 <b>Throws:</b>
@@ -224,7 +224,7 @@ public function getClassEntityFilter(): \BumbleDocGen\Core\Parser\FilterConditio
 <ul>
 <li><a name="mgetcustomtwigfilters" href="#mgetcustomtwigfilters">#</a>
  <b>getCustomTwigFilters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L201">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L201">source code</a></li>
 </ul>
 
 ```php
@@ -235,7 +235,7 @@ public function getCustomTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Filter/CustomFiltersCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/CustomFiltersCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection</a>
 
 
 <b>Throws:</b>
@@ -258,7 +258,7 @@ public function getCustomTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\
 <ul>
 <li><a name="mgetcustomtwigfunctions" href="#mgetcustomtwigfunctions">#</a>
  <b>getCustomTwigFunctions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L178">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L178">source code</a></li>
 </ul>
 
 ```php
@@ -269,7 +269,7 @@ public function getCustomTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Funct
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/Function/CustomFunctionsCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection</a>
 
 
 <b>Throws:</b>
@@ -292,7 +292,7 @@ public function getCustomTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Funct
 <ul>
 <li><a name="mgetentitydocrendererscollection" href="#mgetentitydocrendererscollection">#</a>
  <b>getEntityDocRenderersCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L123">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L123">source code</a></li>
 </ul>
 
 ```php
@@ -303,7 +303,7 @@ public function getEntityDocRenderersCollection(): \BumbleDocGen\Core\Renderer\E
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRenderersCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRenderersCollection</a>
 
 
 <b>Throws:</b>
@@ -326,7 +326,7 @@ public function getEntityDocRenderersCollection(): \BumbleDocGen\Core\Renderer\E
 <ul>
 <li><a name="mgetfilesourcebaseurl" href="#mgetfilesourcebaseurl">#</a>
  <b>getFileSourceBaseUrl</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L144">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L144">source code</a></li>
 </ul>
 
 ```php
@@ -354,7 +354,7 @@ public function getFileSourceBaseUrl(): string|null;
 <ul>
 <li><a name="mgetmethodentityfilter" href="#mgetmethodentityfilter">#</a>
  <b>getMethodEntityFilter</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L83">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L83">source code</a></li>
 </ul>
 
 ```php
@@ -365,7 +365,7 @@ public function getMethodEntityFilter(): \BumbleDocGen\Core\Parser\FilterConditi
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
 
 
 <b>Throws:</b>
@@ -388,7 +388,7 @@ public function getMethodEntityFilter(): \BumbleDocGen\Core\Parser\FilterConditi
 <ul>
 <li><a name="mgetpropertyentityfilter" href="#mgetpropertyentityfilter">#</a>
  <b>getPropertyEntityFilter</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/PhpHandlerSettings.php#L103">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L103">source code</a></li>
 </ul>
 
 ```php
@@ -399,7 +399,7 @@ public function getPropertyEntityFilter(): \BumbleDocGen\Core\Parser\FilterCondi
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
 
 
 <b>Throws:</b>

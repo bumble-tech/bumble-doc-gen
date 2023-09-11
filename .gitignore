@@ -1,7 +1,6 @@
 composer.phar
 /vendor/
 .idea
-/SelfDoc/__cache/
 /demo/demo1/docs/
 /demo/demo1/__cache/
 /demo/demo2-templates-generation/__cache/
@@ -13,3 +12,4 @@ composer.phar
 /last_run.log
 /.phpunit.result.cache
 /demo/demo2-templates-generation/templates/
+/.bumbleDocGenCache/

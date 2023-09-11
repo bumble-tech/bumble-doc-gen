@@ -20,9 +20,9 @@ You can add your custom functions to the configuration like this:
 
 ```yaml
 twig_functions:
-  - class: \SelfDoc\Configuration\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
-  - class: \SelfDoc\Configuration\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
-  - class: \SelfDoc\Configuration\Twig\CustomFunction\GetConfigParametersDescription
+  - class: \SelfDocConfig\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
+  - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
+  - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
 ```
 
 It is important to remember that when a template is inherited, custom functions are not overridden and augmented.
@@ -385,4 +385,4 @@ Here is a list of functions available by default:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Jul 29 16:46:33 2023 +0300<br><b>Page content update date:</b> Thu Aug 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Sat Sep 02 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/readme.md'>Bumble Documentation Generator</div>

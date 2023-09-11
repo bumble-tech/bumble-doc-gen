@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RendererHelper<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php#L12">RendererHelper</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php#L12">RendererHelper</a> class:
 </h1>
 
 
@@ -57,7 +57,7 @@ final class RendererHelper
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php#L14">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php#L14">source code</a></li>
 </ul>
 
 ```php
@@ -79,12 +79,12 @@ public function __construct(\BumbleDocGen\Core\Plugin\PluginEventDispatcher $plu
     <tbody>
             <tr>
             <td>$pluginEventDispatcher</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginEventDispatcher.php'>\BumbleDocGen\Core\Plugin\PluginEventDispatcher</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php'>\BumbleDocGen\Core\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -99,7 +99,7 @@ public function __construct(\BumbleDocGen\Core\Plugin\PluginEventDispatcher $plu
 <ul>
 <li><a name="mfileinternallinktofilepath" href="#mfileinternallinktofilepath">#</a>
  <b>fileInternalLinkToFilePath</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php#L61">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php#L61">source code</a></li>
 </ul>
 
 ```php
@@ -147,7 +147,7 @@ public function fileInternalLinkToFilePath(string $fileInternalLink): string;
 <ul>
 <li><a name="mfilepathtofileinternallink" href="#mfilepathtofileinternallink">#</a>
  <b>filePathToFileInternalLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php#L24">source code</a></li>
 </ul>
 
 ```php
@@ -195,7 +195,7 @@ public function filePathToFileInternalLink(string $fileName): string;
 <ul>
 <li><a name="mgetpreloadresourcelink" href="#mgetpreloadresourcelink">#</a>
  <b>getPreloadResourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/RendererHelper.php#L82">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php#L82">source code</a></li>
 </ul>
 
 ```php

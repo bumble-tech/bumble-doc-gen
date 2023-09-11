@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> LocalObjectCache<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/LocalCache/LocalObjectCache.php#L9">LocalObjectCache</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php#L9">LocalObjectCache</a> class:
 </h1>
 
 
@@ -47,7 +47,7 @@ final class LocalObjectCache
 <ul>
 <li><a name="mcachemethodresult" href="#mcachemethodresult">#</a>
  <b>cacheMethodResult</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/LocalCache/LocalObjectCache.php#L13">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php#L13">source code</a></li>
 </ul>
 
 ```php
@@ -95,7 +95,7 @@ public function cacheMethodResult(string $methodKey, string $objectId, mixed $me
 <ul>
 <li><a name="mgetmethodcachedresult" href="#mgetmethodcachedresult">#</a>
  <b>getMethodCachedResult</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Cache/LocalCache/LocalObjectCache.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php#L21">source code</a></li>
 </ul>
 
 ```php

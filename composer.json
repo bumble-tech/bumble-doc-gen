@@ -46,16 +46,16 @@
     },
     "autoload": {
         "psr-4": {
-            "BumbleDocGen\\": "BumbleDocGen/"
+            "BumbleDocGen\\": "src/"
         },
         "files": [
-            "BumbleDocGen/Core/utils.php"
+            "src/Core/utils.php"
         ]
     },
     "autoload-dev": {
         "psr-4": {
             "Test\\": "tests/",
-            "SelfDoc\\": "SelfDoc/"
+            "SelfDocConfig\\": "selfdoc/"
         }
     },
     "config": {
@@ -63,5 +63,8 @@
             "php-http/discovery": true,
             "captainhook/plugin-composer": true
         }
-    }
+    },
+    "bin": [
+        "bin/bumbleDocGen"
+    ]
 }

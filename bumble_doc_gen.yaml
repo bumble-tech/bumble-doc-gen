@@ -1,0 +1,27 @@
+project_root: '%WORKING_DIR%'
+templates_dir: '%project_root%/selfdoc/templates'
+output_dir: "%project_root%/docs"
+cache_dir: '%project_root%/.bumbleDocGenCache'
+output_dir_base_url: "/docs"
+language_handlers:
+  php:
+    class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
+    settings:
+      file_source_base_url: 'https://github.com/bumble-tech/bumble-doc-gen/blob/master'
+      async_source_loading_enabled: true
+source_locators:
+  - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
+    arguments:
+      directories:
+        - "%project_root%/src"
+        - "%project_root%/selfdoc"
+twig_filters:
+  - class: \SelfDocConfig\Twig\CustomFilter\EvalString
+twig_functions:
+  - class: \SelfDocConfig\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
+  - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
+  - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
+plugins:
+  - class: \SelfDocConfig\Plugin\RoaveStubber\BetterReflectionStubberPlugin
+  - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
+  - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin

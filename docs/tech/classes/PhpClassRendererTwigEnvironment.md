@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PhpClassRendererTwigEnvironment<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/PhpClassToMd/PhpClassRendererTwigEnvironment.php#L14">PhpClassRendererTwigEnvironment</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/PhpClassToMd/PhpClassRendererTwigEnvironment.php#L14">PhpClassRendererTwigEnvironment</a> class:
 </h1>
 
 
@@ -51,7 +51,7 @@ final class PhpClassRendererTwigEnvironment
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/PhpClassToMd/PhpClassRendererTwigEnvironment.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/PhpClassToMd/PhpClassRendererTwigEnvironment.php#L18">source code</a></li>
 </ul>
 
 ```php
@@ -73,7 +73,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\MainExtension $main
     <tbody>
             <tr>
             <td>$mainExtension</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Renderer/Twig/MainExtension.php'>\BumbleDocGen\Core\Renderer\Twig\MainExtension</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainExtension.php'>\BumbleDocGen\Core\Renderer\Twig\MainExtension</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -88,7 +88,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\MainExtension $main
 <ul>
 <li><a name="mrender" href="#mrender">#</a>
  <b>render</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/LanguageHandler/Php/Renderer/EntityDocRenderer/PhpClassToMd/PhpClassRendererTwigEnvironment.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/PhpClassToMd/PhpClassRendererTwigEnvironment.php#L32">source code</a></li>
 </ul>
 
 ```php

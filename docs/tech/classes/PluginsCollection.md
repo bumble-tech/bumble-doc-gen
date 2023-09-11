@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PluginsCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginsCollection.php#L7">PluginsCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginsCollection.php#L7">PluginsCollection</a> class:
 </h1>
 
 
@@ -53,7 +53,7 @@ final class PluginsCollection implements \IteratorAggregate, \Traversable
 <ul>
 <li><a name="madd" href="#madd">#</a>
  <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginsCollection.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginsCollection.php#L22">source code</a></li>
 </ul>
 
 ```php
@@ -75,13 +75,13 @@ public function add(\BumbleDocGen\Core\Plugin\PluginInterface $plugins): \Bumble
     <tbody>
             <tr>
             <td>$plugins</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginInterface.php'>\BumbleDocGen\Core\Plugin\PluginInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginInterface.php'>\BumbleDocGen\Core\Plugin\PluginInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginsCollection.php'>\BumbleDocGen\Core\Plugin\PluginsCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginsCollection.php'>\BumbleDocGen\Core\Plugin\PluginsCollection</a>
 
 
 </div>
@@ -91,7 +91,7 @@ public function add(\BumbleDocGen\Core\Plugin\PluginInterface $plugins): \Bumble
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginsCollection.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginsCollection.php#L17">source code</a></li>
 </ul>
 
 ```php
@@ -113,13 +113,13 @@ public static function create(\BumbleDocGen\Core\Plugin\PluginInterface $plugins
     <tbody>
             <tr>
             <td>$plugins</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginInterface.php'>\BumbleDocGen\Core\Plugin\PluginInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginInterface.php'>\BumbleDocGen\Core\Plugin\PluginInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginsCollection.php'>\BumbleDocGen\Core\Plugin\PluginsCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginsCollection.php'>\BumbleDocGen\Core\Plugin\PluginsCollection</a>
 
 
 </div>
@@ -129,7 +129,7 @@ public static function create(\BumbleDocGen\Core\Plugin\PluginInterface $plugins
 <ul>
 <li><a name="mget" href="#mget">#</a>
  <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginsCollection.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginsCollection.php#L30">source code</a></li>
 </ul>
 
 ```php
@@ -157,7 +157,7 @@ public function get(string $key): \BumbleDocGen\Core\Plugin\PluginInterface|null
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginInterface.php'>\BumbleDocGen\Core\Plugin\PluginInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginInterface.php'>\BumbleDocGen\Core\Plugin\PluginInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 </div>
@@ -167,7 +167,7 @@ public function get(string $key): \BumbleDocGen\Core\Plugin\PluginInterface|null
 <ul>
 <li><a name="mgetiterator" href="#mgetiterator">#</a>
  <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Plugin/PluginsCollection.php#L12">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginsCollection.php#L12">source code</a></li>
 </ul>
 
 ```php

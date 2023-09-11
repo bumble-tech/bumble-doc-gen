@@ -2,7 +2,7 @@
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> SourceLocatorsCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L9">SourceLocatorsCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L9">SourceLocatorsCollection</a> class:
 </h1>
 
 
@@ -53,7 +53,7 @@ final class SourceLocatorsCollection implements \IteratorAggregate, \Traversable
 <ul>
 <li><a name="madd" href="#madd">#</a>
  <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L28">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L28">source code</a></li>
 </ul>
 
 ```php
@@ -75,13 +75,13 @@ public function add(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterfa
     <tbody>
             <tr>
             <td>$sourceLocator</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/SourceLocator/SourceLocatorInterface.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorInterface.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/SourceLocator/SourceLocatorsCollection.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorsCollection.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection</a>
 
 
 </div>
@@ -91,7 +91,7 @@ public function add(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterfa
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L19">source code</a></li>
 </ul>
 
 ```php
@@ -113,13 +113,13 @@ public static function create(\BumbleDocGen\Core\Parser\SourceLocator\SourceLoca
     <tbody>
             <tr>
             <td>$sourceLocators</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/SourceLocator/SourceLocatorInterface.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorInterface.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/SourceLocator/SourceLocatorsCollection.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorsCollection.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection</a>
 
 
 </div>
@@ -129,7 +129,7 @@ public static function create(\BumbleDocGen\Core\Parser\SourceLocator\SourceLoca
 <ul>
 <li><a name="mgetcommonfinder" href="#mgetcommonfinder">#</a>
  <b>getCommonFinder</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L34">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L34">source code</a></li>
 </ul>
 
 ```php
@@ -150,7 +150,7 @@ public function getCommonFinder(): \Symfony\Component\Finder\Finder;
 <ul>
 <li><a name="mgetiterator" href="#mgetiterator">#</a>
  <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L14">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorsCollection.php#L14">source code</a></li>
 </ul>
 
 ```php
