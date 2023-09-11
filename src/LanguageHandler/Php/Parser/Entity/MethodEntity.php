@@ -12,7 +12,6 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
-use DI\Attribute\Inject;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
@@ -338,8 +337,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return preg_match('/^([a-zA-Z\\_]+)(\[\])$/', $annotationType) ||
             preg_match('/^(array)(<|{)(.*)(>|})$/', $annotationType);
     }
-
-    #[Inject] private OutputStyle $io;
 
     /**
      * @throws NotFoundException
