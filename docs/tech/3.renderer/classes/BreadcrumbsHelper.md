@@ -157,7 +157,7 @@ public function getAllPageLinks(): array;
     <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -213,7 +213,7 @@ public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): arr
     <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -269,7 +269,7 @@ public function getBreadcrumbsForTemplates(string $templateFilePatch, bool $from
     <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -317,7 +317,7 @@ public function getPageDataByKey(string $key): array|null;
     <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a >\DI\NotFoundException</a></li>
@@ -368,7 +368,7 @@ public function getPageDocFileByKey(string $key): string|null;
     <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a >\DI\NotFoundException</a></li>
@@ -419,7 +419,7 @@ public function getPageLinkByKey(string $key): string|null;
     <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a >\DI\NotFoundException</a></li>
@@ -467,7 +467,7 @@ public function getTemplateLinkKey(string $templateName): string|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -512,7 +512,7 @@ public function getTemplateTitle(string $templateName): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -593,7 +593,7 @@ public function renderBreadcrumbs(string $currentPageTitle, string $filePatch, b
     <a href="https://github.com/twigphp/Twig/blob/master/src/Error/LoaderError.php">\Twig\Error\LoaderError</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_5.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
