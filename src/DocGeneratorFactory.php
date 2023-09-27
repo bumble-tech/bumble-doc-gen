@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen;
 
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use DI\ContainerBuilder;
 use DI\DependencyException;
@@ -44,6 +45,27 @@ final class DocGeneratorFactory
             $configurationParameterBag->loadFromFiles(...$configurationFiles);
             $configurationParameterBag->loadFromArray($this->customConfigurationParameters);
             return $diContainer->get(DocGenerator::class);
+        } catch (\Exception $e) {
+            $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
+            throw new \RuntimeException($e->getMessage());
+        }
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws \Exception
+     */
+    public function createConfiguration(string ...$configurationFiles): Configuration
+    {
+        $diContainer = $this->containerBuilder->build();
+        $logger = $diContainer->get(LoggerInterface::class);
+        try {
+            /** @var ConfigurationParameterBag $configurationParameterBag */
+            $configurationParameterBag = $diContainer->get(ConfigurationParameterBag::class);
+            $configurationParameterBag->loadFromFiles(...$configurationFiles);
+            $configurationParameterBag->loadFromArray($this->customConfigurationParameters);
+            return $diContainer->get(Configuration::class);
         } catch (\Exception $e) {
             $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
             throw new \RuntimeException($e->getMessage());
