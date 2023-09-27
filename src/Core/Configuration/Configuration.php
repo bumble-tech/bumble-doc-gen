@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Configuration;
 
+use BumbleDocGen\Console\Command\AdditionalCommandCollection;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
@@ -21,6 +22,7 @@ use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Configuration project documentation
@@ -332,5 +334,25 @@ final class Configuration
     public function getDocGenLibDir(): string
     {
         return dirname(__DIR__, 2);
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getAdditionalConsoleCommands(): AdditionalCommandCollection
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $customFilters = $this->parameterBag->validateAndGetClassListValue(
+            'additional_console_commands',
+            Command::class
+        );
+        $additionalCommandCollection = AdditionalCommandCollection::create(...$customFilters);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $additionalCommandCollection);
+        return $additionalCommandCollection;
     }
 }
