@@ -25,15 +25,7 @@ final class GenerateCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('generate')
-            ->setDescription('Generate documentation')
-            ->addOption(
-                'config',
-                'c',
-                InputOption::VALUE_NEGATABLE,
-                'Path to the configuration file, specified as absolute or relative to the working directory <fg=yellow;>[default: "bumble_doc_gen.yaml"]</>',
-                'bumble_doc_gen.yaml'
-            );
+        $this->setName('generate')->setDescription('Generate documentation');
 
         foreach ($this->customConfigOptions as $optionName => $description) {
             $this->addOption(
