@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> App<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L10">App</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L16">App</a> class:
 </h1>
 
 
@@ -156,7 +156,7 @@ class App extends \Symfony\Component\Console\Application implements \Symfony\Con
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L12">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L23">source code</a></li>
 </ul>
 
 ```php
@@ -168,6 +168,19 @@ public function __construct();
 <b>Parameters:</b> not specified
 
 
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a >\DI\DependencyException</a></li>
+
+<li>
+    <a >\DI\NotFoundException</a></li>
+
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
 
 </div>
 <hr>
