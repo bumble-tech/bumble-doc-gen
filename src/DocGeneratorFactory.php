@@ -6,6 +6,7 @@ namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
+use DI\Container;
 use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -15,6 +16,7 @@ final class DocGeneratorFactory
 {
     private ContainerBuilder $containerBuilder;
     private array $customConfigurationParameters = [];
+    private array $customDefinitions = [];
 
     public function __construct(
         private string $diConfig = __DIR__ . '/di-config.php'
@@ -30,6 +32,11 @@ final class DocGeneratorFactory
         $this->customConfigurationParameters = $customConfigurationParameters;
     }
 
+    public function setCustomDiDefinitions(array $definitions): void
+    {
+        $this->customDefinitions = $definitions;
+    }
+
     /**
      * @throws DependencyException
      * @throws NotFoundException
@@ -37,7 +44,7 @@ final class DocGeneratorFactory
      */
     public function create(?string ...$configurationFiles): DocGenerator
     {
-        $diContainer = $this->containerBuilder->build();
+        $diContainer = $this->buildDiContainer();
         $logger = $diContainer->get(LoggerInterface::class);
         try {
             /** @var ConfigurationParameterBag $configurationParameterBag */
@@ -58,7 +65,7 @@ final class DocGeneratorFactory
      */
     public function createConfiguration(string ...$configurationFiles): Configuration
     {
-        $diContainer = $this->containerBuilder->build();
+        $diContainer = $this->buildDiContainer();
         $logger = $diContainer->get(LoggerInterface::class);
         try {
             /** @var ConfigurationParameterBag $configurationParameterBag */
@@ -70,5 +77,17 @@ final class DocGeneratorFactory
             $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
             throw new \RuntimeException($e->getMessage());
         }
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function buildDiContainer(): Container
+    {
+        $diContainer = $this->containerBuilder->build();
+        foreach ($this->customDefinitions as $name => $definition) {
+            $diContainer->set($name, $definition);
+        }
+        return $diContainer;
     }
 }
