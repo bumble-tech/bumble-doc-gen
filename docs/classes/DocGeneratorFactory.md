@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> DocGeneratorFactory<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L14">DocGeneratorFactory</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L15">DocGeneratorFactory</a> class:
 </h1>
 
 
@@ -42,6 +42,9 @@ final class DocGeneratorFactory
 <li>
     <a href="#msetcustomconfigurationparameters">setCustomConfigurationParameters</a>
     </li>
+<li>
+    <a href="#msetcustomdidefinitions">setCustomDiDefinitions</a>
+    </li>
 </ol>
 
 
@@ -57,7 +60,7 @@ final class DocGeneratorFactory
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L21">source code</a></li>
 </ul>
 
 ```php
@@ -94,7 +97,7 @@ public function __construct(string $diConfig = '/src/di-config.php');
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L38">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L45">source code</a></li>
 </ul>
 
 ```php
@@ -145,7 +148,7 @@ public function create(string|null ...$configurationFiles): \BumbleDocGen\DocGen
 <ul>
 <li><a name="mcreateconfiguration" href="#mcreateconfiguration">#</a>
  <b>createConfiguration</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L59">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L66">source code</a></li>
 </ul>
 
 ```php
@@ -196,7 +199,7 @@ public function createConfiguration(string ...$configurationFiles): \BumbleDocGe
 <ul>
 <li><a name="msetcustomconfigurationparameters" href="#msetcustomconfigurationparameters">#</a>
  <b>setCustomConfigurationParameters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L28">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L30">source code</a></li>
 </ul>
 
 ```php
@@ -218,6 +221,44 @@ public function setCustomConfigurationParameters(array $customConfigurationParam
     <tbody>
             <tr>
             <td>$customConfigurationParameters</td>
+            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="msetcustomdidefinitions" href="#msetcustomdidefinitions">#</a>
+ <b>setCustomDiDefinitions</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L35">source code</a></li>
+</ul>
+
+```php
+public function setCustomDiDefinitions(array $definitions): void;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$definitions</td>
             <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
             <td>-</td>
         </tr>

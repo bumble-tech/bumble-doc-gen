@@ -4,37 +4,28 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Console\Command;
 
-use BumbleDocGen\DocGeneratorFactory;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Cache\InvalidArgumentException;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class GenerateCommand extends Command
+final class GenerateCommand extends BaseCommand
 {
-    private array $customConfigOptions = [
-        'project_root' => 'Path to the directory of the documented project',
-        'templates_dir' => 'Path to directory with documentation templates',
-        'output_dir' => 'Path to the directory where the finished documentation will be generated',
-        'cache_dir' => 'Configuration parameter: Path to the directory where the documentation generator cache will be saved',
-    ];
+    protected function getCustomConfigOptionsMap(): array
+    {
+        return [
+            'project_root' => 'Path to the directory of the documented project',
+            'templates_dir' => 'Path to directory with documentation templates',
+            'output_dir' => 'Path to the directory where the finished documentation will be generated',
+            'cache_dir' => 'Configuration parameter: Path to the directory where the documentation generator cache will be saved',
+        ];
+    }
 
     protected function configure(): void
     {
         $this->setName('generate')->setDescription('Generate documentation');
-
-        foreach ($this->customConfigOptions as $optionName => $description) {
-            $this->addOption(
-                $optionName,
-                null,
-                InputOption::VALUE_OPTIONAL,
-                "<fg=magenta;options=bold>Config parameter:</> {$description}"
-            );
-        }
     }
 
     /**
@@ -46,11 +37,7 @@ final class GenerateCommand extends Command
         InputInterface $input,
         OutputInterface $output
     ): int {
-        $docGeneratorFactory = (new DocGeneratorFactory());
-        $docGeneratorFactory->setCustomConfigurationParameters(
-            $this->getCustomConfigurationParameters($input)
-        );
-
+        $docGeneratorFactory = $this->getDocGeneratorFactory($input, $output);
         $configFile = $input->getOption('config');
         if ($configFile && Path::isRelative($configFile)) {
             $configFile = getcwd() . DIRECTORY_SEPARATOR . $configFile;
@@ -60,17 +47,5 @@ final class GenerateCommand extends Command
         }
 
         return self::SUCCESS;
-    }
-
-    private function getCustomConfigurationParameters(InputInterface $input): array
-    {
-        $customConfigurationParameters = [];
-        foreach ($this->customConfigOptions as $optionName => $description) {
-            $optionValue = $input->getOption($optionName);
-            if (!is_null($optionValue)) {
-                $customConfigurationParameters[$optionName] = $optionValue;
-            }
-        }
-        return $customConfigurationParameters;
     }
 }
