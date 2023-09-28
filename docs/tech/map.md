@@ -5,9 +5,12 @@ Directory layout ( only documented files shown ):
 <embed> <pre>└──<b>src</b>/
 │  ├──<b>Console</b>/
 │  │  ├──<b>Command</b>/
+│  │  │  ├── <a href='/docs/tech/classes/AddMissingDocBlocksCommand.md'>AddMissingDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/AdditionalCommandCollection.md'>AdditionalCommandCollection.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/BaseCommand.md'>BaseCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/FillInReadmeMdTemplateCommand.md'>FillInReadmeMdTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateProjectTemplatesStructureCommand.md'>GenerateProjectTemplatesStructureCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  ├──<b>ProgressBar</b>/
 │  │  │  ├── <a href='/docs/tech/classes/ProgressBarFactory.md'>ProgressBarFactory.php</a> 
 │  │  │  └── <a href='/docs/tech/classes/StylizedProgressBar.md'>StylizedProgressBar.php</a> 
