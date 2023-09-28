@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Console\Command;
 
+use BumbleDocGen\DocGenerator;
 use BumbleDocGen\DocGeneratorFactory;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\OutputStyle;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Path;
 
 abstract class BaseCommand extends Command
 {
@@ -28,10 +32,14 @@ abstract class BaseCommand extends Command
         }
     }
 
-    final protected function getDocGeneratorFactory(
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    protected function createDocGenInstance(
         InputInterface $input,
         OutputInterface $output
-    ): DocGeneratorFactory {
+    ): DocGenerator {
         $docGeneratorFactory = (new DocGeneratorFactory());
         $docGeneratorFactory->setCustomConfigurationParameters(
             $this->getCustomConfigurationParameters($input)
@@ -40,7 +48,13 @@ abstract class BaseCommand extends Command
             OutputStyle::class => new SymfonyStyle($input, $output),
         ]);
 
-        return $docGeneratorFactory;
+        $configFile = $input->getOption('config');
+        if ($configFile && Path::isRelative($configFile)) {
+            $configFile = getcwd() . DIRECTORY_SEPARATOR . $configFile;
+            return $docGeneratorFactory->create($configFile);
+        }
+
+        return $docGeneratorFactory->create();
     }
 
     final protected function getCustomConfigurationParameters(InputInterface $input): array

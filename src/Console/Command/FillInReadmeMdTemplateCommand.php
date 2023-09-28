@@ -43,15 +43,7 @@ final class FillInReadmeMdTemplateCommand extends BaseCommand
         InputInterface $input,
         OutputInterface $output
     ): int {
-        $docGeneratorFactory = $this->getDocGeneratorFactory($input, $output);
-        $configFile = $input->getOption('config');
-        if ($configFile && Path::isRelative($configFile)) {
-            $configFile = getcwd() . DIRECTORY_SEPARATOR . $configFile;
-            $docGeneratorFactory->create($configFile)->fillInReadmeMdTemplate();
-        } else {
-            $docGeneratorFactory->create()->generate();
-        }
-
+        $this->createDocGenInstance($input, $output)->fillInReadmeMdTemplate();
         return self::SUCCESS;
     }
 }
