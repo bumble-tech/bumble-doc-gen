@@ -8,8 +8,6 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
-use Psr\Cache\InvalidArgumentException;
-use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tectalic\OpenAi\ClientException;
@@ -32,7 +30,6 @@ final class FillInReadmeMdTemplateCommand extends BaseCommand
     }
 
     /**
-     * @throws InvalidArgumentException
      * @throws DependencyException
      * @throws ReflectionException
      * @throws ClientException
