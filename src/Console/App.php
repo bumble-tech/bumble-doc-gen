@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Console;
 
+use BumbleDocGen\Console\Command\FillInReadmeMdTemplateCommand;
 use BumbleDocGen\Console\Command\GenerateCommand;
 use BumbleDocGen\DocGeneratorFactory;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\CompleteCommand;
+use Symfony\Component\Console\Command\DumpCompletionCommand;
+use Symfony\Component\Console\Command\HelpCommand;
+use Symfony\Component\Console\Command\ListCommand;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -27,7 +32,13 @@ class App extends Application
         );
         $this->setDefinition($inputDefinition);
         $this->add(new GenerateCommand());
+        $this->add(new FillInReadmeMdTemplateCommand());
         $this->setExtraCommands();
+    }
+
+    protected function getDefaultCommands(): array
+    {
+        return [new HelpCommand(), new ListCommand(), new CompleteCommand()];
     }
 
     private function setExtraCommands(): void
