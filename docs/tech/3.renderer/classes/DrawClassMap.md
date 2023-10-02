@@ -132,7 +132,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumen
 </ul>
 
 ```php
-public function __invoke(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollections): string;
+public function __invoke(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection ...$classEntityCollections): string;
 ```
 
 
@@ -149,7 +149,7 @@ public function __invoke(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEn
     </thead>
     <tbody>
             <tr>
-            <td>$classEntityCollections</td>
+            <td>$classEntityCollections <i>(variadic)</i></td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
             <td>The collection of entities for which the class map will be generated</td>
         </tr>

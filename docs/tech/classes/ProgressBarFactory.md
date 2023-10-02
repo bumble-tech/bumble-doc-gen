@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ProgressBarFactory<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Console/ProgressBarFactory.php#L9">ProgressBarFactory</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/ProgressBarFactory.php#L9">ProgressBarFactory</a> class:
 </h1>
 
 
@@ -10,7 +10,7 @@
 
 
 ```php
-namespace BumbleDocGen\Core\Console;
+namespace BumbleDocGen\Console\ProgressBar;
 
 final class ProgressBarFactory
 ```
@@ -51,7 +51,7 @@ final class ProgressBarFactory
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Console/ProgressBarFactory.php#L11">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/ProgressBarFactory.php#L11">source code</a></li>
 </ul>
 
 ```php
@@ -88,18 +88,18 @@ public function __construct(\Symfony\Component\Console\Style\OutputStyle $io);
 <ul>
 <li><a name="mcreatestylizedprogressbar" href="#mcreatestylizedprogressbar">#</a>
  <b>createStylizedProgressBar</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Console/ProgressBarFactory.php#L15">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/ProgressBarFactory.php#L15">source code</a></li>
 </ul>
 
 ```php
-public function createStylizedProgressBar(): \BumbleDocGen\Core\Console\StylizedProgressBar;
+public function createStylizedProgressBar(): \BumbleDocGen\Console\ProgressBar\StylizedProgressBar;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Console/StylizedProgressBar.php'>\BumbleDocGen\Core\Console\StylizedProgressBar</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php'>\BumbleDocGen\Console\ProgressBar\StylizedProgressBar</a>
 
 
 </div>

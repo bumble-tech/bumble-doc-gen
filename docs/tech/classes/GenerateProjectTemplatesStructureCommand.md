@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GenerateCommand<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GenerateProjectTemplatesStructureCommand<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/GenerateCommand.php#L14">GenerateCommand</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/GenerateProjectTemplatesStructureCommand.php#L15">GenerateProjectTemplatesStructureCommand</a> class:
 </h1>
 
 
@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Console\Command;
 
-final class GenerateCommand extends \BumbleDocGen\Console\Command\BaseCommand
+final class GenerateProjectTemplatesStructureCommand extends \BumbleDocGen\Console\Command\BaseCommand
 ```
 
 <blockquote>Base class for all commands.</blockquote>
@@ -162,7 +162,7 @@ final class GenerateCommand extends \BumbleDocGen\Console\Command\BaseCommand
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/BaseCommand.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/BaseCommand.php#L21">source code</a></li>
 </ul>
 
 ```php

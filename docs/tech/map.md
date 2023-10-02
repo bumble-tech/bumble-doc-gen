@@ -5,7 +5,15 @@ Directory layout ( only documented files shown ):
 <embed> <pre>└──<b>src</b>/
 │  ├──<b>Console</b>/
 │  │  ├──<b>Command</b>/
-│  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/AddMissingDocBlocksCommand.md'>AddMissingDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/AdditionalCommandCollection.md'>AdditionalCommandCollection.php</a> 
+│  │  │  ├── <a href='/docs/tech/classes/BaseCommand.md'>BaseCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/FillInReadmeMdTemplateCommand.md'>FillInReadmeMdTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateProjectTemplatesStructureCommand.md'>GenerateProjectTemplatesStructureCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  ├──<b>ProgressBar</b>/
+│  │  │  ├── <a href='/docs/tech/classes/ProgressBarFactory.md'>ProgressBarFactory.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/StylizedProgressBar.md'>StylizedProgressBar.php</a> 
 │  │  └── <a href='/docs/tech/classes/App.md'>App.php</a> <i> — <samp>An Application is the container for a collection of commands.</samp></i>
 │  ├──<b>Core</b>/
 │  │  ├──<b>Cache</b>/
@@ -29,9 +37,6 @@ Directory layout ( only documented files shown ):
 │  │  │  │  └── <a href='/docs/tech/classes/ValueTransformerInterface.md'>ValueTransformerInterface.php</a> <i> — <samp>Interface defining classes that transform text configuration values into objects</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/Configuration.md'>Configuration.php</a> <i> — <samp>Configuration project documentation</samp></i>
 │  │  │  └── <a href='/docs/tech/classes/ConfigurationParameterBag.md'>ConfigurationParameterBag.php</a> <i> — <samp>Wrapper for getting raw configuration file data</samp></i>
-│  │  ├──<b>Console</b>/
-│  │  │  ├── <a href='/docs/tech/classes/ProgressBarFactory.md'>ProgressBarFactory.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/StylizedProgressBar.md'>StylizedProgressBar.php</a> 
 │  │  ├──<b>Parser</b>/
 │  │  │  ├──<b>Entity</b>/
 │  │  │  │  ├──<b>Cache</b>/
@@ -233,4 +238,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Sun Sep 10 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Thu Sep 28 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
