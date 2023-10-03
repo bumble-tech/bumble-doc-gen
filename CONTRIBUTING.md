@@ -1,6 +1,8 @@
-# Contributing to **BumbleDocGen**
+# Contributing to BumbleDocGen
 
-Welcome to `BumbleDocGen`! We're glad you're interested in contributing. Please follow the guidelines below to ensure your contributions align with our coding standards and practices.
+Welcome to `BumbleDocGen`! We're glad you're interested in contributing. 
+
+_Please follow the guidelines below to ensure your contributions align with our coding standards and practices._
 
 ## Code Style
 
@@ -8,7 +10,7 @@ We follow the [PSR-12 coding standard](https://www.php-fig.org/psr/psr-12/) to m
 
 ## How to Contribute
 
-1. Fork the repository and create a new branch from the current working one (not the master, for example 1.x.x) for your contributions.
+1. Fork the repository and create a new branch from the current working branch (not master, currently [1.x.x](https://github.com/bumble-tech/bumble-doc-gen/tree/1.x.x)) for your contributions.
 2. Clone your forked repository to your local machine.
 3. Make your code changes, following the PSR-12 coding standard.
 4. Commit your changes with clear and descriptive commit messages.
