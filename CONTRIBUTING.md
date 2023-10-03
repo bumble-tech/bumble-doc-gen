@@ -8,7 +8,7 @@ We follow the [PSR-12 coding standard](https://www.php-fig.org/psr/psr-12/) to m
 
 ## How to Contribute
 
-1. Fork the repository and create a new branch for your contributions.
+1. Fork the repository and create a new branch from the current working one (not the master, for example 1.x.x) for your contributions.
 2. Clone your forked repository to your local machine.
 3. Make your code changes, following the PSR-12 coding standard.
 4. Commit your changes with clear and descriptive commit messages.
