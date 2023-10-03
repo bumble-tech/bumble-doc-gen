@@ -66,5 +66,9 @@
     },
     "bin": [
         "bin/bumbleDocGen"
-    ]
+    ],
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "phpcs": "vendor/bin/phpcs --standard=psr12 src"
+    }
 }
