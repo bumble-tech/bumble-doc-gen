@@ -162,7 +162,7 @@ abstract class BaseCommand extends \Symfony\Component\Console\Command\Command
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/BaseCommand.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/BaseCommand.php#L21">source code</a></li>
 </ul>
 
 ```php

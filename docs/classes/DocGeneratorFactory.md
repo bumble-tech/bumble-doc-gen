@@ -125,27 +125,7 @@ public function create(string|null ...$configurationFiles): \BumbleDocGen\DocGen
         </tbody>
 </table>
 
-<b>Return value:</b> 
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-<a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php'>\BumbleDocGen\DocGenerator</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php'>\BumbleDocGen\DocGenerator</a>
 
 
 <b>Throws:</b>

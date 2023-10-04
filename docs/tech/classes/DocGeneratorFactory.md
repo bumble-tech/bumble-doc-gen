@@ -2,11 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DocGeneratorFactory<hr> </embed>
 
 <h1>
-    <a href="
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L15">DocGeneratorFactory</a> 
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L15">DocGeneratorFactory</a> class:
 </h1>
 
 
@@ -16,55 +12,21 @@ class:
 ```php
 namespace BumbleDocGen;
 
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 final class DocGeneratorFactory
 ```
 
 
 
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 
 
 
 
 
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 <h2>Initialization methods:</h2>
 
 <ol>
 <li>
-    <a href="#m-construct">
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-__construct</a>
+    <a href="#m-construct">__construct</a>
     </li>
 </ol>
 
@@ -72,49 +34,21 @@ __construct</a>
 
 <ol>
 <li>
-    <a href="#mcreate">
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-create</a>
+    <a href="#mcreate">create</a>
     </li>
 <li>
-    <a href="#mcreateconfiguration">
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-createConfiguration</a>
+    <a href="#mcreateconfiguration">createConfiguration</a>
     </li>
 <li>
-    <a href="#msetcustomconfigurationparameters">
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-setCustomConfigurationParameters</a>
+    <a href="#msetcustomconfigurationparameters">setCustomConfigurationParameters</a>
     </li>
 <li>
-    <a href="#msetcustomdidefinitions">
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-setCustomDiDefinitions</a>
+    <a href="#msetcustomdidefinitions">setCustomDiDefinitions</a>
     </li>
 </ol>
 
 
 
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 
 
 
@@ -126,21 +60,11 @@ Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/De
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-   
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
- <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L21">source code</a></li>
 </ul>
 
 ```php
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-public function __construct(
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-string $diConfig = '/src/di-config.php');
+public function __construct(string $diConfig = '/src/di-config.php');
 ```
 
 
@@ -166,8 +90,6 @@ string $diConfig = '/src/di-config.php');
 
 
 
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 </div>
 <hr>
 <div class='method_description-block'>
@@ -175,21 +97,11 @@ Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/De
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-   
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
- <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L45">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L45">source code</a></li>
 </ul>
 
 ```php
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-public function create(
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-string|null ...$configurationFiles): 
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-\BumbleDocGen\DocGenerator;
+public function create(string|null ...$configurationFiles): \BumbleDocGen\DocGenerator;
 ```
 
 
@@ -213,33 +125,11 @@ Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/De
         </tbody>
 </table>
 
-<b>Return value:</b> 
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-<a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php'>\BumbleDocGen\DocGenerator</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php'>\BumbleDocGen\DocGenerator</a>
 
 
 <b>Throws:</b>
 <ul>
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 <li>
     <a >\DI\DependencyException</a></li>
 
@@ -251,8 +141,6 @@ Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/De
 
 </ul>
 
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 </div>
 <hr>
 <div class='method_description-block'>
@@ -260,21 +148,11 @@ Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/De
 <ul>
 <li><a name="mcreateconfiguration" href="#mcreateconfiguration">#</a>
  <b>createConfiguration</b>
-   
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
- <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L66">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L66">source code</a></li>
 </ul>
 
 ```php
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-public function createConfiguration(
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-string ...$configurationFiles): 
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-\BumbleDocGen\Core\Configuration\Configuration;
+public function createConfiguration(string ...$configurationFiles): \BumbleDocGen\Core\Configuration\Configuration;
 ```
 
 
@@ -303,8 +181,6 @@ Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/De
 
 <b>Throws:</b>
 <ul>
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 <li>
     <a >\DI\DependencyException</a></li>
 
@@ -316,8 +192,6 @@ Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/De
 
 </ul>
 
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 </div>
 <hr>
 <div class='method_description-block'>
@@ -325,21 +199,11 @@ Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/De
 <ul>
 <li><a name="msetcustomconfigurationparameters" href="#msetcustomconfigurationparameters">#</a>
  <b>setCustomConfigurationParameters</b>
-   
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
- <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L30">source code</a></li>
 </ul>
 
 ```php
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-public function setCustomConfigurationParameters(
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-array $customConfigurationParameters): 
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-void;
+public function setCustomConfigurationParameters(array $customConfigurationParameters): void;
 ```
 
 
@@ -366,8 +230,6 @@ void;
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
 
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 </div>
 <hr>
 <div class='method_description-block'>
@@ -375,21 +237,11 @@ Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/De
 <ul>
 <li><a name="msetcustomdidefinitions" href="#msetcustomdidefinitions">#</a>
  <b>setCustomDiDefinitions</b>
-   
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
- <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L35">source code</a></li>
 </ul>
 
 ```php
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-public function setCustomDiDefinitions(
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-array $definitions): 
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
-void;
+public function setCustomDiDefinitions(array $definitions): void;
 ```
 
 
@@ -416,8 +268,6 @@ void;
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
 
-
-Deprecated: Use of "parent" in callables is deprecated in /Users/shcherbanich/Desktop/projects/bumble-doc-gen/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php on line 42
 </div>
 <hr>
 
