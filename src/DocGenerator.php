@@ -16,6 +16,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\TemplateGenerator\ChatGpt\MissingDocBlocksGenerator;
 use BumbleDocGen\TemplateGenerator\ChatGpt\ReadmeTemplateFiller;
+use BumbleDocGen\TemplateGenerator\ChatGpt\TemplateGenerator;
 use BumbleDocGen\TemplateGenerator\ChatGpt\TemplatesStructureGenerator;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -81,23 +82,36 @@ final class DocGenerator
             new \Tectalic\OpenAi\Authentication($openaiKey)
         );
 
-        $availableModels = array_values(array_filter(
-            array_map(
-                fn(array $v) => $v['id'],
-                $openaiClient->models()->list()->toArray()['data'] ?? []
-            ),
-            fn(string $v) => str_starts_with($v, "gpt-")
-        ));
+        $availableModels = array_values(
+            array_filter(
+                array_map(
+                    fn(array $v) => $v['id'],
+                    $openaiClient->models()->list()->toArray()['data'] ?? []
+                ),
+                fn(string $v) => str_starts_with($v, "gpt-")
+            )
+        );
 
         $model = $this->io->choice("Choose GPT model from available", $availableModels);
         $templatesStructureGenerator = new TemplatesStructureGenerator($openaiClient, $model);
 
         do {
-            $additionalPrompt = $this->io->ask('Write instructions for more accurate documentation generation ( or just skip this step )') ?: null;
+            $additionalPrompt = $this->io->ask(
+                'Write instructions for more accurate documentation generation ( or just skip this step )'
+            ) ?: null;
             $this->logger->notice("Sending ChatGPT request");
-            $structure = $templatesStructureGenerator->generateStructureByEntityCollection($entitiesCollection, $additionalPrompt);
-            $structureAsString = implode("\n", array_map(fn($v, $k) => "{$k} => {$v}", $structure, array_keys($structure)));
-            $action = $this->io->choice("The proposed documentation structure is as follows:\n\n{$structureAsString}", ['Save', 'Regenerate', 'Cancel']);
+            $structure = $templatesStructureGenerator->generateStructureByEntityCollection(
+                $entitiesCollection,
+                $additionalPrompt
+            );
+            $structureAsString = implode(
+                "\n",
+                array_map(fn($v, $k) => "{$k} => {$v}", $structure, array_keys($structure))
+            );
+            $action = $this->io->choice(
+                "The proposed documentation structure is as follows:\n\n{$structureAsString}",
+                ['Save', 'Regenerate', 'Cancel']
+            );
         } while ($action == 'Regenerate');
 
         if ($action === 'Save') {
@@ -146,22 +160,33 @@ final class DocGenerator
             new \Tectalic\OpenAi\Authentication($openaiKey)
         );
 
-        $availableModels = array_values(array_filter(
-            array_map(
-                fn(array $v) => $v['id'],
-                $openaiClient->models()->list()->toArray()['data'] ?? []
-            ),
-            fn(string $v) => str_starts_with($v, "gpt-")
-        ));
+        $availableModels = array_values(
+            array_filter(
+                array_map(
+                    fn(array $v) => $v['id'],
+                    $openaiClient->models()->list()->toArray()['data'] ?? []
+                ),
+                fn(string $v) => str_starts_with($v, "gpt-")
+            )
+        );
 
         $model = $this->io->choice("Choose GPT model from available", $availableModels);
         $missingDocBlocksGenerator = new MissingDocBlocksGenerator($openaiClient, $this->parserHelper, $model);
 
         $alreadyProcessedEntities = [];
-        $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (&$getEntities, &$alreadyProcessedEntities): \Generator {
+        $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (
+            &$getEntities,
+            &
+            $alreadyProcessedEntities
+        ): \Generator {
             foreach ($entitiesCollection as $classEntity) {
                 /**@var ClassEntity $classEntity */
-                if (!$classEntity->entityDataCanBeLoaded() || array_key_exists($classEntity->getName(), $alreadyProcessedEntities)) {
+                if (
+                    !$classEntity->entityDataCanBeLoaded() || array_key_exists(
+                        $classEntity->getName(),
+                        $alreadyProcessedEntities
+                    )
+                ) {
                     continue;
                 }
                 $interfaces = $classEntity->getInterfacesEntities();
@@ -193,7 +218,9 @@ final class DocGenerator
             $classFileLines = explode("\n", $classFileContent);
             foreach ($newBocBlocks as $method => $docBlock) {
                 $methodEntity = $entity->getMethodEntity($method);
-                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock(false)->getLocation()?->getLineNumber() : null;
+                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock(
+                    false
+                )->getLocation()?->getLineNumber() : null;
                 $lineNumber = $lineNumber ?: $methodEntity->getStartLine();
 
                 foreach (file($entity->getFullFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
@@ -246,7 +273,9 @@ final class DocGenerator
 
         $entryPoints = [];
         do {
-            $entityName = $this->io->ask("Enter the name of the class that is the entry point of the documented project (or just skip this step)");
+            $entityName = $this->io->ask(
+                "Enter the name of the class that is the entry point of the documented project (or just skip this step)"
+            );
             if ($entityName) {
                 $entity = $entitiesCollection->findEntity($entityName, false);
                 if (!$entity) {
@@ -259,11 +288,17 @@ final class DocGenerator
             $action = null;
             if ($entryPoints) {
                 do {
-                    $this->io->text(array_merge(["Entry-point classes:"], array_map(function ($v) {
-                        static $n = 0;
-                        ++$n;
-                        return "{$n}) {$v}";
-                    }, array_keys($entryPoints))));
+                    $this->io->text(
+                        array_merge(
+                            ["Entry-point classes:"],
+                            array_map(function ($v) {
+                                static $n = 0;
+                                ++$n;
+                                return "{$n}) {$v}";
+                            },
+                            array_keys($entryPoints))
+                        )
+                    );
 
                     $action = $this->io->choice("Choose your next action", ['Continue', 'Add more', 'Remove last']);
                     if ($action === 'Remove last') {
@@ -273,19 +308,28 @@ final class DocGenerator
             }
         } while ($action !== 'Continue');
 
-        $additionalPrompt = $this->io->ask('Write instructions for more accurate documentation generation ( or just skip this step )');
+        $additionalPrompt = $this->io->ask(
+            'Write instructions for more accurate documentation generation ( or just skip this step )'
+        );
 
-        $availableModels = array_values(array_filter(
-            array_map(
-                fn(array $v) => $v['id'],
-                $openaiClient->models()->list()->toArray()['data'] ?? []
-            ),
-            fn(string $v) => str_starts_with($v, "gpt-")
-        ));
+        $availableModels = array_values(
+            array_filter(
+                array_map(
+                    fn(array $v) => $v['id'],
+                    $openaiClient->models()->list()->toArray()['data'] ?? []
+                ),
+                fn(string $v) => str_starts_with($v, "gpt-")
+            )
+        );
 
         $model = $this->io->choice("Choose GPT model from available", $availableModels, 'gpt-4');
         $readmeTemplateFiller = new ReadmeTemplateFiller($openaiClient, $model);
-        $readmeFileContent = $readmeTemplateFiller->generateReadmeFileContent($entitiesCollection, $entryPoints, $composerJsonFile, $additionalPrompt);
+        $readmeFileContent = $readmeTemplateFiller->generateReadmeFileContent(
+            $entitiesCollection,
+            $entryPoints,
+            $composerJsonFile,
+            $additionalPrompt
+        );
 
         $fileContent = "{% set title = 'About the project' %}\n{$readmeFileContent}";
         $this->io->note("readme.md.twig file content generated:");
@@ -294,6 +338,68 @@ final class DocGenerator
             $readmeFilePath = $this->configuration->getTemplatesDir() . '/readme.md.twig';
             file_put_contents($readmeFilePath, $fileContent);
             $this->logger->notice("{$readmeFilePath} file saved.");
+        }
+    }
+
+    public function generateProjectTemplates(): void
+    {
+        $this->parser->parse();
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+
+        $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
+        $openaiClient = \Tectalic\OpenAi\Manager::build(
+            new \GuzzleHttp\Client(),
+            new \Tectalic\OpenAi\Authentication($openaiKey)
+        );
+
+        $availableModels = array_values(
+            array_filter(
+                array_map(
+                    fn(array $v) => $v['id'],
+                    $openaiClient->models()->list()->toArray()['data'] ?? []
+                ),
+                fn(string $v) => str_starts_with($v, "gpt-")
+            )
+        );
+
+        $model = $this->io->choice("Choose GPT model from available", $availableModels);
+
+        $templateGenerator = new TemplateGenerator($openaiClient, $model);
+
+        $finder = new Finder();
+
+        $finder->files()->in($this->configuration->getTemplatesDir());
+        foreach ($finder as $file) {
+            if ($file->getBasename() === 'readme.md.twig') {
+                continue;
+            }
+
+            do {
+                $this->logger->notice(
+                    'Creating template for ' . $templateGenerator->getFileSubPathFromPath($file->getRealPath())
+                );
+                $additionalPrompt = $this->io->ask(
+                    'Add additional information about this ( or just skip this step )'
+                ) ?: null;
+                $this->logger->notice('Sending ChatGPT request');
+                $content = $templateGenerator->generate(
+                    $file->getRealPath(),
+                    $file->getContents(),
+                    $entitiesCollection,
+                    $additionalPrompt
+                );
+                $action = $this->io->choice(
+                    "The proposed documentation is as follows:\n\n{$content}",
+                    ['Save', 'Regenerate', 'Cancel']
+                );
+            } while ($action === 'Regenerate');
+
+            if ($action === 'Save') {
+                $this->logger->notice(
+                    'Saving file: .' . $file->getRealPath()
+                );
+                $this->fs->dumpFile($file->getRealPath(), $content);
+            }
         }
     }
 
@@ -311,7 +417,9 @@ final class DocGenerator
             $this->parser->parse();
             $this->renderer->run();
         } catch (\Exception $e) {
-            $this->logger->critical("{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{{$e->getTraceAsString()}}");
+            $this->logger->critical(
+                "{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{{$e->getTraceAsString()}}"
+            );
         }
 
         $time = microtime(true) - $start;
