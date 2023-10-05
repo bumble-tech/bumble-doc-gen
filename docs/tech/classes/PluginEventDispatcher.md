@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PluginEventDispatcher<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L13">PluginEventDispatcher</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L9">PluginEventDispatcher</a> class:
 </h1>
 
 
@@ -72,48 +72,20 @@ class PluginEventDispatcher extends \Symfony\Component\EventDispatcher\EventDisp
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/vendor/symfony/event-dispatcher/EventDispatcher.php#L38">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration);
+// Implemented in Symfony\Component\EventDispatcher\EventDispatcher
+
+public function __construct();
 ```
 
 
 
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+<b>Parameters:</b> not specified
 
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a >\DI\DependencyException</a></li>
-
-<li>
-    <a >\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
 
 </div>
 <hr>
@@ -213,7 +185,7 @@ public function addSubscriber(\Symfony\Component\EventDispatcher\EventSubscriber
 <ul>
 <li><a name="mdispatch" href="#mdispatch">#</a>
  <b>dispatch</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L13">source code</a></li>
 </ul>
 
 ```php
