@@ -37,6 +37,9 @@ final class DocGeneratorFactory
     <a href="#mcreate">create</a>
     </li>
 <li>
+    <a href="#mcreatebyconfigarray">createByConfigArray</a>
+    </li>
+<li>
     <a href="#mcreateconfiguration">createConfiguration</a>
     </li>
 <li>
@@ -146,9 +149,60 @@ public function create(string|null ...$configurationFiles): \BumbleDocGen\DocGen
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mcreatebyconfigarray" href="#mcreatebyconfigarray">#</a>
+ <b>createByConfigArray</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L66">source code</a></li>
+</ul>
+
+```php
+public function createByConfigArray(array $config): \BumbleDocGen\DocGenerator;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$config</td>
+            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php'>\BumbleDocGen\DocGenerator</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a >\DI\DependencyException</a></li>
+
+<li>
+    <a >\DI\NotFoundException</a></li>
+
+<li>
+    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mcreateconfiguration" href="#mcreateconfiguration">#</a>
  <b>createConfiguration</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L66">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L87">source code</a></li>
 </ul>
 
 ```php

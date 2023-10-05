@@ -8,6 +8,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 try {
     $docGen = (new \BumbleDocGen\DocGeneratorFactory())->create(__DIR__ . '/demo-config.yaml');
     $docGen->fillInReadmeMdTemplate();
-} catch (\Exception|\Psr\Cache\InvalidArgumentException $e) {
+} catch (\Exception | \Psr\Cache\InvalidArgumentException $e) {
     die($e->getMessage());
 }

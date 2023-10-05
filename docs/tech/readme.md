@@ -32,9 +32,16 @@ To start the documentation generation process, you need to call the following co
 ```
 
 
+or
+
+```php
+ (new DocGeneratorFactory())->createByConfigArray($configArray)->generate()
+```
+
+
 After that, the process of parsing the project code according to the configuration will start, and then filling the templates with data and saving the finished result as final documents.
 
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Wed Oct 04 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Thu Oct 05 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
