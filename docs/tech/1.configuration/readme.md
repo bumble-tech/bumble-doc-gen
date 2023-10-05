@@ -2,10 +2,12 @@
 
 <embed> <h1>Configuration</h1> </embed>
 
-Documentation generator configuration is stored in special files.
+Documentation generator configuration can be stored in special files.
 They can be in different formats: <a href='https://yaml.org/'>yaml</a>, <a href='https://www.json.org/json-en.html'>json</a>, <a href='https://www.php.net/manual/en/language.types.array.php'>php arrays</a>, <a href='https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ms717987(v=vs.85)'>ini</a>, <a href='https://www.w3.org/XML/'>xml</a>
 
-During the generation process, the data from these files is loaded into the <a href="/docs/tech/1.configuration/classes/Configuration.md">Configuration</a> class, and the code works directly with it.
+But it is not necessary to use files to store the configuration; you can also initialize the documentation generator instance by passing there an array of configuration parameters (see <a href='https://github.com/bumble-tech/bumble-doc-gen/tree/master/demo'>demo-5</a>)
+
+During the instance creation process, configuration data is loaded into <a href="/docs/tech/1.configuration/classes/Configuration.md">Configuration</a> class, and the code works directly with it.
 
 <embed> <h2>Configuration file example</h2> </embed>
 

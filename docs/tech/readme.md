@@ -32,6 +32,13 @@ To start the documentation generation process, you need to call the following co
 ```
 
 
+or
+
+```php
+ (new DocGeneratorFactory())->createByConfigArray($configArray)->generate()
+```
+
+
 After that, the process of parsing the project code according to the configuration will start, and then filling the templates with data and saving the finished result as final documents.
 
 
