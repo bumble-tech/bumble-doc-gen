@@ -57,13 +57,21 @@ abstract class BaseCommand extends Command
         return $docGeneratorFactory->create();
     }
 
+    private function prepareCustomConfigurationParameterValue(string $optionName, string $rawValue): string|bool|int|float
+    {
+        return match ($optionName) {
+            'use_shared_cache' => (fn($rawValue): bool => !($rawValue === 'false') && $rawValue)($rawValue),
+            default => $rawValue,
+        };
+    }
+
     final protected function getCustomConfigurationParameters(InputInterface $input): array
     {
         $customConfigurationParameters = [];
         foreach ($this->getCustomConfigOptionsMap() as $optionName => $description) {
             $optionValue = $input->getOption($optionName);
             if (!is_null($optionValue)) {
-                $customConfigurationParameters[$optionName] = $optionValue;
+                $customConfigurationParameters[$optionName] = $this->prepareCustomConfigurationParameterValue($optionName, $optionValue);
             }
         }
         return $customConfigurationParameters;
