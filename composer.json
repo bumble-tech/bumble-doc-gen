@@ -1,7 +1,7 @@
 {
     "name": "bumble-tech/bumble-doc-gen",
     "description": "Documentation generator next to the code for large and small php projects",
-    "type": "project",
+    "type": "library",
     "license": "Apache-2.0",
     "keywords": ["documentation-generator", "phpdoc", "cli-tool", "documentation", "docs", "llms", "chatgpt", "php"],
     "homepage": "https://github.com/bumble-tech/bumble-doc-gen",
