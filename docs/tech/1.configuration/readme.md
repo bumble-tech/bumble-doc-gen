@@ -2,10 +2,12 @@
 
 <embed> <h1>Configuration</h1> </embed>
 
-Documentation generator configuration is stored in special files.
+Documentation generator configuration can be stored in special files.
 They can be in different formats: <a href='https://yaml.org/'>yaml</a>, <a href='https://www.json.org/json-en.html'>json</a>, <a href='https://www.php.net/manual/en/language.types.array.php'>php arrays</a>, <a href='https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ms717987(v=vs.85)'>ini</a>, <a href='https://www.w3.org/XML/'>xml</a>
 
-During the generation process, the data from these files is loaded into the <a href="/docs/tech/1.configuration/classes/Configuration.md">Configuration</a> class, and the code works directly with it.
+But it is not necessary to use files to store the configuration; you can also initialize the documentation generator instance by passing there an array of configuration parameters (see <a href='https://github.com/bumble-tech/bumble-doc-gen/tree/master/demo'>demo-5</a>)
+
+During the instance creation process, configuration data is loaded into <a href="/docs/tech/1.configuration/classes/Configuration.md">Configuration</a> class, and the code works directly with it.
 
 <embed> <h2>Configuration file example</h2> </embed>
 
@@ -220,4 +222,4 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Wed Sep 27 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Thu Oct 5 17:42:06 2023 +0300<br><b>Page content update date:</b> Fri Oct 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

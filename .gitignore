@@ -13,3 +13,5 @@ composer.phar
 /.phpunit.result.cache
 /demo/demo2-templates-generation/templates/
 /.bumbleDocGenCache/
+/demo/demo5-config-array/docs/
+/demo/demo5-config-array/.cache/

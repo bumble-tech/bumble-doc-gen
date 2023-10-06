@@ -60,6 +60,8 @@ $factory = new DocGeneratorFactory();
 // Create a DocGenerator instance
 $docgen = $factory->create('/path/to/configuration/files');
 
+// or $docgen = $factory->createByConfigArray([...]);
+
 // Now call the desired operation
 $docgen->generate();
 ```

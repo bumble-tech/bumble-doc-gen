@@ -63,6 +63,27 @@ final class DocGeneratorFactory
      * @throws NotFoundException
      * @throws \Exception
      */
+    public function createByConfigArray(array $config): DocGenerator
+    {
+        $diContainer = $this->buildDiContainer();
+        $logger = $diContainer->get(LoggerInterface::class);
+        try {
+            /** @var ConfigurationParameterBag $configurationParameterBag */
+            $configurationParameterBag = $diContainer->get(ConfigurationParameterBag::class);
+            $configurationParameterBag->loadFromArray($config);
+            $configurationParameterBag->loadFromArray($this->customConfigurationParameters);
+            return $diContainer->get(DocGenerator::class);
+        } catch (\Exception $e) {
+            $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
+            throw new \RuntimeException($e->getMessage());
+        }
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws \Exception
+     */
     public function createConfiguration(string ...$configurationFiles): Configuration
     {
         $diContainer = $this->buildDiContainer();
