@@ -27,7 +27,7 @@ trait CacheableEntityWrapperTrait
         int $cacheExpiresAfter
     ) {
         if ($this->noCacheMode) {
-            return call_user_func_array(['parent', $methodName], $funcArgs);
+            return call_user_func_array([parent::class, $methodName], $funcArgs);
         }
 
         $cacheKey = $getCacheKeyGeneratorClassName::generateKey(
@@ -39,7 +39,7 @@ trait CacheableEntityWrapperTrait
         if ($this->hasEntityCacheValue($cacheKey) && !$this->entityCacheIsOutdated()) {
             $methodReturnValue = $this->getEntityCacheValue($cacheKey);
         } else {
-            $methodReturnValue = call_user_func_array(['parent', $methodName], $funcArgs);
+            $methodReturnValue = call_user_func_array([parent::class, $methodName], $funcArgs);
             $this->noCacheMode = true;
             if ($this->isEntityFileCanBeLoad()) {
                 $this->addEntityValueToCache($cacheKey, $methodReturnValue, $cacheExpiresAfter);
