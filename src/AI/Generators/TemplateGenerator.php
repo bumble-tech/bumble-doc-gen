@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\TemplateGenerator\ChatGpt;
+namespace BumbleDocGen\AI\Generators;
 
+use BumbleDocGen\AI\ProviderInterface;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
@@ -11,15 +12,11 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use DI\DependencyException;
 use DI\NotFoundException;
-use Tectalic\OpenAi\Client;
 
 final class TemplateGenerator
 {
-    public const MODEL_GPT_4 = 'gpt-4';
-
     public function __construct(
-        private Client $openaiClient,
-        private string $model = self::MODEL_GPT_4,
+        private ProviderInterface $aiHandler,
     ) {
     }
 
@@ -29,43 +26,23 @@ final class TemplateGenerator
         array $methodStubs,
         ?string $additionalPrompt
     ): ?string {
-        $messages = [
-            [
-                'role' => 'system',
-                'content' => file_get_contents(__DIR__ . '/prompts/templateGenerationSystem')
-            ],
-        ];
+        $prompts[] = 'Create the template for ' . $this->getFileSubPathFromPath(
+            $filePath
+        ) . ' the existing template is: [TEMPLATE]' . $fileContent . '[/TEMPLATE]';
 
-        $messages[] = [
-            'role' => 'user',
-            'content' => 'Create the template for ' . $this->getFileSubPathFromPath(
-                $filePath
-            ) . ' the existing template is: [TEMPLATE]' . $fileContent . '[/TEMPLATE]',
-        ];
-
-        $messages[] = [
-            'role' => 'user',
-            'content' => "The file documents a namespace/class with the following method stubs: \n" . implode(
+        $prompts[] =
+            "The file documents a namespace/class with the following method stubs: \n" . implode(
                 "\n",
                 $methodStubs
-            ),
-        ];
+            );
 
         if ($additionalPrompt) {
-            $messages[] = [
-                'role' => 'user',
-                'content' => "Additional Information: {$additionalPrompt}"
-            ];
+            $prompts[] = "Additional Information: {$additionalPrompt}";
         }
 
-        $response = $this->openaiClient->chatCompletions()->create(
-            new \Tectalic\OpenAi\Models\ChatCompletions\CreateRequest([
-                'model' => $this->model,
-                'messages' => $messages,
-            ])
-        )->toModel();
+        $response = $this->aiHandler->generateTemplateContent($prompts);
 
-        return $this->extractTemplateContent($response->choices[0]->message->content);
+        return $this->extractTemplateContent($response);
     }
 
     private function extractTemplateContent(string $str): ?string

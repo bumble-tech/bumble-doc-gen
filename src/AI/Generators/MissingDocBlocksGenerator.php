@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\TemplateGenerator\ChatGpt;
+namespace BumbleDocGen\AI\Generators;
 
+use BumbleDocGen\AI\ProviderInterface;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
@@ -12,20 +13,15 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
-use Tectalic\OpenAi\Client;
-use Tectalic\OpenAi\ClientException;
 
 final class MissingDocBlocksGenerator
 {
-    public const MODEL_GPT_4 = 'gpt-4';
-
     public const MODE_READ_ONLY_SIGNATURES = 1;
     public const MODE_READ_ALL_CODE = 2;
 
     public function __construct(
-        private Client $openaiClient,
+        private ProviderInterface $aiHandler,
         private ParserHelper $parserHelper,
-        private string $model = self::MODEL_GPT_4,
     ) {
     }
 
@@ -55,13 +51,11 @@ final class MissingDocBlocksGenerator
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
-     * @throws ClientException
      */
     public function generateDocBlocksForMethodsWithoutIt(
         RootEntityInterface $rootEntity,
         int $mode = self::MODE_READ_ONLY_SIGNATURES,
     ): array {
-
         if (!is_a($rootEntity, ClassEntity::class)) {
             throw new \InvalidArgumentException('Currently we can only work PHP class entities');
         }
@@ -82,12 +76,15 @@ final class MissingDocBlocksGenerator
                 $foundThrows = $matches[1] ?? [];
                 $foundThrows = array_combine($foundThrows, $foundThrows);
                 if ($foundThrows) {
-                    $newThrowsDockBlocks[$method->getName()] = array_filter(array_map(function (string $className) use ($method) {
-                        return $this->parserHelper->parseFullClassName(
-                            $className,
-                            $method->getImplementingClass()
-                        );
-                    }, $foundThrows), fn($c) => !in_array($c, $alreadySavedThrows));
+                    $newThrowsDockBlocks[$method->getName()] = array_filter(
+                        array_map(function (string $className) use ($method) {
+                            return $this->parserHelper->parseFullClassName(
+                                $className,
+                                $method->getImplementingClass()
+                            );
+                        }, $foundThrows),
+                        fn($c) => !in_array($c, $alreadySavedThrows)
+                    );
                 }
             }
 
@@ -96,18 +93,34 @@ final class MissingDocBlocksGenerator
                 $prototypeDocComment = $prototype?->getDocComment();
                 if ($prototypeDocComment && !str_contains(strtolower($method->getDocComment()), '@inheritdoc')) {
                     if (isset($newThrowsDockBlocks[$method->getName()])) {
-                        $methodsDockBlocks[$method->getName()] = str_replace('*/', "*\n * [throws]\n * {@inheritDoc}\n */", $method->getDocComment());
+                        $methodsDockBlocks[$method->getName()] = str_replace(
+                            '*/',
+                            "*\n * [throws]\n * {@inheritDoc}\n */",
+                            $method->getDocComment()
+                        );
                     } else {
-                        $methodsDockBlocks[$method->getName()] = str_replace('*/', "*\n * {@inheritDoc}\n */", $method->getDocComment());
+                        $methodsDockBlocks[$method->getName()] = str_replace(
+                            '*/',
+                            "*\n * {@inheritDoc}\n */",
+                            $method->getDocComment()
+                        );
                     }
                 } elseif (isset($newThrowsDockBlocks[$method->getName()])) {
-                    $methodsDockBlocks[$method->getName()] = str_replace('*/', "* [throws]\n */", $method->getDocComment());
+                    $methodsDockBlocks[$method->getName()] = str_replace(
+                        '*/',
+                        "* [throws]\n */",
+                        $method->getDocComment()
+                    );
                 }
                 continue;
             }
 
             if (!$method->getDescription() && $method->getDocComment()) {
-                $methodsDockBlocks[$method->getName()] = str_replace('/**', "/**\n * [insert]", $method->getDocComment());
+                $methodsDockBlocks[$method->getName()] = str_replace(
+                    '/**',
+                    "/**\n * [insert]",
+                    $method->getDocComment()
+                );
             } elseif (strlen($method->getDocCommentRecursive()) > 1) {
                 if ($method->getDescription()) {
                     if (isset($newThrowsDockBlocks[$method->getName()])) {
@@ -132,27 +145,14 @@ final class MissingDocBlocksGenerator
 
         if ($toRequest) {
             $classSignature = "{$rootEntity->getModifiersString()} \\{$rootEntity->getName()}";
-            $requestData = "/**{$rootEntity->getDescription()}*/\n{$classSignature}{\n" . implode("\n", $toRequest) . "\n}";
+            $requestData = "/**{$rootEntity->getDescription()}*/\n{$classSignature}{\n" . implode(
+                "\n",
+                $toRequest
+            ) . "\n}";
 
-            $messages = [
-                [
-                    'role' => 'system',
-                    'content' => file_get_contents(__DIR__ . '/prompts/missingDocBlockGeneration')
-                ],
-            ];
-            $messages[] = [
-                'role' => 'user',
-                'content' => $requestData,
-            ];
+            $responseData = $this->aiHandler->generateMissingPHPDocBlocs($requestData);
+            $responseData = json_decode($responseData ?? "{}", true);
 
-            $response = $this->openaiClient->chatCompletions()->create(
-                new \Tectalic\OpenAi\Models\ChatCompletions\CreateRequest([
-                    'model' => $this->model,
-                    'messages' => $messages,
-                ])
-            )->toModel();
-
-            $responseData = json_decode($response->choices[0]->message->content ?? "{}", true);
             if (!$responseData) {
                 return [];
             }
@@ -160,7 +160,10 @@ final class MissingDocBlocksGenerator
 
         foreach ($methodsDockBlocks as $methodName => $block) {
             $methodsDockBlocks[$methodName] = str_replace("[insert]", $responseData[$methodName] ?? '', $block);
-            $throwsString = implode("\n *", array_map(fn($v) => "@throws {$v}", $newThrowsDockBlocks[$methodName] ?? []));
+            $throwsString = implode(
+                "\n *",
+                array_map(fn($v) => "@throws {$v}", $newThrowsDockBlocks[$methodName] ?? [])
+            );
             if ($throwsString) {
                 $methodsDockBlocks[$methodName] = str_replace(
                     '[throws]',

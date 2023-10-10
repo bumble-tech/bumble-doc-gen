@@ -10,7 +10,6 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Tectalic\OpenAi\ClientException;
 
 final class GenerateProjectTemplatesStructureCommand extends BaseCommand
 {
@@ -32,7 +31,6 @@ final class GenerateProjectTemplatesStructureCommand extends BaseCommand
     /**
      * @throws DependencyException
      * @throws ReflectionException
-     * @throws ClientException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */

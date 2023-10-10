@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace BumbleDocGen;
 
+use BumbleDocGen\AI\Generators\MissingDocBlocksGenerator;
+use BumbleDocGen\AI\Generators\ReadmeTemplateGenerator;
+use BumbleDocGen\AI\Generators\TemplateGenerator;
+use BumbleDocGen\AI\Generators\TemplatesStructureGenerator;
+use BumbleDocGen\AI\ProviderFactory;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
@@ -14,10 +19,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
-use BumbleDocGen\TemplateGenerator\ChatGpt\MissingDocBlocksGenerator;
-use BumbleDocGen\TemplateGenerator\ChatGpt\ReadmeTemplateFiller;
-use BumbleDocGen\TemplateGenerator\ChatGpt\TemplateGenerator;
-use BumbleDocGen\TemplateGenerator\ChatGpt\TemplatesStructureGenerator;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
@@ -26,7 +27,6 @@ use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Style\OutputStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Tectalic\OpenAi\ClientException;
 
 /**
  * Class for generating documentation.
@@ -65,7 +65,6 @@ final class DocGenerator
     /**
      * Generate documentation structure with blank templates using AI tools
      *
-     * @throws ClientException
      * @throws NotFoundException
      * @throws ReflectionException
      * @throws DependencyException
@@ -76,30 +75,14 @@ final class DocGenerator
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
-        $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
-        $openaiClient = \Tectalic\OpenAi\Manager::build(
-            new \GuzzleHttp\Client(),
-            new \Tectalic\OpenAi\Authentication($openaiKey)
-        );
-
-        $availableModels = array_values(
-            array_filter(
-                array_map(
-                    fn(array $v) => $v['id'],
-                    $openaiClient->models()->list()->toArray()['data'] ?? []
-                ),
-                fn(string $v) => str_starts_with($v, "gpt-")
-            )
-        );
-
-        $model = $this->io->choice("Choose GPT model from available", $availableModels);
-        $templatesStructureGenerator = new TemplatesStructureGenerator($openaiClient, $model);
+        $aiHandler = ProviderFactory::create();
+        $templatesStructureGenerator = new TemplatesStructureGenerator($aiHandler);
 
         do {
             $additionalPrompt = $this->io->ask(
-                'Write instructions for more accurate documentation generation ( or just skip this step )'
+                'Write instructions for more accurate template structure generation ( or just skip this step )'
             ) ?: null;
-            $this->logger->notice("Sending ChatGPT request");
+            $this->io->note("Sending " . $aiHandler->getName() . " request");
             $structure = $templatesStructureGenerator->generateStructureByEntityCollection(
                 $entitiesCollection,
                 $additionalPrompt
@@ -112,7 +95,7 @@ final class DocGenerator
                 "The proposed documentation structure is as follows:\n\n{$structureAsString}",
                 ['Save', 'Regenerate', 'Cancel']
             );
-        } while ($action == 'Regenerate');
+        } while ($action === 'Regenerate');
 
         if ($action === 'Save') {
             $templatesDir = $this->configuration->getTemplatesDir();
@@ -143,7 +126,6 @@ final class DocGenerator
      * @throws DependencyException
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
-     * @throws ClientException
      */
     public function addMissingDocBlocks(): void
     {
@@ -154,24 +136,9 @@ final class DocGenerator
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
-        $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
-        $openaiClient = \Tectalic\OpenAi\Manager::build(
-            new \GuzzleHttp\Client(),
-            new \Tectalic\OpenAi\Authentication($openaiKey)
-        );
+        $aiHandler = ProviderFactory::create();
 
-        $availableModels = array_values(
-            array_filter(
-                array_map(
-                    fn(array $v) => $v['id'],
-                    $openaiClient->models()->list()->toArray()['data'] ?? []
-                ),
-                fn(string $v) => str_starts_with($v, "gpt-")
-            )
-        );
-
-        $model = $this->io->choice("Choose GPT model from available", $availableModels);
-        $missingDocBlocksGenerator = new MissingDocBlocksGenerator($openaiClient, $this->parserHelper, $model);
+        $missingDocBlocksGenerator = new MissingDocBlocksGenerator($aiHandler, $this->parserHelper);
 
         $alreadyProcessedEntities = [];
         $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (
@@ -243,7 +210,6 @@ final class DocGenerator
     /**
      * @throws ReflectionException
      * @throws DependencyException
-     * @throws ClientException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
@@ -252,12 +218,6 @@ final class DocGenerator
         $this->io->note("Project analysis");
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
-
-        $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
-        $openaiClient = \Tectalic\OpenAi\Manager::build(
-            new \GuzzleHttp\Client(),
-            new \Tectalic\OpenAi\Authentication($openaiKey)
-        );
 
         $finder = new Finder();
         $finder
@@ -296,7 +256,7 @@ final class DocGenerator
                                 ++$n;
                                 return "{$n}) {$v}";
                             },
-                            array_keys($entryPoints))
+                                array_keys($entryPoints))
                         )
                     );
 
@@ -312,18 +272,9 @@ final class DocGenerator
             'Write instructions for more accurate documentation generation ( or just skip this step )'
         );
 
-        $availableModels = array_values(
-            array_filter(
-                array_map(
-                    fn(array $v) => $v['id'],
-                    $openaiClient->models()->list()->toArray()['data'] ?? []
-                ),
-                fn(string $v) => str_starts_with($v, "gpt-")
-            )
-        );
-
-        $model = $this->io->choice("Choose GPT model from available", $availableModels, 'gpt-4');
-        $readmeTemplateFiller = new ReadmeTemplateFiller($openaiClient, $model);
+        $aiHandler = ProviderFactory::create();
+        $readmeTemplateFiller = new ReadmeTemplateGenerator($aiHandler);
+        $this->io->note("Sending " . $aiHandler->getName() . " request");
         $readmeFileContent = $readmeTemplateFiller->generateReadmeFileContent(
             $entitiesCollection,
             $entryPoints,
@@ -344,27 +295,10 @@ final class DocGenerator
     public function generateProjectTemplates(): void
     {
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::getEntityCollectionName());
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
-        $openaiKey = getenv('OPENAI_API_KEY') ?: $this->io->askHidden('Enter the key to work with ChatGpt');
-        $openaiClient = \Tectalic\OpenAi\Manager::build(
-            new \GuzzleHttp\Client(),
-            new \Tectalic\OpenAi\Authentication($openaiKey)
-        );
-
-        $availableModels = array_values(
-            array_filter(
-                array_map(
-                    fn(array $v) => $v['id'],
-                    $openaiClient->models()->list()->toArray()['data'] ?? []
-                ),
-                fn(string $v) => str_starts_with($v, "gpt-")
-            )
-        );
-
-        $model = $this->io->choice("Choose GPT model from available", $availableModels);
-
-        $templateGenerator = new TemplateGenerator($openaiClient, $model);
+        $aiHandler = ProviderFactory::create();
+        $templateGenerator = new TemplateGenerator($aiHandler);
 
         $finder = new Finder();
 
@@ -375,13 +309,13 @@ final class DocGenerator
             }
 
             do {
-                $this->logger->notice(
+                $this->io->note(
                     'Creating template for ' . $templateGenerator->getFileSubPathFromPath($file->getRealPath())
                 );
                 $additionalPrompt = $this->io->ask(
                     'Add additional information about this ( or just skip this step )'
                 ) ?: null;
-                $this->logger->notice('Sending ChatGPT request');
+                $this->io->note("Sending " . $aiHandler->getName() . " request");
                 $content = $templateGenerator->generate(
                     $file->getRealPath(),
                     $file->getContents(),
