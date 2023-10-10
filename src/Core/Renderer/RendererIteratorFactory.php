@@ -138,7 +138,7 @@ final class RendererIteratorFactory
 
             $this->markFileNameAsRendered($entityWrapper->getDocUrl());
 
-            $filesDependenciesKey = "{$entityWrapper->getEntityName()}_{$entityWrapper->getInitiatorFilePath()}";
+            $filesDependenciesKey = "{$entityWrapper->getEntityName()}_{$entityWrapper->getParentDocFilePath()}";
             if (
                 !$this->configuration->useSharedCache() ||
                 !$this->isGeneratedEntityDocumentExists($entityWrapper) ||
@@ -153,7 +153,7 @@ final class RendererIteratorFactory
                 $this->rootEntityCollectionsGroup->clearOperationsLog();
                 yield $entityWrapper;
             } else {
-                $this->moveCachedDataToCurrentData($entityWrapper->getInitiatorFilePath(), $entityWrapper->getEntityName());
+                $this->moveCachedDataToCurrentData($entityWrapper->getParentDocFilePath(), $entityWrapper->getEntityName());
                 $this->logger->info("Use cached version `{$this->configuration->getOutputDir()}{$entityWrapper->getDocUrl()}`");
                 ++$skippedCount;
                 continue;
@@ -257,7 +257,7 @@ final class RendererIteratorFactory
     private function isEntityRelationsCacheOutdated(DocumentedEntityWrapper $entityWrapper): bool
     {
         $cachedEntitiesRelations = $this->sharedCompressedDocumentFileCache->get('entities_relations', []);
-        if (!array_key_exists($entityWrapper->getInitiatorFilePath(), $cachedEntitiesRelations)) {
+        if (!array_key_exists($entityWrapper->getParentDocFilePath(), $cachedEntitiesRelations)) {
             return true;
         }
 
