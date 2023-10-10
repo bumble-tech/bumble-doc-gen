@@ -73,7 +73,7 @@ final class MissingDocBlocksGenerator
 </ul>
 
 ```php
-public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, string $model = \BumbleDocGen\TemplateGenerator\ChatGpt\MissingDocBlocksGenerator::MODEL_GPT_4);
+public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, string $model = \BumbleDocGen\AI\Generators\MissingDocBlocksGenerator::MODEL_GPT_4);
 ```
 
 
@@ -120,7 +120,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen
 </ul>
 
 ```php
-public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $rootEntity, int $mode = \BumbleDocGen\TemplateGenerator\ChatGpt\MissingDocBlocksGenerator::MODE_READ_ONLY_SIGNATURES): array;
+public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $rootEntity, int $mode = \BumbleDocGen\AI\Generators\MissingDocBlocksGenerator::MODE_READ_ONLY_SIGNATURES): array;
 ```
 
 

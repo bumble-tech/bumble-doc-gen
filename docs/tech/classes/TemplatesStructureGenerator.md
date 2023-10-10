@@ -62,7 +62,7 @@ final class TemplatesStructureGenerator
 </ul>
 
 ```php
-public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = \BumbleDocGen\TemplateGenerator\ChatGpt\TemplatesStructureGenerator::MODEL_GPT_4);
+public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = \BumbleDocGen\AI\Generators\TemplatesStructureGenerator::MODEL_GPT_4);
 ```
 
 
