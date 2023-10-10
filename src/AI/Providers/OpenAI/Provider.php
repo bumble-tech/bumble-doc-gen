@@ -44,10 +44,10 @@ final class Provider implements ProviderInterface
         $this->topP = getenv('OPENAI_TOP_P') ?: 1;
     }
 
-    public function generateMissingPHPDocBlocs(string $requestData): string
+    public function generateMissingPHPDocBlocs(string $prompt): string
     {
         $systemPrompt = $this->getSystemPrompt('missingDocBlockGeneration');
-        $prompts = [$requestData];
+        $prompts = [$prompt];
         return $this->sendPrompt($prompts, $systemPrompt);
     }
 

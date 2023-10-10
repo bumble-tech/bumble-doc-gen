@@ -8,7 +8,7 @@ interface ProviderInterface
 {
     public function generateTemplateStructure(array $namespacesList, ?string $additionalPrompt): string;
 
-    public function generateMissingPHPDocBlocs(string $requestData): string;
+    public function generateMissingPHPDocBlocs(string $prompt): string;
 
     public function generateTemplateContent(array $prompts): string;
 

@@ -37,11 +37,10 @@ final class Provider implements ProviderInterface
         $this->temperature = getenv('HUGGINGFACE_TEMPERATURE') ?: 0.1;
     }
 
-    public function generateMissingPHPDocBlocs(string $requestData): string
+    public function generateMissingPHPDocBlocs(string $prompt): string
     {
         $systemPrompt = $this->getSystemPrompt('missingDocBlockGeneration');
-        $prompts = [$requestData];
-        return $this->sendPrompt($prompts, $systemPrompt);
+        return $this->sendPrompt([$prompt], $systemPrompt);
     }
 
     public function generateReadMeFileContent(array $prompts): string
