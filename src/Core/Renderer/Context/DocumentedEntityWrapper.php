@@ -34,7 +34,7 @@ final class DocumentedEntityWrapper
      */
     public function getKey(): string
     {
-        return md5("{$this->documentTransformableEntity->getName()}{$this->initiatorFilePath}");
+        return md5("{$this->documentTransformableEntity->getName()}{$this->getInitiatorFilePath()}");
     }
 
     public function getEntityName(): string
@@ -52,7 +52,7 @@ final class DocumentedEntityWrapper
         }
         $usedKeysCounter ??= [];
         $fileName = $this->documentTransformableEntity->getShortName();
-        $initiatorFileDir = dirname($this->initiatorFilePath);
+        $initiatorFileDir = dirname($this->getInitiatorFilePath());
         $counterKey = "{$initiatorFileDir}{$fileName}";
 
         if (!isset($usedKeysCounter[$counterKey])) {
@@ -87,7 +87,7 @@ final class DocumentedEntityWrapper
      */
     public function getDocUrl(): string
     {
-        $pathParts = explode('/', $this->initiatorFilePath);
+        $pathParts = explode('/', $this->getInitiatorFilePath());
         array_pop($pathParts);
         $path = implode('/', $pathParts);
         return "{$path}/{$this->getDocRender()->getDocFileNamespace()}/{$this->getFileName()}";
@@ -96,5 +96,10 @@ final class DocumentedEntityWrapper
     public function getInitiatorFilePath(): string
     {
         return $this->initiatorFilePath;
+    }
+
+    public function setInitiatorFilePath(string $initiatorFilePath): void
+    {
+        $this->initiatorFilePath = $initiatorFilePath;
     }
 }
