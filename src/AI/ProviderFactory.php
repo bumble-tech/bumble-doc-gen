@@ -6,6 +6,7 @@ namespace BumbleDocGen\AI;
 
 use BumbleDocGen\AI\Providers\HuggingFace\Provider as HuggingFaceProvider;
 use BumbleDocGen\AI\Providers\OpenAI\Provider as OpenAIProvider;
+use BumbleDocGen\AI\Providers\Ollama\Provider as OllamaProvider;
 use RuntimeException;
 
 final class ProviderFactory
@@ -24,6 +25,8 @@ final class ProviderFactory
                     throw new RuntimeException("Environment variable HUGGINGFACE_TOKEN not set!");
                 }
                 return new HuggingFaceProvider($apiKey, $endpoint);
+            case 'ollama':
+                return new OllamaProvider();
             case 'openai':
                 $apiKey = getenv('OPENAI_API_KEY');
                 if (empty($apiKey)) {
