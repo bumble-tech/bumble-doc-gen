@@ -107,7 +107,7 @@ class App extends \Symfony\Component\Console\Application implements \Symfony\Con
     </li>
 <li>
     <a href="#mreset">reset</a>
-    - <i>This method is used to reset an object to its initial state.</i></li>
+    </li>
 <li>
     <a href="#mrun">run</a>
     - <i>Runs the current application.</i></li>
@@ -999,7 +999,7 @@ public function renderThrowable(\Throwable $e, \Symfony\Component\Console\Output
 public function reset(): mixed;
 ```
 
-<blockquote>This method is used to reset an object to its initial state.</blockquote>
+
 
 <b>Parameters:</b> not specified
 

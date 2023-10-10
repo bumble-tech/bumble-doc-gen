@@ -1,7 +1,7 @@
 {
     "name": "bumble-tech/bumble-doc-gen",
     "description": "Documentation generator next to the code for large and small php projects",
-    "type": "project",
+    "type": "library",
     "license": "Apache-2.0",
     "keywords": ["documentation-generator", "phpdoc", "cli-tool", "documentation", "docs", "llms", "chatgpt", "php"],
     "homepage": "https://github.com/bumble-tech/bumble-doc-gen",
@@ -31,7 +31,6 @@
         "symfony/cache": "^6.0",
         "symfony/event-dispatcher": "^6.0",
         "php-di/php-di": "^7.0",
-        "ocramius/proxy-manager": "~2.0",
         "symfony/yaml": "^6.0",
         "hassankhan/config": "^3.1",
         "guzzlehttp/guzzle": "^7.8",

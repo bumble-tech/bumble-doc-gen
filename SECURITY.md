@@ -6,10 +6,11 @@ Your security is of utmost importance to us. This document outlines our commitme
 
 Security updates will be applied to certain versions of our software. Please refer to the table below to understand which versions are currently supported for security patches.
 
-| Version | Supported          | Notes                                 |
-| ------- | ------------------ | ------------------------------------- |
-| 1.1.x   | :white_check_mark: | Current version, fully supported.     |
-| 1.0.x   | :x:                | Not supported, please upgrade to 1.1.x|
+| Version | Supported          | Notes                                  |
+|---------|--------------------|----------------------------------------|
+| 1.2.x   | :white_check_mark: | Current version, fully supported.      |
+| 1.1.x   | :x:                | Not supported, please upgrade to 1.2.x |
+| 1.0.x   | :x:                | Not supported, please upgrade to 1.2.x |
 
 ## Reporting a Vulnerability
 

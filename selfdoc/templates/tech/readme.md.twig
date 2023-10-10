@@ -30,4 +30,8 @@ To start the documentation generation process, you need to call the following co
 
 {{ "(new DocGeneratorFactory())->create($configFile)->generate()" | textToCodeBlock('php') }}
 
+or
+
+{{ "(new DocGeneratorFactory())->createByConfigArray($configArray)->generate()" | textToCodeBlock('php') }}
+
 After that, the process of parsing the project code according to the configuration will start, and then filling the templates with data and saving the finished result as final documents.

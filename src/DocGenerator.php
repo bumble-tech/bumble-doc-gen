@@ -13,6 +13,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
@@ -33,13 +34,14 @@ use Symfony\Component\Finder\Finder;
  */
 final class DocGenerator
 {
-    public const VERSION = '1.1.0';
+    public const VERSION = '1.2.1';
     public const LOG_FILE_NAME = 'last_run.log';
 
     public function __construct(
         private Filesystem $fs,
         private OutputStyle $io,
         private Configuration $configuration,
+        PluginEventDispatcher $pluginEventDispatcher,
         private ProjectParser $parser,
         private ParserHelper $parserHelper,
         private Renderer $renderer,
@@ -48,6 +50,10 @@ final class DocGenerator
     ) {
         if (file_exists(self::LOG_FILE_NAME)) {
             unlink(self::LOG_FILE_NAME);
+        }
+
+        foreach ($configuration->getPlugins() as $plugin) {
+            $pluginEventDispatcher->addSubscriber($plugin);
         }
     }
 
