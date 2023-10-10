@@ -6,6 +6,8 @@ namespace BumbleDocGen\Core\Renderer\Context;
 
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 
 final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \Countable
 {
@@ -16,7 +18,8 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \C
 
     public function __construct(
         private RendererContext $rendererContext,
-        private LocalObjectCache $localObjectCache
+        private LocalObjectCache $localObjectCache,
+        private PluginEventDispatcher $pluginEventDispatcher
     ) {
     }
 
@@ -37,6 +40,8 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \C
             $this->localObjectCache,
             $this->rendererContext->getCurrentTemplateFilePatch()
         );
+
+        $this->pluginEventDispatcher->dispatch(new OnCreateDocumentedEntityWrapper($documentedEntity));
 
         $parentEntityName = $this->rendererContext->getCurrentDocumentedEntityWrapper()?->getEntityName();
         $this->documentedEntitiesRelations[$this->rendererContext->getCurrentTemplateFilePatch()][$parentEntityName][$documentedEntity->getEntityName()] = [
