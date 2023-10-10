@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile;
+use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingEntities;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
@@ -89,6 +90,10 @@ final class Renderer
             $this->fs->dumpFile($filePatch, $content);
             $this->logger->info("Saving `{$filePatch}`");
         }
+
+        $this->pluginEventDispatcher->dispatch(
+            new BeforeRenderingEntities($this->configuration, $this->rootEntityCollectionsGroup)
+        );
 
         foreach ($this->renderIteratorFactory->getDocumentedEntityWrappersWithOutdatedCache() as $entityWrapper) {
             /** @var DocumentedEntityWrapper $entityWrapper */
