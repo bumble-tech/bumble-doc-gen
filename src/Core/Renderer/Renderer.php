@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+use BumbleDocGen\Core\Plugin\Event\Renderer\AfterRenderingEntities;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingEntities;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -112,6 +113,10 @@ final class Renderer
             $this->fs->dumpFile($filePatch, "<!-- {% raw %} -->\n{$content}\n<!-- {% endraw %} -->");
             $this->logger->info("Saving `{$filePatch}`");
         }
+
+        $this->pluginEventDispatcher->dispatch(
+            new AfterRenderingEntities($this->configuration, $this->rootEntityCollectionsGroup)
+        );
 
         foreach ($this->renderIteratorFactory->getFilesToRemove() as $file) {
             $this->fs->remove($file->getPathname());
