@@ -10,7 +10,7 @@ use RuntimeException;
 
 final class ProviderFactory
 {
-    public static function create(): OpenAIProvider|HuggingFaceProvider
+    public static function create(): ProviderInterface
     {
         $apiType = getenv('API_TYPE');
         switch ($apiType) {
