@@ -10,4 +10,4 @@ source_locators:
   - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
     arguments:
       directories:
-        - "%project_root%"
+        - "%project_root%/src"
