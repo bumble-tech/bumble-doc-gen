@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace BumbleDocGen\AI\Providers\HuggingFace;
 
 use BumbleDocGen\AI\ProviderInterface;
+use BumbleDocGen\AI\Traits\JsonExtractorTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use RuntimeException;
 
 final class Provider implements ProviderInterface
 {
+    use JsonExtractorTrait;
+
     public bool $extractFirstJsonObject = false;
     private Client $client;
     private string $endpoint;
@@ -100,7 +103,7 @@ final class Provider implements ProviderInterface
 
             if (isset($responseData[0]['generated_text'])) {
                 if ($this->extractFirstJsonObject) {
-                    return $this->extractJsonObjectsFromText($responseData[0]['generated_text']);
+                    return $this->extractFirstJsonObjectFromText($responseData[0]['generated_text']);
                 }
                 return $responseData[0]['generated_text'];
             }
@@ -113,26 +116,6 @@ final class Provider implements ProviderInterface
                 '[' . $e->getCode() . '] Failed to decode JSON response: ' . $e->getMessage()
             );
         }
-    }
-
-    private function extractJsonObjectsFromText($text)
-    {
-        $pattern = '/\{(?:[^{}]|(?R))*}/x';
-        $result = preg_match_all($pattern, $text, $matches);
-
-        if ($result === false || !isset($matches[0][0])) {
-            throw new RuntimeException('Failed to extract JSON object');
-        }
-
-        // Check if the matched string is valid JSON
-        $jsonObject = $matches[0][0];
-        try {
-            json_decode($jsonObject, false, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            throw new RuntimeException('Failed to decode JSON object: ' . $e->getMessage());
-        }
-
-        return $jsonObject;
     }
 
     private function getSystemPrompt(string $fileName): string
