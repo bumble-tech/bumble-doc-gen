@@ -92,9 +92,7 @@ final class Renderer
             $this->logger->info("Saving `{$filePatch}`");
         }
 
-        $this->pluginEventDispatcher->dispatch(
-            new BeforeRenderingEntities($this->configuration, $this->rootEntityCollectionsGroup)
-        );
+        $this->pluginEventDispatcher->dispatch(new BeforeRenderingEntities());
 
         foreach ($this->renderIteratorFactory->getDocumentedEntityWrappersWithOutdatedCache() as $entityWrapper) {
             /** @var DocumentedEntityWrapper $entityWrapper */
@@ -114,9 +112,7 @@ final class Renderer
             $this->logger->info("Saving `{$filePatch}`");
         }
 
-        $this->pluginEventDispatcher->dispatch(
-            new AfterRenderingEntities($this->configuration, $this->rootEntityCollectionsGroup)
-        );
+        $this->pluginEventDispatcher->dispatch(new AfterRenderingEntities());
 
         foreach ($this->renderIteratorFactory->getFilesToRemove() as $file) {
             $this->fs->remove($file->getPathname());
