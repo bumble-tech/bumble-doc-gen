@@ -36,7 +36,8 @@ final class LastPageCommitter implements PluginInterface
                 '',
                 "{$this->configuration->getTemplatesDir()}{$this->context->getCurrentTemplateFilePatch()}"
             );
-            exec("{$gitClientPath} log --no-merges -1 {$filePath}", $output);
+
+            exec("{$gitClientPath} log --no-merges -1 {$filePath} 2>/dev/null", $output);
 
             $content = $event->getContent();
             if (isset($output[2]) && str_contains($output[2], 'Date: ')) {
