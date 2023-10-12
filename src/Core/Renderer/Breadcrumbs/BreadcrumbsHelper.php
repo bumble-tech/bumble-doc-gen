@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeLoadAllPagesLinks;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadTemplateContentForBreadcrumbs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use DI\DependencyException;
@@ -230,15 +231,17 @@ final class BreadcrumbsHelper
             }
         };
 
-        /**@var \SplFileInfo[] $allFiles */
-        $allFiles = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator(
-                $templatesDir,
-                \FilesystemIterator::SKIP_DOTS
-            )
-        );
-        foreach ($allFiles as $file) {
-            $filePatch = str_replace($templatesDir, '', $file->getRealPath());
+        $event = $this->pluginEventDispatcher->dispatch(new BeforeLoadAllPagesLinks([$templatesDir]));
+
+        $finder = Finder::create()
+            ->ignoreVCS(true)
+            ->ignoreDotFiles(true)
+            ->ignoreUnreadableDirs()
+            ->sortByName()
+            ->in($event->getTemplatesDirs());
+
+        foreach ($finder->files() as $file) {
+            $filePatch = str_replace($event->getTemplatesDirs(), '', $file->getRealPath());
             if (!str_ends_with($filePatch, '.twig')) {
                 continue;
             }
