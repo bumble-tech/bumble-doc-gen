@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\EntityDocUnifiedPlace;
 
+use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeLoadAllPagesLinks;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingDocFiles;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateMainTwigEnvironment;
@@ -36,6 +37,7 @@ final class EntityDocUnifiedPlacePlugin implements PluginInterface
             OnCreateMainTwigEnvironment::class => 'onCreateMainTwigEnvironment',
             BeforeRenderingDocFiles::class => 'beforeRenderingDocFiles',
             OnLoadTemplateContentForBreadcrumbs::class => 'onLoadTemplateContentForBreadcrumbs',
+            BeforeLoadAllPagesLinks::class => 'beforeLoadAllPagesLinks'
         ];
     }
 
@@ -78,5 +80,10 @@ final class EntityDocUnifiedPlacePlugin implements PluginInterface
             );
             $this->rendererIteratorFactory->addExtraTemplate(new TemplateFile($templateFile->getRealPath(), $docFileRelativeName));
         }
+    }
+
+    public function beforeLoadAllPagesLinks(BeforeLoadAllPagesLinks $event): void
+    {
+        $event->addTemplatesDir(self::TEMPLATES_FOLDER);
     }
 }
