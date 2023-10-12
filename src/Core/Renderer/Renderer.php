@@ -10,6 +10,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Renderer\AfterRenderingEntities;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile;
+use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingDocFiles;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingEntities;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
@@ -66,9 +67,10 @@ final class Renderer
             $templateParams[$collectionName] = $rootEntityCollection;
         }
 
+        $this->pluginEventDispatcher->dispatch(new BeforeRenderingDocFiles());
+
         foreach ($this->renderIteratorFactory->getTemplatesWithOutdatedCache() as $templateFile) {
-            /**@var \SplFileInfo $templateFile */
-            $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
+            $filePatch = $templateFile->getRelativeDocPath();
 
             if (str_ends_with($filePatch, '.twig')) {
                 $this->rendererContext->setCurrentTemplateFilePatch($filePatch);

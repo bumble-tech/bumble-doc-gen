@@ -25,6 +25,7 @@ final class RendererIteratorFactory
     private const INTERNAL_CACHING_SYSTEM_VERSION = 2;
 
     private array $renderedFileNames = [];
+    private array $extraTemplates = [];
 
     public function __construct(
         private RendererContext $rendererContext,
@@ -40,6 +41,11 @@ final class RendererIteratorFactory
         private OutputStyle $io,
         private Logger $logger,
     ) {
+    }
+
+    public function addExtraTemplate(TemplateFile $templateFile): void
+    {
+        $this->extraTemplates[] = $templateFile;
     }
 
     /**
@@ -59,44 +65,68 @@ final class RendererIteratorFactory
             ->sortByName()
             ->files();
 
+        $getAllDocuments = function () use ($finder, $templateFolder): array {
+            $allDocuments = $this->extraTemplates;
+            foreach ($finder as $templateFile) {
+                $docFileRelativeName = str_replace($templateFolder, '', $templateFile->getRealPath());
+                $allDocuments[] = new TemplateFile($templateFile->getRealPath(), $docFileRelativeName);
+            }
+            return $allDocuments;
+        };
+
         $skippedCount = 0;
-        foreach ($pb->iterate($finder) as $templateFile) {
-            $templateFileName = str_replace($templateFolder, '', $templateFile->getRealPath());
-            $pb->setStepDescription("Processing {$templateFileName} file");
+        foreach ($pb->iterate($getAllDocuments()) as $templateFile) {
+            $pb->setStepDescription("Processing {$templateFile->getRelativeDocPath()} file");
+
+            $file = $this->prepareDocFileForRendering($templateFile);
+            if (!$file) {
+                var_dump(1);
+                ++$skippedCount;
+                continue;
+            }
+            yield $file;
+        }
+
+        $processed = $finder->count() - $skippedCount;
+        $this->io->table([], [
+            ['Processed documents:', "<options=bold,underscore>{$processed}</>"],
+            ['Skipped (without changes):', "<options=bold,underscore>{$skippedCount}</>"],
+        ]);
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    private function prepareDocFileForRendering(TemplateFile $templateFile): ?TemplateFile
+    {
+        $templateFileName = $templateFile->getRelativeDocPath();
+
+        $this->rendererContext->clearDependencies();
+        $this->rootEntityCollectionsGroup->clearOperationsLog();
+
+        $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
+        $fileDependency = $this->dependencyFactory->createFileDependency(
+            filePath: $templateFile->getRealPath()
+        );
+        $this->rendererContext->addDependency($fileDependency);
+
+        $this->markFileNameAsRendered($templateFileName);
+
+        if (
+            !$this->configuration->useSharedCache() ||
+            !$this->isGeneratedDocumentExists($templateFileName) ||
+            $this->isInternalCachingVersionChanged() ||
+            $this->isConfigurationVersionChanged() ||
+            $this->isFilesDependenciesCacheOutdated($templateFileName) ||
+            $this->isEntitiesOperationsLogCacheOutdated($templateFileName)
+        ) {
             $this->rendererContext->clearDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
-
             $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
             $fileDependency = $this->dependencyFactory->createFileDependency(
                 filePath: $templateFile->getRealPath()
             );
             $this->rendererContext->addDependency($fileDependency);
-
-            $this->markFileNameAsRendered($templateFileName);
-
-            if (
-                !$this->configuration->useSharedCache() ||
-                !$this->isGeneratedDocumentExists($templateFileName) ||
-                $this->isInternalCachingVersionChanged() ||
-                $this->isConfigurationVersionChanged() ||
-                $this->isFilesDependenciesCacheOutdated($templateFileName) ||
-                $this->isEntitiesOperationsLogCacheOutdated($templateFileName)
-            ) {
-                $this->rendererContext->clearDependencies();
-                $this->rootEntityCollectionsGroup->clearOperationsLog();
-                $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
-                $fileDependency = $this->dependencyFactory->createFileDependency(
-                    filePath: $templateFile->getRealPath()
-                );
-                $this->rendererContext->addDependency($fileDependency);
-                yield $templateFile;
-            } else {
-                $this->moveCachedDataToCurrentData($templateFileName);
-                $this->logger->info("Use cached version `{$templateFile->getRealPath()}`");
-                ++$skippedCount;
-                continue;
-            }
-
             $this->sharedCompressedDocumentFileCache->set(
                 $this->getOperationsLogCacheKey($templateFileName),
                 $this->rootEntityCollectionsGroup->getOperationsLogWithoutDuplicates()
@@ -106,13 +136,11 @@ final class RendererIteratorFactory
                 $this->getFilesDependenciesCacheKey($templateFileName),
                 $this->rendererContext->getDependencies()
             );
+            return $templateFile;
         }
-
-        $processed = $finder->count() - $skippedCount;
-        $this->io->table([], [
-            ['Processed documents:', "<options=bold,underscore>{$processed}</>"],
-            ['Skipped (without changes):', "<options=bold,underscore>{$skippedCount}</>"],
-        ]);
+        $this->moveCachedDataToCurrentData($templateFileName);
+        $this->logger->info("Use cached version `{$templateFile->getRealPath()}`");
+        return null;
     }
 
     /**
