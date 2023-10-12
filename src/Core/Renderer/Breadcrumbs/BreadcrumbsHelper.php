@@ -8,6 +8,8 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadTemplateContentForBreadcrumbs;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
@@ -34,6 +36,7 @@ final class BreadcrumbsHelper
         private Configuration $configuration,
         private LocalObjectCache $localObjectCache,
         private BreadcrumbsTwigEnvironment $breadcrumbsTwig,
+        private PluginEventDispatcher $pluginEventDispatcher,
         private string $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
     ) {
     }
@@ -44,7 +47,9 @@ final class BreadcrumbsHelper
     private function loadTemplateContent(string $templateName): string
     {
         $outputDir = $this->configuration->getTemplatesDir();
-        $filePath = "{$outputDir}{$templateName}";
+        $event = $this->pluginEventDispatcher->dispatch(new OnLoadTemplateContentForBreadcrumbs($templateName));
+        $filePath = $event->getCustomTemplateFilePath();
+        $filePath = $filePath ?: "{$outputDir}{$templateName}";
         if (!str_ends_with($filePath, '.twig')) {
             $templateName .= '.twig';
             return $this->loadTemplateContent($templateName);
