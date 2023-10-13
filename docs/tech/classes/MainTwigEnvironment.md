@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> MainTwigEnvironment<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L15">MainTwigEnvironment</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L17">MainTwigEnvironment</a> class:
 </h1>
 
 
@@ -55,7 +55,7 @@ final class MainTwigEnvironment
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Renderer\Twig\MainExtension $mainExtension);
+public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Renderer\Twig\MainExtension $mainExtension, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher);
 ```
 
 
@@ -81,17 +81,15 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainExtension.php'>\BumbleDocGen\Core\Renderer\Twig\MainExtension</a></td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$pluginEventDispatcher</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php'>\BumbleDocGen\Core\Plugin\PluginEventDispatcher</a></td>
+            <td>-</td>
+        </tr>
         </tbody>
 </table>
 
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
 
 </div>
 <hr>
@@ -100,7 +98,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mrender" href="#mrender">#</a>
  <b>render</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L37">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L51">source code</a></li>
 </ul>
 
 ```php
@@ -146,6 +144,9 @@ public function render(mixed $name, array $context = [ ]): string;
 
 <li>
     <a href="https://github.com/twigphp/Twig/blob/master/src/Error/LoaderError.php">\Twig\Error\LoaderError</a></li>
+
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

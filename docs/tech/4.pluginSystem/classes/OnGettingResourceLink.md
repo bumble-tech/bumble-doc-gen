@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/4.pluginSystem/readme.md">Plugin system</a> <b>/</b> OnGettingResourceLink<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L9">OnGettingResourceLink</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L12">OnGettingResourceLink</a> class:
 </h1>
 
 
@@ -15,7 +15,7 @@ namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 final class OnGettingResourceLink extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
 ```
 
-<blockquote>Event is the base class for classes containing event data.</blockquote>
+<blockquote>Event occurs when a reference to an entity (resource) is received</blockquote>
 
 
 
@@ -63,7 +63,7 @@ final class OnGettingResourceLink extends \Symfony\Contracts\EventDispatcher\Eve
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L13">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L16">source code</a></li>
 </ul>
 
 ```php
@@ -100,7 +100,7 @@ public function __construct(string $resourceName);
 <ul>
 <li><a name="mgetresourcename" href="#mgetresourcename">#</a>
  <b>getResourceName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -121,7 +121,7 @@ public function getResourceName(): string;
 <ul>
 <li><a name="mgetresourceurl" href="#mgetresourceurl">#</a>
  <b>getResourceUrl</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L25">source code</a></li>
 </ul>
 
 ```php
@@ -165,7 +165,7 @@ public function isPropagationStopped(): bool;
 <ul>
 <li><a name="msetresourceurl" href="#msetresourceurl">#</a>
  <b>setResourceUrl</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php#L30">source code</a></li>
 </ul>
 
 ```php

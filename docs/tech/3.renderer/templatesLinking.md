@@ -1,4 +1,4 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/templates.md">How to create documentation templates?</a> <b>/</b> Linking templates<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/01_templates.md">How to create documentation templates?</a> <b>/</b> Linking templates<hr> </embed>
 
 <embed> <h1>Linking templates</h1> </embed>
 
@@ -22,9 +22,9 @@ will be replaced with this link:
 
 The second way to relink templates is to generate links through functions.
 
-There are a number of functions that allow you to get a link to an entity, for example <a href="/docs/tech/3.renderer/classes/GetDocumentedEntityUrl_2.md">GetDocumentedEntityUrl</a>, and there are also functions for getting a link to other documents, for example <a href="/docs/tech/3.renderer/classes/GetDocumentationPageUrl_2.md">GetDocumentationPageUrl</a>.
+There are a number of functions that allow you to get a link to an entity, for example <a href="/docs/tech/3.renderer/classes/GetDocumentedEntityUrl.md">GetDocumentedEntityUrl</a>, and there are also functions for getting a link to other documents, for example <a href="/docs/tech/3.renderer/classes/GetDocumentationPageUrl.md">GetDocumentationPageUrl</a>.
 You can also implement your own functions for relinking if necessary.
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

@@ -1,10 +1,10 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/templates.md">How to create documentation templates?</a> <b>/</b> Templates dynamic blocks<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/01_templates.md">How to create documentation templates?</a> <b>/</b> Templates dynamic blocks<hr> </embed>
 
 <embed> <h1>Templates dynamic blocks</h1> </embed>
 
 There are several ways to create dynamic blocks in templates.
 
-* First of all, these are custom twig <a href='/docs/tech/3.renderer/twigCustomFunctions.md'>functions</a> and <a href='/docs/tech/3.renderer/twigCustomFilters.md'>filters</a>.
+* First of all, these are custom twig <a href='/docs/tech/3.renderer/05_twigCustomFunctions.md'>functions</a> and <a href='/docs/tech/3.renderer/04_twigCustomFilters.md'>filters</a>.
 You can use the built-in functions and filters or add your own, so you can implement any logic for generating dynamically changing content.
 
 ```twig
@@ -26,4 +26,4 @@ You can use the built-in functions and filters or add your own, so you can imple
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

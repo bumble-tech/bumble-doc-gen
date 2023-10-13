@@ -229,6 +229,9 @@ class ClassEntity extends \BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEn
     <a href="#mimplementsinterface">implementsInterface</a>
     </li>
 <li>
+    <a href="#misabstract">isAbstract</a>
+    </li>
+<li>
     <a href="#misclassload">isClassLoad</a>
     </li>
 <li>
@@ -368,7 +371,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mcursortodocattributelinkfragment" href="#mcursortodocattributelinkfragment">#</a>
  <b>cursorToDocAttributeLinkFragment</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L935">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L944">source code</a></li>
 </ul>
 
 ```php
@@ -636,7 +639,7 @@ public function getCasesNames(): array;
 <ul>
 <li><a name="mgetconstant" href="#mgetconstant">#</a>
  <b>getConstant</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L866">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L875">source code</a></li>
 </ul>
 
 ```php
@@ -780,7 +783,7 @@ public function getConstantEntityCollection(): \BumbleDocGen\LanguageHandler\Php
 <ul>
 <li><a name="mgetconstants" href="#mgetconstants">#</a>
  <b>getConstants</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L903">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L912">source code</a></li>
 </ul>
 
 ```php
@@ -1042,7 +1045,7 @@ public function getDocNote(): string;
 <ul>
 <li><a name="mgetdocrender" href="#mgetdocrender">#</a>
  <b>getDocRender</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L912">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L921">source code</a></li>
 </ul>
 
 ```php
@@ -2207,7 +2210,7 @@ public function hasAnnotationKey(string $annotationKey): bool;
 <ul>
 <li><a name="mhasconstant" href="#mhasconstant">#</a>
  <b>hasConstant</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L840">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L849">source code</a></li>
 </ul>
 
 ```php
@@ -2308,7 +2311,7 @@ public function hasExamples(): bool;
 <ul>
 <li><a name="mhasmethod" href="#mhasmethod">#</a>
  <b>hasMethod</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L822">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L831">source code</a></li>
 </ul>
 
 ```php
@@ -2356,7 +2359,7 @@ public function hasMethod(string $method): bool;
 <ul>
 <li><a name="mhasparentclass" href="#mhasparentclass">#</a>
  <b>hasParentClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L889">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L898">source code</a></li>
 </ul>
 
 ```php
@@ -2404,7 +2407,7 @@ public function hasParentClass(string $parentClassName): bool;
 <ul>
 <li><a name="mhasproperty" href="#mhasproperty">#</a>
  <b>hasProperty</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L831">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L840">source code</a></li>
 </ul>
 
 ```php
@@ -2506,7 +2509,7 @@ public function hasTraits(): bool;
 <ul>
 <li><a name="mimplementsinterface" href="#mimplementsinterface">#</a>
  <b>implementsInterface</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L875">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L884">source code</a></li>
 </ul>
 
 ```php
@@ -2533,6 +2536,37 @@ public function implementsInterface(string $interfaceName): bool;
         </tr>
         </tbody>
 </table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="misabstract" href="#misabstract">#</a>
+ <b>isAbstract</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L804">source code</a></li>
+</ul>
+
+```php
+public function isAbstract(): bool;
+```
+
+
+
+<b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
 
@@ -2792,7 +2826,7 @@ public function isInstantiable(): bool;
 <ul>
 <li><a name="misinterface" href="#misinterface">#</a>
  <b>isInterface</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L804">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L813">source code</a></li>
 </ul>
 
 ```php
@@ -2846,7 +2880,7 @@ public function isInternal(): bool;
 <ul>
 <li><a name="missubclassof" href="#missubclassof">#</a>
  <b>isSubclassOf</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L849">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L858">source code</a></li>
 </ul>
 
 ```php
@@ -2894,7 +2928,7 @@ public function isSubclassOf(string $className): bool;
 <ul>
 <li><a name="mistrait" href="#mistrait">#</a>
  <b>isTrait</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L813">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L822">source code</a></li>
 </ul>
 
 ```php

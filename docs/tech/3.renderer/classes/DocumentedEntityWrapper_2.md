@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/templates.md">How to create documentation templates?</a> <b>/</b> <a href="/docs/tech/3.renderer/templatesLinking.md">Linking templates</a> <b>/</b> DocumentedEntityWrapper<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/05_twigCustomFunctions.md">Template functions</a> <b>/</b> DocumentedEntityWrapper<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L14">DocumentedEntityWrapper</a> class:
@@ -49,11 +49,14 @@ final class DocumentedEntityWrapper
     <a href="#mgetfilename">getFileName</a>
     - <i>The name of the file to be generated</i></li>
 <li>
-    <a href="#mgetinitiatorfilepath">getInitiatorFilePath</a>
-    </li>
-<li>
     <a href="#mgetkey">getKey</a>
     - <i>Get document key</i></li>
+<li>
+    <a href="#mgetparentdocfilepath">getParentDocFilePath</a>
+    </li>
+<li>
+    <a href="#msetparentdocfilepath">setParentDocFilePath</a>
+    </li>
 </ol>
 
 
@@ -73,7 +76,7 @@ final class DocumentedEntityWrapper
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface $documentTransformableEntity, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, string $initiatorFilePath);
+public function __construct(\BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface $documentTransformableEntity, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, string $parentDocFilePath);
 ```
 
 
@@ -100,7 +103,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\DocumentTransfor
             <td>-</td>
         </tr>
             <tr>
-            <td>$initiatorFilePath</td>
+            <td>$parentDocFilePath</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>The file in which the documentation of the entity was requested</td>
         </tr>
@@ -219,27 +222,6 @@ public function getFileName(): string;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgetinitiatorfilepath" href="#mgetinitiatorfilepath">#</a>
- <b>getInitiatorFilePath</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L96">source code</a></li>
-</ul>
-
-```php
-public function getInitiatorFilePath(): string;
-```
-
-
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
 <li><a name="mgetkey" href="#mgetkey">#</a>
  <b>getKey</b>
     <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L35">source code</a></li>
@@ -254,6 +236,65 @@ public function getKey(): string;
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mgetparentdocfilepath" href="#mgetparentdocfilepath">#</a>
+ <b>getParentDocFilePath</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L96">source code</a></li>
+</ul>
+
+```php
+public function getParentDocFilePath(): string;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="msetparentdocfilepath" href="#msetparentdocfilepath">#</a>
+ <b>setParentDocFilePath</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php#L101">source code</a></li>
+</ul>
+
+```php
+public function setParentDocFilePath(string $parentDocFilePath): void;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$parentDocFilePath</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
 
 </div>
