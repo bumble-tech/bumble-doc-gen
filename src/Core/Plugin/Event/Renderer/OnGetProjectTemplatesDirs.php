@@ -7,7 +7,7 @@ namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- *
+ * This event occurs when all directories containing document templates are retrieved
  */
 final class OnGetProjectTemplatesDirs extends Event
 {
