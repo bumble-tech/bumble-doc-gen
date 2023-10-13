@@ -59,7 +59,6 @@ final class Renderer
      */
     public function run(): void
     {
-        $templateFolder = $this->configuration->getTemplatesDir();
         $outputDir = $this->configuration->getOutputDir();
 
         $templateParams = [];
