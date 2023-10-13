@@ -80,7 +80,6 @@ final class RendererIteratorFactory
 
             $file = $this->prepareDocFileForRendering($templateFile);
             if (!$file) {
-                var_dump(1);
                 ++$skippedCount;
                 continue;
             }
