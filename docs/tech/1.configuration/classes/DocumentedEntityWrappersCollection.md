@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/1.configuration/readme.md">Configuration files</a> <b>/</b> DocumentedEntityWrappersCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L10">DocumentedEntityWrappersCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L12">DocumentedEntityWrappersCollection</a> class:
 </h1>
 
 
@@ -60,11 +60,11 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \T
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L19">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache);
+public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher);
 ```
 
 
@@ -90,6 +90,11 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$pluginEventDispatcher</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php'>\BumbleDocGen\Core\Plugin\PluginEventDispatcher</a></td>
+            <td>-</td>
+        </tr>
         </tbody>
 </table>
 
@@ -102,7 +107,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
 <ul>
 <li><a name="mcount" href="#mcount">#</a>
  <b>count</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L58">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L63">source code</a></li>
 </ul>
 
 ```php
@@ -129,7 +134,7 @@ public function count(): int;
 <ul>
 <li><a name="mcreateandadddocumentedentitywrapper" href="#mcreateandadddocumentedentitywrapper">#</a>
  <b>createAndAddDocumentedEntityWrapper</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L33">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L36">source code</a></li>
 </ul>
 
 ```php
@@ -167,7 +172,7 @@ public function createAndAddDocumentedEntityWrapper(\BumbleDocGen\Core\Parser\En
 <ul>
 <li><a name="mgetdocumentedentitiesrelations" href="#mgetdocumentedentitiesrelations">#</a>
  <b>getDocumentedEntitiesRelations</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L53">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L58">source code</a></li>
 </ul>
 
 ```php
@@ -188,7 +193,7 @@ public function getDocumentedEntitiesRelations(): array;
 <ul>
 <li><a name="mgetiterator" href="#mgetiterator">#</a>
  <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L26">source code</a></li>
 </ul>
 
 ```php

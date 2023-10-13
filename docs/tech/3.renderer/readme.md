@@ -10,7 +10,7 @@ We use twig to process templates.
 
 <embed> <h2>More detailed description of renderer components</h2> </embed>
 
-<embed> <ul><li><div><a href='/docs/tech/3.renderer/breadcrumbs.md'>Documentation structure and breadcrumbs</a></div></li><li><div><a href='/docs/tech/3.renderer/templates.md'>How to create documentation templates?</a></div></li><li><div><a href='/docs/tech/3.renderer/twigCustomFilters.md'>Template filters</a></div></li><li><div><a href='/docs/tech/3.renderer/twigCustomFunctions.md'>Template functions</a></div></li></ul> </embed>
+<embed> <ul><li><div><a href='/docs/tech/3.renderer/01_templates.md'>How to create documentation templates?</a></div></li><li><div><a href='/docs/tech/3.renderer/02_breadcrumbs.md'>Documentation structure and breadcrumbs</a></div></li><li><div><a href='/docs/tech/3.renderer/03_documentStructure.md'>Document structure of generated entities</a></div></li><li><div><a href='/docs/tech/3.renderer/04_twigCustomFilters.md'>Template filters</a></div></li><li><div><a href='/docs/tech/3.renderer/05_twigCustomFunctions.md'>Template functions</a></div></li></ul> </embed>
 
 <embed> <h2>Starting the rendering process</h2> </embed>
 
@@ -60,4 +60,4 @@ This process is presented in the form of a diagram below.
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

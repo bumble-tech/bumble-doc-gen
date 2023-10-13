@@ -73,10 +73,16 @@ final class ClassEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Logga
     <a href="#mgetloadedorcreatenew">getLoadedOrCreateNew</a>
     </li>
 <li>
+    <a href="#mgetonlyabstractclasses">getOnlyAbstractClasses</a>
+    </li>
+<li>
     <a href="#mgetonlyinstantiable">getOnlyInstantiable</a>
     </li>
 <li>
     <a href="#mgetonlyinterfaces">getOnlyInterfaces</a>
+    </li>
+<li>
+    <a href="#mgetonlytraits">getOnlyTraits</a>
     </li>
 <li>
     <a href="#mgetoperationslogcollection">getOperationsLogCollection</a>
@@ -333,7 +339,7 @@ public function filterByInterfaces(array $interfaces): \BumbleDocGen\LanguageHan
 <ul>
 <li><a name="mfilterbynameregularexpression" href="#mfilterbynameregularexpression">#</a>
  <b>filterByNameRegularExpression</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L241">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L237">source code</a></li>
 </ul>
 
 ```php
@@ -363,16 +369,6 @@ public function filterByNameRegularExpression(string $regexPattern): \BumbleDocG
 
 <b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a>
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
 
 </div>
 <hr>
@@ -626,7 +622,7 @@ public function getEntityCollectionName(): string;
 <ul>
 <li><a name="mgetentitylinkdata" href="#mgetentitylinkdata">#</a>
  <b>getEntityLinkData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L391">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L419">source code</a></li>
 </ul>
 
 ```php
@@ -760,9 +756,40 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgetonlyabstractclasses" href="#mgetonlyabstractclasses">#</a>
+ <b>getOnlyAbstractClasses</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L301">source code</a></li>
+</ul>
+
+```php
+public function getOnlyAbstractClasses(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgetonlyinstantiable" href="#mgetonlyinstantiable">#</a>
  <b>getOnlyInstantiable</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L257">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L253">source code</a></li>
 </ul>
 
 ```php
@@ -793,11 +820,42 @@ public function getOnlyInstantiable(): \BumbleDocGen\LanguageHandler\Php\Parser\
 <ul>
 <li><a name="mgetonlyinterfaces" href="#mgetonlyinterfaces">#</a>
  <b>getOnlyInterfaces</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L273">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L269">source code</a></li>
 </ul>
 
 ```php
 public function getOnlyInterfaces(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mgetonlytraits" href="#mgetonlytraits">#</a>
+ <b>getOnlyTraits</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L285">source code</a></li>
+</ul>
+
+```php
+public function getOnlyTraits(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 ```
 
 
@@ -908,7 +966,7 @@ public function has(string $objectName): bool;
 <ul>
 <li><a name="minternalfindentity" href="#minternalfindentity">#</a>
  <b>internalFindEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L305">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php#L333">source code</a></li>
 </ul>
 
 ```php

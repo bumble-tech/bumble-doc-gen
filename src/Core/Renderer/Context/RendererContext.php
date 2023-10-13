@@ -37,7 +37,7 @@ final class RendererContext
     public function setCurrentDocumentedEntityWrapper(DocumentedEntityWrapper $currentDocumentedEntityWrapper): void
     {
         $this->currentDocumentedEntityWrapper = $currentDocumentedEntityWrapper;
-        $this->setCurrentTemplateFilePatch($currentDocumentedEntityWrapper->getInitiatorFilePath());
+        $this->setCurrentTemplateFilePatch($currentDocumentedEntityWrapper->getParentDocFilePath());
     }
 
     public function getCurrentDocumentedEntityWrapper(): ?DocumentedEntityWrapper

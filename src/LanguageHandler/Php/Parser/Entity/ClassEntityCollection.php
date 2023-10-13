@@ -234,10 +234,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $classEntityCollection;
     }
 
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
         $classEntityCollection = $this->cloneForFiltration();
@@ -276,6 +272,38 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         foreach ($classEntityCollection as $objectId => $classEntity) {
             /**@var ClassEntity $classEntity */
             if (!$classEntity->isInterface()) {
+                $classEntityCollection->remove($objectId);
+            }
+        }
+        return $classEntityCollection;
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getOnlyTraits(): ClassEntityCollection
+    {
+        $classEntityCollection = $this->cloneForFiltration();
+        foreach ($classEntityCollection as $objectId => $classEntity) {
+            /**@var ClassEntity $classEntity */
+            if (!$classEntity->isTrait()) {
+                $classEntityCollection->remove($objectId);
+            }
+        }
+        return $classEntityCollection;
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getOnlyAbstractClasses(): ClassEntityCollection
+    {
+        $classEntityCollection = $this->cloneForFiltration();
+        foreach ($classEntityCollection as $objectId => $classEntity) {
+            /**@var ClassEntity $classEntity */
+            if (!$classEntity->isAbstract() || $classEntity->isInterface()) {
                 $classEntityCollection->remove($objectId);
             }
         }
