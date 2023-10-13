@@ -30,12 +30,15 @@ final class EntityDocUnifiedPlacePlugin implements PluginInterface
 
     public function onCreateDocumentedEntityWrapper(OnCreateDocumentedEntityWrapper $event): void
     {
+        // Here we replace the parent document for all entities so that they are all in the same directory.
         $structureDirName = self::ENTITY_DOC_STRUCTURE_DIR_NAME;
         $event->getDocumentedEntityWrapper()->setParentDocFilePath("/{$structureDirName}/readme.md");
     }
 
     public function onGetTemplatePathByRelativeDocPath(OnGetTemplatePathByRelativeDocPath $event): void
     {
+        // When getting the path to the template file,
+        // we need to take into account that it is located in the plugin directory, and not the standard one.
         if (str_starts_with($event->getTemplateName(), '/' . self::ENTITY_DOC_STRUCTURE_DIR_NAME)) {
             $event->setCustomTemplateFilePath(self::TEMPLATES_FOLDER . $event->getTemplateName());
         }
