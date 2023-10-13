@@ -83,7 +83,7 @@ final class Provider implements ProviderInterface
         try {
             $response = $this->client->request('POST', $this->endpoint, [
                 'json' => [
-                    // Todo: improve this setup
+                    // Todo: add more parameters
                     'inputs' => $input,
                     'parameters' => [
                         'max_new_tokens' => $this->maxNewTokens,
