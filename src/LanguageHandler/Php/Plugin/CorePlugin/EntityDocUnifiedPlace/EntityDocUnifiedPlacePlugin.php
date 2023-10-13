@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeLoadAllPagesLinks;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingDocFiles;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateMainTwigEnvironment;
-use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadTemplateContentForBreadcrumbs;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\RendererIteratorFactory;
 use BumbleDocGen\Core\Renderer\TemplateFile;
@@ -36,7 +36,7 @@ final class EntityDocUnifiedPlacePlugin implements PluginInterface
             OnCreateDocumentedEntityWrapper::class => 'onCreateDocumentedEntityWrapper',
             OnCreateMainTwigEnvironment::class => 'onCreateMainTwigEnvironment',
             BeforeRenderingDocFiles::class => 'beforeRenderingDocFiles',
-            OnLoadTemplateContentForBreadcrumbs::class => 'onLoadTemplateContentForBreadcrumbs',
+            OnGetTemplatePathByRelativeDocPath::class => 'onGetFilePathByRelativeDocPath',
             BeforeLoadAllPagesLinks::class => 'beforeLoadAllPagesLinks'
         ];
     }
@@ -47,7 +47,7 @@ final class EntityDocUnifiedPlacePlugin implements PluginInterface
         $event->getDocumentedEntityWrapper()->setParentDocFilePath("/{$structureDirName}/readme.md");
     }
 
-    public function onLoadTemplateContentForBreadcrumbs(OnLoadTemplateContentForBreadcrumbs $event): void
+    public function onGetFilePathByRelativeDocPath(OnGetTemplatePathByRelativeDocPath $event): void
     {
         if (str_starts_with($event->getTemplateName(), '/' . self::ENTITY_DOC_STRUCTURE_DIR_NAME)) {
             $event->setCustomTemplateFilePath(self::TEMPLATES_FOLDER . $event->getTemplateName());

@@ -9,8 +9,8 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeLoadAllPagesLinks;
-use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadTemplateContentForBreadcrumbs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Renderer\TemplateFile;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
@@ -47,22 +47,19 @@ final class BreadcrumbsHelper
      */
     private function loadTemplateContent(string $templateName): string
     {
-        $outputDir = $this->configuration->getTemplatesDir();
-        $event = $this->pluginEventDispatcher->dispatch(new OnLoadTemplateContentForBreadcrumbs($templateName));
-        $filePath = $event->getCustomTemplateFilePath();
-        $filePath = $filePath ?: "{$outputDir}{$templateName}";
-        if (!str_ends_with($filePath, '.twig')) {
-            $templateName .= '.twig';
-            return $this->loadTemplateContent($templateName);
-        }
+        $filePath = TemplateFile::getTemplatePathByRelativeDocPath(
+            $templateName,
+            $this->configuration,
+            $this->pluginEventDispatcher
+        );
 
         try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateName);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $filePath);
         } catch (ObjectNotFoundException) {
         }
 
         $templateContent = file_get_contents($filePath) ?: '';
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $templateContent);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $filePath, $templateContent);
         return $templateContent;
     }
 
@@ -186,19 +183,22 @@ final class BreadcrumbsHelper
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function getBreadcrumbsForTemplates(string $templateFilePatch, bool $fromCurrent = true): array
+    public function getBreadcrumbsForTemplates(string $filePatch, bool $fromCurrent = true): array
     {
         $breadcrumbs = [];
-        $filePatch = $templateFilePatch;
         do {
-            $filePatch = str_replace('.twig', '', $filePatch);
             if (!$fromCurrent) {
                 $fromCurrent = true;
                 continue;
             }
-            $templateFilePatch = "{$this->configuration->getTemplatesDir()}{$filePatch}";
+            $filePatch = str_replace('.twig', '', $filePatch);
+            $templateFilePatch = TemplateFile::getTemplatePathByRelativeDocPath(
+                $filePatch,
+                $this->configuration,
+                $this->pluginEventDispatcher
+            );
             $breadcrumbs[] = [
-                'template' => "$templateFilePatch.twig",
+                'template' => $templateFilePatch,
                 'title' => $this->getTemplateTitle($filePatch),
             ];
         } while ($filePatch = $this->getPrevPage($filePatch));

@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
-final class OnLoadTemplateContentForBreadcrumbs extends Event
+final class OnGetTemplatePathByRelativeDocPath extends Event
 {
     private ?string $customTemplateFilePath = null;
 
