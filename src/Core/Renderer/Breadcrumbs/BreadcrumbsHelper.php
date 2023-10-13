@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeLoadAllPagesLinks;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\TemplateFile;
 use DI\DependencyException;
@@ -218,6 +218,8 @@ final class BreadcrumbsHelper
         }
         $pageLinks = [];
         $templatesDir = $this->configuration->getTemplatesDir();
+        $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
+        $templatesDirs = $event->getTemplatesDirs();
 
         $addLinkKey = function (string $key, $value) use (&$pageLinks) {
             $pageLinks[$key] = $value;
@@ -231,8 +233,6 @@ final class BreadcrumbsHelper
             }
         };
 
-        $event = $this->pluginEventDispatcher->dispatch(new BeforeLoadAllPagesLinks([$templatesDir]));
-
         $finder = Finder::create()
             ->ignoreVCS(true)
             ->ignoreDotFiles(true)
@@ -241,7 +241,7 @@ final class BreadcrumbsHelper
             ->in($event->getTemplatesDirs());
 
         foreach ($finder->files() as $file) {
-            $filePatch = str_replace($event->getTemplatesDirs(), '', $file->getRealPath());
+            $filePatch = str_replace($templatesDirs, '', $file->getRealPath());
             if (!str_ends_with($filePatch, '.twig')) {
                 continue;
             }

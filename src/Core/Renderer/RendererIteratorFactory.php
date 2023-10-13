@@ -12,6 +12,8 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection;
@@ -25,7 +27,6 @@ final class RendererIteratorFactory
     private const INTERNAL_CACHING_SYSTEM_VERSION = 2;
 
     private array $renderedFileNames = [];
-    private array $extraTemplates = [];
 
     public function __construct(
         private RendererContext $rendererContext,
@@ -38,14 +39,10 @@ final class RendererIteratorFactory
         private RendererDependencyFactory $dependencyFactory,
         private LocalObjectCache $localObjectCache,
         private ProgressBarFactory $progressBarFactory,
+        private PluginEventDispatcher $pluginEventDispatcher,
         private OutputStyle $io,
         private Logger $logger,
     ) {
-    }
-
-    public function addExtraTemplate(TemplateFile $templateFile): void
-    {
-        $this->extraTemplates[] = $templateFile;
     }
 
     /**
@@ -56,26 +53,24 @@ final class RendererIteratorFactory
         $pb = $this->progressBarFactory->createStylizedProgressBar();
         $pb->setName('Generating main documentation pages');
 
-        $templateFolder = $this->configuration->getTemplatesDir();
+        $templatesDir = $this->configuration->getTemplatesDir();
+        $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
+        $templatesDirs = $event->getTemplatesDirs();
         $finder = Finder::create()
-            ->in($templateFolder)
+            ->in($templatesDirs)
             ->ignoreDotFiles(true)
             ->ignoreVCSIgnored(true)
             ->reverseSorting()
             ->sortByName()
             ->files();
 
-        $getAllDocuments = function () use ($finder, $templateFolder): array {
-            $allDocuments = $this->extraTemplates;
-            foreach ($finder as $templateFile) {
-                $docFileRelativeName = str_replace($templateFolder, '', $templateFile->getRealPath());
-                $allDocuments[] = new TemplateFile($templateFile->getRealPath(), $docFileRelativeName);
-            }
-            return $allDocuments;
-        };
-
         $skippedCount = 0;
-        foreach ($pb->iterate($getAllDocuments()) as $templateFile) {
+        foreach ($pb->iterate($finder) as $templateFile) {
+            $templateFile = TemplateFile::create(
+                $templateFile,
+                $this->configuration,
+                $this->pluginEventDispatcher
+            );
             $pb->setStepDescription("Processing {$templateFile->getRelativeDocPath()} file");
 
             $file = $this->prepareDocFileForRendering($templateFile);
@@ -98,46 +93,46 @@ final class RendererIteratorFactory
      */
     private function prepareDocFileForRendering(TemplateFile $templateFile): ?TemplateFile
     {
-        $templateFileName = $templateFile->getRelativeDocPath();
+        $relativeTemplateName = $templateFile->getRelativeTemplatePath() ?: $templateFile->getRelativeDocPath();
 
         $this->rendererContext->clearDependencies();
         $this->rootEntityCollectionsGroup->clearOperationsLog();
 
-        $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
+        $this->rendererContext->setCurrentTemplateFilePatch($relativeTemplateName);
         $fileDependency = $this->dependencyFactory->createFileDependency(
             filePath: $templateFile->getRealPath()
         );
         $this->rendererContext->addDependency($fileDependency);
 
-        $this->markFileNameAsRendered($templateFileName);
+        $this->markFileNameAsRendered($relativeTemplateName);
 
         if (
             !$this->configuration->useSharedCache() ||
-            !$this->isGeneratedDocumentExists($templateFileName) ||
+            !$this->isGeneratedDocumentExists($relativeTemplateName) ||
             $this->isInternalCachingVersionChanged() ||
             $this->isConfigurationVersionChanged() ||
-            $this->isFilesDependenciesCacheOutdated($templateFileName) ||
-            $this->isEntitiesOperationsLogCacheOutdated($templateFileName)
+            $this->isFilesDependenciesCacheOutdated($relativeTemplateName) ||
+            $this->isEntitiesOperationsLogCacheOutdated($relativeTemplateName)
         ) {
             $this->rendererContext->clearDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
-            $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
+            $this->rendererContext->setCurrentTemplateFilePatch($relativeTemplateName);
             $fileDependency = $this->dependencyFactory->createFileDependency(
                 filePath: $templateFile->getRealPath()
             );
             $this->rendererContext->addDependency($fileDependency);
             $this->sharedCompressedDocumentFileCache->set(
-                $this->getOperationsLogCacheKey($templateFileName),
+                $this->getOperationsLogCacheKey($relativeTemplateName),
                 $this->rootEntityCollectionsGroup->getOperationsLogWithoutDuplicates()
             );
 
             $this->sharedCompressedDocumentFileCache->set(
-                $this->getFilesDependenciesCacheKey($templateFileName),
+                $this->getFilesDependenciesCacheKey($relativeTemplateName),
                 $this->rendererContext->getDependencies()
             );
             return $templateFile;
         }
-        $this->moveCachedDataToCurrentData($templateFileName);
+        $this->moveCachedDataToCurrentData($relativeTemplateName);
         $this->logger->info("Use cached version `{$templateFile->getRealPath()}`");
         return null;
     }

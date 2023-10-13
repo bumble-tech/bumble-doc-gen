@@ -6,7 +6,10 @@ namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
-final class BeforeLoadAllPagesLinks extends Event
+/**
+ *
+ */
+final class OnGetProjectTemplatesDirs extends Event
 {
     public function __construct(private array $templatesDirs)
     {
