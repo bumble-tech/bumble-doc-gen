@@ -41,7 +41,6 @@ Let's look at an example of a real configuration in more detail:
    - class: \SelfDocConfig\Plugin\RoaveStubber\BetterReflectionStubberPlugin
    - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
    - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
-  # - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\EntityDocUnifiedPlace\EntityDocUnifiedPlacePlugin
  
 ```
 
