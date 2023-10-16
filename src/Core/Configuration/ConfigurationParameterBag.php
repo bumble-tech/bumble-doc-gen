@@ -178,7 +178,7 @@ final class ConfigurationParameterBag
         $valueObject = $this->valueToClassTransformer->transform($value);
         if (is_null($valueObject)) {
             throw new InvalidConfigurationParameterException(
-                "Configuration parameter `{$parameterName}` must contain the name of class"
+                "Configuration parameter `{$parameterName}` contains an incorrect value"
             );
         }
         if (!$valueObject instanceof $classInterfaceName) {
@@ -211,7 +211,7 @@ final class ConfigurationParameterBag
             $valueObject = $this->valueToClassTransformer->transform($value);
             if (is_null($valueObject)) {
                 throw new InvalidConfigurationParameterException(
-                    "Configuration parameter `{$parameterName}[{$i}]` must contain the name of class"
+                    "Configuration parameter `{$parameterName}[{$i}]` contains an incorrect value"
                 );
             }
             if (!$valueObject instanceof $classInterfaceName) {
