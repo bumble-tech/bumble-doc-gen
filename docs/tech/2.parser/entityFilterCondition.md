@@ -68,7 +68,7 @@ language_handlers:
 
 Common filtering conditions that are available for any entity:
 
-<embed> <ul><li><a href='/docs/tech/2.parser/classes/FalseCondition.md'>FalseCondition</a> - False conditions, any object is not available</li><li><a href='/docs/tech/2.parser/classes/FileTextContainsCondition.md'>FileTextContainsCondition</a> - Checking if a file contains a substring</li><li><a href='/docs/tech/2.parser/classes/LocatedInCondition.md'>LocatedInCondition</a> - Checking the existence of an entity in the specified directories</li><li><a href='/docs/tech/2.parser/classes/TrueCondition.md'>TrueCondition</a> - True conditions, any object is available</li><li><a href='/docs/tech/2.parser/classes/ConditionGroup.md'>ConditionGroup</a> - Filter condition to group other filter conditions. A group can have an OR/AND condition test;
+<embed> <ul><li><a href='/docs/tech/2.parser/classes/FalseCondition.md'>FalseCondition</a> - False conditions, any object is not available</li><li><a href='/docs/tech/2.parser/classes/FileTextContainsCondition.md'>FileTextContainsCondition</a> - Checking if a file contains a substring</li><li><a href='/docs/tech/2.parser/classes/LocatedInCondition.md'>LocatedInCondition</a> - Checking the existence of an entity in the specified directories</li><li><a href='/docs/tech/2.parser/classes/LocatedNotInCondition.md'>LocatedNotInCondition</a> - Checking the existence of an entity not in the specified directories</li><li><a href='/docs/tech/2.parser/classes/TrueCondition.md'>TrueCondition</a> - True conditions, any object is available</li><li><a href='/docs/tech/2.parser/classes/ConditionGroup.md'>ConditionGroup</a> - Filter condition to group other filter conditions. A group can have an OR/AND condition test;
 In the case of OR, it is enough to successfully check at least one condition, in the case of AND, all checks must be successfully completed.</li></ul> </embed>
 
 Filter condition for working with entities PHP language handler:
@@ -78,4 +78,4 @@ Filter condition for working with entities PHP language handler:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Mon Oct 16 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

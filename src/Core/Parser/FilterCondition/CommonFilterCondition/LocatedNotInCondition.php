@@ -11,9 +11,9 @@ use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 
 /**
- * Checking the existence of an entity in the specified directories
+ * Checking the existence of an entity not in the specified directories
  */
-final class LocatedInCondition implements ConditionInterface
+final class LocatedNotInCondition implements ConditionInterface
 {
     public function __construct(
         private Configuration $configuration,
@@ -37,10 +37,10 @@ final class LocatedInCondition implements ConditionInterface
                 $directory = rtrim($this->configuration->getProjectRoot(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $directory;
             }
             $directory = realpath($directory);
-            if ($directory && str_starts_with($fileName, $directory)) {
-                return true;
+            if (!$directory || str_starts_with($fileName, $directory)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }

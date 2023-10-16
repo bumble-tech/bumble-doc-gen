@@ -67,6 +67,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  ├── <a href='/docs/tech/classes/FalseCondition.md'>FalseCondition.php</a> <i> — <samp>False conditions, any object is not available</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/FileTextContainsCondition.md'>FileTextContainsCondition.php</a> <i> — <samp>Checking if a file contains a substring</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/LocatedInCondition.md'>LocatedInCondition.php</a> <i> — <samp>Checking the existence of an entity in the specified directories</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/LocatedNotInCondition.md'>LocatedNotInCondition.php</a> <i> — <samp>Checking the existence of an entity not in the specified directories</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/TrueCondition.md'>TrueCondition.php</a> <i> — <samp>True conditions, any object is available</samp></i>
 │  │  │  │  ├── <a href='/docs/tech/classes/ConditionGroup.md'>ConditionGroup.php</a> <i> — <samp>Filter condition to group other filter conditions. A group can have an OR/AND condition test; In ...</samp></i>
 │  │  │  │  ├── <a href='/docs/tech/classes/ConditionGroupTypeEnum.md'>ConditionGroupTypeEnum.php</a> 
@@ -247,4 +248,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Mon Oct 16 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
