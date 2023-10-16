@@ -231,7 +231,7 @@ public function fillInReadmeMdTemplate(): void;
 <ul>
 <li><a name="mgenerate" href="#mgenerate">#</a>
  <b>generate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L311">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L312">source code</a></li>
 </ul>
 
 ```php
@@ -249,6 +249,9 @@ public function generate(): void;
 <ul>
 <li>
     <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a></li>
+
+<li>
+    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
 
 </ul>
 
