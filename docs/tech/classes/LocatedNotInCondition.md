@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entityFilterCondition.md">Entity filter conditions</a> <b>/</b> LocatedInCondition<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> LocatedNotInCondition<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/CommonFilterCondition/LocatedInCondition.php#L16">LocatedInCondition</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/CommonFilterCondition/LocatedNotInCondition.php#L16">LocatedNotInCondition</a> class:
 </h1>
 
 
@@ -12,10 +12,10 @@
 ```php
 namespace BumbleDocGen\Core\Parser\FilterCondition\CommonFilterCondition;
 
-final class LocatedInCondition implements \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface
+final class LocatedNotInCondition implements \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface
 ```
 
-<blockquote>Checking the existence of an entity in the specified directories</blockquote>
+<blockquote>Checking the existence of an entity not in the specified directories</blockquote>
 
 
 
@@ -51,7 +51,7 @@ final class LocatedInCondition implements \BumbleDocGen\Core\Parser\FilterCondit
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/CommonFilterCondition/LocatedInCondition.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/CommonFilterCondition/LocatedNotInCondition.php#L18">source code</a></li>
 </ul>
 
 ```php
@@ -98,7 +98,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mcanaddtocollection" href="#mcanaddtocollection">#</a>
  <b>canAddToCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/CommonFilterCondition/LocatedInCondition.php#L28">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/CommonFilterCondition/LocatedNotInCondition.php#L28">source code</a></li>
 </ul>
 
 ```php
@@ -132,7 +132,7 @@ public function canAddToCollection(\BumbleDocGen\Core\Parser\Entity\EntityInterf
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
