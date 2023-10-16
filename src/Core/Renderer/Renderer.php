@@ -112,8 +112,12 @@ final class Renderer
         $this->pluginEventDispatcher->dispatch(new AfterRenderingEntities());
 
         foreach ($this->renderIteratorFactory->getFilesToRemove() as $file) {
+            if (!$file->isWritable()) {
+                continue;
+            }
+            $type = $file->getType();
             $this->fs->remove($file->getPathname());
-            $this->logger->info("Removing `{$file->getPathname()}` file");
+            $this->logger->info("Removing `{$file->getPathname()}` {$type}");
         }
 
         $this->rootEntityCollectionsGroup->updateAllEntitiesCache();

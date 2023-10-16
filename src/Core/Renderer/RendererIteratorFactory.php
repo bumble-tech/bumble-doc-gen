@@ -237,6 +237,21 @@ final class RendererIteratorFactory
             }
             yield $docFile;
         }
+
+        // check empty directories
+        $finder = Finder::create()
+            ->in($outputFolder)
+            ->ignoreDotFiles(true)
+            ->ignoreUnreadableDirs()
+            ->directories();
+
+        $dirs = [];
+        foreach ($finder as $dir) {
+            if (!Finder::create()->in($dir->getRealPath())->files()->count()) {
+                $dirs[] = $dir;
+            }
+        }
+        yield from $dirs;
     }
 
     private function isInternalCachingVersionChanged(): bool
