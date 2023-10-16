@@ -81,5 +81,9 @@ final class ValueToClassTransformerTest extends TestCase
 
 
         $this->assertNull($this->valueToClassTransformer->transform(''));
+
+        $this->assertNull($this->valueToClassTransformer->transform([
+            'class' => 'ClassThatDoesntExists'
+        ]));
     }
 }
