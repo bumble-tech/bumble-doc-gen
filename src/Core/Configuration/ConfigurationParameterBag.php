@@ -281,6 +281,10 @@ final class ConfigurationParameterBag
         return realpath($value);
     }
 
+    /**
+     * Configuration arrays are concatenated except when class constructor arguments are passed.
+     * In this case they are overwritten.
+     */
     private function mergeConfigParams(array $params1, array $params2): array
     {
         foreach ($params2 as $key => $param2Value) {
@@ -292,6 +296,8 @@ final class ConfigurationParameterBag
                 $params1[$key] = $param2Value;
             } elseif (is_associative_array($params1[$key]) && is_associative_array($param2Value)) {
                 $params1[$key] = $this->mergeConfigParams($params1[$key], $param2Value);
+            } elseif ($key === 'arguments') {
+                    $params1[$key] = $param2Value;
             } else {
                 $params1[$key] = array_merge($params1[$key], $param2Value);
             }
