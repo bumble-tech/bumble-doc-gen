@@ -50,7 +50,7 @@ class PhpClassToMdDocRenderer implements EntityDocRendererInterface
     {
         return $this->classRendererTwig->render('class.md.twig', [
             'classEntity' => $entityWrapper->getDocumentTransformableEntity(),
-            'generationInitiatorFilePath' => $entityWrapper->getInitiatorFilePath()
+            'parentDocFilePath' => $entityWrapper->getParentDocFilePath()
         ]);
     }
 }

@@ -70,10 +70,15 @@ final class FileDependency implements RendererDependencyInterface
         $fileName = $rendererHelper->fileInternalLinkToFilePath($this->fileInternalLink);
         $newHash = '';
         if ($this->contentFilterRegex && $this->matchIndex) {
+            $fileContent = @file_get_contents($fileName);
+            if (!$fileContent) {
+                return true;
+            }
+
             if (
                 preg_match(
                     $this->contentFilterRegex,
-                    file_get_contents($fileName),
+                    $fileContent,
                     $matches
                 ) &&
                 isset($matches[$this->matchIndex])

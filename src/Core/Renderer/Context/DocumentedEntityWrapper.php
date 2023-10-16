@@ -15,12 +15,12 @@ final class DocumentedEntityWrapper
 {
     /**
      * @param DocumentTransformableEntityInterface $documentTransformableEntity An entity that is allowed to be documented
-     * @param string $initiatorFilePath The file in which the documentation of the entity was requested
+     * @param string $parentDocFilePath The file in which the documentation of the entity was requested
      */
     public function __construct(
         private DocumentTransformableEntityInterface $documentTransformableEntity,
         private LocalObjectCache $localObjectCache,
-        private string $initiatorFilePath
+        private string $parentDocFilePath
     ) {
     }
 
@@ -34,7 +34,7 @@ final class DocumentedEntityWrapper
      */
     public function getKey(): string
     {
-        return md5("{$this->documentTransformableEntity->getName()}{$this->initiatorFilePath}");
+        return md5("{$this->documentTransformableEntity->getName()}{$this->getParentDocFilePath()}");
     }
 
     public function getEntityName(): string
@@ -52,7 +52,7 @@ final class DocumentedEntityWrapper
         }
         $usedKeysCounter ??= [];
         $fileName = $this->documentTransformableEntity->getShortName();
-        $initiatorFileDir = dirname($this->initiatorFilePath);
+        $initiatorFileDir = dirname($this->getParentDocFilePath());
         $counterKey = "{$initiatorFileDir}{$fileName}";
 
         if (!isset($usedKeysCounter[$counterKey])) {
@@ -87,14 +87,19 @@ final class DocumentedEntityWrapper
      */
     public function getDocUrl(): string
     {
-        $pathParts = explode('/', $this->initiatorFilePath);
+        $pathParts = explode('/', $this->getParentDocFilePath());
         array_pop($pathParts);
         $path = implode('/', $pathParts);
         return "{$path}/{$this->getDocRender()->getDocFileNamespace()}/{$this->getFileName()}";
     }
 
-    public function getInitiatorFilePath(): string
+    public function getParentDocFilePath(): string
     {
-        return $this->initiatorFilePath;
+        return $this->parentDocFilePath;
+    }
+
+    public function setParentDocFilePath(string $parentDocFilePath): void
+    {
+        $this->parentDocFilePath = $parentDocFilePath;
     }
 }

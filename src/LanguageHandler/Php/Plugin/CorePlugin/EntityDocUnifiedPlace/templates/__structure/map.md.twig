@@ -1,0 +1,7 @@
+{% set title = 'Project entities map' %}
+{% set prevPage = 'Project structure' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Entities map" | textToHeading('H1') }}
+
+{{ drawClassMap( phpClassEntityCollection ) }}

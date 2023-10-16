@@ -1,0 +1,12 @@
+{% set title = 'Project traits' %}
+{% set prevPage = 'Project structure' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Project traits" | textToHeading('H1') }}
+
+<table>
+<tr><th>Name</th><th>Namespace</th></tr>
+{% for traitEntity in phpClassEntityCollection.getOnlyTraits() %}
+<tr><td><a>{{ traitEntity.getName() }}|short_form</a><td>{{ traitEntity.getNamespaceName() }}</td></tr>
+{% endfor %}
+</table>

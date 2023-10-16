@@ -67,6 +67,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  ├── <a href='/docs/tech/classes/FalseCondition.md'>FalseCondition.php</a> <i> — <samp>False conditions, any object is not available</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/FileTextContainsCondition.md'>FileTextContainsCondition.php</a> <i> — <samp>Checking if a file contains a substring</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/LocatedInCondition.md'>LocatedInCondition.php</a> <i> — <samp>Checking the existence of an entity in the specified directories</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/LocatedNotInCondition.md'>LocatedNotInCondition.php</a> <i> — <samp>Checking the existence of an entity not in the specified directories</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/TrueCondition.md'>TrueCondition.php</a> <i> — <samp>True conditions, any object is available</samp></i>
 │  │  │  │  ├── <a href='/docs/tech/classes/ConditionGroup.md'>ConditionGroup.php</a> <i> — <samp>Filter condition to group other filter conditions. A group can have an OR/AND condition test; In ...</samp></i>
 │  │  │  │  ├── <a href='/docs/tech/classes/ConditionGroupTypeEnum.md'>ConditionGroupTypeEnum.php</a> 
@@ -92,8 +93,14 @@ Directory layout ( only documented files shown ):
 │  │  │  │  ├──<b>Parser</b>/
 │  │  │  │  │  └── <a href='/docs/tech/classes/OnLoadSourceLocatorsCollection.md'>OnLoadSourceLocatorsCollection.php</a> <i> — <samp>Called when source locators are loaded</samp></i>
 │  │  │  │  └──<b>Renderer</b>/
+│  │  │  │  │  ├── <a href='/docs/tech/classes/AfterRenderingEntities.md'>AfterRenderingEntities.php</a> <i> — <samp>Event is the base class for classes containing event data.</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BeforeCreatingDocFile.md'>BeforeCreatingDocFile.php</a> <i> — <samp>Called before the content of the documentation document is saved to a file</samp></i>
-│  │  │  │  │  ├── <a href='/docs/tech/classes/OnGettingResourceLink.md'>OnGettingResourceLink.php</a> <i> — <samp>Event is the base class for classes containing event data.</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/BeforeRenderingDocFiles.md'>BeforeRenderingDocFiles.php</a> <i> — <samp>The event occurs before the main documents begin rendering</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/BeforeRenderingEntities.md'>BeforeRenderingEntities.php</a> <i> — <samp>The event occurs before the rendering of entity documents begins, after the main documents have b...</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/OnCreateDocumentedEntityWrapper.md'>OnCreateDocumentedEntityWrapper.php</a> <i> — <samp>The event occurs when an entity is added to the list for documentation</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/OnGetProjectTemplatesDirs.md'>OnGetProjectTemplatesDirs.php</a> <i> — <samp>This event occurs when all directories containing document templates are retrieved</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/OnGetTemplatePathByRelativeDocPath.md'>OnGetTemplatePathByRelativeDocPath.php</a> <i> — <samp>The event occurs when the path to the template file is obtained relative to the path to the document</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/OnGettingResourceLink.md'>OnGettingResourceLink.php</a> <i> — <samp>Event occurs when a reference to an entity (resource) is received</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/OnLoadEntityDocPluginContent.md'>OnLoadEntityDocPluginContent.php</a> <i> — <samp>Called when entity documentation is generated (plugin content loading)</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/OnlySingleExecutionEvent.md'>OnlySingleExecutionEvent.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/PluginEventDispatcher.md'>PluginEventDispatcher.php</a> <i> — <samp>The EventDispatcherInterface is the central point of Symfony's event listener system.</samp></i>
@@ -148,7 +155,8 @@ Directory layout ( only documented files shown ):
 │  │  │  │  └── <a href='/docs/tech/classes/MainTwigEnvironment.md'>MainTwigEnvironment.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/Renderer.md'>Renderer.php</a> <i> — <samp>Generates and processes files from directory TemplatesDir saving them to directory OutputDir</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/RendererHelper.md'>RendererHelper.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/RendererIteratorFactory.md'>RendererIteratorFactory.php</a> 
+│  │  │  ├── <a href='/docs/tech/classes/RendererIteratorFactory.md'>RendererIteratorFactory.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/TemplateFile.md'>TemplateFile.php</a> 
 │  ├──<b>LanguageHandler</b>/
 │  │  ├──<b>Php</b>/
 │  │  │  ├──<b>Parser</b>/
@@ -199,7 +207,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  └── <a href='/docs/tech/classes/ParserHelper.md'>ParserHelper.php</a> 
 │  │  │  ├──<b>Plugin</b>/
 │  │  │  │  ├──<b>CorePlugin</b>/
-│  │  │  │  │  └──<b>BasePhpStubber</b>/
+│  │  │  │  │  ├──<b>BasePhpStubber</b>/
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/BasePhpStubberPlugin.md'>BasePhpStubberPlugin.php</a> <i> — <samp>Adding links to type documentation and documentation of built-in PHP classes</samp></i>
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/ComposerStubberPlugin.md'>ComposerStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Composer namespace</samp></i>
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/PhpDocumentorStubberPlugin.md'>PhpDocumentorStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \phpDocumentor namespace</samp></i>
@@ -207,6 +215,8 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/PsrClassesStubberPlugin.md'>PsrClassesStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Psr namespace</samp></i>
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/SymfonyComponentStubberPlugin.md'>SymfonyComponentStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Symfony\Component namespace</samp></i>
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/TwigStubberPlugin.md'>TwigStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Twig namespace</samp></i>
+│  │  │  │  │  └──<b>EntityDocUnifiedPlace</b>/
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin.php</a> <i> — <samp>This plugin changes the algorithm for saving entity documents. The standard system stores each fi...</samp></i>
 │  │  │  │  └──<b>Event</b>/
 │  │  │  │  │  ├──<b>Entity</b>/
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/OnCheckIsClassEntityCanBeLoad.md'>OnCheckIsClassEntityCanBeLoad.php</a> <i> — <samp>Event is the base class for classes containing event data.</samp></i>
@@ -238,4 +248,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Mon Oct 16 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

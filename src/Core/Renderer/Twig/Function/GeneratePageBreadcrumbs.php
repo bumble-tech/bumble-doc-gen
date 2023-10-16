@@ -8,6 +8,8 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -45,9 +47,11 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
      *  current template, and the reference to it in breadcrumbs should not be clickable.
      *
      * @return string
-     * @throws SyntaxError
      * @throws RuntimeError
+     * @throws DependencyException
      * @throws LoaderError
+     * @throws SyntaxError
+     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(

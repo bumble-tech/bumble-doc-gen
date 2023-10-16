@@ -801,6 +801,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
+    #[CacheableMethod] public function isAbstract(): bool
+    {
+        return $this->getReflection()->isAbstract();
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
     #[CacheableMethod] public function isInterface(): bool
     {
         return $this->getReflection()->isInterface();
