@@ -355,7 +355,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
          * @var Param[] $params
          */
         $params = $docBlock->getTagsByName('param');
-        $typesFromDoc = $this->parseAnnotationParams($params);
+        $typesFromDoc = self::parseAnnotationParams($params);
         try {
             foreach ($this->getReflection()->getParameters() as $param) {
                 $type = '';
@@ -382,7 +382,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 }
                 $type = $type ?: 'mixed';
                 $expectedType = $type;
-                if ($type == 'array' && $this->isArrayAnnotationType($annotationType)) {
+                if ($type === 'array' && $this->isArrayAnnotationType($annotationType)) {
                     $expectedType = $annotationType;
                 }
 
