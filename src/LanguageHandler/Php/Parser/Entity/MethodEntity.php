@@ -382,7 +382,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 }
                 $type = $type ?: 'mixed';
                 $expectedType = $type;
-                if ($type == 'array' && $this->isArrayAnnotationType($annotationType)) {
+                if ($type === 'array' && $this->isArrayAnnotationType($annotationType)) {
                     $expectedType = $annotationType;
                 }
 
