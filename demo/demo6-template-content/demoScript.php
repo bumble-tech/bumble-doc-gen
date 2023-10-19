@@ -19,8 +19,12 @@ function generateTemplateStructureIfNeeded(\BumbleDocGen\DocGenerator $docGen)
 {
     $finder = new Finder();
     $targetDir = __DIR__ . '/templates';
-    $finder->files()->in($targetDir);
-    $fileCount = iterator_count($finder);
+    $fileCount = 0;
+
+    if (is_dir($targetDir)) {
+        $finder->files()->in($targetDir);
+        $fileCount = iterator_count($finder);
+    }
 
     if ($fileCount === 0) {
         $docGen->generateProjectTemplatesStructure();
