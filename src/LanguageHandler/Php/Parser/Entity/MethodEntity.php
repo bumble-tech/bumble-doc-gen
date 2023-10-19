@@ -355,7 +355,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
          * @var Param[] $params
          */
         $params = $docBlock->getTagsByName('param');
-        $typesFromDoc = $this->parseAnnotationParams($params);
+        $typesFromDoc = self::parseAnnotationParams($params);
         try {
             foreach ($this->getReflection()->getParameters() as $param) {
                 $type = '';
