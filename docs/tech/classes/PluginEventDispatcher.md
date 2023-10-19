@@ -169,7 +169,7 @@ public function addSubscriber(\Symfony\Component\EventDispatcher\EventSubscriber
     <tbody>
             <tr>
             <td>$subscriber</td>
-            <td><a href='https://github.com/symfony/event-dispatcher/blob/master/EventSubscriberInterface.php'>Symfony\Component\EventDispatcher\EventSubscriberInterface</a></td>
+            <td><a href='https://github.com/symfony/event-dispatcher/blob/master/EventSubscriberInterface.php'>\Symfony\Component\EventDispatcher\EventSubscriberInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -189,7 +189,7 @@ public function addSubscriber(\Symfony\Component\EventDispatcher\EventSubscriber
 </ul>
 
 ```php
-public function dispatch(object $event, string|null $eventName = NULL): object;
+public function dispatch(object $event, string $eventName = null): object;
 ```
 
 <blockquote>Dispatches an event to all registered listeners.</blockquote>
@@ -212,7 +212,7 @@ public function dispatch(object $event, string|null $eventName = NULL): object;
         </tr>
             <tr>
             <td>$eventName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>The name of the event to dispatch. If not supplied,
  the class of $event should be used instead.</td>
         </tr>
@@ -280,7 +280,7 @@ public function getListenerPriority(string $eventName, callable|array $listener)
 ```php
 // Implemented in Symfony\Component\EventDispatcher\EventDispatcher
 
-public function getListeners(string|null $eventName = NULL): array;
+public function getListeners(string $eventName = null): array;
 ```
 
 <blockquote>Gets the listeners of a specific event or all listeners sorted by descending priority.</blockquote>
@@ -298,7 +298,7 @@ public function getListeners(string|null $eventName = NULL): array;
     <tbody>
             <tr>
             <td>$eventName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -320,7 +320,7 @@ public function getListeners(string|null $eventName = NULL): array;
 ```php
 // Implemented in Symfony\Component\EventDispatcher\EventDispatcher
 
-public function hasListeners(string|null $eventName = NULL): bool;
+public function hasListeners(string $eventName = null): bool;
 ```
 
 <blockquote>Checks whether an event has any registered listeners.</blockquote>
@@ -338,7 +338,7 @@ public function hasListeners(string|null $eventName = NULL): bool;
     <tbody>
             <tr>
             <td>$eventName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -423,7 +423,7 @@ public function removeSubscriber(\Symfony\Component\EventDispatcher\EventSubscri
     <tbody>
             <tr>
             <td>$subscriber</td>
-            <td><a href='https://github.com/symfony/event-dispatcher/blob/master/EventSubscriberInterface.php'>Symfony\Component\EventDispatcher\EventSubscriberInterface</a></td>
+            <td><a href='https://github.com/symfony/event-dispatcher/blob/master/EventSubscriberInterface.php'>\Symfony\Component\EventDispatcher\EventSubscriberInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>

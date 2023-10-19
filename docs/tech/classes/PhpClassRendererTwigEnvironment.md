@@ -92,7 +92,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\MainExtension $main
 </ul>
 
 ```php
-public function render(mixed $name, array $context = [ ]): string;
+public function render(mixed $name, array $context = []): string;
 ```
 
 

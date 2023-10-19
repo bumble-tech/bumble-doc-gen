@@ -346,7 +346,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
         </tr>
             <tr>
             <td>$logger</td>
-            <td><a href='https://github.com/php-fig/log/blob/master/src/LoggerInterface.php'>Psr\Log\LoggerInterface</a></td>
+            <td><a href='https://github.com/php-fig/log/blob/master/src/LoggerInterface.php'>\Psr\Log\LoggerInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -3084,7 +3084,7 @@ public function setReflectionClass(\Roave\BetterReflection\Reflection\Reflection
     <tbody>
             <tr>
             <td>$reflectionClass</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>\Roave\BetterReflection\Reflection\ReflectionClass</a></td>
             <td>-</td>
         </tr>
         </tbody>

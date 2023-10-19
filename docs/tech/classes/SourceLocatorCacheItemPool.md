@@ -300,7 +300,7 @@ public function getItem(string $key): \Psr\Cache\CacheItemInterface;
 </ul>
 
 ```php
-public function getItems(array $keys = [ ]): iterable;
+public function getItems(array $keys = []): iterable;
 ```
 
 <blockquote>Returns a traversable set of cache items.</blockquote>
@@ -408,7 +408,7 @@ public function save(\Psr\Cache\CacheItemInterface $item): bool;
     <tbody>
             <tr>
             <td>$item</td>
-            <td><a href='https://github.com/php-fig/cache/blob/master/src/CacheItemInterface.php'>Psr\Cache\CacheItemInterface</a></td>
+            <td><a href='https://github.com/php-fig/cache/blob/master/src/CacheItemInterface.php'>\Psr\Cache\CacheItemInterface</a></td>
             <td>The cache item to save.</td>
         </tr>
         </tbody>
@@ -446,7 +446,7 @@ public function saveDeferred(\Psr\Cache\CacheItemInterface $item): bool;
     <tbody>
             <tr>
             <td>$item</td>
-            <td><a href='https://github.com/php-fig/cache/blob/master/src/CacheItemInterface.php'>Psr\Cache\CacheItemInterface</a></td>
+            <td><a href='https://github.com/php-fig/cache/blob/master/src/CacheItemInterface.php'>\Psr\Cache\CacheItemInterface</a></td>
             <td>The cache item to save.</td>
         </tr>
         </tbody>

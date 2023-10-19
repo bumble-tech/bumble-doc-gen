@@ -140,7 +140,7 @@ public function createDirectoryDependency(string $dirPath): \BumbleDocGen\Core\R
 </ul>
 
 ```php
-public function createFileDependency(string $filePath, string|null $contentFilterRegex = NULL, int|null $matchIndex = NULL): \BumbleDocGen\Core\Renderer\Context\Dependency\FileDependency;
+public function createFileDependency(string $filePath, string|null $contentFilterRegex = null, int|null $matchIndex = null): \BumbleDocGen\Core\Renderer\Context\Dependency\FileDependency;
 ```
 
 
