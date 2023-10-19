@@ -6,6 +6,9 @@ namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
+/**
+ * Event occurs when a reference to an entity (resource) is received
+ */
 final class OnGettingResourceLink extends Event
 {
     private ?string $resourceUrl = null;

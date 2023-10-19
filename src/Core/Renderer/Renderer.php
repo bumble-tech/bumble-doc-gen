@@ -8,7 +8,10 @@ use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+use BumbleDocGen\Core\Plugin\Event\Renderer\AfterRenderingEntities;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile;
+use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingDocFiles;
+use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingEntities;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
@@ -56,7 +59,6 @@ final class Renderer
      */
     public function run(): void
     {
-        $templateFolder = $this->configuration->getTemplatesDir();
         $outputDir = $this->configuration->getOutputDir();
 
         $templateParams = [];
@@ -64,24 +66,21 @@ final class Renderer
             $templateParams[$collectionName] = $rootEntityCollection;
         }
 
-        foreach ($this->renderIteratorFactory->getTemplatesWithOutdatedCache() as $templateFile) {
-            /**@var \SplFileInfo $templateFile */
-            $filePatch = str_replace($templateFolder, '', $templateFile->getRealPath());
+        $this->pluginEventDispatcher->dispatch(new BeforeRenderingDocFiles());
 
-            if (str_ends_with($filePatch, '.twig')) {
-                $this->rendererContext->setCurrentTemplateFilePatch($filePatch);
-                $content = $this->twig->render($filePatch, $templateParams);
+        foreach ($this->renderIteratorFactory->getTemplatesWithOutdatedCache() as $templateFile) {
+            if ($templateFile->isTemplate()) {
+                $this->rendererContext->setCurrentTemplateFilePatch($templateFile->getRelativeTemplatePath());
+                $content = $this->twig->render($templateFile->getRelativeTemplatePath(), $templateParams);
 
                 $content = $this->pluginEventDispatcher->dispatch(
                     new BeforeCreatingDocFile($content, $this->rendererContext)
                 )->getContent();
-
-                $filePatch = str_replace('.twig', '', $filePatch);
             } else {
                 $content = file_get_contents($templateFile->getRealPath());
             }
 
-            $filePatch = "{$outputDir}{$filePatch}";
+            $filePatch = "{$outputDir}{$templateFile->getRelativeDocPath()}";
             $newDirName = dirname($filePatch);
             if (!is_dir($newDirName)) {
                 $this->fs->mkdir($newDirName, 0755);
@@ -89,6 +88,8 @@ final class Renderer
             $this->fs->dumpFile($filePatch, $content);
             $this->logger->info("Saving `{$filePatch}`");
         }
+
+        $this->pluginEventDispatcher->dispatch(new BeforeRenderingEntities());
 
         foreach ($this->renderIteratorFactory->getDocumentedEntityWrappersWithOutdatedCache() as $entityWrapper) {
             /** @var DocumentedEntityWrapper $entityWrapper */
@@ -108,9 +109,15 @@ final class Renderer
             $this->logger->info("Saving `{$filePatch}`");
         }
 
+        $this->pluginEventDispatcher->dispatch(new AfterRenderingEntities());
+
         foreach ($this->renderIteratorFactory->getFilesToRemove() as $file) {
+            if (!$file->isWritable()) {
+                continue;
+            }
+            $type = $file->getType();
             $this->fs->remove($file->getPathname());
-            $this->logger->info("Removing `{$file->getPathname()}` file");
+            $this->logger->info("Removing `{$file->getPathname()}` {$type}");
         }
 
         $this->rootEntityCollectionsGroup->updateAllEntitiesCache();

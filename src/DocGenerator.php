@@ -34,7 +34,7 @@ use Symfony\Component\Finder\Finder;
  */
 final class DocGenerator
 {
-    public const VERSION = '1.2.1';
+    public const VERSION = '1.3.0';
     public const LOG_FILE_NAME = 'last_run.log';
 
     public function __construct(

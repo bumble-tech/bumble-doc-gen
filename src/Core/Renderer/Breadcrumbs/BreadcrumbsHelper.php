@@ -8,6 +8,9 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Renderer\TemplateFile;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
@@ -34,6 +37,7 @@ final class BreadcrumbsHelper
         private Configuration $configuration,
         private LocalObjectCache $localObjectCache,
         private BreadcrumbsTwigEnvironment $breadcrumbsTwig,
+        private PluginEventDispatcher $pluginEventDispatcher,
         private string $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
     ) {
     }
@@ -43,20 +47,19 @@ final class BreadcrumbsHelper
      */
     private function loadTemplateContent(string $templateName): string
     {
-        $outputDir = $this->configuration->getTemplatesDir();
-        $filePath = "{$outputDir}{$templateName}";
-        if (!str_ends_with($filePath, '.twig')) {
-            $templateName .= '.twig';
-            return $this->loadTemplateContent($templateName);
-        }
+        $filePath = TemplateFile::getTemplatePathByRelativeDocPath(
+            $templateName,
+            $this->configuration,
+            $this->pluginEventDispatcher
+        );
 
         try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateName);
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $filePath);
         } catch (ObjectNotFoundException) {
         }
 
         $templateContent = file_get_contents($filePath) ?: '';
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $templateContent);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $filePath, $templateContent);
         return $templateContent;
     }
 
@@ -180,19 +183,22 @@ final class BreadcrumbsHelper
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function getBreadcrumbsForTemplates(string $templateFilePatch, bool $fromCurrent = true): array
+    public function getBreadcrumbsForTemplates(string $filePatch, bool $fromCurrent = true): array
     {
         $breadcrumbs = [];
-        $filePatch = $templateFilePatch;
         do {
-            $filePatch = str_replace('.twig', '', $filePatch);
             if (!$fromCurrent) {
                 $fromCurrent = true;
                 continue;
             }
-            $templateFilePatch = "{$this->configuration->getTemplatesDir()}{$filePatch}";
+            $filePatch = str_replace('.twig', '', $filePatch);
+            $templateFilePatch = TemplateFile::getTemplatePathByRelativeDocPath(
+                $filePatch,
+                $this->configuration,
+                $this->pluginEventDispatcher
+            );
             $breadcrumbs[] = [
-                'template' => "$templateFilePatch.twig",
+                'template' => $templateFilePatch,
                 'title' => $this->getTemplateTitle($filePatch),
             ];
         } while ($filePatch = $this->getPrevPage($filePatch));
@@ -212,6 +218,8 @@ final class BreadcrumbsHelper
         }
         $pageLinks = [];
         $templatesDir = $this->configuration->getTemplatesDir();
+        $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
+        $templatesDirs = $event->getTemplatesDirs();
 
         $addLinkKey = function (string $key, $value) use (&$pageLinks) {
             $pageLinks[$key] = $value;
@@ -225,15 +233,15 @@ final class BreadcrumbsHelper
             }
         };
 
-        /**@var \SplFileInfo[] $allFiles */
-        $allFiles = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator(
-                $templatesDir,
-                \FilesystemIterator::SKIP_DOTS
-            )
-        );
-        foreach ($allFiles as $file) {
-            $filePatch = str_replace($templatesDir, '', $file->getRealPath());
+        $finder = Finder::create()
+            ->ignoreVCS(true)
+            ->ignoreDotFiles(true)
+            ->ignoreUnreadableDirs()
+            ->sortByName()
+            ->in($event->getTemplatesDirs());
+
+        foreach ($finder->files() as $file) {
+            $filePatch = str_replace($templatesDirs, '', $file->getRealPath());
             if (!str_ends_with($filePatch, '.twig')) {
                 continue;
             }

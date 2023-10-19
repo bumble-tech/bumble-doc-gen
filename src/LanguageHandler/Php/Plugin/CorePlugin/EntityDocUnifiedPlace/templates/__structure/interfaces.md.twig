@@ -1,0 +1,12 @@
+{% set title = 'Project interfaces' %}
+{% set prevPage = 'Project structure' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Project interfaces" | textToHeading('H1') }}
+
+<table>
+<tr><th>Name</th><th>Namespace</th></tr>
+{% for interfaceEntity in phpClassEntityCollection.getOnlyInterfaces() %}
+<tr><td><a>{{ interfaceEntity.getName() }}|short_form</a><td>{{ interfaceEntity.getNamespaceName() }}</td></tr>
+{% endfor %}
+</table>

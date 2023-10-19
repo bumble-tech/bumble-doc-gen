@@ -28,6 +28,9 @@ final class LocatedInCondition implements ConditionInterface
     public function canAddToCollection(EntityInterface $entity): bool
     {
         $fileName = $entity->getAbsoluteFileName();
+        if (!$fileName) {
+            return false;
+        }
         foreach ($this->directories as $directory) {
             $directory = $this->parameterBag->resolveValue($directory);
             if (!str_starts_with($directory, DIRECTORY_SEPARATOR)) {

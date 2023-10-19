@@ -12,6 +12,8 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection;
@@ -37,6 +39,7 @@ final class RendererIteratorFactory
         private RendererDependencyFactory $dependencyFactory,
         private LocalObjectCache $localObjectCache,
         private ProgressBarFactory $progressBarFactory,
+        private PluginEventDispatcher $pluginEventDispatcher,
         private OutputStyle $io,
         private Logger $logger,
     ) {
@@ -50,9 +53,11 @@ final class RendererIteratorFactory
         $pb = $this->progressBarFactory->createStylizedProgressBar();
         $pb->setName('Generating main documentation pages');
 
-        $templateFolder = $this->configuration->getTemplatesDir();
+        $templatesDir = $this->configuration->getTemplatesDir();
+        $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
+        $templatesDirs = $event->getTemplatesDirs();
         $finder = Finder::create()
-            ->in($templateFolder)
+            ->in($templatesDirs)
             ->ignoreDotFiles(true)
             ->ignoreVCSIgnored(true)
             ->reverseSorting()
@@ -61,51 +66,19 @@ final class RendererIteratorFactory
 
         $skippedCount = 0;
         foreach ($pb->iterate($finder) as $templateFile) {
-            $templateFileName = str_replace($templateFolder, '', $templateFile->getRealPath());
-            $pb->setStepDescription("Processing {$templateFileName} file");
-            $this->rendererContext->clearDependencies();
-            $this->rootEntityCollectionsGroup->clearOperationsLog();
-
-            $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
-            $fileDependency = $this->dependencyFactory->createFileDependency(
-                filePath: $templateFile->getRealPath()
+            $templateFile = TemplateFile::create(
+                $templateFile,
+                $this->configuration,
+                $this->pluginEventDispatcher
             );
-            $this->rendererContext->addDependency($fileDependency);
+            $pb->setStepDescription("Processing {$templateFile->getRelativeDocPath()} file");
 
-            $this->markFileNameAsRendered($templateFileName);
-
-            if (
-                !$this->configuration->useSharedCache() ||
-                !$this->isGeneratedDocumentExists($templateFileName) ||
-                $this->isInternalCachingVersionChanged() ||
-                $this->isConfigurationVersionChanged() ||
-                $this->isFilesDependenciesCacheOutdated($templateFileName) ||
-                $this->isEntitiesOperationsLogCacheOutdated($templateFileName)
-            ) {
-                $this->rendererContext->clearDependencies();
-                $this->rootEntityCollectionsGroup->clearOperationsLog();
-                $this->rendererContext->setCurrentTemplateFilePatch($templateFileName);
-                $fileDependency = $this->dependencyFactory->createFileDependency(
-                    filePath: $templateFile->getRealPath()
-                );
-                $this->rendererContext->addDependency($fileDependency);
-                yield $templateFile;
-            } else {
-                $this->moveCachedDataToCurrentData($templateFileName);
-                $this->logger->info("Use cached version `{$templateFile->getRealPath()}`");
+            $file = $this->prepareDocFileForRendering($templateFile);
+            if (!$file) {
                 ++$skippedCount;
                 continue;
             }
-
-            $this->sharedCompressedDocumentFileCache->set(
-                $this->getOperationsLogCacheKey($templateFileName),
-                $this->rootEntityCollectionsGroup->getOperationsLogWithoutDuplicates()
-            );
-
-            $this->sharedCompressedDocumentFileCache->set(
-                $this->getFilesDependenciesCacheKey($templateFileName),
-                $this->rendererContext->getDependencies()
-            );
+            yield $file;
         }
 
         $processed = $finder->count() - $skippedCount;
@@ -113,6 +86,55 @@ final class RendererIteratorFactory
             ['Processed documents:', "<options=bold,underscore>{$processed}</>"],
             ['Skipped (without changes):', "<options=bold,underscore>{$skippedCount}</>"],
         ]);
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    private function prepareDocFileForRendering(TemplateFile $templateFile): ?TemplateFile
+    {
+        $relativeTemplateName = $templateFile->getRelativeTemplatePath() ?: $templateFile->getRelativeDocPath();
+
+        $this->rendererContext->clearDependencies();
+        $this->rootEntityCollectionsGroup->clearOperationsLog();
+
+        $this->rendererContext->setCurrentTemplateFilePatch($relativeTemplateName);
+        $fileDependency = $this->dependencyFactory->createFileDependency(
+            filePath: $templateFile->getRealPath()
+        );
+        $this->rendererContext->addDependency($fileDependency);
+
+        $this->markFileNameAsRendered($relativeTemplateName);
+
+        if (
+            !$this->configuration->useSharedCache() ||
+            !$this->isGeneratedDocumentExists($relativeTemplateName) ||
+            $this->isInternalCachingVersionChanged() ||
+            $this->isConfigurationVersionChanged() ||
+            $this->isFilesDependenciesCacheOutdated($relativeTemplateName) ||
+            $this->isEntitiesOperationsLogCacheOutdated($relativeTemplateName)
+        ) {
+            $this->rendererContext->clearDependencies();
+            $this->rootEntityCollectionsGroup->clearOperationsLog();
+            $this->rendererContext->setCurrentTemplateFilePatch($relativeTemplateName);
+            $fileDependency = $this->dependencyFactory->createFileDependency(
+                filePath: $templateFile->getRealPath()
+            );
+            $this->rendererContext->addDependency($fileDependency);
+            $this->sharedCompressedDocumentFileCache->set(
+                $this->getOperationsLogCacheKey($relativeTemplateName),
+                $this->rootEntityCollectionsGroup->getOperationsLogWithoutDuplicates()
+            );
+
+            $this->sharedCompressedDocumentFileCache->set(
+                $this->getFilesDependenciesCacheKey($relativeTemplateName),
+                $this->rendererContext->getDependencies()
+            );
+            return $templateFile;
+        }
+        $this->moveCachedDataToCurrentData($relativeTemplateName);
+        $this->logger->info("Use cached version `{$templateFile->getRealPath()}`");
+        return null;
     }
 
     /**
@@ -138,7 +160,7 @@ final class RendererIteratorFactory
 
             $this->markFileNameAsRendered($entityWrapper->getDocUrl());
 
-            $filesDependenciesKey = "{$entityWrapper->getEntityName()}_{$entityWrapper->getInitiatorFilePath()}";
+            $filesDependenciesKey = "{$entityWrapper->getEntityName()}_{$entityWrapper->getParentDocFilePath()}";
             if (
                 !$this->configuration->useSharedCache() ||
                 !$this->isGeneratedEntityDocumentExists($entityWrapper) ||
@@ -153,7 +175,7 @@ final class RendererIteratorFactory
                 $this->rootEntityCollectionsGroup->clearOperationsLog();
                 yield $entityWrapper;
             } else {
-                $this->moveCachedDataToCurrentData($entityWrapper->getInitiatorFilePath(), $entityWrapper->getEntityName());
+                $this->moveCachedDataToCurrentData($entityWrapper->getParentDocFilePath(), $entityWrapper->getEntityName());
                 $this->logger->info("Use cached version `{$this->configuration->getOutputDir()}{$entityWrapper->getDocUrl()}`");
                 ++$skippedCount;
                 continue;
@@ -215,6 +237,21 @@ final class RendererIteratorFactory
             }
             yield $docFile;
         }
+
+        // check empty directories
+        $finder = Finder::create()
+            ->in($outputFolder)
+            ->ignoreDotFiles(true)
+            ->ignoreUnreadableDirs()
+            ->directories();
+
+        $dirs = [];
+        foreach ($finder as $dir) {
+            if (!Finder::create()->in($dir->getRealPath())->files()->count()) {
+                $dirs[] = $dir;
+            }
+        }
+        yield from $dirs;
     }
 
     private function isInternalCachingVersionChanged(): bool
@@ -257,7 +294,7 @@ final class RendererIteratorFactory
     private function isEntityRelationsCacheOutdated(DocumentedEntityWrapper $entityWrapper): bool
     {
         $cachedEntitiesRelations = $this->sharedCompressedDocumentFileCache->get('entities_relations', []);
-        if (!array_key_exists($entityWrapper->getInitiatorFilePath(), $cachedEntitiesRelations)) {
+        if (!array_key_exists($entityWrapper->getParentDocFilePath(), $cachedEntitiesRelations)) {
             return true;
         }
 

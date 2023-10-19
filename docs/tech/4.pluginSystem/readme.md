@@ -149,11 +149,25 @@ Plugins for any programming languages work regardless of which language handler 
         </td>
         <td>Adding links to the documentation of PHP classes in the \Twig namespace</td>
     </tr>
+    <tr>
+        <td><a href='/docs/tech/4.pluginSystem/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin</a></td>
+        <td>PHP</td>
+        <td>
+            <ul>
+                            <li><a href="/docs/tech/4.pluginSystem/classes/OnCreateDocumentedEntityWrapper.md">OnCreateDocumentedEntityWrapper</a></li>
+                            <li><a href="/docs/tech/4.pluginSystem/classes/OnGetTemplatePathByRelativeDocPath.md">OnGetTemplatePathByRelativeDocPath</a></li>
+                            <li><a href="/docs/tech/4.pluginSystem/classes/OnGetProjectTemplatesDirs.md">OnGetProjectTemplatesDirs</a></li>
+                        </ul>
+        </td>
+        <td>This plugin changes the algorithm for saving entity documents. The standard system stores each file
+in a directory next to the file where it was requested. This behavior changes and all documents are saved
+in a separate directory structure, so they are not duplicated.</td>
+    </tr>
 </table>
 
 <embed> <h2>Default events</h2> </embed>
 
-<embed> <ul><li><a href='/docs/tech/4.pluginSystem/classes/OnLoadSourceLocatorsCollection.md'>OnLoadSourceLocatorsCollection</a> - Called when source locators are loaded</li><li><a href='/docs/tech/4.pluginSystem/classes/BeforeCreatingDocFile.md'>BeforeCreatingDocFile</a> - Called before the content of the documentation document is saved to a file</li><li><a href='/docs/tech/4.pluginSystem/classes/OnGettingResourceLink.md'>OnGettingResourceLink</a> - Event is the base class for classes containing event data.</li><li><a href='/docs/tech/4.pluginSystem/classes/OnLoadEntityDocPluginContent.md'>OnLoadEntityDocPluginContent</a> - Called when entity documentation is generated (plugin content loading)</li><li><a href='/docs/tech/4.pluginSystem/classes/OnCheckIsClassEntityCanBeLoad.md'>OnCheckIsClassEntityCanBeLoad</a> - Event is the base class for classes containing event data.</li><li><a href='/docs/tech/4.pluginSystem/classes/AfterLoadingClassEntityCollection.md'>AfterLoadingClassEntityCollection</a> - The event is called after the initial creation of a collection of class entities</li><li><a href='/docs/tech/4.pluginSystem/classes/OnAddClassEntityToCollection.md'>OnAddClassEntityToCollection</a> - Called when each class entity is added to the entity collection</li></ul> </embed>
+<embed> <ul><li><a href='/docs/tech/4.pluginSystem/classes/OnLoadSourceLocatorsCollection.md'>OnLoadSourceLocatorsCollection</a> - Called when source locators are loaded</li><li><a href='/docs/tech/4.pluginSystem/classes/AfterRenderingEntities.md'>AfterRenderingEntities</a> - Event is the base class for classes containing event data.</li><li><a href='/docs/tech/4.pluginSystem/classes/BeforeCreatingDocFile.md'>BeforeCreatingDocFile</a> - Called before the content of the documentation document is saved to a file</li><li><a href='/docs/tech/4.pluginSystem/classes/BeforeRenderingDocFiles.md'>BeforeRenderingDocFiles</a> - The event occurs before the main documents begin rendering</li><li><a href='/docs/tech/4.pluginSystem/classes/BeforeRenderingEntities.md'>BeforeRenderingEntities</a> - The event occurs before the rendering of entity documents begins, after the main documents have been created</li><li><a href='/docs/tech/4.pluginSystem/classes/OnCreateDocumentedEntityWrapper.md'>OnCreateDocumentedEntityWrapper</a> - The event occurs when an entity is added to the list for documentation</li><li><a href='/docs/tech/4.pluginSystem/classes/OnGetProjectTemplatesDirs.md'>OnGetProjectTemplatesDirs</a> - This event occurs when all directories containing document templates are retrieved</li><li><a href='/docs/tech/4.pluginSystem/classes/OnGetTemplatePathByRelativeDocPath.md'>OnGetTemplatePathByRelativeDocPath</a> - The event occurs when the path to the template file is obtained relative to the path to the document</li><li><a href='/docs/tech/4.pluginSystem/classes/OnGettingResourceLink.md'>OnGettingResourceLink</a> - Event occurs when a reference to an entity (resource) is received</li><li><a href='/docs/tech/4.pluginSystem/classes/OnLoadEntityDocPluginContent.md'>OnLoadEntityDocPluginContent</a> - Called when entity documentation is generated (plugin content loading)</li><li><a href='/docs/tech/4.pluginSystem/classes/OnCheckIsClassEntityCanBeLoad.md'>OnCheckIsClassEntityCanBeLoad</a> - Event is the base class for classes containing event data.</li><li><a href='/docs/tech/4.pluginSystem/classes/AfterLoadingClassEntityCollection.md'>AfterLoadingClassEntityCollection</a> - The event is called after the initial creation of a collection of class entities</li><li><a href='/docs/tech/4.pluginSystem/classes/OnAddClassEntityToCollection.md'>OnAddClassEntityToCollection</a> - Called when each class entity is added to the entity collection</li></ul> </embed>
 
 <embed> <h2>Adding a new plugin</h2> </embed>
 
@@ -192,4 +206,4 @@ plugins:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Sun Oct 15 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

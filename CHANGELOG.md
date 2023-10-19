@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.3.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.3.0)
+- Add Unit Tests for BumbleDocGen\Core\Configuration\ValueTransformer [#45](https://github.com/bumble-tech/bumble-doc-gen/pull/45)
+- Add Unit Tests for ValueResolver Namespace [#47](https://github.com/bumble-tech/bumble-doc-gen/pull/47)
+- Adding entity doc generation modes [#46](https://github.com/bumble-tech/bumble-doc-gen/pull/46)
+- Adding new filter condition [#50](https://github.com/bumble-tech/bumble-doc-gen/pull/50)
+- Removing empty doc dirs [#49](https://github.com/bumble-tech/bumble-doc-gen/pull/49)
+
 # [1.2.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.2.0)
 - Fixing contributing rules [#9](https://github.com/bumble-tech/bumble-doc-gen/pull/9)
 - Adds issue templates for Bug reports & feature requests [#13](https://github.com/bumble-tech/bumble-doc-gen/pull/13)
