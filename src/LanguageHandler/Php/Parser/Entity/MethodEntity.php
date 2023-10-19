@@ -357,7 +357,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         $params = $docBlock->getTagsByName('param');
         $typesFromDoc = $this->parseAnnotationParams($params);
         try {
-            foreach ($this->getReflection()->getParameters() as $k => $param) {
+            foreach ($this->getReflection()->getParameters() as $param) {
                 $type = '';
                 $defaultValue = '';
                 $annotationType = '';
@@ -373,6 +373,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 }
                 if ($paramAst['default']) {
                     $defaultValue = $this->astPrinter->prettyPrint([$param->getAst()->jsonSerialize()['default']]);
+                    $defaultValue = str_replace('array()', '[]', $defaultValue);
                 }
                 if (isset($typesFromDoc[$name])) {
                     $annotationType = $typesFromDoc[$name]['type'] ?? '';
