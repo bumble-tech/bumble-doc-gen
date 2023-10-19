@@ -347,6 +347,7 @@ final class DocGenerator
      * Generates documentation using configuration
      *
      * @throws InvalidArgumentException
+     * @throws \Exception
      */
     public function generate(): void
     {
@@ -360,6 +361,7 @@ final class DocGenerator
             $this->logger->critical(
                 "{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{{$e->getTraceAsString()}}"
             );
+            throw $e;
         }
 
         $time = microtime(true) - $start;

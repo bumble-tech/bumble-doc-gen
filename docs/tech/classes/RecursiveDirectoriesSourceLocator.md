@@ -55,7 +55,7 @@ final class RecursiveDirectoriesSourceLocator extends \BumbleDocGen\Core\Parser\
 </ul>
 
 ```php
-public function __construct(array $directories, array $exclude = [ ], bool $abortExecutionIfPartOfDirsNotExists = true);
+public function __construct(array $directories, array $exclude = [], bool $abortExecutionIfPartOfDirsNotExists = true);
 ```
 
 

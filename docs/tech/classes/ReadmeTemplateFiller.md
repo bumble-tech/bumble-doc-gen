@@ -62,7 +62,7 @@ final class ReadmeTemplateFiller
 </ul>
 
 ```php
-public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = \BumbleDocGen\AI\Generators\ReadmeTemplateGenerator::MODEL_GPT_4);
+public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = self::MODEL_GPT_4);
 ```
 
 
@@ -104,7 +104,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model
 </ul>
 
 ```php
-public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, array $entryPoints = [ ], string|null $composerJsonFile = NULL, string|null $additionalPrompt = NULL): string;
+public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, array $entryPoints = [], string|null $composerJsonFile = null, string|null $additionalPrompt = null): string;
 ```
 
 

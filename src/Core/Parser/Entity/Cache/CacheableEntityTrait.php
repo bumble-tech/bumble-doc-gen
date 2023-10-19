@@ -11,7 +11,7 @@ trait CacheableEntityTrait
 {
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
 
-    private string $cacheVersion = 'v6';
+    private string $cacheVersion = 'v7';
     private bool $isCacheChanged = false;
 
     abstract public function getCacheKey(): string;

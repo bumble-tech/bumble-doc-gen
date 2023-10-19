@@ -199,7 +199,7 @@ public function getClassFromFile(mixed $file): string|null;
 </ul>
 
 ```php
-public function getDocBlock(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, string $docComment, int|null $lineNumber = NULL): \phpDocumentor\Reflection\DocBlock;
+public function getDocBlock(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, string $docComment, int|null $lineNumber = null): \phpDocumentor\Reflection\DocBlock;
 ```
 
 
@@ -351,12 +351,12 @@ public function getMethodReturnValue(\Roave\BetterReflection\Reflection\Reflecti
     <tbody>
             <tr>
             <td>$reflectionClass</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>\Roave\BetterReflection\Reflection\ReflectionClass</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$reflectionMethod</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionMethod.php'>Roave\BetterReflection\Reflection\ReflectionMethod</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionMethod.php'>\Roave\BetterReflection\Reflection\ReflectionMethod</a></td>
             <td>-</td>
         </tr>
         </tbody>

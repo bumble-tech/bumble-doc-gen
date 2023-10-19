@@ -55,7 +55,7 @@ class GithubPagesLinkProcessor implements \BumbleDocGen\Core\Renderer\PageLinkPr
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, array $docFilesExtensions = [   0 => 'md',   1 => 'html', ]);
+public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, array $docFilesExtensions = ['md', 'html']);
 ```
 
 

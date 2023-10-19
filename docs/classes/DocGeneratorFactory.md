@@ -67,7 +67,7 @@ final class DocGeneratorFactory
 </ul>
 
 ```php
-public function __construct(string $diConfig = '/src/di-config.php');
+public function __construct(string $diConfig = __DIR__ . '/di-config.php');
 ```
 
 

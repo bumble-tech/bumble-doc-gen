@@ -153,7 +153,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 </ul>
 
 ```php
-public function __invoke(string|null $startPageKey = NULL, int|null $maxDeep = NULL): string;
+public function __invoke(string|null $startPageKey = null, int|null $maxDeep = null): string;
 ```
 
 

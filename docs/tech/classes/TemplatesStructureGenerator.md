@@ -62,7 +62,7 @@ final class TemplatesStructureGenerator
 </ul>
 
 ```php
-public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = \BumbleDocGen\AI\Generators\TemplatesStructureGenerator::MODEL_GPT_4);
+public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = self::MODEL_GPT_4);
 ```
 
 
@@ -104,7 +104,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model
 </ul>
 
 ```php
-public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $additionalPrompt = NULL): array;
+public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $additionalPrompt = null): array;
 ```
 
 

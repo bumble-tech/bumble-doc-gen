@@ -111,7 +111,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 </ul>
 
 ```php
-public function get(string $key, mixed $defaultValue = NULL): mixed;
+public function get(string $key, mixed $defaultValue = null): mixed;
 ```
 
 
