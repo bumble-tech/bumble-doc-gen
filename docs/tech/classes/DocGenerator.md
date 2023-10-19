@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DocGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L34">DocGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L35">DocGenerator</a> class:
 </h1>
 
 
@@ -43,6 +43,9 @@ final class DocGenerator
     <a href="#mgenerate">generate</a>
     - <i>Generates documentation using configuration</i></li>
 <li>
+    <a href="#mgenerateprojecttemplates">generateProjectTemplates</a>
+    </li>
+<li>
     <a href="#mgenerateprojecttemplatesstructure">generateProjectTemplatesStructure</a>
     - <i>Generate documentation structure with blank templates using AI tools</i></li>
 <li>
@@ -55,11 +58,11 @@ final class DocGenerator
 <ul>
             <li><a name="qlog-file-name"
                href="#qlog-file-name">#</a>
-            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L37">source
+            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L38">source
                     code</a> </li>
             <li><a name="qversion"
                href="#qversion">#</a>
-            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L36">source
+            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L37">source
                     code</a> </li>
     </ul>
 
@@ -74,7 +77,7 @@ final class DocGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L39">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L40">source code</a></li>
 </ul>
 
 ```php
@@ -151,7 +154,7 @@ public function __construct(\Symfony\Component\Filesystem\Filesystem $fs, \Symfo
 <ul>
 <li><a name="maddmissingdocblocks" href="#maddmissingdocblocks">#</a>
  <b>addMissingDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L140">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L136">source code</a></li>
 </ul>
 
 ```php
@@ -179,9 +182,6 @@ public function addMissingDocBlocks(): void;
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
-<li>
-    <a >\Tectalic\OpenAi\ClientException</a></li>
-
 </ul>
 
 </div>
@@ -191,7 +191,7 @@ public function addMissingDocBlocks(): void;
 <ul>
 <li><a name="mfillinreadmemdtemplate" href="#mfillinreadmemdtemplate">#</a>
  <b>fillInReadmeMdTemplate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L229">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L222">source code</a></li>
 </ul>
 
 ```php
@@ -214,9 +214,6 @@ public function fillInReadmeMdTemplate(): void;
     <a >\DI\DependencyException</a></li>
 
 <li>
-    <a >\Tectalic\OpenAi\ClientException</a></li>
-
-<li>
     <a >\DI\NotFoundException</a></li>
 
 <li>
@@ -231,7 +228,7 @@ public function fillInReadmeMdTemplate(): void;
 <ul>
 <li><a name="mgenerate" href="#mgenerate">#</a>
  <b>generate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L312">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L352">source code</a></li>
 </ul>
 
 ```php
@@ -260,6 +257,27 @@ public function generate(): void;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgenerateprojecttemplates" href="#mgenerateprojecttemplates">#</a>
+ <b>generateProjectTemplates</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L301">source code</a></li>
+</ul>
+
+```php
+public function generateProjectTemplates(): void;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgenerateprojecttemplatesstructure" href="#mgenerateprojecttemplatesstructure">#</a>
  <b>generateProjectTemplatesStructure</b>
     <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L79">source code</a></li>
@@ -278,9 +296,6 @@ public function generateProjectTemplatesStructure(): void;
 
 <b>Throws:</b>
 <ul>
-<li>
-    <a >\Tectalic\OpenAi\ClientException</a></li>
-
 <li>
     <a >\DI\NotFoundException</a></li>
 
@@ -302,7 +317,7 @@ public function generateProjectTemplatesStructure(): void;
 <ul>
 <li><a name="mparseandgetrootentitycollectionsgroup" href="#mparseandgetrootentitycollectionsgroup">#</a>
  <b>parseAndGetRootEntityCollectionsGroup</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L64">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L65">source code</a></li>
 </ul>
 
 ```php

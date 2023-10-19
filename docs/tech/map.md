@@ -3,6 +3,23 @@
 Directory layout ( only documented files shown ):
 
 <embed> <pre>└──<b>src</b>/
+│  ├──<b>AI</b>/
+│  │  ├──<b>Generators</b>/
+│  │  │  ├── <a href='/docs/tech/classes/MissingDocBlocksGenerator.md'>MissingDocBlocksGenerator.php</a> 
+│  │  │  ├── <a href='/docs/tech/classes/ReadmeTemplateGenerator.md'>ReadmeTemplateGenerator.php</a> 
+│  │  │  ├── <a href='/docs/tech/classes/TemplateGenerator.md'>TemplateGenerator.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/TemplatesStructureGenerator.md'>TemplatesStructureGenerator.php</a> 
+│  │  ├──<b>Providers</b>/
+│  │  │  ├──<b>HuggingFace</b>/
+│  │  │  │  └── <a href='/docs/tech/classes/Provider.md'>Provider.php</a> 
+│  │  │  ├──<b>Ollama</b>/
+│  │  │  │  └── <a href='/docs/tech/classes/Provider_2.md'>Provider.php</a> 
+│  │  │  └──<b>OpenAI</b>/
+│  │  │  │  └── <a href='/docs/tech/classes/Provider_3.md'>Provider.php</a> 
+│  │  ├──<b>Traits</b>/
+│  │  │  └── <a href='/docs/tech/classes/JsonExtractorTrait.md'>JsonExtractorTrait.php</a> 
+│  │  ├── <a href='/docs/tech/classes/ProviderFactory.md'>ProviderFactory.php</a> 
+│  │  └── <a href='/docs/tech/classes/ProviderInterface.md'>ProviderInterface.php</a> 
 │  ├──<b>Console</b>/
 │  │  ├──<b>Command</b>/
 │  │  │  ├── <a href='/docs/tech/classes/AddMissingDocBlocksCommand.md'>AddMissingDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
@@ -237,11 +254,6 @@ Directory layout ( only documented files shown ):
 │  │  │  └── <a href='/docs/tech/classes/PhpHandlerSettings.md'>PhpHandlerSettings.php</a> 
 │  │  ├── <a href='/docs/tech/classes/LanguageHandlerInterface.md'>LanguageHandlerInterface.php</a> 
 │  │  └── <a href='/docs/tech/classes/LanguageHandlersCollection.md'>LanguageHandlersCollection.php</a> 
-│  ├──<b>TemplateGenerator</b>/
-│  │  └──<b>ChatGpt</b>/
-│  │  │  ├── <a href='/docs/tech/classes/MissingDocBlocksGenerator.md'>MissingDocBlocksGenerator.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/ReadmeTemplateFiller.md'>ReadmeTemplateFiller.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/TemplatesStructureGenerator.md'>TemplatesStructureGenerator.php</a> 
 │  ├── <a href='/docs/tech/classes/DocGenerator.md'>DocGenerator.php</a> <i> — <samp>Class for generating documentation.</samp></i>
 │  └── <a href='/docs/tech/classes/DocGeneratorFactory.md'>DocGeneratorFactory.php</a> 
 </pre> </embed>

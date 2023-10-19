@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> TemplatesStructureGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L15">TemplatesStructureGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplatesStructureGenerator.php#L14">TemplatesStructureGenerator</a> class:
 </h1>
 
 
@@ -10,7 +10,7 @@
 
 
 ```php
-namespace BumbleDocGen\TemplateGenerator\ChatGpt;
+namespace BumbleDocGen\AI\Generators;
 
 final class TemplatesStructureGenerator
 ```
@@ -39,13 +39,6 @@ final class TemplatesStructureGenerator
 </ol>
 
 
-<h2>Constants:</h2>
-<ul>
-            <li><a name="qmodel-gpt-4"
-               href="#qmodel-gpt-4">#</a>
-            <code>MODEL_GPT_4</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L17">source
-                    code</a> </li>
-    </ul>
 
 
 
@@ -58,11 +51,11 @@ final class TemplatesStructureGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplatesStructureGenerator.php#L16">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = self::MODEL_GPT_4);
+public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
 ```
 
 
@@ -79,13 +72,8 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model
     </thead>
     <tbody>
             <tr>
-            <td>$openaiClient</td>
-            <td>\Tectalic\OpenAi\Client</td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$model</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>$aiHandler</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -100,7 +88,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model
 <ul>
 <li><a name="mgeneratestructurebyentitycollection" href="#mgeneratestructurebyentitycollection">#</a>
  <b>generateStructureByEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L28">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplatesStructureGenerator.php#L24">source code</a></li>
 </ul>
 
 ```php
@@ -138,9 +126,6 @@ public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\En
 
 <b>Throws:</b>
 <ul>
-<li>
-    <a >\Tectalic\OpenAi\ClientException</a></li>
-
 <li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
