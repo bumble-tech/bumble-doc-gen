@@ -23,7 +23,7 @@ return [
                 \DI\autowire(StreamHandler::class)
                     ->constructor(
                         stream: 'php://stdout',
-                        level: Logger::CRITICAL
+                        level: Logger::ALERT
                     )
                     ->method(
                         'setFormatter',
