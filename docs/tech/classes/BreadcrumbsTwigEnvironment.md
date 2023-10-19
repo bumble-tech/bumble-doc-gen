@@ -75,7 +75,7 @@ public function __construct();
 </ul>
 
 ```php
-public function render(mixed $name, array $context = [ ]): string;
+public function render(mixed $name, array $context = []): string;
 ```
 
 

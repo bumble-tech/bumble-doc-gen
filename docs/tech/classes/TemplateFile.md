@@ -133,7 +133,7 @@ public static function create(\Symfony\Component\Finder\SplFileInfo $fileInfo, \
     <tbody>
             <tr>
             <td>$fileInfo</td>
-            <td><a href='https://github.com/symfony/finder/blob/master/SplFileInfo.php'>Symfony\Component\Finder\SplFileInfo</a></td>
+            <td><a href='https://github.com/symfony/finder/blob/master/SplFileInfo.php'>\Symfony\Component\Finder\SplFileInfo</a></td>
             <td>-</td>
         </tr>
             <tr>

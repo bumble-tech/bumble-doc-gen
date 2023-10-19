@@ -235,7 +235,7 @@ public function getEntityCollectionName(): string;
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\RootEntityCollection
 
-public function getEntityLinkData(string $rawLink, string|null $defaultEntityName = NULL, bool $useUnsafeKeys = true): array;
+public function getEntityLinkData(string $rawLink, string|null $defaultEntityName = null, bool $useUnsafeKeys = true): array;
 ```
 
 

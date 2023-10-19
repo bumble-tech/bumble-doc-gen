@@ -599,6 +599,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     final public function getCacheKey(): string
     {
         $currentRootEntity = $this->getCurrentRootEntity();
-        return $currentRootEntity ? str_replace(["\\", ":", '\n', '/', '{', '}'], '', $this->getCurrentRootEntity()->getName()) : '';
+        return $currentRootEntity ? md5($this->getCurrentRootEntity()->getName()) : '';
     }
 }

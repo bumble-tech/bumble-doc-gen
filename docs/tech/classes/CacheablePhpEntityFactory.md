@@ -133,7 +133,7 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEnti
 </ul>
 
 ```php
-public function createClassEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollection, string $className, string|null $relativeFileName = NULL): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+public function createClassEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollection, string $className, string|null $relativeFileName = null): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 ```
 
 
@@ -209,7 +209,7 @@ public function createClassEntityByReflection(\Roave\BetterReflection\Reflection
     <tbody>
             <tr>
             <td>$reflectionClass</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>\Roave\BetterReflection\Reflection\ReflectionClass</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -338,7 +338,7 @@ public function createDynamicMethodEntity(\BumbleDocGen\LanguageHandler\Php\Pars
         </tr>
             <tr>
             <td>$annotationMethod</td>
-            <td><a href='https://github.com/phpDocumentor/ReflectionDocBlock/blob/master/src/DocBlock/Tags/Method.php'>phpDocumentor\Reflection\DocBlock\Tags\Method</a></td>
+            <td><a href='https://github.com/phpDocumentor/ReflectionDocBlock/blob/master/src/DocBlock/Tags/Method.php'>\phpDocumentor\Reflection\DocBlock\Tags\Method</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -580,7 +580,7 @@ public function createSubClassEntityByReflection(string $subClassEntity, \Roave\
         </tr>
             <tr>
             <td>$reflectionClass</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>\Roave\BetterReflection\Reflection\ReflectionClass</a></td>
             <td>-</td>
         </tr>
             <tr>

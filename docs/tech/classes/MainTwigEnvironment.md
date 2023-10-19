@@ -102,7 +102,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 </ul>
 
 ```php
-public function render(mixed $name, array $context = [ ]): string;
+public function render(mixed $name, array $context = []): string;
 ```
 
 

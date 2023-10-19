@@ -73,7 +73,7 @@ final class CacheableMethod
 </ul>
 
 ```php
-public function __construct(int $cacheSeconds = \BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod::MONTH_SECONDS, string $cacheKeyGeneratorClass = \BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\DefaultCacheKeyGenerator::class);
+public function __construct(int $cacheSeconds = self::MONTH_SECONDS, string $cacheKeyGeneratorClass = \BumbleDocGen\Core\Parser\Entity\Cache\CacheKey\DefaultCacheKeyGenerator::class);
 ```
 
 

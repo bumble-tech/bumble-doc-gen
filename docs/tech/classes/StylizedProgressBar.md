@@ -91,7 +91,7 @@ public function __construct(\Symfony\Component\Console\Style\OutputStyle $io);
     <tbody>
             <tr>
             <td>$io</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Style/OutputStyle.php'>Symfony\Component\Console\Style\OutputStyle</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Style/OutputStyle.php'>\Symfony\Component\Console\Style\OutputStyle</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -169,7 +169,7 @@ public function finish(): void;
 </ul>
 
 ```php
-public function iterate(iterable $iterable, int|null $max = NULL): \Generator;
+public function iterate(iterable $iterable, int|null $max = null): \Generator;
 ```
 
 
@@ -326,7 +326,7 @@ public function setStepDescription(string $stepDescription): void;
 </ul>
 
 ```php
-public function start(int|null $max = NULL): void;
+public function start(int|null $max = null): void;
 ```
 
 

@@ -115,7 +115,7 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\RootEntityCollectio
 </ul>
 
 ```php
-public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $defaultEntityName = NULL, bool $useUnsafeKeys = true): array;
+public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $defaultEntityName = null, bool $useUnsafeKeys = true): array;
 ```
 
 
@@ -178,7 +178,7 @@ public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parse
 </ul>
 
 ```php
-public function getEntityUrlDataByLink(string $linkString, string|null $defaultEntityClassName = NULL, bool $createDocument = true): array;
+public function getEntityUrlDataByLink(string $linkString, string|null $defaultEntityClassName = null, bool $createDocument = true): array;
 ```
 
 

@@ -55,7 +55,7 @@ final class LocatedNotInCondition implements \BumbleDocGen\Core\Parser\FilterCon
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Configuration\ConfigurationParameterBag $parameterBag, array $directories = [ ]);
+public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Configuration\ConfigurationParameterBag $parameterBag, array $directories = []);
 ```
 
 
