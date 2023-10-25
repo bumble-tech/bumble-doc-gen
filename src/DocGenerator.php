@@ -23,7 +23,9 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Helper;
+use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Style\OutputStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -332,12 +334,30 @@ final class DocGenerator
         } else {
             $this->io->writeln("<comment>Generation completed with errors</>");
 
-            $header = ['<fg=white>Error</>', '<fg=white>Text</>'];
+            $this->io->getFormatter()->setStyle('warning', new OutputFormatterStyle('yellow'));
+            $badErrorStyle = new OutputFormatterStyle('red', '#ff0', ['bold']);
+            $this->io->getFormatter()->setStyle('critical', $badErrorStyle);
+            $this->io->getFormatter()->setStyle('alert', $badErrorStyle);
+            $this->io->getFormatter()->setStyle('emergency', $badErrorStyle);
+            $table = $this->io->createTable();
+
             $rows = [];
-            foreach ($warningMessages as $warningMessage) {
-                $rows[] = [$warningMessage['type'], $warningMessage['msg']];
+            $warningMessagesCount = count($warningMessages);
+            foreach ($warningMessages as $i => $warningMessage) {
+                $tag = strtolower($warningMessage['type']);
+                $rows[] = ["<{$tag}>{$warningMessage['type']}</>", "<{$tag}>{$warningMessage['msg']}</>"];
+                if ($warningMessage['isRenderingError']) {
+                    $rows[] = ['', '<options=conceal,underscore>This error occurs during the document rendering process</>'];
+                }
+                $rows[] = ['', $warningMessage['initiator']];
+                if ($warningMessagesCount - $i !== 1) {
+                    $rows[] = new TableSeparator();
+                }
             }
-            $this->io->table($header, $rows);
+            $table->setStyle('box');
+            $table->addRows($rows);
+            $table->render();
+            $this->io->newLine();
         }
 
         $this->io->writeln("<info>Performance</>");
