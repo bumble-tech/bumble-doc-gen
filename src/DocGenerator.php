@@ -6,6 +6,7 @@ namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -44,6 +45,7 @@ final class DocGenerator
         private ProjectParser $parser,
         private ParserHelper $parserHelper,
         private Renderer $renderer,
+        private GenerationErrorsHandler $generationErrorsHandler,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private Logger $logger
     ) {
@@ -323,8 +325,22 @@ final class DocGenerator
         $time = microtime(true) - $start;
         $memory = memory_get_usage(true) - $memory;
 
+        $warningMessages = $this->generationErrorsHandler->getRecords();
 
-        $this->io->writeln("<info>Documentation successfully generated</>");
+        if (empty($warningMessages)) {
+            $this->io->writeln("<info>Documentation successfully generated</>");
+        } else {
+            $this->io->writeln("<comment>Generation completed with errors</>");
+
+            $header = ['<fg=white>Error</>', '<fg=white>Text</>'];
+            $rows = [];
+            foreach ($warningMessages as $warningMessage) {
+                $rows[] = [$warningMessage['type'], $warningMessage['msg']];
+            }
+            $this->io->table($header, $rows);
+        }
+
+        $this->io->writeln("<info>Performance</>");
         $this->io->table([], [
             ['Execution time:', "<options=bold,underscore>{$time} sec.</>"],
             ['Allocated memory:', '<options=bold,underscore>' . Helper::formatMemory(memory_get_usage(true)) . '</>'],

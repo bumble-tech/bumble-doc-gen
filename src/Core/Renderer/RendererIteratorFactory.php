@@ -11,6 +11,7 @@ use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -42,6 +43,7 @@ final class RendererIteratorFactory
         private PluginEventDispatcher $pluginEventDispatcher,
         private OutputStyle $io,
         private Logger $logger,
+        private GenerationErrorsHandler $generationErrorsHandler,
     ) {
     }
 
@@ -73,12 +75,31 @@ final class RendererIteratorFactory
             );
             $pb->setStepDescription("Processing {$templateFile->getRelativeDocPath()} file");
 
+            $oldErrorsCount = count($this->generationErrorsHandler->getRecords());
+
             $file = $this->prepareDocFileForRendering($templateFile);
+            $relativeTemplateName = $templateFile->getRelativeTemplatePath() ?: $templateFile->getRelativeDocPath();
+
             if (!$file) {
+                $oldTemplateErrors = $this->sharedCompressedDocumentFileCache->get(
+                    $this->getErrorLogCacheKey($relativeTemplateName)
+                );
+                $oldTemplateErrors = $oldTemplateErrors ?: [];
+                $this->generationErrorsHandler->addRecords($oldTemplateErrors);
                 ++$skippedCount;
                 continue;
             }
             yield $file;
+
+            $pastErrors = $this->generationErrorsHandler->getRecords();
+            $newErrors = [];
+            if ($oldErrorsCount != count($pastErrors)) {
+                $newErrors = array_slice($pastErrors, count($pastErrors) - $oldErrorsCount);
+            }
+            $this->sharedCompressedDocumentFileCache->set(
+                $this->getErrorLogCacheKey($relativeTemplateName),
+                $newErrors
+            );
         }
 
         $processed = $finder->count() - $skippedCount;
@@ -160,6 +181,8 @@ final class RendererIteratorFactory
 
             $this->markFileNameAsRendered($entityWrapper->getDocUrl());
 
+            $oldErrorsCount = count($this->generationErrorsHandler->getRecords());
+
             $filesDependenciesKey = "{$entityWrapper->getEntityName()}_{$entityWrapper->getParentDocFilePath()}";
             if (
                 !$this->configuration->useSharedCache() ||
@@ -178,12 +201,27 @@ final class RendererIteratorFactory
                 $this->moveCachedDataToCurrentData($entityWrapper->getParentDocFilePath(), $entityWrapper->getEntityName());
                 $this->logger->info("Use cached version `{$this->configuration->getOutputDir()}{$entityWrapper->getDocUrl()}`");
                 ++$skippedCount;
+                $oldTemplateErrors = $this->sharedCompressedDocumentFileCache->get(
+                    $this->getErrorLogCacheKey($entityWrapper->getEntityName())
+                );
+                $oldTemplateErrors = $oldTemplateErrors ?: [];
+                $this->generationErrorsHandler->addRecords($oldTemplateErrors);
                 continue;
             }
 
             $this->sharedCompressedDocumentFileCache->set(
                 $this->getOperationsLogCacheKey($entityWrapper->getEntityName()),
                 $this->rootEntityCollectionsGroup->getOperationsLogWithoutDuplicates()
+            );
+
+            $pastErrors = $this->generationErrorsHandler->getRecords();
+            $newErrors = [];
+            if ($oldErrorsCount != count($pastErrors)) {
+                $newErrors = array_slice($pastErrors, count($pastErrors) - $oldErrorsCount);
+            }
+            $this->sharedCompressedDocumentFileCache->set(
+                $this->getErrorLogCacheKey($entityWrapper->getEntityName()),
+                $newErrors
             );
 
             $this->sharedCompressedDocumentFileCache->set(
@@ -379,5 +417,10 @@ final class RendererIteratorFactory
     private function getFilesDependenciesCacheKey(string $key): string
     {
         return "files_dependencies_{$key}";
+    }
+
+    private function getErrorLogCacheKey(string $key): string
+    {
+        return "past_errors_{$key}";
     }
 }
