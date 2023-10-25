@@ -28,6 +28,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Tectalic\OpenAi\ClientException;
 
+use function BumbleDocGen\Core\get_class_short;
+
 /**
  * Class for generating documentation.
  */
@@ -330,5 +332,22 @@ final class DocGenerator
             ['Allocated memory:', '<options=bold,underscore>' . Helper::formatMemory(memory_get_usage(true)) . '</>'],
             ['Command memory usage:', '<options=bold,underscore>' . Helper::formatMemory($memory) . '</>']
         ]);
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getConfigurationKey(string $key): void
+    {
+        $result = match ($key) {
+            'plugins' => array_map(static function (string $key) {
+                $classNameShort = get_class_short($key);
+                return [rtrim($classNameShort, 'Plugin'), $key];
+            }, $this->configuration->getPlugins()->keys())
+        };
+
+        $this->io->table([], $result);
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\Console;
 
 use BumbleDocGen\Console\Command\AddMissingDocBlocksCommand;
+use BumbleDocGen\Console\Command\ConfigurationCommand;
 use BumbleDocGen\Console\Command\FillInReadmeMdTemplateCommand;
 use BumbleDocGen\Console\Command\GenerateCommand;
 use BumbleDocGen\Console\Command\GenerateProjectTemplatesStructureCommand;
@@ -36,6 +37,7 @@ class App extends Application
         $this->add(new FillInReadmeMdTemplateCommand());
         $this->add(new AddMissingDocBlocksCommand());
         $this->add(new GenerateProjectTemplatesStructureCommand());
+        $this->add(new ConfigurationCommand());
         $this->setExtraCommands();
     }
 

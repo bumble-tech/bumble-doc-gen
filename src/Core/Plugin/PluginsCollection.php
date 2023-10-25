@@ -6,7 +6,7 @@ namespace BumbleDocGen\Core\Plugin;
 
 final class PluginsCollection implements \IteratorAggregate
 {
-    /** @var array<int, PluginInterface> */
+    /** @var array<string, PluginInterface> */
     private array $plugins = [];
 
     public function getIterator(): \Generator
@@ -30,5 +30,13 @@ final class PluginsCollection implements \IteratorAggregate
     public function get(string $key): ?PluginInterface
     {
         return $this->plugins[$key] ?? null;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public function keys(): array
+    {
+        return array_keys($this->plugins);
     }
 }
