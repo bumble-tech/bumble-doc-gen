@@ -45,4 +45,12 @@ final class CustomFiltersCollection implements \IteratorAggregate
     {
         return $this->customFilters[$key] ?? null;
     }
+
+    /**
+     * @return array<int, string>
+     */
+    public function keys(): array
+    {
+        return array_keys($this->customFilters);
+    }
 }

@@ -65,7 +65,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $sourceLocators = $this->parameterBag->validateAndGetClassListValue(
-            'source_locators',
+            ConfigurationKey::SOURCE_LOCATORS,
             SourceLocatorInterface::class
         );
         $cachedSourceLocatorsCollection = SourceLocatorsCollection::create(...$sourceLocators);
@@ -156,7 +156,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $languageHandlers = $this->parameterBag->validateAndGetClassListValue(
-            'language_handlers',
+            ConfigurationKey::LANGUAGE_HANDLERS,
             LanguageHandlerInterface::class,
             false
         );
@@ -177,7 +177,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $pluginsList = $this->parameterBag->validateAndGetClassListValue(
-            'plugins',
+            ConfigurationKey::PLUGINS,
             PluginInterface::class
         );
         $cachedPlugins = PluginsCollection::create(...$pluginsList);
@@ -257,7 +257,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $customFunctions = $this->parameterBag->validateAndGetClassListValue(
-            'twig_functions',
+            ConfigurationKey::TWIG_FUNCTIONS,
             CustomFunctionInterface::class
         );
         $customFunctionsCollection = new CustomFunctionsCollection();
@@ -280,7 +280,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
-            'twig_filters',
+            ConfigurationKey::TWIG_FILTERS,
             CustomFilterInterface::class
         );
         $customFiltersCollection = new CustomFiltersCollection();
@@ -348,7 +348,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
-            'additional_console_commands',
+            ConfigurationKey::ADDITIONAL_CONSOLE_COMMANDS,
             Command::class
         );
         $additionalCommandCollection = AdditionalCommandCollection::create(...$customFilters);

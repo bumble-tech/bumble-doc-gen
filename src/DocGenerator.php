@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\ConfigurationKey;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
@@ -38,6 +39,11 @@ final class DocGenerator
     public const VERSION = '1.3.0';
     public const LOG_FILE_NAME = 'last_run.log';
 
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
     public function __construct(
         private Filesystem $fs,
         private OutputStyle $io,
@@ -341,11 +347,41 @@ final class DocGenerator
      */
     public function getConfigurationKey(string $key): void
     {
+        $entityMapFn = static fn (object $locator): array => [
+            get_class_short(get_class($locator)),
+            get_class($locator),
+        ];
+        $keyMapFn = static fn (string $key): array => [
+            get_class_short($key),
+            $key,
+        ];
+
         $result = match ($key) {
-            'plugins' => array_map(static function (string $key) {
-                $classNameShort = get_class_short($key);
-                return [rtrim($classNameShort, 'Plugin'), $key];
-            }, $this->configuration->getPlugins()->keys())
+            ConfigurationKey::SOURCE_LOCATORS => array_map(
+                $entityMapFn,
+                iterator_to_array($this->configuration->getSourceLocators())
+            ),
+            ConfigurationKey::LANGUAGE_HANDLERS => array_map(
+                $keyMapFn,
+                $this->configuration->getLanguageHandlersCollection()->keys()
+            ),
+            ConfigurationKey::PLUGINS => array_map(
+                $keyMapFn,
+                $this->configuration->getPlugins()->keys()
+            ),
+            ConfigurationKey::TWIG_FUNCTIONS => array_map(
+                $keyMapFn,
+                $this->configuration->getTwigFunctions()->keys()
+            ),
+            ConfigurationKey::TWIG_FILTERS => array_map(
+                $keyMapFn,
+                $this->configuration->getTwigFilters()->keys()
+            ),
+            ConfigurationKey::ADDITIONAL_CONSOLE_COMMANDS => array_map(
+                $entityMapFn,
+                iterator_to_array($this->configuration->getAdditionalConsoleCommands())
+            ),
+            default => throw new \InvalidArgumentException('Unsupported config key provided: ' . $key)
         };
 
         $this->io->table([], $result);

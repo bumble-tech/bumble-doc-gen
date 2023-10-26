@@ -50,4 +50,12 @@ final class CustomFunctionsCollection implements \IteratorAggregate
     {
         return !is_null($this->get($key));
     }
+
+    /**
+     * @return array<int, string>
+     */
+    public function keys(): array
+    {
+        return array_keys($this->customFunctions);
+    }
 }
