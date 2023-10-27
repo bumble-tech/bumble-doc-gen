@@ -40,12 +40,12 @@ final class StubberPlugin implements PluginInterface
                 if (!$packageData) {
                     return;
                 }
-                $resourceName = str_replace(
+                $resourceName = ltrim(str_replace(
                     [$packageData['namespace'], '\\'],
                     ['', '/'],
                     $resourceName
-                );
-                $url = "/blob/master/{$packageData['path']}{$resourceName}.php";
+                ), '/');
+                $url = "/blob/master/{$packageData['path']}/{$resourceName}.php";
                 $this->foundLinks[$resourceName] = $packageData['url'] . str_replace('//', '/', $url);
             }
 
