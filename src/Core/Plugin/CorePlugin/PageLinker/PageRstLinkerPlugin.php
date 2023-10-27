@@ -27,9 +27,15 @@ final class PageRstLinkerPlugin extends BasePageLinker
         return '/(`)([^<>`\n]+?)(`_)/m';
     }
 
-    protected function getGroupRegExNumber(): int
+    protected function getUrlFromMatch(string $match): string
     {
-        return 2;
+        preg_match($this->getLinkRegEx(), $match, $m);
+        return $m[2] ?? '#';
+    }
+
+    protected function getCustomTitleFromMatch(string $match): string
+    {
+        return '';
     }
 
     protected function getOutputTemplate(): string

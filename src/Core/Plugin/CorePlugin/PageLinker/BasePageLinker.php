@@ -17,17 +17,37 @@ use Psr\Log\LoggerInterface;
 
 abstract class BasePageLinker implements PluginInterface
 {
+    public function __construct(
+        private BreadcrumbsHelper $breadcrumbsHelper,
+        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private LoggerInterface $logger,
+    ) {
+    }
+
     /**
      * Template to search for empty links
      *
      * @example /(`)([^<>\n]+?)(`_)/m
+     * @example  /(<a(?![^>]*\bhref\b)[^>]*>)(.*?)(<\/a>)/m
      */
     abstract protected function getLinkRegEx(): string;
 
     /**
-     * Group number of the regular expression that contains the text that will be used to search for the link
+     * Method for getting a URL from a link found using a regular expression
+     *
+     * @param string $match Link found using regular expression
+     * @return string $url
      */
-    abstract protected function getGroupRegExNumber(): int;
+    abstract protected function getUrlFromMatch(string $match): string;
+
+    /**
+     * Get custom link title
+     *
+     * @param string $match Link found using regular expression
+     * @return string $title
+     */
+    abstract protected function getCustomTitleFromMatch(string $match): string;
 
     /**
      * Template of the result of processing an empty link by a plugin.
@@ -36,14 +56,6 @@ abstract class BasePageLinker implements PluginInterface
      * @example `%title% <%url%>`_
      */
     abstract protected function getOutputTemplate(): string;
-
-    public function __construct(
-        private BreadcrumbsHelper $breadcrumbsHelper,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
-        private LoggerInterface $logger,
-    ) {
-    }
 
     public static function getSubscribedEvents(): array
     {
@@ -63,10 +75,14 @@ abstract class BasePageLinker implements PluginInterface
         $content = preg_replace_callback(
             $this->getLinkRegEx(),
             function (array $matches) {
-                $linkString = $matches[$this->getGroupRegExNumber()];
+                $match = $matches[0] ?? '';
+                $linkString = $this->getUrlFromMatch($match);
                 $pageData = $this->breadcrumbsHelper->getPageDataByKey($linkString);
                 if ($pageData) {
-                    return $this->getFilledOutputTemplate($pageData['title'], $pageData['url']);
+                    return $this->getFilledOutputTemplate(
+                        $this->getCustomTitleFromMatch($match) ?: $pageData['title'],
+                        $pageData['url']
+                    );
                 } else {
                     foreach ($this->rootEntityCollectionsGroup as $rootEntityCollection) {
                         $entityUrlData = $rootEntityCollection->getEntityLinkData($linkString);
@@ -77,7 +93,10 @@ abstract class BasePageLinker implements PluginInterface
                                 $entityUrlData['entityName'],
                                 $entityUrlData['cursor']
                             );
-                            return $this->getFilledOutputTemplate($entityUrlData['title'], $entityUrlData['url']);
+                            return $this->getFilledOutputTemplate(
+                                $this->getCustomTitleFromMatch($match) ?: $entityUrlData['title'],
+                                $entityUrlData['url']
+                            );
                         }
                     }
                 }
