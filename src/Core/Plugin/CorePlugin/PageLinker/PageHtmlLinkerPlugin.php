@@ -18,18 +18,31 @@ namespace BumbleDocGen\Core\Plugin\CorePlugin\PageLinker;
  *  <a>Existent page name</a> => <a href="/docs/some/page/targetPage.html">Existent page name</a>
  *
  * @example
+ *   <a x-title="Custom title">\Namespace\ClassName</a> => <a href="/docs/some/page/ClassName.md">Custom title</a>
+ *
+ * @example
+ *    <a>\Namespace\ClassName</a> => <a href="/docs/some/page/ClassName.md">\Namespace\ClassName</a>
+ *
+ * @example
  *  <a>Non-existent page name</a> => Non-existent page name
  */
 final class PageHtmlLinkerPlugin extends BasePageLinker
 {
     protected function getLinkRegEx(): string
     {
-        return '/(<a>)([^<>\n]+?)(<\/a>)/m';
+        return '/(<a(?![^>]*\bhref\b)[^>]*>)(.*?)(<\/a>)/m';
     }
 
-    protected function getGroupRegExNumber(): int
+    protected function getUrlFromMatch(string $match): string
     {
-        return 2;
+        preg_match($this->getLinkRegEx(), $match, $m);
+        return $m[2] ?? '#';
+    }
+
+    protected function getCustomTitleFromMatch(string $match): string
+    {
+        preg_match('/(x-title=("|\')(.*?)("|\'))/', $match, $m);
+        return $m[3] ?? '';
     }
 
     protected function getOutputTemplate(): string
