@@ -73,15 +73,25 @@ final class StubberPlugin implements PluginInterface
         $installedJsonFile = realpath($this->configuration->getProjectRoot() . '/vendor/composer/installed.json');
         $installedPackagesData = json_decode(file_get_contents($installedJsonFile), true);
         foreach ($installedPackagesData['packages'] as $package) {
-            if (!isset($package['source']['url']) || !str_contains($package['source']['url'], 'https://github.com/')) {
+            if (!isset($package['source']['url'])) {
                 continue;
             }
+
+            if (str_starts_with($package['source']['url'], 'https://github.com/')) {
+                $url = str_replace('.git', '', $package['source']['url']);
+            } elseif (str_starts_with($package['source']['url'], 'git@github')) {
+                preg_match('/(@)(.*?)(:)(.*?)(.git)/', $package['source']['url'], $matches);
+                $url = "https://{$matches[2]}/{$matches[4]}";
+            } else {
+                continue;
+            }
+
             $psr4 = $package['autoload']["psr-4"] ?? [];
             foreach ($psr4 as $namespace => $path) {
                 $this->packages[$namespace] = [
                     'path' => $path,
                     'namespace' => $namespace,
-                    'url' => str_replace('.git', '', $package['source']['url'])
+                    'url' => $url
                 ];
             }
         }
