@@ -38,9 +38,9 @@ Let's look at an example of a real configuration in more detail:
    - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
    - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
  plugins:
-   - class: \SelfDocConfig\Plugin\RoaveStubber\BetterReflectionStubberPlugin
    - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
    - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
+   - class: \BumbleDocGen\Core\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter
  
 ```
 
@@ -205,8 +205,6 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
         <td>
 
 - <a href="/docs/tech/1.configuration/classes/PageHtmlLinkerPlugin.md">PageHtmlLinkerPlugin</a>
-
-- <a href="/docs/tech/1.configuration/classes/LastPageCommitter.md">LastPageCommitter</a>
 
 </td>
         <td>List of plugins</td>

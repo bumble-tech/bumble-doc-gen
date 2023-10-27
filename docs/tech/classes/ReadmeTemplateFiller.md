@@ -80,7 +80,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model
     <tbody>
             <tr>
             <td>$openaiClient</td>
-            <td>\Tectalic\OpenAi\Client</td>
+            <td><a href='https://github.com/tectalichq/public-openai-client-php/blob/master/src/Client.php'>\Tectalic\OpenAi\Client</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -149,16 +149,16 @@ public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootE
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\Tectalic\OpenAi\ClientException</a></li>
+    <a href="https://github.com/tectalichq/public-openai-client-php/blob/master/src/ClientException.php">\Tectalic\OpenAi\ClientException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>

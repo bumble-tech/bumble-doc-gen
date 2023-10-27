@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/4.pluginSystem/readme.md">Plugin system</a> <b>/</b> SymfonyComponentStubberPlugin<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/4.pluginSystem/readme.md">Plugin system</a> <b>/</b> StubberPlugin<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/SymfonyComponentStubberPlugin.php#L14">SymfonyComponentStubberPlugin</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L13">StubberPlugin</a> class:
 </h1>
 
 
@@ -10,18 +10,25 @@
 
 
 ```php
-namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
+namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\ComposerPackagesStubber;
 
-final class SymfonyComponentStubberPlugin implements \BumbleDocGen\Core\Plugin\PluginInterface, \Symfony\Component\EventDispatcher\EventSubscriberInterface
+final class StubberPlugin implements \BumbleDocGen\Core\Plugin\PluginInterface, \Symfony\Component\EventDispatcher\EventSubscriberInterface
 ```
 
-<blockquote>Adding links to the documentation of PHP classes in the \Symfony\Component namespace</blockquote>
 
 
 
 
 
 
+
+<h2>Initialization methods:</h2>
+
+<ol>
+<li>
+    <a href="#m-construct">__construct</a>
+    </li>
+</ol>
 
 <h2>Methods:</h2>
 
@@ -48,9 +55,46 @@ final class SymfonyComponentStubberPlugin implements \BumbleDocGen\Core\Plugin\P
 <div class='method_description-block'>
 
 <ul>
+<li><a name="m-construct" href="#m-construct">#</a>
+ <b>__construct</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L18">source code</a></li>
+</ul>
+
+```php
+public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration);
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$configuration</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a>
  <b>getSubscribedEvents</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/SymfonyComponentStubberPlugin.php#L16">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L22">source code</a></li>
 </ul>
 
 ```php
@@ -71,7 +115,7 @@ public static function getSubscribedEvents(): array;
 <ul>
 <li><a name="moncheckisclassentitycanbeload" href="#moncheckisclassentitycanbeload">#</a>
  <b>onCheckIsClassEntityCanBeLoad</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/SymfonyComponentStubberPlugin.php#L48">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L59">source code</a></li>
 </ul>
 
 ```php
@@ -102,6 +146,13 @@ public function onCheckIsClassEntityCanBeLoad(\BumbleDocGen\LanguageHandler\Php\
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
 
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
+
+</ul>
+
 </div>
 <hr>
 <div class='method_description-block'>
@@ -109,7 +160,7 @@ public function onCheckIsClassEntityCanBeLoad(\BumbleDocGen\LanguageHandler\Php\
 <ul>
 <li><a name="mongettingresourcelink" href="#mongettingresourcelink">#</a>
  <b>onGettingResourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/SymfonyComponentStubberPlugin.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L33">source code</a></li>
 </ul>
 
 ```php
@@ -139,6 +190,13 @@ public function onGettingResourceLink(\BumbleDocGen\Core\Plugin\Event\Renderer\O
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
+
+</ul>
 
 </div>
 <hr>

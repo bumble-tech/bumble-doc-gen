@@ -84,17 +84,6 @@ Plugins for any programming languages work regardless of which language handler 
         <td>Adding links to type documentation and documentation of built-in PHP classes</td>
     </tr>
     <tr>
-        <td><a href='/docs/tech/4.pluginSystem/classes/ComposerStubberPlugin.md'>ComposerStubberPlugin</a></td>
-        <td>PHP</td>
-        <td>
-            <ul>
-                            <li><a href="/docs/tech/4.pluginSystem/classes/OnGettingResourceLink.md">OnGettingResourceLink</a></li>
-                            <li><a href="/docs/tech/4.pluginSystem/classes/OnCheckIsClassEntityCanBeLoad.md">OnCheckIsClassEntityCanBeLoad</a></li>
-                        </ul>
-        </td>
-        <td>Adding links to the documentation of PHP classes in the \Composer namespace</td>
-    </tr>
-    <tr>
         <td><a href='/docs/tech/4.pluginSystem/classes/PhpDocumentorStubberPlugin.md'>PhpDocumentorStubberPlugin</a></td>
         <td>PHP</td>
         <td>
@@ -117,7 +106,7 @@ Plugins for any programming languages work regardless of which language handler 
         <td>Adding links to the documentation of PHP classes in the \PHPUnit namespace</td>
     </tr>
     <tr>
-        <td><a href='/docs/tech/4.pluginSystem/classes/PsrClassesStubberPlugin.md'>PsrClassesStubberPlugin</a></td>
+        <td><a href='/docs/tech/4.pluginSystem/classes/StubberPlugin.md'>StubberPlugin</a></td>
         <td>PHP</td>
         <td>
             <ul>
@@ -125,29 +114,7 @@ Plugins for any programming languages work regardless of which language handler 
                             <li><a href="/docs/tech/4.pluginSystem/classes/OnCheckIsClassEntityCanBeLoad.md">OnCheckIsClassEntityCanBeLoad</a></li>
                         </ul>
         </td>
-        <td>Adding links to the documentation of PHP classes in the \Psr namespace</td>
-    </tr>
-    <tr>
-        <td><a href='/docs/tech/4.pluginSystem/classes/SymfonyComponentStubberPlugin.md'>SymfonyComponentStubberPlugin</a></td>
-        <td>PHP</td>
-        <td>
-            <ul>
-                            <li><a href="/docs/tech/4.pluginSystem/classes/OnGettingResourceLink.md">OnGettingResourceLink</a></li>
-                            <li><a href="/docs/tech/4.pluginSystem/classes/OnCheckIsClassEntityCanBeLoad.md">OnCheckIsClassEntityCanBeLoad</a></li>
-                        </ul>
-        </td>
-        <td>Adding links to the documentation of PHP classes in the \Symfony\Component namespace</td>
-    </tr>
-    <tr>
-        <td><a href='/docs/tech/4.pluginSystem/classes/TwigStubberPlugin.md'>TwigStubberPlugin</a></td>
-        <td>PHP</td>
-        <td>
-            <ul>
-                            <li><a href="/docs/tech/4.pluginSystem/classes/OnGettingResourceLink.md">OnGettingResourceLink</a></li>
-                            <li><a href="/docs/tech/4.pluginSystem/classes/OnCheckIsClassEntityCanBeLoad.md">OnCheckIsClassEntityCanBeLoad</a></li>
-                        </ul>
-        </td>
-        <td>Adding links to the documentation of PHP classes in the \Twig namespace</td>
+        <td></td>
     </tr>
     <tr>
         <td><a href='/docs/tech/4.pluginSystem/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin</a></td>
