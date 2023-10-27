@@ -226,6 +226,29 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                                 "{$docCommentImplementingClass->getName()}::",
                                 $name
                             );
+                        } else {
+                            // phpDocumentor resolves function values with an error as a class (adds namespace).
+                            // This is a temporary fix that allows us to check whether the call is to the current class or to another.
+                            $rawValue = '';
+                            $ref = $seeBlock->getReference();
+                            $seeBlockRefReflection = new \ReflectionClass($ref);
+                            if ($seeBlockRefReflection->hasProperty('fqsen')) {
+                                $property = $seeBlockRefReflection->getProperty('fqsen');
+                                $property->setAccessible(true);
+                                $fqsenProperty = $property->getValue($ref);
+                                if (is_a($fqsenProperty, \phpDocumentor\Reflection\Fqsen::class)) {
+                                    $rawValue = $fqsenProperty->getName();
+                                }
+                            }
+                            if ($rawValue && !str_contains($rawValue, '\\')) {
+                                if ($docCommentImplementingClass->hasMethod($rawValue)) {
+                                    $name = "{$docCommentImplementingClass->getName()}::{$rawValue}()";
+                                } elseif ($docCommentImplementingClass->hasProperty($rawValue)) {
+                                    $name = "{$docCommentImplementingClass->getName()}::${$rawValue}";
+                                } elseif ($docCommentImplementingClass->hasConstant($rawValue)) {
+                                    $name = "{$docCommentImplementingClass->getName()}::{$rawValue}";
+                                }
+                            }
                         }
                     }
                     $name = str_replace([
