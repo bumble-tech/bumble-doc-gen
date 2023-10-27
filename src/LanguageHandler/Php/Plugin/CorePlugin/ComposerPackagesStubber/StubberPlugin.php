@@ -10,6 +10,9 @@ use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 
+/**
+ * The plugin allows you to automatically provide links to github repositories for documented classes from libraries included in composer
+ */
 final class StubberPlugin implements PluginInterface
 {
     private array $packages = [];
