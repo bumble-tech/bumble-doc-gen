@@ -215,7 +215,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/PhpDocumentorStubberPlugin.md'>PhpDocumentorStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \phpDocumentor namespace</samp></i>
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/PhpUnitStubberPlugin.md'>PhpUnitStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \PHPUnit namespace</samp></i>
 │  │  │  │  │  ├──<b>ComposerPackagesStubber</b>/
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/StubberPlugin.md'>StubberPlugin.php</a> 
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/StubberPlugin.md'>StubberPlugin.php</a> <i> — <samp>The plugin allows you to automatically provide links to github repositories for documented classe...</samp></i>
 │  │  │  │  │  └──<b>EntityDocUnifiedPlace</b>/
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin.php</a> <i> — <samp>This plugin changes the algorithm for saving entity documents. The standard system stores each fi...</samp></i>
 │  │  │  │  └──<b>Event</b>/

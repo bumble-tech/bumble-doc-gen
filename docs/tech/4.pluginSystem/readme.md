@@ -114,7 +114,7 @@ Plugins for any programming languages work regardless of which language handler 
                             <li><a href="/docs/tech/4.pluginSystem/classes/OnCheckIsClassEntityCanBeLoad.md">OnCheckIsClassEntityCanBeLoad</a></li>
                         </ul>
         </td>
-        <td></td>
+        <td>The plugin allows you to automatically provide links to github repositories for documented classes from libraries included in composer</td>
     </tr>
     <tr>
         <td><a href='/docs/tech/4.pluginSystem/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin</a></td>

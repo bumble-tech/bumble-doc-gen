@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/4.pluginSystem/readme.md">Plugin system</a> <b>/</b> StubberPlugin<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L13">StubberPlugin</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L16">StubberPlugin</a> class:
 </h1>
 
 
@@ -15,7 +15,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\ComposerPackagesStu
 final class StubberPlugin implements \BumbleDocGen\Core\Plugin\PluginInterface, \Symfony\Component\EventDispatcher\EventSubscriberInterface
 ```
 
-
+<blockquote>The plugin allows you to automatically provide links to github repositories for documented classes from libraries included in composer</blockquote>
 
 
 
@@ -57,7 +57,7 @@ final class StubberPlugin implements \BumbleDocGen\Core\Plugin\PluginInterface, 
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L21">source code</a></li>
 </ul>
 
 ```php
@@ -94,7 +94,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a>
  <b>getSubscribedEvents</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L25">source code</a></li>
 </ul>
 
 ```php
@@ -115,7 +115,7 @@ public static function getSubscribedEvents(): array;
 <ul>
 <li><a name="moncheckisclassentitycanbeload" href="#moncheckisclassentitycanbeload">#</a>
  <b>onCheckIsClassEntityCanBeLoad</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L59">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L62">source code</a></li>
 </ul>
 
 ```php
@@ -160,7 +160,7 @@ public function onCheckIsClassEntityCanBeLoad(\BumbleDocGen\LanguageHandler\Php\
 <ul>
 <li><a name="mongettingresourcelink" href="#mongettingresourcelink">#</a>
  <b>onGettingResourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L33">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L36">source code</a></li>
 </ul>
 
 ```php
