@@ -7,6 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\ComposerPackagesStu
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 
 final class StubberPlugin implements PluginInterface
@@ -103,6 +104,9 @@ final class StubberPlugin implements PluginInterface
      */
     private function getPackageDataByName(string $className): ?array
     {
+        if (!ParserHelper::isCorrectClassName($className)) {
+            return null;
+        }
         $packages = $this->getComposerPackages();
         $classParts = explode('\\', $className);
         $namespace = '';
