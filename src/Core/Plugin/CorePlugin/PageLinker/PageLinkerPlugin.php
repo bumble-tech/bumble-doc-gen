@@ -15,22 +15,22 @@ namespace BumbleDocGen\Core\Plugin\CorePlugin\PageLinker;
  *  6) Relative reference to the entity document from the root directory of the documentation
  *
  * @example
- *  <a>Existent page name</a> => <a href="/docs/some/page/targetPage.html">Existent page name</a>
+ *  [a]Existent page name[/a] => <a href="/docs/some/page/targetPage.html">Existent page name</a>
  *
  * @example
- *  <a x-title="Custom title">\Namespace\ClassName</a> => <a href="/docs/some/page/ClassName.md">Custom title</a>
+ *  [a x-title="Custom title"]\Namespace\ClassName[/a] => <a href="/docs/some/page/ClassName.md">Custom title</a>
  *
  * @example
- *  <a>\Namespace\ClassName</a> => <a href="/docs/some/page/ClassName.md">\Namespace\ClassName</a>
+ *  [a]\Namespace\ClassName[/a] => <a href="/docs/some/page/ClassName.md">\Namespace\ClassName</a>
  *
  * @example
- *  <a>Non-existent page name</a> => Non-existent page name
+ *  [a]Non-existent page name[/a] => Non-existent page name
  */
-final class PageHtmlLinkerPlugin extends BasePageLinker
+final class PageLinkerPlugin extends BasePageLinker
 {
     protected function getLinkRegEx(): string
     {
-        return '/(<a(?![^>]*\bhref\b)[^>]*>)(.*?)(<\/a>)/m';
+        return '/(\\[a(?![^>]*\bhref\b)[^\\]]*\\])(.*?)(\\[\/a\\])/m';
     }
 
     protected function getUrlFromMatch(string $match): string
