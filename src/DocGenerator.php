@@ -23,6 +23,8 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
+use Exception;
+use Generator;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
@@ -155,7 +157,7 @@ final class DocGenerator
             &$getEntities,
             &
             $alreadyProcessedEntities
-        ): \Generator {
+        ): Generator {
             foreach ($entitiesCollection as $classEntity) {
                 /**@var ClassEntity $classEntity */
                 if (
@@ -366,7 +368,7 @@ final class DocGenerator
      * Generates documentation using configuration
      *
      * @throws InvalidArgumentException
-     * @throws \Exception
+     * @throws Exception
      */
     public function generate(): void
     {
@@ -376,7 +378,7 @@ final class DocGenerator
         try {
             $this->parser->parse();
             $this->renderer->run();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger->critical(
                 "{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{{$e->getTraceAsString()}}"
             );
@@ -406,7 +408,10 @@ final class DocGenerator
                 $tag = strtolower($warningMessage['type']);
                 $rows[] = ["<{$tag}>{$warningMessage['type']}</>", "<{$tag}>{$warningMessage['msg']}</>"];
                 if ($warningMessage['isRenderingError']) {
-                    $rows[] = ['', '<options=conceal,underscore>This error occurs during the document rendering process</>'];
+                    $rows[] = [
+                        '',
+                        '<options=conceal,underscore>This error occurs during the document rendering process</>'
+                    ];
                 }
                 $rows[] = ['', $warningMessage['initiator']];
                 if ($warningMessagesCount - $i !== 1) {
