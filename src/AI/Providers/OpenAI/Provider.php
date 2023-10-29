@@ -18,6 +18,7 @@ final class Provider implements ProviderInterface
     private ?int $maxTokens;
     private int $topP;
     private string $model;
+    private const DATA_SEPARATOR = '"""';
 
     public function __construct($bearerToken)
     {
@@ -44,45 +45,12 @@ final class Provider implements ProviderInterface
         $this->topP = getenv('OPENAI_TOP_P') ?: 1;
     }
 
-    public function generateMissingPHPDocBlocs(string $prompt): string
-    {
-        $systemPrompt = $this->getSystemPrompt('missingDocBlockGeneration');
-        $prompts = [$prompt];
-        return $this->sendPrompt($prompts, $systemPrompt);
-    }
-
-    public function generateReadMeFileContent(array $prompts): string
-    {
-        $systemPrompt = $this->getSystemPrompt('readmeTemplateFiller');
-        return $this->sendPrompt($prompts, $systemPrompt);
-    }
-
-    public function generateTemplateContent(array $prompts): string
-    {
-        $systemPrompt = $this->getSystemPrompt('templateGeneration');
-        return $this->sendPrompt($prompts, $systemPrompt);
-    }
-
-    public function generateTemplateStructure(array $namespacesList, ?string $additionalPrompt): string
-    {
-        $systemPrompt = $this->getSystemPrompt('structureGeneration');
-
-        $prompts = [];
-        if ($additionalPrompt) {
-            $prompts[] = "Additional Information: {$additionalPrompt}";
-        }
-
-        $prompts[] = implode("\n", $namespacesList);
-
-        return $this->sendPrompt($prompts, $systemPrompt);
-    }
-
     public function getName(): string
     {
         return 'OpenAI';
     }
 
-    public function sendPrompt(array $prompts, string $system): string
+    public function sendPrompts(array $prompts, string $system): string
     {
         $requestData = [
             'messages' => $this->createMessages($prompts, $system),
@@ -122,12 +90,22 @@ final class Provider implements ProviderInterface
         }
     }
 
+    public function getSystemPrompt(string $fileName): string
+    {
+        $systemPrompt = getenv('PROMPT_' . $fileName) ?: null;
+        return $systemPrompt ?? file_get_contents(__DIR__ . '../Prompts/' . $fileName);
+    }
     private function createMessage(string $role, string $content): \stdClass
     {
         $message = new \stdClass();
         $message->role = $role;
         $message->content = $content;
         return $message;
+    }
+
+    public function formatDataPrompt(string $title, string $content): string
+    {
+        return $title . ": \n" . self::DATA_SEPARATOR . "\n" . $content . "\n" . self::DATA_SEPARATOR;
     }
 
     private function createMessages(array $prompts, string $system): array
@@ -138,11 +116,5 @@ final class Provider implements ProviderInterface
             $messages[] = $this->createMessage('user', $prompt);
         }
         return $messages;
-    }
-
-    private function getSystemPrompt(string $fileName): string
-    {
-        $systemPrompt = getenv('PROMPT_' . $fileName) ?: null;
-        return $systemPrompt ?? file_get_contents(__DIR__ . '/Prompts/' . $fileName);
     }
 }

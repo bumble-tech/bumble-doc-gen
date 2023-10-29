@@ -10,6 +10,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use JsonException;
 
 final class TemplatesStructureGenerator
 {
@@ -20,6 +21,7 @@ final class TemplatesStructureGenerator
     /**
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
+     * @throws JsonException
      */
     public function generateStructureByEntityCollection(
         RootEntityCollection $rootEntityCollection,
@@ -34,15 +36,30 @@ final class TemplatesStructureGenerator
         );
         $namespacesList = array_unique($namespacesList);
 
-        $content = $this->aiHandler->generateTemplateStructure($namespacesList, $additionalPrompt);
+        $prompts = [];
+        $prompts[] = $this->aiHandler->formatDataPrompt(
+            'Namespaces',
+            implode(
+                "\n",
+                $namespacesList
+            )
+        );
 
-        $structure = json_decode($content);
+        $systemPrompt = $this->aiHandler->getSystemPrompt('structureGeneration');
+
+        if ($additionalPrompt) {
+            $prompts[] = $this->aiHandler->formatDataPrompt('Additional Information', $additionalPrompt);
+        }
+
+        $content = $this->aiHandler->sendPrompts($prompts, $systemPrompt);
+
+        $structure = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
         $finalStructure = [
             "/readme.md.twig" => "About the project",
         ];
 
         foreach ($structure as $dir => $docName) {
-            $finalStructure["{$dir}/index.md.twig"] = $docName;
+            $finalStructure["/tech{$dir}/index.md.twig"] = $docName;
         }
 
         $finalStructure["/tech/index.md.twig"] = "Description of the technical part of the project";

@@ -48,10 +48,11 @@ final class ReadmeTemplateGenerator
         );
 
         $namespacesList = array_unique($namespacesList);
-        $messages[] = "Project namespaces:\n" . implode("\n", $namespacesList);
+        $prompts = [];
+        $prompts[] = $this->aiHandler->formatDataPrompt('Project namespaces', implode("\n", $namespacesList));
 
         if ($composerJsonFile) {
-            $messages[] = "Composer JSON:\n" . file_get_contents($composerJsonFile);
+            $prompts[] = $this->aiHandler->formatDataPrompt('Composer JSON', file_get_contents($composerJsonFile));
         }
 
         $entryPointsSignatures = [];
@@ -69,13 +70,17 @@ final class ReadmeTemplateGenerator
         }
 
         if ($entryPointsSignatures) {
-            $messages[] = "Project entry points: \n" . implode("\n\n", $entryPointsSignatures);
+            $prompts[] = $this->aiHandler->formatDataPrompt(
+                'Project entry points',
+                implode("\n\n", $entryPointsSignatures)
+            );
         }
 
         if ($additionalPrompt) {
-            $messages[] = "Additional Information: {$additionalPrompt}";
+            $prompts[] = $this->aiHandler->formatDataPrompt('Additional Information', $additionalPrompt);
         }
 
-        return $this->aiHandler->generateReadMeFileContent($messages);
+        $systemPrompt = $this->aiHandler->getSystemPrompt('readmeTemplateFiller');
+        return $this->aiHandler->sendPrompts($prompts, $systemPrompt);
     }
 }

@@ -129,9 +129,9 @@ final class MissingDocBlocksGenerator
                         $methodsDockBlocks[$method->getName()] = $this->createDocBlockText(['{@inheritDoc}']);
                     }
                     continue;
-                } else {
-                    $methodsDockBlocks[$method->getName()] = $this->createDocBlockText(['[insert]', '{@inheritDoc}']);
                 }
+
+                $methodsDockBlocks[$method->getName()] = $this->createDocBlockText(['[insert]', '{@inheritDoc}']);
             } else {
                 $methodsDockBlocks[$method->getName()] = $this->createDocBlockText(['[insert]']);
             }
@@ -150,8 +150,10 @@ final class MissingDocBlocksGenerator
                 $toRequest
             ) . "\n}";
 
-            $responseData = $this->aiHandler->generateMissingPHPDocBlocs($requestData);
-            $responseData = json_decode($responseData ?? "{}", true);
+            $systemPrompt = $this->aiHandler->getSystemPrompt('missingDocBlockGeneration');
+            $prompts = [$requestData];
+            $responseData = $this->aiHandler->sendPrompts($prompts, $systemPrompt);
+            $responseData = json_decode($responseData, true, 512, JSON_THROW_ON_ERROR);
 
             if (!$responseData) {
                 return [];
