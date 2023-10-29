@@ -385,7 +385,7 @@ final class DocGenerator
             ConfigurationKey::CACHE_DIR => [
                 [
                     'Cache directory',
-                    $this->configuration->getCacheDir(),
+                    $this->configuration->getCacheDir() ?: '',
                 ],
             ],
             ConfigurationKey::PAGE_LINK_PROCESSOR => [
