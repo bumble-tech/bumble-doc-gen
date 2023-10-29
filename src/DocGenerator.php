@@ -302,7 +302,7 @@ final class DocGenerator
         }
     }
 
-    public function generateProjectTemplates(): void
+    public function generateProjectTemplates($interactive = true): void
     {
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
@@ -322,9 +322,13 @@ final class DocGenerator
                 $this->io->note(
                     'Creating template for ' . $templateGenerator->getFileSubPathFromPath($file->getRealPath())
                 );
-                $additionalPrompt = $this->io->ask(
-                    'Add additional information about this ( or just skip this step )'
-                ) ?: null;
+                if ($interactive) {
+                    $additionalPrompt = $this->io->ask(
+                        'Add additional information about this ( or just skip this step )'
+                    ) ?: null;
+                } else {
+                    $additionalPrompt = null;
+                }
                 $this->io->note("Sending " . $aiHandler->getName() . " request");
                 $content = $templateGenerator->generate(
                     $file->getRealPath(),
@@ -332,10 +336,21 @@ final class DocGenerator
                     $entitiesCollection,
                     $additionalPrompt
                 );
-                $action = $this->io->choice(
-                    "The proposed documentation is as follows:\n\n{$content}",
-                    ['Save', 'Regenerate', 'Cancel']
-                );
+                if ($content === null) {
+                    $this->io->note(
+                        'Template already exists for ' . $templateGenerator->getFileSubPathFromPath(
+                            $file->getRealPath()
+                        )
+                    );
+                    $action = 'Continue';
+                } elseif ($interactive) {
+                    $action = $this->io->choice(
+                        "The proposed documentation is as follows:\n\n{$content}",
+                        ['Save', 'Regenerate', 'Cancel']
+                    );
+                } else {
+                    $action = 'Save';
+                }
             } while ($action === 'Regenerate');
 
             if ($action === 'Save') {
