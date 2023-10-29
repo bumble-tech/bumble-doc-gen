@@ -48,7 +48,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $projectRoot = $this->parameterBag->validateAndGetDirectoryPathValue('project_root', false);
+        $projectRoot = $this->parameterBag->validateAndGetDirectoryPathValue(ConfigurationKey::PROJECT_ROOT, false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $projectRoot);
         return $projectRoot;
     }
@@ -82,7 +82,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $templatesDir = $this->parameterBag->validateAndGetStringValue('templates_dir', false);
+        $templatesDir = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::TEMPLATES_DIR, false);
         $parentDir = dirname($templatesDir);
         if (!$parentDir || !is_dir($parentDir)) {
             throw new InvalidConfigurationParameterException(
@@ -107,7 +107,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $outputDir = $this->parameterBag->validateAndGetStringValue('output_dir', false);
+        $outputDir = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::OUTPUT_DIR, false);
         $parentDir = dirname($outputDir);
         if (!$parentDir || !is_dir($parentDir)) {
             throw new InvalidConfigurationParameterException(
@@ -139,7 +139,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $outputDirBaseUrl = $this->parameterBag->validateAndGetStringValue('output_dir_base_url', false);
+        $outputDirBaseUrl = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::OUTPUT_DIR_BASE_URL, false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $outputDirBaseUrl);
         return $outputDirBaseUrl;
     }
@@ -195,7 +195,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
 
-        $cacheDir = $this->parameterBag->validateAndGetStringValue('cache_dir');
+        $cacheDir = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::CACHE_DIR);
         $parentDir = dirname($cacheDir);
         if (!is_dir($parentDir)) {
             throw new InvalidConfigurationParameterException(
@@ -224,7 +224,7 @@ final class Configuration
         }
         /** @var PageLinkProcessorInterface $pageLinkProcessor */
         $pageLinkProcessor = $this->parameterBag->validateAndGetClassValue(
-            'page_link_processor',
+            ConfigurationKey::PAGE_LINK_PROCESSOR,
             PageLinkProcessorInterface::class
         );
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $pageLinkProcessor);
@@ -240,7 +240,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $gitClientPath = $this->parameterBag->validateAndGetStringValue('git_client_path', false);
+        $gitClientPath = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::GIT_CLIENT_PATH, false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $gitClientPath);
         return $gitClientPath;
     }
@@ -300,7 +300,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue('use_shared_cache');
+        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue(ConfigurationKey::USE_SHARED_CACHE);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $useSharedCache);
         return $useSharedCache;
     }
@@ -314,7 +314,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue('check_file_in_git_before_creating_doc');
+        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue(ConfigurationKey::CHECK_FILE_IN_GIT_BEFORE_CREATING_DOC);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $useSharedCache);
         return $useSharedCache;
     }
