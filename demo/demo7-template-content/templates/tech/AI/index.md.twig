@@ -1,0 +1,47 @@
+{% set title = 'Artificial Intelligence' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+# Artificial Intelligence
+
+This page contains the documentation for the classes and methods in the AI namespace. The AI namespace is broken down into several sub-namespaces, including `Console`, `Generators`, `Providers\OpenAI`, and the base `AI` namespace.
+
+## Console
+
+The `Console` sub-namespace contains command classes used in the console for various tasks. These classes are:
+
+- <a>\BumbleDocGen\AI\Console\AddDocBlocksCommand</a>
+- <a>\BumbleDocGen\AI\Console\GenerateReadMeTemplateCommand</a>
+- <a>\BumbleDocGen\AI\Console\GenerateTemplatesContentCommand</a>
+- <a>\BumbleDocGen\AI\Console\InitDocsStructureCommand</a>
+
+Each of these classes includes methods for managing console commands such as `addArgument`, `addOption`, `getAliases`, `getApplication`, and more.
+
+## Generators
+
+The `Generators` sub-namespace contains utility classes used for generating documentation. These classes include:
+
+- <a>\BumbleDocGen\AI\Generators\MissingDocBlocksGenerator</a>
+- <a>\BumbleDocGen\AI\Generators\ReadmeTemplateGenerator</a>
+- <a>\BumbleDocGen\AI\Generators\TemplateGenerator</a>
+- <a>\BumbleDocGen\AI\Generators\TemplatesStructureGenerator</a>
+
+These classes host methods to compile and generate documentation blocks, README files, and template structures.
+
+## Providers
+
+The `Providers` sub-namespace comprises classes used to interface with external AI providers. Currently, the only AI provider implemented is `OpenAI`.
+
+- <a>\BumbleDocGen\AI\Providers\OpenAI\Provider</a>
+
+This class contains methods for interfacing with the OpenAI API, including methods for formatting data prompts, retrieving available models, and sending prompts to the AI.
+
+## Base AI Namespace
+
+The base AI namespace includes important classes for interacting with AI providers:
+
+- <a>\BumbleDocGen\AI\ProviderFactory</a>
+- <a>\BumbleDocGen\AI\ProviderInterface</a>
+
+The `ProviderFactory` class is used to instantiate AI providers, while the `ProviderInterface` is an interface that all AI providers must implement.
+
+For detailed information about each class and its methods, refer to the specific class documentation page.

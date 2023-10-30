@@ -1,0 +1,25 @@
+{% set title = 'Core Cache' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+```
+<h1>Core Cache</h1>
+
+<p>The Core Cache namespace consists of classes responsible for managing cache in the BumbleDocGen application. These classes provide functionality for persisting, retrieving, and removing cache items.</p>
+
+<h2>Classes:</h2>
+
+<h3><a href="/BumbleDocGen/Core/Cache/EntityCacheItemPool">EntityCacheItemPool</a></h3>
+<p>This class manages a collection of cache items. It provides methods for adding, deleting, and retrieving cache items, as well as for committing any deferred cache operations.</p>
+
+<h3><a href="/BumbleDocGen/Core/Cache/SharedCompressedDocumentFileCache">SharedCompressedDocumentFileCache</a></h3>
+<p>This class is responsible for caching document files. It provides methods for getting, setting, and saving the cache, as well as for removing unused keys.</p>
+
+<h3><a href="/BumbleDocGen/Core/Cache/SourceLocatorCacheItemPool">SourceLocatorCacheItemPool</a></h3>
+<p>This class manages a collection of source locator cache items. Similar to the EntityCacheItemPool, it provides methods for adding, deleting, and retrieving cache items, and committing deferred cache operations.</p>
+
+<h3><a href="/BumbleDocGen/Core/Cache/LocalCache/Exception/ObjectNotFoundException">ObjectNotFoundException</a></h3>
+<p>This class defines an exception to be thrown when a requested object is not found in the cache. It extends the base PHP Exception class.</p>
+
+<h3><a href="/BumbleDocGen/Core/Cache/LocalCache/LocalObjectCache">LocalObjectCache</a></h3>
+<p>This class provides methods for caching and retrieving the results of method calls. This can help improve performance by avoiding the need for expensive or duplicate method calls.</p>
+```

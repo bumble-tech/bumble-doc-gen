@@ -1,0 +1,34 @@
+{% set title = 'Console Operations' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+# Console Operations
+
+## \BumbleDocGen\Console\Command
+
+### [BaseCommand](\Namespace\BaseCommand)
+
+This is the base class for all commands in the console application. It takes care of basic command operations such as argument and option manipulation, command description, and execution.
+
+### [AdditionalCommandCollection](\Namespace\AdditionalCommandCollection)
+
+This class manages a collection of additional commands. It provides methods for adding and iterating over the command objects.
+
+### [GenerateCommand](\Namespace\GenerateCommand)
+
+This class represents a specific console command that generates output based on provided arguments and options.
+
+## \BumbleDocGen\Console
+
+### [App](\Namespace\App)
+
+This class represents the console application itself. It provides a wide range of methods for command registration, execution, and lifecycle management.
+
+## \BumbleDocGen\Console\ProgressBar
+
+### [ProgressBarFactory](\Namespace\ProgressBarFactory)
+
+This class is a factory for creating stylized progress bars, which can be used to display progress information for long-running console commands.
+
+### [StylizedProgressBar](\Namespace\StylizedProgressBar)
+
+This class represents a stylized progress bar. It provides methods for managing the progress bar's appearance and updating its progress.
