@@ -1,0 +1,106 @@
+{
+    "/AI/": {
+        "name": "Artificial Intelligence",
+        "namespaces": [
+            "BumbleDocGen\\AI\\Console",
+            "BumbleDocGen\\AI\\Generators",
+            "BumbleDocGen\\AI",
+            "BumbleDocGen\\AI\\Providers\\OpenAI",
+            "BumbleDocGen\\AI\\Traits"
+        ]
+    },
+    "/Console/": {
+        "name": "Console Operations",
+        "namespaces": [
+            "BumbleDocGen\\Console",
+            "BumbleDocGen\\Console\\Command",
+            "BumbleDocGen\\Console\\ProgressBar"
+        ]
+    },
+    "/Core/Cache/": {
+        "name": "Core Cache",
+        "namespaces": [
+            "BumbleDocGen\\Core\\Cache",
+            "BumbleDocGen\\Core\\Cache\\LocalCache",
+            "BumbleDocGen\\Core\\Cache\\LocalCache\\Exception"
+        ]
+    },
+    "/Core/Configuration/": {
+        "name": "Core Configuration",
+        "namespaces": [
+            "BumbleDocGen\\Core\\Configuration",
+            "BumbleDocGen\\Core\\Configuration\\Exception",
+            "BumbleDocGen\\Core\\Configuration\\ValueResolver",
+            "BumbleDocGen\\Core\\Configuration\\ValueTransformer"
+        ]
+    },
+    "/Core/Logger/": {
+        "name": "Core Logger",
+        "namespaces": ["BumbleDocGen\\Core\\Logger\\Handler"]
+    },
+    "/Core/Parser/": {
+        "name": "Core Parser",
+        "namespaces": [
+            "BumbleDocGen\\Core\\Parser",
+            "BumbleDocGen\\Core\\Parser\\Entity",
+            "BumbleDocGen\\Core\\Parser\\Entity\\Cache",
+            "BumbleDocGen\\Core\\Parser\\Entity\\Cache\\CacheKey",
+            "BumbleDocGen\\Core\\Parser\\Entity\\CollectionLogOperation",
+            "BumbleDocGen\\Core\\Parser\\FilterCondition",
+            "BumbleDocGen\\Core\\Parser\\FilterCondition\\CommonFilterCondition",
+            "BumbleDocGen\\Core\\Parser\\SourceLocator"
+        ]
+    },
+    "/Core/Plugin/": {
+        "name": "Core Plugin",
+        "namespaces": [
+            "BumbleDocGen\\Core\\Plugin",
+            "BumbleDocGen\\Core\\Plugin\\CorePlugin\\LastPageCommitter",
+            "BumbleDocGen\\Core\\Plugin\\CorePlugin\\PageLinker",
+            "BumbleDocGen\\Core\\Plugin\\Event\\Parser",
+            "BumbleDocGen\\Core\\Plugin\\Event\\Renderer"
+        ]
+    },
+    "/Core/Renderer/": {
+        "name": "Core Renderer",
+        "namespaces": [
+            "BumbleDocGen\\Core\\Renderer",
+            "BumbleDocGen\\Core\\Renderer\\Breadcrumbs",
+            "BumbleDocGen\\Core\\Renderer\\Context",
+            "BumbleDocGen\\Core\\Renderer\\Context\\Dependency",
+            "BumbleDocGen\\Core\\Renderer\\EntityDocRenderer",
+            "BumbleDocGen\\Core\\Renderer\\PageLinkProcessor",
+            "BumbleDocGen\\Core\\Renderer\\Twig",
+            "BumbleDocGen\\Core\\Renderer\\Twig\\Filter",
+            "BumbleDocGen\\Core\\Renderer\\Twig\\Function"
+        ]
+    },
+    "/LanguageHandler/": {
+        "name": "Language Handler",
+        "namespaces": ["BumbleDocGen\\LanguageHandler"]
+    },
+    "/LanguageHandler/Php/": {
+        "name": "PHP Language Handler",
+        "namespaces": [
+            "BumbleDocGen\\LanguageHandler\\Php",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\Cache",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\Exception",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\Reflection",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\FilterCondition\\ClassConstantFilterCondition",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\FilterCondition\\ClassFilterCondition",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\FilterCondition\\MethodFilterCondition",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\FilterCondition\\PropertyFilterCondition",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\SourceLocator",
+            "BumbleDocGen\\LanguageHandler\\Php\\Parser\\SourceLocator\\Internal",
+            "BumbleDocGen\\LanguageHandler\\Php\\Plugin\\CorePlugin\\BasePhpStubber",
+            "BumbleDocGen\\LanguageHandler\\Php\\Plugin\\CorePlugin\\EntityDocUnifiedPlace",
+            "BumbleDocGen\\LanguageHandler\\Php\\Plugin\\Event\\Entity",
+            "BumbleDocGen\\LanguageHandler\\Php\\Plugin\\Event\\Parser",
+            "BumbleDocGen\\LanguageHandler\\Php\\Renderer\\EntityDocRenderer",
+            "BumbleDocGen\\LanguageHandler\\Php\\Renderer\\EntityDocRenderer\\PhpClassToMd",
+            "BumbleDocGen\\LanguageHandler\\Php\\Renderer\\Twig\\Function"
+        ]
+    }
+}
