@@ -9,20 +9,15 @@ use RuntimeException;
 
 final class ProviderFactory
 {
-    public static function create(): ProviderInterface
+    private const VALID_PROVIDERS = [OpenAIProvider::NAME];
+
+    public static function create(string $handler, string $apiKey, string $model): ProviderInterface
     {
-        $apiType = getenv('API_TYPE');
-        switch ($apiType) {
-            case 'openai':
-                $apiKey = getenv('OPENAI_API_KEY');
-                if (empty($apiKey)) {
-                    throw new RuntimeException("Environment variable OPENAI_API_KEY not set!");
-                }
-                return new OpenAIProvider($apiKey);
-            default:
-                throw new RuntimeException(
-                    "Environment variable API_TYPE not set to valid option (huggingface, openai, ollama)!",
-                );
-        }
+        return match ($handler) {
+            OpenAIProvider::NAME => new OpenAIProvider($apiKey, $model),
+            default => throw new RuntimeException(
+                "Parameter 'ai-handler' not set to valid option (" . implode(',', self::VALID_PROVIDERS) . ")!",
+            ),
+        };
     }
 }

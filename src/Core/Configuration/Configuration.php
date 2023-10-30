@@ -98,6 +98,27 @@ final class Configuration
         return $templatesDir;
     }
 
+    public function getAiDataDir(): string
+    {
+        $dataDir = $this->parameterBag->getSubConfigurationParameterBag('ai')->validateAndGetStringValue(
+            'data_dir',
+            false
+        );
+        $parentDir = dirname($dataDir);
+        if (!$parentDir || !is_dir($parentDir)) {
+            throw new InvalidConfigurationParameterException(
+                "`ai:data_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+            );
+        }
+        if (!file_exists($dataDir)) {
+            $this->logger->notice("Creating `{$dataDir}` directory");
+            mkdir($dataDir);
+        }
+        $dataDir = realpath($dataDir);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $dataDir);
+        return $dataDir;
+    }
+
     /**
      * @throws InvalidConfigurationParameterException
      */
@@ -354,5 +375,19 @@ final class Configuration
         $additionalCommandCollection = AdditionalCommandCollection::create(...$customFilters);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $additionalCommandCollection);
         return $additionalCommandCollection;
+    }
+
+    public function getAIConfig(): array
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        if (!$this->parameterBag->has('ai')) {
+            return [];
+        }
+        $aiConfig = $this->parameterBag->get('ai', false);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $aiConfig);
+        return $aiConfig;
     }
 }

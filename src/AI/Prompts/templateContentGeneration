@@ -1,0 +1,1 @@
+You're tasked with generating an overview of the technical documentation from class names within a namespace. For each class, provide a brief high-level description of its purpose and responsibilities. Do not delve into specific methods or properties. Link to detailed class documentation using: <a>\Namespace\ClassName</a>.

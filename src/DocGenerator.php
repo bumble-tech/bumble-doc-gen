@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen;
 
-use BumbleDocGen\AI\Generators\MissingDocBlocksGenerator;
+use BumbleDocGen\AI\Generators\DocBlocksGenerator;
 use BumbleDocGen\AI\Generators\ReadmeTemplateGenerator;
-use BumbleDocGen\AI\Generators\TemplateGenerator;
-use BumbleDocGen\AI\Generators\TemplatesStructureGenerator;
+use BumbleDocGen\AI\Generators\TemplateContentGenerator;
+use BumbleDocGen\AI\Generators\TemplateStructureGenerator;
 use BumbleDocGen\AI\ProviderFactory;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
@@ -25,6 +25,7 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Exception;
 use Generator;
+use JsonException;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
@@ -77,36 +78,49 @@ final class DocGenerator
     /**
      * Generate documentation structure with blank templates using AI tools
      *
-     * @throws NotFoundException
-     * @throws ReflectionException
-     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function generateProjectTemplatesStructure(): void
-    {
+    public function initDocsStructure(
+        string $aiHandler,
+        string $aiApiKey,
+        string $aiModel,
+        bool $nonInteractive = false,
+        ?string $systemPrompt = null,
+    ): void {
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
-        $aiHandler = ProviderFactory::create();
-        $templatesStructureGenerator = new TemplatesStructureGenerator($aiHandler);
+        $aiProvider = ProviderFactory::create($aiHandler, $aiApiKey, $aiModel);
+        $aiDirectory = $this->configuration->getAiDataDir();
+
+        $templatesStructureGenerator = new TemplateStructureGenerator($aiProvider, $aiDirectory);
 
         do {
-            $additionalPrompt = $this->io->ask(
-                'Write instructions for more accurate template structure generation ( or just skip this step )'
-            ) ?: null;
-            $this->io->note("Sending " . $aiHandler->getName() . " request");
+            if ($nonInteractive) {
+                $additionalPrompt = null;
+            } else {
+                $additionalPrompt = $this->io->ask(
+                    'Write instructions for more accurate template structure generation ( or just skip this step )'
+                ) ?: null;
+            }
+            $this->io->note("Sending " . $aiProvider->getName() . " request");
             $structure = $templatesStructureGenerator->generateStructureByEntityCollection(
                 $entitiesCollection,
-                $additionalPrompt
+                $additionalPrompt,
+                $systemPrompt
             );
             $structureAsString = implode(
                 "\n",
                 array_map(fn($v, $k) => "{$k} => {$v}", $structure, array_keys($structure))
             );
-            $action = $this->io->choice(
-                "The proposed documentation structure is as follows:\n\n{$structureAsString}",
-                ['Save', 'Regenerate', 'Cancel']
-            );
+            if ($nonInteractive) {
+                $action = 'Save';
+            } else {
+                $action = $this->io->choice(
+                    "The proposed documentation structure is as follows:\n\n{$structureAsString}",
+                    ['Save', 'Regenerate', 'Cancel']
+                );
+            }
         } while ($action === 'Regenerate');
 
         if ($action === 'Save') {
@@ -139,8 +153,12 @@ final class DocGenerator
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function addMissingDocBlocks(): void
-    {
+    public function addDocBlocks(
+        string $aiHandler,
+        string $aiApiKey,
+        string $aiModel,
+        ?string $systemPrompt = null,
+    ): void {
         if (!$this->io->confirm("This command will change the source code of your project. Continue?")) {
             return;
         }
@@ -148,9 +166,9 @@ final class DocGenerator
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
-        $aiHandler = ProviderFactory::create();
+        $aiProvider = ProviderFactory::create($aiHandler, $aiApiKey, $aiModel);
 
-        $missingDocBlocksGenerator = new MissingDocBlocksGenerator($aiHandler, $this->parserHelper);
+        $missingDocBlocksGenerator = new DocBlocksGenerator($aiProvider, $this->parserHelper);
 
         $alreadyProcessedEntities = [];
         $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (
@@ -190,7 +208,7 @@ final class DocGenerator
                 continue;
             }
             $this->logger->notice("Processing `{$entity->getName()}` class");
-            $newBocBlocks = $missingDocBlocksGenerator->generateDocBlocksForMethodsWithoutIt($entity);
+            $newBocBlocks = $missingDocBlocksGenerator->generateDocBlocksForMethodsWithoutIt($entity, $systemPrompt);
 
             $classFileContent = $entity->getFileContent();
             $toReplace = [];
@@ -225,8 +243,12 @@ final class DocGenerator
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    public function fillInReadmeMdTemplate(): void
-    {
+    public function generateReadmeTemplate(
+        string $aiHandler,
+        string $aiApiKey,
+        string $aiModel,
+        ?string $systemPrompt = null,
+    ): void {
         $this->io->note("Project analysis");
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
@@ -284,14 +306,15 @@ final class DocGenerator
             'Write instructions for more accurate documentation generation ( or just skip this step )'
         );
 
-        $aiHandler = ProviderFactory::create();
-        $readmeTemplateFiller = new ReadmeTemplateGenerator($aiHandler);
-        $this->io->note("Sending " . $aiHandler->getName() . " request");
+        $aiProvider = ProviderFactory::create($aiHandler, $aiApiKey, $aiModel);
+        $readmeTemplateFiller = new ReadmeTemplateGenerator($aiProvider);
+        $this->io->note("Sending " . $aiProvider->getName() . " request");
         $readmeFileContent = $readmeTemplateFiller->generateReadmeFileContent(
             $entitiesCollection,
             $entryPoints,
             $composerJsonFile,
-            $additionalPrompt
+            $additionalPrompt,
+            $systemPrompt
         );
 
         $fileContent = "{% set title = 'About the project' %}\n{$readmeFileContent}";
@@ -304,48 +327,60 @@ final class DocGenerator
         }
     }
 
-    public function generateProjectTemplates($interactive = true): void
-    {
+    /**
+     * @throws ReflectionException
+     * @throws DependencyException
+     * @throws JsonException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function generateTemplatesContent(
+        string $aiHandler,
+        string $aiApiKey,
+        string $aiModel,
+        bool $nonInteractive = false,
+        ?string $systemPrompt = null,
+    ): void {
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
-        $aiHandler = ProviderFactory::create();
-        $templateGenerator = new TemplateGenerator($aiHandler);
+        $aiProvider = ProviderFactory::create($aiHandler, $aiApiKey, $aiModel);
+        $aiConfigDirectory = $this->configuration->getAiDataDir();
+        $templateGenerator = new TemplateContentGenerator($aiProvider);
+        $aiStructure = file_get_contents($aiConfigDirectory . '/structure.json');
+        $aiStructure = json_decode($aiStructure, true, 512, JSON_THROW_ON_ERROR);
 
-        $finder = new Finder();
-
-        $finder->files()->in($this->configuration->getTemplatesDir());
-        foreach ($finder as $file) {
-            if ($file->getBasename() === 'readme.md.twig') {
-                continue;
-            }
-
+        foreach ($aiStructure as $path => $data) {
+            $template = $this->configuration->getTemplatesDir() . '/tech' . $path . 'index.md.twig';
             do {
                 $this->io->note(
-                    'Creating template for ' . $templateGenerator->getFileSubPathFromPath($file->getRealPath())
+                    'Creating template for ' . $template
                 );
-                if ($interactive) {
+                if ($nonInteractive) {
+                    $additionalPrompt = null;
+                } else {
+                    $processThisTemplate = $this->io->choice(
+                        'Do you want to create this template?',
+                        ['Yes', 'No'],
+                        'Yes'
+                    );
+                    if ($processThisTemplate === 'No') {
+                        continue(2);
+                    }
                     $additionalPrompt = $this->io->ask(
                         'Add additional information about this ( or just skip this step )'
                     ) ?: null;
-                } else {
-                    $additionalPrompt = null;
                 }
-                $this->io->note("Sending " . $aiHandler->getName() . " request");
+                $this->io->note("Sending " . $aiProvider->getName() . " request");
                 $content = $templateGenerator->generate(
-                    $file->getRealPath(),
-                    $file->getContents(),
+                    $template,
+                    $data['name'],
+                    $data['namespaces'],
                     $entitiesCollection,
-                    $additionalPrompt
+                    $additionalPrompt,
+                    $systemPrompt,
                 );
-                if ($content === null) {
-                    $this->io->note(
-                        'Template already exists for ' . $templateGenerator->getFileSubPathFromPath(
-                            $file->getRealPath()
-                        )
-                    );
-                    $action = 'Continue';
-                } elseif ($interactive) {
+                if (!$nonInteractive) {
                     $action = $this->io->choice(
                         "The proposed documentation is as follows:\n\n{$content}",
                         ['Save', 'Regenerate', 'Cancel']
@@ -357,9 +392,9 @@ final class DocGenerator
 
             if ($action === 'Save') {
                 $this->logger->notice(
-                    'Saving file: .' . $file->getRealPath()
+                    'Saving file: .' . $template
                 );
-                $this->fs->dumpFile($file->getRealPath(), $content);
+                $this->fs->dumpFile($template, $content);
             }
         }
     }

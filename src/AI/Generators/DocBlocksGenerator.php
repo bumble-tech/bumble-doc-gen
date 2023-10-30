@@ -14,7 +14,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
 
-final class MissingDocBlocksGenerator
+final class DocBlocksGenerator
 {
     public const MODE_READ_ONLY_SIGNATURES = 1;
     public const MODE_READ_ALL_CODE = 2;
@@ -54,6 +54,7 @@ final class MissingDocBlocksGenerator
      */
     public function generateDocBlocksForMethodsWithoutIt(
         RootEntityInterface $rootEntity,
+        ?string $systemPrompt = null,
         int $mode = self::MODE_READ_ONLY_SIGNATURES,
     ): array {
         if (!is_a($rootEntity, ClassEntity::class)) {
@@ -150,7 +151,9 @@ final class MissingDocBlocksGenerator
                 $toRequest
             ) . "\n}";
 
-            $systemPrompt = $this->aiHandler->getSystemPrompt('missingDocBlockGeneration');
+            if ($systemPrompt === null) {
+                $systemPrompt = $this->aiHandler->getSystemPrompt('docBlockGeneration');
+            }
             $prompts = [$requestData];
             $responseData = $this->aiHandler->sendPrompts($prompts, $systemPrompt);
             $responseData = json_decode($responseData, true, 512, JSON_THROW_ON_ERROR);

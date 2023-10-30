@@ -12,9 +12,9 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use JsonException;
 
-final class TemplatesStructureGenerator
+final class TemplateStructureGenerator
 {
-    public function __construct(private ProviderInterface $aiHandler)
+    public function __construct(private ProviderInterface $aiHandler, private string $aiConfigDirectory)
     {
     }
 
@@ -26,6 +26,7 @@ final class TemplatesStructureGenerator
     public function generateStructureByEntityCollection(
         RootEntityCollection $rootEntityCollection,
         ?string $additionalPrompt = null,
+        ?string $systemPrompt = null,
     ): array {
         if (!is_a($rootEntityCollection, ClassEntityCollection::class)) {
             throw new \InvalidArgumentException('Currently we can only work with collections of PHP entities');
@@ -45,7 +46,9 @@ final class TemplatesStructureGenerator
             )
         );
 
-        $systemPrompt = $this->aiHandler->getSystemPrompt('structureGeneration');
+        if ($systemPrompt === null) {
+            $systemPrompt = $this->aiHandler->getSystemPrompt('templateStructureGeneration');
+        }
 
         if ($additionalPrompt) {
             $prompts[] = $this->aiHandler->formatDataPrompt('Additional Information', $additionalPrompt);
@@ -53,16 +56,19 @@ final class TemplatesStructureGenerator
 
         $content = $this->aiHandler->sendPrompts($prompts, $systemPrompt);
 
+        file_put_contents($this->aiConfigDirectory . '/structure.json', $content);
+
         $structure = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
+
         $finalStructure = [
             "/readme.md.twig" => "About the project",
         ];
 
-        foreach ($structure as $dir => $docName) {
-            $finalStructure["/tech{$dir}/index.md.twig"] = $docName;
+        foreach ($structure as $dir => $info) {
+            $finalStructure["/tech{$dir}index.md.twig"] = $info['name'];
         }
 
-        $finalStructure["/tech/index.md.twig"] = "Description of the technical part of the project";
+        $finalStructure["/tech/index.md.twig"] = "Technical Overview";
         return $finalStructure;
     }
 }

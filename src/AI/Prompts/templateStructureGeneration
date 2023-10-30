@@ -1,0 +1,18 @@
+Given a list of PHP namespaces, generate a JSON representation of a condensed documentation file structure based on the criteria below:
+ - Group related namespaces.
+ - Exclude the top-level namespace.
+ - Represent each path with associated metadata: a human-readable name and a list of related namespaces.
+
+Return the response in pure JSON format only, without any markdown or additional context.
+
+Example Output:
+{
+    "/tech/": {
+        "name": "Technical description",
+        "namespaces": ["\Namespace\Tech"]
+    },
+    "/tech/events/": {
+        "name": "Events to call",
+        "namespaces": ["\Namespace\Tech\Events", "\Namespace\Tech\Events\Listener"]
+    }
+}
