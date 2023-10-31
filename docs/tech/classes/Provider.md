@@ -112,7 +112,7 @@ public function __construct(string $bearerToken, string|null $model);
 <ul>
 <li><a name="mformatdataprompt" href="#mformatdataprompt">#</a>
  <b>formatDataPrompt</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L101">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L95">source code</a></li>
 </ul>
 
 ```php
@@ -155,7 +155,7 @@ public function formatDataPrompt(string $title, string $content): string;
 <ul>
 <li><a name="mgetavailablemodels" href="#mgetavailablemodels">#</a>
  <b>getAvailableModels</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L110">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L104">source code</a></li>
 </ul>
 
 ```php
@@ -172,7 +172,7 @@ public function getAvailableModels(): array;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\GuzzleHttp\Exception\GuzzleException</a></li>
+    <a href="https://github.com/guzzle/guzzle/blob/master/src/Exception/GuzzleException.php">\GuzzleHttp\Exception\GuzzleException</a></li>
 
 <li>
     <a href="https://www.php.net/manual/en/class.jsonexception.php">\JsonException</a></li>
@@ -186,7 +186,7 @@ public function getAvailableModels(): array;
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L51">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L45">source code</a></li>
 </ul>
 
 ```php
@@ -207,7 +207,7 @@ public function getName(): string;
 <ul>
 <li><a name="mgetsystemprompt" href="#mgetsystemprompt">#</a>
  <b>getSystemPrompt</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L96">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L90">source code</a></li>
 </ul>
 
 ```php
@@ -245,7 +245,7 @@ public function getSystemPrompt(string $fileName): string;
 <ul>
 <li><a name="msendprompts" href="#msendprompts">#</a>
  <b>sendPrompts</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L56">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L50">source code</a></li>
 </ul>
 
 ```php

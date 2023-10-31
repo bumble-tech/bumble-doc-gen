@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> MissingDocBlocksGenerator<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DocBlocksGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L18">MissingDocBlocksGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L17">DocBlocksGenerator</a> class:
 </h1>
 
 
@@ -10,9 +10,9 @@
 
 
 ```php
-namespace BumbleDocGen\TemplateGenerator\ChatGpt;
+namespace BumbleDocGen\AI\Generators;
 
-final class MissingDocBlocksGenerator
+final class DocBlocksGenerator
 ```
 
 
@@ -44,17 +44,13 @@ final class MissingDocBlocksGenerator
 
 <h2>Constants:</h2>
 <ul>
-            <li><a name="qmodel-gpt-4"
-               href="#qmodel-gpt-4">#</a>
-            <code>MODEL_GPT_4</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L20">source
-                    code</a> </li>
             <li><a name="qmode-read-all-code"
                href="#qmode-read-all-code">#</a>
-            <code>MODE_READ_ALL_CODE</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L23">source
+            <code>MODE_READ_ALL_CODE</code>                   <b>|</b> <a href="/src/AI/Generators/DocBlocksGenerator.php#L20">source
                     code</a> </li>
             <li><a name="qmode-read-only-signatures"
                href="#qmode-read-only-signatures">#</a>
-            <code>MODE_READ_ONLY_SIGNATURES</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L22">source
+            <code>MODE_READ_ONLY_SIGNATURES</code>                   <b>|</b> <a href="/src/AI/Generators/DocBlocksGenerator.php#L19">source
                     code</a> </li>
     </ul>
 
@@ -69,11 +65,11 @@ final class MissingDocBlocksGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L25">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L22">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, string $model = self::MODEL_GPT_4);
+public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper);
 ```
 
 
@@ -90,18 +86,13 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen
     </thead>
     <tbody>
             <tr>
-            <td>$openaiClient</td>
-            <td><a href='https://github.com/tectalichq/public-openai-client-php/blob/master/src/Client.php'>\Tectalic\OpenAi\Client</a></td>
+            <td>$aiHandler</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$parserHelper</td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php'>\BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$model</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -116,7 +107,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen
 <ul>
 <li><a name="mgeneratedocblocksformethodswithoutit" href="#mgeneratedocblocksformethodswithoutit">#</a>
  <b>generateDocBlocksForMethodsWithoutIt</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L60">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L55">source code</a></li>
 </ul>
 
 ```php
@@ -166,9 +157,6 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
-<li>
-    <a href="https://github.com/tectalichq/public-openai-client-php/blob/master/src/ClientException.php">\Tectalic\OpenAi\ClientException</a></li>
-
 </ul>
 
 </div>
@@ -178,7 +166,7 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
 <ul>
 <li><a name="mhasmethodswithoutdocblocks" href="#mhasmethodswithoutdocblocks">#</a>
  <b>hasMethodsWithoutDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/MissingDocBlocksGenerator.php#L38">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L34">source code</a></li>
 </ul>
 
 ```php

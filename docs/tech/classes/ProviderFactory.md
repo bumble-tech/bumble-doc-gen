@@ -32,6 +32,13 @@ final class ProviderFactory
 </ol>
 
 
+<h2>Constants:</h2>
+<ul>
+            <li><a name="qvalid-providers"
+               href="#qvalid-providers">#</a>
+            <code>VALID_PROVIDERS</code>                   <b>|</b> <a href="/src/AI/ProviderFactory.php#L12">source
+                    code</a> </li>
+    </ul>
 
 
 
@@ -48,7 +55,7 @@ final class ProviderFactory
 </ul>
 
 ```php
-public static function create(string $handler, string $apiKey, string $model): \BumbleDocGen\AI\ProviderInterface;
+public static function create(string $provider, string $apiKey, string|null $model = null): \BumbleDocGen\AI\ProviderInterface;
 ```
 
 
@@ -65,7 +72,7 @@ public static function create(string $handler, string $apiKey, string $model): \
     </thead>
     <tbody>
             <tr>
-            <td>$handler</td>
+            <td>$provider</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
@@ -76,7 +83,7 @@ public static function create(string $handler, string $apiKey, string $model): \
         </tr>
             <tr>
             <td>$model</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>
         </tbody>

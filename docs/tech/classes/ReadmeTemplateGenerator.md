@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ReadmeTemplateFiller<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ReadmeTemplateGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/ReadmeTemplateFiller.php#L17">ReadmeTemplateFiller</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L16">ReadmeTemplateGenerator</a> class:
 </h1>
 
 
@@ -10,9 +10,9 @@
 
 
 ```php
-namespace BumbleDocGen\TemplateGenerator\ChatGpt;
+namespace BumbleDocGen\AI\Generators;
 
-final class ReadmeTemplateFiller
+final class ReadmeTemplateGenerator
 ```
 
 
@@ -39,13 +39,6 @@ final class ReadmeTemplateFiller
 </ol>
 
 
-<h2>Constants:</h2>
-<ul>
-            <li><a name="qmodel-gpt-4"
-               href="#qmodel-gpt-4">#</a>
-            <code>MODEL_GPT_4</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/ReadmeTemplateFiller.php#L19">source
-                    code</a> </li>
-    </ul>
 
 
 
@@ -58,11 +51,11 @@ final class ReadmeTemplateFiller
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/ReadmeTemplateFiller.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L18">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = self::MODEL_GPT_4);
+public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
 ```
 
 
@@ -79,13 +72,8 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model
     </thead>
     <tbody>
             <tr>
-            <td>$openaiClient</td>
-            <td><a href='https://github.com/tectalichq/public-openai-client-php/blob/master/src/Client.php'>\Tectalic\OpenAi\Client</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$model</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>$aiHandler</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -100,7 +88,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model
 <ul>
 <li><a name="mgeneratereadmefilecontent" href="#mgeneratereadmefilecontent">#</a>
  <b>generateReadmeFileContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/ReadmeTemplateFiller.php#L40">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L35">source code</a></li>
 </ul>
 
 ```php
@@ -148,9 +136,6 @@ public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootE
 
 <b>Throws:</b>
 <ul>
-<li>
-    <a href="https://github.com/tectalichq/public-openai-client-php/blob/master/src/ClientException.php">\Tectalic\OpenAi\ClientException</a></li>
-
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 

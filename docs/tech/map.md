@@ -6,14 +6,10 @@ Directory layout ( only documented files shown ):
 │  ├──<b>AI</b>/
 │  │  ├──<b>Console</b>/
 │  │  │  ├── <a href='/docs/tech/classes/AddDocBlocksCommand.md'>AddDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/GenerateReadMeTemplateCommand.md'>GenerateReadMeTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/GenerateTemplatesContentCommand.md'>GenerateTemplatesContentCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  └── <a href='/docs/tech/classes/InitDocsStructureCommand.md'>InitDocsStructureCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateReadMeTemplateCommand.md'>GenerateReadMeTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  ├──<b>Generators</b>/
 │  │  │  ├── <a href='/docs/tech/classes/DocBlocksGenerator.md'>DocBlocksGenerator.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/ReadmeTemplateGenerator.md'>ReadmeTemplateGenerator.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/TemplateContentGenerator.md'>TemplateContentGenerator.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/TemplateStructureGenerator.md'>TemplateStructureGenerator.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/ReadmeTemplateGenerator.md'>ReadmeTemplateGenerator.php</a> 
 │  │  ├──<b>Providers</b>/
 │  │  │  └──<b>OpenAI</b>/
 │  │  │  │  └── <a href='/docs/tech/classes/Provider.md'>Provider.php</a> 
