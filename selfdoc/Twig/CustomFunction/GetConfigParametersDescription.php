@@ -27,11 +27,13 @@ final class GetConfigParametersDescription implements CustomFunctionInterface
             preg_match("/({$name}:)([^#]+)(#)(( ?\([^\\)]+\\))?)(.*)/", $configContent, $matches);
             if (is_array($defaultValue)) {
                 if (is_associative_array($defaultValue)) {
-                    $tmpDefaultValue = "<a>{$defaultValue['class']}|short_form</a>";
+                    $shortName = array_reverse(explode('\\', $defaultValue['class']))[0];
+                    $tmpDefaultValue = "[a x-title='{$shortName}']{$defaultValue['class']}[/a]";
                 } else {
                     $tmpDefaultValue = "\n\n";
                     foreach ($defaultValue as $v) {
-                        $tmpDefaultValue .= "- <a>{$v['class']}|short_form</a>\n\n";
+                        $shortName = array_reverse(explode('\\', $v['class']))[0];
+                        $tmpDefaultValue .= "- [a x-title='{$shortName}']{$v['class']}[/a]\n\n";
                     }
                 }
                 $defaultValue = $tmpDefaultValue;

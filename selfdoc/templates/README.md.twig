@@ -13,14 +13,14 @@ Add the BumbleDocGen to the `composer.json` file of your project using the follo
 
 {{ "Detailed technical description" | textToHeading('H2') }}
 
-💡 Please refer to the <a href="{{ getDocumentationPageUrl('Technical description of the project') }}">Description of the technical part of the project</a> for a detailed explanation of all the classes and methods used.
+💡 Please refer to the [a x-title="Description of the technical part of the project"]Technical description of the project[/a] for a detailed explanation of all the classes and methods used.
 
 {{ "Core Features" | textToHeading('H2') }}
 
-- 🔍 <b><a href="{{ getDocumentationPageUrl('Parser') }}">Parsing</a>:</b>
+- 🔍 <b>[a x-title="Parsing"]Parser[/a]:</b>
   BumbleDocGen scans your project by parsing PHP files, extracting comments, and providing detailed models of your code.
 
-- ✍️ <b><a href="{{ getDocumentationPageUrl('Renderer') }}">Rendering</a>:</b>
+- ✍️ <b>[a x-title="Rendering"]Renderer[/a]:</b>
   BumbleDocGen generates markdown content using templates and fills them with data obtained from parsing your code.
 
 - 🧠 <b>AI tools for documentation generation:</b>
@@ -30,9 +30,9 @@ Add the BumbleDocGen to the `composer.json` file of your project using the follo
 
 {{ "Entry points" | textToHeading('H3') }}
 
-BumbleDocGen's interface consists of mainly two classes: <a>DocGenerator</a> and <a>DocGeneratorFactory</a>.
+BumbleDocGen's interface consists of mainly two classes: [a]DocGenerator[/a] and [a]DocGeneratorFactory[/a].
 
-- <a>DocGenerator</a> provides main operations for generating the documents.
+- [a]DocGenerator[/a] provides main operations for generating the documents.
 
   - `addMissingDocBlocks()`: This method creates missing docBlocks in your code.
   - `fillInReadmeMdTemplate()`: This method prepares the `README.md` file using a predefined template.
@@ -40,7 +40,7 @@ BumbleDocGen's interface consists of mainly two classes: <a>DocGenerator</a> and
   - `generateProjectTemplatesStructure()`: This method creates a structure for project templates.
   - `parseAndGetRootEntityCollectionsGroup()`: This method parses your project's files and collects information for the documentation.
 
-- <a>DocGeneratorFactory</a> provides a method for creating `DocGenerator` instance.
+- [a]DocGeneratorFactory[/a] provides a method for creating `DocGenerator` instance.
 
   - `create(configurationFiles: string)`: This method creates a `DocGenerator` instance using provided configuration files.
   - `setCustomConfigurationParameters(customConfigurationParameters: array)`: This method sets custom configuration parameters for the `DocGenerator` creation.

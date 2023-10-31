@@ -378,7 +378,7 @@ public function loadMethodEntities(): void;
     <a >\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -472,7 +472,7 @@ public function unsafeGet(string $objectName): \BumbleDocGen\LanguageHandler\Php
     <a >\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
