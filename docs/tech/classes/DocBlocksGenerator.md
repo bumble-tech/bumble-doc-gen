@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> MissingDocBlocksGenerator<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DocBlocksGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/MissingDocBlocksGenerator.php#L17">MissingDocBlocksGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L17">DocBlocksGenerator</a> class:
 </h1>
 
 
@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\AI\Generators;
 
-final class MissingDocBlocksGenerator
+final class DocBlocksGenerator
 ```
 
 
@@ -46,11 +46,11 @@ final class MissingDocBlocksGenerator
 <ul>
             <li><a name="qmode-read-all-code"
                href="#qmode-read-all-code">#</a>
-            <code>MODE_READ_ALL_CODE</code>                   <b>|</b> <a href="/src/AI/Generators/MissingDocBlocksGenerator.php#L20">source
+            <code>MODE_READ_ALL_CODE</code>                   <b>|</b> <a href="/src/AI/Generators/DocBlocksGenerator.php#L20">source
                     code</a> </li>
             <li><a name="qmode-read-only-signatures"
                href="#qmode-read-only-signatures">#</a>
-            <code>MODE_READ_ONLY_SIGNATURES</code>                   <b>|</b> <a href="/src/AI/Generators/MissingDocBlocksGenerator.php#L19">source
+            <code>MODE_READ_ONLY_SIGNATURES</code>                   <b>|</b> <a href="/src/AI/Generators/DocBlocksGenerator.php#L19">source
                     code</a> </li>
     </ul>
 
@@ -65,7 +65,7 @@ final class MissingDocBlocksGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/MissingDocBlocksGenerator.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L22">source code</a></li>
 </ul>
 
 ```php
@@ -107,11 +107,11 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler, \Bumb
 <ul>
 <li><a name="mgeneratedocblocksformethodswithoutit" href="#mgeneratedocblocksformethodswithoutit">#</a>
  <b>generateDocBlocksForMethodsWithoutIt</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/MissingDocBlocksGenerator.php#L55">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L55">source code</a></li>
 </ul>
 
 ```php
-public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $rootEntity, int $mode = self::MODE_READ_ONLY_SIGNATURES): array;
+public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $rootEntity, string|null $systemPrompt = null, int $mode = self::MODE_READ_ONLY_SIGNATURES): array;
 ```
 
 
@@ -130,6 +130,11 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
             <tr>
             <td>$rootEntity</td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$systemPrompt</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -166,7 +171,7 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
 <ul>
 <li><a name="mhasmethodswithoutdocblocks" href="#mhasmethodswithoutdocblocks">#</a>
  <b>hasMethodsWithoutDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/MissingDocBlocksGenerator.php#L34">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L34">source code</a></li>
 </ul>
 
 ```php

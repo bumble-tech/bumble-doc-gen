@@ -4,30 +4,28 @@ Directory layout ( only documented files shown ):
 
 <embed> <pre>└──<b>src</b>/
 │  ├──<b>AI</b>/
+│  │  ├──<b>Console</b>/
+│  │  │  ├── <a href='/docs/tech/classes/AddDocBlocksCommand.md'>AddDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/GenerateReadMeTemplateCommand.md'>GenerateReadMeTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/GenerateTemplatesContentCommand.md'>GenerateTemplatesContentCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/InitDocsStructureCommand.md'>InitDocsStructureCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  ├──<b>Generators</b>/
-│  │  │  ├── <a href='/docs/tech/classes/MissingDocBlocksGenerator.md'>MissingDocBlocksGenerator.php</a> 
+│  │  │  ├── <a href='/docs/tech/classes/DocBlocksGenerator.md'>DocBlocksGenerator.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/ReadmeTemplateGenerator.md'>ReadmeTemplateGenerator.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/TemplateGenerator.md'>TemplateGenerator.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/TemplatesStructureGenerator.md'>TemplatesStructureGenerator.php</a> 
+│  │  │  ├── <a href='/docs/tech/classes/TemplateContentGenerator.md'>TemplateContentGenerator.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/TemplateStructureGenerator.md'>TemplateStructureGenerator.php</a> 
 │  │  ├──<b>Providers</b>/
-│  │  │  ├──<b>HuggingFace</b>/
-│  │  │  │  └── <a href='/docs/tech/classes/Provider.md'>Provider.php</a> 
-│  │  │  ├──<b>Ollama</b>/
-│  │  │  │  └── <a href='/docs/tech/classes/Provider_2.md'>Provider.php</a> 
 │  │  │  └──<b>OpenAI</b>/
-│  │  │  │  └── <a href='/docs/tech/classes/Provider_3.md'>Provider.php</a> 
+│  │  │  │  └── <a href='/docs/tech/classes/Provider.md'>Provider.php</a> 
 │  │  ├──<b>Traits</b>/
-│  │  │  └── <a href='/docs/tech/classes/JsonExtractorTrait.md'>JsonExtractorTrait.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/SharedCommandLogicTrait.md'>SharedCommandLogicTrait.php</a> 
 │  │  ├── <a href='/docs/tech/classes/ProviderFactory.md'>ProviderFactory.php</a> 
 │  │  └── <a href='/docs/tech/classes/ProviderInterface.md'>ProviderInterface.php</a> 
 │  ├──<b>Console</b>/
 │  │  ├──<b>Command</b>/
-│  │  │  ├── <a href='/docs/tech/classes/AddMissingDocBlocksCommand.md'>AddMissingDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/AdditionalCommandCollection.md'>AdditionalCommandCollection.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/BaseCommand.md'>BaseCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/FillInReadmeMdTemplateCommand.md'>FillInReadmeMdTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  └── <a href='/docs/tech/classes/GenerateProjectTemplatesStructureCommand.md'>GenerateProjectTemplatesStructureCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  ├──<b>ProgressBar</b>/
 │  │  │  ├── <a href='/docs/tech/classes/ProgressBarFactory.md'>ProgressBarFactory.php</a> 
 │  │  │  └── <a href='/docs/tech/classes/StylizedProgressBar.md'>StylizedProgressBar.php</a> 
@@ -108,6 +106,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  └──<b>PageLinker</b>/
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BasePageLinker.md'>BasePageLinker.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/PageHtmlLinkerPlugin.md'>PageHtmlLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in HTML format; Links may contain: 1) Short entity name 2) Full entity n...</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/PageLinkerPlugin.md'>PageLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in HTML format; Links may contain: 1) Short entity name 2) Full entity n...</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/PageRstLinkerPlugin.md'>PageRstLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in rst format; Links may contain: 1) Short entity name 2) Full entity na...</samp></i>
 │  │  │  ├──<b>Event</b>/
 │  │  │  │  ├──<b>Parser</b>/
@@ -263,4 +262,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 27 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Tue Oct 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

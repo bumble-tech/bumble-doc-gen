@@ -92,7 +92,7 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
 </ul>
 
 ```php
-public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, array $entryPoints = [], string|null $composerJsonFile = null, string|null $additionalPrompt = null): string;
+public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, array $entryPoints = [], string|null $composerJsonFile = null, string|null $additionalPrompt = null, string|null $systemPrompt = null): string;
 ```
 
 
@@ -125,6 +125,11 @@ public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootE
         </tr>
             <tr>
             <td>$additionalPrompt</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$systemPrompt</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>

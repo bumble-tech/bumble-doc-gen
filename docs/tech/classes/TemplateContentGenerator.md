@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> TemplateGenerator<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> TemplateContentGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateGenerator.php#L16">TemplateGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateContentGenerator.php#L16">TemplateContentGenerator</a> class:
 </h1>
 
 
@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\AI\Generators;
 
-final class TemplateGenerator
+final class TemplateContentGenerator
 ```
 
 
@@ -36,9 +36,6 @@ final class TemplateGenerator
 <li>
     <a href="#mgenerate">generate</a>
     </li>
-<li>
-    <a href="#mgetfilesubpathfrompath">getFileSubPathFromPath</a>
-    </li>
 </ol>
 
 
@@ -54,7 +51,7 @@ final class TemplateGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateGenerator.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateContentGenerator.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -91,11 +88,11 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
 <ul>
 <li><a name="mgenerate" href="#mgenerate">#</a>
  <b>generate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateGenerator.php#L107">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateContentGenerator.php#L31">source code</a></li>
 </ul>
 
 ```php
-public function generate(string $filePath, string $fileContent, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection|null $entitiesCollection, string|null $additionalPrompt = null): string|null;
+public function generate(string $filePath, string $fileName, array $fileNamespaces, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection|null $entitiesCollection, string|null $additionalPrompt = null, string|null $systemPrompt = null): string|null;
 ```
 
 
@@ -117,8 +114,13 @@ public function generate(string $filePath, string $fileContent, \BumbleDocGen\La
             <td>-</td>
         </tr>
             <tr>
-            <td>$fileContent</td>
+            <td>$fileName</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$fileNamespaces</td>
+            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -128,6 +130,11 @@ public function generate(string $filePath, string $fileContent, \BumbleDocGen\La
         </tr>
             <tr>
             <td>$additionalPrompt</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$systemPrompt</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>
@@ -152,44 +159,6 @@ public function generate(string $filePath, string $fileContent, \BumbleDocGen\La
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetfilesubpathfrompath" href="#mgetfilesubpathfrompath">#</a>
- <b>getFileSubPathFromPath</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateGenerator.php#L88">source code</a></li>
-</ul>
-
-```php
-public function getFileSubPathFromPath(string $path): mixed;
-```
-
-
-
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$path</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.mixed.php'>mixed</a>
-
 
 </div>
 <hr>

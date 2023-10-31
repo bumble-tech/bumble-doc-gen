@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> Provider<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/HuggingFace/Provider.php#L13">Provider</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L13">Provider</a> class:
 </h1>
 
 
@@ -10,7 +10,7 @@
 
 
 ```php
-namespace BumbleDocGen\AI\Providers\HuggingFace;
+namespace BumbleDocGen\AI\Providers\OpenAI;
 
 final class Provider implements \BumbleDocGen\AI\ProviderInterface
 ```
@@ -34,51 +34,31 @@ final class Provider implements \BumbleDocGen\AI\ProviderInterface
 
 <ol>
 <li>
-    <a href="#mgeneratemissingphpdocblocs">generateMissingPHPDocBlocs</a>
+    <a href="#mformatdataprompt">formatDataPrompt</a>
     </li>
 <li>
-    <a href="#mgeneratereadmefilecontent">generateReadMeFileContent</a>
-    </li>
-<li>
-    <a href="#mgeneratetemplatecontent">generateTemplateContent</a>
-    </li>
-<li>
-    <a href="#mgeneratetemplatestructure">generateTemplateStructure</a>
+    <a href="#mgetavailablemodels">getAvailableModels</a>
     </li>
 <li>
     <a href="#mgetname">getName</a>
     </li>
 <li>
-    <a href="#msendprompt">sendPrompt</a>
+    <a href="#mgetsystemprompt">getSystemPrompt</a>
+    </li>
+<li>
+    <a href="#msendprompts">sendPrompts</a>
     </li>
 </ol>
 
-<h2>Traits:</h2>
 
+<h2>Constants:</h2>
 <ul>
-        <li><b><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Traits/JsonExtractorTrait.php'>\BumbleDocGen\AI\Traits\JsonExtractorTrait</a></b></li>
+            <li><a name="qname"
+               href="#qname">#</a>
+            <code>NAME</code>                   <b>|</b> <a href="/src/AI/Providers/OpenAI/Provider.php#L18">source
+                    code</a> </li>
     </ul>
 
-
-<h2>Properties:</h2>
-
-<ol>
-            <li>
-            <a href="#pextractfirstjsonobject">extractFirstJsonObject</a> </li>
-    </ol>
-
-
-
-<h2>Property details:</h2>
-
-
-* <a name="pextractfirstjsonobject" href="#pextractfirstjsonobject">#</a>
- <b>$extractFirstJsonObject</b>
-    **|** <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/HuggingFace/Provider.php#L17">source code</a>
-```php
-public bool $extractFirstJsonObject;
-
-```
 
 
 
@@ -90,11 +70,11 @@ public bool $extractFirstJsonObject;
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/HuggingFace/Provider.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L26">source code</a></li>
 </ul>
 
 ```php
-public function __construct(mixed $bearerToken, mixed $apiEndpoint);
+public function __construct(string $bearerToken, string|null $model);
 ```
 
 
@@ -112,12 +92,12 @@ public function __construct(mixed $bearerToken, mixed $apiEndpoint);
     <tbody>
             <tr>
             <td>$bearerToken</td>
-            <td><a href='https://www.php.net/manual/en/language.types.mixed.php'>mixed</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
             <tr>
-            <td>$apiEndpoint</td>
-            <td><a href='https://www.php.net/manual/en/language.types.mixed.php'>mixed</a></td>
+            <td>$model</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -130,13 +110,13 @@ public function __construct(mixed $bearerToken, mixed $apiEndpoint);
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgeneratemissingphpdocblocs" href="#mgeneratemissingphpdocblocs">#</a>
- <b>generateMissingPHPDocBlocs</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/HuggingFace/Provider.php#L40">source code</a></li>
+<li><a name="mformatdataprompt" href="#mformatdataprompt">#</a>
+ <b>formatDataPrompt</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L101">source code</a></li>
 </ul>
 
 ```php
-public function generateMissingPHPDocBlocs(string $prompt): string;
+public function formatDataPrompt(string $title, string $content): string;
 ```
 
 
@@ -153,7 +133,12 @@ public function generateMissingPHPDocBlocs(string $prompt): string;
     </thead>
     <tbody>
             <tr>
-            <td>$prompt</td>
+            <td>$title</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$content</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
@@ -168,119 +153,31 @@ public function generateMissingPHPDocBlocs(string $prompt): string;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgeneratereadmefilecontent" href="#mgeneratereadmefilecontent">#</a>
- <b>generateReadMeFileContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/HuggingFace/Provider.php#L46">source code</a></li>
+<li><a name="mgetavailablemodels" href="#mgetavailablemodels">#</a>
+ <b>getAvailableModels</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L110">source code</a></li>
 </ul>
 
 ```php
-public function generateReadMeFileContent(array $prompts): string;
+public function getAvailableModels(): array;
 ```
 
 
 
-<b>Parameters:</b>
+<b>Parameters:</b> not specified
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$prompts</td>
-            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
 
 
-</div>
-<hr>
-<div class='method_description-block'>
-
+<b>Throws:</b>
 <ul>
-<li><a name="mgeneratetemplatecontent" href="#mgeneratetemplatecontent">#</a>
- <b>generateTemplateContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/HuggingFace/Provider.php#L52">source code</a></li>
+<li>
+    <a >\GuzzleHttp\Exception\GuzzleException</a></li>
+
+<li>
+    <a href="https://www.php.net/manual/en/class.jsonexception.php">\JsonException</a></li>
+
 </ul>
-
-```php
-public function generateTemplateContent(array $prompts): string;
-```
-
-
-
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$prompts</td>
-            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgeneratetemplatestructure" href="#mgeneratetemplatestructure">#</a>
- <b>generateTemplateStructure</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/HuggingFace/Provider.php#L58">source code</a></li>
-</ul>
-
-```php
-public function generateTemplateStructure(array $namespacesList, string|null $additionalPrompt): string;
-```
-
-
-
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$namespacesList</td>
-            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$additionalPrompt</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
 
 </div>
 <hr>
@@ -289,7 +186,7 @@ public function generateTemplateStructure(array $namespacesList, string|null $ad
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/HuggingFace/Provider.php#L75">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L51">source code</a></li>
 </ul>
 
 ```php
@@ -308,13 +205,51 @@ public function getName(): string;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="msendprompt" href="#msendprompt">#</a>
- <b>sendPrompt</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/HuggingFace/Provider.php#L80">source code</a></li>
+<li><a name="mgetsystemprompt" href="#mgetsystemprompt">#</a>
+ <b>getSystemPrompt</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L96">source code</a></li>
 </ul>
 
 ```php
-public function sendPrompt(array $prompts, string $system): string;
+public function getSystemPrompt(string $fileName): string;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$fileName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="msendprompts" href="#msendprompts">#</a>
+ <b>sendPrompts</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Providers/OpenAI/Provider.php#L56">source code</a></li>
+</ul>
+
+```php
+public function sendPrompts(array $prompts, string $system): string;
 ```
 
 

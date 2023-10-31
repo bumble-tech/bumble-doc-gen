@@ -57,6 +57,23 @@ Plugins for any programming languages work regardless of which language handler 
  6) Relative reference to the entity document from the root directory of the documentation</td>
     </tr>
     <tr>
+        <td><a href='/docs/tech/4.pluginSystem/classes/PageLinkerPlugin.md'>PageLinkerPlugin</a></td>
+        <td>any</td>
+        <td>
+            <ul>
+                            <li><a href="/docs/tech/4.pluginSystem/classes/BeforeCreatingDocFile.md">BeforeCreatingDocFile</a></li>
+                        </ul>
+        </td>
+        <td>Adds URLs to empty links in HTML format;
+ Links may contain:
+ 1) Short entity name
+ 2) Full entity name
+ 3) Relative link to the entity file from the root directory of the project
+ 4) Page title ( title )
+ 5) Template key ( BreadcrumbsHelper::getTemplateLinkKey() )
+ 6) Relative reference to the entity document from the root directory of the documentation</td>
+    </tr>
+    <tr>
         <td><a href='/docs/tech/4.pluginSystem/classes/PageRstLinkerPlugin.md'>PageRstLinkerPlugin</a></td>
         <td>any</td>
         <td>
@@ -206,4 +223,4 @@ plugins:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 27 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Tue Oct 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

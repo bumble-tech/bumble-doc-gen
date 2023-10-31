@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GenerateProjectTemplatesStructureCommand<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GenerateReadMeTemplateCommand<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/GenerateProjectTemplatesStructureCommand.php#L15">GenerateProjectTemplatesStructureCommand</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Console/GenerateReadMeTemplateCommand.php#L18">GenerateReadMeTemplateCommand</a> class:
 </h1>
 
 
@@ -10,9 +10,9 @@
 
 
 ```php
-namespace BumbleDocGen\Console\Command;
+namespace BumbleDocGen\AI\Console;
 
-final class GenerateProjectTemplatesStructureCommand extends \BumbleDocGen\Console\Command\BaseCommand
+final class GenerateReadMeTemplateCommand extends \BumbleDocGen\Console\Command\BaseCommand
 ```
 
 <blockquote>Base class for all commands.</blockquote>
@@ -134,6 +134,11 @@ final class GenerateProjectTemplatesStructureCommand extends \BumbleDocGen\Conso
     - <i>Sets the process title of the command.</i></li>
 </ol>
 
+<h2>Traits:</h2>
+
+<ul>
+        <li><b><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Traits/SharedCommandLogicTrait.php'>\BumbleDocGen\AI\Traits\SharedCommandLogicTrait</a></b></li>
+    </ul>
 
 <h2>Constants:</h2>
 <ul>
@@ -144,6 +149,10 @@ final class GenerateProjectTemplatesStructureCommand extends \BumbleDocGen\Conso
             <li><a name="qinvalid"
                href="#qinvalid">#</a>
             <code>INVALID</code>                   <b>|</b> <a href="/vendor/symfony/console/Command/Command.php#L38">source
+                    code</a> </li>
+            <li><a name="qname"
+               href="#qname">#</a>
+            <code>NAME</code>                   <b>|</b> <a href="/src/AI/Console/GenerateReadMeTemplateCommand.php#L22">source
                     code</a> </li>
             <li><a name="qsuccess"
                href="#qsuccess">#</a>

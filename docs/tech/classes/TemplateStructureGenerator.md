@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> TemplatesStructureGenerator<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> TemplateStructureGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplatesStructureGenerator.php#L14">TemplatesStructureGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateStructureGenerator.php#L15">TemplateStructureGenerator</a> class:
 </h1>
 
 
@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\AI\Generators;
 
-final class TemplatesStructureGenerator
+final class TemplateStructureGenerator
 ```
 
 
@@ -51,11 +51,11 @@ final class TemplatesStructureGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplatesStructureGenerator.php#L16">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateStructureGenerator.php#L17">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
+public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler, string $aiConfigDirectory);
 ```
 
 
@@ -76,6 +76,11 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$aiConfigDirectory</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
         </tbody>
 </table>
 
@@ -88,11 +93,11 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
 <ul>
 <li><a name="mgeneratestructurebyentitycollection" href="#mgeneratestructurebyentitycollection">#</a>
  <b>generateStructureByEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplatesStructureGenerator.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateStructureGenerator.php#L26">source code</a></li>
 </ul>
 
 ```php
-public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $additionalPrompt = null): array;
+public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $additionalPrompt = null, string|null $systemPrompt = null): array;
 ```
 
 
@@ -118,6 +123,11 @@ public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\En
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$systemPrompt</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
         </tbody>
 </table>
 
@@ -131,6 +141,9 @@ public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\En
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+<li>
+    <a href="https://www.php.net/manual/en/class.jsonexception.php">\JsonException</a></li>
 
 </ul>
 
