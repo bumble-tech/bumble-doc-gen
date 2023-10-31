@@ -91,6 +91,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  └──<b>PageLinker</b>/
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BasePageLinker.md'>BasePageLinker.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/PageHtmlLinkerPlugin.md'>PageHtmlLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in HTML format; Links may contain: 1) Short entity name 2) Full entity n...</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/PageLinkerPlugin.md'>PageLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in HTML format; Links may contain: 1) Short entity name 2) Full entity n...</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/PageRstLinkerPlugin.md'>PageRstLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in rst format; Links may contain: 1) Short entity name 2) Full entity na...</samp></i>
 │  │  │  ├──<b>Event</b>/
 │  │  │  │  ├──<b>Parser</b>/
@@ -212,12 +213,10 @@ Directory layout ( only documented files shown ):
 │  │  │  │  ├──<b>CorePlugin</b>/
 │  │  │  │  │  ├──<b>BasePhpStubber</b>/
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/BasePhpStubberPlugin.md'>BasePhpStubberPlugin.php</a> <i> — <samp>Adding links to type documentation and documentation of built-in PHP classes</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/ComposerStubberPlugin.md'>ComposerStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Composer namespace</samp></i>
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/PhpDocumentorStubberPlugin.md'>PhpDocumentorStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \phpDocumentor namespace</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/PhpUnitStubberPlugin.md'>PhpUnitStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \PHPUnit namespace</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/PsrClassesStubberPlugin.md'>PsrClassesStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Psr namespace</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/SymfonyComponentStubberPlugin.md'>SymfonyComponentStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Symfony\Component namespace</samp></i>
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/TwigStubberPlugin.md'>TwigStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Twig namespace</samp></i>
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/PhpUnitStubberPlugin.md'>PhpUnitStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \PHPUnit namespace</samp></i>
+│  │  │  │  │  ├──<b>ComposerPackagesStubber</b>/
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/StubberPlugin.md'>StubberPlugin.php</a> <i> — <samp>The plugin allows you to automatically provide links to github repositories for documented classe...</samp></i>
 │  │  │  │  │  └──<b>EntityDocUnifiedPlace</b>/
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin.php</a> <i> — <samp>This plugin changes the algorithm for saving entity documents. The standard system stores each fi...</samp></i>
 │  │  │  │  └──<b>Event</b>/
@@ -251,4 +250,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Fri Oct 27 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Tue Oct 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

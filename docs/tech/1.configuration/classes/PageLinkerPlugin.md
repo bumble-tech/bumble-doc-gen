@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/4.pluginSystem/readme.md">Plugin system</a> <b>/</b> PageHtmlLinkerPlugin<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/1.configuration/readme.md">Configuration files</a> <b>/</b> PageLinkerPlugin<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/PageHtmlLinkerPlugin.php#L29">PageHtmlLinkerPlugin</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/PageLinkerPlugin.php#L29">PageLinkerPlugin</a> class:
 </h1>
 
 
@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\CorePlugin\PageLinker;
 
-final class PageHtmlLinkerPlugin extends \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\BasePageLinker implements \BumbleDocGen\Core\Plugin\PluginInterface, \Symfony\Component\EventDispatcher\EventSubscriberInterface
+final class PageLinkerPlugin extends \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\BasePageLinker implements \BumbleDocGen\Core\Plugin\PluginInterface, \Symfony\Component\EventDispatcher\EventSubscriberInterface
 ```
 
 <blockquote>Adds URLs to empty links in HTML format;
@@ -28,22 +28,22 @@ final class PageHtmlLinkerPlugin extends \BumbleDocGen\Core\Plugin\CorePlugin\Pa
 <b>Examples of using:</b>
 
 ```php
-<a>Existent page name</a> => <a href="/docs/some/page/targetPage.html">Existent page name</a>
+[a]Existent page name[/a] => <a href="/docs/some/page/targetPage.html">Existent page name</a>
 
 ```
 
 ```php
-<a x-title="Custom title">\Namespace\ClassName</a> => <a href="/docs/some/page/ClassName.md">Custom title</a>
+[a x-title="Custom title"]\Namespace\ClassName[/a] => <a href="/docs/some/page/ClassName.md">Custom title</a>
 
 ```
 
 ```php
-<a>\Namespace\ClassName</a> => <a href="/docs/some/page/ClassName.md">\Namespace\ClassName</a>
+[a]\Namespace\ClassName[/a] => <a href="/docs/some/page/ClassName.md">\Namespace\ClassName</a>
 
 ```
 
 ```php
-<a>Non-existent page name</a> => Non-existent page name
+[a]Non-existent page name[/a] => Non-existent page name
 
 ```
 
@@ -180,10 +180,10 @@ public function beforeCreatingDocFile(\BumbleDocGen\Core\Plugin\Event\Renderer\B
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/4.pluginSystem/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/1.configuration/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/4.pluginSystem/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/1.configuration/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
