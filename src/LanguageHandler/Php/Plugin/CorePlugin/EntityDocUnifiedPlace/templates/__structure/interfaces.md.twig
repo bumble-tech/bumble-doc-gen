@@ -7,6 +7,6 @@
 <table>
 <tr><th>Name</th><th>Namespace</th></tr>
 {% for interfaceEntity in phpClassEntityCollection.getOnlyInterfaces() %}
-<tr><td><a>{{ interfaceEntity.getName() }}|short_form</a><td>{{ interfaceEntity.getNamespaceName() }}</td></tr>
+<tr><td>[a x-title='{{ interfaceEntity.getShortName() }}']{{ interfaceEntity.getName() }}[/a]<td>{{ interfaceEntity.getNamespaceName() }}</td></tr>
 {% endfor %}
 </table>
