@@ -390,7 +390,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
                 $entity = $index[$preparedSearch];
                 $foundKey = $preparedSearch;
             } elseif (
-                preg_match('/^(\/?)(([a-zA-Z_])([a-zA-Z_0-9\/]+))((::|->))?/', $preparedSearch, $matches) &&
+                preg_match('/^(\/?)(([a-zA-Z_])([a-zA-Z_0-9\\\\]+))((::|->))?/', $preparedSearch, $matches) &&
                 isset($index[$matches[2]])
             ) {
                 $entity = $index[$matches[2]];
