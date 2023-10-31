@@ -37,7 +37,6 @@ final class ReadmeTemplateGenerator
         array $entryPoints = [],
         ?string $composerJsonFile = null,
         ?string $additionalPrompt = null,
-        ?string $systemPrompt = null,
     ): string {
         if (!is_a($rootEntityCollection, ClassEntityCollection::class)) {
             throw new \InvalidArgumentException('Currently we can only work with collections of PHP entities');
@@ -81,9 +80,7 @@ final class ReadmeTemplateGenerator
             $prompts[] = $this->aiHandler->formatDataPrompt('Additional Information', $additionalPrompt);
         }
 
-        if ($systemPrompt === null) {
-            $systemPrompt = $this->aiHandler->getSystemPrompt('readmeTemplateGeneration');
-        }
+        $systemPrompt = $this->aiHandler->getSystemPrompt('readmeTemplateGeneration');
         return $this->aiHandler->sendPrompts($prompts, $systemPrompt);
     }
 }

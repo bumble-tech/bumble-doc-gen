@@ -29,19 +29,13 @@ final class Provider implements ProviderInterface
             'Authorization' => 'Bearer ' . $bearerToken
         ];
 
-        //todo: pass through in config
-        $organisation = null;
-        if ($organisation !== null) {
-            $headers['OpenAI-Organization'] = $organisation;
-        }
-
         $client = new Client(
             [
                 'headers' => $headers
             ]
         );
         $this->client = $client;
-        $this->model = $model;
+        $this->model = $model ?? 'gpt-4';
         $this->temperature = 0.5;
         $this->frequencyPenalty = 0;
         $this->maxTokens = null;

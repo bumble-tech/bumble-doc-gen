@@ -98,27 +98,6 @@ final class Configuration
         return $templatesDir;
     }
 
-    public function getAiDataDir(): string
-    {
-        $dataDir = $this->parameterBag->getSubConfigurationParameterBag('ai')->validateAndGetStringValue(
-            'data_dir',
-            false
-        );
-        $parentDir = dirname($dataDir);
-        if (!$parentDir || !is_dir($parentDir)) {
-            throw new InvalidConfigurationParameterException(
-                "`ai:data_dir` cannot be created because parent directory `{$parentDir}` does not exist"
-            );
-        }
-        if (!file_exists($dataDir)) {
-            $this->logger->notice("Creating `{$dataDir}` directory");
-            mkdir($dataDir);
-        }
-        $dataDir = realpath($dataDir);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $dataDir);
-        return $dataDir;
-    }
-
     /**
      * @throws InvalidConfigurationParameterException
      */
@@ -377,17 +356,22 @@ final class Configuration
         return $additionalCommandCollection;
     }
 
-    public function getAIConfig(): array
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getIfExists($key): ?string
     {
         try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $key);
         } catch (ObjectNotFoundException) {
         }
-        if (!$this->parameterBag->has('ai')) {
-            return [];
+
+        if (!$this->parameterBag->has($key)) {
+            return null;
         }
-        $aiConfig = $this->parameterBag->get('ai', false);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $aiConfig);
-        return $aiConfig;
+        $value = $this->parameterBag->validateAndGetStringValue($key, false);
+
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $key, $value);
+        return $value;
     }
 }

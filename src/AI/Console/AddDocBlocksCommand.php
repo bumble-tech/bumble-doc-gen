@@ -27,6 +27,9 @@ final class AddDocBlocksCommand extends BaseCommand
             'project_root' => 'Path to the directory of the documented project',
             'templates_dir' => 'Path to directory with documentation templates',
             'cache_dir' => 'Configuration parameter: Path to the directory where the documentation generator cache will be saved',
+            'ai_provider' => 'The AI service to use, options: openai',
+            'ai_api_key' => 'The API key to use when interacting with the AI',
+            'ai_model' => 'The AI model to use',
         ];
     }
 
@@ -34,7 +37,6 @@ final class AddDocBlocksCommand extends BaseCommand
     {
         $this->setName(self::NAME)
             ->setDescription('Leverage AI to insert missing doc blocks in code.');
-        $this->addSharedCommandOptions();
     }
 
     /**
@@ -52,18 +54,11 @@ final class AddDocBlocksCommand extends BaseCommand
         InputInterface $input,
         OutputInterface $output
     ): int {
-        $configuration = $this->getConfigurationFromInput($input);
-        $provider = $this->getAIProvider($input, $configuration);
-        $apiKey = $this->getAIApiKey($input, $output, $configuration, $provider);
-        $model = $this->getAIModel($input, $output, $configuration, $provider, $apiKey);
-        $systemPrompt = $this->getValueFromOptionOrConfig($input, $configuration, 'system-prompt');
+        // Initialise AI provider from params/config
+        $aiProvider = $this->initAiProvider($input, $output);
 
-        $this->createDocGenInstance($input, $output)->addDocBlocks(
-            $provider,
-            $apiKey,
-            $model,
-            $systemPrompt
-        );
+        // Generate doc blocks
+        $this->createDocGenInstance($input, $output)->addDocBlocks($aiProvider);
 
         return self::SUCCESS;
     }

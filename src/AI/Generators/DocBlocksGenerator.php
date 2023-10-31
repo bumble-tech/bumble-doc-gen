@@ -54,7 +54,6 @@ final class DocBlocksGenerator
      */
     public function generateDocBlocksForMethodsWithoutIt(
         RootEntityInterface $rootEntity,
-        ?string $systemPrompt = null,
         int $mode = self::MODE_READ_ONLY_SIGNATURES,
     ): array {
         if (!is_a($rootEntity, ClassEntity::class)) {
@@ -151,9 +150,7 @@ final class DocBlocksGenerator
                 $toRequest
             ) . "\n}";
 
-            if ($systemPrompt === null) {
-                $systemPrompt = $this->aiHandler->getSystemPrompt('docBlockGeneration');
-            }
+            $systemPrompt = $this->aiHandler->getSystemPrompt('docBlockGeneration');
             $prompts = [$requestData];
             $responseData = $this->aiHandler->sendPrompts($prompts, $systemPrompt);
             $responseData = json_decode($responseData, true, 512, JSON_THROW_ON_ERROR);

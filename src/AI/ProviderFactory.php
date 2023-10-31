@@ -9,14 +9,14 @@ use RuntimeException;
 
 final class ProviderFactory
 {
-    private const VALID_PROVIDERS = [OpenAIProvider::NAME];
+    public const VALID_PROVIDERS = [OpenAIProvider::NAME];
 
-    public static function create(string $handler, string $apiKey, string $model): ProviderInterface
+    public static function create(string $provider, string $apiKey, ?string $model = null): ProviderInterface
     {
-        return match ($handler) {
+        return match ($provider) {
             OpenAIProvider::NAME => new OpenAIProvider($apiKey, $model),
             default => throw new RuntimeException(
-                "Parameter 'ai-handler' not set to valid option (" . implode(',', self::VALID_PROVIDERS) . ")!",
+                "Parameter 'ai-provider' not set to valid option (" . implode(',', self::VALID_PROVIDERS) . ")!",
             ),
         };
     }

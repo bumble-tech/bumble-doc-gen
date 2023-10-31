@@ -6,7 +6,7 @@ namespace BumbleDocGen;
 
 use BumbleDocGen\AI\Generators\DocBlocksGenerator;
 use BumbleDocGen\AI\Generators\ReadmeTemplateGenerator;
-use BumbleDocGen\AI\ProviderFactory;
+use BumbleDocGen\AI\ProviderInterface;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
@@ -23,7 +23,6 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Exception;
 use Generator;
-use JsonException;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
@@ -82,10 +81,7 @@ final class DocGenerator
      * @throws InvalidConfigurationParameterException
      */
     public function addDocBlocks(
-        string $aiHandler,
-        string $aiApiKey,
-        string $aiModel,
-        ?string $systemPrompt = null,
+        ProviderInterface $aiProvider,
     ): void {
         if (!$this->io->confirm("This command will change the source code of your project. Continue?")) {
             return;
@@ -93,9 +89,6 @@ final class DocGenerator
 
         $this->parser->parse();
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
-
-        $aiProvider = ProviderFactory::create($aiHandler, $aiApiKey, $aiModel);
-
         $missingDocBlocksGenerator = new DocBlocksGenerator($aiProvider, $this->parserHelper);
 
         $alreadyProcessedEntities = [];
@@ -136,7 +129,7 @@ final class DocGenerator
                 continue;
             }
             $this->logger->notice("Processing `{$entity->getName()}` class");
-            $newBocBlocks = $missingDocBlocksGenerator->generateDocBlocksForMethodsWithoutIt($entity, $systemPrompt);
+            $newBocBlocks = $missingDocBlocksGenerator->generateDocBlocksForMethodsWithoutIt($entity);
 
             $classFileContent = $entity->getFileContent();
             $toReplace = [];
@@ -172,10 +165,7 @@ final class DocGenerator
      * @throws InvalidConfigurationParameterException
      */
     public function generateReadmeTemplate(
-        string $aiHandler,
-        string $aiApiKey,
-        string $aiModel,
-        ?string $systemPrompt = null,
+        ProviderInterface $aiProvider,
     ): void {
         $this->io->note("Project analysis");
         $this->parser->parse();
@@ -234,7 +224,6 @@ final class DocGenerator
             'Write instructions for more accurate documentation generation ( or just skip this step )'
         );
 
-        $aiProvider = ProviderFactory::create($aiHandler, $aiApiKey, $aiModel);
         $readmeTemplateFiller = new ReadmeTemplateGenerator($aiProvider);
         $this->io->note("Sending " . $aiProvider->getName() . " request");
         $readmeFileContent = $readmeTemplateFiller->generateReadmeFileContent(
@@ -242,7 +231,6 @@ final class DocGenerator
             $entryPoints,
             $composerJsonFile,
             $additionalPrompt,
-            $systemPrompt
         );
 
         $fileContent = "{% set title = 'About the project' %}\n{$readmeFileContent}";
