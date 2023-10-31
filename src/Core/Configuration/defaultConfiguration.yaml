@@ -33,5 +33,4 @@ twig_filters:                     # (array<CustomFilterInterface>) Filters that 
 plugins:                          # (array<PluginInterface>|null) List of plugins
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageLinkerPlugin
-  - class: \BumbleDocGen\Core\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter
 additional_console_commands:      # (array<Command>) Additional console commands

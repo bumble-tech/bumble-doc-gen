@@ -254,7 +254,7 @@ public function add(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity 
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
@@ -328,7 +328,7 @@ public function filterByInterfaces(array $interfaces): \BumbleDocGen\LanguageHan
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -414,7 +414,7 @@ public function filterByParentClassNames(array $parentClassNames): \BumbleDocGen
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -462,7 +462,7 @@ public function filterByPaths(array $paths): \BumbleDocGen\LanguageHandler\Php\P
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -778,7 +778,7 @@ public function getOnlyAbstractClasses(): \BumbleDocGen\LanguageHandler\Php\Pars
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -809,7 +809,7 @@ public function getOnlyInstantiable(): \BumbleDocGen\LanguageHandler\Php\Parser\
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -840,7 +840,7 @@ public function getOnlyInterfaces(): \BumbleDocGen\LanguageHandler\Php\Parser\En
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -871,7 +871,7 @@ public function getOnlyTraits(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1065,10 +1065,10 @@ public function internalGetLoadedOrCreateNew(string $objectName, bool $withAddCl
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -1119,16 +1119,16 @@ public function loadClassEntities(): void;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

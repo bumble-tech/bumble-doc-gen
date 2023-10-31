@@ -197,10 +197,10 @@ public function getAdditionalConsoleCommands(): \BumbleDocGen\Console\Command\Ad
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -329,10 +329,10 @@ public function getLanguageHandlersCollection(): \BumbleDocGen\LanguageHandler\L
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -419,13 +419,13 @@ public function getPageLinkProcessor(): \BumbleDocGen\Core\Renderer\PageLinkProc
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -453,13 +453,13 @@ public function getPlugins(): \BumbleDocGen\Core\Plugin\PluginsCollection;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -515,13 +515,13 @@ public function getSourceLocators(): \BumbleDocGen\Core\Parser\SourceLocator\Sou
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -577,10 +577,10 @@ public function getTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\Custom
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -611,13 +611,13 @@ public function getTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Function\Cu
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 

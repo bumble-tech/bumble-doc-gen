@@ -8,10 +8,11 @@ Security updates will be applied to certain versions of our software. Please ref
 
 | Version | Supported          | Notes                                  |
 |---------|--------------------|----------------------------------------|
-| 1.3.x   | :white_check_mark: | Current version, fully supported.      |
-| 1.2.x   | :x:                | Not supported, please upgrade to 1.3.x |
-| 1.1.x   | :x:                | Not supported, please upgrade to 1.3.x |
-| 1.0.x   | :x:                | Not supported, please upgrade to 1.3.x |
+| 1.4.x   | :white_check_mark: | Current version, fully supported.      |
+| 1.3.x   | :x:                | Not supported, please upgrade to 1.4.x |
+| 1.2.x   | :x:                | Not supported, please upgrade to 1.4.x |
+| 1.1.x   | :x:                | Not supported, please upgrade to 1.4.x |
+| 1.0.x   | :x:                | Not supported, please upgrade to 1.4.x |
 
 ## Reporting a Vulnerability
 

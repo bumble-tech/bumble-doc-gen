@@ -289,7 +289,7 @@ public function getFormatter(): \Monolog\Formatter\FormatterInterface;
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> \Monolog\Formatter\FormatterInterface
+<b>Return value:</b> <a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/FormatterInterface.php'>\Monolog\Formatter\FormatterInterface</a>
 
 
 </div>
@@ -516,7 +516,7 @@ public function pushProcessor(callable $callback): \Monolog\Handler\HandlerInter
         </tbody>
 </table>
 
-<b>Return value:</b> \Monolog\Handler\HandlerInterface
+<b>Return value:</b> <a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/HandlerInterface.php'>\Monolog\Handler\HandlerInterface</a>
 
 
 </div>
@@ -614,13 +614,13 @@ public function setFormatter(\Monolog\Formatter\FormatterInterface $formatter): 
     <tbody>
             <tr>
             <td>$formatter</td>
-            <td>\Monolog\Formatter\FormatterInterface</td>
+            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/FormatterInterface.php'>\Monolog\Formatter\FormatterInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> \Monolog\Handler\HandlerInterface
+<b>Return value:</b> <a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/HandlerInterface.php'>\Monolog\Handler\HandlerInterface</a>
 
 
 </div>
@@ -654,7 +654,7 @@ public function setLevel(\Monolog\Handler\Level|\Monolog\Handler\LevelName|\Psr\
     <tbody>
             <tr>
             <td>$level</td>
-            <td>\Monolog\Handler\Level | \Monolog\Handler\LevelName | <a href='https://github.com/php-fig/log/blob/master/src/LogLevel::*.php'>\Psr\Log\LogLevel::*</a></td>
+            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/Level.php'>\Monolog\Handler\Level</a> | <a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/LevelName.php'>\Monolog\Handler\LevelName</a> | \Psr\Log\LogLevel::*</td>
             <td>Level or level name</td>
         </tr>
         </tbody>

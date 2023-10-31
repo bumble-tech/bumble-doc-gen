@@ -228,12 +228,10 @@ Directory layout ( only documented files shown ):
 │  │  │  │  ├──<b>CorePlugin</b>/
 │  │  │  │  │  ├──<b>BasePhpStubber</b>/
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/BasePhpStubberPlugin.md'>BasePhpStubberPlugin.php</a> <i> — <samp>Adding links to type documentation and documentation of built-in PHP classes</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/ComposerStubberPlugin.md'>ComposerStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Composer namespace</samp></i>
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/PhpDocumentorStubberPlugin.md'>PhpDocumentorStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \phpDocumentor namespace</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/PhpUnitStubberPlugin.md'>PhpUnitStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \PHPUnit namespace</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/PsrClassesStubberPlugin.md'>PsrClassesStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Psr namespace</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/SymfonyComponentStubberPlugin.md'>SymfonyComponentStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Symfony\Component namespace</samp></i>
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/TwigStubberPlugin.md'>TwigStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Twig namespace</samp></i>
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/PhpUnitStubberPlugin.md'>PhpUnitStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \PHPUnit namespace</samp></i>
+│  │  │  │  │  ├──<b>ComposerPackagesStubber</b>/
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/StubberPlugin.md'>StubberPlugin.php</a> <i> — <samp>The plugin allows you to automatically provide links to github repositories for documented classe...</samp></i>
 │  │  │  │  │  └──<b>EntityDocUnifiedPlace</b>/
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin.php</a> <i> — <samp>This plugin changes the algorithm for saving entity documents. The standard system stores each fi...</samp></i>
 │  │  │  │  └──<b>Event</b>/

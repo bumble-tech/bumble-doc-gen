@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ReadmeTemplateGenerator<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ReadmeTemplateFiller<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L16">ReadmeTemplateGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/ReadmeTemplateFiller.php#L17">ReadmeTemplateFiller</a> class:
 </h1>
 
 
@@ -10,9 +10,9 @@
 
 
 ```php
-namespace BumbleDocGen\AI\Generators;
+namespace BumbleDocGen\TemplateGenerator\ChatGpt;
 
-final class ReadmeTemplateGenerator
+final class ReadmeTemplateFiller
 ```
 
 
@@ -39,6 +39,13 @@ final class ReadmeTemplateGenerator
 </ol>
 
 
+<h2>Constants:</h2>
+<ul>
+            <li><a name="qmodel-gpt-4"
+               href="#qmodel-gpt-4">#</a>
+            <code>MODEL_GPT_4</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/ReadmeTemplateFiller.php#L19">source
+                    code</a> </li>
+    </ul>
 
 
 
@@ -51,11 +58,11 @@ final class ReadmeTemplateGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/ReadmeTemplateFiller.php#L21">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
+public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = self::MODEL_GPT_4);
 ```
 
 
@@ -72,8 +79,13 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
     </thead>
     <tbody>
             <tr>
-            <td>$aiHandler</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
+            <td>$openaiClient</td>
+            <td><a href='https://github.com/tectalichq/public-openai-client-php/blob/master/src/Client.php'>\Tectalic\OpenAi\Client</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$model</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -88,11 +100,11 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
 <ul>
 <li><a name="mgeneratereadmefilecontent" href="#mgeneratereadmefilecontent">#</a>
  <b>generateReadmeFileContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/ReadmeTemplateFiller.php#L40">source code</a></li>
 </ul>
 
 ```php
-public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, array $entryPoints = [], string|null $composerJsonFile = null, string|null $additionalPrompt = null, string|null $systemPrompt = null): string;
+public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, array $entryPoints = [], string|null $composerJsonFile = null, string|null $additionalPrompt = null): string;
 ```
 
 
@@ -128,11 +140,6 @@ public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootE
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>
-            <tr>
-            <td>$systemPrompt</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
-            <td>-</td>
-        </tr>
         </tbody>
 </table>
 
@@ -142,13 +149,16 @@ public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootE
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/tectalichq/public-openai-client-php/blob/master/src/ClientException.php">\Tectalic\OpenAi\ClientException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>

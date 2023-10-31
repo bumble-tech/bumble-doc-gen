@@ -316,13 +316,13 @@ public function loadPropertyEntities(): void;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
@@ -410,10 +410,10 @@ public function unsafeGet(string $objectName): \BumbleDocGen\LanguageHandler\Php
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>

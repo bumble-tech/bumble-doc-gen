@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DocGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L41">DocGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L37">DocGenerator</a> class:
 </h1>
 
 
@@ -34,19 +34,16 @@ final class DocGenerator
 
 <ol>
 <li>
-    <a href="#madddocblocks">addDocBlocks</a>
+    <a href="#maddmissingdocblocks">addMissingDocBlocks</a>
     - <i>Generate missing docBlocks with ChatGPT for project class methods that are available for documentation</i></li>
+<li>
+    <a href="#mfillinreadmemdtemplate">fillInReadmeMdTemplate</a>
+    </li>
 <li>
     <a href="#mgenerate">generate</a>
     - <i>Generates documentation using configuration</i></li>
 <li>
-    <a href="#mgeneratereadmetemplate">generateReadmeTemplate</a>
-    </li>
-<li>
-    <a href="#mgeneratetemplatescontent">generateTemplatesContent</a>
-    </li>
-<li>
-    <a href="#minitdocsstructure">initDocsStructure</a>
+    <a href="#mgenerateprojecttemplatesstructure">generateProjectTemplatesStructure</a>
     - <i>Generate documentation structure with blank templates using AI tools</i></li>
 <li>
     <a href="#mparseandgetrootentitycollectionsgroup">parseAndGetRootEntityCollectionsGroup</a>
@@ -58,11 +55,11 @@ final class DocGenerator
 <ul>
             <li><a name="qlog-file-name"
                href="#qlog-file-name">#</a>
-            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L44">source
+            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L40">source
                     code</a> </li>
             <li><a name="qversion"
                href="#qversion">#</a>
-            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L43">source
+            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L39">source
                     code</a> </li>
     </ul>
 
@@ -77,7 +74,7 @@ final class DocGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L46">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L42">source code</a></li>
 </ul>
 
 ```php
@@ -144,7 +141,7 @@ public function __construct(\Symfony\Component\Filesystem\Filesystem $fs, \Symfo
         </tr>
             <tr>
             <td>$logger</td>
-            <td>\Monolog\Logger</td>
+            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Logger.php'>\Monolog\Logger</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -157,50 +154,18 @@ public function __construct(\Symfony\Component\Filesystem\Filesystem $fs, \Symfo
 <div class='method_description-block'>
 
 <ul>
-<li><a name="madddocblocks" href="#madddocblocks">#</a>
- <b>addDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L156">source code</a></li>
+<li><a name="maddmissingdocblocks" href="#maddmissingdocblocks">#</a>
+ <b>addMissingDocBlocks</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L144">source code</a></li>
 </ul>
 
 ```php
-public function addDocBlocks(string $aiHandler, string $aiApiKey, string $aiModel, string|null $systemPrompt = null): void;
+public function addMissingDocBlocks(): void;
 ```
 
 <blockquote>Generate missing docBlocks with ChatGPT for project class methods that are available for documentation</blockquote>
 
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$aiHandler</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$aiApiKey</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$aiModel</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$systemPrompt</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+<b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
@@ -208,13 +173,56 @@ public function addDocBlocks(string $aiHandler, string $aiApiKey, string $aiMode
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+<li>
+    <a href="https://github.com/tectalichq/public-openai-client-php/blob/master/src/ClientException.php">\Tectalic\OpenAi\ClientException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mfillinreadmemdtemplate" href="#mfillinreadmemdtemplate">#</a>
+ <b>fillInReadmeMdTemplate</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L233">source code</a></li>
+</ul>
+
+```php
+public function fillInReadmeMdTemplate(): void;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
+
+<li>
+    <a href="https://github.com/tectalichq/public-openai-client-php/blob/master/src/ClientException.php">\Tectalic\OpenAi\ClientException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -228,7 +236,7 @@ public function addDocBlocks(string $aiHandler, string $aiApiKey, string $aiMode
 <ul>
 <li><a name="mgenerate" href="#mgenerate">#</a>
  <b>generate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L408">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L316">source code</a></li>
 </ul>
 
 ```php
@@ -257,207 +265,36 @@ public function generate(): void;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgeneratereadmetemplate" href="#mgeneratereadmetemplate">#</a>
- <b>generateReadmeTemplate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L246">source code</a></li>
-</ul>
-
-```php
-public function generateReadmeTemplate(string $aiHandler, string $aiApiKey, string $aiModel, string|null $systemPrompt = null): void;
-```
-
-
-
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$aiHandler</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$aiApiKey</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$aiModel</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$systemPrompt</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
-    <a >\DI\DependencyException</a></li>
-
-<li>
-    <a >\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgeneratetemplatescontent" href="#mgeneratetemplatescontent">#</a>
- <b>generateTemplatesContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L337">source code</a></li>
-</ul>
-
-```php
-public function generateTemplatesContent(string $aiHandler, string $aiApiKey, string $aiModel, bool $nonInteractive = false, string|null $systemPrompt = null): void;
-```
-
-
-
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$aiHandler</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$aiApiKey</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$aiModel</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$nonInteractive</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$systemPrompt</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
-    <a >\DI\DependencyException</a></li>
-
-<li>
-    <a href="https://www.php.net/manual/en/class.jsonexception.php">\JsonException</a></li>
-
-<li>
-    <a >\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="minitdocsstructure" href="#minitdocsstructure">#</a>
- <b>initDocsStructure</b>
+<li><a name="mgenerateprojecttemplatesstructure" href="#mgenerateprojecttemplatesstructure">#</a>
+ <b>generateProjectTemplatesStructure</b>
     <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L83">source code</a></li>
 </ul>
 
 ```php
-public function initDocsStructure(string $aiHandler, string $aiApiKey, string $aiModel, bool $nonInteractive = false, string|null $systemPrompt = null): void;
+public function generateProjectTemplatesStructure(): void;
 ```
 
 <blockquote>Generate documentation structure with blank templates using AI tools</blockquote>
 
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$aiHandler</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$aiApiKey</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$aiModel</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$nonInteractive</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$systemPrompt</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+<b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
 
 <b>Throws:</b>
 <ul>
+<li>
+    <a href="https://github.com/tectalichq/public-openai-client-php/blob/master/src/ClientException.php">\Tectalic\OpenAi\ClientException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
+
+<li>
+    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
+
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
@@ -470,7 +307,7 @@ public function initDocsStructure(string $aiHandler, string $aiApiKey, string $a
 <ul>
 <li><a name="mparseandgetrootentitycollectionsgroup" href="#mparseandgetrootentitycollectionsgroup">#</a>
  <b>parseAndGetRootEntityCollectionsGroup</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L72">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L68">source code</a></li>
 </ul>
 
 ```php
@@ -487,10 +324,10 @@ public function parseAndGetRootEntityCollectionsGroup(): \BumbleDocGen\Core\Pars
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>

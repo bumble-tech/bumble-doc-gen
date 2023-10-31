@@ -145,7 +145,7 @@ public function getClassLoader(array $psr4FileMap, array $classMap): \Composer\A
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/composer/composer/blob/master/src/Composer/Autoload/ClassLoader.php'>\Composer\Autoload\ClassLoader</a>
+<b>Return value:</b> \Composer\Autoload\ClassLoader
 
 
 </div>

@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> TemplateStructureGenerator<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> TemplatesStructureGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateStructureGenerator.php#L15">TemplateStructureGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L15">TemplatesStructureGenerator</a> class:
 </h1>
 
 
@@ -10,9 +10,9 @@
 
 
 ```php
-namespace BumbleDocGen\AI\Generators;
+namespace BumbleDocGen\TemplateGenerator\ChatGpt;
 
-final class TemplateStructureGenerator
+final class TemplatesStructureGenerator
 ```
 
 
@@ -39,6 +39,13 @@ final class TemplateStructureGenerator
 </ol>
 
 
+<h2>Constants:</h2>
+<ul>
+            <li><a name="qmodel-gpt-4"
+               href="#qmodel-gpt-4">#</a>
+            <code>MODEL_GPT_4</code>                   <b>|</b> <a href="/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L17">source
+                    code</a> </li>
+    </ul>
 
 
 
@@ -51,11 +58,11 @@ final class TemplateStructureGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateStructureGenerator.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L19">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler, string $aiConfigDirectory);
+public function __construct(\Tectalic\OpenAi\Client $openaiClient, string $model = self::MODEL_GPT_4);
 ```
 
 
@@ -72,12 +79,12 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler, strin
     </thead>
     <tbody>
             <tr>
-            <td>$aiHandler</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
+            <td>$openaiClient</td>
+            <td><a href='https://github.com/tectalichq/public-openai-client-php/blob/master/src/Client.php'>\Tectalic\OpenAi\Client</a></td>
             <td>-</td>
         </tr>
             <tr>
-            <td>$aiConfigDirectory</td>
+            <td>$model</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
@@ -93,11 +100,11 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler, strin
 <ul>
 <li><a name="mgeneratestructurebyentitycollection" href="#mgeneratestructurebyentitycollection">#</a>
  <b>generateStructureByEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/TemplateStructureGenerator.php#L26">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/TemplateGenerator/ChatGpt/TemplatesStructureGenerator.php#L28">source code</a></li>
 </ul>
 
 ```php
-public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $additionalPrompt = null, string|null $systemPrompt = null): array;
+public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $additionalPrompt = null): array;
 ```
 
 
@@ -123,11 +130,6 @@ public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\En
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>-</td>
         </tr>
-            <tr>
-            <td>$systemPrompt</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
-            <td>-</td>
-        </tr>
         </tbody>
 </table>
 
@@ -137,13 +139,13 @@ public function generateStructureByEntityCollection(\BumbleDocGen\Core\Parser\En
 <b>Throws:</b>
 <ul>
 <li>
+    <a href="https://github.com/tectalichq/public-openai-client-php/blob/master/src/ClientException.php">\Tectalic\OpenAi\ClientException</a></li>
+
+<li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://www.php.net/manual/en/class.jsonexception.php">\JsonException</a></li>
 
 </ul>
 

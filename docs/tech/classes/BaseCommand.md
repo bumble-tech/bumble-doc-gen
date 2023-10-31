@@ -945,9 +945,9 @@ public function run(\Symfony\Component\Console\Input\InputInterface $input, \Sym
 <b>See:</b>
 <ul>
     <li>
-        <a href="https://github.com/symfony/console/blob/master/Command/setCode().php">\Symfony\Component\Console\Command\setCode()</a>    </li>
+        <a href="https://github.com/symfony/console/blob/master/Command/Command.php">\Symfony\Component\Console\Command\Command::setCode()</a>    </li>
     <li>
-        <a href="https://github.com/symfony/console/blob/master/Command/execute().php">\Symfony\Component\Console\Command\execute()</a>    </li>
+        <a href="https://github.com/symfony/console/blob/master/Command/Command.php">\Symfony\Component\Console\Command\Command::execute()</a>    </li>
 </ul>
 </div>
 <hr>
@@ -1087,7 +1087,7 @@ public function setCode(callable $code): static;
 <b>See:</b>
 <ul>
     <li>
-        <a href="https://github.com/symfony/console/blob/master/Command/execute().php">\Symfony\Component\Console\Command\execute()</a>    </li>
+        <a href="https://github.com/symfony/console/blob/master/Command/Command.php">\Symfony\Component\Console\Command\Command::execute()</a>    </li>
 </ul>
 </div>
 <hr>
