@@ -9,7 +9,7 @@ try {
     $docGen = (new \BumbleDocGen\DocGeneratorFactory())
         ->createByConfigArray([
             'project_root' => '%WORKING_DIR%/vendor/doctrine',
-            'demo_dir' => '%WORKING_DIR%/demo/demo5-config-array', // <= custom parameter
+            'demo_dir' => '%WORKING_DIR%/demo/demo4-config-array', // <= custom parameter
             'cache_dir' => '%demo_dir%/.cache',
             'templates_dir' => '%demo_dir%/templates',
             'output_dir' => "%demo_dir%/docs",

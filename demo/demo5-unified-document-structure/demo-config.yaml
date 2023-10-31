@@ -1,5 +1,5 @@
 parent_configuration: '%WORKING_DIR%/bumble_doc_gen.yaml'
-demo_dir: '%WORKING_DIR%/demo/demo6-unified-document-structure' # Here I define a template configuration variable
+demo_dir: '%WORKING_DIR%/demo/demo5-unified-document-structure' # Here I define a template configuration variable
 output_dir: "%demo_dir%/docs"
 cache_dir: '%demo_dir%/.bumbleDocGenCache'
 plugins: # Connecting this built-in plugin will change the structure of the configured document

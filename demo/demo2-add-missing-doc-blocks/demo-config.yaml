@@ -1,6 +1,6 @@
 project_root: '%DOC_GEN_LIB_PATH%'
-cache_dir: '%WORKING_DIR%/demo/demo3-add-missing-doc-blocks/__cache'
-templates_dir: '%WORKING_DIR%/demo/demo3-add-missing-doc-blocks/templates'
+cache_dir: '%WORKING_DIR%/demo/demo2-add-missing-doc-blocks/__cache'
+templates_dir: '%WORKING_DIR%/demo/demo2-add-missing-doc-blocks/templates'
 language_handlers:
   php:
     class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
