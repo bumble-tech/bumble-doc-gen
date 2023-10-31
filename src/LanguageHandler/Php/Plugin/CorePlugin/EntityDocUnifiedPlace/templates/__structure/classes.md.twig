@@ -8,10 +8,10 @@
 <tr><th>Name</th><th>Namespace</th></tr>
 <tr><td colspan='2'><b>Abstract classes</b></td></tr>
 {% for abstractClassEntity in phpClassEntityCollection.getOnlyAbstractClasses() %}
-<tr><td><a>{{ abstractClassEntity.getName() }}|short_form</a><td>{{ abstractClassEntity.getNamespaceName() }}</td></tr>
+<tr><td>[a x-title='{{ classEntity.getShortName() }}']{{ abstractClassEntity.getName() }}[/a]<td>{{ abstractClassEntity.getNamespaceName() }}</td></tr>
 {% endfor %}
 <tr><td colspan='2'><b>Classes</b></td></tr>
 {% for classEntity in phpClassEntityCollection.getOnlyInstantiable() %}
-<tr><td><a>{{ classEntity.getName() }}|short_form</a><td>{{ classEntity.getNamespaceName() }}</td></tr>
+<tr><td>[a x-title='{{ classEntity.getShortName() }}']{{ classEntity.getName() }}[/a]<td>{{ classEntity.getNamespaceName() }}</td></tr>
 {% endfor %}
 </table>

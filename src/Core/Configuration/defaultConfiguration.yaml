@@ -32,4 +32,5 @@ twig_filters:                     # (array<CustomFilterInterface>) Filters that 
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\PregMatch
 plugins:                          # (array<PluginInterface>|null) List of plugins
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin
+  - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageLinkerPlugin
 additional_console_commands:      # (array<Command>) Additional console commands
