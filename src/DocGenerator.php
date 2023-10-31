@@ -36,7 +36,7 @@ use Tectalic\OpenAi\ClientException;
  */
 final class DocGenerator
 {
-    public const VERSION = '1.3.0';
+    public const VERSION = '1.4.0';
     public const LOG_FILE_NAME = 'last_run.log';
 
     public function __construct(
