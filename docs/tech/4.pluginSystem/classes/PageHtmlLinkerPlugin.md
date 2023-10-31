@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/4.pluginSystem/readme.md">Plugin system</a> <b>/</b> PageHtmlLinkerPlugin<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/PageHtmlLinkerPlugin.php#L23">PageHtmlLinkerPlugin</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/PageHtmlLinkerPlugin.php#L29">PageHtmlLinkerPlugin</a> class:
 </h1>
 
 
@@ -29,6 +29,16 @@ final class PageHtmlLinkerPlugin extends \BumbleDocGen\Core\Plugin\CorePlugin\Pa
 
 ```php
 <a>Existent page name</a> => <a href="/docs/some/page/targetPage.html">Existent page name</a>
+
+```
+
+```php
+<a x-title="Custom title">\Namespace\ClassName</a> => <a href="/docs/some/page/ClassName.md">Custom title</a>
+
+```
+
+```php
+<a>\Namespace\ClassName</a> => <a href="/docs/some/page/ClassName.md">\Namespace\ClassName</a>
 
 ```
 
@@ -74,7 +84,7 @@ final class PageHtmlLinkerPlugin extends \BumbleDocGen\Core\Plugin\CorePlugin\Pa
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L40">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -113,7 +123,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsH
         </tr>
             <tr>
             <td>$logger</td>
-            <td><a href='https://github.com/php-fig/log/blob/master/src/LoggerInterface.php'>Psr\Log\LoggerInterface</a></td>
+            <td><a href='https://github.com/php-fig/log/blob/master/src/LoggerInterface.php'>\Psr\Log\LoggerInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -128,7 +138,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsH
 <ul>
 <li><a name="mbeforecreatingdocfile" href="#mbeforecreatingdocfile">#</a>
  <b>beforeCreatingDocFile</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L61">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L73">source code</a></li>
 </ul>
 
 ```php
@@ -164,10 +174,10 @@ public function beforeCreatingDocFile(\BumbleDocGen\Core\Plugin\Event\Renderer\B
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/4.pluginSystem/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
@@ -184,7 +194,7 @@ public function beforeCreatingDocFile(\BumbleDocGen\Core\Plugin\Event\Renderer\B
 <ul>
 <li><a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a>
  <b>getSubscribedEvents</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L48">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/PageLinker/BasePageLinker.php#L60">source code</a></li>
 </ul>
 
 ```php

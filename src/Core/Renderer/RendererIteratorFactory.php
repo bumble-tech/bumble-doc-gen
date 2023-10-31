@@ -11,6 +11,7 @@ use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -42,6 +43,7 @@ final class RendererIteratorFactory
         private PluginEventDispatcher $pluginEventDispatcher,
         private OutputStyle $io,
         private Logger $logger,
+        private GenerationErrorsHandler $generationErrorsHandler,
     ) {
     }
 
@@ -73,12 +75,22 @@ final class RendererIteratorFactory
             );
             $pb->setStepDescription("Processing {$templateFile->getRelativeDocPath()} file");
 
+            $errorsBeforeGenerationCount = count($this->generationErrorsHandler->getRecords());
+
+            $relativeTemplateName = $templateFile->getRelativeTemplatePath() ?: $templateFile->getRelativeDocPath();
             $file = $this->prepareDocFileForRendering($templateFile);
             if (!$file) {
                 ++$skippedCount;
+                $this->moveCachedDataToCurrentData($relativeTemplateName);
+                $this->logger->info("Use cached version `{$templateFile->getRealPath()}`");
                 continue;
             }
             yield $file;
+
+            $errorsCount = count($this->generationErrorsHandler->getRecords());
+            if ($errorsBeforeGenerationCount === $errorsCount) {
+                $this->saveContextCacheForSingleDocument($relativeTemplateName);
+            }
         }
 
         $processed = $finder->count() - $skippedCount;
@@ -121,19 +133,8 @@ final class RendererIteratorFactory
                 filePath: $templateFile->getRealPath()
             );
             $this->rendererContext->addDependency($fileDependency);
-            $this->sharedCompressedDocumentFileCache->set(
-                $this->getOperationsLogCacheKey($relativeTemplateName),
-                $this->rootEntityCollectionsGroup->getOperationsLogWithoutDuplicates()
-            );
-
-            $this->sharedCompressedDocumentFileCache->set(
-                $this->getFilesDependenciesCacheKey($relativeTemplateName),
-                $this->rendererContext->getDependencies()
-            );
             return $templateFile;
         }
-        $this->moveCachedDataToCurrentData($relativeTemplateName);
-        $this->logger->info("Use cached version `{$templateFile->getRealPath()}`");
         return null;
     }
 
@@ -156,10 +157,10 @@ final class RendererIteratorFactory
             $this->rendererContext->clearDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
 
+            $errorsBeforeGenerationCount = count($this->generationErrorsHandler->getRecords());
+
             $this->rendererContext->setCurrentDocumentedEntityWrapper($entityWrapper);
-
             $this->markFileNameAsRendered($entityWrapper->getDocUrl());
-
             $filesDependenciesKey = "{$entityWrapper->getEntityName()}_{$entityWrapper->getParentDocFilePath()}";
             if (
                 !$this->configuration->useSharedCache() ||
@@ -181,15 +182,13 @@ final class RendererIteratorFactory
                 continue;
             }
 
-            $this->sharedCompressedDocumentFileCache->set(
-                $this->getOperationsLogCacheKey($entityWrapper->getEntityName()),
-                $this->rootEntityCollectionsGroup->getOperationsLogWithoutDuplicates()
-            );
-
-            $this->sharedCompressedDocumentFileCache->set(
-                $this->getFilesDependenciesCacheKey($filesDependenciesKey),
-                $this->rendererContext->getDependencies()
-            );
+            $errorsCount = count($this->generationErrorsHandler->getRecords());
+            if ($errorsBeforeGenerationCount === $errorsCount) {
+                $this->saveContextCacheForSingleDocument(
+                    $entityWrapper->getEntityName(),
+                    $entityWrapper->getParentDocFilePath()
+                );
+            }
             $this->rendererContext->clearDependencies();
             $this->rootEntityCollectionsGroup->clearOperationsLog();
         }
@@ -369,6 +368,20 @@ final class RendererIteratorFactory
             $entity = $this->rootEntityCollectionsGroup->get($collectionName)->getLoadedOrCreateNew($entityName, true);
             $this->documentedEntityWrappersCollection->createAndAddDocumentedEntityWrapper($entity);
         }
+    }
+
+    private function saveContextCacheForSingleDocument(string $docKey, ?string $namespace = null): void
+    {
+        $this->sharedCompressedDocumentFileCache->set(
+            $this->getOperationsLogCacheKey($docKey),
+            $this->rootEntityCollectionsGroup->getOperationsLogWithoutDuplicates()
+        );
+
+        $filesDependenciesKey = $namespace ? "{$docKey}_{$namespace}" : $docKey;
+        $this->sharedCompressedDocumentFileCache->set(
+            $this->getFilesDependenciesCacheKey($filesDependenciesKey),
+            $this->rendererContext->getDependencies()
+        );
     }
 
     private function getOperationsLogCacheKey(string $key): string

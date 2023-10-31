@@ -82,7 +82,7 @@ public function __construct(\Roave\BetterReflection\SourceLocator\Ast\Locator $a
     <tbody>
             <tr>
             <td>$astLocator</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/SourceLocator/Ast/Locator.php'>Roave\BetterReflection\SourceLocator\Ast\Locator</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/SourceLocator/Ast/Locator.php'>\Roave\BetterReflection\SourceLocator\Ast\Locator</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -145,7 +145,7 @@ public function getClassLoader(array $psr4FileMap, array $classMap): \Composer\A
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/composer/composer/blob/master/src/Composer/Autoload/ClassLoader.php'>\Composer\Autoload\ClassLoader</a>
+<b>Return value:</b> \Composer\Autoload\ClassLoader
 
 
 </div>
@@ -217,12 +217,12 @@ public function locateIdentifier(\Roave\BetterReflection\Reflector\Reflector $re
     <tbody>
             <tr>
             <td>$reflector</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflector/Reflector.php'>\Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$identifier</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Identifier/Identifier.php'>Roave\BetterReflection\Identifier\Identifier</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Identifier/Identifier.php'>\Roave\BetterReflection\Identifier\Identifier</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -262,12 +262,12 @@ public function locateIdentifiersByType(\Roave\BetterReflection\Reflector\Reflec
     <tbody>
             <tr>
             <td>$reflector</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflector/Reflector.php'>\Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$identifierType</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Identifier/IdentifierType.php'>Roave\BetterReflection\Identifier\IdentifierType</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Identifier/IdentifierType.php'>\Roave\BetterReflection\Identifier\IdentifierType</a></td>
             <td>-</td>
         </tr>
         </tbody>

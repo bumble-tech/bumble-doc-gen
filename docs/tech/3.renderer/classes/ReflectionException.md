@@ -88,7 +88,7 @@ See:
 ```php
 // Implemented in Exception
 
-public function __construct(string $message = '', int $code, \Throwable|null $previous = NULL);
+public function __construct(string $message = "", int $code, \Throwable|null $previous = \null);
 ```
 
 <blockquote>Construct the exception. Note: The message is NOT binary safe.</blockquote>
@@ -116,7 +116,7 @@ public function __construct(string $message = '', int $code, \Throwable|null $pr
         </tr>
             <tr>
             <td>$previous</td>
-            <td><a href='https://www.php.net/manual/en/class.throwable.php'>Throwable</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/class.throwable.php'>\Throwable</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>[optional] The previous throwable used for the exception chaining.</td>
         </tr>
         </tbody>

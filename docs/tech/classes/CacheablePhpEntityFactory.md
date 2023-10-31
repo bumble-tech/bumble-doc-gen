@@ -114,7 +114,7 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEnti
         </tr>
             <tr>
             <td>$diContainer</td>
-            <td>\DI\Container</td>
+            <td><a href='https://github.com/PHP-DI/PHP-DI/blob/master/src/Container.php'>\DI\Container</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -133,7 +133,7 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEnti
 </ul>
 
 ```php
-public function createClassEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollection, string $className, string|null $relativeFileName = NULL): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+public function createClassEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollection, string $className, string|null $relativeFileName = null): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 ```
 
 
@@ -173,10 +173,10 @@ public function createClassEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entit
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -209,7 +209,7 @@ public function createClassEntityByReflection(\Roave\BetterReflection\Reflection
     <tbody>
             <tr>
             <td>$reflectionClass</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>\Roave\BetterReflection\Reflection\ReflectionClass</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -226,10 +226,10 @@ public function createClassEntityByReflection(\Roave\BetterReflection\Reflection
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -297,10 +297,10 @@ public function createConstantEntity(\BumbleDocGen\LanguageHandler\Php\Parser\En
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -338,7 +338,7 @@ public function createDynamicMethodEntity(\BumbleDocGen\LanguageHandler\Php\Pars
         </tr>
             <tr>
             <td>$annotationMethod</td>
-            <td><a href='https://github.com/phpDocumentor/ReflectionDocBlock/blob/master/src/DocBlock/Tags/Method.php'>phpDocumentor\Reflection\DocBlock\Tags\Method</a></td>
+            <td><a href='https://github.com/phpDocumentor/ReflectionDocBlock/blob/master/src/DocBlock/Tags/Method.php'>\phpDocumentor\Reflection\DocBlock\Tags\Method</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -350,10 +350,10 @@ public function createDynamicMethodEntity(\BumbleDocGen\LanguageHandler\Php\Pars
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -413,10 +413,10 @@ public function createMethodEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Enti
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -476,10 +476,10 @@ public function createPropertyEntity(\BumbleDocGen\LanguageHandler\Php\Parser\En
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -539,10 +539,10 @@ public function createSubClassEntity(string $subClassEntity, \BumbleDocGen\Langu
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 
@@ -580,7 +580,7 @@ public function createSubClassEntityByReflection(string $subClassEntity, \Roave\
         </tr>
             <tr>
             <td>$reflectionClass</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>Roave\BetterReflection\Reflection\ReflectionClass</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflection/ReflectionClass.php'>\Roave\BetterReflection\Reflection\ReflectionClass</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -597,10 +597,10 @@ public function createSubClassEntityByReflection(string $subClassEntity, \Roave\
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>

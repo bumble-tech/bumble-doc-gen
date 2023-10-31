@@ -66,7 +66,7 @@ public function getSourceLocator(\Roave\BetterReflection\SourceLocator\Ast\Locat
     <tbody>
             <tr>
             <td>$astLocator</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/SourceLocator/Ast/Locator.php'>Roave\BetterReflection\SourceLocator\Ast\Locator</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/SourceLocator/Ast/Locator.php'>\Roave\BetterReflection\SourceLocator\Ast\Locator</a></td>
             <td>-</td>
         </tr>
         </tbody>

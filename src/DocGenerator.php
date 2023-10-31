@@ -6,6 +6,7 @@ namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -22,7 +23,9 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
 use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Helper;
+use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Style\OutputStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -33,7 +36,7 @@ use Tectalic\OpenAi\ClientException;
  */
 final class DocGenerator
 {
-    public const VERSION = '1.3.0';
+    public const VERSION = '1.4.0';
     public const LOG_FILE_NAME = 'last_run.log';
 
     public function __construct(
@@ -44,6 +47,7 @@ final class DocGenerator
         private ProjectParser $parser,
         private ParserHelper $parserHelper,
         private Renderer $renderer,
+        private GenerationErrorsHandler $generationErrorsHandler,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private Logger $logger
     ) {
@@ -307,6 +311,7 @@ final class DocGenerator
      * Generates documentation using configuration
      *
      * @throws InvalidArgumentException
+     * @throws \Exception
      */
     public function generate(): void
     {
@@ -318,13 +323,46 @@ final class DocGenerator
             $this->renderer->run();
         } catch (\Exception $e) {
             $this->logger->critical("{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{{$e->getTraceAsString()}}");
+            throw $e;
         }
 
         $time = microtime(true) - $start;
         $memory = memory_get_usage(true) - $memory;
 
+        $warningMessages = $this->generationErrorsHandler->getRecords();
 
-        $this->io->writeln("<info>Documentation successfully generated</>");
+        if (empty($warningMessages)) {
+            $this->io->writeln("<info>Documentation successfully generated</>");
+        } else {
+            $this->io->writeln("<comment>Generation completed with errors</>");
+
+            $this->io->getFormatter()->setStyle('warning', new OutputFormatterStyle('yellow'));
+            $badErrorStyle = new OutputFormatterStyle('red', '#ff0', ['bold']);
+            $this->io->getFormatter()->setStyle('critical', $badErrorStyle);
+            $this->io->getFormatter()->setStyle('alert', $badErrorStyle);
+            $this->io->getFormatter()->setStyle('emergency', $badErrorStyle);
+            $table = $this->io->createTable();
+
+            $rows = [];
+            $warningMessagesCount = count($warningMessages);
+            foreach ($warningMessages as $i => $warningMessage) {
+                $tag = strtolower($warningMessage['type']);
+                $rows[] = ["<{$tag}>{$warningMessage['type']}</>", "<{$tag}>{$warningMessage['msg']}</>"];
+                if ($warningMessage['isRenderingError']) {
+                    $rows[] = ['', '<options=conceal,underscore>This error occurs during the document rendering process</>'];
+                }
+                $rows[] = ['', $warningMessage['initiator']];
+                if ($warningMessagesCount - $i !== 1) {
+                    $rows[] = new TableSeparator();
+                }
+            }
+            $table->setStyle('box');
+            $table->addRows($rows);
+            $table->render();
+            $this->io->newLine();
+        }
+
+        $this->io->writeln("<info>Performance</>");
         $this->io->table([], [
             ['Execution time:', "<options=bold,underscore>{$time} sec.</>"],
             ['Allocated memory:', '<options=bold,underscore>' . Helper::formatMemory(memory_get_usage(true)) . '</>'],

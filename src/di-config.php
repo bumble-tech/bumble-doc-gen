@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use Bramus\Monolog\Formatter\ColoredLineFormatter;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
+use BumbleDocGen\Core\Configuration\ValueResolver\ArgvValueResolver;
 use BumbleDocGen\Core\Configuration\ValueResolver\InternalValueResolver;
 use BumbleDocGen\Core\Configuration\ValueResolver\RefValueResolver;
-use BumbleDocGen\Core\Configuration\ValueResolver\ArgvValueResolver;
+use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\Console\Style\OutputStyle;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 return [
+    GenerationErrorsHandler::class => \DI\autowire(GenerationErrorsHandler::class),
     Logger::class => \DI\autowire(Logger::class)
         ->constructor(
             name: 'Bumble doc gen',
@@ -23,7 +25,7 @@ return [
                 \DI\autowire(StreamHandler::class)
                     ->constructor(
                         stream: 'php://stdout',
-                        level: Logger::CRITICAL
+                        level: Logger::ALERT
                     )
                     ->method(
                         'setFormatter',
@@ -45,7 +47,8 @@ return [
                                 dateFormat: 'Y-m-d H:i:s',
                                 format: "[%datetime%] > %level_name% > %message%\n",
                             )
-                    )
+                    ),
+                \DI\get(GenerationErrorsHandler::class)
             ]
         ),
     LoggerInterface::class => \DI\get(Logger::class),

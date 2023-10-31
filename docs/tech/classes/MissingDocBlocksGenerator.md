@@ -73,7 +73,7 @@ final class MissingDocBlocksGenerator
 </ul>
 
 ```php
-public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, string $model = \BumbleDocGen\TemplateGenerator\ChatGpt\MissingDocBlocksGenerator::MODEL_GPT_4);
+public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, string $model = self::MODEL_GPT_4);
 ```
 
 
@@ -91,7 +91,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen
     <tbody>
             <tr>
             <td>$openaiClient</td>
-            <td>\Tectalic\OpenAi\Client</td>
+            <td><a href='https://github.com/tectalichq/public-openai-client-php/blob/master/src/Client.php'>\Tectalic\OpenAi\Client</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -120,7 +120,7 @@ public function __construct(\Tectalic\OpenAi\Client $openaiClient, \BumbleDocGen
 </ul>
 
 ```php
-public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $rootEntity, int $mode = \BumbleDocGen\TemplateGenerator\ChatGpt\MissingDocBlocksGenerator::MODE_READ_ONLY_SIGNATURES): array;
+public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $rootEntity, int $mode = self::MODE_READ_ONLY_SIGNATURES): array;
 ```
 
 
@@ -158,16 +158,16 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a >\Tectalic\OpenAi\ClientException</a></li>
+    <a href="https://github.com/tectalichq/public-openai-client-php/blob/master/src/ClientException.php">\Tectalic\OpenAi\ClientException</a></li>
 
 </ul>
 
@@ -212,10 +212,10 @@ public function hasMethodsWithoutDocBlocks(\BumbleDocGen\Core\Parser\Entity\Root
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>

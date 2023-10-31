@@ -5,7 +5,7 @@
 
 The documentation generator includes the ability to expand the functionality using plugins that allow you to add the necessary functionality to the system without changing its core.
 
-The system is built on the basis of an event model, each plugin class must implement <a>PluginInterface</a>.
+The system is built on the basis of an event model, each plugin class must implement [a]PluginInterface[/a].
 
 {{ "Configuration example" | textToHeading('H2') }}
 
@@ -45,7 +45,7 @@ Plugins for any programming languages work regardless of which language handler 
         <td>
             <ul>
             {% for key in pluginEntity.getMethodEntity('getSubscribedEvents').getFirstReturnValue() | eval | keys %}
-                <li><a>{{ key }}|short_form</a></li>
+                <li>[a]{{ key }}|short_form[/a]</li>
             {% endfor %}
             </ul>
         </td>
