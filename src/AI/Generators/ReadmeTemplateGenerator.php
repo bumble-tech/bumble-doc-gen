@@ -16,7 +16,7 @@ use DI\NotFoundException;
 final class ReadmeTemplateGenerator
 {
     public function __construct(
-        private ProviderInterface $aiHandler,
+        private ProviderInterface $aiProvider,
     ) {
     }
 
@@ -49,10 +49,10 @@ final class ReadmeTemplateGenerator
 
         $namespacesList = array_unique($namespacesList);
         $prompts = [];
-        $prompts[] = $this->aiHandler->formatDataPrompt('Project namespaces', implode("\n", $namespacesList));
+        $prompts[] = $this->aiProvider->formatDataPrompt('Project namespaces', implode("\n", $namespacesList));
 
         if ($composerJsonFile) {
-            $prompts[] = $this->aiHandler->formatDataPrompt('Composer JSON', file_get_contents($composerJsonFile));
+            $prompts[] = $this->aiProvider->formatDataPrompt('Composer JSON', file_get_contents($composerJsonFile));
         }
 
         $entryPointsSignatures = [];
@@ -70,17 +70,17 @@ final class ReadmeTemplateGenerator
         }
 
         if ($entryPointsSignatures) {
-            $prompts[] = $this->aiHandler->formatDataPrompt(
+            $prompts[] = $this->aiProvider->formatDataPrompt(
                 'Project entry points',
                 implode("\n\n", $entryPointsSignatures)
             );
         }
 
         if ($additionalPrompt) {
-            $prompts[] = $this->aiHandler->formatDataPrompt('Additional Information', $additionalPrompt);
+            $prompts[] = $this->aiProvider->formatDataPrompt('Additional Information', $additionalPrompt);
         }
 
-        $systemPrompt = $this->aiHandler->getSystemPrompt('readmeTemplateGeneration');
-        return $this->aiHandler->sendPrompts($prompts, $systemPrompt);
+        $systemPrompt = $this->aiProvider->getSystemPrompt('readmeTemplateGeneration');
+        return $this->aiProvider->sendPrompts($prompts, $systemPrompt);
     }
 }

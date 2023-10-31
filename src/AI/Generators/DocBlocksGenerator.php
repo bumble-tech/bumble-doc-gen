@@ -20,7 +20,7 @@ final class DocBlocksGenerator
     public const MODE_READ_ALL_CODE = 2;
 
     public function __construct(
-        private ProviderInterface $aiHandler,
+        private ProviderInterface $aiProvider,
         private ParserHelper $parserHelper,
     ) {
     }
@@ -150,9 +150,9 @@ final class DocBlocksGenerator
                 $toRequest
             ) . "\n}";
 
-            $systemPrompt = $this->aiHandler->getSystemPrompt('docBlockGeneration');
+            $systemPrompt = $this->aiProvider->getSystemPrompt('docBlockGeneration');
             $prompts = [$requestData];
-            $responseData = $this->aiHandler->sendPrompts($prompts, $systemPrompt);
+            $responseData = $this->aiProvider->sendPrompts($prompts, $systemPrompt);
             $responseData = json_decode($responseData, true, 512, JSON_THROW_ON_ERROR);
 
             if (!$responseData) {
