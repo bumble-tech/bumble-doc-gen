@@ -20,6 +20,7 @@ use function BumbleDocGen\Core\is_associative_array;
 final class ConfigurationParameterBag
 {
     private array $parameters = [];
+    private ?string $lastConfigVersion = null;
 
     /**
      * @param ValueResolverInterface[] $resolvers
@@ -32,7 +33,10 @@ final class ConfigurationParameterBag
 
     public function getConfigVersion(): string
     {
-        return md5(serialize($this->getAll(false)));
+        if (is_null($this->lastConfigVersion)) {
+            $this->lastConfigVersion = md5(serialize($this->getAll(false)));
+        }
+        return $this->lastConfigVersion;
     }
 
     public function getConfigValues(string ...$configurationFiles): array
@@ -53,6 +57,7 @@ final class ConfigurationParameterBag
 
     public function loadFromArray(array $parameters): void
     {
+        $this->lastConfigVersion = null;
         foreach ($parameters as $name => $value) {
             $this->set($name, $value);
         }
@@ -82,6 +87,7 @@ final class ConfigurationParameterBag
 
     public function addValueIfNotExists(string $name, mixed $value): void
     {
+        $this->lastConfigVersion = null;
         $keys = array_reverse(explode('.', $name));
         foreach ($keys as $key) {
             if ($key) {
