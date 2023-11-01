@@ -30,6 +30,11 @@ final class ConfigurationParameterBag
     ) {
     }
 
+    public function getConfigVersion(): string
+    {
+        return md5(serialize($this->getAll(false)));
+    }
+
     public function getConfigValues(string ...$configurationFiles): array
     {
         $values = [];
