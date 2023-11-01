@@ -467,7 +467,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $this->getReflection()->getDocComment();
     }
 
-    private function getCurrentRootEntity(): ?RootEntityInterface
+    protected function getCurrentRootEntity(): ?RootEntityInterface
     {
         if (is_a($this, RootEntityInterface::class)) {
             return $this;
@@ -617,11 +617,5 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $dependenciesChecks);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, $entityCacheIsOutdated);
         return $entityCacheIsOutdated;
-    }
-
-    final public function getCacheKey(): string
-    {
-        $currentRootEntity = $this->getCurrentRootEntity();
-        return $currentRootEntity ? md5($this->getCurrentRootEntity()->getName()) : '';
     }
 }
