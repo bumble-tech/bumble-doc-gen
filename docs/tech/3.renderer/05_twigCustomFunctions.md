@@ -177,7 +177,7 @@ Here is a list of functions available by default:
           </tr>
                                                           <tr>
                                   <td rowspan="1">
-                    <a href="/docs/tech/3.renderer/classes/GetDocumentationPageUrl.md">getDocumentationPageUrl</a><br>
+                    <a href="/docs/tech/3.renderer/classes/GetDocumentationPageUrl_2.md">getDocumentationPageUrl</a><br>
                                         Creates an entity link by object
                                      </td>
                                   <td>
@@ -193,7 +193,7 @@ Here is a list of functions available by default:
           </tr>
                                                           <tr>
                                   <td rowspan="7">
-                    <a href="/docs/tech/3.renderer/classes/GetDocumentedEntityUrl.md">getDocumentedEntityUrl</a><br>
+                    <a href="/docs/tech/3.renderer/classes/GetDocumentedEntityUrl_2.md">getDocumentedEntityUrl</a><br>
                                         Get the URL of a documented entity by its name. If the entity is found, next to the file where this method was called, the `EntityDocRendererInterface::getDocFileExtension()` directory will be created, in which the documented entity file will be created
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
                                   <td>
@@ -385,4 +385,4 @@ Here is a list of functions available by default:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Tue Oct 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Wed Nov 01 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
