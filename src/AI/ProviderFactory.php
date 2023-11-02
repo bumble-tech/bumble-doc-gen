@@ -16,7 +16,7 @@ final class ProviderFactory
         return match ($provider) {
             OpenAIProvider::NAME => new OpenAIProvider($apiKey, $model),
             default => throw new RuntimeException(
-                "Parameter 'ai-provider' not set to valid option (" . implode(',', self::VALID_PROVIDERS) . ")!",
+                "Parameter 'ai_provider' not set to valid option (" . implode(',', self::VALID_PROVIDERS) . ")!",
             ),
         };
     }
