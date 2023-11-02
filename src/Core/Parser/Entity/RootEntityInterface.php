@@ -21,6 +21,11 @@ interface RootEntityInterface extends EntityInterface
     public function entityDataCanBeLoaded(): bool;
 
     /**
+     * The entity is loaded from a third party library and should not be treated the same as a standard one
+     */
+    public function isExternalLibraryEntity(): bool;
+
+    /**
      * @return string[]
      */
     public function getEntityDependencies(): array;
