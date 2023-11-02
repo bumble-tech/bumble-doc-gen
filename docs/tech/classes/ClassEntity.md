@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ClassEntity<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L37">ClassEntity</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L38">ClassEntity</a> class:
 </h1>
 
 
@@ -250,6 +250,9 @@ class ClassEntity extends \BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEn
     <a href="#misenum">isEnum</a>
     </li>
 <li>
+    <a href="#misexternallibraryentity">isExternalLibraryEntity</a>
+    - <i>The entity is loaded from a third party library and should not be treated the same as a standard one</i></li>
+<li>
     <a href="#misingit">isInGit</a>
     - <i>Checking if class file is in git repository</i></li>
 <li>
@@ -274,6 +277,9 @@ class ClassEntity extends \BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEn
     <a href="#mreloadentitydependenciescache">reloadEntityDependenciesCache</a>
     </li>
 <li>
+    <a href="#mremoveentityvaluefromcache">removeEntityValueFromCache</a>
+    </li>
+<li>
     <a href="#mremovenotusedentitydatacache">removeNotUsedEntityDataCache</a>
     </li>
 <li>
@@ -294,11 +300,11 @@ class ClassEntity extends \BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEn
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L46">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L47">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings $phpHandlerSettings, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper $reflector, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollection, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \Psr\Log\LoggerInterface $logger, string $className, string|null $relativeFileName);
+public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings $phpHandlerSettings, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper $reflector, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollection, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, \BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser $composerParser, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \Psr\Log\LoggerInterface $logger, string $className, string|null $relativeFileName);
 ```
 
 
@@ -340,6 +346,11 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
             <td>-</td>
         </tr>
             <tr>
+            <td>$composerParser</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerParser.php'>\BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
             <td>$localObjectCache</td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
             <td>-</td>
@@ -371,7 +382,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mcursortodocattributelinkfragment" href="#mcursortodocattributelinkfragment">#</a>
  <b>cursorToDocAttributeLinkFragment</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L944">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L965">source code</a></li>
 </ul>
 
 ```php
@@ -430,7 +441,7 @@ public function cursorToDocAttributeLinkFragment(string $cursor, bool $isForDocu
 <ul>
 <li><a name="mdocumentcreationallowed" href="#mdocumentcreationallowed">#</a>
  <b>documentCreationAllowed</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L162">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L175">source code</a></li>
 </ul>
 
 ```php
@@ -461,7 +472,7 @@ public function documentCreationAllowed(): bool;
 <ul>
 <li><a name="mentitycacheisoutdated" href="#mentitycacheisoutdated">#</a>
  <b>entityCacheIsOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L556">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L566">source code</a></li>
 </ul>
 
 ```php
@@ -494,7 +505,7 @@ public function entityCacheIsOutdated(): bool;
 <ul>
 <li><a name="mentitydatacanbeloaded" href="#mentitydatacanbeloaded">#</a>
  <b>entityDataCanBeLoaded</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L297">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L311">source code</a></li>
 </ul>
 
 ```php
@@ -516,6 +527,9 @@ public function entityDataCanBeLoaded(): bool;
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
+<li>
+    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
+
 </ul>
 
 </div>
@@ -525,7 +539,7 @@ public function entityDataCanBeLoaded(): bool;
 <ul>
 <li><a name="mgetabsolutefilename" href="#mgetabsolutefilename">#</a>
  <b>getAbsoluteFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L84">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L85">source code</a></li>
 </ul>
 
 ```php
@@ -578,7 +592,7 @@ public function getCacheKey(): string;
 <ul>
 <li><a name="mgetcachedentitydependencies" href="#mgetcachedentitydependencies">#</a>
  <b>getCachedEntityDependencies</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L488">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L489">source code</a></li>
 </ul>
 
 ```php
@@ -608,7 +622,7 @@ public function getCachedEntityDependencies(): array;
 <ul>
 <li><a name="mgetcasesnames" href="#mgetcasesnames">#</a>
  <b>getCasesNames</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L714">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L735">source code</a></li>
 </ul>
 
 ```php
@@ -639,7 +653,7 @@ public function getCasesNames(): array;
 <ul>
 <li><a name="mgetconstant" href="#mgetconstant">#</a>
  <b>getConstant</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L875">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L896">source code</a></li>
 </ul>
 
 ```php
@@ -687,7 +701,7 @@ public function getConstant(string $name): string|array|int|bool|null|float;
 <ul>
 <li><a name="mgetconstantentity" href="#mgetconstantentity">#</a>
  <b>getConstantEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L608">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L629">source code</a></li>
 </ul>
 
 ```php
@@ -746,7 +760,7 @@ public function getConstantEntity(string $constantName, bool $unsafe = true): \B
 <ul>
 <li><a name="mgetconstantentitycollection" href="#mgetconstantentitycollection">#</a>
  <b>getConstantEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L587">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L608">source code</a></li>
 </ul>
 
 ```php
@@ -783,7 +797,7 @@ public function getConstantEntityCollection(): \BumbleDocGen\LanguageHandler\Php
 <ul>
 <li><a name="mgetconstants" href="#mgetconstants">#</a>
  <b>getConstants</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L912">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L933">source code</a></li>
 </ul>
 
 ```php
@@ -814,7 +828,7 @@ public function getConstants(): array;
 <ul>
 <li><a name="mgetconstantsdata" href="#mgetconstantsdata">#</a>
  <b>getConstantsData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L778">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L799">source code</a></li>
 </ul>
 
 ```php
@@ -845,7 +859,7 @@ public function getConstantsData(): array;
 <ul>
 <li><a name="mgetdescription" href="#mgetdescription">#</a>
  <b>getDescription</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L695">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L716">source code</a></li>
 </ul>
 
 ```php
@@ -882,7 +896,7 @@ public function getDescription(): string;
 <ul>
 <li><a name="mgetdescriptionlinks" href="#mgetdescriptionlinks">#</a>
  <b>getDescriptionLinks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L324">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L325">source code</a></li>
 </ul>
 
 ```php
@@ -915,7 +929,7 @@ public function getDescriptionLinks(): array;
 <ul>
 <li><a name="mgetdocblock" href="#mgetdocblock">#</a>
  <b>getDocBlock</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L136">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L149">source code</a></li>
 </ul>
 
 ```php
@@ -952,7 +966,7 @@ public function getDocBlock(): \phpDocumentor\Reflection\DocBlock;
 <ul>
 <li><a name="mgetdoccomment" href="#mgetdoccomment">#</a>
  <b>getDocComment</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L465">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L466">source code</a></li>
 </ul>
 
 ```php
@@ -985,7 +999,7 @@ public function getDocComment(): string;
 <ul>
 <li><a name="mgetdoccommententity" href="#mgetdoccommententity">#</a>
  <b>getDocCommentEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L173">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L186">source code</a></li>
 </ul>
 
 ```php
@@ -1022,7 +1036,7 @@ public function getDocCommentEntity(): \BumbleDocGen\LanguageHandler\Php\Parser\
 <ul>
 <li><a name="mgetdocnote" href="#mgetdocnote">#</a>
  <b>getDocNote</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L452">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L453">source code</a></li>
 </ul>
 
 ```php
@@ -1045,7 +1059,7 @@ public function getDocNote(): string;
 <ul>
 <li><a name="mgetdocrender" href="#mgetdocrender">#</a>
  <b>getDocRender</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L921">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L942">source code</a></li>
 </ul>
 
 ```php
@@ -1076,7 +1090,7 @@ public function getDocRender(): \BumbleDocGen\Core\Renderer\EntityDocRenderer\En
 <ul>
 <li><a name="mgetendline" href="#mgetendline">#</a>
  <b>getEndLine</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L383">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L397">source code</a></li>
 </ul>
 
 ```php
@@ -1107,7 +1121,7 @@ public function getEndLine(): int;
 <ul>
 <li><a name="mgetentitydependencies" href="#mgetentitydependencies">#</a>
  <b>getEntityDependencies</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L106">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L118">source code</a></li>
 </ul>
 
 ```php
@@ -1128,7 +1142,7 @@ public function getEntityDependencies(): array;
 <ul>
 <li><a name="mgetexamples" href="#mgetexamples">#</a>
  <b>getExamples</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L429">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L430">source code</a></li>
 </ul>
 
 ```php
@@ -1151,7 +1165,7 @@ public function getExamples(): array;
 <ul>
 <li><a name="mgetextends" href="#mgetextends">#</a>
  <b>getExtends</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L424">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L438">source code</a></li>
 </ul>
 
 ```php
@@ -1182,7 +1196,7 @@ public function getExtends(): string|null;
 <ul>
 <li><a name="mgetfilecontent" href="#mgetfilecontent">#</a>
  <b>getFileContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L728">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L749">source code</a></li>
 </ul>
 
 ```php
@@ -1210,7 +1224,7 @@ public function getFileContent(): string;
 <ul>
 <li><a name="mgetfilename" href="#mgetfilename">#</a>
  <b>getFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L352">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L366">source code</a></li>
 </ul>
 
 ```php
@@ -1231,7 +1245,7 @@ public function getFileName(): string|null;
 <ul>
 <li><a name="mgetfilesourcelink" href="#mgetfilesourcelink">#</a>
  <b>getFileSourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L126">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L127">source code</a></li>
 </ul>
 
 ```php
@@ -1278,7 +1292,7 @@ public function getFileSourceLink(bool $withLine = true): string|null;
 <ul>
 <li><a name="mgetfirstexample" href="#mgetfirstexample">#</a>
  <b>getFirstExample</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L446">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L447">source code</a></li>
 </ul>
 
 ```php
@@ -1301,7 +1315,7 @@ public function getFirstExample(): string;
 <ul>
 <li><a name="mgetfullfilename" href="#mgetfullfilename">#</a>
  <b>getFullFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L361">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L375">source code</a></li>
 </ul>
 
 ```php
@@ -1332,7 +1346,7 @@ public function getFullFileName(): string|null;
 <ul>
 <li><a name="mgetimplementingreflectionclass" href="#mgetimplementingreflectionclass">#</a>
  <b>getImplementingReflectionClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L263">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L276">source code</a></li>
 </ul>
 
 ```php
@@ -1363,7 +1377,7 @@ public function getImplementingReflectionClass(): \Roave\BetterReflection\Reflec
 <ul>
 <li><a name="mgetinterfacenames" href="#mgetinterfacenames">#</a>
  <b>getInterfaceNames</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L482">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L499">source code</a></li>
 </ul>
 
 ```php
@@ -1394,7 +1408,7 @@ public function getInterfaceNames(): array;
 <ul>
 <li><a name="mgetinterfacesentities" href="#mgetinterfacesentities">#</a>
  <b>getInterfacesEntities</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L443">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L457">source code</a></li>
 </ul>
 
 ```php
@@ -1425,7 +1439,7 @@ public function getInterfacesEntities(): array;
 <ul>
 <li><a name="mgetinterfacesstring" href="#mgetinterfacesstring">#</a>
  <b>getInterfacesString</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L558">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L579">source code</a></li>
 </ul>
 
 ```php
@@ -1456,7 +1470,7 @@ public function getInterfacesString(): string;
 <ul>
 <li><a name="mgetmethodentity" href="#mgetmethodentity">#</a>
  <b>getMethodEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L680">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L701">source code</a></li>
 </ul>
 
 ```php
@@ -1515,7 +1529,7 @@ public function getMethodEntity(string $methodName, bool $unsafe = true): \Bumbl
 <ul>
 <li><a name="mgetmethodentitycollection" href="#mgetmethodentitycollection">#</a>
  <b>getMethodEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L659">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L680">source code</a></li>
 </ul>
 
 ```php
@@ -1552,7 +1566,7 @@ public function getMethodEntityCollection(): \BumbleDocGen\LanguageHandler\Php\P
 <ul>
 <li><a name="mgetmethodsdata" href="#mgetmethodsdata">#</a>
  <b>getMethodsData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L744">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L765">source code</a></li>
 </ul>
 
 ```php
@@ -1583,7 +1597,7 @@ public function getMethodsData(): array;
 <ul>
 <li><a name="mgetmodifiersstring" href="#mgetmodifiersstring">#</a>
  <b>getModifiersString</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L392">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L406">source code</a></li>
 </ul>
 
 ```php
@@ -1614,7 +1628,7 @@ public function getModifiersString(): string;
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L273">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L286">source code</a></li>
 </ul>
 
 ```php
@@ -1635,7 +1649,7 @@ public function getName(): string;
 <ul>
 <li><a name="mgetnamespacename" href="#mgetnamespacename">#</a>
  <b>getNamespaceName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L320">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L334">source code</a></li>
 </ul>
 
 ```php
@@ -1666,7 +1680,7 @@ public function getNamespaceName(): string;
 <ul>
 <li><a name="mgetobjectid" href="#mgetobjectid">#</a>
  <b>getObjectId</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L73">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L75">source code</a></li>
 </ul>
 
 ```php
@@ -1687,7 +1701,7 @@ public function getObjectId(): string;
 <ul>
 <li><a name="mgetparentclass" href="#mgetparentclass">#</a>
  <b>getParentClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L545">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L566">source code</a></li>
 </ul>
 
 ```php
@@ -1718,7 +1732,7 @@ public function getParentClass(): \BumbleDocGen\LanguageHandler\Php\Parser\Entit
 <ul>
 <li><a name="mgetparentclassname" href="#mgetparentclassname">#</a>
  <b>getParentClassName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L533">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L554">source code</a></li>
 </ul>
 
 ```php
@@ -1749,7 +1763,7 @@ public function getParentClassName(): string|null;
 <ul>
 <li><a name="mgetparentclassnames" href="#mgetparentclassnames">#</a>
  <b>getParentClassNames</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L458">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L472">source code</a></li>
 </ul>
 
 ```php
@@ -1780,7 +1794,7 @@ public function getParentClassNames(): array;
 <ul>
 <li><a name="mgetphphandlersettings" href="#mgetphphandlersettings">#</a>
  <b>getPhpHandlerSettings</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L89">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L100">source code</a></li>
 </ul>
 
 ```php
@@ -1801,7 +1815,7 @@ public function getPhpHandlerSettings(): \BumbleDocGen\LanguageHandler\Php\PhpHa
 <ul>
 <li><a name="mgetplugindata" href="#mgetplugindata">#</a>
  <b>getPluginData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L208">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L221">source code</a></li>
 </ul>
 
 ```php
@@ -1839,7 +1853,7 @@ public function getPluginData(string $pluginKey): array|null;
 <ul>
 <li><a name="mgetpropertiesdata" href="#mgetpropertiesdata">#</a>
  <b>getPropertiesData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L761">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L782">source code</a></li>
 </ul>
 
 ```php
@@ -1870,7 +1884,7 @@ public function getPropertiesData(): array;
 <ul>
 <li><a name="mgetpropertyentity" href="#mgetpropertyentity">#</a>
  <b>getPropertyEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L644">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L665">source code</a></li>
 </ul>
 
 ```php
@@ -1929,7 +1943,7 @@ public function getPropertyEntity(string $propertyName, bool $unsafe = true): \B
 <ul>
 <li><a name="mgetpropertyentitycollection" href="#mgetpropertyentitycollection">#</a>
  <b>getPropertyEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L623">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L644">source code</a></li>
 </ul>
 
 ```php
@@ -1966,7 +1980,7 @@ public function getPropertyEntityCollection(): \BumbleDocGen\LanguageHandler\Php
 <ul>
 <li><a name="mgetreflector" href="#mgetreflector">#</a>
  <b>getReflector</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L84">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L95">source code</a></li>
 </ul>
 
 ```php
@@ -1987,7 +2001,7 @@ public function getReflector(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\
 <ul>
 <li><a name="mgetrelativefilename" href="#mgetrelativefilename">#</a>
  <b>getRelativeFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L329">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L343">source code</a></li>
 </ul>
 
 ```php
@@ -2035,7 +2049,7 @@ public function getRelativeFileName(bool $loadIfEmpty = true): string|null;
 <ul>
 <li><a name="mgetrootentitycollection" href="#mgetrootentitycollection">#</a>
  <b>getRootEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L94">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L105">source code</a></li>
 </ul>
 
 ```php
@@ -2056,7 +2070,7 @@ public function getRootEntityCollection(): \BumbleDocGen\LanguageHandler\Php\Par
 <ul>
 <li><a name="mgetshortname" href="#mgetshortname">#</a>
  <b>getShortName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L310">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L324">source code</a></li>
 </ul>
 
 ```php
@@ -2077,7 +2091,7 @@ public function getShortName(): string;
 <ul>
 <li><a name="mgetstartline" href="#mgetstartline">#</a>
  <b>getStartLine</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L374">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L388">source code</a></li>
 </ul>
 
 ```php
@@ -2108,7 +2122,7 @@ public function getStartLine(): int;
 <ul>
 <li><a name="mgetthrows" href="#mgetthrows">#</a>
  <b>getThrows</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L379">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L380">source code</a></li>
 </ul>
 
 ```php
@@ -2141,7 +2155,7 @@ public function getThrows(): array;
 <ul>
 <li><a name="mgettraitsnames" href="#mgettraitsnames">#</a>
  <b>getTraitsNames</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L567">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L588">source code</a></li>
 </ul>
 
 ```php
@@ -2172,7 +2186,7 @@ public function getTraitsNames(): array;
 <ul>
 <li><a name="mhasannotationkey" href="#mhasannotationkey">#</a>
  <b>hasAnnotationKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L268">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L281">source code</a></li>
 </ul>
 
 ```php
@@ -2210,7 +2224,7 @@ public function hasAnnotationKey(string $annotationKey): bool;
 <ul>
 <li><a name="mhasconstant" href="#mhasconstant">#</a>
  <b>hasConstant</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L849">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L870">source code</a></li>
 </ul>
 
 ```php
@@ -2258,7 +2272,7 @@ public function hasConstant(string $constant): bool;
 <ul>
 <li><a name="mhasdescriptionlinks" href="#mhasdescriptionlinks">#</a>
  <b>hasDescriptionLinks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L179">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L180">source code</a></li>
 </ul>
 
 ```php
@@ -2288,7 +2302,7 @@ public function hasDescriptionLinks(): bool;
 <ul>
 <li><a name="mhasexamples" href="#mhasexamples">#</a>
  <b>hasExamples</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L418">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L419">source code</a></li>
 </ul>
 
 ```php
@@ -2311,7 +2325,7 @@ public function hasExamples(): bool;
 <ul>
 <li><a name="mhasmethod" href="#mhasmethod">#</a>
  <b>hasMethod</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L831">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L852">source code</a></li>
 </ul>
 
 ```php
@@ -2359,7 +2373,7 @@ public function hasMethod(string $method): bool;
 <ul>
 <li><a name="mhasparentclass" href="#mhasparentclass">#</a>
  <b>hasParentClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L898">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L919">source code</a></li>
 </ul>
 
 ```php
@@ -2407,7 +2421,7 @@ public function hasParentClass(string $parentClassName): bool;
 <ul>
 <li><a name="mhasproperty" href="#mhasproperty">#</a>
  <b>hasProperty</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L840">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L861">source code</a></li>
 </ul>
 
 ```php
@@ -2455,7 +2469,7 @@ public function hasProperty(string $property): bool;
 <ul>
 <li><a name="mhasthrows" href="#mhasthrows">#</a>
  <b>hasThrows</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L330">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L331">source code</a></li>
 </ul>
 
 ```php
@@ -2478,7 +2492,7 @@ public function hasThrows(): bool;
 <ul>
 <li><a name="mhastraits" href="#mhastraits">#</a>
  <b>hasTraits</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L576">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L597">source code</a></li>
 </ul>
 
 ```php
@@ -2509,7 +2523,7 @@ public function hasTraits(): bool;
 <ul>
 <li><a name="mimplementsinterface" href="#mimplementsinterface">#</a>
  <b>implementsInterface</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L884">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L905">source code</a></li>
 </ul>
 
 ```php
@@ -2557,7 +2571,7 @@ public function implementsInterface(string $interfaceName): bool;
 <ul>
 <li><a name="misabstract" href="#misabstract">#</a>
  <b>isAbstract</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L804">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L825">source code</a></li>
 </ul>
 
 ```php
@@ -2588,7 +2602,7 @@ public function isAbstract(): bool;
 <ul>
 <li><a name="misclassload" href="#misclassload">#</a>
  <b>isClassLoad</b>
- <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L281">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L294">source code</a></li>
 </ul>
 
 ```php
@@ -2609,7 +2623,7 @@ public function isClassLoad(): bool;
 <ul>
 <li><a name="misdeprecated" href="#misdeprecated">#</a>
  <b>isDeprecated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L169">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L170">source code</a></li>
 </ul>
 
 ```php
@@ -2632,7 +2646,7 @@ public function isDeprecated(): bool;
 <ul>
 <li><a name="misentitydatacacheoutdated" href="#misentitydatacacheoutdated">#</a>
  <b>isEntityDataCacheOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L68">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L77">source code</a></li>
 </ul>
 
 ```php
@@ -2662,7 +2676,7 @@ public function isEntityDataCacheOutdated(): bool;
 <ul>
 <li><a name="misentityfilecanbeload" href="#misentityfilecanbeload">#</a>
  <b>isEntityFileCanBeLoad</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L74">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L75">source code</a></li>
 </ul>
 
 ```php
@@ -2695,7 +2709,7 @@ public function isEntityFileCanBeLoad(): bool;
 <ul>
 <li><a name="misentitynamevalid" href="#misentitynamevalid">#</a>
  <b>isEntityNameValid</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L68">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L70">source code</a></li>
 </ul>
 
 ```php
@@ -2733,7 +2747,7 @@ public static function isEntityNameValid(string $entityName): bool;
 <ul>
 <li><a name="misenum" href="#misenum">#</a>
  <b>isEnum</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L705">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L726">source code</a></li>
 </ul>
 
 ```php
@@ -2762,9 +2776,30 @@ public function isEnum(): bool;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="misexternallibraryentity" href="#misexternallibraryentity">#</a>
+ <b>isExternalLibraryEntity</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L84">source code</a></li>
+</ul>
+
+```php
+public function isExternalLibraryEntity(): bool;
+```
+
+<blockquote>The entity is loaded from a third party library and should not be treated the same as a standard one</blockquote>
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="misingit" href="#misingit">#</a>
  <b>isInGit</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L148">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L161">source code</a></li>
 </ul>
 
 ```php
@@ -2795,7 +2830,7 @@ public function isInGit(): bool;
 <ul>
 <li><a name="misinstantiable" href="#misinstantiable">#</a>
  <b>isInstantiable</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L795">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L816">source code</a></li>
 </ul>
 
 ```php
@@ -2826,7 +2861,7 @@ public function isInstantiable(): bool;
 <ul>
 <li><a name="misinterface" href="#misinterface">#</a>
  <b>isInterface</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L813">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L834">source code</a></li>
 </ul>
 
 ```php
@@ -2857,7 +2892,7 @@ public function isInterface(): bool;
 <ul>
 <li><a name="misinternal" href="#misinternal">#</a>
  <b>isInternal</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L162">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L163">source code</a></li>
 </ul>
 
 ```php
@@ -2880,7 +2915,7 @@ public function isInternal(): bool;
 <ul>
 <li><a name="missubclassof" href="#missubclassof">#</a>
  <b>isSubclassOf</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L858">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L879">source code</a></li>
 </ul>
 
 ```php
@@ -2928,7 +2963,7 @@ public function isSubclassOf(string $className): bool;
 <ul>
 <li><a name="mistrait" href="#mistrait">#</a>
  <b>isTrait</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L822">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L843">source code</a></li>
 </ul>
 
 ```php
@@ -2959,7 +2994,7 @@ public function isTrait(): bool;
 <ul>
 <li><a name="mloadplugindata" href="#mloadplugindata">#</a>
  <b>loadPluginData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L203">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L216">source code</a></li>
 </ul>
 
 ```php
@@ -3002,20 +3037,20 @@ public function loadPluginData(string $pluginKey, array $data): void;
 <ul>
 <li><a name="mreloadentitydependenciescache" href="#mreloadentitydependenciescache">#</a>
  <b>reloadEntityDependenciesCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L506">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L507">source code</a></li>
 </ul>
 
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
-public function reloadEntityDependenciesCache(): void;
+public function reloadEntityDependenciesCache(): array;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
 
 
 <b>Throws:</b>
@@ -3030,9 +3065,49 @@ public function reloadEntityDependenciesCache(): void;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mremoveentityvaluefromcache" href="#mremoveentityvaluefromcache">#</a>
+ <b>removeEntityValueFromCache</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L65">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait
+
+public function removeEntityValueFromCache(string $key): void;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$key</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mremovenotusedentitydatacache" href="#mremovenotusedentitydatacache">#</a>
  <b>removeNotUsedEntityDataCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L88">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L97">source code</a></li>
 </ul>
 
 ```php
@@ -3062,7 +3137,7 @@ public function removeNotUsedEntityDataCache(): void;
 <ul>
 <li><a name="msetreflectionclass" href="#msetreflectionclass">#</a>
  <b>setReflectionClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L78">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php#L89">source code</a></li>
 </ul>
 
 ```php

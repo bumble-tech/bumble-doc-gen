@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Logger\Handler;
 
-final class GenerationErrorsHandler extends \Monolog\Handler\AbstractProcessingHandler implements \Monolog\Handler\ProcessableHandlerInterface, \Monolog\Handler\FormattableHandlerInterface, \Monolog\ResettableInterface, \Monolog\Handler\HandlerInterface
+final class GenerationErrorsHandler extends \Monolog\Handler\AbstractProcessingHandler
 ```
 
 <blockquote>Base Handler class providing the Handler structure, including processors and formatters</blockquote>
@@ -192,7 +192,7 @@ public function __sleep(): mixed;
 <ul>
 <li><a name="maddrecords" href="#maddrecords">#</a>
  <b>addRecords</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L53">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L54">source code</a></li>
 </ul>
 
 ```php
@@ -322,7 +322,7 @@ public function getLevel(): int;
 <ul>
 <li><a name="mgetrecords" href="#mgetrecords">#</a>
  <b>getRecords</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L48">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L49">source code</a></li>
 </ul>
 
 ```php

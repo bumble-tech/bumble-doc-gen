@@ -208,6 +208,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/SystemAsyncSourceLocator.md'>SystemAsyncSourceLocator.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/AsyncSourceLocator.md'>AsyncSourceLocator.php</a> <i> — <samp>Lazy loading classes. Cannot be used for initial parsing of files, only for getting specific docu...</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/CustomSourceLocatorInterface.md'>CustomSourceLocatorInterface.php</a> 
+│  │  │  │  ├── <a href='/docs/tech/classes/ComposerParser.md'>ComposerParser.php</a> 
 │  │  │  │  └── <a href='/docs/tech/classes/ParserHelper.md'>ParserHelper.php</a> 
 │  │  │  ├──<b>Plugin</b>/
 │  │  │  │  ├──<b>CorePlugin</b>/
@@ -250,4 +251,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Wed Nov 01 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Thu Nov 02 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
