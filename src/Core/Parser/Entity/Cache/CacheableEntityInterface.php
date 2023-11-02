@@ -16,7 +16,7 @@ interface CacheableEntityInterface
 
     public function isEntityDataCacheOutdated(): bool;
 
-    public function reloadEntityDependenciesCache(): void;
+    public function reloadEntityDependenciesCache(): array;
 
     public function removeNotUsedEntityDataCache(): void;
 }
