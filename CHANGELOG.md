@@ -1,5 +1,14 @@
 # Changelog
 
+# [1.4.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.4.0)
+- Fixed config errors [#52](https://github.com/bumble-tech/bumble-doc-gen/pull/52)
+- Fixed method type getter bug [#53](https://github.com/bumble-tech/bumble-doc-gen/pull/53)
+- Changed errors output [#55](https://github.com/bumble-tech/bumble-doc-gen/pull/55)
+- Improvement of the linking system [#56](https://github.com/bumble-tech/bumble-doc-gen/pull/56)
+- Added new page linker [#58](https://github.com/bumble-tech/bumble-doc-gen/pull/58)
+- Changed default plugins list [#57](https://github.com/bumble-tech/bumble-doc-gen/pull/57)
+- Fixed link finder errors [#59](https://github.com/bumble-tech/bumble-doc-gen/pull/59)
+
 # [1.3.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.3.0)
 - Add Unit Tests for BumbleDocGen\Core\Configuration\ValueTransformer [#45](https://github.com/bumble-tech/bumble-doc-gen/pull/45)
 - Add Unit Tests for ValueResolver Namespace [#47](https://github.com/bumble-tech/bumble-doc-gen/pull/47)

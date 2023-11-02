@@ -39,6 +39,11 @@ final class Configuration
         $parameterBag->addValueFromFileIfNotExists('', self::DEFAULT_SETTINGS_FILE);
     }
 
+    public function getConfigurationVersion(): string
+    {
+        return $this->parameterBag->getConfigVersion();
+    }
+
     /**
      * @throws InvalidConfigurationParameterException
      */

@@ -61,7 +61,7 @@ trait CacheableEntityWrapperTrait
 <ul>
 <li><a name="mentitycacheisoutdated" href="#mentitycacheisoutdated">#</a>
  <b>entityCacheIsOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -84,7 +84,7 @@ public function entityCacheIsOutdated(): bool;
 <ul>
 <li><a name="mgetcachekey" href="#mgetcachekey">#</a>
  <b>getCacheKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -107,7 +107,7 @@ public function getCacheKey(): string;
 <ul>
 <li><a name="misentitydatacacheoutdated" href="#misentitydatacacheoutdated">#</a>
  <b>isEntityDataCacheOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L60">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L68">source code</a></li>
 </ul>
 
 ```php
@@ -158,7 +158,7 @@ public function isEntityFileCanBeLoad(): bool;
 <ul>
 <li><a name="mremovenotusedentitydatacache" href="#mremovenotusedentitydatacache">#</a>
  <b>removeNotUsedEntityDataCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L80">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L88">source code</a></li>
 </ul>
 
 ```php
