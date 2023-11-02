@@ -177,7 +177,7 @@ Here is a list of functions available by default:
           </tr>
                                                           <tr>
                                   <td rowspan="1">
-                    <a href="/docs/tech/3.renderer/classes/GetDocumentationPageUrl.md">getDocumentationPageUrl</a><br>
+                    <a href="/docs/tech/3.renderer/classes/GetDocumentationPageUrl_2.md">getDocumentationPageUrl</a><br>
                                         Creates an entity link by object
                                      </td>
                                   <td>
@@ -193,7 +193,7 @@ Here is a list of functions available by default:
           </tr>
                                                           <tr>
                                   <td rowspan="7">
-                    <a href="/docs/tech/3.renderer/classes/GetDocumentedEntityUrl.md">getDocumentedEntityUrl</a><br>
+                    <a href="/docs/tech/3.renderer/classes/GetDocumentedEntityUrl_2.md">getDocumentedEntityUrl</a><br>
                                         Get the URL of a documented entity by its name. If the entity is found, next to the file where this method was called, the `EntityDocRendererInterface::getDocFileExtension()` directory will be created, in which the documented entity file will be created
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
                                   <td>
@@ -344,7 +344,7 @@ Here is a list of functions available by default:
                     <b>$classEntityCollections</b>
                  </td>
                  <td>
-                    <i><a href='/docs/tech/3.renderer/classes/ClassEntityCollection.md'>ClassEntityCollection</a></i>
+                    <i><a href='/docs/tech/3.renderer/classes/ClassEntityCollection_2.md'>ClassEntityCollection</a></i>
                  </td>
                  <td>The collection of entities for which the class map will be generated</td>
               </tr>
