@@ -55,7 +55,7 @@ final class ReadmeTemplateGenerator
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
+public function __construct(\BumbleDocGen\AI\ProviderInterface $aiProvider);
 ```
 
 
@@ -72,7 +72,7 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler);
     </thead>
     <tbody>
             <tr>
-            <td>$aiHandler</td>
+            <td>$aiProvider</td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
             <td>-</td>
         </tr>

@@ -69,7 +69,7 @@ final class DocBlocksGenerator
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper);
+public function __construct(\BumbleDocGen\AI\ProviderInterface $aiProvider, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper);
 ```
 
 
@@ -86,7 +86,7 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiHandler, \Bumb
     </thead>
     <tbody>
             <tr>
-            <td>$aiHandler</td>
+            <td>$aiProvider</td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
             <td>-</td>
         </tr>
