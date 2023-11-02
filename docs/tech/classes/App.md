@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Console;
 
-class App extends \Symfony\Component\Console\Application implements \Symfony\Contracts\Service\ResetInterface
+class App extends \Symfony\Component\Console\Application
 ```
 
 <blockquote>An Application is the container for a collection of commands.</blockquote>

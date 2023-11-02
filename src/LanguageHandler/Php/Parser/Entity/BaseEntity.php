@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
@@ -477,7 +478,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return null;
     }
 
-    private function getEntityDependenciesCacheKey(): string
+    protected function getEntityDependenciesCacheKey(): string
     {
         return "__internalEntityDependencies{$this->getCacheKey()}";
     }
@@ -493,23 +494,32 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
             $entityDependencies = $this->getEntityCacheValue($filesDependenciesCacheKey);
             if (is_null($entityDependencies)) {
-                $entityDependencies = $entity->getEntityDependencies();
-                $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
+                $entityDependencies = $this->reloadEntityDependenciesCache();
             }
         }
         return $entityDependencies;
     }
+    #[Inject] private GenerationErrorsHandler $generationErrorsHandler;
 
     /**
      * @throws InvalidArgumentException
      */
-    final public function reloadEntityDependenciesCache(): void
+    final public function reloadEntityDependenciesCache(): array
     {
+        $entityDependencies = [];
         $entity = $this->getCurrentRootEntity();
         if ($entity) {
+            $errorsBeforeCount = count($this->generationErrorsHandler->getRecords());
             $entityDependencies = $entity->getEntityDependencies();
-            $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
+            $errorsAfterCount = count($this->generationErrorsHandler->getRecords());
+            if ($errorsBeforeCount === $errorsAfterCount) {
+                $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
+            } else {
+                $this->removeEntityValueFromCache($this->getEntityDependenciesCacheKey());
+                $entityDependencies = [];
+            }
         }
+        return $entityDependencies;
     }
 
     /**

@@ -291,7 +291,7 @@ public function getGitClientPath(): string;
 <ul>
 <li><a name="mgetifexists" href="#mgetifexists">#</a>
  <b>getIfExists</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L362">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L367">source code</a></li>
 </ul>
 
 ```php

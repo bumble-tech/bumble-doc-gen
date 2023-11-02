@@ -4,11 +4,18 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Plugin;
 
+use BumbleDocGen\Core\Configuration\Configuration;
+use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class PluginEventDispatcher extends EventDispatcher
 {
     private array $handledSingleExecutionEvents = [];
+
+    public function __construct(private Logger $logger)
+    {
+        parent::__construct();
+    }
 
     public function dispatch(object $event, string $eventName = null): object
     {
@@ -20,6 +27,10 @@ class PluginEventDispatcher extends EventDispatcher
                 $this->handledSingleExecutionEvents[$uniqueExecutionId] = true;
             }
         }
-        return parent::dispatch($event, $eventName);
+        try {
+            return parent::dispatch($event, $eventName);
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+        }
     }
 }

@@ -62,6 +62,15 @@ trait CacheableEntityTrait
         );
     }
 
+    public function removeEntityValueFromCache(string $key): void
+    {
+        $this->isCacheChanged = true;
+        $this->entityCacheStorageHelper->removeItemValueFromCache(
+            $this->getCacheKey(),
+            $key,
+        );
+    }
+
     /**
      * @throws InvalidArgumentException
      */

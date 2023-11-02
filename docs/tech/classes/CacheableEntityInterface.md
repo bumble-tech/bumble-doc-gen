@@ -171,14 +171,14 @@ public function isEntityFileCanBeLoad(): bool;
 </ul>
 
 ```php
-public function reloadEntityDependenciesCache(): void;
+public function reloadEntityDependenciesCache(): array;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
 
 
 </div>

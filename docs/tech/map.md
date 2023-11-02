@@ -219,6 +219,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/SystemAsyncSourceLocator.md'>SystemAsyncSourceLocator.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/AsyncSourceLocator.md'>AsyncSourceLocator.php</a> <i> — <samp>Lazy loading classes. Cannot be used for initial parsing of files, only for getting specific docu...</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/CustomSourceLocatorInterface.md'>CustomSourceLocatorInterface.php</a> 
+│  │  │  │  ├── <a href='/docs/tech/classes/ComposerParser.md'>ComposerParser.php</a> 
 │  │  │  │  └── <a href='/docs/tech/classes/ParserHelper.md'>ParserHelper.php</a> 
 │  │  │  ├──<b>Plugin</b>/
 │  │  │  │  ├──<b>CorePlugin</b>/
