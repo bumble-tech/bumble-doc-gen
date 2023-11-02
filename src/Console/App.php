@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Console;
 
-use BumbleDocGen\Console\Command\AddMissingDocBlocksCommand;
-use BumbleDocGen\Console\Command\FillInReadmeMdTemplateCommand;
+use BumbleDocGen\AI\Console\AddDocBlocksCommand;
+use BumbleDocGen\AI\Console\GenerateReadMeTemplateCommand;
 use BumbleDocGen\Console\Command\GenerateCommand;
-use BumbleDocGen\Console\Command\GenerateProjectTemplatesStructureCommand;
 use BumbleDocGen\DocGeneratorFactory;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\CompleteCommand;
@@ -33,9 +32,8 @@ class App extends Application
         );
         $this->setDefinition($inputDefinition);
         $this->add(new GenerateCommand());
-        $this->add(new FillInReadmeMdTemplateCommand());
-        $this->add(new AddMissingDocBlocksCommand());
-        $this->add(new GenerateProjectTemplatesStructureCommand());
+        $this->add(new GenerateReadMeTemplateCommand());
+        $this->add(new AddDocBlocksCommand());
         $this->setExtraCommands();
     }
 

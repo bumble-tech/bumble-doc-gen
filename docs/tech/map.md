@@ -3,14 +3,25 @@
 Directory layout ( only documented files shown ):
 
 <embed> <pre>└──<b>src</b>/
+│  ├──<b>AI</b>/
+│  │  ├──<b>Console</b>/
+│  │  │  ├── <a href='/docs/tech/classes/AddDocBlocksCommand.md'>AddDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateReadMeTemplateCommand.md'>GenerateReadMeTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  ├──<b>Generators</b>/
+│  │  │  ├── <a href='/docs/tech/classes/DocBlocksGenerator.md'>DocBlocksGenerator.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/ReadmeTemplateGenerator.md'>ReadmeTemplateGenerator.php</a> 
+│  │  ├──<b>Providers</b>/
+│  │  │  └──<b>OpenAI</b>/
+│  │  │  │  └── <a href='/docs/tech/classes/Provider.md'>Provider.php</a> 
+│  │  ├──<b>Traits</b>/
+│  │  │  └── <a href='/docs/tech/classes/SharedCommandLogicTrait.md'>SharedCommandLogicTrait.php</a> 
+│  │  ├── <a href='/docs/tech/classes/ProviderFactory.md'>ProviderFactory.php</a> 
+│  │  └── <a href='/docs/tech/classes/ProviderInterface.md'>ProviderInterface.php</a> 
 │  ├──<b>Console</b>/
 │  │  ├──<b>Command</b>/
-│  │  │  ├── <a href='/docs/tech/classes/AddMissingDocBlocksCommand.md'>AddMissingDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/AdditionalCommandCollection.md'>AdditionalCommandCollection.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/BaseCommand.md'>BaseCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/FillInReadmeMdTemplateCommand.md'>FillInReadmeMdTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  └── <a href='/docs/tech/classes/GenerateProjectTemplatesStructureCommand.md'>GenerateProjectTemplatesStructureCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  ├──<b>ProgressBar</b>/
 │  │  │  ├── <a href='/docs/tech/classes/ProgressBarFactory.md'>ProgressBarFactory.php</a> 
 │  │  │  └── <a href='/docs/tech/classes/StylizedProgressBar.md'>StylizedProgressBar.php</a> 
@@ -240,11 +251,6 @@ Directory layout ( only documented files shown ):
 │  │  │  └── <a href='/docs/tech/classes/PhpHandlerSettings.md'>PhpHandlerSettings.php</a> 
 │  │  ├── <a href='/docs/tech/classes/LanguageHandlerInterface.md'>LanguageHandlerInterface.php</a> 
 │  │  └── <a href='/docs/tech/classes/LanguageHandlersCollection.md'>LanguageHandlersCollection.php</a> 
-│  ├──<b>TemplateGenerator</b>/
-│  │  └──<b>ChatGpt</b>/
-│  │  │  ├── <a href='/docs/tech/classes/MissingDocBlocksGenerator.md'>MissingDocBlocksGenerator.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/ReadmeTemplateFiller.md'>ReadmeTemplateFiller.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/TemplatesStructureGenerator.md'>TemplatesStructureGenerator.php</a> 
 │  ├── <a href='/docs/tech/classes/DocGenerator.md'>DocGenerator.php</a> <i> — <samp>Class for generating documentation.</samp></i>
 │  └── <a href='/docs/tech/classes/DocGeneratorFactory.md'>DocGeneratorFactory.php</a> 
 </pre> </embed>

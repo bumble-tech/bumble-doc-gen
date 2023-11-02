@@ -21,7 +21,7 @@ and all links with this page are recursively collected for it, after which the h
 See:
 <ul>
     <li>
-        <a href="/docs/tech/3.renderer/classes/GetDocumentedEntityUrl_2.md">\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a>    </li>
+        <a href="/docs/tech/3.renderer/classes/GetDocumentedEntityUrl.md">\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a>    </li>
 </ul>
 
 

@@ -49,6 +49,9 @@ final class Configuration
     <a href="#mgetgitclientpath">getGitClientPath</a>
     </li>
 <li>
+    <a href="#mgetifexists">getIfExists</a>
+    </li>
+<li>
     <a href="#mgetlanguagehandlerscollection">getLanguageHandlersCollection</a>
     </li>
 <li>
@@ -272,6 +275,51 @@ public function getGitClientPath(): string;
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mgetifexists" href="#mgetifexists">#</a>
+ <b>getIfExists</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L362">source code</a></li>
+</ul>
+
+```php
+public function getIfExists(mixed $key): string|null;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$key</td>
+            <td><a href='https://www.php.net/manual/en/language.types.mixed.php'>mixed</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
 
 
 <b>Throws:</b>
