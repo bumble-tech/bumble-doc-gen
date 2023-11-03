@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Plugin;
 
-use BumbleDocGen\Core\Configuration\Configuration;
 use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -32,5 +31,6 @@ class PluginEventDispatcher extends EventDispatcher
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
         }
+        return $event;
     }
 }
