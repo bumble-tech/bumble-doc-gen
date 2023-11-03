@@ -116,6 +116,35 @@ final class BreadcrumbsHelper
     }
 
     /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getNearestIndexFile(string $templateName): string
+    {
+        $pathParts = explode('/', $templateName);
+        array_pop($pathParts);
+        $subPath = implode('/', $pathParts);
+        $finder = Finder::create()
+            ->name('*.twig')
+            ->ignoreVCS(true)
+            ->ignoreDotFiles(true)
+            ->ignoreUnreadableDirs()
+            ->depth(0)
+            ->in($this->configuration->getTemplatesDir() . '/' . $subPath);
+
+        $indexFile = null;
+        foreach ($finder->files() as $file) {
+            $indexFile = $file->getFileName();
+            if (preg_match($this->prevPageNameTemplate, $indexFile)) {
+                break;
+            }
+        }
+        if (is_null($indexFile)) {
+            return $templateName;
+        }
+        return "{$subPath}/{$indexFile}";
+    }
+
+    /**
      * Get the name of a template by its URL.
      * Only templates with .twig extension are processed.
      * The title is parsed from the `title` variable in the template
