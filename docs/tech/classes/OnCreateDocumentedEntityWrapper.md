@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
-final class OnCreateDocumentedEntityWrapper extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class OnCreateDocumentedEntityWrapper extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>The event occurs when an entity is added to the list for documentation</blockquote>

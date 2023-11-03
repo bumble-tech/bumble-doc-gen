@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/04_twigCustomFilters.md">Template filters</a> <b>/</b> DocumentedEntityWrappersCollection<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> DocumentedEntityWrappersCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L12">DocumentedEntityWrappersCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L14">DocumentedEntityWrappersCollection</a> class:
 </h1>
 
 
@@ -60,11 +60,11 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \T
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L21">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher);
+public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper $breadcrumbsHelper, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher);
 ```
 
 
@@ -91,6 +91,11 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
             <td>-</td>
         </tr>
             <tr>
+            <td>$breadcrumbsHelper</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
             <td>$pluginEventDispatcher</td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php'>\BumbleDocGen\Core\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
@@ -107,7 +112,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
 <ul>
 <li><a name="mcount" href="#mcount">#</a>
  <b>count</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L63">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L76">source code</a></li>
 </ul>
 
 ```php
@@ -134,7 +139,7 @@ public function count(): int;
 <ul>
 <li><a name="mcreateandadddocumentedentitywrapper" href="#mcreateandadddocumentedentitywrapper">#</a>
  <b>createAndAddDocumentedEntityWrapper</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L36">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L42">source code</a></li>
 </ul>
 
 ```php
@@ -165,6 +170,13 @@ public function createAndAddDocumentedEntityWrapper(\BumbleDocGen\Core\Parser\En
 <b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>
 
 
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
 </div>
 <hr>
 <div class='method_description-block'>
@@ -172,7 +184,7 @@ public function createAndAddDocumentedEntityWrapper(\BumbleDocGen\Core\Parser\En
 <ul>
 <li><a name="mgetdocumentedentitiesrelations" href="#mgetdocumentedentitiesrelations">#</a>
  <b>getDocumentedEntitiesRelations</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L58">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L71">source code</a></li>
 </ul>
 
 ```php
@@ -193,7 +205,7 @@ public function getDocumentedEntitiesRelations(): array;
 <ul>
 <li><a name="mgetiterator" href="#mgetiterator">#</a>
  <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L26">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L29">source code</a></li>
 </ul>
 
 ```php

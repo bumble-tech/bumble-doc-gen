@@ -21,11 +21,11 @@ the `EntityDocRendererInterface::getDocFileExtension()` directory will be create
 See:
 <ul>
     <li>
-        <a href="/docs/tech/classes/DocumentedEntityWrapper.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
+        <a href="/docs/tech/classes/DocumentedEntityWrapper_2.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
     <li>
-        <a href="/docs/tech/classes/DocumentedEntityWrappersCollection.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
+        <a href="/docs/tech/classes/DocumentedEntityWrappersCollection_2.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
     <li>
-        <a href="/docs/tech/classes/RendererContext.md#pentitywrapperscollection">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
+        <a href="/docs/tech/classes/RendererContext_2.md">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
 </ul>
 
 
@@ -211,13 +211,13 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 </ul>
 

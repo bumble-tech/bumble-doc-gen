@@ -654,7 +654,7 @@ public function setLevel(\Monolog\Handler\Level|\Monolog\Handler\LevelName|\Psr\
     <tbody>
             <tr>
             <td>$level</td>
-            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/Level.php'>\Monolog\Handler\Level</a> | <a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/LevelName.php'>\Monolog\Handler\LevelName</a> | \Psr\Log\LogLevel::*</td>
+            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/Level.php'>\Monolog\Handler\Level</a> | <a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/LevelName.php'>\Monolog\Handler\LevelName</a> | <a href='https://github.com/php-fig/log/blob/master/src/LogLevel.php'>\Psr\Log\LogLevel::*</a></td>
             <td>Level or level name</td>
         </tr>
         </tbody>

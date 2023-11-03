@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser;
 
-final class OnAddClassEntityToCollection extends \Symfony\Contracts\EventDispatcher\Event implements \BumbleDocGen\Core\Plugin\OnlySingleExecutionEvent, \Psr\EventDispatcher\StoppableEventInterface
+final class OnAddClassEntityToCollection extends \Symfony\Contracts\EventDispatcher\Event implements \BumbleDocGen\Core\Plugin\OnlySingleExecutionEvent
 ```
 
 <blockquote>Called when each class entity is added to the entity collection</blockquote>

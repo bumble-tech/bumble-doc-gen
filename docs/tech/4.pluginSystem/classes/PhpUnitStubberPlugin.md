@@ -71,7 +71,7 @@ public static function getSubscribedEvents(): array;
 <ul>
 <li><a name="moncheckisclassentitycanbeload" href="#moncheckisclassentitycanbeload">#</a>
  <b>onCheckIsClassEntityCanBeLoad</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/PhpUnitStubberPlugin.php#L38">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/PhpUnitStubberPlugin.php#L39">source code</a></li>
 </ul>
 
 ```php
