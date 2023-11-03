@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace BumbleDocGen\Core\Renderer\Context;
 
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
 
 final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \Countable
 {
@@ -19,6 +21,7 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \C
     public function __construct(
         private RendererContext $rendererContext,
         private LocalObjectCache $localObjectCache,
+        private BreadcrumbsHelper $breadcrumbsHelper,
         private PluginEventDispatcher $pluginEventDispatcher
     ) {
     }
@@ -33,12 +36,22 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \C
         }
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function createAndAddDocumentedEntityWrapper(RootEntityInterface $rootEntity): DocumentedEntityWrapper
     {
+        $parentDocFilePatch = $this->rendererContext->getCurrentTemplateFilePatch();
+
+        $entityWrapper = $this->rendererContext->getCurrentDocumentedEntityWrapper();
+        if (!is_null($entityWrapper)) {
+            $parentDocFilePatch = $this->breadcrumbsHelper->getNearestIndexFile($parentDocFilePatch);
+        }
+
         $documentedEntity = new DocumentedEntityWrapper(
             $rootEntity,
             $this->localObjectCache,
-            $this->rendererContext->getCurrentTemplateFilePatch()
+            $parentDocFilePatch
         );
 
         $this->pluginEventDispatcher->dispatch(new OnCreateDocumentedEntityWrapper($documentedEntity));
