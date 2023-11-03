@@ -107,6 +107,10 @@ class PropertyEntity extends BaseEntity
         }
         $docComment = $this->getDocComment();
         $reflectionProperty = $this;
+        if ($reflectionProperty->isImplementedInParentClass()) {
+            $reflectionProperty = $reflectionProperty->getImplementingClass()->getPropertyEntity($this->getName());
+        }
+
         if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
             $implementingClass = $this->getImplementingClass();
             $parentClass = $this->getImplementingClass()->getParentClass();
