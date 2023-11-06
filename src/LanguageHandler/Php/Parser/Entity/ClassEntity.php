@@ -449,6 +449,20 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getTraits(): array
+    {
+        // todo use collection
+        $traits = [];
+        foreach ($this->getTraitsNames() as $traitsName) {
+            $traits[] = $this->classEntityCollection->getLoadedOrCreateNew($traitsName);
+        }
+        return $traits;
+    }
+
+    /**
      * @return ClassEntity[]
      *
      * @throws ReflectionException
