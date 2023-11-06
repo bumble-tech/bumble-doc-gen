@@ -91,22 +91,7 @@ final class BreadcrumbsHelper
 
         if ($pathParts) {
             $subPath = count($pathParts) > 1 ? implode('/', $pathParts) : '';
-            $finder = Finder::create()
-                ->name('*.twig')
-                ->ignoreVCS(true)
-                ->ignoreDotFiles(true)
-                ->ignoreUnreadableDirs()
-                ->depth(0)
-                ->in($this->configuration->getTemplatesDir() . '/' . $subPath);
-
-            $indexFile = null;
-            foreach ($finder->files() as $file) {
-                $indexFile = $file->getFileName();
-                if (preg_match($this->prevPageNameTemplate, $indexFile)) {
-                    break;
-                }
-            }
-
+            $indexFile = $this->getFindIndexFileByRelativePath($subPath);
             if ($indexFile) {
                 $prevPage = $subPath . "/{$indexFile}";
             }
@@ -123,13 +108,25 @@ final class BreadcrumbsHelper
         $pathParts = explode('/', $templateName);
         array_pop($pathParts);
         $subPath = implode('/', $pathParts);
+        $indexFile = $this->getFindIndexFileByRelativePath($subPath);
+        if (is_null($indexFile)) {
+            return $templateName;
+        }
+        return "{$subPath}/{$indexFile}";
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    private function getFindIndexFileByRelativePath(string $relativePath): ?string
+    {
         $finder = Finder::create()
             ->name('*.twig')
             ->ignoreVCS(true)
             ->ignoreDotFiles(true)
             ->ignoreUnreadableDirs()
             ->depth(0)
-            ->in($this->configuration->getTemplatesDir() . '/' . $subPath);
+            ->in($this->configuration->getTemplatesDir() . '/' . $relativePath);
 
         $indexFile = null;
         foreach ($finder->files() as $file) {
@@ -138,10 +135,7 @@ final class BreadcrumbsHelper
                 break;
             }
         }
-        if (is_null($indexFile)) {
-            return $templateName;
-        }
-        return "{$subPath}/{$indexFile}";
+        return $indexFile;
     }
 
     /**
