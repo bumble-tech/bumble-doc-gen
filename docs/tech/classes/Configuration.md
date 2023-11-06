@@ -40,10 +40,16 @@ final class Configuration
     <a href="#mgetcachedir">getCacheDir</a>
     </li>
 <li>
+    <a href="#mgetconfigurationversion">getConfigurationVersion</a>
+    </li>
+<li>
     <a href="#mgetdocgenlibdir">getDocGenLibDir</a>
     </li>
 <li>
     <a href="#mgetgitclientpath">getGitClientPath</a>
+    </li>
+<li>
+    <a href="#mgetifexists">getIfExists</a>
     </li>
 <li>
     <a href="#mgetlanguagehandlerscollection">getLanguageHandlersCollection</a>
@@ -153,7 +159,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\ConfigurationParame
 <ul>
 <li><a name="mgetadditionalconsolecommands" href="#mgetadditionalconsolecommands">#</a>
  <b>getAdditionalConsoleCommands</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L344">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L349">source code</a></li>
 </ul>
 
 ```php
@@ -176,7 +182,7 @@ public function getAdditionalConsoleCommands(): \BumbleDocGen\Console\Command\Ad
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -187,7 +193,7 @@ public function getAdditionalConsoleCommands(): \BumbleDocGen\Console\Command\Ad
 <ul>
 <li><a name="mgetcachedir" href="#mgetcachedir">#</a>
  <b>getCacheDir</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L191">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L196">source code</a></li>
 </ul>
 
 ```php
@@ -204,7 +210,7 @@ public function getCacheDir(): string|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -213,9 +219,30 @@ public function getCacheDir(): string|null;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgetconfigurationversion" href="#mgetconfigurationversion">#</a>
+ <b>getConfigurationVersion</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L42">source code</a></li>
+</ul>
+
+```php
+public function getConfigurationVersion(): string;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgetdocgenlibdir" href="#mgetdocgenlibdir">#</a>
  <b>getDocGenLibDir</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L334">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L339">source code</a></li>
 </ul>
 
 ```php
@@ -236,7 +263,7 @@ public function getDocGenLibDir(): string;
 <ul>
 <li><a name="mgetgitclientpath" href="#mgetgitclientpath">#</a>
  <b>getGitClientPath</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L237">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L242">source code</a></li>
 </ul>
 
 ```php
@@ -253,7 +280,52 @@ public function getGitClientPath(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mgetifexists" href="#mgetifexists">#</a>
+ <b>getIfExists</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L367">source code</a></li>
+</ul>
+
+```php
+public function getIfExists(mixed $key): string|null;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$key</td>
+            <td><a href='https://www.php.net/manual/en/language.types.mixed.php'>mixed</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -264,7 +336,7 @@ public function getGitClientPath(): string;
 <ul>
 <li><a name="mgetlanguagehandlerscollection" href="#mgetlanguagehandlerscollection">#</a>
  <b>getLanguageHandlersCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L152">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L157">source code</a></li>
 </ul>
 
 ```php
@@ -287,7 +359,7 @@ public function getLanguageHandlersCollection(): \BumbleDocGen\LanguageHandler\L
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -298,7 +370,7 @@ public function getLanguageHandlersCollection(): \BumbleDocGen\LanguageHandler\L
 <ul>
 <li><a name="mgetoutputdir" href="#mgetoutputdir">#</a>
  <b>getOutputDir</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L104">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L109">source code</a></li>
 </ul>
 
 ```php
@@ -315,7 +387,7 @@ public function getOutputDir(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -326,7 +398,7 @@ public function getOutputDir(): string;
 <ul>
 <li><a name="mgetoutputdirbaseurl" href="#mgetoutputdirbaseurl">#</a>
  <b>getOutputDirBaseUrl</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L136">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L141">source code</a></li>
 </ul>
 
 ```php
@@ -343,7 +415,7 @@ public function getOutputDirBaseUrl(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -354,7 +426,7 @@ public function getOutputDirBaseUrl(): string;
 <ul>
 <li><a name="mgetpagelinkprocessor" href="#mgetpagelinkprocessor">#</a>
  <b>getPageLinkProcessor</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L219">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L224">source code</a></li>
 </ul>
 
 ```php
@@ -374,7 +446,7 @@ public function getPageLinkProcessor(): \BumbleDocGen\Core\Renderer\PageLinkProc
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
@@ -388,7 +460,7 @@ public function getPageLinkProcessor(): \BumbleDocGen\Core\Renderer\PageLinkProc
 <ul>
 <li><a name="mgetplugins" href="#mgetplugins">#</a>
  <b>getPlugins</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L173">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L178">source code</a></li>
 </ul>
 
 ```php
@@ -408,7 +480,7 @@ public function getPlugins(): \BumbleDocGen\Core\Plugin\PluginsCollection;
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
@@ -422,7 +494,7 @@ public function getPlugins(): \BumbleDocGen\Core\Plugin\PluginsCollection;
 <ul>
 <li><a name="mgetprojectroot" href="#mgetprojectroot">#</a>
  <b>getProjectRoot</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L45">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L50">source code</a></li>
 </ul>
 
 ```php
@@ -439,7 +511,7 @@ public function getProjectRoot(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -450,7 +522,7 @@ public function getProjectRoot(): string;
 <ul>
 <li><a name="mgetsourcelocators" href="#mgetsourcelocators">#</a>
  <b>getSourceLocators</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L61">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L66">source code</a></li>
 </ul>
 
 ```php
@@ -470,7 +542,7 @@ public function getSourceLocators(): \BumbleDocGen\Core\Parser\SourceLocator\Sou
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
@@ -484,7 +556,7 @@ public function getSourceLocators(): \BumbleDocGen\Core\Parser\SourceLocator\Sou
 <ul>
 <li><a name="mgettemplatesdir" href="#mgettemplatesdir">#</a>
  <b>getTemplatesDir</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L79">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L84">source code</a></li>
 </ul>
 
 ```php
@@ -501,7 +573,7 @@ public function getTemplatesDir(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -512,7 +584,7 @@ public function getTemplatesDir(): string;
 <ul>
 <li><a name="mgettwigfilters" href="#mgettwigfilters">#</a>
  <b>getTwigFilters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L276">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L281">source code</a></li>
 </ul>
 
 ```php
@@ -535,7 +607,7 @@ public function getTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\Custom
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -546,7 +618,7 @@ public function getTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\Custom
 <ul>
 <li><a name="mgettwigfunctions" href="#mgettwigfunctions">#</a>
  <b>getTwigFunctions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L253">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L258">source code</a></li>
 </ul>
 
 ```php
@@ -566,7 +638,7 @@ public function getTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Function\Cu
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
@@ -580,7 +652,7 @@ public function getTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Function\Cu
 <ul>
 <li><a name="mgetworkingdir" href="#mgetworkingdir">#</a>
  <b>getWorkingDir</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L325">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L330">source code</a></li>
 </ul>
 
 ```php
@@ -608,7 +680,7 @@ public function getWorkingDir(): string;
 <ul>
 <li><a name="mischeckfileingitbeforecreatingdocenabled" href="#mischeckfileingitbeforecreatingdocenabled">#</a>
  <b>isCheckFileInGitBeforeCreatingDocEnabled</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L311">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L316">source code</a></li>
 </ul>
 
 ```php
@@ -625,7 +697,7 @@ public function isCheckFileInGitBeforeCreatingDocEnabled(): bool;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -636,7 +708,7 @@ public function isCheckFileInGitBeforeCreatingDocEnabled(): bool;
 <ul>
 <li><a name="musesharedcache" href="#musesharedcache">#</a>
  <b>useSharedCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L297">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php#L302">source code</a></li>
 </ul>
 
 ```php
@@ -653,7 +725,7 @@ public function useSharedCache(): bool;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

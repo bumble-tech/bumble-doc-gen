@@ -134,6 +134,10 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         }
         $docComment = $this->getDocComment();
         $reflectionMethod = $this;
+        if ($reflectionMethod->isImplementedInParentClass()) {
+            $reflectionMethod = $reflectionMethod->getImplementingClass()->getMethodEntity($this->getName());
+        }
+
         if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
             $implementingClass = $this->getImplementingClass();
             $parentClass = $this->getImplementingClass()->getParentClass();

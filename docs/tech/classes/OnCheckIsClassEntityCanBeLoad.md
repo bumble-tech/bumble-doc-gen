@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity;
 
-final class OnCheckIsClassEntityCanBeLoad extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class OnCheckIsClassEntityCanBeLoad extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>Event is the base class for classes containing event data.</blockquote>

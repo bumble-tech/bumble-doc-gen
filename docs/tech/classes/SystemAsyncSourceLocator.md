@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal;
 
-final class SystemAsyncSourceLocator extends \Roave\BetterReflection\SourceLocator\Type\AbstractSourceLocator implements \Roave\BetterReflection\SourceLocator\Type\SourceLocator
+final class SystemAsyncSourceLocator extends \Roave\BetterReflection\SourceLocator\Type\AbstractSourceLocator
 ```
 
 

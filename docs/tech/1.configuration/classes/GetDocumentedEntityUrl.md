@@ -25,7 +25,7 @@ See:
     <li>
         <a href="/docs/tech/1.configuration/classes/DocumentedEntityWrappersCollection.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
     <li>
-        <a href="/docs/tech/1.configuration/classes/RendererContext.md#pentitywrapperscollection">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
+        <a href="/docs/tech/1.configuration/classes/RendererContext.md">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
 </ul>
 
 

@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/04_twigCustomFilters.md">Template filters</a> <b>/</b> GetDocumentedEntityUrl<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> GetDocumentedEntityUrl<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L38">GetDocumentedEntityUrl</a> class:
@@ -21,11 +21,11 @@ the `EntityDocRendererInterface::getDocFileExtension()` directory will be create
 See:
 <ul>
     <li>
-        <a href="/docs/tech/3.renderer/classes/DocumentedEntityWrapper_3.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
+        <a href="/docs/tech/3.renderer/classes/DocumentedEntityWrapper.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
     <li>
-        <a href="/docs/tech/3.renderer/classes/DocumentedEntityWrappersCollection_3.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
+        <a href="/docs/tech/3.renderer/classes/DocumentedEntityWrappersCollection.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
     <li>
-        <a href="/docs/tech/3.renderer/classes/RendererContext_3.md#pentitywrapperscollection">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
+        <a href="/docs/tech/3.renderer/classes/RendererContext.md">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
 </ul>
 
 
@@ -211,13 +211,13 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_4.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 </ul>
 

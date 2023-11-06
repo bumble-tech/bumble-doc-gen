@@ -3,14 +3,25 @@
 Directory layout ( only documented files shown ):
 
 <embed> <pre>└──<b>src</b>/
+│  ├──<b>AI</b>/
+│  │  ├──<b>Console</b>/
+│  │  │  ├── <a href='/docs/tech/classes/AddDocBlocksCommand.md'>AddDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateReadMeTemplateCommand.md'>GenerateReadMeTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  ├──<b>Generators</b>/
+│  │  │  ├── <a href='/docs/tech/classes/DocBlocksGenerator.md'>DocBlocksGenerator.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/ReadmeTemplateGenerator.md'>ReadmeTemplateGenerator.php</a> 
+│  │  ├──<b>Providers</b>/
+│  │  │  └──<b>OpenAI</b>/
+│  │  │  │  └── <a href='/docs/tech/classes/Provider.md'>Provider.php</a> 
+│  │  ├──<b>Traits</b>/
+│  │  │  └── <a href='/docs/tech/classes/SharedCommandLogicTrait.md'>SharedCommandLogicTrait.php</a> 
+│  │  ├── <a href='/docs/tech/classes/ProviderFactory.md'>ProviderFactory.php</a> 
+│  │  └── <a href='/docs/tech/classes/ProviderInterface.md'>ProviderInterface.php</a> 
 │  ├──<b>Console</b>/
 │  │  ├──<b>Command</b>/
-│  │  │  ├── <a href='/docs/tech/classes/AddMissingDocBlocksCommand.md'>AddMissingDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/AdditionalCommandCollection.md'>AdditionalCommandCollection.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/BaseCommand.md'>BaseCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/FillInReadmeMdTemplateCommand.md'>FillInReadmeMdTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  └── <a href='/docs/tech/classes/GenerateProjectTemplatesStructureCommand.md'>GenerateProjectTemplatesStructureCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  ├──<b>ProgressBar</b>/
 │  │  │  ├── <a href='/docs/tech/classes/ProgressBarFactory.md'>ProgressBarFactory.php</a> 
 │  │  │  └── <a href='/docs/tech/classes/StylizedProgressBar.md'>StylizedProgressBar.php</a> 
@@ -208,6 +219,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/SystemAsyncSourceLocator.md'>SystemAsyncSourceLocator.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/AsyncSourceLocator.md'>AsyncSourceLocator.php</a> <i> — <samp>Lazy loading classes. Cannot be used for initial parsing of files, only for getting specific docu...</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/CustomSourceLocatorInterface.md'>CustomSourceLocatorInterface.php</a> 
+│  │  │  │  ├── <a href='/docs/tech/classes/ComposerParser.md'>ComposerParser.php</a> 
 │  │  │  │  └── <a href='/docs/tech/classes/ParserHelper.md'>ParserHelper.php</a> 
 │  │  │  ├──<b>Plugin</b>/
 │  │  │  │  ├──<b>CorePlugin</b>/
@@ -239,15 +251,10 @@ Directory layout ( only documented files shown ):
 │  │  │  └── <a href='/docs/tech/classes/PhpHandlerSettings.md'>PhpHandlerSettings.php</a> 
 │  │  ├── <a href='/docs/tech/classes/LanguageHandlerInterface.md'>LanguageHandlerInterface.php</a> 
 │  │  └── <a href='/docs/tech/classes/LanguageHandlersCollection.md'>LanguageHandlersCollection.php</a> 
-│  ├──<b>TemplateGenerator</b>/
-│  │  └──<b>ChatGpt</b>/
-│  │  │  ├── <a href='/docs/tech/classes/MissingDocBlocksGenerator.md'>MissingDocBlocksGenerator.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/ReadmeTemplateFiller.md'>ReadmeTemplateFiller.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/TemplatesStructureGenerator.md'>TemplatesStructureGenerator.php</a> 
 │  ├── <a href='/docs/tech/classes/DocGenerator.md'>DocGenerator.php</a> <i> — <samp>Class for generating documentation.</samp></i>
 │  └── <a href='/docs/tech/classes/DocGeneratorFactory.md'>DocGeneratorFactory.php</a> 
 </pre> </embed>
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Tue Oct 31 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Mon Nov 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

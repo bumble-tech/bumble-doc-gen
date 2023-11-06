@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/04_twigCustomFilters.md">Template filters</a> <b>/</b> StrTypeToUrl<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L22">StrTypeToUrl</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L18">StrTypeToUrl</a> class:
 </h1>
 
 
@@ -77,7 +77,7 @@ See:
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -124,7 +124,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\RendererHelper $renderer
 <ul>
 <li><a name="m-invoke" href="#m-invoke">#</a>
  <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L57">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L49">source code</a></li>
 </ul>
 
 ```php
@@ -170,22 +170,6 @@ public function __invoke(string $text, \BumbleDocGen\Core\Parser\Entity\RootEnti
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_4.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_4.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
 </div>
 <hr>
 <div class='method_description-block'>
@@ -193,7 +177,7 @@ public function __invoke(string $text, \BumbleDocGen\Core\Parser\Entity\RootEnti
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -214,7 +198,7 @@ public static function getName(): string;
 <ul>
 <li><a name="mgetoptions" href="#mgetoptions">#</a>
  <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L36">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L32">source code</a></li>
 </ul>
 
 ```php

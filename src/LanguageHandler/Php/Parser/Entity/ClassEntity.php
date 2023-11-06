@@ -13,6 +13,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
 use BumbleDocGen\Core\Renderer\Twig\Filter\PrepareSourceLink;
+use BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
@@ -49,6 +50,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         private ReflectorWrapper $reflector,
         private ClassEntityCollection $classEntityCollection,
         private ParserHelper $parserHelper,
+        private ComposerParser $composerParser,
         private LocalObjectCache $localObjectCache,
         private LoggerInterface $logger,
         private string $className,
@@ -73,6 +75,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     public function getObjectId(): string
     {
         return $this->className;
+    }
+
+    /**
+     * @inheritDoc
+     * @throws \Exception
+     */
+    public function isExternalLibraryEntity(): bool
+    {
+        return !is_null($this->composerParser->getComposerPackageDataByClassName($this->getName()));
     }
 
     public function setReflectionClass(ReflectionClass $reflectionClass): void
@@ -102,6 +113,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws DependencyException
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
+     * @throws \Exception
      */
     public function getEntityDependencies(): array
     {
@@ -113,8 +125,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $interfaceNames = $this->getInterfaceNames();
 
             $classNames = array_unique(array_merge($parentClassNames, $traitClassNames, $interfaceNames));
+            $classNames = array_filter($classNames, fn(string $className) => !$this->composerParser->getComposerPackageDataByClassName($className));
 
-            $reflections = array_map(fn($className) => $this->getReflector()->reflectClass($className), $classNames);
+            $reflections = array_map(fn(string $className): ReflectionClass => $this->getReflector()->reflectClass($className), $classNames);
             $reflections[] = $currentClassEntityReflection;
             foreach ($reflections as $reflectionClass) {
                 $fileName = $reflectionClass->getFileName();
@@ -293,18 +306,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
+     * @throws \Exception
      */
     #[CacheableMethod] public function entityDataCanBeLoaded(): bool
     {
-        if (
-            !$this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
-                new OnCheckIsClassEntityCanBeLoad($this)
-            )->isClassCanBeLoad()
-        ) {
+        if (!$this->isCurrentEntityCanBeLoad()) {
             $this->logger->notice("Class `{$this->getName()}` loading skipped by plugin");
             return false;
         }
-        return $this->isEntityFileCanBeLoad();
+        return !$this->isExternalLibraryEntity() && $this->isEntityFileCanBeLoad();
     }
 
     public function getShortName(): string
@@ -457,6 +467,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     #[CacheableMethod] public function getParentClassNames(): array
     {
+        if ($this->isExternalLibraryEntity()) {
+            return [];
+        }
         if ($this->isInterface()) {
             return $this->getInterfaceNames();
         } else {
@@ -506,7 +519,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $parentInterfaceNames = [];
             try {
                 $interfaceEntity = $this->getRootEntityCollection()->getLoadedOrCreateNew($interfaceName);
-                $parentInterfaceNames = $interfaceEntity->getInterfaceNames();
+                if (!$interfaceEntity->isExternalLibraryEntity()) {
+                    $parentInterfaceNames = $interfaceEntity->getInterfaceNames();
+                }
             } catch (\Exception $e) {
                 $this->logger->error($e->getMessage());
             }
@@ -515,7 +530,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!$this->isInterface() && $parentClass = $this->getParentClass()) {
             $parentInterfaceNames = [];
             try {
-                $parentInterfaceNames = $parentClass->getInterfaceNames();
+                if (!$parentClass->isExternalLibraryEntity()) {
+                    $parentInterfaceNames = $parentClass->getInterfaceNames();
+                }
             } catch (\Exception $e) {
                 $this->logger->error($e->getMessage());
             }
@@ -812,7 +829,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     #[CacheableMethod] public function isInterface(): bool
     {
-        return $this->getReflection()->isInterface();
+        return $this->getReflection()->getAst() instanceof InterfaceNode;
     }
 
     /**

@@ -38,6 +38,7 @@ final class PhpDocumentorStubberPlugin implements PluginInterface
                 $resourceName = "\\{$resourceName}";
             }
             if (str_starts_with($resourceName, '\\phpDocumentor\\Reflection\\')) {
+                $resourceName = explode('::', $resourceName)[0];
                 if (
                     in_array(ltrim($resourceName, '\\'), [
                         DocBlock::class,
@@ -64,7 +65,6 @@ final class PhpDocumentorStubberPlugin implements PluginInterface
                 ) {
                     $resource = str_replace(['\\phpDocumentor\\Reflection\\', '\\'], ['', '/'], $resourceName);
                     $event->setResourceUrl("https://github.com/phpDocumentor/TypeResolver/blob/master/src/{$resource}.php");
-                    return;
                 }
             }
         }

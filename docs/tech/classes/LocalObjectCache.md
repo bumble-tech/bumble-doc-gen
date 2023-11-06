@@ -134,7 +134,7 @@ public function getMethodCachedResult(string $methodKey, string $objectId): mixe
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/ObjectNotFoundException.md">\BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException</a></li>
+    <a href="/docs/tech/classes/ObjectNotFoundException_2.md">\BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException</a></li>
 
 </ul>
 

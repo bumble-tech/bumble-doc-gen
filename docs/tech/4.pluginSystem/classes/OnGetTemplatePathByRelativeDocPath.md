@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
-final class OnGetTemplatePathByRelativeDocPath extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class OnGetTemplatePathByRelativeDocPath extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>The event occurs when the path to the template file is obtained relative to the path to the document</blockquote>
