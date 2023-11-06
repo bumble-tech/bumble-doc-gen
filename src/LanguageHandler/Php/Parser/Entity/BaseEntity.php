@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
@@ -18,6 +19,7 @@ use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use DI\Attribute\Inject;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Cache\InvalidArgumentException;
@@ -400,14 +402,37 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                     $this->getImplementingReflectionClass()->getName(),
                     false
                 );
-                $linkData[$key]['url'] = $entityData['entityName'] ? call_user_func_array(
-                    callback: $this->documentedEntityUrlFunction,
-                    args: [
-                        $this->getRootEntityCollection(),
-                        $entityData['entityName'],
-                        $entityData['cursor']
-                    ]
-                ) : null;
+                if (!$entityData['entityName'] && !str_contains($data['className'], '\\')) {
+                    try {
+                        $data['className'] = $this->getDocCommentEntity()->getCurrentRootEntity()->getNamespaceName() . "\\{$data['className']}";
+                        $entityData = $this->getRootEntityCollection()->getEntityLinkData(
+                            $data['className'],
+                            $this->getDocCommentEntity()->getCurrentRootEntity()->getName(),
+                            false
+                        );
+                    } catch (\Exception $e) {
+                        $this->logger->error($e->getMessage());
+                    }
+                }
+
+                if ($entityData['entityName']) {
+                    $linkData[$key]['url'] = call_user_func_array(
+                        callback: $this->documentedEntityUrlFunction,
+                        args: [
+                            $this->getRootEntityCollection(),
+                            $entityData['entityName'],
+                            $entityData['cursor']
+                        ]
+                    );
+                } else {
+                    $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($data['className']);
+                    if ($preloadResourceLink) {
+                        $linkData[$key]['url'] = $preloadResourceLink;
+                    } else {
+                        $linkData[$key]['url'] = null;
+                        $this->logger->warning("Unable to get URL data for entity `{$data['className']}`");
+                    }
+                }
                 $linkData[$key]['name'] = $entityData['title'];
                 unset($data['className']);
             }
@@ -467,7 +492,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $this->getReflection()->getDocComment();
     }
 
-    private function getCurrentRootEntity(): ?RootEntityInterface
+    protected function getCurrentRootEntity(): ?RootEntityInterface
     {
         if (is_a($this, RootEntityInterface::class)) {
             return $this;
@@ -477,7 +502,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return null;
     }
 
-    private function getEntityDependenciesCacheKey(): string
+    protected function getEntityDependenciesCacheKey(): string
     {
         return "__internalEntityDependencies{$this->getCacheKey()}";
     }
@@ -493,23 +518,32 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             $filesDependenciesCacheKey = $this->getEntityDependenciesCacheKey();
             $entityDependencies = $this->getEntityCacheValue($filesDependenciesCacheKey);
             if (is_null($entityDependencies)) {
-                $entityDependencies = $entity->getEntityDependencies();
-                $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
+                $entityDependencies = $this->reloadEntityDependenciesCache();
             }
         }
         return $entityDependencies;
     }
+    #[Inject] private GenerationErrorsHandler $generationErrorsHandler;
 
     /**
      * @throws InvalidArgumentException
      */
-    final public function reloadEntityDependenciesCache(): void
+    final public function reloadEntityDependenciesCache(): array
     {
+        $entityDependencies = [];
         $entity = $this->getCurrentRootEntity();
         if ($entity) {
+            $errorsBeforeCount = count($this->generationErrorsHandler->getRecords());
             $entityDependencies = $entity->getEntityDependencies();
-            $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
+            $errorsAfterCount = count($this->generationErrorsHandler->getRecords());
+            if ($errorsBeforeCount === $errorsAfterCount) {
+                $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $entityDependencies);
+            } else {
+                $this->removeEntityValueFromCache($this->getEntityDependenciesCacheKey());
+                $entityDependencies = [];
+            }
         }
+        return $entityDependencies;
     }
 
     /**
@@ -549,6 +583,23 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $entityCacheIsOutdated;
     }
 
+    protected function isCurrentEntityCanBeLoad(): bool
+    {
+        $classEntity = $this->getCurrentRootEntity();
+        if (!$classEntity) {
+            return false;
+        }
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $classEntity->getObjectId());
+        } catch (ObjectNotFoundException) {
+        }
+        $entityCanBeLoad = $this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
+            new OnCheckIsClassEntityCanBeLoad($this->getCurrentRootEntity())
+        )->isClassCanBeLoad();
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $classEntity->getObjectId(), $entityCanBeLoad);
+        return $entityCanBeLoad;
+    }
+
     /**
      * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
@@ -578,6 +629,10 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         }
 
         $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, false);
+        if (!$this->isCurrentEntityCanBeLoad()) {
+            return false;
+        }
+
         $cachedDependencies = $this->getCachedEntityDependencies();
         if (!$cachedDependencies) {
             $entityCacheIsOutdated = true;
@@ -617,11 +672,5 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $dependenciesChecks);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, $entityCacheIsOutdated);
         return $entityCacheIsOutdated;
-    }
-
-    final public function getCacheKey(): string
-    {
-        $currentRootEntity = $this->getCurrentRootEntity();
-        return $currentRootEntity ? md5($this->getCurrentRootEntity()->getName()) : '';
     }
 }

@@ -41,7 +41,8 @@ final class GenerationErrorsHandler extends AbstractProcessingHandler
             "type" => $record['level_name'],
             "msg" => $record['message'],
             'initiator' => $initiator,
-            'isRenderingError' => boolval($this->rendererContext->getCurrentTemplateFilePatch())
+            'isRenderingError' => boolval($this->rendererContext->getCurrentTemplateFilePatch()),
+            'currentDocumentedEntityWrapper' => $this->rendererContext->getCurrentDocumentedEntityWrapper()?->getDocumentTransformableEntity()?->getName()
         ];
     }
 

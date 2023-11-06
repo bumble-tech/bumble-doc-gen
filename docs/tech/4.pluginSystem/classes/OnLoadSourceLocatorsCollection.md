@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Parser;
 
-final class OnLoadSourceLocatorsCollection extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class OnLoadSourceLocatorsCollection extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>Called when source locators are loaded</blockquote>

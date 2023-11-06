@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
-final class OnGettingResourceLink extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class OnGettingResourceLink extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>Event occurs when a reference to an entity (resource) is received</blockquote>

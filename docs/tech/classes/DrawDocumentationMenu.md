@@ -21,7 +21,7 @@ and all links with this page are recursively collected for it, after which the h
 See:
 <ul>
     <li>
-        <a href="/docs/tech/classes/GetDocumentedEntityUrl.md">\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a>    </li>
+        <a href="/docs/tech/classes/GetDocumentedEntityUrl_2.md">\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a>    </li>
 </ul>
 
 
@@ -196,7 +196,7 @@ public function __invoke(string|null $startPageKey = null, int|null $maxDeep = n
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser;
 
-final class AfterLoadingClassEntityCollection extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class AfterLoadingClassEntityCollection extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>The event is called after the initial creation of a collection of class entities</blockquote>

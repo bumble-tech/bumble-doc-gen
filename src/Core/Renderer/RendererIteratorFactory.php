@@ -198,7 +198,7 @@ final class RendererIteratorFactory
         );
         $this->sharedCompressedDocumentFileCache->set(
             'config_hash',
-            md5(serialize($this->configurationParameterBag->getAll(false)))
+            $this->configuration->getConfigurationVersion()
         );
         $this->sharedCompressedDocumentFileCache->set(
             'internal_caching_system_version',
@@ -283,7 +283,7 @@ final class RendererIteratorFactory
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $configHash = md5(serialize($this->configurationParameterBag->getAll(false)));
+        $configHash = $this->configuration->getConfigurationVersion();
         $cachedConfigHash = $this->sharedCompressedDocumentFileCache->get('config_hash');
         $isConfigChanged = $configHash !== $cachedConfigHash;
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $isConfigChanged);

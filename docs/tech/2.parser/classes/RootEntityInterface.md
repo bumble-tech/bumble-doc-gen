@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entity.md">Entities and entities collections</a> <b>/</b> RootEntityInterface<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> RootEntityInterface<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L11">RootEntityInterface</a> class:
@@ -63,6 +63,9 @@ their entities need to correspond to the same interfaces</blockquote>
 <li>
     <a href="#misentitynamevalid">isEntityNameValid</a>
     - <i>Check if entity name is valid</i></li>
+<li>
+    <a href="#misexternallibraryentity">isExternalLibraryEntity</a>
+    - <i>The entity is loaded from a third party library and should not be treated the same as a standard one</i></li>
 <li>
     <a href="#misingit">isInGit</a>
     - <i>The entity file is in the git repository</i></li>
@@ -148,7 +151,7 @@ public function getAbsoluteFileName(): string|null;
 <ul>
 <li><a name="mgetentitydependencies" href="#mgetentitydependencies">#</a>
  <b>getEntityDependencies</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L26">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L31">source code</a></li>
 </ul>
 
 ```php
@@ -169,7 +172,7 @@ public function getEntityDependencies(): array;
 <ul>
 <li><a name="mgetfilecontent" href="#mgetfilecontent">#</a>
  <b>getFileContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L33">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L38">source code</a></li>
 </ul>
 
 ```php
@@ -213,7 +216,7 @@ public function getFileName(): string|null;
 <ul>
 <li><a name="mgetfilesourcelink" href="#mgetfilesourcelink">#</a>
  <b>getFileSourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L40">source code</a></li>
 </ul>
 
 ```php
@@ -379,9 +382,30 @@ public static function isEntityNameValid(string $entityName): bool;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="misexternallibraryentity" href="#misexternallibraryentity">#</a>
+ <b>isExternalLibraryEntity</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L26">source code</a></li>
+</ul>
+
+```php
+public function isExternalLibraryEntity(): bool;
+```
+
+<blockquote>The entity is loaded from a third party library and should not be treated the same as a standard one</blockquote>
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="misingit" href="#misingit">#</a>
  <b>isInGit</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L36">source code</a></li>
 </ul>
 
 ```php
