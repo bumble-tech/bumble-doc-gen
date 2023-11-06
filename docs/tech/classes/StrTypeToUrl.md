@@ -20,7 +20,7 @@ final class StrTypeToUrl implements \BumbleDocGen\Core\Renderer\Twig\Filter\Cust
 See:
 <ul>
     <li>
-        <a href="/docs/tech/classes/GetDocumentedEntityUrl.md">\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a>    </li>
+        <a href="/docs/tech/classes/GetDocumentedEntityUrl_2.md">\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a>    </li>
 </ul>
 
 

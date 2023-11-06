@@ -74,20 +74,16 @@ final class EntityDocRendererHelper
             }
         }
 
-        if ($entity) {
+        if ($entity && $entity->entityDataCanBeLoaded()) {
             $cursor = '';
             if ($classData[1] ?? null) {
                 $cursorTarget = str_replace(['$', '(', ')'], '', $classData[1]);
-                if (
-                    str_ends_with($classData[1], '()') || $entity->hasMethod($cursorTarget)
-                ) {
-                    $cursor = $classData[1];
-                } elseif (
-                    str_starts_with($classData[1], '$') || $entity->hasProperty($cursorTarget)
-                ) {
-                    $cursor = $classData[1];
-                } elseif ($entity->hasConstant($classData[1])) {
-                    $cursor = $classData[1];
+                if ($entity->hasMethod($cursorTarget)) {
+                    $cursor = "{$cursorTarget}()";
+                } elseif ($entity->hasProperty($cursorTarget)) {
+                    $cursor = "\${$cursorTarget}";
+                } elseif ($entity->hasConstant($cursorTarget)) {
+                    $cursor = $cursorTarget;
                 }
             }
             if (in_array(self::CLASS_ENTITY_SHORT_LINK_OPTION, $linkOptions)) {

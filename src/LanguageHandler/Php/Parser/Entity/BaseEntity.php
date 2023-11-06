@@ -19,6 +19,7 @@ use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use DI\Attribute\Inject;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Cache\InvalidArgumentException;
@@ -401,14 +402,37 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                     $this->getImplementingReflectionClass()->getName(),
                     false
                 );
-                $linkData[$key]['url'] = $entityData['entityName'] ? call_user_func_array(
-                    callback: $this->documentedEntityUrlFunction,
-                    args: [
-                        $this->getRootEntityCollection(),
-                        $entityData['entityName'],
-                        $entityData['cursor']
-                    ]
-                ) : null;
+                if (!$entityData['entityName'] && !str_contains($data['className'], '\\')) {
+                    try {
+                        $data['className'] = $this->getDocCommentEntity()->getCurrentRootEntity()->getNamespaceName() . "\\{$data['className']}";
+                        $entityData = $this->getRootEntityCollection()->getEntityLinkData(
+                            $data['className'],
+                            $this->getDocCommentEntity()->getCurrentRootEntity()->getName(),
+                            false
+                        );
+                    } catch (\Exception $e) {
+                        $this->logger->error($e->getMessage());
+                    }
+                }
+
+                if ($entityData['entityName']) {
+                    $linkData[$key]['url'] = call_user_func_array(
+                        callback: $this->documentedEntityUrlFunction,
+                        args: [
+                            $this->getRootEntityCollection(),
+                            $entityData['entityName'],
+                            $entityData['cursor']
+                        ]
+                    );
+                } else {
+                    $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($data['className']);
+                    if ($preloadResourceLink) {
+                        $linkData[$key]['url'] = $preloadResourceLink;
+                    } else {
+                        $linkData[$key]['url'] = null;
+                        $this->logger->warning("Unable to get URL data for entity `{$data['className']}`");
+                    }
+                }
                 $linkData[$key]['name'] = $entityData['title'];
                 unset($data['className']);
             }
@@ -559,6 +583,23 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $entityCacheIsOutdated;
     }
 
+    protected function isCurrentEntityCanBeLoad(): bool
+    {
+        $classEntity = $this->getCurrentRootEntity();
+        if (!$classEntity) {
+            return false;
+        }
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $classEntity->getObjectId());
+        } catch (ObjectNotFoundException) {
+        }
+        $entityCanBeLoad = $this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
+            new OnCheckIsClassEntityCanBeLoad($this->getCurrentRootEntity())
+        )->isClassCanBeLoad();
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $classEntity->getObjectId(), $entityCanBeLoad);
+        return $entityCanBeLoad;
+    }
+
     /**
      * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
@@ -588,6 +629,10 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         }
 
         $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, false);
+        if (!$this->isCurrentEntityCanBeLoad()) {
+            return false;
+        }
+
         $cachedDependencies = $this->getCachedEntityDependencies();
         if (!$cachedDependencies) {
             $entityCacheIsOutdated = true;

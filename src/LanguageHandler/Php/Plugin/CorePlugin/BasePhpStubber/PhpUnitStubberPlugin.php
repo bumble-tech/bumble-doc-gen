@@ -29,6 +29,7 @@ final class PhpUnitStubberPlugin implements PluginInterface
                 $resourceName = "\\{$resourceName}";
             }
             if (str_starts_with($resourceName, '\\PHPUnit\\')) {
+                $resourceName = explode('::', $resourceName)[0];
                 $resourceName = str_replace(['\\PHPUnit\\', '\\'], ['', '/'], $resourceName);
                 $event->setResourceUrl("https://github.com/sebastianbergmann/phpunit/blob/master/src/{$resourceName}.php");
             }

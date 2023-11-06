@@ -20,9 +20,9 @@ final class Renderer
 See:
 <ul>
     <li>
-        <a href="/docs/tech/classes/Configuration.md#mgettemplatesdir">\BumbleDocGen\Core\Configuration\Configuration::getTemplatesDir()</a>    </li>
+        <a href="/docs/tech/classes/Configuration_2.md#mgettemplatesdir">\BumbleDocGen\Core\Configuration\Configuration::getTemplatesDir()</a>    </li>
     <li>
-        <a href="/docs/tech/classes/Configuration.md#mgetoutputdir">\BumbleDocGen\Core\Configuration\Configuration::getOutputDir()</a>    </li>
+        <a href="/docs/tech/classes/Configuration_2.md#mgetoutputdir">\BumbleDocGen\Core\Configuration\Configuration::getOutputDir()</a>    </li>
 </ul>
 
 
@@ -171,7 +171,7 @@ public function run(): void;
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

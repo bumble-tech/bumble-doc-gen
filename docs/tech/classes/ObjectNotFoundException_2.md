@@ -1,8 +1,8 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/04_twigCustomFilters.md">Template filters</a> <b>/</b> ReflectionException<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> ObjectNotFoundException<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Exception/ReflectionException.php#L7">ReflectionException</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/Exception/ObjectNotFoundException.php#L7">ObjectNotFoundException</a> class:
 </h1>
 
 
@@ -10,9 +10,9 @@
 
 
 ```php
-namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception;
+namespace BumbleDocGen\Core\Cache\LocalCache\Exception;
 
-final class ReflectionException extends \Exception implements \Throwable, \Stringable
+final class ObjectNotFoundException extends \Exception implements \Throwable, \Stringable
 ```
 
 <blockquote>Exception is the base class for

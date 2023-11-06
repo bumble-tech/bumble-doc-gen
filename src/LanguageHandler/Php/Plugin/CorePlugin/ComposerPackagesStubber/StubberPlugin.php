@@ -36,7 +36,7 @@ final class StubberPlugin implements PluginInterface
     {
         if (!$event->getResourceUrl()) {
             $resourceName = trim($event->getResourceName());
-
+            $resourceName = explode('::', $resourceName)[0];
             if (!isset($this->foundLinks[$resourceName])) {
                 $packageData = $this->composerParser->getComposerPackageDataByClassName($resourceName);
                 if (!$packageData) {

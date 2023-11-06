@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
-final class BeforeCreatingDocFile extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class BeforeCreatingDocFile extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>Called before the content of the documentation document is saved to a file</blockquote>

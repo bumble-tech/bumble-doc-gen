@@ -310,11 +310,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      */
     #[CacheableMethod] public function entityDataCanBeLoaded(): bool
     {
-        if (
-            !$this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
-                new OnCheckIsClassEntityCanBeLoad($this)
-            )->isClassCanBeLoad()
-        ) {
+        if (!$this->isCurrentEntityCanBeLoad()) {
             $this->logger->notice("Class `{$this->getName()}` loading skipped by plugin");
             return false;
         }
