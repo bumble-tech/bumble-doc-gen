@@ -1,5 +1,11 @@
 # Changelog
 
+# [1.5.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.5.0)
+- Caching system refactoring [#62](https://github.com/bumble-tech/bumble-doc-gen/pull/62)
+- Ai refactor [#61](https://github.com/bumble-tech/bumble-doc-gen/pull/61)
+- Optimization of the caching and error handling [#63](https://github.com/bumble-tech/bumble-doc-gen/pull/63)
+- Fixing generation problems [#64](https://github.com/bumble-tech/bumble-doc-gen/pull/64)
+
 # [1.4.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.4.0)
 - Fixed config errors [#52](https://github.com/bumble-tech/bumble-doc-gen/pull/52)
 - Fixed method type getter bug [#53](https://github.com/bumble-tech/bumble-doc-gen/pull/53)
