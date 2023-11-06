@@ -68,7 +68,7 @@
     ],
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "phpcs": "vendor/bin/phpcs --standard=psr12 src --warning-severity=0 --error-severity=1",
+        "phpcs": "vendor/bin/phpcs --standard=psr12 src demo tests --warning-severity=0 --error-severity=1",
         "phpcbf": "vendor/bin/phpcbf --standard=psr12 src demo tests"
     }
 }
