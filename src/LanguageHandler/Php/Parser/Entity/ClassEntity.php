@@ -18,7 +18,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use DI\Attribute\Inject;
 use DI\Container;
 use DI\DependencyException;
@@ -125,7 +124,12 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $interfaceNames = $this->getInterfaceNames();
 
             $classNames = array_unique(array_merge($parentClassNames, $traitClassNames, $interfaceNames));
-            $classNames = array_filter($classNames, fn(string $className) => !$this->composerParser->getComposerPackageDataByClassName($className));
+            $classNames = array_filter(
+                $classNames,
+                function (string $className): bool {
+                    return !$this->composerParser->getComposerPackageDataByClassName($className) && !$this->parserHelper->isBuiltInClass($className);
+                }
+            );
 
             $reflections = array_map(fn(string $className): ReflectionClass => $this->getReflector()->reflectClass($className), $classNames);
             $reflections[] = $currentClassEntityReflection;
@@ -761,6 +765,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     #[CacheableMethod] public function getMethodsData(): array
     {
         $methods = [];
+        // todo use ast
         foreach ($this->getReflection()->getMethods() as $method) {
             $name = $method->getName();
             $methods[$name] = [
