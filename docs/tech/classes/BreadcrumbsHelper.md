@@ -142,7 +142,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mgetallpagelinks" href="#mgetallpagelinks">#</a>
  <b>getAllPageLinks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L242">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L236">source code</a></li>
 </ul>
 
 ```php
@@ -176,7 +176,7 @@ public function getAllPageLinks(): array;
 <ul>
 <li><a name="mgetbreadcrumbs" href="#mgetbreadcrumbs">#</a>
  <b>getBreadcrumbs</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L193">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L187">source code</a></li>
 </ul>
 
 ```php
@@ -232,7 +232,7 @@ public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): arr
 <ul>
 <li><a name="mgetbreadcrumbsfortemplates" href="#mgetbreadcrumbsfortemplates">#</a>
  <b>getBreadcrumbsForTemplates</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L215">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L209">source code</a></li>
 </ul>
 
 ```php
@@ -288,7 +288,7 @@ public function getBreadcrumbsForTemplates(string $filePatch, bool $fromCurrent 
 <ul>
 <li><a name="mgetnearestindexfile" href="#mgetnearestindexfile">#</a>
  <b>getNearestIndexFile</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L121">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L106">source code</a></li>
 </ul>
 
 ```php
@@ -333,7 +333,7 @@ public function getNearestIndexFile(string $templateName): string;
 <ul>
 <li><a name="mgetpagedatabykey" href="#mgetpagedatabykey">#</a>
  <b>getPageDataByKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L306">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L300">source code</a></li>
 </ul>
 
 ```php
@@ -384,7 +384,7 @@ public function getPageDataByKey(string $key): array|null;
 <ul>
 <li><a name="mgetpagedocfilebykey" href="#mgetpagedocfilebykey">#</a>
  <b>getPageDocFileByKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L332">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L326">source code</a></li>
 </ul>
 
 ```php
@@ -435,7 +435,7 @@ public function getPageDocFileByKey(string $key): string|null;
 <ul>
 <li><a name="mgetpagelinkbykey" href="#mgetpagelinkbykey">#</a>
  <b>getPageLinkByKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L321">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L315">source code</a></li>
 </ul>
 
 ```php
@@ -486,7 +486,7 @@ public function getPageLinkByKey(string $key): string|null;
 <ul>
 <li><a name="mgettemplatelinkkey" href="#mgettemplatelinkkey">#</a>
  <b>getTemplateLinkKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L172">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L166">source code</a></li>
 </ul>
 
 ```php
@@ -531,7 +531,7 @@ public function getTemplateLinkKey(string $templateName): string|null;
 <ul>
 <li><a name="mgettemplatetitle" href="#mgettemplatetitle">#</a>
  <b>getTemplateTitle</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L159">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L153">source code</a></li>
 </ul>
 
 ```php
@@ -587,7 +587,7 @@ $breadcrumbsHelper->getTemplateTitle() == 'Some template title'; // is true
 <ul>
 <li><a name="mrenderbreadcrumbs" href="#mrenderbreadcrumbs">#</a>
  <b>renderBreadcrumbs</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L348">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L342">source code</a></li>
 </ul>
 
 ```php
