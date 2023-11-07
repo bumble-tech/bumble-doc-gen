@@ -37,7 +37,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         private LoggerInterface $logger,
         private Standard $astPrinter,
         private string $methodName,
-        private string $declaringClassName,
         private string $implementingClassName,
     ) {
         parent::__construct(

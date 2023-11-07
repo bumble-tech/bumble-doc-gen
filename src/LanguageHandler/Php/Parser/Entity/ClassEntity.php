@@ -782,10 +782,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         // todo use ast
         foreach ($this->getReflection()->getMethods() as $method) {
             $name = $method->getName();
-            $methods[$name] = [
-                'declaringClass' => $method->getDeclaringClass()->getName(),
-                'implementingClass' => $method->getLocatedSource()->getName(),
-            ];
+            $methods[$name] = $method->getLocatedSource()->getName();
         }
         return $methods;
     }
@@ -799,10 +796,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $properties = [];
         foreach ($this->getReflection()->getProperties() as $property) {
             $name = $property->getName();
-            $properties[$name] = [
-                'declaringClass' => $property->getDeclaringClass()->getName(),
-                'implementingClass' => $property->getImplementingClass()->getName()
-            ];
+            $properties[$name] = $property->getImplementingClass()->getName();
         }
         return $properties;
     }
@@ -816,10 +810,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $constants = [];
         foreach ($this->getReflection()->getReflectionConstants() as $constant) {
             $name = $constant->getName();
-            $constants[$name] = [
-                'declaringClass' => $constant->getDeclaringClass()->getName(),
-                'implementingClass' => $constant->getImplementingClass()->getName()
-            ];
+            $constants[$name] = $constant->getImplementingClass()->getName();
         }
         return $constants;
     }

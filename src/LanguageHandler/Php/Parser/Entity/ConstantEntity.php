@@ -33,7 +33,6 @@ class ConstantEntity extends BaseEntity
         LocalObjectCache $localObjectCache,
         LoggerInterface $logger,
         private string $constantName,
-        private string $declaringClassName,
         private string $implementingClassName,
     ) {
         parent::__construct(

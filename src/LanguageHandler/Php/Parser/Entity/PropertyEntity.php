@@ -33,7 +33,6 @@ class PropertyEntity extends BaseEntity
         private LocalObjectCache $localObjectCache,
         private LoggerInterface $logger,
         private string $propertyName,
-        private string $declaringClassName,
         private string $implementingClassName,
     ) {
         parent::__construct(

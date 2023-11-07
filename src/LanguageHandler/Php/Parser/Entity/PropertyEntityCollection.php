@@ -30,12 +30,11 @@ final class PropertyEntityCollection extends BaseEntityCollection
     public function loadPropertyEntities(): void
     {
         $propertyEntityFilter = $this->phpHandlerSettings->getPropertyEntityFilter();
-        foreach ($this->classEntity->getPropertiesData() as $name => $propertyData) {
+        foreach ($this->classEntity->getPropertiesData() as $name => $propertyImplementingClass) {
             $propertyEntity = $this->cacheablePhpEntityFactory->createPropertyEntity(
                 $this->classEntity,
                 $name,
-                $propertyData['declaringClass'],
-                $propertyData['implementingClass']
+                $propertyImplementingClass
             );
             if ($propertyEntityFilter->canAddToCollection($propertyEntity)) {
                 $this->add($propertyEntity);
@@ -67,13 +66,12 @@ final class PropertyEntityCollection extends BaseEntityCollection
     {
         $propertyEntity = $this->get($objectName);
         if (!$propertyEntity) {
-            $propertyData = $this->classEntity->getPropertiesData()[$objectName] ?? null;
-            if (is_array($propertyData)) {
+            $propertyImplementingClass = $this->classEntity->getPropertiesData()[$objectName] ?? null;
+            if (!is_null($propertyImplementingClass)) {
                 return $this->cacheablePhpEntityFactory->createPropertyEntity(
                     $this->classEntity,
                     $objectName,
-                    $propertyData['declaringClass'],
-                    $propertyData['implementingClass']
+                    $propertyImplementingClass
                 );
             }
         }

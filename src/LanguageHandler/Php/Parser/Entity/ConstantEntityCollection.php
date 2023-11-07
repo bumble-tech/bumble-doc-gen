@@ -30,12 +30,11 @@ final class ConstantEntityCollection extends BaseEntityCollection
     public function loadConstantEntities(): void
     {
         $classConstantEntityFilter = $this->phpHandlerSettings->getClassConstantEntityFilter();
-        foreach ($this->classEntity->getConstantsData() as $name => $constantData) {
+        foreach ($this->classEntity->getConstantsData() as $name => $constantImplementingClass) {
             $constantEntity = $this->cacheablePhpEntityFactory->createConstantEntity(
                 $this->classEntity,
                 $name,
-                $constantData['declaringClass'],
-                $constantData['implementingClass']
+                $constantImplementingClass
             );
             if ($classConstantEntityFilter->canAddToCollection($constantEntity)) {
                 $this->add($constantEntity);
@@ -67,13 +66,12 @@ final class ConstantEntityCollection extends BaseEntityCollection
     {
         $constantEntity = $this->get($constantName);
         if (!$constantEntity) {
-            $constantsData = $this->classEntity->getConstantsData()[$constantName] ?? null;
-            if (is_array($constantsData)) {
+            $constantsImplementingClass = $this->classEntity->getConstantsData()[$constantName] ?? null;
+            if (!is_null($constantsImplementingClass)) {
                 return $this->cacheablePhpEntityFactory->createConstantEntity(
                     $this->classEntity,
                     $constantName,
-                    $constantsData['declaringClass'],
-                    $constantsData['implementingClass']
+                    $constantsImplementingClass
                 );
             }
         }

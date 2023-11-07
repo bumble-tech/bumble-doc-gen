@@ -40,7 +40,6 @@ final class CacheablePhpEntityFactory
     public function createPropertyEntity(
         ClassEntity $classEntity,
         string $propertyName,
-        string $declaringClassName,
         string $implementingClassName
     ): PropertyEntity {
         $objectId = "{$classEntity->getName()}:{$propertyName}";
@@ -52,7 +51,6 @@ final class CacheablePhpEntityFactory
         $propertyEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'propertyName' => $propertyName,
-            'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName
         ]);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $propertyEntity);
@@ -66,7 +64,6 @@ final class CacheablePhpEntityFactory
     public function createConstantEntity(
         ClassEntity $classEntity,
         string $constantName,
-        string $declaringClassName,
         string $implementingClassName,
         bool $reloadCache = false
     ): ConstantEntity {
@@ -79,7 +76,6 @@ final class CacheablePhpEntityFactory
         $constantEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'constantName' => $constantName,
-            'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName,
             'reloadCache' => $reloadCache
         ]);
@@ -94,7 +90,6 @@ final class CacheablePhpEntityFactory
     public function createMethodEntity(
         ClassEntity $classEntity,
         string $methodName,
-        string $declaringClassName,
         string $implementingClassName
     ): MethodEntity {
         $objectId = "{$classEntity->getName()}:{$methodName}";
@@ -106,7 +101,6 @@ final class CacheablePhpEntityFactory
         $methodEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'methodName' => $methodName,
-            'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName
         ]);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntity);
