@@ -21,6 +21,7 @@ use Psr\Log\LoggerInterface;
 class ConstantEntity extends BaseEntity
 {
     private ?ClassConst $ast = null;
+    private int $nodePosition = 0;
 
     public function __construct(
         Configuration $configuration,
@@ -72,10 +73,13 @@ class ConstantEntity extends BaseEntity
     {
         $implementingClass = $this->getImplementingClass();
         if (!$this->ast) {
-            foreach ($implementingClass->getAst()->getConstants() as $constant) {
-                if ($constant->consts[0]->name) {
-                    $this->ast = $constant;
-                    return $this->ast;
+            foreach ($implementingClass->getAst()->getConstants() as $classConst) {
+                foreach ($classConst->consts as $pos => $const) {
+                    if ($const->name->toString() === $this->constantName) {
+                        $this->ast = $classConst;
+                        $this->nodePosition = $pos;
+                        return $this->ast;
+                    }
                 }
             }
         }
@@ -180,7 +184,7 @@ class ConstantEntity extends BaseEntity
      */
     #[CacheableMethod] public function getStartLine(): int
     {
-        return $this->getAst()->getStartLine();
+        return $this->getAst()->consts[$this->nodePosition]->getStartLine();
     }
 
     /**
@@ -189,6 +193,6 @@ class ConstantEntity extends BaseEntity
      */
     #[CacheableMethod] public function getEndLine(): int
     {
-        return $this->getAst()->getEndLine();
+        return $this->getAst()->consts[$this->nodePosition]->getEndLine();
     }
 }
