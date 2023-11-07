@@ -23,7 +23,10 @@ use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
+use PhpParser\Node\Stmt\Class_ as ClassNode;
+use PhpParser\Node\Stmt\Enum_ as EnumNode;
 use PhpParser\Node\Stmt\Interface_ as InterfaceNode;
+use PhpParser\Node\Stmt\Trait_ as TraitNode;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Identifier\Identifier;
@@ -270,6 +273,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         }
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $this->reflectionClass);
         return $this->reflectionClass;
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getAst(): ClassNode|InterfaceNode|TraitNode|EnumNode
+    {
+        return $this->getReflection()->getAst();
     }
 
 
