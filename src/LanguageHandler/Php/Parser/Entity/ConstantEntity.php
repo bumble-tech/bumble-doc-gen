@@ -12,15 +12,15 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use phpDocumentor\Reflection\DocBlock;
+use PhpParser\Node\Stmt\ClassConst;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\ReflectionClassConstant;
 
 /**
  * Class constant entity
  */
 class ConstantEntity extends BaseEntity
 {
-    private ?ReflectionClassConstant $reflectionClassConstant = null;
+    private ?ClassConst $ast = null;
 
     public function __construct(
         Configuration $configuration,
@@ -68,12 +68,21 @@ class ConstantEntity extends BaseEntity
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getReflection(): ReflectionClassConstant
+    public function getAst(): ClassConst
     {
-        if (!$this->reflectionClassConstant) {
-            $this->reflectionClassConstant = $this->classEntity->getReflection()->getReflectionConstant($this->constantName);
+        $implementingClass = $this->getImplementingClass();
+        if (!$this->ast) {
+            foreach ($implementingClass->getAst()->getConstants() as $constant) {
+                if ($constant->consts[0]->name) {
+                    $this->ast = $constant;
+                    return $this->ast;
+                }
+            }
         }
-        return $this->reflectionClassConstant;
+        if (is_null($this->ast)) {
+            throw new \RuntimeException("Constant `{$this->constantName}` not found in `{$implementingClass->getName()}` class AST");
+        }
+        return $this->ast;
     }
 
     public function getImplementingClassName(): string
@@ -144,7 +153,7 @@ class ConstantEntity extends BaseEntity
      */
     #[CacheableMethod] public function isPublic(): bool
     {
-        return $this->getReflection()->isPublic();
+        return $this->getAst()->isPublic();
     }
 
     /**
@@ -153,7 +162,7 @@ class ConstantEntity extends BaseEntity
      */
     #[CacheableMethod] public function isProtected(): bool
     {
-        return $this->getReflection()->isProtected();
+        return $this->getAst()->isProtected();
     }
 
     /**
@@ -162,7 +171,7 @@ class ConstantEntity extends BaseEntity
      */
     #[CacheableMethod] public function isPrivate(): bool
     {
-        return $this->getReflection()->isPrivate();
+        return $this->getAst()->isPrivate();
     }
 
     /**
@@ -171,7 +180,7 @@ class ConstantEntity extends BaseEntity
      */
     #[CacheableMethod] public function getStartLine(): int
     {
-        return $this->getReflection()->getStartLine();
+        return $this->getAst()->getStartLine();
     }
 
     /**
@@ -180,6 +189,6 @@ class ConstantEntity extends BaseEntity
      */
     #[CacheableMethod] public function getEndLine(): int
     {
-        return $this->getReflection()->getEndLine();
+        return $this->getAst()->getEndLine();
     }
 }

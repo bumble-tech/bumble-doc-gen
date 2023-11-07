@@ -47,9 +47,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
-     * @internal
      */
-    abstract protected function getReflection(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
+    abstract public function getAst(): \PhpParser\Node\Stmt;
 
     abstract public function getImplementingClass(): ClassEntity;
 
@@ -480,7 +479,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return (string)($docBlock->getTagsByName('note')[0] ?? '');
     }
 
-
     /**
      * Get the doc comment of an entity
      *
@@ -489,10 +487,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      */
     #[CacheableMethod] public function getDocComment(): string
     {
-        return $this->getReflection()->getDocComment();
+        $docComment = $this->getAst()->getDocComment();
+        return (string)$docComment?->getReformattedText();
     }
 
-    protected function getCurrentRootEntity(): ?RootEntityInterface
+    public function getCurrentRootEntity(): ?RootEntityInterface
     {
         if (is_a($this, RootEntityInterface::class)) {
             return $this;

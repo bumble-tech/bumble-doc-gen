@@ -20,14 +20,12 @@ use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\PrettyPrinter\Standard;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\ReflectionMethod;
 
 /**
  * Class method entity
  */
 class MethodEntity extends BaseEntity implements MethodEntityInterface
 {
-    private ?ReflectionMethod $reflectionMethod = null;
     private ?ClassMethod $ast = null;
 
     public function __construct(
@@ -52,19 +50,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getReflection(): ReflectionMethod
-    {
-        if (!$this->reflectionMethod) {
-            $this->reflectionMethod = $this->classEntity->getReflection()->getMethod($this->methodName);
-        }
-        return $this->reflectionMethod;
-    }
-
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    protected function getAst(): ClassMethod
+    public function getAst(): ClassMethod
     {
         $implementingClass = $this->getImplementingClass();
         if (!$this->ast) {
@@ -302,8 +288,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     {
         $type = $this->getAst()->getReturnType();
         if ($type) {
-            $type = $this->astPrinter->prettyPrint([$type]);
-            $type = str_replace('?', 'null|', $type);
+            $typeString = $this->astPrinter->prettyPrint([$type]);
+            $typeString = str_replace('?', 'null|', $typeString);
         } else {
             $docBlock = $this->getDocBlock();
             $returnType = $docBlock->getTagsByName('return');
@@ -315,12 +301,12 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 }
                 return 'mixed';
             }
-            $type = $returnType ? (string)$returnType->getType() : 'mixed';
-            $type = preg_replace_callback(['/({)([^{}]*)(})/', '/(\[)([^\[\]]*)(\])/'], function ($condition) {
+            $typeString = $returnType ? (string)$returnType->getType() : 'mixed';
+            $typeString = preg_replace_callback(['/({)([^{}]*)(})/', '/(\[)([^\[\]]*)(\])/'], function ($condition) {
                 return str_replace(' ', '', $condition[0]);
-            }, $type);
+            }, $typeString);
         }
-        return $this->prepareTypeString($type);
+        return $this->prepareTypeString($typeString);
     }
 
     /**
