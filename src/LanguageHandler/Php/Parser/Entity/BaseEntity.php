@@ -51,7 +51,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      */
     abstract protected function getReflection(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
 
-    abstract public function getImplementingReflectionClass(): ReflectionClass;
+    abstract public function getImplementingClass(): ClassEntity;
 
     abstract protected function getDocCommentRecursive(): string;
 
@@ -399,7 +399,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             if (($data['className'] ?? null)) {
                 $entityData = $this->getRootEntityCollection()->getEntityLinkData(
                     $data['className'],
-                    $this->getImplementingReflectionClass()->getName(),
+                    $this->getImplementingClass()->getName(),
                     false
                 );
                 if (!$entityData['entityName'] && !str_contains($data['className'], '\\')) {

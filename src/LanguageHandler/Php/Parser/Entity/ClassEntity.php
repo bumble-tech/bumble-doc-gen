@@ -284,14 +284,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->getReflection()->getAst();
     }
 
-
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getImplementingReflectionClass(): ReflectionClass
+    public function getImplementingClass(): ClassEntity
     {
-        return $this->getReflection();
+        return $this;
     }
 
     public function hasAnnotationKey(string $annotationKey): bool

@@ -10,7 +10,6 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
-use Roave\BetterReflection\Reflection\ReflectionClass;
 
 /**
  * Method obtained by parsing the "method" annotation
@@ -152,18 +151,9 @@ class DynamicMethodEntity implements MethodEntityInterface
     /**
      * @throws \Exception
      */
-    public function getImplementingReflectionClass(): ReflectionClass
-    {
-        $callMethod = $this->getCallMethod();
-        return $callMethod->getImplementingReflectionClass();
-    }
-
-    /**
-     * @throws \Exception
-     */
     public function getImplementingClassName(): string
     {
-        return $this->getImplementingReflectionClass()->getName();
+        return $this->getImplementingClass()->getName();
     }
 
     public function getDescription(): string
@@ -182,8 +172,8 @@ class DynamicMethodEntity implements MethodEntityInterface
             'self',
             'static',
             'this',
-            $this->getImplementingReflectionClass()->getName(),
-            $this->getImplementingReflectionClass()->getShortName(),
+            $this->getImplementingClass()->getName(),
+            $this->getImplementingClass()->getShortName(),
         ];
         return $this->isStatic() && in_array($this->getReturnType(), $initializationReturnTypes);
     }

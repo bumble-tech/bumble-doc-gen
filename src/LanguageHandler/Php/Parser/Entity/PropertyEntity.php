@@ -16,7 +16,6 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
 
 /**
@@ -80,15 +79,6 @@ class PropertyEntity extends BaseEntity
     {
         $classEntity = $this->getDocCommentEntity()->getImplementingClass();
         return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
-    }
-
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getImplementingReflectionClass(): ReflectionClass
-    {
-        return $this->getReflection()->getImplementingClass();
     }
 
     /**
