@@ -55,6 +55,7 @@ class PropertyEntity extends BaseEntity
 
 
     private ?Property $ast = null;
+    private ?int $nodePosition = null;
 
     public function __construct(
         Configuration $configuration,
@@ -89,8 +90,8 @@ class PropertyEntity extends BaseEntity
      */
     public function getAst(): Property
     {
-        $implementingClass = $this->getImplementingClass();
         if (!$this->ast) {
+            $implementingClass = $this->getImplementingClass();
             $classAst = $implementingClass->getAst();
             $this->ast = $classAst->getProperty($this->propertyName);
             if (!$this->ast) {
@@ -107,10 +108,16 @@ class PropertyEntity extends BaseEntity
                         return $this->ast;
                     }
                 }
+            } else {
+                foreach ($this->ast->props as $pos => $propNode) {
+                    if ($propNode->name->toString() === $this->propertyName) {
+                        $this->nodePosition = $pos;
+                    }
+                }
             }
         }
         if (is_null($this->ast)) {
-            throw new \RuntimeException("Property `{$this->propertyName}` not found in `{$implementingClass->getName()}` class AST");
+            throw new \RuntimeException("Property `{$this->propertyName}` not found in `{$this->getImplementingClassName()}` class AST");
         }
         return $this->ast;
     }
@@ -196,9 +203,6 @@ class PropertyEntity extends BaseEntity
         return $this->getName();
     }
 
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function getNamespaceName(): string
     {
         return $this->getRootEntity()->getNamespaceName();
@@ -322,7 +326,10 @@ class PropertyEntity extends BaseEntity
      */
     #[CacheableMethod] public function getStartLine(): int
     {
-        return $this->getAst()->getStartLine();
+        if (is_null($this->nodePosition)) {
+            return $this->getAst()->getStartLine();
+        }
+        return $this->getAst()->props[$this->nodePosition]->getStartLine();
     }
 
     /**
@@ -330,7 +337,10 @@ class PropertyEntity extends BaseEntity
      */
     #[CacheableMethod] public function getEndLine(): int
     {
-        return $this->getAst()->getEndLine();
+        if (is_null($this->nodePosition)) {
+            return $this->getAst()->getEndLine();
+        }
+        return $this->getAst()->props[$this->nodePosition]->getEndLine();
     }
 
     /**
