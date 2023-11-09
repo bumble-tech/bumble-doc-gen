@@ -155,12 +155,12 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             $implementingClass = $this->getImplementingClass();
             $parentClass = $this->getImplementingClass()->getParentClass();
             $methodName = $this->getName();
-            if ($parentClass && $parentClass->hasMethod($methodName)) {
+            if ($parentClass && $parentClass->entityDataCanBeLoaded() && $parentClass->hasMethod($methodName)) {
                 $parentReflectionMethod = $parentClass->getMethodEntity($methodName);
                 $reflectionMethod = $parentReflectionMethod->getDocCommentEntity();
             } else {
                 foreach ($implementingClass->getInterfacesEntities() as $interface) {
-                    if ($interface->hasMethod($methodName)) {
+                    if ($interface->entityDataCanBeLoaded() && $interface->hasMethod($methodName)) {
                         $reflectionMethod = $interface->getMethodEntity($methodName);
                         break;
                     }
