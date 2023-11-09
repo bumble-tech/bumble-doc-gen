@@ -7,7 +7,6 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -28,7 +27,6 @@ final class MethodEntityCollection extends BaseEntityCollection
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -78,7 +76,6 @@ final class MethodEntityCollection extends BaseEntityCollection
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
