@@ -71,12 +71,12 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
      */
     public function getAst(): ClassMethod
     {
-        $implementingClass = $this->getImplementingClass();
         if (!$this->ast) {
+            $implementingClass = $this->getImplementingClass();
             $this->ast = $implementingClass->getAst()->getMethod($this->methodName);
         }
         if (is_null($this->ast)) {
-            throw new \RuntimeException("Method `{$this->methodName}` not found in `{$implementingClass->getName()}` class AST");
+            throw new \RuntimeException("Method `{$this->methodName}` not found in `{$this->getImplementingClassName()}` class AST");
         }
         return $this->ast;
     }

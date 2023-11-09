@@ -94,8 +94,8 @@ class ConstantEntity extends BaseEntity
      */
     public function getAst(): ClassConst
     {
-        $implementingClass = $this->getImplementingClass();
         if (!$this->ast) {
+            $implementingClass = $this->getImplementingClass();
             foreach ($implementingClass->getAst()->getConstants() as $classConst) {
                 foreach ($classConst->consts as $pos => $const) {
                     if ($const->name->toString() === $this->constantName) {
@@ -107,7 +107,7 @@ class ConstantEntity extends BaseEntity
             }
         }
         if (is_null($this->ast)) {
-            throw new \RuntimeException("Constant `{$this->constantName}` not found in `{$implementingClass->getName()}` class AST");
+            throw new \RuntimeException("Constant `{$this->constantName}` not found in `{$this->getImplementingClassName()}` class AST");
         }
         return $this->ast;
     }
