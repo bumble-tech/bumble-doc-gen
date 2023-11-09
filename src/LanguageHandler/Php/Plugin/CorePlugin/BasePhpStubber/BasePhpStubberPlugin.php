@@ -6,6 +6,8 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 
 /**
  * Adding links to type documentation and documentation of built-in PHP classes
@@ -144,6 +146,7 @@ final class BasePhpStubberPlugin implements PluginInterface
     {
         return [
             OnGettingResourceLink::class => 'onGettingResourceLink',
+            OnCheckIsClassEntityCanBeLoad::class => 'onCheckIsClassEntityCanBeLoad',
         ];
     }
 
@@ -159,6 +162,22 @@ final class BasePhpStubberPlugin implements PluginInterface
             } elseif (!str_starts_with($resourceName, '\\') && array_key_exists("\\{$resourceName}", self::$builtInUrls)) {
                 $event->setResourceUrl(self::$builtInUrls["\\{$resourceName}"]);
             }
+        }
+    }
+
+    final public function onCheckIsClassEntityCanBeLoad(OnCheckIsClassEntityCanBeLoad $event): void
+    {
+        $entityName = $event->getEntity()->getName();
+        $entityName = explode('::', $entityName)[0];
+        if (preg_match('/([{\[])/', $entityName) || preg_match('/^(array)([{<])/', $entityName)) {
+            $entityName = 'array';
+        }
+        if (!ParserHelper::isCorrectClassName($entityName)) {
+            $event->disableClassLoading();
+            return;
+        }
+        if (array_key_exists($entityName, self::$builtInUrls) || array_key_exists("\\{$entityName}", self::$builtInUrls)) {
+            $event->disableClassLoading();
         }
     }
 }
