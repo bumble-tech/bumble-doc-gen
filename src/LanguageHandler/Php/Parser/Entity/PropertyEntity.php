@@ -28,6 +28,33 @@ use Psr\Log\LoggerInterface;
  */
 class PropertyEntity extends BaseEntity
 {
+    /**
+     * Indicates that the property is public.
+     *
+     * @link https://www.php.net/manual/en/class.reflectionproperty.php#reflectionproperty.constants.is-public
+     */
+    public const MODIFIERS_FLAG_IS_PUBLIC = 1;
+
+    /**
+     * Indicates that the property is protected.
+     *
+     * @link https://www.php.net/manual/en/class.reflectionproperty.php#reflectionproperty.constants.is-protected
+     */
+    public const MODIFIERS_FLAG_IS_PROTECTED = 2;
+
+    /**
+     * Indicates that the property is private.
+     *
+     * @link https://www.php.net/manual/en/class.reflectionproperty.php#reflectionproperty.constants.is-private
+     */
+    public const MODIFIERS_FLAG_IS_PRIVATE = 4;
+
+    public const VISIBILITY_MODIFIERS_FLAG_ANY =
+        self::MODIFIERS_FLAG_IS_PUBLIC |
+        self::MODIFIERS_FLAG_IS_PROTECTED |
+        self::MODIFIERS_FLAG_IS_PRIVATE;
+
+
     private ?Property $ast = null;
 
     public function __construct(

@@ -26,6 +26,26 @@ use Psr\Log\LoggerInterface;
  */
 class MethodEntity extends BaseEntity implements MethodEntityInterface
 {
+    /**
+     * Indicates that the method is public.
+     */
+    public const MODIFIERS_FLAG_IS_PUBLIC = 1;
+
+    /**
+     * Indicates that the method is protected.
+     */
+    public const MODIFIERS_FLAG_IS_PROTECTED = 2;
+
+    /**
+     * Indicates that the method is private.
+     */
+    public const MODIFIERS_FLAG_IS_PRIVATE = 4;
+
+    public const VISIBILITY_MODIFIERS_FLAG_ANY =
+        self::MODIFIERS_FLAG_IS_PUBLIC |
+        self::MODIFIERS_FLAG_IS_PROTECTED |
+        self::MODIFIERS_FLAG_IS_PRIVATE;
+
     private ?ClassMethod $ast = null;
 
     public function __construct(

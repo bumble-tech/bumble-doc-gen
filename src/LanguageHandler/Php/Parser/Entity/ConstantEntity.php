@@ -20,6 +20,32 @@ use Psr\Log\LoggerInterface;
  */
 class ConstantEntity extends BaseEntity
 {
+    /**
+     * Indicates that the constant is public.
+     *
+     * @since 8.0
+     */
+    public const MODIFIERS_FLAG_IS_PUBLIC = 1;
+
+    /**
+     * Indicates that the constant is protected.
+     *
+     * @since 8.0
+     */
+    public const MODIFIERS_FLAG_IS_PROTECTED = 2;
+
+    /**
+     * Indicates that the constant is private.
+     *
+     * @since 8.0
+     */
+    public const MODIFIERS_FLAG_IS_PRIVATE = 4;
+
+    public const VISIBILITY_MODIFIERS_FLAG_ANY =
+        self::MODIFIERS_FLAG_IS_PUBLIC |
+        self::MODIFIERS_FLAG_IS_PROTECTED |
+        self::MODIFIERS_FLAG_IS_PRIVATE;
+
     private ?ClassConst $ast = null;
     private int $nodePosition = 0;
 
