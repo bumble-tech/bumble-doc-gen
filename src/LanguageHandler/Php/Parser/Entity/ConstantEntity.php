@@ -8,7 +8,6 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use phpDocumentor\Reflection\DocBlock;
@@ -77,7 +76,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getDocBlock(): DocBlock
@@ -92,7 +90,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getAst(): ClassConst
@@ -131,7 +128,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     protected function getDocCommentRecursive(): string
@@ -150,7 +146,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getNamespaceName(): string
@@ -159,7 +154,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getFileName(): ?string
@@ -168,7 +162,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getDescription(): string
@@ -178,7 +171,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool
@@ -187,7 +179,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isProtected(): bool
@@ -196,7 +187,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPrivate(): bool
@@ -205,7 +195,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
@@ -214,7 +203,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int

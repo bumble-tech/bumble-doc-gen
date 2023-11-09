@@ -67,7 +67,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getAst(): ClassMethod
@@ -99,7 +98,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
@@ -124,7 +122,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getNamespaceName(): string
@@ -133,7 +130,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -172,7 +168,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -204,7 +199,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -222,7 +216,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
@@ -236,7 +229,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getDocCommentLine(): ?int
@@ -245,7 +237,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -266,7 +257,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getFileName(): ?string
@@ -275,7 +265,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getModifiersString(): string
@@ -300,7 +289,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -359,7 +347,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
@@ -435,7 +422,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws NotFoundException
-     * @throws DependencyException
      * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
@@ -463,7 +449,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getDescription(): string
@@ -473,7 +458,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -503,7 +487,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool
@@ -512,7 +495,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isStatic(): bool
@@ -521,7 +503,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isProtected(): bool
@@ -530,7 +511,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPrivate(): bool
@@ -539,7 +519,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
@@ -548,7 +527,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartColumn(): int
@@ -557,7 +535,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
@@ -568,7 +545,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getFirstReturnValue(): mixed
@@ -577,7 +553,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getBodyCode(): string

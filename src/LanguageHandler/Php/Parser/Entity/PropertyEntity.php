@@ -11,7 +11,6 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast\NodeCompiler\CompileNodeToValue;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast\NodeCompiler\CompilerContext;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
@@ -86,7 +85,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getAst(): Property
@@ -124,7 +122,6 @@ class PropertyEntity extends BaseEntity
 
     /**
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
@@ -135,7 +132,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -175,7 +171,6 @@ class PropertyEntity extends BaseEntity
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -202,7 +197,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getNamespaceName(): string
@@ -221,7 +215,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getFileName(): ?string
@@ -231,7 +224,6 @@ class PropertyEntity extends BaseEntity
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -260,7 +252,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -294,7 +285,6 @@ class PropertyEntity extends BaseEntity
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getDescription(): string
@@ -304,7 +294,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool
@@ -313,7 +302,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isProtected(): bool
@@ -322,7 +310,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPrivate(): bool
@@ -331,7 +318,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
@@ -340,7 +326,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
@@ -349,7 +334,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws ConstExprEvaluationException
      * @throws InvalidConfigurationParameterException
      */
