@@ -10,7 +10,6 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
@@ -158,7 +157,7 @@ final class ParserHelper
 
     public function __construct(
         private Configuration $configuration,
-        private ReflectorWrapper $reflector,
+        private ComposerParser $composerParser,
         private LocalObjectCache $localObjectCache,
         private Logger $logger
     ) {
@@ -220,16 +219,14 @@ final class ParserHelper
         return self::checkIsClassName($className);
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function isClassLoaded(string $className): bool
     {
         if (self::isCorrectClassName($className)) {
-            try {
-                $this->reflector->reflectClass($className);
-                return true;
-            } catch (\Exception) {
-            }
+            return (bool)$this->composerParser->getComposerClassLoader()->findFile($className);
         }
-
         return false;
     }
 
@@ -348,6 +345,7 @@ final class ParserHelper
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
+     * @throws \PhpParser\ConstExprEvaluationException
      */
     protected function getRawValue(MethodEntity $methodEntity, string $condition)
     {
@@ -381,7 +379,7 @@ final class ParserHelper
                         $methodValue = $this->getMethodReturnValue($nextMethodEntity);
                         return $prepareReturnValue($methodValue);
                     } elseif (!preg_match('/([-+:\/ ])/', $parts[1])) {
-                        $constantValue = $classEntity->getConstant($parts[1]);
+                        $constantValue = $classEntity->getConstantValue($parts[1]);
                         return $prepareReturnValue($constantValue);
                     }
                 }
@@ -412,7 +410,7 @@ final class ParserHelper
                     $methodValue = $this->getMethodReturnValue($methodEntity);
                     return $prepareReturnValue($methodValue);
                 } elseif ($classEntity->hasConstant($matches[6])) {
-                    $constantValue = $classEntity->getConstant($matches[6]);
+                    $constantValue = $classEntity->getConstantValue($matches[6]);
                     return $prepareReturnValue($constantValue);
                 }
                 return $matches[0];
