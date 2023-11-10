@@ -9,7 +9,6 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 
 final class EntityDocRendererHelper
 {
@@ -24,7 +23,6 @@ final class EntityDocRendererHelper
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getEntityDataByLink(
@@ -107,7 +105,6 @@ final class EntityDocRendererHelper
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getEntityUrlDataByLink(

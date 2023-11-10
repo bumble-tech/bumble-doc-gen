@@ -16,7 +16,6 @@ use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
@@ -24,10 +23,6 @@ use DI\Attribute\Inject;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionClassConstant;
-use Roave\BetterReflection\Reflection\ReflectionMethod;
-use Roave\BetterReflection\Reflection\ReflectionProperty;
 
 abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
@@ -45,7 +40,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     abstract public function getAst(): \PhpParser\Node\Stmt;
@@ -69,7 +63,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     final public function isEntityFileCanBeLoad(): bool
@@ -335,7 +328,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] protected function getThrowsData(): array
@@ -374,7 +366,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * Get parsed throws from `throws` doc block
      *
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getThrows(): array
@@ -384,7 +375,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     private function fillInLinkDataWithUrls(array $linkData): array
@@ -482,7 +472,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * Get the doc comment of an entity
      *
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getDocComment(): string

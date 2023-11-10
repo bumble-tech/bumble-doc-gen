@@ -9,7 +9,6 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
@@ -422,8 +421,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
+     * @throws DependencyException
      */
     public function getParametersString(): string
     {

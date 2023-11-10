@@ -9,7 +9,6 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -30,7 +29,6 @@ final class ReadmeTemplateGenerator
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
-     * @throws ReflectionException
      */
     public function generateReadmeFileContent(
         RootEntityCollection $rootEntityCollection,

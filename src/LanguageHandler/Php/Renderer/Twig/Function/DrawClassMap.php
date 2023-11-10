@@ -10,7 +10,6 @@ use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -52,7 +51,6 @@ final class DrawClassMap implements CustomFunctionInterface
      * @return string
      *
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -66,7 +64,6 @@ final class DrawClassMap implements CustomFunctionInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     protected function appendClassToDirectoryStructure(array $directoryStructure, ClassEntity $classEntity): array
@@ -94,7 +91,6 @@ final class DrawClassMap implements CustomFunctionInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */

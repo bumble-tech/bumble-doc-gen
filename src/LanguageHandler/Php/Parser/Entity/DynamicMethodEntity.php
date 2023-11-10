@@ -7,7 +7,6 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 
@@ -100,7 +99,6 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getReturnType(): string
@@ -162,7 +160,6 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
@@ -188,10 +185,6 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->getName();
     }
 
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
     public function getNamespaceName(): string
     {
         return $this->getRootEntity()->getNamespaceName();

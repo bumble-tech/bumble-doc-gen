@@ -10,7 +10,6 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Log\LoggerInterface;
@@ -67,7 +66,6 @@ abstract class BasePageLinker implements PluginInterface
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     final public function beforeCreatingDocFile(BeforeCreatingDocFile $event): void

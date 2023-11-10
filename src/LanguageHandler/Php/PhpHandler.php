@@ -11,7 +11,6 @@ use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -28,9 +27,9 @@ final class PhpHandler implements LanguageHandlerInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function getEntityCollection(): RootEntityCollection
     {

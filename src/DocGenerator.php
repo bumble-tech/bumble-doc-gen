@@ -17,7 +17,6 @@ use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -77,7 +76,6 @@ final class DocGenerator
      *
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function addDocBlocks(
@@ -159,7 +157,6 @@ final class DocGenerator
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
