@@ -12,7 +12,6 @@ use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer;
 use DI\DependencyException;
@@ -42,7 +41,6 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
@@ -70,7 +68,6 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function afterLoadingClassEntityCollection(AfterLoadingClassEntityCollection $event): void
@@ -86,7 +83,6 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     private function isCustomTwigFunction(ClassEntity $classEntity): bool
@@ -102,7 +98,6 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     private function getAllUsedFunctions(): array
@@ -122,7 +117,6 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException

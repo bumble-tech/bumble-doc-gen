@@ -12,7 +12,6 @@ use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer;
 use DI\DependencyException;
@@ -42,7 +41,6 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
@@ -71,7 +69,6 @@ final class TwigFilterClassParserPlugin implements PluginInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -88,12 +85,14 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     private function isCustomTwigFilter(ClassEntity $classEntity): bool
     {
         foreach (self::TWIG_FILTER_DIR_NAMES as $dirName) {
+            if (!$classEntity->entityDataCanBeLoaded()) {
+                continue;
+            }
             if (str_starts_with($classEntity->getFileName(), $dirName) && $classEntity->implementsInterface(CustomFilterInterface::class)) {
                 return true;
             }
@@ -104,7 +103,6 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     private function getAllUsedFilters(): array
@@ -125,7 +123,6 @@ final class TwigFilterClassParserPlugin implements PluginInterface
 
     /**
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
