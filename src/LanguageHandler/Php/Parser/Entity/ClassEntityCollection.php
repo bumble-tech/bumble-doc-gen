@@ -11,15 +11,22 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\LoggableRootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast\PhpParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
-use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\EntityDocRendererHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
+use PhpParser\Node\Stmt\Class_ as ClassNode;
+use PhpParser\Node\Stmt\Enum_ as EnumNode;
+use PhpParser\Node\Stmt\Interface_ as InterfaceNode;
+use PhpParser\Node\Stmt\Namespace_;
+use PhpParser\Node\Stmt\Trait_ as TraitNode;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor\NameResolver;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Style\OutputStyle;
 
@@ -35,14 +42,14 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     public function __construct(
         private Configuration $configuration,
         private PhpHandlerSettings $phpHandlerSettings,
-        private ParserHelper $parserHelper,
         private PluginEventDispatcher $pluginEventDispatcher,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory,
         private EntityDocRendererHelper $docRendererHelper,
+        private PhpParserHelper $phpParserHelper,
         private LocalObjectCache $localObjectCache,
         private ProgressBarFactory $progressBarFactory,
         private OutputStyle $io,
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
     ) {
         parent::__construct();
     }
@@ -58,9 +65,9 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * @throws NotFoundException
+     * @throws InvalidArgumentException
      * @throws DependencyException
-     * @throws ReflectionException
+     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function loadClassEntities(): void
@@ -71,21 +78,42 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
 
         $allFiles = iterator_to_array($this->configuration->getSourceLocators()->getCommonFinder()->files());
         $addedFilesCount = 0;
+
+        $nodeTraverser = new NodeTraverser();
+        $nodeTraverser->addVisitor(new NameResolver());
+        $phpParser = $this->phpParserHelper->phpParser();
+
         foreach ($pb->iterate($allFiles) as $file) {
             $pathName = $file->getPathName();
+            $nodes = $phpParser->parse(file_get_contents($pathName));
+            $nodes = $nodeTraverser->traverse($nodes);
             $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $pathName);
             $pb->setStepDescription("Processing `{$relativeFileName}` file");
-            $className = $this->parserHelper->getClassFromFile($pathName);
-            if ($className) {
-                $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $file->getPathName());
-                $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
-                    $this,
-                    ltrim($className, '\\'),
-                    $relativeFileName
-                );
-                if ($classEntityFilter->canAddToCollection($classEntity)) {
-                    $this->add($classEntity);
-                    ++$addedFilesCount;
+            foreach ($nodes as $node) {
+                if (!$node instanceof Namespace_) {
+                    continue;
+                }
+                $namespaceName = $node->name->toString();
+                foreach ($node->stmts as $subNode) {
+                    if (!in_array(get_class($subNode), [ClassNode::class, InterfaceNode::class, TraitNode::class, EnumNode::class])) {
+                        continue;
+                    }
+                    $className = $subNode->name->toString();
+                    $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
+                        $this,
+                        "{$namespaceName}\\{$className}",
+                        $relativeFileName
+                    );
+
+                    // todo
+                    if ($classEntity->entityCacheIsOutdated()) {
+                        $classEntity->setCustomAst($subNode);
+                    }
+
+                    if ($classEntityFilter->canAddToCollection($classEntity)) {
+                        $this->add($classEntity);
+                        ++$addedFilesCount;
+                    }
                 }
             }
         }
@@ -106,7 +134,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
 
     /**
      * @throws InvalidConfigurationParameterException
-     * @throws Exception\ReflectionException
      */
     public function add(ClassEntity $classEntity, bool $reload = false): ClassEntityCollection
     {
@@ -159,7 +186,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     /**
      * @param string[] $interfaces
      *
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
@@ -186,7 +212,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
@@ -213,7 +238,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function filterByPaths(array $paths): ClassEntityCollection
@@ -247,7 +271,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getOnlyInstantiable(): ClassEntityCollection
@@ -263,7 +286,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getOnlyInterfaces(): ClassEntityCollection
@@ -279,7 +301,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getOnlyTraits(): ClassEntityCollection
@@ -295,7 +316,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getOnlyAbstractClasses(): ClassEntityCollection
@@ -413,7 +433,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
 
     /**
      * @inheritDoc
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getEntityLinkData(
