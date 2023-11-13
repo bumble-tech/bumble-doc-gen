@@ -9,11 +9,7 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
-use DI\DependencyException;
-use DI\NotFoundException;
 use Monolog\Logger;
-use Nette\PhpGenerator\GlobalFunction;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
 use phpDocumentor\Reflection\Location;
@@ -196,19 +192,10 @@ final class ParserHelper
 
     private static function checkIsClassName(string $name): bool
     {
-        if (
-            !preg_match(
-                '/^(?=_*[A-z]+)[A-z0-9]+$/',
-                $name
-            )
-        ) {
-            return false;
-        }
-
-        $name = explode('\\', $name);
-        $name = end($name);
-        $chr = \mb_substr($name, 0, 1, "UTF-8");
-        return \mb_strtolower($chr, "UTF-8") != $chr;
+        return preg_match(
+            '/^(?=_*[A-z]+)[A-z0-9]+$/',
+            $name
+        );
     }
 
     public static function isCorrectClassName(string $className, bool $checkBuiltIns = true): bool
