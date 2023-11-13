@@ -32,6 +32,7 @@ final class BasePhpStubberPlugin implements PluginInterface
         'object' => 'https://www.php.net/manual/en/language.types.object.php',
         'float' => 'https://www.php.net/manual/en/language.types.float.php',
         'callable' => 'https://www.php.net/manual/en/language.types.callable.php',
+        'iterable' => 'https://www.php.net/manual/en/language.types.iterable.php',
         '[]' => 'https://www.php.net/manual/en/language.types.array.php',
         '\Traversable' => 'https://www.php.net/manual/en/class.traversable.php',
         '\Iterator' => 'https://www.php.net/manual/en/class.iterator.php',
