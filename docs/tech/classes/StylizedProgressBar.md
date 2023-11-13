@@ -187,7 +187,7 @@ public function iterate(iterable $iterable, int|null $max = null): \Generator;
     <tbody>
             <tr>
             <td>$iterable</td>
-            <td>iterable</td>
+            <td><a href='https://www.php.net/manual/en/language.types.iterable.php'>iterable</a></td>
             <td>-</td>
         </tr>
             <tr>

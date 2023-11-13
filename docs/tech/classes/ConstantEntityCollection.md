@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ConstantEntityCollection<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L15">ConstantEntityCollection</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L14">ConstantEntityCollection</a> class:
 </h1>
 
 
@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-final class ConstantEntityCollection extends \BumbleDocGen\Core\Parser\Entity\BaseEntityCollection implements \IteratorAggregate, \Traversable
+final class ConstantEntityCollection extends \BumbleDocGen\Core\Parser\Entity\BaseEntityCollection implements \IteratorAggregate
 ```
 
 
@@ -41,7 +41,7 @@ final class ConstantEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Ba
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 <li>
     <a href="#mhas">has</a>
     </li>
@@ -72,7 +72,7 @@ final class ConstantEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Ba
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L16">source code</a></li>
 </ul>
 
 ```php
@@ -119,7 +119,7 @@ public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Clas
 <ul>
 <li><a name="madd" href="#madd">#</a>
  <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L46">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L43">source code</a></li>
 </ul>
 
 ```php
@@ -162,11 +162,11 @@ public function add(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEnti
 <ul>
 <li><a name="mget" href="#mget">#</a>
  <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L55">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L52">source code</a></li>
 </ul>
 
 ```php
-public function get(string $objectName): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity|null;
+public function get(string $objectName): null|\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 ```
 
 
@@ -190,7 +190,7 @@ public function get(string $objectName): \BumbleDocGen\LanguageHandler\Php\Parse
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity</a>
 
 
 </div>
@@ -209,26 +209,13 @@ public function get(string $objectName): \BumbleDocGen\LanguageHandler\Php\Parse
 public function getIterator(): \Generator;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 <div class='method_description-block'>
@@ -299,7 +286,7 @@ public function isEmpty(): bool;
 <ul>
 <li><a name="mloadconstantentities" href="#mloadconstantentities">#</a>
  <b>loadConstantEntities</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L28">source code</a></li>
 </ul>
 
 ```php
@@ -320,9 +307,6 @@ public function loadConstantEntities(): void;
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -376,11 +360,11 @@ public function remove(string $objectName): void;
 <ul>
 <li><a name="munsafeget" href="#munsafeget">#</a>
  <b>unsafeGet</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L66">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntityCollection.php#L62">source code</a></li>
 </ul>
 
 ```php
-public function unsafeGet(string $constantName): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity|null;
+public function unsafeGet(string $constantName): null|\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 ```
 
 
@@ -404,16 +388,13 @@ public function unsafeGet(string $constantName): \BumbleDocGen\LanguageHandler\P
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity</a>
 
 
 <b>Throws:</b>
 <ul>
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>

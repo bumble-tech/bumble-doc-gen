@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Renderer\Twig\Filter;
 
-final class CustomFiltersCollection implements \IteratorAggregate, \Traversable
+final class CustomFiltersCollection implements \IteratorAggregate
 ```
 
 
@@ -37,7 +37,7 @@ final class CustomFiltersCollection implements \IteratorAggregate, \Traversable
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 <li>
     <a href="#mgettwigfilters">getTwigFilters</a>
     </li>
@@ -136,7 +136,7 @@ public static function create(\BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilt
 </ul>
 
 ```php
-public function get(string $key): \BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface|null;
+public function get(string $key): null|\BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
 ```
 
 
@@ -160,7 +160,7 @@ public function get(string $key): \BumbleDocGen\Core\Renderer\Twig\Filter\Custom
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/CustomFilterInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/CustomFilterInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface</a>
 
 
 </div>
@@ -177,26 +177,13 @@ public function get(string $key): \BumbleDocGen\Core\Renderer\Twig\Filter\Custom
 public function getIterator(): \Generator;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 <div class='method_description-block'>

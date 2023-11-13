@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PhpHandler<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L18">PhpHandler</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L17">PhpHandler</a> class:
 </h1>
 
 
@@ -60,7 +60,7 @@ final class PhpHandler implements \BumbleDocGen\LanguageHandler\LanguageHandlerI
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L19">source code</a></li>
 </ul>
 
 ```php
@@ -102,7 +102,7 @@ public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Clas
 <ul>
 <li><a name="mgetcustomtwigfilters" href="#mgetcustomtwigfilters">#</a>
  <b>getCustomTwigFilters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L58">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L57">source code</a></li>
 </ul>
 
 ```php
@@ -153,7 +153,7 @@ public function getCustomTwigFilters(\BumbleDocGen\Core\Renderer\Context\Rendere
 <ul>
 <li><a name="mgetcustomtwigfunctions" href="#mgetcustomtwigfunctions">#</a>
  <b>getCustomTwigFunctions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L48">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L47">source code</a></li>
 </ul>
 
 ```php
@@ -204,7 +204,7 @@ public function getCustomTwigFunctions(\BumbleDocGen\Core\Renderer\Context\Rende
 <ul>
 <li><a name="mgetentitycollection" href="#mgetentitycollection">#</a>
  <b>getEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L34">source code</a></li>
 </ul>
 
 ```php
@@ -224,13 +224,13 @@ public function getEntityCollection(): \BumbleDocGen\Core\Parser\Entity\RootEnti
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+<li>
+    <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a></li>
 
 </ul>
 
@@ -241,7 +241,7 @@ public function getEntityCollection(): \BumbleDocGen\Core\Parser\Entity\RootEnti
 <ul>
 <li><a name="mgetlanguagekey" href="#mgetlanguagekey">#</a>
  <b>getLanguageKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L23">source code</a></li>
 </ul>
 
 ```php

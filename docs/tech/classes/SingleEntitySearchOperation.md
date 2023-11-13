@@ -123,7 +123,7 @@ public function __construct(string $functionName, array $args, \BumbleDocGen\Cor
 </ul>
 
 ```php
-public function call(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection): \BumbleDocGen\Core\Parser\Entity\RootEntityInterface|null;
+public function call(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection): null|\BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
 
@@ -147,7 +147,7 @@ public function call(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $root
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a>
 
 
 </div>
@@ -203,14 +203,14 @@ public function getArgsHash(): string;
 </ul>
 
 ```php
-public function getEntityName(): string|null;
+public function getEntityName(): null|string;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 </div>

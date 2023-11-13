@@ -5,8 +5,8 @@ Directory layout ( only documented files shown ):
 <embed> <pre>└──<b>src</b>/
 │  ├──<b>AI</b>/
 │  │  ├──<b>Console</b>/
-│  │  │  ├── <a href='/docs/tech/classes/AddDocBlocksCommand.md'>AddDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  └── <a href='/docs/tech/classes/GenerateReadMeTemplateCommand.md'>GenerateReadMeTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/AddDocBlocksCommand.md'>AddDocBlocksCommand.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/GenerateReadMeTemplateCommand.md'>GenerateReadMeTemplateCommand.php</a> 
 │  │  ├──<b>Generators</b>/
 │  │  │  ├── <a href='/docs/tech/classes/DocBlocksGenerator.md'>DocBlocksGenerator.php</a> 
 │  │  │  └── <a href='/docs/tech/classes/ReadmeTemplateGenerator.md'>ReadmeTemplateGenerator.php</a> 
@@ -20,24 +20,23 @@ Directory layout ( only documented files shown ):
 │  ├──<b>Console</b>/
 │  │  ├──<b>Command</b>/
 │  │  │  ├── <a href='/docs/tech/classes/AdditionalCommandCollection.md'>AdditionalCommandCollection.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/BaseCommand.md'>BaseCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/BaseCommand.md'>BaseCommand.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> 
 │  │  ├──<b>ProgressBar</b>/
 │  │  │  ├── <a href='/docs/tech/classes/ProgressBarFactory.md'>ProgressBarFactory.php</a> 
 │  │  │  └── <a href='/docs/tech/classes/StylizedProgressBar.md'>StylizedProgressBar.php</a> 
-│  │  └── <a href='/docs/tech/classes/App.md'>App.php</a> <i> — <samp>An Application is the container for a collection of commands.</samp></i>
+│  │  └── <a href='/docs/tech/classes/App.md'>App.php</a> 
 │  ├──<b>Core</b>/
 │  │  ├──<b>Cache</b>/
 │  │  │  ├──<b>LocalCache</b>/
 │  │  │  │  ├──<b>Exception</b>/
-│  │  │  │  │  └── <a href='/docs/tech/classes/ObjectNotFoundException.md'>ObjectNotFoundException.php</a> <i> — <samp>Exception is the base class for all Exceptions.</samp></i>
+│  │  │  │  │  └── <a href='/docs/tech/classes/ObjectNotFoundException.md'>ObjectNotFoundException.php</a> 
 │  │  │  │  └── <a href='/docs/tech/classes/LocalObjectCache.md'>LocalObjectCache.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/EntityCacheItemPool.md'>EntityCacheItemPool.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/SharedCompressedDocumentFileCache.md'>SharedCompressedDocumentFileCache.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/SourceLocatorCacheItemPool.md'>SourceLocatorCacheItemPool.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/SharedCompressedDocumentFileCache.md'>SharedCompressedDocumentFileCache.php</a> 
 │  │  ├──<b>Configuration</b>/
 │  │  │  ├──<b>Exception</b>/
-│  │  │  │  └── <a href='/docs/tech/classes/InvalidConfigurationParameterException.md'>InvalidConfigurationParameterException.php</a> <i> — <samp>Exception is the base class for all Exceptions.</samp></i>
+│  │  │  │  └── <a href='/docs/tech/classes/InvalidConfigurationParameterException.md'>InvalidConfigurationParameterException.php</a> 
 │  │  │  ├──<b>ValueResolver</b>/
 │  │  │  │  ├── <a href='/docs/tech/classes/ArgvValueResolver.md'>ArgvValueResolver.php</a> <i> — <samp>We supplement the values by replacing the shortcodes with real values by the arguments passed to ...</samp></i>
 │  │  │  │  ├── <a href='/docs/tech/classes/InternalValueResolver.md'>InternalValueResolver.php</a> <i> — <samp>We supplement the values by replacing the shortcodes with real values by internalValuesMap</samp></i>
@@ -50,7 +49,7 @@ Directory layout ( only documented files shown ):
 │  │  │  └── <a href='/docs/tech/classes/ConfigurationParameterBag.md'>ConfigurationParameterBag.php</a> <i> — <samp>Wrapper for getting raw configuration file data</samp></i>
 │  │  ├──<b>Logger</b>/
 │  │  │  └──<b>Handler</b>/
-│  │  │  │  └── <a href='/docs/tech/classes/GenerationErrorsHandler.md'>GenerationErrorsHandler.php</a> <i> — <samp>Base Handler class providing the Handler structure, including processors and formatters</samp></i>
+│  │  │  │  └── <a href='/docs/tech/classes/GenerationErrorsHandler.md'>GenerationErrorsHandler.php</a> 
 │  │  ├──<b>Parser</b>/
 │  │  │  ├──<b>Entity</b>/
 │  │  │  │  ├──<b>Cache</b>/
@@ -106,9 +105,10 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  └── <a href='/docs/tech/classes/PageRstLinkerPlugin.md'>PageRstLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in rst format; Links may contain: 1) Short entity name 2) Full entity na...</samp></i>
 │  │  │  ├──<b>Event</b>/
 │  │  │  │  ├──<b>Parser</b>/
+│  │  │  │  │  ├── <a href='/docs/tech/classes/BeforeParsingProcess.md'>BeforeParsingProcess.php</a> 
 │  │  │  │  │  └── <a href='/docs/tech/classes/OnLoadSourceLocatorsCollection.md'>OnLoadSourceLocatorsCollection.php</a> <i> — <samp>Called when source locators are loaded</samp></i>
 │  │  │  │  └──<b>Renderer</b>/
-│  │  │  │  │  ├── <a href='/docs/tech/classes/AfterRenderingEntities.md'>AfterRenderingEntities.php</a> <i> — <samp>Event is the base class for classes containing event data.</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/AfterRenderingEntities.md'>AfterRenderingEntities.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BeforeCreatingDocFile.md'>BeforeCreatingDocFile.php</a> <i> — <samp>Called before the content of the documentation document is saved to a file</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BeforeRenderingDocFiles.md'>BeforeRenderingDocFiles.php</a> <i> — <samp>The event occurs before the main documents begin rendering</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BeforeRenderingEntities.md'>BeforeRenderingEntities.php</a> <i> — <samp>The event occurs before the rendering of entity documents begins, after the main documents have b...</samp></i>
@@ -118,7 +118,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  ├── <a href='/docs/tech/classes/OnGettingResourceLink.md'>OnGettingResourceLink.php</a> <i> — <samp>Event occurs when a reference to an entity (resource) is received</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/OnLoadEntityDocPluginContent.md'>OnLoadEntityDocPluginContent.php</a> <i> — <samp>Called when entity documentation is generated (plugin content loading)</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/OnlySingleExecutionEvent.md'>OnlySingleExecutionEvent.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/PluginEventDispatcher.md'>PluginEventDispatcher.php</a> <i> — <samp>The EventDispatcherInterface is the central point of Symfony's event listener system.</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/PluginEventDispatcher.md'>PluginEventDispatcher.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/PluginInterface.md'>PluginInterface.php</a> 
 │  │  │  └── <a href='/docs/tech/classes/PluginsCollection.md'>PluginsCollection.php</a> 
 │  │  └──<b>Renderer</b>/
@@ -148,6 +148,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  ├── <a href='/docs/tech/classes/CustomFilterInterface.md'>CustomFilterInterface.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/CustomFiltersCollection.md'>CustomFiltersCollection.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/FixStrSize.md'>FixStrSize.php</a> <i> — <samp>The filter pads the string with the specified characters on the right to the specified size</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/Implode.md'>Implode.php</a> <i> — <samp>Join array elements with a string</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/PregMatch.md'>PregMatch.php</a> <i> — <samp>Perform a regular expression match</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/PrepareSourceLink.md'>PrepareSourceLink.php</a> <i> — <samp>The filter converts the string into an anchor that can be used in a GitHub document link</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/Quotemeta.md'>Quotemeta.php</a> <i> — <samp>Quote meta characters</samp></i>
@@ -178,10 +179,9 @@ Directory layout ( only documented files shown ):
 │  │  │  │  ├──<b>Entity</b>/
 │  │  │  │  │  ├──<b>Cache</b>/
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/CacheablePhpEntityFactory.md'>CacheablePhpEntityFactory.php</a> 
-│  │  │  │  │  ├──<b>Exception</b>/
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/ReflectionException.md'>ReflectionException.php</a> <i> — <samp>Exception is the base class for all Exceptions.</samp></i>
-│  │  │  │  │  ├──<b>Reflection</b>/
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/ReflectorWrapper.md'>ReflectorWrapper.php</a> 
+│  │  │  │  │  ├──<b>PhpParser</b>/
+│  │  │  │  │  │  ├── <a href='/docs/tech/classes/NodeValueCompiler.md'>NodeValueCompiler.php</a> 
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/PhpParserHelper.md'>PhpParserHelper.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BaseEntity.md'>BaseEntity.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/ClassEntity.md'>ClassEntity.php</a> <i> — <samp>Class entity</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/ClassEntityCollection.md'>ClassEntityCollection.php</a> <i> — <samp>Collection of PHP class entities</samp></i>
@@ -213,13 +213,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/IsPublicCondition_3.md'>IsPublicCondition.php</a> <i> — <samp>Check is a public property or not</samp></i>
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/OnlyFromCurrentClassCondition_2.md'>OnlyFromCurrentClassCondition.php</a> <i> — <samp>Only properties that belong to the current class (not parent)</samp></i>
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/VisibilityCondition_3.md'>VisibilityCondition.php</a> <i> — <samp>Property access modifier check</samp></i>
-│  │  │  │  ├──<b>SourceLocator</b>/
-│  │  │  │  │  ├──<b>Internal</b>/
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/CachedSourceLocator.md'>CachedSourceLocator.php</a> 
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/SystemAsyncSourceLocator.md'>SystemAsyncSourceLocator.php</a> 
-│  │  │  │  │  ├── <a href='/docs/tech/classes/AsyncSourceLocator.md'>AsyncSourceLocator.php</a> <i> — <samp>Lazy loading classes. Cannot be used for initial parsing of files, only for getting specific docu...</samp></i>
-│  │  │  │  │  └── <a href='/docs/tech/classes/CustomSourceLocatorInterface.md'>CustomSourceLocatorInterface.php</a> 
-│  │  │  │  ├── <a href='/docs/tech/classes/ComposerParser.md'>ComposerParser.php</a> 
+│  │  │  │  ├── <a href='/docs/tech/classes/ComposerHelper.md'>ComposerHelper.php</a> 
 │  │  │  │  └── <a href='/docs/tech/classes/ParserHelper.md'>ParserHelper.php</a> 
 │  │  │  ├──<b>Plugin</b>/
 │  │  │  │  ├──<b>CorePlugin</b>/
@@ -233,7 +227,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin.php</a> <i> — <samp>This plugin changes the algorithm for saving entity documents. The standard system stores each fi...</samp></i>
 │  │  │  │  └──<b>Event</b>/
 │  │  │  │  │  ├──<b>Entity</b>/
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/OnCheckIsClassEntityCanBeLoad.md'>OnCheckIsClassEntityCanBeLoad.php</a> <i> — <samp>Event is the base class for classes containing event data.</samp></i>
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/OnCheckIsClassEntityCanBeLoad.md'>OnCheckIsClassEntityCanBeLoad.php</a> 
 │  │  │  │  │  └──<b>Parser</b>/
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/AfterLoadingClassEntityCollection.md'>AfterLoadingClassEntityCollection.php</a> <i> — <samp>The event is called after the initial creation of a collection of class entities</samp></i>
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/OnAddClassEntityToCollection.md'>OnAddClassEntityToCollection.php</a> <i> — <samp>Called when each class entity is added to the entity collection</samp></i>
@@ -257,4 +251,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Mon Nov 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Mon Nov 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> EntityDocRendererHelper<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L14">EntityDocRendererHelper</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L13">EntityDocRendererHelper</a> class:
 </h1>
 
 
@@ -46,15 +46,15 @@ final class EntityDocRendererHelper
 <ul>
             <li><a name="qclass-entity-full-link-option"
                href="#qclass-entity-full-link-option">#</a>
-            <code>CLASS_ENTITY_FULL_LINK_OPTION</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L17">source
+            <code>CLASS_ENTITY_FULL_LINK_OPTION</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L16">source
                     code</a> </li>
             <li><a name="qclass-entity-only-cursor-link-option"
                href="#qclass-entity-only-cursor-link-option">#</a>
-            <code>CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L18">source
+            <code>CLASS_ENTITY_ONLY_CURSOR_LINK_OPTION</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L17">source
                     code</a> </li>
             <li><a name="qclass-entity-short-link-option"
                href="#qclass-entity-short-link-option">#</a>
-            <code>CLASS_ENTITY_SHORT_LINK_OPTION</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L16">source
+            <code>CLASS_ENTITY_SHORT_LINK_OPTION</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L15">source
                     code</a> </li>
     </ul>
 
@@ -69,7 +69,7 @@ final class EntityDocRendererHelper
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L19">source code</a></li>
 </ul>
 
 ```php
@@ -111,7 +111,7 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\RootEntityCollectio
 <ul>
 <li><a name="mgetentitydatabylink" href="#mgetentitydatabylink">#</a>
  <b>getEntityDataByLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L28">source code</a></li>
 </ul>
 
 ```php
@@ -160,9 +160,6 @@ public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parse
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
@@ -174,7 +171,7 @@ public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parse
 <ul>
 <li><a name="mgetentityurldatabylink" href="#mgetentityurldatabylink">#</a>
  <b>getEntityUrlDataByLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L113">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L110">source code</a></li>
 </ul>
 
 ```php
@@ -217,9 +214,6 @@ public function getEntityUrlDataByLink(string $linkString, string|null $defaultE
 
 <b>Throws:</b>
 <ul>
-<li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 

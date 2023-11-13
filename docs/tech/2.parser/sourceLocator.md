@@ -20,14 +20,9 @@ You can create your own source locators or use any existing ones. All source loc
 
 <embed> <h2>Built-in source locators</h2> </embed>
 
-**Common source locators:**
-
 <embed> <ul><li><a href='/docs/tech/2.parser/classes/DirectoriesSourceLocator.md'>DirectoriesSourceLocator</a> - Loads all files from the specified directory</li><li><a href='/docs/tech/2.parser/classes/FileIteratorSourceLocator.md'>FileIteratorSourceLocator</a> - Loads all files using an iterator</li><li><a href='/docs/tech/2.parser/classes/RecursiveDirectoriesSourceLocator.md'>RecursiveDirectoriesSourceLocator</a> - Loads all files from the specified directories, which are traversed recursively</li><li><a href='/docs/tech/2.parser/classes/SingleFileSourceLocator.md'>SingleFileSourceLocator</a> - Loads one specific file by its path</li></ul> </embed>
 
-**PHP source locators:**
-
-<embed> <ul><li><a href='/docs/tech/2.parser/classes/AsyncSourceLocator.md'>AsyncSourceLocator</a> - Lazy loading classes. Cannot be used for initial parsing of files, only for getting specific documents</li></ul> </embed>
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Mon Nov 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Tue Nov 14 00:49:39 2023 +0300<br><b>Page content update date:</b> Mon Nov 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

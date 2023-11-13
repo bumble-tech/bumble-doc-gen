@@ -196,6 +196,8 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 
 - <a href="/docs/tech/1.configuration/classes/PregMatch.md">PregMatch</a>
 
+- <a href="/docs/tech/1.configuration/classes/Implode.md">Implode</a>
+
 </td>
         <td>Filters that can be used in document templates</td>
     </tr>
@@ -222,4 +224,4 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Mon Nov 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Mon Nov 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

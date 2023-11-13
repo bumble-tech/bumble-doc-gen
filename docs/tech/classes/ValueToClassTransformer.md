@@ -161,7 +161,7 @@ public function canTransform(mixed $value): bool;
 </ul>
 
 ```php
-public function transform(mixed $value): object|null;
+public function transform(mixed $value): null|object;
 ```
 
 
@@ -185,7 +185,7 @@ public function transform(mixed $value): object|null;
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.object.php'>object</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.object.php'>object</a>
 
 
 <b>Throws:</b>

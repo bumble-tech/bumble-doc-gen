@@ -56,8 +56,7 @@ Here is a list of filters available by default:
                                         <tr>
                                                         <td rowspan="5">
                         <a href="/docs/tech/3.renderer/classes/AddIndentFromLeft.md">addIndentFromLeft</a><br>
-                                                Filter adds indent from left
-                                            </td>
+                        Filter adds indent from left                    </td>
                                                 </tr>
                             <tr>
                     <td colspan="3"></td>
@@ -89,8 +88,7 @@ Here is a list of filters available by default:
                                                 <tr>
                                                         <td rowspan="5">
                         <a href="/docs/tech/3.renderer/classes/FixStrSize.md">fixStrSize</a><br>
-                                                The filter pads the string with the specified characters on the right to the specified size
-                                            </td>
+                        The filter pads the string with the specified characters on the right to the specified size                    </td>
                                                 </tr>
                             <tr>
                     <td colspan="3"></td>
@@ -121,9 +119,28 @@ Here is a list of filters available by default:
             </tr>
                                                 <tr>
                                                         <td rowspan="3">
+                        <a href="/docs/tech/3.renderer/classes/Implode.md">implode</a><br>
+                        Join array elements with a string                    </td>
+                                                </tr>
+                            <tr>
+                    <td colspan="3"></td>
+                </tr>
+                                <tr>
+                                    <td>
+                        <b>$separator</b>
+                    </td>
+                    <td>
+                        <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    </td>
+                    <td>Element separator in result string</td>
+                            </tr>
+                                        <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+                                                <tr>
+                                                        <td rowspan="3">
                         <a href="/docs/tech/3.renderer/classes/PregMatch.md">preg_match</a><br>
-                                                Perform a regular expression match
-                                            </td>
+                        Perform a regular expression match                    </td>
                                                 </tr>
                             <tr>
                     <td colspan="3"></td>
@@ -143,8 +160,7 @@ Here is a list of filters available by default:
                                                 <tr>
                                                         <td >
                         <a href="/docs/tech/3.renderer/classes/PrepareSourceLink.md">prepareSourceLink</a><br>
-                                                The filter converts the string into an anchor that can be used in a GitHub document link
-                                            </td>
+                        The filter converts the string into an anchor that can be used in a GitHub document link                    </td>
                                             <td colspan="3">The filter does not accept any additional parameters</td>
                                                 </tr>
                                         <tr>
@@ -153,8 +169,7 @@ Here is a list of filters available by default:
                                                 <tr>
                                                         <td >
                         <a href="/docs/tech/3.renderer/classes/Quotemeta.md">quotemeta</a><br>
-                                                Quote meta characters
-                                            </td>
+                        Quote meta characters                    </td>
                                             <td colspan="3">The filter does not accept any additional parameters</td>
                                                 </tr>
                                         <tr>
@@ -163,8 +178,7 @@ Here is a list of filters available by default:
                                                 <tr>
                                                         <td >
                         <a href="/docs/tech/3.renderer/classes/RemoveLineBrakes.md">removeLineBrakes</a><br>
-                                                The filter replaces all line breaks with a space
-                                            </td>
+                        The filter replaces all line breaks with a space                    </td>
                                             <td colspan="3">The filter does not accept any additional parameters</td>
                                                 </tr>
                                         <tr>
@@ -173,8 +187,7 @@ Here is a list of filters available by default:
                                                 <tr>
                                                         <td rowspan="7">
                         <a href="/docs/tech/3.renderer/classes/StrTypeToUrl.md">strTypeToUrl</a><br>
-                                                The filter converts the string with the data type into a link to the documented entity, if possible.
-                        <br><i><b>:warning: This filter initiates the creation of documents for the displayed entities</b></i><br>                    </td>
+                        The filter converts the string with the data type into a link to the documented entity, if possible.<br><i><b>:warning: This filter initiates the creation of documents for the displayed entities</b></i><br>                    </td>
                                                 </tr>
                             <tr>
                     <td colspan="3"></td>
@@ -218,8 +231,7 @@ Here is a list of filters available by default:
                                                 <tr>
                                                         <td rowspan="3">
                         <a href="/docs/tech/3.renderer/classes/TextToCodeBlock.md">textToCodeBlock</a><br>
-                                                Convert text to code block
-                                            </td>
+                        Convert text to code block                    </td>
                                                 </tr>
                             <tr>
                     <td colspan="3"></td>
@@ -239,8 +251,7 @@ Here is a list of filters available by default:
                                                 <tr>
                                                         <td rowspan="3">
                         <a href="/docs/tech/3.renderer/classes/TextToHeading.md">textToHeading</a><br>
-                                                Convert text to html header
-                                            </td>
+                        Convert text to html header                    </td>
                                                 </tr>
                             <tr>
                     <td colspan="3"></td>
@@ -263,4 +274,4 @@ Here is a list of filters available by default:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Mon Nov 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Tue Nov 14 00:49:39 2023 +0300<br><b>Page content update date:</b> Mon Nov 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

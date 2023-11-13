@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Renderer\EntityDocRenderer;
 
-final class EntityDocRenderersCollection implements \IteratorAggregate, \Traversable
+final class EntityDocRenderersCollection implements \IteratorAggregate
 ```
 
 
@@ -34,7 +34,7 @@ final class EntityDocRenderersCollection implements \IteratorAggregate, \Travers
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 </ol>
 
 
@@ -92,7 +92,7 @@ public function add(\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRende
 </ul>
 
 ```php
-public function getFirstMatchingRender(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $entity): \BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface|null;
+public function getFirstMatchingRender(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $entity): null|\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
 ```
 
 
@@ -116,7 +116,7 @@ public function getFirstMatchingRender(\BumbleDocGen\Core\Parser\Entity\RootEnti
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRendererInterface.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface</a>
 
 
 </div>
@@ -133,26 +133,13 @@ public function getFirstMatchingRender(\BumbleDocGen\Core\Parser\Entity\RootEnti
 public function getIterator(): \Generator;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 

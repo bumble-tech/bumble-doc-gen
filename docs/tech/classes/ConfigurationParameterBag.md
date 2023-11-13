@@ -776,7 +776,7 @@ public function validateAndGetClassValue(string $parameterName, string $classInt
 </ul>
 
 ```php
-public function validateAndGetDirectoryPathValue(string $parameterName, bool $nullable = true): string|null;
+public function validateAndGetDirectoryPathValue(string $parameterName, bool $nullable = true): null|string;
 ```
 
 
@@ -805,7 +805,7 @@ public function validateAndGetDirectoryPathValue(string $parameterName, bool $nu
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>
@@ -826,7 +826,7 @@ public function validateAndGetDirectoryPathValue(string $parameterName, bool $nu
 </ul>
 
 ```php
-public function validateAndGetFilePathValue(string $parameterName, array $fileExtensions, bool $nullable = true): string|null;
+public function validateAndGetFilePathValue(string $parameterName, array $fileExtensions, bool $nullable = true): null|string;
 ```
 
 
@@ -860,7 +860,7 @@ public function validateAndGetFilePathValue(string $parameterName, array $fileEx
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>
@@ -881,7 +881,7 @@ public function validateAndGetFilePathValue(string $parameterName, array $fileEx
 </ul>
 
 ```php
-public function validateAndGetStringValue(string $parameterName, bool $nullable = true): string|null;
+public function validateAndGetStringValue(string $parameterName, bool $nullable = true): null|string;
 ```
 
 
@@ -910,7 +910,7 @@ public function validateAndGetStringValue(string $parameterName, bool $nullable 
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>

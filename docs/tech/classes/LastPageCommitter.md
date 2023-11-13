@@ -38,7 +38,7 @@ final class LastPageCommitter implements \BumbleDocGen\Core\Plugin\PluginInterfa
     </li>
 <li>
     <a href="#mgetsubscribedevents">getSubscribedEvents</a>
-    - <i>Returns an array of event names this subscriber wants to listen to.</i></li>
+    </li>
 </ol>
 
 
@@ -141,7 +141,7 @@ public function beforeCreatingDocFile(\BumbleDocGen\Core\Plugin\Event\Renderer\B
 public static function getSubscribedEvents(): array;
 ```
 
-<blockquote>Returns an array of event names this subscriber wants to listen to.</blockquote>
+
 
 <b>Parameters:</b> not specified
 

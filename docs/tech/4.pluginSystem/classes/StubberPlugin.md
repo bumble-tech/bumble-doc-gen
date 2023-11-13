@@ -35,7 +35,7 @@ final class StubberPlugin implements \BumbleDocGen\Core\Plugin\PluginInterface, 
 <ol>
 <li>
     <a href="#mgetsubscribedevents">getSubscribedEvents</a>
-    - <i>Returns an array of event names this subscriber wants to listen to.</i></li>
+    </li>
 <li>
     <a href="#moncheckisclassentitycanbeload">onCheckIsClassEntityCanBeLoad</a>
     </li>
@@ -57,11 +57,11 @@ final class StubberPlugin implements \BumbleDocGen\Core\Plugin\PluginInterface, 
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L19">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser $composerParser);
+public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper $composerHelper);
 ```
 
 
@@ -78,8 +78,8 @@ public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\ComposerPar
     </thead>
     <tbody>
             <tr>
-            <td>$composerParser</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerParser.php'>\BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser</a></td>
+            <td>$composerHelper</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php'>\BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -94,14 +94,14 @@ public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\ComposerPar
 <ul>
 <li><a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a>
  <b>getSubscribedEvents</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L23">source code</a></li>
 </ul>
 
 ```php
 public static function getSubscribedEvents(): array;
 ```
 
-<blockquote>Returns an array of event names this subscriber wants to listen to.</blockquote>
+
 
 <b>Parameters:</b> not specified
 
@@ -115,7 +115,7 @@ public static function getSubscribedEvents(): array;
 <ul>
 <li><a name="moncheckisclassentitycanbeload" href="#moncheckisclassentitycanbeload">#</a>
  <b>onCheckIsClassEntityCanBeLoad</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L61">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L60">source code</a></li>
 </ul>
 
 ```php
@@ -160,7 +160,7 @@ public function onCheckIsClassEntityCanBeLoad(\BumbleDocGen\LanguageHandler\Php\
 <ul>
 <li><a name="mongettingresourcelink" href="#mongettingresourcelink">#</a>
  <b>onGettingResourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L34">source code</a></li>
 </ul>
 
 ```php

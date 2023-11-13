@@ -30,7 +30,7 @@ in a separate directory structure, so they are not duplicated.</blockquote>
 <ol>
 <li>
     <a href="#mgetsubscribedevents">getSubscribedEvents</a>
-    - <i>Returns an array of event names this subscriber wants to listen to.</i></li>
+    </li>
 <li>
     <a href="#moncreatedocumentedentitywrapper">onCreateDocumentedEntityWrapper</a>
     </li>
@@ -69,7 +69,7 @@ in a separate directory structure, so they are not duplicated.</blockquote>
 public static function getSubscribedEvents(): array;
 ```
 
-<blockquote>Returns an array of event names this subscriber wants to listen to.</blockquote>
+
 
 <b>Parameters:</b> not specified
 

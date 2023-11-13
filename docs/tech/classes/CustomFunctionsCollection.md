@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Renderer\Twig\Function;
 
-final class CustomFunctionsCollection implements \IteratorAggregate, \Traversable
+final class CustomFunctionsCollection implements \IteratorAggregate
 ```
 
 
@@ -37,7 +37,7 @@ final class CustomFunctionsCollection implements \IteratorAggregate, \Traversabl
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 <li>
     <a href="#mgettwigfunctions">getTwigFunctions</a>
     </li>
@@ -139,7 +139,7 @@ public static function create(\BumbleDocGen\Core\Renderer\Twig\Function\CustomFu
 </ul>
 
 ```php
-public function get(string $key): \BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface|null;
+public function get(string $key): null|\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 ```
 
 
@@ -163,7 +163,7 @@ public function get(string $key): \BumbleDocGen\Core\Renderer\Twig\Function\Cust
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionInterface.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface</a>
 
 
 </div>
@@ -180,26 +180,13 @@ public function get(string $key): \BumbleDocGen\Core\Renderer\Twig\Function\Cust
 public function getIterator(): \Generator;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 <div class='method_description-block'>
