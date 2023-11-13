@@ -8,6 +8,8 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
+use DI\DependencyException;
+use DI\NotFoundException;
 use PhpParser\ConstExprEvaluationException;
 use PhpParser\ConstExprEvaluator;
 use PhpParser\Node;
@@ -31,36 +33,31 @@ final class NodeValueCompiler
         }
 
         $constExprEvaluator = new ConstExprEvaluator(function (Node\Expr $node) use ($entity): mixed {
-            try {
-                $className = get_class($node);
-                return match ($className) {
-                    Node\Expr\ClassConstFetch::class => self::getClassConstantValue($node, $entity),
-                    Node\Scalar\MagicConst\Dir::class => dirname($entity->getRelativeFileName()),
-                    Node\Scalar\MagicConst\File::class => $entity->getRelativeFileName(),
-                    Node\Scalar\MagicConst\Class_::class => is_a($entity, ClassEntity::class) ? $entity->getName() : $entity->getRootEntity()->getName(),
-                    Node\Scalar\MagicConst\Line::class => $node->getLine(),
-                    Node\Scalar\MagicConst\Namespace_::class => $entity->getNamespaceName(),
-                    Node\Scalar\MagicConst\Method::class => is_a($entity, MethodEntity::class) ? $entity->getRootEntity()->getName() . '::' . $entity->getName() : '',
-                    Node\Scalar\MagicConst\Trait_::class => $entity->isTrait() ? $entity->getName() : '',
-                    Node\Scalar\MagicConst\Function_::class => is_a($entity, MethodEntity::class) ?  $entity->getName() : '',
-                    Node\Expr\FuncCall::class => self::getFuncCallValue($node),
-                    Node\Expr\New_::class => throw new \RuntimeException('Unable to compile initializer'),
-                    default => throw new \RuntimeException('Not supported operation')
-                };
-            } catch (\Exception) {
-            }
-
-            $astPrinter = new Standard();
-            $value = $astPrinter->prettyPrint([$node]);
-            $op = array_reverse(explode('\\', get_class($node)))[0];
-            $op = str_replace('Fetch', '', $op);
-            if (str_ends_with($op, '_')) {
-                return '[MagicConst:' . $value . ']';
-            }
-            return "[{$op}:{$value}]";
+            $className = get_class($node);
+            return match ($className) {
+                Node\Expr\ClassConstFetch::class => self::getClassConstantValue($node, $entity),
+                Node\Scalar\MagicConst\Dir::class => dirname($entity->getRelativeFileName()),
+                Node\Scalar\MagicConst\File::class => $entity->getRelativeFileName(),
+                Node\Scalar\MagicConst\Class_::class => is_a($entity, ClassEntity::class) ? $entity->getName() : $entity->getRootEntity()->getName(),
+                Node\Scalar\MagicConst\Line::class => $node->getLine(),
+                Node\Scalar\MagicConst\Namespace_::class => $entity->getNamespaceName(),
+                Node\Scalar\MagicConst\Method::class => is_a($entity, MethodEntity::class) ? $entity->getRootEntity()->getName() . '::' . $entity->getName() : '',
+                Node\Scalar\MagicConst\Trait_::class => $entity->isTrait() ? $entity->getName() : '',
+                Node\Scalar\MagicConst\Function_::class => is_a($entity, MethodEntity::class) ?  $entity->getName() : '',
+                Node\Expr\StaticCall::class => self::getStaticCallValue($node, $entity),
+                Node\Expr\StaticPropertyFetch::class => self::getStaticPropertyValue($node, $entity),
+                Node\Expr\FuncCall::class => self::getFuncCallValue($node),
+                Node\Expr\New_::class => throw new \RuntimeException('Unable to compile initializer'),
+                default => throw new \RuntimeException('Not supported operation')
+            };
         });
 
-        return $constExprEvaluator->evaluateDirectly($node);
+        try {
+            return $constExprEvaluator->evaluateSilently($node);
+        } catch (\Exception) {
+        }
+        $astPrinter = new Standard();
+        return $astPrinter->prettyPrint([$node]);
     }
 
     private static function getFuncCallValue(Node\Expr\FuncCall $node): mixed
@@ -75,6 +72,50 @@ final class NodeValueCompiler
             return constant($node->args[0]->value->value);
         }
         throw new \RuntimeException('Not supported operation');
+    }
+
+    /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
+     */
+    private static function getStaticCallValue(
+        Node\Expr\StaticCall $node,
+        MethodEntity|PropertyEntity|ClassEntity $entity
+    ): mixed {
+        $className = self::resolveClassName($node->class->toString(), $entity);
+        if ($entity->getName() !== $className) {
+            $entity = $entity->getRootEntityCollection()->getLoadedOrCreateNew($className);
+        }
+        if (!$entity->entityDataCanBeLoaded()) {
+            throw new \RuntimeException('Entity cannot be loaded');
+        }
+        $methodEntity = $entity->getMethodEntity($node->name->toString());
+        if (!$methodEntity) {
+            return null;
+        }
+        return $methodEntity->getFirstReturnValue();
+    }
+
+    /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
+     */
+    private static function getStaticPropertyValue(
+        Node\Expr\StaticPropertyFetch $node,
+        MethodEntity|PropertyEntity|ClassEntity $entity
+    ): mixed {
+        $className = self::resolveClassName($node->class->toString(), $entity);
+        if ($entity->getName() !== $className) {
+            $entity = $entity->getRootEntityCollection()->getLoadedOrCreateNew($className);
+        }
+        if (!$entity->entityDataCanBeLoaded()) {
+            throw new \RuntimeException('Entity cannot be loaded');
+        }
+        return $entity->getPropertyEntity($node->name->toString())->getDefaultValue();
     }
 
     /**
@@ -103,6 +144,11 @@ final class NodeValueCompiler
         if ($constantName === 'class') {
             return $className;
         }
+
+        if (!$entity->entityDataCanBeLoaded()) {
+            throw new \RuntimeException('Entity cannot be loaded');
+        }
+
         return $entity->getConstantValue($constantName);
     }
 
