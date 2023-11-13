@@ -335,8 +335,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                 return null;
             }
             $this->relativeFileName = str_replace(
-                $projectRoot,
-                '',
+                [$projectRoot, '//'],
+                ['', '/'],
                 $fileName
             );
         }
