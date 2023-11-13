@@ -153,7 +153,7 @@ final class ParserHelper
 
     public function __construct(
         private Configuration $configuration,
-        private ComposerParser $composerParser,
+        private ComposerHelper $composerHelper,
         private LocalObjectCache $localObjectCache,
         private Logger $logger
     ) {
@@ -192,7 +192,7 @@ final class ParserHelper
 
     private static function checkIsClassName(string $name): bool
     {
-        return preg_match(
+        return (bool)preg_match(
             '/^(?=_*[A-z]+)[A-z0-9]+$/',
             $name
         );
@@ -212,7 +212,7 @@ final class ParserHelper
     public function isClassLoaded(string $className): bool
     {
         if (self::isCorrectClassName($className)) {
-            return (bool)$this->composerParser->getComposerClassLoader()->findFile($className);
+            return (bool)$this->composerHelper->getComposerClassLoader()->findFile($className);
         }
         return false;
     }

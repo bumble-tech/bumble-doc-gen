@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use Composer\Autoload\ClassLoader;
 
-final class ComposerParser
+final class ComposerHelper
 {
     private array $packages = [];
     private ?ClassLoader $classLoader = null;

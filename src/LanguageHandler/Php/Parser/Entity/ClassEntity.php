@@ -13,7 +13,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
 use BumbleDocGen\Core\Renderer\Twig\Filter\PrepareSourceLink;
-use BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser;
+use BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast\NodeValueCompiler;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast\PhpParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
@@ -54,7 +54,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         private PhpHandlerSettings $phpHandlerSettings,
         private ClassEntityCollection $classEntityCollection,
         private ParserHelper $parserHelper,
-        private ComposerParser $composerParser,
+        private ComposerHelper $composerHelper,
         private PhpParserHelper $phpParserHelper,
         private LocalObjectCache $localObjectCache,
         private LoggerInterface $logger,
@@ -84,7 +84,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     public function isExternalLibraryEntity(): bool
     {
-        return !is_null($this->composerParser->getComposerPackageDataByClassName($this->getName()));
+        return !is_null($this->composerHelper->getComposerPackageDataByClassName($this->getName()));
     }
 
     public function getPhpHandlerSettings(): PhpHandlerSettings
@@ -114,7 +114,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $classNames = array_filter(
                 $classNames,
                 function (string $className): bool {
-                    return !$this->composerParser->getComposerPackageDataByClassName($className) && !$this->parserHelper->isBuiltInClass($className);
+                    return !$this->composerHelper->getComposerPackageDataByClassName($className) && !$this->parserHelper->isBuiltInClass($className);
                 }
             );
 
@@ -329,7 +329,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         if (!$this->relativeFileNameLoaded && $loadIfEmpty) {
             $this->relativeFileNameLoaded = true;
-            $fileName = $this->composerParser->getComposerClassLoader()->findFile($this->getName());
+            $fileName = $this->composerHelper->getComposerClassLoader()->findFile($this->getName());
             $projectRoot = $this->configuration->getProjectRoot();
             if (!$fileName || !str_starts_with($fileName, $projectRoot)) {
                 return null;
