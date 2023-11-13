@@ -33,8 +33,8 @@ final class NodeValueCompiler
     ): mixed {
         if (is_a($node, \PhpParser\Node\Expr\Array_::class)) {
             $compiledValue = [];
-            foreach ($node->items as $item) {
-                $key = !$item->key ? $item->key : self::compile($item->key, $entity);
+            foreach ($node->items as $k => $item) {
+                $key = !$item->key ? $k : self::compile($item->key, $entity);
                 $value = self::compile($item->value, $entity);
                 $compiledValue[$key] = $value;
             }
