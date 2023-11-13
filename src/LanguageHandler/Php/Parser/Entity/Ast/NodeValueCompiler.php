@@ -31,10 +31,18 @@ final class NodeValueCompiler
         Node\Stmt\Expression|Node $node,
         MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
     ): mixed {
+        if (is_a($node, \PhpParser\Node\Expr\Array_::class)) {
+            $compiledValue = [];
+            foreach ($node->items as $item) {
+                $key = !$item->key ? $item->key : self::compile($item->key, $entity);
+                $value = self::compile($item->value, $entity);
+                $compiledValue[$key] = $value;
+            }
+            return $compiledValue;
+        }
         if ($node instanceof Node\Stmt\Expression) {
             return self::compile($node->expr, $entity);
         }
-
         $constExprEvaluator = new ConstExprEvaluator(function (Node\Expr $node) use ($entity): mixed {
             $className = get_class($node);
             return match ($className) {
