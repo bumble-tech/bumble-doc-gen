@@ -9,7 +9,6 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
-use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
@@ -34,7 +33,6 @@ final class RendererIteratorFactory
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
         private Configuration $configuration,
-        private ConfigurationParameterBag $configurationParameterBag,
         private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
         private RendererHelper $rendererHelper,
         private RendererDependencyFactory $dependencyFactory,

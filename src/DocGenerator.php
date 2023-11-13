@@ -28,7 +28,6 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Style\OutputStyle;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -40,7 +39,6 @@ final class DocGenerator
     public const LOG_FILE_NAME = 'last_run.log';
 
     public function __construct(
-        private Filesystem $fs,
         private OutputStyle $io,
         private Configuration $configuration,
         PluginEventDispatcher $pluginEventDispatcher,
@@ -77,6 +75,7 @@ final class DocGenerator
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws \JsonException
      */
     public function addDocBlocks(
         ProviderInterface $aiProvider,
