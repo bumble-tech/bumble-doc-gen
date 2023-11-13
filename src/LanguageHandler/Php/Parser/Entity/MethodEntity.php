@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast\NodeValueCompiler;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
@@ -16,7 +17,10 @@ use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
+use PhpParser\ConstExprEvaluationException;
 use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt\Return_;
+use PhpParser\NodeFinder;
 use PhpParser\PrettyPrinter\Standard;
 use Psr\Log\LoggerInterface;
 
@@ -542,13 +546,18 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws NotFoundException
-     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
      */
     #[CacheableMethod] public function getFirstReturnValue(): mixed
     {
-        return $this->parserHelper->getMethodReturnValue($this);
+        $nodeFinder = new NodeFinder();
+        /** @var Return_|null $firstReturn */
+        $firstReturn = $nodeFinder->findFirstInstanceOf($this->getAst()->stmts, Return_::class);
+        if (!$firstReturn) {
+            return null;
+        }
+        return NodeValueCompiler::compile($firstReturn->expr, $this);
     }
 
     /**
