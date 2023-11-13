@@ -38,6 +38,11 @@ final class DocGenerator
     public const VERSION = '1.5.0';
     public const LOG_FILE_NAME = 'last_run.log';
 
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
     public function __construct(
         private OutputStyle $io,
         private Configuration $configuration,
@@ -91,8 +96,7 @@ final class DocGenerator
         $alreadyProcessedEntities = [];
         $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (
             &$getEntities,
-            &
-            $alreadyProcessedEntities
+            &$alreadyProcessedEntities
         ): Generator {
             foreach ($entitiesCollection as $classEntity) {
                 /**@var ClassEntity $classEntity */
