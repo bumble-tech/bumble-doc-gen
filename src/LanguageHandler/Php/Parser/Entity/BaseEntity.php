@@ -65,10 +65,17 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * @throws InvalidConfigurationParameterException
      */
+    public function getRelativeFileName(): ?string
+    {
+        return $this->getCurrentRootEntity()->getRelativeFileName();
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     final public function isEntityFileCanBeLoad(): bool
     {
-        $rootEntity = $this->getCurrentRootEntity();
-        return $rootEntity->isClassLoad() && $rootEntity->getRelativeFileName();
+        return $this->getCurrentRootEntity()->isClassLoad() && $this->getRelativeFileName();
     }
 
     /**
