@@ -1062,29 +1062,15 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ConstExprEvaluationException
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
      */
-    #[CacheableMethod] public function getConstantValue(
-        string $name,
-        bool $onlyFromCurrentClassAndTraits = false
-    ): string|array|int|bool|null|float {
-        $constants = $this->getConstantsData($onlyFromCurrentClassAndTraits);
-        $entity = $this;
-        if (array_key_exists($name, $constants) && $constants[$name] !== $this->getName()) {
-            $entity = $this->getRootEntityCollection()->getLoadedOrCreateNew($constants[$name]);
-        }
-        if (!$entity->entityDataCanBeLoaded()) {
-            return null;
-        }
-        foreach ($entity->getAst()->getConstants() as $node) {
-            foreach ($node->consts as $constantNode) {
-                if ($name === $constantNode->name->toString()) {
-                    return NodeValueCompiler::compile($constantNode->value, $this);
-                }
-            }
-        }
-        return null;
+    #[CacheableMethod] public function getConstantValue(string $name): string|array|int|bool|null|float
+    {
+
+        return $this->getConstantEntity($name)->getValue();
     }
 
     /**

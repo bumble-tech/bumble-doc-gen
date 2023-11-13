@@ -8,9 +8,11 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast\NodeValueCompiler;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use phpDocumentor\Reflection\DocBlock;
+use PhpParser\ConstExprEvaluationException;
 use PhpParser\Node\Stmt\ClassConst;
 use Psr\Log\LoggerInterface;
 
@@ -208,5 +210,14 @@ class ConstantEntity extends BaseEntity
     #[CacheableMethod] public function getEndLine(): int
     {
         return $this->getAst()->consts[$this->nodePosition]->getEndLine();
+    }
+
+    /**
+     * @throws ConstExprEvaluationException
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getValue(): string|array|int|bool|null|float
+    {
+        return NodeValueCompiler::compile($this->getAst()->consts[$this->nodePosition]->value, $this);
     }
 }

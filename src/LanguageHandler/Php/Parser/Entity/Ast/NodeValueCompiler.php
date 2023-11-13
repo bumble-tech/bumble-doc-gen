@@ -6,6 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
 use DI\DependencyException;
@@ -26,8 +27,10 @@ final class NodeValueCompiler
      * @throws ConstExprEvaluationException
      * @throws InvalidConfigurationParameterException
      */
-    public static function compile(Node\Stmt\Expression|Node $node, MethodEntity|PropertyEntity|ClassEntity $entity): mixed
-    {
+    public static function compile(
+        Node\Stmt\Expression|Node $node,
+        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
+    ): mixed {
         if ($node instanceof Node\Stmt\Expression) {
             return self::compile($node->expr, $entity);
         }
@@ -82,7 +85,7 @@ final class NodeValueCompiler
      */
     private static function getStaticCallValue(
         Node\Expr\StaticCall $node,
-        MethodEntity|PropertyEntity|ClassEntity $entity
+        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
     ): mixed {
         $className = self::resolveClassName($node->class->toString(), $entity);
         if ($entity->getName() !== $className) {
@@ -106,7 +109,7 @@ final class NodeValueCompiler
      */
     private static function getStaticPropertyValue(
         Node\Expr\StaticPropertyFetch $node,
-        MethodEntity|PropertyEntity|ClassEntity $entity
+        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
     ): mixed {
         $className = self::resolveClassName($node->class->toString(), $entity);
         if ($entity->getName() !== $className) {
@@ -119,12 +122,14 @@ final class NodeValueCompiler
     }
 
     /**
-     * @throws InvalidConfigurationParameterException
+     * @throws DependencyException
      * @throws ConstExprEvaluationException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
      */
     private static function getClassConstantValue(
         Node\Expr\ClassConstFetch $node,
-        MethodEntity|PropertyEntity|ClassEntity $entity
+        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
     ): mixed {
 
         $className = self::resolveClassName($node->class->toString(), $entity);
@@ -155,8 +160,10 @@ final class NodeValueCompiler
     /**
      * @throws InvalidConfigurationParameterException
      */
-    private static function resolveClassName(string $className, MethodEntity|PropertyEntity|ClassEntity $entity): string
-    {
+    private static function resolveClassName(
+        string $className,
+        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
+    ): string {
         if ($className !== 'self' && $className !== 'static' && $className !== 'parent') {
             return $className;
         }
