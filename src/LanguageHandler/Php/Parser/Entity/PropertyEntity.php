@@ -348,6 +348,6 @@ class PropertyEntity extends BaseEntity
      */
     #[CacheableMethod] public function getDefaultValue(): string|array|int|bool|null|float
     {
-        return NodeValueCompiler::compile($this->getAst()->props[0]->default, $this);
+        return NodeValueCompiler::compile($this->getAst()->props[$this->nodePosition]->default, $this);
     }
 }
