@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpParser;
 
 use PhpParser\Lexer\Emulative;
 use PhpParser\Parser;

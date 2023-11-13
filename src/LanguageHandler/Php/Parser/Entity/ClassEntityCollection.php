@@ -11,7 +11,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\LoggableRootEntityCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Ast\PhpParserHelper;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpParser\PhpParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
