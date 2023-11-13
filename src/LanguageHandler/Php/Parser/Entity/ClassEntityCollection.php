@@ -35,6 +35,7 @@ use Symfony\Component\Console\Style\OutputStyle;
  */
 final class ClassEntityCollection extends LoggableRootEntityCollection
 {
+    private const PHP_FILE_TEMPLATE = '/\.php$/';
     public const NAME = 'phpClassEntityCollection';
 
     private array $entitiesNotHandledByPlugins = [];
@@ -76,7 +77,12 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         $pb->setName('Loading PHP entities');
         $classEntityFilter = $this->phpHandlerSettings->getClassEntityFilter();
 
-        $allFiles = iterator_to_array($this->configuration->getSourceLocators()->getCommonFinder()->files());
+        $allFiles = iterator_to_array(
+            $this->configuration
+                ->getSourceLocators()
+                ->getCommonFinder()
+                ->files()
+        );
         $addedFilesCount = 0;
 
         $nodeTraverser = new NodeTraverser();
@@ -84,8 +90,16 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         $phpParser = $this->phpParserHelper->phpParser();
 
         foreach ($pb->iterate($allFiles) as $file) {
+            if (!preg_match(self::PHP_FILE_TEMPLATE, $file->getPathName())) {
+                continue;
+            }
             $pathName = $file->getPathName();
-            $nodes = $phpParser->parse(file_get_contents($pathName));
+            try {
+                $nodes = $phpParser->parse(file_get_contents($pathName));
+            } catch (\Exception $e) {
+                $this->logger->warning("File `{$pathName}` parsing error: {$e->getMessage()}");
+                continue;
+            }
             $nodes = $nodeTraverser->traverse($nodes);
             $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $pathName);
             $pb->setStepDescription("Processing `{$relativeFileName}` file");
@@ -105,7 +119,6 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
                         $relativeFileName
                     );
 
-                    // todo
                     if ($classEntity->entityCacheIsOutdated()) {
                         $classEntity->setCustomAst($subNode);
                     }
