@@ -19,20 +19,9 @@ You can create your own source locators or use any existing ones. All source loc
 
 {{ "Built-in source locators" | textToHeading('H2') }}
 
-**Common source locators:**
-
 {{ printEntityCollectionAsList(
     phpClassEntityCollection
         .filterByInterfaces(['BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface'])
         .filterByPaths(['/src/Core/Parser'])
-        .getOnlyInstantiable()
-) }}
-
-**PHP source locators:**
-
-{{ printEntityCollectionAsList(
-    phpClassEntityCollection
-        .filterByInterfaces(['BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface'])
-        .filterByPaths(['/src/LanguageHandler/Php/Parser'])
         .getOnlyInstantiable()
 ) }}
