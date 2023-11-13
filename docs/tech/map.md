@@ -105,8 +105,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  └── <a href='/docs/tech/classes/PageRstLinkerPlugin.md'>PageRstLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in rst format; Links may contain: 1) Short entity name 2) Full entity na...</samp></i>
 │  │  │  ├──<b>Event</b>/
 │  │  │  │  ├──<b>Parser</b>/
-│  │  │  │  │  ├── <a href='/docs/tech/classes/BeforeParsingProcess.md'>BeforeParsingProcess.php</a> 
-│  │  │  │  │  └── <a href='/docs/tech/classes/OnLoadSourceLocatorsCollection.md'>OnLoadSourceLocatorsCollection.php</a> <i> — <samp>Called when source locators are loaded</samp></i>
+│  │  │  │  │  └── <a href='/docs/tech/classes/BeforeParsingProcess.md'>BeforeParsingProcess.php</a> 
 │  │  │  │  └──<b>Renderer</b>/
 │  │  │  │  │  ├── <a href='/docs/tech/classes/AfterRenderingEntities.md'>AfterRenderingEntities.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BeforeCreatingDocFile.md'>BeforeCreatingDocFile.php</a> <i> — <samp>Called before the content of the documentation document is saved to a file</samp></i>
