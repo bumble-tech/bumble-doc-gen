@@ -451,8 +451,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         } else {
             try {
                 $parentClass = $this->getParentClass();
-                if ($parentClass?->entityDataCanBeLoaded() && $name = $parentClass?->getName()) {
-                    return array_merge(["\\{$name}"], $parentClass->getParentClassNames());
+                if ($name = $parentClass?->getName()) {
+                    return array_unique(array_merge(["\\{$name}"], $parentClass->getParentClassNames()));
                 }
             } catch (\Exception $e) {
                 $this->logger->warning($e->getMessage());
