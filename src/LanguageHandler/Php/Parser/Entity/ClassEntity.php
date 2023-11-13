@@ -258,10 +258,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         }
 
         if (!$ast) {
-            if ($this->getName() === 'MeetD') {
-                $this->logger->emergency($this->getAbsoluteFileName());
-                die();
-            }
             throw new \RuntimeException("Entity `{$this->getName()}` not found");
         }
         $this->isClassLoad = true;
