@@ -31,7 +31,7 @@ use PhpParser\Node\Stmt\ClassMethod as MethodNode;
 use PhpParser\Node\Stmt\Enum_ as EnumNode;
 use PhpParser\Node\Stmt\EnumCase as EnumCaseNode;
 use PhpParser\Node\Stmt\Interface_ as InterfaceNode;
-use PhpParser\Node\Stmt\Namespace_;
+use PhpParser\Node\Stmt\Namespace_ as NamespaceNode;
 use PhpParser\Node\Stmt\Property as PropertyNode;
 use PhpParser\Node\Stmt\Trait_ as TraitNode;
 use PhpParser\NodeTraverser;
@@ -241,7 +241,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
                     $ast = $node;
                     break;
                 }
-            } elseif (!$node instanceof Namespace_) {
+            } elseif (!$node instanceof NamespaceNode) {
                 continue;
             }
             $namespaceName = $node->name->toString();
@@ -1100,6 +1100,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws ConstExprEvaluationException
      */
