@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ComposerHelper<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L11">ComposerHelper</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L12">ComposerHelper</a> class:
 </h1>
 
 
@@ -57,11 +57,11 @@ final class ComposerHelper
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L16">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L17">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration);
+public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings $phpHandlerSettings);
 ```
 
 
@@ -82,6 +82,11 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$phpHandlerSettings</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php'>\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings</a></td>
+            <td>-</td>
+        </tr>
         </tbody>
 </table>
 
@@ -94,7 +99,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mgetcomposerclassloader" href="#mgetcomposerclassloader">#</a>
  <b>getComposerClassLoader</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L26">source code</a></li>
 </ul>
 
 ```php
@@ -122,7 +127,7 @@ public function getComposerClassLoader(): \Composer\Autoload\ClassLoader;
 <ul>
 <li><a name="mgetcomposerpackagedatabyclassname" href="#mgetcomposerpackagedatabyclassname">#</a>
  <b>getComposerPackageDataByClassName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L97">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L114">source code</a></li>
 </ul>
 
 ```php
@@ -160,7 +165,7 @@ public function getComposerPackageDataByClassName(string $className): null|array
 <ul>
 <li><a name="mgetcomposerpackages" href="#mgetcomposerpackages">#</a>
  <b>getComposerPackages</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L64">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L78">source code</a></li>
 </ul>
 
 ```php

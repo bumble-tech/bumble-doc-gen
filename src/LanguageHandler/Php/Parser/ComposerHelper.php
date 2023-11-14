@@ -6,6 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use Composer\Autoload\ClassLoader;
 
 final class ComposerHelper
@@ -13,8 +14,10 @@ final class ComposerHelper
     private array $packages = [];
     private ?ClassLoader $classLoader = null;
 
-    public function __construct(private Configuration $configuration)
-    {
+    public function __construct(
+        private Configuration $configuration,
+        private PhpHandlerSettings $phpHandlerSettings
+    ) {
     }
 
     /**
@@ -28,8 +31,19 @@ final class ComposerHelper
 
         $classLoader = new ClassLoader();
         $projectRoot = $this->configuration->getProjectRoot();
-        $composerJsonPath = "{$projectRoot}/composer.json";
-        if (!file_exists($composerJsonPath) || !is_readable($composerJsonPath)) {
+
+        $psr4Map = $this->phpHandlerSettings->getPsr4Map();
+        foreach ($psr4Map as $namespace => $path) {
+            $path = "{$projectRoot}/{$path}";
+            $classLoader->addPsr4($namespace, "{$projectRoot}/{$path}");
+        }
+
+        if (!$this->phpHandlerSettings->getUseComposerAutoload()) {
+            return $classLoader;
+        }
+
+        $composerJsonPath = $this->phpHandlerSettings->getComposerConfigFile();
+        if (!$composerJsonPath || !file_exists($composerJsonPath) || !is_readable($composerJsonPath)) {
             return $classLoader;
         }
 
@@ -66,7 +80,10 @@ final class ComposerHelper
         if ($this->packages) {
             return $this->packages;
         }
-        $installedJsonFile = realpath($this->configuration->getProjectRoot() . '/vendor/composer/installed.json');
+        $installedJsonFile = $this->phpHandlerSettings->getComposerInstalledFile();
+        if (!$installedJsonFile) {
+            return $this->packages;
+        }
         $installedPackagesData = json_decode(file_get_contents($installedJsonFile), true);
         foreach ($installedPackagesData['packages'] as $package) {
             if (!isset($package['source']['url'])) {

@@ -31,6 +31,11 @@ language_handlers:
       custom_twig_filters:
 
       file_source_base_url: null
+
+      use_composer_autoload: true # whether to use composer to load the class map or not
+      composer_config_file: "%project_root%/composer.json"
+      composer_installed_file: "%project_root%/vendor/composer/installed.json"
+      psr4_map: # same as in composer
 plugins:
   - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin
   - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpDocumentorStubberPlugin
