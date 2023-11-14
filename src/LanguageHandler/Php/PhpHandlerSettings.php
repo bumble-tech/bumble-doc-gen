@@ -155,22 +155,6 @@ final class PhpHandlerSettings
     }
 
     /**
-     * @throws InvalidConfigurationParameterException
-     */
-    public function asyncSourceLoadingEnabled(): bool
-    {
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException) {
-        }
-        $asyncSourceLoadingEnabled = $this->parameterBag->validateAndGetBooleanValue(
-            $this->getSettingsKey('async_source_loading_enabled')
-        );
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $asyncSourceLoadingEnabled);
-        return $asyncSourceLoadingEnabled;
-    }
-
-    /**
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException

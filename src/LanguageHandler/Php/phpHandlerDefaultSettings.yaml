@@ -31,7 +31,6 @@ language_handlers:
       custom_twig_filters:
 
       file_source_base_url: null
-      async_source_loading_enabled: false
 plugins:
   - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin
   - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpDocumentorStubberPlugin

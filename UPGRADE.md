@@ -25,3 +25,4 @@ This document serves as a reference for updating your current version of the Bum
 * Method `\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity::getExtends()` has been removed.
 * Method `\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity::getInterfacesString()` has been removed.
 * Now documentation for built classes does not load automatically
+* Removed the `async_source_loading_enabled` configuration option (Method `\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::asyncSourceLoadingEnabled()`)

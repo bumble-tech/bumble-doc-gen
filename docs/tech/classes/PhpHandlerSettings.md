@@ -34,9 +34,6 @@ final class PhpHandlerSettings
 
 <ol>
 <li>
-    <a href="#masyncsourceloadingenabled">asyncSourceLoadingEnabled</a>
-    </li>
-<li>
     <a href="#mgetclassconstantentityfilter">getClassConstantEntityFilter</a>
     </li>
 <li>
@@ -126,34 +123,6 @@ public function __construct(\BumbleDocGen\Core\Configuration\ConfigurationParame
 <div class='method_description-block'>
 
 <ul>
-<li><a name="masyncsourceloadingenabled" href="#masyncsourceloadingenabled">#</a>
- <b>asyncSourceLoadingEnabled</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L160">source code</a></li>
-</ul>
-
-```php
-public function asyncSourceLoadingEnabled(): bool;
-```
-
-
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
 <li><a name="mgetclassconstantentityfilter" href="#mgetclassconstantentityfilter">#</a>
  <b>getClassConstantEntityFilter</b>
     <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L63">source code</a></li>
@@ -224,7 +193,7 @@ public function getClassEntityFilter(): \BumbleDocGen\Core\Parser\FilterConditio
 <ul>
 <li><a name="mgetcustomtwigfilters" href="#mgetcustomtwigfilters">#</a>
  <b>getCustomTwigFilters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L201">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L185">source code</a></li>
 </ul>
 
 ```php
@@ -258,7 +227,7 @@ public function getCustomTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\
 <ul>
 <li><a name="mgetcustomtwigfunctions" href="#mgetcustomtwigfunctions">#</a>
  <b>getCustomTwigFunctions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L178">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L162">source code</a></li>
 </ul>
 
 ```php

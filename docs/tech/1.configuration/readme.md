@@ -24,7 +24,6 @@ Let's look at an example of a real configuration in more detail:
      class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
      settings:
        file_source_base_url: 'https://github.com/bumble-tech/bumble-doc-gen/blob/master'
-       async_source_loading_enabled: true
  source_locators:
    - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
      arguments:
@@ -224,4 +223,4 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Mon Nov 13 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Tue Nov 14 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
