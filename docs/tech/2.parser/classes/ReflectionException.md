@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/entity.md">Entities and entities collections</a> <b>/</b> ReflectionException<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> ReflectionException<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Exception/ReflectionException.php#L7">ReflectionException</a> class:
@@ -88,7 +88,7 @@ See:
 ```php
 // Implemented in Exception
 
-public function __construct(string $message = '', int $code, \Throwable|null $previous = NULL);
+public function __construct(string $message = "", int $code, \Throwable|null $previous = \null);
 ```
 
 <blockquote>Construct the exception. Note: The message is NOT binary safe.</blockquote>
@@ -116,7 +116,7 @@ public function __construct(string $message = '', int $code, \Throwable|null $pr
         </tr>
             <tr>
             <td>$previous</td>
-            <td><a href='https://www.php.net/manual/en/class.throwable.php'>Throwable</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/class.throwable.php'>\Throwable</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
             <td>[optional] The previous throwable used for the exception chaining.</td>
         </tr>
         </tbody>

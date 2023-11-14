@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
-final class BeforeRenderingDocFiles extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class BeforeRenderingDocFiles extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>The event occurs before the main documents begin rendering</blockquote>

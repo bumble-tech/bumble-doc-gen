@@ -73,7 +73,7 @@ public function __construct(\Iterator $fileInfoIterator);
     <tbody>
             <tr>
             <td>$fileInfoIterator</td>
-            <td><a href='https://www.php.net/manual/en/class.iterator.php'>Iterator</a></td>
+            <td><a href='https://www.php.net/manual/en/class.iterator.php'>\Iterator</a></td>
             <td>-</td>
         </tr>
         </tbody>

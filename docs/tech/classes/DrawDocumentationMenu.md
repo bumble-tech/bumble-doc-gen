@@ -21,7 +21,7 @@ and all links with this page are recursively collected for it, after which the h
 See:
 <ul>
     <li>
-        <a href="/docs/tech/classes/GetDocumentedEntityUrl.md">\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a>    </li>
+        <a href="/docs/tech/classes/GetDocumentedEntityUrl_2.md">\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a>    </li>
 </ul>
 
 
@@ -153,7 +153,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 </ul>
 
 ```php
-public function __invoke(string|null $startPageKey = NULL, int|null $maxDeep = NULL): string;
+public function __invoke(string|null $startPageKey = null, int|null $maxDeep = null): string;
 ```
 
 
@@ -190,13 +190,13 @@ public function __invoke(string|null $startPageKey = NULL, int|null $maxDeep = N
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

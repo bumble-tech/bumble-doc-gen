@@ -17,10 +17,10 @@ use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
+use PhpParser\PrettyPrinter\Standard;
 use Psr\Log\LoggerInterface;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
-use Symfony\Component\Console\Style\OutputStyle;
 
 /**
  * Class method entity
@@ -34,7 +34,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         private ClassEntity $classEntity,
         private ParserHelper $parserHelper,
         private LocalObjectCache $localObjectCache,
-        LoggerInterface $logger,
+        private LoggerInterface $logger,
+        private Standard $astPrinter,
         private string $methodName,
         private string $declaringClassName,
         private string $implementingClassName,
@@ -133,6 +134,10 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         }
         $docComment = $this->getDocComment();
         $reflectionMethod = $this;
+        if ($reflectionMethod->isImplementedInParentClass()) {
+            $reflectionMethod = $reflectionMethod->getImplementingClass()->getMethodEntity($this->getName());
+        }
+
         if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
             $implementingClass = $this->getImplementingClass();
             $parentClass = $this->getImplementingClass()->getParentClass();
@@ -354,58 +359,56 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
          * @var Param[] $params
          */
         $params = $docBlock->getTagsByName('param');
-        $typesFromDoc = $this->parseAnnotationParams($params);
-        foreach ($this->getReflection()->getParameters() as $param) {
-            try {
-                $param->getType();
-            } catch (\Exception $e) {
-                if (preg_match('/(not locate constant ")([\s\S]+)(")/', $e->getMessage(), $matches)) {
-                    // Temporary hack to get rid of global constants parsing error
-                    $constEvalString = 'const ' . $matches[2] . "='';";
-                    eval($constEvalString);
+        $typesFromDoc = self::parseAnnotationParams($params);
+        try {
+            foreach ($this->getReflection()->getParameters() as $param) {
+                $type = '';
+                $defaultValue = '';
+                $annotationType = '';
+                $description = '';
+                $name = $param->getName();
+
+                $paramAst = $param->getAst()->jsonSerialize();
+                if ($paramAst['type']) {
+                    $type = $this->astPrinter->prettyPrint([$param->getAst()->jsonSerialize()['type']]);
+                    if (str_starts_with($type, '?')) {
+                        $type = str_replace('?', '', $type) . '|null';
+                    }
                 }
-            }
-            $type = (string)$param->getType();
-            $annotationType = '';
-            $name = $param->getName();
-            $description = '';
-            if (isset($typesFromDoc[$name])) {
-                $annotationType = $typesFromDoc[$name]['type'] ?? '';
-                $type = $type ?: $annotationType;
+                if ($paramAst['default']) {
+                    $defaultValue = $this->astPrinter->prettyPrint([$param->getAst()->jsonSerialize()['default']]);
+                    $defaultValue = str_replace('array()', '[]', $defaultValue);
+                }
+                if (isset($typesFromDoc[$name])) {
+                    $annotationType = $typesFromDoc[$name]['type'] ?? '';
+                    $type = $type ?: $annotationType;
+                    $description = $typesFromDoc[$name]['description'];
+                }
+                $type = $type ?: 'mixed';
+                $expectedType = $type;
+                if ($type === 'array' && $this->isArrayAnnotationType($annotationType)) {
+                    $expectedType = $annotationType;
+                }
 
-                $description = $typesFromDoc[$name]['description'];
+                $defaultValue = str_replace(
+                    [
+                        $this->configuration->getWorkingDir(),
+                        $this->configuration->getProjectRoot(),
+                    ],
+                    '',
+                    $defaultValue
+                );
+                $parameters[] = [
+                    'type' => $this->prepareTypeString($type),
+                    'expectedType' => $expectedType,
+                    'isVariadic' => $param->isVariadic(),
+                    'name' => $name,
+                    'defaultValue' => $this->prepareTypeString($defaultValue),
+                    'description' => $description,
+                ];
             }
-            $type = $type ?: 'mixed';
-            $expectedType = $type;
-            if ($type == 'array' && $this->isArrayAnnotationType($annotationType)) {
-                $expectedType = $annotationType;
-            }
-            $defaultValue = '';
-            try {
-                $defaultValue = $this->prettyVarExport($param->getDefaultValue());
-            } catch (\Exception) {
-            }
-            try {
-                $defaultValue = $param->getDefaultValueConstantName();
-            } catch (\Exception) {
-            }
-
-            $defaultValue = str_replace(
-                [
-                    $this->configuration->getWorkingDir(),
-                    $this->configuration->getProjectRoot(),
-                ],
-                '',
-                $defaultValue
-            );
-            $parameters[] = [
-                'type' => $this->prepareTypeString($type),
-                'expectedType' => $expectedType,
-                'isVariadic' => $param->isVariadic(),
-                'name' => $name,
-                'defaultValue' => $this->prepareTypeString($defaultValue),
-                'description' => $description,
-            ];
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
         }
         return $parameters;
     }

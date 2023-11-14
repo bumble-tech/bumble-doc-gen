@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RendererIteratorFactory<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L25">RendererIteratorFactory</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L26">RendererIteratorFactory</a> class:
 </h1>
 
 
@@ -57,11 +57,11 @@ final class RendererIteratorFactory
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L31">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L32">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup $rootEntityCollectionsGroup, \BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection $documentedEntityWrappersCollection, \BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Configuration\ConfigurationParameterBag $configurationParameterBag, \BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache, \BumbleDocGen\Core\Renderer\RendererHelper $rendererHelper, \BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory $dependencyFactory, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Console\ProgressBar\ProgressBarFactory $progressBarFactory, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, \Symfony\Component\Console\Style\OutputStyle $io, \Monolog\Logger $logger);
+public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup $rootEntityCollectionsGroup, \BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection $documentedEntityWrappersCollection, \BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Configuration\ConfigurationParameterBag $configurationParameterBag, \BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache, \BumbleDocGen\Core\Renderer\RendererHelper $rendererHelper, \BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory $dependencyFactory, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Console\ProgressBar\ProgressBarFactory $progressBarFactory, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, \Symfony\Component\Console\Style\OutputStyle $io, \Monolog\Logger $logger, \BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler $generationErrorsHandler);
 ```
 
 
@@ -134,12 +134,17 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
         </tr>
             <tr>
             <td>$io</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Style/OutputStyle.php'>Symfony\Component\Console\Style\OutputStyle</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Style/OutputStyle.php'>\Symfony\Component\Console\Style\OutputStyle</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$logger</td>
-            <td>\Monolog\Logger</td>
+            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Logger.php'>\Monolog\Logger</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$generationErrorsHandler</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php'>\BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -154,7 +159,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
 <ul>
 <li><a name="mgetdocumentedentitywrapperswithoutdatedcache" href="#mgetdocumentedentitywrapperswithoutdatedcache">#</a>
  <b>getDocumentedEntityWrappersWithOutdatedCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L143">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L144">source code</a></li>
 </ul>
 
 ```php
@@ -171,7 +176,7 @@ public function getDocumentedEntityWrappersWithOutdatedCache(): \Generator;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -182,7 +187,7 @@ public function getDocumentedEntityWrappersWithOutdatedCache(): \Generator;
 <ul>
 <li><a name="mgetfilestoremove" href="#mgetfilestoremove">#</a>
  <b>getFilesToRemove</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L219">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L218">source code</a></li>
 </ul>
 
 ```php
@@ -199,7 +204,7 @@ public function getFilesToRemove(): \Generator;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -210,7 +215,7 @@ public function getFilesToRemove(): \Generator;
 <ul>
 <li><a name="mgettemplateswithoutdatedcache" href="#mgettemplateswithoutdatedcache">#</a>
  <b>getTemplatesWithOutdatedCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L51">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L53">source code</a></li>
 </ul>
 
 ```php
@@ -227,7 +232,7 @@ public function getTemplatesWithOutdatedCache(): \Generator;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

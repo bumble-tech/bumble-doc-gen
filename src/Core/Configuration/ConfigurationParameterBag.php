@@ -20,6 +20,7 @@ use function BumbleDocGen\Core\is_associative_array;
 final class ConfigurationParameterBag
 {
     private array $parameters = [];
+    private ?string $lastConfigVersion = null;
 
     /**
      * @param ValueResolverInterface[] $resolvers
@@ -28,6 +29,14 @@ final class ConfigurationParameterBag
         private ValueToClassTransformer $valueToClassTransformer,
         private array $resolvers
     ) {
+    }
+
+    public function getConfigVersion(): string
+    {
+        if (is_null($this->lastConfigVersion)) {
+            $this->lastConfigVersion = md5(serialize($this->getAll(false)));
+        }
+        return $this->lastConfigVersion;
     }
 
     public function getConfigValues(string ...$configurationFiles): array
@@ -48,6 +57,7 @@ final class ConfigurationParameterBag
 
     public function loadFromArray(array $parameters): void
     {
+        $this->lastConfigVersion = null;
         foreach ($parameters as $name => $value) {
             $this->set($name, $value);
         }
@@ -77,6 +87,7 @@ final class ConfigurationParameterBag
 
     public function addValueIfNotExists(string $name, mixed $value): void
     {
+        $this->lastConfigVersion = null;
         $keys = array_reverse(explode('.', $name));
         foreach ($keys as $key) {
             if ($key) {
@@ -178,7 +189,7 @@ final class ConfigurationParameterBag
         $valueObject = $this->valueToClassTransformer->transform($value);
         if (is_null($valueObject)) {
             throw new InvalidConfigurationParameterException(
-                "Configuration parameter `{$parameterName}` must contain the name of class"
+                "Configuration parameter `{$parameterName}` contains an incorrect value"
             );
         }
         if (!$valueObject instanceof $classInterfaceName) {
@@ -211,7 +222,7 @@ final class ConfigurationParameterBag
             $valueObject = $this->valueToClassTransformer->transform($value);
             if (is_null($valueObject)) {
                 throw new InvalidConfigurationParameterException(
-                    "Configuration parameter `{$parameterName}[{$i}]` must contain the name of class"
+                    "Configuration parameter `{$parameterName}[{$i}]` contains an incorrect value"
                 );
             }
             if (!$valueObject instanceof $classInterfaceName) {
@@ -281,6 +292,10 @@ final class ConfigurationParameterBag
         return realpath($value);
     }
 
+    /**
+     * Configuration arrays are concatenated except when class constructor arguments are passed.
+     * In this case they are overwritten.
+     */
     private function mergeConfigParams(array $params1, array $params2): array
     {
         foreach ($params2 as $key => $param2Value) {
@@ -292,6 +307,8 @@ final class ConfigurationParameterBag
                 $params1[$key] = $param2Value;
             } elseif (is_associative_array($params1[$key]) && is_associative_array($param2Value)) {
                 $params1[$key] = $this->mergeConfigParams($params1[$key], $param2Value);
+            } elseif ($key === 'arguments') {
+                    $params1[$key] = $param2Value;
             } else {
                 $params1[$key] = array_merge($params1[$key], $param2Value);
             }

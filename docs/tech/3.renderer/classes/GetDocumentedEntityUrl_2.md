@@ -21,11 +21,11 @@ the `EntityDocRendererInterface::getDocFileExtension()` directory will be create
 See:
 <ul>
     <li>
-        <a href="/docs/tech/3.renderer/classes/DocumentedEntityWrapper_2.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
+        <a href="/docs/tech/3.renderer/classes/DocumentedEntityWrapper.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
     <li>
-        <a href="/docs/tech/3.renderer/classes/DocumentedEntityWrappersCollection_2.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
+        <a href="/docs/tech/3.renderer/classes/DocumentedEntityWrappersCollection.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
     <li>
-        <a href="/docs/tech/3.renderer/classes/RendererContext_2.md#pentitywrapperscollection">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
+        <a href="/docs/tech/3.renderer/classes/RendererContext.md">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
 </ul>
 
 
@@ -143,7 +143,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\RendererHelper $renderer
         </tr>
             <tr>
             <td>$logger</td>
-            <td>\Monolog\Logger</td>
+            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Logger.php'>\Monolog\Logger</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -208,16 +208,16 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/ReflectionException_3.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/3.renderer/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 </ul>
 

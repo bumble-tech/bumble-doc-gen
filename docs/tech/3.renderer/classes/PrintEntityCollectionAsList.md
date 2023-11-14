@@ -168,7 +168,7 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

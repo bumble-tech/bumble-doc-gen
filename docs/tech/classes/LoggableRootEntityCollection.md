@@ -235,7 +235,7 @@ public function getEntityCollectionName(): string;
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\RootEntityCollection
 
-public function getEntityLinkData(string $rawLink, string|null $defaultEntityName = NULL, bool $useUnsafeKeys = true): array;
+public function getEntityLinkData(string $rawLink, string|null $defaultEntityName = null, bool $useUnsafeKeys = true): array;
 ```
 
 
@@ -354,7 +354,7 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
 <b>See:</b>
 <ul>
     <li>
-        <a href="/docs/tech/classes/RootEntityInterface.md#mentitydatacanbeloaded">\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::entityDataCanBeLoaded()</a>    </li>
+        <a href="/docs/tech/classes/RootEntityInterface_2.md#mentitydatacanbeloaded">\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::entityDataCanBeLoaded()</a>    </li>
 </ul>
 </div>
 <hr>

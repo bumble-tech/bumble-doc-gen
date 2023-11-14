@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
-final class OnGetProjectTemplatesDirs extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class OnGetProjectTemplatesDirs extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>This event occurs when all directories containing document templates are retrieved</blockquote>

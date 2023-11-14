@@ -39,6 +39,11 @@ final class Configuration
         $parameterBag->addValueFromFileIfNotExists('', self::DEFAULT_SETTINGS_FILE);
     }
 
+    public function getConfigurationVersion(): string
+    {
+        return $this->parameterBag->getConfigVersion();
+    }
+
     /**
      * @throws InvalidConfigurationParameterException
      */
@@ -366,5 +371,24 @@ final class Configuration
         $additionalCommandCollection = AdditionalCommandCollection::create(...$customFilters);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $additionalCommandCollection);
         return $additionalCommandCollection;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getIfExists($key): ?string
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $key);
+        } catch (ObjectNotFoundException) {
+        }
+
+        if (!$this->parameterBag->has($key)) {
+            return null;
+        }
+        $value = $this->parameterBag->validateAndGetStringValue($key, false);
+
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $key, $value);
+        return $value;
     }
 }

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CacheableEntityWrapperTrait<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php#L10">CacheableEntityWrapperTrait</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php#L12">CacheableEntityWrapperTrait</a> class:
 </h1>
 
 
@@ -39,6 +39,9 @@ trait CacheableEntityWrapperTrait
     <a href="#misentityfilecanbeload">isEntityFileCanBeLoad</a>
     </li>
 <li>
+    <a href="#mremoveentityvaluefromcache">removeEntityValueFromCache</a>
+    </li>
+<li>
     <a href="#mremovenotusedentitydatacache">removeNotUsedEntityDataCache</a>
     </li>
 </ol>
@@ -61,7 +64,7 @@ trait CacheableEntityWrapperTrait
 <ul>
 <li><a name="mentitycacheisoutdated" href="#mentitycacheisoutdated">#</a>
  <b>entityCacheIsOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -84,7 +87,7 @@ public function entityCacheIsOutdated(): bool;
 <ul>
 <li><a name="mgetcachekey" href="#mgetcachekey">#</a>
  <b>getCacheKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L17">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -107,7 +110,7 @@ public function getCacheKey(): string;
 <ul>
 <li><a name="misentitydatacacheoutdated" href="#misentitydatacacheoutdated">#</a>
  <b>isEntityDataCacheOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L60">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L77">source code</a></li>
 </ul>
 
 ```php
@@ -137,7 +140,7 @@ public function isEntityDataCacheOutdated(): bool;
 <ul>
 <li><a name="misentityfilecanbeload" href="#misentityfilecanbeload">#</a>
  <b>isEntityFileCanBeLoad</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php#L16">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityWrapperTrait.php#L19">source code</a></li>
 </ul>
 
 ```php
@@ -156,9 +159,49 @@ public function isEntityFileCanBeLoad(): bool;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mremoveentityvaluefromcache" href="#mremoveentityvaluefromcache">#</a>
+ <b>removeEntityValueFromCache</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L65">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait
+
+public function removeEntityValueFromCache(string $key): void;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$key</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mremovenotusedentitydatacache" href="#mremovenotusedentitydatacache">#</a>
  <b>removeNotUsedEntityDataCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L80">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L97">source code</a></li>
 </ul>
 
 ```php

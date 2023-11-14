@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> App<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L19">App</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L18">App</a> class:
 </h1>
 
 
@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Console;
 
-class App extends \Symfony\Component\Console\Application implements \Symfony\Contracts\Service\ResetInterface
+class App extends \Symfony\Component\Console\Application
 ```
 
 <blockquote>An Application is the container for a collection of commands.</blockquote>
@@ -156,7 +156,7 @@ class App extends \Symfony\Component\Console\Application implements \Symfony\Con
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -200,7 +200,7 @@ public function add(\Symfony\Component\Console\Command\Command $command): \Symfo
     <tbody>
             <tr>
             <td>$command</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Command/Command.php'>Symfony\Component\Console\Command\Command</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Command/Command.php'>\Symfony\Component\Console\Command\Command</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -262,7 +262,7 @@ public function addCommands(array $commands): mixed;
 ```php
 // Implemented in Symfony\Component\Console\Application
 
-public function all(string|null $namespace = NULL): \Symfony\Component\Console\Command\Command[];
+public function all(string $namespace = null): \Symfony\Component\Console\Command\Command[];
 ```
 
 <blockquote>Gets the commands (registered in the given namespace if provided).</blockquote>
@@ -280,7 +280,7 @@ public function all(string|null $namespace = NULL): \Symfony\Component\Console\C
     <tbody>
             <tr>
             <td>$namespace</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -343,12 +343,12 @@ public function complete(\Symfony\Component\Console\Completion\CompletionInput $
     <tbody>
             <tr>
             <td>$input</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Completion/CompletionInput.php'>Symfony\Component\Console\Completion\CompletionInput</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Completion/CompletionInput.php'>\Symfony\Component\Console\Completion\CompletionInput</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$suggestions</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Completion/CompletionSuggestions.php'>Symfony\Component\Console\Completion\CompletionSuggestions</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Completion/CompletionSuggestions.php'>\Symfony\Component\Console\Completion\CompletionSuggestions</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -388,12 +388,12 @@ public function doRun(\Symfony\Component\Console\Input\InputInterface $input, \S
     <tbody>
             <tr>
             <td>$input</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Input/InputInterface.php'>Symfony\Component\Console\Input\InputInterface</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Input/InputInterface.php'>\Symfony\Component\Console\Input\InputInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$output</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Output/OutputInterface.php'>Symfony\Component\Console\Output\OutputInterface</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Output/OutputInterface.php'>\Symfony\Component\Console\Output\OutputInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -415,7 +415,7 @@ public function doRun(\Symfony\Component\Console\Input\InputInterface $input, \S
 ```php
 // Implemented in Symfony\Component\Console\Application
 
-public function extractNamespace(string $name, int|null $limit = NULL): string;
+public function extractNamespace(string $name, int $limit = null): string;
 ```
 
 <blockquote>Returns the namespace part of the command name.</blockquote>
@@ -438,7 +438,7 @@ public function extractNamespace(string $name, int|null $limit = NULL): string;
         </tr>
             <tr>
             <td>$limit</td>
-            <td><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -969,12 +969,12 @@ public function renderThrowable(\Throwable $e, \Symfony\Component\Console\Output
     <tbody>
             <tr>
             <td>$e</td>
-            <td><a href='https://www.php.net/manual/en/class.throwable.php'>Throwable</a></td>
+            <td><a href='https://www.php.net/manual/en/class.throwable.php'>\Throwable</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$output</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Output/OutputInterface.php'>Symfony\Component\Console\Output\OutputInterface</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Output/OutputInterface.php'>\Symfony\Component\Console\Output\OutputInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -1019,7 +1019,7 @@ public function reset(): mixed;
 ```php
 // Implemented in Symfony\Component\Console\Application
 
-public function run(\Symfony\Component\Console\Input\InputInterface|null $input = NULL, \Symfony\Component\Console\Output\OutputInterface|null $output = NULL): int;
+public function run(\Symfony\Component\Console\Input\InputInterface $input = null, \Symfony\Component\Console\Output\OutputInterface $output = null): int;
 ```
 
 <blockquote>Runs the current application.</blockquote>
@@ -1037,12 +1037,12 @@ public function run(\Symfony\Component\Console\Input\InputInterface|null $input 
     <tbody>
             <tr>
             <td>$input</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Input/InputInterface.php'>Symfony\Component\Console\Input\InputInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Input/InputInterface.php'>\Symfony\Component\Console\Input\InputInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$output</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Output/OutputInterface.php'>Symfony\Component\Console\Output\OutputInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Output/OutputInterface.php'>\Symfony\Component\Console\Output\OutputInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -1169,7 +1169,7 @@ public function setCommandLoader(\Symfony\Component\Console\CommandLoader\Comman
     <tbody>
             <tr>
             <td>$commandLoader</td>
-            <td><a href='https://github.com/symfony/console/blob/master/CommandLoader/CommandLoaderInterface.php'>Symfony\Component\Console\CommandLoader\CommandLoaderInterface</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/CommandLoader/CommandLoaderInterface.php'>\Symfony\Component\Console\CommandLoader\CommandLoaderInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -1254,7 +1254,7 @@ public function setDefinition(\Symfony\Component\Console\Input\InputDefinition $
     <tbody>
             <tr>
             <td>$definition</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Input/InputDefinition.php'>Symfony\Component\Console\Input\InputDefinition</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Input/InputDefinition.php'>\Symfony\Component\Console\Input\InputDefinition</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -1294,7 +1294,7 @@ public function setDispatcher(\Symfony\Contracts\EventDispatcher\EventDispatcher
     <tbody>
             <tr>
             <td>$dispatcher</td>
-            <td>\Symfony\Contracts\EventDispatcher\EventDispatcherInterface</td>
+            <td><a href='https://github.com/symfony/event-dispatcher-contracts/blob/master/EventDispatcherInterface.php'>\Symfony\Contracts\EventDispatcher\EventDispatcherInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -1334,7 +1334,7 @@ public function setHelperSet(\Symfony\Component\Console\Helper\HelperSet $helper
     <tbody>
             <tr>
             <td>$helperSet</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Helper/HelperSet.php'>Symfony\Component\Console\Helper\HelperSet</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Helper/HelperSet.php'>\Symfony\Component\Console\Helper\HelperSet</a></td>
             <td>-</td>
         </tr>
         </tbody>

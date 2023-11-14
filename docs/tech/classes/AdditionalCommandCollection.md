@@ -72,7 +72,7 @@ public function add(\Symfony\Component\Console\Command\Command $command): \Bumbl
     <tbody>
             <tr>
             <td>$command</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Command/Command.php'>Symfony\Component\Console\Command\Command</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Command/Command.php'>\Symfony\Component\Console\Command\Command</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -110,7 +110,7 @@ public static function create(\Symfony\Component\Console\Command\Command ...$com
     <tbody>
             <tr>
             <td>$commands <i>(variadic)</i></td>
-            <td><a href='https://github.com/symfony/console/blob/master/Command/Command.php'>Symfony\Component\Console\Command\Command</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Command/Command.php'>\Symfony\Component\Console\Command\Command</a></td>
             <td>-</td>
         </tr>
         </tbody>

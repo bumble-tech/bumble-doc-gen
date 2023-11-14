@@ -125,7 +125,7 @@ public function createDirectoryDependency(string $dirPath): \BumbleDocGen\Core\R
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -140,7 +140,7 @@ public function createDirectoryDependency(string $dirPath): \BumbleDocGen\Core\R
 </ul>
 
 ```php
-public function createFileDependency(string $filePath, string|null $contentFilterRegex = NULL, int|null $matchIndex = NULL): \BumbleDocGen\Core\Renderer\Context\Dependency\FileDependency;
+public function createFileDependency(string $filePath, string|null $contentFilterRegex = null, int|null $matchIndex = null): \BumbleDocGen\Core\Renderer\Context\Dependency\FileDependency;
 ```
 
 
@@ -180,7 +180,7 @@ public function createFileDependency(string $filePath, string|null $contentFilte
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 

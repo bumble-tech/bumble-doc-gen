@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ValueToClassTransformer<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L26">ValueToClassTransformer</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L34">ValueToClassTransformer</a> class:
 </h1>
 
 
@@ -32,6 +32,16 @@ someKey:
 # One class in configuration will be converted to one object
 someKey:
     class: \Namespace\ClassName
+
+```
+
+```php
+# One class in configuration will be converted to one object. The constructor takes arguments to be passed (not via DI)
+someKey:
+    class: \Namespace\ClassName
+    arguments:
+        - arg1: value1
+        - arg2: value2
 
 ```
 
@@ -72,7 +82,7 @@ someKey:
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L28">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L36">source code</a></li>
 </ul>
 
 ```php
@@ -94,7 +104,7 @@ public function __construct(\DI\Container $diContainer);
     <tbody>
             <tr>
             <td>$diContainer</td>
-            <td>\DI\Container</td>
+            <td><a href='https://github.com/PHP-DI/PHP-DI/blob/master/src/Container.php'>\DI\Container</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -109,7 +119,7 @@ public function __construct(\DI\Container $diContainer);
 <ul>
 <li><a name="mcantransform" href="#mcantransform">#</a>
  <b>canTransform</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L40">source code</a></li>
 </ul>
 
 ```php
@@ -147,7 +157,7 @@ public function canTransform(mixed $value): bool;
 <ul>
 <li><a name="mtransform" href="#mtransform">#</a>
  <b>transform</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L41">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ValueTransformer/ValueToClassTransformer.php#L49">source code</a></li>
 </ul>
 
 ```php
@@ -181,10 +191,10 @@ public function transform(mixed $value): object|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 </ul>
 

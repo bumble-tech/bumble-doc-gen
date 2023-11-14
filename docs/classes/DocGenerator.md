@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> DocGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L34">DocGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L38">DocGenerator</a> class:
 </h1>
 
 
@@ -34,17 +34,14 @@ final class DocGenerator
 
 <ol>
 <li>
-    <a href="#maddmissingdocblocks">addMissingDocBlocks</a>
+    <a href="#madddocblocks">addDocBlocks</a>
     - <i>Generate missing docBlocks with ChatGPT for project class methods that are available for documentation</i></li>
-<li>
-    <a href="#mfillinreadmemdtemplate">fillInReadmeMdTemplate</a>
-    </li>
 <li>
     <a href="#mgenerate">generate</a>
     - <i>Generates documentation using configuration</i></li>
 <li>
-    <a href="#mgenerateprojecttemplatesstructure">generateProjectTemplatesStructure</a>
-    - <i>Generate documentation structure with blank templates using AI tools</i></li>
+    <a href="#mgeneratereadmetemplate">generateReadmeTemplate</a>
+    </li>
 <li>
     <a href="#mparseandgetrootentitycollectionsgroup">parseAndGetRootEntityCollectionsGroup</a>
     </li>
@@ -55,11 +52,11 @@ final class DocGenerator
 <ul>
             <li><a name="qlog-file-name"
                href="#qlog-file-name">#</a>
-            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L37">source
+            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L41">source
                     code</a> </li>
             <li><a name="qversion"
                href="#qversion">#</a>
-            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L36">source
+            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L40">source
                     code</a> </li>
     </ul>
 
@@ -74,11 +71,11 @@ final class DocGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L39">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L43">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\Symfony\Component\Filesystem\Filesystem $fs, \Symfony\Component\Console\Style\OutputStyle $io, \BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, \BumbleDocGen\Core\Parser\ProjectParser $parser, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, \BumbleDocGen\Core\Renderer\Renderer $renderer, \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup $rootEntityCollectionsGroup, \Monolog\Logger $logger);
+public function __construct(\Symfony\Component\Filesystem\Filesystem $fs, \Symfony\Component\Console\Style\OutputStyle $io, \BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, \BumbleDocGen\Core\Parser\ProjectParser $parser, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, \BumbleDocGen\Core\Renderer\Renderer $renderer, \BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler $generationErrorsHandler, \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup $rootEntityCollectionsGroup, \Monolog\Logger $logger);
 ```
 
 
@@ -96,12 +93,12 @@ public function __construct(\Symfony\Component\Filesystem\Filesystem $fs, \Symfo
     <tbody>
             <tr>
             <td>$fs</td>
-            <td><a href='https://github.com/symfony/filesystem/blob/master/Filesystem.php'>Symfony\Component\Filesystem\Filesystem</a></td>
+            <td><a href='https://github.com/symfony/filesystem/blob/master/Filesystem.php'>\Symfony\Component\Filesystem\Filesystem</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$io</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Style/OutputStyle.php'>Symfony\Component\Console\Style\OutputStyle</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Style/OutputStyle.php'>\Symfony\Component\Console\Style\OutputStyle</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -130,13 +127,18 @@ public function __construct(\Symfony\Component\Filesystem\Filesystem $fs, \Symfo
             <td>-</td>
         </tr>
             <tr>
+            <td>$generationErrorsHandler</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php'>\BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
             <td>$rootEntityCollectionsGroup</td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$logger</td>
-            <td>\Monolog\Logger</td>
+            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Logger.php'>\Monolog\Logger</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -149,18 +151,35 @@ public function __construct(\Symfony\Component\Filesystem\Filesystem $fs, \Symfo
 <div class='method_description-block'>
 
 <ul>
-<li><a name="maddmissingdocblocks" href="#maddmissingdocblocks">#</a>
- <b>addMissingDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L140">source code</a></li>
+<li><a name="madddocblocks" href="#madddocblocks">#</a>
+ <b>addDocBlocks</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L83">source code</a></li>
 </ul>
 
 ```php
-public function addMissingDocBlocks(): void;
+public function addDocBlocks(\BumbleDocGen\AI\ProviderInterface $aiProvider): void;
 ```
 
 <blockquote>Generate missing docBlocks with ChatGPT for project class methods that are available for documentation</blockquote>
 
-<b>Parameters:</b> not specified
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$aiProvider</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
@@ -168,56 +187,13 @@ public function addMissingDocBlocks(): void;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
-<li>
-    <a href="/docs/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
-    <a href="/docs/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a >\Tectalic\OpenAi\ClientException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mfillinreadmemdtemplate" href="#mfillinreadmemdtemplate">#</a>
- <b>fillInReadmeMdTemplate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L229">source code</a></li>
-</ul>
-
-```php
-public function fillInReadmeMdTemplate(): void;
-```
-
-
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-<b>Throws:</b>
-<ul>
 <li>
     <a href="/docs/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
-    <a >\DI\DependencyException</a></li>
-
-<li>
-    <a >\Tectalic\OpenAi\ClientException</a></li>
-
-<li>
-    <a >\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -231,7 +207,7 @@ public function fillInReadmeMdTemplate(): void;
 <ul>
 <li><a name="mgenerate" href="#mgenerate">#</a>
  <b>generate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L311">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L252">source code</a></li>
 </ul>
 
 ```php
@@ -250,6 +226,9 @@ public function generate(): void;
 <li>
     <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a></li>
 
+<li>
+    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
+
 </ul>
 
 </div>
@@ -257,18 +236,35 @@ public function generate(): void;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgenerateprojecttemplatesstructure" href="#mgenerateprojecttemplatesstructure">#</a>
- <b>generateProjectTemplatesStructure</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L79">source code</a></li>
+<li><a name="mgeneratereadmetemplate" href="#mgeneratereadmetemplate">#</a>
+ <b>generateReadmeTemplate</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L167">source code</a></li>
 </ul>
 
 ```php
-public function generateProjectTemplatesStructure(): void;
+public function generateReadmeTemplate(\BumbleDocGen\AI\ProviderInterface $aiProvider): void;
 ```
 
-<blockquote>Generate documentation structure with blank templates using AI tools</blockquote>
 
-<b>Parameters:</b> not specified
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$aiProvider</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/ProviderInterface.php'>\BumbleDocGen\AI\ProviderInterface</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
@@ -276,16 +272,13 @@ public function generateProjectTemplatesStructure(): void;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\Tectalic\OpenAi\ClientException</a></li>
-
-<li>
-    <a >\DI\NotFoundException</a></li>
-
-<li>
     <a href="/docs/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
@@ -299,7 +292,7 @@ public function generateProjectTemplatesStructure(): void;
 <ul>
 <li><a name="mparseandgetrootentitycollectionsgroup" href="#mparseandgetrootentitycollectionsgroup">#</a>
  <b>parseAndGetRootEntityCollectionsGroup</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L64">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L69">source code</a></li>
 </ul>
 
 ```php
@@ -316,10 +309,10 @@ public function parseAndGetRootEntityCollectionsGroup(): \BumbleDocGen\Core\Pars
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>

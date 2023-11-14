@@ -202,6 +202,9 @@ class MethodEntity extends \BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseE
     <a href="#mreloadentitydependenciescache">reloadEntityDependenciesCache</a>
     </li>
 <li>
+    <a href="#mremoveentityvaluefromcache">removeEntityValueFromCache</a>
+    </li>
+<li>
     <a href="#mremovenotusedentitydatacache">removeNotUsedEntityDataCache</a>
     </li>
 </ol>
@@ -223,7 +226,7 @@ class MethodEntity extends \BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseE
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \Psr\Log\LoggerInterface $logger, string $methodName, string $declaringClassName, string $implementingClassName);
+public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \Psr\Log\LoggerInterface $logger, \PhpParser\PrettyPrinter\Standard $astPrinter, string $methodName, string $declaringClassName, string $implementingClassName);
 ```
 
 
@@ -261,7 +264,12 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
         </tr>
             <tr>
             <td>$logger</td>
-            <td><a href='https://github.com/php-fig/log/blob/master/src/LoggerInterface.php'>Psr\Log\LoggerInterface</a></td>
+            <td><a href='https://github.com/php-fig/log/blob/master/src/LoggerInterface.php'>\Psr\Log\LoggerInterface</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$astPrinter</td>
+            <td><a href='https://github.com/nikic/PHP-Parser/blob/master/lib/PhpParser/PrettyPrinter/Standard.php'>\PhpParser\PrettyPrinter\Standard</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -291,7 +299,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mentitycacheisoutdated" href="#mentitycacheisoutdated">#</a>
  <b>entityCacheIsOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L533">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L607">source code</a></li>
 </ul>
 
 ```php
@@ -310,7 +318,7 @@ public function entityCacheIsOutdated(): bool;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a></li>
@@ -324,7 +332,7 @@ public function entityCacheIsOutdated(): bool;
 <ul>
 <li><a name="mgetabsolutefilename" href="#mgetabsolutefilename">#</a>
  <b>getAbsoluteFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L84">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L86">source code</a></li>
 </ul>
 
 ```php
@@ -343,7 +351,7 @@ public function getAbsoluteFileName(): string|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -354,7 +362,7 @@ public function getAbsoluteFileName(): string|null;
 <ul>
 <li><a name="mgetbodycode" href="#mgetbodycode">#</a>
  <b>getBodyCode</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L561">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L564">source code</a></li>
 </ul>
 
 ```php
@@ -374,7 +382,7 @@ public function getBodyCode(): string;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -385,11 +393,11 @@ public function getBodyCode(): string;
 <ul>
 <li><a name="mgetcachekey" href="#mgetcachekey">#</a>
  <b>getCacheKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L599">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L20">source code</a></li>
 </ul>
 
 ```php
-// Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
+// Implemented in BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait
 
 public function getCacheKey(): string;
 ```
@@ -408,7 +416,7 @@ public function getCacheKey(): string;
 <ul>
 <li><a name="mgetcachedentitydependencies" href="#mgetcachedentitydependencies">#</a>
  <b>getCachedEntityDependencies</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L465">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L513">source code</a></li>
 </ul>
 
 ```php
@@ -438,7 +446,7 @@ public function getCachedEntityDependencies(): array;
 <ul>
 <li><a name="mgetdescription" href="#mgetdescription">#</a>
  <b>getDescription</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L446">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L449">source code</a></li>
 </ul>
 
 ```php
@@ -455,16 +463,16 @@ public function getDescription(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -475,7 +483,7 @@ public function getDescription(): string;
 <ul>
 <li><a name="mgetdescriptionlinks" href="#mgetdescriptionlinks">#</a>
  <b>getDescriptionLinks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L301">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L326">source code</a></li>
 </ul>
 
 ```php
@@ -494,7 +502,7 @@ public function getDescriptionLinks(): array;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
@@ -508,7 +516,7 @@ public function getDescriptionLinks(): array;
 <ul>
 <li><a name="mgetdocblock" href="#mgetdocblock">#</a>
  <b>getDocBlock</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L83">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L84">source code</a></li>
 </ul>
 
 ```php
@@ -542,16 +550,16 @@ public function getDocBlock(bool $recursive = true): \phpDocumentor\Reflection\D
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -562,7 +570,7 @@ public function getDocBlock(bool $recursive = true): \phpDocumentor\Reflection\D
 <ul>
 <li><a name="mgetdoccomment" href="#mgetdoccomment">#</a>
  <b>getDocComment</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L566">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L569">source code</a></li>
 </ul>
 
 ```php
@@ -582,7 +590,7 @@ public function getDocComment(): string;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -593,7 +601,7 @@ public function getDocComment(): string;
 <ul>
 <li><a name="mgetdoccommententity" href="#mgetdoccommententity">#</a>
  <b>getDocCommentEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L127">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L128">source code</a></li>
 </ul>
 
 ```php
@@ -613,13 +621,13 @@ public function getDocCommentEntity(): \BumbleDocGen\LanguageHandler\Php\Parser\
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -630,7 +638,7 @@ public function getDocCommentEntity(): \BumbleDocGen\LanguageHandler\Php\Parser\
 <ul>
 <li><a name="mgetdoccommentline" href="#mgetdoccommentline">#</a>
  <b>getDocCommentLine</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L224">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L229">source code</a></li>
 </ul>
 
 ```php
@@ -650,7 +658,7 @@ public function getDocCommentLine(): int|null;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -661,7 +669,7 @@ public function getDocCommentLine(): int|null;
 <ul>
 <li><a name="mgetdoccommentlinerecursive" href="#mgetdoccommentlinerecursive">#</a>
  <b>getDocCommentLineRecursive</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L211">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L216">source code</a></li>
 </ul>
 
 ```php
@@ -678,16 +686,16 @@ public function getDocCommentLineRecursive(): int|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -698,7 +706,7 @@ public function getDocCommentLineRecursive(): int|null;
 <ul>
 <li><a name="mgetdoccommentrecursive" href="#mgetdoccommentrecursive">#</a>
  <b>getDocCommentRecursive</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L193">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L198">source code</a></li>
 </ul>
 
 ```php
@@ -715,16 +723,16 @@ public function getDocCommentRecursive(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -735,7 +743,7 @@ public function getDocCommentRecursive(): string;
 <ul>
 <li><a name="mgetdocnote" href="#mgetdocnote">#</a>
  <b>getDocNote</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L429">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L477">source code</a></li>
 </ul>
 
 ```php
@@ -758,7 +766,7 @@ public function getDocNote(): string;
 <ul>
 <li><a name="mgetendline" href="#mgetendline">#</a>
  <b>getEndLine</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L540">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L543">source code</a></li>
 </ul>
 
 ```php
@@ -778,7 +786,7 @@ public function getEndLine(): int;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -789,7 +797,7 @@ public function getEndLine(): int;
 <ul>
 <li><a name="mgetexamples" href="#mgetexamples">#</a>
  <b>getExamples</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L406">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L454">source code</a></li>
 </ul>
 
 ```php
@@ -812,7 +820,7 @@ public function getExamples(): array;
 <ul>
 <li><a name="mgetfilename" href="#mgetfilename">#</a>
  <b>getFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L254">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L259">source code</a></li>
 </ul>
 
 ```php
@@ -832,7 +840,7 @@ public function getFileName(): string|null;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -843,7 +851,7 @@ public function getFileName(): string|null;
 <ul>
 <li><a name="mgetfilesourcelink" href="#mgetfilesourcelink">#</a>
  <b>getFileSourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L126">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L128">source code</a></li>
 </ul>
 
 ```php
@@ -879,7 +887,7 @@ public function getFileSourceLink(bool $withLine = true): string|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -890,7 +898,7 @@ public function getFileSourceLink(bool $withLine = true): string|null;
 <ul>
 <li><a name="mgetfirstexample" href="#mgetfirstexample">#</a>
  <b>getFirstExample</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L423">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L471">source code</a></li>
 </ul>
 
 ```php
@@ -913,7 +921,7 @@ public function getFirstExample(): string;
 <ul>
 <li><a name="mgetfirstreturnvalue" href="#mgetfirstreturnvalue">#</a>
  <b>getFirstReturnValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L549">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L552">source code</a></li>
 </ul>
 
 ```php
@@ -933,7 +941,7 @@ public function getFirstReturnValue(): mixed;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -944,7 +952,7 @@ public function getFirstReturnValue(): mixed;
 <ul>
 <li><a name="mgetimplementingclass" href="#mgetimplementingclass">#</a>
  <b>getImplementingClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L102">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L103">source code</a></li>
 </ul>
 
 ```php
@@ -965,7 +973,7 @@ public function getImplementingClass(): \BumbleDocGen\LanguageHandler\Php\Parser
 <ul>
 <li><a name="mgetimplementingclassname" href="#mgetimplementingclassname">#</a>
  <b>getImplementingClassName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L435">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L438">source code</a></li>
 </ul>
 
 ```php
@@ -986,7 +994,7 @@ public function getImplementingClassName(): string;
 <ul>
 <li><a name="mgetimplementingreflectionclass" href="#mgetimplementingreflectionclass">#</a>
  <b>getImplementingReflectionClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L97">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L98">source code</a></li>
 </ul>
 
 ```php
@@ -1006,7 +1014,7 @@ public function getImplementingReflectionClass(): \Roave\BetterReflection\Reflec
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1017,7 +1025,7 @@ public function getImplementingReflectionClass(): \Roave\BetterReflection\Reflec
 <ul>
 <li><a name="mgetmodifiersstring" href="#mgetmodifiersstring">#</a>
  <b>getModifiersString</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L263">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L268">source code</a></li>
 </ul>
 
 ```php
@@ -1037,7 +1045,7 @@ public function getModifiersString(): string;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1048,7 +1056,7 @@ public function getModifiersString(): string;
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L240">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L245">source code</a></li>
 </ul>
 
 ```php
@@ -1069,7 +1077,7 @@ public function getName(): string;
 <ul>
 <li><a name="mgetnamespacename" href="#mgetnamespacename">#</a>
  <b>getNamespaceName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L116">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L117">source code</a></li>
 </ul>
 
 ```php
@@ -1089,7 +1097,7 @@ public function getNamespaceName(): string;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1100,7 +1108,7 @@ public function getNamespaceName(): string;
 <ul>
 <li><a name="mgetobjectid" href="#mgetobjectid">#</a>
  <b>getObjectId</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L138">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L140">source code</a></li>
 </ul>
 
 ```php
@@ -1123,7 +1131,7 @@ public function getObjectId(): string;
 <ul>
 <li><a name="mgetparameters" href="#mgetparameters">#</a>
  <b>getParameters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L348">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L353">source code</a></li>
 </ul>
 
 ```php
@@ -1140,16 +1148,16 @@ public function getParameters(): array;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
@@ -1163,7 +1171,7 @@ public function getParameters(): array;
 <ul>
 <li><a name="mgetparametersstring" href="#mgetparametersstring">#</a>
  <b>getParametersString</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L419">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L422">source code</a></li>
 </ul>
 
 ```php
@@ -1180,16 +1188,16 @@ public function getParametersString(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1200,7 +1208,7 @@ public function getParametersString(): string;
 <ul>
 <li><a name="mgetphphandlersettings" href="#mgetphphandlersettings">#</a>
  <b>getPhpHandlerSettings</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L67">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L68">source code</a></li>
 </ul>
 
 ```php
@@ -1221,7 +1229,7 @@ public function getPhpHandlerSettings(): \BumbleDocGen\LanguageHandler\Php\PhpHa
 <ul>
 <li><a name="mgetprototype" href="#mgetprototype">#</a>
  <b>getPrototype</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L162">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L167">source code</a></li>
 </ul>
 
 ```php
@@ -1241,13 +1249,13 @@ public function getPrototype(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1258,7 +1266,7 @@ public function getPrototype(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\
 <ul>
 <li><a name="mgetreturntype" href="#mgetreturntype">#</a>
  <b>getReturnType</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L289">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L294">source code</a></li>
 </ul>
 
 ```php
@@ -1275,16 +1283,16 @@ public function getReturnType(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1295,7 +1303,7 @@ public function getReturnType(): string;
 <ul>
 <li><a name="mgetrootentity" href="#mgetrootentity">#</a>
  <b>getRootEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L62">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L63">source code</a></li>
 </ul>
 
 ```php
@@ -1316,7 +1324,7 @@ public function getRootEntity(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity
 <ul>
 <li><a name="mgetrootentitycollection" href="#mgetrootentitycollection">#</a>
  <b>getRootEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L72">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L73">source code</a></li>
 </ul>
 
 ```php
@@ -1337,7 +1345,7 @@ public function getRootEntityCollection(): \BumbleDocGen\LanguageHandler\Php\Par
 <ul>
 <li><a name="mgetshortname" href="#mgetshortname">#</a>
  <b>getShortName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L107">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L108">source code</a></li>
 </ul>
 
 ```php
@@ -1358,7 +1366,7 @@ public function getShortName(): string;
 <ul>
 <li><a name="mgetsignature" href="#mgetsignature">#</a>
  <b>getSignature</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L235">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L240">source code</a></li>
 </ul>
 
 ```php
@@ -1378,13 +1386,13 @@ public function getSignature(): string;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1395,7 +1403,7 @@ public function getSignature(): string;
 <ul>
 <li><a name="mgetstartcolumn" href="#mgetstartcolumn">#</a>
  <b>getStartColumn</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L531">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L534">source code</a></li>
 </ul>
 
 ```php
@@ -1415,7 +1423,7 @@ public function getStartColumn(): int;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1426,7 +1434,7 @@ public function getStartColumn(): int;
 <ul>
 <li><a name="mgetstartline" href="#mgetstartline">#</a>
  <b>getStartLine</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L522">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L525">source code</a></li>
 </ul>
 
 ```php
@@ -1446,7 +1454,7 @@ public function getStartLine(): int;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1457,7 +1465,7 @@ public function getStartLine(): int;
 <ul>
 <li><a name="mgetthrows" href="#mgetthrows">#</a>
  <b>getThrows</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L356">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L381">source code</a></li>
 </ul>
 
 ```php
@@ -1479,7 +1487,7 @@ public function getThrows(): array;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1490,7 +1498,7 @@ public function getThrows(): array;
 <ul>
 <li><a name="mhasdescriptionlinks" href="#mhasdescriptionlinks">#</a>
  <b>hasDescriptionLinks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L179">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L181">source code</a></li>
 </ul>
 
 ```php
@@ -1520,7 +1528,7 @@ public function hasDescriptionLinks(): bool;
 <ul>
 <li><a name="mhasexamples" href="#mhasexamples">#</a>
  <b>hasExamples</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L395">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L443">source code</a></li>
 </ul>
 
 ```php
@@ -1543,7 +1551,7 @@ public function hasExamples(): bool;
 <ul>
 <li><a name="mhasthrows" href="#mhasthrows">#</a>
  <b>hasThrows</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L307">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L332">source code</a></li>
 </ul>
 
 ```php
@@ -1566,7 +1574,7 @@ public function hasThrows(): bool;
 <ul>
 <li><a name="misconstructor" href="#misconstructor">#</a>
  <b>isConstructor</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L245">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L250">source code</a></li>
 </ul>
 
 ```php
@@ -1587,7 +1595,7 @@ public function isConstructor(): bool;
 <ul>
 <li><a name="misdeprecated" href="#misdeprecated">#</a>
  <b>isDeprecated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L169">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L171">source code</a></li>
 </ul>
 
 ```php
@@ -1610,7 +1618,7 @@ public function isDeprecated(): bool;
 <ul>
 <li><a name="misdynamic" href="#misdynamic">#</a>
  <b>isDynamic</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L477">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L480">source code</a></li>
 </ul>
 
 ```php
@@ -1631,7 +1639,7 @@ public function isDynamic(): bool;
 <ul>
 <li><a name="misentitydatacacheoutdated" href="#misentitydatacacheoutdated">#</a>
  <b>isEntityDataCacheOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L60">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L77">source code</a></li>
 </ul>
 
 ```php
@@ -1661,7 +1669,7 @@ public function isEntityDataCacheOutdated(): bool;
 <ul>
 <li><a name="misentityfilecanbeload" href="#misentityfilecanbeload">#</a>
  <b>isEntityFileCanBeLoad</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L74">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L76">source code</a></li>
 </ul>
 
 ```php
@@ -1683,7 +1691,7 @@ public function isEntityFileCanBeLoad(): bool;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1694,7 +1702,7 @@ public function isEntityFileCanBeLoad(): bool;
 <ul>
 <li><a name="misimplementedinparentclass" href="#misimplementedinparentclass">#</a>
  <b>isImplementedInParentClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L430">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L433">source code</a></li>
 </ul>
 
 ```php
@@ -1715,7 +1723,7 @@ public function isImplementedInParentClass(): bool;
 <ul>
 <li><a name="misinitialization" href="#misinitialization">#</a>
  <b>isInitialization</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L458">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L461">source code</a></li>
 </ul>
 
 ```php
@@ -1735,13 +1743,13 @@ public function isInitialization(): bool;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a >\DI\DependencyException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a >\DI\NotFoundException</a></li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1752,7 +1760,7 @@ public function isInitialization(): bool;
 <ul>
 <li><a name="misinternal" href="#misinternal">#</a>
  <b>isInternal</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L162">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L164">source code</a></li>
 </ul>
 
 ```php
@@ -1775,7 +1783,7 @@ public function isInternal(): bool;
 <ul>
 <li><a name="misprivate" href="#misprivate">#</a>
  <b>isPrivate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L513">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L516">source code</a></li>
 </ul>
 
 ```php
@@ -1795,7 +1803,7 @@ public function isPrivate(): bool;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1806,7 +1814,7 @@ public function isPrivate(): bool;
 <ul>
 <li><a name="misprotected" href="#misprotected">#</a>
  <b>isProtected</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L504">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L507">source code</a></li>
 </ul>
 
 ```php
@@ -1826,7 +1834,7 @@ public function isProtected(): bool;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1837,7 +1845,7 @@ public function isProtected(): bool;
 <ul>
 <li><a name="mispublic" href="#mispublic">#</a>
  <b>isPublic</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L486">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L489">source code</a></li>
 </ul>
 
 ```php
@@ -1857,7 +1865,7 @@ public function isPublic(): bool;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1868,7 +1876,7 @@ public function isPublic(): bool;
 <ul>
 <li><a name="misstatic" href="#misstatic">#</a>
  <b>isStatic</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L495">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L498">source code</a></li>
 </ul>
 
 ```php
@@ -1888,7 +1896,7 @@ public function isStatic(): bool;
     <a href="/docs/tech/2.parser/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException_3.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1899,7 +1907,7 @@ public function isStatic(): bool;
 <ul>
 <li><a name="mparseannotationparams" href="#mparseannotationparams">#</a>
  <b>parseAnnotationParams</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L316">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php#L321">source code</a></li>
 </ul>
 
 ```php
@@ -1937,20 +1945,20 @@ public static function parseAnnotationParams(array $params): array;
 <ul>
 <li><a name="mreloadentitydependenciescache" href="#mreloadentitydependenciescache">#</a>
  <b>reloadEntityDependenciesCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L483">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L531">source code</a></li>
 </ul>
 
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
-public function reloadEntityDependenciesCache(): void;
+public function reloadEntityDependenciesCache(): array;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
 
 
 <b>Throws:</b>
@@ -1965,9 +1973,49 @@ public function reloadEntityDependenciesCache(): void;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mremoveentityvaluefromcache" href="#mremoveentityvaluefromcache">#</a>
+ <b>removeEntityValueFromCache</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L65">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait
+
+public function removeEntityValueFromCache(string $key): void;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$key</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mremovenotusedentitydatacache" href="#mremovenotusedentitydatacache">#</a>
  <b>removeNotUsedEntityDataCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L80">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L97">source code</a></li>
 </ul>
 
 ```php

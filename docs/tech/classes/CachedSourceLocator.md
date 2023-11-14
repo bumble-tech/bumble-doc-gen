@@ -76,7 +76,7 @@ public function __construct(\Roave\BetterReflection\SourceLocator\Type\SourceLoc
     <tbody>
             <tr>
             <td>$sourceLocator</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/SourceLocator/Type/SourceLocator.php'>Roave\BetterReflection\SourceLocator\Type\SourceLocator</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/SourceLocator/Type/SourceLocator.php'>\Roave\BetterReflection\SourceLocator\Type\SourceLocator</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -123,12 +123,12 @@ public function locateIdentifier(\Roave\BetterReflection\Reflector\Reflector $re
     <tbody>
             <tr>
             <td>$reflector</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflector/Reflector.php'>\Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$identifier</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Identifier/Identifier.php'>Roave\BetterReflection\Identifier\Identifier</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Identifier/Identifier.php'>\Roave\BetterReflection\Identifier\Identifier</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -143,7 +143,7 @@ public function locateIdentifier(\Roave\BetterReflection\Reflector\Reflector $re
     <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -176,12 +176,12 @@ public function locateIdentifiersByType(\Roave\BetterReflection\Reflector\Reflec
     <tbody>
             <tr>
             <td>$reflector</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflector/Reflector.php'>Roave\BetterReflection\Reflector\Reflector</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Reflector/Reflector.php'>\Roave\BetterReflection\Reflector\Reflector</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$identifierType</td>
-            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Identifier/IdentifierType.php'>Roave\BetterReflection\Identifier\IdentifierType</a></td>
+            <td><a href='https://github.com/Roave/BetterReflection/blob/master/src/Identifier/IdentifierType.php'>\Roave\BetterReflection\Identifier\IdentifierType</a></td>
             <td>-</td>
         </tr>
         </tbody>

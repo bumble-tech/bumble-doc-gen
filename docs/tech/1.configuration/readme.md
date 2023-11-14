@@ -38,9 +38,9 @@ Let's look at an example of a real configuration in more detail:
    - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
    - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
  plugins:
-   - class: \SelfDocConfig\Plugin\RoaveStubber\BetterReflectionStubberPlugin
    - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
    - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
+   - class: \BumbleDocGen\Core\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter
  
 ```
 
@@ -206,7 +206,7 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 
 - <a href="/docs/tech/1.configuration/classes/PageHtmlLinkerPlugin.md">PageHtmlLinkerPlugin</a>
 
-- <a href="/docs/tech/1.configuration/classes/LastPageCommitter.md">LastPageCommitter</a>
+- <a href="/docs/tech/1.configuration/classes/PageLinkerPlugin.md">PageLinkerPlugin</a>
 
 </td>
         <td>List of plugins</td>
@@ -222,4 +222,4 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Thu Oct 5 17:42:06 2023 +0300<br><b>Page content update date:</b> Sun Oct 15 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Mon Nov 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

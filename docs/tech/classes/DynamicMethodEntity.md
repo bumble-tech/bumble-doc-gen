@@ -172,7 +172,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
         </tr>
             <tr>
             <td>$annotationMethod</td>
-            <td><a href='https://github.com/phpDocumentor/ReflectionDocBlock/blob/master/src/DocBlock/Tags/Method.php'>phpDocumentor\Reflection\DocBlock\Tags\Method</a></td>
+            <td><a href='https://github.com/phpDocumentor/ReflectionDocBlock/blob/master/src/DocBlock/Tags/Method.php'>\phpDocumentor\Reflection\DocBlock\Tags\Method</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -225,7 +225,7 @@ public function getAbsoluteFileName(): string|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -351,7 +351,7 @@ public function getFileName(): string|null;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
@@ -522,10 +522,10 @@ public function getNamespaceName(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -616,10 +616,10 @@ public function getReturnType(): string;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -787,10 +787,10 @@ public function isInitialization(): bool;
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>

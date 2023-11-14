@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
-final class OnLoadEntityDocPluginContent extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class OnLoadEntityDocPluginContent extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>Called when entity documentation is generated (plugin content loading)</blockquote>

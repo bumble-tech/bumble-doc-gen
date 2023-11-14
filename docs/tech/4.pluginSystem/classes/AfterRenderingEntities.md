@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
-final class AfterRenderingEntities extends \Symfony\Contracts\EventDispatcher\Event implements \Psr\EventDispatcher\StoppableEventInterface
+final class AfterRenderingEntities extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
 <blockquote>Event is the base class for classes containing event data.</blockquote>

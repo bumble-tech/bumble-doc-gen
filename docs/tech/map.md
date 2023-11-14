@@ -3,15 +3,25 @@
 Directory layout ( only documented files shown ):
 
 <embed> <pre>└──<b>src</b>/
+│  ├──<b>AI</b>/
+│  │  ├──<b>Console</b>/
+│  │  │  ├── <a href='/docs/tech/classes/AddDocBlocksCommand.md'>AddDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateReadMeTemplateCommand.md'>GenerateReadMeTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  ├──<b>Generators</b>/
+│  │  │  ├── <a href='/docs/tech/classes/DocBlocksGenerator.md'>DocBlocksGenerator.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/ReadmeTemplateGenerator.md'>ReadmeTemplateGenerator.php</a> 
+│  │  ├──<b>Providers</b>/
+│  │  │  └──<b>OpenAI</b>/
+│  │  │  │  └── <a href='/docs/tech/classes/Provider.md'>Provider.php</a> 
+│  │  ├──<b>Traits</b>/
+│  │  │  └── <a href='/docs/tech/classes/SharedCommandLogicTrait.md'>SharedCommandLogicTrait.php</a> 
+│  │  ├── <a href='/docs/tech/classes/ProviderFactory.md'>ProviderFactory.php</a> 
+│  │  └── <a href='/docs/tech/classes/ProviderInterface.md'>ProviderInterface.php</a> 
 │  ├──<b>Console</b>/
 │  │  ├──<b>Command</b>/
-│  │  │  ├── <a href='/docs/tech/classes/AddMissingDocBlocksCommand.md'>AddMissingDocBlocksCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/AdditionalCommandCollection.md'>AdditionalCommandCollection.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/BaseCommand.md'>BaseCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/ConfigurationCommand.md'>ConfigurationCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/FillInReadmeMdTemplateCommand.md'>FillInReadmeMdTemplateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  ├── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
-│  │  │  └── <a href='/docs/tech/classes/GenerateProjectTemplatesStructureCommand.md'>GenerateProjectTemplatesStructureCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> <i> — <samp>Base class for all commands.</samp></i>
 │  │  ├──<b>ProgressBar</b>/
 │  │  │  ├── <a href='/docs/tech/classes/ProgressBarFactory.md'>ProgressBarFactory.php</a> 
 │  │  │  └── <a href='/docs/tech/classes/StylizedProgressBar.md'>StylizedProgressBar.php</a> 
@@ -38,6 +48,9 @@ Directory layout ( only documented files shown ):
 │  │  │  │  └── <a href='/docs/tech/classes/ValueTransformerInterface.md'>ValueTransformerInterface.php</a> <i> — <samp>Interface defining classes that transform text configuration values into objects</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/Configuration.md'>Configuration.php</a> <i> — <samp>Configuration project documentation</samp></i>
 │  │  │  └── <a href='/docs/tech/classes/ConfigurationParameterBag.md'>ConfigurationParameterBag.php</a> <i> — <samp>Wrapper for getting raw configuration file data</samp></i>
+│  │  ├──<b>Logger</b>/
+│  │  │  └──<b>Handler</b>/
+│  │  │  │  └── <a href='/docs/tech/classes/GenerationErrorsHandler.md'>GenerationErrorsHandler.php</a> <i> — <samp>Base Handler class providing the Handler structure, including processors and formatters</samp></i>
 │  │  ├──<b>Parser</b>/
 │  │  │  ├──<b>Entity</b>/
 │  │  │  │  ├──<b>Cache</b>/
@@ -89,6 +102,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  └──<b>PageLinker</b>/
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BasePageLinker.md'>BasePageLinker.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/PageHtmlLinkerPlugin.md'>PageHtmlLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in HTML format; Links may contain: 1) Short entity name 2) Full entity n...</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/PageLinkerPlugin.md'>PageLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in HTML format; Links may contain: 1) Short entity name 2) Full entity n...</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/PageRstLinkerPlugin.md'>PageRstLinkerPlugin.php</a> <i> — <samp>Adds URLs to empty links in rst format; Links may contain: 1) Short entity name 2) Full entity na...</samp></i>
 │  │  │  ├──<b>Event</b>/
 │  │  │  │  ├──<b>Parser</b>/
@@ -205,17 +219,16 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/SystemAsyncSourceLocator.md'>SystemAsyncSourceLocator.php</a> 
 │  │  │  │  │  ├── <a href='/docs/tech/classes/AsyncSourceLocator.md'>AsyncSourceLocator.php</a> <i> — <samp>Lazy loading classes. Cannot be used for initial parsing of files, only for getting specific docu...</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/CustomSourceLocatorInterface.md'>CustomSourceLocatorInterface.php</a> 
+│  │  │  │  ├── <a href='/docs/tech/classes/ComposerParser.md'>ComposerParser.php</a> 
 │  │  │  │  └── <a href='/docs/tech/classes/ParserHelper.md'>ParserHelper.php</a> 
 │  │  │  ├──<b>Plugin</b>/
 │  │  │  │  ├──<b>CorePlugin</b>/
 │  │  │  │  │  ├──<b>BasePhpStubber</b>/
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/BasePhpStubberPlugin.md'>BasePhpStubberPlugin.php</a> <i> — <samp>Adding links to type documentation and documentation of built-in PHP classes</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/ComposerStubberPlugin.md'>ComposerStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Composer namespace</samp></i>
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/PhpDocumentorStubberPlugin.md'>PhpDocumentorStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \phpDocumentor namespace</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/PhpUnitStubberPlugin.md'>PhpUnitStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \PHPUnit namespace</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/PsrClassesStubberPlugin.md'>PsrClassesStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Psr namespace</samp></i>
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/SymfonyComponentStubberPlugin.md'>SymfonyComponentStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Symfony\Component namespace</samp></i>
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/TwigStubberPlugin.md'>TwigStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \Twig namespace</samp></i>
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/PhpUnitStubberPlugin.md'>PhpUnitStubberPlugin.php</a> <i> — <samp>Adding links to the documentation of PHP classes in the \PHPUnit namespace</samp></i>
+│  │  │  │  │  ├──<b>ComposerPackagesStubber</b>/
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/StubberPlugin.md'>StubberPlugin.php</a> <i> — <samp>The plugin allows you to automatically provide links to github repositories for documented classe...</samp></i>
 │  │  │  │  │  └──<b>EntityDocUnifiedPlace</b>/
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin.php</a> <i> — <samp>This plugin changes the algorithm for saving entity documents. The standard system stores each fi...</samp></i>
 │  │  │  │  └──<b>Event</b>/
@@ -238,15 +251,10 @@ Directory layout ( only documented files shown ):
 │  │  │  └── <a href='/docs/tech/classes/PhpHandlerSettings.md'>PhpHandlerSettings.php</a> 
 │  │  ├── <a href='/docs/tech/classes/LanguageHandlerInterface.md'>LanguageHandlerInterface.php</a> 
 │  │  └── <a href='/docs/tech/classes/LanguageHandlersCollection.md'>LanguageHandlersCollection.php</a> 
-│  ├──<b>TemplateGenerator</b>/
-│  │  └──<b>ChatGpt</b>/
-│  │  │  ├── <a href='/docs/tech/classes/MissingDocBlocksGenerator.md'>MissingDocBlocksGenerator.php</a> 
-│  │  │  ├── <a href='/docs/tech/classes/ReadmeTemplateFiller.md'>ReadmeTemplateFiller.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/TemplatesStructureGenerator.md'>TemplatesStructureGenerator.php</a> 
 │  ├── <a href='/docs/tech/classes/DocGenerator.md'>DocGenerator.php</a> <i> — <samp>Class for generating documentation.</samp></i>
 │  └── <a href='/docs/tech/classes/DocGeneratorFactory.md'>DocGeneratorFactory.php</a> 
 </pre> </embed>
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Wed Oct 25 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Mon Nov 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

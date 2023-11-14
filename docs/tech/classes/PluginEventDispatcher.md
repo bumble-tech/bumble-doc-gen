@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PluginEventDispatcher<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L9">PluginEventDispatcher</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L10">PluginEventDispatcher</a> class:
 </h1>
 
 
@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Plugin;
 
-class PluginEventDispatcher extends \Symfony\Component\EventDispatcher\EventDispatcher implements \Symfony\Component\EventDispatcher\EventDispatcherInterface, \Symfony\Contracts\EventDispatcher\EventDispatcherInterface, \Psr\EventDispatcher\EventDispatcherInterface
+class PluginEventDispatcher extends \Symfony\Component\EventDispatcher\EventDispatcher
 ```
 
 <blockquote>The EventDispatcherInterface is the central point of Symfony's event listener system.</blockquote>
@@ -72,18 +72,33 @@ class PluginEventDispatcher extends \Symfony\Component\EventDispatcher\EventDisp
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/vendor/symfony/event-dispatcher/EventDispatcher.php#L38">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L14">source code</a></li>
 </ul>
 
 ```php
-// Implemented in Symfony\Component\EventDispatcher\EventDispatcher
-
-public function __construct();
+public function __construct(\Monolog\Logger $logger);
 ```
 
 
 
-<b>Parameters:</b> not specified
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$logger</td>
+            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Logger.php'>\Monolog\Logger</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
 
 
 
@@ -169,7 +184,7 @@ public function addSubscriber(\Symfony\Component\EventDispatcher\EventSubscriber
     <tbody>
             <tr>
             <td>$subscriber</td>
-            <td><a href='https://github.com/symfony/event-dispatcher/blob/master/EventSubscriberInterface.php'>Symfony\Component\EventDispatcher\EventSubscriberInterface</a></td>
+            <td><a href='https://github.com/symfony/event-dispatcher/blob/master/EventSubscriberInterface.php'>\Symfony\Component\EventDispatcher\EventSubscriberInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -185,11 +200,11 @@ public function addSubscriber(\Symfony\Component\EventDispatcher\EventSubscriber
 <ul>
 <li><a name="mdispatch" href="#mdispatch">#</a>
  <b>dispatch</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L13">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php#L19">source code</a></li>
 </ul>
 
 ```php
-public function dispatch(object $event, string|null $eventName = NULL): object;
+public function dispatch(object $event, string $eventName = null): object;
 ```
 
 <blockquote>Dispatches an event to all registered listeners.</blockquote>
@@ -212,7 +227,7 @@ public function dispatch(object $event, string|null $eventName = NULL): object;
         </tr>
             <tr>
             <td>$eventName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>The name of the event to dispatch. If not supplied,
  the class of $event should be used instead.</td>
         </tr>
@@ -280,7 +295,7 @@ public function getListenerPriority(string $eventName, callable|array $listener)
 ```php
 // Implemented in Symfony\Component\EventDispatcher\EventDispatcher
 
-public function getListeners(string|null $eventName = NULL): array;
+public function getListeners(string $eventName = null): array;
 ```
 
 <blockquote>Gets the listeners of a specific event or all listeners sorted by descending priority.</blockquote>
@@ -298,7 +313,7 @@ public function getListeners(string|null $eventName = NULL): array;
     <tbody>
             <tr>
             <td>$eventName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -320,7 +335,7 @@ public function getListeners(string|null $eventName = NULL): array;
 ```php
 // Implemented in Symfony\Component\EventDispatcher\EventDispatcher
 
-public function hasListeners(string|null $eventName = NULL): bool;
+public function hasListeners(string $eventName = null): bool;
 ```
 
 <blockquote>Checks whether an event has any registered listeners.</blockquote>
@@ -338,7 +353,7 @@ public function hasListeners(string|null $eventName = NULL): bool;
     <tbody>
             <tr>
             <td>$eventName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -423,7 +438,7 @@ public function removeSubscriber(\Symfony\Component\EventDispatcher\EventSubscri
     <tbody>
             <tr>
             <td>$subscriber</td>
-            <td><a href='https://github.com/symfony/event-dispatcher/blob/master/EventSubscriberInterface.php'>Symfony\Component\EventDispatcher\EventSubscriberInterface</a></td>
+            <td><a href='https://github.com/symfony/event-dispatcher/blob/master/EventSubscriberInterface.php'>\Symfony\Component\EventDispatcher\EventSubscriberInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>

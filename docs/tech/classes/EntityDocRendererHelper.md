@@ -115,7 +115,7 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\RootEntityCollectio
 </ul>
 
 ```php
-public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $defaultEntityName = NULL, bool $useUnsafeKeys = true): array;
+public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string|null $defaultEntityName = null, bool $useUnsafeKeys = true): array;
 ```
 
 
@@ -160,10 +160,10 @@ public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parse
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -174,11 +174,11 @@ public function getEntityDataByLink(string $linkString, \BumbleDocGen\Core\Parse
 <ul>
 <li><a name="mgetentityurldatabylink" href="#mgetentityurldatabylink">#</a>
  <b>getEntityUrlDataByLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L117">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/EntityDocRenderer/EntityDocRendererHelper.php#L113">source code</a></li>
 </ul>
 
 ```php
-public function getEntityUrlDataByLink(string $linkString, string|null $defaultEntityClassName = NULL, bool $createDocument = true): array;
+public function getEntityUrlDataByLink(string $linkString, string|null $defaultEntityClassName = null, bool $createDocument = true): array;
 ```
 
 
@@ -218,10 +218,10 @@ public function getEntityUrlDataByLink(string $linkString, string|null $defaultE
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/ReflectionException.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
+    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
