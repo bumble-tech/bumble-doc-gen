@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ConfigurationCommand<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/ConfigurationCommand.php#L13">ConfigurationCommand</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/ConfigurationCommand.php#L14">ConfigurationCommand</a> class:
 </h1>
 
 
@@ -168,7 +168,7 @@ final class ConfigurationCommand extends \BumbleDocGen\Console\Command\BaseComma
 ```php
 // Implemented in BumbleDocGen\Console\Command\BaseCommand
 
-public function __construct(string|null $name = NULL);
+public function __construct(string $name = null);
 ```
 
 
@@ -186,7 +186,7 @@ public function __construct(string|null $name = NULL);
     <tbody>
             <tr>
             <td>$name</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>The name of the command; passing null means it must be set in configure()</td>
         </tr>
         </tbody>
@@ -214,7 +214,7 @@ public function __construct(string|null $name = NULL);
 ```php
 // Implemented in Symfony\Component\Console\Command\Command
 
-public function addArgument(string $name, int|null $mode = NULL, string $description = '', mixed $default = NULL): static;
+public function addArgument(string $name, int $mode = null, string $description = '', mixed $default = null): static;
 ```
 
 <blockquote>Adds an argument.</blockquote>
@@ -237,7 +237,7 @@ public function addArgument(string $name, int|null $mode = NULL, string $descrip
         </tr>
             <tr>
             <td>$mode</td>
-            <td><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a></td>
             <td>The argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL</td>
         </tr>
             <tr>
@@ -276,7 +276,7 @@ public function addArgument(string $name, int|null $mode = NULL, string $descrip
 ```php
 // Implemented in Symfony\Component\Console\Command\Command
 
-public function addOption(string $name, string|array|null $shortcut = NULL, int|null $mode = NULL, string $description = '', mixed $default = NULL): static;
+public function addOption(string $name, string|array $shortcut = null, int $mode = null, string $description = '', mixed $default = null): static;
 ```
 
 <blockquote>Adds an option.</blockquote>
@@ -299,12 +299,12 @@ public function addOption(string $name, string|array|null $shortcut = NULL, int|
         </tr>
             <tr>
             <td>$shortcut</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.array.php'>array</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
             <td>The shortcuts, can be null, a string of shortcuts delimited by | or an array of shortcuts</td>
         </tr>
             <tr>
             <td>$mode</td>
-            <td><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a></td>
             <td>The option mode: One of the InputOption::VALUE_* constants</td>
         </tr>
             <tr>
@@ -401,12 +401,12 @@ public function complete(\Symfony\Component\Console\Completion\CompletionInput $
     <tbody>
             <tr>
             <td>$input</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Completion/CompletionInput.php'>Symfony\Component\Console\Completion\CompletionInput</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Completion/CompletionInput.php'>\Symfony\Component\Console\Completion\CompletionInput</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$suggestions</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Completion/CompletionSuggestions.php'>Symfony\Component\Console\Completion\CompletionSuggestions</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Completion/CompletionSuggestions.php'>\Symfony\Component\Console\Completion\CompletionSuggestions</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -922,12 +922,12 @@ public function run(\Symfony\Component\Console\Input\InputInterface $input, \Sym
     <tbody>
             <tr>
             <td>$input</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Input/InputInterface.php'>Symfony\Component\Console\Input\InputInterface</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Input/InputInterface.php'>\Symfony\Component\Console\Input\InputInterface</a></td>
             <td>-</td>
         </tr>
             <tr>
             <td>$output</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Output/OutputInterface.php'>Symfony\Component\Console\Output\OutputInterface</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Output/OutputInterface.php'>\Symfony\Component\Console\Output\OutputInterface</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -947,9 +947,9 @@ public function run(\Symfony\Component\Console\Input\InputInterface $input, \Sym
 <b>See:</b>
 <ul>
     <li>
-        <a href="https://github.com/symfony/console/blob/master/Command/setCode().php">\Symfony\Component\Console\Command\setCode()</a>    </li>
+        <a href="https://github.com/symfony/console/blob/master/Command/Command.php">\Symfony\Component\Console\Command\Command::setCode()</a>    </li>
     <li>
-        <a href="https://github.com/symfony/console/blob/master/Command/execute().php">\Symfony\Component\Console\Command\execute()</a>    </li>
+        <a href="https://github.com/symfony/console/blob/master/Command/Command.php">\Symfony\Component\Console\Command\Command::execute()</a>    </li>
 </ul>
 </div>
 <hr>
@@ -1011,7 +1011,7 @@ public function setAliases(iterable $aliases): static;
 ```php
 // Implemented in Symfony\Component\Console\Command\Command
 
-public function setApplication(\Symfony\Component\Console\Application|null $application = NULL): mixed;
+public function setApplication(\Symfony\Component\Console\Application $application = null): mixed;
 ```
 
 
@@ -1029,7 +1029,7 @@ public function setApplication(\Symfony\Component\Console\Application|null $appl
     <tbody>
             <tr>
             <td>$application</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Application.php'>Symfony\Component\Console\Application</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Application.php'>\Symfony\Component\Console\Application</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -1089,7 +1089,7 @@ public function setCode(callable $code): static;
 <b>See:</b>
 <ul>
     <li>
-        <a href="https://github.com/symfony/console/blob/master/Command/execute().php">\Symfony\Component\Console\Command\execute()</a>    </li>
+        <a href="https://github.com/symfony/console/blob/master/Command/Command.php">\Symfony\Component\Console\Command\Command::execute()</a>    </li>
 </ul>
 </div>
 <hr>
@@ -1122,7 +1122,7 @@ public function setDefinition(array|\Symfony\Component\Console\Input\InputDefini
     <tbody>
             <tr>
             <td>$definition</td>
-            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a> | <a href='https://github.com/symfony/console/blob/master/Input/InputDefinition.php'>Symfony\Component\Console\Input\InputDefinition</a></td>
+            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a> | <a href='https://github.com/symfony/console/blob/master/Input/InputDefinition.php'>\Symfony\Component\Console\Input\InputDefinition</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -1242,7 +1242,7 @@ public function setHelperSet(\Symfony\Component\Console\Helper\HelperSet $helper
     <tbody>
             <tr>
             <td>$helperSet</td>
-            <td><a href='https://github.com/symfony/console/blob/master/Helper/HelperSet.php'>Symfony\Component\Console\Helper\HelperSet</a></td>
+            <td><a href='https://github.com/symfony/console/blob/master/Helper/HelperSet.php'>\Symfony\Component\Console\Helper\HelperSet</a></td>
             <td>-</td>
         </tr>
         </tbody>
