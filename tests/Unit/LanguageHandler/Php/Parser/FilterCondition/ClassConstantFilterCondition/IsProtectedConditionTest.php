@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Unit\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Constant\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition\IsProtectedCondition;
 use PHPUnit\Framework\TestCase;
 

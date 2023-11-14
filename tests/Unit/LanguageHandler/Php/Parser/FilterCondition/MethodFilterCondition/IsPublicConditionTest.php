@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Unit\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCondition\IsPublicCondition;
 use PHPUnit\Framework\TestCase;
 

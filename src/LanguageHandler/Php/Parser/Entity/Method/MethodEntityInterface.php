@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method;
 
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 
 interface MethodEntityInterface extends EntityInterface
 {
