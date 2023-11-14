@@ -21,4 +21,25 @@ final class ConfigurationKey
     public const TWIG_FUNCTIONS = 'twig_functions';
     public const TWIG_FILTERS = 'twig_filters';
     public const ADDITIONAL_CONSOLE_COMMANDS = 'additional_console_commands';
+
+    public static function all(): array
+    {
+        return [
+            self::PROJECT_ROOT,
+            self::TEMPLATES_DIR,
+            self::OUTPUT_DIR,
+            self::OUTPUT_DIR_BASE_URL,
+            self::CACHE_DIR,
+            self::PAGE_LINK_PROCESSOR,
+            self::GIT_CLIENT_PATH,
+            self::USE_SHARED_CACHE,
+            self::CHECK_FILE_IN_GIT_BEFORE_CREATING_DOC,
+            self::SOURCE_LOCATORS,
+            self::LANGUAGE_HANDLERS,
+            self::PLUGINS,
+            self::TWIG_FUNCTIONS,
+            self::TWIG_FILTERS,
+            self::ADDITIONAL_CONSOLE_COMMANDS,
+        ];
+    }
 }

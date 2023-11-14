@@ -345,6 +345,18 @@ final class DocGenerator
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
+    public function getConfigurationKeys(): void
+    {
+        foreach (ConfigurationKey::all() as $key) {
+            $this->getConfigurationKey($key);
+        }
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
     public function getConfigurationKey(string $key): void
     {
         $entityMapFn = static fn (object $locator): array => [

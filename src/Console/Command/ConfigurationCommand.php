@@ -18,7 +18,7 @@ final class ConfigurationCommand extends BaseCommand
         $this
             ->setName('configuration')
             ->setDescription('Display list of configured plugins, programming language handlers, etc')
-            ->addArgument('key', InputArgument::REQUIRED, 'Configuration key to display')
+            ->addArgument('key', InputArgument::OPTIONAL, 'Configuration key to display')
         ;
     }
 
@@ -29,8 +29,14 @@ final class ConfigurationCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $generator = $this->createDocGenInstance($input, $output);
+
         $key = $input->getArgument('key');
-        $this->createDocGenInstance($input, $output)->getConfigurationKey($key);
+        if ($key === null) {
+            $generator->getConfigurationKeys();
+        } else {
+            $generator->getConfigurationKey($key);
+        }
 
         return self::SUCCESS;
     }

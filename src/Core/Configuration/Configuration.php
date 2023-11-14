@@ -86,7 +86,10 @@ final class Configuration
         $parentDir = dirname($templatesDir);
         if (!$parentDir || !is_dir($parentDir)) {
             throw new InvalidConfigurationParameterException(
-                "`output_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+                sprintf(
+                    "`%s` cannot be created because parent directory `{$parentDir}` does not exist",
+                    ConfigurationKey::TEMPLATES_DIR
+                )
             );
         }
         if (!file_exists($templatesDir)) {
@@ -111,13 +114,19 @@ final class Configuration
         $parentDir = dirname($outputDir);
         if (!$parentDir || !is_dir($parentDir)) {
             throw new InvalidConfigurationParameterException(
-                "`output_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+                sprintf(
+                    "`%s` cannot be created because parent directory `{$parentDir}` does not exist",
+                    ConfigurationKey::OUTPUT_DIR
+                )
             );
         }
 
         if (!is_writable($parentDir)) {
             throw new InvalidConfigurationParameterException(
-                "`output_dir` cannot be created because parent directory `{$parentDir}` is not writable"
+                sprintf(
+                    "`%s` cannot be created because parent directory `{$parentDir}` is not writable",
+                    ConfigurationKey::OUTPUT_DIR
+                )
             );
         }
 
@@ -199,7 +208,10 @@ final class Configuration
         $parentDir = dirname($cacheDir);
         if (!is_dir($parentDir)) {
             throw new InvalidConfigurationParameterException(
-                "`cache_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+                sprintf(
+                    "`%s` cannot be created because parent directory `{$parentDir}` does not exist",
+                    ConfigurationKey::CACHE_DIR
+                )
             );
         }
         if (!file_exists($cacheDir)) {
