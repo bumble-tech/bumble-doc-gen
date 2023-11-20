@@ -10,6 +10,7 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
+use Psr\Cache\InvalidArgumentException;
 
 /**
  * Method obtained by parsing the "method" annotation
@@ -308,9 +309,12 @@ class DynamicMethodEntity implements MethodEntityInterface
 
     /**
      * @internal
+     *
+     * @throws InvalidArgumentException
+     * @throws InvalidConfigurationParameterException
      */
     public function isEntityCacheOutdated(): bool
     {
-        return false;
+        return $this->getImplementingClass()->isEntityCacheOutdated();
     }
 }
