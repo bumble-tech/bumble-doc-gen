@@ -16,7 +16,7 @@ interface DocumentTransformableEntityInterface
 
     public function getName(): string;
 
-    public function documentCreationAllowed(): bool;
+    public function isDocumentCreationAllowed(): bool;
 
     public function getShortName(): string;
 

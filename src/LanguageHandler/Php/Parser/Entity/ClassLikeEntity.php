@@ -184,7 +184,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function documentCreationAllowed(): bool
+    public function isDocumentCreationAllowed(): bool
     {
         return !$this->configuration->isCheckFileInGitBeforeCreatingDocEnabled() || $this->isInGit();
     }
