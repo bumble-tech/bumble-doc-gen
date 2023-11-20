@@ -617,10 +617,4 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         }
         return $this->astPrinter->prettyPrint($stmts);
     }
-
-    #[CacheableMethod] public function getDocComment(): string
-    {
-        $docComment = $this->getAst()->getDocComment();
-        return (string)$docComment?->getReformattedText();
-    }
 }
