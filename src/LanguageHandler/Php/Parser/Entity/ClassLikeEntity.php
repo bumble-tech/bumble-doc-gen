@@ -601,17 +601,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
-     *
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getAbsoluteFileName(): ?string
-    {
-        $relativeFileName = $this->getRelativeFileName();
-        return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
-    }
-
-    /**
      * @throws InvalidConfigurationParameterException
      */
     public function getFileContent(): string
