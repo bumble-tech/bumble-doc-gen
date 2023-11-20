@@ -10,7 +10,7 @@ interface CacheableEntityInterface
 
     public function getCacheKey(): string;
 
-    public function entityCacheIsOutdated(): bool;
+    public function isEntityCacheOutdated(): bool;
 
     public function isEntityFileCanBeLoad(): bool;
 

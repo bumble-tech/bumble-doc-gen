@@ -309,7 +309,7 @@ class DynamicMethodEntity implements MethodEntityInterface
     /**
      * @internal
      */
-    public function entityCacheIsOutdated(): bool
+    public function isEntityCacheOutdated(): bool
     {
         return false;
     }

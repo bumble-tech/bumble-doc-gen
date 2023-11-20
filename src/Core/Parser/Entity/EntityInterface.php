@@ -24,5 +24,5 @@ interface EntityInterface
      */
     public function getAbsoluteFileName(): ?string;
 
-    public function entityCacheIsOutdated(): bool;
+    public function isEntityCacheOutdated(): bool;
 }

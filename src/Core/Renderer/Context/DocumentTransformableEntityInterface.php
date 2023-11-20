@@ -20,7 +20,7 @@ interface DocumentTransformableEntityInterface
 
     public function getShortName(): string;
 
-    public function entityCacheIsOutdated(): bool;
+    public function isEntityCacheOutdated(): bool;
 
     public function getDocRender(): EntityDocRendererInterface;
 

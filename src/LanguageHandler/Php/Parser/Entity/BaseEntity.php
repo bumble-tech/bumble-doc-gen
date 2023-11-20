@@ -559,9 +559,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                 $this->localObjectCache->cacheMethodResult(__METHOD__, '', $dependenciesChecks);
             }
         }
-        $entityCacheIsOutdated = $dependenciesChecks[$relativeFileName];
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $key, $entityCacheIsOutdated);
-        return $entityCacheIsOutdated;
+        $isEntityCacheOutdated = $dependenciesChecks[$relativeFileName];
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $key, $isEntityCacheOutdated);
+        return $isEntityCacheOutdated;
     }
 
     protected function isCurrentEntityCanBeLoad(): bool
@@ -585,7 +585,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
      */
-    final public function entityCacheIsOutdated(): bool
+    final public function isEntityCacheOutdated(): bool
     {
         $entity = $this->getCurrentRootEntity();
         $entityName = $entity?->getName();
@@ -616,23 +616,23 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
         $cachedDependencies = $this->getCachedEntityDependencies();
         if (!$cachedDependencies) {
-            $entityCacheIsOutdated = true;
+            $isEntityCacheOutdated = true;
             $this->logger->warning("Unable to load {$entityName} entity dependencies");
         } else {
-            $entityCacheIsOutdated = false;
+            $isEntityCacheOutdated = false;
             $projectRoot = $this->configuration->getProjectRoot();
             foreach ($cachedDependencies as $relativeFileName => $hashFile) {
                 $filePath = "{$projectRoot}{$relativeFileName}";
                 if (array_key_exists($filePath, $dependenciesChecks)) {
                     if ($dependenciesChecks[$filePath]) {
-                        $entityCacheIsOutdated = true;
+                        $isEntityCacheOutdated = true;
                         break;
                     }
                     continue;
                 }
 
                 if (!file_exists($filePath) || md5_file($filePath) !== $hashFile) {
-                    $entityCacheIsOutdated = true;
+                    $isEntityCacheOutdated = true;
                     $dependenciesChecks[$filePath] = true;
                     break;
                 } else {
@@ -641,17 +641,17 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             }
         }
 
-        if (!$entityCacheIsOutdated) {
+        if (!$isEntityCacheOutdated) {
             $localDependencies = $this->getEntityCacheValue($this->getEntityDependenciesCacheKey()) ?? [];
             if (!$localDependencies && $cachedDependencies) {
                 $this->addEntityValueToCache($this->getEntityDependenciesCacheKey(), $cachedDependencies);
             } elseif (ksort($localDependencies) !== ksort($cachedDependencies)) {
-                $entityCacheIsOutdated = true;
+                $isEntityCacheOutdated = true;
             }
         }
 
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $dependenciesChecks);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, $entityCacheIsOutdated);
-        return $entityCacheIsOutdated;
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $entityName, $isEntityCacheOutdated);
+        return $isEntityCacheOutdated;
     }
 }

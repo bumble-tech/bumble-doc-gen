@@ -29,7 +29,7 @@ trait CacheableEntityTrait
         return $this->entityCacheKey;
     }
 
-    abstract public function entityCacheIsOutdated(): bool;
+    abstract public function isEntityCacheOutdated(): bool;
 
     /**
      * @throws InvalidArgumentException

@@ -165,7 +165,7 @@ final class RendererIteratorFactory
                 !$this->isGeneratedEntityDocumentExists($entityWrapper) ||
                 $this->isInternalCachingVersionChanged() ||
                 $this->isConfigurationVersionChanged() ||
-                $entityWrapper->getDocumentTransformableEntity()->entityCacheIsOutdated() ||
+                $entityWrapper->getDocumentTransformableEntity()->isEntityCacheOutdated() ||
                 $this->isFilesDependenciesCacheOutdated($filesDependenciesKey) ||
                 $this->isEntityRelationsCacheOutdated($entityWrapper) ||
                 $this->isEntitiesOperationsLogCacheOutdated($entityWrapper->getEntityName())

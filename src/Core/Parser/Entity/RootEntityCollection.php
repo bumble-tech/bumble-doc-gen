@@ -53,7 +53,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
             if (!is_a($entity, CacheableEntityInterface::class)) {
                 continue;
             }
-            if ($entity->isEntityDataCanBeLoaded() && $entity->entityCacheIsOutdated()) {
+            if ($entity->isEntityDataCanBeLoaded() && $entity->isEntityCacheOutdated()) {
                 $this->logger->info("Preparing {$entity->getName()} dependencies cache");
                 $entity->reloadEntityDependenciesCache();
             }

@@ -120,7 +120,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
                         $relativeFileName
                     );
 
-                    if ($classEntity->entityCacheIsOutdated()) {
+                    if ($classEntity->isEntityCacheOutdated()) {
                         $classEntity->setCustomAst($subNode);
                     }
 
