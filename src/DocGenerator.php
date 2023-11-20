@@ -8,6 +8,7 @@ use BumbleDocGen\AI\Generators\DocBlocksGenerator;
 use BumbleDocGen\AI\Generators\ReadmeTemplateGenerator;
 use BumbleDocGen\AI\ProviderInterface;
 use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\ConfigurationKey;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
@@ -32,6 +33,8 @@ use Symfony\Component\Console\Style\OutputStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
+use function BumbleDocGen\Core\get_class_short;
+
 /**
  * Class for generating documentation.
  */
@@ -40,6 +43,11 @@ final class DocGenerator
     public const VERSION = '1.5.0';
     public const LOG_FILE_NAME = 'last_run.log';
 
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
     public function __construct(
         private Filesystem $fs,
         private OutputStyle $io,
@@ -309,5 +317,119 @@ final class DocGenerator
             ['Allocated memory:', '<options=bold,underscore>' . Helper::formatMemory(memory_get_usage(true)) . '</>'],
             ['Command memory usage:', '<options=bold,underscore>' . Helper::formatMemory($memory) . '</>']
         ]);
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getConfigurationKeys(): void
+    {
+        foreach (ConfigurationKey::all() as $key) {
+            $this->getConfigurationKey($key);
+        }
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getConfigurationKey(string $key): void
+    {
+        $entityMapFn = static fn (object $locator): array => [
+            get_class_short(get_class($locator)),
+            get_class($locator),
+        ];
+        $keyMapFn = static fn (string $key): array => [
+            get_class_short($key),
+            $key,
+        ];
+        $boolWrapFn = static fn (bool $value): string => $value ? 'yes' : 'no';
+
+        $result = match ($key) {
+            ConfigurationKey::PROJECT_ROOT => [
+                [
+                    'Project root',
+                    $this->configuration->getProjectRoot(),
+                ],
+            ],
+            ConfigurationKey::TEMPLATES_DIR => [
+                [
+                    'Templates directory',
+                    $this->configuration->getTemplatesDir(),
+                ],
+            ],
+            ConfigurationKey::OUTPUT_DIR => [
+                [
+                    'Output directory',
+                    $this->configuration->getOutputDir(),
+                ],
+            ],
+            ConfigurationKey::OUTPUT_DIR_BASE_URL => [
+                [
+                    'Output directory base url',
+                    $this->configuration->getOutputDirBaseUrl(),
+                ],
+            ],
+            ConfigurationKey::CACHE_DIR => [
+                [
+                    'Cache directory',
+                    $this->configuration->getCacheDir() ?: '',
+                ],
+            ],
+            ConfigurationKey::PAGE_LINK_PROCESSOR => [
+                [
+                    get_class_short(get_class($this->configuration->getPageLinkProcessor())),
+                    get_class($this->configuration->getPageLinkProcessor()),
+                ],
+            ],
+            ConfigurationKey::GIT_CLIENT_PATH => [
+                [
+                    'Git client path',
+                    $this->configuration->getGitClientPath(),
+                ],
+            ],
+            ConfigurationKey::USE_SHARED_CACHE => [
+                [
+                    'Use shared cache',
+                    $boolWrapFn($this->configuration->useSharedCache()),
+                ],
+            ],
+            ConfigurationKey::CHECK_FILE_IN_GIT_BEFORE_CREATING_DOC => [
+                [
+                    'Check file in Git before creating doc',
+                    $boolWrapFn($this->configuration->isCheckFileInGitBeforeCreatingDocEnabled()),
+                ],
+            ],
+            ConfigurationKey::SOURCE_LOCATORS => array_map(
+                $entityMapFn,
+                iterator_to_array($this->configuration->getSourceLocators())
+            ),
+            ConfigurationKey::LANGUAGE_HANDLERS => array_map(
+                $keyMapFn,
+                $this->configuration->getLanguageHandlersCollection()->keys()
+            ),
+            ConfigurationKey::PLUGINS => array_map(
+                $keyMapFn,
+                $this->configuration->getPlugins()->keys()
+            ),
+            ConfigurationKey::TWIG_FUNCTIONS => array_map(
+                $keyMapFn,
+                $this->configuration->getTwigFunctions()->keys()
+            ),
+            ConfigurationKey::TWIG_FILTERS => array_map(
+                $keyMapFn,
+                $this->configuration->getTwigFilters()->keys()
+            ),
+            ConfigurationKey::ADDITIONAL_CONSOLE_COMMANDS => array_map(
+                $entityMapFn,
+                iterator_to_array($this->configuration->getAdditionalConsoleCommands())
+            ),
+            default => throw new \InvalidArgumentException('Unsupported config key provided: ' . $key)
+        };
+
+        $this->io->table([], $result);
     }
 }

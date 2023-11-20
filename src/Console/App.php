@@ -6,6 +6,7 @@ namespace BumbleDocGen\Console;
 
 use BumbleDocGen\AI\Console\AddDocBlocksCommand;
 use BumbleDocGen\AI\Console\GenerateReadMeTemplateCommand;
+use BumbleDocGen\Console\Command\ConfigurationCommand;
 use BumbleDocGen\Console\Command\GenerateCommand;
 use BumbleDocGen\DocGeneratorFactory;
 use Symfony\Component\Console\Application;
@@ -34,6 +35,7 @@ class App extends Application
         $this->add(new GenerateCommand());
         $this->add(new GenerateReadMeTemplateCommand());
         $this->add(new AddDocBlocksCommand());
+        $this->add(new ConfigurationCommand());
         $this->setExtraCommands();
     }
 
