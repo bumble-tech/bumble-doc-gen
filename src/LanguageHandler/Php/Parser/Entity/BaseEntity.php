@@ -54,8 +54,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      */
     abstract public function getImplementingClass(): ClassLikeEntity;
 
-    abstract public function getDocCommentEntity(): ClassLikeEntity|MethodEntity|PropertyEntity|ConstantEntity;
-
     /**
      * @api
      */
@@ -67,6 +65,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     abstract public function getRootEntityCollection(): PhpEntitiesCollection;
 
     abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
+
+    abstract public function getDocCommentEntity(): ClassLikeEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
     /**
      * @api
@@ -212,8 +212,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     public function isDeprecated(): bool
     {
         $docBlock = $this->getDocBlock();
-        $internalBlock = $docBlock->getTagsByName('deprecated')[0] ?? null;
-        return (bool)$internalBlock;
+        $deprecatedBlock = $docBlock->getTagsByName('deprecated')[0] ?? null;
+        return (bool)$deprecatedBlock;
     }
 
     /**
@@ -620,7 +620,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      */
     private function isSubEntityFileCacheIsOutdated(string $dependenciesCacheKey): bool
     {
-        if (!method_exists($this, 'getImplementingClassName') || !method_exists($this, 'getImplementingClass')) {
+        if (!method_exists($this, 'getImplementingClassName')) {
             return true;
         }
         $key = $this->getImplementingClassName();

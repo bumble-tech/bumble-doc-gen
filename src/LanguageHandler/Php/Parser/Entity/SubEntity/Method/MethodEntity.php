@@ -17,7 +17,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\NodeValueCompiler;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
-use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use PhpParser\ConstExprEvaluationException;
