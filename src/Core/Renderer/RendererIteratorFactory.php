@@ -147,7 +147,7 @@ final class RendererIteratorFactory
         $skippedCount = 0;
         foreach ($pb->iterate($this->documentedEntityWrappersCollection) as $entityWrapper) {
             $pb->setStepDescription("Processing `{$entityWrapper->getEntityName()}` entity");
-            if (!$entityWrapper->getDocumentTransformableEntity()->entityDataCanBeLoaded()) {
+            if (!$entityWrapper->getDocumentTransformableEntity()->isEntityDataCanBeLoaded()) {
                 continue;
             }
 

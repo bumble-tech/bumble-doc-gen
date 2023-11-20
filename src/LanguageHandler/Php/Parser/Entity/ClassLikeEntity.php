@@ -205,7 +205,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         $classEntity = $this;
         if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
             $parentReflectionClass = $this->getParentClass();
-            if ($parentReflectionClass && $parentReflectionClass->entityDataCanBeLoaded()) {
+            if ($parentReflectionClass && $parentReflectionClass->isEntityDataCanBeLoaded()) {
                 $classEntity = $parentReflectionClass->getDocCommentEntity();
             }
         }
@@ -315,7 +315,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     /**
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function entityDataCanBeLoaded(): bool
+    #[CacheableMethod] public function isEntityDataCanBeLoaded(): bool
     {
         if (!$this->isCurrentEntityCanBeLoad()) {
             $this->logger->notice("Class `{$this->getName()}` loading skipped by plugin");
@@ -438,7 +438,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     #[CacheableMethod] public function getInterfaceNames(): array
     {
-        if (!$this->entityDataCanBeLoaded()) {
+        if (!$this->isEntityDataCanBeLoaded()) {
             return [];
         }
 
@@ -460,7 +460,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             $parentInterfaceNames = [];
             try {
                 $interfaceEntity = $this->getRootEntityCollection()->getLoadedOrCreateNew($interfaceName);
-                if ($interfaceEntity->entityDataCanBeLoaded()) {
+                if ($interfaceEntity->isEntityDataCanBeLoaded()) {
                     $parentInterfaceNames = $interfaceEntity->getInterfaceNames();
                 }
             } catch (\Exception $e) {
@@ -471,7 +471,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         if (!$this->isInterface() && $parentClass = $this->getParentClass()) {
             $parentInterfaceNames = [];
             try {
-                if ($parentClass->entityDataCanBeLoaded()) {
+                if ($parentClass->isEntityDataCanBeLoaded()) {
                     $parentInterfaceNames = $parentClass->getInterfaceNames();
                 }
             } catch (\Exception $e) {
@@ -499,7 +499,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     #[CacheableMethod] public function getTraitsNames(): array
     {
-        if (!$this->entityDataCanBeLoaded()) {
+        if (!$this->isEntityDataCanBeLoaded()) {
             return [];
         }
         $traitsNames = [];
@@ -666,7 +666,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         bool $onlyFromCurrentClassAndTraits = false,
         int $flags = MethodEntity::VISIBILITY_MODIFIERS_FLAG_ANY
     ): array {
-        if (!$this->entityDataCanBeLoaded()) {
+        if (!$this->isEntityDataCanBeLoaded()) {
             return [];
         }
         $methods = [];
@@ -685,7 +685,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
 
         $flags &= ~ MethodEntity::MODIFIERS_FLAG_IS_PRIVATE;
         foreach ($this->getTraits() as $traitEntity) {
-            if (!$traitEntity->entityDataCanBeLoaded()) {
+            if (!$traitEntity->isEntityDataCanBeLoaded()) {
                 continue;
             }
             foreach ($traitEntity->getMethodsData(true, $flags) as $name => $methodsData) {
@@ -698,7 +698,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
 
         if (!$onlyFromCurrentClassAndTraits) {
             foreach ($this->getParentClassEntities() as $parentClassEntity) {
-                if (!$parentClassEntity->entityDataCanBeLoaded()) {
+                if (!$parentClassEntity->isEntityDataCanBeLoaded()) {
                     continue;
                 }
                 foreach ($parentClassEntity->getMethodsData(true, $flags) as $name => $methodsData) {
@@ -710,7 +710,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             }
 
             foreach ($this->getInterfacesEntities() as $interfacesEntity) {
-                if (!$interfacesEntity->entityDataCanBeLoaded()) {
+                if (!$interfacesEntity->isEntityDataCanBeLoaded()) {
                     continue;
                 }
                 foreach ($interfacesEntity->getMethodsData(true, $flags) as $name => $methodsData) {
@@ -732,7 +732,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         bool $onlyFromCurrentClassAndTraits = false,
         int $flags = PropertyEntity::VISIBILITY_MODIFIERS_FLAG_ANY
     ): array {
-        if (!$this->entityDataCanBeLoaded()) {
+        if (!$this->isEntityDataCanBeLoaded()) {
             return [];
         }
         $properties = [];
@@ -754,7 +754,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         $flags &= ~ PropertyEntity::MODIFIERS_FLAG_IS_PRIVATE;
         foreach ($this->getTraits() as $traitEntity) {
             foreach ($traitEntity->getPropertiesData(true, $flags) as $name => $propertyData) {
-                if (!$traitEntity->entityDataCanBeLoaded()) {
+                if (!$traitEntity->isEntityDataCanBeLoaded()) {
                     continue;
                 }
                 if (array_key_exists($name, $properties)) {
@@ -765,7 +765,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         }
         if (!$onlyFromCurrentClassAndTraits) {
             foreach ($this->getParentClassEntities() as $parentClassEntity) {
-                if (!$parentClassEntity->entityDataCanBeLoaded()) {
+                if (!$parentClassEntity->isEntityDataCanBeLoaded()) {
                     continue;
                 }
                 foreach ($parentClassEntity->getPropertiesData(true, $flags) as $name => $propertyData) {
@@ -786,7 +786,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         bool $onlyFromCurrentClassAndTraits = false,
         int $flags = ConstantEntity::VISIBILITY_MODIFIERS_FLAG_ANY
     ): array {
-        if (!$this->entityDataCanBeLoaded()) {
+        if (!$this->isEntityDataCanBeLoaded()) {
             return [];
         }
         $constants = [];
@@ -807,7 +807,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
 
         $flags &= ~  ConstantEntity::MODIFIERS_FLAG_IS_PRIVATE;
         foreach ($this->getTraits() as $traitEntity) {
-            if (!$traitEntity->entityDataCanBeLoaded()) {
+            if (!$traitEntity->isEntityDataCanBeLoaded()) {
                 continue;
             }
             foreach ($traitEntity->getConstantsData(true, $flags) as $name => $constantsData) {
@@ -820,7 +820,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
 
         if (!$onlyFromCurrentClassAndTraits) {
             foreach ($this->getParentClassEntities() as $parentClassEntity) {
-                if (!$parentClassEntity->entityDataCanBeLoaded()) {
+                if (!$parentClassEntity->isEntityDataCanBeLoaded()) {
                     continue;
                 }
                 foreach ($parentClassEntity->getConstantsData(true, $flags) as $name => $constantsData) {
@@ -832,7 +832,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             }
 
             foreach ($this->getInterfacesEntities() as $interfacesEntity) {
-                if (!$interfacesEntity->entityDataCanBeLoaded()) {
+                if (!$interfacesEntity->isEntityDataCanBeLoaded()) {
                     continue;
                 }
                 foreach ($interfacesEntity->getConstantsData(true, $flags) as $name => $constantsData) {

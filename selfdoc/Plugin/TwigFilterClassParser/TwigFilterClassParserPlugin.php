@@ -90,7 +90,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     private function isCustomTwigFilter(ClassLikeEntity $classEntity): bool
     {
         foreach (self::TWIG_FILTER_DIR_NAMES as $dirName) {
-            if (!$classEntity->entityDataCanBeLoaded()) {
+            if (!$classEntity->isEntityDataCanBeLoaded()) {
                 continue;
             }
             if (str_starts_with($classEntity->getRelativeFileName(), $dirName) && $classEntity->implementsInterface(CustomFilterInterface::class)) {

@@ -18,7 +18,7 @@ interface RootEntityInterface extends EntityInterface
     /**
      * Checking if it is possible to get the entity data
      */
-    public function entityDataCanBeLoaded(): bool;
+    public function isEntityDataCanBeLoaded(): bool;
 
     /**
      * The entity is loaded from a third party library and should not be treated the same as a standard one

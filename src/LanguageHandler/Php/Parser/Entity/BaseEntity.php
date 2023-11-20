@@ -107,7 +107,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         $types[$k] = "\\{$t}";
                     } elseif (
                         ParserHelper::isCorrectClassName($t) &&
-                        $this->getRootEntityCollection()->getLoadedOrCreateNew($t)->entityDataCanBeLoaded()
+                        $this->getRootEntityCollection()->getLoadedOrCreateNew($t)->isEntityDataCanBeLoaded()
                     ) {
                         $types[$k] = "\\{$t}";
                     }

@@ -53,7 +53,7 @@ final class GetClassMethodsBodyCode implements CustomFunctionInterface
             return null;
         }
         $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
-        if ($classEntity->entityDataCanBeLoaded()) {
+        if ($classEntity->isEntityDataCanBeLoaded()) {
             $methodsCode = [];
             $methodEntityCollection = $classEntity->getMethodEntityCollection();
             $addIndentFromLeft = new AddIndentFromLeft();

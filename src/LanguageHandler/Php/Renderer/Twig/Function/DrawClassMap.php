@@ -99,7 +99,7 @@ final class DrawClassMap implements CustomFunctionInterface
         $entities = [];
         foreach ($classEntityCollections as $classEntityCollection) {
             foreach ($classEntityCollection as $classEntity) {
-                if (!$classEntity->entityDataCanBeLoaded()) {
+                if (!$classEntity->isEntityDataCanBeLoaded()) {
                     continue;
                 }
                 $entities[$classEntity->getName()] = $classEntity;

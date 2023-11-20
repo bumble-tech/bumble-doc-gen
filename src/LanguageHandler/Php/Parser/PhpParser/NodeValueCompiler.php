@@ -99,7 +99,7 @@ final class NodeValueCompiler
         if ($entity->getName() !== $className) {
             $entity = $entity->getRootEntityCollection()->getLoadedOrCreateNew($className);
         }
-        if (!$entity->entityDataCanBeLoaded()) {
+        if (!$entity->isEntityDataCanBeLoaded()) {
             throw new \RuntimeException('Entity cannot be loaded');
         }
         $methodEntity = $entity->getMethodEntity($node->name->toString());
@@ -123,7 +123,7 @@ final class NodeValueCompiler
         if ($entity->getName() !== $className) {
             $entity = $entity->getRootEntityCollection()->getLoadedOrCreateNew($className);
         }
-        if (!$entity->entityDataCanBeLoaded()) {
+        if (!$entity->isEntityDataCanBeLoaded()) {
             throw new \RuntimeException('Entity cannot be loaded');
         }
         return $entity->getPropertyEntity($node->name->toString())->getDefaultValue();
@@ -158,7 +158,7 @@ final class NodeValueCompiler
             return $className;
         }
 
-        if (!$entity->entityDataCanBeLoaded()) {
+        if (!$entity->isEntityDataCanBeLoaded()) {
             throw new \RuntimeException('Entity cannot be loaded');
         }
 

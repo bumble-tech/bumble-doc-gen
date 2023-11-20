@@ -27,7 +27,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
 
     /**
      * @warning The entity obtained as a result of executing this method may not be available for loading
-     * @see RootEntityInterface::entityDataCanBeLoaded()
+     * @see RootEntityInterface::isEntityDataCanBeLoaded()
      */
     abstract public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): RootEntityInterface;
 
@@ -53,7 +53,7 @@ abstract class RootEntityCollection extends BaseEntityCollection
             if (!is_a($entity, CacheableEntityInterface::class)) {
                 continue;
             }
-            if ($entity->entityDataCanBeLoaded() && $entity->entityCacheIsOutdated()) {
+            if ($entity->isEntityDataCanBeLoaded() && $entity->entityCacheIsOutdated()) {
                 $this->logger->info("Preparing {$entity->getName()} dependencies cache");
                 $entity->reloadEntityDependenciesCache();
             }

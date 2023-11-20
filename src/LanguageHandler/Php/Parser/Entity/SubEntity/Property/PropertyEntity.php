@@ -162,12 +162,12 @@ class PropertyEntity extends BaseEntity
             $implementingClass = $this->getImplementingClass();
             $parentClass = $this->getImplementingClass()->getParentClass();
             $propertyName = $this->getName();
-            if ($parentClass && $parentClass->entityDataCanBeLoaded() && $parentClass->hasProperty($propertyName)) {
+            if ($parentClass && $parentClass->isEntityDataCanBeLoaded() && $parentClass->hasProperty($propertyName)) {
                 $parentReflectionProperty = $parentClass->getPropertyEntity($propertyName);
                 $reflectionProperty = $parentReflectionProperty->getDocCommentEntity();
             } else {
                 foreach ($implementingClass->getInterfacesEntities() as $interface) {
-                    if ($interface->entityDataCanBeLoaded() && $interface->hasProperty($propertyName)) {
+                    if ($interface->isEntityDataCanBeLoaded() && $interface->hasProperty($propertyName)) {
                         $reflectionProperty = $interface->getPropertyEntity($propertyName);
                         break;
                     }

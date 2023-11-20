@@ -83,7 +83,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
             return $preloadResourceLink;
         }
         $entity = $rootEntityCollection->getLoadedOrCreateNew($entityName);
-        if ($entity->entityDataCanBeLoaded()) {
+        if ($entity->isEntityDataCanBeLoaded()) {
             if (!$entity->documentCreationAllowed()) {
                 return self::DEFAULT_URL;
             } elseif ($createDocument && is_a($entity, DocumentTransformableEntityInterface::class)) {

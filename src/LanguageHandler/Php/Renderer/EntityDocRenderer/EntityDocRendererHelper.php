@@ -52,7 +52,7 @@ final class EntityDocRendererHelper
         if ($needToUseDefaultEntity) {
             $defaultEntity = $rootEntityCollection->getLoadedOrCreateNew($defaultEntityName);
             $cursorTmpName = str_replace(['$', '(', ')'], '', $className);
-            if (!$defaultEntity->entityDataCanBeLoaded()) {
+            if (!$defaultEntity->isEntityDataCanBeLoaded()) {
                 $entity = $defaultEntity;
                 $classData[1] = '';
             } elseif (
@@ -67,12 +67,12 @@ final class EntityDocRendererHelper
 
         if (!$entity) {
             $nextEntity = $rootEntityCollection->getLoadedOrCreateNew($className);
-            if ($nextEntity->entityDataCanBeLoaded() && $nextEntity->documentCreationAllowed()) {
+            if ($nextEntity->isEntityDataCanBeLoaded() && $nextEntity->documentCreationAllowed()) {
                 $entity = $nextEntity;
             }
         }
 
-        if ($entity && $entity->entityDataCanBeLoaded()) {
+        if ($entity && $entity->isEntityDataCanBeLoaded()) {
             $cursor = '';
             if ($classData[1] ?? null) {
                 $cursorTarget = str_replace(['$', '(', ')'], '', $classData[1]);

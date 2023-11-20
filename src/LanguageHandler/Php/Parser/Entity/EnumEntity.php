@@ -29,7 +29,7 @@ class EnumEntity extends ClassLikeEntity
      */
     #[CacheableMethod] public function getEnumCases(): array
     {
-        if (!$this->entityDataCanBeLoaded()) {
+        if (!$this->isEntityDataCanBeLoaded()) {
             return [];
         }
 

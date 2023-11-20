@@ -40,7 +40,7 @@ class ClassEntity extends ClassLikeEntity
      */
     #[CacheableMethod] public function getParentClassNames(): array
     {
-        if (!$this->entityDataCanBeLoaded()) {
+        if (!$this->isEntityDataCanBeLoaded()) {
             return [];
         }
         try {
@@ -59,7 +59,7 @@ class ClassEntity extends ClassLikeEntity
      */
     #[CacheableMethod] public function getParentClassName(): ?string
     {
-        if (!$this->entityDataCanBeLoaded()) {
+        if (!$this->isEntityDataCanBeLoaded()) {
             return null;
         }
         if ($parentClassName = $this->getAst()->extends?->toString()) {

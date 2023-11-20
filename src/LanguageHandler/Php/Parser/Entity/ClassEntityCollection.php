@@ -390,7 +390,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
             $duplicates = [];
             foreach ($this->entities as $entity) {
                 $index[$entity->getName()] = $entity;
-                if ($entity->entityDataCanBeLoaded() && $entity->getRelativeFileName()) {
+                if ($entity->isEntityDataCanBeLoaded() && $entity->getRelativeFileName()) {
                     $index[$entity->getRelativeFileName()] = $entity;
                     $index[$entity->getAbsoluteFileName()] = $entity;
                     $index[$entity->getFileSourceLink(false)] = $entity;

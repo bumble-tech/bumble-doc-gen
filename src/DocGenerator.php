@@ -103,7 +103,7 @@ final class DocGenerator
             foreach ($entitiesCollection as $classEntity) {
                 /**@var ClassLikeEntity $classEntity */
                 if (
-                    !$classEntity->entityDataCanBeLoaded() || array_key_exists(
+                    !$classEntity->isEntityDataCanBeLoaded() || array_key_exists(
                         $classEntity->getName(),
                         $alreadyProcessedEntities
                     )
