@@ -102,7 +102,7 @@ final class NodeValueCompiler
         if (!$entity->isEntityDataCanBeLoaded()) {
             throw new \RuntimeException('Entity cannot be loaded');
         }
-        $methodEntity = $entity->getMethodEntity($node->name->toString());
+        $methodEntity = $entity->getMethod($node->name->toString(), true);
         if (!$methodEntity) {
             return null;
         }
