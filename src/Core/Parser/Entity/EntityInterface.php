@@ -22,6 +22,8 @@ interface EntityInterface
      */
     public function getFileName(): ?string;
 
+    public function getRelativeFileName(): ?string;
+
     /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
      */
