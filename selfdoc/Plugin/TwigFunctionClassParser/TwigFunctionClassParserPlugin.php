@@ -121,7 +121,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    private function getFunctionData(ClassEntityCollection $classEntityCollection, string $className): ?array
+    private function getFunctionData(ClassEntityCollection $entityCollection, string $className): ?array
     {
         static $functionsData = [];
         if (!array_key_exists($className, $functionsData)) {
@@ -129,7 +129,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
             if (!isset($functions[$className])) {
                 return null;
             }
-            $entity = $classEntityCollection->getEntityByClassName($className);
+            $entity = $entityCollection->getEntityByClassName($className);
             if (str_starts_with($entity->getRelativeFileName(), '/selfdoc')) {
                 return null;
             }

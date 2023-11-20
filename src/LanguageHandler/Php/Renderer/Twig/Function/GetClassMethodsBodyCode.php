@@ -48,11 +48,11 @@ final class GetClassMethodsBodyCode implements CustomFunctionInterface
      */
     public function __invoke(string $className, array $methodsNames): ?string
     {
-        $classEntityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
-        if (!is_a($classEntityCollection, ClassEntityCollection::class)) {
+        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        if (!is_a($entityCollection, ClassEntityCollection::class)) {
             return null;
         }
-        $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
+        $classEntity = $entityCollection->getLoadedOrCreateNew($className);
         if ($classEntity->isEntityDataCanBeLoaded()) {
             $methodsCode = [];
             $methodEntityCollection = $classEntity->getMethodEntityCollection();

@@ -18,8 +18,8 @@ use DI\NotFoundException;
  *
  * @note This function initiates the creation of documents for the displayed entities
  *
- * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/src/Renderer'])) }}
- * @example {{ drawClassMap(classEntityCollection) }}
+ * @example {{ drawClassMap(phpEntities.filterByPaths(['/src/Renderer'])) }}
+ * @example {{ drawClassMap(phpEntities) }}
  */
 final class DrawClassMap implements CustomFunctionInterface
 {
@@ -46,7 +46,7 @@ final class DrawClassMap implements CustomFunctionInterface
 
 
     /**
-     * @param ClassEntityCollection ...$classEntityCollections
+     * @param ClassEntityCollection ...$entityCollections
      *  The collection of entities for which the class map will be generated
      * @return string
      *
@@ -55,10 +55,10 @@ final class DrawClassMap implements CustomFunctionInterface
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
-        ClassEntityCollection ...$classEntityCollections,
+        ClassEntityCollection ...$entityCollections,
     ): string {
         $structure = $this->convertDirectoryStructureToFormattedString(
-            $this->getDirectoryStructure(...$classEntityCollections),
+            $this->getDirectoryStructure(...$entityCollections),
         );
         return "<embed> <pre>{$structure}</pre> </embed>";
     }
@@ -94,11 +94,11 @@ final class DrawClassMap implements CustomFunctionInterface
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDirectoryStructure(ClassEntityCollection ...$classEntityCollections): array
+    public function getDirectoryStructure(ClassEntityCollection ...$entityCollections): array
     {
         $entities = [];
-        foreach ($classEntityCollections as $classEntityCollection) {
-            foreach ($classEntityCollection as $classEntity) {
+        foreach ($entityCollections as $entityCollection) {
+            foreach ($entityCollection as $classEntity) {
                 if (!$classEntity->isEntityDataCanBeLoaded()) {
                     continue;
                 }

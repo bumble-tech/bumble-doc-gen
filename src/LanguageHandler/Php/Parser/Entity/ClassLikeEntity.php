@@ -54,7 +54,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     public function __construct(
         private Configuration $configuration,
         private PhpHandlerSettings $phpHandlerSettings,
-        private ClassEntityCollection $classEntityCollection,
+        private ClassEntityCollection $entityCollection,
         private ParserHelper $parserHelper,
         private ComposerHelper $composerHelper,
         private PhpParserHelper $phpParserHelper,
@@ -116,7 +116,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
 
     final public function getRootEntityCollection(): ClassEntityCollection
     {
-        return $this->classEntityCollection;
+        return $this->entityCollection;
     }
 
     /**
@@ -395,7 +395,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     {
         $traits = [];
         foreach ($this->getTraitsNames() as $traitsName) {
-            $traits[] = $this->classEntityCollection->getLoadedOrCreateNew($traitsName);
+            $traits[] = $this->entityCollection->getLoadedOrCreateNew($traitsName);
         }
         return $traits;
     }

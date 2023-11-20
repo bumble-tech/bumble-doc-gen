@@ -12,12 +12,12 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class AfterLoadingClassEntityCollection extends Event
 {
-    public function __construct(private ClassEntityCollection $classEntityCollection)
+    public function __construct(private ClassEntityCollection $entityCollection)
     {
     }
 
     public function getClassEntityCollection(): ClassEntityCollection
     {
-        return $this->classEntityCollection;
+        return $this->entityCollection;
     }
 }

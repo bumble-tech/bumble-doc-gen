@@ -16,18 +16,18 @@ final class OnAddClassEntityToCollection extends Event implements OnlySingleExec
 {
     public function __construct(
         private ClassLikeEntity $classEntity,
-        private ClassEntityCollection $classEntityCollection
+        private ClassEntityCollection $entityCollection
     ) {
     }
 
     public function getUniqueExecutionId(): string
     {
-        return "{$this->classEntity->getName()}{$this->classEntityCollection->getEntityCollectionName()}";
+        return "{$this->classEntity->getName()}{$this->entityCollection->getEntityCollectionName()}";
     }
 
     public function getClassEntityCollection(): ClassEntityCollection
     {
-        return $this->classEntityCollection;
+        return $this->entityCollection;
     }
 
     public function getRootEntity(): ClassLikeEntity

@@ -136,7 +136,7 @@ final class CacheablePhpEntityFactory
      * @throws InvalidConfigurationParameterException
      */
     public function createClassLikeEntity(
-        ClassEntityCollection $classEntityCollection,
+        ClassEntityCollection $entityCollection,
         string $className,
         ?string $relativeFileName = null
     ): ClassLikeEntity {
@@ -167,7 +167,7 @@ final class CacheablePhpEntityFactory
         $wrapperClassName = $this->getOrCreateEntityClassWrapper($entityClassName);
         /** @var ClassLikeEntity $classEntity */
         $classEntity = $this->diContainer->make($wrapperClassName, [
-            'classEntityCollection' => $classEntityCollection,
+            'entityCollection' => $entityCollection,
             'className' => $className,
             'relativeFileName' => $relativeFileName
         ]);
@@ -181,7 +181,7 @@ final class CacheablePhpEntityFactory
      */
     public function createSubClassEntity(
         string $subClassEntity,
-        ClassEntityCollection $classEntityCollection,
+        ClassEntityCollection $entityCollection,
         string $className,
         ?string $relativeFileName
     ): ClassLikeEntity {
@@ -198,7 +198,7 @@ final class CacheablePhpEntityFactory
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper($subClassEntity);
         $classEntity = $this->diContainer->make($wrapperClassName, [
-            'classEntityCollection' => $classEntityCollection,
+            'entityCollection' => $entityCollection,
             'className' => $className,
             'relativeFileName' => $relativeFileName
         ]);

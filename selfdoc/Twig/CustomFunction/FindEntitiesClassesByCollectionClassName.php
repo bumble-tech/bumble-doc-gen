@@ -26,12 +26,12 @@ final class FindEntitiesClassesByCollectionClassName implements CustomFunctionIn
      */
     public function __invoke(string $collectionName): array
     {
-        $classEntityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
         /**
          * @var ClassLikeEntity $findCollectionEntity
          */
-        $findCollectionEntity = $classEntityCollection->findEntity($collectionName);
+        $findCollectionEntity = $entityCollection->findEntity($collectionName);
         $addMethodEntity = $findCollectionEntity->getMethodEntity('add');
         if (!$addMethodEntity) {
             return [];
@@ -40,14 +40,14 @@ final class FindEntitiesClassesByCollectionClassName implements CustomFunctionIn
         /**
          * @var ClassLikeEntity $firstParamEntity
          */
-        $firstParamEntity = $classEntityCollection->findEntity($firstParam['type']);
+        $firstParamEntity = $entityCollection->findEntity($firstParam['type']);
 
         if ($firstParamEntity->isInterface()) {
-            return iterator_to_array($classEntityCollection->filterByInterfaces([$firstParamEntity->getName()]));
+            return iterator_to_array($entityCollection->filterByInterfaces([$firstParamEntity->getName()]));
         } elseif ($firstParamEntity->isInstantiable()) {
             return [$firstParamEntity];
         }
-        return iterator_to_array($classEntityCollection->filterByParentClassNames([$firstParamEntity->getName()]));
+        return iterator_to_array($entityCollection->filterByParentClassNames([$firstParamEntity->getName()]));
     }
 
     public static function getName(): string

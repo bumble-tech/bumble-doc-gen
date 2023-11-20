@@ -359,14 +359,14 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      * @return ClassLikeEntity|null
      *
      * @example
-     *  $classEntityCollection->findEntity('App'); // class name
-     *  $classEntityCollection->findEntity('BumbleDocGen\Console\App'); // class with namespace
-     *  $classEntityCollection->findEntity('\BumbleDocGen\Console\App'); // class with namespace
-     *  $classEntityCollection->findEntity('\BumbleDocGen\Console\App::test()'); // class with namespace and optional part
-     *  $classEntityCollection->findEntity('App.php'); // filename
-     *  $classEntityCollection->findEntity('/BumbleDocGen/Console/App.php'); // relative path
-     *  $classEntityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/BumbleDocGen/Console/App.php'); // absolute path
-     *  $classEntityCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Console/App.php'); // source link
+     *  $entityCollection->findEntity('App'); // class name
+     *  $entityCollection->findEntity('BumbleDocGen\Console\App'); // class with namespace
+     *  $entityCollection->findEntity('\BumbleDocGen\Console\App'); // class with namespace
+     *  $entityCollection->findEntity('\BumbleDocGen\Console\App::test()'); // class with namespace and optional part
+     *  $entityCollection->findEntity('App.php'); // filename
+     *  $entityCollection->findEntity('/BumbleDocGen/Console/App.php'); // relative path
+     *  $entityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/BumbleDocGen/Console/App.php'); // absolute path
+     *  $entityCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Console/App.php'); // source link
      */
     public function internalFindEntity(string $search, bool $useUnsafeKeys = true): ?ClassLikeEntity
     {

@@ -126,7 +126,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    private function getFilterData(ClassEntityCollection $classEntityCollection, string $className): ?array
+    private function getFilterData(ClassEntityCollection $entityCollection, string $className): ?array
     {
         static $filtersData = [];
         if (!array_key_exists($className, $filtersData)) {
@@ -136,7 +136,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
             }
 
             $functionData['name'] = $filters[$className];
-            $entity = $classEntityCollection->getEntityByClassName($className);
+            $entity = $entityCollection->getEntityByClassName($className);
             $method = $entity->getMethodEntityCollection()->get('__invoke');
             $functionData['parameters'] = $method->getParameters();
             $filtersData[$className] = $functionData;

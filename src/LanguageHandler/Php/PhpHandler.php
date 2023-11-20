@@ -16,7 +16,7 @@ use DI\NotFoundException;
 
 final class PhpHandler implements LanguageHandlerInterface
 {
-    public function __construct(private ClassEntityCollection $classEntityCollection, private PhpHandlerSettings $phpHandlerSettings)
+    public function __construct(private ClassEntityCollection $entityCollection, private PhpHandlerSettings $phpHandlerSettings)
     {
     }
 
@@ -33,10 +33,10 @@ final class PhpHandler implements LanguageHandlerInterface
      */
     public function getEntityCollection(): RootEntityCollection
     {
-        if ($this->classEntityCollection->isEmpty()) {
-            $this->classEntityCollection->loadClassEntities();
+        if ($this->entityCollection->isEmpty()) {
+            $this->entityCollection->loadClassEntities();
         }
-        return $this->classEntityCollection;
+        return $this->entityCollection;
     }
 
     /**

@@ -64,9 +64,9 @@ final class RootEntityCollectionsGroup implements \IteratorAggregate
         return $operationsLog;
     }
 
-    public function isFoundEntitiesOperationsLogCacheOutdated(array $classEntityCollectionOperationsLog): bool
+    public function isFoundEntitiesOperationsLogCacheOutdated(array $entityCollectionOperationsLog): bool
     {
-        foreach ($classEntityCollectionOperationsLog as $collectionName => $operationsLog) {
+        foreach ($entityCollectionOperationsLog as $collectionName => $operationsLog) {
             $collection = $this->get($collectionName);
             if (!$collection || $operationsLog->isFoundEntitiesCacheOutdated($this->get($collectionName))) {
                 return true;
