@@ -337,7 +337,7 @@ public function getNearestIndexFile(string $templateName): string;
 </ul>
 
 ```php
-public function getPageDataByKey(string $key): array|null;
+public function getPageDataByKey(string $key): null|array;
 ```
 
 
@@ -361,7 +361,7 @@ public function getPageDataByKey(string $key): array|null;
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
 
 
 <b>Throws:</b>
@@ -388,7 +388,7 @@ public function getPageDataByKey(string $key): array|null;
 </ul>
 
 ```php
-public function getPageDocFileByKey(string $key): string|null;
+public function getPageDocFileByKey(string $key): null|string;
 ```
 
 
@@ -412,7 +412,7 @@ public function getPageDocFileByKey(string $key): string|null;
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>
@@ -439,7 +439,7 @@ public function getPageDocFileByKey(string $key): string|null;
 </ul>
 
 ```php
-public function getPageLinkByKey(string $key): string|null;
+public function getPageLinkByKey(string $key): null|string;
 ```
 
 
@@ -463,7 +463,7 @@ public function getPageLinkByKey(string $key): string|null;
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>
@@ -490,7 +490,7 @@ public function getPageLinkByKey(string $key): string|null;
 </ul>
 
 ```php
-public function getTemplateLinkKey(string $templateName): string|null;
+public function getTemplateLinkKey(string $templateName): null|string;
 ```
 
 
@@ -514,7 +514,7 @@ public function getTemplateLinkKey(string $templateName): string|null;
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>

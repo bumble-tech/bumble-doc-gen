@@ -13,7 +13,7 @@ trait CacheableEntityTrait
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
     #[Inject] private Configuration $configuration;
 
-    private string $entityCacheVersion = 'v1';
+    private string $entityCacheVersion = 'v2';
     private string $entityCacheKey = '';
     private bool $isCacheChanged = false;
 

@@ -199,7 +199,7 @@ public function filePathToFileInternalLink(string $fileName): string;
 </ul>
 
 ```php
-public function getPreloadResourceLink(string $resourceName): string|null;
+public function getPreloadResourceLink(string $resourceName): null|string;
 ```
 
 
@@ -223,7 +223,7 @@ public function getPreloadResourceLink(string $resourceName): string|null;
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 </div>

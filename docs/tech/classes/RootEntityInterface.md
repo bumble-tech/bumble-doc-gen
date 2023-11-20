@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Parser\Entity;
 
-interface RootEntityInterface extends \\BumbleDocGen\Core\Parser\Entity\EntityInterface implements \BumbleDocGen\Core\Parser\Entity\EntityInterface
+interface RootEntityInterface extends \BumbleDocGen\Core\Parser\Entity\EntityInterface
 ```
 
 <blockquote>Since the documentation generator supports several programming languages,
@@ -134,14 +134,14 @@ public function entityDataCanBeLoaded(): bool;
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
 
-public function getAbsoluteFileName(): string|null;
+public function getAbsoluteFileName(): null|string;
 ```
 
 <blockquote>Returns the absolute path to a file if it can be retrieved and if the file is in the project directory</blockquote>
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 </div>
@@ -199,14 +199,14 @@ public function getFileContent(): string;
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
 
-public function getFileName(): string|null;
+public function getFileName(): null|string;
 ```
 
 <blockquote>Returns the relative path to a file if it can be retrieved and if the file is in the project directory</blockquote>
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 </div>
@@ -220,7 +220,7 @@ public function getFileName(): string|null;
 </ul>
 
 ```php
-public function getFileSourceLink(bool $withLine = true): string|null;
+public function getFileSourceLink(bool $withLine = true): null|string;
 ```
 
 
@@ -244,7 +244,7 @@ public function getFileSourceLink(bool $withLine = true): string|null;
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 </div>

@@ -28,7 +28,7 @@ final class PhpDocumentorStubberPlugin implements \BumbleDocGen\Core\Plugin\Plug
 <ol>
 <li>
     <a href="#mgetsubscribedevents">getSubscribedEvents</a>
-    - <i>Returns an array of event names this subscriber wants to listen to.</i></li>
+    </li>
 <li>
     <a href="#moncheckisclassentitycanbeload">onCheckIsClassEntityCanBeLoad</a>
     </li>
@@ -57,7 +57,7 @@ final class PhpDocumentorStubberPlugin implements \BumbleDocGen\Core\Plugin\Plug
 public static function getSubscribedEvents(): array;
 ```
 
-<blockquote>Returns an array of event names this subscriber wants to listen to.</blockquote>
+
 
 <b>Parameters:</b> not specified
 

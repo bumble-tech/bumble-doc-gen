@@ -35,31 +35,31 @@ final class EntityCacheItemPool implements \Psr\Cache\CacheItemPoolInterface
 <ol>
 <li>
     <a href="#mclear">clear</a>
-    - <i>Deletes all items in the pool.</i></li>
+    </li>
 <li>
     <a href="#mcommit">commit</a>
-    - <i>Persists any deferred cache items.</i></li>
+    </li>
 <li>
     <a href="#mdeleteitem">deleteItem</a>
-    - <i>Removes the item from the pool.</i></li>
+    </li>
 <li>
     <a href="#mdeleteitems">deleteItems</a>
-    - <i>Removes multiple items from the pool.</i></li>
+    </li>
 <li>
     <a href="#mgetitem">getItem</a>
-    - <i>Returns a Cache Item representing the specified key.</i></li>
+    </li>
 <li>
     <a href="#mgetitems">getItems</a>
-    - <i>Returns a traversable set of cache items.</i></li>
+    </li>
 <li>
     <a href="#mhasitem">hasItem</a>
-    - <i>Confirms if the cache contains specified cache item.</i></li>
+    </li>
 <li>
     <a href="#msave">save</a>
-    - <i>Persists a cache item immediately.</i></li>
+    </li>
 <li>
     <a href="#msavedeferred">saveDeferred</a>
-    - <i>Sets a cache item to be persisted later.</i></li>
+    </li>
 </ol>
 
 
@@ -126,7 +126,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 public function clear(): bool;
 ```
 
-<blockquote>Deletes all items in the pool.</blockquote>
+
 
 <b>Parameters:</b> not specified
 
@@ -147,7 +147,7 @@ public function clear(): bool;
 public function commit(): bool;
 ```
 
-<blockquote>Persists any deferred cache items.</blockquote>
+
 
 <b>Parameters:</b> not specified
 
@@ -168,7 +168,7 @@ public function commit(): bool;
 public function deleteItem(string $key): bool;
 ```
 
-<blockquote>Removes the item from the pool.</blockquote>
+
 
 <b>Parameters:</b>
 
@@ -184,20 +184,13 @@ public function deleteItem(string $key): bool;
             <tr>
             <td>$key</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>The key to delete.</td>
+            <td>-</td>
         </tr>
         </tbody>
 </table>
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a> - If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException MUST be thrown. </li>
-
-</ul>
 
 </div>
 <hr>
@@ -213,7 +206,7 @@ public function deleteItem(string $key): bool;
 public function deleteItems(array $keys): bool;
 ```
 
-<blockquote>Removes multiple items from the pool.</blockquote>
+
 
 <b>Parameters:</b>
 
@@ -228,21 +221,14 @@ public function deleteItems(array $keys): bool;
     <tbody>
             <tr>
             <td>$keys</td>
-            <td><a href='https://www.php.net/manual/en/language.types.array.php'>string[]</a></td>
-            <td>An array of keys that should be removed from the pool.</td>
+            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
+            <td>-</td>
         </tr>
         </tbody>
 </table>
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a> - If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException MUST be thrown. </li>
-
-</ul>
 
 </div>
 <hr>
@@ -258,7 +244,7 @@ public function deleteItems(array $keys): bool;
 public function getItem(string $key): \Psr\Cache\CacheItemInterface;
 ```
 
-<blockquote>Returns a Cache Item representing the specified key.</blockquote>
+
 
 <b>Parameters:</b>
 
@@ -274,20 +260,13 @@ public function getItem(string $key): \Psr\Cache\CacheItemInterface;
             <tr>
             <td>$key</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>The key for which to return the corresponding Cache Item.</td>
+            <td>-</td>
         </tr>
         </tbody>
 </table>
 
 <b>Return value:</b> <a href='https://github.com/php-fig/cache/blob/master/src/CacheItemInterface.php'>\Psr\Cache\CacheItemInterface</a>
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a> - If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException MUST be thrown. </li>
-
-</ul>
 
 </div>
 <hr>
@@ -303,7 +282,7 @@ public function getItem(string $key): \Psr\Cache\CacheItemInterface;
 public function getItems(array $keys = []): iterable;
 ```
 
-<blockquote>Returns a traversable set of cache items.</blockquote>
+
 
 <b>Parameters:</b>
 
@@ -318,21 +297,14 @@ public function getItems(array $keys = []): iterable;
     <tbody>
             <tr>
             <td>$keys</td>
-            <td><a href='https://www.php.net/manual/en/language.types.array.php'>string[]</a></td>
-            <td>An indexed array of keys of items to retrieve.</td>
+            <td><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></td>
+            <td>-</td>
         </tr>
         </tbody>
 </table>
 
-<b>Return value:</b> iterable
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.iterable.php'>iterable</a>
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a> - If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException MUST be thrown. </li>
-
-</ul>
 
 </div>
 <hr>
@@ -348,7 +320,7 @@ public function getItems(array $keys = []): iterable;
 public function hasItem(string $key): bool;
 ```
 
-<blockquote>Confirms if the cache contains specified cache item.</blockquote>
+
 
 <b>Parameters:</b>
 
@@ -364,20 +336,13 @@ public function hasItem(string $key): bool;
             <tr>
             <td>$key</td>
             <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>The key for which to check existence.</td>
+            <td>-</td>
         </tr>
         </tbody>
 </table>
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a> - If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException MUST be thrown. </li>
-
-</ul>
 
 </div>
 <hr>
@@ -393,7 +358,7 @@ public function hasItem(string $key): bool;
 public function save(\Psr\Cache\CacheItemInterface $item): bool;
 ```
 
-<blockquote>Persists a cache item immediately.</blockquote>
+
 
 <b>Parameters:</b>
 
@@ -409,7 +374,7 @@ public function save(\Psr\Cache\CacheItemInterface $item): bool;
             <tr>
             <td>$item</td>
             <td><a href='https://github.com/php-fig/cache/blob/master/src/CacheItemInterface.php'>\Psr\Cache\CacheItemInterface</a></td>
-            <td>The cache item to save.</td>
+            <td>-</td>
         </tr>
         </tbody>
 </table>
@@ -431,7 +396,7 @@ public function save(\Psr\Cache\CacheItemInterface $item): bool;
 public function saveDeferred(\Psr\Cache\CacheItemInterface $item): bool;
 ```
 
-<blockquote>Sets a cache item to be persisted later.</blockquote>
+
 
 <b>Parameters:</b>
 
@@ -447,7 +412,7 @@ public function saveDeferred(\Psr\Cache\CacheItemInterface $item): bool;
             <tr>
             <td>$item</td>
             <td><a href='https://github.com/php-fig/cache/blob/master/src/CacheItemInterface.php'>\Psr\Cache\CacheItemInterface</a></td>
-            <td>The cache item to save.</td>
+            <td>-</td>
         </tr>
         </tbody>
 </table>

@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Parser\Entity;
 
-final class RootEntityCollectionsGroup implements \IteratorAggregate, \Traversable
+final class RootEntityCollectionsGroup implements \IteratorAggregate
 ```
 
 
@@ -37,7 +37,7 @@ final class RootEntityCollectionsGroup implements \IteratorAggregate, \Traversab
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 <li>
     <a href="#mgetoperationslog">getOperationsLog</a>
     </li>
@@ -128,7 +128,7 @@ public function clearOperationsLog(): void;
 </ul>
 
 ```php
-public function get(string $collectionName): \BumbleDocGen\Core\Parser\Entity\RootEntityCollection|null;
+public function get(string $collectionName): null|\BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 ```
 
 
@@ -152,7 +152,7 @@ public function get(string $collectionName): \BumbleDocGen\Core\Parser\Entity\Ro
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a>
 
 
 </div>
@@ -169,26 +169,13 @@ public function get(string $collectionName): \BumbleDocGen\Core\Parser\Entity\Ro
 public function getIterator(): \Generator;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 <div class='method_description-block'>

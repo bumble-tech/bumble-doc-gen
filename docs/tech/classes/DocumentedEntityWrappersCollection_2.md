@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Renderer\Context;
 
-final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \Traversable, \Countable
+final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \Countable
 ```
 
 
@@ -35,7 +35,7 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \T
 <ol>
 <li>
     <a href="#mcount">count</a>
-    - <i>Count elements of an object</i></li>
+    </li>
 <li>
     <a href="#mcreateandadddocumentedentitywrapper">createAndAddDocumentedEntityWrapper</a>
     </li>
@@ -44,7 +44,7 @@ final class DocumentedEntityWrappersCollection implements \IteratorAggregate, \T
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 </ol>
 
 
@@ -119,19 +119,13 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
 public function count(): int;
 ```
 
-<blockquote>Count elements of an object</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.integer.php'>int</a>
 
 
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/countable.count.php">https://php.net/manual/en/countable.count.php</a>    </li>
-</ul>
 </div>
 <hr>
 <div class='method_description-block'>
@@ -212,26 +206,13 @@ public function getDocumentedEntitiesRelations(): array;
 public function getIterator(): \Generator;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 

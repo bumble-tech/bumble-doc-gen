@@ -7,7 +7,6 @@ namespace BumbleDocGen\AI\Console;
 use BumbleDocGen\AI\Traits\SharedCommandLogicTrait;
 use BumbleDocGen\Console\Command\BaseCommand;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
 use GuzzleHttp\Exception\GuzzleException;
@@ -46,7 +45,6 @@ final class AddDocBlocksCommand extends BaseCommand
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws GuzzleException
      * @throws JsonException
      */

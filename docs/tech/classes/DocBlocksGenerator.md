@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DocBlocksGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L17">DocBlocksGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L16">DocBlocksGenerator</a> class:
 </h1>
 
 
@@ -46,11 +46,11 @@ final class DocBlocksGenerator
 <ul>
             <li><a name="qmode-read-all-code"
                href="#qmode-read-all-code">#</a>
-            <code>MODE_READ_ALL_CODE</code>                   <b>|</b> <a href="/src/AI/Generators/DocBlocksGenerator.php#L20">source
+            <code>MODE_READ_ALL_CODE</code>                   <b>|</b> <a href="/src/AI/Generators/DocBlocksGenerator.php#L19">source
                     code</a> </li>
             <li><a name="qmode-read-only-signatures"
                href="#qmode-read-only-signatures">#</a>
-            <code>MODE_READ_ONLY_SIGNATURES</code>                   <b>|</b> <a href="/src/AI/Generators/DocBlocksGenerator.php#L19">source
+            <code>MODE_READ_ONLY_SIGNATURES</code>                   <b>|</b> <a href="/src/AI/Generators/DocBlocksGenerator.php#L18">source
                     code</a> </li>
     </ul>
 
@@ -65,7 +65,7 @@ final class DocBlocksGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L21">source code</a></li>
 </ul>
 
 ```php
@@ -107,7 +107,7 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiProvider, \Bum
 <ul>
 <li><a name="mgeneratedocblocksformethodswithoutit" href="#mgeneratedocblocksformethodswithoutit">#</a>
  <b>generateDocBlocksForMethodsWithoutIt</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L55">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L53">source code</a></li>
 </ul>
 
 ```php
@@ -146,9 +146,6 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
@@ -156,6 +153,9 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+<li>
+    <a href="https://www.php.net/manual/en/class.jsonexception.php">\JsonException</a></li>
 
 </ul>
 
@@ -166,7 +166,7 @@ public function generateDocBlocksForMethodsWithoutIt(\BumbleDocGen\Core\Parser\E
 <ul>
 <li><a name="mhasmethodswithoutdocblocks" href="#mhasmethodswithoutdocblocks">#</a>
  <b>hasMethodsWithoutDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L34">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/DocBlocksGenerator.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -204,9 +204,6 @@ public function hasMethodsWithoutDocBlocks(\BumbleDocGen\Core\Parser\Entity\Root
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 <li>
     <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>

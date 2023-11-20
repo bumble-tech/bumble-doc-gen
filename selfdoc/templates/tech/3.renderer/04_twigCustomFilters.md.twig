@@ -70,9 +70,7 @@ Here is a list of filters available by default:
                     {% set rowspan = paramsCount * 2 - 1 %}
                     <td {% if rowspan > 1 %}rowspan="{{ rowspan }}"{% endif %}>
                         <a href="{{ getDocumentedEntityUrl(phpClassEntityCollection, filter.getName()) }}">{{ twigFilterData.name }}</a><br>
-                        {% if filter.isInternal() %}<i><b>:warning: For internal use</b></i><br>{% endif %}
-                        {{ filter.getDescription() | removeLineBrakes }}
-                        {% if filter.getDocNote() %}<br><i><b>:warning: {{ filter.getDocNote() }}</b></i><br>{% endif %}
+                        {% if filter.isInternal() %}<i><b>:warning: For internal use</b></i><br>{% endif %}{{ filter.getDescription() | removeLineBrakes }}{% if filter.getDocNote() %}<br><i><b>:warning: {{ filter.getDocNote() }}</b></i><br>{% endif %}
                     </td>
                     {% if rowspan == 1 %}
                         <td colspan="3">The filter does not accept any additional parameters</td>

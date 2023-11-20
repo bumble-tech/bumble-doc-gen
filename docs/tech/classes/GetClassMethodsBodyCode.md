@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GetClassMethodsBodyCode<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L21">GetClassMethodsBodyCode</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L20">GetClassMethodsBodyCode</a> class:
 </h1>
 
 
@@ -75,7 +75,7 @@ final class GetClassMethodsBodyCode implements \BumbleDocGen\Core\Renderer\Twig\
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L22">source code</a></li>
 </ul>
 
 ```php
@@ -112,11 +112,11 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\RootEntityCollectio
 <ul>
 <li><a name="m-invoke" href="#m-invoke">#</a>
  <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L51">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L49">source code</a></li>
 </ul>
 
 ```php
-public function __invoke(string $className, array $methodsNames): string|null;
+public function __invoke(string $className, array $methodsNames): null|string;
 ```
 
 
@@ -145,14 +145,11 @@ public function __invoke(string $className, array $methodsNames): string|null;
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>
 <ul>
-<li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
@@ -171,7 +168,7 @@ public function __invoke(string $className, array $methodsNames): string|null;
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L26">source code</a></li>
 </ul>
 
 ```php
@@ -192,7 +189,7 @@ public static function getName(): string;
 <ul>
 <li><a name="mgetoptions" href="#mgetoptions">#</a>
  <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/GetClassMethodsBodyCode.php#L31">source code</a></li>
 </ul>
 
 ```php

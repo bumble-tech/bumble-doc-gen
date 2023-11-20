@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> ReadmeTemplateGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L16">ReadmeTemplateGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L15">ReadmeTemplateGenerator</a> class:
 </h1>
 
 
@@ -51,7 +51,7 @@ final class ReadmeTemplateGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L18">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L17">source code</a></li>
 </ul>
 
 ```php
@@ -88,7 +88,7 @@ public function __construct(\BumbleDocGen\AI\ProviderInterface $aiProvider);
 <ul>
 <li><a name="mgeneratereadmefilecontent" href="#mgeneratereadmefilecontent">#</a>
  <b>generateReadmeFileContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Generators/ReadmeTemplateGenerator.php#L33">source code</a></li>
 </ul>
 
 ```php
@@ -144,9 +144,6 @@ public function generateReadmeFileContent(\BumbleDocGen\Core\Parser\Entity\RootE
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 </ul>
 

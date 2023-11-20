@@ -4,27 +4,51 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpParser\NodeValueCompiler;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
-use DI\DependencyException;
-use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
+use PhpParser\ConstExprEvaluationException;
+use PhpParser\Node\Stmt\ClassConst;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionClassConstant;
 
 /**
  * Class constant entity
  */
 class ConstantEntity extends BaseEntity
 {
-    private ?ReflectionClassConstant $reflectionClassConstant = null;
+    /**
+     * Indicates that the constant is public.
+     *
+     * @since 8.0
+     */
+    public const MODIFIERS_FLAG_IS_PUBLIC = 1;
+
+    /**
+     * Indicates that the constant is protected.
+     *
+     * @since 8.0
+     */
+    public const MODIFIERS_FLAG_IS_PROTECTED = 2;
+
+    /**
+     * Indicates that the constant is private.
+     *
+     * @since 8.0
+     */
+    public const MODIFIERS_FLAG_IS_PRIVATE = 4;
+
+    public const VISIBILITY_MODIFIERS_FLAG_ANY =
+        self::MODIFIERS_FLAG_IS_PUBLIC |
+        self::MODIFIERS_FLAG_IS_PROTECTED |
+        self::MODIFIERS_FLAG_IS_PRIVATE;
+
+    private ?ClassConst $ast = null;
+    private int $nodePosition = 0;
 
     public function __construct(
         Configuration $configuration,
@@ -33,7 +57,6 @@ class ConstantEntity extends BaseEntity
         LocalObjectCache $localObjectCache,
         LoggerInterface $logger,
         private string $constantName,
-        private string $declaringClassName,
         private string $implementingClassName,
     ) {
         parent::__construct(
@@ -55,7 +78,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getDocBlock(): DocBlock
@@ -70,24 +92,26 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getReflection(): ReflectionClassConstant
+    public function getAst(): ClassConst
     {
-        if (!$this->reflectionClassConstant) {
-            $this->reflectionClassConstant = $this->classEntity->getReflection()->getReflectionConstant($this->constantName);
+        if (!$this->ast) {
+            $implementingClass = $this->getImplementingClass();
+            foreach ($implementingClass->getAst()->getConstants() as $classConst) {
+                foreach ($classConst->consts as $pos => $const) {
+                    if ($const->name->toString() === $this->constantName) {
+                        $this->ast = $classConst;
+                        $this->nodePosition = $pos;
+                        return $this->ast;
+                    }
+                }
+            }
         }
-        return $this->reflectionClassConstant;
-    }
-
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getImplementingReflectionClass(): ReflectionClass
-    {
-        return $this->getReflection()->getDeclaringClass();
+        if (is_null($this->ast)) {
+            throw new \RuntimeException("Constant `{$this->constantName}` not found in `{$this->getImplementingClassName()}` class AST");
+        }
+        return $this->ast;
     }
 
     public function getImplementingClassName(): string
@@ -106,7 +130,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     protected function getDocCommentRecursive(): string
@@ -125,7 +148,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getNamespaceName(): string
@@ -134,7 +156,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getFileName(): ?string
@@ -143,7 +164,6 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getDescription(): string
@@ -153,47 +173,51 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool
     {
-        return $this->getReflection()->isPublic();
+        return $this->getAst()->isPublic();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isProtected(): bool
     {
-        return $this->getReflection()->isProtected();
+        return $this->getAst()->isProtected();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPrivate(): bool
     {
-        return $this->getReflection()->isPrivate();
+        return $this->getAst()->isPrivate();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
     {
-        return $this->getReflection()->getStartLine();
+        return $this->getAst()->consts[$this->nodePosition]->getStartLine();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
     {
-        return $this->getReflection()->getEndLine();
+        return $this->getAst()->consts[$this->nodePosition]->getEndLine();
+    }
+
+    /**
+     * @throws ConstExprEvaluationException
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getValue(): string|array|int|bool|null|float
+    {
+        return NodeValueCompiler::compile($this->getAst()->consts[$this->nodePosition]->value, $this);
     }
 }

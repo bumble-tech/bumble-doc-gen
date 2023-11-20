@@ -125,14 +125,14 @@ public function clearDependencies(): void;
 </ul>
 
 ```php
-public function getCurrentDocumentedEntityWrapper(): \BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper|null;
+public function getCurrentDocumentedEntityWrapper(): null|\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>
 
 
 </div>

@@ -13,24 +13,30 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
 use BumbleDocGen\Core\Renderer\Twig\Filter\PrepareSourceLink;
-use BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
+use BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpParser\NodeValueCompiler;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpParser\PhpParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 use DI\Attribute\Inject;
 use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
+use PhpParser\ConstExprEvaluationException;
+use PhpParser\Node;
+use PhpParser\Node\Stmt\Class_ as ClassNode;
+use PhpParser\Node\Stmt\ClassConst as ConstNode;
+use PhpParser\Node\Stmt\ClassMethod as MethodNode;
+use PhpParser\Node\Stmt\Enum_ as EnumNode;
+use PhpParser\Node\Stmt\EnumCase as EnumCaseNode;
 use PhpParser\Node\Stmt\Interface_ as InterfaceNode;
+use PhpParser\Node\Stmt\Namespace_ as NamespaceNode;
+use PhpParser\Node\Stmt\Property as PropertyNode;
+use PhpParser\Node\Stmt\Trait_ as TraitNode;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor\NameResolver;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\BetterReflection;
-use Roave\BetterReflection\Identifier\Identifier;
-use Roave\BetterReflection\Identifier\IdentifierType;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\SourceLocator\Located\LocatedSource;
 
 /**
  * Class entity
@@ -40,17 +46,16 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     #[Inject] private Container $diContainer;
 
     private array $pluginsData = [];
-    private ?ReflectionClass $reflectionClass = null;
     private bool $relativeFileNameLoaded = false;
     private bool $isClassLoad = false;
 
     public function __construct(
         private Configuration $configuration,
         private PhpHandlerSettings $phpHandlerSettings,
-        private ReflectorWrapper $reflector,
         private ClassEntityCollection $classEntityCollection,
         private ParserHelper $parserHelper,
-        private ComposerParser $composerParser,
+        private ComposerHelper $composerHelper,
+        private PhpParserHelper $phpParserHelper,
         private LocalObjectCache $localObjectCache,
         private LoggerInterface $logger,
         private string $className,
@@ -77,24 +82,9 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->className;
     }
 
-    /**
-     * @inheritDoc
-     * @throws \Exception
-     */
     public function isExternalLibraryEntity(): bool
     {
-        return !is_null($this->composerParser->getComposerPackageDataByClassName($this->getName()));
-    }
-
-    public function setReflectionClass(ReflectionClass $reflectionClass): void
-    {
-        $this->reflectionClass = $reflectionClass;
-        $this->isClassLoad = true;
-    }
-
-    public function getReflector(): ReflectorWrapper
-    {
-        return $this->reflector;
+        return !is_null($this->composerHelper->getComposerPackageDataByClassName($this->getName()));
     }
 
     public function getPhpHandlerSettings(): PhpHandlerSettings
@@ -109,9 +99,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * {@inheritDoc}
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
@@ -119,20 +106,24 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         $fileDependencies = [];
         if ($this->isClassLoad()) {
-            $currentClassEntityReflection = $this->getReflection();
             $parentClassNames = $this->getParentClassNames();
-            $traitClassNames = $currentClassEntityReflection->getTraitNames();
+            $traitClassNames = $this->getTraitsNames();
             $interfaceNames = $this->getInterfaceNames();
 
             $classNames = array_unique(array_merge($parentClassNames, $traitClassNames, $interfaceNames));
-            $classNames = array_filter($classNames, fn(string $className) => !$this->composerParser->getComposerPackageDataByClassName($className));
+            $classNames = array_filter(
+                $classNames,
+                function (string $className): bool {
+                    return !$this->composerHelper->getComposerPackageDataByClassName($className) && !$this->parserHelper->isBuiltInClass($className);
+                }
+            );
 
-            $reflections = array_map(fn(string $className): ReflectionClass => $this->getReflector()->reflectClass($className), $classNames);
-            $reflections[] = $currentClassEntityReflection;
+            $reflections = array_map(fn(string $className) => $this->getRootEntityCollection()->getLoadedOrCreateNew($className), $classNames);
+            $reflections[] = $this;
             foreach ($reflections as $reflectionClass) {
-                $fileName = $reflectionClass->getFileName();
-                if ($fileName) {
-                    $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName());
+                $relativeFileName = $reflectionClass->getRelativeFileName();
+                if ($relativeFileName) {
+                    $fileName = $this->configuration->getProjectRoot() . '/' . $relativeFileName;
                     $fileDependencies[$relativeFileName] = md5_file($fileName);
                 }
             }
@@ -142,7 +133,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -154,22 +144,22 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * Checking if class file is in git repository
-     *
-     * @throws InvalidConfigurationParameterException
-     * @throws ReflectionException
      */
     public function isInGit(): bool
     {
-        if (!$this->getFileName()) {
-            return false;
+        try {
+            if (!$this->getFileName()) {
+                return false;
+            }
+            $filesInGit = $this->parserHelper->getFilesInGit();
+            $fileName = ltrim($this->getFileName(), DIRECTORY_SEPARATOR);
+            return isset($filesInGit[$fileName]);
+        } catch (\Exception) {
         }
-        $filesInGit = $this->parserHelper->getFilesInGit();
-        $fileName = ltrim($this->getFileName(), DIRECTORY_SEPARATOR);
-        return isset($filesInGit[$fileName]);
+        return false;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function documentCreationAllowed(): bool
@@ -180,7 +170,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getDocCommentEntity(): ClassEntity
@@ -194,7 +183,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         $classEntity = $this;
         if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
             $parentReflectionClass = $this->getParentClass();
-            if ($parentReflectionClass) {
+            if ($parentReflectionClass && $parentReflectionClass->entityDataCanBeLoaded()) {
                 $classEntity = $parentReflectionClass->getDocCommentEntity();
             }
         }
@@ -205,7 +194,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     protected function getDocCommentRecursive(): string
@@ -223,64 +211,63 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return $this->pluginsData[$pluginKey] ?? null;
     }
 
+    public function setCustomAst(TraitNode|EnumNode|InterfaceNode|ClassNode|null $customAst): void
+    {
+        $objectId = $this->getObjectId();
+        $this->isClassLoad = true;
+        $this->localObjectCache->cacheMethodResult(__CLASS__ . '::getAst', $objectId, $customAst);
+    }
     /**
-     * {@inheritDoc}
-     * @throws ReflectionException
+     * @throws \RuntimeException
      * @throws InvalidConfigurationParameterException
      */
-    final protected function getReflection(): ReflectionClass
+    public function getAst(): ClassNode|InterfaceNode|TraitNode|EnumNode
     {
-        if ($this->reflectionClass) {
-            return $this->reflectionClass;
-        }
         $objectId = $this->getObjectId();
         try {
-            $this->reflectionClass = $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-            return $this->reflectionClass;
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        if (!$this->reflectionClass) {
-            try {
-                $this->reflectionClass = $this->reflector->reflectClass($this->className);
-            } catch (\Exception) {
+
+        $ast = null;
+        $nodes = $this->phpParserHelper->phpParser()->parse($this->getFileContent());
+        $nodeTraverser = new NodeTraverser();
+        $nodeTraverser->addVisitor(new NameResolver());
+        $nodes = $nodeTraverser->traverse($nodes);
+        foreach ($nodes as $node) {
+            if (in_array(get_class($node), [ClassNode::class, InterfaceNode::class, TraitNode::class, EnumNode::class])) {
+                $className = $node->name->toString();
+                if ($className === $this->getName()) {
+                    $ast = $node;
+                    break;
+                }
+            } elseif (!$node instanceof NamespaceNode) {
+                continue;
             }
-            if (!$this->reflectionClass && $this->relativeFileNameLoaded && $this->getName()) {
-                $locatedSource = new LocatedSource(
-                    $this->getFileContent(),
-                    $this->getName(),
-                    $this->getAbsoluteFileName()
-                );
-                /**
-                 * @var ReflectionClass $reflectionClass
-                 */
-                $reflectionClass = (new BetterReflection())->astLocator()->findReflection(
-                    $this->getReflector(),
-                    $locatedSource,
-                    new Identifier($this->getName(), new IdentifierType(IdentifierType::IDENTIFIER_CLASS)),
-                );
-                $this->reflectionClass = $reflectionClass;
+            $namespaceName = $node->name->toString();
+            foreach ($node->stmts as $subNode) {
+                if (!in_array(get_class($subNode), [ClassNode::class, InterfaceNode::class, TraitNode::class, EnumNode::class])) {
+                    continue;
+                }
+                $className = "{$namespaceName}\\{$subNode->name->toString()}";
+                if ($className === $this->getName()) {
+                    $ast = $subNode;
+                    break 2;
+                }
             }
         }
-        if (!$this->reflectionClass) {
-            throw new ReflectionException("'{$this->className}' could not be found in the located source ");
+
+        if (!$ast) {
+            throw new \RuntimeException("Entity `{$this->getName()}` not found");
         }
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $this->reflectionClass);
-        return $this->reflectionClass;
+        $this->isClassLoad = true;
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $ast);
+        return $ast;
     }
 
-
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getImplementingReflectionClass(): ReflectionClass
+    public function getImplementingClass(): ClassEntity
     {
-        return $this->getReflection();
-    }
-
-    public function hasAnnotationKey(string $annotationKey): bool
-    {
-        return false;
+        return $this;
     }
 
     public function getName(): string
@@ -295,7 +282,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     {
         if (!$this->isClassLoad) {
             try {
-                $this->isClassLoad = ParserHelper::isCorrectClassName($this->getName()) && $this->getReflection();
+                $this->isClassLoad = ParserHelper::isCorrectClassName($this->getName()) && $this->getRelativeFileName();
             } catch (\Exception) {
                 $this->isClassLoad = false;
             }
@@ -304,9 +291,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
-     * @throws \Exception
      */
     #[CacheableMethod] public function entityDataCanBeLoaded(): bool
     {
@@ -323,31 +308,31 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return end($nameParts);
     }
 
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
     #[CacheableMethod] public function getNamespaceName(): string
     {
-        return $this->getReflection()->getNamespaceName();
+        $namespaceParts = explode('\\', $this->getName());
+        if (count($namespaceParts) < 2) {
+            return '';
+        }
+        array_pop($namespaceParts);
+        return implode('\\', $namespaceParts);
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getRelativeFileName(bool $loadIfEmpty = true): ?string
     {
         if (!$this->relativeFileNameLoaded && $loadIfEmpty) {
             $this->relativeFileNameLoaded = true;
-            $fileName = $this->getReflection()->getFileName();
+            $fileName = $this->composerHelper->getComposerClassLoader()->findFile($this->getName());
             $projectRoot = $this->configuration->getProjectRoot();
             if (!$fileName || !str_starts_with($fileName, $projectRoot)) {
                 return null;
             }
             $this->relativeFileName = str_replace(
-                $projectRoot,
-                '',
+                [$projectRoot, '//'],
+                ['', '/'],
                 $fileName
             );
         }
@@ -357,15 +342,13 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * {@inheritDoc}
      * @throws InvalidConfigurationParameterException
-     * @throws ReflectionException
      */
-    #[CacheableMethod] public function getFileName(): ?string
+    public function getFileName(): ?string
     {
         return $this->getRelativeFileName();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getFullFileName(): ?string
@@ -378,33 +361,28 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
     {
-        return $this->getReflection()->getStartLine();
+        return $this->getAst()->getStartLine();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
     {
-        return $this->getReflection()->getEndLine();
+        return $this->getAst()->getEndLine();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
-
-        $reflection = $this->getReflection();
-        if ($reflection->isFinal() && !$this->isEnum()) {
+        if (!$this->isInterface() && !$this->isEnum() && !$this->isTrait() && $this->getAst()->isFinal()) {
             $modifiersString[] = 'final';
         }
 
@@ -412,11 +390,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if ($isInterface) {
             $modifiersString[] = 'interface';
             return implode(' ', $modifiersString);
-        } elseif ($reflection->isAbstract()) {
+        } elseif ($this->isAbstract()) {
             $modifiersString[] = 'abstract';
         }
 
-        if ($reflection->isTrait()) {
+        if ($this->isTrait()) {
             $modifiersString[] = 'trait';
         } elseif ($this->isEnum()) {
             $modifiersString[] = 'enum';
@@ -428,26 +406,21 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
+     * @return ClassEntity[] $trait
      * @throws InvalidConfigurationParameterException
      */
-    public function getExtends(): ?string
+    public function getTraits(): array
     {
-        if ($this->isInterface()) {
-            $extends = $this->getInterfaceNames()[0] ?? null;
-        } else {
-            $extends = $this->getParentClassName();
+        $traits = [];
+        foreach ($this->getTraitsNames() as $traitsName) {
+            $traits[] = $this->classEntityCollection->getLoadedOrCreateNew($traitsName);
         }
-        if ($extends) {
-            $extends = "\\{$extends}";
-        }
-        return $extends;
+        return $traits;
     }
 
     /**
      * @return ClassEntity[]
      *
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getInterfacesEntities(): array
@@ -462,12 +435,11 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     /**
      * @return string[]
      *
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getParentClassNames(): array
     {
-        if ($this->isExternalLibraryEntity()) {
+        if (!$this->entityDataCanBeLoaded()) {
             return [];
         }
         if ($this->isInterface()) {
@@ -475,8 +447,8 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         } else {
             try {
                 $parentClass = $this->getParentClass();
-                if ($parentClass?->getName()) {
-                    return array_merge(["\\{$parentClass->getName()}"], $parentClass->getParentClassNames());
+                if ($name = $parentClass?->getName()) {
+                    return array_unique(array_merge(["\\{$name}"], $parentClass->getParentClassNames()));
                 }
             } catch (\Exception $e) {
                 $this->logger->warning($e->getMessage());
@@ -485,18 +457,28 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         return [];
     }
 
+    /**
+     * @return ClassEntity[]
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getParentClassEntities(): array
+    {
+        return array_map(
+            fn(string $className) => $this->getRootEntityCollection()->getLoadedOrCreateNew($className),
+            $this->getParentClassNames()
+        );
+    }
 
     /**
      * @return string[]
      *
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getInterfaceNames(): array
     {
-        // method $this->getReflection()->getInterfaceNames() is not suitable, because if at least
-        // one successor interface was not found in the sources, an error will be returned.
-        // We also need to get the maximum possible number of interfaces
+        if (!$this->entityDataCanBeLoaded()) {
+            return [];
+        }
 
         if ($this->isTrait()) {
             return [];
@@ -509,7 +491,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
         $interfaceNames = [];
 
-        $node = $this->getReflection()->getAst();
+        $node = $this->getAst();
         $nodes = $node instanceof InterfaceNode ? $node->extends : $node->implements;
         $interfaces = array_map(static fn($n) => $n->toString(), $nodes ?? []);
         foreach ($interfaces as $interfaceName) {
@@ -519,7 +501,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
             $parentInterfaceNames = [];
             try {
                 $interfaceEntity = $this->getRootEntityCollection()->getLoadedOrCreateNew($interfaceName);
-                if (!$interfaceEntity->isExternalLibraryEntity()) {
+                if ($interfaceEntity->entityDataCanBeLoaded()) {
                     $parentInterfaceNames = $interfaceEntity->getInterfaceNames();
                 }
             } catch (\Exception $e) {
@@ -530,7 +512,7 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
         if (!$this->isInterface() && $parentClass = $this->getParentClass()) {
             $parentInterfaceNames = [];
             try {
-                if (!$parentClass->isExternalLibraryEntity()) {
+                if ($parentClass->entityDataCanBeLoaded()) {
                     $parentInterfaceNames = $parentClass->getInterfaceNames();
                 }
             } catch (\Exception $e) {
@@ -544,19 +526,20 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getParentClassName(): ?string
     {
-        if (!$this->isInterface() && !$this->isTrait()) {
-            return $this->getReflection()->getAst()->extends?->toString();
+        if (!$this->entityDataCanBeLoaded() || $this->isEnum()) {
+            return null;
         }
-        return $this->getReflection()->getParentClass()?->getName();
+        if (!$this->isInterface() && !$this->isTrait() && $parentClassName = $this->getAst()->extends?->toString()) {
+            return '\\' . $parentClassName;
+        }
+        return null;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getParentClass(): ?ClassEntity
@@ -569,25 +552,25 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getInterfacesString(): string
-    {
-        return implode(', ', $this->getInterfaceNames());
-    }
-
-    /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getTraitsNames(): array
     {
-        return $this->getReflection()->getTraitNames();
+        if (!$this->entityDataCanBeLoaded()) {
+            return [];
+        }
+        $traitsNames = [];
+        /**@var Node\Stmt\TraitUse[] $traitsNodes * */
+        $traitsNodes = array_filter($this->getAst()->stmts, static fn(Node\Stmt $stmt): bool => $stmt instanceof Node\Stmt\TraitUse);
+        foreach ($traitsNodes as $node) {
+            foreach ($node->traits as $traitNode) {
+                $traitsNames[] = $traitNode->toString();
+            }
+        }
+        return $traitsNames;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function hasTraits(): bool
@@ -597,7 +580,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -618,7 +600,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -635,7 +616,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
-     * @throws ReflectionException
      */
     public function getPropertyEntityCollection(): PropertyEntityCollection
     {
@@ -656,7 +636,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
-     * @throws ReflectionException
      */
     public function getPropertyEntity(string $propertyName, bool $unsafe = true): ?PropertyEntity
     {
@@ -671,7 +650,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
-     * @throws ReflectionException
      */
     public function getMethodEntityCollection(): MethodEntityCollection
     {
@@ -692,7 +670,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
-     * @throws ReflectionException
      */
     public function getMethodEntity(string $methodName, bool $unsafe = true): ?MethodEntity
     {
@@ -705,7 +682,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -716,27 +692,61 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isEnum(): bool
     {
-        return $this->getReflection()->isEnum();
+        return $this->getAst() instanceof EnumNode;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
      */
     #[CacheableMethod] public function getCasesNames(): array
     {
-        $caseNames = [];
-        if ($this->isEnum()) {
-            foreach ($this->getReflection()->getCases() as $case) {
-                $caseNames[] = $case->getName();
-            }
+        return array_keys($this->getEnumCases());
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
+     */
+    #[CacheableMethod] public function getEnumCases(): array
+    {
+        if (!$this->entityDataCanBeLoaded() || !$this->isEnum()) {
+            return [];
         }
-        return $caseNames;
+
+        $enumCases = [];
+        /** @var EnumCaseNode[] $enumCaseNodes */
+        $enumCaseNodes = array_filter(
+            $this->getAst()->stmts,
+            static fn(Node\Stmt $stmt): bool => $stmt instanceof EnumCaseNode,
+        );
+
+        foreach ($enumCaseNodes as $enumCaseNode) {
+            $enumCases[$enumCaseNode->name->toString()] = $enumCaseNode->expr ? NodeValueCompiler::compile($enumCaseNode->expr, $this) : null;
+        }
+        return $enumCases;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
+     */
+    #[CacheableMethod] public function getEnumCaseValue(string $name): mixed
+    {
+        return $this->getEnumCases()[$name] ?? null;
+    }
+    /**
+     * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getAbsoluteFileName(): ?string
+    {
+        $relativeFileName = $this->getRelativeFileName();
+        return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 
     /**
@@ -755,94 +765,242 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getMethodsData(): array
-    {
-        $methods = [];
-        foreach ($this->getReflection()->getMethods() as $method) {
-            $name = $method->getName();
-            $methods[$name] = [
-                'declaringClass' => $method->getDeclaringClass()->getName(),
-                'implementingClass' => $method->getLocatedSource()->getName(),
-            ];
+    #[CacheableMethod] public function getMethodsData(
+        bool $onlyFromCurrentClassAndTraits = false,
+        int $flags = MethodEntity::VISIBILITY_MODIFIERS_FLAG_ANY
+    ): array {
+        if (!$this->entityDataCanBeLoaded()) {
+            return [];
         }
+        $methods = [];
+        /** @var MethodNode[] $methodNodes */
+        $methodNodes = array_filter(
+            $this->getAst()->stmts,
+            static fn(Node\Stmt $stmt): bool => $stmt instanceof MethodNode,
+        );
+        array_walk($methodNodes, fn(MethodNode $stmt) => $stmt->flags = $stmt->flags ?: MethodEntity::MODIFIERS_FLAG_IS_PUBLIC);
+        foreach ($methodNodes as $methodNode) {
+            if (($methodNode->flags & $flags) === 0) {
+                continue;
+            }
+            $methods[$methodNode->name->toString()] = $this->getName();
+        }
+
+        $flags &= ~ MethodEntity::MODIFIERS_FLAG_IS_PRIVATE;
+        foreach ($this->getTraits() as $traitEntity) {
+            if (!$traitEntity->entityDataCanBeLoaded()) {
+                continue;
+            }
+            foreach ($traitEntity->getMethodsData(true, $flags) as $name => $methodsData) {
+                if (array_key_exists($name, $methods)) {
+                    continue;
+                }
+                $methods[$name] = $methodsData;
+            }
+        }
+
+        if (!$onlyFromCurrentClassAndTraits) {
+            foreach ($this->getParentClassEntities() as $parentClassEntity) {
+                if (!$parentClassEntity->entityDataCanBeLoaded()) {
+                    continue;
+                }
+                foreach ($parentClassEntity->getMethodsData(true, $flags) as $name => $methodsData) {
+                    if (array_key_exists($name, $methods)) {
+                        continue;
+                    }
+                    $methods[$name] = $methodsData;
+                }
+            }
+
+            foreach ($this->getInterfacesEntities() as $interfacesEntity) {
+                if (!$interfacesEntity->entityDataCanBeLoaded()) {
+                    continue;
+                }
+                foreach ($interfacesEntity->getMethodsData(true, $flags) as $name => $methodsData) {
+                    if (array_key_exists($name, $methods)) {
+                        continue;
+                    }
+                    $methods[$name] = $methodsData;
+                }
+            }
+        }
+
         return $methods;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getPropertiesData(): array
-    {
+    #[CacheableMethod] public function getPropertiesData(
+        bool $onlyFromCurrentClassAndTraits = false,
+        int $flags = PropertyEntity::VISIBILITY_MODIFIERS_FLAG_ANY
+    ): array {
+        if (!$this->entityDataCanBeLoaded()) {
+            return [];
+        }
         $properties = [];
-        foreach ($this->getReflection()->getProperties() as $property) {
-            $name = $property->getName();
-            $properties[$name] = [
-                'declaringClass' => $property->getDeclaringClass()->getName(),
-                'implementingClass' => $property->getImplementingClass()->getName()
-            ];
+        /** @var PropertyNode[] $propertyNodes */
+        $propertyNodes = array_filter(
+            $this->getAst()->stmts,
+            static fn(Node\Stmt $stmt): bool => $stmt instanceof PropertyNode,
+        );
+        array_walk($propertyNodes, fn(PropertyNode $stmt) => $stmt->flags = $stmt->flags ?: PropertyEntity::MODIFIERS_FLAG_IS_PUBLIC);
+        foreach ($propertyNodes as $node) {
+            if (($node->flags & $flags) === 0) {
+                continue;
+            }
+            foreach ($node->props as $propertyNode) {
+                $properties[$propertyNode->name->toString()] = $this->getName();
+            }
+        }
+
+        $flags &= ~ PropertyEntity::MODIFIERS_FLAG_IS_PRIVATE;
+        foreach ($this->getTraits() as $traitEntity) {
+            foreach ($traitEntity->getPropertiesData(true, $flags) as $name => $propertyData) {
+                if (!$traitEntity->entityDataCanBeLoaded()) {
+                    continue;
+                }
+                if (array_key_exists($name, $properties)) {
+                    continue;
+                }
+                $properties[$name] = $propertyData;
+            }
+        }
+        if (!$onlyFromCurrentClassAndTraits) {
+            foreach ($this->getParentClassEntities() as $parentClassEntity) {
+                if (!$parentClassEntity->entityDataCanBeLoaded()) {
+                    continue;
+                }
+                foreach ($parentClassEntity->getPropertiesData(true, $flags) as $name => $propertyData) {
+                    if (array_key_exists($name, $properties)) {
+                        continue;
+                    }
+                    $properties[$name] = $propertyData;
+                }
+            }
         }
         return $properties;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getConstantsData(): array
-    {
+    #[CacheableMethod] public function getConstantsData(
+        bool $onlyFromCurrentClassAndTraits = false,
+        int $flags = ConstantEntity::VISIBILITY_MODIFIERS_FLAG_ANY
+    ): array {
+        if (!$this->entityDataCanBeLoaded()) {
+            return [];
+        }
         $constants = [];
-        foreach ($this->getReflection()->getReflectionConstants() as $constant) {
-            $name = $constant->getName();
-            $constants[$name] = [
-                'declaringClass' => $constant->getDeclaringClass()->getName(),
-                'implementingClass' => $constant->getImplementingClass()->getName()
-            ];
+        /** @var ConstNode[] $constNodes */
+        $constNodes = array_filter(
+            $this->getAst()->stmts,
+            static fn(Node\Stmt $stmt): bool => $stmt instanceof ConstNode,
+        );
+        array_walk($constNodes, fn(ConstNode $stmt) => $stmt->flags = $stmt->flags ?: ConstantEntity::MODIFIERS_FLAG_IS_PUBLIC);
+        foreach ($constNodes as $constNode) {
+            if (($constNode->flags & $flags) === 0) {
+                continue;
+            }
+            foreach ($constNode->consts as $constant) {
+                $constants[$constant->name->toString()] = $this->getName();
+            }
+        }
+
+        $flags &= ~  ConstantEntity::MODIFIERS_FLAG_IS_PRIVATE;
+        foreach ($this->getTraits() as $traitEntity) {
+            if (!$traitEntity->entityDataCanBeLoaded()) {
+                continue;
+            }
+            foreach ($traitEntity->getConstantsData(true, $flags) as $name => $constantsData) {
+                if (array_key_exists($name, $constants)) {
+                    continue;
+                }
+                $constants[$name] = $constantsData;
+            }
+        }
+
+        if (!$onlyFromCurrentClassAndTraits) {
+            foreach ($this->getParentClassEntities() as $parentClassEntity) {
+                if (!$parentClassEntity->entityDataCanBeLoaded()) {
+                    continue;
+                }
+                foreach ($parentClassEntity->getConstantsData(true, $flags) as $name => $constantsData) {
+                    if (array_key_exists($name, $constants)) {
+                        continue;
+                    }
+                    $constants[$name] = $constantsData;
+                }
+            }
+
+            foreach ($this->getInterfacesEntities() as $interfacesEntity) {
+                if (!$interfacesEntity->entityDataCanBeLoaded()) {
+                    continue;
+                }
+                foreach ($interfacesEntity->getConstantsData(true, $flags) as $name => $constantsData) {
+                    if (array_key_exists($name, $constants)) {
+                        continue;
+                    }
+                    $constants[$name] = $constantsData;
+                }
+            }
         }
         return $constants;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isInstantiable(): bool
     {
-        return $this->getReflection()->isInstantiable();
+        if ($this->isAbstract()) {
+            return false;
+        }
+
+        if ($this->isInterface()) {
+            return false;
+        }
+
+        if ($this->isTrait()) {
+            return false;
+        }
+
+        return $this->getAst()->getMethod('__construct')?->isPublic() ?? true;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isAbstract(): bool
     {
-        return $this->getReflection()->isAbstract();
+        $ast = $this->getAst();
+        if (!method_exists($ast, 'isAbstract')) {
+            return false;
+        }
+        return $ast->isAbstract();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isInterface(): bool
     {
-        return $this->getReflection()->getAst() instanceof InterfaceNode;
+        return $this->getAst() instanceof InterfaceNode;
     }
 
     /**
-     * @throws ReflectionException
+     * @throws \RuntimeException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isTrait(): bool
     {
-        return $this->getReflection()->isTrait();
+        return $this->getAst() instanceof TraitNode;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function hasMethod(string $method): bool
@@ -851,7 +1009,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function hasProperty(string $property): bool
@@ -860,16 +1017,14 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function hasConstant(string $constant): bool
+    public function hasConstant(string $constantName): bool
     {
-        return array_key_exists($constant, $this->getConstantsData());
+        return array_key_exists($constantName, $this->getConstantsData(true));
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function isSubclassOf(string $className): bool
@@ -886,16 +1041,35 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
+     * @throws ConstExprEvaluationException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getConstant(string $name): string|array|int|bool|null|float
     {
-        return $this->getReflection()->getConstant($name);
+        // todo return constant entity
+        foreach ($this->getAst()->getConstants() as $node) {
+            foreach ($node->consts as $constantNode) {
+                if ($name === $constantNode->name->toString()) {
+                    return NodeValueCompiler::compile($constantNode->value, $this);
+                }
+            }
+        }
+        return null;
     }
 
     /**
-     * @throws ReflectionException
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
+     */
+    #[CacheableMethod] public function getConstantValue(string $name): string|array|int|bool|null|float
+    {
+
+        return $this->getConstantEntity($name)->getValue();
+    }
+
+    /**
      * @throws InvalidConfigurationParameterException
      */
     public function implementsInterface(string $interfaceName): bool
@@ -909,7 +1083,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function hasParentClass(string $parentClassName): bool
@@ -923,12 +1096,18 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
      */
     #[CacheableMethod] public function getConstants(): array
     {
-        return $this->getReflection()->getImmediateConstants();
+        $constants = [];
+        foreach ($this->getConstantsData(true) as $name => $data) {
+            $constants[$name] = $this->getConstantValue($name);
+        }
+        return $constants;
     }
 
     /**
@@ -953,7 +1132,6 @@ class ClassEntity extends BaseEntity implements DocumentTransformableEntityInter
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException

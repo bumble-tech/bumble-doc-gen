@@ -30,6 +30,7 @@ twig_filters:                     # (array<CustomFilterInterface>) Filters that 
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\TextToCodeBlock
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\TextToHeading
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\PregMatch
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\Implode
 plugins:                          # (array<PluginInterface>|null) List of plugins
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageHtmlLinkerPlugin
   - class: \BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageLinkerPlugin

@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RendererIteratorFactory<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L26">RendererIteratorFactory</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L25">RendererIteratorFactory</a> class:
 </h1>
 
 
@@ -57,11 +57,11 @@ final class RendererIteratorFactory
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L31">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup $rootEntityCollectionsGroup, \BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection $documentedEntityWrappersCollection, \BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Configuration\ConfigurationParameterBag $configurationParameterBag, \BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache, \BumbleDocGen\Core\Renderer\RendererHelper $rendererHelper, \BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory $dependencyFactory, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Console\ProgressBar\ProgressBarFactory $progressBarFactory, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, \Symfony\Component\Console\Style\OutputStyle $io, \Monolog\Logger $logger, \BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler $generationErrorsHandler);
+public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup $rootEntityCollectionsGroup, \BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection $documentedEntityWrappersCollection, \BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache, \BumbleDocGen\Core\Renderer\RendererHelper $rendererHelper, \BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory $dependencyFactory, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Console\ProgressBar\ProgressBarFactory $progressBarFactory, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, \Symfony\Component\Console\Style\OutputStyle $io, \Monolog\Logger $logger, \BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler $generationErrorsHandler);
 ```
 
 
@@ -95,11 +95,6 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
             <tr>
             <td>$configuration</td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$configurationParameterBag</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php'>\BumbleDocGen\Core\Configuration\ConfigurationParameterBag</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -159,7 +154,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
 <ul>
 <li><a name="mgetdocumentedentitywrapperswithoutdatedcache" href="#mgetdocumentedentitywrapperswithoutdatedcache">#</a>
  <b>getDocumentedEntityWrappersWithOutdatedCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L144">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L142">source code</a></li>
 </ul>
 
 ```php
@@ -187,7 +182,7 @@ public function getDocumentedEntityWrappersWithOutdatedCache(): \Generator;
 <ul>
 <li><a name="mgetfilestoremove" href="#mgetfilestoremove">#</a>
  <b>getFilesToRemove</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L218">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L216">source code</a></li>
 </ul>
 
 ```php
@@ -215,7 +210,7 @@ public function getFilesToRemove(): \Generator;
 <ul>
 <li><a name="mgettemplateswithoutdatedcache" href="#mgettemplateswithoutdatedcache">#</a>
  <b>getTemplatesWithOutdatedCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L53">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererIteratorFactory.php#L51">source code</a></li>
 </ul>
 
 ```php

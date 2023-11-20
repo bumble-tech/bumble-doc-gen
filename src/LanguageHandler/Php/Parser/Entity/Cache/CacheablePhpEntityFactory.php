@@ -6,8 +6,6 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache;
 
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
-use BumbleDocGen\Core\Configuration\Configuration;
-use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
@@ -15,19 +13,15 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\DynamicMethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
 use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
-use Roave\BetterReflection\Reflection\ReflectionClass;
 
 final class CacheablePhpEntityFactory
 {
     public function __construct(
         private CacheableEntityWrapperFactory $cacheableEntityWrapperFactory,
-        private ReflectorWrapper $reflector,
-        private Configuration $configuration,
         private LocalObjectCache $localObjectCache,
         private Container $diContainer
     ) {
@@ -40,7 +34,6 @@ final class CacheablePhpEntityFactory
     public function createPropertyEntity(
         ClassEntity $classEntity,
         string $propertyName,
-        string $declaringClassName,
         string $implementingClassName
     ): PropertyEntity {
         $objectId = "{$classEntity->getName()}:{$propertyName}";
@@ -52,7 +45,6 @@ final class CacheablePhpEntityFactory
         $propertyEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'propertyName' => $propertyName,
-            'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName
         ]);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $propertyEntity);
@@ -66,7 +58,6 @@ final class CacheablePhpEntityFactory
     public function createConstantEntity(
         ClassEntity $classEntity,
         string $constantName,
-        string $declaringClassName,
         string $implementingClassName,
         bool $reloadCache = false
     ): ConstantEntity {
@@ -79,7 +70,6 @@ final class CacheablePhpEntityFactory
         $constantEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'constantName' => $constantName,
-            'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName,
             'reloadCache' => $reloadCache
         ]);
@@ -94,7 +84,6 @@ final class CacheablePhpEntityFactory
     public function createMethodEntity(
         ClassEntity $classEntity,
         string $methodName,
-        string $declaringClassName,
         string $implementingClassName
     ): MethodEntity {
         $objectId = "{$classEntity->getName()}:{$methodName}";
@@ -106,7 +95,6 @@ final class CacheablePhpEntityFactory
         $methodEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'methodName' => $methodName,
-            'declaringClassName' => $declaringClassName,
             'implementingClassName' => $implementingClassName
         ]);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntity);
@@ -152,29 +140,11 @@ final class CacheablePhpEntityFactory
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper(ClassEntity::class);
         $classEntity = $this->diContainer->make($wrapperClassName, [
-            'reflector' => $this->reflector,
             'classEntityCollection' => $classEntityCollection,
             'className' => $className,
             'relativeFileName' => $relativeFileName
         ]);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $classEntity);
-        return $classEntity;
-    }
-
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function createClassEntityByReflection(
-        ReflectionClass $reflectionClass,
-        ClassEntityCollection $classEntityCollection
-    ): ClassEntity {
-        $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName() ?? '');
-        $relativeFileName = $relativeFileName ?: null;
-        $className = $reflectionClass->getName();
-        $classEntity = $this->createClassEntity($classEntityCollection, $className, $relativeFileName);
-        $classEntity->setReflectionClass($reflectionClass);
         return $classEntity;
     }
 
@@ -201,35 +171,11 @@ final class CacheablePhpEntityFactory
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper($subClassEntity);
         $classEntity = $this->diContainer->make($wrapperClassName, [
-            'reflector' => $this->reflector,
             'classEntityCollection' => $classEntityCollection,
             'className' => $className,
             'relativeFileName' => $relativeFileName
         ]);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $classEntity);
-        return $classEntity;
-    }
-
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function createSubClassEntityByReflection(
-        string $subClassEntity,
-        ReflectionClass $reflectionClass,
-        ClassEntityCollection $classEntityCollection
-    ): ClassEntity {
-        $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $reflectionClass->getFileName() ?? '');
-        $relativeFileName = $relativeFileName ?: null;
-        $className = $reflectionClass->getName();
-        $classEntity = $this->createSubClassEntity(
-            $subClassEntity,
-            $classEntityCollection,
-            $className,
-            $relativeFileName
-        );
-        $classEntity->setReflectionClass($reflectionClass);
         return $classEntity;
     }
 

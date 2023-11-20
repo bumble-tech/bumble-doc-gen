@@ -85,6 +85,9 @@ final class ConfigurationParameterBag
     <a href="#mvalidateandgetfilepathvalue">validateAndGetFilePathValue</a>
     </li>
 <li>
+    <a href="#mvalidateandgetstringlistvalue">validateAndGetStringListValue</a>
+    </li>
+<li>
     <a href="#mvalidateandgetstringvalue">validateAndGetStringValue</a>
     </li>
 </ol>
@@ -610,7 +613,7 @@ public function set(string $name, mixed $value): void;
 <ul>
 <li><a name="mvalidateandgetbooleanvalue" href="#mvalidateandgetbooleanvalue">#</a>
  <b>validateAndGetBooleanValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L241">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L271">source code</a></li>
 </ul>
 
 ```php
@@ -772,11 +775,11 @@ public function validateAndGetClassValue(string $parameterName, string $classInt
 <ul>
 <li><a name="mvalidateandgetdirectorypathvalue" href="#mvalidateandgetdirectorypathvalue">#</a>
  <b>validateAndGetDirectoryPathValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L279">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L309">source code</a></li>
 </ul>
 
 ```php
-public function validateAndGetDirectoryPathValue(string $parameterName, bool $nullable = true): string|null;
+public function validateAndGetDirectoryPathValue(string $parameterName, bool $nullable = true): null|string;
 ```
 
 
@@ -805,7 +808,7 @@ public function validateAndGetDirectoryPathValue(string $parameterName, bool $nu
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>
@@ -822,11 +825,11 @@ public function validateAndGetDirectoryPathValue(string $parameterName, bool $nu
 <ul>
 <li><a name="mvalidateandgetfilepathvalue" href="#mvalidateandgetfilepathvalue">#</a>
  <b>validateAndGetFilePathValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L254">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L284">source code</a></li>
 </ul>
 
 ```php
-public function validateAndGetFilePathValue(string $parameterName, array $fileExtensions, bool $nullable = true): string|null;
+public function validateAndGetFilePathValue(string $parameterName, array $fileExtensions, bool $nullable = true): null|string;
 ```
 
 
@@ -860,7 +863,62 @@ public function validateAndGetFilePathValue(string $parameterName, array $fileEx
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mvalidateandgetstringlistvalue" href="#mvalidateandgetstringlistvalue">#</a>
+ <b>validateAndGetStringListValue</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L241">source code</a></li>
+</ul>
+
+```php
+public function validateAndGetStringListValue(string $parameterName, bool $associative = true, bool $nullable = true): array;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$parameterName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$associative</td>
+            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$nullable</td>
+            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
 
 
 <b>Throws:</b>
@@ -881,7 +939,7 @@ public function validateAndGetFilePathValue(string $parameterName, array $fileEx
 </ul>
 
 ```php
-public function validateAndGetStringValue(string $parameterName, bool $nullable = true): string|null;
+public function validateAndGetStringValue(string $parameterName, bool $nullable = true): null|string;
 ```
 
 
@@ -910,7 +968,7 @@ public function validateAndGetStringValue(string $parameterName, bool $nullable 
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>

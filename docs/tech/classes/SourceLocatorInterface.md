@@ -48,14 +48,14 @@ interface SourceLocatorInterface
 </ul>
 
 ```php
-public function getFinder(): \Symfony\Component\Finder\Finder|null;
+public function getFinder(): null|\Symfony\Component\Finder\Finder;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/symfony/finder/blob/master/Finder.php'>\Symfony\Component\Finder\Finder</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/symfony/finder/blob/master/Finder.php'>\Symfony\Component\Finder\Finder</a>
 
 
 </div>

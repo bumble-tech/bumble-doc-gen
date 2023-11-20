@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Parser\Entity;
 
-abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\BaseEntityCollection implements \IteratorAggregate, \Traversable
+abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\BaseEntityCollection implements \IteratorAggregate
 ```
 
 
@@ -40,7 +40,7 @@ abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Bas
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 <li>
     <a href="#mgetloadedorcreatenew">getLoadedOrCreateNew</a>
     </li>
@@ -75,7 +75,7 @@ abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Bas
 </ul>
 
 ```php
-public function findEntity(string $search, bool $useUnsafeKeys = true): \BumbleDocGen\Core\Parser\Entity\RootEntityInterface|null;
+public function findEntity(string $search, bool $useUnsafeKeys = true): null|\BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
 
@@ -104,7 +104,7 @@ public function findEntity(string $search, bool $useUnsafeKeys = true): \BumbleD
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a>
 
 
 </div>
@@ -118,7 +118,7 @@ public function findEntity(string $search, bool $useUnsafeKeys = true): \BumbleD
 </ul>
 
 ```php
-public function get(string $objectName): \BumbleDocGen\Core\Parser\Entity\RootEntityInterface|null;
+public function get(string $objectName): null|\BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
 
@@ -142,7 +142,7 @@ public function get(string $objectName): \BumbleDocGen\Core\Parser\Entity\RootEn
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a>
 
 
 </div>
@@ -231,26 +231,13 @@ public function getEntityLinkData(string $rawLink, string|null $defaultEntityNam
 public function getIterator(): \Generator;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 <div class='method_description-block'>

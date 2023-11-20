@@ -9,31 +9,61 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpParser\NodeValueCompiler;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
+use PhpParser\ConstExprEvaluationException;
+use PhpParser\Node;
+use PhpParser\Node\Stmt\Property;
+use PhpParser\PrettyPrinter\Standard;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionProperty;
 
 /**
  * Class property entity
  */
 class PropertyEntity extends BaseEntity
 {
-    private ?ReflectionProperty $reflectionProperty = null;
+    /**
+     * Indicates that the property is public.
+     *
+     * @link https://www.php.net/manual/en/class.reflectionproperty.php#reflectionproperty.constants.is-public
+     */
+    public const MODIFIERS_FLAG_IS_PUBLIC = 1;
+
+    /**
+     * Indicates that the property is protected.
+     *
+     * @link https://www.php.net/manual/en/class.reflectionproperty.php#reflectionproperty.constants.is-protected
+     */
+    public const MODIFIERS_FLAG_IS_PROTECTED = 2;
+
+    /**
+     * Indicates that the property is private.
+     *
+     * @link https://www.php.net/manual/en/class.reflectionproperty.php#reflectionproperty.constants.is-private
+     */
+    public const MODIFIERS_FLAG_IS_PRIVATE = 4;
+
+    public const VISIBILITY_MODIFIERS_FLAG_ANY =
+        self::MODIFIERS_FLAG_IS_PUBLIC |
+        self::MODIFIERS_FLAG_IS_PROTECTED |
+        self::MODIFIERS_FLAG_IS_PRIVATE;
+
+
+    private ?Property $ast = null;
+    private ?int $nodePosition = null;
 
     public function __construct(
         Configuration $configuration,
         private ClassEntity $classEntity,
         private ParserHelper $parserHelper,
+        private Standard $astPrinter,
         private LocalObjectCache $localObjectCache,
         private LoggerInterface $logger,
         private string $propertyName,
-        private string $declaringClassName,
         private string $implementingClassName,
     ) {
         parent::__construct(
@@ -55,15 +85,40 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getReflection(): ReflectionProperty
+    public function getAst(): Property
     {
-        if (!$this->reflectionProperty) {
-            $this->reflectionProperty = $this->classEntity->getReflection()->getProperty($this->propertyName);
+        if (!$this->ast) {
+            $implementingClass = $this->getImplementingClass();
+            $classAst = $implementingClass->getAst();
+            $this->ast = $classAst->getProperty($this->propertyName);
+            if (!$this->ast) {
+                $methodAst = $classAst->getMethod('__construct');
+                foreach ($methodAst?->getParams() ?? [] as $param) {
+                    if ($param->var->name === $this->propertyName) {
+                        $this->ast = new Node\Stmt\Property(
+                            $param->flags,
+                            [new Node\Stmt\PropertyProperty($param->var->name)],
+                            $param->getAttributes(),
+                            $param->type,
+                            $param->attrGroups,
+                        );
+                        return $this->ast;
+                    }
+                }
+            } else {
+                foreach ($this->ast->props as $pos => $propNode) {
+                    if ($propNode->name->toString() === $this->propertyName) {
+                        $this->nodePosition = $pos;
+                    }
+                }
+            }
         }
-        return $this->reflectionProperty;
+        if (is_null($this->ast)) {
+            throw new \RuntimeException("Property `{$this->propertyName}` not found in `{$this->getImplementingClassName()}` class AST");
+        }
+        return $this->ast;
     }
 
     public function getRootEntityCollection(): ClassEntityCollection
@@ -73,7 +128,6 @@ class PropertyEntity extends BaseEntity
 
     /**
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
@@ -84,16 +138,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getImplementingReflectionClass(): ReflectionClass
-    {
-        return $this->getReflection()->getImplementingClass();
-    }
-
-    /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -115,12 +159,12 @@ class PropertyEntity extends BaseEntity
             $implementingClass = $this->getImplementingClass();
             $parentClass = $this->getImplementingClass()->getParentClass();
             $propertyName = $this->getName();
-            if ($parentClass && $parentClass->hasProperty($propertyName)) {
+            if ($parentClass && $parentClass->entityDataCanBeLoaded() && $parentClass->hasProperty($propertyName)) {
                 $parentReflectionProperty = $parentClass->getPropertyEntity($propertyName);
                 $reflectionProperty = $parentReflectionProperty->getDocCommentEntity();
             } else {
                 foreach ($implementingClass->getInterfacesEntities() as $interface) {
-                    if ($interface->hasProperty($propertyName)) {
+                    if ($interface->entityDataCanBeLoaded() && $interface->hasProperty($propertyName)) {
                         $reflectionProperty = $interface->getPropertyEntity($propertyName);
                         break;
                     }
@@ -133,7 +177,6 @@ class PropertyEntity extends BaseEntity
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -159,10 +202,6 @@ class PropertyEntity extends BaseEntity
         return $this->getName();
     }
 
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
     public function getNamespaceName(): string
     {
         return $this->getRootEntity()->getNamespaceName();
@@ -179,7 +218,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getFileName(): ?string
@@ -189,17 +227,17 @@ class PropertyEntity extends BaseEntity
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getType(): string
     {
-        $type = $this->getReflection()->getType();
-        $typeString = 'mixed';
+        $type = $this->getAst()->type;
         if ($type) {
-            $typeString = (string)$type;
+            $typeString = $this->astPrinter->prettyPrint([$type]);
+            $typeString = str_replace('?', 'null|', $typeString);
         } else {
+            $typeString = 'mixed';
             $docBlock = $this->getDocBlock();
             $typesFromDoc = [];
             foreach ($docBlock->getTagsByName('var') as $param) {
@@ -217,7 +255,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -225,17 +262,17 @@ class PropertyEntity extends BaseEntity
     #[CacheableMethod] public function getModifiersString(): string
     {
         $modifiersString = [];
-        if ($this->getReflection()->isPrivate()) {
+        if ($this->isPrivate()) {
             $modifiersString[] = 'private';
-        } elseif ($this->getReflection()->isProtected()) {
+        } elseif ($this->isProtected()) {
             $modifiersString[] = 'protected';
-        } elseif ($this->getReflection()->isPublic()) {
+        } elseif ($this->isPublic()) {
             $modifiersString[] = 'public';
         }
 
-        if ($this->getReflection()->isStatic()) {
+        if ($this->getAst()->isStatic()) {
             $modifiersString[] = 'static';
-        } elseif ($this->getReflection()->isReadOnly()) {
+        } elseif ($this->getAst()->isReadOnly()) {
             $modifiersString[] = 'readonly';
         }
 
@@ -251,7 +288,6 @@ class PropertyEntity extends BaseEntity
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getDescription(): string
@@ -261,56 +297,57 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool
     {
-        return $this->getReflection()->isPublic();
+        return $this->getAst()->isPublic();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isProtected(): bool
     {
-        return $this->getReflection()->isProtected();
+        return $this->getAst()->isProtected();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPrivate(): bool
     {
-        return $this->getReflection()->isPrivate();
+        return $this->getAst()->isPrivate();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
     {
-        return $this->getReflection()->getStartLine();
+        if (is_null($this->nodePosition)) {
+            return $this->getAst()->getStartLine();
+        }
+        return $this->getAst()->props[$this->nodePosition]->getStartLine();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
     {
-        return $this->getReflection()->getEndLine();
+        if (is_null($this->nodePosition)) {
+            return $this->getAst()->getEndLine();
+        }
+        return $this->getAst()->props[$this->nodePosition]->getEndLine();
     }
 
     /**
-     * @throws ReflectionException
+     * @throws ConstExprEvaluationException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getDefaultValue(): string|array|int|bool|null|float
     {
-        return $this->getReflection()->getDefaultValue();
+        return NodeValueCompiler::compile($this->getAst()->props[$this->nodePosition]->default, $this);
     }
 }

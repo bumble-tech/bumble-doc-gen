@@ -157,17 +157,67 @@ final class PhpHandlerSettings
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function asyncSourceLoadingEnabled(): bool
+    public function getUseComposerAutoload(): bool
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $asyncSourceLoadingEnabled = $this->parameterBag->validateAndGetBooleanValue(
-            $this->getSettingsKey('async_source_loading_enabled')
+        $useComposerAutoload = $this->parameterBag->validateAndGetBooleanValue(
+            $this->getSettingsKey('use_composer_autoload')
         );
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $asyncSourceLoadingEnabled);
-        return $asyncSourceLoadingEnabled;
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $useComposerAutoload);
+        return $useComposerAutoload;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getComposerConfigFile(): ?string
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $composerConfigFile = $this->parameterBag->validateAndGetFilePathValue(
+            $this->getSettingsKey('composer_config_file'),
+            ['json']
+        );
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $composerConfigFile);
+        return $composerConfigFile;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getComposerInstalledFile(): ?string
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $composerInstalledFile = $this->parameterBag->validateAndGetFilePathValue(
+            $this->getSettingsKey('composer_installed_file'),
+            ['json']
+        );
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $composerInstalledFile);
+        return $composerInstalledFile;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getPsr4Map(): array
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $psr4 = $this->parameterBag->validateAndGetStringListValue(
+            $this->getSettingsKey('psr4_map'),
+        );
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $psr4);
+        return $psr4;
     }
 
     /**

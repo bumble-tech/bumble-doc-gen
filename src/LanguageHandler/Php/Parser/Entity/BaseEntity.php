@@ -16,7 +16,6 @@ use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
@@ -24,10 +23,6 @@ use DI\Attribute\Inject;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionClassConstant;
-use Roave\BetterReflection\Reflection\ReflectionMethod;
-use Roave\BetterReflection\Reflection\ReflectionProperty;
 
 abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 {
@@ -45,13 +40,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
-     * @internal
      */
-    abstract protected function getReflection(): ReflectionClass|ReflectionMethod|ReflectionProperty|ReflectionClassConstant;
+    abstract public function getAst(): \PhpParser\Node\Stmt;
 
-    abstract public function getImplementingReflectionClass(): ReflectionClass;
+    abstract public function getImplementingClass(): ClassEntity;
 
     abstract protected function getDocCommentRecursive(): string;
 
@@ -70,13 +63,19 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
 
     /**
-     * @throws ReflectionException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getRelativeFileName(): ?string
+    {
+        return $this->getCurrentRootEntity()->getRelativeFileName();
+    }
+
+    /**
      * @throws InvalidConfigurationParameterException
      */
     final public function isEntityFileCanBeLoad(): bool
     {
-        $rootEntity = $this->getCurrentRootEntity();
-        return $rootEntity->isClassLoad() && $rootEntity->getRelativeFileName();
+        return $this->getCurrentRootEntity()->isClassLoad() && $this->getRelativeFileName();
     }
 
     /**
@@ -336,7 +335,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] protected function getThrowsData(): array
@@ -375,7 +373,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * Get parsed throws from `throws` doc block
      *
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getThrows(): array
@@ -385,7 +382,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     private function fillInLinkDataWithUrls(array $linkData): array
@@ -399,7 +395,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             if (($data['className'] ?? null)) {
                 $entityData = $this->getRootEntityCollection()->getEntityLinkData(
                     $data['className'],
-                    $this->getImplementingReflectionClass()->getName(),
+                    $this->getImplementingClass()->getName(),
                     false
                 );
                 if (!$entityData['entityName'] && !str_contains($data['className'], '\\')) {
@@ -480,19 +476,18 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return (string)($docBlock->getTagsByName('note')[0] ?? '');
     }
 
-
     /**
      * Get the doc comment of an entity
      *
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getDocComment(): string
     {
-        return $this->getReflection()->getDocComment();
+        $docComment = $this->getAst()->getDocComment();
+        return (string)$docComment?->getReformattedText();
     }
 
-    protected function getCurrentRootEntity(): ?RootEntityInterface
+    public function getCurrentRootEntity(): ?RootEntityInterface
     {
         if (is_a($this, RootEntityInterface::class)) {
             return $this;

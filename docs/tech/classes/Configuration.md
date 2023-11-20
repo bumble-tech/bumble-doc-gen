@@ -197,14 +197,14 @@ public function getAdditionalConsoleCommands(): \BumbleDocGen\Console\Command\Ad
 </ul>
 
 ```php
-public function getCacheDir(): string|null;
+public function getCacheDir(): null|string;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>
@@ -295,7 +295,7 @@ public function getGitClientPath(): string;
 </ul>
 
 ```php
-public function getIfExists(mixed $key): string|null;
+public function getIfExists(mixed $key): null|string;
 ```
 
 
@@ -319,7 +319,7 @@ public function getIfExists(mixed $key): string|null;
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 <b>Throws:</b>

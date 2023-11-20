@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\ComposerPackagesStu
 
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser;
+use BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
 
 /**
@@ -14,10 +14,9 @@ use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCan
  */
 final class StubberPlugin implements PluginInterface
 {
-    private array $packages = [];
     private array $foundLinks = [];
 
-    public function __construct(private ComposerParser $composerParser)
+    public function __construct(private ComposerHelper $composerHelper)
     {
     }
 
@@ -38,7 +37,7 @@ final class StubberPlugin implements PluginInterface
             $resourceName = trim($event->getResourceName());
             $resourceName = explode('::', $resourceName)[0];
             if (!isset($this->foundLinks[$resourceName])) {
-                $packageData = $this->composerParser->getComposerPackageDataByClassName($resourceName);
+                $packageData = $this->composerHelper->getComposerPackageDataByClassName($resourceName);
                 if (!$packageData) {
                     return;
                 }
@@ -60,7 +59,7 @@ final class StubberPlugin implements PluginInterface
      */
     final public function onCheckIsClassEntityCanBeLoad(OnCheckIsClassEntityCanBeLoad $event): void
     {
-        if ($this->composerParser->getComposerPackageDataByClassName($event->getEntity()->getName())) {
+        if ($this->composerHelper->getComposerPackageDataByClassName($event->getEntity()->getName())) {
             $event->disableClassLoading();
         }
     }

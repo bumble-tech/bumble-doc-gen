@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Parser\Entity\CollectionLogOperation;
 
-final class OperationsCollection implements \IteratorAggregate, \Traversable
+final class OperationsCollection implements \IteratorAggregate
 ```
 
 
@@ -37,7 +37,7 @@ final class OperationsCollection implements \IteratorAggregate, \Traversable
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 <li>
     <a href="#misfoundentitiescacheoutdated">isFoundEntitiesCacheOutdated</a>
     </li>
@@ -163,26 +163,13 @@ public function add(\BumbleDocGen\Core\Parser\Entity\CollectionLogOperation\Oper
 public function getIterator(): \Traversable;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/class.traversable.php'>\Traversable</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 <div class='method_description-block'>

@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Console\Command;
 
-final class AdditionalCommandCollection implements \IteratorAggregate, \Traversable
+final class AdditionalCommandCollection implements \IteratorAggregate
 ```
 
 
@@ -34,7 +34,7 @@ final class AdditionalCommandCollection implements \IteratorAggregate, \Traversa
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 </ol>
 
 
@@ -133,26 +133,13 @@ public static function create(\Symfony\Component\Console\Command\Command ...$com
 public function getIterator(): \Generator;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 

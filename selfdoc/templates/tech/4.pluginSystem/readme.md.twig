@@ -13,7 +13,6 @@ You can add your plugins to the configuration like this:
 
 ```yaml
 plugins:
-  - class: \SelfDocConfig\Plugin\RoaveStubber\BetterReflectionStubberPlugin
   - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
   - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
 ```
@@ -44,7 +43,7 @@ Plugins for any programming languages work regardless of which language handler 
         <td>{% if match[2] %}{{ match[2] | upper }}{% else %}any{% endif %}</td>
         <td>
             <ul>
-            {% for key in pluginEntity.getMethodEntity('getSubscribedEvents').getFirstReturnValue() | eval | keys %}
+            {% for key in pluginEntity.getMethodEntity('getSubscribedEvents').getFirstReturnValue() | keys %}
                 <li>[a]{{ key }}|short_form[/a]</li>
             {% endfor %}
             </ul>

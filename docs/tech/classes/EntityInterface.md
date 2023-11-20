@@ -87,14 +87,14 @@ public function entityCacheIsOutdated(): bool;
 </ul>
 
 ```php
-public function getAbsoluteFileName(): string|null;
+public function getAbsoluteFileName(): null|string;
 ```
 
 <blockquote>Returns the absolute path to a file if it can be retrieved and if the file is in the project directory</blockquote>
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 </div>
@@ -108,14 +108,14 @@ public function getAbsoluteFileName(): string|null;
 </ul>
 
 ```php
-public function getFileName(): string|null;
+public function getFileName(): null|string;
 ```
 
 <blockquote>Returns the relative path to a file if it can be retrieved and if the file is in the project directory</blockquote>
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 </div>

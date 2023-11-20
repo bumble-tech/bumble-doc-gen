@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpParser\NodeValueCompiler;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
@@ -17,27 +17,48 @@ use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
+use PhpParser\ConstExprEvaluationException;
+use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt\Return_;
+use PhpParser\NodeFinder;
 use PhpParser\PrettyPrinter\Standard;
 use Psr\Log\LoggerInterface;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionMethod;
 
 /**
  * Class method entity
  */
 class MethodEntity extends BaseEntity implements MethodEntityInterface
 {
-    private ?ReflectionMethod $reflectionMethod = null;
+    /**
+     * Indicates that the method is public.
+     */
+    public const MODIFIERS_FLAG_IS_PUBLIC = 1;
+
+    /**
+     * Indicates that the method is protected.
+     */
+    public const MODIFIERS_FLAG_IS_PROTECTED = 2;
+
+    /**
+     * Indicates that the method is private.
+     */
+    public const MODIFIERS_FLAG_IS_PRIVATE = 4;
+
+    public const VISIBILITY_MODIFIERS_FLAG_ANY =
+        self::MODIFIERS_FLAG_IS_PUBLIC |
+        self::MODIFIERS_FLAG_IS_PROTECTED |
+        self::MODIFIERS_FLAG_IS_PRIVATE;
+
+    private ?ClassMethod $ast = null;
 
     public function __construct(
         private Configuration $configuration,
         private ClassEntity $classEntity,
         private ParserHelper $parserHelper,
+        private Standard $astPrinter,
         private LocalObjectCache $localObjectCache,
         private LoggerInterface $logger,
-        private Standard $astPrinter,
         private string $methodName,
-        private string $declaringClassName,
         private string $implementingClassName,
     ) {
         parent::__construct(
@@ -49,15 +70,18 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    protected function getReflection(): ReflectionMethod
+    public function getAst(): ClassMethod
     {
-        if (!$this->reflectionMethod) {
-            $this->reflectionMethod = $this->classEntity->getReflection()->getMethod($this->methodName);
+        if (!$this->ast) {
+            $implementingClass = $this->getImplementingClass();
+            $this->ast = $implementingClass->getAst()->getMethod($this->methodName);
         }
-        return $this->reflectionMethod;
+        if (is_null($this->ast)) {
+            throw new \RuntimeException("Method `{$this->methodName}` not found in `{$this->getImplementingClassName()}` class AST");
+        }
+        return $this->ast;
     }
 
     public function getRootEntity(): ClassEntity
@@ -77,7 +101,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
@@ -91,15 +114,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->parserHelper->getDocBlock($classEntity, $this->getDocComment(), $this->getDocCommentLine());
     }
 
-    /**
-     * @throws ReflectionException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getImplementingReflectionClass(): ReflectionClass
-    {
-        return $this->getReflection()->getImplementingClass();
-    }
-
     public function getImplementingClass(): ClassEntity
     {
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
@@ -111,7 +125,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getNamespaceName(): string
@@ -120,7 +133,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -142,12 +154,12 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             $implementingClass = $this->getImplementingClass();
             $parentClass = $this->getImplementingClass()->getParentClass();
             $methodName = $this->getName();
-            if ($parentClass && $parentClass->hasMethod($methodName)) {
+            if ($parentClass && $parentClass->entityDataCanBeLoaded() && $parentClass->hasMethod($methodName)) {
                 $parentReflectionMethod = $parentClass->getMethodEntity($methodName);
                 $reflectionMethod = $parentReflectionMethod->getDocCommentEntity();
             } else {
                 foreach ($implementingClass->getInterfacesEntities() as $interface) {
-                    if ($interface->hasMethod($methodName)) {
+                    if ($interface->entityDataCanBeLoaded() && $interface->hasMethod($methodName)) {
                         $reflectionMethod = $interface->getMethodEntity($methodName);
                         break;
                     }
@@ -159,7 +171,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -191,7 +202,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -209,7 +219,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
@@ -217,22 +226,20 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     {
         $methodEntity = $this->getDocCommentEntity();
         if ($methodEntity->getDocCommentRecursive()) {
-            return $methodEntity->getReflection()->getAst()->getDocComment()?->getStartLine();
+            return $methodEntity->getAst()->getDocComment()?->getStartLine();
         }
         return null;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getDocCommentLine(): ?int
     {
-        return $this->getReflection()->getAst()->getDocComment()?->getStartLine();
+        return $this->getAst()->getDocComment()?->getStartLine();
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -253,7 +260,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getFileName(): ?string
@@ -262,7 +268,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getModifiersString(): string
@@ -287,15 +292,15 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getReturnType(): string
     {
-        $type = $this->getReflection()->getReturnType();
+        $type = $this->getAst()->getReturnType();
         if ($type) {
-            $type = (string)$type;
+            $typeString = $this->astPrinter->prettyPrint([$type]);
+            $typeString = str_replace('?', 'null|', $typeString);
         } else {
             $docBlock = $this->getDocBlock();
             $returnType = $docBlock->getTagsByName('return');
@@ -307,12 +312,12 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 }
                 return 'mixed';
             }
-            $type = $returnType ? (string)$returnType->getType() : 'mixed';
-            $type = preg_replace_callback(['/({)([^{}]*)(})/', '/(\[)([^\[\]]*)(\])/'], function ($condition) {
+            $typeString = $returnType ? (string)$returnType->getType() : 'mixed';
+            $typeString = preg_replace_callback(['/({)([^{}]*)(})/', '/(\[)([^\[\]]*)(\])/'], function ($condition) {
                 return str_replace(' ', '', $condition[0]);
-            }, $type);
+            }, $typeString);
         }
-        return $this->prepareTypeString($type);
+        return $this->prepareTypeString($typeString);
     }
 
     /**
@@ -345,7 +350,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
@@ -361,22 +365,28 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         $params = $docBlock->getTagsByName('param');
         $typesFromDoc = self::parseAnnotationParams($params);
         try {
-            foreach ($this->getReflection()->getParameters() as $param) {
+            /** @var \PhpParser\Node\Param[] $params */
+            $params = $this->getAst()->getParams();
+            foreach ($params as $param) {
+                if (!$param->var instanceof \PhpParser\Node\Expr\Variable) {
+                    continue;
+                }
+
                 $type = '';
                 $defaultValue = '';
                 $annotationType = '';
                 $description = '';
-                $name = $param->getName();
+                $name = $param->var->name;
 
-                $paramAst = $param->getAst()->jsonSerialize();
+                $paramAst = $param->jsonSerialize();
                 if ($paramAst['type']) {
-                    $type = $this->astPrinter->prettyPrint([$param->getAst()->jsonSerialize()['type']]);
+                    $type = $this->astPrinter->prettyPrint([$paramAst['type']]);
                     if (str_starts_with($type, '?')) {
                         $type = str_replace('?', '', $type) . '|null';
                     }
                 }
                 if ($paramAst['default']) {
-                    $defaultValue = $this->astPrinter->prettyPrint([$param->getAst()->jsonSerialize()['default']]);
+                    $defaultValue = $this->astPrinter->prettyPrint([$paramAst['default']]);
                     $defaultValue = str_replace('array()', '[]', $defaultValue);
                 }
                 if (isset($typesFromDoc[$name])) {
@@ -401,7 +411,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 $parameters[] = [
                     'type' => $this->prepareTypeString($type),
                     'expectedType' => $expectedType,
-                    'isVariadic' => $param->isVariadic(),
+                    'isVariadic' => $param->variadic,
                     'name' => $name,
                     'defaultValue' => $this->prepareTypeString($defaultValue),
                     'description' => $description,
@@ -415,9 +425,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
 
     /**
      * @throws NotFoundException
-     * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
+     * @throws DependencyException
      */
     public function getParametersString(): string
     {
@@ -443,7 +452,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function getDescription(): string
@@ -453,7 +461,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -483,91 +490,91 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool
     {
-        return $this->getReflection()->isPublic();
+        return $this->getAst()->isPublic();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isStatic(): bool
     {
-        return $this->getReflection()->isStatic();
+        return $this->getAst()->isStatic();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isProtected(): bool
     {
-        return $this->getReflection()->isProtected();
+        return $this->getAst()->isProtected();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPrivate(): bool
     {
-        return $this->getReflection()->isPrivate();
+        return $this->getAst()->isPrivate();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
     {
-        return $this->getReflection()->getStartLine();
+        return $this->getAst()->getStartLine();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartColumn(): int
     {
-        return $this->getReflection()->getStartColumn();
+        return $this->getAst()->getStartFilePos();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
     {
-        return $this->getReflection()->getEndLine();
+        return $this->getAst()->getEndLine();
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
      */
     #[CacheableMethod] public function getFirstReturnValue(): mixed
     {
-        return $this->parserHelper->getMethodReturnValue(
-            $this->getRootEntity()->getReflection(),
-            $this->getReflection()
-        );
+        $nodeFinder = new NodeFinder();
+        /** @var Return_|null $firstReturn */
+        $firstReturn = $nodeFinder->findFirstInstanceOf($this->getAst()->stmts, Return_::class);
+        if (!$firstReturn) {
+            return null;
+        }
+        return NodeValueCompiler::compile($firstReturn->expr, $this);
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getBodyCode(): string
     {
-        return $this->getReflection()->getBodyCode();
+        $stmts = $this->getAst()->getStmts();
+        if (!is_array($stmts)) {
+            $stmts = [];
+        }
+        return $this->astPrinter->prettyPrint($stmts);
     }
 
     #[CacheableMethod] public function getDocComment(): string
     {
-        return $this->getReflection()->getDocComment();
+        $docComment = $this->getAst()->getDocComment();
+        return (string)$docComment?->getReformattedText();
     }
 }

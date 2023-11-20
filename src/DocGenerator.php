@@ -17,7 +17,6 @@ use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -29,7 +28,6 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Style\OutputStyle;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -40,8 +38,12 @@ final class DocGenerator
     public const VERSION = '2.0.0';
     public const LOG_FILE_NAME = 'last_run.log';
 
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
     public function __construct(
-        private Filesystem $fs,
         private OutputStyle $io,
         private Configuration $configuration,
         PluginEventDispatcher $pluginEventDispatcher,
@@ -77,8 +79,8 @@ final class DocGenerator
      *
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
+     * @throws \JsonException
      */
     public function addDocBlocks(
         ProviderInterface $aiProvider,
@@ -94,8 +96,7 @@ final class DocGenerator
         $alreadyProcessedEntities = [];
         $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (
             &$getEntities,
-            &
-            $alreadyProcessedEntities
+            &$alreadyProcessedEntities
         ): Generator {
             foreach ($entitiesCollection as $classEntity) {
                 /**@var ClassEntity $classEntity */
@@ -159,7 +160,6 @@ final class DocGenerator
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException

@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Core\Parser\SourceLocator;
 
-final class SourceLocatorsCollection implements \IteratorAggregate, \Traversable
+final class SourceLocatorsCollection implements \IteratorAggregate
 ```
 
 
@@ -37,7 +37,7 @@ final class SourceLocatorsCollection implements \IteratorAggregate, \Traversable
     </li>
 <li>
     <a href="#mgetiterator">getIterator</a>
-    - <i>Retrieve an external iterator</i></li>
+    </li>
 </ol>
 
 
@@ -157,26 +157,13 @@ public function getCommonFinder(): \Symfony\Component\Finder\Finder;
 public function getIterator(): \Generator;
 ```
 
-<blockquote>Retrieve an external iterator</blockquote>
+
 
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
 
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a> - on failure. </li>
-
-</ul>
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="https://php.net/manual/en/iteratoraggregate.getiterator.php">https://php.net/manual/en/iteratoraggregate.getiterator.php</a>    </li>
-</ul>
 </div>
 <hr>
 

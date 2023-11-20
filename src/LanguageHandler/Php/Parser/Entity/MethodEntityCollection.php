@@ -7,7 +7,6 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -28,7 +27,6 @@ final class MethodEntityCollection extends BaseEntityCollection
     }
 
     /**
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -36,12 +34,11 @@ final class MethodEntityCollection extends BaseEntityCollection
     public function loadMethodEntities(): void
     {
         $methodEntityFilter = $this->phpHandlerSettings->getMethodEntityFilter();
-        foreach ($this->classEntity->getMethodsData() as $name => $methodData) {
+        foreach ($this->classEntity->getMethodsData() as $name => $methodImplementingClass) {
             $methodEntity = $this->cacheablePhpEntityFactory->createMethodEntity(
                 $this->classEntity,
                 $name,
-                $methodData['declaringClass'],
-                $methodData['implementingClass']
+                $methodImplementingClass
             );
             if ($methodEntityFilter->canAddToCollection($methodEntity)) {
                 $this->add($methodEntity);
@@ -79,7 +76,6 @@ final class MethodEntityCollection extends BaseEntityCollection
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
@@ -87,13 +83,12 @@ final class MethodEntityCollection extends BaseEntityCollection
     {
         $methodEntity = $this->get($objectName);
         if (!$methodEntity) {
-            $methodData = $this->classEntity->getMethodsData()[$objectName] ?? null;
-            if (is_array($methodData)) {
+            $methodImplementingClass = $this->classEntity->getMethodsData()[$objectName] ?? null;
+            if (!is_null($methodImplementingClass)) {
                 return $this->cacheablePhpEntityFactory->createMethodEntity(
                     $this->classEntity,
                     $objectName,
-                    $methodData['declaringClass'],
-                    $methodData['implementingClass']
+                    $methodImplementingClass
                 );
             }
         }
