@@ -37,7 +37,7 @@ Plugins for any programming languages work regardless of which language handler 
         .filterByInterfaces(['BumbleDocGen\\Core\\Plugin\\PluginInterface'])
         .getOnlyInstantiable()
 %}
-{% set match = pluginEntity.getFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+{% set match = pluginEntity.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
     <tr>
         <td>{{ drawDocumentedEntityLink(pluginEntity) }}</td>
         <td>{% if match[2] %}{{ match[2] | upper }}{% else %}any{% endif %}</td>

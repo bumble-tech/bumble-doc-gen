@@ -17,11 +17,6 @@ interface EntityInterface
 
     public function getShortName(): string;
 
-    /**
-     * Returns the relative path to a file if it can be retrieved and if the file is in the project directory
-     */
-    public function getFileName(): ?string;
-
     public function getRelativeFileName(): ?string;
 
     /**

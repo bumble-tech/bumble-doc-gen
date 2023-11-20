@@ -223,9 +223,9 @@ class PropertyEntity extends BaseEntity
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getFileName(): ?string
+    public function getRelativeFileName(): ?string
     {
-        return $this->getImplementingClass()->getFileName();
+        return $this->getImplementingClass()->getRelativeFileName();
     }
 
     /**

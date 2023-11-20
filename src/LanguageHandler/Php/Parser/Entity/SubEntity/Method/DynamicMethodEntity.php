@@ -56,9 +56,9 @@ class DynamicMethodEntity implements MethodEntityInterface
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
-    public function getFileName(): ?string
+    public function getRelativeFileName(): ?string
     {
-        return $this->getImplementingClass()->getFileName();
+        return $this->getImplementingClass()->getRelativeFileName();
     }
 
     /**
@@ -236,7 +236,7 @@ class DynamicMethodEntity implements MethodEntityInterface
      */
     public function getAbsoluteFileName(): ?string
     {
-        $relativeFileName = $this->getFileName();
+        $relativeFileName = $this->getRelativeFileName();
         return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 

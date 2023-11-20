@@ -88,7 +88,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     private function isCustomTwigFunction(ClassLikeEntity $classEntity): bool
     {
         foreach (self::TWIG_FUNCTION_DIR_NAMES as $dirName) {
-            if ($classEntity->implementsInterface(CustomFunctionInterface::class) && str_starts_with($classEntity->getFileName(), $dirName)) {
+            if ($classEntity->implementsInterface(CustomFunctionInterface::class) && str_starts_with($classEntity->getRelativeFileName(), $dirName)) {
                 return true;
             }
         }
@@ -130,7 +130,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
                 return null;
             }
             $entity = $classEntityCollection->getEntityByClassName($className);
-            if (str_starts_with($entity->getFileName(), '/selfdoc')) {
+            if (str_starts_with($entity->getRelativeFileName(), '/selfdoc')) {
                 return null;
             }
 

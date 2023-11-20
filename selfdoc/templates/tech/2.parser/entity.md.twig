@@ -54,7 +54,7 @@ The root collections ([a]RootEntityCollection[/a]), which are directly accessibl
             .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\RootEntityCollection'])
             .getOnlyInstantiable()
             %}
-    {% set match = entityCollection.getFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+    {% set match = entityCollection.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
     <tr>
         <td>{{ drawDocumentedEntityLink(entityCollection) }}</td>
         <td><b>{{ entityCollection.getMethodEntity('getEntityCollectionName').getFirstReturnValue() }}</b></td>
@@ -81,7 +81,7 @@ These classes are a convenient wrapper for accessing data in templates:
     .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\BaseEntityCollection'])
     .getOnlyInstantiable()
 %}
-    {% set match = entityCollection.getFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+    {% set match = entityCollection.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
     {% set entitiesClasses = findEntitiesClassesByCollectionClassName(entityCollection.getName()) %}
     {% for entityClass in entitiesClasses %}
     <tr>

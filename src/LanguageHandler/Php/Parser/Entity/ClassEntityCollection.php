@@ -153,7 +153,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     {
         $className = $classEntity->getName();
         if (!isset($this->entities[$className]) || $reload || isset($this->entitiesNotHandledByPlugins[$className])) {
-            $this->logger->info("Parsing {$classEntity->getFileName()} file");
+            $this->logger->info("Parsing {$classEntity->getRelativeFileName()} file");
             $this->pluginEventDispatcher->dispatch(new OnAddClassEntityToCollection($classEntity, $this));
             $this->entities[$className] = $classEntity;
             unset($this->entitiesNotHandledByPlugins[$className]);
@@ -390,12 +390,12 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
             $duplicates = [];
             foreach ($this->entities as $entity) {
                 $index[$entity->getName()] = $entity;
-                if ($entity->entityDataCanBeLoaded() && $entity->getFileName()) {
-                    $index[$entity->getFileName()] = $entity;
+                if ($entity->entityDataCanBeLoaded() && $entity->getRelativeFileName()) {
+                    $index[$entity->getRelativeFileName()] = $entity;
                     $index[$entity->getAbsoluteFileName()] = $entity;
                     $index[$entity->getFileSourceLink(false)] = $entity;
 
-                    $shortFileName = array_reverse(explode('/', $entity->getFileName()))[0];
+                    $shortFileName = array_reverse(explode('/', $entity->getRelativeFileName()))[0];
                     if (!isset($index[$shortFileName])) {
                         $index[$shortFileName] = $entity;
                     } else {

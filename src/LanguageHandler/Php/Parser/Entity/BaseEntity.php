@@ -54,8 +54,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     abstract public function getDescription(): string;
 
-    abstract public function getFileName(): ?string;
-
     #[CacheableMethod] abstract public function getStartLine(): int;
 
     abstract public function getDocBlock(): DocBlock;
@@ -86,7 +84,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      */
     public function getAbsoluteFileName(): ?string
     {
-        $relativeFileName = $this->getFileName();
+        $relativeFileName = $this->getRelativeFileName();
         return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 
@@ -128,7 +126,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      */
     public function getFileSourceLink(bool $withLine = true): ?string
     {
-        $fileName = $this->getFileName();
+        $fileName = $this->getRelativeFileName();
         if (!$fileName) {
             return null;
         }

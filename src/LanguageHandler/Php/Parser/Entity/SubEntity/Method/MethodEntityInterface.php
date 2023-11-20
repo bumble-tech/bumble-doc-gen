@@ -11,8 +11,6 @@ interface MethodEntityInterface extends EntityInterface
 {
     public function getName(): string;
 
-    public function getFileName(): ?string;
-
     public function getStartLine(): int;
 
     public function getStartColumn(): int;

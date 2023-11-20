@@ -93,7 +93,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
             if (!$classEntity->entityDataCanBeLoaded()) {
                 continue;
             }
-            if (str_starts_with($classEntity->getFileName(), $dirName) && $classEntity->implementsInterface(CustomFilterInterface::class)) {
+            if (str_starts_with($classEntity->getRelativeFileName(), $dirName) && $classEntity->implementsInterface(CustomFilterInterface::class)) {
                 return true;
             }
         }

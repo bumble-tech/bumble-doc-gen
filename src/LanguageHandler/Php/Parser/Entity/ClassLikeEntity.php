@@ -170,11 +170,11 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     final public function isInGit(): bool
     {
         try {
-            if (!$this->getFileName()) {
+            if (!$this->getRelativeFileName()) {
                 return false;
             }
             $filesInGit = $this->parserHelper->getFilesInGit();
-            $fileName = ltrim($this->getFileName(), DIRECTORY_SEPARATOR);
+            $fileName = ltrim($this->getRelativeFileName(), DIRECTORY_SEPARATOR);
             return isset($filesInGit[$fileName]);
         } catch (\Exception) {
         }
@@ -359,27 +359,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             );
         }
         return $this->relativeFileName;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getFileName(): ?string
-    {
-        return $this->getRelativeFileName();
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getFullFileName(): ?string
-    {
-        $fileName = $this->getFileName();
-        if (!$fileName) {
-            return $fileName;
-        }
-        return "{$this->configuration->getProjectRoot()}{$fileName}";
     }
 
     public function isInstantiable(): bool

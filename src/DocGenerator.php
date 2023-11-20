@@ -144,7 +144,7 @@ final class DocGenerator
                 )->getLocation()?->getLineNumber() : null;
                 $lineNumber = $lineNumber ?: $methodEntity->getStartLine();
 
-                foreach (file($entity->getFullFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
+                foreach (file($entity->getAbsoluteFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
                     if ($line + 1 === $lineNumber) {
                         $classFileLines[$line] = "[%docBlock%{$method}%]{$lineContent}";
                         break;
@@ -156,7 +156,7 @@ final class DocGenerator
 
             $classFileContent = implode("\n", $classFileLines);
             $classFileContent = preg_replace(array_keys($toReplace), $toReplace, $classFileContent);
-            file_put_contents($entity->getFullFileName(), $classFileContent);
+            file_put_contents($entity->getAbsoluteFileName(), $classFileContent);
             $this->logger->notice("DocBlocks added");
         }
     }
