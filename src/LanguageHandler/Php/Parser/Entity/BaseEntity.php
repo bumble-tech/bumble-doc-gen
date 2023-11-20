@@ -32,6 +32,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     #[Inject] private GetDocumentedEntityUrl $documentedEntityUrlFunction;
     #[Inject] private RendererHelper $rendererHelper;
+    #[Inject] private GenerationErrorsHandler $generationErrorsHandler;
 
     protected function __construct(
         private Configuration $configuration,
@@ -42,27 +43,43 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     abstract public function getAst(): \PhpParser\Node\Stmt;
 
+    /**
+     * @api
+     */
     abstract public function getImplementingClass(): ClassLikeEntity;
 
     abstract protected function getDocCommentRecursive(): string;
 
     abstract public function getDocCommentEntity(): ClassLikeEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
+    /**
+     * @api
+     */
     abstract public function getDescription(): string;
 
-    #[CacheableMethod] abstract public function getStartLine(): int;
+    /**
+     * @api
+     */
+    abstract public function getStartLine(): int;
 
     abstract public function getDocBlock(): DocBlock;
 
+    /**
+     * @api
+     */
     abstract public function getRootEntityCollection(): PhpEntitiesCollection;
 
     abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
 
     /**
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getRelativeFileName(): ?string
@@ -80,6 +97,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getAbsoluteFileName(): ?string
@@ -135,6 +155,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Get entity unique ID
+     *
+     * @api
      */
     public function getObjectId(): string
     {
@@ -144,6 +166,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $this->getName();
     }
 
+    /**
+     * @api
+     */
     public function isInternal(): bool
     {
         $docBlock = $this->getDocBlock();
@@ -151,6 +176,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return (bool)$internalBlock;
     }
 
+    /**
+     * @api
+     */
     public function isDeprecated(): bool
     {
         $docBlock = $this->getDocBlock();
@@ -159,6 +187,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * @api
+     *
      * @throws \Exception
      */
     public function hasDescriptionLinks(): bool
@@ -303,6 +333,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Get parsed links from description and doc blocks `see` and `link`
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
@@ -312,6 +345,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $this->fillInLinkDataWithUrls($linksData);
     }
 
+    /**
+     * @api
+     */
     public function hasThrows(): bool
     {
         $docBlock = $this->getDocBlock();
@@ -356,6 +392,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Get parsed throws from `throws` doc block
+     *
+     * @api
      *
      * @throws InvalidConfigurationParameterException
      */
@@ -420,6 +458,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $linkData;
     }
 
+    /**
+     * @api
+     */
     public function hasExamples(): bool
     {
         $docBlock = $this->getDocBlock();
@@ -428,6 +469,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Get parsed examples from `examples` doc block
+     *
+     * @api
      *
      * @return array<int,array{example:string}>
      */
@@ -447,6 +490,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * Get first example from @examples doc block
+     *
+     * @api
      */
     public function getFirstExample(): string
     {
@@ -454,6 +499,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $examples[0]['example'] ?? '';
     }
 
+    /**
+     * @api
+     */
     public function getDocNote(): string
     {
         $docBlock = $this->getDocBlock();
@@ -503,7 +551,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         }
         return $entityDependencies;
     }
-    #[Inject] private GenerationErrorsHandler $generationErrorsHandler;
 
     /**
      * @throws InvalidArgumentException
@@ -528,6 +575,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * @internal
+     *
      * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
      */
@@ -582,6 +631,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      * @throws InvalidArgumentException
      */
