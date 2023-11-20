@@ -6,9 +6,9 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\PhpParser;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Constant\ConstantEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method\MethodEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Property\PropertyEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
 use DI\DependencyException;
 use DI\NotFoundException;
 use PhpParser\ConstExprEvaluationException;

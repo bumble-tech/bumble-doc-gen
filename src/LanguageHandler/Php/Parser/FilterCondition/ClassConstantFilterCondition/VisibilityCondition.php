@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantF
 
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Constant\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
 
 /**

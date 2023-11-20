@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\MethodFilterCo
 
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method\MethodEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
 
 /**
