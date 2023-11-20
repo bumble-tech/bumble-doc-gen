@@ -10,6 +10,7 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\LoggableRootEntityCollection;
+use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\PhpParserHelper;
@@ -198,13 +199,15 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * Retrieving all entities that implement the specified interfaces. Filtering is only available for ClassLikeEntity.
+     *
      * @param string[] $interfaces
      *
      * @throws InvalidConfigurationParameterException
      */
     public function filterByInterfaces(array $interfaces): ClassEntityCollection
     {
-        $classEntityCollection = $this->cloneForFiltration();
+        $entitiesCollection = $this->cloneForFiltration();
         $interfaces = array_map(
             fn($interface) => ltrim(
                 str_replace('\\\\', '\\', $interface),
@@ -212,25 +215,30 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
             ),
             $interfaces
         );
-        foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassLikeEntity $classEntity */
+        foreach ($entitiesCollection as $objectId => $entity) {
+            if (!is_a($entity, ClassLikeEntity::class)) {
+                $entitiesCollection->remove($objectId);
+                continue;
+            }
             $entityInterfaces = array_map(
                 fn($interface) => ltrim($interface, '\\'),
-                $classEntity->getInterfaceNames()
+                $entity->getInterfaceNames()
             );
             if (!array_intersect($interfaces, $entityInterfaces)) {
-                $classEntityCollection->remove($objectId);
+                $entitiesCollection->remove($objectId);
             }
         }
-        return $classEntityCollection;
+        return $entitiesCollection;
     }
 
     /**
+     * Retrieving all entities that inherit from the specified classes. Filtering is only available for ClassLikeEntity.
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
     {
-        $classEntityCollection = $this->cloneForFiltration();
+        $entitiesCollection = $this->cloneForFiltration();
         $parentClassNames = array_map(
             fn($parentClassName) => ltrim(
                 str_replace('\\\\', '\\', $parentClassName),
@@ -238,86 +246,92 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
             ),
             $parentClassNames
         );
-        foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassLikeEntity $classEntity */
+        foreach ($entitiesCollection as $objectId => $entity) {
+            if (!is_a($entity, ClassLikeEntity::class)) {
+                $entitiesCollection->remove($objectId);
+                continue;
+            }
+
             $entityParentClassNames = array_map(
                 fn($parentClassName) => ltrim($parentClassName, '\\'),
-                $classEntity->getParentClassNames()
+                $entity->getParentClassNames()
             );
             if (!array_intersect($parentClassNames, $entityParentClassNames)) {
-                $classEntityCollection->remove($objectId);
+                $entitiesCollection->remove($objectId);
             }
         }
-        return $classEntityCollection;
+        return $entitiesCollection;
     }
 
     /**
+     * Filtering entities by relative files paths (from project_root) of the project
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function filterByPaths(array $paths): ClassEntityCollection
     {
-        $classEntityCollection = $this->cloneForFiltration();
-        foreach ($classEntityCollection as $objectId => $classEntity) {
+        $entitiesCollection = $this->cloneForFiltration();
+        foreach ($entitiesCollection as $objectId => $entity) {
             $needToKeep = false;
-            /**@var ClassLikeEntity $classEntity */
+            /**@var RootEntityInterface $entity */
             foreach ($paths as $path) {
-                if (str_starts_with($classEntity->getFileName(), $path)) {
+                if (str_starts_with($entity->getRelativeFileName(), $path)) {
                     $needToKeep = true;
                 }
             }
             if (!$needToKeep) {
-                $classEntityCollection->remove($objectId);
+                $entitiesCollection->remove($objectId);
             }
         }
-        return $classEntityCollection;
+        return $entitiesCollection;
     }
 
     public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
     {
-        $classEntityCollection = $this->cloneForFiltration();
-        foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassLikeEntity $classEntity */
-            if (!preg_match($regexPattern, $classEntity->getShortName())) {
-                $classEntityCollection->remove($objectId);
+        $entitiesCollection = $this->cloneForFiltration();
+        foreach ($entitiesCollection as $objectId => $entity) {
+            /**@var RootEntityInterface $entity */
+            if (!preg_match($regexPattern, $entity->getShortName())) {
+                $entitiesCollection->remove($objectId);
             }
         }
-        return $classEntityCollection;
+        return $entitiesCollection;
     }
 
+    /**
+     * Retrieving only instantiable entities. Filtering is only available for ClassLikeEntity.
+     */
     public function getOnlyInstantiable(): ClassEntityCollection
     {
-        $classEntityCollection = $this->cloneForFiltration();
-        foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassLikeEntity $classEntity */
-            if (!$classEntity->isInstantiable()) {
-                $classEntityCollection->remove($objectId);
+        $entitiesCollection = $this->cloneForFiltration();
+        foreach ($entitiesCollection as $objectId => $entity) {
+            if (!is_a($entity, ClassLikeEntity::class) || !$entity->isInstantiable()) {
+                $entitiesCollection->remove($objectId);
             }
         }
-        return $classEntityCollection;
+        return $entitiesCollection;
     }
 
     public function getOnlyInterfaces(): ClassEntityCollection
     {
-        $classEntityCollection = $this->cloneForFiltration();
-        foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassLikeEntity $classEntity */
-            if (!$classEntity->isInterface()) {
-                $classEntityCollection->remove($objectId);
+        $entitiesCollection = $this->cloneForFiltration();
+        foreach ($entitiesCollection as $objectId => $entity) {
+            if (!is_a($entity, InterfaceEntity::class)) {
+                $entitiesCollection->remove($objectId);
             }
         }
-        return $classEntityCollection;
+        return $entitiesCollection;
     }
 
     public function getOnlyTraits(): ClassEntityCollection
     {
-        $classEntityCollection = $this->cloneForFiltration();
-        foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassLikeEntity $classEntity */
-            if (!$classEntity->isTrait()) {
-                $classEntityCollection->remove($objectId);
+        $entitiesCollection = $this->cloneForFiltration();
+        foreach ($entitiesCollection as $objectId => $entity) {
+            if (!is_a($entity, TraitEntity::class)) {
+                $entitiesCollection->remove($objectId);
             }
         }
-        return $classEntityCollection;
+        return $entitiesCollection;
     }
 
     /**
@@ -325,14 +339,13 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      */
     public function getOnlyAbstractClasses(): ClassEntityCollection
     {
-        $classEntityCollection = $this->cloneForFiltration();
-        foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassLikeEntity $classEntity */
-            if (!$classEntity->isAbstract() || $classEntity->isInterface()) {
-                $classEntityCollection->remove($objectId);
+        $entitiesCollection = $this->cloneForFiltration();
+        foreach ($entitiesCollection as $objectId => $entity) {
+            if (!is_a($entity, ClassEntity::class) || !$entity->isAbstract()) {
+                $entitiesCollection->remove($objectId);
             }
         }
-        return $classEntityCollection;
+        return $entitiesCollection;
     }
 
     /**
