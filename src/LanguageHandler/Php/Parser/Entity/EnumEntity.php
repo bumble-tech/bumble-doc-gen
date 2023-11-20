@@ -11,6 +11,11 @@ use PhpParser\ConstExprEvaluationException;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\EnumCase as EnumCaseNode;
 
+/**
+ * Enumeration
+ *
+ * @see https://www.php.net/manual/en/language.enumerations.php
+ */
 class EnumEntity extends ClassLikeEntity
 {
     public function isEnum(): bool

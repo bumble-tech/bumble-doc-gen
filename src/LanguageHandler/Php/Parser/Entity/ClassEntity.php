@@ -7,6 +7,11 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 
+/**
+ * PHP Class
+ *
+ * @see https://www.php.net/manual/en/language.oop5.php
+ */
 class ClassEntity extends ClassLikeEntity
 {
     public function isClass(): bool

@@ -32,7 +32,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Style\OutputStyle;
 
 /**
- * Collection of class entities
+ * Collection of php root entities
  */
 final class PhpEntitiesCollection extends LoggableRootEntityCollection
 {
@@ -439,7 +439,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         if (array_key_exists($foundKey, $duplicates)) {
             if ($useUnsafeKeys) {
                 $this->logger->warning(
-                    "ClassEntityCollection:findEntity: Key `{$foundKey}` refers to multiple entities. Use a unique search key to avoid mistakes"
+                    "PhpEntityCollection:findEntity: Key `{$foundKey}` refers to multiple entities. Use a unique search key to avoid mistakes"
                 );
             } else {
                 return null;
