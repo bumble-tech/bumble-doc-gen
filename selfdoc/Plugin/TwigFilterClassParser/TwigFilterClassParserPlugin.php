@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer;
@@ -52,7 +52,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         }
 
         $entity = $event->getEntity();
-        if (!is_a($entity, ClassEntity::class) || !$this->isCustomTwigFilter($event->getEntity())) {
+        if (!is_a($entity, ClassLikeEntity::class) || !$this->isCustomTwigFilter($event->getEntity())) {
             return;
         }
 
@@ -87,7 +87,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     /**
      * @throws InvalidConfigurationParameterException
      */
-    private function isCustomTwigFilter(ClassEntity $classEntity): bool
+    private function isCustomTwigFilter(ClassLikeEntity $classEntity): bool
     {
         foreach (self::TWIG_FILTER_DIR_NAMES as $dirName) {
             if (!$classEntity->entityDataCanBeLoaded()) {

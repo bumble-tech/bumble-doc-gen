@@ -11,12 +11,14 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Parser\ProjectParser;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\InterfaceEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -99,7 +101,7 @@ final class DocGenerator
             &$alreadyProcessedEntities
         ): Generator {
             foreach ($entitiesCollection as $classEntity) {
-                /**@var ClassEntity $classEntity */
+                /**@var ClassLikeEntity $classEntity */
                 if (
                     !$classEntity->entityDataCanBeLoaded() || array_key_exists(
                         $classEntity->getName(),
@@ -122,7 +124,7 @@ final class DocGenerator
         };
 
         foreach ($getEntities($entitiesCollection) as $entity) {
-            /**@var ClassEntity $entity */
+            /**@var ClassLikeEntity $entity */
             if (!$missingDocBlocksGenerator->hasMethodsWithoutDocBlocks($entity)) {
                 $this->logger->notice("Skipping `{$entity->getName()}`class. All methods are already documented");
             }
@@ -256,6 +258,14 @@ final class DocGenerator
 
         try {
             $this->parser->parse();
+//RootEntityInterface
+            $in = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME)->get(RootEntityInterface::class);
+        /*    var_dump($in->getParentClassNames());
+
+            $r = new \ReflectionClass(RootEntityInterface::class);
+            var_dump($r->getParentClass());
+            die();*/
+
             $this->renderer->run();
         } catch (Exception $e) {
             $this->logger->critical(

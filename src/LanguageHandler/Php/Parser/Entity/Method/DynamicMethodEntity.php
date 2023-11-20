@@ -7,7 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 
@@ -19,12 +19,12 @@ class DynamicMethodEntity implements MethodEntityInterface
     public function __construct(
         private Configuration $configuration,
         private ParserHelper $parserHelper,
-        private ClassEntity $classEntity,
+        private ClassLikeEntity $classEntity,
         private Method $annotationMethod
     ) {
     }
 
-    public function getRootEntity(): ClassEntity
+    public function getRootEntity(): ClassLikeEntity
     {
         return $this->classEntity;
     }
@@ -176,7 +176,7 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->isStatic() && in_array($this->getReturnType(), $initializationReturnTypes);
     }
 
-    public function getImplementingClass(): ClassEntity
+    public function getImplementingClass(): ClassLikeEntity
     {
         return $this->classEntity;
     }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser;
 
 use BumbleDocGen\Core\Plugin\OnlySingleExecutionEvent;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use Symfony\Contracts\EventDispatcher\Event;
 
@@ -15,7 +15,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 final class OnAddClassEntityToCollection extends Event implements OnlySingleExecutionEvent
 {
     public function __construct(
-        private ClassEntity $classEntity,
+        private ClassLikeEntity $classEntity,
         private ClassEntityCollection $classEntityCollection
     ) {
     }
@@ -30,7 +30,7 @@ final class OnAddClassEntityToCollection extends Event implements OnlySingleExec
         return $this->classEntityCollection;
     }
 
-    public function getRootEntity(): ClassEntity
+    public function getRootEntity(): ClassLikeEntity
     {
         return $this->classEntity;
     }

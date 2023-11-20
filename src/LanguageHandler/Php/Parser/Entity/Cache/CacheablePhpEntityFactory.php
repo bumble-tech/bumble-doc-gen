@@ -6,13 +6,19 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache;
 
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
+use BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Constant\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\EnumEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\InterfaceEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method\DynamicMethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Property\PropertyEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\TraitEntity;
 use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -22,6 +28,7 @@ final class CacheablePhpEntityFactory
 {
     public function __construct(
         private CacheableEntityWrapperFactory $cacheableEntityWrapperFactory,
+        private ComposerHelper $composerHelper,
         private LocalObjectCache $localObjectCache,
         private Container $diContainer
     ) {
@@ -32,7 +39,7 @@ final class CacheablePhpEntityFactory
      * @throws NotFoundException
      */
     public function createPropertyEntity(
-        ClassEntity $classEntity,
+        ClassLikeEntity $classEntity,
         string $propertyName,
         string $implementingClassName
     ): PropertyEntity {
@@ -56,7 +63,7 @@ final class CacheablePhpEntityFactory
      * @throws NotFoundException
      */
     public function createConstantEntity(
-        ClassEntity $classEntity,
+        ClassLikeEntity $classEntity,
         string $constantName,
         string $implementingClassName,
         bool $reloadCache = false
@@ -82,7 +89,7 @@ final class CacheablePhpEntityFactory
      * @throws NotFoundException
      */
     public function createMethodEntity(
-        ClassEntity $classEntity,
+        ClassLikeEntity $classEntity,
         string $methodName,
         string $implementingClassName
     ): MethodEntity {
@@ -106,7 +113,7 @@ final class CacheablePhpEntityFactory
      * @throws NotFoundException
      */
     public function createDynamicMethodEntity(
-        ClassEntity $classEntity,
+        ClassLikeEntity $classEntity,
         Method $annotationMethod
     ): DynamicMethodEntity {
         $objectId = "{$classEntity->getName()}:{$annotationMethod->getMethodName()}";
@@ -126,19 +133,39 @@ final class CacheablePhpEntityFactory
     /**
      * @throws DependencyException
      * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
      */
-    public function createClassEntity(
+    public function createClassLikeEntity(
         ClassEntityCollection $classEntityCollection,
         string $className,
         ?string $relativeFileName = null
-    ): ClassEntity {
+    ): ClassLikeEntity {
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
         $objectId = md5($className);
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        $wrapperClassName = $this->getOrCreateEntityClassWrapper(ClassEntity::class);
+
+        $fileName = $this->composerHelper->getComposerClassLoader()->findFile($className);
+        $entityClassName = ClassEntity::class;
+        if ($fileName) {
+            $shortClassNameLS = mb_strtolower(array_reverse(explode('\\', $className))[0]);
+            preg_match(
+                '/^(\s+)?(interface|trait|((final|abstract)\s+)?class|enum)(\s+)(' . $shortClassNameLS . ')/m',
+                mb_strtolower(file_get_contents($fileName)),
+                $matches
+            );
+            $entityClassName = match ($matches[2] ?? '') {
+                'interface' => InterfaceEntity::class,
+                'trait' => TraitEntity::class,
+                'enum' => EnumEntity::class,
+                default => ClassEntity::class
+            };
+        }
+
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper($entityClassName);
+        /** @var ClassLikeEntity $classEntity */
         $classEntity = $this->diContainer->make($wrapperClassName, [
             'classEntityCollection' => $classEntityCollection,
             'className' => $className,
@@ -157,10 +184,10 @@ final class CacheablePhpEntityFactory
         ClassEntityCollection $classEntityCollection,
         string $className,
         ?string $relativeFileName
-    ): ClassEntity {
-        if (!is_a($subClassEntity, ClassEntity::class, true)) {
-            throw new \Exception(
-                'The class must inherit from `BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity`'
+    ): ClassLikeEntity {
+        if (!is_a($subClassEntity, ClassLikeEntity::class, true)) {
+            throw new \RuntimeException(
+                'The class must inherit from `' . ClassEntity::class . '`'
             );
         }
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');

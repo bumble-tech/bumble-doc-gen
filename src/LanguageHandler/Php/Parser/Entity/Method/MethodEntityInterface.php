@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method;
 
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 
 interface MethodEntityInterface extends EntityInterface
 {
@@ -45,5 +45,5 @@ interface MethodEntityInterface extends EntityInterface
 
     public function getBodyCode(): string;
 
-    public function getImplementingClass(): ClassEntity;
+    public function getImplementingClass(): ClassLikeEntity;
 }

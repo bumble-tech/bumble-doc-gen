@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use Symfony\Contracts\EventDispatcher\Event;
 
 final class OnCheckIsClassEntityCanBeLoad extends Event
 {
     public bool $classCanBeLoad = true;
 
-    public function __construct(private ClassEntity $entity)
+    public function __construct(private ClassLikeEntity $entity)
     {
     }
 
-    public function getEntity(): ClassEntity
+    public function getEntity(): ClassLikeEntity
     {
         return $this->entity;
     }

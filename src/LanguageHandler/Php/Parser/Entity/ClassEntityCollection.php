@@ -113,7 +113,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
                         continue;
                     }
                     $className = $subNode->name->toString();
-                    $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
+                    $classEntity = $this->cacheablePhpEntityFactory->createClassLikeEntity(
                         $this,
                         "{$namespaceName}\\{$className}",
                         $relativeFileName
@@ -148,7 +148,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function add(ClassEntity $classEntity, bool $reload = false): ClassEntityCollection
+    public function add(ClassLikeEntity $classEntity, bool $reload = false): ClassEntityCollection
     {
         $className = $classEntity->getName();
         if (!isset($this->entities[$className]) || $reload || isset($this->entitiesNotHandledByPlugins[$className])) {
@@ -168,13 +168,14 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     /**
      * @throws DependencyException
      * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
      */
-    public function internalGetLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): ClassEntity
+    public function internalGetLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): ClassLikeEntity
     {
         $classEntity = $this->get($objectName);
         if (!$classEntity) {
             $objectName = ltrim($objectName, '\\');
-            $classEntity = $this->cacheablePhpEntityFactory->createClassEntity(
+            $classEntity = $this->cacheablePhpEntityFactory->createClassLikeEntity(
                 $this,
                 $objectName
             );
@@ -191,7 +192,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $classEntity;
     }
 
-    public function getEntityByClassName(string $className, bool $createIfNotExists = true): ?ClassEntity
+    public function getEntityByClassName(string $className, bool $createIfNotExists = true): ?ClassLikeEntity
     {
         return $createIfNotExists ? $this->getLoadedOrCreateNew($className) : $this->get($className);
     }
@@ -212,7 +213,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
             $interfaces
         );
         foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassEntity $classEntity */
+            /**@var ClassLikeEntity $classEntity */
             $entityInterfaces = array_map(
                 fn($interface) => ltrim($interface, '\\'),
                 $classEntity->getInterfaceNames()
@@ -238,7 +239,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
             $parentClassNames
         );
         foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassEntity $classEntity */
+            /**@var ClassLikeEntity $classEntity */
             $entityParentClassNames = array_map(
                 fn($parentClassName) => ltrim($parentClassName, '\\'),
                 $classEntity->getParentClassNames()
@@ -258,7 +259,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
             $needToKeep = false;
-            /**@var ClassEntity $classEntity */
+            /**@var ClassLikeEntity $classEntity */
             foreach ($paths as $path) {
                 if (str_starts_with($classEntity->getFileName(), $path)) {
                     $needToKeep = true;
@@ -275,7 +276,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     {
         $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassEntity $classEntity */
+            /**@var ClassLikeEntity $classEntity */
             if (!preg_match($regexPattern, $classEntity->getShortName())) {
                 $classEntityCollection->remove($objectId);
             }
@@ -283,14 +284,11 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $classEntityCollection;
     }
 
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function getOnlyInstantiable(): ClassEntityCollection
     {
         $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassEntity $classEntity */
+            /**@var ClassLikeEntity $classEntity */
             if (!$classEntity->isInstantiable()) {
                 $classEntityCollection->remove($objectId);
             }
@@ -298,14 +296,11 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $classEntityCollection;
     }
 
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function getOnlyInterfaces(): ClassEntityCollection
     {
         $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassEntity $classEntity */
+            /**@var ClassLikeEntity $classEntity */
             if (!$classEntity->isInterface()) {
                 $classEntityCollection->remove($objectId);
             }
@@ -313,14 +308,11 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $classEntityCollection;
     }
 
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function getOnlyTraits(): ClassEntityCollection
     {
         $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassEntity $classEntity */
+            /**@var ClassLikeEntity $classEntity */
             if (!$classEntity->isTrait()) {
                 $classEntityCollection->remove($objectId);
             }
@@ -335,7 +327,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     {
         $classEntityCollection = $this->cloneForFiltration();
         foreach ($classEntityCollection as $objectId => $classEntity) {
-            /**@var ClassEntity $classEntity */
+            /**@var ClassLikeEntity $classEntity */
             if (!$classEntity->isAbstract() || $classEntity->isInterface()) {
                 $classEntityCollection->remove($objectId);
             }
@@ -351,7 +343,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      *
      * @param bool $useUnsafeKeys Whether to use search keys that can be used to find several entities
      *
-     * @return ClassEntity|null
+     * @return ClassLikeEntity|null
      *
      * @example
      *  $classEntityCollection->findEntity('App'); // class name
@@ -363,7 +355,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      *  $classEntityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/BumbleDocGen/Console/App.php'); // absolute path
      *  $classEntityCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Console/App.php'); // source link
      */
-    public function internalFindEntity(string $search, bool $useUnsafeKeys = true): ?ClassEntity
+    public function internalFindEntity(string $search, bool $useUnsafeKeys = true): ?ClassLikeEntity
     {
         if (preg_match('/^((self|parent):|(\$(.*)->))/', $search)) {
             return null;

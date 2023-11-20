@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\NodeValueCompiler;
@@ -55,7 +55,7 @@ class ConstantEntity extends BaseEntity
 
     public function __construct(
         Configuration $configuration,
-        private ClassEntity $classEntity,
+        private ClassLikeEntity $classEntity,
         private ParserHelper $parserHelper,
         LocalObjectCache $localObjectCache,
         LoggerInterface $logger,
@@ -89,7 +89,7 @@ class ConstantEntity extends BaseEntity
         return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
     }
 
-    public function getRootEntity(): ClassEntity
+    public function getRootEntity(): ClassLikeEntity
     {
         return $this->classEntity;
     }
@@ -122,7 +122,7 @@ class ConstantEntity extends BaseEntity
         return $this->implementingClassName;
     }
 
-    public function getImplementingClass(): ClassEntity
+    public function getImplementingClass(): ClassLikeEntity
     {
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }

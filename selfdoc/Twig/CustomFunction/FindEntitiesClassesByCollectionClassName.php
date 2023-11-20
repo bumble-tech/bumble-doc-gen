@@ -7,7 +7,7 @@ namespace SelfDocConfig\Twig\CustomFunction;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -19,7 +19,7 @@ final class FindEntitiesClassesByCollectionClassName implements CustomFunctionIn
     }
 
     /**
-     * @return ClassEntity[]
+     * @return ClassLikeEntity[]
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -29,13 +29,16 @@ final class FindEntitiesClassesByCollectionClassName implements CustomFunctionIn
         $classEntityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
 
         /**
-         * @var ClassEntity $findCollectionEntity
+         * @var ClassLikeEntity $findCollectionEntity
          */
         $findCollectionEntity = $classEntityCollection->findEntity($collectionName);
         $addMethodEntity = $findCollectionEntity->getMethodEntity('add');
+        if (!$addMethodEntity) {
+            return [];
+        }
         $firstParam = $addMethodEntity->getParameters()[0];
         /**
-         * @var ClassEntity $firstParamEntity
+         * @var ClassLikeEntity $firstParamEntity
          */
         $firstParamEntity = $classEntityCollection->findEntity($firstParam['type']);
 

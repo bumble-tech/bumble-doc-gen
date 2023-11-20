@@ -7,7 +7,7 @@ namespace BumbleDocGen\AI\Generators;
 use BumbleDocGen\AI\ProviderInterface;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -22,7 +22,7 @@ final class ReadmeTemplateGenerator
 
     /**
      * @param RootEntityCollection $rootEntityCollection
-     * @param ClassEntity[] $entryPoints
+     * @param ClassLikeEntity[] $entryPoints
      * @param string|null $composerJsonFile
      * @param string|null $additionalPrompt
      * @return string
@@ -41,7 +41,7 @@ final class ReadmeTemplateGenerator
         }
 
         $namespacesList = array_map(
-            fn(ClassEntity $e) => $e->getNamespaceName(),
+            fn(ClassLikeEntity $e) => $e->getNamespaceName(),
             iterator_to_array($rootEntityCollection)
         );
 

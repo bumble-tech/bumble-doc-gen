@@ -13,7 +13,6 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
-use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Constant\ConstantEntity;
@@ -47,11 +46,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      */
     abstract public function getAst(): \PhpParser\Node\Stmt;
 
-    abstract public function getImplementingClass(): ClassEntity;
+    abstract public function getImplementingClass(): ClassLikeEntity;
 
     abstract protected function getDocCommentRecursive(): string;
 
-    abstract public function getDocCommentEntity(): ClassEntity|MethodEntity|PropertyEntity|ConstantEntity;
+    abstract public function getDocCommentEntity(): ClassLikeEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
     abstract public function getDescription(): string;
 
@@ -147,22 +146,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $this->getName();
     }
 
-    protected function prettyVarExport(mixed $expression): string
-    {
-        $export = var_export($expression, true);
-        $patterns = [
-            "/array \(/" => '[',
-            "/^([ ]*)\)(,?)$/m" => '$1]$2',
-            "/=>[ ]?\n[ ]+\[/" => '=> [',
-            "/([ ]*)(\'[^\']+\') => ([\[\'])/" => '$1$2 => $3',
-        ];
-        return str_replace(
-            PHP_EOL,
-            ' ',
-            preg_replace(array_keys($patterns), array_values($patterns), $export)
-        );
-    }
-
     public function isInternal(): bool
     {
         $docBlock = $this->getDocBlock();
@@ -194,7 +177,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         $docBlock = $this->getDocBlock();
         $getDocCommentEntity = $this->getDocCommentEntity();
 
-        if (is_a($getDocCommentEntity, ClassEntity::class)) {
+        if (is_a($getDocCommentEntity, ClassLikeEntity::class)) {
             $docCommentImplementingClass = $getDocCommentEntity;
         } elseif (method_exists($getDocCommentEntity, 'getImplementingClass')) {
             $docCommentImplementingClass = $getDocCommentEntity->getImplementingClass();
@@ -288,7 +271,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
                         'description' => $description,
                     ];
                 } else {
-                    $currentClassEntity = is_a($docCommentImplementingClass, ClassEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
+                    $currentClassEntity = is_a($docCommentImplementingClass, ClassLikeEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
                     $className = $this->parserHelper->parseFullClassName(
                         $name,
                         $currentClassEntity
@@ -490,9 +473,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return (string)$docComment?->getReformattedText();
     }
 
-    public function getCurrentRootEntity(): ?RootEntityInterface
+    public function getCurrentRootEntity(): ?ClassLikeEntity
     {
-        if (is_a($this, RootEntityInterface::class)) {
+        if (is_a($this, ClassLikeEntity::class)) {
             return $this;
         } elseif (method_exists($this, 'getRootEntity')) {
             return $this->getRootEntity();
@@ -507,6 +490,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * @throws InvalidArgumentException
+     * @throws InvalidConfigurationParameterException
      */
     final public function getCachedEntityDependencies(): array
     {
@@ -525,6 +509,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * @throws InvalidArgumentException
+     * @throws InvalidConfigurationParameterException
      */
     final public function reloadEntityDependenciesCache(): array
     {
@@ -613,7 +598,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
             $rootEntityResult = $this->localObjectCache->getMethodCachedResult(__METHOD__, $entityName);
             if (!$rootEntityResult) {
                 return false;
-            } elseif (is_a($this, ClassEntity::class)) {
+            } elseif (is_a($this, ClassLikeEntity::class)) {
                 return true;
             }
             return $this->isSubEntityFileCacheIsOutdated(__METHOD__);

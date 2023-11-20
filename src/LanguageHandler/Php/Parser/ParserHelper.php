@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use Monolog\Logger;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
@@ -220,7 +220,7 @@ final class ParserHelper
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getUsesListByClassEntity(ClassEntity $classEntity, bool $extended = true): array
+    public function getUsesListByClassEntity(ClassLikeEntity $classEntity, bool $extended = true): array
     {
         $fileName = $classEntity->getAbsoluteFileName();
         if (!$fileName) {
@@ -261,7 +261,7 @@ final class ParserHelper
      */
     public function parseFullClassName(
         string $searchClassName,
-        ClassEntity $parentClassEntity,
+        ClassLikeEntity $parentClassEntity,
         bool $extended = true
     ): string {
         $classNameParts = explode('::', $searchClassName);
@@ -334,7 +334,7 @@ final class ParserHelper
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlock(ClassEntity $classEntity, string $docComment, ?int $lineNumber = null): DocBlock
+    public function getDocBlock(ClassLikeEntity $classEntity, string $docComment, ?int $lineNumber = null): DocBlock
     {
         $docComment = $docComment ?: ' ';
         $cacheKey = md5("{$classEntity->getName()}{$docComment}{$lineNumber}");
@@ -365,7 +365,7 @@ final class ParserHelper
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlockContext(ClassEntity $classEntity): Context
+    public function getDocBlockContext(ClassLikeEntity $classEntity): Context
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $classEntity->getName());

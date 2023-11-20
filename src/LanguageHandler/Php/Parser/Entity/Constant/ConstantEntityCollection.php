@@ -7,7 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\Constant;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -15,7 +15,7 @@ use DI\NotFoundException;
 final class ConstantEntityCollection extends BaseEntityCollection
 {
     public function __construct(
-        private ClassEntity $classEntity,
+        private ClassLikeEntity $classEntity,
         private PhpHandlerSettings $phpHandlerSettings,
         private CacheablePhpEntityFactory $cacheablePhpEntityFactory
     ) {

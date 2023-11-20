@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php\Parser\PhpParser;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Constant\ConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Property\PropertyEntity;
@@ -29,7 +29,7 @@ final class NodeValueCompiler
      */
     public static function compile(
         Node\Stmt\Expression|Node $node,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
+        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
     ): mixed {
         if (is_a($node, \PhpParser\Node\Expr\Array_::class)) {
             $compiledValue = [];
@@ -49,7 +49,7 @@ final class NodeValueCompiler
                 Node\Expr\ClassConstFetch::class => self::getClassConstantValue($node, $entity),
                 Node\Scalar\MagicConst\Dir::class => dirname($entity->getRelativeFileName()),
                 Node\Scalar\MagicConst\File::class => $entity->getRelativeFileName(),
-                Node\Scalar\MagicConst\Class_::class => is_a($entity, ClassEntity::class) ? $entity->getName() : $entity->getRootEntity()->getName(),
+                Node\Scalar\MagicConst\Class_::class => is_a($entity, ClassLikeEntity::class) ? $entity->getName() : $entity->getRootEntity()->getName(),
                 Node\Scalar\MagicConst\Line::class => $node->getLine(),
                 Node\Scalar\MagicConst\Namespace_::class => $entity->getNamespaceName(),
                 Node\Scalar\MagicConst\Method::class => is_a($entity, MethodEntity::class) ? $entity->getRootEntity()->getName() . '::' . $entity->getName() : '',
@@ -93,7 +93,7 @@ final class NodeValueCompiler
      */
     private static function getStaticCallValue(
         Node\Expr\StaticCall $node,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
+        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
     ): mixed {
         $className = self::resolveClassName($node->class->toString(), $entity);
         if ($entity->getName() !== $className) {
@@ -117,7 +117,7 @@ final class NodeValueCompiler
      */
     private static function getStaticPropertyValue(
         Node\Expr\StaticPropertyFetch $node,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
+        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
     ): mixed {
         $className = self::resolveClassName($node->class->toString(), $entity);
         if ($entity->getName() !== $className) {
@@ -137,13 +137,13 @@ final class NodeValueCompiler
      */
     private static function getClassConstantValue(
         Node\Expr\ClassConstFetch $node,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
+        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
     ): mixed {
 
         $className = self::resolveClassName($node->class->toString(), $entity);
         $constantName = $node->name->toString();
 
-        if (!$entity instanceof ClassEntity) {
+        if (!$entity instanceof ClassLikeEntity) {
             $entity = $entity->getRootEntity();
         }
         if ($entity->getName() !== $className) {
@@ -170,13 +170,13 @@ final class NodeValueCompiler
      */
     private static function resolveClassName(
         string $className,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassEntity $entity
+        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
     ): string {
         if ($className !== 'self' && $className !== 'static' && $className !== 'parent') {
             return $className;
         }
         $classEntity = $entity;
-        if (!$entity instanceof ClassEntity) {
+        if (!$entity instanceof ClassLikeEntity) {
             $classEntity = $entity->getRootEntity();
         }
         return $className === 'parent' ? $classEntity->getParentClassName() : $classEntity->getName();

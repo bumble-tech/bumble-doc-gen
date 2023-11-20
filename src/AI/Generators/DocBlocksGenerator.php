@@ -7,7 +7,7 @@ namespace BumbleDocGen\AI\Generators;
 use BumbleDocGen\AI\ProviderInterface;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
@@ -31,7 +31,7 @@ final class DocBlocksGenerator
      */
     public function hasMethodsWithoutDocBlocks(RootEntityInterface $rootEntity): bool
     {
-        if (!is_a($rootEntity, ClassEntity::class)) {
+        if (!is_a($rootEntity, ClassLikeEntity::class)) {
             throw new \InvalidArgumentException('Currently we can only work PHP class entities');
         }
         foreach ($rootEntity->getMethodEntityCollection() as $method) {
@@ -54,7 +54,7 @@ final class DocBlocksGenerator
         RootEntityInterface $rootEntity,
         int $mode = self::MODE_READ_ONLY_SIGNATURES,
     ): array {
-        if (!is_a($rootEntity, ClassEntity::class)) {
+        if (!is_a($rootEntity, ClassLikeEntity::class)) {
             throw new \InvalidArgumentException('Currently we can only work PHP class entities');
         }
 

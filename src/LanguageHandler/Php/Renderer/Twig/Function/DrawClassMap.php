@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -66,7 +66,7 @@ final class DrawClassMap implements CustomFunctionInterface
     /**
      * @throws InvalidConfigurationParameterException
      */
-    protected function appendClassToDirectoryStructure(array $directoryStructure, ClassEntity $classEntity): array
+    protected function appendClassToDirectoryStructure(array $directoryStructure, ClassLikeEntity $classEntity): array
     {
         $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
         $this->fileClassmap[$classEntity->getFileName()] = call_user_func_array(
