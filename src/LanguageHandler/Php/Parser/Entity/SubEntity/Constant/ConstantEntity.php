@@ -80,15 +80,6 @@ class ConstantEntity extends BaseEntity
         return $this->classEntity->getRootEntityCollection();
     }
 
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getDocBlock(): DocBlock
-    {
-        $classEntity = $this->getDocCommentEntity()->getImplementingClass();
-        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
-    }
-
     public function getRootEntity(): ClassLikeEntity
     {
         return $this->classEntity;
@@ -130,14 +121,6 @@ class ConstantEntity extends BaseEntity
     public function getDocCommentEntity(): ConstantEntity
     {
         return $this;
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    protected function getDocCommentRecursive(): string
-    {
-        return $this->getDocCommentEntity()->getDocComment() ?: ' ';
     }
 
     public function getName(): string

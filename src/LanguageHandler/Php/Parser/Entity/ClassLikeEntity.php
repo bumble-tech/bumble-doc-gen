@@ -154,17 +154,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getDocBlock(): DocBlock
-    {
-        $classEntity = $this->getDocCommentEntity();
-        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
-    }
-
-    /**
      * Checking if class file is in git repository
      */
     final public function isInGit(): bool
@@ -211,16 +200,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         }
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $classEntity);
         return $classEntity;
-    }
-
-    /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     */
-    protected function getDocCommentRecursive(): string
-    {
-        return $this->getDocCommentEntity()->getDocComment() ?: ' ';
     }
 
     final public function loadPluginData(string $pluginKey, array $data): void

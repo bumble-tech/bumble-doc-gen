@@ -105,21 +105,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getDocBlock(bool $recursive = true): DocBlock
-    {
-        if ($recursive) {
-            $classEntity = $this->getDocCommentEntity()->getImplementingClass();
-            return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive(), $this->getDocCommentLineRecursive());
-        }
-        $classEntity = $this->getImplementingClass();
-        return $this->parserHelper->getDocBlock($classEntity, $this->getDocComment(), $this->getDocCommentLine());
-    }
-
-    /**
      * @inheritDoc
      */
     public function getImplementingClass(): ClassLikeEntity
@@ -203,37 +188,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         }
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $prototype);
         return $prototype;
-    }
-
-    /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getDocCommentRecursive(): string
-    {
-        $objectId = $this->getObjectId();
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException) {
-        }
-        $docComment = $this->getDocCommentEntity()->getDocComment() ?: ' ';
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docComment);
-        return $docComment;
-    }
-
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     * @throws InvalidConfigurationParameterException
-     */
-    #[CacheableMethod] public function getDocCommentLineRecursive(): ?int
-    {
-        $methodEntity = $this->getDocCommentEntity();
-        if ($methodEntity->getDocCommentRecursive()) {
-            return $methodEntity->getAst()->getDocComment()?->getStartLine();
-        }
-        return null;
     }
 
     /**

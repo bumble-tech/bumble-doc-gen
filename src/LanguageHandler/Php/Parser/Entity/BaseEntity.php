@@ -54,8 +54,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      */
     abstract public function getImplementingClass(): ClassLikeEntity;
 
-    abstract protected function getDocCommentRecursive(): string;
-
     abstract public function getDocCommentEntity(): ClassLikeEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
     /**
@@ -67,8 +65,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      * @api
      */
     abstract public function getStartLine(): int;
-
-    abstract public function getDocBlock(): DocBlock;
 
     /**
      * @api
@@ -168,6 +164,32 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * @api
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getDocCommentLine(): ?int
+    {
+        $entity = $this->getDocCommentEntity();
+        return $entity->getAst()->getDocComment()?->getStartLine();
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getDocBlock(): DocBlock
+    {
+        $docCommentEntity = $this->getDocCommentEntity();
+        return $this->parserHelper->getDocBlock(
+            $docCommentEntity->getImplementingClass(),
+            $docCommentEntity->getDocComment() ?: ' ',
+            $this->getDocCommentLine()
+        );
+    }
+
+    /**
+     * @api
+     *
+     * @throws InvalidConfigurationParameterException
      */
     public function isInternal(): bool
     {
@@ -178,6 +200,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * @api
+     *
+     * @throws InvalidConfigurationParameterException
      */
     public function isDeprecated(): bool
     {
@@ -347,6 +371,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * @api
+     *
+     * @throws InvalidConfigurationParameterException
      */
     public function hasThrows(): bool
     {
@@ -460,6 +486,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * @api
+     *
+     * @throws InvalidConfigurationParameterException
      */
     public function hasExamples(): bool
     {
@@ -470,9 +498,11 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * Get parsed examples from `examples` doc block
      *
+     * @return array<int,array{example:string}>
+     *
      * @api
      *
-     * @return array<int,array{example:string}>
+     * @throws InvalidConfigurationParameterException
      */
     public function getExamples(): array
     {
@@ -492,6 +522,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      * Get first example from @examples doc block
      *
      * @api
+     *
+     * @throws InvalidConfigurationParameterException
      */
     public function getFirstExample(): string
     {
@@ -501,6 +533,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     /**
      * @api
+     *
+     * @throws InvalidConfigurationParameterException
      */
     public function getDocNote(): string
     {

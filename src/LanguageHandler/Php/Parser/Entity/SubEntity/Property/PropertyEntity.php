@@ -134,17 +134,6 @@ class PropertyEntity extends BaseEntity
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlock(): DocBlock
-    {
-        $classEntity = $this->getDocCommentEntity()->getImplementingClass();
-        return $this->parserHelper->getDocBlock($classEntity, $this->getDocCommentRecursive());
-    }
-
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     * @throws InvalidConfigurationParameterException
-     */
     public function getDocCommentEntity(): PropertyEntity
     {
         $objectId = $this->getObjectId();
@@ -176,23 +165,6 @@ class PropertyEntity extends BaseEntity
         }
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $reflectionProperty);
         return $reflectionProperty;
-    }
-
-    /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     */
-    protected function getDocCommentRecursive(): string
-    {
-        $objectId = $this->getObjectId();
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException) {
-        }
-        $docComment = $this->getDocCommentEntity()->getDocComment() ?: ' ';
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $docComment);
-        return $docComment;
     }
 
     public function getName(): string
