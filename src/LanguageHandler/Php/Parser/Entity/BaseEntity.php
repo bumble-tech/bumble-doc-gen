@@ -237,10 +237,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
         if (is_a($getDocCommentEntity, ClassLikeEntity::class)) {
             $docCommentImplementingClass = $getDocCommentEntity;
-        } elseif (method_exists($getDocCommentEntity, 'getImplementingClass')) {
-            $docCommentImplementingClass = $getDocCommentEntity->getImplementingClass();
         } else {
-            $docCommentImplementingClass = $getDocCommentEntity;
+            $docCommentImplementingClass = $getDocCommentEntity->getImplementingClass();
         }
 
         foreach ($docBlock->getTagsByName('see') as $seeBlock) {
