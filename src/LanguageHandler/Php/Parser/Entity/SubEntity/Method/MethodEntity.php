@@ -430,19 +430,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     /**
      * @inheritDoc
      *
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getDescription(): string
-    {
-        $docBlock = $this->getDocBlock();
-        return trim($docBlock->getSummary());
-    }
-
-    /**
-     * @inheritDoc
-     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException

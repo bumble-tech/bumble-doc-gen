@@ -152,15 +152,6 @@ class ConstantEntity extends BaseEntity
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getDescription(): string
-    {
-        $docBlock = $this->getDocBlock();
-        return $docBlock->getSummary();
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     #[CacheableMethod] public function isPublic(): bool
     {
         return $this->getAst()->isPublic();

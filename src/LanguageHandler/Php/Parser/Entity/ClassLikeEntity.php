@@ -569,17 +569,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getDescription(): string
-    {
-        $docBlock = $this->getDocBlock();
-        return $docBlock->getSummary();
-    }
-
-    /**
      * @throws InvalidConfigurationParameterException
      */
     public function getFileContent(): string

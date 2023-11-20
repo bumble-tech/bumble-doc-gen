@@ -261,17 +261,6 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getDescription(): string
-    {
-        $docBlock = $this->getDocBlock();
-        return trim($docBlock->getSummary());
-    }
-
-    /**
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool

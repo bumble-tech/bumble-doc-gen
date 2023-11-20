@@ -59,11 +59,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * @api
      */
-    abstract public function getDescription(): string;
-
-    /**
-     * @api
-     */
     abstract public function getStartLine(): int;
 
     /**
@@ -84,14 +79,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
-     * @throws InvalidConfigurationParameterException
-     */
-    final public function isEntityFileCanBeLoad(): bool
-    {
-        return $this->getCurrentRootEntity()->isClassLoad() && $this->getRelativeFileName();
-    }
-
-    /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
      *
      * @api
@@ -102,6 +89,25 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     {
         $relativeFileName = $this->getRelativeFileName();
         return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    final public function isEntityFileCanBeLoad(): bool
+    {
+        return $this->getCurrentRootEntity()->isClassLoad() && $this->getRelativeFileName();
+    }
+
+    /**
+     * @api
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getDescription(): string
+    {
+        $docBlock = $this->getDocBlock();
+        return trim($docBlock->getSummary());
     }
 
     protected function prepareTypeString(string $type): string
