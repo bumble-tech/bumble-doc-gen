@@ -11,7 +11,7 @@ use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer;
 use DI\DependencyException;
@@ -126,7 +126,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    private function getFilterData(ClassEntityCollection $entityCollection, string $className): ?array
+    private function getFilterData(PhpEntitiesCollection $entitiesCollection, string $className): ?array
     {
         static $filtersData = [];
         if (!array_key_exists($className, $filtersData)) {
@@ -136,7 +136,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
             }
 
             $functionData['name'] = $filters[$className];
-            $entity = $entityCollection->getEntityByClassName($className);
+            $entity = $entitiesCollection->getEntityByClassName($className);
             $method = $entity->getMethodEntityCollection()->get('__invoke');
             $functionData['parameters'] = $method->getParameters();
             $filtersData[$className] = $functionData;

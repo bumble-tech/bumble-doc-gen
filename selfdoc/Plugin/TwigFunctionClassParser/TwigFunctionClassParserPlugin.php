@@ -11,7 +11,7 @@ use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer;
 use DI\DependencyException;
@@ -121,7 +121,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    private function getFunctionData(ClassEntityCollection $entityCollection, string $className): ?array
+    private function getFunctionData(PhpEntitiesCollection $entitiesCollection, string $className): ?array
     {
         static $functionsData = [];
         if (!array_key_exists($className, $functionsData)) {
@@ -129,7 +129,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
             if (!isset($functions[$className])) {
                 return null;
             }
-            $entity = $entityCollection->getEntityByClassName($className);
+            $entity = $entitiesCollection->getEntityByClassName($className);
             if (str_starts_with($entity->getRelativeFileName(), '/selfdoc')) {
                 return null;
             }

@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -26,12 +26,12 @@ final class FindEntitiesClassesByCollectionClassName implements CustomFunctionIn
      */
     public function __invoke(string $collectionName): array
     {
-        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
 
         /**
          * @var ClassLikeEntity $findCollectionEntity
          */
-        $findCollectionEntity = $entityCollection->findEntity($collectionName);
+        $findCollectionEntity = $entitiesCollection->findEntity($collectionName);
         $addMethodEntity = $findCollectionEntity->getMethodEntity('add');
         if (!$addMethodEntity) {
             return [];
@@ -40,14 +40,14 @@ final class FindEntitiesClassesByCollectionClassName implements CustomFunctionIn
         /**
          * @var ClassLikeEntity $firstParamEntity
          */
-        $firstParamEntity = $entityCollection->findEntity($firstParam['type']);
+        $firstParamEntity = $entitiesCollection->findEntity($firstParam['type']);
 
         if ($firstParamEntity->isInterface()) {
-            return iterator_to_array($entityCollection->filterByInterfaces([$firstParamEntity->getName()]));
+            return iterator_to_array($entitiesCollection->filterByInterfaces([$firstParamEntity->getName()]));
         } elseif ($firstParamEntity->isInstantiable()) {
             return [$firstParamEntity];
         }
-        return iterator_to_array($entityCollection->filterByParentClassNames([$firstParamEntity->getName()]));
+        return iterator_to_array($entitiesCollection->filterByParentClassNames([$firstParamEntity->getName()]));
     }
 
     public static function getName(): string

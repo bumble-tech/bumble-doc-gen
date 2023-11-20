@@ -32,9 +32,9 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Style\OutputStyle;
 
 /**
- * Collection of PHP class entities
+ * Collection of class entities
  */
-final class ClassEntityCollection extends LoggableRootEntityCollection
+final class PhpEntitiesCollection extends LoggableRootEntityCollection
 {
     private const PHP_FILE_TEMPLATE = '/\.php$/';
     public const NAME = 'phpEntities';
@@ -149,7 +149,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function add(ClassLikeEntity $classEntity, bool $reload = false): ClassEntityCollection
+    public function add(ClassLikeEntity $classEntity, bool $reload = false): PhpEntitiesCollection
     {
         $className = $classEntity->getName();
         if (!isset($this->entities[$className]) || $reload || isset($this->entitiesNotHandledByPlugins[$className])) {
@@ -205,7 +205,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      *
      * @throws InvalidConfigurationParameterException
      */
-    public function filterByInterfaces(array $interfaces): ClassEntityCollection
+    public function filterByInterfaces(array $interfaces): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         $interfaces = array_map(
@@ -236,7 +236,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      *
      * @throws InvalidConfigurationParameterException
      */
-    public function filterByParentClassNames(array $parentClassNames): ClassEntityCollection
+    public function filterByParentClassNames(array $parentClassNames): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         $parentClassNames = array_map(
@@ -268,7 +268,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      *
      * @throws InvalidConfigurationParameterException
      */
-    public function filterByPaths(array $paths): ClassEntityCollection
+    public function filterByPaths(array $paths): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         foreach ($entitiesCollection as $objectId => $entity) {
@@ -286,7 +286,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $entitiesCollection;
     }
 
-    public function filterByNameRegularExpression(string $regexPattern): ClassEntityCollection
+    public function filterByNameRegularExpression(string $regexPattern): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         foreach ($entitiesCollection as $objectId => $entity) {
@@ -301,7 +301,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     /**
      * Retrieving only instantiable entities. Filtering is only available for ClassLikeEntity.
      */
-    public function getOnlyInstantiable(): ClassEntityCollection
+    public function getOnlyInstantiable(): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         foreach ($entitiesCollection as $objectId => $entity) {
@@ -312,7 +312,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $entitiesCollection;
     }
 
-    public function getOnlyInterfaces(): ClassEntityCollection
+    public function getOnlyInterfaces(): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         foreach ($entitiesCollection as $objectId => $entity) {
@@ -323,7 +323,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
         return $entitiesCollection;
     }
 
-    public function getOnlyTraits(): ClassEntityCollection
+    public function getOnlyTraits(): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         foreach ($entitiesCollection as $objectId => $entity) {
@@ -337,7 +337,7 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getOnlyAbstractClasses(): ClassEntityCollection
+    public function getOnlyAbstractClasses(): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         foreach ($entitiesCollection as $objectId => $entity) {
@@ -359,14 +359,14 @@ final class ClassEntityCollection extends LoggableRootEntityCollection
      * @return ClassLikeEntity|null
      *
      * @example
-     *  $entityCollection->findEntity('App'); // class name
-     *  $entityCollection->findEntity('BumbleDocGen\Console\App'); // class with namespace
-     *  $entityCollection->findEntity('\BumbleDocGen\Console\App'); // class with namespace
-     *  $entityCollection->findEntity('\BumbleDocGen\Console\App::test()'); // class with namespace and optional part
-     *  $entityCollection->findEntity('App.php'); // filename
-     *  $entityCollection->findEntity('/BumbleDocGen/Console/App.php'); // relative path
-     *  $entityCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/BumbleDocGen/Console/App.php'); // absolute path
-     *  $entityCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Console/App.php'); // source link
+     *  $entitiesCollection->findEntity('App'); // class name
+     *  $entitiesCollection->findEntity('BumbleDocGen\Console\App'); // class with namespace
+     *  $entitiesCollection->findEntity('\BumbleDocGen\Console\App'); // class with namespace
+     *  $entitiesCollection->findEntity('\BumbleDocGen\Console\App::test()'); // class with namespace and optional part
+     *  $entitiesCollection->findEntity('App.php'); // filename
+     *  $entitiesCollection->findEntity('/BumbleDocGen/Console/App.php'); // relative path
+     *  $entitiesCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/BumbleDocGen/Console/App.php'); // absolute path
+     *  $entitiesCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Console/App.php'); // source link
      */
     public function internalFindEntity(string $search, bool $useUnsafeKeys = true): ?ClassLikeEntity
     {

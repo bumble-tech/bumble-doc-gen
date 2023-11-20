@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 
 final class EntityDocRendererHelper
 {
@@ -31,7 +31,7 @@ final class EntityDocRendererHelper
         ?string $defaultEntityName = null,
         bool $useUnsafeKeys = true
     ): array {
-        if (!is_a($rootEntityCollection, ClassEntityCollection::class)) {
+        if (!is_a($rootEntityCollection, PhpEntitiesCollection::class)) {
             return [];
         }
 
@@ -112,13 +112,13 @@ final class EntityDocRendererHelper
         ?string $defaultEntityClassName = null,
         bool $createDocument = true
     ): array {
-        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
-        $data = self::getEntityDataByLink($linkString, $entityCollection, $defaultEntityClassName);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
+        $data = self::getEntityDataByLink($linkString, $entitiesCollection, $defaultEntityClassName);
         if ($data['entityName'] ?? null) {
             $data['url'] = call_user_func_array(
                 $this->getDocumentedEntityUrlFunction,
                 [
-                    $entityCollection,
+                    $entitiesCollection,
                     $data['entityName'],
                     $data['cursor'],
                     $createDocument

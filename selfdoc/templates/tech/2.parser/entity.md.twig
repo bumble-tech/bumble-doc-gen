@@ -50,16 +50,16 @@ The root collections ([a]RootEntityCollection[/a]), which are directly accessibl
         <th>PL</th>
         <th>Description</th>
     </tr>
-    {% for entityCollection in phpEntities
+    {% for entitiesCollection in phpEntities
             .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\RootEntityCollection'])
             .getOnlyInstantiable()
             %}
-    {% set match = entityCollection.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+    {% set match = entitiesCollection.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
     <tr>
-        <td>{{ drawDocumentedEntityLink(entityCollection) }}</td>
-        <td><b>{{ entityCollection.getMethodEntity('getEntityCollectionName').getFirstReturnValue() }}</b></td>
+        <td>{{ drawDocumentedEntityLink(entitiesCollection) }}</td>
+        <td><b>{{ entitiesCollection.getMethodEntity('getEntityCollectionName').getFirstReturnValue() }}</b></td>
         <td>{{ match[2] | upper }}</td>
-        <td>{{ entityCollection.getDescription() }}</td>
+        <td>{{ entitiesCollection.getDescription() }}</td>
     </tr>
     {% endfor %}
 </table>
@@ -77,16 +77,16 @@ These classes are a convenient wrapper for accessing data in templates:
         <th>PL</th>
         <th>Description</th>
     </tr>
-{% for entityCollection in phpEntities
+{% for entitiesCollection in phpEntities
     .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\BaseEntityCollection'])
     .getOnlyInstantiable()
 %}
-    {% set match = entityCollection.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
-    {% set entitiesClasses = findEntitiesClassesByCollectionClassName(entityCollection.getName()) %}
+    {% set match = entitiesCollection.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+    {% set entitiesClasses = findEntitiesClassesByCollectionClassName(entitiesCollection.getName()) %}
     {% for entityClass in entitiesClasses %}
     <tr>
         <td>{{ drawDocumentedEntityLink(entityClass) }}</td>
-        <td>{{ drawDocumentedEntityLink(entityCollection) }}</td>
+        <td>{{ drawDocumentedEntityLink(entitiesCollection) }}</td>
         <td>{% if entityClass.implementsInterface('BumbleDocGen\\Core\\Parser\\Entity\\RootEntityInterface') %}yes{% else %}no{% endif %}</td>
         <td>{{ match[2] | upper }}</td>
         <td>{{ entityClass.getDescription() }}</td>

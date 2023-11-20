@@ -58,7 +58,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
 
     abstract public function getDocBlock(): DocBlock;
 
-    abstract public function getRootEntityCollection(): ClassEntityCollection;
+    abstract public function getRootEntityCollection(): PhpEntitiesCollection;
 
     abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
 

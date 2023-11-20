@@ -10,13 +10,13 @@ use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
 
 final class PhpHandler implements LanguageHandlerInterface
 {
-    public function __construct(private ClassEntityCollection $entityCollection, private PhpHandlerSettings $phpHandlerSettings)
+    public function __construct(private PhpEntitiesCollection $entitiesCollection, private PhpHandlerSettings $phpHandlerSettings)
     {
     }
 
@@ -33,10 +33,10 @@ final class PhpHandler implements LanguageHandlerInterface
      */
     public function getEntityCollection(): RootEntityCollection
     {
-        if ($this->entityCollection->isEmpty()) {
-            $this->entityCollection->loadClassEntities();
+        if ($this->entitiesCollection->isEmpty()) {
+            $this->entitiesCollection->loadClassEntities();
         }
-        return $this->entityCollection;
+        return $this->entitiesCollection;
     }
 
     /**

@@ -10,7 +10,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\EnumEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\InterfaceEntity;
@@ -136,7 +136,7 @@ final class CacheablePhpEntityFactory
      * @throws InvalidConfigurationParameterException
      */
     public function createClassLikeEntity(
-        ClassEntityCollection $entityCollection,
+        PhpEntitiesCollection $entitiesCollection,
         string $className,
         ?string $relativeFileName = null
     ): ClassLikeEntity {
@@ -167,7 +167,7 @@ final class CacheablePhpEntityFactory
         $wrapperClassName = $this->getOrCreateEntityClassWrapper($entityClassName);
         /** @var ClassLikeEntity $classEntity */
         $classEntity = $this->diContainer->make($wrapperClassName, [
-            'entityCollection' => $entityCollection,
+            'entitiesCollection' => $entitiesCollection,
             'className' => $className,
             'relativeFileName' => $relativeFileName
         ]);
@@ -181,7 +181,7 @@ final class CacheablePhpEntityFactory
      */
     public function createSubClassEntity(
         string $subClassEntity,
-        ClassEntityCollection $entityCollection,
+        PhpEntitiesCollection $entitiesCollection,
         string $className,
         ?string $relativeFileName
     ): ClassLikeEntity {
@@ -198,7 +198,7 @@ final class CacheablePhpEntityFactory
         }
         $wrapperClassName = $this->getOrCreateEntityClassWrapper($subClassEntity);
         $classEntity = $this->diContainer->make($wrapperClassName, [
-            'entityCollection' => $entityCollection,
+            'entitiesCollection' => $entitiesCollection,
             'className' => $className,
             'relativeFileName' => $relativeFileName
         ]);

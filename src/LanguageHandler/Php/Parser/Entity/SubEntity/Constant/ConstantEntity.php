@@ -9,7 +9,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\NodeValueCompiler;
@@ -75,7 +75,7 @@ class ConstantEntity extends BaseEntity
         return $this->classEntity->getPhpHandlerSettings();
     }
 
-    public function getRootEntityCollection(): ClassEntityCollection
+    public function getRootEntityCollection(): PhpEntitiesCollection
     {
         return $this->classEntity->getRootEntityCollection();
     }

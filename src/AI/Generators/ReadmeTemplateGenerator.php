@@ -8,7 +8,7 @@ use BumbleDocGen\AI\ProviderInterface;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -36,7 +36,7 @@ final class ReadmeTemplateGenerator
         ?string $composerJsonFile = null,
         ?string $additionalPrompt = null,
     ): string {
-        if (!is_a($rootEntityCollection, ClassEntityCollection::class)) {
+        if (!is_a($rootEntityCollection, PhpEntitiesCollection::class)) {
             throw new \InvalidArgumentException('Currently we can only work with collections of PHP entities');
         }
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -12,12 +12,12 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class AfterLoadingClassEntityCollection extends Event
 {
-    public function __construct(private ClassEntityCollection $entityCollection)
+    public function __construct(private PhpEntitiesCollection $entitiesCollection)
     {
     }
 
-    public function getClassEntityCollection(): ClassEntityCollection
+    public function getClassEntityCollection(): PhpEntitiesCollection
     {
-        return $this->entityCollection;
+        return $this->entitiesCollection;
     }
 }

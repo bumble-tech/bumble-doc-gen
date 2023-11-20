@@ -17,7 +17,7 @@ use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\InterfaceEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
@@ -92,11 +92,11 @@ final class DocGenerator
         }
 
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
         $missingDocBlocksGenerator = new DocBlocksGenerator($aiProvider, $this->parserHelper);
 
         $alreadyProcessedEntities = [];
-        $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (
+        $getEntities = function (PhpEntitiesCollection|array $entitiesCollection) use (
             &$getEntities,
             &$alreadyProcessedEntities
         ): Generator {
@@ -171,7 +171,7 @@ final class DocGenerator
     ): void {
         $this->io->note("Project analysis");
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
 
         $finder = new Finder();
         $finder
@@ -259,7 +259,7 @@ final class DocGenerator
         try {
             $this->parser->parse();
 //RootEntityInterface
-            $in = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME)->get(RootEntityInterface::class);
+            $in = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME)->get(RootEntityInterface::class);
         /*    var_dump($in->getParentClassNames());
 
             $r = new \ReflectionClass(RootEntityInterface::class);

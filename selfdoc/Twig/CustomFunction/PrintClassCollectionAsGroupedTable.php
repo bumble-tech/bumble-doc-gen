@@ -7,7 +7,7 @@ namespace SelfDocConfig\Twig\CustomFunction;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -34,7 +34,7 @@ final class PrintClassCollectionAsGroupedTable implements CustomFunctionInterfac
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function __invoke(ClassEntityCollection $rootEntityCollection): string
+    public function __invoke(PhpEntitiesCollection $rootEntityCollection): string
     {
         $groups = $this->groupEntities($rootEntityCollection);
         $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
@@ -55,7 +55,7 @@ final class PrintClassCollectionAsGroupedTable implements CustomFunctionInterfac
         return "<embed> {$table} </embed>";
     }
 
-    private function groupEntities(ClassEntityCollection $rootEntityCollection): array
+    private function groupEntities(PhpEntitiesCollection $rootEntityCollection): array
     {
         $notUniquePart = null;
         foreach ($rootEntityCollection as $entity) {
