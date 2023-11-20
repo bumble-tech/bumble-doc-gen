@@ -590,40 +590,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     * @throws NotFoundException
-     */
-    public function getMethodEntityCollection(): MethodEntityCollection
-    {
-        $objectId = $this->getObjectId();
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException) {
-        }
-        $methodEntityCollection = $this->diContainer->make(MethodEntityCollection::class, [
-            'classEntity' => $this
-        ]);
-        $methodEntityCollection->loadMethodEntities();
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntityCollection);
-        return $methodEntityCollection;
-    }
-
-    /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getMethodEntity(string $methodName, bool $unsafe = true): ?MethodEntity
-    {
-        $methodEntityCollection = $this->getMethodEntityCollection();
-        if ($unsafe) {
-            return $methodEntityCollection->unsafeGet($methodName);
-        }
-        return $methodEntityCollection->get($methodName);
-    }
-
-    /**
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
@@ -636,6 +602,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
 
     /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getAbsoluteFileName(): ?string
@@ -660,6 +627,12 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * Get a list of all methods available in the current class according to filters and the classes where they are implemented
+     *
+     * @return array<string, string>
+     *
+     * @internal
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getMethodsData(
@@ -723,6 +696,88 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         }
 
         return $methods;
+    }
+
+    /**
+     * Get a collection of methods entities
+     *
+     * @see PhpHandlerSettings::getMethodEntityFilter()
+     *
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function getMethodEntityCollection(): MethodEntityCollection
+    {
+        $objectId = $this->getObjectId();
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
+        } catch (ObjectNotFoundException) {
+        }
+        $methodEntityCollection = $this->diContainer->make(MethodEntityCollection::class, [
+            'classEntity' => $this
+        ]);
+        $methodEntityCollection->loadMethodEntities();
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntityCollection);
+        return $methodEntityCollection;
+    }
+
+    /**
+     * Get all methods that are available according to the configuration as an array
+     *
+     * @return MethodEntity[]
+     *
+     * @see self::getMethodEntityCollection()
+     * @see PhpHandlerSettings::getMethodEntityFilter()
+     *
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function getMethods(): array
+    {
+        $methodEntityCollection = $this->getMethodEntityCollection();
+        return iterator_to_array($methodEntityCollection);
+    }
+
+    /**
+     * Check if a method exists in a class
+     *
+     * @param string $methodName The name of the method whose entity you want to check
+     * @param bool $unsafe Check all methods, not just the methods allowed in the configuration
+     *
+     * @return bool The method exists
+     *
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function hasMethod(string $methodName, bool $unsafe = false): bool
+    {
+        $methodEntityCollection = $this->getMethodEntityCollection();
+        if ($unsafe) {
+            return array_key_exists($methodName, $this->getMethodsData());
+        }
+        return $methodEntityCollection->has($methodName);
+    }
+
+    /**
+     * Get the method entity by its name
+     *
+     * @param string $methodName The name of the method whose entity you want to get
+     * @param bool $unsafe Check all methods, not just the methods allowed in the configuration
+     *
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function getMethod(string $methodName, bool $unsafe = false): ?MethodEntity
+    {
+        $methodEntityCollection = $this->getMethodEntityCollection();
+        if ($unsafe) {
+            return $methodEntityCollection->unsafeGet($methodName);
+        }
+        return $methodEntityCollection->get($methodName);
     }
 
     /**
@@ -849,14 +904,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function hasMethod(string $method): bool
-    {
-        return array_key_exists($method, $this->getMethodsData());
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function hasProperty(string $property): bool
     {
         return array_key_exists($property, $this->getPropertiesData());
@@ -911,7 +958,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     #[CacheableMethod] public function getConstantValue(string $name): string|array|int|bool|null|float
     {
-
         return $this->getConstantEntity($name)->getValue();
     }
 
@@ -997,7 +1043,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             // is constant
             $prefix = 'q';
             if (!array_key_exists($matches[7], $this->getConstantsData())) {
-                if (array_key_exists($matches[7], $this->getMethodsData())) {
+                if ($this->hasMethod($matches[7], true)) {
                     // is method
                     $prefix = 'm';
                 } elseif (array_key_exists($matches[7], $this->getPropertiesData())) {
@@ -1018,7 +1064,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             return "#{$prefix}{$prepareSourceLink($attributeName)}";
         }
         $line = match ($prefix) {
-            'm' => $this->getMethodEntity($attributeName)?->getStartLine(),
+            'm' => $this->getMethod($attributeName, true)?->getStartLine(),
             'p' => $this->getPropertyEntity($attributeName)?->getStartLine(),
             'q' => $this->getConstantEntity($attributeName)?->getStartLine(),
             default => 0,
