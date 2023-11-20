@@ -81,11 +81,6 @@ class PropertyEntity extends BaseEntity
         return $this->classEntity;
     }
 
-    public function getPhpHandlerSettings(): PhpHandlerSettings
-    {
-        return $this->classEntity->getPhpHandlerSettings();
-    }
-
     /**
      * @throws InvalidConfigurationParameterException
      */

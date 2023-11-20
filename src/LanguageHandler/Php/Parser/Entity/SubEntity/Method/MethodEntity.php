@@ -93,11 +93,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->classEntity;
     }
 
-    public function getPhpHandlerSettings(): PhpHandlerSettings
-    {
-        return $this->classEntity->getPhpHandlerSettings();
-    }
-
     public function getRootEntityCollection(): PhpEntitiesCollection
     {
         return $this->getRootEntity()->getRootEntityCollection();

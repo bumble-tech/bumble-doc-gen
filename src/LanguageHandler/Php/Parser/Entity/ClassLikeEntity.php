@@ -28,7 +28,6 @@ use DI\Attribute\Inject;
 use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
-use phpDocumentor\Reflection\DocBlock;
 use PhpParser\ConstExprEvaluationException;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_ as ClassNode;
@@ -107,11 +106,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     public function isExternalLibraryEntity(): bool
     {
         return !is_null($this->composerHelper->getComposerPackageDataByClassName($this->getName()));
-    }
-
-    public function getPhpHandlerSettings(): PhpHandlerSettings
-    {
-        return $this->phpHandlerSettings;
     }
 
     final public function getRootEntityCollection(): PhpEntitiesCollection
@@ -967,7 +961,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        $docRenderer = $this->getPhpHandlerSettings()->getEntityDocRenderersCollection()->getFirstMatchingRender($this);
+        $docRenderer = $this->phpHandlerSettings->getEntityDocRenderersCollection()->getFirstMatchingRender($this);
         if (!$docRenderer) {
             throw new \Exception(
                 "Renderer for file `{$this->getName()}` not found"

@@ -33,6 +33,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     #[Inject] private GetDocumentedEntityUrl $documentedEntityUrlFunction;
     #[Inject] private RendererHelper $rendererHelper;
     #[Inject] private GenerationErrorsHandler $generationErrorsHandler;
+    #[Inject] private PhpHandlerSettings $phpHandlerSettings;
 
     protected function __construct(
         private Configuration $configuration,
@@ -63,8 +64,6 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
      * @api
      */
     abstract public function getRootEntityCollection(): PhpEntitiesCollection;
-
-    abstract public function getPhpHandlerSettings(): PhpHandlerSettings;
 
     abstract public function getDocCommentEntity(): ClassLikeEntity|MethodEntity|PropertyEntity|ConstantEntity;
 
@@ -152,7 +151,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         if (!$fileName) {
             return null;
         }
-        return $this->getPhpHandlerSettings()->getFileSourceBaseUrl() . $fileName . ($withLine ? "#L{$this->getStartLine()}" : '');
+        return $this->phpHandlerSettings->getFileSourceBaseUrl() . $fileName . ($withLine ? "#L{$this->getStartLine()}" : '');
     }
 
     /**

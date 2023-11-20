@@ -69,11 +69,6 @@ class ConstantEntity extends BaseEntity
         );
     }
 
-    public function getPhpHandlerSettings(): PhpHandlerSettings
-    {
-        return $this->classEntity->getPhpHandlerSettings();
-    }
-
     public function getRootEntityCollection(): PhpEntitiesCollection
     {
         return $this->classEntity->getRootEntityCollection();
