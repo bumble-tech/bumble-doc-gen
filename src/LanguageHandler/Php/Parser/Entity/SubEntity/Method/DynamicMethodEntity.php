@@ -29,11 +29,17 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->classEntity;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getName(): string
     {
         return $this->annotationMethod->getMethodName();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isStatic(): bool
     {
         return $this->annotationMethod->isStatic();
@@ -45,9 +51,9 @@ class DynamicMethodEntity implements MethodEntityInterface
     public function getCallMethod(): MethodEntity
     {
         if ($this->isStatic()) {
-            $callMethod = $this->classEntity->getMethodEntity('__callStatic');
+            $callMethod = $this->classEntity->getMethod('__callStatic', true);
         } else {
-            $callMethod = $this->classEntity->getMethodEntity('__call');
+            $callMethod = $this->classEntity->getMethod('__call', true);
         }
         return $callMethod;
     }
@@ -62,6 +68,8 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws \Exception
      */
     public function getStartLine(): int
@@ -71,6 +79,8 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws \Exception
      */
     public function getStartColumn(): int
@@ -80,6 +90,8 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws \Exception
      */
     public function getEndLine(): int
@@ -88,6 +100,9 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $callMethod->getEndLine();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getModifiersString(): string
     {
         $modifiersString = [];
@@ -100,6 +115,8 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getReturnType(): string
@@ -120,6 +137,9 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $returnType;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getParameters(): array
     {
         $parameters = [];
@@ -137,6 +157,9 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $parameters;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getParametersString(): string
     {
         $parameters = [];
@@ -148,6 +171,8 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws \Exception
      */
     public function getImplementingClassName(): string
@@ -155,12 +180,27 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->getImplementingClass()->getName();
     }
 
+    /**
+     * @inheritDoc
+     *
+     * @throws \Exception
+     */
+    public function isImplementedInParentClass(): bool
+    {
+        return $this->getImplementingClassName() !== $this->classEntity->getName();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getDescription(): string
     {
         return (string)$this->annotationMethod->getDescription();
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
@@ -176,6 +216,9 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->isStatic() && in_array($this->getReturnType(), $initializationReturnTypes);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getImplementingClass(): ClassLikeEntity
     {
         return $this->classEntity;
@@ -191,31 +234,49 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->getRootEntity()->getNamespaceName();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isPublic(): bool
     {
         return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isProtected(): bool
     {
         return false;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isPrivate(): bool
     {
         return false;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isDynamic(): bool
     {
         return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getFirstReturnValue(): mixed
     {
         return null;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getBodyCode(): string
     {
         return '';
@@ -226,12 +287,17 @@ class DynamicMethodEntity implements MethodEntityInterface
         return "{$this->getRootEntity()->getName()}:{$this->getName()}";
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getRootEntityCollection(): RootEntityCollection
     {
         return $this->getRootEntity()->getRootEntityCollection();
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getAbsoluteFileName(): ?string
@@ -240,6 +306,9 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $relativeFileName ? $this->configuration->getProjectRoot() . $relativeFileName : null;
     }
 
+    /**
+     * @internal
+     */
     public function entityCacheIsOutdated(): bool
     {
         return false;

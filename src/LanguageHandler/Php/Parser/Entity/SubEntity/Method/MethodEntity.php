@@ -73,6 +73,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getAst(): ClassMethod
@@ -117,6 +119,9 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->parserHelper->getDocBlock($classEntity, $this->getDocComment(), $this->getDocCommentLine());
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getImplementingClass(): ClassLikeEntity
     {
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
@@ -127,9 +132,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->getName();
     }
 
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function getNamespaceName(): string
     {
         return $this->getRootEntity()->getNamespaceName();
@@ -150,7 +152,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         $docComment = $this->getDocComment();
         $reflectionMethod = $this;
         if ($reflectionMethod->isImplementedInParentClass()) {
-            $reflectionMethod = $reflectionMethod->getImplementingClass()->getMethodEntity($this->getName());
+            $reflectionMethod = $reflectionMethod->getImplementingClass()->getMethod($this->getName(), true);
         }
 
         if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
@@ -158,12 +160,12 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
             $parentClass = $this->getImplementingClass()->getParentClass();
             $methodName = $this->getName();
             if ($parentClass && $parentClass->isEntityDataCanBeLoaded() && $parentClass->hasMethod($methodName)) {
-                $parentReflectionMethod = $parentClass->getMethodEntity($methodName);
+                $parentReflectionMethod = $parentClass->getMethod($methodName, true);
                 $reflectionMethod = $parentReflectionMethod->getDocCommentEntity();
             } else {
                 foreach ($implementingClass->getInterfacesEntities() as $interface) {
                     if ($interface->isEntityDataCanBeLoaded() && $interface->hasMethod($methodName)) {
-                        $reflectionMethod = $interface->getMethodEntity($methodName);
+                        $reflectionMethod = $interface->getMethod($methodName, true);
                         break;
                     }
                 }
@@ -190,11 +192,11 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         $parentClass = $this->getImplementingClass()->getParentClass();
         $methodName = $this->getName();
         if ($parentClass && $parentClass->hasMethod($methodName)) {
-            $prototype = $parentClass->getMethodEntity($methodName);
+            $prototype = $parentClass->getMethod($methodName, true);
         } else {
             foreach ($implementingClass->getInterfacesEntities() as $interface) {
                 if ($interface->hasMethod($methodName)) {
-                    $prototype = $interface->getMethodEntity($methodName);
+                    $prototype = $interface->getMethod($methodName, true);
                     break;
                 }
             }
@@ -252,6 +254,9 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return "{$this->getModifiersString()} {$this->getName()}({$this->getParametersString()})" . (!$this->isConstructor() ? ": {$this->getReturnType()}" : '');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getName(): string
     {
         return $this->methodName;
@@ -263,6 +268,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getRelativeFileName(): ?string
@@ -271,6 +278,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getModifiersString(): string
@@ -294,6 +303,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
@@ -352,6 +363,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
@@ -427,6 +440,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      * @throws DependencyException
@@ -442,17 +457,25 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return implode(', ', $parameters);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isImplementedInParentClass(): bool
     {
         return $this->getImplementingClassName() !== $this->classEntity->getName();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getImplementingClassName(): string
     {
         return $this->implementingClassName;
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
@@ -464,6 +487,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -493,6 +518,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool
@@ -501,6 +528,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isStatic(): bool
@@ -509,6 +538,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isProtected(): bool
@@ -517,6 +548,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPrivate(): bool
@@ -525,6 +558,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
@@ -533,6 +568,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartColumn(): int
@@ -541,6 +578,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
@@ -549,6 +588,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      * @throws ConstExprEvaluationException
      */
@@ -564,6 +605,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getBodyCode(): string

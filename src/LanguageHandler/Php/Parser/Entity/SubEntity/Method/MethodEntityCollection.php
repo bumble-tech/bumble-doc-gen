@@ -15,10 +15,14 @@ use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Psr\Log\LoggerInterface;
 
 /**
+ * Collection of PHP class method entities
+ *
  * @implements \IteratorAggregate<int, MethodEntity>
  */
 final class MethodEntityCollection extends BaseEntityCollection
 {
+    private array $unsafeEntities = [];
+
     public function __construct(
         private ClassLikeEntity $classEntity,
         private PhpHandlerSettings $phpHandlerSettings,
@@ -28,6 +32,10 @@ final class MethodEntityCollection extends BaseEntityCollection
     }
 
     /**
+     * Load method entities into the collection according to the project configuration
+     *
+     * @see PhpHandlerSettings::getMethodEntityFilter()
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -61,6 +69,12 @@ final class MethodEntityCollection extends BaseEntityCollection
         }
     }
 
+    /**
+     * Add an entity to a collection
+     *
+     * @param MethodEntityInterface $methodEntity Entity to be added to the collection
+     * @param bool $reload Replace an entity with a new one if one has already been loaded previously
+     */
     public function add(MethodEntityInterface $methodEntity, bool $reload = false): MethodEntityCollection
     {
         $methodName = $methodEntity->getName();
@@ -70,12 +84,21 @@ final class MethodEntityCollection extends BaseEntityCollection
         return $this;
     }
 
+    /**
+     * Get the loaded method entity if it exists
+     *
+     * @param string $objectName Method entity name
+     */
     public function get(string $objectName): ?MethodEntity
     {
         return $this->entities[$objectName] ?? null;
     }
 
     /**
+     * Get the method entity if it exists. If the method exists but has not been loaded into the collection, a new entity object will be created
+     *
+     * @param string $objectName Method entity name
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
@@ -84,18 +107,26 @@ final class MethodEntityCollection extends BaseEntityCollection
     {
         $methodEntity = $this->get($objectName);
         if (!$methodEntity) {
+            if (array_key_exists($objectName, $this->unsafeEntities)) {
+                return $this->unsafeEntities[$objectName];
+            }
+
             $methodImplementingClass = $this->classEntity->getMethodsData()[$objectName] ?? null;
             if (!is_null($methodImplementingClass)) {
-                return $this->cacheablePhpEntityFactory->createMethodEntity(
+                $methodEntity = $this->cacheablePhpEntityFactory->createMethodEntity(
                     $this->classEntity,
                     $objectName,
                     $methodImplementingClass
                 );
+                $this->unsafeEntities[$objectName] = $methodEntity;
             }
         }
         return $methodEntity;
     }
 
+    /**
+     * Get a copy of the collection containing only those methods that are initialization methods
+     */
     public function getInitializations(): MethodEntityCollection
     {
         $methodEntityCollection = clone $this;
@@ -109,9 +140,13 @@ final class MethodEntityCollection extends BaseEntityCollection
                 $this->logger->warning($e->getMessage());
             }
         }
+        $methodEntityCollection->unsafeEntities = [];
         return $methodEntityCollection;
     }
 
+    /**
+     * Get a copy of the collection containing only those methods that are not initialization methods
+     */
     public function getAllExceptInitializations(): MethodEntityCollection
     {
         $methodEntityCollection = clone $this;
@@ -125,6 +160,7 @@ final class MethodEntityCollection extends BaseEntityCollection
                 $this->logger->warning($e->getMessage());
             }
         }
+        $methodEntityCollection->unsafeEntities = [];
         return $methodEntityCollection;
     }
 }
