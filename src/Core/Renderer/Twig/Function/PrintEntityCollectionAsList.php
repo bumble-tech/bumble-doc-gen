@@ -12,10 +12,10 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
  *
  * @note This function initiates the creation of documents for the displayed entities
  *
- * @example  {{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['ScriptFramework\\ScriptInterface', 'ScriptFramework\\TestScriptInterface'])) }}
+ * @example  {{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['ScriptFramework\\ScriptInterface', 'ScriptFramework\\TestScriptInterface'])) }}
  *  The function will output a list of PHP classes that match the ScriptFramework\ScriptInterface and ScriptFramework\TestScriptInterface interfaces
  *
- * @example  {{ printEntityCollectionAsList(phpClassEntityCollection) }}
+ * @example  {{ printEntityCollectionAsList(phpEntities) }}
  *  The function will list all documented PHP classes
  */
 final class PrintEntityCollectionAsList implements CustomFunctionInterface

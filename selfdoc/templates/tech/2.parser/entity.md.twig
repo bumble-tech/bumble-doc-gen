@@ -13,25 +13,25 @@ Entities are always handled through collections. Collections are the result of t
 
 * Passing a collection to a function:
 
-{{ "{{ printEntityCollectionAsList(phpClassEntityCollection) }}" | textToCodeBlock('twig') }}
+{{ "{{ printEntityCollectionAsList(phpEntities) }}" | textToCodeBlock('twig') }}
 
 * Filtering a collection and passing it to a function:
 
-{{ "{{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\Entity\\EntityInterface'])) }}" | textToCodeBlock('twig') }}
+{{ "{{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\Entity\\EntityInterface'])) }}" | textToCodeBlock('twig') }}
 
 * Saving a filtered collection to a variable:
 
-{{ "{{ {% set filteredCollection = phpClassEntityCollection.getOnlyInstantiable() %} }}" | textToCodeBlock('twig') }}
+{{ "{{ {% set filteredCollection = phpEntities.getOnlyInstantiable() %} }}" | textToCodeBlock('twig') }}
 
 * Using a collection in a for loop:
 
-{{ "{% for someClassEntity in phpClassEntityCollection %}
+{{ "{% for someClassEntity in phpEntities %}
     * {{ someClassEntity.getName() }}
 {% endfor %}" | textToCodeBlock('twig') }}
 
 * Output of all methods of all found entities in `className::methodName()` format:
 
-{{ "{% for someClassEntity in phpClassEntityCollection %}
+{{ "{% for someClassEntity in phpEntities %}
     {% for methodEntity in someClassEntity.getMethodEntityCollection() %}
         * {{ someClassEntity.getName() }}::{{ methodEntity.getName() }}()
     {% endfor %}
@@ -50,7 +50,7 @@ The root collections ([a]RootEntityCollection[/a]), which are directly accessibl
         <th>PL</th>
         <th>Description</th>
     </tr>
-    {% for entityCollection in phpClassEntityCollection
+    {% for entityCollection in phpEntities
             .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\RootEntityCollection'])
             .getOnlyInstantiable()
             %}
@@ -77,7 +77,7 @@ These classes are a convenient wrapper for accessing data in templates:
         <th>PL</th>
         <th>Description</th>
     </tr>
-{% for entityCollection in phpClassEntityCollection
+{% for entityCollection in phpEntities
     .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\BaseEntityCollection'])
     .getOnlyInstantiable()
 %}

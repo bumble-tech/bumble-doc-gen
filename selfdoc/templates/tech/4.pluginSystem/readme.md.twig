@@ -29,7 +29,7 @@ Plugins for any programming languages work regardless of which language handler 
         <th>Handles events</th>
         <th>Description</th>
     </tr>
-{% for pluginEntity in phpClassEntityCollection
+{% for pluginEntity in phpEntities
         .filterByPaths([
             '/src/Core',
             '/src/LanguageHandler',
@@ -55,7 +55,7 @@ Plugins for any programming languages work regardless of which language handler 
 
 {{ "Default events" | textToHeading('H2') }}
 
-{{ printEntityCollectionAsList( phpClassEntityCollection
+{{ printEntityCollectionAsList( phpEntities
         .filterByPaths([
             '/src/Core',
             '/src/LanguageHandler',

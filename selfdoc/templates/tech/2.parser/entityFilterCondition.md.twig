@@ -67,7 +67,7 @@ language_handlers:
 
 {{ "Available filters" | textToHeading('H2') }}
 
-{% set filterConditions = phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
+{% set filterConditions = phpEntities.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
 
 Common filtering conditions that are available for any entity:
 

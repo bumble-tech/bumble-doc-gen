@@ -6,7 +6,7 @@
 
 <table>
 <tr><th>Name</th><th>Namespace</th></tr>
-{% for traitEntity in phpClassEntityCollection.getOnlyTraits() %}
+{% for traitEntity in phpEntities.getOnlyTraits() %}
 <tr><td>[a x-title='{{ traitEntity.getShortName() }}']{{ traitEntity.getName() }}[/a]<td>{{ traitEntity.getNamespaceName() }}</td></tr>
 {% endfor %}
 </table>

@@ -53,7 +53,7 @@ Here is a list of functions available by default:
       </tr>
    </thead>
    <tbody>
-    {% for function in phpClassEntityCollection.filterByPaths([
+    {% for function in phpEntities.filterByPaths([
             '/src/Core/Renderer/Twig/Function',
             '/src/LanguageHandler/Php/Renderer/Twig/Function'
         ])
@@ -67,7 +67,7 @@ Here is a list of functions available by default:
               <tr>
                  {% if loop.index == 1 %}
                  <td rowspan="{{ paramsCount * 2 - 1 }}">
-                    <a href="{{ getDocumentedEntityUrl(phpClassEntityCollection, function.getName()) }}">{{ twigFunctionData.name }}</a><br>
+                    <a href="{{ getDocumentedEntityUrl(phpEntities, function.getName()) }}">{{ twigFunctionData.name }}</a><br>
                     {% if function.isInternal() %}<i><b>:warning: For internal use</b></i><br>{% endif %}
                     {{ function.getDescription() | removeLineBrakes }}
                     {% if function.getDocNote() %}<br><i><b>:warning: {{ function.getDocNote() }}</b></i><br>{% endif %}
@@ -77,7 +77,7 @@ Here is a list of functions available by default:
                     <b>${{ parameter.name }}</b>
                  </td>
                  <td>
-                    <i>{{ parameter.type | strTypeToUrl(phpClassEntityCollection, true, true) }}</i>
+                    <i>{{ parameter.type | strTypeToUrl(phpEntities, true, true) }}</i>
                  </td>
                  <td>{{ parameter.description | removeLineBrakes }}</td>
               </tr>

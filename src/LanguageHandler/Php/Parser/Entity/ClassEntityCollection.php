@@ -37,7 +37,7 @@ use Symfony\Component\Console\Style\OutputStyle;
 final class ClassEntityCollection extends LoggableRootEntityCollection
 {
     private const PHP_FILE_TEMPLATE = '/\.php$/';
-    public const NAME = 'phpClassEntityCollection';
+    public const NAME = 'phpEntities';
 
     private array $entitiesNotHandledByPlugins = [];
 
