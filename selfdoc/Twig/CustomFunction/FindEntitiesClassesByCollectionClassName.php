@@ -32,7 +32,7 @@ final class FindEntitiesClassesByCollectionClassName implements CustomFunctionIn
          * @var ClassLikeEntity $findCollectionEntity
          */
         $findCollectionEntity = $entitiesCollection->findEntity($collectionName);
-        $addMethodEntity = $findCollectionEntity->getMethodEntity('add');
+        $addMethodEntity = $findCollectionEntity->getMethod('add', true);
         if (!$addMethodEntity) {
             return [];
         }

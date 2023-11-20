@@ -57,7 +57,7 @@ The root collections ([a]RootEntityCollection[/a]), which are directly accessibl
     {% set match = entitiesCollection.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
     <tr>
         <td>{{ drawDocumentedEntityLink(entitiesCollection) }}</td>
-        <td><b>{{ entitiesCollection.getMethodEntity('getEntityCollectionName').getFirstReturnValue() }}</b></td>
+        <td><b>{{ entitiesCollection.getMethod('getEntityCollectionName', true).getFirstReturnValue() }}</b></td>
         <td>{{ match[2] | upper }}</td>
         <td>{{ entitiesCollection.getDescription() }}</td>
     </tr>

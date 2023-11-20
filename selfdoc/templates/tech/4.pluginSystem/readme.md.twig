@@ -43,7 +43,7 @@ Plugins for any programming languages work regardless of which language handler 
         <td>{% if match[2] %}{{ match[2] | upper }}{% else %}any{% endif %}</td>
         <td>
             <ul>
-            {% for key in pluginEntity.getMethodEntity('getSubscribedEvents').getFirstReturnValue() | keys %}
+            {% for key in pluginEntity.getMethod('getSubscribedEvents', true).getFirstReturnValue() | keys %}
                 <li>[a]{{ key }}|short_form[/a]</li>
             {% endfor %}
             </ul>
