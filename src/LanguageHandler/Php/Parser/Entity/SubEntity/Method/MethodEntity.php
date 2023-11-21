@@ -292,28 +292,6 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @param Param[] $params
-     */
-    public static function parseAnnotationParams(array $params): array
-    {
-        $paramsFromDoc = [];
-        foreach ($params as $param) {
-            try {
-                if (method_exists($param, 'getVariableName')) {
-                    $paramsFromDoc[$param->getVariableName()] = [
-                        'name' => (string)$param->getVariableName(),
-                        'type' => (string)$param->getType(),
-                        'description' => (string)$param->getDescription(),
-                        'defaultValue' => null,
-                    ];
-                }
-            } catch (\Exception) {
-            }
-        }
-        return $paramsFromDoc;
-    }
-
-    /**
      * @inheritDoc
      *
      * @throws InvalidConfigurationParameterException
@@ -333,7 +311,20 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
          * @var Param[] $params
          */
         $params = $docBlock->getTagsByName('param');
-        $typesFromDoc = self::parseAnnotationParams($params);
+        $typesFromDoc = [];
+        foreach ($params as $param) {
+            try {
+                if (method_exists($param, 'getVariableName')) {
+                    $typesFromDoc[$param->getVariableName()] = [
+                        'name' => (string)$param->getVariableName(),
+                        'type' => (string)$param->getType(),
+                        'description' => (string)$param->getDescription(),
+                        'defaultValue' => null,
+                    ];
+                }
+            } catch (\Exception) {
+            }
+        }
         try {
             /** @var \PhpParser\Node\Param[] $params */
             $params = $this->getAst()->getParams();
