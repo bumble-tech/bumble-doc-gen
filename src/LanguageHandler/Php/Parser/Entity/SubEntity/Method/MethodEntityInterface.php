@@ -10,13 +10,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 interface MethodEntityInterface extends EntityInterface
 {
     /**
-     * Get method name
-     *
-     * @api
-     */
-    public function getName(): string;
-
-    /**
      * Namespace of the class that contains this method
      *
      * @api

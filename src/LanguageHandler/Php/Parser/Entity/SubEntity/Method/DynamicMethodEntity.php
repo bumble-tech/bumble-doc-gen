@@ -25,6 +25,9 @@ class DynamicMethodEntity implements MethodEntityInterface
     ) {
     }
 
+    /**
+     * Get the class like entity where this method was obtained
+     */
     public function getRootEntity(): ClassLikeEntity
     {
         return $this->classEntity;
@@ -57,6 +60,8 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
+     * Get the entity of the magic method that will be called instead of the current virtual one
+     *
      * @throws \Exception
      */
     public function getCallMethod(): MethodEntity
@@ -70,6 +75,8 @@ class DynamicMethodEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */

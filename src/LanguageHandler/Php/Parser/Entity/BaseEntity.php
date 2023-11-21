@@ -12,7 +12,6 @@ use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
-use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
@@ -26,7 +25,7 @@ use phpDocumentor\Reflection\DocBlock;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
-abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
+abstract class BaseEntity implements CacheableEntityInterface
 {
     use CacheableEntityTrait;
 
@@ -81,7 +80,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     abstract public function getDocCommentEntity(): ClassLikeEntity|MethodEntity|PropertyEntity|ClassConstantEntity;
 
     /**
-     * @api
+     * @inheritDoc
      *
      * @throws InvalidConfigurationParameterException
      */
@@ -104,6 +103,10 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Checking if entity data can be retrieved
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     final public function isEntityFileCanBeLoad(): bool
@@ -112,6 +115,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Get entity description
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -156,6 +161,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * @internal
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getFileSourceLink(bool $withLine = true): ?string
@@ -181,6 +188,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Get the code line number where the dockBlock of the current entity begins
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -192,6 +201,10 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Get DocBlock for current entity
+     *
+     * @internal
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getDocBlock(): DocBlock
@@ -205,6 +218,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Checking if an entity has `internal` docBlock
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -217,6 +232,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Checking if an entity has `deprecated` docBlock
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -229,6 +246,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Checking if an entity has links in its description
+     *
      * @api
      *
      * @throws \Exception
@@ -386,6 +405,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Checking if an entity has `throws` docBlock
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -501,6 +522,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Checking if an entity has `example` docBlock
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -535,7 +558,7 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
-     * Get first example from @examples doc block
+     * Get first example from `examples` doc block
      *
      * @api
      *
@@ -548,6 +571,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Get the note annotation value
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -561,6 +586,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     /**
      * Get the doc comment of an entity
      *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getDocComment(): string
@@ -569,6 +596,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return (string)$docComment?->getReformattedText();
     }
 
+    /**
+     * @internal
+     */
     public function getCurrentRootEntity(): ?ClassLikeEntity
     {
         if (is_a($this, ClassLikeEntity::class)) {
@@ -579,12 +609,17 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return null;
     }
 
+    /**
+     * @internal
+     */
     protected function getEntityDependenciesCacheKey(): string
     {
         return "__internalEntityDependencies{$this->getCacheKey()}";
     }
 
     /**
+     * @internal
+     *
      * @throws InvalidArgumentException
      * @throws InvalidConfigurationParameterException
      */
@@ -603,6 +638,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidArgumentException
      * @throws InvalidConfigurationParameterException
      */
@@ -663,6 +700,9 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
         return $isEntityCacheOutdated;
     }
 
+    /**
+     * @internal
+     */
     protected function isCurrentEntityCanBeLoad(): bool
     {
         $classEntity = $this->getCurrentRootEntity();
