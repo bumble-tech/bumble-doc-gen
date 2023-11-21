@@ -14,7 +14,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\NodeValueCompiler;
-use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
