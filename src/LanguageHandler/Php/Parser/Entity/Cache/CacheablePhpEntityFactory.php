@@ -14,7 +14,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\EnumEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\InterfaceEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\DynamicMethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
@@ -62,18 +62,18 @@ final class CacheablePhpEntityFactory
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function createConstantEntity(
+    public function createClassConstantEntity(
         ClassLikeEntity $classEntity,
         string $constantName,
         string $implementingClassName,
         bool $reloadCache = false
-    ): ConstantEntity {
+    ): ClassConstantEntity {
         $objectId = "{$classEntity->getName()}:{$constantName}";
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        $wrapperClassName = $this->getOrCreateEntityClassWrapper(ConstantEntity::class);
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(ClassConstantEntity::class);
         $constantEntity = $this->diContainer->make($wrapperClassName, [
             'classEntity' => $classEntity,
             'constantName' => $constantName,

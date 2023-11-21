@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant;
 
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
@@ -13,7 +13,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\NodeValueCompiler;
-use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use PhpParser\ConstExprEvaluationException;
 use PhpParser\Node\Stmt\ClassConst;
 use Psr\Log\LoggerInterface;
@@ -21,7 +20,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Class constant entity
  */
-class ConstantEntity extends BaseEntity
+class ClassConstantEntity extends BaseEntity
 {
     /**
      * Indicates that the constant is public.
@@ -55,7 +54,7 @@ class ConstantEntity extends BaseEntity
     public function __construct(
         Configuration $configuration,
         private ClassLikeEntity $classEntity,
-        private ParserHelper $parserHelper,
+        ParserHelper $parserHelper,
         LocalObjectCache $localObjectCache,
         LoggerInterface $logger,
         private string $constantName,
@@ -69,17 +68,25 @@ class ConstantEntity extends BaseEntity
         );
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getRootEntityCollection(): PhpEntitiesCollection
     {
         return $this->classEntity->getRootEntityCollection();
     }
 
+    /**
+     * Get the class like entity where this constant was obtained
+     */
     public function getRootEntity(): ClassLikeEntity
     {
         return $this->classEntity;
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getAst(): ClassConst
@@ -107,28 +114,44 @@ class ConstantEntity extends BaseEntity
         return $this->implementingClassName;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getImplementingClass(): ClassLikeEntity
     {
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
-    public function getDocCommentEntity(): ConstantEntity
+    /**
+     * @inheritDoc
+     */
+    public function getDocCommentEntity(): ClassConstantEntity
     {
         return $this;
     }
 
+    /**
+     * Constant name
+     */
     public function getName(): string
     {
         return $this->constantName;
     }
 
+    /**
+     * Constant short name
+     *
+     * @see self::getName()
+     */
     public function getShortName(): string
     {
         return $this->getName();
     }
 
     /**
-     * @throws InvalidConfigurationParameterException
+     * Get the name of the namespace where the current class is implemented
+     *
+     * @api
      */
     public function getNamespaceName(): string
     {
@@ -136,14 +159,10 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getRelativeFileName(): ?string
-    {
-        return $this->getImplementingClass()->getRelativeFileName();
-    }
-
-    /**
+     * Check if a constant is a public constant
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool
@@ -152,6 +171,10 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
+     * Check if a constant is a protected constant
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isProtected(): bool
@@ -160,6 +183,10 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
+     * Check if a constant is a private constant
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPrivate(): bool
@@ -168,6 +195,10 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
+     * Get the line number of the beginning of the constant code in a file
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
@@ -176,6 +207,10 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
+     * Get the line number of the end of a constant's code in a file
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
@@ -184,6 +219,12 @@ class ConstantEntity extends BaseEntity
     }
 
     /**
+     * Get the compiled value of a constant
+     *
+     * @api
+     *
+     * @return string|array|int|bool|null|float Compiled constant value
+     *
      * @throws ConstExprEvaluationException
      * @throws InvalidConfigurationParameterException
      */

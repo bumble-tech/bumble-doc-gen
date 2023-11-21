@@ -1,7 +1,7 @@
-{% if not classEntity.getConstantEntityCollection().isEmpty() %}
+{% if not classEntity.getConstantEntitiesCollection().isEmpty() %}
 <h2>Constants:</h2>
 <ul>
-    {% for constantEntity in classEntity.getConstantEntityCollection() %}
+    {% for constantEntity in classEntity.getConstantEntitiesCollection() %}
         <li><a name="q{{ constantEntity.getName() | prepareSourceLink }}"
                href="#q{{ constantEntity.getName() | prepareSourceLink }}">#</a>
             <code>{{ constantEntity.getName() }}</code> {% if constantEntity.isInternal() %}:warning: Is internal {% endif %} {% if constantEntity.isDeprecated() %}:no_entry: Deprecated {% endif %} {% if constantEntity.getRelativeFileName() %}

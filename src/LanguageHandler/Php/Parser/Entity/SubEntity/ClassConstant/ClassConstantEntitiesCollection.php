@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\BaseEntityCollection;
@@ -12,7 +12,7 @@ use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
 
-final class ConstantEntityCollection extends BaseEntityCollection
+final class ClassConstantEntitiesCollection extends BaseEntityCollection
 {
     public function __construct(
         private ClassLikeEntity $classEntity,
@@ -22,6 +22,9 @@ final class ConstantEntityCollection extends BaseEntityCollection
     }
 
     /**
+     *
+     * @internal
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
@@ -30,7 +33,7 @@ final class ConstantEntityCollection extends BaseEntityCollection
     {
         $classConstantEntityFilter = $this->phpHandlerSettings->getClassConstantEntityFilter();
         foreach ($this->classEntity->getConstantsData() as $name => $constantImplementingClass) {
-            $constantEntity = $this->cacheablePhpEntityFactory->createConstantEntity(
+            $constantEntity = $this->cacheablePhpEntityFactory->createClassConstantEntity(
                 $this->classEntity,
                 $name,
                 $constantImplementingClass
@@ -41,7 +44,10 @@ final class ConstantEntityCollection extends BaseEntityCollection
         }
     }
 
-    public function add(ConstantEntity $constantEntity, bool $reload = false): ConstantEntityCollection
+    /**
+     * @api
+     */
+    public function add(ClassConstantEntity $constantEntity, bool $reload = false): ClassConstantEntitiesCollection
     {
         $constantName = $constantEntity->getName();
         if (!isset($this->entities[$constantName]) || $reload) {
@@ -50,23 +56,29 @@ final class ConstantEntityCollection extends BaseEntityCollection
         return $this;
     }
 
-    public function get(string $objectName): ?ConstantEntity
+    /**
+     * @api
+     */
+    public function get(string $objectName): ?ClassConstantEntity
     {
         return $this->entities[$objectName] ?? null;
     }
 
     /**
+     *
+     * @api
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function unsafeGet(string $constantName): ?ConstantEntity
+    public function unsafeGet(string $constantName): ?ClassConstantEntity
     {
         $constantEntity = $this->get($constantName);
         if (!$constantEntity) {
             $constantsImplementingClass = $this->classEntity->getConstantsData()[$constantName] ?? null;
             if (!is_null($constantsImplementingClass)) {
-                return $this->cacheablePhpEntityFactory->createConstantEntity(
+                return $this->cacheablePhpEntityFactory->createClassConstantEntity(
                     $this->classEntity,
                     $constantName,
                     $constantsImplementingClass

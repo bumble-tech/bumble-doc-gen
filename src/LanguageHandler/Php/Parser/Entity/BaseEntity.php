@@ -15,7 +15,7 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
@@ -44,6 +44,8 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     }
 
     /**
+     * Get AST for this entity
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -51,21 +53,32 @@ abstract class BaseEntity implements CacheableEntityInterface, EntityInterface
     abstract public function getAst(): \PhpParser\Node\Stmt;
 
     /**
+     * Get the class like entity in which the current entity was implemented
+     *
      * @api
      */
     abstract public function getImplementingClass(): ClassLikeEntity;
 
     /**
+     * Get the line number of the beginning of the entity code in a file
+     *
      * @api
      */
     abstract public function getStartLine(): int;
 
     /**
+     * Get the collection of root entities to which this entity belongs
+     *
      * @api
      */
     abstract public function getRootEntityCollection(): PhpEntitiesCollection;
 
-    abstract public function getDocCommentEntity(): ClassLikeEntity|MethodEntity|PropertyEntity|ConstantEntity;
+    /**
+     * Link to an entity where docBlock is implemented for this entity
+     *
+     * @internal
+     */
+    abstract public function getDocCommentEntity(): ClassLikeEntity|MethodEntity|PropertyEntity|ClassConstantEntity;
 
     /**
      * @api

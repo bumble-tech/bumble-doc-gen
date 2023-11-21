@@ -14,8 +14,8 @@ use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
 use BumbleDocGen\Core\Renderer\Twig\Filter\PrepareSourceLink;
 use BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant\ConstantEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant\ConstantEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
@@ -495,37 +495,214 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * Get a list of all constants available in the current class according to filters and the classes where they are implemented
+     *
+     * @internal
+     *
+     * @param bool $onlyFromCurrentClassAndTraits Get data only for constants from the current class
+     * @param int $flags Get data only for constants corresponding to the visibility modifiers passed in this value
+     *
+     * @return array<string, string>
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getConstantsData(
+        bool $onlyFromCurrentClassAndTraits = false,
+        int $flags = ClassConstantEntity::VISIBILITY_MODIFIERS_FLAG_ANY
+    ): array {
+        if (!$this->isEntityDataCanBeLoaded()) {
+            return [];
+        }
+        $constants = [];
+        /** @var ConstNode[] $constNodes */
+        $constNodes = array_filter(
+            $this->getAst()->stmts,
+            static fn(Node\Stmt $stmt): bool => $stmt instanceof ConstNode,
+        );
+        array_walk($constNodes, fn(ConstNode $stmt) => $stmt->flags = $stmt->flags ?: ClassConstantEntity::MODIFIERS_FLAG_IS_PUBLIC);
+        foreach ($constNodes as $constNode) {
+            if (($constNode->flags & $flags) === 0) {
+                continue;
+            }
+            foreach ($constNode->consts as $constant) {
+                $constants[$constant->name->toString()] = $this->getName();
+            }
+        }
+
+        $flags &= ~  ClassConstantEntity::MODIFIERS_FLAG_IS_PRIVATE;
+        foreach ($this->getTraits() as $traitEntity) {
+            if (!$traitEntity->isEntityDataCanBeLoaded()) {
+                continue;
+            }
+            foreach ($traitEntity->getConstantsData(true, $flags) as $name => $constantsData) {
+                if (array_key_exists($name, $constants)) {
+                    continue;
+                }
+                $constants[$name] = $constantsData;
+            }
+        }
+
+        if (!$onlyFromCurrentClassAndTraits) {
+            foreach ($this->getParentClassEntities() as $parentClassEntity) {
+                if (!$parentClassEntity->isEntityDataCanBeLoaded()) {
+                    continue;
+                }
+                foreach ($parentClassEntity->getConstantsData(true, $flags) as $name => $constantsData) {
+                    if (array_key_exists($name, $constants)) {
+                        continue;
+                    }
+                    $constants[$name] = $constantsData;
+                }
+            }
+
+            foreach ($this->getInterfacesEntities() as $interfacesEntity) {
+                if (!$interfacesEntity->isEntityDataCanBeLoaded()) {
+                    continue;
+                }
+                foreach ($interfacesEntity->getConstantsData(true, $flags) as $name => $constantsData) {
+                    if (array_key_exists($name, $constants)) {
+                        continue;
+                    }
+                    $constants[$name] = $constantsData;
+                }
+            }
+        }
+        return $constants;
+    }
+
+    /**
+     * Get a collection of constants entities
+     *
+     * @api
+     *
+     * @see PhpHandlerSettings::getClassConstantEntityFilter()
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function getConstantEntityCollection(): ConstantEntityCollection
+    public function getConstantEntitiesCollection(): ClassConstantEntitiesCollection
     {
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        $constantEntityCollection = $this->diContainer->make(ConstantEntityCollection::class, [
+        $constantEntitiesCollection = $this->diContainer->make(ClassConstantEntitiesCollection::class, [
             'classEntity' => $this
         ]);
-        $constantEntityCollection->loadConstantEntities();
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $constantEntityCollection);
-        return $constantEntityCollection;
+        $constantEntitiesCollection->loadConstantEntities();
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $constantEntitiesCollection);
+        return $constantEntitiesCollection;
     }
 
     /**
+     * Get all constants that are available according to the configuration as an array
+     *
+     * @return ClassConstantEntity[]
+     *
+     * @see self::getConstantEntitiesCollection()
+     * @see PhpHandlerSettings::getClassConstantEntityFilter()
+     *
+     * @api
+     *
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function getConstants(): array
+    {
+        $constantEntitiesCollection = $this->getConstantEntitiesCollection();
+        return iterator_to_array($constantEntitiesCollection);
+    }
+
+    /**
+     * Check if a constant exists in a class
+     *
+     * @param string $constantName The name of the class whose entity you want to check
+     * @param bool $unsafe Check all constants, not just the constants allowed in the configuration
+     *
+     * @return bool The constant exists
+     *
+     * @api
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function hasConstant(string $constantName, bool $unsafe = false): bool
+    {
+        $constantEntitiesCollection = $this->getConstantEntitiesCollection();
+        if ($unsafe) {
+            return array_key_exists($constantName, $this->getConstantsData());
+        }
+        return $constantEntitiesCollection->has($constantName);
+    }
+
+    /**
+     * Get the method entity by its name
+     *
+     * @param string $constantName The name of the constant whose entity you want to get
+     * @param bool $unsafe Check all constants, not just the constants allowed in the configuration
+     *
+     * @api
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function getConstantEntity(string $constantName, bool $unsafe = true): ?ConstantEntity
+    public function getConstant(string $constantName, bool $unsafe = false): ?ClassConstantEntity
     {
-        $constantEntityCollection = $this->getConstantEntityCollection();
+        $constantEntitiesCollection = $this->getConstantEntitiesCollection();
         if ($unsafe) {
-            return $constantEntityCollection->unsafeGet($constantName);
+            return $constantEntitiesCollection->unsafeGet($constantName);
         }
-        return $constantEntityCollection->get($constantName);
+        return $constantEntitiesCollection->get($constantName);
+    }
+
+    /**
+     * Get the compiled value of a constant
+     *
+     * @param string $constantName The name of the constant for which you need to get the value
+     *
+     * @return string|array|int|bool|float|null Compiled constant value
+     *
+     * @api
+     *
+     * @throws ConstExprEvaluationException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    #[CacheableMethod] public function getConstantValue(string $constantName): string|array|int|bool|null|float
+    {
+        return $this->getConstant($constantName, true)->getValue();
+    }
+
+    /**
+     * Get class constant compiled values according to filters
+     *
+     * @param bool $onlyFromCurrentClassAndTraits Get values only for constants from the current class
+     * @param int $flags Get values only for constants corresponding to the visibility modifiers passed in this value
+     *
+     * @return array<string, mixed>
+     *
+     * @api
+     *
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws ConstExprEvaluationException
+     */
+    #[CacheableMethod] public function getConstantsValues(
+        bool $onlyFromCurrentClassAndTraits = false,
+        int $flags = ClassConstantEntity::VISIBILITY_MODIFIERS_FLAG_ANY
+    ): array {
+        $constants = [];
+        foreach ($this->getConstantsData($onlyFromCurrentClassAndTraits, $flags) as $constantName => $implementingClassName) {
+            $constants[$constantName] = $this->getConstantValue($constantName);
+        }
+        return $constants;
     }
 
     /**
@@ -580,9 +757,12 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     /**
      * Get a list of all methods available in the current class according to filters and the classes where they are implemented
      *
-     * @return array<string, string>
-     *
      * @internal
+     *
+     * @param bool $onlyFromCurrentClassAndTraits Get data only for methods from the current class
+     * @param int $flags Get data only for methods corresponding to the visibility modifiers passed in this value
+     *
+     * @return array<string, string>
      *
      * @throws InvalidConfigurationParameterException
      */
@@ -788,84 +968,9 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     /**
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getConstantsData(
-        bool $onlyFromCurrentClassAndTraits = false,
-        int $flags = ConstantEntity::VISIBILITY_MODIFIERS_FLAG_ANY
-    ): array {
-        if (!$this->isEntityDataCanBeLoaded()) {
-            return [];
-        }
-        $constants = [];
-        /** @var ConstNode[] $constNodes */
-        $constNodes = array_filter(
-            $this->getAst()->stmts,
-            static fn(Node\Stmt $stmt): bool => $stmt instanceof ConstNode,
-        );
-        array_walk($constNodes, fn(ConstNode $stmt) => $stmt->flags = $stmt->flags ?: ConstantEntity::MODIFIERS_FLAG_IS_PUBLIC);
-        foreach ($constNodes as $constNode) {
-            if (($constNode->flags & $flags) === 0) {
-                continue;
-            }
-            foreach ($constNode->consts as $constant) {
-                $constants[$constant->name->toString()] = $this->getName();
-            }
-        }
-
-        $flags &= ~  ConstantEntity::MODIFIERS_FLAG_IS_PRIVATE;
-        foreach ($this->getTraits() as $traitEntity) {
-            if (!$traitEntity->isEntityDataCanBeLoaded()) {
-                continue;
-            }
-            foreach ($traitEntity->getConstantsData(true, $flags) as $name => $constantsData) {
-                if (array_key_exists($name, $constants)) {
-                    continue;
-                }
-                $constants[$name] = $constantsData;
-            }
-        }
-
-        if (!$onlyFromCurrentClassAndTraits) {
-            foreach ($this->getParentClassEntities() as $parentClassEntity) {
-                if (!$parentClassEntity->isEntityDataCanBeLoaded()) {
-                    continue;
-                }
-                foreach ($parentClassEntity->getConstantsData(true, $flags) as $name => $constantsData) {
-                    if (array_key_exists($name, $constants)) {
-                        continue;
-                    }
-                    $constants[$name] = $constantsData;
-                }
-            }
-
-            foreach ($this->getInterfacesEntities() as $interfacesEntity) {
-                if (!$interfacesEntity->isEntityDataCanBeLoaded()) {
-                    continue;
-                }
-                foreach ($interfacesEntity->getConstantsData(true, $flags) as $name => $constantsData) {
-                    if (array_key_exists($name, $constants)) {
-                        continue;
-                    }
-                    $constants[$name] = $constantsData;
-                }
-            }
-        }
-        return $constants;
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
     public function hasProperty(string $property): bool
     {
         return array_key_exists($property, $this->getPropertiesData());
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    public function hasConstant(string $constantName): bool
-    {
-        return array_key_exists($constantName, $this->getConstantsData(true));
     }
 
     /**
@@ -882,34 +987,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             array_merge($parentClassNames, $interfacesNames)
         );
         return in_array($className, $allClasses);
-    }
-
-    /**
-     * @throws ConstExprEvaluationException
-     * @throws InvalidConfigurationParameterException
-     */
-    #[CacheableMethod] public function getConstant(string $name): string|array|int|bool|null|float
-    {
-        // todo return constant entity
-        foreach ($this->getAst()->getConstants() as $node) {
-            foreach ($node->consts as $constantNode) {
-                if ($name === $constantNode->name->toString()) {
-                    return NodeValueCompiler::compile($constantNode->value, $this);
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     * @throws ConstExprEvaluationException
-     */
-    #[CacheableMethod] public function getConstantValue(string $name): string|array|int|bool|null|float
-    {
-        return $this->getConstantEntity($name)->getValue();
     }
 
     /**
@@ -933,21 +1010,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             $this->getParentClassNames()
         );
         return in_array($parentClassName, $parentClassNames);
-    }
-
-    /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     * @throws ConstExprEvaluationException
-     */
-    #[CacheableMethod] public function getConstants(): array
-    {
-        $constants = [];
-        foreach ($this->getConstantsData(true) as $name => $data) {
-            $constants[$name] = $this->getConstantValue($name);
-        }
-        return $constants;
     }
 
     /**
@@ -1017,7 +1079,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         $line = match ($prefix) {
             'm' => $this->getMethod($attributeName, true)?->getStartLine(),
             'p' => $this->getPropertyEntity($attributeName)?->getStartLine(),
-            'q' => $this->getConstantEntity($attributeName)?->getStartLine(),
+            'q' => $this->getConstant($attributeName, true)?->getStartLine(),
             default => 0,
         };
         return $line ? "#L{$line}" : '';

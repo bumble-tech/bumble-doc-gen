@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantF
 
 use BumbleDocGen\Core\Parser\Entity\EntityInterface;
 use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
 
 /**
@@ -23,7 +23,7 @@ final class VisibilityCondition implements ConditionInterface
 
     public function canAddToCollection(EntityInterface $entity): bool
     {
-        if (!$entity instanceof ConstantEntity) {
+        if (!$entity instanceof ClassConstantEntity) {
             return false;
         }
         foreach ($this->visibilityModifiers as $visibilityModifier) {

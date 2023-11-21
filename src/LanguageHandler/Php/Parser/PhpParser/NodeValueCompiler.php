@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\PhpParser;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Constant\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
 use DI\DependencyException;
@@ -29,7 +29,7 @@ final class NodeValueCompiler
      */
     public static function compile(
         Node\Stmt\Expression|Node $node,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
+        MethodEntity|PropertyEntity|ClassConstantEntity|ClassLikeEntity $entity
     ): mixed {
         if (is_a($node, \PhpParser\Node\Expr\Array_::class)) {
             $compiledValue = [];
@@ -93,7 +93,7 @@ final class NodeValueCompiler
      */
     private static function getStaticCallValue(
         Node\Expr\StaticCall $node,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
+        MethodEntity|PropertyEntity|ClassConstantEntity|ClassLikeEntity $entity
     ): mixed {
         $className = self::resolveClassName($node->class->toString(), $entity);
         if ($entity->getName() !== $className) {
@@ -117,7 +117,7 @@ final class NodeValueCompiler
      */
     private static function getStaticPropertyValue(
         Node\Expr\StaticPropertyFetch $node,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
+        MethodEntity|PropertyEntity|ClassConstantEntity|ClassLikeEntity $entity
     ): mixed {
         $className = self::resolveClassName($node->class->toString(), $entity);
         if ($entity->getName() !== $className) {
@@ -137,7 +137,7 @@ final class NodeValueCompiler
      */
     private static function getClassConstantValue(
         Node\Expr\ClassConstFetch $node,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
+        MethodEntity|PropertyEntity|ClassConstantEntity|ClassLikeEntity $entity
     ): mixed {
 
         $className = self::resolveClassName($node->class->toString(), $entity);
@@ -170,7 +170,7 @@ final class NodeValueCompiler
      */
     private static function resolveClassName(
         string $className,
-        MethodEntity|PropertyEntity|ConstantEntity|ClassLikeEntity $entity
+        MethodEntity|PropertyEntity|ClassConstantEntity|ClassLikeEntity $entity
     ): string {
         if ($className !== 'self' && $className !== 'static' && $className !== 'parent') {
             return $className;
