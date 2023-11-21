@@ -32,7 +32,7 @@ Entities are always handled through collections. Collections are the result of t
 * Output of all methods of all found entities in `className::methodName()` format:
 
 {{ "{% for someClassEntity in phpEntities %}
-    {% for methodEntity in someClassEntity.getMethodEntityCollection() %}
+    {% for methodEntity in someClassEntity.getMethodEntitiesCollection() %}
         * {{ someClassEntity.getName() }}::{{ methodEntity.getName() }}()
     {% endfor %}
 {% endfor %}" | textToCodeBlock('twig') }}

@@ -55,10 +55,10 @@ final class GetClassMethodsBodyCode implements CustomFunctionInterface
         $classEntity = $entitiesCollection->getLoadedOrCreateNew($className);
         if ($classEntity->isEntityDataCanBeLoaded()) {
             $methodsCode = [];
-            $methodEntityCollection = $classEntity->getMethodEntityCollection();
+            $methodEntitiesCollection = $classEntity->getMethodEntitiesCollection();
             $addIndentFromLeft = new AddIndentFromLeft();
             foreach ($methodsNames as $methodName) {
-                $method = $methodEntityCollection->unsafeGet($methodName);
+                $method = $methodEntitiesCollection->unsafeGet($methodName);
                 if ($method) {
                     $bodyCode = "{$method->getModifiersString()} {$method->getName()}({$method->getParametersString()}): {$method->getReturnType()}\n";
                     $bodyCode .= "{\n";

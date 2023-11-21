@@ -17,7 +17,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntityCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
@@ -832,33 +832,37 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     /**
      * Get a collection of methods entities
      *
+     * @api
+     *
      * @see PhpHandlerSettings::getMethodEntityFilter()
      *
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
      */
-    public function getMethodEntityCollection(): MethodEntityCollection
+    public function getMethodEntitiesCollection(): MethodEntitiesCollection
     {
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        $methodEntityCollection = $this->diContainer->make(MethodEntityCollection::class, [
+        $methodEntitiesCollection = $this->diContainer->make(MethodEntitiesCollection::class, [
             'classEntity' => $this
         ]);
-        $methodEntityCollection->loadMethodEntities();
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntityCollection);
-        return $methodEntityCollection;
+        $methodEntitiesCollection->loadMethodEntities();
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntitiesCollection);
+        return $methodEntitiesCollection;
     }
 
     /**
      * Get all methods that are available according to the configuration as an array
      *
+     * @api
+     *
      * @return MethodEntity[]
      *
-     * @see self::getMethodEntityCollection()
+     * @see self::getMethodEntitiesCollection()
      * @see PhpHandlerSettings::getMethodEntityFilter()
      *
      * @throws DependencyException
@@ -867,12 +871,14 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function getMethods(): array
     {
-        $methodEntityCollection = $this->getMethodEntityCollection();
-        return iterator_to_array($methodEntityCollection);
+        $methodEntitiesCollection = $this->getMethodEntitiesCollection();
+        return iterator_to_array($methodEntitiesCollection);
     }
 
     /**
      * Check if a method exists in a class
+     *
+     * @api
      *
      * @param string $methodName The name of the method whose entity you want to check
      * @param bool $unsafe Check all methods, not just the methods allowed in the configuration
@@ -885,15 +891,17 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function hasMethod(string $methodName, bool $unsafe = false): bool
     {
-        $methodEntityCollection = $this->getMethodEntityCollection();
+        $methodEntitiesCollection = $this->getMethodEntitiesCollection();
         if ($unsafe) {
             return array_key_exists($methodName, $this->getMethodsData());
         }
-        return $methodEntityCollection->has($methodName);
+        return $methodEntitiesCollection->has($methodName);
     }
 
     /**
      * Get the method entity by its name
+     *
+     * @api
      *
      * @param string $methodName The name of the method whose entity you want to get
      * @param bool $unsafe Check all methods, not just the methods allowed in the configuration
@@ -904,11 +912,11 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function getMethod(string $methodName, bool $unsafe = false): ?MethodEntity
     {
-        $methodEntityCollection = $this->getMethodEntityCollection();
+        $methodEntitiesCollection = $this->getMethodEntitiesCollection();
         if ($unsafe) {
-            return $methodEntityCollection->unsafeGet($methodName);
+            return $methodEntitiesCollection->unsafeGet($methodName);
         }
-        return $methodEntityCollection->get($methodName);
+        return $methodEntitiesCollection->get($methodName);
     }
 
     /**

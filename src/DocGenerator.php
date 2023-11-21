@@ -18,7 +18,6 @@ use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\InterfaceEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -138,7 +137,7 @@ final class DocGenerator
             $toReplace = [];
             $classFileLines = explode("\n", $classFileContent);
             foreach ($newBocBlocks as $method => $docBlock) {
-                $methodEntity = $entity->getMethodEntity($method);
+                $methodEntity = $entity->getMethod($method, true);
                 $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock(
                     false
                 )->getLocation()?->getLineNumber() : null;
@@ -258,14 +257,6 @@ final class DocGenerator
 
         try {
             $this->parser->parse();
-//RootEntityInterface
-            $in = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME)->get(RootEntityInterface::class);
-        /*    var_dump($in->getParentClassNames());
-
-            $r = new \ReflectionClass(RootEntityInterface::class);
-            var_dump($r->getParentClass());
-            die();*/
-
             $this->renderer->run();
         } catch (Exception $e) {
             $this->logger->critical(

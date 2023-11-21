@@ -34,7 +34,7 @@ final class DocBlocksGenerator
         if (!is_a($rootEntity, ClassLikeEntity::class)) {
             throw new \InvalidArgumentException('Currently we can only work PHP class entities');
         }
-        foreach ($rootEntity->getMethodEntityCollection() as $method) {
+        foreach ($rootEntity->getMethodEntitiesCollection() as $method) {
             /** @var MethodEntity $method */
             if ($method->getDocComment() || $method->isConstructor()) {
                 continue;
@@ -62,7 +62,7 @@ final class DocBlocksGenerator
         $newThrowsDockBlocks = [];
         $toRequest = [];
 
-        foreach ($rootEntity->getMethodEntityCollection() as $method) {
+        foreach ($rootEntity->getMethodEntitiesCollection() as $method) {
             /** @var MethodEntity $method */
             if ($method->isConstructor() || $method->isImplementedInParentClass()) {
                 continue;

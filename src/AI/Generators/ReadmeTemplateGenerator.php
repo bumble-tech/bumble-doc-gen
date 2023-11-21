@@ -56,7 +56,7 @@ final class ReadmeTemplateGenerator
         $entryPointsSignatures = [];
         foreach ($entryPoints as $entryPoint) {
             $methodsSignatures = [];
-            foreach ($entryPoint->getMethodEntityCollection() as $method) {
+            foreach ($entryPoint->getMethodEntitiesCollection() as $method) {
                 $methodsSignatures[] = $method->getSignature();
             }
 

@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
  *
  * @implements \IteratorAggregate<int, MethodEntity>
  */
-final class MethodEntityCollection extends BaseEntityCollection
+final class MethodEntitiesCollection extends BaseEntityCollection
 {
     private array $unsafeEntities = [];
 
@@ -75,7 +75,7 @@ final class MethodEntityCollection extends BaseEntityCollection
      * @param MethodEntityInterface $methodEntity Entity to be added to the collection
      * @param bool $reload Replace an entity with a new one if one has already been loaded previously
      */
-    public function add(MethodEntityInterface $methodEntity, bool $reload = false): MethodEntityCollection
+    public function add(MethodEntityInterface $methodEntity, bool $reload = false): MethodEntitiesCollection
     {
         $methodName = $methodEntity->getName();
         if (!isset($this->entities[$methodName]) || $reload) {
@@ -127,40 +127,40 @@ final class MethodEntityCollection extends BaseEntityCollection
     /**
      * Get a copy of the collection containing only those methods that are initialization methods
      */
-    public function getInitializations(): MethodEntityCollection
+    public function getInitializations(): MethodEntitiesCollection
     {
-        $methodEntityCollection = clone $this;
+        $methodEntitiesCollection = clone $this;
         foreach ($this as $objectId => $methodEntity) {
             try {
                 /**@var MethodEntity $methodEntity */
                 if (!$methodEntity->isInitialization()) {
-                    $methodEntityCollection->remove($objectId);
+                    $methodEntitiesCollection->remove($objectId);
                 }
             } catch (\Exception $e) {
                 $this->logger->warning($e->getMessage());
             }
         }
-        $methodEntityCollection->unsafeEntities = [];
-        return $methodEntityCollection;
+        $methodEntitiesCollection->unsafeEntities = [];
+        return $methodEntitiesCollection;
     }
 
     /**
      * Get a copy of the collection containing only those methods that are not initialization methods
      */
-    public function getAllExceptInitializations(): MethodEntityCollection
+    public function getAllExceptInitializations(): MethodEntitiesCollection
     {
-        $methodEntityCollection = clone $this;
+        $methodEntitiesCollection = clone $this;
         foreach ($this as $objectId => $methodEntity) {
             try {
                 /**@var MethodEntity $methodEntity */
                 if ($methodEntity->isInitialization()) {
-                    $methodEntityCollection->remove($objectId);
+                    $methodEntitiesCollection->remove($objectId);
                 }
             } catch (\Exception $e) {
                 $this->logger->warning($e->getMessage());
             }
         }
-        $methodEntityCollection->unsafeEntities = [];
-        return $methodEntityCollection;
+        $methodEntitiesCollection->unsafeEntities = [];
+        return $methodEntitiesCollection;
     }
 }

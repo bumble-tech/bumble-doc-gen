@@ -135,7 +135,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
             }
 
             $functionData['name'] = $functions[$className];
-            $method = $entity->getMethodEntityCollection()->get('__invoke');
+            $method = $entity->getMethodEntitiesCollection()->get('__invoke');
             $functionData['parameters'] = $method->getParameters();
             $functionsData[$className] = $functionData;
         }
