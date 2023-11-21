@@ -87,8 +87,8 @@ final class DocBlocksGenerator
             }
 
             if ($method->getDocComment() && $method->getDescription()) {
-                $prototype = $method->getPrototype();
-                $prototypeDocComment = $prototype?->getDocComment();
+                $parentMethod = $method->getParentMethod();
+                $prototypeDocComment = $parentMethod?->getDocComment();
                 if ($prototypeDocComment && !str_contains(strtolower($method->getDocComment()), '@inheritdoc')) {
                     if (isset($newThrowsDockBlocks[$method->getName()])) {
                         $methodsDockBlocks[$method->getName()] = str_replace(
@@ -119,7 +119,7 @@ final class DocBlocksGenerator
                     "/**\n * [insert]",
                     $method->getDocComment()
                 );
-            } elseif (strlen($method->getDocCommentRecursive()) > 1) {
+            } elseif (strlen($method->getDescription()) > 1) {
                 if ($method->getDescription()) {
                     if (isset($newThrowsDockBlocks[$method->getName()])) {
                         $methodsDockBlocks[$method->getName()] = $this->createDocBlockText(['[throws]', '{@inheritDoc}']);

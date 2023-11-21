@@ -55,7 +55,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     public function __construct(
         private Configuration $configuration,
         private ClassLikeEntity $classEntity,
-        private ParserHelper $parserHelper,
+        ParserHelper $parserHelper,
         private Standard $astPrinter,
         private LocalObjectCache $localObjectCache,
         private LoggerInterface $logger,
@@ -92,6 +92,9 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->classEntity;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getRootEntityCollection(): PhpEntitiesCollection
     {
         return $this->getRootEntity()->getRootEntityCollection();
@@ -105,17 +108,33 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getName(): string
+    {
+        return $this->methodName;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getShortName(): string
     {
         return $this->getName();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getNamespaceName(): string
     {
         return $this->getRootEntity()->getNamespaceName();
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -154,33 +173,25 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * Get the parent method for this method
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    public function getPrototype(): ?MethodEntity
+    public function getParentMethod(): ?MethodEntity
     {
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        $prototype = null;
-        $implementingClass = $this->getImplementingClass();
         $parentClass = $this->getImplementingClass()->getParentClass();
-        $methodName = $this->getName();
-        if ($parentClass && $parentClass->hasMethod($methodName)) {
-            $prototype = $parentClass->getMethod($methodName, true);
-        } else {
-            foreach ($implementingClass->getInterfacesEntities() as $interface) {
-                if ($interface->hasMethod($methodName)) {
-                    $prototype = $interface->getMethod($methodName, true);
-                    break;
-                }
-            }
-        }
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $prototype);
-        return $prototype;
+        $parentMethod = $parentClass->getMethod($this->getName(), true);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $parentMethod);
+        return $parentMethod;
     }
 
     /**
@@ -192,6 +203,8 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -202,13 +215,10 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     }
 
     /**
-     * @inheritDoc
+     * Checking that a method is a constructor
+     *
+     * @api
      */
-    public function getName(): string
-    {
-        return $this->methodName;
-    }
-
     public function isConstructor(): bool
     {
         return $this->getName() === '__construct';
@@ -303,17 +313,9 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $paramsFromDoc;
     }
 
-    private function isArrayAnnotationType(string $annotationType): bool
-    {
-        return preg_match('/^([a-zA-Z\\_]+)(\[\])$/', $annotationType) ||
-            preg_match('/^(array)(<|{)(.*)(>|})$/', $annotationType);
-    }
-
     /**
      * @inheritDoc
      *
-     * @throws NotFoundException
-     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
@@ -321,6 +323,11 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     {
         $parameters = [];
         $docBlock = $this->getDocBlock();
+
+        $isArrayAnnotationType = function (string $annotationType): bool {
+            return preg_match('/^([a-zA-Z\\_]+)(\[\])$/', $annotationType) ||
+            preg_match('/^(array)(<|{)(.*)(>|})$/', $annotationType);
+        };
 
         /**
          * @var Param[] $params
@@ -359,7 +366,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
                 }
                 $type = $type ?: 'mixed';
                 $expectedType = $type;
-                if ($type === 'array' && $this->isArrayAnnotationType($annotationType)) {
+                if ($type === 'array' && $isArrayAnnotationType($annotationType)) {
                     $expectedType = $annotationType;
                 }
 
@@ -389,9 +396,7 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
     /**
      * @inheritDoc
      *
-     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
-     * @throws DependencyException
      */
     public function getParametersString(): string
     {
@@ -446,6 +451,9 @@ class MethodEntity extends BaseEntity implements MethodEntityInterface
         return $this->isStatic() && in_array($this->getReturnType(), $initializationReturnTypes);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isDynamic(): bool
     {
         return false;

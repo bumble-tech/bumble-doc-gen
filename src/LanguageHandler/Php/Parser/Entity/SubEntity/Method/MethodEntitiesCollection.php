@@ -34,6 +34,8 @@ final class MethodEntitiesCollection extends BaseEntityCollection
     /**
      * Load method entities into the collection according to the project configuration
      *
+     * @internal
+     *
      * @see PhpHandlerSettings::getMethodEntityFilter()
      *
      * @throws DependencyException
@@ -72,6 +74,8 @@ final class MethodEntitiesCollection extends BaseEntityCollection
     /**
      * Add an entity to a collection
      *
+     * @api
+     *
      * @param MethodEntityInterface $methodEntity Entity to be added to the collection
      * @param bool $reload Replace an entity with a new one if one has already been loaded previously
      */
@@ -87,6 +91,8 @@ final class MethodEntitiesCollection extends BaseEntityCollection
     /**
      * Get the loaded method entity if it exists
      *
+     * @api
+     *
      * @param string $objectName Method entity name
      */
     public function get(string $objectName): ?MethodEntity
@@ -96,6 +102,8 @@ final class MethodEntitiesCollection extends BaseEntityCollection
 
     /**
      * Get the method entity if it exists. If the method exists but has not been loaded into the collection, a new entity object will be created
+     *
+     * @api
      *
      * @param string $objectName Method entity name
      *
@@ -126,6 +134,8 @@ final class MethodEntitiesCollection extends BaseEntityCollection
 
     /**
      * Get a copy of the collection containing only those methods that are initialization methods
+     *
+     * @api
      */
     public function getInitializations(): MethodEntitiesCollection
     {
@@ -146,6 +156,8 @@ final class MethodEntitiesCollection extends BaseEntityCollection
 
     /**
      * Get a copy of the collection containing only those methods that are not initialization methods
+     *
+     * @api
      */
     public function getAllExceptInitializations(): MethodEntitiesCollection
     {

@@ -40,6 +40,16 @@ class DynamicMethodEntity implements MethodEntityInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getSignature(): string
+    {
+        return "{$this->getModifiersString()} {$this->getName()}({$this->getParametersString()}): {$this->getReturnType()}";
+    }
+
+    /**
+     * @inheritDoc
      */
     public function isStatic(): bool
     {
@@ -225,11 +235,17 @@ class DynamicMethodEntity implements MethodEntityInterface
         return $this->classEntity;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getShortName(): string
     {
         return $this->getName();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getNamespaceName(): string
     {
         return $this->getRootEntity()->getNamespaceName();
