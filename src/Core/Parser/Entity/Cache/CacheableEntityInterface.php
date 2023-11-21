@@ -10,6 +10,11 @@ interface CacheableEntityInterface
 
     public function getCacheKey(): string;
 
+    /**
+     * Checking if the entity cache is out of date
+     *
+     * @internal
+     */
     public function isEntityCacheOutdated(): bool;
 
     public function isEntityFileCanBeLoad(): bool;
