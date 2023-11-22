@@ -12,7 +12,7 @@ use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\DependencyException;
 use DI\NotFoundException;
 
-final class PropertyEntityCollection extends BaseEntityCollection
+final class PropertyEntitiesCollection extends BaseEntityCollection
 {
     public function __construct(
         private ClassLikeEntity $classEntity,
@@ -22,6 +22,12 @@ final class PropertyEntityCollection extends BaseEntityCollection
     }
 
     /**
+     * Load property entities into the collection according to the project configuration
+     *
+     * @internal
+     *
+     * @see PhpHandlerSettings::getPropertyEntityFilter()
+     *
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
@@ -41,7 +47,15 @@ final class PropertyEntityCollection extends BaseEntityCollection
         }
     }
 
-    public function add(PropertyEntity $propertyEntity, bool $reload = false): PropertyEntityCollection
+    /**
+     * Add an entity to a collection
+     *
+     * @api
+     *
+     * @param PropertyEntity $propertyEntity Entity to be added to the collection
+     * @param bool $reload Replace an entity with a new one if one has already been loaded previously
+     */
+    public function add(PropertyEntity $propertyEntity, bool $reload = false): PropertyEntitiesCollection
     {
         $propertyName = $propertyEntity->getName();
         if (!isset($this->entities[$propertyName]) || $reload) {
@@ -50,12 +64,26 @@ final class PropertyEntityCollection extends BaseEntityCollection
         return $this;
     }
 
+    /**
+     * Get the loaded property entity if it exists
+     *
+     * @api
+     *
+     * @param string $objectName Property entity name
+     */
     public function get(string $objectName): ?PropertyEntity
     {
         return $this->entities[$objectName] ?? null;
     }
 
     /**
+     * Get the property entity if it exists. If the property exists but has not been loaded into the collection, a new entity object will be created
+     *
+     * @param string $objectName Property entity name
+     *
+     * @api
+     *
+     * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */

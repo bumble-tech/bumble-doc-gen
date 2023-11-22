@@ -19,7 +19,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\Class
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\NodeValueCompiler;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\PhpParserHelper;
@@ -495,7 +495,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * Get a list of all constants available in the current class according to filters and the classes where they are implemented
+     * Get a list of all constants and classes where they are implemented
      *
      * @internal
      *
@@ -571,7 +571,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * Get a collection of constants entities
+     * Get a collection of constant entities
      *
      * @api
      *
@@ -620,7 +620,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      * Check if a constant exists in a class
      *
      * @param string $constantName The name of the class whose entity you want to check
-     * @param bool $unsafe Check all constants, not just the constants allowed in the configuration
+     * @param bool $unsafe Check all constants, not just the constants allowed in the configuration (@see PhpHandlerSettings::getClassConstantEntityFilter())
      *
      * @return bool The constant exists
      *
@@ -643,7 +643,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      * Get the method entity by its name
      *
      * @param string $constantName The name of the constant whose entity you want to get
-     * @param bool $unsafe Check all constants, not just the constants allowed in the configuration
+     * @param bool $unsafe Check all constants, not just the constants allowed in the configuration (@see PhpHandlerSettings::getClassConstantEntityFilter())
      *
      * @api
      *
@@ -674,7 +674,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
      */
-    #[CacheableMethod] public function getConstantValue(string $constantName): string|array|int|bool|null|float
+    public function getConstantValue(string $constantName): string|array|int|bool|null|float
     {
         return $this->getConstant($constantName, true)->getValue();
     }
@@ -694,7 +694,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      * @throws InvalidConfigurationParameterException
      * @throws ConstExprEvaluationException
      */
-    #[CacheableMethod] public function getConstantsValues(
+    public function getConstantsValues(
         bool $onlyFromCurrentClassAndTraits = false,
         int $flags = ClassConstantEntity::VISIBILITY_MODIFIERS_FLAG_ANY
     ): array {
@@ -706,37 +706,175 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * Get a list of all properties and classes where they are implemented
+     *
+     * @param bool $onlyFromCurrentClassAndTraits Get data only for properties from the current class
+     * @param int $flags Get data only for properties corresponding to the visibility modifiers passed in this value
+     *
+     * @return array<string, string>
+     *
+     * @internal
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getPropertiesData(
+        bool $onlyFromCurrentClassAndTraits = false,
+        int $flags = PropertyEntity::VISIBILITY_MODIFIERS_FLAG_ANY
+    ): array {
+        if (!$this->isEntityDataCanBeLoaded()) {
+            return [];
+        }
+        $properties = [];
+        /** @var PropertyNode[] $propertyNodes */
+        $propertyNodes = array_filter(
+            $this->getAst()->stmts,
+            static fn(Node\Stmt $stmt): bool => $stmt instanceof PropertyNode,
+        );
+        array_walk($propertyNodes, fn(PropertyNode $stmt) => $stmt->flags = $stmt->flags ?: PropertyEntity::MODIFIERS_FLAG_IS_PUBLIC);
+        foreach ($propertyNodes as $node) {
+            if (($node->flags & $flags) === 0) {
+                continue;
+            }
+            foreach ($node->props as $propertyNode) {
+                $properties[$propertyNode->name->toString()] = $this->getName();
+            }
+        }
+
+        $flags &= ~ PropertyEntity::MODIFIERS_FLAG_IS_PRIVATE;
+        foreach ($this->getTraits() as $traitEntity) {
+            foreach ($traitEntity->getPropertiesData(true, $flags) as $name => $propertyData) {
+                if (!$traitEntity->isEntityDataCanBeLoaded()) {
+                    continue;
+                }
+                if (array_key_exists($name, $properties)) {
+                    continue;
+                }
+                $properties[$name] = $propertyData;
+            }
+        }
+        if (!$onlyFromCurrentClassAndTraits) {
+            foreach ($this->getParentClassEntities() as $parentClassEntity) {
+                if (!$parentClassEntity->isEntityDataCanBeLoaded()) {
+                    continue;
+                }
+                foreach ($parentClassEntity->getPropertiesData(true, $flags) as $name => $propertyData) {
+                    if (array_key_exists($name, $properties)) {
+                        continue;
+                    }
+                    $properties[$name] = $propertyData;
+                }
+            }
+        }
+        return $properties;
+    }
+
+    /**
+     * Get a collection of property entities
+     *
+     * @api
+     *
+     * @see PhpHandlerSettings::getPropertyEntityFilter()
+     *
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
      */
-    public function getPropertyEntityCollection(): PropertyEntityCollection
+    public function getPropertyEntitiesCollection(): PropertyEntitiesCollection
     {
         $objectId = $this->getObjectId();
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
         } catch (ObjectNotFoundException) {
         }
-        $propertyEntityCollection = $this->diContainer->make(PropertyEntityCollection::class, [
+        $propertyEntitiesCollection = $this->diContainer->make(PropertyEntitiesCollection::class, [
             'classEntity' => $this
         ]);
-        $propertyEntityCollection->loadPropertyEntities();
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $propertyEntityCollection);
-        return $propertyEntityCollection;
+        $propertyEntitiesCollection->loadPropertyEntities();
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $propertyEntitiesCollection);
+        return $propertyEntitiesCollection;
     }
 
     /**
-     * @throws NotFoundException
+     * Get all properties that are available according to the configuration as an array
+     *
+     * @return PropertyEntity[]
+     *
+     * @api
+     *
+     * @see self::getPropertyEntitiesCollection()
+     * @see PhpHandlerSettings::getPropertyEntityFilter()
+     *
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
-    public function getPropertyEntity(string $propertyName, bool $unsafe = true): ?PropertyEntity
+    public function getProperties(): array
     {
-        $propertyEntityCollection = $this->getPropertyEntityCollection();
+        $propertyEntitiesCollection = $this->getPropertyEntitiesCollection();
+        return iterator_to_array($propertyEntitiesCollection);
+    }
+
+    /**
+     * Check if a property exists in a class
+     *
+     * @param string $propertyName The name of the property whose entity you want to check
+     * @param bool $unsafe Check all properties, not just the properties allowed in the configuration (@see PhpHandlerSettings::getPropertyEntityFilter())
+     *
+     * @return bool The property exists
+     *
+     * @api
+     *
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function hasProperty(string $propertyName, bool $unsafe = false): bool
+    {
+        $propertyEntitiesCollection = $this->getPropertyEntitiesCollection();
         if ($unsafe) {
-            return $propertyEntityCollection->unsafeGet($propertyName);
+            return array_key_exists($propertyName, $this->getPropertiesData());
         }
-        return $propertyEntityCollection->get($propertyName);
+        return $propertyEntitiesCollection->has($propertyName);
+    }
+
+    /**
+     * Get the property entity by its name
+     *
+     * @param string $propertyName The name of the property whose entity you want to get
+     * @param bool $unsafe Check all properties, not just the properties allowed in the configuration (@see PhpHandlerSettings::getPropertyEntityFilter())
+     *
+     * @api
+     *
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function getProperty(string $propertyName, bool $unsafe = false): ?PropertyEntity
+    {
+        $propertyEntitiesCollection = $this->getPropertyEntitiesCollection();
+        if ($unsafe) {
+            return $propertyEntitiesCollection->unsafeGet($propertyName);
+        }
+        return $propertyEntitiesCollection->get($propertyName);
+    }
+
+    /**
+     * Get the compiled value of a property
+     *
+     * @param string $propertyName The name of the property for which you need to get the value
+     *
+     * @return string|array|int|bool|float|null Compiled property value
+     *
+     * @api
+     *
+     * @throws ConstExprEvaluationException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function getPropertyDefaultValue(string $propertyName): string|array|int|bool|null|float
+    {
+        return $this->getProperty($propertyName, true)->getDefaultValue();
     }
 
     /**
@@ -755,7 +893,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * Get a list of all methods available in the current class according to filters and the classes where they are implemented
+     * Get a list of all methods and classes where they are implemented
      *
      * @internal
      *
@@ -830,7 +968,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * Get a collection of methods entities
+     * Get a collection of method entities
      *
      * @api
      *
@@ -881,7 +1019,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      * @api
      *
      * @param string $methodName The name of the method whose entity you want to check
-     * @param bool $unsafe Check all methods, not just the methods allowed in the configuration
+     * @param bool $unsafe Check all methods, not just the methods allowed in the configuration (@see PhpHandlerSettings::getMethodEntityFilter())
      *
      * @return bool The method exists
      *
@@ -904,7 +1042,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      * @api
      *
      * @param string $methodName The name of the method whose entity you want to get
-     * @param bool $unsafe Check all methods, not just the methods allowed in the configuration
+     * @param bool $unsafe Check all methods, not just the methods allowed in the configuration (@see PhpHandlerSettings::getMethodEntityFilter())
      *
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
@@ -917,68 +1055,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             return $methodEntitiesCollection->unsafeGet($methodName);
         }
         return $methodEntitiesCollection->get($methodName);
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    #[CacheableMethod] public function getPropertiesData(
-        bool $onlyFromCurrentClassAndTraits = false,
-        int $flags = PropertyEntity::VISIBILITY_MODIFIERS_FLAG_ANY
-    ): array {
-        if (!$this->isEntityDataCanBeLoaded()) {
-            return [];
-        }
-        $properties = [];
-        /** @var PropertyNode[] $propertyNodes */
-        $propertyNodes = array_filter(
-            $this->getAst()->stmts,
-            static fn(Node\Stmt $stmt): bool => $stmt instanceof PropertyNode,
-        );
-        array_walk($propertyNodes, fn(PropertyNode $stmt) => $stmt->flags = $stmt->flags ?: PropertyEntity::MODIFIERS_FLAG_IS_PUBLIC);
-        foreach ($propertyNodes as $node) {
-            if (($node->flags & $flags) === 0) {
-                continue;
-            }
-            foreach ($node->props as $propertyNode) {
-                $properties[$propertyNode->name->toString()] = $this->getName();
-            }
-        }
-
-        $flags &= ~ PropertyEntity::MODIFIERS_FLAG_IS_PRIVATE;
-        foreach ($this->getTraits() as $traitEntity) {
-            foreach ($traitEntity->getPropertiesData(true, $flags) as $name => $propertyData) {
-                if (!$traitEntity->isEntityDataCanBeLoaded()) {
-                    continue;
-                }
-                if (array_key_exists($name, $properties)) {
-                    continue;
-                }
-                $properties[$name] = $propertyData;
-            }
-        }
-        if (!$onlyFromCurrentClassAndTraits) {
-            foreach ($this->getParentClassEntities() as $parentClassEntity) {
-                if (!$parentClassEntity->isEntityDataCanBeLoaded()) {
-                    continue;
-                }
-                foreach ($parentClassEntity->getPropertiesData(true, $flags) as $name => $propertyData) {
-                    if (array_key_exists($name, $properties)) {
-                        continue;
-                    }
-                    $properties[$name] = $propertyData;
-                }
-            }
-        }
-        return $properties;
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    public function hasProperty(string $property): bool
-    {
-        return array_key_exists($property, $this->getPropertiesData());
     }
 
     /**
@@ -1086,7 +1162,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         }
         $line = match ($prefix) {
             'm' => $this->getMethod($attributeName, true)?->getStartLine(),
-            'p' => $this->getPropertyEntity($attributeName)?->getStartLine(),
+            'p' => $this->getProperty($attributeName, true)?->getStartLine(),
             'q' => $this->getConstant($attributeName, true)?->getStartLine(),
             default => 0,
         };

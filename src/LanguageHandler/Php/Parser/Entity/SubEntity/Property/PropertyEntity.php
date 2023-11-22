@@ -53,15 +53,13 @@ class PropertyEntity extends BaseEntity
         self::MODIFIERS_FLAG_IS_PROTECTED |
         self::MODIFIERS_FLAG_IS_PRIVATE;
 
-
     private ?Property $ast = null;
     private ?int $nodePosition = null;
 
     public function __construct(
         Configuration $configuration,
         private ClassLikeEntity $classEntity,
-        private ParserHelper $parserHelper,
-        private Standard $astPrinter,
+        ParserHelper $parserHelper,
         private LocalObjectCache $localObjectCache,
         private LoggerInterface $logger,
         private string $propertyName,
@@ -81,6 +79,8 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getAst(): Property
@@ -117,12 +117,17 @@ class PropertyEntity extends BaseEntity
         return $this->ast;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getRootEntityCollection(): PhpEntitiesCollection
     {
         return $this->getRootEntity()->getRootEntityCollection();
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -137,7 +142,7 @@ class PropertyEntity extends BaseEntity
         $docComment = $this->getDocComment();
         $reflectionProperty = $this;
         if ($reflectionProperty->isImplementedInParentClass()) {
-            $reflectionProperty = $reflectionProperty->getImplementingClass()->getPropertyEntity($this->getName());
+            $reflectionProperty = $reflectionProperty->getImplementingClass()->getProperty($this->getName(), true);
         }
 
         if (!$docComment || str_contains(mb_strtolower($docComment), '@inheritdoc')) {
@@ -145,12 +150,12 @@ class PropertyEntity extends BaseEntity
             $parentClass = $this->getImplementingClass()->getParentClass();
             $propertyName = $this->getName();
             if ($parentClass && $parentClass->isEntityDataCanBeLoaded() && $parentClass->hasProperty($propertyName)) {
-                $parentReflectionProperty = $parentClass->getPropertyEntity($propertyName);
+                $parentReflectionProperty = $parentClass->getProperty($propertyName, true);
                 $reflectionProperty = $parentReflectionProperty->getDocCommentEntity();
             } else {
                 foreach ($implementingClass->getInterfacesEntities() as $interface) {
                     if ($interface->isEntityDataCanBeLoaded() && $interface->hasProperty($propertyName)) {
-                        $reflectionProperty = $interface->getPropertyEntity($propertyName);
+                        $reflectionProperty = $interface->getProperty($propertyName, true);
                         break;
                     }
                 }
@@ -160,32 +165,53 @@ class PropertyEntity extends BaseEntity
         return $reflectionProperty;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getName(): string
     {
         return $this->propertyName;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getShortName(): string
     {
         return $this->getName();
     }
 
+    /**
+     * Namespace of the class that contains this property
+     *
+     * @api
+     */
     public function getNamespaceName(): string
     {
         return $this->getRootEntity()->getNamespaceName();
     }
 
+    /**
+     * Get the name of the class in which this property is implemented
+     *
+     * @api
+     */
     public function getImplementingClassName(): string
     {
         return $this->implementingClassName;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getImplementingClass(): ClassLikeEntity
     {
         return $this->getRootEntityCollection()->getLoadedOrCreateNew($this->getImplementingClassName());
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getRelativeFileName(): ?string
@@ -194,6 +220,10 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
+     * Get current property type
+     *
+     * @api
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
@@ -202,7 +232,8 @@ class PropertyEntity extends BaseEntity
     {
         $type = $this->getAst()->type;
         if ($type) {
-            $typeString = $this->astPrinter->prettyPrint([$type]);
+            $astPrinter = new Standard();
+            $typeString = $astPrinter->prettyPrint([$type]);
             $typeString = str_replace('?', 'null|', $typeString);
         } else {
             $typeString = 'mixed';
@@ -223,6 +254,10 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
+     * Get a text representation of property modifiers
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -248,12 +283,21 @@ class PropertyEntity extends BaseEntity
         return implode(' ', $modifiersString);
     }
 
+    /**
+     * Check if this property is implemented in the parent class
+     *
+     * @api
+     */
     public function isImplementedInParentClass(): bool
     {
         return $this->getImplementingClassName() !== $this->classEntity->getName();
     }
 
     /**
+     * Check if a property is a public property
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPublic(): bool
@@ -262,6 +306,10 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
+     * Check if a protected is a public protected
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isProtected(): bool
@@ -270,6 +318,10 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
+     * Check if a private is a public private
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isPrivate(): bool
@@ -278,6 +330,8 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
@@ -289,6 +343,10 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
+     * Get the line number of the end of a property's code in a file
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
@@ -300,6 +358,12 @@ class PropertyEntity extends BaseEntity
     }
 
     /**
+     * Get the compiled default value of a property
+     *
+     * @api
+     *
+     * @return string|array|int|bool|null|float Compiled property default value
+     *
      * @throws ConstExprEvaluationException
      * @throws InvalidConfigurationParameterException
      */
