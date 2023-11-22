@@ -159,21 +159,6 @@ final class ParserHelper
     ) {
     }
 
-    public static function getBuiltInClassNames(): array
-    {
-        static $classNames = [];
-        if (!$classNames) {
-            $builtInClassNames = array_merge(self::$predefinedClassesInterfaces, get_declared_classes());
-            foreach ($builtInClassNames as $className) {
-                if (str_starts_with(ltrim($className, '\\'), 'Composer')) {
-                    break;
-                }
-                $classNames[$className] = $className;
-            }
-        }
-        return $classNames;
-    }
-
     public static function isBuiltInClass(string $className): bool
     {
         $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
@@ -190,20 +175,15 @@ final class ParserHelper
         return false;
     }
 
-    private static function checkIsClassName(string $name): bool
-    {
-        return (bool)preg_match(
-            '/^(?=_*[A-z]+)[A-z0-9]+$/',
-            $name
-        );
-    }
-
     public static function isCorrectClassName(string $className, bool $checkBuiltIns = true): bool
     {
         if (self::isBuiltInType($className) || ($checkBuiltIns && self::isBuiltInClass($className))) {
             return false;
         }
-        return self::checkIsClassName($className);
+        return (bool)preg_match(
+            '/^(?=_*[A-z]+)[A-z0-9]+$/',
+            $className
+        );
     }
 
     /**
@@ -320,17 +300,6 @@ final class ParserHelper
         return $gitFiles;
     }
 
-    private function getDocBlockFactory(): DocBlockFactory
-    {
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException) {
-        }
-        $docBlockFactory = DocBlockFactory::createInstance();
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $docBlockFactory);
-        return $docBlockFactory;
-    }
-
     /**
      * @throws InvalidConfigurationParameterException
      */
@@ -399,5 +368,31 @@ final class ParserHelper
         );
         $this->localObjectCache->cacheMethodResult(__METHOD__, $classEntity->getName(), $context);
         return $context;
+    }
+
+    private static function getBuiltInClassNames(): array
+    {
+        static $classNames = [];
+        if (!$classNames) {
+            $builtInClassNames = array_merge(self::$predefinedClassesInterfaces, get_declared_classes());
+            foreach ($builtInClassNames as $className) {
+                if (str_starts_with(ltrim($className, '\\'), 'Composer')) {
+                    break;
+                }
+                $classNames[$className] = $className;
+            }
+        }
+        return $classNames;
+    }
+
+    private function getDocBlockFactory(): DocBlockFactory
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $docBlockFactory = DocBlockFactory::createInstance();
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $docBlockFactory);
+        return $docBlockFactory;
     }
 }
