@@ -14,12 +14,17 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
  */
 class ClassEntity extends ClassLikeEntity
 {
+    /**
+     * @inheritDoc
+     */
     public function isClass(): bool
     {
         return true;
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isInstantiable(): bool
@@ -31,6 +36,8 @@ class ClassEntity extends ClassLikeEntity
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function isAbstract(): bool
@@ -39,7 +46,7 @@ class ClassEntity extends ClassLikeEntity
     }
 
     /**
-     * @return string[]
+     * @inheritDoc
      *
      * @throws InvalidConfigurationParameterException
      */
@@ -60,6 +67,8 @@ class ClassEntity extends ClassLikeEntity
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getParentClassName(): ?string
@@ -74,6 +83,8 @@ class ClassEntity extends ClassLikeEntity
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getParentClass(): ?ClassLikeEntity
@@ -86,6 +97,8 @@ class ClassEntity extends ClassLikeEntity
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getModifiersString(): string

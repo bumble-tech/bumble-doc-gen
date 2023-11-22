@@ -21,7 +21,6 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntiti
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
-use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\NodeValueCompiler;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\PhpParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use DI\Attribute\Inject;
@@ -73,48 +72,88 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         }
     }
 
+    /**
+     * Get entity modifiers as a string
+     */
+    abstract public function getModifiersString(): string;
+
+    /**
+     * Check if the name is a valid name for ClassLikeEntity
+     */
     public static function isEntityNameValid(string $entityName): bool
     {
         return ParserHelper::isCorrectClassName($entityName);
     }
 
+    /**
+     * Check if an entity is a Class
+     *
+     * @api
+     */
     public function isClass(): bool
     {
         return false;
     }
 
+    /**
+     * Check if an entity is an Interface
+     *
+     * @api
+     */
     public function isInterface(): bool
     {
         return false;
     }
 
+    /**
+     * Check if an entity is a Trait
+     *
+     * @api
+     */
     public function isTrait(): bool
     {
         return false;
     }
 
+    /**
+     * Check if an entity is an Enum
+     *
+     * @api
+     */
     public function isEnum(): bool
     {
         return false;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getObjectId(): string
     {
         return $this->className;
     }
 
+    /**
+     * Check if a given entity is an entity from a third party library (connected via composer)
+     *
+     * @internal
+     */
     public function isExternalLibraryEntity(): bool
     {
         return !is_null($this->composerHelper->getComposerPackageDataByClassName($this->getName()));
     }
 
+    /**
+     * @inheritDoc
+     */
     final public function getRootEntityCollection(): PhpEntitiesCollection
     {
         return $this->entitiesCollection;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
@@ -149,6 +188,8 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
 
     /**
      * Checking if class file is in git repository
+     *
+     * @internal
      */
     final public function isInGit(): bool
     {
@@ -165,19 +206,23 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * @internal
+     *
      * @throws InvalidConfigurationParameterException
      */
-    public function isDocumentCreationAllowed(): bool
+    final public function isDocumentCreationAllowed(): bool
     {
         return !$this->configuration->isCheckFileInGitBeforeCreatingDocEnabled() || $this->isInGit();
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocCommentEntity(): ClassLikeEntity
+    final public function getDocCommentEntity(): ClassLikeEntity
     {
         $objectId = $this->getObjectId();
         try {
@@ -196,16 +241,25 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         return $classEntity;
     }
 
+    /**
+     * @internal
+     */
     final public function loadPluginData(string $pluginKey, array $data): void
     {
         $this->pluginsData[$pluginKey] = $data;
     }
 
+    /**
+     * @internal
+     */
     final public function getPluginData(string $pluginKey): ?array
     {
         return $this->pluginsData[$pluginKey] ?? null;
     }
 
+    /**
+     * @internal
+     */
     final public function setCustomAst(TraitNode|EnumNode|InterfaceNode|ClassNode|null $customAst): void
     {
         $objectId = $this->getObjectId();
@@ -213,6 +267,8 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         $this->localObjectCache->cacheMethodResult(__CLASS__ . '::getAst', $objectId, $customAst);
     }
     /**
+     * @inheritDoc
+     *
      * @throws \RuntimeException
      * @throws InvalidConfigurationParameterException
      */
@@ -260,20 +316,10 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         return $ast;
     }
 
-    public function getImplementingClass(): ClassLikeEntity
-    {
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->className;
-    }
-
     /**
      * @internal
      */
-    public function isClassLoad(): bool
+    final public function isClassLoad(): bool
     {
         if (!$this->isClassLoad) {
             try {
@@ -297,13 +343,37 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         return !$this->isExternalLibraryEntity() && $this->isEntityFileCanBeLoad();
     }
 
-    public function getShortName(): string
+    /**
+     * @inheritDoc
+     */
+    final public function getImplementingClass(): ClassLikeEntity
+    {
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    final public function getName(): string
+    {
+        return $this->className;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    final public function getShortName(): string
     {
         $nameParts = explode('\\', $this->getName());
         return end($nameParts);
     }
 
-    #[CacheableMethod] public function getNamespaceName(): string
+    /**
+     * Get the entity namespace name
+     *
+     * @api
+     */
+    final public function getNamespaceName(): string
     {
         $namespaceParts = explode('\\', $this->getName());
         if (count($namespaceParts) < 2) {
@@ -314,11 +384,13 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
-    public function getRelativeFileName(bool $loadIfEmpty = true): ?string
+    public function getRelativeFileName(): ?string
     {
-        if (!$this->relativeFileNameLoaded && $loadIfEmpty) {
+        if (!$this->relativeFileNameLoaded) {
             $this->relativeFileNameLoaded = true;
             $fileName = $this->composerHelper->getComposerClassLoader()->findFile($this->getName());
             $projectRoot = $this->configuration->getProjectRoot();
@@ -334,17 +406,31 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         return $this->relativeFileName;
     }
 
+    /**
+     * Check that an entity is instantiable
+     *
+     * @api
+     */
     public function isInstantiable(): bool
     {
         return false;
     }
 
+    /**
+     * Check that an entity is abstract
+     *
+     * @api
+     */
     public function isAbstract(): bool
     {
         return false;
     }
 
     /**
+     * Get the line number of the start of a class code in a file
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getStartLine(): int
@@ -353,6 +439,10 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * Get the line number of the end of a class code in a file
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getEndLine(): int
@@ -361,40 +451,23 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * @return ClassLikeEntity[] $trait
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getTraits(): array
-    {
-        $traits = [];
-        foreach ($this->getTraitsNames() as $traitsName) {
-            $traits[] = $this->entitiesCollection->getLoadedOrCreateNew($traitsName);
-        }
-        return $traits;
-    }
-
-    /**
-     * @return ClassLikeEntity[]
+     * Get a list of entity names of parent classes
      *
-     * @throws InvalidConfigurationParameterException
+     * @api
+     *
+     * @return string[]
      */
-    public function getInterfacesEntities(): array
-    {
-        $interfacesEntities = [];
-        foreach ($this->getInterfaceNames() as $interfaceClassName) {
-            $interfacesEntities[] = $this->getRootEntityCollection()->getLoadedOrCreateNew($interfaceClassName);
-        }
-        return $interfacesEntities;
-    }
-
     public function getParentClassNames(): array
     {
         return [];
     }
 
     /**
+     * Get a list of parent class entities
+     *
+     * @api
+     *
      * @return ClassLikeEntity[]
-     * @throws InvalidConfigurationParameterException
      */
     public function getParentClassEntities(): array
     {
@@ -405,7 +478,31 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * Get the name of the parent class entity if it exists
+     *
+     * @api
+     */
+    public function getParentClassName(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Get the entity of the parent class if it exists
+     *
+     * @api
+     */
+    public function getParentClass(): ?ClassLikeEntity
+    {
+        return null;
+    }
+
+    /**
+     * Get a list of class interface names
+     *
      * @return string[]
+     *
+     * @api
      *
      * @throws InvalidConfigurationParameterException
      */
@@ -457,17 +554,31 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         return $interfaceNames;
     }
 
-    public function getParentClassName(): ?string
+    /**
+     * Get a list of interface entities that the current class implements
+     *
+     * @return InterfaceEntity[]
+     *
+     * @api
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getInterfacesEntities(): array
     {
-        return null;
-    }
-
-    public function getParentClass(): ?ClassLikeEntity
-    {
-        return null;
+        $interfacesEntities = [];
+        foreach ($this->getInterfaceNames() as $interfaceClassName) {
+            $interfacesEntities[] = $this->getRootEntityCollection()->getLoadedOrCreateNew($interfaceClassName);
+        }
+        return $interfacesEntities;
     }
 
     /**
+     * Get a list of class traits names
+     *
+     * @api
+     *
+     * @return string[]
+     *
      * @throws InvalidConfigurationParameterException
      */
     #[CacheableMethod] public function getTraitsNames(): array
@@ -487,6 +598,28 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * Get a list of trait entities of the current class
+     *
+     * @api
+     *
+     * @return TraitEntity[]
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getTraits(): array
+    {
+        $traits = [];
+        foreach ($this->getTraitsNames() as $traitsName) {
+            $traits[] = $this->entitiesCollection->getLoadedOrCreateNew($traitsName);
+        }
+        return $traits;
+    }
+
+    /**
+     * Check if the class contains traits
+     *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function hasTraits(): bool
@@ -1058,7 +1191,11 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * Whether the given class is a subclass of the specified class
+     *
      * @throws InvalidConfigurationParameterException
+     *
+     * @api
      */
     public function isSubclassOf(string $className): bool
     {
@@ -1074,7 +1211,13 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * Check if a class implements an interface
+     *
+     * @param string $interfaceName Name of the required interface in the interface chain
+     *
      * @throws InvalidConfigurationParameterException
+     *
+     * @api
      */
     public function implementsInterface(string $interfaceName): bool
     {
@@ -1086,6 +1229,13 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         return in_array($interfaceName, $interfaces);
     }
 
+    /**
+     * Check if a certain parent class exists in a chain of parent classes
+     *
+     * @param string $parentClassName Searched parent class
+     *
+     * @api
+     */
     public function hasParentClass(string $parentClassName): bool
     {
         $parentClassName = ltrim(str_replace('\\\\', '\\', $parentClassName), '\\');
@@ -1097,6 +1247,8 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * @internal
+     *
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
@@ -1118,6 +1270,8 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * @internal
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException

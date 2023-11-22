@@ -683,7 +683,7 @@ abstract class BaseEntity implements CacheableEntityInterface
             return false;
         }
         $implementingClass = $this->getImplementingClass();
-        $relativeFileName = $implementingClass->getRelativeFileName(false);
+        $relativeFileName = $implementingClass->getRelativeFileName();
         if (!isset($dependenciesChecks[$relativeFileName])) {
             $dependenciesChecks[$relativeFileName] = true;
             $cachedEntityDependencies = $this->getCachedEntityDependencies();

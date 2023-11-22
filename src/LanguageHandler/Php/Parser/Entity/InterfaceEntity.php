@@ -11,21 +11,33 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
  */
 class InterfaceEntity extends ClassLikeEntity
 {
+    /**
+     * @inheritDoc
+     */
     public function isInterface(): bool
     {
         return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isAbstract(): bool
     {
         return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getModifiersString(): string
     {
         return 'interface';
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getTraitsNames(): array
     {
         return [];

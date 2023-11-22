@@ -18,17 +18,25 @@ use PhpParser\Node\Stmt\EnumCase as EnumCaseNode;
  */
 class EnumEntity extends ClassLikeEntity
 {
+    /**
+     * @inheritDoc
+     */
     public function isEnum(): bool
     {
         return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getInterfaceNames(): array
     {
         return [];
     }
 
     /**
+     * Get enum cases values
+     *
      * @throws InvalidConfigurationParameterException
      * @throws ConstExprEvaluationException
      */
@@ -52,6 +60,10 @@ class EnumEntity extends ClassLikeEntity
     }
 
     /**
+     * Get enum cases names
+     *
+     * @return string[]
+     *
      * @throws InvalidConfigurationParameterException
      * @throws ConstExprEvaluationException
      */
@@ -61,6 +73,8 @@ class EnumEntity extends ClassLikeEntity
     }
 
     /**
+     * Get enum case value
+     *
      * @throws InvalidConfigurationParameterException
      * @throws ConstExprEvaluationException
      */
@@ -69,6 +83,9 @@ class EnumEntity extends ClassLikeEntity
         return $this->getEnumCases()[$name] ?? null;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getModifiersString(): string
     {
         return 'enum';
