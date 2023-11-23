@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoad;
 
 /**
  * Adding links to the documentation of PHP classes in the \PHPUnit namespace
@@ -17,7 +17,7 @@ final class PhpUnitStubberPlugin implements PluginInterface
     {
         return [
             OnGettingResourceLink::class => 'onGettingResourceLink',
-            OnCheckIsClassEntityCanBeLoad::class => 'onCheckIsClassEntityCanBeLoad',
+            OnCheckIsEntityCanBeLoad::class => 'onCheckIsClassEntityCanBeLoad',
         ];
     }
 
@@ -36,7 +36,7 @@ final class PhpUnitStubberPlugin implements PluginInterface
         }
     }
 
-    final public function onCheckIsClassEntityCanBeLoad(OnCheckIsClassEntityCanBeLoad $event): void
+    final public function onCheckIsClassEntityCanBeLoad(OnCheckIsEntityCanBeLoad $event): void
     {
         if (
             str_starts_with($event->getEntity()->getName(), 'PHPUnit\\') ||

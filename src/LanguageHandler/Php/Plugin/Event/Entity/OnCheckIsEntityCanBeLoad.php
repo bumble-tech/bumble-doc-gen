@@ -7,7 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use Symfony\Contracts\EventDispatcher\Event;
 
-final class OnCheckIsClassEntityCanBeLoad extends Event
+final class OnCheckIsEntityCanBeLoad extends Event
 {
     public bool $classCanBeLoad = true;
 

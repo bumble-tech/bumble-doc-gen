@@ -19,7 +19,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoad;
 use DI\Attribute\Inject;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Cache\InvalidArgumentException;
@@ -714,7 +714,7 @@ abstract class BaseEntity implements CacheableEntityInterface
         } catch (ObjectNotFoundException) {
         }
         $entityCanBeLoad = $this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
-            new OnCheckIsClassEntityCanBeLoad($this->getCurrentRootEntity())
+            new OnCheckIsEntityCanBeLoad($this->getCurrentRootEntity())
         )->isClassCanBeLoad();
         $this->localObjectCache->cacheMethodResult(__METHOD__, $classEntity->getObjectId(), $entityCanBeLoad);
         return $entityCanBeLoad;
