@@ -175,7 +175,6 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     {
         $classEntity = $this->get($objectName);
         if (!$classEntity) {
-            $objectName = ltrim($objectName, '\\');
             $classEntity = $this->cacheablePhpEntityFactory->createClassLikeEntity(
                 $this,
                 $objectName
@@ -209,10 +208,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         $interfaces = array_map(
-            fn($interface) => ltrim(
-                str_replace('\\\\', '\\', $interface),
-                '\\'
-            ),
+            fn($interface) => ClassLikeEntity::normalizeClassName($interface),
             $interfaces
         );
         foreach ($entitiesCollection as $objectId => $entity) {
@@ -220,11 +216,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
                 $entitiesCollection->remove($objectId);
                 continue;
             }
-            $entityInterfaces = array_map(
-                fn($interface) => ltrim($interface, '\\'),
-                $entity->getInterfaceNames()
-            );
-            if (!array_intersect($interfaces, $entityInterfaces)) {
+            if (!array_intersect($interfaces, $entity->getInterfaceNames())) {
                 $entitiesCollection->remove($objectId);
             }
         }
@@ -240,10 +232,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
         $parentClassNames = array_map(
-            fn($parentClassName) => ltrim(
-                str_replace('\\\\', '\\', $parentClassName),
-                '\\'
-            ),
+            fn($parentClassName) => ClassLikeEntity::normalizeClassName($parentClassName),
             $parentClassNames
         );
         foreach ($entitiesCollection as $objectId => $entity) {
@@ -251,12 +240,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
                 $entitiesCollection->remove($objectId);
                 continue;
             }
-
-            $entityParentClassNames = array_map(
-                fn($parentClassName) => ltrim($parentClassName, '\\'),
-                $entity->getParentClassNames()
-            );
-            if (!array_intersect($parentClassNames, $entityParentClassNames)) {
+            if (!array_intersect($parentClassNames, $entity->getParentClassNames())) {
                 $entitiesCollection->remove($objectId);
             }
         }
@@ -364,9 +348,9 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
      *  $entitiesCollection->findEntity('\BumbleDocGen\Console\App'); // class with namespace
      *  $entitiesCollection->findEntity('\BumbleDocGen\Console\App::test()'); // class with namespace and optional part
      *  $entitiesCollection->findEntity('App.php'); // filename
-     *  $entitiesCollection->findEntity('/BumbleDocGen/Console/App.php'); // relative path
-     *  $entitiesCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/BumbleDocGen/Console/App.php'); // absolute path
-     *  $entitiesCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/BumbleDocGen/Console/App.php'); // source link
+     *  $entitiesCollection->findEntity('/src/Console/App.php'); // relative path
+     *  $entitiesCollection->findEntity('/Users/someuser/Desktop/projects/bumble-doc-gen/src/Console/App.php'); // absolute path
+     *  $entitiesCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php'); // source link
      */
     public function internalFindEntity(string $search, bool $useUnsafeKeys = true): ?ClassLikeEntity
     {
@@ -418,11 +402,12 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
 
         $entity = null;
         $foundKey = null;
-        $search = ltrim($search, '\\');
+        $search = ClassEntity::normalizeClassName($search);
         if (array_key_exists($search, $index)) {
             $entity = $index[$search];
             $foundKey = $search;
         } else {
+            $search = preg_replace('#^(((http(s?)):\/\/)(.*)(blob\/([^/]+)))(.*)#', '$8', $search);
             $preparedSearch = preg_replace('/^(((http(s?))::)?([^-:]+))((::|->)(.*))/', '$1', $search);
             if (array_key_exists($preparedSearch, $index)) {
                 $entity = $index[$preparedSearch];

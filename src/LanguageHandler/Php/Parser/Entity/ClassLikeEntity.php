@@ -546,7 +546,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
             } catch (\Exception $e) {
                 $this->logger->error($e->getMessage());
             }
-            $interfaceNames = array_merge($interfaceNames, ["\\{$interfaceName}"], $parentInterfaceNames);
+            $interfaceNames = array_merge($interfaceNames, [$interfaceName], $parentInterfaceNames);
         }
         if (!$this->isInterface() && $parentClass = $this->getParentClass()) {
             $parentInterfaceNames = [];
@@ -1212,10 +1212,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         $className = ClassLikeEntity::normalizeClassName($className);
         $parentClassNames = $this->getParentClassNames();
         $interfacesNames = $this->getInterfaceNames();
-        $allClasses = array_map(
-            fn($interface) => ltrim($interface, '\\'),
-            array_merge($parentClassNames, $interfacesNames)
-        );
+        $allClasses = array_merge($parentClassNames, $interfacesNames);
         return in_array($className, $allClasses);
     }
 
@@ -1231,11 +1228,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     public function implementsInterface(string $interfaceName): bool
     {
         $interfaceName = ClassLikeEntity::normalizeClassName($interfaceName);
-        $interfaces = array_map(
-            fn($interface) => ltrim($interface, '\\'),
-            $this->getInterfaceNames()
-        );
-        return in_array($interfaceName, $interfaces);
+        return in_array($interfaceName, $this->getInterfaceNames());
     }
 
     /**
@@ -1248,11 +1241,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     public function hasParentClass(string $parentClassName): bool
     {
         $parentClassName = ClassLikeEntity::normalizeClassName($parentClassName);
-        $parentClassNames = array_map(
-            fn($interface) => ltrim($interface, '\\'),
-            $this->getParentClassNames()
-        );
-        return in_array($parentClassName, $parentClassNames);
+        return in_array($parentClassName, $this->getParentClassNames());
     }
 
     /**

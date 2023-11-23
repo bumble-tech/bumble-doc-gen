@@ -58,7 +58,7 @@ class ClassEntity extends ClassLikeEntity
         try {
             $parentClass = $this->getParentClass();
             if ($name = $parentClass?->getName()) {
-                return array_unique(array_merge(["\\{$name}"], $parentClass->getParentClassNames()));
+                return array_unique(array_merge([$name], $parentClass->getParentClassNames()));
             }
         } catch (\Exception $e) {
             $this->logger->warning($e->getMessage());
@@ -76,10 +76,7 @@ class ClassEntity extends ClassLikeEntity
         if (!$this->isEntityDataCanBeLoaded()) {
             return null;
         }
-        if ($parentClassName = $this->getAst()->extends?->toString()) {
-            return '\\' . $parentClassName;
-        }
-        return null;
+        return $this->getAst()->extends?->toString();
     }
 
     /**
