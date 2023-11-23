@@ -76,7 +76,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     {
         foreach ($event->getPhpEntitiesCollection() as $classEntity) {
             if ($this->isCustomTwigFilter($classEntity)) {
-                $classEntity->loadPluginData(
+                $classEntity->addPluginData(
                     self::PLUGIN_KEY,
                     $this->getFilterData($event->getPhpEntitiesCollection(), $classEntity->getName()) ?? []
                 );

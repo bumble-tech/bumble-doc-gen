@@ -45,7 +45,6 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
 {
     #[Inject] private Container $diContainer;
 
-    private array $pluginsData = [];
     private bool $relativeFileNameLoaded = false;
     private bool $isClassLoad = false;
 
@@ -252,19 +251,29 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
-     * @internal
+     * Add information to aт entity object
      */
-    final public function loadPluginData(string $pluginKey, array $data): void
+    final public function addPluginData(string $pluginKey, mixed $data): void
     {
-        $this->pluginsData[$pluginKey] = $data;
+        $objectId = $this->getObjectId();
+        $cacheKey = "{$objectId}::{$pluginKey}";
+        $this->localObjectCache->cacheMethodResult(__CLASS__ . '::getPluginData', $cacheKey, $data);
     }
 
     /**
-     * @internal
+     * Get additional information added using the plugin
+     *
+     * @api
      */
-    final public function getPluginData(string $pluginKey): ?array
+    final public function getPluginData(string $pluginKey): mixed
     {
-        return $this->pluginsData[$pluginKey] ?? null;
+        $objectId = $this->getObjectId();
+        $cacheKey = "{$objectId}::{$pluginKey}";
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $cacheKey);
+        } catch (ObjectNotFoundException) {
+        }
+        return null;
     }
 
     /**

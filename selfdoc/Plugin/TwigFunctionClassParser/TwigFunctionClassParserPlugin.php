@@ -74,7 +74,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
     {
         foreach ($event->getPhpEntitiesCollection() as $classEntity) {
             if ($this->isCustomTwigFunction($classEntity) && $classEntity->isInstantiable()) {
-                $classEntity->loadPluginData(
+                $classEntity->addPluginData(
                     self::PLUGIN_KEY,
                     $this->getFunctionData($event->getPhpEntitiesCollection(), $classEntity->getName()) ?? []
                 );
