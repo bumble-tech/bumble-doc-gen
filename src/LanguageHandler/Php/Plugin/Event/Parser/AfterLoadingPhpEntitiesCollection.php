@@ -8,15 +8,15 @@ use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * The event is called after the initial creation of a collection of class entities
+ * The event is called after the initial creation of a collection of PHP entities
  */
-final class AfterLoadingClassEntityCollection extends Event
+final class AfterLoadingPhpEntitiesCollection extends Event
 {
     public function __construct(private PhpEntitiesCollection $entitiesCollection)
     {
     }
 
-    public function getClassEntityCollection(): PhpEntitiesCollection
+    public function getPhpEntitiesCollection(): PhpEntitiesCollection
     {
         return $this->entitiesCollection;
     }

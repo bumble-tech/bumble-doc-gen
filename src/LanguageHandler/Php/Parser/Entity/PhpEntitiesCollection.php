@@ -15,7 +15,7 @@ use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\PhpParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingPhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\OnAddClassEntityToCollection;
 use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\EntityDocRendererHelper;
 use DI\DependencyException;
@@ -131,7 +131,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
                 }
             }
         }
-        $this->pluginEventDispatcher->dispatch(new AfterLoadingClassEntityCollection($this));
+        $this->pluginEventDispatcher->dispatch(new AfterLoadingPhpEntitiesCollection($this));
 
         $allFilesCount = count($allFiles);
         $skipped = $allFilesCount - $addedFilesCount;

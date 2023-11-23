@@ -12,7 +12,7 @@ use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingPhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -35,7 +35,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            AfterLoadingClassEntityCollection::class => 'afterLoadingClassEntityCollection',
+            AfterLoadingPhpEntitiesCollection::class => 'afterLoadingClassEntityCollection',
             OnLoadEntityDocPluginContent::class => 'onLoadEntityDocPluginContentEvent',
         ];
     }
@@ -72,13 +72,13 @@ final class TwigFilterClassParserPlugin implements PluginInterface
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function afterLoadingClassEntityCollection(AfterLoadingClassEntityCollection $event): void
+    public function afterLoadingClassEntityCollection(AfterLoadingPhpEntitiesCollection $event): void
     {
-        foreach ($event->getClassEntityCollection() as $classEntity) {
+        foreach ($event->getPhpEntitiesCollection() as $classEntity) {
             if ($this->isCustomTwigFilter($classEntity)) {
                 $classEntity->loadPluginData(
                     self::PLUGIN_KEY,
-                    $this->getFilterData($event->getClassEntityCollection(), $classEntity->getName()) ?? []
+                    $this->getFilterData($event->getPhpEntitiesCollection(), $classEntity->getName()) ?? []
                 );
             }
         }
