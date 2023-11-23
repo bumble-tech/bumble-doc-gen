@@ -10,6 +10,8 @@ namespace BumbleDocGen\Core\Parser\Entity;
  */
 interface RootEntityInterface extends EntityInterface
 {
+    public static function normalizeClassName(string $name): string;
+
     /**
      * Check if entity name is valid
      */

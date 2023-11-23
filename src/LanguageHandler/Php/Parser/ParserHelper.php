@@ -161,7 +161,7 @@ final class ParserHelper
 
     public static function isBuiltInClass(string $className): bool
     {
-        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
+        $className = ClassLikeEntity::normalizeClassName($className);
         return array_key_exists($className, self::getBuiltInClassNames());
     }
 

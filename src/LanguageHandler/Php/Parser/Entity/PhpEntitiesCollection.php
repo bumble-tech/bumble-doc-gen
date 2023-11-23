@@ -163,7 +163,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
 
     protected function prepareObjectName(string $objectName): string
     {
-        return ltrim(str_replace('\\\\', '\\', $objectName), '\\');
+        return ClassLikeEntity::normalizeClassName($objectName);
     }
 
     /**

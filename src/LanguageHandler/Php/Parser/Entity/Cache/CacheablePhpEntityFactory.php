@@ -140,7 +140,7 @@ final class CacheablePhpEntityFactory
         string $className,
         ?string $relativeFileName = null
     ): ClassLikeEntity {
-        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
+        $className = ClassLikeEntity::normalizeClassName($className);
         $objectId = md5($className);
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
@@ -190,7 +190,7 @@ final class CacheablePhpEntityFactory
                 'The class must inherit from `' . ClassEntity::class . '`'
             );
         }
-        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
+        $className = ClassLikeEntity::normalizeClassName($className);
         $objectId = md5($className);
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);

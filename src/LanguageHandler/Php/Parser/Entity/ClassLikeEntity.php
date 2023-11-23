@@ -61,15 +61,17 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
         private string $className,
         private ?string $relativeFileName,
     ) {
+        $this->className = self::normalizeClassName($this->className);
+        if ($relativeFileName) {
+            $this->relativeFileNameLoaded = true;
+        }
+
         parent::__construct(
             $configuration,
             $localObjectCache,
             $parserHelper,
             $logger
         );
-        if ($relativeFileName) {
-            $this->relativeFileNameLoaded = true;
-        }
     }
 
     /**
@@ -83,6 +85,14 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     public static function isEntityNameValid(string $entityName): bool
     {
         return ParserHelper::isCorrectClassName($entityName);
+    }
+
+    /**
+     * @api
+     */
+    final public static function normalizeClassName(string $name): string
+    {
+        return ltrim(str_replace('\\\\', '\\', $name), '\\');
     }
 
     /**
@@ -1199,8 +1209,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function isSubclassOf(string $className): bool
     {
-        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
-
+        $className = ClassLikeEntity::normalizeClassName($className);
         $parentClassNames = $this->getParentClassNames();
         $interfacesNames = $this->getInterfaceNames();
         $allClasses = array_map(
@@ -1221,7 +1230,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function implementsInterface(string $interfaceName): bool
     {
-        $interfaceName = ltrim(str_replace('\\\\', '\\', $interfaceName), '\\');
+        $interfaceName = ClassLikeEntity::normalizeClassName($interfaceName);
         $interfaces = array_map(
             fn($interface) => ltrim($interface, '\\'),
             $this->getInterfaceNames()
@@ -1238,7 +1247,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function hasParentClass(string $parentClassName): bool
     {
-        $parentClassName = ltrim(str_replace('\\\\', '\\', $parentClassName), '\\');
+        $parentClassName = ClassLikeEntity::normalizeClassName($parentClassName);
         $parentClassNames = array_map(
             fn($interface) => ltrim($interface, '\\'),
             $this->getParentClassNames()
