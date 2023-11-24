@@ -255,7 +255,7 @@ abstract class BaseEntity implements CacheableEntityInterface
      */
     public function hasDescriptionLinks(): bool
     {
-        return count($this->getDescriptionDockBlockLinks()) > 0;
+        return count($this->getDescriptionDocBlockLinks()) > 0;
     }
 
     /**
@@ -263,7 +263,7 @@ abstract class BaseEntity implements CacheableEntityInterface
      *
      * @throws \Exception
      */
-    #[CacheableMethod] protected function getDescriptionDockBlockLinks(): array
+    #[CacheableMethod] protected function getDescriptionDocBlockLinks(): array
     {
         $links = [];
         $docBlock = $this->getDocBlock();
@@ -402,7 +402,7 @@ abstract class BaseEntity implements CacheableEntityInterface
      */
     public function getDescriptionLinks(): array
     {
-        $linksData = $this->getDescriptionDockBlockLinks();
+        $linksData = $this->getDescriptionDocBlockLinks();
         return $this->getPreparedDocBlockLinks($linksData);
     }
 
@@ -424,7 +424,7 @@ abstract class BaseEntity implements CacheableEntityInterface
      *
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getThrowsDockBlockLinks(): array
+    #[CacheableMethod] public function getThrowsDocBlockLinks(): array
     {
         $throws = [];
         $implementingClassEntity = $this->getDocCommentEntity()->getRootEntity();
@@ -468,7 +468,7 @@ abstract class BaseEntity implements CacheableEntityInterface
      */
     public function getThrows(): array
     {
-        $throwsData = $this->getThrowsDockBlockLinks();
+        $throwsData = $this->getThrowsDocBlockLinks();
         return $this->getPreparedDocBlockLinks($throwsData);
     }
 
