@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoad;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
 use phpDocumentor\Reflection\DocBlockFactoryInterface;
@@ -26,7 +26,7 @@ final class PhpDocumentorStubberPlugin implements PluginInterface
     {
         return [
             OnGettingResourceLink::class => 'onGettingResourceLink',
-            OnCheckIsEntityCanBeLoad::class => 'onCheckIsClassEntityCanBeLoad',
+            OnCheckIsEntityCanBeLoaded::class => 'onCheckIsEntityCanBeLoaded',
         ];
     }
 
@@ -70,13 +70,13 @@ final class PhpDocumentorStubberPlugin implements PluginInterface
         }
     }
 
-    final public function onCheckIsClassEntityCanBeLoad(OnCheckIsEntityCanBeLoad $event): void
+    final public function onCheckIsEntityCanBeLoaded(OnCheckIsEntityCanBeLoaded $event): void
     {
         if (
             str_starts_with($event->getEntity()->getName(), 'phpDocumentor\\') ||
             str_starts_with($event->getEntity()->getName(), '\\phpDocumentor\\')
         ) {
-            $event->disableClassLoading();
+            $event->disableEntityLoading();
         }
     }
 }
