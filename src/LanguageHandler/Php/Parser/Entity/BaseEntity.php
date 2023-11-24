@@ -14,6 +14,7 @@ use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Data\DocBlockLink;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
@@ -188,7 +189,7 @@ abstract class BaseEntity implements CacheableEntityInterface
     }
 
     /**
-     * Get the code line number where the dockBlock of the current entity begins
+     * Get the code line number where the docBlock of the current entity begins
      *
      * @api
      *
@@ -254,13 +255,15 @@ abstract class BaseEntity implements CacheableEntityInterface
      */
     public function hasDescriptionLinks(): bool
     {
-        return count($this->getDescriptionLinksData()) > 0;
+        return count($this->getDescriptionDockBlockLinks()) > 0;
     }
 
     /**
+     * @return DocBlockLink[]
+     *
      * @throws \Exception
      */
-    #[CacheableMethod] protected function getDescriptionLinksData(): array
+    #[CacheableMethod] protected function getDescriptionDockBlockLinks(): array
     {
         $links = [];
         $docBlock = $this->getDocBlock();
@@ -280,17 +283,17 @@ abstract class BaseEntity implements CacheableEntityInterface
                 $name = (string)$seeBlock->getReference();
                 $description = (string)$seeBlock->getDescription();
                 if (filter_var($name, FILTER_VALIDATE_URL)) {
-                    $links[] = [
-                        'url' => $name,
-                        'name' => $name,
-                        'description' => $description,
-                    ];
+                    $links[] = new DocBlockLink(
+                        name: $name,
+                        description: $description,
+                        url: $name,
+                    );
                 } elseif ($url = $this->rendererHelper->getPreloadResourceLink($name)) {
-                    $links[] = [
-                        'url' => $url,
-                        'name' => $name,
-                        'description' => $description,
-                    ];
+                    $links[] = new DocBlockLink(
+                        name: $name,
+                        description: $description,
+                        url: $url
+                    );
                 } elseif (str_starts_with($name, '\\')) {
                     if (!str_contains($name, '::')) {
                         // tmp hack to fix methods declared as global functions
@@ -330,12 +333,11 @@ abstract class BaseEntity implements CacheableEntityInterface
                         '$this->'
                     ], "{$docCommentImplementingClass->getShortName()}::", $name);
 
-                    $links[] = [
-                        'className' => $name,
-                        'url' => null,
-                        'name' => $name,
-                        'description' => $description,
-                    ];
+                    $links[] = new DocBlockLink(
+                        name: $name,
+                        description: $description,
+                        className: $name,
+                    );
                 }
             } catch (\Exception $e) {
                 $this->logger->error($e->getMessage());
@@ -346,17 +348,16 @@ abstract class BaseEntity implements CacheableEntityInterface
         if (preg_match_all('/(\@see )(.*?)( |}|])/', $description . ' ', $matches)) {
             foreach ($matches[2] as $name) {
                 if (filter_var($name, FILTER_VALIDATE_URL)) {
-                    $links[] = [
-                        'url' => $name,
-                        'name' => $name,
-                        'description' => '',
-                    ];
+                    $links[] = new DocBlockLink(
+                        name: $name,
+                        url: $name,
+                    );
                 } elseif ($url = $this->rendererHelper->getPreloadResourceLink($name)) {
-                    $links[] = [
-                        'url' => $url,
-                        'name' => $name,
-                        'description' => $description,
-                    ];
+                    $links[] = new DocBlockLink(
+                        name: $name,
+                        description: $description,
+                        url: $url,
+                    );
                 } else {
                     $currentClassEntity = is_a($docCommentImplementingClass, ClassLikeEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
                     $className = $this->parserHelper->parseFullClassName(
@@ -364,12 +365,11 @@ abstract class BaseEntity implements CacheableEntityInterface
                         $currentClassEntity
                     );
 
-                    $links[] = [
-                        'className' => $className,
-                        'url' => null,
-                        'name' => $className,
-                        'description' => $description,
-                    ];
+                    $links[] = new DocBlockLink(
+                        name: $className,
+                        description: $description,
+                        className: $className,
+                    );
                 }
             }
         }
@@ -380,11 +380,11 @@ abstract class BaseEntity implements CacheableEntityInterface
             }
             $description = (string)$linkBlock->getDescription();
             $url = $linkBlock->getLink();
-            $links[] = [
-                'url' => $url,
-                'name' => $url,
-                'description' => $description,
-            ];
+            $links[] = new DocBlockLink(
+                name: $url,
+                description: $description,
+                url: $url,
+            );
         }
 
         return $links;
@@ -393,15 +393,17 @@ abstract class BaseEntity implements CacheableEntityInterface
     /**
      * Get parsed links from description and doc blocks `see` and `link`
      *
-     * @api
+     * @return DocBlockLink[]
      *
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
+     *@api
+     *
      */
     public function getDescriptionLinks(): array
     {
-        $linksData = $this->getDescriptionLinksData();
-        return $this->fillInLinkDataWithUrls($linksData);
+        $linksData = $this->getDescriptionDockBlockLinks();
+        return $this->getPreparedDocBlockLinks($linksData);
     }
 
     /**
@@ -418,9 +420,11 @@ abstract class BaseEntity implements CacheableEntityInterface
     }
 
     /**
+     * @return DocBlockLink[]
+     *
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] protected function getThrowsData(): array
+    #[CacheableMethod] public function getThrowsDockBlockLinks(): array
     {
         $throws = [];
         $implementingClassEntity = $this->getDocCommentEntity()->getRootEntity();
@@ -430,22 +434,22 @@ abstract class BaseEntity implements CacheableEntityInterface
                 $names = explode('|', (string)$throwBlock->getType());
                 foreach ($names as $name) {
                     if ($url = $this->rendererHelper->getPreloadResourceLink($name)) {
-                        $throws[] = [
-                            'url' => $url,
-                            'name' => $name,
-                            'description' => (string)$throwBlock->getDescription(),
-                        ];
+                        $throws[] = new DocBlockLink(
+                            name: $name,
+                            description: (string)$throwBlock->getDescription(),
+                            url: $url,
+                        );
                         continue;
                     }
                     $className = $this->parserHelper->parseFullClassName(
                         $name,
                         $implementingClassEntity
                     );
-                    $throwData = [
-                        'className' => $className,
-                        'name' => $className,
-                        'description' => (string)$throwBlock->getDescription(),
-                    ];
+                    $throwData = new DocBlockLink(
+                        name: $className,
+                        description: (string)$throwBlock->getDescription(),
+                        className: $className,
+                    );
                     $throws[] = $throwData;
                 }
             }
@@ -456,38 +460,48 @@ abstract class BaseEntity implements CacheableEntityInterface
     /**
      * Get parsed throws from `throws` doc block
      *
-     * @api
+     * @return DocBlockLink[]
      *
      * @throws InvalidConfigurationParameterException
+     *@api
+     *
      */
     public function getThrows(): array
     {
-        $throwsData = $this->getThrowsData();
-        return $this->fillInLinkDataWithUrls($throwsData);
+        $throwsData = $this->getThrowsDockBlockLinks();
+        return $this->getPreparedDocBlockLinks($throwsData);
     }
 
     /**
+     * @param DocBlockLink[] $docBlockLinks
+     *
+     * @return DocBlockLink[]
+     *
      * @throws InvalidConfigurationParameterException
      */
-    private function fillInLinkDataWithUrls(array $linkData): array
+    private function getPreparedDocBlockLinks(array $docBlockLinks): array
     {
-        foreach ($linkData as $key => $data) {
-            if (!isset($data['url'])) {
-                $linkData[$key]['url'] = null;
-            } else {
+        $preparedDocBlockLinksLinks = [];
+        foreach ($docBlockLinks as $data) {
+            if ($data->url) {
+                $preparedDocBlockLinksLinks[] = $data;
                 continue;
             }
-            if (($data['className'] ?? null)) {
+
+            $className = $data->className;
+            $name = $data->name;
+            $url = null;
+            if ($data->className) {
                 $entityData = $this->getRootEntityCollection()->getEntityLinkData(
-                    $data['className'],
+                    $data->className,
                     $this->getImplementingClass()->getName(),
                     false
                 );
-                if (!$entityData['entityName'] && !str_contains($data['className'], '\\')) {
+                if (!$entityData['entityName'] && !str_contains($data->className, '\\')) {
                     try {
-                        $data['className'] = $this->getDocCommentEntity()->getCurrentRootEntity()->getNamespaceName() . "\\{$data['className']}";
+                        $className = $this->getDocCommentEntity()->getCurrentRootEntity()->getNamespaceName() . "\\{$data->className}";
                         $entityData = $this->getRootEntityCollection()->getEntityLinkData(
-                            $data['className'],
+                            $className,
                             $this->getDocCommentEntity()->getCurrentRootEntity()->getName(),
                             false
                         );
@@ -497,7 +511,7 @@ abstract class BaseEntity implements CacheableEntityInterface
                 }
 
                 if ($entityData['entityName']) {
-                    $linkData[$key]['url'] = call_user_func_array(
+                    $url = call_user_func_array(
                         callback: $this->documentedEntityUrlFunction,
                         args: [
                             $this->getRootEntityCollection(),
@@ -506,19 +520,23 @@ abstract class BaseEntity implements CacheableEntityInterface
                         ]
                     );
                 } else {
-                    $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($data['className']);
+                    $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($data->className);
                     if ($preloadResourceLink) {
-                        $linkData[$key]['url'] = $preloadResourceLink;
+                        $url = $preloadResourceLink;
                     } else {
-                        $linkData[$key]['url'] = null;
-                        $this->logger->warning("Unable to get URL data for entity `{$data['className']}`");
+                        $this->logger->warning("Unable to get URL data for entity `{$data->className}`");
                     }
                 }
-                $linkData[$key]['name'] = $entityData['title'];
-                unset($data['className']);
+                $name = $entityData['title'];
             }
+            $preparedDocBlockLinksLinks[] = new DocBlockLink(
+                name: $name,
+                description: $data->description,
+                className: $className,
+                url: $url
+            );
         }
-        return $linkData;
+        return $preparedDocBlockLinksLinks;
     }
 
     /**

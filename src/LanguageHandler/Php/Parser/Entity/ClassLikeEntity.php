@@ -491,7 +491,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     public function getParentClassEntities(): array
     {
         return array_map(
-            fn(string $className) => $this->getRootEntityCollection()->getLoadedOrCreateNew($className),
+            fn(string $className): ClassLikeEntity => $this->getRootEntityCollection()->getLoadedOrCreateNew($className),
             $this->getParentClassNames()
         );
     }
@@ -627,11 +627,10 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function getTraits(): array
     {
-        $traits = [];
-        foreach ($this->getTraitsNames() as $traitsName) {
-            $traits[] = $this->entitiesCollection->getLoadedOrCreateNew($traitsName);
-        }
-        return $traits;
+        return array_map(
+            fn(string $className): TraitEntity => $this->getRootEntityCollection()->getLoadedOrCreateNew($className),
+            $this->getTraitsNames()
+        );
     }
 
     /**
