@@ -35,102 +35,10 @@ final class CacheablePhpEntityFactory
     }
 
     /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
-    public function createPropertyEntity(
-        ClassLikeEntity $classEntity,
-        string $propertyName,
-        string $implementingClassName
-    ): PropertyEntity {
-        $objectId = "{$classEntity->getName()}:{$propertyName}";
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException) {
-        }
-        $wrapperClassName = $this->getOrCreateEntityClassWrapper(PropertyEntity::class);
-        $propertyEntity = $this->diContainer->make($wrapperClassName, [
-            'classEntity' => $classEntity,
-            'propertyName' => $propertyName,
-            'implementingClassName' => $implementingClassName
-        ]);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $propertyEntity);
-        return $propertyEntity;
-    }
-
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
-    public function createClassConstantEntity(
-        ClassLikeEntity $classEntity,
-        string $constantName,
-        string $implementingClassName,
-        bool $reloadCache = false
-    ): ClassConstantEntity {
-        $objectId = "{$classEntity->getName()}:{$constantName}";
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException) {
-        }
-        $wrapperClassName = $this->getOrCreateEntityClassWrapper(ClassConstantEntity::class);
-        $constantEntity = $this->diContainer->make($wrapperClassName, [
-            'classEntity' => $classEntity,
-            'constantName' => $constantName,
-            'implementingClassName' => $implementingClassName,
-            'reloadCache' => $reloadCache
-        ]);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $constantEntity);
-        return $constantEntity;
-    }
-
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
-    public function createMethodEntity(
-        ClassLikeEntity $classEntity,
-        string $methodName,
-        string $implementingClassName
-    ): MethodEntity {
-        $objectId = "{$classEntity->getName()}:{$methodName}";
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException) {
-        }
-        $wrapperClassName = $this->getOrCreateEntityClassWrapper(MethodEntity::class);
-        $methodEntity = $this->diContainer->make($wrapperClassName, [
-            'classEntity' => $classEntity,
-            'methodName' => $methodName,
-            'implementingClassName' => $implementingClassName
-        ]);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntity);
-        return $methodEntity;
-    }
-
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
-    public function createDynamicMethodEntity(
-        ClassLikeEntity $classEntity,
-        Method $annotationMethod
-    ): DynamicMethodEntity {
-        $objectId = "{$classEntity->getName()}:{$annotationMethod->getMethodName()}";
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException) {
-        }
-        $wrapperClassName = $this->getOrCreateEntityClassWrapper(DynamicMethodEntity::class);
-        $methodEntity = $this->diContainer->make($wrapperClassName, [
-            'classEntity' => $classEntity,
-            'annotationMethod' => $annotationMethod,
-        ]);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntity);
-        return $methodEntity;
-    }
-
-    /**
+     * Create a child entity ClassLikeEntity in which the CacheableMethod attributes will be processed to cache the results of the methods
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -191,6 +99,110 @@ final class CacheablePhpEntityFactory
         ]);
         $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $classEntity);
         return $classEntity;
+    }
+
+    /**
+     * @internal
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function createPropertyEntity(
+        ClassLikeEntity $classEntity,
+        string $propertyName,
+        string $implementingClassName
+    ): PropertyEntity {
+        $objectId = "{$classEntity->getName()}:{$propertyName}";
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
+        } catch (ObjectNotFoundException) {
+        }
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(PropertyEntity::class);
+        $propertyEntity = $this->diContainer->make($wrapperClassName, [
+            'classEntity' => $classEntity,
+            'propertyName' => $propertyName,
+            'implementingClassName' => $implementingClassName
+        ]);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $propertyEntity);
+        return $propertyEntity;
+    }
+
+    /**
+     * @internal
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function createClassConstantEntity(
+        ClassLikeEntity $classEntity,
+        string $constantName,
+        string $implementingClassName,
+        bool $reloadCache = false
+    ): ClassConstantEntity {
+        $objectId = "{$classEntity->getName()}:{$constantName}";
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
+        } catch (ObjectNotFoundException) {
+        }
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(ClassConstantEntity::class);
+        $constantEntity = $this->diContainer->make($wrapperClassName, [
+            'classEntity' => $classEntity,
+            'constantName' => $constantName,
+            'implementingClassName' => $implementingClassName,
+            'reloadCache' => $reloadCache
+        ]);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $constantEntity);
+        return $constantEntity;
+    }
+
+    /**
+     * @internal
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function createMethodEntity(
+        ClassLikeEntity $classEntity,
+        string $methodName,
+        string $implementingClassName
+    ): MethodEntity {
+        $objectId = "{$classEntity->getName()}:{$methodName}";
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
+        } catch (ObjectNotFoundException) {
+        }
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(MethodEntity::class);
+        $methodEntity = $this->diContainer->make($wrapperClassName, [
+            'classEntity' => $classEntity,
+            'methodName' => $methodName,
+            'implementingClassName' => $implementingClassName
+        ]);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntity);
+        return $methodEntity;
+    }
+
+    /**
+     * @internal
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
+    public function createDynamicMethodEntity(
+        ClassLikeEntity $classEntity,
+        Method $annotationMethod
+    ): DynamicMethodEntity {
+        $objectId = "{$classEntity->getName()}:{$annotationMethod->getMethodName()}";
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
+        } catch (ObjectNotFoundException) {
+        }
+        $wrapperClassName = $this->getOrCreateEntityClassWrapper(DynamicMethodEntity::class);
+        $methodEntity = $this->diContainer->make($wrapperClassName, [
+            'classEntity' => $classEntity,
+            'annotationMethod' => $annotationMethod,
+        ]);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $methodEntity);
+        return $methodEntity;
     }
 
     private function getOrCreateEntityClassWrapper(string $entityClassName): string
