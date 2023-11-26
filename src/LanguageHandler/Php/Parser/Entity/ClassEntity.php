@@ -46,6 +46,25 @@ class ClassEntity extends ClassLikeEntity
     }
 
     /**
+     * Check if a class is an attribute
+     *
+     * @api
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function isAttribute(): bool
+    {
+        foreach ($this->getAst()->attrGroups as $attrGroup) {
+            foreach ($attrGroup->attrs as $attr) {
+                if ($attr->name->toString() === 'Attribute') {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * @inheritDoc
      *
      * @throws InvalidConfigurationParameterException
