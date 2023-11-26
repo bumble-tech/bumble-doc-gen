@@ -21,6 +21,7 @@ use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\EntityDocRendere
 use DI\DependencyException;
 use DI\NotFoundException;
 use PhpParser\Node\Stmt\Class_ as ClassNode;
+use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\Enum_ as EnumNode;
 use PhpParser\Node\Stmt\Interface_ as InterfaceNode;
 use PhpParser\Node\Stmt\Namespace_;
@@ -84,12 +85,13 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
                 ->getCommonFinder()
                 ->files()
         );
-        $addedFilesCount = 0;
 
         $nodeTraverser = new NodeTraverser();
         $nodeTraverser->addVisitor(new NameResolver());
         $phpParser = $this->phpParserHelper->phpParser();
 
+        $addedEntitiesCount = 0;
+        $allEntitiesCount = 0;
         foreach ($pb->iterate($allFiles) as $file) {
             if (!preg_match(self::PHP_FILE_TEMPLATE, $file->getPathName())) {
                 continue;
@@ -105,28 +107,43 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
             $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $pathName);
             $pb->setStepDescription("Processing `{$relativeFileName}` file");
             foreach ($nodes as $node) {
-                if (!$node instanceof Namespace_) {
-                    continue;
+                $classStmts = [];
+                $namespaceName = '';
+                if ($node instanceof ClassLike) {
+                    $classStmts = [$node];
+                } elseif ($node instanceof Namespace_) {
+                    $namespaceName = $node->name->toString();
+                    $classStmts = $node->stmts;
                 }
-                $namespaceName = $node->name->toString();
-                foreach ($node->stmts as $subNode) {
-                    if (!in_array(get_class($subNode), [ClassNode::class, InterfaceNode::class, TraitNode::class, EnumNode::class])) {
+
+                foreach ($classStmts as $subNode) {
+                    $entityClassName = match (get_class($subNode)) {
+                        ClassNode::class => ClassEntity::class,
+                        InterfaceNode::class => InterfaceEntity::class,
+                        TraitNode::class => TraitEntity::class,
+                        EnumNode::class => EnumEntity::class,
+                        default => null
+                    };
+
+                    if (is_null($entityClassName)) {
                         continue;
                     }
                     $className = $subNode->name->toString();
                     $classEntity = $this->cacheablePhpEntityFactory->createClassLikeEntity(
-                        $this,
-                        "{$namespaceName}\\{$className}",
-                        $relativeFileName
+                        entitiesCollection: $this,
+                        className: $namespaceName ? "{$namespaceName}\\{$className}" : $className,
+                        relativeFileName: $relativeFileName,
+                        entityClassName: $entityClassName
                     );
 
                     if ($classEntity->isEntityCacheOutdated()) {
                         $classEntity->setCustomAst($subNode);
                     }
 
+                    ++$allEntitiesCount;
                     if ($classEntityFilter->canAddToCollection($classEntity)) {
                         $this->add($classEntity);
-                        ++$addedFilesCount;
+                        ++$addedEntitiesCount;
                     }
                 }
             }
@@ -134,13 +151,14 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         $this->pluginEventDispatcher->dispatch(new AfterLoadingPhpEntitiesCollection($this));
 
         $allFilesCount = count($allFiles);
-        $skipped = $allFilesCount - $addedFilesCount;
+        $skipped = $allEntitiesCount - $addedEntitiesCount;
         $totalAddedEntities = count($this->entities);
-        $addedByPlugins = $totalAddedEntities - $addedFilesCount;
+        $addedByPlugins = $totalAddedEntities - $allEntitiesCount;
 
         $this->io->table([], [
-            ['Processed files:', "<options=bold,underscore>{$addedFilesCount}</>"],
-            ['Skipped files:', "<options=bold,underscore>{$skipped}</>"],
+            ['Processed files:', "<options=bold,underscore>{$allFilesCount}</>"],
+            ['Processed entities:', "<options=bold,underscore>{$allEntitiesCount}</>"],
+            ['Skipped entities:', "<options=bold,underscore>{$skipped}</>"],
             ['Entities added by plugins:', "<options=bold,underscore>{$addedByPlugins}</>"],
             ['Total added entities:', "<options=bold,underscore>{$totalAddedEntities}</>"],
         ]);

@@ -138,7 +138,8 @@ final class CacheablePhpEntityFactory
     public function createClassLikeEntity(
         PhpEntitiesCollection $entitiesCollection,
         string $className,
-        ?string $relativeFileName = null
+        ?string $relativeFileName = null,
+        ?string $entityClassName = null
     ): ClassLikeEntity {
         $className = ClassLikeEntity::normalizeClassName($className);
         $objectId = md5($className);
@@ -147,21 +148,38 @@ final class CacheablePhpEntityFactory
         } catch (ObjectNotFoundException) {
         }
 
-        $fileName = $this->composerHelper->getComposerClassLoader()->findFile($className);
-        $entityClassName = ClassEntity::class;
-        if ($fileName) {
-            $shortClassNameLS = mb_strtolower(array_reverse(explode('\\', $className))[0]);
-            preg_match(
-                '/^(\s+)?(interface|trait|((final|abstract)\s+)?class|enum)(\s+)(' . $shortClassNameLS . ')/m',
-                mb_strtolower(file_get_contents($fileName)),
-                $matches
+        if (!$entityClassName) {
+            $fileName = $this->composerHelper->getComposerClassLoader()->findFile($className);
+            $entityClassName = ClassEntity::class;
+            if ($fileName) {
+                $shortClassNameLS = mb_strtolower(array_reverse(explode('\\', $className))[0]);
+                preg_match(
+                    '/^(\s+)?(interface|trait|((final|abstract)\s+)?class|enum)(\s+)(' . $shortClassNameLS . ')/m',
+                    mb_strtolower(file_get_contents($fileName)),
+                    $matches
+                );
+                $entityClassName = match ($matches[2] ?? '') {
+                    'interface' => InterfaceEntity::class,
+                    'trait' => TraitEntity::class,
+                    'enum' => EnumEntity::class,
+                    default => ClassEntity::class
+                };
+            }
+        } else {
+            $entityClassName = ClassLikeEntity::normalizeClassName($entityClassName);
+        }
+
+        if (
+            !in_array($entityClassName, [
+                InterfaceEntity::class,
+                TraitEntity::class,
+                EnumEntity::class,
+                ClassEntity::class
+            ]) && !is_a($entityClassName, ClassLikeEntity::class, true)
+        ) {
+            throw new \RuntimeException(
+                'The $entityClassName parameter must contain the name of the class that is a subclass of ' . ClassLikeEntity::class
             );
-            $entityClassName = match ($matches[2] ?? '') {
-                'interface' => InterfaceEntity::class,
-                'trait' => TraitEntity::class,
-                'enum' => EnumEntity::class,
-                default => ClassEntity::class
-            };
         }
 
         $wrapperClassName = $this->getOrCreateEntityClassWrapper($entityClassName);
