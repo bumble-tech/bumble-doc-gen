@@ -584,11 +584,10 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function getInterfacesEntities(): array
     {
-        $interfacesEntities = [];
-        foreach ($this->getInterfaceNames() as $interfaceClassName) {
-            $interfacesEntities[] = $this->getRootEntityCollection()->getLoadedOrCreateNew($interfaceClassName);
-        }
-        return $interfacesEntities;
+        return array_map(
+            fn(string $className): ClassLikeEntity => $this->getRootEntityCollection()->getLoadedOrCreateNew($className),
+            $this->getInterfaceNames()
+        );
     }
 
     /**
@@ -628,7 +627,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     public function getTraits(): array
     {
         return array_map(
-            fn(string $className): TraitEntity => $this->getRootEntityCollection()->getLoadedOrCreateNew($className),
+            fn(string $className): ClassLikeEntity => $this->getRootEntityCollection()->getLoadedOrCreateNew($className),
             $this->getTraitsNames()
         );
     }
