@@ -193,37 +193,6 @@ final class CacheablePhpEntityFactory
         return $classEntity;
     }
 
-    /**
-     * @throws DependencyException
-     * @throws NotFoundException
-     */
-    public function createSubClassEntity(
-        string $subClassEntity,
-        PhpEntitiesCollection $entitiesCollection,
-        string $className,
-        ?string $relativeFileName
-    ): ClassLikeEntity {
-        if (!is_a($subClassEntity, ClassLikeEntity::class, true)) {
-            throw new \RuntimeException(
-                'The class must inherit from `' . ClassEntity::class . '`'
-            );
-        }
-        $className = ClassLikeEntity::normalizeClassName($className);
-        $objectId = md5($className);
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $objectId);
-        } catch (ObjectNotFoundException) {
-        }
-        $wrapperClassName = $this->getOrCreateEntityClassWrapper($subClassEntity);
-        $classEntity = $this->diContainer->make($wrapperClassName, [
-            'entitiesCollection' => $entitiesCollection,
-            'className' => $className,
-            'relativeFileName' => $relativeFileName
-        ]);
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $objectId, $classEntity);
-        return $classEntity;
-    }
-
     private function getOrCreateEntityClassWrapper(string $entityClassName): string
     {
         try {
