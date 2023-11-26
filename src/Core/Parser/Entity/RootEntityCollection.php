@@ -10,6 +10,9 @@ use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
+/**
+ * @template T
+ */
 abstract class RootEntityCollection extends BaseEntityCollection
 {
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
@@ -18,6 +21,10 @@ abstract class RootEntityCollection extends BaseEntityCollection
     /** @var RootEntityInterface[] */
     protected array $entities = [];
 
+    /**
+     * @param class-string<T> $objectName
+     * @return null|T
+     */
     public function get(string $objectName): ?RootEntityInterface
     {
         return $this->entities[$objectName] ?? null;
@@ -27,10 +34,18 @@ abstract class RootEntityCollection extends BaseEntityCollection
 
     /**
      * @warning The entity obtained as a result of executing this method may not be available for loading
+     *
      * @see RootEntityInterface::isEntityDataCanBeLoaded()
+     *
+     * @param class-string<T> $objectName
+     *
+     * @return T
      */
     abstract public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): RootEntityInterface;
 
+    /**
+     * @return null|T
+     */
     abstract public function findEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface;
 
     /**
@@ -38,7 +53,9 @@ abstract class RootEntityCollection extends BaseEntityCollection
      * @param string|null $defaultEntityName Entity name to use if the link does not contain a valid or existing entity name,
      *  but only a cursor on an entity element
      * @param bool $useUnsafeKeys
+     *
      * @return array
+     *
      * @todo return object instead array
      */
     abstract public function getEntityLinkData(string $rawLink, ?string $defaultEntityName = null, bool $useUnsafeKeys = true): array;

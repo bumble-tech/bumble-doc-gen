@@ -10,6 +10,7 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\LoggableRootEntityCollection;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
@@ -34,6 +35,8 @@ use Symfony\Component\Console\Style\OutputStyle;
 
 /**
  * Collection of php root entities
+ *
+ * @implements RootEntityCollection<ClassLikeEntity>
  */
 final class PhpEntitiesCollection extends LoggableRootEntityCollection
 {
