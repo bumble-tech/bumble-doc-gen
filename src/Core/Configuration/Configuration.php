@@ -201,17 +201,19 @@ final class Configuration
         }
 
         $cacheDir = $this->parameterBag->validateAndGetStringValue('cache_dir');
-        $parentDir = dirname($cacheDir);
-        if (!is_dir($parentDir)) {
-            throw new InvalidConfigurationParameterException(
-                "`cache_dir` cannot be created because parent directory `{$parentDir}` does not exist"
-            );
+        if ($cacheDir) {
+            $parentDir = dirname($cacheDir);
+            if (!is_dir($parentDir)) {
+                throw new InvalidConfigurationParameterException(
+                    "`cache_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+                );
+            }
+            if (!file_exists($cacheDir)) {
+                $this->logger->notice("Creating `{$cacheDir}` directory");
+                mkdir($cacheDir);
+            }
+            $cacheDir = realpath($cacheDir);
         }
-        if (!file_exists($cacheDir)) {
-            $this->logger->notice("Creating `{$cacheDir}` directory");
-            mkdir($cacheDir);
-        }
-        $cacheDir = realpath($cacheDir);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheDir);
         return $cacheDir;
     }
