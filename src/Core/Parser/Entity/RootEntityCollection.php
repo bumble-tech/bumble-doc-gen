@@ -21,6 +21,10 @@ abstract class RootEntityCollection extends BaseEntityCollection
     /** @var RootEntityInterface[] */
     protected array $entities = [];
 
+    abstract public function loadEntitiesByConfiguration(): void;
+
+    abstract public function getEntityCollectionName(): string;
+
     /**
      * @param class-string<T> $objectName
      * @return null|T
@@ -29,8 +33,6 @@ abstract class RootEntityCollection extends BaseEntityCollection
     {
         return $this->entities[$objectName] ?? null;
     }
-
-    abstract public function getEntityCollectionName(): string;
 
     /**
      * @warning The entity obtained as a result of executing this method may not be available for loading

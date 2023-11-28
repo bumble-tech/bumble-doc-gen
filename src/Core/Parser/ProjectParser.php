@@ -6,6 +6,7 @@ namespace BumbleDocGen\Core\Parser;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Parser\BeforeParsingProcess;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
@@ -25,6 +26,8 @@ final class ProjectParser
     }
 
     /**
+     * @api
+     *
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
@@ -33,8 +36,25 @@ final class ProjectParser
     {
         $this->pluginEventDispatcher->dispatch(new BeforeParsingProcess());
         foreach ($this->configuration->getLanguageHandlersCollection() as $languageHandler) {
-            $this->rootEntityCollectionsGroup->add($languageHandler->getEntityCollection());
+            $collection = $languageHandler->getEntityCollection();
+            $collection->loadEntitiesByConfiguration();
+            $this->rootEntityCollectionsGroup->add($collection);
         }
         return $this->rootEntityCollectionsGroup;
+    }
+
+    /**
+     * @api
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getEntityCollectionForPL(string $plHandlerClassName): ?RootEntityCollection
+    {
+        return $this->configuration
+            ->getLanguageHandlersCollection()
+            ->get($plHandlerClassName)
+            ?->getEntityCollection();
     }
 }

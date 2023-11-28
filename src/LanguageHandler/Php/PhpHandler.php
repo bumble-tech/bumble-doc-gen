@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BumbleDocGen\LanguageHandler\Php;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
@@ -16,8 +15,10 @@ use DI\NotFoundException;
 
 final class PhpHandler implements LanguageHandlerInterface
 {
-    public function __construct(private PhpEntitiesCollection $entitiesCollection, private PhpHandlerSettings $phpHandlerSettings)
-    {
+    public function __construct(
+        private PhpEntitiesCollection $entitiesCollection,
+        private PhpHandlerSettings $phpHandlerSettings
+    ) {
     }
 
     public static function getLanguageKey(): string
@@ -25,17 +26,13 @@ final class PhpHandler implements LanguageHandlerInterface
         return 'php';
     }
 
-    /**
-     * @throws NotFoundException
-     * @throws DependencyException
-     * @throws InvalidConfigurationParameterException
-     * @throws \Psr\Cache\InvalidArgumentException
-     */
-    public function getEntityCollection(): RootEntityCollection
+    public function getPhpHandlerSettings(): PhpHandlerSettings
     {
-        if ($this->entitiesCollection->isEmpty()) {
-            $this->entitiesCollection->loadClassEntities();
-        }
+        return $this->phpHandlerSettings;
+    }
+
+    public function getEntityCollection(): PhpEntitiesCollection
+    {
         return $this->entitiesCollection;
     }
 
