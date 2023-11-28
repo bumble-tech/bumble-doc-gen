@@ -85,4 +85,9 @@ abstract class RootEntityCollection extends BaseEntityCollection
             $this->entityCacheStorageHelper->saveCache();
         }
     }
+
+    public function toArray(): array
+    {
+        return $this->entities;
+    }
 }
