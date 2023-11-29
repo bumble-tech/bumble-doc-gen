@@ -12,6 +12,8 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\LoggableRootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
+use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
+use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\PhpParserHelper;
@@ -71,23 +73,39 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * Load entities into a collection by configuration
+     *
+     * @internal
+     *
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function loadEntitiesByConfiguration(): void
+    {
+        $this->loadEntities(
+            $this->configuration->getSourceLocators(),
+            $this->phpHandlerSettings->getClassEntityFilter()
+        );
+    }
+
+    /**
+     * Load entities into a collection
+     *
+     * @api
+     *
      * @throws InvalidArgumentException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    public function loadClassEntities(): void
-    {
+    public function loadEntities(
+        SourceLocatorsCollection $sourceLocatorsCollection,
+        ?ConditionInterface $filters = null
+    ): void {
         $pb = $this->progressBarFactory->createStylizedProgressBar();
         $pb->setName('Loading PHP entities');
-        $classEntityFilter = $this->phpHandlerSettings->getClassEntityFilter();
-
-        $allFiles = iterator_to_array(
-            $this->configuration
-                ->getSourceLocators()
-                ->getCommonFinder()
-                ->files()
-        );
 
         $nodeTraverser = new NodeTraverser();
         $nodeTraverser->addVisitor(new NameResolver());
@@ -95,7 +113,9 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
 
         $addedEntitiesCount = 0;
         $allEntitiesCount = 0;
-        foreach ($pb->iterate($allFiles) as $file) {
+
+        $allFiles = iterator_to_array($sourceLocatorsCollection->getCommonFinder()->files());
+        foreach ($allFiles ? $pb->iterate($allFiles) : [] as $file) {
             if (!preg_match(self::PHP_FILE_TEMPLATE, $file->getPathName())) {
                 continue;
             }
@@ -139,12 +159,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
                         entityClassName: $entityClassName
                     );
 
-                    if ($classEntity->isEntityCacheOutdated()) {
-                        $classEntity->setCustomAst($subNode);
-                    }
-
                     ++$allEntitiesCount;
-                    if ($classEntityFilter->canAddToCollection($classEntity)) {
+                    if (!$filters || $filters->canAddToCollection($classEntity)) {
                         $this->add($classEntity);
                         ++$addedEntitiesCount;
                     }
@@ -457,6 +473,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
 
     /**
      * @inheritDoc
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getEntityLinkData(
