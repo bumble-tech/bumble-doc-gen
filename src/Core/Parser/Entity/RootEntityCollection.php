@@ -23,11 +23,12 @@ abstract class RootEntityCollection extends BaseEntityCollection
     /** @var RootEntityInterface[] */
     protected array $entities = [];
 
-    abstract public function loadEntitiesByConfiguration(): CollectionLoadEntitiesResult;
+    abstract public function loadEntitiesByConfiguration(?EntitiesLoaderProgressBarInterface $progressBar = null): CollectionLoadEntitiesResult;
 
     abstract public function loadEntities(
         SourceLocatorsCollection $sourceLocatorsCollection,
-        ?ConditionInterface $filters = null
+        ?ConditionInterface $filters = null,
+        ?EntitiesLoaderProgressBarInterface $progressBar = null
     ): CollectionLoadEntitiesResult;
 
     abstract public function getEntityCollectionName(): string;

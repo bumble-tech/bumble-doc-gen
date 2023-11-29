@@ -19,12 +19,14 @@ final class RootEntityCollectionsGroup implements \IteratorAggregate
         yield from $this->rootEntityCollections;
     }
 
-    public function loadByLanguageHandlers(LanguageHandlersCollection $languageHandlersCollection): CollectionGroupLoadEntitiesResult
-    {
+    public function loadByLanguageHandlers(
+        LanguageHandlersCollection $languageHandlersCollection,
+        ?EntitiesLoaderProgressBarInterface $progressBar = null
+    ): CollectionGroupLoadEntitiesResult {
         $collectionGroupLoadEntitiesResult = new CollectionGroupLoadEntitiesResult();
         foreach ($languageHandlersCollection as $languageHandler) {
             $collection = $languageHandler->getEntityCollection();
-            $loadResult = $collection->loadEntitiesByConfiguration();
+            $loadResult = $collection->loadEntitiesByConfiguration($progressBar);
             $collectionGroupLoadEntitiesResult->addResult($languageHandler::class, $loadResult);
             $this->add($collection);
         }

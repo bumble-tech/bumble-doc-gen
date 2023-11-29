@@ -7,6 +7,7 @@ namespace BumbleDocGen;
 use BumbleDocGen\AI\Generators\DocBlocksGenerator;
 use BumbleDocGen\AI\Generators\ReadmeTemplateGenerator;
 use BumbleDocGen\AI\ProviderInterface;
+use BumbleDocGen\Console\ProgressBar\ProgressBarFactory;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
@@ -52,6 +53,7 @@ final class DocGenerator
         private Renderer $renderer,
         private GenerationErrorsHandler $generationErrorsHandler,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private ProgressBarFactory $progressBarFactory,
         private Logger $logger
     ) {
         if (file_exists(self::LOG_FILE_NAME)) {
@@ -253,7 +255,9 @@ final class DocGenerator
         $memory = memory_get_usage(true);
 
         try {
-            $result = $this->parser->parse();
+            $pb = $this->progressBarFactory->createStylizedProgressBar();
+            $result = $this->parser->parse($pb);
+
             $resSummary = $result->getSummary();
             $this->io->table([], [
                 ['Processed files:', "<options=bold,underscore>{$resSummary->getProcessedFilesCount()}</>"],

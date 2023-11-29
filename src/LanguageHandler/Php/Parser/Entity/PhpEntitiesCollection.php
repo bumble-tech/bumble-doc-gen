@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity;
 
-use BumbleDocGen\Console\ProgressBar\ProgressBarFactory;
 use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\CollectionLoadEntitiesResult;
+use BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface;
 use BumbleDocGen\Core\Parser\Entity\LoggableRootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
@@ -55,7 +55,6 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         private EntityDocRendererHelper $docRendererHelper,
         private PhpParserHelper $phpParserHelper,
         private LocalObjectCache $localObjectCache,
-        private ProgressBarFactory $progressBarFactory,
         private LoggerInterface $logger,
     ) {
         parent::__construct();
@@ -81,11 +80,12 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function loadEntitiesByConfiguration(): CollectionLoadEntitiesResult
+    public function loadEntitiesByConfiguration(?EntitiesLoaderProgressBarInterface $progressBar = null): CollectionLoadEntitiesResult
     {
         return $this->loadEntities(
             $this->configuration->getSourceLocators(),
-            $this->phpHandlerSettings->getClassEntityFilter()
+            $this->phpHandlerSettings->getClassEntityFilter(),
+            $progressBar
         );
     }
 
@@ -101,10 +101,10 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
      */
     public function loadEntities(
         SourceLocatorsCollection $sourceLocatorsCollection,
-        ?ConditionInterface $filters = null
+        ?ConditionInterface $filters = null,
+        ?EntitiesLoaderProgressBarInterface $progressBar = null
     ): CollectionLoadEntitiesResult {
-        $pb = $this->progressBarFactory->createStylizedProgressBar();
-        $pb->setName('Loading PHP entities');
+        $progressBar?->setName('Loading PHP entities');
 
         $nodeTraverser = new NodeTraverser();
         $nodeTraverser->addVisitor(new NameResolver());
@@ -114,7 +114,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         $allEntitiesCount = 0;
 
         $allFiles = iterator_to_array($sourceLocatorsCollection->getCommonFinder()->files());
-        foreach ($allFiles ? $pb->iterate($allFiles) : [] as $file) {
+        foreach ($progressBar ? $progressBar->iterate($allFiles) : $allFiles as $file) {
             if (!preg_match(self::PHP_FILE_TEMPLATE, $file->getPathName())) {
                 continue;
             }
@@ -127,7 +127,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
             }
             $nodes = $nodeTraverser->traverse($nodes);
             $relativeFileName = str_replace($this->configuration->getProjectRoot(), '', $pathName);
-            $pb->setStepDescription("Processing `{$relativeFileName}` file");
+            $progressBar?->setStepDescription("Processing `{$relativeFileName}` file");
             foreach ($nodes as $node) {
                 $classStmts = [];
                 $namespaceName = '';

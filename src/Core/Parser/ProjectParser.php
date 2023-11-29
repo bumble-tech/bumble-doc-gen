@@ -7,6 +7,7 @@ namespace BumbleDocGen\Core\Parser;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\CollectionGroupLoadEntitiesResult;
+use BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Parser\BeforeParsingProcess;
@@ -33,11 +34,12 @@ final class ProjectParser
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
      */
-    public function parse(): CollectionGroupLoadEntitiesResult
+    public function parse(?EntitiesLoaderProgressBarInterface $progressBar = null): CollectionGroupLoadEntitiesResult
     {
         $this->pluginEventDispatcher->dispatch(new BeforeParsingProcess());
         return $this->rootEntityCollectionsGroup->loadByLanguageHandlers(
-            $this->configuration->getLanguageHandlersCollection()
+            $this->configuration->getLanguageHandlersCollection(),
+            $progressBar
         );
     }
 
