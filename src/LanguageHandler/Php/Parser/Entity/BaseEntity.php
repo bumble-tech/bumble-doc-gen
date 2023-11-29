@@ -12,6 +12,7 @@ use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait;
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableMethod;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\RendererHelper;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Data\DocBlockLink;
@@ -30,6 +31,7 @@ abstract class BaseEntity implements CacheableEntityInterface
 {
     use CacheableEntityTrait;
 
+    #[Inject] private PluginEventDispatcher $pluginEventDispatcher;
     #[Inject] private GetDocumentedEntityUrl $documentedEntityUrlFunction;
     #[Inject] private RendererHelper $rendererHelper;
     #[Inject] private GenerationErrorsHandler $generationErrorsHandler;
@@ -731,7 +733,7 @@ abstract class BaseEntity implements CacheableEntityInterface
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $classEntity->getObjectId());
         } catch (ObjectNotFoundException) {
         }
-        $entityCanBeLoad = $this->getRootEntityCollection()->getPluginEventDispatcher()->dispatch(
+        $entityCanBeLoad = $this->pluginEventDispatcher->dispatch(
             new OnCheckIsEntityCanBeLoaded($this->getCurrentRootEntity())
         )->isEntityCanBeLoaded();
         $this->localObjectCache->cacheMethodResult(__METHOD__, $classEntity->getObjectId(), $entityCanBeLoad);
