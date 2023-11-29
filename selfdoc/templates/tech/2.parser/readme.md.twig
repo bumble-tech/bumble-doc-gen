@@ -19,7 +19,8 @@ In this section, we show how the parser works and what components it consists of
 {{ "$parser = new ProjectParser($configuration, $rootEntityCollectionsGroup);
 
 // Parsing the project and filling RootEntityCollectionsGroup with data
-$rootEntityCollectionsGroup = $this->parser->parse();" | textToCodeBlock('php') }}
+$this->parser->parse();
+$rootEntityCollectionsGroup = $this->parser->getRootEntityCollectionsGroup();" | textToCodeBlock('php') }}
 
 {{ "How it works" | textToHeading('H2') }}
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity;
 
+use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use Psr\Cache\InvalidArgumentException;
 
 final class RootEntityCollectionsGroup implements \IteratorAggregate
@@ -16,6 +17,18 @@ final class RootEntityCollectionsGroup implements \IteratorAggregate
     public function getIterator(): \Generator
     {
         yield from $this->rootEntityCollections;
+    }
+
+    public function loadByLanguageHandlers(LanguageHandlersCollection $languageHandlersCollection): CollectionGroupLoadEntitiesResult
+    {
+        $collectionGroupLoadEntitiesResult = new CollectionGroupLoadEntitiesResult();
+        foreach ($languageHandlersCollection as $languageHandler) {
+            $collection = $languageHandler->getEntityCollection();
+            $loadResult = $collection->loadEntitiesByConfiguration();
+            $collectionGroupLoadEntitiesResult->addResult($languageHandler::class, $loadResult);
+            $this->add($collection);
+        }
+        return $collectionGroupLoadEntitiesResult;
     }
 
     public function add(RootEntityCollection $rootEntityCollection): void

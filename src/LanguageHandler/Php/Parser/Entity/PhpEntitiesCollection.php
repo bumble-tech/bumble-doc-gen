@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\Core\Parser\Entity\CollectionLoadEntitiesResult;
 use BumbleDocGen\Core\Parser\Entity\LoggableRootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
@@ -33,7 +34,6 @@ use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\NameResolver;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Console\Style\OutputStyle;
 
 /**
  * Collection of php root entities
@@ -56,7 +56,6 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         private PhpParserHelper $phpParserHelper,
         private LocalObjectCache $localObjectCache,
         private ProgressBarFactory $progressBarFactory,
-        private OutputStyle $io,
         private LoggerInterface $logger,
     ) {
         parent::__construct();
@@ -82,9 +81,9 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function loadEntitiesByConfiguration(): void
+    public function loadEntitiesByConfiguration(): CollectionLoadEntitiesResult
     {
-        $this->loadEntities(
+        return $this->loadEntities(
             $this->configuration->getSourceLocators(),
             $this->phpHandlerSettings->getClassEntityFilter()
         );
@@ -103,7 +102,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     public function loadEntities(
         SourceLocatorsCollection $sourceLocatorsCollection,
         ?ConditionInterface $filters = null
-    ): void {
+    ): CollectionLoadEntitiesResult {
         $pb = $this->progressBarFactory->createStylizedProgressBar();
         $pb->setName('Loading PHP entities');
 
@@ -174,13 +173,13 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         $totalAddedEntities = count($this->entities);
         $addedByPlugins = $totalAddedEntities - $addedEntitiesCount;
 
-        $this->io->table([], [
-            ['Processed files:', "<options=bold,underscore>{$allFilesCount}</>"],
-            ['Processed entities:', "<options=bold,underscore>{$allEntitiesCount}</>"],
-            ['Skipped entities:', "<options=bold,underscore>{$skipped}</>"],
-            ['Entities added by plugins:', "<options=bold,underscore>{$addedByPlugins}</>"],
-            ['Total added entities:', "<options=bold,underscore>{$totalAddedEntities}</>"],
-        ]);
+        return new CollectionLoadEntitiesResult(
+            processedFilesCount: $allFilesCount,
+            processedEntitiesCount: $allEntitiesCount,
+            skippedEntitiesCount: $skipped,
+            entitiesAddedByPluginsCount: $addedByPlugins,
+            totalAddedEntities: $totalAddedEntities
+        );
     }
 
     /**

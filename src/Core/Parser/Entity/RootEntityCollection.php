@@ -6,6 +6,8 @@ namespace BumbleDocGen\Core\Parser\Entity;
 
 use BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityInterface;
 use BumbleDocGen\Core\Parser\Entity\Cache\EntityCacheStorageHelper;
+use BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
+use BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection;
 use DI\Attribute\Inject;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -21,7 +23,12 @@ abstract class RootEntityCollection extends BaseEntityCollection
     /** @var RootEntityInterface[] */
     protected array $entities = [];
 
-    abstract public function loadEntitiesByConfiguration(): void;
+    abstract public function loadEntitiesByConfiguration(): CollectionLoadEntitiesResult;
+
+    abstract public function loadEntities(
+        SourceLocatorsCollection $sourceLocatorsCollection,
+        ?ConditionInterface $filters = null
+    ): CollectionLoadEntitiesResult;
 
     abstract public function getEntityCollectionName(): string;
 

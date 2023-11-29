@@ -137,9 +137,7 @@ final class DocGenerator
             $classFileLines = explode("\n", $classFileContent);
             foreach ($newBocBlocks as $method => $docBlock) {
                 $methodEntity = $entity->getMethod($method, true);
-                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock(
-                    false
-                )->getLocation()?->getLineNumber() : null;
+                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock()->getLocation()?->getLineNumber() : null;
                 $lineNumber = $lineNumber ?: $methodEntity->getStartLine();
 
                 foreach (file($entity->getAbsoluteFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
@@ -255,7 +253,16 @@ final class DocGenerator
         $memory = memory_get_usage(true);
 
         try {
-            $this->parser->parse();
+            $result = $this->parser->parse();
+            $resSummary = $result->getSummary();
+            $this->io->table([], [
+                ['Processed files:', "<options=bold,underscore>{$resSummary->getProcessedFilesCount()}</>"],
+                ['Processed entities:', "<options=bold,underscore>{$resSummary->getProcessedEntitiesCount()}</>"],
+                ['Skipped entities:', "<options=bold,underscore>{$resSummary->getSkippedEntitiesCount()}</>"],
+                ['Entities added by plugins:', "<options=bold,underscore>{$resSummary->getEntitiesAddedByPluginsCount()}</>"],
+                ['Total added entities:', "<options=bold,underscore>{$resSummary->getTotalAddedEntities()}</>"],
+            ]);
+
             $this->renderer->run();
         } catch (Exception $e) {
             $this->logger->critical(
