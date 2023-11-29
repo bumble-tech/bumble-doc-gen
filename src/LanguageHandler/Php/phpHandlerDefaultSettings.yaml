@@ -34,7 +34,7 @@ language_handlers:
 
       use_composer_autoload: true # whether to use composer to load the class map or not
       composer_config_file: "%project_root%/composer.json"
-      composer_installed_file: "%project_root%/vendor/composer/installed.json"
+      composer_vendor_dir: "%project_root%/vendor"
       psr4_map: # same as in composer
 plugins:
   - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin

@@ -190,18 +190,17 @@ final class PhpHandlerSettings
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getComposerInstalledFile(): ?string
+    public function getComposerVendorDir(): ?string
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $composerInstalledFile = $this->parameterBag->validateAndGetFilePathValue(
-            $this->getSettingsKey('composer_installed_file'),
-            ['json']
+        $composerVendorDir = $this->parameterBag->validateAndGetDirectoryPathValue(
+            $this->getSettingsKey('composer_vendor_dir'),
         );
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $composerInstalledFile);
-        return $composerInstalledFile;
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $composerVendorDir);
+        return $composerVendorDir;
     }
 
     /**

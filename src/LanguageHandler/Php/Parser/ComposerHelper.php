@@ -80,10 +80,11 @@ final class ComposerHelper
         if ($this->packages) {
             return $this->packages;
         }
-        $installedJsonFile = $this->phpHandlerSettings->getComposerInstalledFile();
-        if (!$installedJsonFile) {
+        $composerVendorDir = $this->phpHandlerSettings->getComposerVendorDir();
+        if (!$composerVendorDir) {
             return $this->packages;
         }
+        $installedJsonFile = "{$composerVendorDir}/composer/installed.json";
         $installedPackagesData = json_decode(file_get_contents($installedJsonFile), true);
         foreach ($installedPackagesData['packages'] as $package) {
             if (!isset($package['source']['url'])) {
