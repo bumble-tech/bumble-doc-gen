@@ -6,6 +6,9 @@ namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
+use BumbleDocGen\Core\Configuration\ReflectionApiConfig;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Parser\ProjectParser;
 use DI\Container;
 use DI\ContainerBuilder;
 use DI\DependencyException;
@@ -94,6 +97,28 @@ final class DocGeneratorFactory
             $configurationParameterBag->loadFromFiles(...$configurationFiles);
             $configurationParameterBag->loadFromArray($this->customConfigurationParameters);
             return $diContainer->get(Configuration::class);
+        } catch (\Exception $e) {
+            $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
+            throw new \RuntimeException($e->getMessage());
+        }
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws \Exception
+     */
+    public function getRootEntityReflections(ReflectionApiConfig $reflectionApiConfig): RootEntityCollection
+    {
+        $diContainer = $this->buildDiContainer();
+        $logger = $diContainer->get(LoggerInterface::class);
+        try {
+            /** @var ConfigurationParameterBag $configurationParameterBag */
+            $configurationParameterBag = $diContainer->get(ConfigurationParameterBag::class);
+            $configurationParameterBag->loadFromArray($reflectionApiConfig->toConfigArray());
+            return $diContainer->get(ProjectParser::class)->getEntityCollectionForPL(
+                $reflectionApiConfig->getLanguageHandlerClassName()
+            );
         } catch (\Exception $e) {
             $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
             throw new \RuntimeException($e->getMessage());
