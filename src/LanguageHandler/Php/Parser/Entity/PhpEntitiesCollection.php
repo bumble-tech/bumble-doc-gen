@@ -172,7 +172,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         $allFilesCount = count($allFiles);
         $skipped = $allEntitiesCount - $addedEntitiesCount;
         $totalAddedEntities = count($this->entities);
-        $addedByPlugins = $totalAddedEntities - $allEntitiesCount;
+        $addedByPlugins = $totalAddedEntities - $addedEntitiesCount;
 
         $this->io->table([], [
             ['Processed files:', "<options=bold,underscore>{$allFilesCount}</>"],
