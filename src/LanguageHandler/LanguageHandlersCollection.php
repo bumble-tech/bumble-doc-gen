@@ -6,7 +6,7 @@ namespace BumbleDocGen\LanguageHandler;
 
 final class LanguageHandlersCollection implements \IteratorAggregate
 {
-    /** @var array<int, LanguageHandlerInterface> */
+    /** @var array<string, LanguageHandlerInterface> */
     private array $languageHandlers = [];
 
     public function getIterator(): \Generator
@@ -32,5 +32,13 @@ final class LanguageHandlersCollection implements \IteratorAggregate
     public function get(string $key): ?LanguageHandlerInterface
     {
         return $this->languageHandlers[$key] ?? null;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public function keys(): array
+    {
+        return array_keys($this->languageHandlers);
     }
 }
