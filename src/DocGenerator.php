@@ -40,7 +40,7 @@ use function BumbleDocGen\Core\get_class_short;
  */
 final class DocGenerator
 {
-    public const VERSION = '1.5.0';
+    public const VERSION = '1.6.0';
     public const LOG_FILE_NAME = 'last_run.log';
 
     /**
