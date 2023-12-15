@@ -25,6 +25,7 @@ language_handlers:
         - class: \BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer
 
       custom_twig_functions:
+        - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\DisplayClassApiMethods
         - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\DrawClassMap
         - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\GetClassMethodsBodyCode
 
