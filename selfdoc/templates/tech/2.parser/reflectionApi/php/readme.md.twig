@@ -1,0 +1,38 @@
+{% set title = 'Reflection API for PHP' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Reflection API for PHP" | textToHeading('H1') }}
+
+The tool we implemented partially replicates the [standard PHP reflection API](https://www.php.net/manual/en/book.reflection.php), but it has some additional capabilities.
+In addition, our Reflection API is available for use in every documentation template, plugin, twig function, etc. at `BumbleDocGen`.
+
+{{ "Class like reflections" | textToHeading('H2') }}
+
+Using our PHP reflection API you can get information about project entities.
+Below is information about the available methods for working with each entity type:
+
+1) [a x-title="Class reflection"]PHP class reflection API[/a]
+2) [a x-title="Trait reflection"]PHP trait reflection API[/a]
+3) [a x-title="Interface reflection"]PHP interface reflection API[/a]
+4) [a x-title="Enum reflection"]PHP enum reflection API[/a]
+
+**Usage example:**
+
+```php
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+
+$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName'); // or get()
+
+$entityName = $classReflection->getName();
+$entityDescription = $classReflection->getDescription();
+$entityClassCodeStartLine = $classReflection->getStartLine();
+// ... etc.
+```
+
+{{ "Class like sub entities reflections" | textToHeading('H2') }}
+
+PHP classes contain methods, properties and constants. Below is information about these child entities:
+
+1) [a x-title="Class method reflection"]PHP class method reflection API[/a]
+2) [a x-title="Class property reflection"]PHP class property reflection API[/a]
+3) [a x-title="Class constant reflection"]PHP class constant reflection API[/a]

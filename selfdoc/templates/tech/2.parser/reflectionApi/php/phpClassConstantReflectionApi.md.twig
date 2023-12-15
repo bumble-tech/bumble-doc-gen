@@ -1,0 +1,21 @@
+{% set title = 'PHP class constant reflection API' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+{% set prevPage = 'Reflection API for PHP' %}
+
+{{ "PHP class constant reflection API" | textToHeading('H1') }}
+
+Class constant reflection entity class: [a]ClassConstantEntity[/a].
+
+**Example of creating class constant reflection:**
+
+```php
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+
+$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
+
+$constantReflection = $classReflection->getConstant('constantName');
+```
+
+**Class constant reflection API methods:**
+
+{{ displayClassApiMethods('\\BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\SubEntity\\ClassConstant\\ClassConstantEntity') }}

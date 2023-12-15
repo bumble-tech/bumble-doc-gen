@@ -1,0 +1,23 @@
+{% set title = 'PHP trait reflection API' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+{% set prevPage = 'Reflection API for PHP' %}
+
+{{ "PHP trait reflection API" | textToHeading('H1') }}
+
+PHP trait reflection [a]TraitEntity[/a] inherits from [a]ClassLikeEntity[/a].
+
+**Source trait formats:**
+
+1) `trait <className>`
+
+**Example of creating trait reflection:**
+
+```php
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+
+$traitReflection = $entitiesCollection->getLoadedOrCreateNew('SomeTraitName'); // or get()
+```
+
+**Trait reflection API methods:**
+
+{{ displayClassApiMethods('\\BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\TraitEntity') }}

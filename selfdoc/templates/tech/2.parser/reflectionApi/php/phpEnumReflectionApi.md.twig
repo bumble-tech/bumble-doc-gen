@@ -1,0 +1,23 @@
+{% set title = 'PHP enum reflection API' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+{% set prevPage = 'Reflection API for PHP' %}
+
+{{ "PHP enum reflection API" | textToHeading('H1') }}
+
+PHP enum reflection [a]EnumEntity[/a] inherits from [a]ClassLikeEntity[/a].
+
+**Source enum formats:**
+
+1) `enum <className>`
+
+**Example of creating enum reflection:**
+
+```php
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+
+$enumReflection = $entitiesCollection->getLoadedOrCreateNew('SomeEnumName'); // or get()
+```
+
+**Enum reflection API methods:**
+
+{{ displayClassApiMethods('\\BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\EnumEntity') }}

@@ -1,0 +1,21 @@
+{% set title = 'PHP class method reflection API' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+{% set prevPage = 'Reflection API for PHP' %}
+
+{{ "PHP class method reflection API" | textToHeading('H1') }}
+
+Method reflection entity class: [a]MethodEntity[/a].
+
+**Example of creating class method reflection:**
+
+```php
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+
+$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
+
+$methodReflection = $classReflection->getMethod('methodName');
+```
+
+**Class method reflection API methods:**
+
+{{ displayClassApiMethods('\\BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\SubEntity\\Method\\MethodEntity') }}

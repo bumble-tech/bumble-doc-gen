@@ -1,0 +1,21 @@
+{% set title = 'PHP class property reflection API' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+{% set prevPage = 'Reflection API for PHP' %}
+
+{{ "PHP class property reflection API" | textToHeading('H1') }}
+
+Property reflection entity class: [a]PropertyEntity[/a].
+
+**Example of creating class property reflection:**
+
+```php
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+
+$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
+
+$propertyReflection = $classReflection->getProperty('propertyName');
+```
+
+**Class property reflection API methods:**
+
+{{ displayClassApiMethods('\\BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\SubEntity\\Property\\PropertyEntity') }}
