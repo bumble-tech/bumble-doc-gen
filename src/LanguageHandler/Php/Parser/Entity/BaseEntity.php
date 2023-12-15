@@ -235,6 +235,20 @@ abstract class BaseEntity implements CacheableEntityInterface
     }
 
     /**
+     * Checking if an entity has `api` docBlock
+     *
+     * @api
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    public function isApi(): bool
+    {
+        $docBlock = $this->getDocBlock();
+        $internalBlock = $docBlock->getTagsByName('api')[0] ?? null;
+        return (bool)$internalBlock;
+    }
+
+    /**
      * Checking if an entity has `deprecated` docBlock
      *
      * @api
