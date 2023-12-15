@@ -26,6 +26,7 @@ $classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName'); /
 $entityName = $classReflection->getName();
 $entityDescription = $classReflection->getDescription();
 $entityClassCodeStartLine = $classReflection->getStartLine();
+
 // ... etc.
 ```
 
@@ -36,3 +37,20 @@ PHP classes contain methods, properties and constants. Below is information abou
 1) [a x-title="Class method reflection"]PHP class method reflection API[/a]
 2) [a x-title="Class property reflection"]PHP class property reflection API[/a]
 3) [a x-title="Class constant reflection"]PHP class constant reflection API[/a]
+
+**Usage example:**
+
+```php
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+
+$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
+
+$propertyReflection = $classReflection->getProperty('propertyName');
+$propertyName = $methodReflection->getName();
+
+$methodReflection = $classReflection->getMethod('methodName');
+$methodName = $methodReflection->getName();
+$firstMethodReturnValue = $methodReflection->getFirstReturnValue();
+
+// ... etc.
+```
