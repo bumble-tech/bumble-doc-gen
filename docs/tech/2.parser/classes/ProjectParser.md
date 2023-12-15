@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> ProjectParser<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/ProjectParser.php#L18">ProjectParser</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/ProjectParser.php#L21">ProjectParser</a> class:
 </h1>
 
 
@@ -34,6 +34,12 @@ final class ProjectParser
 
 <ol>
 <li>
+    <a href="#mgetentitycollectionforpl">getEntityCollectionForPL</a>
+    </li>
+<li>
+    <a href="#mgetrootentitycollectionsgroup">getRootEntityCollectionsGroup</a>
+    </li>
+<li>
     <a href="#mparse">parse</a>
     </li>
 </ol>
@@ -51,7 +57,7 @@ final class ProjectParser
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/ProjectParser.php#L20">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/ProjectParser.php#L23">source code</a></li>
 </ul>
 
 ```php
@@ -96,13 +102,64 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mparse" href="#mparse">#</a>
- <b>parse</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/ProjectParser.php#L32">source code</a></li>
+<li><a name="mgetentitycollectionforpl" href="#mgetentitycollectionforpl">#</a>
+ <b>getEntityCollectionForPL</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/ProjectParser.php#L58">source code</a></li>
 </ul>
 
 ```php
-public function parse(): \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+public function getEntityCollectionForPL(string $plHandlerClassName): null|\BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$plHandlerClassName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
+
+<li>
+    <a href="/docs/tech/2.parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mgetrootentitycollectionsgroup" href="#mgetrootentitycollectionsgroup">#</a>
+ <b>getRootEntityCollectionsGroup</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/ProjectParser.php#L46">source code</a></li>
+</ul>
+
+```php
+public function getRootEntityCollectionsGroup(): \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 ```
 
 
@@ -110,6 +167,44 @@ public function parse(): \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsG
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollectionsGroup.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mparse" href="#mparse">#</a>
+ <b>parse</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/ProjectParser.php#L37">source code</a></li>
+</ul>
+
+```php
+public function parse(\BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface|null $progressBar = null): \BumbleDocGen\Core\Parser\Entity\CollectionGroupLoadEntitiesResult;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$progressBar</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntitiesLoaderProgressBarInterface.php'>\BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionGroupLoadEntitiesResult.php'>\BumbleDocGen\Core\Parser\Entity\CollectionGroupLoadEntitiesResult</a>
 
 
 <b>Throws:</b>

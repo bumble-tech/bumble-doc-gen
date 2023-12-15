@@ -30,12 +30,6 @@ interface DocumentTransformableEntityInterface
     <a href="#mcursortodocattributelinkfragment">cursorToDocAttributeLinkFragment</a>
     </li>
 <li>
-    <a href="#mdocumentcreationallowed">documentCreationAllowed</a>
-    </li>
-<li>
-    <a href="#mentitycacheisoutdated">entityCacheIsOutdated</a>
-    </li>
-<li>
     <a href="#mgetdocrender">getDocRender</a>
     </li>
 <li>
@@ -46,6 +40,12 @@ interface DocumentTransformableEntityInterface
     </li>
 <li>
     <a href="#mgetshortname">getShortName</a>
+    </li>
+<li>
+    <a href="#misdocumentcreationallowed">isDocumentCreationAllowed</a>
+    </li>
+<li>
+    <a href="#misentitycacheoutdated">isEntityCacheOutdated</a>
     </li>
 </ol>
 
@@ -96,48 +96,6 @@ public function cursorToDocAttributeLinkFragment(string $cursor, bool $isForDocu
 </table>
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mdocumentcreationallowed" href="#mdocumentcreationallowed">#</a>
- <b>documentCreationAllowed</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentTransformableEntityInterface.php#L19">source code</a></li>
-</ul>
-
-```php
-public function documentCreationAllowed(): bool;
-```
-
-
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mentitycacheisoutdated" href="#mentitycacheisoutdated">#</a>
- <b>entityCacheIsOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentTransformableEntityInterface.php#L23">source code</a></li>
-</ul>
-
-```php
-public function entityCacheIsOutdated(): bool;
-```
-
-
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
 
 
 </div>
@@ -222,6 +180,48 @@ public function getShortName(): string;
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="misdocumentcreationallowed" href="#misdocumentcreationallowed">#</a>
+ <b>isDocumentCreationAllowed</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentTransformableEntityInterface.php#L19">source code</a></li>
+</ul>
+
+```php
+public function isDocumentCreationAllowed(): bool;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="misentitycacheoutdated" href="#misentitycacheoutdated">#</a>
+ <b>isEntityCacheOutdated</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentTransformableEntityInterface.php#L23">source code</a></li>
+</ul>
+
+```php
+public function isEntityCacheOutdated(): bool;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
 
 
 </div>

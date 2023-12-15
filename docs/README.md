@@ -20,7 +20,7 @@ Add the BumbleDocGen to the `composer.json` file of your project using the follo
 <embed> <h2>Core Features</h2> </embed>
 
 - 🔍 <b><a href="/docs/tech/2.parser/readme.md">Parsing</a>:</b>
-  BumbleDocGen scans your project by parsing PHP files, extracting comments, and providing detailed models of your code.
+  BumbleDocGen analyzes your code and provides a convenient <a href="/docs/tech/2.parser/reflectionApi/readme.md">Reflection API</a>.
 
 - ✍️ <b><a href="/docs/tech/3.renderer/readme.md">Rendering</a>:</b>
   BumbleDocGen generates markdown content using templates and fills them with data obtained from parsing your code.
@@ -95,4 +95,4 @@ To update this documentation, run the following command:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Tue Nov 14 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Dec 15 21:27:10 2023 +0300<br><b>Page content update date:</b> Fri Dec 15 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

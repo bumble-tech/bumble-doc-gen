@@ -27,10 +27,10 @@ trait CacheableEntityWrapperTrait
 
 <ol>
 <li>
-    <a href="#mentitycacheisoutdated">entityCacheIsOutdated</a>
+    <a href="#mgetcachekey">getCacheKey</a>
     </li>
 <li>
-    <a href="#mgetcachekey">getCacheKey</a>
+    <a href="#misentitycacheoutdated">isEntityCacheOutdated</a>
     </li>
 <li>
     <a href="#misentitydatacacheoutdated">isEntityDataCacheOutdated</a>
@@ -62,32 +62,9 @@ trait CacheableEntityWrapperTrait
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mentitycacheisoutdated" href="#mentitycacheisoutdated">#</a>
- <b>entityCacheIsOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L32">source code</a></li>
-</ul>
-
-```php
-// Implemented in BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait
-
-public function entityCacheIsOutdated(): bool;
-```
-
-
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
 <li><a name="mgetcachekey" href="#mgetcachekey">#</a>
  <b>getCacheKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L20">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L23">source code</a></li>
 </ul>
 
 ```php
@@ -108,9 +85,32 @@ public function getCacheKey(): string;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="misentitycacheoutdated" href="#misentitycacheoutdated">#</a>
+ <b>isEntityCacheOutdated</b>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L38">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityTrait
+
+public function isEntityCacheOutdated(): bool;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="misentitydatacacheoutdated" href="#misentitydatacacheoutdated">#</a>
  <b>isEntityDataCacheOutdated</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L77">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L94">source code</a></li>
 </ul>
 
 ```php
@@ -161,7 +161,7 @@ public function isEntityFileCanBeLoad(): bool;
 <ul>
 <li><a name="mremoveentityvaluefromcache" href="#mremoveentityvaluefromcache">#</a>
  <b>removeEntityValueFromCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L65">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L80">source code</a></li>
 </ul>
 
 ```php
@@ -201,7 +201,7 @@ public function removeEntityValueFromCache(string $key): void;
 <ul>
 <li><a name="mremovenotusedentitydatacache" href="#mremovenotusedentitydatacache">#</a>
  <b>removeNotUsedEntityDataCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L97">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityTrait.php#L116">source code</a></li>
 </ul>
 
 ```php

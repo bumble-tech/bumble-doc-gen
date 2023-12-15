@@ -43,7 +43,7 @@ final class PhpHandlerSettings
     <a href="#mgetcomposerconfigfile">getComposerConfigFile</a>
     </li>
 <li>
-    <a href="#mgetcomposerinstalledfile">getComposerInstalledFile</a>
+    <a href="#mgetcomposervendordir">getComposerVendorDir</a>
     </li>
 <li>
     <a href="#mgetcustomtwigfilters">getCustomTwigFilters</a>
@@ -231,13 +231,13 @@ public function getComposerConfigFile(): null|string;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgetcomposerinstalledfile" href="#mgetcomposerinstalledfile">#</a>
- <b>getComposerInstalledFile</b>
+<li><a name="mgetcomposervendordir" href="#mgetcomposervendordir">#</a>
+ <b>getComposerVendorDir</b>
     <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L193">source code</a></li>
 </ul>
 
 ```php
-public function getComposerInstalledFile(): null|string;
+public function getComposerVendorDir(): null|string;
 ```
 
 
@@ -261,7 +261,7 @@ public function getComposerInstalledFile(): null|string;
 <ul>
 <li><a name="mgetcustomtwigfilters" href="#mgetcustomtwigfilters">#</a>
  <b>getCustomTwigFilters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L251">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L250">source code</a></li>
 </ul>
 
 ```php
@@ -295,7 +295,7 @@ public function getCustomTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\
 <ul>
 <li><a name="mgetcustomtwigfunctions" href="#mgetcustomtwigfunctions">#</a>
  <b>getCustomTwigFunctions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L228">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L227">source code</a></li>
 </ul>
 
 ```php
@@ -459,7 +459,7 @@ public function getPropertyEntityFilter(): \BumbleDocGen\Core\Parser\FilterCondi
 <ul>
 <li><a name="mgetpsr4map" href="#mgetpsr4map">#</a>
  <b>getPsr4Map</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L210">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L209">source code</a></li>
 </ul>
 
 ```php

@@ -12,28 +12,28 @@ Entities are always handled through collections. Collections are the result of t
 * Passing a collection to a function:
 
 ```twig
- {{ printEntityCollectionAsList(phpClassEntityCollection) }}
+ {{ printEntityCollectionAsList(phpEntities) }}
 ```
 
 
 * Filtering a collection and passing it to a function:
 
 ```twig
- {{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\Core\Parser\Entity\EntityInterface'])) }}
+ {{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['BumbleDocGen\Core\Parser\Entity\EntityInterface'])) }}
 ```
 
 
 * Saving a filtered collection to a variable:
 
 ```twig
- {{ {% set filteredCollection = phpClassEntityCollection.getOnlyInstantiable() %} }}
+ {{ {% set filteredCollection = phpEntities.getOnlyInstantiable() %} }}
 ```
 
 
 * Using a collection in a for loop:
 
 ```twig
- {% for someClassEntity in phpClassEntityCollection %}
+ {% for someClassEntity in phpEntities %}
      * {{ someClassEntity.getName() }}
  {% endfor %}
 ```
@@ -42,8 +42,8 @@ Entities are always handled through collections. Collections are the result of t
 * Output of all methods of all found entities in `className::methodName()` format:
 
 ```twig
- {% for someClassEntity in phpClassEntityCollection %}
-     {% for methodEntity in someClassEntity.getMethodEntityCollection() %}
+ {% for someClassEntity in phpEntities %}
+     {% for methodEntity in someClassEntity.getMethodEntitiesCollection() %}
          * {{ someClassEntity.getName() }}::{{ methodEntity.getName() }}()
      {% endfor %}
  {% endfor %}
@@ -64,10 +64,10 @@ The root collections (<a href="/docs/tech/2.parser/classes/RootEntityCollection.
         <th>Description</th>
     </tr>
             <tr>
-        <td><a href='/docs/tech/2.parser/classes/ClassEntityCollection.md'>ClassEntityCollection</a></td>
-        <td><b>phpClassEntityCollection</b></td>
+        <td><a href='/docs/tech/2.parser/classes/PhpEntitiesCollection.md'>PhpEntitiesCollection</a></td>
+        <td><b>phpEntities</b></td>
         <td>PHP</td>
-        <td>Collection of PHP class entities</td>
+        <td>Collection of php root entities</td>
     </tr>
     </table>
 
@@ -86,35 +86,56 @@ These classes are a convenient wrapper for accessing data in templates:
     </tr>
                 <tr>
         <td><a href='/docs/tech/2.parser/classes/ClassEntity.md'>ClassEntity</a></td>
-        <td><a href='/docs/tech/2.parser/classes/ClassEntityCollection.md'>ClassEntityCollection</a></td>
+        <td><a href='/docs/tech/2.parser/classes/PhpEntitiesCollection.md'>PhpEntitiesCollection</a></td>
         <td>yes</td>
         <td>PHP</td>
-        <td>Class entity</td>
+        <td>PHP Class</td>
+    </tr>
+        <tr>
+        <td><a href='/docs/tech/2.parser/classes/EnumEntity.md'>EnumEntity</a></td>
+        <td><a href='/docs/tech/2.parser/classes/PhpEntitiesCollection.md'>PhpEntitiesCollection</a></td>
+        <td>yes</td>
+        <td>PHP</td>
+        <td>Enumeration</td>
+    </tr>
+        <tr>
+        <td><a href='/docs/tech/2.parser/classes/InterfaceEntity.md'>InterfaceEntity</a></td>
+        <td><a href='/docs/tech/2.parser/classes/PhpEntitiesCollection.md'>PhpEntitiesCollection</a></td>
+        <td>yes</td>
+        <td>PHP</td>
+        <td>Object interface</td>
+    </tr>
+        <tr>
+        <td><a href='/docs/tech/2.parser/classes/TraitEntity.md'>TraitEntity</a></td>
+        <td><a href='/docs/tech/2.parser/classes/PhpEntitiesCollection.md'>PhpEntitiesCollection</a></td>
+        <td>yes</td>
+        <td>PHP</td>
+        <td>Trait</td>
     </tr>
                     <tr>
-        <td><a href='/docs/tech/2.parser/classes/ConstantEntity.md'>ConstantEntity</a></td>
-        <td><a href='/docs/tech/2.parser/classes/ConstantEntityCollection.md'>ConstantEntityCollection</a></td>
+        <td><a href='/docs/tech/2.parser/classes/ClassConstantEntity.md'>ClassConstantEntity</a></td>
+        <td><a href='/docs/tech/2.parser/classes/ClassConstantEntitiesCollection.md'>ClassConstantEntitiesCollection</a></td>
         <td>no</td>
         <td>PHP</td>
         <td>Class constant entity</td>
     </tr>
                     <tr>
         <td><a href='/docs/tech/2.parser/classes/DynamicMethodEntity.md'>DynamicMethodEntity</a></td>
-        <td><a href='/docs/tech/2.parser/classes/MethodEntityCollection.md'>MethodEntityCollection</a></td>
+        <td><a href='/docs/tech/2.parser/classes/MethodEntitiesCollection.md'>MethodEntitiesCollection</a></td>
         <td>no</td>
         <td>PHP</td>
         <td>Method obtained by parsing the &quot;method&quot; annotation</td>
     </tr>
         <tr>
         <td><a href='/docs/tech/2.parser/classes/MethodEntity.md'>MethodEntity</a></td>
-        <td><a href='/docs/tech/2.parser/classes/MethodEntityCollection.md'>MethodEntityCollection</a></td>
+        <td><a href='/docs/tech/2.parser/classes/MethodEntitiesCollection.md'>MethodEntitiesCollection</a></td>
         <td>no</td>
         <td>PHP</td>
         <td>Class method entity</td>
     </tr>
                     <tr>
         <td><a href='/docs/tech/2.parser/classes/PropertyEntity.md'>PropertyEntity</a></td>
-        <td><a href='/docs/tech/2.parser/classes/PropertyEntityCollection.md'>PropertyEntityCollection</a></td>
+        <td><a href='/docs/tech/2.parser/classes/PropertyEntitiesCollection.md'>PropertyEntitiesCollection</a></td>
         <td>no</td>
         <td>PHP</td>
         <td>Class property entity</td>
@@ -123,4 +144,4 @@ These classes are a convenient wrapper for accessing data in templates:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Tue Nov 14 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Tue Nov 21 16:24:59 2023 +0300<br><b>Page content update date:</b> Fri Dec 15 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

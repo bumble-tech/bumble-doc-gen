@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PhpHandler<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L17">PhpHandler</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L16">PhpHandler</a> class:
 </h1>
 
 
@@ -45,6 +45,9 @@ final class PhpHandler implements \BumbleDocGen\LanguageHandler\LanguageHandlerI
 <li>
     <a href="#mgetlanguagekey">getLanguageKey</a>
     - <i>Unique language handler key</i></li>
+<li>
+    <a href="#mgetphphandlersettings">getPhpHandlerSettings</a>
+    </li>
 </ol>
 
 
@@ -60,11 +63,11 @@ final class PhpHandler implements \BumbleDocGen\LanguageHandler\LanguageHandlerI
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L18">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollection, \BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings $phpHandlerSettings);
+public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection $entitiesCollection, \BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings $phpHandlerSettings);
 ```
 
 
@@ -81,8 +84,8 @@ public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Clas
     </thead>
     <tbody>
             <tr>
-            <td>$classEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
+            <td>$entitiesCollection</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -102,7 +105,7 @@ public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Clas
 <ul>
 <li><a name="mgetcustomtwigfilters" href="#mgetcustomtwigfilters">#</a>
  <b>getCustomTwigFilters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L57">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L54">source code</a></li>
 </ul>
 
 ```php
@@ -153,7 +156,7 @@ public function getCustomTwigFilters(\BumbleDocGen\Core\Renderer\Context\Rendere
 <ul>
 <li><a name="mgetcustomtwigfunctions" href="#mgetcustomtwigfunctions">#</a>
  <b>getCustomTwigFunctions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L47">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L44">source code</a></li>
 </ul>
 
 ```php
@@ -208,31 +211,15 @@ public function getCustomTwigFunctions(\BumbleDocGen\Core\Renderer\Context\Rende
 </ul>
 
 ```php
-public function getEntityCollection(): \BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+public function getEntityCollection(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection</a>
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a></li>
-
-</ul>
 
 </div>
 <hr>
@@ -241,7 +228,7 @@ public function getEntityCollection(): \BumbleDocGen\Core\Parser\Entity\RootEnti
 <ul>
 <li><a name="mgetlanguagekey" href="#mgetlanguagekey">#</a>
  <b>getLanguageKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L24">source code</a></li>
 </ul>
 
 ```php
@@ -253,6 +240,27 @@ public static function getLanguageKey(): string;
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mgetphphandlersettings" href="#mgetphphandlersettings">#</a>
+ <b>getPhpHandlerSettings</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandler.php#L29">source code</a></li>
+</ul>
+
+```php
+public function getPhpHandlerSettings(): \BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php'>\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings</a>
 
 
 </div>

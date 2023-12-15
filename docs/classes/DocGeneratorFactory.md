@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> DocGeneratorFactory<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L15">DocGeneratorFactory</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L18">DocGeneratorFactory</a> class:
 </h1>
 
 
@@ -43,6 +43,9 @@ final class DocGeneratorFactory
     <a href="#mcreateconfiguration">createConfiguration</a>
     </li>
 <li>
+    <a href="#mgetrootentityreflections">getRootEntityReflections</a>
+    </li>
+<li>
     <a href="#msetcustomconfigurationparameters">setCustomConfigurationParameters</a>
     </li>
 <li>
@@ -63,7 +66,7 @@ final class DocGeneratorFactory
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L21">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L24">source code</a></li>
 </ul>
 
 ```php
@@ -100,7 +103,7 @@ public function __construct(string $diConfig = __DIR__ . '/di-config.php');
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L45">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L48">source code</a></li>
 </ul>
 
 ```php
@@ -151,7 +154,7 @@ public function create(string|null ...$configurationFiles): \BumbleDocGen\DocGen
 <ul>
 <li><a name="mcreatebyconfigarray" href="#mcreatebyconfigarray">#</a>
  <b>createByConfigArray</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L66">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L69">source code</a></li>
 </ul>
 
 ```php
@@ -202,7 +205,7 @@ public function createByConfigArray(array $config): \BumbleDocGen\DocGenerator;
 <ul>
 <li><a name="mcreateconfiguration" href="#mcreateconfiguration">#</a>
  <b>createConfiguration</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L87">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L90">source code</a></li>
 </ul>
 
 ```php
@@ -251,9 +254,60 @@ public function createConfiguration(string ...$configurationFiles): \BumbleDocGe
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgetrootentityreflections" href="#mgetrootentityreflections">#</a>
+ <b>getRootEntityReflections</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L111">source code</a></li>
+</ul>
+
+```php
+public function getRootEntityReflections(\BumbleDocGen\Core\Configuration\ReflectionApiConfig $reflectionApiConfig): \BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$reflectionApiConfig</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ReflectionApiConfig.php'>\BumbleDocGen\Core\Configuration\ReflectionApiConfig</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
+
+<li>
+    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="msetcustomconfigurationparameters" href="#msetcustomconfigurationparameters">#</a>
  <b>setCustomConfigurationParameters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L30">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L33">source code</a></li>
 </ul>
 
 ```php
@@ -291,7 +345,7 @@ public function setCustomConfigurationParameters(array $customConfigurationParam
 <ul>
 <li><a name="msetcustomdidefinitions" href="#msetcustomdidefinitions">#</a>
  <b>setCustomDiDefinitions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L35">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L38">source code</a></li>
 </ul>
 
 ```php

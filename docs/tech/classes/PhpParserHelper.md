@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PhpParserHelper<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpParser/PhpParserHelper.php#L11">PhpParserHelper</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/PhpParser/PhpParserHelper.php#L11">PhpParserHelper</a> class:
 </h1>
 
 
@@ -10,7 +10,7 @@
 
 
 ```php
-namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpParser;
+namespace BumbleDocGen\LanguageHandler\Php\Parser\PhpParser;
 
 final class PhpParserHelper
 ```
@@ -44,7 +44,7 @@ final class PhpParserHelper
 <ul>
 <li><a name="mphpparser" href="#mphpparser">#</a>
  <b>phpParser</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpParser/PhpParserHelper.php#L15">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/PhpParser/PhpParserHelper.php#L15">source code</a></li>
 </ul>
 
 ```php

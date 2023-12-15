@@ -127,7 +127,7 @@ public function getComposerClassLoader(): \Composer\Autoload\ClassLoader;
 <ul>
 <li><a name="mgetcomposerpackagedatabyclassname" href="#mgetcomposerpackagedatabyclassname">#</a>
  <b>getComposerPackageDataByClassName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L114">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php#L115">source code</a></li>
 </ul>
 
 ```php

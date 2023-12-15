@@ -30,7 +30,7 @@ final class BasePhpStubberPlugin implements \BumbleDocGen\Core\Plugin\PluginInte
     <a href="#mgetsubscribedevents">getSubscribedEvents</a>
     </li>
 <li>
-    <a href="#moncheckisclassentitycanbeload">onCheckIsClassEntityCanBeLoad</a>
+    <a href="#moncheckisentitycanbeloaded">onCheckIsEntityCanBeLoaded</a>
     </li>
 <li>
     <a href="#mongettingresourcelink">onGettingResourceLink</a>
@@ -69,13 +69,13 @@ public static function getSubscribedEvents(): array;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="moncheckisclassentitycanbeload" href="#moncheckisclassentitycanbeload">#</a>
- <b>onCheckIsClassEntityCanBeLoad</b>
+<li><a name="moncheckisentitycanbeloaded" href="#moncheckisentitycanbeloaded">#</a>
+ <b>onCheckIsEntityCanBeLoaded</b>
     <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/BasePhpStubberPlugin.php#L169">source code</a></li>
 </ul>
 
 ```php
-public function onCheckIsClassEntityCanBeLoad(\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad $event): void;
+public function onCheckIsEntityCanBeLoaded(\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded $event): void;
 ```
 
 
@@ -93,7 +93,7 @@ public function onCheckIsClassEntityCanBeLoad(\BumbleDocGen\LanguageHandler\Php\
     <tbody>
             <tr>
             <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/Event/Entity/OnCheckIsClassEntityCanBeLoad.php'>\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/Event/Entity/OnCheckIsEntityCanBeLoaded.php'>\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded</a></td>
             <td>-</td>
         </tr>
         </tbody>

@@ -613,7 +613,7 @@ public function set(string $name, mixed $value): void;
 <ul>
 <li><a name="mvalidateandgetbooleanvalue" href="#mvalidateandgetbooleanvalue">#</a>
  <b>validateAndGetBooleanValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L271">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L279">source code</a></li>
 </ul>
 
 ```php
@@ -658,7 +658,7 @@ public function validateAndGetBooleanValue(string $parameterName): bool;
 <ul>
 <li><a name="mvalidateandgetclasslistvalue" href="#mvalidateandgetclasslistvalue">#</a>
  <b>validateAndGetClassListValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L208">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L212">source code</a></li>
 </ul>
 
 ```php
@@ -775,7 +775,7 @@ public function validateAndGetClassValue(string $parameterName, string $classInt
 <ul>
 <li><a name="mvalidateandgetdirectorypathvalue" href="#mvalidateandgetdirectorypathvalue">#</a>
  <b>validateAndGetDirectoryPathValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L309">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L317">source code</a></li>
 </ul>
 
 ```php
@@ -825,7 +825,7 @@ public function validateAndGetDirectoryPathValue(string $parameterName, bool $nu
 <ul>
 <li><a name="mvalidateandgetfilepathvalue" href="#mvalidateandgetfilepathvalue">#</a>
  <b>validateAndGetFilePathValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L284">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L292">source code</a></li>
 </ul>
 
 ```php
@@ -880,7 +880,7 @@ public function validateAndGetFilePathValue(string $parameterName, array $fileEx
 <ul>
 <li><a name="mvalidateandgetstringlistvalue" href="#mvalidateandgetstringlistvalue">#</a>
  <b>validateAndGetStringListValue</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L241">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php#L249">source code</a></li>
 </ul>
 
 ```php
