@@ -60,11 +60,6 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         parent::__construct();
     }
 
-    public function getPluginEventDispatcher(): PluginEventDispatcher
-    {
-        return $this->pluginEventDispatcher;
-    }
-
     /**
      * @inheritDoc
      */
