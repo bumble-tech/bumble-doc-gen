@@ -66,7 +66,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * @api
+     * @inheritDoc
      */
     public function getEntityCollectionName(): string
     {
@@ -186,6 +186,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * Add an entity to the collection
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -208,6 +210,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * @internal
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -239,7 +243,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * Retrieving all entities that implement the specified interfaces. Filtering is only available for ClassLikeEntity.
+     * Get a copy of the current collection only with entities filtered by interfaces names (filtering is only available for ClassLikeEntity)
      *
      * @param string[] $interfaces
      *
@@ -267,7 +271,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * Retrieving all entities that inherit from the specified classes. Filtering is only available for ClassLikeEntity.
+     * Get a copy of the current collection only with entities filtered by parent classes names (filtering is only available for ClassLikeEntity)
      *
      * @api
      *
@@ -293,7 +297,9 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * Filtering entities by relative files paths (from project_root) of the project
+     * Get a copy of the current collection only with entities filtered by file paths (from project_root)
+     *
+     * Get a copy of a collection with only instantiable entities from the current collection
      *
      * @api
      *
@@ -318,6 +324,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * Get a copy of the current collection with only entities whose names match the regular expression
+     *
      * @api
      */
     public function filterByNameRegularExpression(string $regexPattern): PhpEntitiesCollection
@@ -333,7 +341,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
-     * Retrieving only instantiable entities. Filtering is only available for ClassLikeEntity.
+     * Get a copy of the current collection with only instantiable entities
      *
      * @api
      */
@@ -349,6 +357,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * Get a copy of the current collection with only interfaces
+     *
      * @api
      */
     public function getOnlyInterfaces(): PhpEntitiesCollection
@@ -363,6 +373,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * Get a copy of the current collection with only traits
+     *
      * @api
      */
     public function getOnlyTraits(): PhpEntitiesCollection
@@ -377,6 +389,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * Get a copy of the current collection with only abstract classes
+     *
      * @api
      *
      * @throws InvalidConfigurationParameterException
@@ -402,7 +416,7 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
      *
      * @return ClassLikeEntity|null
      *
-     * @api
+     * @internal
      *
      * @example
      *  $entitiesCollection->findEntity('App'); // class name

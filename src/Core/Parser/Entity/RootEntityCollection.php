@@ -31,11 +31,20 @@ abstract class RootEntityCollection extends BaseEntityCollection
         ?EntitiesLoaderProgressBarInterface $progressBar = null
     ): CollectionLoadEntitiesResult;
 
+    /**
+     * Get collection name
+     *
+     * @api
+     */
     abstract public function getEntityCollectionName(): string;
 
     /**
+     * Get an entity from a collection (only previously added)
+     *
      * @param class-string<T> $objectName
      * @return null|T
+     *
+     * @api
      */
     public function get(string $objectName): ?RootEntityInterface
     {
@@ -43,6 +52,8 @@ abstract class RootEntityCollection extends BaseEntityCollection
     }
 
     /**
+     * Get an entity from the collection or create a new one if it has not yet been added
+     *
      * @warning The entity obtained as a result of executing this method may not be available for loading
      *
      * @see RootEntityInterface::isEntityDataCanBeLoaded()
@@ -50,11 +61,17 @@ abstract class RootEntityCollection extends BaseEntityCollection
      * @param class-string<T> $objectName
      *
      * @return T
+     *
+     * @api
      */
     abstract public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): RootEntityInterface;
 
     /**
+     * Find an entity in a collection
+     *
      * @return null|T
+     *
+     * @api
      */
     abstract public function findEntity(string $search, bool $useUnsafeKeys = true): ?RootEntityInterface;
 
@@ -66,11 +83,15 @@ abstract class RootEntityCollection extends BaseEntityCollection
      *
      * @return array
      *
+     * @internal
+     *
      * @todo return object instead array
      */
     abstract public function getEntityLinkData(string $rawLink, ?string $defaultEntityName = null, bool $useUnsafeKeys = true): array;
 
     /**
+     * @internal
+     *
      * @throws InvalidArgumentException
      */
     public function updateEntitiesCache(): void
@@ -96,6 +117,13 @@ abstract class RootEntityCollection extends BaseEntityCollection
         }
     }
 
+    /**
+     * Convert collection to array
+     *
+     * @return RootEntityInterface[]
+     *
+     * @api
+     */
     public function toArray(): array
     {
         return $this->entities;
