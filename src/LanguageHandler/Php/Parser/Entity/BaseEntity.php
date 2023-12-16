@@ -411,10 +411,10 @@ abstract class BaseEntity implements CacheableEntityInterface
      *
      * @return DocBlockLink[]
      *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      * @throws \Exception
-     *@api
-     *
      */
     public function getDescriptionLinks(): array
     {
@@ -478,9 +478,9 @@ abstract class BaseEntity implements CacheableEntityInterface
      *
      * @return DocBlockLink[]
      *
-     * @throws InvalidConfigurationParameterException
-     *@api
+     * @api
      *
+     * @throws InvalidConfigurationParameterException
      */
     public function getThrows(): array
     {

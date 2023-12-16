@@ -37,6 +37,8 @@ class EnumEntity extends ClassLikeEntity
     /**
      * Get enum cases values
      *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      * @throws ConstExprEvaluationException
      */
@@ -64,6 +66,8 @@ class EnumEntity extends ClassLikeEntity
      *
      * @return string[]
      *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      * @throws ConstExprEvaluationException
      */
@@ -74,6 +78,8 @@ class EnumEntity extends ClassLikeEntity
 
     /**
      * Get enum case value
+     *
+     * @api
      *
      * @throws InvalidConfigurationParameterException
      * @throws ConstExprEvaluationException

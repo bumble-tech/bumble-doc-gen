@@ -65,6 +65,9 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         return $this->pluginEventDispatcher;
     }
 
+    /**
+     * @api
+     */
     public function getEntityCollectionName(): string
     {
         return self::NAME;
@@ -183,6 +186,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function add(ClassLikeEntity $classEntity, bool $reload = false): PhpEntitiesCollection
@@ -238,6 +243,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
      *
      * @param string[] $interfaces
      *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function filterByInterfaces(array $interfaces): PhpEntitiesCollection
@@ -261,6 +268,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
 
     /**
      * Retrieving all entities that inherit from the specified classes. Filtering is only available for ClassLikeEntity.
+     *
+     * @api
      *
      * @throws InvalidConfigurationParameterException
      */
@@ -286,6 +295,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     /**
      * Filtering entities by relative files paths (from project_root) of the project
      *
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function filterByPaths(array $paths): PhpEntitiesCollection
@@ -306,6 +317,9 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         return $entitiesCollection;
     }
 
+    /**
+     * @api
+     */
     public function filterByNameRegularExpression(string $regexPattern): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
@@ -320,6 +334,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
 
     /**
      * Retrieving only instantiable entities. Filtering is only available for ClassLikeEntity.
+     *
+     * @api
      */
     public function getOnlyInstantiable(): PhpEntitiesCollection
     {
@@ -332,6 +348,9 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         return $entitiesCollection;
     }
 
+    /**
+     * @api
+     */
     public function getOnlyInterfaces(): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
@@ -343,6 +362,9 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         return $entitiesCollection;
     }
 
+    /**
+     * @api
+     */
     public function getOnlyTraits(): PhpEntitiesCollection
     {
         $entitiesCollection = $this->cloneForFiltration();
@@ -355,6 +377,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
     }
 
     /**
+     * @api
+     *
      * @throws InvalidConfigurationParameterException
      */
     public function getOnlyAbstractClasses(): PhpEntitiesCollection
@@ -377,6 +401,8 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
      * @param bool $useUnsafeKeys Whether to use search keys that can be used to find several entities
      *
      * @return ClassLikeEntity|null
+     *
+     * @api
      *
      * @example
      *  $entitiesCollection->findEntity('App'); // class name
