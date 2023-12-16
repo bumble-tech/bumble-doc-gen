@@ -136,7 +136,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
             }
 
             $functionData['name'] = $filters[$className];
-            $entity = $entitiesCollection->getEntityByClassName($className);
+            $entity = $entitiesCollection->getLoadedOrCreateNew($className);
             $method = $entity->getMethodEntitiesCollection()->get('__invoke');
             $functionData['parameters'] = $method->getParameters();
             $filtersData[$className] = $functionData;

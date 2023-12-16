@@ -129,7 +129,7 @@ final class TwigFunctionClassParserPlugin implements PluginInterface
             if (!isset($functions[$className])) {
                 return null;
             }
-            $entity = $entitiesCollection->getEntityByClassName($className);
+            $entity = $entitiesCollection->getLoadedOrCreateNew($className);
             if (str_starts_with($entity->getRelativeFileName(), '/selfdoc')) {
                 return null;
             }

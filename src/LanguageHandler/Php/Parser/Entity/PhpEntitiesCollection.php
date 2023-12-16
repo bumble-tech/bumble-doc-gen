@@ -232,11 +232,6 @@ final class PhpEntitiesCollection extends LoggableRootEntityCollection
         return $classEntity;
     }
 
-    public function getEntityByClassName(string $className, bool $createIfNotExists = true): ?ClassLikeEntity
-    {
-        return $createIfNotExists ? $this->getLoadedOrCreateNew($className) : $this->get($className);
-    }
-
     /**
      * Get a copy of the current collection only with entities filtered by interfaces names (filtering is only available for ClassLikeEntity)
      *
