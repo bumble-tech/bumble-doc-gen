@@ -59,7 +59,7 @@ final class DisplayClassApiMethods implements CustomFunctionInterface
                         $classEntity->getName(),
                         $method->getName()
                     ]);
-                    $apiMethods[] = "- [#]({$entityDocUrl}) `{$method->getName()}()`" . ($description ? ": {$description}" : '');
+                    $apiMethods[] = "- [{$method->getName()}()]({$entityDocUrl})" . ($description ? ": {$description}" : '');
                 }
             }
             return implode("\n", $apiMethods);
