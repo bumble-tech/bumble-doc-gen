@@ -35,34 +35,31 @@ final class PhpEntitiesCollection extends \BumbleDocGen\Core\Parser\Entity\Logga
 <ol>
 <li>
     <a href="#madd">add</a>
-    </li>
+    - <i>Add an entity to the collection</i></li>
 <li>
     <a href="#mclearoperationslogcollection">clearOperationsLogCollection</a>
     </li>
 <li>
     <a href="#mfilterbyinterfaces">filterByInterfaces</a>
-    - <i>Retrieving all entities that implement the specified interfaces. Filtering is only available for ClassLikeEntity.</i></li>
+    - <i>Get a copy of the current collection only with entities filtered by interfaces names (filtering is only available for ClassLikeEntity)</i></li>
 <li>
     <a href="#mfilterbynameregularexpression">filterByNameRegularExpression</a>
-    </li>
+    - <i>Get a copy of the current collection with only entities whose names match the regular expression</i></li>
 <li>
     <a href="#mfilterbyparentclassnames">filterByParentClassNames</a>
-    - <i>Retrieving all entities that inherit from the specified classes. Filtering is only available for ClassLikeEntity.</i></li>
+    - <i>Get a copy of the current collection only with entities filtered by parent classes names (filtering is only available for ClassLikeEntity)</i></li>
 <li>
     <a href="#mfilterbypaths">filterByPaths</a>
-    - <i>Filtering entities by relative files paths (from project_root) of the project</i></li>
+    - <i>Get a copy of the current collection only with entities filtered by file paths (from project_root)</i></li>
 <li>
     <a href="#mfindentity">findEntity</a>
-    </li>
+    - <i>Find an entity in a collection</i></li>
 <li>
     <a href="#mget">get</a>
-    </li>
-<li>
-    <a href="#mgetentitybyclassname">getEntityByClassName</a>
-    </li>
+    - <i>Get an entity from a collection (only previously added)</i></li>
 <li>
     <a href="#mgetentitycollectionname">getEntityCollectionName</a>
-    </li>
+    - <i>Get collection name</i></li>
 <li>
     <a href="#mgetentitylinkdata">getEntityLinkData</a>
     </li>
@@ -71,28 +68,25 @@ final class PhpEntitiesCollection extends \BumbleDocGen\Core\Parser\Entity\Logga
     </li>
 <li>
     <a href="#mgetloadedorcreatenew">getLoadedOrCreateNew</a>
-    </li>
+    - <i>Get an entity from the collection or create a new one if it has not yet been added</i></li>
 <li>
     <a href="#mgetonlyabstractclasses">getOnlyAbstractClasses</a>
-    </li>
+    - <i>Get a copy of the current collection with only abstract classes</i></li>
 <li>
     <a href="#mgetonlyinstantiable">getOnlyInstantiable</a>
-    - <i>Retrieving only instantiable entities. Filtering is only available for ClassLikeEntity.</i></li>
+    - <i>Get a copy of the current collection with only instantiable entities</i></li>
 <li>
     <a href="#mgetonlyinterfaces">getOnlyInterfaces</a>
-    </li>
+    - <i>Get a copy of the current collection with only interfaces</i></li>
 <li>
     <a href="#mgetonlytraits">getOnlyTraits</a>
-    </li>
+    - <i>Get a copy of the current collection with only traits</i></li>
 <li>
     <a href="#mgetoperationslogcollection">getOperationsLogCollection</a>
     </li>
 <li>
-    <a href="#mgetplugineventdispatcher">getPluginEventDispatcher</a>
-    </li>
-<li>
     <a href="#mhas">has</a>
-    </li>
+    - <i>Check if an entity has been added to the collection</i></li>
 <li>
     <a href="#minternalfindentity">internalFindEntity</a>
     </li>
@@ -101,7 +95,7 @@ final class PhpEntitiesCollection extends \BumbleDocGen\Core\Parser\Entity\Logga
     </li>
 <li>
     <a href="#misempty">isEmpty</a>
-    </li>
+    - <i>Check if the collection is empty or not</i></li>
 <li>
     <a href="#mloadentities">loadEntities</a>
     - <i>Load entities into a collection</i></li>
@@ -110,10 +104,10 @@ final class PhpEntitiesCollection extends \BumbleDocGen\Core\Parser\Entity\Logga
     - <i>Load entities into a collection by configuration</i></li>
 <li>
     <a href="#mremove">remove</a>
-    </li>
+    - <i>Remove an entity from a collection</i></li>
 <li>
     <a href="#mtoarray">toArray</a>
-    </li>
+    - <i>Convert collection to array</i></li>
 <li>
     <a href="#mupdateentitiescache">updateEntitiesCache</a>
     </li>
@@ -211,14 +205,14 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="madd" href="#madd">#</a>
  <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L188">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L190">source code</a></li>
 </ul>
 
 ```php
 public function add(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $classEntity, bool $reload = false): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
-
+<blockquote>Add an entity to the collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -284,14 +278,14 @@ public function clearOperationsLogCollection(): void;
 <ul>
 <li><a name="mfilterbyinterfaces" href="#mfilterbyinterfaces">#</a>
  <b>filterByInterfaces</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L243">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L244">source code</a></li>
 </ul>
 
 ```php
 public function filterByInterfaces(array $interfaces): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
-<blockquote>Retrieving all entities that implement the specified interfaces. Filtering is only available for ClassLikeEntity.</blockquote>
+<blockquote>Get a copy of the current collection only with entities filtered by interfaces names (filtering is only available for ClassLikeEntity)</blockquote>
 
 <b>Parameters:</b>
 
@@ -329,14 +323,14 @@ public function filterByInterfaces(array $interfaces): \BumbleDocGen\LanguageHan
 <ul>
 <li><a name="mfilterbynameregularexpression" href="#mfilterbynameregularexpression">#</a>
  <b>filterByNameRegularExpression</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L309">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L321">source code</a></li>
 </ul>
 
 ```php
 public function filterByNameRegularExpression(string $regexPattern): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
-
+<blockquote>Get a copy of the current collection with only entities whose names match the regular expression</blockquote>
 
 <b>Parameters:</b>
 
@@ -367,14 +361,14 @@ public function filterByNameRegularExpression(string $regexPattern): \BumbleDocG
 <ul>
 <li><a name="mfilterbyparentclassnames" href="#mfilterbyparentclassnames">#</a>
  <b>filterByParentClassNames</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L267">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L270">source code</a></li>
 </ul>
 
 ```php
 public function filterByParentClassNames(array $parentClassNames): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
-<blockquote>Retrieving all entities that inherit from the specified classes. Filtering is only available for ClassLikeEntity.</blockquote>
+<blockquote>Get a copy of the current collection only with entities filtered by parent classes names (filtering is only available for ClassLikeEntity)</blockquote>
 
 <b>Parameters:</b>
 
@@ -412,14 +406,14 @@ public function filterByParentClassNames(array $parentClassNames): \BumbleDocGen
 <ul>
 <li><a name="mfilterbypaths" href="#mfilterbypaths">#</a>
  <b>filterByPaths</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L291">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L298">source code</a></li>
 </ul>
 
 ```php
 public function filterByPaths(array $paths): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
-<blockquote>Filtering entities by relative files paths (from project_root) of the project</blockquote>
+<blockquote>Get a copy of the current collection only with entities filtered by file paths (from project_root)</blockquote>
 
 <b>Parameters:</b>
 
@@ -466,7 +460,7 @@ public function filterByPaths(array $paths): \BumbleDocGen\LanguageHandler\Php\P
 public function findEntity(string $search, bool $useUnsafeKeys = true): null|\BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
-
+<blockquote>Find an entity in a collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -511,7 +505,7 @@ public function findEntity(string $search, bool $useUnsafeKeys = true): null|\Bu
 public function get(string $objectName): null|\BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
-
+<blockquote>Get an entity from a collection (only previously added)</blockquote>
 
 <b>Parameters:</b>
 
@@ -540,59 +534,16 @@ public function get(string $objectName): null|\BumbleDocGen\Core\Parser\Entity\R
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgetentitybyclassname" href="#mgetentitybyclassname">#</a>
- <b>getEntityByClassName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L231">source code</a></li>
-</ul>
-
-```php
-public function getEntityByClassName(string $className, bool $createIfNotExists = true): null|\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
-```
-
-
-
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$className</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$createIfNotExists</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
 <li><a name="mgetentitycollectionname" href="#mgetentitycollectionname">#</a>
  <b>getEntityCollectionName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L68">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L66">source code</a></li>
 </ul>
 
 ```php
 public function getEntityCollectionName(): string;
 ```
 
-
+<blockquote>Get collection name</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -606,7 +557,7 @@ public function getEntityCollectionName(): string;
 <ul>
 <li><a name="mgetentitylinkdata" href="#mgetentitylinkdata">#</a>
  <b>getEntityLinkData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L478">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L508">source code</a></li>
 </ul>
 
 ```php
@@ -687,7 +638,7 @@ public function getIterator(): \Generator;
 public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): \BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
-
+<blockquote>Get an entity from the collection or create a new one if it has not yet been added</blockquote>
 
 <b>Parameters:</b>
 
@@ -729,14 +680,14 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
 <ul>
 <li><a name="mgetonlyabstractclasses" href="#mgetonlyabstractclasses">#</a>
  <b>getOnlyAbstractClasses</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L360">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L388">source code</a></li>
 </ul>
 
 ```php
 public function getOnlyAbstractClasses(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
-
+<blockquote>Get a copy of the current collection with only abstract classes</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -757,14 +708,14 @@ public function getOnlyAbstractClasses(): \BumbleDocGen\LanguageHandler\Php\Pars
 <ul>
 <li><a name="mgetonlyinstantiable" href="#mgetonlyinstantiable">#</a>
  <b>getOnlyInstantiable</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L324">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L338">source code</a></li>
 </ul>
 
 ```php
 public function getOnlyInstantiable(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
-<blockquote>Retrieving only instantiable entities. Filtering is only available for ClassLikeEntity.</blockquote>
+<blockquote>Get a copy of the current collection with only instantiable entities</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -778,14 +729,14 @@ public function getOnlyInstantiable(): \BumbleDocGen\LanguageHandler\Php\Parser\
 <ul>
 <li><a name="mgetonlyinterfaces" href="#mgetonlyinterfaces">#</a>
  <b>getOnlyInterfaces</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L335">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L354">source code</a></li>
 </ul>
 
 ```php
 public function getOnlyInterfaces(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
-
+<blockquote>Get a copy of the current collection with only interfaces</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -799,14 +750,14 @@ public function getOnlyInterfaces(): \BumbleDocGen\LanguageHandler\Php\Parser\En
 <ul>
 <li><a name="mgetonlytraits" href="#mgetonlytraits">#</a>
  <b>getOnlyTraits</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L346">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L370">source code</a></li>
 </ul>
 
 ```php
 public function getOnlyTraits(): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 ```
 
-
+<blockquote>Get a copy of the current collection with only traits</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -841,30 +792,9 @@ public function getOperationsLogCollection(): \BumbleDocGen\Core\Parser\Entity\C
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgetplugineventdispatcher" href="#mgetplugineventdispatcher">#</a>
- <b>getPluginEventDispatcher</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L63">source code</a></li>
-</ul>
-
-```php
-public function getPluginEventDispatcher(): \BumbleDocGen\Core\Plugin\PluginEventDispatcher;
-```
-
-
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php'>\BumbleDocGen\Core\Plugin\PluginEventDispatcher</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
 <li><a name="mhas" href="#mhas">#</a>
  <b>has</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L42">source code</a></li>
 </ul>
 
 ```php
@@ -873,7 +803,7 @@ public function getPluginEventDispatcher(): \BumbleDocGen\Core\Plugin\PluginEven
 public function has(string $objectName): bool;
 ```
 
-
+<blockquote>Check if an entity has been added to the collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -904,7 +834,7 @@ public function has(string $objectName): bool;
 <ul>
 <li><a name="minternalfindentity" href="#minternalfindentity">#</a>
  <b>internalFindEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L391">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L421">source code</a></li>
 </ul>
 
 ```php
@@ -964,7 +894,7 @@ $entitiesCollection->findEntity('https://github.com/bumble-tech/bumble-doc-gen/b
 <ul>
 <li><a name="minternalgetloadedorcreatenew" href="#minternalgetloadedorcreatenew">#</a>
  <b>internalGetLoadedOrCreateNew</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L210">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L214">source code</a></li>
 </ul>
 
 ```php
@@ -1020,7 +950,7 @@ public function internalGetLoadedOrCreateNew(string $objectName, bool $withAddCl
 <ul>
 <li><a name="misempty" href="#misempty">#</a>
  <b>isEmpty</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L52">source code</a></li>
 </ul>
 
 ```php
@@ -1029,7 +959,7 @@ public function internalGetLoadedOrCreateNew(string $objectName, bool $withAddCl
 public function isEmpty(): bool;
 ```
 
-
+<blockquote>Check if the collection is empty or not</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -1043,7 +973,7 @@ public function isEmpty(): bool;
 <ul>
 <li><a name="mloadentities" href="#mloadentities">#</a>
  <b>loadEntities</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L102">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L100">source code</a></li>
 </ul>
 
 ```php
@@ -1107,7 +1037,7 @@ public function loadEntities(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocat
 <ul>
 <li><a name="mloadentitiesbyconfiguration" href="#mloadentitiesbyconfiguration">#</a>
  <b>loadEntitiesByConfiguration</b>
- <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L83">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L81">source code</a></li>
 </ul>
 
 ```php
@@ -1161,7 +1091,7 @@ public function loadEntitiesByConfiguration(\BumbleDocGen\Core\Parser\Entity\Ent
 <ul>
 <li><a name="mremove" href="#mremove">#</a>
  <b>remove</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -1170,7 +1100,7 @@ public function loadEntitiesByConfiguration(\BumbleDocGen\Core\Parser\Entity\Ent
 public function remove(string $objectName): void;
 ```
 
-
+<blockquote>Remove an entity from a collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -1201,7 +1131,7 @@ public function remove(string $objectName): void;
 <ul>
 <li><a name="mtoarray" href="#mtoarray">#</a>
  <b>toArray</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L99">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L127">source code</a></li>
 </ul>
 
 ```php
@@ -1210,7 +1140,7 @@ public function remove(string $objectName): void;
 public function toArray(): array;
 ```
 
-
+<blockquote>Convert collection to array</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -1224,7 +1154,7 @@ public function toArray(): array;
 <ul>
 <li><a name="mupdateentitiescache" href="#mupdateentitiescache">#</a>
  <b>updateEntitiesCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L76">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L97">source code</a></li>
 </ul>
 
 ```php

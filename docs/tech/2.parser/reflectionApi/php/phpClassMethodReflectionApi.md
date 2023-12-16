@@ -16,50 +16,50 @@ $methodReflection = $classReflection->getMethod('methodName');
 
 **Class method reflection API methods:**
 
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetabsolutefilename) `getAbsoluteFileName()`: Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetast) `getAst()`: Get AST for this entity
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetbodycode) `getBodyCode()`: Get the code for this method
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetdescription) `getDescription()`: Get entity description
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetdescriptionlinks) `getDescriptionLinks()`: Get parsed links from description and doc blocks `see` and `link`
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetdoccomment) `getDocComment()`: Get the doc comment of an entity
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetdocnote) `getDocNote()`: Get the note annotation value
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetendline) `getEndLine()`: Get the line number of the end of a method&#039;s code in a file
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetexamples) `getExamples()`: Get parsed examples from `examples` doc block
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetfirstexample) `getFirstExample()`: Get first example from `examples` doc block
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetfirstreturnvalue) `getFirstReturnValue()`: Get the compiled first return value of a method (if possible)
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetimplementingclass) `getImplementingClass()`: Get the class like entity in which the current entity was implemented
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetimplementingclassname) `getImplementingClassName()`: Get the name of the class in which this method is implemented
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetmodifiersstring) `getModifiersString()`: Get a text representation of method modifiers
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetname) `getName()`: Full name of the entity
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetnamespacename) `getNamespaceName()`: Namespace of the class that contains this method
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetobjectid) `getObjectId()`: Get entity unique ID
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetparameters) `getParameters()`: Get a list of method parameters
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetparametersstring) `getParametersString()`: Get a list of method parameters as a string
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetparentmethod) `getParentMethod()`: Get the parent method for this method
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetrelativefilename) `getRelativeFileName()`: File name relative to project_root configuration parameter
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetreturntype) `getReturnType()`: Get the return type of method
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetrootentitycollection) `getRootEntityCollection()`: Get the collection of root entities to which this entity belongs
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetshortname) `getShortName()`: Short name of the entity
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetsignature) `getSignature()`: Get the method signature as a string
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetstartcolumn) `getStartColumn()`: Get the column number of the beginning of the method code in a file
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetstartline) `getStartLine()`: Get the line number of the beginning of the entity code in a file
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetthrows) `getThrows()`: Get parsed throws from `throws` doc block
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mhasdescriptionlinks) `hasDescriptionLinks()`: Checking if an entity has links in its description
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mhasexamples) `hasExamples()`: Checking if an entity has `example` docBlock
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mhasthrows) `hasThrows()`: Checking if an entity has `throws` docBlock
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misapi) `isApi()`: Checking if an entity has `api` docBlock
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misconstructor) `isConstructor()`: Checking that a method is a constructor
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misdeprecated) `isDeprecated()`: Checking if an entity has `deprecated` docBlock
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misdynamic) `isDynamic()`: Check if a method is a dynamic method, that is, implementable using __call or __callStatic
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misentityfilecanbeload) `isEntityFileCanBeLoad()`: Checking if entity data can be retrieved
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misimplementedinparentclass) `isImplementedInParentClass()`: Check if this method is implemented in the parent class
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misinitialization) `isInitialization()`: Check if a method is an initialization method
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misinternal) `isInternal()`: Checking if an entity has `internal` docBlock
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misprivate) `isPrivate()`: Check if a method is a private method
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misprotected) `isProtected()`: Check if a method is a protected method
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mispublic) `isPublic()`: Check if a method is a public method
-- [#](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misstatic) `isStatic()`: Check if this method is static
+- [getAbsoluteFileName()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetabsolutefilename): Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
+- [getAst()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetast): Get AST for this entity
+- [getBodyCode()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetbodycode): Get the code for this method
+- [getDescription()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetdescription): Get entity description
+- [getDescriptionLinks()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetdescriptionlinks): Get parsed links from description and doc blocks `see` and `link`
+- [getDocComment()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetdoccomment): Get the doc comment of an entity
+- [getDocNote()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetdocnote): Get the note annotation value
+- [getEndLine()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetendline): Get the line number of the end of a method&#039;s code in a file
+- [getExamples()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetexamples): Get parsed examples from `examples` doc block
+- [getFirstExample()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetfirstexample): Get first example from `examples` doc block
+- [getFirstReturnValue()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetfirstreturnvalue): Get the compiled first return value of a method (if possible)
+- [getImplementingClass()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetimplementingclass): Get the class like entity in which the current entity was implemented
+- [getImplementingClassName()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetimplementingclassname): Get the name of the class in which this method is implemented
+- [getModifiersString()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetmodifiersstring): Get a text representation of method modifiers
+- [getName()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetname): Full name of the entity
+- [getNamespaceName()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetnamespacename): Namespace of the class that contains this method
+- [getObjectId()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetobjectid): Get entity unique ID
+- [getParameters()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetparameters): Get a list of method parameters
+- [getParametersString()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetparametersstring): Get a list of method parameters as a string
+- [getParentMethod()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetparentmethod): Get the parent method for this method
+- [getRelativeFileName()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetrelativefilename): File name relative to project_root configuration parameter
+- [getReturnType()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetreturntype): Get the return type of method
+- [getRootEntityCollection()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetrootentitycollection): Get the collection of root entities to which this entity belongs
+- [getShortName()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetshortname): Short name of the entity
+- [getSignature()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetsignature): Get the method signature as a string
+- [getStartColumn()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetstartcolumn): Get the column number of the beginning of the method code in a file
+- [getStartLine()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetstartline): Get the line number of the beginning of the entity code in a file
+- [getThrows()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mgetthrows): Get parsed throws from `throws` doc block
+- [hasDescriptionLinks()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mhasdescriptionlinks): Checking if an entity has links in its description
+- [hasExamples()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mhasexamples): Checking if an entity has `example` docBlock
+- [hasThrows()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mhasthrows): Checking if an entity has `throws` docBlock
+- [isApi()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misapi): Checking if an entity has `api` docBlock
+- [isConstructor()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misconstructor): Checking that a method is a constructor
+- [isDeprecated()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misdeprecated): Checking if an entity has `deprecated` docBlock
+- [isDynamic()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misdynamic): Check if a method is a dynamic method, that is, implementable using __call or __callStatic
+- [isEntityFileCanBeLoad()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misentityfilecanbeload): Checking if entity data can be retrieved
+- [isImplementedInParentClass()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misimplementedinparentclass): Check if this method is implemented in the parent class
+- [isInitialization()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misinitialization): Check if a method is an initialization method
+- [isInternal()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misinternal): Checking if an entity has `internal` docBlock
+- [isPrivate()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misprivate): Check if a method is a private method
+- [isProtected()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misprotected): Check if a method is a protected method
+- [isPublic()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#mispublic): Check if a method is a public method
+- [isStatic()](/docs/tech/2.parser/reflectionApi/php/classes/MethodEntity.md#misstatic): Check if this method is static
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Dec 15 21:27:10 2023 +0300<br><b>Page content update date:</b> Fri Dec 15 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Dec 15 21:27:10 2023 +0300<br><b>Page content update date:</b> Sat Dec 16 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

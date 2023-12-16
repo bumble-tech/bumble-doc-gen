@@ -28,13 +28,13 @@ abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Bas
 <ol>
 <li>
     <a href="#mfindentity">findEntity</a>
-    </li>
+    - <i>Find an entity in a collection</i></li>
 <li>
     <a href="#mget">get</a>
-    </li>
+    - <i>Get an entity from a collection (only previously added)</i></li>
 <li>
     <a href="#mgetentitycollectionname">getEntityCollectionName</a>
-    </li>
+    - <i>Get collection name</i></li>
 <li>
     <a href="#mgetentitylinkdata">getEntityLinkData</a>
     </li>
@@ -43,13 +43,13 @@ abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Bas
     </li>
 <li>
     <a href="#mgetloadedorcreatenew">getLoadedOrCreateNew</a>
-    </li>
+    - <i>Get an entity from the collection or create a new one if it has not yet been added</i></li>
 <li>
     <a href="#mhas">has</a>
-    </li>
+    - <i>Check if an entity has been added to the collection</i></li>
 <li>
     <a href="#misempty">isEmpty</a>
-    </li>
+    - <i>Check if the collection is empty or not</i></li>
 <li>
     <a href="#mloadentities">loadEntities</a>
     </li>
@@ -58,10 +58,10 @@ abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Bas
     </li>
 <li>
     <a href="#mremove">remove</a>
-    </li>
+    - <i>Remove an entity from a collection</i></li>
 <li>
     <a href="#mtoarray">toArray</a>
-    </li>
+    - <i>Convert collection to array</i></li>
 <li>
     <a href="#mupdateentitiescache">updateEntitiesCache</a>
     </li>
@@ -80,14 +80,14 @@ abstract class RootEntityCollection extends \BumbleDocGen\Core\Parser\Entity\Bas
 <ul>
 <li><a name="mfindentity" href="#mfindentity">#</a>
  <b>findEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L59">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L76">source code</a></li>
 </ul>
 
 ```php
 public function findEntity(string $search, bool $useUnsafeKeys = true): null|\BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
-
+<blockquote>Find an entity in a collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -123,14 +123,14 @@ public function findEntity(string $search, bool $useUnsafeKeys = true): null|\Bu
 <ul>
 <li><a name="mget" href="#mget">#</a>
  <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L40">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L49">source code</a></li>
 </ul>
 
 ```php
 public function get(string $objectName): null|\BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
-
+<blockquote>Get an entity from a collection (only previously added)</blockquote>
 
 <b>Parameters:</b>
 
@@ -161,14 +161,14 @@ public function get(string $objectName): null|\BumbleDocGen\Core\Parser\Entity\R
 <ul>
 <li><a name="mgetentitycollectionname" href="#mgetentitycollectionname">#</a>
  <b>getEntityCollectionName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L34">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L39">source code</a></li>
 </ul>
 
 ```php
 public function getEntityCollectionName(): string;
 ```
 
-
+<blockquote>Get collection name</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -182,7 +182,7 @@ public function getEntityCollectionName(): string;
 <ul>
 <li><a name="mgetentitylinkdata" href="#mgetentitylinkdata">#</a>
  <b>getEntityLinkData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L71">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L90">source code</a></li>
 </ul>
 
 ```php
@@ -254,14 +254,14 @@ public function getIterator(): \Generator;
 <ul>
 <li><a name="mgetloadedorcreatenew" href="#mgetloadedorcreatenew">#</a>
  <b>getLoadedOrCreateNew</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L54">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L67">source code</a></li>
 </ul>
 
 ```php
 public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): \BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
-
+<blockquote>Get an entity from the collection or create a new one if it has not yet been added</blockquote>
 
 <b>Parameters:</b>
 
@@ -303,7 +303,7 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
 <ul>
 <li><a name="mhas" href="#mhas">#</a>
  <b>has</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L42">source code</a></li>
 </ul>
 
 ```php
@@ -312,7 +312,7 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
 public function has(string $objectName): bool;
 ```
 
-
+<blockquote>Check if an entity has been added to the collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -343,7 +343,7 @@ public function has(string $objectName): bool;
 <ul>
 <li><a name="misempty" href="#misempty">#</a>
  <b>isEmpty</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L52">source code</a></li>
 </ul>
 
 ```php
@@ -352,7 +352,7 @@ public function has(string $objectName): bool;
 public function isEmpty(): bool;
 ```
 
-
+<blockquote>Check if the collection is empty or not</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -452,7 +452,7 @@ public function loadEntitiesByConfiguration(\BumbleDocGen\Core\Parser\Entity\Ent
 <ul>
 <li><a name="mremove" href="#mremove">#</a>
  <b>remove</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -461,7 +461,7 @@ public function loadEntitiesByConfiguration(\BumbleDocGen\Core\Parser\Entity\Ent
 public function remove(string $objectName): void;
 ```
 
-
+<blockquote>Remove an entity from a collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -492,14 +492,14 @@ public function remove(string $objectName): void;
 <ul>
 <li><a name="mtoarray" href="#mtoarray">#</a>
  <b>toArray</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L99">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L127">source code</a></li>
 </ul>
 
 ```php
 public function toArray(): array;
 ```
 
-
+<blockquote>Convert collection to array</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -513,7 +513,7 @@ public function toArray(): array;
 <ul>
 <li><a name="mupdateentitiescache" href="#mupdateentitiescache">#</a>
  <b>updateEntitiesCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L76">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L97">source code</a></li>
 </ul>
 
 ```php

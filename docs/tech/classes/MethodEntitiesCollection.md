@@ -50,16 +50,16 @@ final class MethodEntitiesCollection extends \BumbleDocGen\Core\Parser\Entity\Ba
     </li>
 <li>
     <a href="#mhas">has</a>
-    </li>
+    - <i>Check if an entity has been added to the collection</i></li>
 <li>
     <a href="#misempty">isEmpty</a>
-    </li>
+    - <i>Check if the collection is empty or not</i></li>
 <li>
     <a href="#mloadmethodentities">loadMethodEntities</a>
     - <i>Load method entities into the collection according to the project configuration</i></li>
 <li>
     <a href="#mremove">remove</a>
-    </li>
+    - <i>Remove an entity from a collection</i></li>
 <li>
     <a href="#munsafeget">unsafeGet</a>
     - <i>Get the method entity if it exists. If the method exists but has not been loaded into the collection, a new entity object will be created</i></li>
@@ -276,7 +276,7 @@ public function getIterator(): \Generator;
 <ul>
 <li><a name="mhas" href="#mhas">#</a>
  <b>has</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L42">source code</a></li>
 </ul>
 
 ```php
@@ -285,7 +285,7 @@ public function getIterator(): \Generator;
 public function has(string $objectName): bool;
 ```
 
-
+<blockquote>Check if an entity has been added to the collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -316,7 +316,7 @@ public function has(string $objectName): bool;
 <ul>
 <li><a name="misempty" href="#misempty">#</a>
  <b>isEmpty</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L52">source code</a></li>
 </ul>
 
 ```php
@@ -325,7 +325,7 @@ public function has(string $objectName): bool;
 public function isEmpty(): bool;
 ```
 
-
+<blockquote>Check if the collection is empty or not</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -379,7 +379,7 @@ public function loadMethodEntities(): void;
 <ul>
 <li><a name="mremove" href="#mremove">#</a>
  <b>remove</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -388,7 +388,7 @@ public function loadMethodEntities(): void;
 public function remove(string $objectName): void;
 ```
 
-
+<blockquote>Remove an entity from a collection</blockquote>
 
 <b>Parameters:</b>
 

@@ -1,5 +1,5 @@
 <!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/3.renderer/01_templates.md">How to create documentation templates?</a> <b>/</b> <a href="/docs/tech/3.renderer/templatesVariables.md">Templates variables</a> <b>/</b> PhpEntitiesCollection<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/2.parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/2.parser/reflectionApi/readme.md">Reflection API</a> <b>/</b> <a href="/docs/tech/2.parser/reflectionApi/php/readme.md">Reflection API for PHP</a> <b>/</b> <a href="/docs/tech/2.parser/reflectionApi/php/phpEntitiesCollection.md">PHP entities collection</a> <b>/</b> PhpEntitiesCollection<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php#L43">PhpEntitiesCollection</a> class:
@@ -244,7 +244,7 @@ public function add(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEnt
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/reflectionApi/php/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -312,7 +312,7 @@ public function filterByInterfaces(array $interfaces): \BumbleDocGen\LanguageHan
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/reflectionApi/php/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -395,7 +395,7 @@ public function filterByParentClassNames(array $parentClassNames): \BumbleDocGen
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/reflectionApi/php/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -440,7 +440,7 @@ public function filterByPaths(array $paths): \BumbleDocGen\LanguageHandler\Php\P
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/reflectionApi/php/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -671,7 +671,7 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
 <b>See:</b>
 <ul>
     <li>
-        <a href="/docs/tech/3.renderer/classes/RootEntityInterface_2.md#misentitydatacanbeloaded">\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::isEntityDataCanBeLoaded()</a>    </li>
+        <a href="/docs/tech/2.parser/reflectionApi/php/classes/RootEntityInterface.md#misentitydatacanbeloaded">\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::isEntityDataCanBeLoaded()</a>    </li>
 </ul>
 </div>
 <hr>
@@ -697,7 +697,7 @@ public function getOnlyAbstractClasses(): \BumbleDocGen\LanguageHandler\Php\Pars
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/reflectionApi/php/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -939,7 +939,7 @@ public function internalGetLoadedOrCreateNew(string $objectName, bool $withAddCl
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/reflectionApi/php/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1026,7 +1026,7 @@ public function loadEntities(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocat
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/reflectionApi/php/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -1080,7 +1080,7 @@ public function loadEntitiesByConfiguration(\BumbleDocGen\Core\Parser\Entity\Ent
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/3.renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/2.parser/reflectionApi/php/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
