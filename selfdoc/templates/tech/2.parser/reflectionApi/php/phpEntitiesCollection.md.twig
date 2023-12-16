@@ -1,0 +1,9 @@
+{% set title = 'PHP entities collection' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+{% set prevPage = 'Reflection API for PHP' %}
+
+{{ "PHP entities collection" | textToHeading('H1') }}
+
+**PHP entities collection API methods:**
+
+{{ displayClassApiMethods('\\BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\PhpEntitiesCollection') }}
