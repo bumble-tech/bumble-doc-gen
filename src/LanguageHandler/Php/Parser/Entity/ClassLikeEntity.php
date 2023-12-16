@@ -87,6 +87,8 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
     }
 
     /**
+     * Bring the class name to the standard format used in the system
+     *
      * @api
      */
     final public static function normalizeClassName(string $name): string
