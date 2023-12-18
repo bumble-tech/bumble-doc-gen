@@ -77,7 +77,9 @@ final class DocGenerator
     }
 
     /**
-     * Generate missing docBlocks with ChatGPT for project class methods that are available for documentation
+     * Generate missing docBlocks with LLM for project class methods that are available for documentation
+     *
+     * @api
      *
      * @throws NotFoundException
      * @throws DependencyException
@@ -160,6 +162,10 @@ final class DocGenerator
     }
 
     /**
+     * Creates a `README.md` template filled with basic information using LLM
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -245,6 +251,8 @@ final class DocGenerator
 
     /**
      * Generates documentation using configuration
+     *
+     * @api
      *
      * @throws InvalidArgumentException
      * @throws Exception

@@ -35,13 +35,13 @@ final class DocGenerator
 <ol>
 <li>
     <a href="#madddocblocks">addDocBlocks</a>
-    - <i>Generate missing docBlocks with ChatGPT for project class methods that are available for documentation</i></li>
+    - <i>Generate missing docBlocks with LLM for project class methods that are available for documentation</i></li>
 <li>
     <a href="#mgenerate">generate</a>
     - <i>Generates documentation using configuration</i></li>
 <li>
     <a href="#mgeneratereadmetemplate">generateReadmeTemplate</a>
-    </li>
+    - <i>Creates a `README.md` template filled with basic information using LLM</i></li>
 <li>
     <a href="#mparseandgetrootentitycollectionsgroup">parseAndGetRootEntityCollectionsGroup</a>
     </li>
@@ -166,14 +166,14 @@ public function __construct(\Symfony\Component\Console\Style\OutputStyle $io, \B
 <ul>
 <li><a name="madddocblocks" href="#madddocblocks">#</a>
  <b>addDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L87">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L89">source code</a></li>
 </ul>
 
 ```php
 public function addDocBlocks(\BumbleDocGen\AI\ProviderInterface $aiProvider): void;
 ```
 
-<blockquote>Generate missing docBlocks with ChatGPT for project class methods that are available for documentation</blockquote>
+<blockquote>Generate missing docBlocks with LLM for project class methods that are available for documentation</blockquote>
 
 <b>Parameters:</b>
 
@@ -220,7 +220,7 @@ public function addDocBlocks(\BumbleDocGen\AI\ProviderInterface $aiProvider): vo
 <ul>
 <li><a name="mgenerate" href="#mgenerate">#</a>
  <b>generate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L252">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L260">source code</a></li>
 </ul>
 
 ```php
@@ -251,14 +251,14 @@ public function generate(): void;
 <ul>
 <li><a name="mgeneratereadmetemplate" href="#mgeneratereadmetemplate">#</a>
  <b>generateReadmeTemplate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L167">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L173">source code</a></li>
 </ul>
 
 ```php
 public function generateReadmeTemplate(\BumbleDocGen\AI\ProviderInterface $aiProvider): void;
 ```
 
-
+<blockquote>Creates a `README.md` template filled with basic information using LLM</blockquote>
 
 <b>Parameters:</b>
 

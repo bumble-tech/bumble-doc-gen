@@ -35,16 +35,16 @@ final class DocGeneratorFactory
 <ol>
 <li>
     <a href="#mcreate">create</a>
-    </li>
+    - <i>Creates a documentation generator instance using configuration files</i></li>
 <li>
     <a href="#mcreatebyconfigarray">createByConfigArray</a>
-    </li>
+    - <i>Creates a documentation generator instance using an array containing the configuration</i></li>
 <li>
     <a href="#mcreateconfiguration">createConfiguration</a>
-    </li>
+    - <i>Creating a project configuration instance</i></li>
 <li>
     <a href="#mcreaterootentitiescollection">createRootEntitiesCollection</a>
-    </li>
+    - <i>Creating a collection of entities (see `ReflectionAPI`)</i></li>
 <li>
     <a href="#msetcustomconfigurationparameters">setCustomConfigurationParameters</a>
     </li>
@@ -103,14 +103,14 @@ public function __construct(string $diConfig = __DIR__ . '/di-config.php');
 <ul>
 <li><a name="mcreate" href="#mcreate">#</a>
  <b>create</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L48">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L52">source code</a></li>
 </ul>
 
 ```php
 public function create(string|null ...$configurationFiles): \BumbleDocGen\DocGenerator;
 ```
 
-
+<blockquote>Creates a documentation generator instance using configuration files</blockquote>
 
 <b>Parameters:</b>
 
@@ -154,14 +154,14 @@ public function create(string|null ...$configurationFiles): \BumbleDocGen\DocGen
 <ul>
 <li><a name="mcreatebyconfigarray" href="#mcreatebyconfigarray">#</a>
  <b>createByConfigArray</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L69">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L77">source code</a></li>
 </ul>
 
 ```php
 public function createByConfigArray(array $config): \BumbleDocGen\DocGenerator;
 ```
 
-
+<blockquote>Creates a documentation generator instance using an array containing the configuration</blockquote>
 
 <b>Parameters:</b>
 
@@ -205,14 +205,14 @@ public function createByConfigArray(array $config): \BumbleDocGen\DocGenerator;
 <ul>
 <li><a name="mcreateconfiguration" href="#mcreateconfiguration">#</a>
  <b>createConfiguration</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L90">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L102">source code</a></li>
 </ul>
 
 ```php
 public function createConfiguration(string ...$configurationFiles): \BumbleDocGen\Core\Configuration\Configuration;
 ```
 
-
+<blockquote>Creating a project configuration instance</blockquote>
 
 <b>Parameters:</b>
 
@@ -256,14 +256,14 @@ public function createConfiguration(string ...$configurationFiles): \BumbleDocGe
 <ul>
 <li><a name="mcreaterootentitiescollection" href="#mcreaterootentitiescollection">#</a>
  <b>createRootEntitiesCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L111">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L127">source code</a></li>
 </ul>
 
 ```php
 public function createRootEntitiesCollection(\BumbleDocGen\Core\Configuration\ReflectionApiConfig $reflectionApiConfig): \BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 ```
 
-
+<blockquote>Creating a collection of entities (see `ReflectionAPI`)</blockquote>
 
 <b>Parameters:</b>
 

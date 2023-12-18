@@ -34,16 +34,11 @@ BumbleDocGen's interface consists of mainly two classes: [a]DocGenerator[/a] and
 
 - [a]DocGenerator[/a] provides main operations for generating the documents.
 
-  - `addMissingDocBlocks()`: This method creates missing docBlocks in your code.
-  - `fillInReadmeMdTemplate()`: This method prepares the `README.md` file using a predefined template.
-  - `generate()`: This method produces all necessary documentation.
-  - `generateProjectTemplatesStructure()`: This method creates a structure for project templates.
-  - `parseAndGetRootEntityCollectionsGroup()`: This method parses your project's files and collects information for the documentation.
+{{ displayClassApiMethods('\\BumbleDocGen\\DocGenerator') | addIndentFromLeft}}
 
 - [a]DocGeneratorFactory[/a] provides a method for creating `DocGenerator` instance.
 
-  - `create(configurationFiles: string)`: This method creates a `DocGenerator` instance using provided configuration files.
-  - `setCustomConfigurationParameters(customConfigurationParameters: array)`: This method sets custom configuration parameters for the `DocGenerator` creation.
+{{ displayClassApiMethods('\\BumbleDocGen\\DocGeneratorFactory') | addIndentFromLeft }}
 
 {{ "Examples of usage" | textToHeading('H3') }}
 

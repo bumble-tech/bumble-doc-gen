@@ -36,16 +36,16 @@ BumbleDocGen's interface consists of mainly two classes: <a href="/docs/classes/
 
 - <a href="/docs/classes/DocGenerator.md">DocGenerator</a> provides main operations for generating the documents.
 
-  - `addMissingDocBlocks()`: This method creates missing docBlocks in your code.
-  - `fillInReadmeMdTemplate()`: This method prepares the `README.md` file using a predefined template.
-  - `generate()`: This method produces all necessary documentation.
-  - `generateProjectTemplatesStructure()`: This method creates a structure for project templates.
-  - `parseAndGetRootEntityCollectionsGroup()`: This method parses your project's files and collects information for the documentation.
+    - [addDocBlocks()](/docs/classes/DocGenerator.md#madddocblocks): Generate missing docBlocks with LLM for project class methods that are available for documentation
+    - [generate()](/docs/classes/DocGenerator.md#mgenerate): Generates documentation using configuration
+    - [generateReadmeTemplate()](/docs/classes/DocGenerator.md#mgeneratereadmetemplate): Creates a `README.md` template filled with basic information using LLM
 
 - <a href="/docs/classes/DocGeneratorFactory.md">DocGeneratorFactory</a> provides a method for creating `DocGenerator` instance.
 
-  - `create(configurationFiles: string)`: This method creates a `DocGenerator` instance using provided configuration files.
-  - `setCustomConfigurationParameters(customConfigurationParameters: array)`: This method sets custom configuration parameters for the `DocGenerator` creation.
+    - [create()](/docs/classes/DocGeneratorFactory.md#mcreate): Creates a documentation generator instance using configuration files
+    - [createByConfigArray()](/docs/classes/DocGeneratorFactory.md#mcreatebyconfigarray): Creates a documentation generator instance using an array containing the configuration
+    - [createConfiguration()](/docs/classes/DocGeneratorFactory.md#mcreateconfiguration): Creating a project configuration instance
+    - [createRootEntitiesCollection()](/docs/classes/DocGeneratorFactory.md#mcreaterootentitiescollection): Creating a collection of entities (see `ReflectionAPI`)
 
 <embed> <h3>Examples of usage</h3> </embed>
 

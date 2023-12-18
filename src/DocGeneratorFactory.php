@@ -41,6 +41,10 @@ final class DocGeneratorFactory
     }
 
     /**
+     * Creates a documentation generator instance using configuration files
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \Exception
@@ -62,6 +66,10 @@ final class DocGeneratorFactory
     }
 
     /**
+     * Creates a documentation generator instance using an array containing the configuration
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \Exception
@@ -83,6 +91,10 @@ final class DocGeneratorFactory
     }
 
     /**
+     * Creating a project configuration instance
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \Exception
@@ -104,6 +116,10 @@ final class DocGeneratorFactory
     }
 
     /**
+     * Creating a collection of entities (see `ReflectionAPI`)
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \Exception
