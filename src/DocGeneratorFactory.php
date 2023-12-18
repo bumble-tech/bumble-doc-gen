@@ -108,7 +108,7 @@ final class DocGeneratorFactory
      * @throws NotFoundException
      * @throws \Exception
      */
-    public function getRootEntityReflections(ReflectionApiConfig $reflectionApiConfig): RootEntityCollection
+    public function createRootEntitiesCollection(ReflectionApiConfig $reflectionApiConfig): RootEntityCollection
     {
         $diContainer = $this->buildDiContainer();
         $logger = $diContainer->get(LoggerInterface::class);
@@ -116,13 +116,17 @@ final class DocGeneratorFactory
             /** @var ConfigurationParameterBag $configurationParameterBag */
             $configurationParameterBag = $diContainer->get(ConfigurationParameterBag::class);
             $configurationParameterBag->loadFromArray($reflectionApiConfig->toConfigArray());
-            return $diContainer->get(ProjectParser::class)->getEntityCollectionForPL(
+            $entitiesCollection =  $diContainer->get(ProjectParser::class)->getEntityCollectionForPL(
                 $reflectionApiConfig->getLanguageHandlerClassName()
             );
         } catch (\Exception $e) {
             $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
             throw new \RuntimeException($e->getMessage());
         }
+        if (!$entitiesCollection) {
+            throw new \InvalidArgumentException('The collection could not be created');
+        }
+        return $entitiesCollection;
     }
 
     /**

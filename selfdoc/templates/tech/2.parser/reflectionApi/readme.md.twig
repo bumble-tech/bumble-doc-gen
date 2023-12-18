@@ -16,7 +16,7 @@ You can use the Reflection API both in documentation templates and simply in you
 $reflectionApiConfig = PhpReflectionApiConfig::create();
 
 /** @var PhpEntitiesCollection $entitiesCollection*/
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 // By default the collection is empty. You can populate the collection with data
 $entitiesCollection->loadEntities(

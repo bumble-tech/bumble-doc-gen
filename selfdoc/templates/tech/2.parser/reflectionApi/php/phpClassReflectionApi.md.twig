@@ -15,7 +15,7 @@ PHP class reflection [a]ClassEntity[/a] inherits from [a]ClassLikeEntity[/a].
 **Example of creating class reflection:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 $classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName'); // or get()
 ```

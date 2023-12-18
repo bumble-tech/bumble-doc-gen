@@ -13,7 +13,7 @@ PHP interface reflection [a]InterfaceEntity[/a] inherits from [a]ClassLikeEntity
 **Example of creating interface reflection:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 $interfaceReflection = $entitiesCollection->getLoadedOrCreateNew('SomeInterfaceName'); // or get()
 ```

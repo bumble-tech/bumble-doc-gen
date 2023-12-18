@@ -19,9 +19,10 @@ Below is information about the available methods for working with each entity ty
 **Usage example:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
-$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName'); // or get()
+// In this example, the collection is empty, so we use a method that will create an entity by its name
+$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
 
 $entityName = $classReflection->getName();
 $entityDescription = $classReflection->getDescription();
@@ -42,7 +43,7 @@ The collections API is presented on this page: [a]PHP entities collection[/a]
 
 ```php
 // Create an empty collection
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 // Fill the collection with entities
 $entitiesCollection->loadEntities(
@@ -72,7 +73,7 @@ PHP classes contain methods, properties and constants. Below is information abou
 **Usage example:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 $classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
 

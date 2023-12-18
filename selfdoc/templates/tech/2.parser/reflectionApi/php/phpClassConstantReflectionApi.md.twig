@@ -9,7 +9,7 @@ Class constant reflection entity class: [a]ClassConstantEntity[/a].
 **Example of creating class constant reflection:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 $classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
 

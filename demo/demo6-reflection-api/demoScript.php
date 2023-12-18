@@ -18,7 +18,7 @@ try {
     $reflectionApiConfig = PhpReflectionApiConfig::create();
 
     /** @var PhpEntitiesCollection $entitiesCollection*/
-    $entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+    $entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
     // Initially, the data in the collection is not loaded
     assert(0 === count(iterator_to_array($entitiesCollection)));

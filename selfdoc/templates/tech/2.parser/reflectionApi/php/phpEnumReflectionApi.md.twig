@@ -13,7 +13,7 @@ PHP enum reflection [a]EnumEntity[/a] inherits from [a]ClassLikeEntity[/a].
 **Example of creating enum reflection:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 $enumReflection = $entitiesCollection->getLoadedOrCreateNew('SomeEnumName'); // or get()
 ```

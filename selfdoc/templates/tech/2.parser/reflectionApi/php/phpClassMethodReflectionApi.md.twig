@@ -9,7 +9,7 @@ Method reflection entity class: [a]MethodEntity[/a].
 **Example of creating class method reflection:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 $classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
 

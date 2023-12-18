@@ -18,9 +18,10 @@ Below is information about the available methods for working with each entity ty
 **Usage example:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
-$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName'); // or get()
+// In this example, the collection is empty, so we use a method that will create an entity by its name
+$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
 
 $entityName = $classReflection->getName();
 $entityDescription = $classReflection->getDescription();
@@ -41,7 +42,7 @@ The collections API is presented on this page: <a href="/docs/tech/2.parser/refl
 
 ```php
 // Create an empty collection
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 // Fill the collection with entities
 $entitiesCollection->loadEntities(
@@ -71,7 +72,7 @@ PHP classes contain methods, properties and constants. Below is information abou
 **Usage example:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 $classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName');
 
@@ -87,4 +88,4 @@ $firstMethodReturnValue = $methodReflection->getFirstReturnValue();
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Dec 16 13:54:48 2023 +0300<br><b>Page content update date:</b> Sat Dec 16 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Dec 16 13:54:48 2023 +0300<br><b>Page content update date:</b> Mon Dec 18 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

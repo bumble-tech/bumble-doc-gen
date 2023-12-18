@@ -13,7 +13,7 @@ PHP trait reflection [a]TraitEntity[/a] inherits from [a]ClassLikeEntity[/a].
 **Example of creating trait reflection:**
 
 ```php
-$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->getRootEntityReflections($reflectionApiConfig);
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
 $traitReflection = $entitiesCollection->getLoadedOrCreateNew('SomeTraitName'); // or get()
 ```

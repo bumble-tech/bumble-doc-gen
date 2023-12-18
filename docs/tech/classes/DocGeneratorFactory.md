@@ -43,7 +43,7 @@ final class DocGeneratorFactory
     <a href="#mcreateconfiguration">createConfiguration</a>
     </li>
 <li>
-    <a href="#mgetrootentityreflections">getRootEntityReflections</a>
+    <a href="#mcreaterootentitiescollection">createRootEntitiesCollection</a>
     </li>
 <li>
     <a href="#msetcustomconfigurationparameters">setCustomConfigurationParameters</a>
@@ -254,13 +254,13 @@ public function createConfiguration(string ...$configurationFiles): \BumbleDocGe
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgetrootentityreflections" href="#mgetrootentityreflections">#</a>
- <b>getRootEntityReflections</b>
+<li><a name="mcreaterootentitiescollection" href="#mcreaterootentitiescollection">#</a>
+ <b>createRootEntitiesCollection</b>
     <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGeneratorFactory.php#L111">source code</a></li>
 </ul>
 
 ```php
-public function getRootEntityReflections(\BumbleDocGen\Core\Configuration\ReflectionApiConfig $reflectionApiConfig): \BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+public function createRootEntitiesCollection(\BumbleDocGen\Core\Configuration\ReflectionApiConfig $reflectionApiConfig): \BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 ```
 
 
