@@ -38,6 +38,9 @@ final class LanguageHandlersCollection implements \IteratorAggregate
 <li>
     <a href="#mgetiterator">getIterator</a>
     </li>
+<li>
+    <a href="#mkeys">keys</a>
+    </li>
 </ol>
 
 
@@ -179,6 +182,27 @@ public function getIterator(): \Generator;
 <b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mkeys" href="#mkeys">#</a>
+ <b>keys</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/LanguageHandlersCollection.php#L40">source code</a></li>
+</ul>
+
+```php
+public function keys(): array;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
 
 
 </div>

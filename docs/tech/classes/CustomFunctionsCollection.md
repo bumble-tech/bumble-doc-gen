@@ -44,6 +44,9 @@ final class CustomFunctionsCollection implements \IteratorAggregate
 <li>
     <a href="#mhas">has</a>
     </li>
+<li>
+    <a href="#mkeys">keys</a>
+    </li>
 </ol>
 
 
@@ -244,6 +247,27 @@ public function has(string $key): bool;
 </table>
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mkeys" href="#mkeys">#</a>
+ <b>keys</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php#L57">source code</a></li>
+</ul>
+
+```php
+public function keys(): array;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
 
 
 </div>

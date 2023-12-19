@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DocGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L37">DocGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L40">DocGenerator</a> class:
 </h1>
 
 
@@ -43,6 +43,12 @@ final class DocGenerator
     <a href="#mgeneratereadmetemplate">generateReadmeTemplate</a>
     - <i>Creates a `README.md` template filled with basic information using LLM</i></li>
 <li>
+    <a href="#mgetconfigurationkey">getConfigurationKey</a>
+    </li>
+<li>
+    <a href="#mgetconfigurationkeys">getConfigurationKeys</a>
+    </li>
+<li>
     <a href="#mparseandgetrootentitycollectionsgroup">parseAndGetRootEntityCollectionsGroup</a>
     </li>
 </ol>
@@ -52,11 +58,11 @@ final class DocGenerator
 <ul>
             <li><a name="qlog-file-name"
                href="#qlog-file-name">#</a>
-            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L40">source
+            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L43">source
                     code</a> </li>
             <li><a name="qversion"
                href="#qversion">#</a>
-            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L39">source
+            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L42">source
                     code</a> </li>
     </ul>
 
@@ -71,7 +77,7 @@ final class DocGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L47">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L50">source code</a></li>
 </ul>
 
 ```php
@@ -166,7 +172,7 @@ public function __construct(\Symfony\Component\Console\Style\OutputStyle $io, \B
 <ul>
 <li><a name="madddocblocks" href="#madddocblocks">#</a>
  <b>addDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L89">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L92">source code</a></li>
 </ul>
 
 ```php
@@ -220,7 +226,7 @@ public function addDocBlocks(\BumbleDocGen\AI\ProviderInterface $aiProvider): vo
 <ul>
 <li><a name="mgenerate" href="#mgenerate">#</a>
  <b>generate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L260">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L263">source code</a></li>
 </ul>
 
 ```php
@@ -251,7 +257,7 @@ public function generate(): void;
 <ul>
 <li><a name="mgeneratereadmetemplate" href="#mgeneratereadmetemplate">#</a>
  <b>generateReadmeTemplate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L173">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L176">source code</a></li>
 </ul>
 
 ```php
@@ -300,9 +306,94 @@ public function generateReadmeTemplate(\BumbleDocGen\AI\ProviderInterface $aiPro
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgetconfigurationkey" href="#mgetconfigurationkey">#</a>
+ <b>getConfigurationKey</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L353">source code</a></li>
+</ul>
+
+```php
+public function getConfigurationKey(string $key): void;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$key</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
+
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mgetconfigurationkeys" href="#mgetconfigurationkeys">#</a>
+ <b>getConfigurationKeys</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L341">source code</a></li>
+</ul>
+
+```php
+public function getConfigurationKeys(): void;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
+
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mparseandgetrootentitycollectionsgroup" href="#mparseandgetrootentitycollectionsgroup">#</a>
  <b>parseAndGetRootEntityCollectionsGroup</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L73">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L76">source code</a></li>
 </ul>
 
 ```php

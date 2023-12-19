@@ -21,6 +21,7 @@ Directory layout ( only documented files shown ):
 │  │  ├──<b>Command</b>/
 │  │  │  ├── <a href='/docs/tech/classes/AdditionalCommandCollection.md'>AdditionalCommandCollection.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/BaseCommand.md'>BaseCommand.php</a> 
+│  │  │  ├── <a href='/docs/tech/classes/ConfigurationCommand.md'>ConfigurationCommand.php</a> 
 │  │  │  └── <a href='/docs/tech/classes/GenerateCommand.md'>GenerateCommand.php</a> 
 │  │  ├──<b>ProgressBar</b>/
 │  │  │  ├── <a href='/docs/tech/classes/ProgressBarFactory.md'>ProgressBarFactory.php</a> 
@@ -46,6 +47,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  ├── <a href='/docs/tech/classes/ValueToClassTransformer.md'>ValueToClassTransformer.php</a> <i> — <samp>Standard text-to-class transformer</samp></i>
 │  │  │  │  └── <a href='/docs/tech/classes/ValueTransformerInterface.md'>ValueTransformerInterface.php</a> <i> — <samp>Interface defining classes that transform text configuration values into objects</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/Configuration.md'>Configuration.php</a> <i> — <samp>Configuration project documentation</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/ConfigurationKey.md'>ConfigurationKey.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/ConfigurationParameterBag.md'>ConfigurationParameterBag.php</a> <i> — <samp>Wrapper for getting raw configuration file data</samp></i>
 │  │  │  └── <a href='/docs/tech/classes/ReflectionApiConfig.md'>ReflectionApiConfig.php</a> 
 │  │  ├──<b>Logger</b>/
