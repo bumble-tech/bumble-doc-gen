@@ -527,13 +527,11 @@ abstract class BaseEntity implements CacheableEntityInterface
                 }
 
                 if ($entityData['entityName']) {
-                    $url = call_user_func_array(
-                        callback: $this->documentedEntityUrlFunction,
-                        args: [
-                            $this->getRootEntityCollection(),
-                            $entityData['entityName'],
-                            $entityData['cursor']
-                        ]
+                    $url = call_user_func(
+                        $this->documentedEntityUrlFunction,
+                        $this->getRootEntityCollection(),
+                        $entityData['entityName'],
+                        $entityData['cursor']
                     );
                 } else {
                     $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($data->className);
