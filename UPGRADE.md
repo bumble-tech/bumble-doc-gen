@@ -4,6 +4,7 @@ This document serves as a reference for updating your current version of the Bum
 
 ## Upgrading from BumbleDocGen 1.6.0 to 2.0.0
 
+* Changes when working with templates: variable `phpClassEntityCollection` renamed to `phpEntities`
 * The BetterReflection library and classes that depend on it in the code have been removed:
   * `\BumbleDocGen\Core\Cache\SourceLocatorCacheItemPool`
   * `\BumbleDocGen\Core\Plugin\Event\Parser\OnLoadSourceLocatorsCollection`
@@ -26,3 +27,7 @@ This document serves as a reference for updating your current version of the Bum
 * Method `\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity::getInterfacesString()` has been removed.
 * Now documentation for built classes does not load automatically
 * Removed the `async_source_loading_enabled` configuration option (Method `\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::asyncSourceLoadingEnabled()`)
+* Class `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\AfterLoadingClassEntityCollection` has been removed. Use `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\AfterLoadingPhpEntitiesCollection`
+* Class `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad` has been removed. Use `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded`
+* ⚠️**PHP ReflectionAPI has been completely changed. See information about the current version here:** [ReflectionAPI](https://github.com/bumble-tech/bumble-doc-gen/tree/master/docs/tech/2.parser/reflectionApi)
+* Method `\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getComposerInstalledFile()` renamed to `\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getComposerVendorDir()`
