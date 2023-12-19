@@ -7,8 +7,8 @@ namespace SelfDocConfig\Twig\CustomFunction;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -19,32 +19,35 @@ final class FindEntitiesClassesByCollectionClassName implements CustomFunctionIn
     }
 
     /**
-     * @return ClassEntity[]
+     * @return ClassLikeEntity[]
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(string $collectionName): array
     {
-        $classEntityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
 
         /**
-         * @var ClassEntity $findCollectionEntity
+         * @var ClassLikeEntity $findCollectionEntity
          */
-        $findCollectionEntity = $classEntityCollection->findEntity($collectionName);
-        $addMethodEntity = $findCollectionEntity->getMethodEntity('add');
+        $findCollectionEntity = $entitiesCollection->findEntity($collectionName);
+        $addMethodEntity = $findCollectionEntity->getMethod('add', true);
+        if (!$addMethodEntity) {
+            return [];
+        }
         $firstParam = $addMethodEntity->getParameters()[0];
         /**
-         * @var ClassEntity $firstParamEntity
+         * @var ClassLikeEntity $firstParamEntity
          */
-        $firstParamEntity = $classEntityCollection->findEntity($firstParam['type']);
+        $firstParamEntity = $entitiesCollection->findEntity($firstParam['type']);
 
         if ($firstParamEntity->isInterface()) {
-            return iterator_to_array($classEntityCollection->filterByInterfaces([$firstParamEntity->getName()]));
+            return iterator_to_array($entitiesCollection->filterByInterfaces([$firstParamEntity->getName()]));
         } elseif ($firstParamEntity->isInstantiable()) {
             return [$firstParamEntity];
         }
-        return iterator_to_array($classEntityCollection->filterByParentClassNames([$firstParamEntity->getName()]));
+        return iterator_to_array($entitiesCollection->filterByParentClassNames([$firstParamEntity->getName()]));
     }
 
     public static function getName(): string

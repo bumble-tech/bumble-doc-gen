@@ -1,0 +1,23 @@
+{% set title = 'PHP interface reflection API' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+{% set prevPage = 'Reflection API for PHP' %}
+
+{{ "PHP interface reflection API" | textToHeading('H1') }}
+
+PHP interface reflection [a]InterfaceEntity[/a] inherits from [a]ClassLikeEntity[/a].
+
+**Source interface formats:**
+
+1) `interface <className>`
+
+**Example of creating interface reflection:**
+
+```php
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
+
+$interfaceReflection = $entitiesCollection->getLoadedOrCreateNew('SomeInterfaceName'); // or get()
+```
+
+**Interface reflection API methods:**
+
+{{ displayClassApiMethods('\\BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\InterfaceEntity') }}

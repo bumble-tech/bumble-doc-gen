@@ -87,7 +87,7 @@ final class OperationsCollection implements \IteratorAggregate
         foreach ($operationsCollection->operations as $operation) {
             if ($operation instanceof SingleEntitySearchOperation) {
                 $entity = $operation->call($rootEntityCollection);
-                if (is_null($operation->getEntityName()) && (is_null($entity) || $entity->entityCacheIsOutdated())) {
+                if (is_null($operation->getEntityName()) && (is_null($entity) || $entity->isEntityCacheOutdated())) {
                     continue;
                 }
                 if ($entity && !$entity::isEntityNameValid($entity?->getName())) {
@@ -95,10 +95,11 @@ final class OperationsCollection implements \IteratorAggregate
                 }
 
                 $entityName = $entity?->getName();
-                $entityName = $entityName && $entity?->entityDataCanBeLoaded() ? $entityName : null;
+                $entityName = $entityName && $entity?->isEntityDataCanBeLoaded() ? $entityName : null;
                 if ($operation->getEntityName() !== $entityName) {
                     return true;
-                } elseif ($entity?->entityCacheIsOutdated() && $entity?->entityDataCanBeLoaded()) {
+                } 
+                if ($entity?->isEntityCacheOutdated() && $entity?->isEntityDataCanBeLoaded()) {
                     return true;
                 }
             } elseif ($operation instanceof IterateEntitiesOperation) {
@@ -108,7 +109,7 @@ final class OperationsCollection implements \IteratorAggregate
                     return true;
                 }
                 foreach ($entities as $entity) {
-                    if (!array_key_exists($entity->getName(), $entitiesData) || $entity->entityCacheIsOutdated()) {
+                    if (!array_key_exists($entity->getName(), $entitiesData) || $entity->isEntityCacheOutdated()) {
                         return true;
                     }
                 }

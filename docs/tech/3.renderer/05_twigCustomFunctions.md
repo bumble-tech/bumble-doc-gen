@@ -337,14 +337,30 @@ Here is a list of functions available by default:
           </tr>
                                                           <tr>
                                   <td rowspan="1">
+                    <a href="/docs/tech/3.renderer/classes/DisplayClassApiMethods.md">displayClassApiMethods</a><br>
+                                        Display all API methods of a class
+                                     </td>
+                                  <td>
+                    <b>$className</b>
+                 </td>
+                 <td>
+                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                 </td>
+                 <td>Name of the class for which API methods need to be displayed</td>
+              </tr>
+                                            <tr>
+             <td colspan="4">&nbsp;</td>
+          </tr>
+                                                          <tr>
+                                  <td rowspan="1">
                     <a href="/docs/tech/3.renderer/classes/DrawClassMap.md">drawClassMap</a><br>
                                         Generate class map in HTML format
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
                                   <td>
-                    <b>$classEntityCollections</b>
+                    <b>$entitiesCollections</b>
                  </td>
                  <td>
-                    <i><a href='/docs/tech/3.renderer/classes/ClassEntityCollection_2.md'>ClassEntityCollection</a></i>
+                    <i><a href='/docs/tech/3.renderer/classes/PhpEntitiesCollection_2.md'>PhpEntitiesCollection</a></i>
                  </td>
                  <td>The collection of entities for which the class map will be generated</td>
               </tr>
@@ -385,4 +401,4 @@ Here is a list of functions available by default:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Tue Nov 14 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Mon Nov 20 19:18:48 2023 +0300<br><b>Page content update date:</b> Mon Dec 18 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

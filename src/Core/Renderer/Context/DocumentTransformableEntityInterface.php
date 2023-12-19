@@ -16,11 +16,11 @@ interface DocumentTransformableEntityInterface
 
     public function getName(): string;
 
-    public function documentCreationAllowed(): bool;
+    public function isDocumentCreationAllowed(): bool;
 
     public function getShortName(): string;
 
-    public function entityCacheIsOutdated(): bool;
+    public function isEntityCacheOutdated(): bool;
 
     public function getDocRender(): EntityDocRendererInterface;
 

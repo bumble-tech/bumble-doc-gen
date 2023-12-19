@@ -147,7 +147,7 @@ final class RendererIteratorFactory
         $skippedCount = 0;
         foreach ($pb->iterate($this->documentedEntityWrappersCollection) as $entityWrapper) {
             $pb->setStepDescription("Processing `{$entityWrapper->getEntityName()}` entity");
-            if (!$entityWrapper->getDocumentTransformableEntity()->entityDataCanBeLoaded()) {
+            if (!$entityWrapper->getDocumentTransformableEntity()->isEntityDataCanBeLoaded()) {
                 continue;
             }
 
@@ -165,7 +165,7 @@ final class RendererIteratorFactory
                 !$this->isGeneratedEntityDocumentExists($entityWrapper) ||
                 $this->isInternalCachingVersionChanged() ||
                 $this->isConfigurationVersionChanged() ||
-                $entityWrapper->getDocumentTransformableEntity()->entityCacheIsOutdated() ||
+                $entityWrapper->getDocumentTransformableEntity()->isEntityCacheOutdated() ||
                 $this->isFilesDependenciesCacheOutdated($filesDependenciesKey) ||
                 $this->isEntityRelationsCacheOutdated($entityWrapper) ||
                 $this->isEntitiesOperationsLogCacheOutdated($entityWrapper->getEntityName())

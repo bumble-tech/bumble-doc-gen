@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> CacheablePhpEntityFactory<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L21">CacheablePhpEntityFactory</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L27">CacheablePhpEntityFactory</a> class:
 </h1>
 
 
@@ -34,11 +34,11 @@ final class CacheablePhpEntityFactory
 
 <ol>
 <li>
-    <a href="#mcreateclassentity">createClassEntity</a>
+    <a href="#mcreateclassconstantentity">createClassConstantEntity</a>
     </li>
 <li>
-    <a href="#mcreateconstantentity">createConstantEntity</a>
-    </li>
+    <a href="#mcreateclasslikeentity">createClassLikeEntity</a>
+    - <i>Create a child entity ClassLikeEntity in which the CacheableMethod attributes will be processed to cache the results of the methods</i></li>
 <li>
     <a href="#mcreatedynamicmethodentity">createDynamicMethodEntity</a>
     </li>
@@ -47,9 +47,6 @@ final class CacheablePhpEntityFactory
     </li>
 <li>
     <a href="#mcreatepropertyentity">createPropertyEntity</a>
-    </li>
-<li>
-    <a href="#mcreatesubclassentity">createSubClassEntity</a>
     </li>
 </ol>
 
@@ -66,11 +63,11 @@ final class CacheablePhpEntityFactory
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L23">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L29">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory $cacheableEntityWrapperFactory, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \DI\Container $diContainer);
+public function __construct(\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory $cacheableEntityWrapperFactory, \BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper $composerHelper, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \DI\Container $diContainer);
 ```
 
 
@@ -89,6 +86,11 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEnti
             <tr>
             <td>$cacheableEntityWrapperFactory</td>
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/Cache/CacheableEntityWrapperFactory.php'>\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEntityWrapperFactory</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$composerHelper</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php'>\BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -111,71 +113,13 @@ public function __construct(\BumbleDocGen\Core\Parser\Entity\Cache\CacheableEnti
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mcreateclassentity" href="#mcreateclassentity">#</a>
- <b>createClassEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L130">source code</a></li>
+<li><a name="mcreateclassconstantentity" href="#mcreateclassconstantentity">#</a>
+ <b>createClassConstantEntity</b>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L136">source code</a></li>
 </ul>
 
 ```php
-public function createClassEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollection, string $className, string|null $relativeFileName = null): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-```
-
-
-
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$classEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$className</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$relativeFileName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mcreateconstantentity" href="#mcreateconstantentity">#</a>
- <b>createConstantEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L58">source code</a></li>
-</ul>
-
-```php
-public function createConstantEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, string $constantName, string $implementingClassName, bool $reloadCache = false): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
+public function createClassConstantEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $classEntity, string $constantName, string $implementingClassName, bool $reloadCache = false): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 ```
 
 
@@ -193,7 +137,7 @@ public function createConstantEntity(\BumbleDocGen\LanguageHandler\Php\Parser\En
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -214,7 +158,7 @@ public function createConstantEntity(\BumbleDocGen\LanguageHandler\Php\Parser\En
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ConstantEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity</a>
 
 
 <b>Throws:</b>
@@ -232,13 +176,79 @@ public function createConstantEntity(\BumbleDocGen\LanguageHandler\Php\Parser\En
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mcreatedynamicmethodentity" href="#mcreatedynamicmethodentity">#</a>
- <b>createDynamicMethodEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L108">source code</a></li>
+<li><a name="mcreateclasslikeentity" href="#mcreateclasslikeentity">#</a>
+ <b>createClassLikeEntity</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L46">source code</a></li>
 </ul>
 
 ```php
-public function createDynamicMethodEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, \phpDocumentor\Reflection\DocBlock\Tags\Method $annotationMethod): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\DynamicMethodEntity;
+public function createClassLikeEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection $entitiesCollection, string $className, string|null $relativeFileName = null, string|null $entityClassName = null): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
+```
+
+<blockquote>Create a child entity ClassLikeEntity in which the CacheableMethod attributes will be processed to cache the results of the methods</blockquote>
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$entitiesCollection</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$className</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$relativeFileName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$entityClassName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
+
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mcreatedynamicmethodentity" href="#mcreatedynamicmethodentity">#</a>
+ <b>createDynamicMethodEntity</b>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L190">source code</a></li>
+</ul>
+
+```php
+public function createDynamicMethodEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $classEntity, \phpDocumentor\Reflection\DocBlock\Tags\Method $annotationMethod): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\DynamicMethodEntity;
 ```
 
 
@@ -256,7 +266,7 @@ public function createDynamicMethodEntity(\BumbleDocGen\LanguageHandler\Php\Pars
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -267,7 +277,7 @@ public function createDynamicMethodEntity(\BumbleDocGen\LanguageHandler\Php\Pars
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/DynamicMethodEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\DynamicMethodEntity</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/Method/DynamicMethodEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\DynamicMethodEntity</a>
 
 
 <b>Throws:</b>
@@ -287,11 +297,11 @@ public function createDynamicMethodEntity(\BumbleDocGen\LanguageHandler\Php\Pars
 <ul>
 <li><a name="mcreatemethodentity" href="#mcreatemethodentity">#</a>
  <b>createMethodEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L84">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L164">source code</a></li>
 </ul>
 
 ```php
-public function createMethodEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, string $methodName, string $implementingClassName): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity;
+public function createMethodEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $classEntity, string $methodName, string $implementingClassName): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity;
 ```
 
 
@@ -309,7 +319,7 @@ public function createMethodEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Enti
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -325,7 +335,7 @@ public function createMethodEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Enti
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/MethodEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\MethodEntity</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/Method/MethodEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntity</a>
 
 
 <b>Throws:</b>
@@ -345,11 +355,11 @@ public function createMethodEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Enti
 <ul>
 <li><a name="mcreatepropertyentity" href="#mcreatepropertyentity">#</a>
  <b>createPropertyEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L34">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L110">source code</a></li>
 </ul>
 
 ```php
-public function createPropertyEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, string $propertyName, string $implementingClassName): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
+public function createPropertyEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $classEntity, string $propertyName, string $implementingClassName): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
 ```
 
 
@@ -367,7 +377,7 @@ public function createPropertyEntity(\BumbleDocGen\LanguageHandler\Php\Parser\En
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -383,70 +393,7 @@ public function createPropertyEntity(\BumbleDocGen\LanguageHandler\Php\Parser\En
         </tbody>
 </table>
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PropertyEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mcreatesubclassentity" href="#mcreatesubclassentity">#</a>
- <b>createSubClassEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php#L155">source code</a></li>
-</ul>
-
-```php
-public function createSubClassEntity(string $subClassEntity, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection $classEntityCollection, string $className, string|null $relativeFileName): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-```
-
-
-
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$subClassEntity</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$classEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$className</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$relativeFileName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a>
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/Property/PropertyEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity</a>
 
 
 <b>Throws:</b>

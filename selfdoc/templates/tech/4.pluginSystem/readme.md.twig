@@ -29,7 +29,7 @@ Plugins for any programming languages work regardless of which language handler 
         <th>Handles events</th>
         <th>Description</th>
     </tr>
-{% for pluginEntity in phpClassEntityCollection
+{% for pluginEntity in phpEntities
         .filterByPaths([
             '/src/Core',
             '/src/LanguageHandler',
@@ -37,13 +37,13 @@ Plugins for any programming languages work regardless of which language handler 
         .filterByInterfaces(['BumbleDocGen\\Core\\Plugin\\PluginInterface'])
         .getOnlyInstantiable()
 %}
-{% set match = pluginEntity.getFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+{% set match = pluginEntity.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
     <tr>
         <td>{{ drawDocumentedEntityLink(pluginEntity) }}</td>
         <td>{% if match[2] %}{{ match[2] | upper }}{% else %}any{% endif %}</td>
         <td>
             <ul>
-            {% for key in pluginEntity.getMethodEntity('getSubscribedEvents').getFirstReturnValue() | keys %}
+            {% for key in pluginEntity.getMethod('getSubscribedEvents', true).getFirstReturnValue() | keys %}
                 <li>[a]{{ key }}|short_form[/a]</li>
             {% endfor %}
             </ul>
@@ -55,7 +55,7 @@ Plugins for any programming languages work regardless of which language handler 
 
 {{ "Default events" | textToHeading('H2') }}
 
-{{ printEntityCollectionAsList( phpClassEntityCollection
+{{ printEntityCollectionAsList( phpEntities
         .filterByPaths([
             '/src/Core',
             '/src/LanguageHandler',

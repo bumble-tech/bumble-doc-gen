@@ -1,0 +1,25 @@
+{% set title = 'PHP class reflection API' %}
+{{ generatePageBreadcrumbs(title, _self) }}
+{% set prevPage = 'Reflection API for PHP' %}
+
+{{ "PHP class reflection API" | textToHeading('H1') }}
+
+PHP class reflection [a]ClassEntity[/a] inherits from [a]ClassLikeEntity[/a].
+
+**Source class formats:**
+
+1) `class <className>`
+2) `abstract class <className>`
+3) `final class <className>`
+
+**Example of creating class reflection:**
+
+```php
+$entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
+
+$classReflection = $entitiesCollection->getLoadedOrCreateNew('SomeClassName'); // or get()
+```
+
+**Class reflection API methods:**
+
+{{ displayClassApiMethods('\\BumbleDocGen\\LanguageHandler\\Php\\Parser\\Entity\\ClassEntity') }}

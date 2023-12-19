@@ -38,13 +38,13 @@ abstract class LoggableRootEntityCollection extends \BumbleDocGen\Core\Parser\En
     </li>
 <li>
     <a href="#mfindentity">findEntity</a>
-    </li>
+    - <i>Find an entity in a collection</i></li>
 <li>
     <a href="#mget">get</a>
-    </li>
+    - <i>Get an entity from a collection (only previously added)</i></li>
 <li>
     <a href="#mgetentitycollectionname">getEntityCollectionName</a>
-    </li>
+    - <i>Get collection name</i></li>
 <li>
     <a href="#mgetentitylinkdata">getEntityLinkData</a>
     </li>
@@ -53,19 +53,28 @@ abstract class LoggableRootEntityCollection extends \BumbleDocGen\Core\Parser\En
     </li>
 <li>
     <a href="#mgetloadedorcreatenew">getLoadedOrCreateNew</a>
-    </li>
+    - <i>Get an entity from the collection or create a new one if it has not yet been added</i></li>
 <li>
     <a href="#mgetoperationslogcollection">getOperationsLogCollection</a>
     </li>
 <li>
     <a href="#mhas">has</a>
-    </li>
+    - <i>Check if an entity has been added to the collection</i></li>
 <li>
     <a href="#misempty">isEmpty</a>
+    - <i>Check if the collection is empty or not</i></li>
+<li>
+    <a href="#mloadentities">loadEntities</a>
+    </li>
+<li>
+    <a href="#mloadentitiesbyconfiguration">loadEntitiesByConfiguration</a>
     </li>
 <li>
     <a href="#mremove">remove</a>
-    </li>
+    - <i>Remove an entity from a collection</i></li>
+<li>
+    <a href="#mtoarray">toArray</a>
+    - <i>Convert collection to array</i></li>
 <li>
     <a href="#mupdateentitiescache">updateEntitiesCache</a>
     </li>
@@ -132,7 +141,7 @@ public function clearOperationsLogCollection(): void;
 public function findEntity(string $search, bool $useUnsafeKeys = true): null|\BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
-
+<blockquote>Find an entity in a collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -175,7 +184,7 @@ public function findEntity(string $search, bool $useUnsafeKeys = true): null|\Bu
 public function get(string $objectName): null|\BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
-
+<blockquote>Get an entity from a collection (only previously added)</blockquote>
 
 <b>Parameters:</b>
 
@@ -206,7 +215,7 @@ public function get(string $objectName): null|\BumbleDocGen\Core\Parser\Entity\R
 <ul>
 <li><a name="mgetentitycollectionname" href="#mgetentitycollectionname">#</a>
  <b>getEntityCollectionName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L26">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L39">source code</a></li>
 </ul>
 
 ```php
@@ -215,7 +224,7 @@ public function get(string $objectName): null|\BumbleDocGen\Core\Parser\Entity\R
 public function getEntityCollectionName(): string;
 ```
 
-
+<blockquote>Get collection name</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -229,7 +238,7 @@ public function getEntityCollectionName(): string;
 <ul>
 <li><a name="mgetentitylinkdata" href="#mgetentitylinkdata">#</a>
  <b>getEntityLinkData</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L44">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L90">source code</a></li>
 </ul>
 
 ```php
@@ -308,7 +317,7 @@ public function getIterator(): \Generator;
 public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntityToCollectionEvent = false): \BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
-
+<blockquote>Get an entity from the collection or create a new one if it has not yet been added</blockquote>
 
 <b>Parameters:</b>
 
@@ -341,7 +350,7 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
 <b>See:</b>
 <ul>
     <li>
-        <a href="/docs/tech/classes/RootEntityInterface_2.md#mentitydatacanbeloaded">\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::entityDataCanBeLoaded()</a>    </li>
+        <a href="/docs/tech/classes/RootEntityInterface_2.md#misentitydatacanbeloaded">\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::isEntityDataCanBeLoaded()</a>    </li>
 </ul>
 </div>
 <hr>
@@ -371,7 +380,7 @@ public function getOperationsLogCollection(): \BumbleDocGen\Core\Parser\Entity\C
 <ul>
 <li><a name="mhas" href="#mhas">#</a>
  <b>has</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L27">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L42">source code</a></li>
 </ul>
 
 ```php
@@ -380,7 +389,7 @@ public function getOperationsLogCollection(): \BumbleDocGen\Core\Parser\Entity\C
 public function has(string $objectName): bool;
 ```
 
-
+<blockquote>Check if an entity has been added to the collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -411,7 +420,7 @@ public function has(string $objectName): bool;
 <ul>
 <li><a name="misempty" href="#misempty">#</a>
  <b>isEmpty</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L52">source code</a></li>
 </ul>
 
 ```php
@@ -420,7 +429,7 @@ public function has(string $objectName): bool;
 public function isEmpty(): bool;
 ```
 
-
+<blockquote>Check if the collection is empty or not</blockquote>
 
 <b>Parameters:</b> not specified
 
@@ -432,9 +441,99 @@ public function isEmpty(): bool;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mloadentities" href="#mloadentities">#</a>
+ <b>loadEntities</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L28">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\RootEntityCollection
+
+public function loadEntities(\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection $sourceLocatorsCollection, \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface|null $filters = null, \BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface|null $progressBar = null): \BumbleDocGen\Core\Parser\Entity\CollectionLoadEntitiesResult;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$sourceLocatorsCollection</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/SourceLocator/SourceLocatorsCollection.php'>\BumbleDocGen\Core\Parser\SourceLocator\SourceLocatorsCollection</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$filters</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$progressBar</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntitiesLoaderProgressBarInterface.php'>\BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLoadEntitiesResult.php'>\BumbleDocGen\Core\Parser\Entity\CollectionLoadEntitiesResult</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mloadentitiesbyconfiguration" href="#mloadentitiesbyconfiguration">#</a>
+ <b>loadEntitiesByConfiguration</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L26">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\RootEntityCollection
+
+public function loadEntitiesByConfiguration(\BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface|null $progressBar = null): \BumbleDocGen\Core\Parser\Entity\CollectionLoadEntitiesResult;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$progressBar</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntitiesLoaderProgressBarInterface.php'>\BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLoadEntitiesResult.php'>\BumbleDocGen\Core\Parser\Entity\CollectionLoadEntitiesResult</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mremove" href="#mremove">#</a>
  <b>remove</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -443,7 +542,7 @@ public function isEmpty(): bool;
 public function remove(string $objectName): void;
 ```
 
-
+<blockquote>Remove an entity from a collection</blockquote>
 
 <b>Parameters:</b>
 
@@ -472,9 +571,32 @@ public function remove(string $objectName): void;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mtoarray" href="#mtoarray">#</a>
+ <b>toArray</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L127">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\RootEntityCollection
+
+public function toArray(): array;
+```
+
+<blockquote>Convert collection to array</blockquote>
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mupdateentitiescache" href="#mupdateentitiescache">#</a>
  <b>updateEntitiesCache</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L49">source code</a></li>
+ <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L97">source code</a></li>
 </ul>
 
 ```php

@@ -46,7 +46,8 @@ Directory layout ( only documented files shown ):
 │  │  │  │  ├── <a href='/docs/tech/classes/ValueToClassTransformer.md'>ValueToClassTransformer.php</a> <i> — <samp>Standard text-to-class transformer</samp></i>
 │  │  │  │  └── <a href='/docs/tech/classes/ValueTransformerInterface.md'>ValueTransformerInterface.php</a> <i> — <samp>Interface defining classes that transform text configuration values into objects</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/Configuration.md'>Configuration.php</a> <i> — <samp>Configuration project documentation</samp></i>
-│  │  │  └── <a href='/docs/tech/classes/ConfigurationParameterBag.md'>ConfigurationParameterBag.php</a> <i> — <samp>Wrapper for getting raw configuration file data</samp></i>
+│  │  │  ├── <a href='/docs/tech/classes/ConfigurationParameterBag.md'>ConfigurationParameterBag.php</a> <i> — <samp>Wrapper for getting raw configuration file data</samp></i>
+│  │  │  └── <a href='/docs/tech/classes/ReflectionApiConfig.md'>ReflectionApiConfig.php</a> 
 │  │  ├──<b>Logger</b>/
 │  │  │  └──<b>Handler</b>/
 │  │  │  │  └── <a href='/docs/tech/classes/GenerationErrorsHandler.md'>GenerationErrorsHandler.php</a> 
@@ -70,6 +71,9 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  ├── <a href='/docs/tech/classes/OperationsCollection.md'>OperationsCollection.php</a> 
 │  │  │  │  │  └── <a href='/docs/tech/classes/SingleEntitySearchOperation.md'>SingleEntitySearchOperation.php</a> 
 │  │  │  │  ├── <a href='/docs/tech/classes/BaseEntityCollection.md'>BaseEntityCollection.php</a> 
+│  │  │  │  ├── <a href='/docs/tech/classes/CollectionGroupLoadEntitiesResult.md'>CollectionGroupLoadEntitiesResult.php</a> 
+│  │  │  │  ├── <a href='/docs/tech/classes/CollectionLoadEntitiesResult.md'>CollectionLoadEntitiesResult.php</a> 
+│  │  │  │  ├── <a href='/docs/tech/classes/EntitiesLoaderProgressBarInterface.md'>EntitiesLoaderProgressBarInterface.php</a> 
 │  │  │  │  ├── <a href='/docs/tech/classes/EntityInterface.md'>EntityInterface.php</a> 
 │  │  │  │  ├── <a href='/docs/tech/classes/LoggableRootEntityCollection.md'>LoggableRootEntityCollection.php</a> 
 │  │  │  │  ├── <a href='/docs/tech/classes/RootEntityCollection.md'>RootEntityCollection.php</a> 
@@ -178,20 +182,27 @@ Directory layout ( only documented files shown ):
 │  │  │  │  ├──<b>Entity</b>/
 │  │  │  │  │  ├──<b>Cache</b>/
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/CacheablePhpEntityFactory.md'>CacheablePhpEntityFactory.php</a> 
-│  │  │  │  │  ├──<b>PhpParser</b>/
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/NodeValueCompiler.md'>NodeValueCompiler.php</a> 
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/PhpParserHelper.md'>PhpParserHelper.php</a> 
+│  │  │  │  │  ├──<b>Data</b>/
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/DocBlockLink.md'>DocBlockLink.php</a> 
+│  │  │  │  │  ├──<b>SubEntity</b>/
+│  │  │  │  │  │  ├──<b>ClassConstant</b>/
+│  │  │  │  │  │  │  ├── <a href='/docs/tech/classes/ClassConstantEntitiesCollection.md'>ClassConstantEntitiesCollection.php</a> 
+│  │  │  │  │  │  │  └── <a href='/docs/tech/classes/ClassConstantEntity.md'>ClassConstantEntity.php</a> <i> — <samp>Class constant entity</samp></i>
+│  │  │  │  │  │  ├──<b>Method</b>/
+│  │  │  │  │  │  │  ├── <a href='/docs/tech/classes/DynamicMethodEntity.md'>DynamicMethodEntity.php</a> <i> — <samp>Method obtained by parsing the "method" annotation</samp></i>
+│  │  │  │  │  │  │  ├── <a href='/docs/tech/classes/MethodEntitiesCollection.md'>MethodEntitiesCollection.php</a> <i> — <samp>Collection of PHP class method entities</samp></i>
+│  │  │  │  │  │  │  ├── <a href='/docs/tech/classes/MethodEntity.md'>MethodEntity.php</a> <i> — <samp>Class method entity</samp></i>
+│  │  │  │  │  │  │  └── <a href='/docs/tech/classes/MethodEntityInterface.md'>MethodEntityInterface.php</a> 
+│  │  │  │  │  │  └──<b>Property</b>/
+│  │  │  │  │  │  │  ├── <a href='/docs/tech/classes/PropertyEntitiesCollection.md'>PropertyEntitiesCollection.php</a> 
+│  │  │  │  │  │  │  └── <a href='/docs/tech/classes/PropertyEntity.md'>PropertyEntity.php</a> <i> — <samp>Class property entity</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/BaseEntity.md'>BaseEntity.php</a> 
-│  │  │  │  │  ├── <a href='/docs/tech/classes/ClassEntity.md'>ClassEntity.php</a> <i> — <samp>Class entity</samp></i>
-│  │  │  │  │  ├── <a href='/docs/tech/classes/ClassEntityCollection.md'>ClassEntityCollection.php</a> <i> — <samp>Collection of PHP class entities</samp></i>
-│  │  │  │  │  ├── <a href='/docs/tech/classes/ConstantEntity.md'>ConstantEntity.php</a> <i> — <samp>Class constant entity</samp></i>
-│  │  │  │  │  ├── <a href='/docs/tech/classes/ConstantEntityCollection.md'>ConstantEntityCollection.php</a> 
-│  │  │  │  │  ├── <a href='/docs/tech/classes/DynamicMethodEntity.md'>DynamicMethodEntity.php</a> <i> — <samp>Method obtained by parsing the "method" annotation</samp></i>
-│  │  │  │  │  ├── <a href='/docs/tech/classes/MethodEntity.md'>MethodEntity.php</a> <i> — <samp>Class method entity</samp></i>
-│  │  │  │  │  ├── <a href='/docs/tech/classes/MethodEntityCollection.md'>MethodEntityCollection.php</a> 
-│  │  │  │  │  ├── <a href='/docs/tech/classes/MethodEntityInterface.md'>MethodEntityInterface.php</a> 
-│  │  │  │  │  ├── <a href='/docs/tech/classes/PropertyEntity.md'>PropertyEntity.php</a> <i> — <samp>Class property entity</samp></i>
-│  │  │  │  │  └── <a href='/docs/tech/classes/PropertyEntityCollection.md'>PropertyEntityCollection.php</a> 
+│  │  │  │  │  ├── <a href='/docs/tech/classes/ClassEntity.md'>ClassEntity.php</a> <i> — <samp>PHP Class</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/ClassLikeEntity.md'>ClassLikeEntity.php</a> 
+│  │  │  │  │  ├── <a href='/docs/tech/classes/EnumEntity.md'>EnumEntity.php</a> <i> — <samp>Enumeration</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/InterfaceEntity.md'>InterfaceEntity.php</a> <i> — <samp>Object interface</samp></i>
+│  │  │  │  │  ├── <a href='/docs/tech/classes/PhpEntitiesCollection.md'>PhpEntitiesCollection.php</a> <i> — <samp>Collection of php root entities</samp></i>
+│  │  │  │  │  └── <a href='/docs/tech/classes/TraitEntity.md'>TraitEntity.php</a> <i> — <samp>Trait</samp></i>
 │  │  │  │  ├──<b>FilterCondition</b>/
 │  │  │  │  │  ├──<b>ClassConstantFilterCondition</b>/
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/IsPrivateCondition.md'>IsPrivateCondition.php</a> <i> — <samp>Check is a private constant or not</samp></i>
@@ -212,6 +223,9 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/IsPublicCondition_3.md'>IsPublicCondition.php</a> <i> — <samp>Check is a public property or not</samp></i>
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/OnlyFromCurrentClassCondition_2.md'>OnlyFromCurrentClassCondition.php</a> <i> — <samp>Only properties that belong to the current class (not parent)</samp></i>
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/VisibilityCondition_3.md'>VisibilityCondition.php</a> <i> — <samp>Property access modifier check</samp></i>
+│  │  │  │  ├──<b>PhpParser</b>/
+│  │  │  │  │  ├── <a href='/docs/tech/classes/NodeValueCompiler.md'>NodeValueCompiler.php</a> 
+│  │  │  │  │  └── <a href='/docs/tech/classes/PhpParserHelper.md'>PhpParserHelper.php</a> 
 │  │  │  │  ├── <a href='/docs/tech/classes/ComposerHelper.md'>ComposerHelper.php</a> 
 │  │  │  │  └── <a href='/docs/tech/classes/ParserHelper.md'>ParserHelper.php</a> 
 │  │  │  ├──<b>Plugin</b>/
@@ -226,9 +240,9 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/EntityDocUnifiedPlacePlugin.md'>EntityDocUnifiedPlacePlugin.php</a> <i> — <samp>This plugin changes the algorithm for saving entity documents. The standard system stores each fi...</samp></i>
 │  │  │  │  └──<b>Event</b>/
 │  │  │  │  │  ├──<b>Entity</b>/
-│  │  │  │  │  │  └── <a href='/docs/tech/classes/OnCheckIsClassEntityCanBeLoad.md'>OnCheckIsClassEntityCanBeLoad.php</a> 
+│  │  │  │  │  │  └── <a href='/docs/tech/classes/OnCheckIsEntityCanBeLoaded.md'>OnCheckIsEntityCanBeLoaded.php</a> 
 │  │  │  │  │  └──<b>Parser</b>/
-│  │  │  │  │  │  ├── <a href='/docs/tech/classes/AfterLoadingClassEntityCollection.md'>AfterLoadingClassEntityCollection.php</a> <i> — <samp>The event is called after the initial creation of a collection of class entities</samp></i>
+│  │  │  │  │  │  ├── <a href='/docs/tech/classes/AfterLoadingPhpEntitiesCollection.md'>AfterLoadingPhpEntitiesCollection.php</a> <i> — <samp>The event is called after the initial creation of a collection of PHP entities</samp></i>
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/OnAddClassEntityToCollection.md'>OnAddClassEntityToCollection.php</a> <i> — <samp>Called when each class entity is added to the entity collection</samp></i>
 │  │  │  ├──<b>Renderer</b>/
 │  │  │  │  ├──<b>EntityDocRenderer</b>/
@@ -238,10 +252,12 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  └── <a href='/docs/tech/classes/EntityDocRendererHelper.md'>EntityDocRendererHelper.php</a> 
 │  │  │  │  └──<b>Twig</b>/
 │  │  │  │  │  └──<b>Function</b>/
+│  │  │  │  │  │  ├── <a href='/docs/tech/classes/DisplayClassApiMethods.md'>DisplayClassApiMethods.php</a> <i> — <samp>Display all API methods of a class</samp></i>
 │  │  │  │  │  │  ├── <a href='/docs/tech/classes/DrawClassMap.md'>DrawClassMap.php</a> <i> — <samp>Generate class map in HTML format</samp></i>
 │  │  │  │  │  │  └── <a href='/docs/tech/classes/GetClassMethodsBodyCode.md'>GetClassMethodsBodyCode.php</a> <i> — <samp>Get the code of the specified class methods as a formatted string</samp></i>
 │  │  │  ├── <a href='/docs/tech/classes/PhpHandler.md'>PhpHandler.php</a> 
-│  │  │  └── <a href='/docs/tech/classes/PhpHandlerSettings.md'>PhpHandlerSettings.php</a> 
+│  │  │  ├── <a href='/docs/tech/classes/PhpHandlerSettings.md'>PhpHandlerSettings.php</a> 
+│  │  │  └── <a href='/docs/tech/classes/PhpReflectionApiConfig.md'>PhpReflectionApiConfig.php</a> 
 │  │  ├── <a href='/docs/tech/classes/LanguageHandlerInterface.md'>LanguageHandlerInterface.php</a> 
 │  │  └── <a href='/docs/tech/classes/LanguageHandlersCollection.md'>LanguageHandlersCollection.php</a> 
 │  ├── <a href='/docs/tech/classes/DocGenerator.md'>DocGenerator.php</a> <i> — <samp>Class for generating documentation.</samp></i>
@@ -250,4 +266,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Sep 2 21:01:47 2023 +0300<br><b>Page content update date:</b> Tue Nov 14 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Mon Nov 20 19:18:48 2023 +0300<br><b>Page content update date:</b> Tue Dec 19 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

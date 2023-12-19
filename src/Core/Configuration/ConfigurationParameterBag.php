@@ -186,7 +186,11 @@ final class ConfigurationParameterBag
         string $classInterfaceName
     ): object {
         $value = $this->get($parameterName);
-        $valueObject = $this->valueToClassTransformer->transform($value);
+        if (is_object($value)) {
+            $valueObject = $value;
+        } else {
+            $valueObject = $this->valueToClassTransformer->transform($value);
+        }
         if (is_null($valueObject)) {
             throw new InvalidConfigurationParameterException(
                 "Configuration parameter `{$parameterName}` contains an incorrect value"
@@ -219,7 +223,11 @@ final class ConfigurationParameterBag
             throw new InvalidConfigurationParameterException("Parameter `{$parameterName}` must be an array");
         }
         foreach ($values as $i => $value) {
-            $valueObject = $this->valueToClassTransformer->transform($value);
+            if (is_object($value)) {
+                $valueObject = $value;
+            } else {
+                $valueObject = $this->valueToClassTransformer->transform($value);
+            }
             if (is_null($valueObject)) {
                 throw new InvalidConfigurationParameterException(
                     "Configuration parameter `{$parameterName}[{$i}]` contains an incorrect value"

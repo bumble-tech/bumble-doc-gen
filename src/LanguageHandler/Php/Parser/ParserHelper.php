@@ -8,7 +8,7 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use Monolog\Logger;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
@@ -159,24 +159,9 @@ final class ParserHelper
     ) {
     }
 
-    public static function getBuiltInClassNames(): array
-    {
-        static $classNames = [];
-        if (!$classNames) {
-            $builtInClassNames = array_merge(self::$predefinedClassesInterfaces, get_declared_classes());
-            foreach ($builtInClassNames as $className) {
-                if (str_starts_with(ltrim($className, '\\'), 'Composer')) {
-                    break;
-                }
-                $classNames[$className] = $className;
-            }
-        }
-        return $classNames;
-    }
-
     public static function isBuiltInClass(string $className): bool
     {
-        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
+        $className = ClassLikeEntity::normalizeClassName($className);
         return array_key_exists($className, self::getBuiltInClassNames());
     }
 
@@ -190,20 +175,15 @@ final class ParserHelper
         return false;
     }
 
-    private static function checkIsClassName(string $name): bool
-    {
-        return (bool)preg_match(
-            '/^(?=_*[A-z]+)[A-z0-9]+$/',
-            $name
-        );
-    }
-
     public static function isCorrectClassName(string $className, bool $checkBuiltIns = true): bool
     {
         if (self::isBuiltInType($className) || ($checkBuiltIns && self::isBuiltInClass($className))) {
             return false;
         }
-        return self::checkIsClassName($className);
+        return (bool)preg_match(
+            '/^(?=_*[A-z]+)[A-z0-9]+$/',
+            $className
+        );
     }
 
     /**
@@ -220,7 +200,7 @@ final class ParserHelper
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getUsesListByClassEntity(ClassEntity $classEntity, bool $extended = true): array
+    public function getUsesListByClassEntity(ClassLikeEntity $classEntity, bool $extended = true): array
     {
         $fileName = $classEntity->getAbsoluteFileName();
         if (!$fileName) {
@@ -261,7 +241,7 @@ final class ParserHelper
      */
     public function parseFullClassName(
         string $searchClassName,
-        ClassEntity $parentClassEntity,
+        ClassLikeEntity $parentClassEntity,
         bool $extended = true
     ): string {
         $classNameParts = explode('::', $searchClassName);
@@ -320,21 +300,10 @@ final class ParserHelper
         return $gitFiles;
     }
 
-    private function getDocBlockFactory(): DocBlockFactory
-    {
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException) {
-        }
-        $docBlockFactory = DocBlockFactory::createInstance();
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $docBlockFactory);
-        return $docBlockFactory;
-    }
-
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlock(ClassEntity $classEntity, string $docComment, ?int $lineNumber = null): DocBlock
+    public function getDocBlock(ClassLikeEntity $classEntity, string $docComment, ?int $lineNumber = null): DocBlock
     {
         $docComment = $docComment ?: ' ';
         $cacheKey = md5("{$classEntity->getName()}{$docComment}{$lineNumber}");
@@ -365,7 +334,7 @@ final class ParserHelper
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlockContext(ClassEntity $classEntity): Context
+    public function getDocBlockContext(ClassLikeEntity $classEntity): Context
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $classEntity->getName());
@@ -399,5 +368,31 @@ final class ParserHelper
         );
         $this->localObjectCache->cacheMethodResult(__METHOD__, $classEntity->getName(), $context);
         return $context;
+    }
+
+    private static function getBuiltInClassNames(): array
+    {
+        static $classNames = [];
+        if (!$classNames) {
+            $builtInClassNames = array_merge(self::$predefinedClassesInterfaces, get_declared_classes());
+            foreach ($builtInClassNames as $className) {
+                if (str_starts_with(ltrim($className, '\\'), 'Composer')) {
+                    break;
+                }
+                $classNames[$className] = $className;
+            }
+        }
+        return $classNames;
+    }
+
+    private function getDocBlockFactory(): DocBlockFactory
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $docBlockFactory = DocBlockFactory::createInstance();
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $docBlockFactory);
+        return $docBlockFactory;
     }
 }

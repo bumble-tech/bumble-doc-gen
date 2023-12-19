@@ -7,6 +7,7 @@ namespace BumbleDocGen;
 use BumbleDocGen\AI\Generators\DocBlocksGenerator;
 use BumbleDocGen\AI\Generators\ReadmeTemplateGenerator;
 use BumbleDocGen\AI\ProviderInterface;
+use BumbleDocGen\Console\ProgressBar\ProgressBarFactory;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
@@ -15,8 +16,8 @@ use BumbleDocGen\Core\Parser\ProjectParser;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -52,6 +53,7 @@ final class DocGenerator
         private Renderer $renderer,
         private GenerationErrorsHandler $generationErrorsHandler,
         private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private ProgressBarFactory $progressBarFactory,
         private Logger $logger
     ) {
         if (file_exists(self::LOG_FILE_NAME)) {
@@ -75,7 +77,9 @@ final class DocGenerator
     }
 
     /**
-     * Generate missing docBlocks with ChatGPT for project class methods that are available for documentation
+     * Generate missing docBlocks with LLM for project class methods that are available for documentation
+     *
+     * @api
      *
      * @throws NotFoundException
      * @throws DependencyException
@@ -90,18 +94,18 @@ final class DocGenerator
         }
 
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
         $missingDocBlocksGenerator = new DocBlocksGenerator($aiProvider, $this->parserHelper);
 
         $alreadyProcessedEntities = [];
-        $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (
+        $getEntities = function (PhpEntitiesCollection|array $entitiesCollection) use (
             &$getEntities,
             &$alreadyProcessedEntities
         ): Generator {
             foreach ($entitiesCollection as $classEntity) {
-                /**@var ClassEntity $classEntity */
+                /**@var ClassLikeEntity $classEntity */
                 if (
-                    !$classEntity->entityDataCanBeLoaded() || array_key_exists(
+                    !$classEntity->isEntityDataCanBeLoaded() || array_key_exists(
                         $classEntity->getName(),
                         $alreadyProcessedEntities
                     )
@@ -122,7 +126,7 @@ final class DocGenerator
         };
 
         foreach ($getEntities($entitiesCollection) as $entity) {
-            /**@var ClassEntity $entity */
+            /**@var ClassLikeEntity $entity */
             if (!$missingDocBlocksGenerator->hasMethodsWithoutDocBlocks($entity)) {
                 $this->logger->notice("Skipping `{$entity->getName()}`class. All methods are already documented");
             }
@@ -136,13 +140,11 @@ final class DocGenerator
             $toReplace = [];
             $classFileLines = explode("\n", $classFileContent);
             foreach ($newBocBlocks as $method => $docBlock) {
-                $methodEntity = $entity->getMethodEntity($method);
-                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock(
-                    false
-                )->getLocation()?->getLineNumber() : null;
+                $methodEntity = $entity->getMethod($method, true);
+                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock()->getLocation()?->getLineNumber() : null;
                 $lineNumber = $lineNumber ?: $methodEntity->getStartLine();
 
-                foreach (file($entity->getFullFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
+                foreach (file($entity->getAbsoluteFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
                     if ($line + 1 === $lineNumber) {
                         $classFileLines[$line] = "[%docBlock%{$method}%]{$lineContent}";
                         break;
@@ -154,12 +156,16 @@ final class DocGenerator
 
             $classFileContent = implode("\n", $classFileLines);
             $classFileContent = preg_replace(array_keys($toReplace), $toReplace, $classFileContent);
-            file_put_contents($entity->getFullFileName(), $classFileContent);
+            file_put_contents($entity->getAbsoluteFileName(), $classFileContent);
             $this->logger->notice("DocBlocks added");
         }
     }
 
     /**
+     * Creates a `README.md` template filled with basic information using LLM
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -169,7 +175,7 @@ final class DocGenerator
     ): void {
         $this->io->note("Project analysis");
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
 
         $finder = new Finder();
         $finder
@@ -246,6 +252,8 @@ final class DocGenerator
     /**
      * Generates documentation using configuration
      *
+     * @api
+     *
      * @throws InvalidArgumentException
      * @throws Exception
      */
@@ -255,7 +263,18 @@ final class DocGenerator
         $memory = memory_get_usage(true);
 
         try {
-            $this->parser->parse();
+            $pb = $this->progressBarFactory->createStylizedProgressBar();
+            $result = $this->parser->parse($pb);
+
+            $resSummary = $result->getSummary();
+            $this->io->table([], [
+                ['Processed files:', "<options=bold,underscore>{$resSummary->getProcessedFilesCount()}</>"],
+                ['Processed entities:', "<options=bold,underscore>{$resSummary->getProcessedEntitiesCount()}</>"],
+                ['Skipped entities:', "<options=bold,underscore>{$resSummary->getSkippedEntitiesCount()}</>"],
+                ['Entities added by plugins:', "<options=bold,underscore>{$resSummary->getEntitiesAddedByPluginsCount()}</>"],
+                ['Total added entities:', "<options=bold,underscore>{$resSummary->getTotalAddedEntities()}</>"],
+            ]);
+
             $this->renderer->run();
         } catch (Exception $e) {
             $this->logger->critical(

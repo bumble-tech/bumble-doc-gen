@@ -11,7 +11,7 @@ In this section, we show how the parser works and what components it consists of
 
 <embed> <h2>Description of the main components of the parser</h2> </embed>
 
-<embed> <ul><li><div><a href='/docs/tech/2.parser/entity.md'>Entities and entities collections</a></div></li><li><div><a href='/docs/tech/2.parser/entityFilterCondition.md'>Entity filter conditions</a></div></li><li><div><a href='/docs/tech/2.parser/sourceLocator.md'>Source locators</a></div></li></ul> </embed>
+<embed> <ul><li><div><a href='/docs/tech/2.parser/entity.md'>Entities and entities collections</a></div></li><li><div><a href='/docs/tech/2.parser/entityFilterCondition.md'>Entity filter conditions</a></div></li><li><div><a href='/docs/tech/2.parser/reflectionApi/readme.md'>Reflection API</a></div><div><ul><li><div><a href='/docs/tech/2.parser/reflectionApi/php/readme.md'>Reflection API for PHP</a></div><div><ul><li><div><a href='/docs/tech/2.parser/reflectionApi/php/phpClassConstantReflectionApi.md'>PHP class constant reflection API</a></div></li><li><div><a href='/docs/tech/2.parser/reflectionApi/php/phpClassMethodReflectionApi.md'>PHP class method reflection API</a></div></li><li><div><a href='/docs/tech/2.parser/reflectionApi/php/phpClassPropertyReflectionApi.md'>PHP class property reflection API</a></div></li><li><div><a href='/docs/tech/2.parser/reflectionApi/php/phpClassReflectionApi.md'>PHP class reflection API</a></div></li><li><div><a href='/docs/tech/2.parser/reflectionApi/php/phpEntitiesCollection.md'>PHP entities collection</a></div></li><li><div><a href='/docs/tech/2.parser/reflectionApi/php/phpEnumReflectionApi.md'>PHP enum reflection API</a></div></li><li><div><a href='/docs/tech/2.parser/reflectionApi/php/phpInterfaceReflectionApi.md'>PHP interface reflection API</a></div></li><li><div><a href='/docs/tech/2.parser/reflectionApi/php/phpTraitReflectionApi.md'>PHP trait reflection API</a></div></li></ul></div></li></ul></div></li><li><div><a href='/docs/tech/2.parser/sourceLocator.md'>Source locators</a></div></li></ul> </embed>
 
 <embed> <h2>Starting the parsing process</h2> </embed>
 
@@ -19,7 +19,8 @@ In this section, we show how the parser works and what components it consists of
  $parser = new ProjectParser($configuration, $rootEntityCollectionsGroup);
  
  // Parsing the project and filling RootEntityCollectionsGroup with data
- $rootEntityCollectionsGroup = $this->parser->parse();
+ $this->parser->parse();
+ $rootEntityCollectionsGroup = $this->parser->getRootEntityCollectionsGroup();
 ```
 
 
@@ -41,4 +42,4 @@ In this section, we show how the parser works and what components it consists of
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Tue Nov 14 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Nov 29 11:54:40 2023 +0300<br><b>Page content update date:</b> Mon Dec 18 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

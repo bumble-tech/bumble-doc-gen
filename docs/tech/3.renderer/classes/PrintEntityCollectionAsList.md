@@ -21,13 +21,13 @@ final class PrintEntityCollectionAsList implements \BumbleDocGen\Core\Renderer\T
 <b>Examples of using:</b>
 
 ```php
-{{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['ScriptFramework\\ScriptInterface', 'ScriptFramework\\TestScriptInterface'])) }}
+{{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['ScriptFramework\\ScriptInterface', 'ScriptFramework\\TestScriptInterface'])) }}
 The function will output a list of PHP classes that match the ScriptFramework\ScriptInterface and ScriptFramework\TestScriptInterface interfaces
 
 ```
 
 ```php
-{{ printEntityCollectionAsList(phpClassEntityCollection) }}
+{{ printEntityCollectionAsList(phpEntities) }}
 The function will list all documented PHP classes
 
 ```

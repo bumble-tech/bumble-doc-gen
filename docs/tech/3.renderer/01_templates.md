@@ -31,7 +31,7 @@ After generating the documentation, this page will look exactly like a template.
  
  Dynamic block:
  
- {{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['\\BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable()) }}
+ {{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['\\BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable()) }}
  
  More static text...
  
@@ -72,9 +72,9 @@ Output method description as a dynamic block:
  
  Dynamic block:
  
- {{ phpClassEntityCollection
+ {{ phpEntities
      .get('\\BumbleDocGen\\LanguageHandler\\LanguageHandlerInterface')
-     .getMethodEntity('getLanguageKey')
+     .getMethod('getLanguageKey')
      .getDescription()
  }}
  
@@ -101,4 +101,4 @@ Result after starting the documentation generation process:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Oct 13 18:40:45 2023 +0300<br><b>Page content update date:</b> Tue Nov 14 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Mon Nov 20 23:05:39 2023 +0300<br><b>Page content update date:</b> Mon Dec 18 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

@@ -20,7 +20,7 @@ Add the BumbleDocGen to the `composer.json` file of your project using the follo
 <embed> <h2>Core Features</h2> </embed>
 
 - 🔍 <b><a href="/docs/tech/2.parser/readme.md">Parsing</a>:</b>
-  BumbleDocGen scans your project by parsing PHP files, extracting comments, and providing detailed models of your code.
+  BumbleDocGen analyzes your code and provides a convenient <a href="/docs/tech/2.parser/reflectionApi/readme.md">Reflection API</a>.
 
 - ✍️ <b><a href="/docs/tech/3.renderer/readme.md">Rendering</a>:</b>
   BumbleDocGen generates markdown content using templates and fills them with data obtained from parsing your code.
@@ -36,16 +36,16 @@ BumbleDocGen's interface consists of mainly two classes: <a href="/docs/classes/
 
 - <a href="/docs/classes/DocGenerator.md">DocGenerator</a> provides main operations for generating the documents.
 
-  - `addMissingDocBlocks()`: This method creates missing docBlocks in your code.
-  - `fillInReadmeMdTemplate()`: This method prepares the `README.md` file using a predefined template.
-  - `generate()`: This method produces all necessary documentation.
-  - `generateProjectTemplatesStructure()`: This method creates a structure for project templates.
-  - `parseAndGetRootEntityCollectionsGroup()`: This method parses your project's files and collects information for the documentation.
+    - [addDocBlocks()](/docs/classes/DocGenerator.md#madddocblocks): Generate missing docBlocks with LLM for project class methods that are available for documentation
+    - [generate()](/docs/classes/DocGenerator.md#mgenerate): Generates documentation using configuration
+    - [generateReadmeTemplate()](/docs/classes/DocGenerator.md#mgeneratereadmetemplate): Creates a `README.md` template filled with basic information using LLM
 
 - <a href="/docs/classes/DocGeneratorFactory.md">DocGeneratorFactory</a> provides a method for creating `DocGenerator` instance.
 
-  - `create(configurationFiles: string)`: This method creates a `DocGenerator` instance using provided configuration files.
-  - `setCustomConfigurationParameters(customConfigurationParameters: array)`: This method sets custom configuration parameters for the `DocGenerator` creation.
+    - [create()](/docs/classes/DocGeneratorFactory.md#mcreate): Creates a documentation generator instance using configuration files
+    - [createByConfigArray()](/docs/classes/DocGeneratorFactory.md#mcreatebyconfigarray): Creates a documentation generator instance using an array containing the configuration
+    - [createConfiguration()](/docs/classes/DocGeneratorFactory.md#mcreateconfiguration): Creating a project configuration instance
+    - [createRootEntitiesCollection()](/docs/classes/DocGeneratorFactory.md#mcreaterootentitiescollection): Creating a collection of entities (see `ReflectionAPI`)
 
 <embed> <h3>Examples of usage</h3> </embed>
 
@@ -95,4 +95,4 @@ To update this documentation, run the following command:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Tue Nov 14 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Dec 15 21:27:10 2023 +0300<br><b>Page content update date:</b> Mon Dec 18 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

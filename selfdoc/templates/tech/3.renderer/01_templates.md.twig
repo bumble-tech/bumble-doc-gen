@@ -28,7 +28,7 @@ Some static text...
 
 Dynamic block:
 
-{\{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['\\\\BumbleDocGen\\\\Core\\\\Parser\\\\SourceLocator\\\\SourceLocatorInterface']).getOnlyInstantiable()) }\}
+{\{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['\\\\BumbleDocGen\\\\Core\\\\Parser\\\\SourceLocator\\\\SourceLocatorInterface']).getOnlyInstantiable()) }\}
 
 More static text...
 " | textToCodeBlock('twig') }}
@@ -63,9 +63,9 @@ Output method description as a dynamic block:
 
 Dynamic block:
 
-{\{ phpClassEntityCollection
+{\{ phpEntities
     .get('\\\\BumbleDocGen\\\\LanguageHandler\\\\LanguageHandlerInterface')
-    .getMethodEntity('getLanguageKey')
+    .getMethod('getLanguageKey')
     .getDescription()
 }\}
 

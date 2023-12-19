@@ -13,26 +13,26 @@ Entities are always handled through collections. Collections are the result of t
 
 * Passing a collection to a function:
 
-{{ "{{ printEntityCollectionAsList(phpClassEntityCollection) }}" | textToCodeBlock('twig') }}
+{{ "{{ printEntityCollectionAsList(phpEntities) }}" | textToCodeBlock('twig') }}
 
 * Filtering a collection and passing it to a function:
 
-{{ "{{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\Entity\\EntityInterface'])) }}" | textToCodeBlock('twig') }}
+{{ "{{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\Entity\\EntityInterface'])) }}" | textToCodeBlock('twig') }}
 
 * Saving a filtered collection to a variable:
 
-{{ "{{ {% set filteredCollection = phpClassEntityCollection.getOnlyInstantiable() %} }}" | textToCodeBlock('twig') }}
+{{ "{{ {% set filteredCollection = phpEntities.getOnlyInstantiable() %} }}" | textToCodeBlock('twig') }}
 
 * Using a collection in a for loop:
 
-{{ "{% for someClassEntity in phpClassEntityCollection %}
+{{ "{% for someClassEntity in phpEntities %}
     * {{ someClassEntity.getName() }}
 {% endfor %}" | textToCodeBlock('twig') }}
 
 * Output of all methods of all found entities in `className::methodName()` format:
 
-{{ "{% for someClassEntity in phpClassEntityCollection %}
-    {% for methodEntity in someClassEntity.getMethodEntityCollection() %}
+{{ "{% for someClassEntity in phpEntities %}
+    {% for methodEntity in someClassEntity.getMethodEntitiesCollection() %}
         * {{ someClassEntity.getName() }}::{{ methodEntity.getName() }}()
     {% endfor %}
 {% endfor %}" | textToCodeBlock('twig') }}
@@ -50,16 +50,16 @@ The root collections ([a]RootEntityCollection[/a]), which are directly accessibl
         <th>PL</th>
         <th>Description</th>
     </tr>
-    {% for entityCollection in phpClassEntityCollection
+    {% for entitiesCollection in phpEntities
             .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\RootEntityCollection'])
             .getOnlyInstantiable()
             %}
-    {% set match = entityCollection.getFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+    {% set match = entitiesCollection.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
     <tr>
-        <td>{{ drawDocumentedEntityLink(entityCollection) }}</td>
-        <td><b>{{ entityCollection.getMethodEntity('getEntityCollectionName').getFirstReturnValue() }}</b></td>
+        <td>{{ drawDocumentedEntityLink(entitiesCollection) }}</td>
+        <td><b>{{ entitiesCollection.getMethod('getEntityCollectionName', true).getFirstReturnValue() }}</b></td>
         <td>{{ match[2] | upper }}</td>
-        <td>{{ entityCollection.getDescription() }}</td>
+        <td>{{ entitiesCollection.getDescription() }}</td>
     </tr>
     {% endfor %}
 </table>
@@ -77,16 +77,16 @@ These classes are a convenient wrapper for accessing data in templates:
         <th>PL</th>
         <th>Description</th>
     </tr>
-{% for entityCollection in phpClassEntityCollection
+{% for entitiesCollection in phpEntities
     .filterByParentClassNames(['BumbleDocGen\\Core\\Parser\\Entity\\BaseEntityCollection'])
     .getOnlyInstantiable()
 %}
-    {% set match = entityCollection.getFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
-    {% set entitiesClasses = findEntitiesClassesByCollectionClassName(entityCollection.getName()) %}
+    {% set match = entitiesCollection.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
+    {% set entitiesClasses = findEntitiesClassesByCollectionClassName(entitiesCollection.getName()) %}
     {% for entityClass in entitiesClasses %}
     <tr>
         <td>{{ drawDocumentedEntityLink(entityClass) }}</td>
-        <td>{{ drawDocumentedEntityLink(entityCollection) }}</td>
+        <td>{{ drawDocumentedEntityLink(entitiesCollection) }}</td>
         <td>{% if entityClass.implementsInterface('BumbleDocGen\\Core\\Parser\\Entity\\RootEntityInterface') %}yes{% else %}no{% endif %}</td>
         <td>{{ match[2] | upper }}</td>
         <td>{{ entityClass.getDescription() }}</td>

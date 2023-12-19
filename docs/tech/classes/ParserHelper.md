@@ -34,9 +34,6 @@ final class ParserHelper
 
 <ol>
 <li>
-    <a href="#mgetbuiltinclassnames">getBuiltInClassNames</a>
-    </li>
-<li>
     <a href="#mgetdocblock">getDocBlock</a>
     </li>
 <li>
@@ -128,34 +125,13 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgetbuiltinclassnames" href="#mgetbuiltinclassnames">#</a>
- <b>getBuiltInClassNames</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L162">source code</a></li>
-</ul>
-
-```php
-public static function getBuiltInClassNames(): array;
-```
-
-
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
 <li><a name="mgetdocblock" href="#mgetdocblock">#</a>
  <b>getDocBlock</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L337">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L306">source code</a></li>
 </ul>
 
 ```php
-public function getDocBlock(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, string $docComment, int|null $lineNumber = null): \phpDocumentor\Reflection\DocBlock;
+public function getDocBlock(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $classEntity, string $docComment, int|null $lineNumber = null): \phpDocumentor\Reflection\DocBlock;
 ```
 
 
@@ -173,7 +149,7 @@ public function getDocBlock(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Clas
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -206,11 +182,11 @@ public function getDocBlock(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Clas
 <ul>
 <li><a name="mgetdocblockcontext" href="#mgetdocblockcontext">#</a>
  <b>getDocBlockContext</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L368">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L337">source code</a></li>
 </ul>
 
 ```php
-public function getDocBlockContext(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity): \phpDocumentor\Reflection\Types\Context;
+public function getDocBlockContext(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $classEntity): \phpDocumentor\Reflection\Types\Context;
 ```
 
 
@@ -228,7 +204,7 @@ public function getDocBlockContext(\BumbleDocGen\LanguageHandler\Php\Parser\Enti
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -251,7 +227,7 @@ public function getDocBlockContext(\BumbleDocGen\LanguageHandler\Php\Parser\Enti
 <ul>
 <li><a name="mgetfilesingit" href="#mgetfilesingit">#</a>
  <b>getFilesInGit</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L310">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L290">source code</a></li>
 </ul>
 
 ```php
@@ -279,11 +255,11 @@ public function getFilesInGit(): array;
 <ul>
 <li><a name="mgetuseslistbyclassentity" href="#mgetuseslistbyclassentity">#</a>
  <b>getUsesListByClassEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L223">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L203">source code</a></li>
 </ul>
 
 ```php
-public function getUsesListByClassEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $classEntity, bool $extended = true): array;
+public function getUsesListByClassEntity(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $classEntity, bool $extended = true): array;
 ```
 
 
@@ -301,7 +277,7 @@ public function getUsesListByClassEntity(\BumbleDocGen\LanguageHandler\Php\Parse
     <tbody>
             <tr>
             <td>$classEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a></td>
             <td>-</td>
         </tr>
             <tr>
@@ -329,7 +305,7 @@ public function getUsesListByClassEntity(\BumbleDocGen\LanguageHandler\Php\Parse
 <ul>
 <li><a name="misbuiltinclass" href="#misbuiltinclass">#</a>
  <b>isBuiltInClass</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L177">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L162">source code</a></li>
 </ul>
 
 ```php
@@ -367,7 +343,7 @@ public static function isBuiltInClass(string $className): bool;
 <ul>
 <li><a name="misbuiltintype" href="#misbuiltintype">#</a>
  <b>isBuiltInType</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L183">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L168">source code</a></li>
 </ul>
 
 ```php
@@ -405,7 +381,7 @@ public static function isBuiltInType(string $name): bool;
 <ul>
 <li><a name="misclassloaded" href="#misclassloaded">#</a>
  <b>isClassLoaded</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L212">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L192">source code</a></li>
 </ul>
 
 ```php
@@ -450,7 +426,7 @@ public function isClassLoaded(string $className): bool;
 <ul>
 <li><a name="miscorrectclassname" href="#miscorrectclassname">#</a>
  <b>isCorrectClassName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L201">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L178">source code</a></li>
 </ul>
 
 ```php
@@ -493,11 +469,11 @@ public static function isCorrectClassName(string $className, bool $checkBuiltIns
 <ul>
 <li><a name="mparsefullclassname" href="#mparsefullclassname">#</a>
  <b>parseFullClassName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L262">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ParserHelper.php#L242">source code</a></li>
 </ul>
 
 ```php
-public function parseFullClassName(string $searchClassName, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity $parentClassEntity, bool $extended = true): string;
+public function parseFullClassName(string $searchClassName, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $parentClassEntity, bool $extended = true): string;
 ```
 
 
@@ -520,7 +496,7 @@ public function parseFullClassName(string $searchClassName, \BumbleDocGen\Langua
         </tr>
             <tr>
             <td>$parentClassEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a></td>
             <td>-</td>
         </tr>
             <tr>

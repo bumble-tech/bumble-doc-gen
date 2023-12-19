@@ -21,12 +21,12 @@ final class DrawClassMap implements \BumbleDocGen\Core\Renderer\Twig\Function\Cu
 <b>Examples of using:</b>
 
 ```php
-{{ drawClassMap(classEntityCollection.filterByPaths(['/src/Renderer'])) }}
+{{ drawClassMap(phpEntities.filterByPaths(['/src/Renderer'])) }}
 
 ```
 
 ```php
-{{ drawClassMap(classEntityCollection) }}
+{{ drawClassMap(phpEntities) }}
 
 ```
 
@@ -132,7 +132,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumen
 </ul>
 
 ```php
-public function __invoke(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection ...$classEntityCollections): string;
+public function __invoke(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection ...$entitiesCollections): string;
 ```
 
 
@@ -149,8 +149,8 @@ public function __invoke(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEn
     </thead>
     <tbody>
             <tr>
-            <td>$classEntityCollections <i>(variadic)</i></td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
+            <td>$entitiesCollections <i>(variadic)</i></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection</a></td>
             <td>The collection of entities for which the class map will be generated</td>
         </tr>
         </tbody>
@@ -231,7 +231,7 @@ public function convertDirectoryStructureToFormattedString(array $structure, str
 </ul>
 
 ```php
-public function getDirectoryStructure(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection ...$classEntityCollections): array;
+public function getDirectoryStructure(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection ...$entitiesCollections): array;
 ```
 
 
@@ -248,8 +248,8 @@ public function getDirectoryStructure(\BumbleDocGen\LanguageHandler\Php\Parser\E
     </thead>
     <tbody>
             <tr>
-            <td>$classEntityCollections <i>(variadic)</i></td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassEntityCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection</a></td>
+            <td>$entitiesCollections <i>(variadic)</i></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection</a></td>
             <td>-</td>
         </tr>
         </tbody>

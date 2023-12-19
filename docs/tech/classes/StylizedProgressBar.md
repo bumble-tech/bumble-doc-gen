@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> StylizedProgressBar<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L10">StylizedProgressBar</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L11">StylizedProgressBar</a> class:
 </h1>
 
 
@@ -12,7 +12,7 @@
 ```php
 namespace BumbleDocGen\Console\ProgressBar;
 
-final class StylizedProgressBar
+final class StylizedProgressBar implements \BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface
 ```
 
 
@@ -69,7 +69,7 @@ final class StylizedProgressBar
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L16">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L17">source code</a></li>
 </ul>
 
 ```php
@@ -106,7 +106,7 @@ public function __construct(\Symfony\Component\Console\Style\OutputStyle $io);
 <ul>
 <li><a name="madvance" href="#madvance">#</a>
  <b>advance</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L79">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L85">source code</a></li>
 </ul>
 
 ```php
@@ -144,7 +144,7 @@ public function advance(int $step): void;
 <ul>
 <li><a name="mfinish" href="#mfinish">#</a>
  <b>finish</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L84">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L90">source code</a></li>
 </ul>
 
 ```php
@@ -165,7 +165,7 @@ public function finish(): void;
 <ul>
 <li><a name="miterate" href="#miterate">#</a>
  <b>iterate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L57">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L58">source code</a></li>
 </ul>
 
 ```php
@@ -208,7 +208,7 @@ public function iterate(iterable $iterable, int|null $max = null): \Generator;
 <ul>
 <li><a name="msetmaxsteps" href="#msetmaxsteps">#</a>
  <b>setMaxSteps</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L74">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L80">source code</a></li>
 </ul>
 
 ```php
@@ -246,7 +246,7 @@ public function setMaxSteps(int $maxSteps): void;
 <ul>
 <li><a name="msetname" href="#msetname">#</a>
  <b>setName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L43">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L44">source code</a></li>
 </ul>
 
 ```php
@@ -284,7 +284,7 @@ public function setName(string $name): void;
 <ul>
 <li><a name="msetstepdescription" href="#msetstepdescription">#</a>
  <b>setStepDescription</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L50">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L51">source code</a></li>
 </ul>
 
 ```php
@@ -322,7 +322,7 @@ public function setStepDescription(string $stepDescription): void;
 <ul>
 <li><a name="mstart" href="#mstart">#</a>
  <b>start</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L69">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/ProgressBar/StylizedProgressBar.php#L75">source code</a></li>
 </ul>
 
 ```php
