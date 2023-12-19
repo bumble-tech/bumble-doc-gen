@@ -53,7 +53,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $projectRoot = $this->parameterBag->validateAndGetDirectoryPathValue('project_root', false);
+        $projectRoot = $this->parameterBag->validateAndGetDirectoryPathValue(ConfigurationKey::PROJECT_ROOT, false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $projectRoot);
         return $projectRoot;
     }
@@ -70,7 +70,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $sourceLocators = $this->parameterBag->validateAndGetClassListValue(
-            'source_locators',
+            ConfigurationKey::SOURCE_LOCATORS,
             SourceLocatorInterface::class
         );
         $cachedSourceLocatorsCollection = SourceLocatorsCollection::create(...$sourceLocators);
@@ -87,11 +87,14 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $templatesDir = $this->parameterBag->validateAndGetStringValue('templates_dir', false);
+        $templatesDir = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::TEMPLATES_DIR, false);
         $parentDir = dirname($templatesDir);
         if (!$parentDir || !is_dir($parentDir)) {
             throw new InvalidConfigurationParameterException(
-                "`output_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+                sprintf(
+                    "`%s` cannot be created because parent directory `{$parentDir}` does not exist",
+                    ConfigurationKey::TEMPLATES_DIR
+                )
             );
         }
         if (!file_exists($templatesDir)) {
@@ -112,17 +115,23 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $outputDir = $this->parameterBag->validateAndGetStringValue('output_dir', false);
+        $outputDir = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::OUTPUT_DIR, false);
         $parentDir = dirname($outputDir);
         if (!$parentDir || !is_dir($parentDir)) {
             throw new InvalidConfigurationParameterException(
-                "`output_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+                sprintf(
+                    "`%s` cannot be created because parent directory `{$parentDir}` does not exist",
+                    ConfigurationKey::OUTPUT_DIR
+                )
             );
         }
 
         if (!is_writable($parentDir)) {
             throw new InvalidConfigurationParameterException(
-                "`output_dir` cannot be created because parent directory `{$parentDir}` is not writable"
+                sprintf(
+                    "`%s` cannot be created because parent directory `{$parentDir}` is not writable",
+                    ConfigurationKey::OUTPUT_DIR
+                )
             );
         }
 
@@ -144,7 +153,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $outputDirBaseUrl = $this->parameterBag->validateAndGetStringValue('output_dir_base_url', false);
+        $outputDirBaseUrl = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::OUTPUT_DIR_BASE_URL, false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $outputDirBaseUrl);
         return $outputDirBaseUrl;
     }
@@ -161,7 +170,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $languageHandlers = $this->parameterBag->validateAndGetClassListValue(
-            'language_handlers',
+            ConfigurationKey::LANGUAGE_HANDLERS,
             LanguageHandlerInterface::class,
             false
         );
@@ -182,7 +191,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $pluginsList = $this->parameterBag->validateAndGetClassListValue(
-            'plugins',
+            ConfigurationKey::PLUGINS,
             PluginInterface::class
         );
         $cachedPlugins = PluginsCollection::create(...$pluginsList);
@@ -200,12 +209,15 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
 
-        $cacheDir = $this->parameterBag->validateAndGetStringValue('cache_dir');
+        $cacheDir = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::CACHE_DIR);
         if ($cacheDir) {
             $parentDir = dirname($cacheDir);
             if (!is_dir($parentDir)) {
                 throw new InvalidConfigurationParameterException(
-                    "`cache_dir` cannot be created because parent directory `{$parentDir}` does not exist"
+                    sprintf(
+                        "`%s` cannot be created because parent directory `{$parentDir}` does not exist",
+                        ConfigurationKey::CACHE_DIR
+                    )
                 );
             }
             if (!file_exists($cacheDir)) {
@@ -231,7 +243,7 @@ final class Configuration
         }
         /** @var PageLinkProcessorInterface $pageLinkProcessor */
         $pageLinkProcessor = $this->parameterBag->validateAndGetClassValue(
-            'page_link_processor',
+            ConfigurationKey::PAGE_LINK_PROCESSOR,
             PageLinkProcessorInterface::class
         );
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $pageLinkProcessor);
@@ -247,7 +259,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $gitClientPath = $this->parameterBag->validateAndGetStringValue('git_client_path', false);
+        $gitClientPath = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::GIT_CLIENT_PATH, false);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $gitClientPath);
         return $gitClientPath;
     }
@@ -264,7 +276,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $customFunctions = $this->parameterBag->validateAndGetClassListValue(
-            'twig_functions',
+            ConfigurationKey::TWIG_FUNCTIONS,
             CustomFunctionInterface::class
         );
         $customFunctionsCollection = new CustomFunctionsCollection();
@@ -287,7 +299,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
-            'twig_filters',
+            ConfigurationKey::TWIG_FILTERS,
             CustomFilterInterface::class
         );
         $customFiltersCollection = new CustomFiltersCollection();
@@ -307,7 +319,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue('use_shared_cache');
+        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue(ConfigurationKey::USE_SHARED_CACHE);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $useSharedCache);
         return $useSharedCache;
     }
@@ -321,7 +333,7 @@ final class Configuration
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
         } catch (ObjectNotFoundException) {
         }
-        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue('check_file_in_git_before_creating_doc');
+        $useSharedCache = $this->parameterBag->validateAndGetBooleanValue(ConfigurationKey::CHECK_FILE_IN_GIT_BEFORE_CREATING_DOC);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $useSharedCache);
         return $useSharedCache;
     }
@@ -355,7 +367,7 @@ final class Configuration
         } catch (ObjectNotFoundException) {
         }
         $customFilters = $this->parameterBag->validateAndGetClassListValue(
-            'additional_console_commands',
+            ConfigurationKey::ADDITIONAL_CONSOLE_COMMANDS,
             Command::class
         );
         $additionalCommandCollection = AdditionalCommandCollection::create(...$customFilters);

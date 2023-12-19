@@ -1,4 +1,7 @@
 # Changelog
+# [1.6.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.6.0)
+- Updating composer scripts [#66](https://github.com/bumble-tech/bumble-doc-gen/pull/66)
+- Configuration console command [#54](https://github.com/bumble-tech/bumble-doc-gen/pull/54)
 
 # [1.5.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.5.0)
 - Caching system refactoring [#62](https://github.com/bumble-tech/bumble-doc-gen/pull/62)
