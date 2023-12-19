@@ -59,7 +59,7 @@ final class OperationsCollection implements \IteratorAggregate
 <ul>
 <li><a name="m-serialize" href="#m-serialize">#</a>
  <b>__serialize</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L130">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L131">source code</a></li>
 </ul>
 
 ```php
@@ -80,7 +80,7 @@ public function __serialize(): array;
 <ul>
 <li><a name="m-unserialize" href="#m-unserialize">#</a>
  <b>__unserialize</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L137">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/CollectionLogOperation/OperationsCollection.php#L138">source code</a></li>
 </ul>
 
 ```php

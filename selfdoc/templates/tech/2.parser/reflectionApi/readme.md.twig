@@ -18,10 +18,16 @@ $reflectionApiConfig = PhpReflectionApiConfig::create();
 /** @var PhpEntitiesCollection $entitiesCollection*/
 $entitiesCollection = (new \BumbleDocGen\DocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
 
+// Source locators are needed so that we can determine all the files that will be traversed to fill the collection with data
+$sourceLocators = SourceLocatorsCollection::create(new DirectoriesSourceLocator([__DIR__]));
+
+// We can define special filters according to which entities will be loaded
+$filter = new TrueCondition();
+
 // By default the collection is empty. You can populate the collection with data
 $entitiesCollection->loadEntities(
-    $sourceLocators, // Source locators are needed so that we can determine all the files that will be traversed to fill the collection with data
-    $filter // We can define special filters according to which entities will be loaded
+    $sourceLocators,
+    $filter
 );
 
 // And now you can use Reflection API

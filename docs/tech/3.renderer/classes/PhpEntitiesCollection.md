@@ -671,7 +671,7 @@ public function getLoadedOrCreateNew(string $objectName, bool $withAddClassEntit
 <b>See:</b>
 <ul>
     <li>
-        <a href="/docs/tech/3.renderer/classes/RootEntityInterface_2.md#misentitydatacanbeloaded">\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::isEntityDataCanBeLoaded()</a>    </li>
+        <a href="/docs/tech/3.renderer/classes/RootEntityInterface.md#misentitydatacanbeloaded">\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::isEntityDataCanBeLoaded()</a>    </li>
 </ul>
 </div>
 <hr>

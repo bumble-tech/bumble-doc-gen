@@ -18,10 +18,16 @@ You can use the Reflection API both in documentation templates and simply in you
  /** @var PhpEntitiesCollection $entitiesCollection*/
  $entitiesCollection = (new BumbleDocGenDocGeneratorFactory())->createRootEntitiesCollection($reflectionApiConfig);
  
+ // Source locators are needed so that we can determine all the files that will be traversed to fill the collection with data
+ $sourceLocators = SourceLocatorsCollection::create(new DirectoriesSourceLocator([__DIR__]));
+ 
+ // We can define special filters according to which entities will be loaded
+ $filter = new TrueCondition();
+ 
  // By default the collection is empty. You can populate the collection with data
  $entitiesCollection->loadEntities(
-     $sourceLocators, // Source locators are needed so that we can determine all the files that will be traversed to fill the collection with data
-     $filter // We can define special filters according to which entities will be loaded
+     $sourceLocators,
+     $filter
  );
  
  // And now you can use Reflection API
@@ -58,4 +64,4 @@ In addition, <a href="/docs/tech/2.parser/reflectionApi/classes/RootEntityCollec
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Dec 15 21:22:59 2023 +0300<br><b>Page content update date:</b> Mon Dec 18 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Mon Dec 18 15:25:50 2023 +0300<br><b>Page content update date:</b> Tue Dec 19 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
