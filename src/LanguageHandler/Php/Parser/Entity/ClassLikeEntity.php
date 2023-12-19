@@ -828,7 +828,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function getConstantValue(string $constantName): string|array|int|bool|null|float
     {
-        return $this->getConstant($constantName, true)->getValue();
+        return $this->getConstant($constantName, true)?->getValue();
     }
 
     /**
@@ -1026,7 +1026,7 @@ abstract class ClassLikeEntity extends BaseEntity implements DocumentTransformab
      */
     public function getPropertyDefaultValue(string $propertyName): string|array|int|bool|null|float
     {
-        return $this->getProperty($propertyName, true)->getDefaultValue();
+        return $this->getProperty($propertyName, true)?->getDefaultValue();
     }
 
     /**
