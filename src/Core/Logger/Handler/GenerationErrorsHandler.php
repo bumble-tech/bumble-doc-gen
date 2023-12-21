@@ -7,6 +7,7 @@ namespace BumbleDocGen\Core\Logger\Handler;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
+use Monolog\LogRecord;
 
 final class GenerationErrorsHandler extends AbstractProcessingHandler
 {
@@ -20,7 +21,7 @@ final class GenerationErrorsHandler extends AbstractProcessingHandler
         parent::__construct($level, $bubble);
     }
 
-    protected function write(array $record): void
+    protected function write(LogRecord $record): void
     {
         $initiator = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[3] ?? [];
         $fileName = str_replace([
@@ -38,8 +39,8 @@ final class GenerationErrorsHandler extends AbstractProcessingHandler
         }
 
         $this->records[] = [
-            "type" => $record['level_name'],
-            "msg" => $record['message'],
+            "type" => $record->level->getName(),
+            "msg" => $record->message,
             'initiator' => $initiator,
             'isRenderingError' => boolval($this->rendererContext->getCurrentTemplateFilePatch()),
             'currentDocumentedEntityWrapper' => $this->rendererContext->getCurrentDocumentedEntityWrapper()?->getDocumentTransformableEntity()?->getName()
