@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GenerationErrorsHandler<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L11">GenerationErrorsHandler</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L12">GenerationErrorsHandler</a> class:
 </h1>
 
 
@@ -54,7 +54,7 @@ final class GenerationErrorsHandler extends \Monolog\Handler\AbstractProcessingH
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L15">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L16">source code</a></li>
 </ul>
 
 ```php
@@ -101,7 +101,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Context\RendererContext 
 <ul>
 <li><a name="maddrecords" href="#maddrecords">#</a>
  <b>addRecords</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L54">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L55">source code</a></li>
 </ul>
 
 ```php
@@ -139,7 +139,7 @@ public function addRecords(array $records): void;
 <ul>
 <li><a name="mgetrecords" href="#mgetrecords">#</a>
  <b>getRecords</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L49">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Logger/Handler/GenerationErrorsHandler.php#L50">source code</a></li>
 </ul>
 
 ```php

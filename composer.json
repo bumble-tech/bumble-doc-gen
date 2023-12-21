@@ -15,7 +15,7 @@
         "issues": "https://github.com/bumble-tech/bumble-doc-gen/issues"
     },
     "require": {
-        "php": "^8.0.0",
+        "php": "^8.1.0",
         "ext-zlib": "*",
         "ext-mbstring": "*",
         "symfony/console": "^6.0",
@@ -25,7 +25,7 @@
         "phpdocumentor/reflection-docblock": "^5.3",
         "doctrine/annotations": "^1.13",
         "nette/php-generator": "^4.0",
-        "monolog/monolog": "^2.5",
+        "monolog/monolog": "^3.0",
         "bramus/monolog-colored-line-formatter": "^3.0",
         "symfony/cache": "^6.0",
         "symfony/event-dispatcher": "^6.0",
