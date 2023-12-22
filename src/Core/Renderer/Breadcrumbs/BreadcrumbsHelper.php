@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\TemplateFile;
 use DI\DependencyException;
@@ -120,13 +121,16 @@ final class BreadcrumbsHelper
      */
     private function getFindIndexFileByRelativePath(string $relativePath): ?string
     {
+        $event = $this->pluginEventDispatcher->dispatch(new OnGetTemplatePathByRelativeDocPath($relativePath));
+        $path = $event->getCustomTemplateFilePath() ?: $this->configuration->getTemplatesDir() . '/' . $relativePath;
+
         $finder = Finder::create()
             ->name('*.twig')
             ->ignoreVCS(true)
             ->ignoreDotFiles(true)
             ->ignoreUnreadableDirs()
             ->depth(0)
-            ->in($this->configuration->getTemplatesDir() . '/' . $relativePath);
+            ->in($path);
 
         $indexFile = null;
         foreach ($finder->files() as $file) {
