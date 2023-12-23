@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -20,9 +21,10 @@ final class MainTwigEnvironment
     private bool $isEnvLoaded = false;
 
     public function __construct(
-        private Configuration $configuration,
-        private MainExtension $mainExtension,
-        private PluginEventDispatcher $pluginEventDispatcher,
+        private readonly Configuration $configuration,
+        private readonly MainExtension $mainExtension,
+        private readonly PluginEventDispatcher $pluginEventDispatcher,
+        private readonly BreadcrumbsHelper $breadcrumbsHelper
     ) {
     }
 
@@ -35,7 +37,7 @@ final class MainTwigEnvironment
             $templatesDir = $this->configuration->getTemplatesDir();
             $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
             $templatesDirs = $event->getTemplatesDirs();
-            $loader = new FilesystemLoader($templatesDirs);
+            $loader = new FrontMatterLoader(new FilesystemLoader($templatesDirs), $this->breadcrumbsHelper);
             $this->twig = new Environment($loader);
             $this->twig->addExtension($this->mainExtension);
             $this->isEnvLoaded = true;
