@@ -1,5 +1,7 @@
-{% set title = 'Documentation structure and breadcrumbs' %}
-{% set prevPage = 'Renderer' %}
+---
+title: Documentation structure and breadcrumbs
+prevPage: Renderer
+---
 {{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "Documentation structure and breadcrumbs" | textToHeading('H1') }}
@@ -15,9 +17,11 @@ For each directory there is an index file ( <b>readme.md</b> or <b>index.md</b> 
 <img src="/docs/assets/doc_structure.png?raw=true">
 
 But in addition to building the documentation structure using the actual location of template files in directories,
-you can explicitly specify the parent page in each template using the special variable `prevPage`:
+you can explicitly specify the parent page in each template using the special front matter variable `prevPage`:
 
-{{ "{% set prevPage = 'Prev page name' %\}" | textToCodeBlock('twig') }}
+{{ "---
+prevPage: Prev page name
+---" | textToCodeBlock('markdown') }}
 
 In this way, complex documentation structures can be created with less file nesting:
 
@@ -31,9 +35,11 @@ Here is how it is used in twig templates:
 {{ '{{ generatePageBreadcrumbs(title, _self) }\}' | textToCodeBlock('twig') }}
 
 To build breadcrumbs, the previously compiled project structure and the names of each template are used.
-The template name can be specified using the `title` variable:
+The template name can be specified using the `title` front matter variable:
 
-{{ "{% set title = 'Some page title' %\}" | textToCodeBlock('twig') }}
+{{ "---
+title: Some page title
+---" | textToCodeBlock('markdown') }}
 
 Here is an example of the result of the `generatePageBreadcrumbs` function:
 
