@@ -242,7 +242,7 @@ final class DocGenerator
             $additionalPrompt,
         );
 
-        $fileContent = "{% set title = 'About the project' %}\n{$readmeFileContent}";
+        $fileContent = "---\ntitle: About the project\n---\n{$readmeFileContent}";
         $this->io->note("readme.md.twig file content generated:");
         $this->io->text($fileContent);
         if ($this->io->confirm('Save file?')) {
