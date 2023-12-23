@@ -281,7 +281,7 @@ final class DocGenerator
             $this->renderer->run();
         } catch (Exception $e) {
             $this->logger->critical(
-                "{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{{$e->getTraceAsString()}}"
+                "{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{$e->getTraceAsString()}"
             );
             throw $e;
         }
