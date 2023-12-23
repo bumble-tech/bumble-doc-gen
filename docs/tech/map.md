@@ -172,6 +172,7 @@ Directory layout ( only documented files shown ):
 │  │  │  │  │  ├── <a href='/docs/tech/classes/GetDocumentedEntityUrl.md'>GetDocumentedEntityUrl.php</a> <i> — <samp>Get the URL of a documented entity by its name. If the entity is found, next to the file where th...</samp></i>
 │  │  │  │  │  ├── <a href='/docs/tech/classes/LoadPluginsContent.md'>LoadPluginsContent.php</a> <i> — <samp>Process entity template blocks with plugins. The method returns the content processed by plugins.</samp></i>
 │  │  │  │  │  └── <a href='/docs/tech/classes/PrintEntityCollectionAsList.md'>PrintEntityCollectionAsList.php</a> <i> — <samp>Outputting entity data as HTML list</samp></i>
+│  │  │  │  ├── <a href='/docs/tech/classes/FrontMatterLoader.md'>FrontMatterLoader.php</a> 
 │  │  │  │  ├── <a href='/docs/tech/classes/MainExtension.md'>MainExtension.php</a> <i> — <samp>This is an extension that is used to generate documents from templates</samp></i>
 │  │  │  │  └── <a href='/docs/tech/classes/MainTwigEnvironment.md'>MainTwigEnvironment.php</a> 
 │  │  │  ├── <a href='/docs/tech/classes/Renderer.md'>Renderer.php</a> <i> — <samp>Generates and processes files from directory TemplatesDir saving them to directory OutputDir</samp></i>
@@ -268,4 +269,4 @@ Directory layout ( only documented files shown ):
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Mon Nov 20 19:18:48 2023 +0300<br><b>Page content update date:</b> Thu Dec 21 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Dec 23 23:00:37 2023 +0300<br><b>Page content update date:</b> Sat Dec 23 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

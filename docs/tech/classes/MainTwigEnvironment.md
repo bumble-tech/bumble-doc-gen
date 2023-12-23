@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> MainTwigEnvironment<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L17">MainTwigEnvironment</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L18">MainTwigEnvironment</a> class:
 </h1>
 
 
@@ -51,11 +51,11 @@ final class MainTwigEnvironment
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L22">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L23">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Renderer\Twig\MainExtension $mainExtension, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher);
+public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Renderer\Twig\MainExtension $mainExtension, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, \BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper $breadcrumbsHelper);
 ```
 
 
@@ -86,6 +86,11 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
             <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php'>\BumbleDocGen\Core\Plugin\PluginEventDispatcher</a></td>
             <td>-</td>
         </tr>
+            <tr>
+            <td>$breadcrumbsHelper</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper</a></td>
+            <td>-</td>
+        </tr>
         </tbody>
 </table>
 
@@ -98,7 +103,7 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 <ul>
 <li><a name="mrender" href="#mrender">#</a>
  <b>render</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L51">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/MainTwigEnvironment.php#L53">source code</a></li>
 </ul>
 
 ```php
