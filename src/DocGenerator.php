@@ -411,6 +411,12 @@ final class DocGenerator
                     $boolWrapFn($this->configuration->useSharedCache()),
                 ],
             ],
+            ConfigurationKey::RENDER_WITH_FRONT_MATTER => [
+                [
+                    'Do not remove the front matter block from templates when creating documents',
+                    $boolWrapFn($this->configuration->renderWithFrontMatter()),
+                ],
+            ],
             ConfigurationKey::CHECK_FILE_IN_GIT_BEFORE_CREATING_DOC => [
                 [
                     'Check file in Git before creating doc',
