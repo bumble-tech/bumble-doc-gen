@@ -66,18 +66,20 @@ final class Renderer
         $this->pluginEventDispatcher->dispatch(new BeforeRenderingDocFiles());
 
         foreach ($this->renderIteratorFactory->getTemplatesWithOutdatedCache() as $templateFile) {
+            $filePatch = "{$outputDir}{$templateFile->getRelativeDocPath()}";
             if ($templateFile->isTemplate()) {
                 $this->rendererContext->setCurrentTemplateFilePatch($templateFile->getRelativeTemplatePath());
                 $content = $this->twig->render($templateFile->getRelativeTemplatePath(), $templateParams);
 
-                $content = $this->pluginEventDispatcher->dispatch(
-                    new BeforeCreatingDocFile($content, $this->rendererContext)
-                )->getContent();
+                $handledEvent = $this->pluginEventDispatcher->dispatch(
+                    new BeforeCreatingDocFile($content, $filePatch, $this->rendererContext)
+                );
+                $content = $handledEvent->getContent();
+                $filePatch = $handledEvent->getOutputFilePatch();
             } else {
                 $content = file_get_contents($templateFile->getRealPath());
             }
 
-            $filePatch = "{$outputDir}{$templateFile->getRelativeDocPath()}";
             $newDirName = dirname($filePatch);
             if (!is_dir($newDirName)) {
                 $this->fs->mkdir($newDirName, 0755);

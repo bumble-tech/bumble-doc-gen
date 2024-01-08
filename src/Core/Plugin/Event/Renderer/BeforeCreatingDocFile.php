@@ -12,8 +12,11 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class BeforeCreatingDocFile extends Event
 {
-    public function __construct(private string $content, private RendererContext $context)
-    {
+    public function __construct(
+        private string $content,
+        private string $outputFilePatch,
+        private readonly RendererContext $context
+    ) {
     }
 
     public function getContent(): string
@@ -24,6 +27,16 @@ final class BeforeCreatingDocFile extends Event
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    public function getOutputFilePatch(): string
+    {
+        return $this->outputFilePatch;
+    }
+
+    public function setOutputFilePatch(string $outputFilePatch): void
+    {
+        $this->outputFilePatch = $outputFilePatch;
     }
 
     public function getContext(): RendererContext
