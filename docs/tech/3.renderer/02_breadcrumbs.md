@@ -13,10 +13,12 @@ For each directory there is an index file ( <b>readme.md</b> or <b>index.md</b> 
 <img src="/docs/assets/doc_structure.png?raw=true">
 
 But in addition to building the documentation structure using the actual location of template files in directories,
-you can explicitly specify the parent page in each template using the special variable `prevPage`:
+you can explicitly specify the parent page in each template using the special front matter variable `prevPage`:
 
-```twig
- {% set prevPage = 'Prev page name' %}
+```markdown
+ ---
+ prevPage: Prev page name
+ ---
 ```
 
 
@@ -35,10 +37,12 @@ Here is how it is used in twig templates:
 
 
 To build breadcrumbs, the previously compiled project structure and the names of each template are used.
-The template name can be specified using the `title` variable:
+The template name can be specified using the `title` front matter variable:
 
-```twig
- {% set title = 'Some page title' %}
+```markdown
+ ---
+ title: Some page title
+ ---
 ```
 
 
@@ -51,4 +55,4 @@ Here is an example of the result of the `generatePageBreadcrumbs` function:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Oct 28 11:03:31 2023 +0300<br><b>Page content update date:</b> Thu Dec 21 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Dec 23 23:12:46 2023 +0300<br><b>Page content update date:</b> Sat Dec 23 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

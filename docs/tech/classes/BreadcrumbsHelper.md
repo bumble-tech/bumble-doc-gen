@@ -2,7 +2,7 @@
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> BreadcrumbsHelper<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L24">BreadcrumbsHelper</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L25">BreadcrumbsHelper</a> class:
 </h1>
 
 
@@ -55,6 +55,9 @@ final class BreadcrumbsHelper
     <a href="#mgetpagelinkbykey">getPageLinkByKey</a>
     </li>
 <li>
+    <a href="#mgettemplatefrontmatter">getTemplateFrontMatter</a>
+    </li>
+<li>
     <a href="#mgettemplatelinkkey">getTemplateLinkKey</a>
     </li>
 <li>
@@ -70,7 +73,7 @@ final class BreadcrumbsHelper
 <ul>
             <li><a name="qdefault-prev-page-name-template"
                href="#qdefault-prev-page-name-template">#</a>
-            <code>DEFAULT_PREV_PAGE_NAME_TEMPLATE</code>                   <b>|</b> <a href="/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L29">source
+            <code>DEFAULT_PREV_PAGE_NAME_TEMPLATE</code>                   <b>|</b> <a href="/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L30">source
                     code</a> </li>
     </ul>
 
@@ -85,7 +88,7 @@ final class BreadcrumbsHelper
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L36">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L37">source code</a></li>
 </ul>
 
 ```php
@@ -288,7 +291,7 @@ public function getBreadcrumbsForTemplates(string $filePatch, bool $fromCurrent 
 <ul>
 <li><a name="mgetnearestindexfile" href="#mgetnearestindexfile">#</a>
  <b>getNearestIndexFile</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L106">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L85">source code</a></li>
 </ul>
 
 ```php
@@ -484,9 +487,54 @@ public function getPageLinkByKey(string $key): null|string;
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgettemplatefrontmatter" href="#mgettemplatefrontmatter">#</a>
+ <b>getTemplateFrontMatter</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L152">source code</a></li>
+</ul>
+
+```php
+public function getTemplateFrontMatter(string $templateName): array;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$templateName</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgettemplatelinkkey" href="#mgettemplatelinkkey">#</a>
  <b>getTemplateLinkKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L166">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L143">source code</a></li>
 </ul>
 
 ```php
@@ -531,7 +579,7 @@ public function getTemplateLinkKey(string $templateName): null|string;
 <ul>
 <li><a name="mgettemplatetitle" href="#mgettemplatetitle">#</a>
  <b>getTemplateTitle</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L153">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L134">source code</a></li>
 </ul>
 
 ```php
@@ -574,8 +622,10 @@ public function getTemplateTitle(string $templateName): string;
 <b>Examples of using:</b>
 
 ```php
-// variable in template:
-// {% set title = 'Some template title' %}
+# Front matter in template:
+# ---
+# title: Some template title
+# ---
 
 $breadcrumbsHelper->getTemplateTitle() == 'Some template title'; // is true
 ```

@@ -1,5 +1,7 @@
-{% set title = 'How to create documentation templates?' %}
-{% set prevPage = 'Renderer' %}
+---
+title: How to create documentation templates?
+prevPage: Renderer
+---
 {{ generatePageBreadcrumbs(title, _self) }}
 
 {{ "How to create documentation templates?" | textToHeading('H1') }}
@@ -20,8 +22,10 @@ After generating the documentation, this page will look exactly like a template.
 
 {{ "2) An example of a template with static text and dynamic blocks:" | textToHeading('H3') }}
 
-{{ "{% set title = 'Some page' %\}
-{% set prevPage = 'Technical description of the project' %\}
+{{ "---
+title: Some page
+prevPage: Technical description of the project
+---
 {{ generatePageBreadcrumbs(title, _self) }\}
 
 Some static text...

@@ -4,7 +4,9 @@ This document serves as a reference for updating your current version of the Bum
 
 ## Upgrading from BumbleDocGen 1.6.0 to 2.0.0
 
+* Updating the minimum PHP version to 8.1
 * Changes when working with templates: variable `phpClassEntityCollection` renamed to `phpEntities`
+* Now, instead of variables in the template with title and previous page, the Front Matter block is used
 * The BetterReflection library and classes that depend on it in the code have been removed:
   * `\BumbleDocGen\Core\Cache\SourceLocatorCacheItemPool`
   * `\BumbleDocGen\Core\Plugin\Event\Parser\OnLoadSourceLocatorsCollection`
