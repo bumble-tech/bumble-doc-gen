@@ -375,7 +375,7 @@ abstract class BaseEntity implements CacheableEntityInterface
                         url: $url,
                     );
                 } else {
-                    $currentClassEntity = is_a($docCommentImplementingClass, ClassLikeEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getRootEntity();
+                    $currentClassEntity = is_a($docCommentImplementingClass, ClassLikeEntity::class) ? $docCommentImplementingClass : $docCommentImplementingClass->getCurrentRootEntity();
                     $className = $this->parserHelper->parseFullClassName(
                         $name,
                         $currentClassEntity
@@ -443,7 +443,7 @@ abstract class BaseEntity implements CacheableEntityInterface
     #[CacheableMethod] public function getThrowsDocBlockLinks(): array
     {
         $throws = [];
-        $implementingClassEntity = $this->getDocCommentEntity()->getRootEntity();
+        $implementingClassEntity = $this->getDocCommentEntity()->getCurrentRootEntity();
         $docBlock = $this->getDocBlock();
         foreach ($docBlock->getTagsByName('throws') as $throwBlock) {
             if (is_a($throwBlock, DocBlock\Tags\Throws::class)) {
