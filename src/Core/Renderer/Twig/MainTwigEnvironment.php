@@ -19,6 +19,7 @@ final class MainTwigEnvironment
 {
     private Environment $twig;
     private bool $isEnvLoaded = false;
+    private bool $dynamicTemplatesMode = false;
 
     public function __construct(
         private readonly Configuration $configuration,
@@ -50,6 +51,16 @@ final class MainTwigEnvironment
     }
 
     /**
+     * To avoid template caching in Twig
+     *
+     * @internal
+     */
+    public function enableDynamicTemplatesMode(): void
+    {
+        $this->dynamicTemplatesMode = true;
+    }
+
+    /**
      * @throws SyntaxError
      * @throws RuntimeError
      * @throws LoaderError
@@ -58,6 +69,19 @@ final class MainTwigEnvironment
     public function render($name, array $context = []): string
     {
         $this->loadMainTwigEnvironment();
+        // To avoid template caching in Twig
+        if ($this->dynamicTemplatesMode) {
+            $tmpTemplate = '/~bumbleDocGen' . uniqid() . '.twig';
+            $tmpFile = $this->configuration->getTemplatesDir() . $tmpTemplate;
+            try {
+                file_put_contents($tmpFile, file_get_contents($this->configuration->getTemplatesDir() . $name));
+                $data = $this->twig->render($tmpTemplate, $context);
+            } finally {
+                unlink($tmpFile);
+            }
+            return $data;
+        }
+
         return $this->twig->render($name, $context);
     }
 }
