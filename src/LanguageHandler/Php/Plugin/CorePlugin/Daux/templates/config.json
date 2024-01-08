@@ -1,0 +1,10 @@
+{
+  "tagline": "",
+  "html": {
+    "auto_landing": true,
+    "breadcrumbs": false,
+    "inherit_index": true,
+    "jump_buttons": true,
+    "toggle_code": false
+  }
+}
