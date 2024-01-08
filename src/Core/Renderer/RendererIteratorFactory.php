@@ -225,14 +225,10 @@ final class RendererIteratorFactory
         $this->markFileNameAsRendered('/.gitattributes');
 
         foreach ($finder as $docFile) {
-            $handledEvent = $this->pluginEventDispatcher->dispatch(
-                new BeforeCreatingEntityDocFile('', $docFile->getRealPath())
-            );
-            $outputFilePatch = $handledEvent->getOutputFilePatch();
             $relativeFilePath = str_replace(
                 $this->configuration->getOutputDir(),
                 '',
-                $outputFilePatch
+                $docFile->getRealPath()
             );
             if (array_key_exists($relativeFilePath, $this->renderedFileNames)) {
                 continue;
@@ -362,6 +358,9 @@ final class RendererIteratorFactory
         return false;
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     private function moveCachedDataToCurrentData(string $templateFileName, ?string $entityName = null): void
     {
         $cachedEntitiesRelations = $this->sharedCompressedDocumentFileCache->get('entities_relations', []);
