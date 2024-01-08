@@ -14,12 +14,15 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Exception;
@@ -48,16 +51,17 @@ final class DocGenerator
      * @throws NotFoundException
      */
     public function __construct(
-        private OutputStyle $io,
-        private Configuration $configuration,
-        PluginEventDispatcher $pluginEventDispatcher,
-        private ProjectParser $parser,
-        private ParserHelper $parserHelper,
-        private Renderer $renderer,
-        private GenerationErrorsHandler $generationErrorsHandler,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private ProgressBarFactory $progressBarFactory,
-        private Logger $logger
+        private readonly OutputStyle $io,
+        private readonly Configuration $configuration,
+        private readonly PluginEventDispatcher $pluginEventDispatcher,
+        private readonly ProjectParser $parser,
+        private readonly ParserHelper $parserHelper,
+        private readonly Renderer $renderer,
+        private readonly GenerationErrorsHandler $generationErrorsHandler,
+        private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private readonly ProgressBarFactory $progressBarFactory,
+        private readonly Container $diContainer,
+        private readonly Logger $logger
     ) {
         if (file_exists(self::LOG_FILE_NAME)) {
             unlink(self::LOG_FILE_NAME);
@@ -66,6 +70,21 @@ final class DocGenerator
         foreach ($configuration->getPlugins() as $plugin) {
             $pluginEventDispatcher->addSubscriber($plugin);
         }
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function addPlugin(PluginInterface|string $plugin): void
+    {
+        if (is_string($plugin)) {
+            $plugin = $this->diContainer->get($plugin);
+        }
+
+        $this->configuration->getPlugins()->add($plugin);
+        $this->pluginEventDispatcher->addSubscriber($plugin);
     }
 
     /**
@@ -331,6 +350,60 @@ final class DocGenerator
             ['Allocated memory:', '<options=bold,underscore>' . Helper::formatMemory(memory_get_usage(true)) . '</>'],
             ['Command memory usage:', '<options=bold,underscore>' . Helper::formatMemory($memory) . '</>']
         ]);
+    }
+
+    /**
+     * Serve documentation
+     *
+     * @api
+     *
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function serve(?callable $afterPreparation = null, int $timeout = 1000): void
+    {
+        $templatesDir = $this->configuration->getTemplatesDir();
+        $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
+        $templatesDirs = $event->getTemplatesDirs();
+
+        $checkedFiles = [];
+        $checkIsTemplatesChanged = function () use ($templatesDirs, &$checkedFiles) {
+            $finder = Finder::create()
+                ->ignoreVCS(true)
+                ->ignoreDotFiles(true)
+                ->ignoreUnreadableDirs()
+                ->sortByName()
+                ->in($templatesDirs);
+
+            $files = [];
+            foreach ($finder as $f) {
+                try {
+                    $files[$f->getPathname()] = $f->getMTime();
+                } catch (\Exception) {
+                }
+            }
+            $changed = $checkedFiles !== $files;
+            $checkedFiles = $files;
+            return $changed;
+        };
+
+        $pb = $this->progressBarFactory->createStylizedProgressBar();
+        $this->parser->parse($pb);
+        while (true) {
+            if ($checkIsTemplatesChanged()) {
+                try {
+                    $this->renderer->run(true);
+                    $this->io->success('Documentation updated');
+                    if ($afterPreparation) {
+                        call_user_func($afterPreparation);
+                        $afterPreparation = null;
+                    }
+                } catch (\Exception $e) {
+                    $this->io->error($e->getMessage());
+                }
+            }
+            usleep($timeout);
+        }
     }
 
     /**
