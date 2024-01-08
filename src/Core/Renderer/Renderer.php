@@ -10,14 +10,13 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Renderer\AfterRenderingEntities;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile;
+use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingEntityDocFile;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingDocFiles;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeRenderingEntities;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
-use DI\DependencyException;
-use DI\NotFoundException;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -34,15 +33,15 @@ use Twig\Error\SyntaxError;
 final class Renderer
 {
     public function __construct(
-        private Configuration $configuration,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private PluginEventDispatcher $pluginEventDispatcher,
-        private RendererContext $rendererContext,
-        private MainTwigEnvironment $twig,
-        private RendererIteratorFactory $renderIteratorFactory,
-        private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
-        private Filesystem $fs,
-        private LoggerInterface $logger
+        private readonly Configuration $configuration,
+        private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private readonly PluginEventDispatcher $pluginEventDispatcher,
+        private readonly RendererContext $rendererContext,
+        private readonly MainTwigEnvironment $twig,
+        private readonly RendererIteratorFactory $renderIteratorFactory,
+        private readonly SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
+        private readonly Filesystem $fs,
+        private readonly LoggerInterface $logger
     ) {
     }
 
@@ -52,9 +51,7 @@ final class Renderer
      * @throws InvalidArgumentException
      * @throws RuntimeError
      * @throws LoaderError
-     * @throws DependencyException
      * @throws SyntaxError
-     * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function run(): void
@@ -104,8 +101,13 @@ final class Renderer
             if (!is_dir($newDirName)) {
                 $this->fs->mkdir($newDirName, 0755);
             }
-            // tmp hack to fix gitHub pages
-            $this->fs->dumpFile($filePatch, "<!-- {% raw %} -->\n{$content}\n<!-- {% endraw %} -->");
+            $handledEvent = $this->pluginEventDispatcher->dispatch(
+                new BeforeCreatingEntityDocFile($content, $filePatch, $this->rendererContext)
+            );
+
+            $content = $handledEvent->getContent();
+            $filePatch = $handledEvent->getOutputFilePatch();
+            $this->fs->dumpFile($filePatch, $content);
             $this->logger->info("Saving `{$filePatch}`");
         }
 
