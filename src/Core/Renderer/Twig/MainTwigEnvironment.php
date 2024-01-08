@@ -9,6 +9,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
+use BumbleDocGen\Core\Renderer\TemplateFile;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -74,7 +75,8 @@ final class MainTwigEnvironment
             $tmpTemplate = '/~bumbleDocGen' . uniqid() . '.twig';
             $tmpFile = $this->configuration->getTemplatesDir() . $tmpTemplate;
             try {
-                file_put_contents($tmpFile, file_get_contents($this->configuration->getTemplatesDir() . $name));
+                $path = TemplateFile::getTemplatePathByRelativeDocPath($name, $this->configuration, $this->pluginEventDispatcher);
+                file_put_contents($tmpFile, file_get_contents($path));
                 $data = $this->twig->render($tmpTemplate, $context);
             } finally {
                 unlink($tmpFile);
