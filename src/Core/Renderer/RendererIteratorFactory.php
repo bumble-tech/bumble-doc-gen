@@ -12,6 +12,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingEntityDocFile;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
@@ -29,19 +30,19 @@ final class RendererIteratorFactory
     private array $renderedFileNames = [];
 
     public function __construct(
-        private RendererContext $rendererContext,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
-        private Configuration $configuration,
-        private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
+        private readonly RendererContext $rendererContext,
+        private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private readonly DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
+        private readonly Configuration $configuration,
+        private readonly SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
         private RendererHelper $rendererHelper,
-        private RendererDependencyFactory $dependencyFactory,
-        private LocalObjectCache $localObjectCache,
-        private ProgressBarFactory $progressBarFactory,
-        private PluginEventDispatcher $pluginEventDispatcher,
-        private OutputStyle $io,
-        private Logger $logger,
-        private GenerationErrorsHandler $generationErrorsHandler,
+        private readonly RendererDependencyFactory $dependencyFactory,
+        private readonly LocalObjectCache $localObjectCache,
+        private readonly ProgressBarFactory $progressBarFactory,
+        private readonly PluginEventDispatcher $pluginEventDispatcher,
+        private readonly OutputStyle $io,
+        private readonly Logger $logger,
+        private readonly GenerationErrorsHandler $generationErrorsHandler,
     ) {
     }
 
@@ -224,10 +225,14 @@ final class RendererIteratorFactory
         $this->markFileNameAsRendered('/.gitattributes');
 
         foreach ($finder as $docFile) {
+            $handledEvent = $this->pluginEventDispatcher->dispatch(
+                new BeforeCreatingEntityDocFile('', $docFile->getRealPath())
+            );
+            $outputFilePatch = $handledEvent->getOutputFilePatch();
             $relativeFilePath = str_replace(
                 $this->configuration->getOutputDir(),
                 '',
-                $docFile->getRealPath()
+                $outputFilePatch
             );
             if (array_key_exists($relativeFilePath, $this->renderedFileNames)) {
                 continue;
@@ -268,10 +273,11 @@ final class RendererIteratorFactory
      */
     private function markFileNameAsRendered(string $docFileName): void
     {
-        $docFileName = str_replace([
-            '.twig',
-            $this->configuration->getOutputDir()
-        ], '', $docFileName);
+        $docFileName = str_replace('.twig', '', $docFileName);
+        $handledEvent = $this->pluginEventDispatcher->dispatch(
+            new BeforeCreatingEntityDocFile('', $docFileName)
+        );
+        $docFileName = str_replace($this->configuration->getOutputDir(), '', $handledEvent->getOutputFilePatch());
         $this->renderedFileNames[$docFileName] = $docFileName;
     }
 

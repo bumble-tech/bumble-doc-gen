@@ -72,7 +72,7 @@ final class Renderer
                 $content = $this->twig->render($templateFile->getRelativeTemplatePath(), $templateParams);
 
                 $handledEvent = $this->pluginEventDispatcher->dispatch(
-                    new BeforeCreatingDocFile($content, $filePatch, $this->rendererContext)
+                    new BeforeCreatingDocFile($content, $filePatch)
                 );
                 $content = $handledEvent->getContent();
                 $filePatch = $handledEvent->getOutputFilePatch();
@@ -104,7 +104,7 @@ final class Renderer
                 $this->fs->mkdir($newDirName, 0755);
             }
             $handledEvent = $this->pluginEventDispatcher->dispatch(
-                new BeforeCreatingEntityDocFile($content, $filePatch, $this->rendererContext)
+                new BeforeCreatingEntityDocFile($content, $filePatch)
             );
 
             $content = $handledEvent->getContent();
