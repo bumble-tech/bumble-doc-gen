@@ -37,7 +37,12 @@ final class MainTwigEnvironment
             $templatesDir = $this->configuration->getTemplatesDir();
             $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
             $templatesDirs = $event->getTemplatesDirs();
-            $loader = new FrontMatterLoader(new FilesystemLoader($templatesDirs), $this->breadcrumbsHelper);
+            $removeFrontMatterFromTemplate = !$this->configuration->renderWithFrontMatter();
+            $loader = new FrontMatterLoader(
+                new FilesystemLoader($templatesDirs),
+                $this->breadcrumbsHelper,
+                $removeFrontMatterFromTemplate
+            );
             $this->twig = new Environment($loader);
             $this->twig->addExtension($this->mainExtension);
             $this->isEnvLoaded = true;

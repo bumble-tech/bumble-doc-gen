@@ -327,6 +327,20 @@ final class Configuration
     /**
      * @throws InvalidConfigurationParameterException
      */
+    public function renderWithFrontMatter(): bool
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $renderWithFrontMatter = $this->parameterBag->validateAndGetBooleanValue(ConfigurationKey::RENDER_WITH_FRONT_MATTER);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $renderWithFrontMatter);
+        return $renderWithFrontMatter;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function isCheckFileInGitBeforeCreatingDocEnabled(): bool
     {
         try {

@@ -15,7 +15,7 @@ final class FrontMatterLoader implements LoaderInterface
     public function __construct(
         private readonly LoaderInterface $loader,
         private readonly BreadcrumbsHelper $breadcrumbsHelper,
-        private bool $removeFrontMatterFromTemplate = true
+        private readonly bool $removeFrontMatterFromTemplate = true
     ) {
     }
 
