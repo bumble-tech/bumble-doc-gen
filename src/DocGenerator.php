@@ -525,4 +525,9 @@ final class DocGenerator
 
         $this->io->table([], $result);
     }
+
+    public function getConfiguration(): Configuration
+    {
+        return $this->configuration;
+    }
 }
