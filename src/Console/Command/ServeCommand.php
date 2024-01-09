@@ -74,7 +74,8 @@ final class ServeCommand extends BaseCommand
                 $filesystem->remove($tmpDir);
 
                 $docGen = $this->createDocGenInstance($input, $output, [
-                    'output_dir' => $tmpDir
+                    'output_dir' => $tmpDir,
+                    'render_with_front_matter' => true
                 ]);
                 $docGen->addPlugin(Daux::class);
 

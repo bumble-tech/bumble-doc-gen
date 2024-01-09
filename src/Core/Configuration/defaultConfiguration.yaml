@@ -5,7 +5,7 @@ output_dir: "%project_root%/docs" # (string) Path to the directory where the fin
 cache_dir: '%WORKING_DIR%/.bumbleDocGenCache'# (string|null) Path to the directory where the documentation generator cache will be saved
 output_dir_base_url: "/docs"      # (string) Basic part of url documentation. Used to form links in generated documents.
 git_client_path: "git"            # (string) Path to git client
-render_with_front_matter: true   # (bool) Do not remove the front matter block from templates when creating documents
+render_with_front_matter: false   # (bool) Do not remove the front matter block from templates when creating documents
 check_file_in_git_before_creating_doc: true # (bool) Checking if a document exists in GIT before creating a document
 page_link_processor:              # (PageLinkProcessorInterface) Link handler class on documentation pages
   class: \BumbleDocGen\Core\Renderer\PageLinkProcessor\BasePageLinkProcessor
