@@ -12,6 +12,7 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\TemplateFile;
+use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
@@ -269,7 +270,7 @@ final class BreadcrumbsHelper
 
         foreach ($finder->files() as $file) {
             $filePatch = str_replace($templatesDirs, '', $file->getRealPath());
-            if (!str_ends_with($filePatch, '.twig')) {
+            if (!str_ends_with($filePatch, '.twig') || str_contains($filePatch, DIRECTORY_SEPARATOR . MainTwigEnvironment::TMP_TEMPLATE_PREFIX)) {
                 continue;
             }
 

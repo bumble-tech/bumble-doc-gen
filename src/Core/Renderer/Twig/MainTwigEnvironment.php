@@ -18,6 +18,8 @@ use Twig\Loader\FilesystemLoader;
 
 final class MainTwigEnvironment
 {
+    public const TMP_TEMPLATE_PREFIX = '~bumbleDocGen';
+
     private Environment $twig;
     private bool $isEnvLoaded = false;
     private bool $dynamicTemplatesMode = false;
@@ -72,10 +74,11 @@ final class MainTwigEnvironment
         $this->loadMainTwigEnvironment();
         // To avoid template caching in Twig
         if ($this->dynamicTemplatesMode) {
-            $tmpTemplate = '/~bumbleDocGen' . uniqid() . '.twig';
-            $tmpFile = $this->configuration->getTemplatesDir() . $tmpTemplate;
+            $tmpFileName = self::TMP_TEMPLATE_PREFIX . uniqid() . '.twig';
+            $tmpTemplate = dirname($name) . DIRECTORY_SEPARATOR . $tmpFileName;
+            $path = TemplateFile::getTemplatePathByRelativeDocPath($name, $this->configuration, $this->pluginEventDispatcher);
+            $tmpFile = dirname($path) . DIRECTORY_SEPARATOR . $tmpFileName;
             try {
-                $path = TemplateFile::getTemplatePathByRelativeDocPath($name, $this->configuration, $this->pluginEventDispatcher);
                 file_put_contents($tmpFile, file_get_contents($path));
                 $data = $this->twig->render($tmpTemplate, $context);
             } finally {

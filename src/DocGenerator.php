@@ -19,6 +19,7 @@ use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
+use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
@@ -360,7 +361,7 @@ final class DocGenerator
      * @throws Exception
      * @throws InvalidArgumentException
      */
-    public function serve(?callable $afterPreparation = null, int $timeout = 1000): void
+    public function serve(?callable $afterPreparation = null, int $timeout = 1000000): void
     {
         $templatesDir = $this->configuration->getTemplatesDir();
         $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
@@ -373,10 +374,14 @@ final class DocGenerator
                 ->ignoreDotFiles(true)
                 ->ignoreUnreadableDirs()
                 ->sortByName()
-                ->in($templatesDirs);
+                ->in($templatesDirs)
+                ->files();
 
             $files = [];
             foreach ($finder as $f) {
+                if (str_contains($f->getPathname(), MainTwigEnvironment::TMP_TEMPLATE_PREFIX)) {
+                    continue;
+                }
                 try {
                     $files[$f->getPathname()] = $f->getMTime();
                 } catch (\Exception) {
@@ -389,15 +394,17 @@ final class DocGenerator
 
         $pb = $this->progressBarFactory->createStylizedProgressBar();
         $this->parser->parse($pb);
+        $this->renderer->run(true);
+        $checkIsTemplatesChanged();
+        if ($afterPreparation) {
+            call_user_func($afterPreparation);
+        }
+
         while (true) {
             if ($checkIsTemplatesChanged()) {
                 try {
                     $this->renderer->run(true);
                     $this->io->success('Documentation updated');
-                    if ($afterPreparation) {
-                        call_user_func($afterPreparation);
-                        $afterPreparation = null;
-                    }
                 } catch (\Exception $e) {
                     $this->io->error($e->getMessage());
                 }
