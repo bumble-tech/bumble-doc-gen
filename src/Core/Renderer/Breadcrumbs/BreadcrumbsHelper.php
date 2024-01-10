@@ -288,6 +288,9 @@ final class BreadcrumbsHelper
             $addLinkKey($docFilePatch, $value);
             $addLinkKey($url, $value);
             $addLinkKey($title, $value);
+            $templateFileName = array_reverse(explode(DIRECTORY_SEPARATOR, $filePatch))[0];
+            $addLinkKey($templateFileName, $value);
+            $addLinkKey(rtrim($templateFileName, '.twig'), $value);
             $linkKey = $this->getTemplateLinkKey($filePatch);
             if ($linkKey) {
                 $addLinkKey($linkKey, $value);
