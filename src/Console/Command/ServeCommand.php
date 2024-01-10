@@ -31,10 +31,9 @@ final class ServeCommand extends BaseCommand
         $this->setName('serve')
             ->setDescription('Serve documentation')
             ->addOption(
-                name: 'use-dev-server',
-                mode: InputOption::VALUE_OPTIONAL,
+                name: 'as-html',
+                mode: InputOption::VALUE_NONE,
                 description: 'Display HTML documentation on dev server. Otherwise update files in output_dir',
-                default: 'true'
             )
             ->addOption(
                 name: 'dev-server-host',
@@ -60,8 +59,8 @@ final class ServeCommand extends BaseCommand
         InputInterface $input,
         OutputInterface $output
     ): void {
-        $asHtml = $input->getOption('use-dev-server');
-        if ($asHtml === 'true' || $asHtml === '1') {
+        $asHtml = $input->getOption('as-html');
+        if ($asHtml) {
             $tmpDir = sys_get_temp_dir() . '/~bumbleDocGen';
             $process = new Process([
                 PHP_BINARY,
@@ -69,6 +68,8 @@ final class ServeCommand extends BaseCommand
                 'serve',
                 "--source={$tmpDir}"
             ]);
+            $process->setTimeout(3600);
+            $process->disableOutput();
             try {
                 $filesystem = new Filesystem();
                 $filesystem->remove($tmpDir);
@@ -86,7 +87,7 @@ final class ServeCommand extends BaseCommand
                     $output->writeln("Development server started on: http://{$host}:{$port}/");
                 });
             } finally {
-                $process->signal(15);
+                $process->signal(9);
             }
         } else {
             $docGen = $this->createDocGenInstance($input, $output);
