@@ -126,7 +126,7 @@ final class Renderer
         }
 
         $this->rootEntityCollectionsGroup->updateAllEntitiesCache();
-        $this->sharedCompressedDocumentFileCache->removeNotUsedKeys();
         $this->sharedCompressedDocumentFileCache->saveChanges();
+        $this->renderIteratorFactory->clearCounters();
     }
 }

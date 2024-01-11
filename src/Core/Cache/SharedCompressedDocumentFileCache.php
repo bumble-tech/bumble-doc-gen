@@ -19,7 +19,7 @@ final class SharedCompressedDocumentFileCache
      * @throws InvalidConfigurationParameterException
      */
     public function __construct(
-        private Configuration $configuration
+        private readonly Configuration $configuration
     ) {
         $this->cacheFileName = $this->configuration->getOutputDir() . '/' . self::FILE_NAME;
         if (!$this->configuration->useSharedCache()) {
@@ -53,19 +53,10 @@ final class SharedCompressedDocumentFileCache
         $this->cacheData[$key] = $data;
     }
 
-    public function removeNotUsedKeys(): void
-    {
-        $this->cacheData = array_filter(
-            $this->cacheData,
-            fn(string $key) => array_key_exists($key, $this->usedKeys),
-            ARRAY_FILTER_USE_KEY
-        );
-    }
-
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function saveChanges(): void
+    public function saveChanges(bool $clearUsedKeysCounter = true): void
     {
         $gitAttributesFile = $this->configuration->getOutputDir() . '/.gitattributes';
         file_put_contents($gitAttributesFile, self::FILE_NAME . ' merge=ours');
@@ -75,6 +66,15 @@ final class SharedCompressedDocumentFileCache
             }
             return;
         }
-        file_put_contents($this->cacheFileName, base64_encode(gzcompress(serialize($this->cacheData))));
+        $cacheData = array_filter(
+            $this->cacheData,
+            fn(string $key) => array_key_exists($key, $this->usedKeys),
+            ARRAY_FILTER_USE_KEY
+        );
+        file_put_contents($this->cacheFileName, base64_encode(gzcompress(serialize($cacheData))));
+
+        if ($clearUsedKeysCounter) {
+            $this->usedKeys = [];
+        }
     }
 }

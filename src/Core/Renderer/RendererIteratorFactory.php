@@ -396,4 +396,9 @@ final class RendererIteratorFactory
     {
         return "files_dependencies_{$key}";
     }
+
+    public function clearCounters(): void
+    {
+        $this->renderedFileNames = [];
+    }
 }
