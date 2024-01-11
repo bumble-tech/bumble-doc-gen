@@ -1,4 +1,3 @@
-<!-- {% raw %} -->
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> DocGeneratorFactory<hr> </embed>
 
 <h1>
@@ -378,5 +377,3 @@ public function setCustomDiDefinitions(array $definitions): void;
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

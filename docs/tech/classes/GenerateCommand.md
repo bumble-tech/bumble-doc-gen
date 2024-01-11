@@ -1,8 +1,7 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GenerateCommand<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/05_console.md">Console app</a> <b>/</b> GenerateCommand<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/GenerateCommand.php#L13">GenerateCommand</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/GenerateCommand.php#L18">GenerateCommand</a> class:
 </h1>
 
 
@@ -78,5 +77,3 @@ public function __construct(string $name = null);
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

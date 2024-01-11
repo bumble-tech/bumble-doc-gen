@@ -1,8 +1,7 @@
-<!-- {% raw %} -->
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> DocGenerator<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L40">DocGenerator</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L44">DocGenerator</a> class:
 </h1>
 
 
@@ -37,11 +36,17 @@ final class DocGenerator
     <a href="#madddocblocks">addDocBlocks</a>
     - <i>Generate missing docBlocks with LLM for project class methods that are available for documentation</i></li>
 <li>
+    <a href="#maddplugin">addPlugin</a>
+    </li>
+<li>
     <a href="#mgenerate">generate</a>
     - <i>Generates documentation using configuration</i></li>
 <li>
     <a href="#mgeneratereadmetemplate">generateReadmeTemplate</a>
     - <i>Creates a `README.md` template filled with basic information using LLM</i></li>
+<li>
+    <a href="#mgetconfiguration">getConfiguration</a>
+    </li>
 <li>
     <a href="#mgetconfigurationkey">getConfigurationKey</a>
     </li>
@@ -51,6 +56,9 @@ final class DocGenerator
 <li>
     <a href="#mparseandgetrootentitycollectionsgroup">parseAndGetRootEntityCollectionsGroup</a>
     </li>
+<li>
+    <a href="#mserve">serve</a>
+    - <i>Serve documentation</i></li>
 </ol>
 
 
@@ -58,11 +66,11 @@ final class DocGenerator
 <ul>
             <li><a name="qlog-file-name"
                href="#qlog-file-name">#</a>
-            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L43">source
+            <code>LOG_FILE_NAME</code>                   <b>|</b> <a href="/src/DocGenerator.php#L47">source
                     code</a> </li>
             <li><a name="qversion"
                href="#qversion">#</a>
-            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L42">source
+            <code>VERSION</code>                   <b>|</b> <a href="/src/DocGenerator.php#L46">source
                     code</a> </li>
     </ul>
 
@@ -77,11 +85,11 @@ final class DocGenerator
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L50">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L54">source code</a></li>
 </ul>
 
 ```php
-public function __construct(\Symfony\Component\Console\Style\OutputStyle $io, \BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, \BumbleDocGen\Core\Parser\ProjectParser $parser, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, \BumbleDocGen\Core\Renderer\Renderer $renderer, \BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler $generationErrorsHandler, \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup $rootEntityCollectionsGroup, \BumbleDocGen\Console\ProgressBar\ProgressBarFactory $progressBarFactory, \Monolog\Logger $logger);
+public function __construct(\Symfony\Component\Console\Style\OutputStyle $io, \BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, \BumbleDocGen\Core\Parser\ProjectParser $parser, \BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper $parserHelper, \BumbleDocGen\Core\Renderer\Renderer $renderer, \BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler $generationErrorsHandler, \BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup $rootEntityCollectionsGroup, \BumbleDocGen\Console\ProgressBar\ProgressBarFactory $progressBarFactory, \DI\Container $diContainer, \Monolog\Logger $logger);
 ```
 
 
@@ -143,6 +151,11 @@ public function __construct(\Symfony\Component\Console\Style\OutputStyle $io, \B
             <td>-</td>
         </tr>
             <tr>
+            <td>$diContainer</td>
+            <td><a href='https://github.com/PHP-DI/PHP-DI/blob/master/src/Container.php'>\DI\Container</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
             <td>$logger</td>
             <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Logger.php'>\Monolog\Logger</a></td>
             <td>-</td>
@@ -172,7 +185,7 @@ public function __construct(\Symfony\Component\Console\Style\OutputStyle $io, \B
 <ul>
 <li><a name="madddocblocks" href="#madddocblocks">#</a>
  <b>addDocBlocks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L92">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L112">source code</a></li>
 </ul>
 
 ```php
@@ -224,9 +237,60 @@ public function addDocBlocks(\BumbleDocGen\AI\ProviderInterface $aiProvider): vo
 <div class='method_description-block'>
 
 <ul>
+<li><a name="maddplugin" href="#maddplugin">#</a>
+ <b>addPlugin</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L81">source code</a></li>
+</ul>
+
+```php
+public function addPlugin(\BumbleDocGen\Core\Plugin\PluginInterface|string $plugin): void;
+```
+
+
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$plugin</td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginInterface.php'>\BumbleDocGen\Core\Plugin\PluginInterface</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
+
+<li>
+    <a href="/docs/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+
+<li>
+    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
+
+</ul>
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgenerate" href="#mgenerate">#</a>
  <b>generate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L263">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L283">source code</a></li>
 </ul>
 
 ```php
@@ -257,7 +321,7 @@ public function generate(): void;
 <ul>
 <li><a name="mgeneratereadmetemplate" href="#mgeneratereadmetemplate">#</a>
  <b>generateReadmeTemplate</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L176">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L196">source code</a></li>
 </ul>
 
 ```php
@@ -306,9 +370,30 @@ public function generateReadmeTemplate(\BumbleDocGen\AI\ProviderInterface $aiPro
 <div class='method_description-block'>
 
 <ul>
+<li><a name="mgetconfiguration" href="#mgetconfiguration">#</a>
+ <b>getConfiguration</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L536">source code</a></li>
+</ul>
+
+```php
+public function getConfiguration(): \BumbleDocGen\Core\Configuration\Configuration;
+```
+
+
+
+<b>Parameters:</b> not specified
+
+<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
 <li><a name="mgetconfigurationkey" href="#mgetconfigurationkey">#</a>
  <b>getConfigurationKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L353">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L433">source code</a></li>
 </ul>
 
 ```php
@@ -359,7 +444,7 @@ public function getConfigurationKey(string $key): void;
 <ul>
 <li><a name="mgetconfigurationkeys" href="#mgetconfigurationkeys">#</a>
  <b>getConfigurationKeys</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L341">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L421">source code</a></li>
 </ul>
 
 ```php
@@ -393,7 +478,7 @@ public function getConfigurationKeys(): void;
 <ul>
 <li><a name="mparseandgetrootentitycollectionsgroup" href="#mparseandgetrootentitycollectionsgroup">#</a>
  <b>parseAndGetRootEntityCollectionsGroup</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L76">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L96">source code</a></li>
 </ul>
 
 ```php
@@ -422,5 +507,56 @@ public function parseAndGetRootEntityCollectionsGroup(): \BumbleDocGen\Core\Pars
 
 </div>
 <hr>
+<div class='method_description-block'>
 
-<!-- {% endraw %} -->
+<ul>
+<li><a name="mserve" href="#mserve">#</a>
+ <b>serve</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L364">source code</a></li>
+</ul>
+
+```php
+public function serve(callable|null $afterPreparation = null, int $timeout = 1000000): void;
+```
+
+<blockquote>Serve documentation</blockquote>
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$afterPreparation</td>
+            <td><a href='https://www.php.net/manual/en/language.types.callable.php'>callable</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></td>
+            <td>-</td>
+        </tr>
+            <tr>
+            <td>$timeout</td>
+            <td><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+<b>Throws:</b>
+<ul>
+<li>
+    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
+
+<li>
+    <a href="https://github.com/php-fig/cache/blob/master/src/InvalidArgumentException.php">\Psr\Cache\InvalidArgumentException</a></li>
+
+</ul>
+
+</div>
+<hr>
