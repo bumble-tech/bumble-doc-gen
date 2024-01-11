@@ -9,7 +9,6 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
-use BumbleDocGen\Core\Renderer\TemplateFile;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -22,7 +21,8 @@ final class MainTwigEnvironment
 
     private Environment $twig;
     private bool $isEnvLoaded = false;
-    private bool $dynamicTemplatesMode = false;
+    private ?string $twigTemplatePrefixKey = null;
+    private bool $prefixChanged = false;
 
     public function __construct(
         private readonly Configuration $configuration,
@@ -47,20 +47,19 @@ final class MainTwigEnvironment
                 $this->breadcrumbsHelper,
                 $removeFrontMatterFromTemplate
             );
-            $this->twig = new Environment($loader);
+            $this->twig = new Environment($loader, ['auto_reload' => true, 'cache' => false]);
             $this->twig->addExtension($this->mainExtension);
             $this->isEnvLoaded = true;
         }
     }
 
     /**
-     * To avoid template caching in Twig
-     *
      * @internal
      */
-    public function enableDynamicTemplatesMode(): void
+    public function reloadTemplates(): void
     {
-        $this->dynamicTemplatesMode = true;
+        $this->twigTemplatePrefixKey = uniqid();
+        $this->prefixChanged = true;
     }
 
     /**
@@ -72,19 +71,11 @@ final class MainTwigEnvironment
     public function render($name, array $context = []): string
     {
         $this->loadMainTwigEnvironment();
-        // To avoid template caching in Twig
-        if ($this->dynamicTemplatesMode) {
-            $tmpFileName = self::TMP_TEMPLATE_PREFIX . uniqid() . '.twig';
-            $tmpTemplate = dirname($name) . DIRECTORY_SEPARATOR . $tmpFileName;
-            $path = TemplateFile::getTemplatePathByRelativeDocPath($name, $this->configuration, $this->pluginEventDispatcher);
-            $tmpFile = dirname($path) . DIRECTORY_SEPARATOR . $tmpFileName;
-            try {
-                file_put_contents($tmpFile, file_get_contents($path));
-                $data = $this->twig->render($tmpTemplate, $context);
-            } finally {
-                unlink($tmpFile);
-            }
-            return $data;
+        if ($this->twigTemplatePrefixKey && $this->prefixChanged) {
+            $this->prefixChanged = false;
+            $reflection = new \ReflectionClass($this->twig);
+            $reflectionProperty = $reflection->getProperty('templateClassPrefix');
+            $reflectionProperty->setValue($this->twig, "__TwigTemplate_" . md5($this->twigTemplatePrefixKey));
         }
 
         return $this->twig->render($name, $context);

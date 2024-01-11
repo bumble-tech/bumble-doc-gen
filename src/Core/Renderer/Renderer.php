@@ -48,19 +48,15 @@ final class Renderer
     /**
      * Starting the rendering process
      *
-     * @param bool $enableDynamicTemplatesMode Less productive mode, which is necessary to avoid caching twig templates within one script run
-     *
      * @throws InvalidArgumentException
      * @throws RuntimeError
      * @throws LoaderError
      * @throws SyntaxError
      * @throws InvalidConfigurationParameterException
      */
-    public function run(bool $enableDynamicTemplatesMode = false): void
+    public function run(): void
     {
-        if ($enableDynamicTemplatesMode) {
-            $this->twig->enableDynamicTemplatesMode();
-        }
+        $this->twig->reloadTemplates();
         $outputDir = $this->configuration->getOutputDir();
 
         $templateParams = [];

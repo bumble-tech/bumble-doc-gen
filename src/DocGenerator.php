@@ -8,6 +8,7 @@ use BumbleDocGen\AI\Generators\DocBlocksGenerator;
 use BumbleDocGen\AI\Generators\ReadmeTemplateGenerator;
 use BumbleDocGen\AI\ProviderInterface;
 use BumbleDocGen\Console\ProgressBar\ProgressBarFactory;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationKey;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
@@ -62,6 +63,7 @@ final class DocGenerator
         private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private readonly ProgressBarFactory $progressBarFactory,
         private readonly Container $diContainer,
+        private readonly LocalObjectCache $localObjectCache,
         private readonly Logger $logger
     ) {
         if (file_exists(self::LOG_FILE_NAME)) {
@@ -361,8 +363,11 @@ final class DocGenerator
      * @throws Exception
      * @throws InvalidArgumentException
      */
-    public function serve(?callable $afterPreparation = null, int $timeout = 1000000): void
-    {
+    public function serve(
+        ?callable $afterPreparation = null,
+        ?callable $afterDocChanged = null,
+        int $timeout = 1000000
+    ): void {
         $templatesDir = $this->configuration->getTemplatesDir();
         $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
         $templatesDirs = $event->getTemplatesDirs();
@@ -379,9 +384,6 @@ final class DocGenerator
 
             $files = [];
             foreach ($finder as $f) {
-                if (str_contains($f->getPathname(), MainTwigEnvironment::TMP_TEMPLATE_PREFIX)) {
-                    continue;
-                }
                 try {
                     $files[$f->getPathname()] = $f->getMTime();
                 } catch (\Exception) {
@@ -394,7 +396,7 @@ final class DocGenerator
 
         $pb = $this->progressBarFactory->createStylizedProgressBar();
         $this->parser->parse($pb);
-        $this->renderer->run(true);
+        $this->renderer->run();
         $checkIsTemplatesChanged();
         if ($afterPreparation) {
             call_user_func($afterPreparation);
@@ -403,7 +405,11 @@ final class DocGenerator
         while (true) {
             if ($checkIsTemplatesChanged()) {
                 try {
-                    $this->renderer->run(true);
+                    $this->localObjectCache->clear();
+                    $this->renderer->run();
+                    if ($afterDocChanged) {
+                        call_user_func($afterDocChanged);
+                    }
                     $this->io->success('Documentation updated');
                 } catch (\Exception $e) {
                     $this->io->error($e->getMessage());

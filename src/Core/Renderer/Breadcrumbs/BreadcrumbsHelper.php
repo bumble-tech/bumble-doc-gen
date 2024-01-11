@@ -270,7 +270,7 @@ final class BreadcrumbsHelper
 
         foreach ($finder->files() as $file) {
             $filePatch = str_replace($templatesDirs, '', $file->getRealPath());
-            if (!str_ends_with($filePatch, '.twig') || str_contains($filePatch, DIRECTORY_SEPARATOR . MainTwigEnvironment::TMP_TEMPLATE_PREFIX)) {
+            if (!str_ends_with($filePatch, '.twig')) {
                 continue;
             }
 

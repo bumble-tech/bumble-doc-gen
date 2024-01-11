@@ -13,7 +13,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
+use Todaymade\Daux\ConfigBuilder;
 
 final class ServeCommand extends BaseCommand
 {
@@ -61,37 +63,72 @@ final class ServeCommand extends BaseCommand
     ): void {
         $asHtml = $input->getOption('as-html');
         if ($asHtml) {
-            $tmpDir = sys_get_temp_dir() . '/~bumbleDocGen';
-            $process = new Process([
-                PHP_BINARY,
-                dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . 'vendor/bin/daux',
-                'serve',
-                "--source={$tmpDir}"
-            ]);
-            $process->setTimeout(3600);
-            $process->disableOutput();
+            $tmpDir = sys_get_temp_dir();
+            $tmpDocDir = "{$tmpDir}/~bumbleDocGen";
+            if (!is_dir($tmpDocDir)) {
+                mkdir($tmpDocDir);
+            }
+            $host = $input->getOption('dev-server-host');
+            $port = $input->getOption('dev-server-port');
+            $process = $this->createDauxProcess($tmpDir, $tmpDocDir, $input, $output);
             try {
                 $filesystem = new Filesystem();
-                $filesystem->remove($tmpDir);
+                $filesystem->remove($tmpDocDir);
 
                 $docGen = $this->createDocGenInstance($input, $output, [
-                    'output_dir' => $tmpDir,
+                    'output_dir' => $tmpDocDir,
                     'render_with_front_matter' => true
                 ]);
                 $docGen->addPlugin(Daux::class);
 
-                $host = $input->getOption('dev-server-host');
-                $port = $input->getOption('dev-server-port');
                 $docGen->serve(function () use ($process, $output, $host, $port) {
                     $process->start();
                     $output->writeln("Development server started on: http://{$host}:{$port}/");
+                }, function () use (&$process, $tmpDir, $tmpDocDir, $input, $output) {
+                    $process->stop(0, 9);
+                    $process = $this->createDauxProcess($tmpDir, $tmpDocDir, $input, $output);
+                    $process->restart();
                 });
             } finally {
-                $process->signal(9);
+                $process->stop(0, 9);
             }
         } else {
             $docGen = $this->createDocGenInstance($input, $output);
             $docGen->serve();
         }
+    }
+
+    private function createDauxProcess(
+        string $tmpConfigDir,
+        string $tmpDocDir,
+        InputInterface $input,
+        OutputInterface $output
+    ): Process {
+        $builder = ConfigBuilder::withMode(\Todaymade\Daux\Daux::LIVE_MODE);
+        $builder->withFormat('html');
+        $builder->withDocumentationDirectory($tmpDocDir);
+        $builder->withCache(false);
+        $daux = new \Todaymade\Daux\Daux($builder->build(), $output);
+
+        $path = "{$tmpConfigDir}/bumbleDocGenDaux.config";
+        file_put_contents($path, serialize($daux->getConfig()));
+
+        $host = $input->getOption('dev-server-host');
+        $port = $input->getOption('dev-server-port');
+        $binary = escapeshellarg((new PhpExecutableFinder())->find(false));
+
+        $script = <<<EOT
+                #!/bin/bash
+                cd vendor/daux/daux.io
+                $binary -S $host:$port index.php
+            EOT;
+
+        $process = new Process(['bash', '-c', $script], null, [
+            'DAUX_CONFIG' => $path,
+            'DAUX_VERBOSITY' => $output->getVerbosity()
+        ]);
+        $process->setTimeout(3600);
+        $process->disableOutput();
+        return $process;
     }
 }
