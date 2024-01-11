@@ -377,7 +377,7 @@ public function generateReadmeTemplate(\BumbleDocGen\AI\ProviderInterface $aiPro
 <ul>
 <li><a name="mgetconfiguration" href="#mgetconfiguration">#</a>
  <b>getConfiguration</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L542">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L516">source code</a></li>
 </ul>
 
 ```php
@@ -398,7 +398,7 @@ public function getConfiguration(): \BumbleDocGen\Core\Configuration\Configurati
 <ul>
 <li><a name="mgetconfigurationkey" href="#mgetconfigurationkey">#</a>
  <b>getConfigurationKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L439">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L413">source code</a></li>
 </ul>
 
 ```php
@@ -449,7 +449,7 @@ public function getConfigurationKey(string $key): void;
 <ul>
 <li><a name="mgetconfigurationkeys" href="#mgetconfigurationkeys">#</a>
  <b>getConfigurationKeys</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L427">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L401">source code</a></li>
 </ul>
 
 ```php
@@ -517,7 +517,7 @@ public function parseAndGetRootEntityCollectionsGroup(): \BumbleDocGen\Core\Pars
 <ul>
 <li><a name="mserve" href="#mserve">#</a>
  <b>serve</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L366">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/DocGenerator.php#L338">source code</a></li>
 </ul>
 
 ```php
