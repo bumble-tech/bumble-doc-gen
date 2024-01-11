@@ -1,0 +1,39 @@
+---
+title: Console app
+prevPage: Technical description of the project
+---
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Console app" | textToHeading('H1') }}
+
+The documentation generator provides the ability to work through a built-in [a x-title="console application"]App[/a].
+It is available via composer:
+```console
+vendor/bin/bumbleDocGen list
+```
+
+We use [Symfony Console](https://github.com/symfony/console) as the basis of the console application.
+
+{{ "Built-in console commands" | textToHeading('H2') }}
+
+<table>
+    <tr>
+        <th>Command</th>
+        <th>Parameters</th>
+        <th>Description</th>
+    </tr>
+{% for consoleCommandData in getConsoleCommands() %}
+    <tr>
+        <td><a href="{{ getDocumentedEntityUrl(phpEntities, consoleCommandData.class) }}">{{ consoleCommandData.name }}</a></td>
+        <td>{{ consoleCommandData.synopsis|raw }}</td>
+        <td>{{ consoleCommandData.description }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{{ "Adding a custom command" | textToHeading('H2') }}
+
+The system allows you to add custom commands to a standard console application.
+This can be done using a special configuration option [a x-title="additional_console_commands"]Configuration::getAdditionalConsoleCommands()[/a] (see [a]Configuration[/a] page).
+
+After adding a new command to the configuration, it will be available in the application. Each added command must inherit the `\Symfony\Component\Console\Command\Command` class
