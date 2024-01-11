@@ -312,39 +312,11 @@ final class DocGenerator
         $memory = memory_get_usage(true) - $memory;
 
         $warningMessages = $this->generationErrorsHandler->getRecords();
-
         if (empty($warningMessages)) {
             $this->io->writeln("<info>Documentation successfully generated</>");
         } else {
             $this->io->writeln("<comment>Generation completed with errors</>");
-
-            $this->io->getFormatter()->setStyle('warning', new OutputFormatterStyle('yellow'));
-            $badErrorStyle = new OutputFormatterStyle('red', '#ff0', ['bold']);
-            $this->io->getFormatter()->setStyle('critical', $badErrorStyle);
-            $this->io->getFormatter()->setStyle('alert', $badErrorStyle);
-            $this->io->getFormatter()->setStyle('emergency', $badErrorStyle);
-            $table = $this->io->createTable();
-
-            $rows = [];
-            $warningMessagesCount = count($warningMessages);
-            foreach ($warningMessages as $i => $warningMessage) {
-                $tag = strtolower($warningMessage['type']);
-                $rows[] = ["<{$tag}>{$warningMessage['type']}</>", "<{$tag}>{$warningMessage['msg']}</>"];
-                if ($warningMessage['isRenderingError']) {
-                    $rows[] = [
-                        '',
-                        '<options=conceal,underscore>This error occurs during the document rendering process</>'
-                    ];
-                }
-                $rows[] = ['', $warningMessage['initiator']];
-                if ($warningMessagesCount - $i !== 1) {
-                    $rows[] = new TableSeparator();
-                }
-            }
-            $table->setStyle('box');
-            $table->addRows($rows);
-            $table->render();
-            $this->io->newLine();
+            $this->displayErrors();
         }
 
         $this->io->writeln("<info>Performance</>");
@@ -398,6 +370,7 @@ final class DocGenerator
         $this->parser->parse($pb);
         $this->renderer->run();
         $checkIsTemplatesChanged();
+        $this->displayErrors();
         if ($afterPreparation) {
             call_user_func($afterPreparation);
         }
@@ -407,6 +380,7 @@ final class DocGenerator
                 try {
                     $this->localObjectCache->clear();
                     $this->renderer->run();
+                    $this->displayErrors();
                     if ($afterDocChanged) {
                         call_user_func($afterDocChanged);
                     }
@@ -542,5 +516,42 @@ final class DocGenerator
     public function getConfiguration(): Configuration
     {
         return $this->configuration;
+    }
+
+    private function displayErrors(bool $removeRecordsAfterDisplaying = true): void
+    {
+        $warningMessages = $this->generationErrorsHandler->getRecords();
+        if ($warningMessages) {
+            $this->io->getFormatter()->setStyle('warning', new OutputFormatterStyle('yellow'));
+            $badErrorStyle = new OutputFormatterStyle('red', '#ff0', ['bold']);
+            $this->io->getFormatter()->setStyle('critical', $badErrorStyle);
+            $this->io->getFormatter()->setStyle('alert', $badErrorStyle);
+            $this->io->getFormatter()->setStyle('emergency', $badErrorStyle);
+            $table = $this->io->createTable();
+
+            $rows = [];
+            $warningMessagesCount = count($warningMessages);
+            foreach ($warningMessages as $i => $warningMessage) {
+                $tag = strtolower($warningMessage['type']);
+                $rows[] = ["<{$tag}>{$warningMessage['type']}</>", "<{$tag}>{$warningMessage['msg']}</>"];
+                if ($warningMessage['isRenderingError']) {
+                    $rows[] = [
+                        '',
+                        '<options=conceal,underscore>This error occurs during the document rendering process</>'
+                    ];
+                }
+                $rows[] = ['', $warningMessage['initiator']];
+                if ($warningMessagesCount - $i !== 1) {
+                    $rows[] = new TableSeparator();
+                }
+            }
+            $table->setStyle('box');
+            $table->addRows($rows);
+            $table->render();
+            $this->io->newLine();
+            if ($removeRecordsAfterDisplaying) {
+                $this->generationErrorsHandler->removeRecords();
+            }
+        }
     }
 }
