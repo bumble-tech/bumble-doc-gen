@@ -18,6 +18,17 @@ will be replaced with this link:
 
 <pre>&lt;a href=&quot;/docs/some/page/targetPage.md&quot;&gt;Existent page name&lt;/a&gt;</pre>
 
+Sometimes the use of standard empty links is not entirely obvious or has insufficient capabilities. For example, in standard empty links it is not obvious which link text will be used in the end.
+
+To fix this, we implemented a special mechanism with link tags: <pre>&#91;a&#93;&#91;/a&#93;</pre>
+
+Examples:
+
+<pre>&#91;a&#93;Existent page name&#91;/a&#93; <b>=></b> &lt;a href=&quot;/docs/some/page/targetPage.md&quot;&gt;Existent page name&lt;/a&gt;</pre>
+
+<pre>&#91;a x-title="test"&#93;Existent page name&#91;/a&#93; <b>=></b> &lt;a href=&quot;/docs/some/page/targetPage.md&quot;&gt;test&lt;/a&gt;</pre>
+
+
 <embed> <h2>Generating links through functions</h2> </embed>
 
 The second way to relink templates is to generate links through functions.
