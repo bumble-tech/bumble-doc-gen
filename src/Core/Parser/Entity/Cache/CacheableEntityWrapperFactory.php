@@ -11,7 +11,7 @@ use Nette\PhpGenerator\Parameter;
 final class CacheableEntityWrapperFactory
 {
     public function __construct(
-        private LocalObjectCache $localObjectCache
+        private readonly LocalObjectCache $localObjectCache
     ) {
     }
 
@@ -23,6 +23,12 @@ final class CacheableEntityWrapperFactory
         }
 
         $namespaceName = 'BumbleDocGen\\Core\\Parser\\Entity\\Cache';
+        $entityWrapperClassName = "{$namespaceName}\\$wrapperName";
+
+        if (class_exists($entityWrapperClassName)) {
+            $this->localObjectCache->cacheMethodResult(__METHOD__, $wrapperName, $entityWrapperClassName);
+            return $entityWrapperClassName;
+        }
 
         $namespace = new \Nette\PhpGenerator\PhpNamespace($namespaceName);
         $class = $namespace->addClass($wrapperName);
@@ -66,7 +72,6 @@ final class CacheableEntityWrapperFactory
         }
 
         eval((string)$namespace);
-        $entityWrapperClassName = "{$namespaceName}\\$wrapperName";
         $this->localObjectCache->cacheMethodResult(__METHOD__, $wrapperName, $entityWrapperClassName);
         return $entityWrapperClassName;
     }
