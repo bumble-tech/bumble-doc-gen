@@ -69,8 +69,8 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
         foreach ($templatesBreadcrumbs as $templateBreadcrumb) {
             $fileDependency = $this->dependencyFactory->createFileDependency(
                 filePath: $templateBreadcrumb['template'],
-                contentFilterRegex: '/({%)( ?)(set)( )(title)([ =]+)([\'"])(.*)(\'|")( %})/',
-                matchIndex: 8
+                contentFilterRegex: '/^---([^-]+)(---)/',
+                matchIndex: 1
             );
             $this->rendererContext->addDependency($fileDependency);
         }
