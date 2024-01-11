@@ -6,7 +6,7 @@ This documentation generator is a library that allows you to create handwritten 
 
 <embed> <h2>Documentation sections</h2> </embed>
 
-<embed> <ul><li><div><a href='/docs/tech/01_configuration.md'>Configuration</a></div></li><li><div><a href='/docs/tech/02_parser/readme.md'>Parser</a></div></li><li><div><a href='/docs/tech/03_renderer/readme.md'>Renderer</a></div></li><li><div><a href='/docs/tech/04_pluginSystem.md'>Plugin system</a></div></li><li><div><a href='/docs/tech/05_console.md'>Console app</a></div></li></ul> </embed>
+<embed> <ul><li><div><a href='/docs/tech/01_configuration.md'>Configuration</a></div></li><li><div><a href='/docs/tech/02_parser/readme.md'>Parser</a></div></li><li><div><a href='/docs/tech/03_renderer/readme.md'>Renderer</a></div></li><li><div><a href='/docs/tech/04_pluginSystem.md'>Plugin system</a></div></li><li><div><a href='/docs/tech/05_console.md'>Console app</a></div></li><li><div><a href='/docs/tech/06_debugging.md'>Debugging</a></div></li></ul> </embed>
 
 <embed> <h2>How it works</h2> </embed>
 
