@@ -22,10 +22,10 @@ However, it is possible to create other files with some restrictions.
     * Generate GFM doc by docGen PHP API:
         ```php
         # Generate GFM files ( see {output_dir})
-        (new DocGeneratorFactory())->create($configFile)->generate()
+        (new DocGeneratorFactory())->create($configFile)->generate();
 
         # Serve GFM documentation ( see {output_dir})
-        (new DocGeneratorFactory())->create($configFile)->serve()
+        (new DocGeneratorFactory())->create($configFile)->serve();
         ```
 
 2) Creating **HTML** documentation is only possible through a [a x-title="console application"]Console app[/a]. The [Daux.io](https://daux.io/) library is used to generate HTML pages.

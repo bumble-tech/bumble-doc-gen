@@ -18,10 +18,10 @@ However, it is possible to create other files with some restrictions.
     * Generate GFM doc by docGen PHP API:
         ```php
         # Generate GFM files ( see {output_dir})
-        (new DocGeneratorFactory())->create($configFile)->generate()
+        (new DocGeneratorFactory())->create($configFile)->generate();
 
         # Serve GFM documentation ( see {output_dir})
-        (new DocGeneratorFactory())->create($configFile)->serve()
+        (new DocGeneratorFactory())->create($configFile)->serve();
         ```
 
 2) Creating **HTML** documentation is only possible through a <a href="/docs/tech/05_console.md">console application</a>. The [Daux.io](https://daux.io/) library is used to generate HTML pages.
@@ -33,3 +33,8 @@ However, it is possible to create other files with some restrictions.
         # Serve HTML documentation (see generated content in browser)
         vendor/bin/bumbleDocGen serve --as-html
         ```
+
+
+<div id='page_committer_info'>
+<hr>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Jan 12 18:53:16 2024 +0300<br><b>Page content update date:</b> Fri Jan 12 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
