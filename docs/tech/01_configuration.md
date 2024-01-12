@@ -56,6 +56,9 @@ In this example, we see the real configuration of the self-documentation of this
  // Multiple files
  $docGenerator = (new DocGeneratorFactory())->create('config.yaml', 'config2.yaml', 'config3.xml');
  
+ // Passing configuration as an array
+ $docGenerator = (new DocGeneratorFactory())->createByConfigArray($configArray);
+ 
 ```
 
 
@@ -212,9 +215,9 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
         <td><i>array&lt;PluginInterface&gt;|null</i></td>
         <td>
 
-- <a href="/docs/tech/classes/PageHtmlLinkerPlugin_2.md">PageHtmlLinkerPlugin</a>
+- <a href="/docs/tech/classes/PageHtmlLinkerPlugin.md">PageHtmlLinkerPlugin</a>
 
-- <a href="/docs/tech/classes/PageLinkerPlugin_2.md">PageLinkerPlugin</a>
+- <a href="/docs/tech/classes/PageLinkerPlugin.md">PageLinkerPlugin</a>
 
 </td>
         <td>List of plugins</td>
@@ -230,4 +233,4 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Thu Jan 11 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Fri Jan 12 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

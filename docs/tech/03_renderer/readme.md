@@ -10,7 +10,7 @@ We use twig to process templates.
 
 <embed> <h2>More detailed description of renderer components</h2> </embed>
 
-<embed> <ul><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/readme.md'>How to create documentation templates?</a></div></li><li><div><a href='/docs/tech/03_renderer/02_breadcrumbs.md'>Documentation structure and breadcrumbs</a></div></li><li><div><a href='/docs/tech/03_renderer/03_documentStructure.md'>Document structure of generated entities</a></div></li><li><div><a href='/docs/tech/03_renderer/04_twigCustomFilters.md'>Template filters</a></div></li><li><div><a href='/docs/tech/03_renderer/05_twigCustomFunctions.md'>Template functions</a></div></li></ul> </embed>
+<embed> <ul><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/readme.md'>How to create documentation templates?</a></div><div><ul><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/frontMatter.md'>Front Matter</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesDynamicBlocks.md'>Templates dynamic blocks</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesLinking.md'>Linking templates</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesVariables.md'>Templates variables</a></div></li></ul></div></li><li><div><a href='/docs/tech/03_renderer/02_breadcrumbs.md'>Documentation structure and breadcrumbs</a></div></li><li><div><a href='/docs/tech/03_renderer/03_documentStructure.md'>Document structure of generated entities</a></div></li><li><div><a href='/docs/tech/03_renderer/04_twigCustomFilters.md'>Template filters</a></div></li><li><div><a href='/docs/tech/03_renderer/05_twigCustomFunctions.md'>Template functions</a></div></li></ul> </embed>
 
 <embed> <h2>Starting the rendering process</h2> </embed>
 
@@ -60,4 +60,4 @@ This process is presented in the form of a diagram below.
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Thu Jan 11 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Fri Jan 12 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

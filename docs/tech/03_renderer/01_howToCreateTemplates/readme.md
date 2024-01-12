@@ -6,7 +6,7 @@ Templates are `twig` files in which you can write both static text and dynamic b
 
 **You can read more about template parts here:**
 
-<embed> <ul><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesDynamicBlocks.md'>Templates dynamic blocks</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesLinking.md'>Linking templates</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesVariables.md'>Templates variables</a></div></li></ul> </embed>
+<embed> <ul><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/frontMatter.md'>Front Matter</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesDynamicBlocks.md'>Templates dynamic blocks</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesLinking.md'>Linking templates</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesVariables.md'>Templates variables</a></div></li></ul> </embed>
 
 <embed> <h2>Examples</h2> </embed>
 
@@ -103,4 +103,4 @@ Result after starting the documentation generation process:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Thu Jan 11 00:14:41 2024 +0300<br><b>Page content update date:</b> Thu Jan 11 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Thu Jan 11 00:14:41 2024 +0300<br><b>Page content update date:</b> Fri Jan 12 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

@@ -28,6 +28,9 @@ $docGenerator = (new DocGeneratorFactory())->create('config.yaml');
 
 // Multiple files
 $docGenerator = (new DocGeneratorFactory())->create('config.yaml', 'config2.yaml', 'config3.xml');
+
+// Passing configuration as an array
+$docGenerator = (new DocGeneratorFactory())->createByConfigArray($configArray);
 " | textToCodeBlock('php') }}
 
 {{ "Handling and inheritance of configuration files" | textToHeading('H2') }}

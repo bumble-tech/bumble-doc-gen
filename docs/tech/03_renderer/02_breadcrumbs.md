@@ -28,7 +28,7 @@ In this way, complex documentation structures can be created with less file nest
 
 <embed> <h2>Displaying breadcrumbs in documents</h2> </embed>
 
-There is a built-in function to generate breadcrumbs in templates <a href="/docs/tech/03_renderer/classes/GeneratePageBreadcrumbs_2.md">GeneratePageBreadcrumbs</a>.
+There is a built-in function to generate breadcrumbs in templates <a href="/docs/tech/03_renderer/classes/GeneratePageBreadcrumbs.md">GeneratePageBreadcrumbs</a>.
 Here is how it is used in twig templates:
 
 ```twig
@@ -49,10 +49,10 @@ The template name can be specified using the `title` front matter variable:
 Here is an example of the result of the `generatePageBreadcrumbs` function:
 
 ```twig
- <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/index.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/index.md">Renderer</a> <b>/</b> Documentation structure and breadcrumbs<hr> </embed>
+ <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/index.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/index.md">Renderer</a> <b>/</b> Some page title <hr> </embed>
 ```
 
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Thu Jan 11 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Fri Jan 12 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

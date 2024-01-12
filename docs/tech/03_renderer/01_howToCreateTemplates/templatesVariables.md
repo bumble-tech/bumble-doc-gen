@@ -8,7 +8,9 @@ There are several variables available in each processed template.
 
 2) Secondly, variables with collections of processed programming languages are available in the template (see <a href="/docs/tech/03_renderer/01_howToCreateTemplates/classes/LanguageHandlerInterface.md">LanguageHandlerInterface</a>). For example, when processing a PHP project collection, a collection <a href="/docs/tech/03_renderer/01_howToCreateTemplates/classes/PhpEntitiesCollection.md">PhpEntitiesCollection</a> will be available in the template under the name <b>phpEntities</b>
 
+3) Thirdly, all variables specified in **Front Matter** are automatically converted into template variables and are available in it
+
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Thu Jan 11 00:14:41 2024 +0300<br><b>Page content update date:</b> Thu Jan 11 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Thu Jan 11 00:14:41 2024 +0300<br><b>Page content update date:</b> Fri Jan 12 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
