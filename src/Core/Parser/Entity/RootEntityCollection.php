@@ -128,4 +128,13 @@ abstract class RootEntityCollection extends BaseEntityCollection
     {
         return $this->entities;
     }
+
+    public function removeAllNotLoadedEntities(): void
+    {
+        foreach ($this->entities as $k => $entity) {
+            if (!$entity->isEntityDataCanBeLoaded()) {
+                unset($this->entities[$k]);
+            }
+        }
+    }
 }
