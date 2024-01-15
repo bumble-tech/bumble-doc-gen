@@ -255,7 +255,7 @@ public function getRelativeFileName(): null|string;
 <b>See:</b>
 <ul>
     <li>
-        <a href="/docs/tech/03_renderer/01_howToCreateTemplates/classes/Configuration.md#mgetprojectroot">\BumbleDocGen\Core\Configuration\Configuration::getProjectRoot()</a>    </li>
+        <a href="/docs/tech/03_renderer/01_howToCreateTemplates/classes/Configuration_2.md#mgetprojectroot">\BumbleDocGen\Core\Configuration\Configuration::getProjectRoot()</a>    </li>
 </ul>
 </div>
 <hr>

@@ -23,3 +23,8 @@ By default, this block is hidden from generated MD files, but it can be displaye
 Some Front Matter block variables are used internally in our system, for example `title` and `prevPage` are used to generate <a href="/docs/tech/03_renderer/02_breadcrumbs.md">breadcrumbs</a> and <a href="/docs/tech/03_renderer/01_howToCreateTemplates/classes/DrawDocumentationMenu.md">documentation menus</a>.
 
 This block is also used when generating HTML documentation. You can learn about the variables used in this block when generating HTML content [in the documentation of the library](https://daux.io/Features/Front_Matter.html) that we use to create HTML pages.
+
+
+<div id='page_committer_info'>
+<hr>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Jan 12 18:53:16 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

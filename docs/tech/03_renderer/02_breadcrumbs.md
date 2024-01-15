@@ -28,7 +28,7 @@ In this way, complex documentation structures can be created with less file nest
 
 <embed> <h2>Displaying breadcrumbs in documents</h2> </embed>
 
-There is a built-in function to generate breadcrumbs in templates <a href="/docs/tech/03_renderer/classes/GeneratePageBreadcrumbs.md">GeneratePageBreadcrumbs</a>.
+There is a built-in function to generate breadcrumbs in templates <a href="/docs/tech/03_renderer/classes/GeneratePageBreadcrumbs_2.md">GeneratePageBreadcrumbs</a>.
 Here is how it is used in twig templates:
 
 ```twig
@@ -55,4 +55,4 @@ Here is an example of the result of the `generatePageBreadcrumbs` function:
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Fri Jan 12 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Jan 12 18:53:16 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

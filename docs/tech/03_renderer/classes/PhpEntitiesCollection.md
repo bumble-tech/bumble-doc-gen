@@ -105,6 +105,9 @@ final class PhpEntitiesCollection extends \BumbleDocGen\Core\Parser\Entity\Logga
     <a href="#mremove">remove</a>
     - <i>Remove an entity from a collection</i></li>
 <li>
+    <a href="#mremoveallnotloadedentities">removeAllNotLoadedEntities</a>
+    </li>
+<li>
     <a href="#mtoarray">toArray</a>
     - <i>Convert collection to array</i></li>
 <li>
@@ -1119,6 +1122,29 @@ public function remove(string $objectName): void;
         </tr>
         </tbody>
 </table>
+
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+
+
+</div>
+<hr>
+<div class='method_description-block'>
+
+<ul>
+<li><a name="mremoveallnotloadedentities" href="#mremoveallnotloadedentities">#</a>
+ <b>removeAllNotLoadedEntities</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php#L132">source code</a></li>
+</ul>
+
+```php
+// Implemented in BumbleDocGen\Core\Parser\Entity\RootEntityCollection
+
+public function removeAllNotLoadedEntities(): void;
+```
+
+
+
+<b>Parameters:</b> not specified
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
