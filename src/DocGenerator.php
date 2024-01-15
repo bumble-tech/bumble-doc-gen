@@ -9,6 +9,7 @@ use BumbleDocGen\AI\Generators\ReadmeTemplateGenerator;
 use BumbleDocGen\AI\ProviderInterface;
 use BumbleDocGen\Console\ProgressBar\ProgressBarFactory;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
+use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationKey;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
@@ -63,6 +64,7 @@ final class DocGenerator
         private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
         private readonly ProgressBarFactory $progressBarFactory,
         private readonly Container $diContainer,
+        private readonly SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
         private readonly LocalObjectCache $localObjectCache,
         private readonly Logger $logger
     ) {
@@ -344,8 +346,24 @@ final class DocGenerator
         $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
         $templatesDirs = $event->getTemplatesDirs();
 
+        // todo This code is temporary.
+        // Why is it needed? The thing is that in live mode there is some problem with the cache,
+        // which I did not have time to debug. If you add a reference to a non-existent entity to the template,
+        // the error will persist even when it is actually corrected.
+        // This happens because a reference to this object is stored in the operation log and is not deleted.
+        // Need to investigate later and fix
+        $handleErrors = function (): void {
+            if ($this->generationErrorsHandler->getRecords()) {
+                $this->sharedCompressedDocumentFileCache->removeFile();
+                foreach ($this->rootEntityCollectionsGroup as $collection) {
+                    $collection->removeAllNotLoadedEntities();
+                }
+                $this->displayErrors();
+            }
+        };
+
         $checkedFiles = [];
-        $checkIsTemplatesChanged = function () use ($templatesDirs, &$checkedFiles) {
+        $checkIsTemplatesChanged = function () use ($templatesDirs, &$checkedFiles, $handleErrors) {
             $finder = Finder::create()
                 ->ignoreVCS(true)
                 ->ignoreDotFiles(true)
@@ -370,7 +388,7 @@ final class DocGenerator
         $this->parser->parse($pb);
         $this->renderer->run();
         $checkIsTemplatesChanged();
-        $this->displayErrors();
+        $handleErrors();
         if ($afterPreparation) {
             call_user_func($afterPreparation);
         }
@@ -380,7 +398,7 @@ final class DocGenerator
                 try {
                     $this->localObjectCache->clear();
                     $this->renderer->run();
-                    $this->displayErrors();
+                    $handleErrors();
                     if ($afterDocChanged) {
                         call_user_func($afterDocChanged);
                     }
