@@ -56,6 +56,7 @@ final class Renderer
      */
     public function run(): void
     {
+        $this->sharedCompressedDocumentFileCache->reloadDataFromFile();
         $this->twig->reloadTemplates();
         $outputDir = $this->configuration->getOutputDir();
 
