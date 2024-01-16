@@ -1,5 +1,4 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> EntityDocUnifiedPlacePlugin<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> EntityDocUnifiedPlacePlugin<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L17">EntityDocUnifiedPlacePlugin</a> class:
@@ -192,5 +191,3 @@ public function onGetTemplatePathByRelativeDocPath(\BumbleDocGen\Core\Plugin\Eve
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

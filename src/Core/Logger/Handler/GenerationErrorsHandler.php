@@ -6,7 +6,6 @@ namespace BumbleDocGen\Core\Logger\Handler;
 
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use Monolog\Handler\AbstractProcessingHandler;
-use Monolog\Logger;
 use Monolog\LogRecord;
 
 final class GenerationErrorsHandler extends AbstractProcessingHandler
@@ -14,8 +13,8 @@ final class GenerationErrorsHandler extends AbstractProcessingHandler
     private array $records = [];
 
     public function __construct(
-        private RendererContext $rendererContext,
-        $level = Logger::WARNING,
+        private readonly RendererContext $rendererContext,
+        $level = \Monolog\Level::Warning,
         bool $bubble = true
     ) {
         parent::__construct($level, $bubble);
@@ -55,5 +54,10 @@ final class GenerationErrorsHandler extends AbstractProcessingHandler
     public function addRecords(array $records): void
     {
         $this->records = array_merge($this->records, $records);
+    }
+
+    public function removeRecords(): void
+    {
+        $this->records = [];
     }
 }

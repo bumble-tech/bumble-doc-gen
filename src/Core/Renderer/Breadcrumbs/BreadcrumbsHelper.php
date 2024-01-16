@@ -9,8 +9,10 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\TemplateFile;
+use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
@@ -99,13 +101,16 @@ final class BreadcrumbsHelper
      */
     private function getFindIndexFileByRelativePath(string $relativePath): ?string
     {
+        $event = $this->pluginEventDispatcher->dispatch(new OnGetTemplatePathByRelativeDocPath($relativePath));
+        $path = $event->getCustomTemplateFilePath() ?: $this->configuration->getTemplatesDir() . '/' . $relativePath;
+
         $finder = Finder::create()
             ->name('*.twig')
             ->ignoreVCS(true)
             ->ignoreDotFiles(true)
             ->ignoreUnreadableDirs()
             ->depth(0)
-            ->in($this->configuration->getTemplatesDir() . '/' . $relativePath);
+            ->in($path);
 
         $indexFile = null;
         foreach ($finder->files() as $file) {
@@ -283,6 +288,9 @@ final class BreadcrumbsHelper
             $addLinkKey($docFilePatch, $value);
             $addLinkKey($url, $value);
             $addLinkKey($title, $value);
+            $templateFileName = array_reverse(explode(DIRECTORY_SEPARATOR, $filePatch))[0];
+            $addLinkKey($templateFileName, $value);
+            $addLinkKey(rtrim($templateFileName, '.twig'), $value);
             $linkKey = $this->getTemplateLinkKey($filePatch);
             if ($linkKey) {
                 $addLinkKey($linkKey, $value);

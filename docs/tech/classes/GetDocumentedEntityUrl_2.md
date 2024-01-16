@@ -1,4 +1,3 @@
-<!-- {% raw %} -->
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> GetDocumentedEntityUrl<hr> </embed>
 
 <h1>
@@ -21,11 +20,11 @@ the `EntityDocRendererInterface::getDocFileExtension()` directory will be create
 See:
 <ul>
     <li>
-        <a href="/docs/tech/classes/DocumentedEntityWrapper_2.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
+        <a href="/docs/tech/classes/DocumentedEntityWrapper.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
     <li>
-        <a href="/docs/tech/classes/DocumentedEntityWrappersCollection_2.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
+        <a href="/docs/tech/classes/DocumentedEntityWrappersCollection.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
     <li>
-        <a href="/docs/tech/classes/RendererContext_2.md">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
+        <a href="/docs/tech/classes/RendererContext.md">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
 </ul>
 
 
@@ -211,7 +210,7 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
@@ -262,5 +261,3 @@ public static function getOptions(): array;
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

@@ -1,0 +1,19 @@
+---
+title: Project classes
+prevPage: Project structure
+---
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Project classes" | textToHeading('H1') }}
+
+<table>
+<tr><th>Name</th><th>Namespace</th></tr>
+<tr><td colspan='2'><b>Abstract classes</b></td></tr>
+{% for abstractClassEntity in phpEntities.getOnlyAbstractClasses() %}
+<tr><td>[a x-title='{{ classEntity.getShortName() }}']{{ abstractClassEntity.getName() }}[/a]<td>{{ abstractClassEntity.getNamespaceName() }}</td></tr>
+{% endfor %}
+<tr><td colspan='2'><b>Classes</b></td></tr>
+{% for classEntity in phpEntities.getOnlyInstantiable() %}
+<tr><td>[a x-title='{{ classEntity.getShortName() }}']{{ classEntity.getName() }}[/a]<td>{{ classEntity.getNamespaceName() }}</td></tr>
+{% endfor %}
+</table>

@@ -1,5 +1,4 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DocumentedEntityWrappersCollection<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> DocumentedEntityWrappersCollection<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrappersCollection.php#L14">DocumentedEntityWrappersCollection</a> class:
@@ -167,7 +166,7 @@ public function createAndAddDocumentedEntityWrapper(\BumbleDocGen\Core\Parser\En
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -215,5 +214,3 @@ public function getIterator(): \Generator;
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

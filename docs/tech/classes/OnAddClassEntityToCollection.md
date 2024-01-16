@@ -1,5 +1,4 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> OnAddClassEntityToCollection<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> OnAddClassEntityToCollection<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/Event/Parser/OnAddClassEntityToCollection.php#L15">OnAddClassEntityToCollection</a> class:
@@ -157,5 +156,3 @@ public function getUniqueExecutionId(): string;
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

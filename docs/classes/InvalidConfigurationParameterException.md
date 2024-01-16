@@ -1,4 +1,3 @@
-<!-- {% raw %} -->
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> InvalidConfigurationParameterException<hr> </embed>
 
 <h1>
@@ -30,5 +29,3 @@ final class InvalidConfigurationParameterException extends \Exception
 
 
 
-
-<!-- {% endraw %} -->

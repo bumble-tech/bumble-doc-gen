@@ -17,8 +17,12 @@ use Twig\Loader\FilesystemLoader;
 
 final class MainTwigEnvironment
 {
+    public const TMP_TEMPLATE_PREFIX = '~bumbleDocGen';
+
     private Environment $twig;
     private bool $isEnvLoaded = false;
+    private ?string $twigTemplatePrefixKey = null;
+    private bool $prefixChanged = false;
 
     public function __construct(
         private readonly Configuration $configuration,
@@ -37,11 +41,25 @@ final class MainTwigEnvironment
             $templatesDir = $this->configuration->getTemplatesDir();
             $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
             $templatesDirs = $event->getTemplatesDirs();
-            $loader = new FrontMatterLoader(new FilesystemLoader($templatesDirs), $this->breadcrumbsHelper);
-            $this->twig = new Environment($loader);
+            $removeFrontMatterFromTemplate = !$this->configuration->renderWithFrontMatter();
+            $loader = new FrontMatterLoader(
+                new FilesystemLoader($templatesDirs),
+                $this->breadcrumbsHelper,
+                $removeFrontMatterFromTemplate
+            );
+            $this->twig = new Environment($loader, ['auto_reload' => true, 'cache' => false]);
             $this->twig->addExtension($this->mainExtension);
             $this->isEnvLoaded = true;
         }
+    }
+
+    /**
+     * @internal
+     */
+    public function reloadTemplates(): void
+    {
+        $this->twigTemplatePrefixKey = uniqid();
+        $this->prefixChanged = true;
     }
 
     /**
@@ -53,6 +71,13 @@ final class MainTwigEnvironment
     public function render($name, array $context = []): string
     {
         $this->loadMainTwigEnvironment();
+        if ($this->twigTemplatePrefixKey && $this->prefixChanged) {
+            $this->prefixChanged = false;
+            $reflection = new \ReflectionClass($this->twig);
+            $reflectionProperty = $reflection->getProperty('templateClassPrefix');
+            $reflectionProperty->setValue($this->twig, "__TwigTemplate_" . md5($this->twigTemplatePrefixKey));
+        }
+
         return $this->twig->render($name, $context);
     }
 }
