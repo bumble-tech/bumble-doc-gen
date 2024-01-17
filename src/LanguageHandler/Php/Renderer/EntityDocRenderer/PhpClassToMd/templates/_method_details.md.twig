@@ -59,19 +59,6 @@
 {% endif %}
 {% endif %}
 
-{% if methodEntity.hasThrows() %}
-
-<b>Throws:</b>
-<ul>
-{% for throw in methodEntity.getThrows() %}
-<li>
-    <a {% if throw.url and throw.url != '#' %}href="{{ throw.url }}"{% endif %}>{{ throw.name }}</a>{% if throw.description %} - {{ throw.description | removeLineBrakes }} {% endif %}
-</li>
-
-{% endfor %}
-</ul>
-{% endif %}
-
 {% if methodEntity.hasDescriptionLinks() %}
 
 <b>See:</b>
