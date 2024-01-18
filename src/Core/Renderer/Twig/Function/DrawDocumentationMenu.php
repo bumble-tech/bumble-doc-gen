@@ -9,12 +9,13 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
+use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Generate documentation menu in HTML format. To generate the menu, the start page is taken,
+ * Generate documentation menu in MD format. To generate the menu, the start page is taken,
  * and all links with this page are recursively collected for it, after which the html menu is created.
  *
  * @note This function initiates the creation of documents for the displayed entities
@@ -28,10 +29,10 @@ use Symfony\Component\Finder\Finder;
 final class DrawDocumentationMenu implements CustomFunctionInterface
 {
     public function __construct(
-        private Configuration $configuration,
-        private BreadcrumbsHelper $breadcrumbsHelper,
-        private RendererContext $rendererContext,
-        private RendererDependencyFactory $dependencyFactory,
+        private readonly Configuration $configuration,
+        private readonly BreadcrumbsHelper $breadcrumbsHelper,
+        private readonly RendererContext $rendererContext,
+        private readonly RendererDependencyFactory $dependencyFactory,
     ) {
     }
 
@@ -94,20 +95,19 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
         }
 
         $drawPages = function (array $pagesData, int $currentDeep = 1) use ($structure, $maxDeep, &$drawPages): string {
-            $html = '<ul>';
+            $addIndentFromLeft = new AddIndentFromLeft();
+            $md = '';
             foreach ($pagesData as $pageData) {
-                $html .= "<li>";
-                $html .= "<div><a href='{$pageData['url']}'>{$pageData['title']}</a></div>";
+                $md .= "\n- ";
+                $md .= "[{$pageData['title']}]({$pageData['url']})";
                 if ($structure[$pageData['url']]) {
                     $nextDeep = $currentDeep + 1;
                     if (!$maxDeep || $nextDeep <= $maxDeep) {
-                        $html .= "<div>{$drawPages($structure[$pageData['url']], $nextDeep)}</div>";
+                        $md .= "{$addIndentFromLeft($drawPages($structure[$pageData['url']], $nextDeep), 4)}";
                     }
                 }
-                $html .= "</li>";
             }
-            $html .= "</ul>";
-            return $html;
+            return $md;
         };
 
         if ($startPageKey) {
@@ -118,7 +118,6 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
             $startPageKey = array_key_first($structure);
         }
 
-        $content = isset($structure[$startPageKey]) ? $drawPages($structure[$startPageKey]) : '';
-        return "<embed> {$content} </embed>";
+        return isset($structure[$startPageKey]) ? $drawPages($structure[$startPageKey]) : '';
     }
 }
