@@ -53,7 +53,7 @@ final class Daux implements PluginInterface
         );
 
         // MD links are not always converted to HTML correctly. This hack fixes that
-        $content = preg_replace('/\[([^\[]+)\]\((.*)\)/', '<a href="$2">$1</a>', $content);
+        $content = preg_replace('/\[([^\[]+)\]\(([^)]+)(\))/', '<a href="$2">$1</a>', $content);
 
         // Hack to make images work in generated HTML
         $content = preg_replace_callback('/(src=("|\')\/)([^"\']+)/', function (array $elements): string {
