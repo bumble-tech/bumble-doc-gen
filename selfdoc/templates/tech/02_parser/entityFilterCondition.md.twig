@@ -4,7 +4,7 @@ prevPage: Parser
 ---
 {{ generatePageBreadcrumbs(title, _self) }}
 
-{{ "Entity filter conditions" | textToHeading('H1') }}
+# Entity filter conditions
 
 Filters serve as a foundational mechanism within our documentation generator, dictating which segments of the source code are selected during the initial parsing phase.
 These rules facilitate a strategic extraction of elements, such as classes, methods, or constants, from the underlying codebase.
@@ -13,7 +13,7 @@ This level of granularity not only streamlines the documentation process but als
 
 All filter conditions implement the [a]ConditionInterface[/a] interface.
 
-{{ "Mechanism for adding entities to the collection" | textToHeading('H2') }}
+## Mechanism for adding entities to the collection
 
 For each language handler, according to the configuration, the following scheme is applicable:
 
@@ -35,7 +35,7 @@ flowchart LR
 The diagram shows the mechanism for adding root entities, but this also applies to the attributes of each entity,
 for example, for PHP there are rules for checking the possibility of adding methods, properties and constants.
 
-{{ "Filter conditions configuration" | textToHeading('H2') }}
+## Filter conditions configuration
 
 Filter conditions are configured separately for language handlers.
 
@@ -67,7 +67,7 @@ language_handlers:
                - class: \BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\OnlyFromCurrentClassCondition
 ```
 
-{{ "Available filters" | textToHeading('H2') }}
+## Available filters
 
 {% set filterConditions = phpEntities.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\FilterCondition\\ConditionInterface']).getOnlyInstantiable() %}
 

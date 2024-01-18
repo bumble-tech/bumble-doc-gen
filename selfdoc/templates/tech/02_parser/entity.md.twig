@@ -4,42 +4,52 @@ prevPage: Parser
 ---
 {{ generatePageBreadcrumbs(title, _self) }}
 
-{{ "Entities and entities collections" | textToHeading('H1') }}
+# Entities and entities collections
 
 Entities are organized outcomes from parsing source code.
 They help easily extract details about specific items from templates, allowing users to quickly access and display the information they need.
 
 Entities are always handled through collections. Collections are the result of the project parsing process and are available in both documentation templates and code.
 
-{{ "Examples of using collections in twig templates" | textToHeading('H2') }}
+## Examples of using collections in twig templates
 
 * Passing a collection to a function:
 
-{{ "{{ printEntityCollectionAsList(phpEntities) }}" | textToCodeBlock('twig') }}
+```twig
+{{ "{{ printEntityCollectionAsList(phpEntities) }}" }}
+```
 
 * Filtering a collection and passing it to a function:
 
-{{ "{{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\Entity\\EntityInterface'])) }}" | textToCodeBlock('twig') }}
+```twig
+{{ "{{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['BumbleDocGen\\Core\\Parser\\Entity\\EntityInterface'])) }}" }}
+```
 
 * Saving a filtered collection to a variable:
 
-{{ "{{ {% set filteredCollection = phpEntities.getOnlyInstantiable() %} }}" | textToCodeBlock('twig') }}
+```twig
+{{ "{% set filteredCollection = phpEntities.getOnlyInstantiable() %}" }}
+```
 
 * Using a collection in a for loop:
 
+```twig
 {{ "{% for someClassEntity in phpEntities %}
     * {{ someClassEntity.getName() }}
-{% endfor %}" | textToCodeBlock('twig') }}
+{% endfor %}" }}
+```
 
 * Output of all methods of all found entities in `className::methodName()` format:
 
+```twig
 {{ "{% for someClassEntity in phpEntities %}
     {% for methodEntity in someClassEntity.getMethodEntitiesCollection() %}
         * {{ someClassEntity.getName() }}::{{ methodEntity.getName() }}()
     {% endfor %}
-{% endfor %}" | textToCodeBlock('twig') }}
+{% endfor %}" }}
+```
 
-{{ "Root entities collections" | textToHeading('H2') }}
+## Root entities collections
 
 To further facilitate the handling of these entities, we utilize entity collections.
 These collections not only group relevant entities together but also provide convenient methods for filtering and manipulating these entities.
@@ -66,7 +76,7 @@ The root collections ([a]RootEntityCollection[/a]), which are directly accessibl
     {% endfor %}
 </table>
 
-{{ "Available entities" | textToHeading('H2') }}
+## Available entities
 
 Following is the list of available entities that are consistent with [a]EntityInterface[/a] and can be created.
 These classes are a convenient wrapper for accessing data in templates:

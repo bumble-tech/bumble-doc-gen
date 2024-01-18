@@ -3,7 +3,7 @@ title: Parser
 ---
 {{ generatePageBreadcrumbs(title, _self) }}
 
-{{ "Documentation parser" | textToHeading('H1') }}
+# Documentation parser
 
 Most often, we need [a]ProjectParser[/a] in order to get a list of entities for documentation.
 But this is not the only use of this tool. The result of the parser's work (a collection of entities) can be used to programmatically analyze the project and perform any operations based on this analysis.
@@ -12,19 +12,21 @@ You can also use the parser for your own purposes other than generating document
 
 In this section, we show how the parser works and what components it consists of.
 
-{{ "Description of the main components of the parser" | textToHeading('H2') }}
+## Description of the main components of the parser
 
 {{ drawDocumentationMenu(_self) }}
 
-{{ "Starting the parsing process" | textToHeading('H2') }}
+## Starting the parsing process
 
-{{ "$parser = new ProjectParser($configuration, $rootEntityCollectionsGroup);
+```php
+$parser = new ProjectParser($configuration, $rootEntityCollectionsGroup);
 
 // Parsing the project and filling RootEntityCollectionsGroup with data
 $this->parser->parse();
-$rootEntityCollectionsGroup = $this->parser->getRootEntityCollectionsGroup();" | textToCodeBlock('php') }}
+$rootEntityCollectionsGroup = $this->parser->getRootEntityCollectionsGroup();
+```
 
-{{ "How it works" | textToHeading('H2') }}
+## How it works
 
 ```mermaid
  flowchart TD

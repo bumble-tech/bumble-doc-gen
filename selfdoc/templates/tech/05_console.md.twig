@@ -4,7 +4,7 @@ prevPage: Technical description of the project
 ---
 {{ generatePageBreadcrumbs(title, _self) }}
 
-{{ "Console app" | textToHeading('H1') }}
+# Console app
 
 The documentation generator provides the ability to work through a built-in [a x-title="console application"]App[/a].
 It is available via composer:
@@ -14,7 +14,7 @@ vendor/bin/bumbleDocGen list
 
 We use [Symfony Console](https://github.com/symfony/console) as the basis of the console application.
 
-{{ "Built-in console commands" | textToHeading('H2') }}
+## Built-in console commands
 
 <table>
     <tr>
@@ -31,7 +31,7 @@ We use [Symfony Console](https://github.com/symfony/console) as the basis of the
 {% endfor %}
 </table>
 
-{{ "Adding a custom command" | textToHeading('H2') }}
+## Adding a custom command
 
 The system allows you to add custom commands to a standard console application.
 This can be done using a special configuration option [a x-title="additional_console_commands"]Configuration::getAdditionalConsoleCommands()[/a] (see [a]Configuration[/a] page).
