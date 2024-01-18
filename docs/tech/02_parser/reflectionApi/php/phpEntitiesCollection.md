@@ -1,6 +1,14 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/02_parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/readme.md">Reflection API</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/php/readme.md">Reflection API for PHP</a> <b>/</b> PHP entities collection<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Parser](/docs/tech/02_parser/readme.md) **/**
+[Reflection API](/docs/tech/02_parser/reflectionApi/readme.md) **/**
+[Reflection API for PHP](/docs/tech/02_parser/reflectionApi/php/readme.md) **/**
+PHP entities collection
 
-<embed> <h1>PHP entities collection</h1> </embed>
+---
+
+
+# PHP entities collection
 
 **PHP entities collection API methods:**
 
@@ -23,6 +31,6 @@
 - [remove()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mremove): Remove an entity from a collection
 - [toArray()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mtoarray): Convert collection to array
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

@@ -1,12 +1,12 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/05_console.md">Console app</a> <b>/</b> App<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Console app](/docs/tech/05_console.md) **/**
+App
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L20">App</a> class:
-</h1>
+---
 
 
-
-
+# [App](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L20) class:
 
 ```php
 namespace BumbleDocGen\Console;
@@ -14,47 +14,15 @@ namespace BumbleDocGen\Console;
 class App extends \Symfony\Component\Console\Application
 ```
 
+## Initialization methods
 
+1. [__construct](#m-construct) 
 
+## Methods details:
 
-
-
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L22">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/App.php#L22)
 ```php
 public function __construct();
 ```
 
-
-
-<b>Parameters:</b> not specified
-
-
-
-</div>
-<hr>
+---

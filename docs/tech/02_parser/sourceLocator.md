@@ -1,28 +1,37 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/02_parser/readme.md">Parser</a> <b>/</b> Source locators<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Parser](/docs/tech/02_parser/readme.md) **/**
+Source locators
 
-<embed> <h1>Source locators</h1> </embed>
+---
+
+
+# Source locators
 
 Source locators are needed so that the parser knows which files to parse, or to get data on a specific file after the primary parsing procedure
 
 Source locators are set in the configuration:
 
 ```yaml
- source_locators:
-   - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
-     arguments:
-       directories:
-         - "%project_root%/src"
-         - "%project_root%/selfdoc"
+source_locators:
+  - class: \\BumbleDocGen\\Core\\Parser\\SourceLocator\\RecursiveDirectoriesSourceLocator
+    arguments:
+      directories:
+        - "%project_root%/src"
+        - "%project_root%/selfdoc"
 ```
 
+You can create your own source locators or use any existing ones. All source locators must implement the [SourceLocatorInterface](/docs/tech/02_parser/classes/SourceLocatorInterface.md) interface.
 
-You can create your own source locators or use any existing ones. All source locators must implement the <a href="/docs/tech/02_parser/classes/SourceLocatorInterface.md">SourceLocatorInterface</a> interface.
+## Built-in source locators
 
-<embed> <h2>Built-in source locators</h2> </embed>
+-  [DirectoriesSourceLocator](/docs/tech/02_parser/classes/DirectoriesSourceLocator.md) - Loads all files from the specified directory
+-  [FileIteratorSourceLocator](/docs/tech/02_parser/classes/FileIteratorSourceLocator.md) - Loads all files using an iterator
+-  [RecursiveDirectoriesSourceLocator](/docs/tech/02_parser/classes/RecursiveDirectoriesSourceLocator.md) - Loads all files from the specified directories, which are traversed recursively
+-  [SingleFileSourceLocator](/docs/tech/02_parser/classes/SingleFileSourceLocator.md) - Loads one specific file by its path
 
-<embed> <ul><li><a href='/docs/tech/02_parser/classes/DirectoriesSourceLocator.md'>DirectoriesSourceLocator</a> - Loads all files from the specified directory</li><li><a href='/docs/tech/02_parser/classes/FileIteratorSourceLocator.md'>FileIteratorSourceLocator</a> - Loads all files using an iterator</li><li><a href='/docs/tech/02_parser/classes/RecursiveDirectoriesSourceLocator.md'>RecursiveDirectoriesSourceLocator</a> - Loads all files from the specified directories, which are traversed recursively</li><li><a href='/docs/tech/02_parser/classes/SingleFileSourceLocator.md'>SingleFileSourceLocator</a> - Loads one specific file by its path</li></ul> </embed>
 
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

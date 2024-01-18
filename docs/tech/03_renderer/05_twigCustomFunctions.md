@@ -1,6 +1,12 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/03_renderer/readme.md">Renderer</a> <b>/</b> Template functions<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Renderer](/docs/tech/03_renderer/readme.md) **/**
+Template functions
 
-<embed> <h1>Template functions</h1> </embed>
+---
+
+
+# Template functions
 
 When generating pages, you can use functions that allow you to modify the content.
 Functions available during page generation are defined in <a href='/docs/tech/01_configuration.md'>the configuration</a> ( `twig_functions` parameter )
@@ -8,13 +14,13 @@ Functions available during page generation are defined in <a href='/docs/tech/01
 We use the twig template engine, you can get more information about working with functions here: https://twig.symfony.com/doc/1.x/advanced.html#functions
 
 You can also create your own functions and use them for any purpose, such as loading some additional information into a template, filtering data, or formatting the output of any information.
-Each function must implement the <a href="/docs/tech/03_renderer/classes/CustomFunctionInterface.md">CustomFunctionInterface</a> interface, implement the `__invoke` magic method, and be added to the configuration.
+Each function must implement the [CustomFunctionInterface](/docs/tech/03_renderer/classes/CustomFunctionInterface.md) interface, implement the `__invoke` magic method, and be added to the configuration.
 
-<embed> <h2>How to use a function in a template</h2> </embed>
+## How to use a function in a template
 
 <pre>&#123;&#123; functionName(...parameters) &#125;&#125;</pre>
 
-<embed> <h2>Configuration example</h2> </embed>
+## Configuration example
 
 You can add your custom functions to the configuration like this:
 
@@ -26,9 +32,9 @@ twig_functions:
 ```
 
 It is important to remember that when a template is inherited, custom functions are not overridden and augmented.
-This information is detailed on page <a href="/docs/tech/01_configuration.md">Configuration</a>.
+This information is detailed on page [Configuration](/docs/tech/01_configuration.md).
 
-<embed> <h2>Defautl template functions</h2> </embed>
+## Default template functions
 
 Several functions are already defined in the base configuration.
 There are both general functions for all types of entities, and functions that only serve to process entities that belong to a particular PL.
@@ -54,13 +60,13 @@ Here is a list of functions available by default:
                                               <tr>
                                   <td rowspan="3">
                     <a href="/docs/tech/03_renderer/classes/DrawDocumentationMenu.md">drawDocumentationMenu</a><br>
-                                        Generate documentation menu in HTML format. To generate the menu, the start page is taken, and all links with this page are recursively collected for it, after which the html menu is created.
+                                        Generate documentation menu in MD format. To generate the menu, the start page is taken, and all links with this page are recursively collected for it, after which the html menu is created.
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
                                   <td>
                     <b>$startPageKey</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php) | [null](https://www.php.net/manual/en/language.types.null.php)</i>
                  </td>
                  <td>Relative path to the page from which the menu will be generated (only child pages will be taken into account). By default, the main documentation page (readme.md) is used.</td>
               </tr>
@@ -72,7 +78,7 @@ Here is a list of functions available by default:
                     <b>$maxDeep</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a></i>
+                    <i>[int](https://www.php.net/manual/en/language.types.integer.php) | [null](https://www.php.net/manual/en/language.types.null.php)</i>
                  </td>
                  <td>Maximum parsing depth of documented links starting from the current page. By default, this restriction is disabled.</td>
               </tr>
@@ -88,7 +94,7 @@ Here is a list of functions available by default:
                     <b>$entity</b>
                  </td>
                  <td>
-                    <i><a href='/docs/tech/03_renderer/classes/RootEntityInterface.md'>RootEntityInterface</a></i>
+                    <i>[RootEntityInterface](/docs/tech/03_renderer/classes/RootEntityInterface.md)</i>
                  </td>
                  <td>The entity for which we want to get the link</td>
               </tr>
@@ -100,7 +106,7 @@ Here is a list of functions available by default:
                     <b>$cursor</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>Reference to an element inside an entity, for example, the name of a function/constant/property</td>
               </tr>
@@ -112,7 +118,7 @@ Here is a list of functions available by default:
                     <b>$useShortName</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></i>
+                    <i>[bool](https://www.php.net/manual/en/language.types.boolean.php)</i>
                  </td>
                  <td>Use the full or short entity name in the link</td>
               </tr>
@@ -128,7 +134,7 @@ Here is a list of functions available by default:
                     <b>$resourceName</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>Resource name, url or path to the resource. The path can contain shortcodes with parameters from the configuration (%param_name%)</td>
               </tr>
@@ -144,7 +150,7 @@ Here is a list of functions available by default:
                     <b>$currentPageTitle</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>Title of the current page</td>
               </tr>
@@ -156,7 +162,7 @@ Here is a list of functions available by default:
                     <b>$templatePath</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>Path to the template from which the breadcrumbs will be generated</td>
               </tr>
@@ -168,7 +174,7 @@ Here is a list of functions available by default:
                     <b>$skipFirstTemplatePage</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></i>
+                    <i>[bool](https://www.php.net/manual/en/language.types.boolean.php)</i>
                  </td>
                  <td>If set to true, the page from which parsing starts will not participate in the formation of breadcrumbs This option is useful when working with the _self value in a template, as it returns the full path to the current template, and the reference to it in breadcrumbs should not be clickable.</td>
               </tr>
@@ -184,7 +190,7 @@ Here is a list of functions available by default:
                     <b>$key</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>The key by which to look up the URL of the page. Can be the title of a page, a path to a template, or a generated document</td>
               </tr>
@@ -200,7 +206,7 @@ Here is a list of functions available by default:
                     <b>$rootEntityCollection</b>
                  </td>
                  <td>
-                    <i><a href='/docs/tech/03_renderer/classes/RootEntityCollection.md'>RootEntityCollection</a></i>
+                    <i>[RootEntityCollection](/docs/tech/03_renderer/classes/RootEntityCollection.md)</i>
                  </td>
                  <td>Processed entity collection</td>
               </tr>
@@ -212,7 +218,7 @@ Here is a list of functions available by default:
                     <b>$entityName</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>The full name of the entity for which the URL will be retrieved. If the entity is not found, the DEFAULT_URL value will be returned.</td>
               </tr>
@@ -224,7 +230,7 @@ Here is a list of functions available by default:
                     <b>$cursor</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>Cursor on the page of the documented entity (for example, the name of a method or property)</td>
               </tr>
@@ -236,7 +242,7 @@ Here is a list of functions available by default:
                     <b>$createDocument</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></i>
+                    <i>[bool](https://www.php.net/manual/en/language.types.boolean.php)</i>
                  </td>
                  <td>If true, creates an entity document. Otherwise, just gives a reference to the entity code</td>
               </tr>
@@ -252,7 +258,7 @@ Here is a list of functions available by default:
                     <b>$content</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>Content to be processed by plugins</td>
               </tr>
@@ -264,7 +270,7 @@ Here is a list of functions available by default:
                     <b>$entity</b>
                  </td>
                  <td>
-                    <i><a href='/docs/tech/03_renderer/classes/RootEntityInterface.md'>RootEntityInterface</a></i>
+                    <i>[RootEntityInterface](/docs/tech/03_renderer/classes/RootEntityInterface.md)</i>
                  </td>
                  <td>The entity for which we process the content block</td>
               </tr>
@@ -276,7 +282,7 @@ Here is a list of functions available by default:
                     <b>$blockType</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>Content block type. @see BaseTemplatePluginInterface::BLOCK_*</td>
               </tr>
@@ -286,13 +292,13 @@ Here is a list of functions available by default:
                                                           <tr>
                                   <td rowspan="7">
                     <a href="/docs/tech/03_renderer/classes/PrintEntityCollectionAsList.md">printEntityCollectionAsList</a><br>
-                                        Outputting entity data as HTML list
+                                        Outputting entity data as MD list
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
                                   <td>
                     <b>$rootEntityCollection</b>
                  </td>
                  <td>
-                    <i><a href='/docs/tech/03_renderer/classes/RootEntityCollection.md'>RootEntityCollection</a></i>
+                    <i>[RootEntityCollection](/docs/tech/03_renderer/classes/RootEntityCollection.md)</i>
                  </td>
                  <td>Processed entity collection</td>
               </tr>
@@ -304,7 +310,7 @@ Here is a list of functions available by default:
                     <b>$type</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>List tag type (&lt;ul&gt;/&lt;ol&gt;)</td>
               </tr>
@@ -316,7 +322,7 @@ Here is a list of functions available by default:
                     <b>$skipDescription</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></i>
+                    <i>[bool](https://www.php.net/manual/en/language.types.boolean.php)</i>
                  </td>
                  <td>Don&#039;t print description of this entities</td>
               </tr>
@@ -328,7 +334,7 @@ Here is a list of functions available by default:
                     <b>$useFullName</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></i>
+                    <i>[bool](https://www.php.net/manual/en/language.types.boolean.php)</i>
                  </td>
                  <td>Use the full name of the entity in the list</td>
               </tr>
@@ -344,7 +350,7 @@ Here is a list of functions available by default:
                     <b>$className</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>Name of the class for which API methods need to be displayed</td>
               </tr>
@@ -360,7 +366,7 @@ Here is a list of functions available by default:
                     <b>$entitiesCollections</b>
                  </td>
                  <td>
-                    <i><a href='/docs/tech/03_renderer/classes/PhpEntitiesCollection.md'>PhpEntitiesCollection</a></i>
+                    <i>[PhpEntitiesCollection](/docs/tech/03_renderer/classes/PhpEntitiesCollection.md)</i>
                  </td>
                  <td>The collection of entities for which the class map will be generated</td>
               </tr>
@@ -376,7 +382,7 @@ Here is a list of functions available by default:
                     <b>$className</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></i>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>The name of the class whose methods are to be retrieved</td>
               </tr>
@@ -388,7 +394,7 @@ Here is a list of functions available by default:
                     <b>$methodsNames</b>
                  </td>
                  <td>
-                    <i><a href='https://www.php.net/manual/en/language.types.array.php'>array</a></i>
+                    <i>[array](https://www.php.net/manual/en/language.types.array.php)</i>
                  </td>
                  <td>List of class methods whose code needs to be retrieved</td>
               </tr>
@@ -399,6 +405,6 @@ Here is a list of functions available by default:
 </table>
 
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

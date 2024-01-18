@@ -1,68 +1,70 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> Configuration<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+Configuration
 
-<embed> <h1>Configuration</h1> </embed>
+---
+
+
+# Configuration
 
 Documentation generator configuration can be stored in special files.
 They can be in different formats: <a href='https://yaml.org/'>yaml</a>, <a href='https://www.json.org/json-en.html'>json</a>, <a href='https://www.php.net/manual/en/language.types.array.php'>php arrays</a>, <a href='https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ms717987(v=vs.85)'>ini</a>, <a href='https://www.w3.org/XML/'>xml</a>
 
 But it is not necessary to use files to store the configuration; you can also initialize the documentation generator instance by passing there an array of configuration parameters (see <a href='https://github.com/bumble-tech/bumble-doc-gen/tree/master/demo'>demo-5</a>)
 
-During the instance creation process, configuration data is loaded into <a href="/docs/tech/01_configuration.md">Configuration</a> class, and the code works directly with it.
+During the instance creation process, configuration data is loaded into [Configuration](/docs/tech/01_configuration.md) class, and the code works directly with it.
 
-<embed> <h2>Configuration file example</h2> </embed>
+# Configuration file example
 
 Let's look at an example of a real configuration in more detail:
 
 ```yaml
- project_root: '%WORKING_DIR%'
- templates_dir: '%project_root%/selfdoc/templates'
- output_dir: "%project_root%/docs"
- cache_dir: '%project_root%/.bumbleDocGenCache'
- output_dir_base_url: "/docs"
- language_handlers:
-   php:
-     class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
-     settings:
-       file_source_base_url: 'https://github.com/bumble-tech/bumble-doc-gen/blob/master'
- source_locators:
-   - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
-     arguments:
-       directories:
-         - "%project_root%/src"
-         - "%project_root%/selfdoc"
- twig_filters:
-   - class: \SelfDocConfig\Twig\CustomFilter\EvalString
- twig_functions:
-   - class: \SelfDocConfig\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
-   - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
-   - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
-   - class: \SelfDocConfig\Twig\CustomFunction\GetConsoleCommands
- plugins:
-   - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
-   - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
-   - class: \BumbleDocGen\Core\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter
- 
-```
+project_root: '%WORKING_DIR%'
+templates_dir: '%project_root%/selfdoc/templates'
+output_dir: "%project_root%/docs"
+cache_dir: '%project_root%/.bumbleDocGenCache'
+output_dir_base_url: "/docs"
+language_handlers:
+  php:
+    class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
+    settings:
+      file_source_base_url: 'https://github.com/bumble-tech/bumble-doc-gen/blob/master'
+source_locators:
+  - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
+    arguments:
+      directories:
+        - "%project_root%/src"
+        - "%project_root%/selfdoc"
+twig_filters:
+  - class: \SelfDocConfig\Twig\CustomFilter\EvalString
+twig_functions:
+  - class: \SelfDocConfig\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
+  - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
+  - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
+  - class: \SelfDocConfig\Twig\CustomFunction\GetConsoleCommands
+plugins:
+  - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
+  - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
+  - class: \BumbleDocGen\Core\Plugin\CorePlugin\LastPageCommitter\LastPageCommitter
 
+```
 
 In this example, we see the real configuration of the self-documentation of this project.
 
 **Here is an example of loading this configuration in PHP code:**
 
 ```php
- // Single file
- $docGenerator = (new DocGeneratorFactory())->create('config.yaml');
- 
- // Multiple files
- $docGenerator = (new DocGeneratorFactory())->create('config.yaml', 'config2.yaml', 'config3.xml');
- 
- // Passing configuration as an array
- $docGenerator = (new DocGeneratorFactory())->createByConfigArray($configArray);
- 
+// Single file
+$docGenerator = (new DocGeneratorFactory())->create('config.yaml');
+
+// Multiple files
+$docGenerator = (new DocGeneratorFactory())->create('config.yaml', 'config2.yaml', 'config3.xml');
+
+// Passing configuration as an array
+$docGenerator = (new DocGeneratorFactory())->createByConfigArray($configArray);
 ```
 
-
-<embed> <h2>Handling and inheritance of configuration files</h2> </embed>
+## Handling and inheritance of configuration files
 
 The documentation generator can work with several configuration files at once.
 When processing configuration files, each subsequent file has a higher priority and overwrites the previously defined parameters, but if the parameter has not yet been defined before, it will be added.
@@ -70,167 +72,30 @@ When processing configuration files, each subsequent file has a higher priority 
 Each default configuration file inherits the base configuration: `BumbleDocGen/Core/Configuration/defaultConfiguration.yaml`, but the parent configuration file can be changed using the `parent_configuration` parameter.
 The inheritance algorithm is as follows: scalar types can be overwritten by each subsequent configuration, while arrays are supplemented with new data instead of overwriting.
 
-<embed> <h2>Configuration parameters</h2> </embed>
+## Configuration parameters
+
+| Key | Type | Default value | Description |
+|-|-|-|-|
+| **`parent_configuration`** | string \| null | NULL | Path to parent configuration file |
+| **`project_root`** | string | NULL | Path to the directory of the documented project (or part of the project) |
+| **`templates_dir`** | string | NULL | Path to directory with documentation templates |
+| **`output_dir`** | string | '%project_root%/docs' | Path to the directory where the finished documentation will be generated |
+| **`cache_dir`** | string \| null | '%WORKING_DIR%/.bumbleDocGenCache' | Path to the directory where the documentation generator cache will be saved |
+| **`output_dir_base_url`** | string | '/docs' | Basic part of url documentation. Used to form links in generated documents. |
+| **`git_client_path`** | string | 'git' | Path to git client |
+| **`render_with_front_matter`** | bool | false | Do not remove the front matter block from templates when creating documents |
+| **`check_file_in_git_before_creating_doc`** | bool | true | Checking if a document exists in GIT before creating a document |
+| **`page_link_processor`** | PageLinkProcessorInterface | [BasePageLinkProcessor](/docs/tech/classes/BasePageLinkProcessor.md) | Link handler class on documentation pages |
+| **`language_handlers`** | array&lt;LanguageHandlerInterface&gt; | NULL | List of programming language handlers |
+| **`source_locators`** | array&lt;SourceLocatorInterface&gt; | NULL | List of source locators |
+| **`use_shared_cache`** | bool | true | Enable cache usage of generated documents |
+| **`twig_functions`** | array&lt;CustomFunctionInterface&gt; | <ul><li>[DrawDocumentationMenu](/docs/tech/classes/DrawDocumentationMenu.md)</li><li>[DrawDocumentedEntityLink](/docs/tech/classes/DrawDocumentedEntityLink.md)</li><li>[GeneratePageBreadcrumbs](/docs/tech/classes/GeneratePageBreadcrumbs.md)</li><li>[GetDocumentedEntityUrl](/docs/tech/classes/GetDocumentedEntityUrl.md)</li><li>[LoadPluginsContent](/docs/tech/classes/LoadPluginsContent.md)</li><li>[PrintEntityCollectionAsList](/docs/tech/classes/PrintEntityCollectionAsList.md)</li><li>[GetDocumentationPageUrl](/docs/tech/classes/GetDocumentationPageUrl.md)</li><li>[FileGetContents](/docs/tech/classes/FileGetContents.md)</li></ul> | Functions that can be used in document templates |
+| **`twig_filters`** | array&lt;CustomFilterInterface&gt; | <ul><li>[AddIndentFromLeft](/docs/tech/classes/AddIndentFromLeft.md)</li><li>[FixStrSize](/docs/tech/classes/FixStrSize.md)</li><li>[PrepareSourceLink](/docs/tech/classes/PrepareSourceLink.md)</li><li>[Quotemeta](/docs/tech/classes/Quotemeta.md)</li><li>[RemoveLineBrakes](/docs/tech/classes/RemoveLineBrakes.md)</li><li>[StrTypeToUrl](/docs/tech/classes/StrTypeToUrl.md)</li><li>[PregMatch](/docs/tech/classes/PregMatch.md)</li><li>[Implode](/docs/tech/classes/Implode.md)</li></ul> | Filters that can be used in document templates |
+| **`plugins`** | array&lt;PluginInterface&gt; \| null | <ul><li>[PageHtmlLinkerPlugin](/docs/tech/classes/PageHtmlLinkerPlugin_2.md)</li><li>[PageLinkerPlugin](/docs/tech/classes/PageLinkerPlugin_2.md)</li></ul> | List of plugins |
+| **`additional_console_commands`** | array&lt;Command&gt; | NULL | Additional console commands |
 
 
-<table>
-    <tr>
-        <th>Key</th>
-        <th>Type</th>
-        <th>Default value</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td><b>parent_configuration</b></td>
-        <td><i>string|null</i></td>
-        <td>NULL</td>
-        <td>Path to parent configuration file</td>
-    </tr>
-    <tr>
-        <td><b>project_root</b></td>
-        <td><i>string</i></td>
-        <td>NULL</td>
-        <td>Path to the directory of the documented project (or part of the project)</td>
-    </tr>
-    <tr>
-        <td><b>templates_dir</b></td>
-        <td><i>string</i></td>
-        <td>NULL</td>
-        <td>Path to directory with documentation templates</td>
-    </tr>
-    <tr>
-        <td><b>output_dir</b></td>
-        <td><i>string</i></td>
-        <td>'%project_root%/docs'</td>
-        <td>Path to the directory where the finished documentation will be generated</td>
-    </tr>
-    <tr>
-        <td><b>cache_dir</b></td>
-        <td><i>string|null</i></td>
-        <td>'%WORKING_DIR%/.bumbleDocGenCache'</td>
-        <td>Path to the directory where the documentation generator cache will be saved</td>
-    </tr>
-    <tr>
-        <td><b>output_dir_base_url</b></td>
-        <td><i>string</i></td>
-        <td>'/docs'</td>
-        <td>Basic part of url documentation. Used to form links in generated documents.</td>
-    </tr>
-    <tr>
-        <td><b>git_client_path</b></td>
-        <td><i>string</i></td>
-        <td>'git'</td>
-        <td>Path to git client</td>
-    </tr>
-    <tr>
-        <td><b>render_with_front_matter</b></td>
-        <td><i>bool</i></td>
-        <td>false</td>
-        <td>Do not remove the front matter block from templates when creating documents</td>
-    </tr>
-    <tr>
-        <td><b>check_file_in_git_before_creating_doc</b></td>
-        <td><i>bool</i></td>
-        <td>true</td>
-        <td>Checking if a document exists in GIT before creating a document</td>
-    </tr>
-    <tr>
-        <td><b>page_link_processor</b></td>
-        <td><i>PageLinkProcessorInterface</i></td>
-        <td><a href="/docs/tech/classes/BasePageLinkProcessor.md">BasePageLinkProcessor</a></td>
-        <td>Link handler class on documentation pages</td>
-    </tr>
-    <tr>
-        <td><b>language_handlers</b></td>
-        <td><i>array&lt;LanguageHandlerInterface&gt;</i></td>
-        <td>NULL</td>
-        <td>List of programming language handlers</td>
-    </tr>
-    <tr>
-        <td><b>source_locators</b></td>
-        <td><i>array&lt;SourceLocatorInterface&gt;</i></td>
-        <td>NULL</td>
-        <td>List of source locators</td>
-    </tr>
-    <tr>
-        <td><b>use_shared_cache</b></td>
-        <td><i>bool</i></td>
-        <td>true</td>
-        <td>Enable cache usage of generated documents</td>
-    </tr>
-    <tr>
-        <td><b>twig_functions</b></td>
-        <td><i>array&lt;CustomFunctionInterface&gt;</i></td>
-        <td>
 
-- <a href="/docs/tech/classes/DrawDocumentationMenu.md">DrawDocumentationMenu</a>
+---
 
-- <a href="/docs/tech/classes/DrawDocumentedEntityLink.md">DrawDocumentedEntityLink</a>
-
-- <a href="/docs/tech/classes/GeneratePageBreadcrumbs.md">GeneratePageBreadcrumbs</a>
-
-- <a href="/docs/tech/classes/GetDocumentedEntityUrl.md">GetDocumentedEntityUrl</a>
-
-- <a href="/docs/tech/classes/LoadPluginsContent.md">LoadPluginsContent</a>
-
-- <a href="/docs/tech/classes/PrintEntityCollectionAsList.md">PrintEntityCollectionAsList</a>
-
-- <a href="/docs/tech/classes/GetDocumentationPageUrl.md">GetDocumentationPageUrl</a>
-
-- <a href="/docs/tech/classes/FileGetContents.md">FileGetContents</a>
-
-</td>
-        <td>Functions that can be used in document templates</td>
-    </tr>
-    <tr>
-        <td><b>twig_filters</b></td>
-        <td><i>array&lt;CustomFilterInterface&gt;</i></td>
-        <td>
-
-- <a href="/docs/tech/classes/AddIndentFromLeft.md">AddIndentFromLeft</a>
-
-- <a href="/docs/tech/classes/FixStrSize.md">FixStrSize</a>
-
-- <a href="/docs/tech/classes/PrepareSourceLink.md">PrepareSourceLink</a>
-
-- <a href="/docs/tech/classes/Quotemeta.md">Quotemeta</a>
-
-- <a href="/docs/tech/classes/RemoveLineBrakes.md">RemoveLineBrakes</a>
-
-- <a href="/docs/tech/classes/StrTypeToUrl.md">StrTypeToUrl</a>
-
-- <a href="/docs/tech/classes/TextToCodeBlock.md">TextToCodeBlock</a>
-
-- <a href="/docs/tech/classes/TextToHeading.md">TextToHeading</a>
-
-- <a href="/docs/tech/classes/PregMatch.md">PregMatch</a>
-
-- <a href="/docs/tech/classes/Implode.md">Implode</a>
-
-</td>
-        <td>Filters that can be used in document templates</td>
-    </tr>
-    <tr>
-        <td><b>plugins</b></td>
-        <td><i>array&lt;PluginInterface&gt;|null</i></td>
-        <td>
-
-- <a href="/docs/tech/classes/PageHtmlLinkerPlugin_2.md">PageHtmlLinkerPlugin</a>
-
-- <a href="/docs/tech/classes/PageLinkerPlugin_2.md">PageLinkerPlugin</a>
-
-</td>
-        <td>List of plugins</td>
-    </tr>
-    <tr>
-        <td><b>additional_console_commands</b></td>
-        <td><i>array&lt;Command&gt;</i></td>
-        <td>NULL</td>
-        <td>Additional console commands</td>
-    </tr>
-</table>
-
-
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Jan 12 18:53:16 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 17:19:08 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

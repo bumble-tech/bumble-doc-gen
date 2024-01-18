@@ -1,22 +1,19 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/01_configuration.md">Configuration</a> <b>/</b> AddIndentFromLeft<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Configuration](/docs/tech/01_configuration.md) **/**
+AddIndentFromLeft
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/AddIndentFromLeft.php#L10">AddIndentFromLeft</a> class:
-</h1>
+---
 
 
-
-
+# [AddIndentFromLeft](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/AddIndentFromLeft.php#L10) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\Twig\Filter;
 
 final class AddIndentFromLeft implements \BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface
 ```
-
-<blockquote>Filter adds indent from left</blockquote>
-
-
+Filter adds indent from left
 
 
 <h2>Settings:</h2>
@@ -32,119 +29,45 @@ final class AddIndentFromLeft implements \BumbleDocGen\Core\Renderer\Twig\Filter
     </tr>
 </table>
 
+## Methods
 
+1. [__invoke](#m-invoke) 
+1. [getName](#mgetname) 
+1. [getOptions](#mgetoptions) 
 
+## Methods details:
 
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-invoke">__invoke</a>
-    </li>
-<li>
-    <a href="#mgetname">getName</a>
-    </li>
-<li>
-    <a href="#mgetoptions">getOptions</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-invoke" href="#m-invoke">#</a>
- <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/AddIndentFromLeft.php#L18">source code</a></li>
-</ul>
-
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/AddIndentFromLeft.php#L18)
 ```php
 public function __invoke(string $text, int $identLength = 4, bool $skipFirstIdent = false): string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$text | [string](https://www.php.net/manual/en/language.types.string.php) | Processed text |
+$identLength | [int](https://www.php.net/manual/en/language.types.integer.php) | Indent size |
+$skipFirstIdent | [bool](https://www.php.net/manual/en/language.types.boolean.php) | Skip indent for first line in text or not |
 
-<b>Parameters:</b>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$text</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>Processed text</td>
-        </tr>
-            <tr>
-            <td>$identLength</td>
-            <td><a href='https://www.php.net/manual/en/language.types.integer.php'>int</a></td>
-            <td>Indent size</td>
-        </tr>
-            <tr>
-            <td>$skipFirstIdent</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>Skip indent for first line in text or not</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetname" href="#mgetname">#</a>
- <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/AddIndentFromLeft.php#L24">source code</a></li>
-</ul>
-
+<a name="mgetname" href="#mgetname">#</a> `getName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/AddIndentFromLeft.php#L24)
 ```php
 public static function getName(): string;
 ```
 
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetoptions" href="#mgetoptions">#</a>
- <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/AddIndentFromLeft.php#L29">source code</a></li>
-</ul>
-
+<a name="mgetoptions" href="#mgetoptions">#</a> `getOptions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/AddIndentFromLeft.php#L29)
 ```php
 public static function getOptions(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
+---

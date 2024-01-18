@@ -1,12 +1,12 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/01_configuration.md">Configuration</a> <b>/</b> BasePageLinkProcessor<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Configuration](/docs/tech/01_configuration.md) **/**
+BasePageLinkProcessor
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/PageLinkProcessor/BasePageLinkProcessor.php#L9">BasePageLinkProcessor</a> class:
-</h1>
+---
 
 
-
-
+# [BasePageLinkProcessor](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/PageLinkProcessor/BasePageLinkProcessor.php#L9) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\PageLinkProcessor;
@@ -14,109 +14,39 @@ namespace BumbleDocGen\Core\Renderer\PageLinkProcessor;
 class BasePageLinkProcessor implements \BumbleDocGen\Core\Renderer\PageLinkProcessor\PageLinkProcessorInterface
 ```
 
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [getAbsoluteUrl](#mgetabsoluteurl) 
 
+## Methods details:
 
-
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#mgetabsoluteurl">getAbsoluteUrl</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/PageLinkProcessor/BasePageLinkProcessor.php#L11">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/PageLinkProcessor/BasePageLinkProcessor.php#L11)
 ```php
 public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$configuration | [\BumbleDocGen\Core\Configuration\Configuration](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php) | - |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetabsoluteurl" href="#mgetabsoluteurl">#</a>
- <b>getAbsoluteUrl</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/PageLinkProcessor/BasePageLinkProcessor.php#L15">source code</a></li>
-</ul>
-
+<a name="mgetabsoluteurl" href="#mgetabsoluteurl">#</a> `getAbsoluteUrl`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/PageLinkProcessor/BasePageLinkProcessor.php#L15)
 ```php
 public function getAbsoluteUrl(string $relativeUrl): string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$relativeUrl | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$relativeUrl</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
+---

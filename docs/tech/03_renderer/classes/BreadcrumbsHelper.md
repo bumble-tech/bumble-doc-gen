@@ -1,625 +1,204 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/03_renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/03_renderer/02_breadcrumbs.md">Documentation structure and breadcrumbs</a> <b>/</b> BreadcrumbsHelper<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Renderer](/docs/tech/03_renderer/readme.md) **/**
+[Documentation structure and breadcrumbs](/docs/tech/03_renderer/02_breadcrumbs.md) **/**
+BreadcrumbsHelper
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L27">BreadcrumbsHelper</a> class:
-</h1>
+---
 
 
-
-
+# [BreadcrumbsHelper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L26) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\Breadcrumbs;
 
 final class BreadcrumbsHelper
 ```
+Helper entity for working with breadcrumbs
 
-<blockquote>Helper entity for working with breadcrumbs</blockquote>
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [getAllPageLinks](#mgetallpagelinks) 
+1. [getBreadcrumbs](#mgetbreadcrumbs) - Get breadcrumbs as an array
+1. [getBreadcrumbsForTemplates](#mgetbreadcrumbsfortemplates) 
+1. [getNearestIndexFile](#mgetnearestindexfile) 
+1. [getPageDataByKey](#mgetpagedatabykey) 
+1. [getPageDocFileByKey](#mgetpagedocfilebykey) 
+1. [getPageLinkByKey](#mgetpagelinkbykey) 
+1. [getTemplateFrontMatter](#mgettemplatefrontmatter) 
+1. [getTemplateLinkKey](#mgettemplatelinkkey) 
+1. [getTemplateTitle](#mgettemplatetitle) - Get the name of a template by its URL.
+1. [renderBreadcrumbs](#mrenderbreadcrumbs) - Returns an HTML string with rendered breadcrumbs
 
+## Methods details:
 
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#mgetallpagelinks">getAllPageLinks</a>
-    </li>
-<li>
-    <a href="#mgetbreadcrumbs">getBreadcrumbs</a>
-    - <i>Get breadcrumbs as an array</i></li>
-<li>
-    <a href="#mgetbreadcrumbsfortemplates">getBreadcrumbsForTemplates</a>
-    </li>
-<li>
-    <a href="#mgetnearestindexfile">getNearestIndexFile</a>
-    </li>
-<li>
-    <a href="#mgetpagedatabykey">getPageDataByKey</a>
-    </li>
-<li>
-    <a href="#mgetpagedocfilebykey">getPageDocFileByKey</a>
-    </li>
-<li>
-    <a href="#mgetpagelinkbykey">getPageLinkByKey</a>
-    </li>
-<li>
-    <a href="#mgettemplatefrontmatter">getTemplateFrontMatter</a>
-    </li>
-<li>
-    <a href="#mgettemplatelinkkey">getTemplateLinkKey</a>
-    </li>
-<li>
-    <a href="#mgettemplatetitle">getTemplateTitle</a>
-    - <i>Get the name of a template by its URL.</i></li>
-<li>
-    <a href="#mrenderbreadcrumbs">renderBreadcrumbs</a>
-    - <i>Returns an HTML string with rendered breadcrumbs</i></li>
-</ol>
-
-
-<h2>Constants:</h2>
-<ul>
-            <li><a name="qdefault-prev-page-name-template"
-               href="#qdefault-prev-page-name-template">#</a>
-            <code>DEFAULT_PREV_PAGE_NAME_TEMPLATE</code>                   <b>|</b> <a href="/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L32">source
-                    code</a> </li>
-    </ul>
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L39">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L38)
 ```php
 public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment $breadcrumbsTwig, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, string $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$configuration | [\BumbleDocGen\Core\Configuration\Configuration](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php) | - |
+$localObjectCache | [\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php) | - |
+$breadcrumbsTwig | [\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsTwigEnvironment.php) | - |
+$pluginEventDispatcher | [\BumbleDocGen\Core\Plugin\PluginEventDispatcher](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php) | - |
+$prevPageNameTemplate | [string](https://www.php.net/manual/en/language.types.string.php) | Index page for each child section |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$localObjectCache</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$breadcrumbsTwig</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsTwigEnvironment.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$pluginEventDispatcher</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php'>\BumbleDocGen\Core\Plugin\PluginEventDispatcher</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$prevPageNameTemplate</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>Index page for each child section</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetallpagelinks" href="#mgetallpagelinks">#</a>
- <b>getAllPageLinks</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L241">source code</a></li>
-</ul>
-
+<a name="mgetallpagelinks" href="#mgetallpagelinks">#</a> `getAllPageLinks`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L240)
 ```php
 public function getAllPageLinks(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetbreadcrumbs" href="#mgetbreadcrumbs">#</a>
- <b>getBreadcrumbs</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L192">source code</a></li>
-</ul>
-
+<a name="mgetbreadcrumbs" href="#mgetbreadcrumbs">#</a> `getBreadcrumbs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L191)
 ```php
 public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): array;
 ```
+Get breadcrumbs as an array
 
-<blockquote>Get breadcrumbs as an array</blockquote>
+***Parameters:***
 
-<b>Parameters:</b>
+| Name | Type | Description |
+|:-|:-|:-|
+$filePatch | [string](https://www.php.net/manual/en/language.types.string.php) | - |
+$fromCurrent | [bool](https://www.php.net/manual/en/language.types.boolean.php) | - |
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$filePatch</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$fromCurrent</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
+---
 
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetbreadcrumbsfortemplates" href="#mgetbreadcrumbsfortemplates">#</a>
- <b>getBreadcrumbsForTemplates</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L214">source code</a></li>
-</ul>
-
+<a name="mgetbreadcrumbsfortemplates" href="#mgetbreadcrumbsfortemplates">#</a> `getBreadcrumbsForTemplates`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L213)
 ```php
 public function getBreadcrumbsForTemplates(string $filePatch, bool $fromCurrent = true): array;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$filePatch | [string](https://www.php.net/manual/en/language.types.string.php) | - |
+$fromCurrent | [bool](https://www.php.net/manual/en/language.types.boolean.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$filePatch</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$fromCurrent</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetnearestindexfile" href="#mgetnearestindexfile">#</a>
- <b>getNearestIndexFile</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L87">source code</a></li>
-</ul>
-
+<a name="mgetnearestindexfile" href="#mgetnearestindexfile">#</a> `getNearestIndexFile`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L86)
 ```php
 public function getNearestIndexFile(string $templateName): string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$templateName | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$templateName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetpagedatabykey" href="#mgetpagedatabykey">#</a>
- <b>getPageDataByKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L308">source code</a></li>
-</ul>
-
+<a name="mgetpagedatabykey" href="#mgetpagedatabykey">#</a> `getPageDataByKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L307)
 ```php
 public function getPageDataByKey(string $key): null|array;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$key | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [array](https://www.php.net/manual/en/language.types.array.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$key</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetpagedocfilebykey" href="#mgetpagedocfilebykey">#</a>
- <b>getPageDocFileByKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L334">source code</a></li>
-</ul>
-
+<a name="mgetpagedocfilebykey" href="#mgetpagedocfilebykey">#</a> `getPageDocFileByKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L333)
 ```php
 public function getPageDocFileByKey(string $key): null|string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$key | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$key</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetpagelinkbykey" href="#mgetpagelinkbykey">#</a>
- <b>getPageLinkByKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L323">source code</a></li>
-</ul>
-
+<a name="mgetpagelinkbykey" href="#mgetpagelinkbykey">#</a> `getPageLinkByKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L322)
 ```php
 public function getPageLinkByKey(string $key): null|string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$key | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$key</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgettemplatefrontmatter" href="#mgettemplatefrontmatter">#</a>
- <b>getTemplateFrontMatter</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L157">source code</a></li>
-</ul>
-
+<a name="mgettemplatefrontmatter" href="#mgettemplatefrontmatter">#</a> `getTemplateFrontMatter`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L156)
 ```php
 public function getTemplateFrontMatter(string $templateName): array;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$templateName | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$templateName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgettemplatelinkkey" href="#mgettemplatelinkkey">#</a>
- <b>getTemplateLinkKey</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L148">source code</a></li>
-</ul>
-
+<a name="mgettemplatelinkkey" href="#mgettemplatelinkkey">#</a> `getTemplateLinkKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L147)
 ```php
 public function getTemplateLinkKey(string $templateName): null|string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$templateName | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$templateName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgettemplatetitle" href="#mgettemplatetitle">#</a>
- <b>getTemplateTitle</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L139">source code</a></li>
-</ul>
-
+<a name="mgettemplatetitle" href="#mgettemplatetitle">#</a> `getTemplateTitle`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L138)
 ```php
 public function getTemplateTitle(string $templateName): string;
 ```
+Get the name of a template by its URL.
 
-<blockquote>Get the name of a template by its URL.</blockquote>
+***Parameters:***
 
-<b>Parameters:</b>
+| Name | Type | Description |
+|:-|:-|:-|
+$templateName | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$templateName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-
-
-<b>Examples of using:</b>
-
+***Examples of using:***
 ```php
 # Front matter in template:
 # ---
@@ -629,75 +208,22 @@ public function getTemplateTitle(string $templateName): string;
 $breadcrumbsHelper->getTemplateTitle() == 'Some template title'; // is true
 ```
 
-</div>
-<hr>
-<div class='method_description-block'>
+---
 
-<ul>
-<li><a name="mrenderbreadcrumbs" href="#mrenderbreadcrumbs">#</a>
- <b>renderBreadcrumbs</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L350">source code</a></li>
-</ul>
-
+<a name="mrenderbreadcrumbs" href="#mrenderbreadcrumbs">#</a> `renderBreadcrumbs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L349)
 ```php
 public function renderBreadcrumbs(string $currentPageTitle, string $filePatch, bool $fromCurrent = true): string;
 ```
+Returns an HTML string with rendered breadcrumbs
 
-<blockquote>Returns an HTML string with rendered breadcrumbs</blockquote>
+***Parameters:***
 
-<b>Parameters:</b>
+| Name | Type | Description |
+|:-|:-|:-|
+$currentPageTitle | [string](https://www.php.net/manual/en/language.types.string.php) | - |
+$filePatch | [string](https://www.php.net/manual/en/language.types.string.php) | - |
+$fromCurrent | [bool](https://www.php.net/manual/en/language.types.boolean.php) | - |
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$currentPageTitle</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$filePatch</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$fromCurrent</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/twigphp/Twig/blob/master/src/Error/SyntaxError.php">\Twig\Error\SyntaxError</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="https://github.com/twigphp/Twig/blob/master/src/Error/RuntimeError.php">\Twig\Error\RuntimeError</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="https://github.com/twigphp/Twig/blob/master/src/Error/LoaderError.php">\Twig\Error\LoaderError</a></li>
-
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
+---

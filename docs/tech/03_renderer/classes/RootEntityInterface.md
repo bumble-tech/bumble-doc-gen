@@ -1,469 +1,218 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/03_renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/03_renderer/05_twigCustomFunctions.md">Template functions</a> <b>/</b> RootEntityInterface<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Renderer](/docs/tech/03_renderer/readme.md) **/**
+[Template functions](/docs/tech/03_renderer/05_twigCustomFunctions.md) **/**
+RootEntityInterface
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L11">RootEntityInterface</a> class:
-</h1>
+---
 
 
-
-
+# [RootEntityInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L11) class:
 
 ```php
 namespace BumbleDocGen\Core\Parser\Entity;
 
 interface RootEntityInterface extends \BumbleDocGen\Core\Parser\Entity\EntityInterface
 ```
+Since the documentation generator supports several programming languages,
+their entities need to correspond to the same interfaces
 
-<blockquote>Since the documentation generator supports several programming languages,
-their entities need to correspond to the same interfaces</blockquote>
+## Methods
 
+1. [getAbsoluteFileName](#mgetabsolutefilename) - Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
+1. [getEntityDependencies](#mgetentitydependencies) 
+1. [getFileContent](#mgetfilecontent) 
+1. [getFileSourceLink](#mgetfilesourcelink) 
+1. [getName](#mgetname) - Full name of the entity
+1. [getObjectId](#mgetobjectid) - Entity object ID
+1. [getRelativeFileName](#mgetrelativefilename) - File name relative to project_root configuration parameter
+1. [getRootEntityCollection](#mgetrootentitycollection) - Get parent collection of entities
+1. [getShortName](#mgetshortname) - Short name of the entity
+1. [isEntityCacheOutdated](#misentitycacheoutdated) 
+1. [isEntityDataCanBeLoaded](#misentitydatacanbeloaded) - Checking if it is possible to get the entity data
+1. [isEntityNameValid](#misentitynamevalid) - Check if entity name is valid
+1. [isExternalLibraryEntity](#misexternallibraryentity) - The entity is loaded from a third party library and should not be treated the same as a standard one
+1. [isInGit](#misingit) - The entity file is in the git repository
+1. [normalizeClassName](#mnormalizeclassname) 
 
+## Methods details:
 
-
-
-
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#mgetabsolutefilename">getAbsoluteFileName</a>
-    - <i>Returns the absolute path to a file if it can be retrieved and if the file is in the project directory</i></li>
-<li>
-    <a href="#mgetentitydependencies">getEntityDependencies</a>
-    </li>
-<li>
-    <a href="#mgetfilecontent">getFileContent</a>
-    </li>
-<li>
-    <a href="#mgetfilesourcelink">getFileSourceLink</a>
-    </li>
-<li>
-    <a href="#mgetname">getName</a>
-    - <i>Full name of the entity</i></li>
-<li>
-    <a href="#mgetobjectid">getObjectId</a>
-    - <i>Entity object ID</i></li>
-<li>
-    <a href="#mgetrelativefilename">getRelativeFileName</a>
-    - <i>File name relative to project_root configuration parameter</i></li>
-<li>
-    <a href="#mgetrootentitycollection">getRootEntityCollection</a>
-    - <i>Get parent collection of entities</i></li>
-<li>
-    <a href="#mgetshortname">getShortName</a>
-    - <i>Short name of the entity</i></li>
-<li>
-    <a href="#misentitycacheoutdated">isEntityCacheOutdated</a>
-    </li>
-<li>
-    <a href="#misentitydatacanbeloaded">isEntityDataCanBeLoaded</a>
-    - <i>Checking if it is possible to get the entity data</i></li>
-<li>
-    <a href="#misentitynamevalid">isEntityNameValid</a>
-    - <i>Check if entity name is valid</i></li>
-<li>
-    <a href="#misexternallibraryentity">isExternalLibraryEntity</a>
-    - <i>The entity is loaded from a third party library and should not be treated the same as a standard one</i></li>
-<li>
-    <a href="#misingit">isInGit</a>
-    - <i>The entity file is in the git repository</i></li>
-<li>
-    <a href="#mnormalizeclassname">normalizeClassName</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetabsolutefilename" href="#mgetabsolutefilename">#</a>
- <b>getAbsoluteFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L53">source code</a></li>
-</ul>
-
+<a name="mgetabsolutefilename" href="#mgetabsolutefilename">#</a> `getAbsoluteFileName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L53)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
 
 public function getAbsoluteFileName(): null|string;
 ```
+Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
 
-<blockquote>Returns the absolute path to a file if it can be retrieved and if the file is in the project directory</blockquote>
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetentitydependencies" href="#mgetentitydependencies">#</a>
- <b>getEntityDependencies</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L33">source code</a></li>
-</ul>
-
+<a name="mgetentitydependencies" href="#mgetentitydependencies">#</a> `getEntityDependencies`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L33)
 ```php
 public function getEntityDependencies(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetfilecontent" href="#mgetfilecontent">#</a>
- <b>getFileContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L40">source code</a></li>
-</ul>
-
+<a name="mgetfilecontent" href="#mgetfilecontent">#</a> `getFileContent`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L40)
 ```php
 public function getFileContent(): string;
 ```
 
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetfilesourcelink" href="#mgetfilesourcelink">#</a>
- <b>getFileSourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L42">source code</a></li>
-</ul>
-
+<a name="mgetfilesourcelink" href="#mgetfilesourcelink">#</a> `getFileSourceLink`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L42)
 ```php
 public function getFileSourceLink(bool $withLine = true): null|string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$withLine | [bool](https://www.php.net/manual/en/language.types.boolean.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$withLine</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetname" href="#mgetname">#</a>
- <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L30">source code</a></li>
-</ul>
-
+<a name="mgetname" href="#mgetname">#</a> `getName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L30)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
 
 public function getName(): string;
 ```
+Full name of the entity
 
-<blockquote>Full name of the entity</blockquote>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetobjectid" href="#mgetobjectid">#</a>
- <b>getObjectId</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L16">source code</a></li>
-</ul>
-
+<a name="mgetobjectid" href="#mgetobjectid">#</a> `getObjectId`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L16)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
 
 public function getObjectId(): string;
 ```
+Entity object ID
 
-<blockquote>Entity object ID</blockquote>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetrelativefilename" href="#mgetrelativefilename">#</a>
- <b>getRelativeFileName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L46">source code</a></li>
-</ul>
-
+<a name="mgetrelativefilename" href="#mgetrelativefilename">#</a> `getRelativeFileName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L46)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
 
 public function getRelativeFileName(): null|string;
 ```
+File name relative to project_root configuration parameter
 
-<blockquote>File name relative to project_root configuration parameter</blockquote>
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
-<b>Parameters:</b> not specified
+***Links:***
+- [\BumbleDocGen\Core\Configuration\Configuration::getProjectRoot()](/docs/tech/03_renderer/classes/Configuration.md#mgetprojectroot)
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+---
 
-
-
-<b>See:</b>
-<ul>
-    <li>
-        <a href="/docs/tech/03_renderer/classes/Configuration.md#mgetprojectroot">\BumbleDocGen\Core\Configuration\Configuration::getProjectRoot()</a>    </li>
-</ul>
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetrootentitycollection" href="#mgetrootentitycollection">#</a>
- <b>getRootEntityCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L23">source code</a></li>
-</ul>
-
+<a name="mgetrootentitycollection" href="#mgetrootentitycollection">#</a> `getRootEntityCollection`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L23)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
 
 public function getRootEntityCollection(): \BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 ```
+Get parent collection of entities
 
-<blockquote>Get parent collection of entities</blockquote>
+***Return value:*** [\BumbleDocGen\Core\Parser\Entity\RootEntityCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetshortname" href="#mgetshortname">#</a>
- <b>getShortName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L37">source code</a></li>
-</ul>
-
+<a name="mgetshortname" href="#mgetshortname">#</a> `getShortName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L37)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
 
 public function getShortName(): string;
 ```
+Short name of the entity
 
-<blockquote>Short name of the entity</blockquote>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="misentitycacheoutdated" href="#misentitycacheoutdated">#</a>
- <b>isEntityCacheOutdated</b>
- <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L58">source code</a></li>
-</ul>
-
+<a name="misentitycacheoutdated" href="#misentitycacheoutdated">#</a> `isEntityCacheOutdated` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/EntityInterface.php#L58)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\EntityInterface
 
 public function isEntityCacheOutdated(): bool;
 ```
 
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="misentitydatacanbeloaded" href="#misentitydatacanbeloaded">#</a>
- <b>isEntityDataCanBeLoaded</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L23">source code</a></li>
-</ul>
-
+<a name="misentitydatacanbeloaded" href="#misentitydatacanbeloaded">#</a> `isEntityDataCanBeLoaded`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L23)
 ```php
 public function isEntityDataCanBeLoaded(): bool;
 ```
+Checking if it is possible to get the entity data
 
-<blockquote>Checking if it is possible to get the entity data</blockquote>
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="misentitynamevalid" href="#misentitynamevalid">#</a>
- <b>isEntityNameValid</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L18">source code</a></li>
-</ul>
-
+<a name="misentitynamevalid" href="#misentitynamevalid">#</a> `isEntityNameValid`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L18)
 ```php
 public static function isEntityNameValid(string $entityName): bool;
 ```
+Check if entity name is valid
 
-<blockquote>Check if entity name is valid</blockquote>
+***Parameters:***
 
-<b>Parameters:</b>
+| Name | Type | Description |
+|:-|:-|:-|
+$entityName | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$entityName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+---
 
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="misexternallibraryentity" href="#misexternallibraryentity">#</a>
- <b>isExternalLibraryEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L28">source code</a></li>
-</ul>
-
+<a name="misexternallibraryentity" href="#misexternallibraryentity">#</a> `isExternalLibraryEntity`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L28)
 ```php
 public function isExternalLibraryEntity(): bool;
 ```
+The entity is loaded from a third party library and should not be treated the same as a standard one
 
-<blockquote>The entity is loaded from a third party library and should not be treated the same as a standard one</blockquote>
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="misingit" href="#misingit">#</a>
- <b>isInGit</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L38">source code</a></li>
-</ul>
-
+<a name="misingit" href="#misingit">#</a> `isInGit`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L38)
 ```php
 public function isInGit(): bool;
 ```
+The entity file is in the git repository
 
-<blockquote>The entity file is in the git repository</blockquote>
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mnormalizeclassname" href="#mnormalizeclassname">#</a>
- <b>normalizeClassName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L13">source code</a></li>
-</ul>
-
+<a name="mnormalizeclassname" href="#mnormalizeclassname">#</a> `normalizeClassName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php#L13)
 ```php
 public static function normalizeClassName(string $name): string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$name | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$name</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
+---

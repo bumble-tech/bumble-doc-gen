@@ -1,8 +1,16 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/02_parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/readme.md">Reflection API</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/php/readme.md">Reflection API for PHP</a> <b>/</b> PHP class constant reflection API<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Parser](/docs/tech/02_parser/readme.md) **/**
+[Reflection API](/docs/tech/02_parser/reflectionApi/readme.md) **/**
+[Reflection API for PHP](/docs/tech/02_parser/reflectionApi/php/readme.md) **/**
+PHP class constant reflection API
 
-<embed> <h1>PHP class constant reflection API</h1> </embed>
+---
 
-Class constant reflection entity class: <a href="/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md">ClassConstantEntity</a>.
+
+# PHP class constant reflection API
+
+Class constant reflection entity class: [ClassConstantEntity](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md).
 
 **Example of creating class constant reflection:**
 
@@ -27,12 +35,14 @@ $constantReflection = $classReflection->getConstant('constantName');
 - [getExamples()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetexamples): Get parsed examples from `examples` doc block
 - [getFirstExample()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetfirstexample): Get first example from `examples` doc block
 - [getImplementingClass()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetimplementingclass): Get the class like entity in which the current entity was implemented
+- [getModifiersString()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetmodifiersstring): Get a text representation of class constant modifiers
 - [getNamespaceName()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetnamespacename): Get the name of the namespace where the current class is implemented
 - [getObjectId()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetobjectid): Get entity unique ID
 - [getRelativeFileName()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetrelativefilename): File name relative to project_root configuration parameter
 - [getRootEntityCollection()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetrootentitycollection): Get the collection of root entities to which this entity belongs
 - [getStartLine()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetstartline): Get the line number of the beginning of the constant code in a file
 - [getThrows()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetthrows): Get parsed throws from `throws` doc block
+- [getType()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgettype): Get current class constant type
 - [getValue()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mgetvalue): Get the compiled value of a constant
 - [hasDescriptionLinks()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mhasdescriptionlinks): Checking if an entity has links in its description
 - [hasExamples()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mhasexamples): Checking if an entity has `example` docBlock
@@ -45,6 +55,6 @@ $constantReflection = $classReflection->getConstant('constantName');
 - [isProtected()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#misprotected): Check if a constant is a protected constant
 - [isPublic()](/docs/tech/02_parser/reflectionApi/php/classes/ClassConstantEntity.md#mispublic): Check if a constant is a public constant
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

@@ -1,22 +1,20 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/03_renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/03_renderer/05_twigCustomFunctions.md">Template functions</a> <b>/</b> GeneratePageBreadcrumbs<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Renderer](/docs/tech/03_renderer/readme.md) **/**
+[Template functions](/docs/tech/03_renderer/05_twigCustomFunctions.md) **/**
+GeneratePageBreadcrumbs
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L20">GeneratePageBreadcrumbs</a> class:
-</h1>
+---
 
 
-
-
+# [GeneratePageBreadcrumbs](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L20) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\Twig\Function;
 
 final class GeneratePageBreadcrumbs implements \BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface
 ```
-
-<blockquote>Function to generate breadcrumbs on the page</blockquote>
-
-
+Function to generate breadcrumbs on the page
 
 
 <h2>Settings:</h2>
@@ -28,197 +26,65 @@ final class GeneratePageBreadcrumbs implements \BumbleDocGen\Core\Renderer\Twig\
     </tr>
 </table>
 
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [__invoke](#m-invoke) 
+1. [getName](#mgetname) 
+1. [getOptions](#mgetoptions) 
 
-<h2>Initialization methods:</h2>
+## Methods details:
 
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-invoke">__invoke</a>
-    </li>
-<li>
-    <a href="#mgetname">getName</a>
-    </li>
-<li>
-    <a href="#mgetoptions">getOptions</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L22">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L22)
 ```php
 public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper $breadcrumbsHelper, \BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory $dependencyFactory);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$breadcrumbsHelper | [\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php) | - |
+$rendererContext | [\BumbleDocGen\Core\Renderer\Context\RendererContext](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php) | - |
+$dependencyFactory | [\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyFactory.php) | - |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$breadcrumbsHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$rendererContext</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php'>\BumbleDocGen\Core\Renderer\Context\RendererContext</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$dependencyFactory</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyFactory.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-invoke" href="#m-invoke">#</a>
- <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L57">source code</a></li>
-</ul>
-
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L57)
 ```php
 public function __invoke(string $currentPageTitle, string $templatePath, bool $skipFirstTemplatePage = true): string;
 ```
 
+***Parameters:***
 
-
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$currentPageTitle</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>Title of the current page</td>
-        </tr>
-            <tr>
-            <td>$templatePath</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>Path to the template from which the breadcrumbs will be generated</td>
-        </tr>
-            <tr>
-            <td>$skipFirstTemplatePage</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>If set to true, the page from which parsing starts will not participate in the formation of breadcrumbs
+| Name | Type | Description |
+|:-|:-|:-|
+$currentPageTitle | [string](https://www.php.net/manual/en/language.types.string.php) | Title of the current page |
+$templatePath | [string](https://www.php.net/manual/en/language.types.string.php) | Path to the template from which the breadcrumbs will be generated |
+$skipFirstTemplatePage | [bool](https://www.php.net/manual/en/language.types.boolean.php) | If set to true, the page from which parsing starts will not participate in the formation of breadcrumbs
  This option is useful when working with the _self value in a template, as it returns the full path to the
- current template, and the reference to it in breadcrumbs should not be clickable.</td>
-        </tr>
-        </tbody>
-</table>
+ current template, and the reference to it in breadcrumbs should not be clickable. |
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/twigphp/Twig/blob/master/src/Error/RuntimeError.php">\Twig\Error\RuntimeError</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="https://github.com/twigphp/Twig/blob/master/src/Error/LoaderError.php">\Twig\Error\LoaderError</a></li>
-
-<li>
-    <a href="https://github.com/twigphp/Twig/blob/master/src/Error/SyntaxError.php">\Twig\Error\SyntaxError</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetname" href="#mgetname">#</a>
- <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L29">source code</a></li>
-</ul>
-
+<a name="mgetname" href="#mgetname">#</a> `getName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L29)
 ```php
 public static function getName(): string;
 ```
 
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetoptions" href="#mgetoptions">#</a>
- <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L34">source code</a></li>
-</ul>
-
+<a name="mgetoptions" href="#mgetoptions">#</a> `getOptions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L34)
 ```php
 public static function getOptions(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
+---

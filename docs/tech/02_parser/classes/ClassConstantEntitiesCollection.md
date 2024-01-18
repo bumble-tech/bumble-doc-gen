@@ -1,12 +1,13 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/02_parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/02_parser/entity.md">Entities and entities collections</a> <b>/</b> ClassConstantEntitiesCollection<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Parser](/docs/tech/02_parser/readme.md) **/**
+[Entities and entities collections](/docs/tech/02_parser/entity.md) **/**
+ClassConstantEntitiesCollection
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L15">ClassConstantEntitiesCollection</a> class:
-</h1>
+---
 
 
-
-
+# [ClassConstantEntitiesCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L15) class:
 
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant;
@@ -14,394 +15,147 @@ namespace BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant
 final class ClassConstantEntitiesCollection extends \BumbleDocGen\Core\Parser\Entity\BaseEntityCollection implements \IteratorAggregate
 ```
 
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [add](#madd) 
+1. [get](#mget) 
+1. [getIterator](#mgetiterator) 
+1. [has](#mhas) - Check if an entity has been added to the collection
+1. [isEmpty](#misempty) - Check if the collection is empty or not
+1. [loadConstantEntities](#mloadconstantentities) 
+1. [remove](#mremove) - Remove an entity from a collection
+1. [unsafeGet](#munsafeget) 
 
+## Methods details:
 
-
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#madd">add</a>
-    </li>
-<li>
-    <a href="#mget">get</a>
-    </li>
-<li>
-    <a href="#mgetiterator">getIterator</a>
-    </li>
-<li>
-    <a href="#mhas">has</a>
-    - <i>Check if an entity has been added to the collection</i></li>
-<li>
-    <a href="#misempty">isEmpty</a>
-    - <i>Check if the collection is empty or not</i></li>
-<li>
-    <a href="#mloadconstantentities">loadConstantEntities</a>
-    </li>
-<li>
-    <a href="#mremove">remove</a>
-    - <i>Remove an entity from a collection</i></li>
-<li>
-    <a href="#munsafeget">unsafeGet</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L17">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L17)
 ```php
 public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity $classEntity, \BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings $phpHandlerSettings, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory $cacheablePhpEntityFactory);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$classEntity | [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php) | - |
+$phpHandlerSettings | [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php) | - |
+$cacheablePhpEntityFactory | [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php) | - |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$classEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/ClassLikeEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$phpHandlerSettings</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php'>\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$cacheablePhpEntityFactory</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/Cache/CacheablePhpEntityFactory.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Cache\CacheablePhpEntityFactory</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="madd" href="#madd">#</a>
- <b>add</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L50">source code</a></li>
-</ul>
-
+<a name="madd" href="#madd">#</a> `add`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L50)
 ```php
 public function add(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity $constantEntity, bool $reload = false): \BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntitiesCollection;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$constantEntity | [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntity.php) | - |
+$reload | [bool](https://www.php.net/manual/en/language.types.boolean.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntitiesCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$constantEntity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$reload</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntitiesCollection</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mget" href="#mget">#</a>
- <b>get</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L62">source code</a></li>
-</ul>
-
+<a name="mget" href="#mget">#</a> `get`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L62)
 ```php
 public function get(string $objectName): null|\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$objectName | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntity.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$objectName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetiterator" href="#mgetiterator">#</a>
- <b>getIterator</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L11">source code</a></li>
-</ul>
-
+<a name="mgetiterator" href="#mgetiterator">#</a> `getIterator`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L11)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\BaseEntityCollection
 
 public function getIterator(): \Generator;
 ```
 
+***Return value:*** [\Generator](https://www.php.net/manual/en/language.generators.overview.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.generators.overview.php'>\Generator</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mhas" href="#mhas">#</a>
- <b>has</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L42">source code</a></li>
-</ul>
-
+<a name="mhas" href="#mhas">#</a> `has`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L42)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\BaseEntityCollection
 
 public function has(string $objectName): bool;
 ```
+Check if an entity has been added to the collection
 
-<blockquote>Check if an entity has been added to the collection</blockquote>
+***Parameters:***
 
-<b>Parameters:</b>
+| Name | Type | Description |
+|:-|:-|:-|
+$objectName | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$objectName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+---
 
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="misempty" href="#misempty">#</a>
- <b>isEmpty</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L52">source code</a></li>
-</ul>
-
+<a name="misempty" href="#misempty">#</a> `isEmpty`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L52)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\BaseEntityCollection
 
 public function isEmpty(): bool;
 ```
+Check if the collection is empty or not
 
-<blockquote>Check if the collection is empty or not</blockquote>
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mloadconstantentities" href="#mloadconstantentities">#</a>
- <b>loadConstantEntities</b>
- <b>:warning:</b> Is internal    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L32">source code</a></li>
-</ul>
-
+<a name="mloadconstantentities" href="#mloadconstantentities">#</a> `loadConstantEntities` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L32)
 ```php
 public function loadConstantEntities(): void;
 ```
 
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mremove" href="#mremove">#</a>
- <b>remove</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32">source code</a></li>
-</ul>
-
+<a name="mremove" href="#mremove">#</a> `remove`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/BaseEntityCollection.php#L32)
 ```php
 // Implemented in BumbleDocGen\Core\Parser\Entity\BaseEntityCollection
 
 public function remove(string $objectName): void;
 ```
+Remove an entity from a collection
 
-<blockquote>Remove an entity from a collection</blockquote>
+***Parameters:***
 
-<b>Parameters:</b>
+| Name | Type | Description |
+|:-|:-|:-|
+$objectName | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$objectName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
+---
 
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="munsafeget" href="#munsafeget">#</a>
- <b>unsafeGet</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L75">source code</a></li>
-</ul>
-
+<a name="munsafeget" href="#munsafeget">#</a> `unsafeGet`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php#L75)
 ```php
 public function unsafeGet(string $constantName): null|\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$constantName | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntity.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$constantName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntity.php'>\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
+---

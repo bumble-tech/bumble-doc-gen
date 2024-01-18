@@ -1,234 +1,98 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> OnLoadEntityDocPluginContent<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Plugin system](/docs/tech/04_pluginSystem.md) **/**
+OnLoadEntityDocPluginContent
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L16">OnLoadEntityDocPluginContent</a> class:
-</h1>
+---
 
 
-
-
+# [OnLoadEntityDocPluginContent](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L16) class:
 
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
 final class OnLoadEntityDocPluginContent extends \Symfony\Contracts\EventDispatcher\Event
 ```
+Called when entity documentation is generated (plugin content loading)
 
-<blockquote>Called when entity documentation is generated (plugin content loading)</blockquote>
+***Links:***
+- [\BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent](/docs/tech/classes/LoadPluginsContent_2.md)
 
-See:
-<ul>
-    <li>
-        <a href="/docs/tech/classes/LoadPluginsContent_2.md">\BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent</a>    </li>
-</ul>
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [addBlockContentPluginResult](#maddblockcontentpluginresult) 
+1. [getBlockContent](#mgetblockcontent) 
+1. [getBlockContentPluginResults](#mgetblockcontentpluginresults) 
+1. [getBlockType](#mgetblocktype) 
+1. [getEntity](#mgetentity) 
 
+## Methods details:
 
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#maddblockcontentpluginresult">addBlockContentPluginResult</a>
-    </li>
-<li>
-    <a href="#mgetblockcontent">getBlockContent</a>
-    </li>
-<li>
-    <a href="#mgetblockcontentpluginresults">getBlockContentPluginResults</a>
-    </li>
-<li>
-    <a href="#mgetblocktype">getBlockType</a>
-    </li>
-<li>
-    <a href="#mgetentity">getEntity</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L20">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L20)
 ```php
 public function __construct(string $blockContent, \BumbleDocGen\Core\Parser\Entity\RootEntityInterface $entity, string $blockType);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$blockContent | [string](https://www.php.net/manual/en/language.types.string.php) | - |
+$entity | [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php) | - |
+$blockType | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$blockContent</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$blockType</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="maddblockcontentpluginresult" href="#maddblockcontentpluginresult">#</a>
- <b>addBlockContentPluginResult</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L42">source code</a></li>
-</ul>
-
+<a name="maddblockcontentpluginresult" href="#maddblockcontentpluginresult">#</a> `addBlockContentPluginResult`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L42)
 ```php
 public function addBlockContentPluginResult(string $pluginResult): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$pluginResult | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$pluginResult</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetblockcontent" href="#mgetblockcontent">#</a>
- <b>getBlockContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L32">source code</a></li>
-</ul>
-
+<a name="mgetblockcontent" href="#mgetblockcontent">#</a> `getBlockContent`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L32)
 ```php
 public function getBlockContent(): string;
 ```
 
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetblockcontentpluginresults" href="#mgetblockcontentpluginresults">#</a>
- <b>getBlockContentPluginResults</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L47">source code</a></li>
-</ul>
-
+<a name="mgetblockcontentpluginresults" href="#mgetblockcontentpluginresults">#</a> `getBlockContentPluginResults`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L47)
 ```php
 public function getBlockContentPluginResults(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetblocktype" href="#mgetblocktype">#</a>
- <b>getBlockType</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L37">source code</a></li>
-</ul>
-
+<a name="mgetblocktype" href="#mgetblocktype">#</a> `getBlockType`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L37)
 ```php
 public function getBlockType(): string;
 ```
 
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetentity" href="#mgetentity">#</a>
- <b>getEntity</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L27">source code</a></li>
-</ul>
-
+<a name="mgetentity" href="#mgetentity">#</a> `getEntity`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnLoadEntityDocPluginContent.php#L27)
 ```php
 public function getEntity(): \BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 ```
 
+***Return value:*** [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php)
 
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a>
-
-
-</div>
-<hr>
+---

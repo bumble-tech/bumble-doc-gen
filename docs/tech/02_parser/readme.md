@@ -1,30 +1,47 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> Parser<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+Parser
 
-<embed> <h1>Documentation parser</h1> </embed>
+---
 
-Most often, we need <a href="/docs/tech/02_parser/classes/ProjectParser.md">ProjectParser</a> in order to get a list of entities for documentation.
+
+# Documentation parser
+
+Most often, we need [ProjectParser](/docs/tech/02_parser/classes/ProjectParser.md) in order to get a list of entities for documentation.
 But this is not the only use of this tool. The result of the parser's work (a collection of entities) can be used to programmatically analyze the project and perform any operations based on this analysis.
 For example, in our documentation generator, we also use the result of the parser in the tasks of generating documentation using AI tools.
 You can also use the parser for your own purposes other than generating documentation.
 
 In this section, we show how the parser works and what components it consists of.
 
-<embed> <h2>Description of the main components of the parser</h2> </embed>
+## Description of the main components of the parser
 
-<embed> <ul><li><div><a href='/docs/tech/02_parser/entity.md'>Entities and entities collections</a></div></li><li><div><a href='/docs/tech/02_parser/entityFilterCondition.md'>Entity filter conditions</a></div></li><li><div><a href='/docs/tech/02_parser/reflectionApi/readme.md'>Reflection API</a></div><div><ul><li><div><a href='/docs/tech/02_parser/reflectionApi/php/readme.md'>Reflection API for PHP</a></div><div><ul><li><div><a href='/docs/tech/02_parser/reflectionApi/php/phpClassConstantReflectionApi.md'>PHP class constant reflection API</a></div></li><li><div><a href='/docs/tech/02_parser/reflectionApi/php/phpClassMethodReflectionApi.md'>PHP class method reflection API</a></div></li><li><div><a href='/docs/tech/02_parser/reflectionApi/php/phpClassPropertyReflectionApi.md'>PHP class property reflection API</a></div></li><li><div><a href='/docs/tech/02_parser/reflectionApi/php/phpClassReflectionApi.md'>PHP class reflection API</a></div></li><li><div><a href='/docs/tech/02_parser/reflectionApi/php/phpEntitiesCollection.md'>PHP entities collection</a></div></li><li><div><a href='/docs/tech/02_parser/reflectionApi/php/phpEnumReflectionApi.md'>PHP enum reflection API</a></div></li><li><div><a href='/docs/tech/02_parser/reflectionApi/php/phpInterfaceReflectionApi.md'>PHP interface reflection API</a></div></li><li><div><a href='/docs/tech/02_parser/reflectionApi/php/phpTraitReflectionApi.md'>PHP trait reflection API</a></div></li></ul></div></li></ul></div></li><li><div><a href='/docs/tech/02_parser/sourceLocator.md'>Source locators</a></div></li></ul> </embed>
 
-<embed> <h2>Starting the parsing process</h2> </embed>
+- [Entities and entities collections](/docs/tech/02_parser/entity.md)
+- [Entity filter conditions](/docs/tech/02_parser/entityFilterCondition.md)
+- [Reflection API](/docs/tech/02_parser/reflectionApi/readme.md)    
+    - [Reflection API for PHP](/docs/tech/02_parser/reflectionApi/php/readme.md)    
+        - [PHP class constant reflection API](/docs/tech/02_parser/reflectionApi/php/phpClassConstantReflectionApi.md)
+        - [PHP class method reflection API](/docs/tech/02_parser/reflectionApi/php/phpClassMethodReflectionApi.md)
+        - [PHP class property reflection API](/docs/tech/02_parser/reflectionApi/php/phpClassPropertyReflectionApi.md)
+        - [PHP class reflection API](/docs/tech/02_parser/reflectionApi/php/phpClassReflectionApi.md)
+        - [PHP entities collection](/docs/tech/02_parser/reflectionApi/php/phpEntitiesCollection.md)
+        - [PHP enum reflection API](/docs/tech/02_parser/reflectionApi/php/phpEnumReflectionApi.md)
+        - [PHP interface reflection API](/docs/tech/02_parser/reflectionApi/php/phpInterfaceReflectionApi.md)
+        - [PHP trait reflection API](/docs/tech/02_parser/reflectionApi/php/phpTraitReflectionApi.md)
+- [Source locators](/docs/tech/02_parser/sourceLocator.md)
+
+## Starting the parsing process
 
 ```php
- $parser = new ProjectParser($configuration, $rootEntityCollectionsGroup);
- 
- // Parsing the project and filling RootEntityCollectionsGroup with data
- $this->parser->parse();
- $rootEntityCollectionsGroup = $this->parser->getRootEntityCollectionsGroup();
+$parser = new ProjectParser($configuration, $rootEntityCollectionsGroup);
+
+// Parsing the project and filling RootEntityCollectionsGroup with data
+$this->parser->parse();
+$rootEntityCollectionsGroup = $this->parser->getRootEntityCollectionsGroup();
 ```
 
-
-<embed> <h2>How it works</h2> </embed>
+## How it works
 
 ```mermaid
  flowchart TD
@@ -40,6 +57,6 @@ In this section, we show how the parser works and what components it consists of
     ReturnResult --> Exit(((Exit)))
 ```
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

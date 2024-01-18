@@ -1,8 +1,16 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/02_parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/readme.md">Reflection API</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/php/readme.md">Reflection API for PHP</a> <b>/</b> PHP interface reflection API<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Parser](/docs/tech/02_parser/readme.md) **/**
+[Reflection API](/docs/tech/02_parser/reflectionApi/readme.md) **/**
+[Reflection API for PHP](/docs/tech/02_parser/reflectionApi/php/readme.md) **/**
+PHP interface reflection API
 
-<embed> <h1>PHP interface reflection API</h1> </embed>
+---
 
-PHP interface reflection <a href="/docs/tech/02_parser/reflectionApi/php/classes/InterfaceEntity.md">InterfaceEntity</a> inherits from <a href="/docs/tech/02_parser/reflectionApi/php/classes/ClassLikeEntity_2.md">ClassLikeEntity</a>.
+
+# PHP interface reflection API
+
+PHP interface reflection [InterfaceEntity](/docs/tech/02_parser/reflectionApi/php/classes/InterfaceEntity.md) inherits from [ClassLikeEntity](/docs/tech/02_parser/reflectionApi/php/classes/ClassLikeEntity_2.md).
 
 **Source interface formats:**
 
@@ -80,6 +88,6 @@ $interfaceReflection = $entitiesCollection->getLoadedOrCreateNew('SomeInterfaceN
 - [isTrait()](/docs/tech/02_parser/reflectionApi/php/classes/InterfaceEntity.md#mistrait): Check if an entity is a Trait
 - [normalizeClassName()](/docs/tech/02_parser/reflectionApi/php/classes/InterfaceEntity.md#mnormalizeclassname): Bring the class name to the standard format used in the system
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

@@ -1,319 +1,121 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> Daux<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Plugin system](/docs/tech/04_pluginSystem.md) **/**
+Daux
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L21">Daux</a> class:
-</h1>
+---
 
 
-
-
-<b>:warning: Is internal</b>
+# [Daux](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L21) class:
+⚠️ Internal 
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\Daux;
 
 final class Daux implements \BumbleDocGen\Core\Plugin\PluginInterface, \Symfony\Component\EventDispatcher\EventSubscriberInterface
 ```
 
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [afterRenderingEntities](#mafterrenderingentities) 
+1. [beforeCreatingDocFile](#mbeforecreatingdocfile) 
+1. [getSubscribedEvents](#mgetsubscribedevents) 
+1. [onCreateDocumentedEntityWrapper](#moncreatedocumentedentitywrapper) 
+1. [onGetProjectTemplatesDirs](#mongetprojecttemplatesdirs) 
+1. [onGetTemplatePathByRelativeDocPath](#mongettemplatepathbyrelativedocpath) 
 
+## Methods details:
 
-
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#mafterrenderingentities">afterRenderingEntities</a>
-    </li>
-<li>
-    <a href="#mbeforecreatingdocfile">beforeCreatingDocFile</a>
-    </li>
-<li>
-    <a href="#mgetsubscribedevents">getSubscribedEvents</a>
-    </li>
-<li>
-    <a href="#moncreatedocumentedentitywrapper">onCreateDocumentedEntityWrapper</a>
-    </li>
-<li>
-    <a href="#mongetprojecttemplatesdirs">onGetProjectTemplatesDirs</a>
-    </li>
-<li>
-    <a href="#mongettemplatepathbyrelativedocpath">onGetTemplatePathByRelativeDocPath</a>
-    </li>
-</ol>
-
-
-<h2>Constants:</h2>
-<ul>
-            <li><a name="qentity-doc-structure-dir-name"
-               href="#qentity-doc-structure-dir-name">#</a>
-            <code>ENTITY_DOC_STRUCTURE_DIR_NAME</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L24">source
-                    code</a> </li>
-    </ul>
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L26">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L26)
 ```php
 public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper $breadcrumbsHelper);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$configuration | [\BumbleDocGen\Core\Configuration\Configuration](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php) | - |
+$breadcrumbsHelper | [\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php) | - |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$configuration</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php'>\BumbleDocGen\Core\Configuration\Configuration</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$breadcrumbsHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php'>\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mafterrenderingentities" href="#mafterrenderingentities">#</a>
- <b>afterRenderingEntities</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L95">source code</a></li>
-</ul>
-
+<a name="mafterrenderingentities" href="#mafterrenderingentities">#</a> `afterRenderingEntities`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L95)
 ```php
 public function afterRenderingEntities(): void;
 ```
 
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mbeforecreatingdocfile" href="#mbeforecreatingdocfile">#</a>
- <b>beforeCreatingDocFile</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L47">source code</a></li>
-</ul>
-
+<a name="mbeforecreatingdocfile" href="#mbeforecreatingdocfile">#</a> `beforeCreatingDocFile`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L47)
 ```php
 public function beforeCreatingDocFile(\BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile|\BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingEntityDocFile $event): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$event | [\BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php) \| [\BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingEntityDocFile](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingEntityDocFile.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php'>\BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingEntityDocFile.php'>\BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingEntityDocFile</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a>
- <b>getSubscribedEvents</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L32">source code</a></li>
-</ul>
-
+<a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a> `getSubscribedEvents`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L32)
 ```php
 public static function getSubscribedEvents(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="moncreatedocumentedentitywrapper" href="#moncreatedocumentedentitywrapper">#</a>
- <b>onCreateDocumentedEntityWrapper</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L71">source code</a></li>
-</ul>
-
+<a name="moncreatedocumentedentitywrapper" href="#moncreatedocumentedentitywrapper">#</a> `onCreateDocumentedEntityWrapper`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L71)
 ```php
 public function onCreateDocumentedEntityWrapper(\BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper $event): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$event | [\BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnCreateDocumentedEntityWrapper.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnCreateDocumentedEntityWrapper.php'>\BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mongetprojecttemplatesdirs" href="#mongetprojecttemplatesdirs">#</a>
- <b>onGetProjectTemplatesDirs</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L87">source code</a></li>
-</ul>
-
+<a name="mongetprojecttemplatesdirs" href="#mongetprojecttemplatesdirs">#</a> `onGetProjectTemplatesDirs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L87)
 ```php
 public function onGetProjectTemplatesDirs(\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs $event): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$event | [\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGetProjectTemplatesDirs.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGetProjectTemplatesDirs.php'>\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mongettemplatepathbyrelativedocpath" href="#mongettemplatepathbyrelativedocpath">#</a>
- <b>onGetTemplatePathByRelativeDocPath</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L78">source code</a></li>
-</ul>
-
+<a name="mongettemplatepathbyrelativedocpath" href="#mongettemplatepathbyrelativedocpath">#</a> `onGetTemplatePathByRelativeDocPath`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L78)
 ```php
 public function onGetTemplatePathByRelativeDocPath(\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath $event): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$event | [\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGetTemplatePathByRelativeDocPath.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGetTemplatePathByRelativeDocPath.php'>\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
+---

@@ -1,28 +1,22 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/01_configuration.md">Configuration</a> <b>/</b> StrTypeToUrl<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Configuration](/docs/tech/01_configuration.md) **/**
+StrTypeToUrl
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L18">StrTypeToUrl</a> class:
-</h1>
+---
 
 
-
-
+# [StrTypeToUrl](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L18) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\Twig\Filter;
 
 final class StrTypeToUrl implements \BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface
 ```
+The filter converts the string with the data type into a link to the documented entity, if possible.
 
-<blockquote>The filter converts the string with the data type into a link to the documented entity, if possible.</blockquote>
-
-See:
-<ul>
-    <li>
-        <a href="/docs/tech/classes/GetDocumentedEntityUrl_2.md">\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a>    </li>
-</ul>
-
-
+***Links:***
+- [\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl](/docs/tech/classes/GetDocumentedEntityUrl_2.md)
 
 
 <h2>Settings:</h2>
@@ -38,178 +32,65 @@ See:
     </tr>
 </table>
 
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [__invoke](#m-invoke) 
+1. [getName](#mgetname) 
+1. [getOptions](#mgetoptions) 
 
-<h2>Initialization methods:</h2>
+## Methods details:
 
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-invoke">__invoke</a>
-    </li>
-<li>
-    <a href="#mgetname">getName</a>
-    </li>
-<li>
-    <a href="#mgetoptions">getOptions</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L20">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L20)
 ```php
 public function __construct(\BumbleDocGen\Core\Renderer\RendererHelper $rendererHelper, \BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl $getDocumentedEntityUrlFunction, \Monolog\Logger $logger);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$rendererHelper | [\BumbleDocGen\Core\Renderer\RendererHelper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php) | - |
+$getDocumentedEntityUrlFunction | [\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php) | - |
+$logger | [\Monolog\Logger](https://github.com/Seldaek/monolog/blob/master/src/Monolog/Logger.php) | - |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$rendererHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/RendererHelper.php'>\BumbleDocGen\Core\Renderer\RendererHelper</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$getDocumentedEntityUrlFunction</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php'>\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$logger</td>
-            <td><a href='https://github.com/Seldaek/monolog/blob/master/src/Monolog/Logger.php'>\Monolog\Logger</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-invoke" href="#m-invoke">#</a>
- <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L49">source code</a></li>
-</ul>
-
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L50)
 ```php
-public function __invoke(string $text, \BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, bool $useShortLinkVersion = false, bool $createDocument = false): string;
+public function __invoke(string $text, \BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, bool $useShortLinkVersion = false, bool $createDocument = false, string $separator = ' | '): string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$text | [string](https://www.php.net/manual/en/language.types.string.php) | Processed text |
+$rootEntityCollection | [\BumbleDocGen\Core\Parser\Entity\RootEntityCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php) | - |
+$useShortLinkVersion | [bool](https://www.php.net/manual/en/language.types.boolean.php) | Shorten or not the link name. When shortening, only the shortName of the entity will be shown |
+$createDocument | [bool](https://www.php.net/manual/en/language.types.boolean.php) | If true, creates an entity document. Otherwise, just gives a reference to the entity code |
+$separator | [string](https://www.php.net/manual/en/language.types.string.php) | Separator between types |
 
-<b>Parameters:</b>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$text</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>Processed text</td>
-        </tr>
-            <tr>
-            <td>$rootEntityCollection</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityCollection</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$useShortLinkVersion</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>Shorten or not the link name. When shortening, only the shortName of the entity will be shown</td>
-        </tr>
-            <tr>
-            <td>$createDocument</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>If true, creates an entity document. Otherwise, just gives a reference to the entity code</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetname" href="#mgetname">#</a>
- <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L27">source code</a></li>
-</ul>
-
+<a name="mgetname" href="#mgetname">#</a> `getName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L27)
 ```php
 public static function getName(): string;
 ```
 
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetoptions" href="#mgetoptions">#</a>
- <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L32">source code</a></li>
-</ul>
-
+<a name="mgetoptions" href="#mgetoptions">#</a> `getOptions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L32)
 ```php
 public static function getOptions(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
+---

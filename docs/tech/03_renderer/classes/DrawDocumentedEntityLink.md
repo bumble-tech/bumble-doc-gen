@@ -1,40 +1,31 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/03_renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/03_renderer/05_twigCustomFunctions.md">Template functions</a> <b>/</b> DrawDocumentedEntityLink<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Renderer](/docs/tech/03_renderer/readme.md) **/**
+[Template functions](/docs/tech/03_renderer/05_twigCustomFunctions.md) **/**
+DrawDocumentedEntityLink
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L21">DrawDocumentedEntityLink</a> class:
-</h1>
+---
 
 
-
-
+# [DrawDocumentedEntityLink](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L21) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\Twig\Function;
 
 final class DrawDocumentedEntityLink implements \BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface
 ```
+Creates an entity link by object
 
-<blockquote>Creates an entity link by object</blockquote>
-
-
-<b>Examples of using:</b>
-
+***Examples of using:***
 ```php
 {{ drawDocumentedEntityLink($entity, 'getFunctions()') }}
-
 ```
-
 ```php
 {{ drawDocumentedEntityLink($entity) }}
-
 ```
-
 ```php
 {{ drawDocumentedEntityLink($entity, '', false) }}
-
 ```
-
-
 
 
 <h2>Settings:</h2>
@@ -46,176 +37,61 @@ final class DrawDocumentedEntityLink implements \BumbleDocGen\Core\Renderer\Twig
     </tr>
 </table>
 
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [__invoke](#m-invoke) 
+1. [getName](#mgetname) 
+1. [getOptions](#mgetoptions) 
 
-<h2>Initialization methods:</h2>
+## Methods details:
 
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-invoke">__invoke</a>
-    </li>
-<li>
-    <a href="#mgetname">getName</a>
-    </li>
-<li>
-    <a href="#mgetoptions">getOptions</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L23">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L23)
 ```php
 public function __construct(\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl $getDocumentedEntityUrlFunction);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$getDocumentedEntityUrlFunction | [\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php) | - |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$getDocumentedEntityUrlFunction</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php'>\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-invoke" href="#m-invoke">#</a>
- <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L50">source code</a></li>
-</ul>
-
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L50)
 ```php
 public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $entity, string $cursor = '', bool $useShortName = true): string;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$entity | [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php) | The entity for which we want to get the link |
+$cursor | [string](https://www.php.net/manual/en/language.types.string.php) | Reference to an element inside an entity, for example, the name of a function/constant/property |
+$useShortName | [bool](https://www.php.net/manual/en/language.types.boolean.php) | Use the full or short entity name in the link |
 
-<b>Parameters:</b>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$entity</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php'>\BumbleDocGen\Core\Parser\Entity\RootEntityInterface</a></td>
-            <td>The entity for which we want to get the link</td>
-        </tr>
-            <tr>
-            <td>$cursor</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>Reference to an element inside an entity, for example, the name of a function/constant/property</td>
-        </tr>
-            <tr>
-            <td>$useShortName</td>
-            <td><a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a></td>
-            <td>Use the full or short entity name in the link</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/03_renderer/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetname" href="#mgetname">#</a>
- <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L27">source code</a></li>
-</ul>
-
+<a name="mgetname" href="#mgetname">#</a> `getName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L27)
 ```php
 public static function getName(): string;
 ```
 
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetoptions" href="#mgetoptions">#</a>
- <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L32">source code</a></li>
-</ul>
-
+<a name="mgetoptions" href="#mgetoptions">#</a> `getOptions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L32)
 ```php
 public static function getOptions(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
+---

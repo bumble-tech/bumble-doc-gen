@@ -1,13 +1,20 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/03_renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/03_renderer/01_howToCreateTemplates/readme.md">How to create documentation templates?</a> <b>/</b> Linking templates<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Renderer](/docs/tech/03_renderer/readme.md) **/**
+[How to create documentation templates?](/docs/tech/03_renderer/01_howToCreateTemplates/readme.md) **/**
+Linking templates
 
-<embed> <h1>Linking templates</h1> </embed>
+---
+
+
+# Linking templates
 
 One of the main requirements of the documentation is to be able to easily and quickly implement linking between pages.
 We have several options for this, such as using special functions or using a special document linking mechanism (`completing blank links`)
 
-<embed> <h2>Completing blank links</h2> </embed>
+## Completing blank links
 
-Plugin <a href="/docs/tech/03_renderer/01_howToCreateTemplates/classes/PageHtmlLinkerPlugin.md">PageHtmlLinkerPlugin</a> have been added to the basic configuration,
+Plugin [PageHtmlLinkerPlugin](/docs/tech/03_renderer/01_howToCreateTemplates/classes/PageHtmlLinkerPlugin.md) have been added to the basic configuration,
 which process the text of the filled template before its result is written to a file, and fill in all empty links.
 
 For example, an empty link:
@@ -29,13 +36,13 @@ Examples:
 <pre>&#91;a x-title="test"&#93;Existent page name&#91;/a&#93; <b>=></b> &lt;a href=&quot;/docs/some/page/targetPage.md&quot;&gt;test&lt;/a&gt;</pre>
 
 
-<embed> <h2>Generating links through functions</h2> </embed>
+## Generating links through functions
 
 The second way to relink templates is to generate links through functions.
 
-There are a number of functions that allow you to get a link to an entity, for example <a href="/docs/tech/03_renderer/01_howToCreateTemplates/classes/GetDocumentedEntityUrl.md">GetDocumentedEntityUrl</a>, and there are also functions for getting a link to other documents, for example <a href="/docs/tech/03_renderer/01_howToCreateTemplates/classes/GetDocumentationPageUrl.md">GetDocumentationPageUrl</a>.
+There are a number of functions that allow you to get a link to an entity, for example [GetDocumentedEntityUrl](/docs/tech/03_renderer/01_howToCreateTemplates/classes/GetDocumentedEntityUrl.md), and there are also functions for getting a link to other documents, for example [GetDocumentationPageUrl](/docs/tech/03_renderer/01_howToCreateTemplates/classes/GetDocumentationPageUrl.md).
 You can also implement your own functions for relinking if necessary.
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Jan 12 01:40:01 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

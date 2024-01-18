@@ -1,8 +1,16 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/02_parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/readme.md">Reflection API</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/php/readme.md">Reflection API for PHP</a> <b>/</b> PHP class property reflection API<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Parser](/docs/tech/02_parser/readme.md) **/**
+[Reflection API](/docs/tech/02_parser/reflectionApi/readme.md) **/**
+[Reflection API for PHP](/docs/tech/02_parser/reflectionApi/php/readme.md) **/**
+PHP class property reflection API
 
-<embed> <h1>PHP class property reflection API</h1> </embed>
+---
 
-Property reflection entity class: <a href="/docs/tech/02_parser/reflectionApi/php/classes/PropertyEntity.md">PropertyEntity</a>.
+
+# PHP class property reflection API
+
+Property reflection entity class: [PropertyEntity](/docs/tech/02_parser/reflectionApi/php/classes/PropertyEntity.md).
 
 **Example of creating class property reflection:**
 
@@ -51,6 +59,6 @@ $propertyReflection = $classReflection->getProperty('propertyName');
 - [isProtected()](/docs/tech/02_parser/reflectionApi/php/classes/PropertyEntity.md#misprotected): Check if a protected is a public protected
 - [isPublic()](/docs/tech/02_parser/reflectionApi/php/classes/PropertyEntity.md#mispublic): Check if a property is a public property
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

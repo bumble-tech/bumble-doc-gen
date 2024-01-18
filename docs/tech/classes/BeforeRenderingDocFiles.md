@@ -1,31 +1,18 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> BeforeRenderingDocFiles<hr> </embed>
+[BumbleDocGen](/docs/README.md) **/**
+[Technical description of the project](/docs/tech/readme.md) **/**
+[Plugin system](/docs/tech/04_pluginSystem.md) **/**
+BeforeRenderingDocFiles
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeRenderingDocFiles.php#L12">BeforeRenderingDocFiles</a> class:
-</h1>
+---
 
 
-
-
+# [BeforeRenderingDocFiles](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeRenderingDocFiles.php#L12) class:
 
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
 final class BeforeRenderingDocFiles extends \Symfony\Contracts\EventDispatcher\Event
 ```
-
-<blockquote>The event occurs before the main documents begin rendering</blockquote>
-
-
-
-
-
-
-
-
-
-
-
-
+The event occurs before the main documents begin rendering
 
 
