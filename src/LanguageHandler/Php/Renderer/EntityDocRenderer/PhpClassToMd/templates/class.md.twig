@@ -1,31 +1,15 @@
 {{ generatePageBreadcrumbs(classEntity.getShortName(), parentDocFilePath, false) }}
 
 {% include '_classHeader.md.twig' with {'classEntity': classEntity} only %}
-
-
 {{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\LanguageHandler\\Php\\Renderer\\EntityDocRenderer\\PhpClassToMd\\PhpClassToMdDocRenderer::BLOCK_AFTER_HEADER')) }}
-
-
 {% include '_classMainInfo.md.twig' with {'classEntity': classEntity} only %}
-
-
 {{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\LanguageHandler\\Php\\Renderer\\EntityDocRenderer\\PhpClassToMd\\PhpClassToMdDocRenderer::BLOCK_AFTER_MAIN_INFO')) }}
-
-
 {% include '_enumCases.md.twig' with {'classEntity': classEntity} only %}
-
 {% include '_methods.md.twig' with {'blockName': 'Initialization methods', 'methodEntitiesCollection': classEntity.getMethodEntitiesCollection().getInitializations()} only %}
-
 {% include '_methods.md.twig' with {'blockName': 'Methods', 'methodEntitiesCollection': classEntity.getMethodEntitiesCollection().getAllExceptInitializations()} only %}
-
 {% include '_traits.md.twig' with {'classEntity': classEntity} only %}
-
-{% include '_constants.md.twig' with {'classEntity': classEntity} only %}
-
 {% include '_properties.md.twig' with {'classEntity': classEntity} only %}
-
+{% include '_constants.md.twig' with {'classEntity': classEntity} only %}
 {{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\LanguageHandler\\Php\\Renderer\\EntityDocRenderer\\PhpClassToMd\\PhpClassToMdDocRenderer::BLOCK_BEFORE_DETAILS')) }}
-
 {% include '_property_details.md.twig' with {'classEntity': classEntity} only %}
-
 {% include '_method_details.md.twig' with {'methodEntitiesCollection': classEntity.getMethodEntitiesCollection()} only %}

@@ -1,12 +1,8 @@
 {% if not classEntity.getPropertyEntitiesCollection().isEmpty() %}
-<h2>Property details:</h2>
-
+## Properties details:
 {% for propertyEntity in classEntity.getPropertyEntitiesCollection() %}
 
-* <a name="p{{ propertyEntity.getName() | prepareSourceLink }}" href="#p{{ propertyEntity.getName() | prepareSourceLink }}">#</a>
- <b>${{ propertyEntity.getName() }}</b>
- {% if propertyEntity.isInternal() %}<b>:warning:</b> Is internal {% endif %} {% if propertyEntity.isDeprecated() %}<b>:no_entry:</b> Deprecated {% endif %}
- {% if propertyEntity.getFileSourceLink() %} **|** <a href="{{ propertyEntity.getFileSourceLink() }}">source code</a>{% endif %}
+<a name="p{{ propertyEntity.getName() | prepareSourceLink }}" href="#p{{ propertyEntity.getName() | prepareSourceLink }}">#</a> `{{ propertyEntity.getName() }}` {% if propertyEntity.isInternal() %}⚠️ Internal {% endif %} {% if propertyEntity.isDeprecated() %}⛔ Deprecated {% endif %}{% if propertyEntity.getFileSourceLink() %}**|** [source code]({{ propertyEntity.getFileSourceLink() }}){% endif %}
 
 ```php
 {% if propertyEntity.isImplementedInParentClass() %}
@@ -16,20 +12,18 @@
 {{ propertyEntity.getModifiersString() }} ${{ propertyEntity.getName() }};
 
 ```
-
-{% if propertyEntity.getDescription() %}<blockquote>{{ propertyEntity.getDescription() }}</blockquote>{% endif %}
-
+{% if propertyEntity.getDescription() %}
+{{ propertyEntity.getDescription() | raw }}
+{% endif %}
 {% if propertyEntity.hasDescriptionLinks() %}
 
-See:
-<ul>
+***Links:***
 {% for link in propertyEntity.getDescriptionLinks() %}
-    <li>
-        <a {% if link.url %}href="{{ link.url }}"{% endif %}>{{ link.name }}</a>{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
-    </li>
+- {% if link.url %}[{{ link.name }}]({{ link.url }}){% else %}{{ link.name }}{% endif %}{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
+
 {% endfor %}
-</ul>
 {% endif %}
 
+---
 {% endfor %}
 {% endif %}

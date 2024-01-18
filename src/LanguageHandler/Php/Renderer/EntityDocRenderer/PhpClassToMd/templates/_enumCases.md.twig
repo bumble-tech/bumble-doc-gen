@@ -1,9 +1,8 @@
 {% if classEntity.getCasesNames() %}
-<h2>Cases:</h2>
+## Cases:
 
-<ul>
-    {% for caseName in classEntity.getCasesNames() %}
-        <li><b>{{ caseName }}</b></li>
-    {% endfor %}
-</ul>
+{% for caseName in classEntity.getCasesNames() %}
+1. **{{ caseName }}**
+
+{% endfor %}
 {% endif %}

@@ -1,5 +1,5 @@
-{% if classEntity.isInternal() %}<b>:warning: Is internal</b>{% endif %}
-{% if classEntity.isDeprecated() %}<b>:no_entry: Deprecated</b>{% endif %}
+{% if classEntity.isInternal() %}⚠️ Internal {% endif %}
+{% if classEntity.isDeprecated() %}⛔ Deprecated{% endif %}
 
 ```php
 {% if classEntity.getNamespaceName() %}
@@ -9,29 +9,23 @@ namespace {{ classEntity.getNamespaceName() }};
 {{ classEntity.getModifiersString() }} {{ classEntity.getShortName() }}{% if classEntity.isInterface() and classEntity.getInterfaceNames() %} extends \{{ classEntity.getInterfaceNames() | implode(', \\') }}{% else %}{% if classEntity.getParentClassName() %} extends \{{ classEntity.getParentClassName() }}{% endif %}{% if classEntity.getInterfaceNames() %} implements \{{ classEntity.getInterfaceNames() | implode(', \\') }}{% endif %}{% endif %}
 
 ```
-
-{% if classEntity.getDescription() %}<blockquote>{{ classEntity.getDescription() | raw }}</blockquote>{% endif %}
-
+{% if classEntity.getDescription() %}
+{{ classEntity.getDescription() | raw }}
+{% endif %}
 {% if classEntity.hasDescriptionLinks() %}
 
-See:
-<ul>
+***Links:***
 {% for link in classEntity.getDescriptionLinks() %}
-    <li>
-        <a {% if link.url %}href="{{ link.url }}"{% endif %}>{{ link.name }}</a>{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
-    </li>
+- {% if link.url %}[{{ link.name }}]({{ link.url }}){% else %}{{ link.name }}{% endif %}{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
+
 {% endfor %}
-</ul>
 {% endif %}
 {% if classEntity.hasExamples() %}
 
-
-<b>Examples of using:</b>
+***Examples of using:***
 {% for exampleData in classEntity.getExamples() %}
-
 ```php
 {{ exampleData.example | raw }}
-
 ```
 {% endfor %}
 {% endif %}

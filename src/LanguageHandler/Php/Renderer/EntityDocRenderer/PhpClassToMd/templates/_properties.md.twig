@@ -1,11 +1,8 @@
 {% if not classEntity.getPropertyEntitiesCollection().isEmpty() %}
-<h2>Properties:</h2>
+## Properties:
 
-<ol>
-    {% for propertyEntity in classEntity.getPropertyEntitiesCollection() %}
-        <li>
-            <a href="#p{{ propertyEntity.getName() | prepareSourceLink }}">{{ propertyEntity.getName() }}</a> {% if propertyEntity.getDescription() %}-
-                <i>{{ propertyEntity.getDescription() | removeLineBrakes }}</i>{% endif %}</li>
-    {% endfor %}
-</ol>
+{% for propertyEntity in classEntity.getPropertyEntitiesCollection() %}
+1. [{% if propertyEntity.isDeprecated() %}~~{{ propertyEntity.getName() }}~~{% else %}{{ propertyEntity.getName() }}{% endif %}](#p{{ propertyEntity.getName() | prepareSourceLink }}) {% if propertyEntity.getDescription() %}- {{ propertyEntity.getDescription() | removeLineBrakes | raw }}{% endif %}
+
+{% endfor %}
 {% endif %}

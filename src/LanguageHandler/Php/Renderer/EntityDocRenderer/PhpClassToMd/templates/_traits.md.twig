@@ -1,9 +1,8 @@
 {% if classEntity.hasTraits() %}
-<h2>Traits:</h2>
+## Traits:
 
-<ul>
-    {% for traitName in classEntity.getTraitsNames() %}
-    <li><b>{{ traitName | strTypeToUrl(classEntity.getRootEntityCollection()) }}</b></li>
-    {% endfor %}
-</ul>
+{% for traitName in classEntity.getTraitsNames() %}
+1. {{ traitName | strTypeToUrl(classEntity.getRootEntityCollection()) }}
+
+{% endfor %}
 {% endif %}

@@ -1,12 +1,8 @@
-{% if not classEntity.getConstantEntitiesCollection().isEmpty() %}
-<h2>Constants:</h2>
-<ul>
-    {% for constantEntity in classEntity.getConstantEntitiesCollection() %}
-        <li><a name="q{{ constantEntity.getName() | prepareSourceLink }}"
-               href="#q{{ constantEntity.getName() | prepareSourceLink }}">#</a>
-            <code>{{ constantEntity.getName() }}</code> {% if constantEntity.isInternal() %}:warning: Is internal {% endif %} {% if constantEntity.isDeprecated() %}:no_entry: Deprecated {% endif %} {% if constantEntity.getRelativeFileName() %}
-                <b>|</b> <a href="{{ constantEntity.getRelativeFileName() }}#L{{ constantEntity.getStartLine() }}">source
-                    code</a> {% endif %}</li>
-    {% endfor %}
-</ul>
+{% if not classEntity.getPropertyEntitiesCollection().isEmpty() %}
+## Constants:
+
+{% for constantEntity in classEntity.getConstantEntitiesCollection() %}
+1.  {{ constantEntity.getModifiersString() }} {% if constantEntity.isDeprecated() %}~~`{{ constantEntity.getName() }}`~~{% else %}`{{ constantEntity.getName() }}`{% endif %} {% if constantEntity.getDescription() %}- {{ constantEntity.getDescription() | removeLineBrakes | raw }}{% endif %}
+
+{% endfor %}
 {% endif %}
