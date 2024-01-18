@@ -1,0 +1,7 @@
+{% if breadcrumbs %}
+{% for item in breadcrumbs %}
+[{{ item.title }}]({{ item.url }}) **/**
+{% endfor %}{{ currentPageTitle }}
+
+---
+{% endif %}

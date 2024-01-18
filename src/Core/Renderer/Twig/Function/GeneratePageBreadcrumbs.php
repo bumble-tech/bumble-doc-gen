@@ -20,9 +20,9 @@ use Twig\Error\SyntaxError;
 final class GeneratePageBreadcrumbs implements CustomFunctionInterface
 {
     public function __construct(
-        private BreadcrumbsHelper $breadcrumbsHelper,
-        private RendererContext $rendererContext,
-        private RendererDependencyFactory $dependencyFactory,
+        private readonly BreadcrumbsHelper $breadcrumbsHelper,
+        private readonly RendererContext $rendererContext,
+        private readonly RendererDependencyFactory $dependencyFactory,
     ) {
     }
 
@@ -75,6 +75,6 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
             $this->rendererContext->addDependency($fileDependency);
         }
 
-        return "<embed> {$content} </embed>";
+        return $content;
     }
 }

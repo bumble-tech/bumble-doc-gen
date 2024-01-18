@@ -12,7 +12,6 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\TemplateFile;
-use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
@@ -349,7 +348,7 @@ final class BreadcrumbsHelper
      */
     public function renderBreadcrumbs(string $currentPageTitle, string $filePatch, bool $fromCurrent = true): string
     {
-        return $this->breadcrumbsTwig->render('breadcrumbs.html.twig', [
+        return $this->breadcrumbsTwig->render('breadcrumbs.md.twig', [
             'currentPageTitle' => $currentPageTitle,
             'breadcrumbs' => $this->getBreadcrumbs($filePatch, $fromCurrent),
         ]);
