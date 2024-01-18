@@ -16,20 +16,11 @@ We use [Symfony Console](https://github.com/symfony/console) as the basis of the
 
 ## Built-in console commands
 
-<table>
-    <tr>
-        <th>Command</th>
-        <th>Parameters</th>
-        <th>Description</th>
-    </tr>
+| Command | Parameters | Description |
+|-|-|-|
 {% for consoleCommandData in getConsoleCommands() %}
-    <tr>
-        <td><a href="{{ getDocumentedEntityUrl(phpEntities, consoleCommandData.class) }}">{{ consoleCommandData.name }}</a></td>
-        <td>{{ consoleCommandData.synopsis|raw }}</td>
-        <td>{{ consoleCommandData.description }}</td>
-    </tr>
+| [{{ consoleCommandData.name }}]({{ getDocumentedEntityUrl(phpEntities, consoleCommandData.class) }}) | {{ consoleCommandData.synopsis|raw }} | {{ consoleCommandData.description }} |
 {% endfor %}
-</table>
 
 ## Adding a custom command
 

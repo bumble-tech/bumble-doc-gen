@@ -47,20 +47,9 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 ## Configuration parameters
 
 {% set parameters = getConfigParametersDescription(phpEntities, '%WORKING_DIR%/src/Core/Configuration/defaultConfiguration.yaml') %}
-
-<table>
-    <tr>
-        <th>Key</th>
-        <th>Type</th>
-        <th>Default value</th>
-        <th>Description</th>
-    </tr>
+| Key | Type | Default value | Description |
+|-|-|-|-|
 {% for parameter in parameters %}
-    <tr>
-        <td><b>{{ parameter.key }}</b></td>
-        <td><i>{{ parameter.type }}</i></td>
-        <td>{{ parameter.defaultValue | raw }}</td>
-        <td>{{ parameter.description }}</td>
-    </tr>
+| **`{{ parameter.key }}`** | {{ parameter.type }} | {{ parameter.defaultValue | raw }} | {{ parameter.description }} |
 {% endfor %}
-</table>
+

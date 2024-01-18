@@ -25,13 +25,8 @@ plugins:
 Below are the plugins that are available by default when working with the library.
 Plugins for any programming languages work regardless of which language handler is configured in the configuration.
 
-<table>
-    <tr>
-        <th>Plugin</th>
-        <th>PL</th>
-        <th>Handles events</th>
-        <th>Description</th>
-    </tr>
+| Plugin | PL | Handles events | Description |
+|-|-|-|-|
 {% for pluginEntity in phpEntities
         .filterByPaths([
             '/src/Core',
@@ -41,20 +36,8 @@ Plugins for any programming languages work regardless of which language handler 
         .getOnlyInstantiable()
 %}
 {% set match = pluginEntity.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
-    <tr>
-        <td>{{ drawDocumentedEntityLink(pluginEntity) }}</td>
-        <td>{% if match[2] %}{{ match[2] | upper }}{% else %}any{% endif %}</td>
-        <td>
-            <ul>
-            {% for key in pluginEntity.getMethod('getSubscribedEvents', true).getFirstReturnValue() | keys %}
-                <li>[a]{{ key }}|short_form[/a]</li>
-            {% endfor %}
-            </ul>
-        </td>
-        <td>{{ pluginEntity.getDescription() }}</td>
-    </tr>
+| {{ drawDocumentedEntityLink(pluginEntity) }} | {% if match[2] %}{{ match[2] | upper }}{% else %}any{% endif %} | <ul>{% for key in pluginEntity.getMethod('getSubscribedEvents', true).getFirstReturnValue() | keys %}<li> [a]{{ key }}|short_form[/a] </li>{% endfor %}</ul> | {{ pluginEntity.getDescription() | removeLineBrakes }} |
 {% endfor %}
-</table>
 
 ## Default events
 

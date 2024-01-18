@@ -13,7 +13,7 @@ use DI\NotFoundException;
 
 final class PrintClassCollectionAsGroupedTable implements CustomFunctionInterface
 {
-    public function __construct(private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction)
+    public function __construct(private readonly GetDocumentedEntityUrl $getDocumentedEntityUrlFunction)
     {
     }
 
@@ -39,20 +39,18 @@ final class PrintClassCollectionAsGroupedTable implements CustomFunctionInterfac
         $groups = $this->groupEntities($rootEntityCollection);
         $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
 
-        $table = "<table>";
-        $table .= "<tr><th>Group name</th><th>Class short name</th><th>Description</th></tr>";
+        $table = "| Group name | Class short name | Description |\n";
+        $table .= "|-|-|-|\n";
 
         foreach ($groups as $groupKey => $entities) {
             $firstEntity = array_shift($entities);
-            $table .= "<tr><td rowspan='" . count($entities) + 1 . "'>{$groupKey}</td><td><a href='{$getDocumentedEntityUrlFunction($rootEntityCollection, $firstEntity->getName())}'>{$firstEntity->getShortName()}</a></td><td>{$firstEntity->getDescription()}</td></tr>";
+            $table .= "| **{$groupKey}** | [{$firstEntity->getShortName()}]({$getDocumentedEntityUrlFunction($rootEntityCollection, $firstEntity->getName())}) | {$firstEntity->getDescription()} |\n";
             foreach ($entities as $entity) {
-                $table .= "<tr><td><a href='{$getDocumentedEntityUrlFunction($rootEntityCollection, $entity->getName())}'>{$entity->getShortName()}</a></td><td>{$entity->getDescription()}</td></tr>";
+                $table .= "| | [{$entity->getShortName()}]({$getDocumentedEntityUrlFunction($rootEntityCollection, $entity->getName())}) | {$entity->getDescription()} |\n";
             }
-            $table .= "<tr><td colspan='3'></td></tr>";
+            $table .= "| | | |\n";
         }
-
-        $table .= "</table>";
-        return "<embed> {$table} </embed>";
+        return $table;
     }
 
     private function groupEntities(PhpEntitiesCollection $rootEntityCollection): array
