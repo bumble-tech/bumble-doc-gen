@@ -15,6 +15,7 @@ use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\Parser\PhpParser\NodeValueCompiler;
 use PhpParser\ConstExprEvaluationException;
 use PhpParser\Node\Stmt\ClassConst;
+use PhpParser\PrettyPrinter\Standard;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -53,12 +54,12 @@ class ClassConstantEntity extends BaseEntity
 
     public function __construct(
         Configuration $configuration,
-        private ClassLikeEntity $classEntity,
+        private readonly ClassLikeEntity $classEntity,
         ParserHelper $parserHelper,
         LocalObjectCache $localObjectCache,
-        LoggerInterface $logger,
-        private string $constantName,
-        private string $implementingClassName,
+        private readonly LoggerInterface $logger,
+        private readonly string $constantName,
+        private readonly string $implementingClassName,
     ) {
         parent::__construct(
             $configuration,
@@ -156,6 +157,64 @@ class ClassConstantEntity extends BaseEntity
     public function getNamespaceName(): string
     {
         return $this->getRootEntity()->getNamespaceName();
+    }
+
+    /**
+     * Get a text representation of class constant modifiers
+     *
+     * @api
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getModifiersString(): string
+    {
+        $modifiersString = [];
+        if ($this->isPrivate()) {
+            $modifiersString[] = 'private';
+        } elseif ($this->isProtected()) {
+            $modifiersString[] = 'protected';
+        } elseif ($this->isPublic()) {
+            $modifiersString[] = 'public';
+        }
+
+        $modifiersString[] = $this->getType();
+        return implode(' ', $modifiersString);
+    }
+
+    /**
+     * Get current class constant type
+     *
+     * @api
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    #[CacheableMethod] public function getType(): string
+    {
+        $type = $this->getAst()->type;
+        if ($type) {
+            $astPrinter = new Standard();
+            $typeString = $astPrinter->prettyPrint([$type]);
+            $typeString = str_replace('?', 'null|', $typeString);
+        } else {
+            try {
+                $typeString = gettype($this->getValue());
+            } catch (\Exception) {
+                $typeString = 'mixed';
+                $docBlock = $this->getDocBlock();
+                $typesFromDoc = [];
+                foreach ($docBlock->getTagsByName('var') as $param) {
+                    try {
+                        $typesFromDoc[] = (string)$param->getType();
+                    } catch (\Exception $e) {
+                        $this->logger->error($e->getMessage());
+                    }
+                }
+                if ($typesFromDoc) {
+                    $typeString = implode('|', $typesFromDoc);
+                }
+            }
+        }
+        return $this->prepareTypeString($typeString);
     }
 
     /**
