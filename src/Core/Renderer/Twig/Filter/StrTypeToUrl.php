@@ -18,9 +18,9 @@ use Monolog\Logger;
 final class StrTypeToUrl implements CustomFilterInterface
 {
     public function __construct(
-        private RendererHelper $rendererHelper,
-        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
-        private Logger $logger
+        private readonly RendererHelper $rendererHelper,
+        private readonly GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private readonly Logger $logger
     ) {
     }
 
@@ -43,6 +43,7 @@ final class StrTypeToUrl implements CustomFilterInterface
      * @param bool $useShortLinkVersion Shorten or not the link name. When shortening, only the shortName of the entity will be shown
      * @param bool $createDocument
      *  If true, creates an entity document. Otherwise, just gives a reference to the entity code
+     * @param string $separator Separator between types
      *
      * @return string
      */
@@ -50,7 +51,8 @@ final class StrTypeToUrl implements CustomFilterInterface
         string $text,
         RootEntityCollection $rootEntityCollection,
         bool $useShortLinkVersion = false,
-        bool $createDocument = false
+        bool $createDocument = false,
+        string $separator = ' | '
     ): string {
         $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
 
@@ -62,7 +64,7 @@ final class StrTypeToUrl implements CustomFilterInterface
                 if ($useShortLinkVersion) {
                     $type = array_reverse(explode('\\', $type))[0];
                 }
-                $preparedTypes[] = "<a href='{$preloadResourceLink}'>{$type}</a>";
+                $preparedTypes[] = "[{$type}]({$preloadResourceLink})";
                 continue;
             }
             try {
@@ -78,7 +80,7 @@ final class StrTypeToUrl implements CustomFilterInterface
                         }
 
                         if ($link && $link !== '#') {
-                            $preparedTypes[] = "<a href='{$link}'>{$type}</a>";
+                            $preparedTypes[] = "[$type]({$link})";
                         } else {
                             $preparedTypes[] = $type;
                         }
@@ -97,6 +99,6 @@ final class StrTypeToUrl implements CustomFilterInterface
             }
         }
 
-        return implode(' | ', $preparedTypes);
+        return implode($separator, $preparedTypes);
     }
 }
