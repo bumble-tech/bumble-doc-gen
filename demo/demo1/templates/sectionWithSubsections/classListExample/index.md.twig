@@ -3,10 +3,12 @@ title: Class list example
 ---
 {{ generatePageBreadcrumbs(title, _self) }}
 
-{{ "Class list" | textToHeading('H1') }}
+# Class list
 
 **List of classes filtered by the directory where they are located.**
 
-{{ "{{ printEntityCollectionAsList( phpEntities.filterByPaths(['/annotations']) ) }}"  | textToCodeBlock('twig') }}
+```twig
+{{ "{{ printEntityCollectionAsList( phpEntities.filterByPaths(['/annotations']) ) }}" }}
+```
 
 {{ printEntityCollectionAsList( phpEntities.filterByPaths(['/annotations']) ) }}

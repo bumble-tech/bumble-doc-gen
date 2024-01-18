@@ -1,10 +1,12 @@
 ---
 title: Demo 5
 ---
-{{ "Demo 5" | textToHeading('H1') }}
+# Demo 5
 
 {{ printEntityCollectionAsList( phpEntities.filterByPaths(['/annotations']) ) }}
 
 To update this documentation, run the following command:
 
-{{ 'php demo/demo4-config-array/demoScript.php' | textToCodeBlock('console') }}
+```console
+php demo/demo4-config-array/demoScript.php
+```

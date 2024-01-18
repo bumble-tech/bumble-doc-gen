@@ -3,9 +3,11 @@ title: Section with subsections
 ---
 {{ generatePageBreadcrumbs(title, _self) }}
 
-{{ "Section with subsections example" | textToHeading('H1') }}
+# Section with subsections example
 
-{{ "{{ drawDocumentationMenu(_self) }}"  | textToCodeBlock('twig') }}
+```twig
+{{ "{{ drawDocumentationMenu(_self) }}" }}
+```
 
 **Documentation menu from current page only:**
 
