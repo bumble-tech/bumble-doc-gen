@@ -149,6 +149,34 @@ Here is a list of functions available by default:
                                             <tr>
              <td colspan="4">&nbsp;</td>
           </tr>
+                                                                      <tr>
+                                  <td rowspan="3">
+                    <a href="classes/DrawPageBreadcrumbs.md">drawPageBreadcrumbs</a><br>
+                                        Function to generate breadcrumbs on the page
+                                     </td>
+                                  <td>
+                    <b>$context</b>
+                 </td>
+                 <td>
+                    <i>[array](https://www.php.net/manual/en/language.types.array.php)</i>
+                 </td>
+                 <td></td>
+              </tr>
+                            <tr>
+                 <td colspan="3"></td>
+              </tr>
+                                        <tr>
+                                  <td>
+                    <b>$customPageTitle</b>
+                 </td>
+                 <td>
+                    <i>[string](https://www.php.net/manual/en/language.types.string.php) | [null](https://www.php.net/manual/en/language.types.null.php)</i>
+                 </td>
+                 <td>Custom title of the current page</td>
+              </tr>
+                                            <tr>
+             <td colspan="4">&nbsp;</td>
+          </tr>
                                                           <tr>
                                   <td rowspan="1">
                     <a href="classes/FileGetContents.md">fileGetContents</a><br>
@@ -161,46 +189,6 @@ Here is a list of functions available by default:
                     <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
                  </td>
                  <td>Resource name, url or path to the resource. The path can contain shortcodes with parameters from the configuration (%param_name%)</td>
-              </tr>
-                                            <tr>
-             <td colspan="4">&nbsp;</td>
-          </tr>
-                                                                      <tr>
-                                  <td rowspan="5">
-                    <a href="classes/GeneratePageBreadcrumbs.md">generatePageBreadcrumbs</a><br>
-                                        Function to generate breadcrumbs on the page
-                                     </td>
-                                  <td>
-                    <b>$currentPageTitle</b>
-                 </td>
-                 <td>
-                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
-                 </td>
-                 <td>Title of the current page</td>
-              </tr>
-                            <tr>
-                 <td colspan="3"></td>
-              </tr>
-                                        <tr>
-                                  <td>
-                    <b>$templatePath</b>
-                 </td>
-                 <td>
-                    <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
-                 </td>
-                 <td>Path to the template from which the breadcrumbs will be generated</td>
-              </tr>
-                            <tr>
-                 <td colspan="3"></td>
-              </tr>
-                                        <tr>
-                                  <td>
-                    <b>$skipFirstTemplatePage</b>
-                 </td>
-                 <td>
-                    <i>[bool](https://www.php.net/manual/en/language.types.boolean.php)</i>
-                 </td>
-                 <td>If set to true, the page from which parsing starts will not participate in the formation of breadcrumbs This option is useful when working with the _self value in a template, as it returns the full path to the current template, and the reference to it in breadcrumbs should not be clickable.</td>
               </tr>
                                             <tr>
              <td colspan="4">&nbsp;</td>
@@ -479,4 +467,4 @@ Here is a list of functions available by default:
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Sat Jan 20 00:42:48 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

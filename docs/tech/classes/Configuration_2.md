@@ -1,6 +1,6 @@
 [BumbleDocGen](../../README.md) **/**
 [Technical description of the project](../readme.md) **/**
-[About configuration](../01_configuration.md) **/**
+[Console app](../05_console.md) **/**
 Configuration
 
 ---

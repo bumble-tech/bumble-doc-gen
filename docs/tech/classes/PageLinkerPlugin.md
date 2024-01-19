@@ -1,6 +1,6 @@
 [BumbleDocGen](../../README.md) **/**
 [Technical description of the project](../readme.md) **/**
-[Plugin system](../04_pluginSystem.md) **/**
+[About configuration](../01_configuration.md) **/**
 PageLinkerPlugin
 
 ---

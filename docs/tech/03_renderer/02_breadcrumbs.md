@@ -33,11 +33,11 @@ In this way, complex documentation structures can be created with less file nest
 
 ## Displaying breadcrumbs in documents
 
-There is a built-in function to generate breadcrumbs in templates [GeneratePageBreadcrumbs](classes/GeneratePageBreadcrumbs_2.md).
+There is a built-in function to generate breadcrumbs in templates [DrawPageBreadcrumbs](classes/DrawPageBreadcrumbs_2.md).
 Here is how it is used in twig templates:
 
 ```twig
-{{ generatePageBreadcrumbs(title, _self) }}
+{{ drawPageBreadcrumbs() }}
 ```
 
 To build breadcrumbs, the previously compiled project structure and the names of each template are used.
@@ -49,7 +49,7 @@ title: Some page title
 ---
 ```
 
-Here is an example of the result of the `generatePageBreadcrumbs` function:
+Here is an example of the result of the `drawPageBreadcrumbs` function:
 
 ```twig
 <embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/index.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/index.md">Renderer</a> <b>/</b> Some page title <hr> </embed>
@@ -58,4 +58,4 @@ Here is an example of the result of the `generatePageBreadcrumbs` function:
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Fri Jan 19 23:21:14 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Sat Jan 20 00:42:48 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

@@ -1,18 +1,18 @@
 [BumbleDocGen](../README.md) **/**
 [Technical description of the project](readme.md) **/**
-Configuration
+About configuration
 
 ---
 
 
-# Configuration
+# About configuration
 
 Documentation generator configuration can be stored in special files.
 They can be in different formats: <a href='https://yaml.org/'>yaml</a>, <a href='https://www.json.org/json-en.html'>json</a>, <a href='https://www.php.net/manual/en/language.types.array.php'>php arrays</a>, <a href='https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ms717987(v=vs.85)'>ini</a>, <a href='https://www.w3.org/XML/'>xml</a>
 
 But it is not necessary to use files to store the configuration; you can also initialize the documentation generator instance by passing there an array of configuration parameters (see <a href='https://github.com/bumble-tech/bumble-doc-gen/tree/master/demo'>demo-5</a>)
 
-During the instance creation process, configuration data is loaded into [Configuration](/docs/tech/01_configuration.md) class, and the code works directly with it.
+During the instance creation process, configuration data is loaded into [Configuration](classes/Configuration.md) class, and the code works directly with it.
 
 # Configuration file example
 
@@ -89,13 +89,13 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 | **`language_handlers`** | array&lt;LanguageHandlerInterface&gt; | NULL | List of programming language handlers |
 | **`source_locators`** | array&lt;SourceLocatorInterface&gt; | NULL | List of source locators |
 | **`use_shared_cache`** | bool | true | Enable cache usage of generated documents |
-| **`twig_functions`** | array&lt;CustomFunctionInterface&gt; | <ul><li>[DrawDocumentationMenu](classes/DrawDocumentationMenu.md)</li><li>[DrawDocumentedEntityLink](classes/DrawDocumentedEntityLink.md)</li><li>[GeneratePageBreadcrumbs](classes/GeneratePageBreadcrumbs.md)</li><li>[GetDocumentedEntityUrl](classes/GetDocumentedEntityUrl.md)</li><li>[LoadPluginsContent](classes/LoadPluginsContent.md)</li><li>[PrintEntityCollectionAsList](classes/PrintEntityCollectionAsList.md)</li><li>[GetDocumentationPageUrl](classes/GetDocumentationPageUrl.md)</li><li>[FileGetContents](classes/FileGetContents.md)</li></ul> | Functions that can be used in document templates |
+| **`twig_functions`** | array&lt;CustomFunctionInterface&gt; | <ul><li>[DrawDocumentationMenu](classes/DrawDocumentationMenu.md)</li><li>[DrawDocumentedEntityLink](classes/DrawDocumentedEntityLink.md)</li><li>[DrawPageBreadcrumbs](classes/DrawPageBreadcrumbs.md)</li><li>[GetDocumentedEntityUrl](classes/GetDocumentedEntityUrl.md)</li><li>[LoadPluginsContent](classes/LoadPluginsContent.md)</li><li>[PrintEntityCollectionAsList](classes/PrintEntityCollectionAsList.md)</li><li>[GetDocumentationPageUrl](classes/GetDocumentationPageUrl.md)</li><li>[FileGetContents](classes/FileGetContents.md)</li></ul> | Functions that can be used in document templates |
 | **`twig_filters`** | array&lt;CustomFilterInterface&gt; | <ul><li>[AddIndentFromLeft](classes/AddIndentFromLeft.md)</li><li>[FixStrSize](classes/FixStrSize.md)</li><li>[PrepareSourceLink](classes/PrepareSourceLink.md)</li><li>[Quotemeta](classes/Quotemeta.md)</li><li>[RemoveLineBrakes](classes/RemoveLineBrakes.md)</li><li>[StrTypeToUrl](classes/StrTypeToUrl.md)</li><li>[PregMatch](classes/PregMatch.md)</li><li>[Implode](classes/Implode.md)</li></ul> | Filters that can be used in document templates |
-| **`plugins`** | array&lt;PluginInterface&gt; \| null | <ul><li>[PageHtmlLinkerPlugin](classes/PageHtmlLinkerPlugin_2.md)</li><li>[PageLinkerPlugin](classes/PageLinkerPlugin_2.md)</li></ul> | List of plugins |
+| **`plugins`** | array&lt;PluginInterface&gt; \| null | <ul><li>[PageHtmlLinkerPlugin](classes/PageHtmlLinkerPlugin.md)</li><li>[PageLinkerPlugin](classes/PageLinkerPlugin.md)</li></ul> | List of plugins |
 | **`additional_console_commands`** | array&lt;Command&gt; | NULL | Additional console commands |
 
 
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 17:19:08 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Sat Jan 20 00:45:03 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
