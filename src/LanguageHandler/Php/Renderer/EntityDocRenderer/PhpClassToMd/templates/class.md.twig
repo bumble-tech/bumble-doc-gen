@@ -1,4 +1,4 @@
-{{ generatePageBreadcrumbs(classEntity.getShortName(), parentDocFilePath, false) }}
+{{ generateEntityBreadcrumbs(classEntity.getShortName(), docUrl, parentDocFilePath, false) }}
 
 {% include '_classHeader.md.twig' with {'classEntity': classEntity} only %}
 {{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\LanguageHandler\\Php\\Renderer\\EntityDocRenderer\\PhpClassToMd\\PhpClassToMdDocRenderer::BLOCK_AFTER_HEADER')) }}
@@ -12,4 +12,4 @@
 {% include '_constants.md.twig' with {'classEntity': classEntity} only %}
 {{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\LanguageHandler\\Php\\Renderer\\EntityDocRenderer\\PhpClassToMd\\PhpClassToMdDocRenderer::BLOCK_BEFORE_DETAILS')) }}
 {% include '_property_details.md.twig' with {'classEntity': classEntity} only %}
-{% include '_method_details.md.twig' with {'methodEntitiesCollection': classEntity.getMethodEntitiesCollection()} only %}
+{% include '_method_details.md.twig' with {'methodEntitiesCollection': classEntity.getMethodEntitiesCollection(), 'classEntity': classEntity} only %}
