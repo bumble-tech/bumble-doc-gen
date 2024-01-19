@@ -20,7 +20,7 @@ use DI\NotFoundException;
  */
 final class DrawDocumentedEntityLink implements CustomFunctionInterface
 {
-    public function __construct(private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction)
+    public function __construct(private readonly GetDocumentedEntityUrl $getDocumentedEntityUrlFunction)
     {
     }
 
@@ -55,6 +55,6 @@ final class DrawDocumentedEntityLink implements CustomFunctionInterface
         $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
         $url = $getDocumentedEntityUrlFunction($entity->getRootEntityCollection(), $entity->getName(), $cursor);
         $name = $useShortName ? $entity->getShortName() : $entity->getName();
-        return "<a href='{$url}'>{$name}</a>";
+        return "[{$name}]({$url})";
     }
 }
