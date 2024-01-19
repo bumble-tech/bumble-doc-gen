@@ -10,9 +10,12 @@ use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
 use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
+use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
+
+use function BumbleDocGen\Core\get_relative_path;
 
 /**
  * Generate documentation menu in MD format. To generate the menu, the start page is taken,
@@ -45,10 +48,12 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
     {
         return [
             'is_safe' => ['html'],
+            'needs_context' => true,
         ];
     }
 
     /**
+     * @param array $context
      * @param null|string $startPageKey
      *  Relative path to the page from which the menu will be generated (only child pages will be taken into account).
      *  By default, the main documentation page (readme.md) is used.
@@ -57,12 +62,15 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
      *  By default, this restriction is disabled.
      *
      * @return string
-     * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
-    public function __invoke(?string $startPageKey = null, ?int $maxDeep = null): string
-    {
+    public function __invoke(
+        array $context,
+        ?string $startPageKey = null,
+        ?int $maxDeep = null
+    ): string {
         if ($startPageKey) {
             $startPageKey = str_replace('.twig', '', $startPageKey);
         }
@@ -94,12 +102,21 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
             }
         }
 
-        $drawPages = function (array $pagesData, int $currentDeep = 1) use ($structure, $maxDeep, &$drawPages): string {
+        $callingTemplate = $context[MainTwigEnvironment::CURRENT_TEMPLATE_NAME_KEY] ?? null;
+        if ($callingTemplate) {
+            $callingTemplate = "{$this->configuration->getOutputDirBaseUrl()}{$callingTemplate}";
+        }
+
+        $drawPages = function (array $pagesData, int $currentDeep = 1) use ($callingTemplate, $structure, $maxDeep, &$drawPages): string {
             $addIndentFromLeft = new AddIndentFromLeft();
             $md = '';
             foreach ($pagesData as $pageData) {
                 $md .= "\n- ";
-                $md .= "[{$pageData['title']}]({$pageData['url']})";
+                $url = $pageData['url'];
+                if ($callingTemplate) {
+                    $url = get_relative_path($callingTemplate, $pageData['url']);
+                }
+                $md .= "[{$pageData['title']}]({$url})";
                 if ($structure[$pageData['url']]) {
                     $nextDeep = $currentDeep + 1;
                     if (!$maxDeep || $nextDeep <= $maxDeep) {

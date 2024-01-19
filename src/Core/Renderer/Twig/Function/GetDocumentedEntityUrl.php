@@ -123,8 +123,10 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
                 $url = $this->configuration->getPageLinkProcessor()->getAbsoluteUrl($documentedEntity->getDocUrl());
                 $url = $url . $entity->cursorToDocAttributeLinkFragment($cursor);
 
-                $callingTemplate = "{$this->configuration->getOutputDirBaseUrl()}{$callingTemplate}";
-                $url = get_relative_path($callingTemplate, $url);
+                if ($callingTemplate) {
+                    $callingTemplate = "{$this->configuration->getOutputDirBaseUrl()}{$callingTemplate}";
+                    $url = get_relative_path($callingTemplate, $url);
+                }
             } else {
                 $url = $entity->getFileSourceLink(false);
                 $url = $url . $entity->cursorToDocAttributeLinkFragment($cursor, false);
