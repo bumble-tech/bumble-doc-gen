@@ -16,7 +16,7 @@ To build the documentation structure, twig templates from the `templates_dir` co
 To determine the structure of the project, the actual location of the files in the templates directory is used first of all.
 For each directory there is an index file ( <b>readme.md</b> or <b>index.md</b> ), and they are used to determine the exact input of each level of nesting.
 
-<img src="/docs/assets/doc_structure.png?raw=true">
+<img src="../../assets/doc_structure.png">
 
 But in addition to building the documentation structure using the actual location of template files in directories,
 you can explicitly specify the parent page in each template using the special front matter variable `prevPage`:
@@ -29,11 +29,11 @@ prevPage: Prev page name
 
 In this way, complex documentation structures can be created with less file nesting:
 
-<img src="/docs/assets/doc_structure2.png?raw=true">
+<img src="../../assets/doc_structure2.png">
 
 ## Displaying breadcrumbs in documents
 
-There is a built-in function to generate breadcrumbs in templates [GeneratePageBreadcrumbs](classes/GeneratePageBreadcrumbs_2.md).
+There is a built-in function to generate breadcrumbs in templates [GeneratePageBreadcrumbs](classes/GeneratePageBreadcrumbs.md).
 Here is how it is used in twig templates:
 
 ```twig
