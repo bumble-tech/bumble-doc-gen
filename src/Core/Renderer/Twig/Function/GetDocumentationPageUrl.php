@@ -23,8 +23,8 @@ final class GetDocumentationPageUrl implements CustomFunctionInterface
     public const DEFAULT_URL = '#';
 
     public function __construct(
-        private BreadcrumbsHelper $breadcrumbsHelper,
-        private LoggerInterface $logger,
+        private readonly BreadcrumbsHelper $breadcrumbsHelper,
+        private readonly LoggerInterface $logger,
     ) {
     }
 

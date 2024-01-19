@@ -17,7 +17,7 @@ use Twig\Loader\FilesystemLoader;
 
 final class MainTwigEnvironment
 {
-    public const TMP_TEMPLATE_PREFIX = '~bumbleDocGen';
+    public const CURRENT_TEMPLATE_NAME_KEY = '__templateName';
 
     private Environment $twig;
     private bool $isEnvLoaded = false;
@@ -78,6 +78,7 @@ final class MainTwigEnvironment
             $reflectionProperty->setValue($this->twig, "__TwigTemplate_" . md5($this->twigTemplatePrefixKey));
         }
 
+        $context[self::CURRENT_TEMPLATE_NAME_KEY] = $name;
         return $this->twig->render($name, $context);
     }
 }

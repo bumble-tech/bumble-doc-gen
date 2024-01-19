@@ -1,14 +1,14 @@
 ---
 title: Reflection API for PHP
 ---
-{{ generatePageBreadcrumbs(title, _self) }}
+{{ drawPageBreadcrumbs() }}
 
-{{ "Reflection API for PHP" | textToHeading('H1') }}
+# Reflection API for PHP
 
 The tool we implemented partially replicates the [standard PHP reflection API](https://www.php.net/manual/en/book.reflection.php), but it has some additional capabilities.
 In addition, our Reflection API is available for use in every documentation template, plugin, twig function, etc. at `BumbleDocGen`.
 
-{{ "Class like reflections" | textToHeading('H2') }}
+## Class like reflections
 
 Using our PHP reflection API you can get information about project entities.
 Below is information about the available methods for working with each entity type:
@@ -33,7 +33,7 @@ $entityClassCodeStartLine = $classReflection->getStartLine();
 // ... etc.
 ```
 
-{{ "Entities collection" | textToHeading('H2') }}
+## Entities collection
 
 Class reflections are stored in collections. The collection is filled either before documents are generated,
 if the Reflection API is used to generate documentation, or when special methods are called that, under certain conditions, fill them with the required reflections.
@@ -64,7 +64,7 @@ foreach($entitiesCollection as $classReflection) {
 }
 ```
 
-{{ "Class like sub entities reflections" | textToHeading('H2') }}
+## Class like sub entities reflections
 
 PHP classes contain methods, properties and constants. Below is information about these child entities:
 

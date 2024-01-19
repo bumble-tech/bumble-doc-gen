@@ -1,201 +1,79 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> StubberPlugin<hr> </embed>
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Plugin system](../04_pluginSystem.md) **/**
+StubberPlugin
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L15">StubberPlugin</a> class:
-</h1>
+---
 
 
-
-
+# [StubberPlugin](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L15) class:
 
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\ComposerPackagesStubber;
 
 final class StubberPlugin implements \BumbleDocGen\Core\Plugin\PluginInterface, \Symfony\Component\EventDispatcher\EventSubscriberInterface
 ```
+The plugin allows you to automatically provide links to github repositories for documented classes from libraries included in composer
 
-<blockquote>The plugin allows you to automatically provide links to github repositories for documented classes from libraries included in composer</blockquote>
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [getSubscribedEvents](#mgetsubscribedevents) 
+1. [onCheckIsEntityCanBeLoaded](#moncheckisentitycanbeloaded) 
+1. [onGettingResourceLink](#mongettingresourcelink) 
 
+## Methods details:
 
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#mgetsubscribedevents">getSubscribedEvents</a>
-    </li>
-<li>
-    <a href="#moncheckisentitycanbeloaded">onCheckIsEntityCanBeLoaded</a>
-    </li>
-<li>
-    <a href="#mongettingresourcelink">onGettingResourceLink</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L19">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L19)
 ```php
 public function __construct(\BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper $composerHelper);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$composerHelper | [\BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php) | - |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$composerHelper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/ComposerHelper.php'>\BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a>
- <b>getSubscribedEvents</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L23">source code</a></li>
-</ul>
-
+<a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a> `getSubscribedEvents`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L23)
 ```php
 public static function getSubscribedEvents(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="moncheckisentitycanbeloaded" href="#moncheckisentitycanbeloaded">#</a>
- <b>onCheckIsEntityCanBeLoaded</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L60">source code</a></li>
-</ul>
-
+<a name="moncheckisentitycanbeloaded" href="#moncheckisentitycanbeloaded">#</a> `onCheckIsEntityCanBeLoaded`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L60)
 ```php
 public function onCheckIsEntityCanBeLoaded(\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded $event): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$event | [\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/Event/Entity/OnCheckIsEntityCanBeLoaded.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/Event/Entity/OnCheckIsEntityCanBeLoaded.php'>\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mongettingresourcelink" href="#mongettingresourcelink">#</a>
- <b>onGettingResourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L34">source code</a></li>
-</ul>
-
+<a name="mongettingresourcelink" href="#mongettingresourcelink">#</a> `onGettingResourceLink`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/ComposerPackagesStubber/StubberPlugin.php#L34)
 ```php
 public function onGettingResourceLink(\BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink $event): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$event | [\BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php'>\BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://www.php.net/manual/en/class.exception.php">\Exception</a></li>
-
-</ul>
-
-</div>
-<hr>
+---

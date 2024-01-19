@@ -1,6 +1,11 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> Debug documents<hr> </embed>
+[BumbleDocGen](../README.md) **/**
+[Technical description of the project](readme.md) **/**
+Debug documents
 
-<embed> <h1>Debug documents</h1> </embed>
+---
+
+
+# Debug documents
 
 Our tool provides several options for debugging documentation.
 
@@ -8,7 +13,7 @@ Our tool provides several options for debugging documentation.
 
     **Here is an example of error output:**
 
-    <img src="/docs/assets/error_example.png?raw=true">
+    <img src="../assets/error_example.png">
 
 2) To track exactly how documentation is generated, you can use the interactive mode:
 
@@ -20,6 +25,6 @@ Our tool provides several options for debugging documentation.
 3) Logs are saved to a special file `last_run.log` which is located in the working directory
 
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Jan 12 01:11:04 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Sat Jan 20 00:42:48 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

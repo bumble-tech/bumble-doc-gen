@@ -19,3 +19,23 @@ if (!function_exists('BumbleDocGen\Core\get_class_short')) {
         return end($classNameParts);
     }
 }
+
+if (!function_exists('BumbleDocGen\Core\calculate_relative_url')) {
+    function calculate_relative_url(string $from, string $to): string
+    {
+        $from = explode('/', $from);
+        $to = explode('/', $to);
+
+        array_pop($from);
+        $toFileName = array_pop($to);
+
+        $commonParts = array_intersect_assoc($from, $to);
+        $diffFrom = array_diff_assoc($from, $commonParts);
+
+        $wayToCommonPath = implode('/', array_fill(0, count($diffFrom), '..'));
+        $diffTo = array_diff_assoc($to, $commonParts);
+        $newPath = $diffTo ? implode('/', $diffTo) . '/' . $toFileName : $toFileName;
+
+        return ltrim("{$wayToCommonPath}/{$newPath}", '/');
+    }
+}

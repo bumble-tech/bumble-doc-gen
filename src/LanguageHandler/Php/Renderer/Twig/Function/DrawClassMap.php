@@ -27,8 +27,8 @@ final class DrawClassMap implements CustomFunctionInterface
     private array $fileClassmap;
 
     public function __construct(
-        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private readonly GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
     ) {
     }
 
@@ -41,24 +41,27 @@ final class DrawClassMap implements CustomFunctionInterface
     {
         return [
             'is_safe' => ['html'],
+            'needs_context' => true,
         ];
     }
 
 
     /**
+     * @param array $context
      * @param PhpEntitiesCollection ...$entitiesCollections
      *  The collection of entities for which the class map will be generated
      * @return string
      *
-     * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function __invoke(
+        array $context,
         PhpEntitiesCollection ...$entitiesCollections,
     ): string {
         $structure = $this->convertDirectoryStructureToFormattedString(
-            $this->getDirectoryStructure(...$entitiesCollections),
+            $this->getDirectoryStructure($context, ...$entitiesCollections),
         );
         return "<embed> <pre>{$structure}</pre> </embed>";
     }
@@ -66,12 +69,13 @@ final class DrawClassMap implements CustomFunctionInterface
     /**
      * @throws InvalidConfigurationParameterException
      */
-    protected function appendClassToDirectoryStructure(array $directoryStructure, ClassLikeEntity $classEntity): array
+    protected function appendClassToDirectoryStructure(array $context, array $directoryStructure, ClassLikeEntity $classEntity): array
     {
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
         $this->fileClassmap[$classEntity->getRelativeFileName()] = call_user_func_array(
             callback: $this->getDocumentedEntityUrlFunction,
             args: [
+                $context,
                 $entitiesCollection,
                 $classEntity->getName()
             ]
@@ -94,7 +98,7 @@ final class DrawClassMap implements CustomFunctionInterface
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDirectoryStructure(PhpEntitiesCollection ...$entitiesCollections): array
+    public function getDirectoryStructure(array $context, PhpEntitiesCollection ...$entitiesCollections): array
     {
         $entities = [];
         foreach ($entitiesCollections as $entitiesCollection) {
@@ -108,7 +112,7 @@ final class DrawClassMap implements CustomFunctionInterface
         ksort($entities, SORT_STRING);
         $directoryStructure = [];
         foreach ($entities as $classEntity) {
-            $directoryStructure = $this->appendClassToDirectoryStructure($directoryStructure, $classEntity);
+            $directoryStructure = $this->appendClassToDirectoryStructure($context, $directoryStructure, $classEntity);
         }
         return $directoryStructure;
     }

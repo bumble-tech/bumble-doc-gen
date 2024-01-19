@@ -2,15 +2,15 @@
 title: Plugin system
 prevPage: Technical description of the project
 ---
-{{ generatePageBreadcrumbs(title, _self) }}
+{{ drawPageBreadcrumbs() }}
 
-{{ "Plugin system" | textToHeading('H1') }}
+# Plugin system
 
 The documentation generator includes the ability to expand the functionality using plugins that allow you to add the necessary functionality to the system without changing its core.
 
 The system is built on the basis of an event model, each plugin class must implement [a]PluginInterface[/a].
 
-{{ "Configuration example" | textToHeading('H2') }}
+## Configuration example
 
 You can add your plugins to the configuration like this:
 
@@ -20,18 +20,13 @@ plugins:
   - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin
 ```
 
-{{ "Default plugins" | textToHeading('H2') }}
+## Default plugins
 
 Below are the plugins that are available by default when working with the library.
 Plugins for any programming languages work regardless of which language handler is configured in the configuration.
 
-<table>
-    <tr>
-        <th>Plugin</th>
-        <th>PL</th>
-        <th>Handles events</th>
-        <th>Description</th>
-    </tr>
+| Plugin | PL | Handles events | Description |
+|-|-|-|-|
 {% for pluginEntity in phpEntities
         .filterByPaths([
             '/src/Core',
@@ -41,22 +36,10 @@ Plugins for any programming languages work regardless of which language handler 
         .getOnlyInstantiable()
 %}
 {% set match = pluginEntity.getRelativeFileName() | preg_match('/(\\/LanguageHandler\\/)([\\s\\S]*?)(?=\\/)/i') %}
-    <tr>
-        <td>{{ drawDocumentedEntityLink(pluginEntity) }}</td>
-        <td>{% if match[2] %}{{ match[2] | upper }}{% else %}any{% endif %}</td>
-        <td>
-            <ul>
-            {% for key in pluginEntity.getMethod('getSubscribedEvents', true).getFirstReturnValue() | keys %}
-                <li>[a]{{ key }}|short_form[/a]</li>
-            {% endfor %}
-            </ul>
-        </td>
-        <td>{{ pluginEntity.getDescription() }}</td>
-    </tr>
+| {{ drawDocumentedEntityLink(pluginEntity) }} | {% if match[2] %}{{ match[2] | upper }}{% else %}any{% endif %} | <ul>{% for key in pluginEntity.getMethod('getSubscribedEvents', true).getFirstReturnValue() | keys %}<li> [a]{{ key }}|short_form[/a] </li>{% endfor %}</ul> | {{ pluginEntity.getDescription() | removeLineBrakes }} |
 {% endfor %}
-</table>
 
-{{ "Default events" | textToHeading('H2') }}
+## Default events
 
 {{ printEntityCollectionAsList( phpEntities
         .filterByPaths([
@@ -66,11 +49,11 @@ Plugins for any programming languages work regardless of which language handler 
         .filterByParentClassNames(['Symfony\\Contracts\\EventDispatcher\\Event'])
         .getOnlyInstantiable() ) }}
 
-{{ "Adding a new plugin" | textToHeading('H2') }}
+## Adding a new plugin
 
 If you decide to add a new plugin, there are a few things you need to do:
 
-{{ "1) Add plugin class and implement events handling" | textToHeading('H3') }}
+### 1) Add plugin class and implement events handling
 
 ```php
 namespace Demo\Plugin\DemoFakeResourceLinkPlugin;
@@ -93,7 +76,7 @@ final class DemoFakeResourceLinkPlugin implements \BumbleDocGen\Core\Plugin\Plug
 }
 ```
 
-{{ "2) Add the new plugin to the configuration" | textToHeading('H3') }}
+### 2) Add the new plugin to the configuration
 
 ```yaml
 plugins:

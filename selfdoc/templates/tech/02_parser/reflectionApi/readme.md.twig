@@ -1,9 +1,9 @@
 ---
 title: Reflection API
 ---
-{{ generatePageBreadcrumbs(title, _self) }}
+{{ drawPageBreadcrumbs() }}
 
-{{ "Reflection API" | textToHeading('H1') }}
+# Reflection API
 
 The documentation generator has a convenient Reflection API for analyzing the source code of the project being documented.
 You can use the Reflection API both in documentation templates and simply in your code where necessary.
@@ -12,9 +12,10 @@ You can use the Reflection API both in documentation templates and simply in you
 1) **[a]Reflection API for PHP[/a]**
 2) **[Demo](/demo/demo6-reflection-api/demoScript.php)**
 
-{{ "Example" | textToHeading('H3') }}
+## Example
 
-{{ '// Create a Reflection API config object. This example shows the config for parsing PHP code
+```php
+// Create a Reflection API config object. This example shows the config for parsing PHP code
 $reflectionApiConfig = PhpReflectionApiConfig::create();
 
 /** @var PhpEntitiesCollection $entitiesCollection*/
@@ -26,19 +27,20 @@ $sourceLocators = SourceLocatorsCollection::create(new DirectoriesSourceLocator(
 // We can define special filters according to which entities will be loaded
 $filter = new TrueCondition();
 
-// By default the collection is empty. You can populate the collection with data
+// By default, the collection is empty. You can populate the collection with data
 $entitiesCollection->loadEntities(
     $sourceLocators,
     $filter
 );
 
 // And now you can use Reflection API
-$filename = $entitiesCollection->get(\'SomeClassName\')?->getAbsoluteFileName();
-' | textToCodeBlock('php') }}
+$filename = $entitiesCollection->get('SomeClassName')?->getAbsoluteFileName();
+```
 
-{{ "Example 2 - Working with the Reflection API through a default parsing mechanism" | textToHeading('H3') }}
+## Example 2 - Working with the Reflection API through a default parsing mechanism
 
-{{ '// Create a documentation generator object
+```php
+// Create a documentation generator object
 $docGen = (new \BumbleDocGen\DocGeneratorFactory())->create($configFile);
 
 // Next we get a group of entity collections (according to the configuration)
@@ -48,8 +50,8 @@ $entityCollectionsGroup = $docGen->parseAndGetRootEntityCollectionsGroup();
 $entitiesCollection = $entityCollectionsGroup->get(PhpEntitiesCollection::class);
 
 // And now you can use Reflection API
-$filename = $entitiesCollection->get(\'SomeClassName\')?->getAbsoluteFileName();
-' | textToCodeBlock('php') }}
+$filename = $entitiesCollection->get('SomeClassName')?->getAbsoluteFileName();
+```
 
 This method is used in the documentation generation process.
 The only difference with the first example is that the first option is more convenient to use as a separate tool.

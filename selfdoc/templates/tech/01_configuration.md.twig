@@ -1,10 +1,10 @@
 ---
-title: Configuration
+title: About configuration
 prevPage: Technical description of the project
 ---
-{{ generatePageBreadcrumbs(title, _self) }}
+{{ drawPageBreadcrumbs() }}
 
-{{ "Configuration" | textToHeading('H1') }}
+# About configuration
 
 Documentation generator configuration can be stored in special files.
 They can be in different formats: <a href='https://yaml.org/'>yaml</a>, <a href='https://www.json.org/json-en.html'>json</a>, <a href='https://www.php.net/manual/en/language.types.array.php'>php arrays</a>, <a href='https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ms717987(v=vs.85)'>ini</a>, <a href='https://www.w3.org/XML/'>xml</a>
@@ -13,17 +13,20 @@ But it is not necessary to use files to store the configuration; you can also in
 
 During the instance creation process, configuration data is loaded into [a]Configuration[/a] class, and the code works directly with it.
 
-{{ "Configuration file example" | textToHeading('H2') }}
+# Configuration file example
 
 Let's look at an example of a real configuration in more detail:
 
-{{ fileGetContents('%WORKING_DIR%/bumble_doc_gen.yaml') | textToCodeBlock('yaml') }}
+```yaml
+{{ fileGetContents('%WORKING_DIR%/bumble_doc_gen.yaml') }}
+```
 
 In this example, we see the real configuration of the self-documentation of this project.
 
 **Here is an example of loading this configuration in PHP code:**
 
-{{ "// Single file
+```php
+// Single file
 $docGenerator = (new DocGeneratorFactory())->create('config.yaml');
 
 // Multiple files
@@ -31,9 +34,9 @@ $docGenerator = (new DocGeneratorFactory())->create('config.yaml', 'config2.yaml
 
 // Passing configuration as an array
 $docGenerator = (new DocGeneratorFactory())->createByConfigArray($configArray);
-" | textToCodeBlock('php') }}
+```
 
-{{ "Handling and inheritance of configuration files" | textToHeading('H2') }}
+## Handling and inheritance of configuration files
 
 The documentation generator can work with several configuration files at once.
 When processing configuration files, each subsequent file has a higher priority and overwrites the previously defined parameters, but if the parameter has not yet been defined before, it will be added.
@@ -41,23 +44,12 @@ When processing configuration files, each subsequent file has a higher priority 
 Each default configuration file inherits the base configuration: `BumbleDocGen/Core/Configuration/defaultConfiguration.yaml`, but the parent configuration file can be changed using the `parent_configuration` parameter.
 The inheritance algorithm is as follows: scalar types can be overwritten by each subsequent configuration, while arrays are supplemented with new data instead of overwriting.
 
-{{ "Configuration parameters" | textToHeading('H2') }}
+## Configuration parameters
 
 {% set parameters = getConfigParametersDescription(phpEntities, '%WORKING_DIR%/src/Core/Configuration/defaultConfiguration.yaml') %}
-
-<table>
-    <tr>
-        <th>Key</th>
-        <th>Type</th>
-        <th>Default value</th>
-        <th>Description</th>
-    </tr>
+| Key | Type | Default value | Description |
+|-|-|-|-|
 {% for parameter in parameters %}
-    <tr>
-        <td><b>{{ parameter.key }}</b></td>
-        <td><i>{{ parameter.type }}</i></td>
-        <td>{{ parameter.defaultValue | raw }}</td>
-        <td>{{ parameter.description }}</td>
-    </tr>
+| **`{{ parameter.key }}`** | {{ parameter.type }} | {{ parameter.defaultValue | raw }} | {{ parameter.description }} |
 {% endfor %}
-</table>
+

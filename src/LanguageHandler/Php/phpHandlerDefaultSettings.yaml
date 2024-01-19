@@ -33,6 +33,8 @@ language_handlers:
 
       file_source_base_url: null
 
+      prop_refs_internal_links_mode: false
+
       use_composer_autoload: true # whether to use composer to load the class map or not
       composer_config_file: "%project_root%/composer.json"
       composer_vendor_dir: "%project_root%/vendor"

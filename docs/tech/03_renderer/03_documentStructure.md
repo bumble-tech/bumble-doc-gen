@@ -1,6 +1,12 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/03_renderer/readme.md">Renderer</a> <b>/</b> Document structure of generated entities<hr> </embed>
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Renderer](readme.md) **/**
+Document structure of generated entities
 
-<embed> <h1>Document structure of generated entities</h1> </embed>
+---
+
+
+# Document structure of generated entities
 
 *By default, the documentation generator offers two options for organizing the structure of generated entity documents:*
 
@@ -17,6 +23,6 @@ plugins:
 ```
 
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Sat Jan 20 00:42:48 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

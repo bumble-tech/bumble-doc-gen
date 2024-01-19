@@ -1,256 +1,110 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> RendererContext<hr> </embed>
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+RendererContext
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L12">RendererContext</a> class:
-</h1>
-
-
+---
 
 
+# [RendererContext](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L12) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\Context;
 
 final class RendererContext
 ```
+Document rendering context
 
-<blockquote>Document rendering context</blockquote>
+## Methods
 
+1. [addDependency](#madddependency) 
+1. [clearDependencies](#mcleardependencies) 
+1. [getCurrentDocumentedEntityWrapper](#mgetcurrentdocumentedentitywrapper) 
+1. [getCurrentTemplateFilePatch](#mgetcurrenttemplatefilepatch) - Getting the path to the template file that is currently being worked on
+1. [getDependencies](#mgetdependencies) 
+1. [setCurrentDocumentedEntityWrapper](#msetcurrentdocumentedentitywrapper) 
+1. [setCurrentTemplateFilePatch](#msetcurrenttemplatefilepatch) - Saving the path to the template file that is currently being worked on in the context
 
+## Methods details:
 
-
-
-
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#madddependency">addDependency</a>
-    </li>
-<li>
-    <a href="#mcleardependencies">clearDependencies</a>
-    </li>
-<li>
-    <a href="#mgetcurrentdocumentedentitywrapper">getCurrentDocumentedEntityWrapper</a>
-    </li>
-<li>
-    <a href="#mgetcurrenttemplatefilepatch">getCurrentTemplateFilePatch</a>
-    - <i>Getting the path to the template file that is currently being worked on</i></li>
-<li>
-    <a href="#mgetdependencies">getDependencies</a>
-    </li>
-<li>
-    <a href="#msetcurrentdocumentedentitywrapper">setCurrentDocumentedEntityWrapper</a>
-    </li>
-<li>
-    <a href="#msetcurrenttemplatefilepatch">setCurrentTemplateFilePatch</a>
-    - <i>Saving the path to the template file that is currently being worked on in the context</i></li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="madddependency" href="#madddependency">#</a>
- <b>addDependency</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L53">source code</a></li>
-</ul>
-
+<a name="madddependency" href="#madddependency">#</a> `addDependency`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L53)
 ```php
 public function addDependency(\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyInterface $dependency): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$dependency | [\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyInterface.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$dependency</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyInterface.php'>\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyInterface</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mcleardependencies" href="#mcleardependencies">#</a>
- <b>clearDependencies</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L48">source code</a></li>
-</ul>
-
+<a name="mcleardependencies" href="#mcleardependencies">#</a> `clearDependencies`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L48)
 ```php
 public function clearDependencies(): void;
 ```
 
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetcurrentdocumentedentitywrapper" href="#mgetcurrentdocumentedentitywrapper">#</a>
- <b>getCurrentDocumentedEntityWrapper</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L43">source code</a></li>
-</ul>
-
+<a name="mgetcurrentdocumentedentitywrapper" href="#mgetcurrentdocumentedentitywrapper">#</a> `getCurrentDocumentedEntityWrapper`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L43)
 ```php
 public function getCurrentDocumentedEntityWrapper(): null|\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 ```
 
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetcurrenttemplatefilepatch" href="#mgetcurrenttemplatefilepatch">#</a>
- <b>getCurrentTemplateFilePatch</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L32">source code</a></li>
-</ul>
-
+<a name="mgetcurrenttemplatefilepatch" href="#mgetcurrenttemplatefilepatch">#</a> `getCurrentTemplateFilePatch`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L32)
 ```php
 public function getCurrentTemplateFilePatch(): string;
 ```
+Getting the path to the template file that is currently being worked on
 
-<blockquote>Getting the path to the template file that is currently being worked on</blockquote>
+***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
-<b>Parameters:</b> not specified
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetdependencies" href="#mgetdependencies">#</a>
- <b>getDependencies</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L58">source code</a></li>
-</ul>
-
+<a name="mgetdependencies" href="#mgetdependencies">#</a> `getDependencies`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L58)
 ```php
 public function getDependencies(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="msetcurrentdocumentedentitywrapper" href="#msetcurrentdocumentedentitywrapper">#</a>
- <b>setCurrentDocumentedEntityWrapper</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L37">source code</a></li>
-</ul>
-
+<a name="msetcurrentdocumentedentitywrapper" href="#msetcurrentdocumentedentitywrapper">#</a> `setCurrentDocumentedEntityWrapper`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L37)
 ```php
 public function setCurrentDocumentedEntityWrapper(\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper $currentDocumentedEntityWrapper): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$currentDocumentedEntityWrapper | [\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$currentDocumentedEntityWrapper</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="msetcurrenttemplatefilepatch" href="#msetcurrenttemplatefilepatch">#</a>
- <b>setCurrentTemplateFilePatch</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L24">source code</a></li>
-</ul>
-
+<a name="msetcurrenttemplatefilepatch" href="#msetcurrenttemplatefilepatch">#</a> `setCurrentTemplateFilePatch`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L24)
 ```php
 public function setCurrentTemplateFilePatch(string $currentTemplateFilePath): void;
 ```
+Saving the path to the template file that is currently being worked on in the context
 
-<blockquote>Saving the path to the template file that is currently being worked on in the context</blockquote>
+***Parameters:***
 
-<b>Parameters:</b>
+| Name | Type | Description |
+|:-|:-|:-|
+$currentTemplateFilePath | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$currentTemplateFilePath</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
+---

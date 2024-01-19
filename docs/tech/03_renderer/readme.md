@@ -1,6 +1,11 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> Renderer<hr> </embed>
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+Renderer
 
-<embed> <h1>Documentation renderer</h1> </embed>
+---
+
+
+# Documentation renderer
 
 Render passes through all files from the directory specified in configuration param `templates_dir`
 
@@ -8,21 +13,29 @@ If the file ends with **.twig** then the file is processed, otherwise it is simp
 to the target directory obtained from configuration param `output_dir`.
 We use twig to process templates.
 
-<embed> <h2>More detailed description of renderer components</h2> </embed>
+## More detailed description of renderer components
 
-<embed> <ul><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/readme.md'>How to create documentation templates?</a></div><div><ul><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/frontMatter.md'>Front Matter</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesDynamicBlocks.md'>Templates dynamic blocks</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesLinking.md'>Linking templates</a></div></li><li><div><a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesVariables.md'>Templates variables</a></div></li></ul></div></li><li><div><a href='/docs/tech/03_renderer/02_breadcrumbs.md'>Documentation structure and breadcrumbs</a></div></li><li><div><a href='/docs/tech/03_renderer/03_documentStructure.md'>Document structure of generated entities</a></div></li><li><div><a href='/docs/tech/03_renderer/04_twigCustomFilters.md'>Template filters</a></div></li><li><div><a href='/docs/tech/03_renderer/05_twigCustomFunctions.md'>Template functions</a></div></li></ul> </embed>
 
-<embed> <h2>Starting the rendering process</h2> </embed>
+- [How to create documentation templates?](01_howToCreateTemplates/readme.md)    
+    - [Front Matter](01_howToCreateTemplates/frontMatter.md)
+    - [Templates dynamic blocks](01_howToCreateTemplates/templatesDynamicBlocks.md)
+    - [Linking templates](01_howToCreateTemplates/templatesLinking.md)
+    - [Templates variables](01_howToCreateTemplates/templatesVariables.md)
+- [Documentation structure and breadcrumbs](02_breadcrumbs.md)
+- [Document structure of generated entities](03_documentStructure.md)
+- [Template filters](04_twigCustomFilters.md)
+- [Template functions](05_twigCustomFunctions.md)
+
+## Starting the rendering process
 
 ```php
- $renderer = new Renderer(...);
- 
- // Starting the process of filling templates with data and saving finished documents
- $renderer->run();
+$renderer = new Renderer(...);
+
+// Starting the process of filling templates with data and saving finished documents
+$renderer->run();
 ```
 
-
-<embed> <h2>How it works</h2> </embed>
+## How it works
 
 The process of rendering documents is divided into several stages. We separately generate documentation for templates that were pre-prepared by the user,
 and then create documentation for classes that the user refers to from document templates.
@@ -58,6 +71,6 @@ This process is presented in the form of a diagram below.
   style EntityProcessing stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
 ```
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Fri Jan 12 18:53:16 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Sat Jan 20 00:42:48 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

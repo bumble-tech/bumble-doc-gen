@@ -23,6 +23,8 @@ use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
 use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded;
 use DI\Attribute\Inject;
+use DI\DependencyException;
+use DI\NotFoundException;
 use phpDocumentor\Reflection\DocBlock;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -271,15 +273,20 @@ abstract class BaseEntity implements CacheableEntityInterface
      */
     public function hasDescriptionLinks(): bool
     {
-        return count($this->getDescriptionDocBlockLinks()) > 0;
+        return count($this->getDescriptionLinks()) > 0;
     }
 
     /**
+     * Get parsed links from description and doc blocks `see` and `link`
+     *
      * @return DocBlockLink[]
      *
+     * @api
+     *
+     * @throws InvalidConfigurationParameterException
      * @throws \Exception
      */
-    #[CacheableMethod] protected function getDescriptionDocBlockLinks(): array
+    #[CacheableMethod] public function getDescriptionLinks(): array
     {
         $links = [];
         $docBlock = $this->getDocBlock();
@@ -407,22 +414,6 @@ abstract class BaseEntity implements CacheableEntityInterface
     }
 
     /**
-     * Get parsed links from description and doc blocks `see` and `link`
-     *
-     * @return DocBlockLink[]
-     *
-     * @api
-     *
-     * @throws InvalidConfigurationParameterException
-     * @throws \Exception
-     */
-    public function getDescriptionLinks(): array
-    {
-        $linksData = $this->getDescriptionDocBlockLinks();
-        return $this->getPreparedDocBlockLinks($linksData);
-    }
-
-    /**
      * Checking if an entity has `throws` docBlock
      *
      * @api
@@ -436,11 +427,15 @@ abstract class BaseEntity implements CacheableEntityInterface
     }
 
     /**
+     * Get parsed throws from `throws` doc block
+     *
      * @return DocBlockLink[]
+     *
+     * @api
      *
      * @throws InvalidConfigurationParameterException
      */
-    #[CacheableMethod] public function getThrowsDocBlockLinks(): array
+    #[CacheableMethod] public function getThrows(): array
     {
         $throws = [];
         $implementingClassEntity = $this->getDocCommentEntity()->getCurrentRootEntity();
@@ -471,86 +466,6 @@ abstract class BaseEntity implements CacheableEntityInterface
             }
         }
         return $throws;
-    }
-
-    /**
-     * Get parsed throws from `throws` doc block
-     *
-     * @return DocBlockLink[]
-     *
-     * @api
-     *
-     * @throws InvalidConfigurationParameterException
-     */
-    public function getThrows(): array
-    {
-        $throwsData = $this->getThrowsDocBlockLinks();
-        return $this->getPreparedDocBlockLinks($throwsData);
-    }
-
-    /**
-     * @param DocBlockLink[] $docBlockLinks
-     *
-     * @return DocBlockLink[]
-     *
-     * @throws InvalidConfigurationParameterException
-     */
-    private function getPreparedDocBlockLinks(array $docBlockLinks): array
-    {
-        $preparedDocBlockLinksLinks = [];
-        foreach ($docBlockLinks as $data) {
-            if ($data->url) {
-                $preparedDocBlockLinksLinks[] = $data;
-                continue;
-            }
-
-            $className = $data->className;
-            $name = $data->name;
-            $url = null;
-            if ($data->className) {
-                $entityData = $this->getRootEntityCollection()->getEntityLinkData(
-                    $data->className,
-                    $this->getImplementingClass()->getName(),
-                    false
-                );
-                if (!$entityData['entityName'] && !str_contains($data->className, '\\')) {
-                    try {
-                        $className = $this->getDocCommentEntity()->getCurrentRootEntity()->getNamespaceName() . "\\{$data->className}";
-                        $entityData = $this->getRootEntityCollection()->getEntityLinkData(
-                            $className,
-                            $this->getDocCommentEntity()->getCurrentRootEntity()->getName(),
-                            false
-                        );
-                    } catch (\Exception $e) {
-                        $this->logger->error($e->getMessage());
-                    }
-                }
-
-                if ($entityData['entityName']) {
-                    $url = call_user_func(
-                        $this->documentedEntityUrlFunction,
-                        $this->getRootEntityCollection(),
-                        $entityData['entityName'],
-                        $entityData['cursor']
-                    );
-                } else {
-                    $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($data->className);
-                    if ($preloadResourceLink) {
-                        $url = $preloadResourceLink;
-                    } else {
-                        $this->logger->warning("Unable to get URL data for entity `{$data->className}`");
-                    }
-                }
-                $name = $entityData['title'];
-            }
-            $preparedDocBlockLinksLinks[] = new DocBlockLink(
-                name: $name,
-                description: $data->description,
-                className: $className,
-                url: $url
-            );
-        }
-        return $preparedDocBlockLinksLinks;
     }
 
     /**

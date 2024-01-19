@@ -1,19 +1,26 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/02_parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/readme.md">Reflection API</a> <b>/</b> Reflection API for PHP<hr> </embed>
+[BumbleDocGen](../../../../README.md) **/**
+[Technical description of the project](../../../readme.md) **/**
+[Parser](../../readme.md) **/**
+[Reflection API](../readme.md) **/**
+Reflection API for PHP
 
-<embed> <h1>Reflection API for PHP</h1> </embed>
+---
+
+
+# Reflection API for PHP
 
 The tool we implemented partially replicates the [standard PHP reflection API](https://www.php.net/manual/en/book.reflection.php), but it has some additional capabilities.
 In addition, our Reflection API is available for use in every documentation template, plugin, twig function, etc. at `BumbleDocGen`.
 
-<embed> <h2>Class like reflections</h2> </embed>
+## Class like reflections
 
 Using our PHP reflection API you can get information about project entities.
 Below is information about the available methods for working with each entity type:
 
-1) <a href="/docs/tech/02_parser/reflectionApi/php/phpClassReflectionApi.md">Class reflection</a>
-2) <a href="/docs/tech/02_parser/reflectionApi/php/phpTraitReflectionApi.md">Trait reflection</a>
-3) <a href="/docs/tech/02_parser/reflectionApi/php/phpInterfaceReflectionApi.md">Interface reflection</a>
-4) <a href="/docs/tech/02_parser/reflectionApi/php/phpEnumReflectionApi.md">Enum reflection</a>
+1) [Class reflection](/docs/tech/02_parser/reflectionApi/php/phpClassReflectionApi.md)
+2) [Trait reflection](/docs/tech/02_parser/reflectionApi/php/phpTraitReflectionApi.md)
+3) [Interface reflection](/docs/tech/02_parser/reflectionApi/php/phpInterfaceReflectionApi.md)
+4) [Enum reflection](/docs/tech/02_parser/reflectionApi/php/phpEnumReflectionApi.md)
 
 **Usage example:**
 
@@ -30,13 +37,13 @@ $entityClassCodeStartLine = $classReflection->getStartLine();
 // ... etc.
 ```
 
-<embed> <h2>Entities collection</h2> </embed>
+## Entities collection
 
 Class reflections are stored in collections. The collection is filled either before documents are generated,
 if the Reflection API is used to generate documentation, or when special methods are called that, under certain conditions, fill them with the required reflections.
 
 You can perform a number of filtering and searching operations on a collection of entities.
-The collections API is presented on this page: <a href="/docs/tech/02_parser/reflectionApi/php/phpEntitiesCollection.md">PHP entities collection</a>
+The collections API is presented on this page: [PHP entities collection](/docs/tech/02_parser/reflectionApi/php/phpEntitiesCollection.md)
 
 **Usage example:**
 
@@ -61,13 +68,13 @@ foreach($entitiesCollection as $classReflection) {
 }
 ```
 
-<embed> <h2>Class like sub entities reflections</h2> </embed>
+## Class like sub entities reflections
 
 PHP classes contain methods, properties and constants. Below is information about these child entities:
 
-1) <a href="/docs/tech/02_parser/reflectionApi/php/phpClassMethodReflectionApi.md">Class method reflection</a>
-2) <a href="/docs/tech/02_parser/reflectionApi/php/phpClassPropertyReflectionApi.md">Class property reflection</a>
-3) <a href="/docs/tech/02_parser/reflectionApi/php/phpClassConstantReflectionApi.md">Class constant reflection</a>
+1) [Class method reflection](/docs/tech/02_parser/reflectionApi/php/phpClassMethodReflectionApi.md)
+2) [Class property reflection](/docs/tech/02_parser/reflectionApi/php/phpClassPropertyReflectionApi.md)
+3) [Class constant reflection](/docs/tech/02_parser/reflectionApi/php/phpClassConstantReflectionApi.md)
 
 **Usage example:**
 
@@ -86,6 +93,6 @@ $firstMethodReturnValue = $methodReflection->getFirstReturnValue();
 // ... etc.
 ```
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Sat Jan 20 00:42:48 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

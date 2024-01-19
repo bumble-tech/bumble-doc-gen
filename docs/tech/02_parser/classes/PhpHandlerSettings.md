@@ -1,12 +1,12 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/02_parser/readme.md">Parser</a> <b>/</b> PhpHandlerSettings<hr> </embed>
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Parser](../readme.md) **/**
+PhpHandlerSettings
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L21">PhpHandlerSettings</a> class:
-</h1>
+---
 
 
-
-
+# [PhpHandlerSettings](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L21) class:
 
 ```php
 namespace BumbleDocGen\LanguageHandler\Php;
@@ -14,498 +14,171 @@ namespace BumbleDocGen\LanguageHandler\Php;
 final class PhpHandlerSettings
 ```
 
+## Initialization methods
 
+1. [__construct](#m-construct) 
+## Methods
 
+1. [changePropRefsInternalLinksMode](#mchangeproprefsinternallinksmode) 
+1. [getClassConstantEntityFilter](#mgetclassconstantentityfilter) 
+1. [getClassEntityFilter](#mgetclassentityfilter) 
+1. [getComposerConfigFile](#mgetcomposerconfigfile) 
+1. [getComposerVendorDir](#mgetcomposervendordir) 
+1. [getCustomTwigFilters](#mgetcustomtwigfilters) 
+1. [getCustomTwigFunctions](#mgetcustomtwigfunctions) 
+1. [getEntityDocRenderersCollection](#mgetentitydocrendererscollection) 
+1. [getFileSourceBaseUrl](#mgetfilesourcebaseurl) 
+1. [getMethodEntityFilter](#mgetmethodentityfilter) 
+1. [getPropRefsInternalLinksMode](#mgetproprefsinternallinksmode) - If `true` - parameters and properties in class documents refer to generated documents and not to external sources
+1. [getPropertyEntityFilter](#mgetpropertyentityfilter) 
+1. [getPsr4Map](#mgetpsr4map) 
+1. [getUseComposerAutoload](#mgetusecomposerautoload) 
 
+## Methods details:
 
-
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#mgetclassconstantentityfilter">getClassConstantEntityFilter</a>
-    </li>
-<li>
-    <a href="#mgetclassentityfilter">getClassEntityFilter</a>
-    </li>
-<li>
-    <a href="#mgetcomposerconfigfile">getComposerConfigFile</a>
-    </li>
-<li>
-    <a href="#mgetcomposervendordir">getComposerVendorDir</a>
-    </li>
-<li>
-    <a href="#mgetcustomtwigfilters">getCustomTwigFilters</a>
-    </li>
-<li>
-    <a href="#mgetcustomtwigfunctions">getCustomTwigFunctions</a>
-    </li>
-<li>
-    <a href="#mgetentitydocrendererscollection">getEntityDocRenderersCollection</a>
-    </li>
-<li>
-    <a href="#mgetfilesourcebaseurl">getFileSourceBaseUrl</a>
-    </li>
-<li>
-    <a href="#mgetmethodentityfilter">getMethodEntityFilter</a>
-    </li>
-<li>
-    <a href="#mgetpropertyentityfilter">getPropertyEntityFilter</a>
-    </li>
-<li>
-    <a href="#mgetpsr4map">getPsr4Map</a>
-    </li>
-<li>
-    <a href="#mgetusecomposerautoload">getUseComposerAutoload</a>
-    </li>
-</ol>
-
-
-<h2>Constants:</h2>
-<ul>
-            <li><a name="qdefault-settings-file"
-               href="#qdefault-settings-file">#</a>
-            <code>DEFAULT_SETTINGS_FILE</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/PhpHandlerSettings.php#L24">source
-                    code</a> </li>
-            <li><a name="qsettings-prefix"
-               href="#qsettings-prefix">#</a>
-            <code>SETTINGS_PREFIX</code>                   <b>|</b> <a href="/src/LanguageHandler/Php/PhpHandlerSettings.php#L23">source
-                    code</a> </li>
-    </ul>
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L26">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L26)
 ```php
 public function __construct(\BumbleDocGen\Core\Configuration\ConfigurationParameterBag $parameterBag, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$parameterBag | [\BumbleDocGen\Core\Configuration\ConfigurationParameterBag](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php) | - |
+$localObjectCache | [\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php) | - |
 
-<b>Parameters:</b>
+---
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$parameterBag</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php'>\BumbleDocGen\Core\Configuration\ConfigurationParameterBag</a></td>
-            <td>-</td>
-        </tr>
-            <tr>
-            <td>$localObjectCache</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php'>\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+<a name="mchangeproprefsinternallinksmode" href="#mchangeproprefsinternallinksmode">#</a> `changePropRefsInternalLinksMode`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L175)
+```php
+public function changePropRefsInternalLinksMode(bool $propRefsInternalLinksMode): void;
+```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$propRefsInternalLinksMode | [bool](https://www.php.net/manual/en/language.types.boolean.php) | - |
 
-</div>
-<hr>
-<div class='method_description-block'>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<ul>
-<li><a name="mgetclassconstantentityfilter" href="#mgetclassconstantentityfilter">#</a>
- <b>getClassConstantEntityFilter</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L63">source code</a></li>
-</ul>
+---
 
+<a name="mgetclassconstantentityfilter" href="#mgetclassconstantentityfilter">#</a> `getClassConstantEntityFilter`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L63)
 ```php
 public function getClassConstantEntityFilter(): \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 ```
 
+***Return value:*** [\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetclassentityfilter" href="#mgetclassentityfilter">#</a>
- <b>getClassEntityFilter</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L43">source code</a></li>
-</ul>
-
+<a name="mgetclassentityfilter" href="#mgetclassentityfilter">#</a> `getClassEntityFilter`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L43)
 ```php
 public function getClassEntityFilter(): \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 ```
 
+***Return value:*** [\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetcomposerconfigfile" href="#mgetcomposerconfigfile">#</a>
- <b>getComposerConfigFile</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L176">source code</a></li>
-</ul>
-
+<a name="mgetcomposerconfigfile" href="#mgetcomposerconfigfile">#</a> `getComposerConfigFile`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L199)
 ```php
 public function getComposerConfigFile(): null|string;
 ```
 
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetcomposervendordir" href="#mgetcomposervendordir">#</a>
- <b>getComposerVendorDir</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L193">source code</a></li>
-</ul>
-
+<a name="mgetcomposervendordir" href="#mgetcomposervendordir">#</a> `getComposerVendorDir`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L216)
 ```php
 public function getComposerVendorDir(): null|string;
 ```
 
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetcustomtwigfilters" href="#mgetcustomtwigfilters">#</a>
- <b>getCustomTwigFilters</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L250">source code</a></li>
-</ul>
-
+<a name="mgetcustomtwigfilters" href="#mgetcustomtwigfilters">#</a> `getCustomTwigFilters`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L273)
 ```php
 public function getCustomTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 ```
 
+***Return value:*** [\BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/CustomFiltersCollection.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/CustomFiltersCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetcustomtwigfunctions" href="#mgetcustomtwigfunctions">#</a>
- <b>getCustomTwigFunctions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L227">source code</a></li>
-</ul>
-
+<a name="mgetcustomtwigfunctions" href="#mgetcustomtwigfunctions">#</a> `getCustomTwigFunctions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L250)
 ```php
 public function getCustomTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 ```
 
+***Return value:*** [\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/CustomFunctionsCollection.php'>\BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetentitydocrendererscollection" href="#mgetentitydocrendererscollection">#</a>
- <b>getEntityDocRenderersCollection</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L123">source code</a></li>
-</ul>
-
+<a name="mgetentitydocrendererscollection" href="#mgetentitydocrendererscollection">#</a> `getEntityDocRenderersCollection`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L123)
 ```php
 public function getEntityDocRenderersCollection(): \BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRenderersCollection;
 ```
 
+***Return value:*** [\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRenderersCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/EntityDocRenderer/EntityDocRenderersCollection.php'>\BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRenderersCollection</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetfilesourcebaseurl" href="#mgetfilesourcebaseurl">#</a>
- <b>getFileSourceBaseUrl</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L144">source code</a></li>
-</ul>
-
+<a name="mgetfilesourcebaseurl" href="#mgetfilesourcebaseurl">#</a> `getFileSourceBaseUrl`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L144)
 ```php
 public function getFileSourceBaseUrl(): null|string;
 ```
 
+***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetmethodentityfilter" href="#mgetmethodentityfilter">#</a>
- <b>getMethodEntityFilter</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L83">source code</a></li>
-</ul>
-
+<a name="mgetmethodentityfilter" href="#mgetmethodentityfilter">#</a> `getMethodEntityFilter`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L83)
 ```php
 public function getMethodEntityFilter(): \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 ```
 
+***Return value:*** [\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php)
 
+---
 
-<b>Parameters:</b> not specified
+<a name="mgetproprefsinternallinksmode" href="#mgetproprefsinternallinksmode">#</a> `getPropRefsInternalLinksMode`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L162)
+```php
+public function getPropRefsInternalLinksMode(): bool;
+```
+If `true` - parameters and properties in class documents refer to generated documents and not to external sources
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
 
+---
 
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetpropertyentityfilter" href="#mgetpropertyentityfilter">#</a>
- <b>getPropertyEntityFilter</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L103">source code</a></li>
-</ul>
-
+<a name="mgetpropertyentityfilter" href="#mgetpropertyentityfilter">#</a> `getPropertyEntityFilter`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L103)
 ```php
 public function getPropertyEntityFilter(): \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
 ```
 
+***Return value:*** [\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/FilterCondition/ConditionInterface.php'>\BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
-
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-<li>
-    <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetpsr4map" href="#mgetpsr4map">#</a>
- <b>getPsr4Map</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L209">source code</a></li>
-</ul>
-
+<a name="mgetpsr4map" href="#mgetpsr4map">#</a> `getPsr4Map`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L232)
 ```php
 public function getPsr4Map(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetusecomposerautoload" href="#mgetusecomposerautoload">#</a>
- <b>getUseComposerAutoload</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L160">source code</a></li>
-</ul>
-
+<a name="mgetusecomposerautoload" href="#mgetusecomposerautoload">#</a> `getUseComposerAutoload`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L183)
 ```php
 public function getUseComposerAutoload(): bool;
 ```
 
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
 
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
-
-
-<b>Throws:</b>
-<ul>
-<li>
-    <a href="/docs/tech/02_parser/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
-
-</ul>
-
-</div>
-<hr>
+---

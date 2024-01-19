@@ -14,6 +14,7 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 
 /**
  * @internal
@@ -25,8 +26,10 @@ final class Daux implements PluginInterface
 
     public function __construct(
         private readonly Configuration $configuration,
-        private readonly BreadcrumbsHelper $breadcrumbsHelper
+        private readonly BreadcrumbsHelper $breadcrumbsHelper,
+        PhpHandlerSettings $phpHandlerSettings
     ) {
+        $phpHandlerSettings->changePropRefsInternalLinksMode(true);
     }
 
     public static function getSubscribedEvents(): array
@@ -53,14 +56,16 @@ final class Daux implements PluginInterface
         );
 
         // MD links are not always converted to HTML correctly. This hack fixes that
-        $content = preg_replace('/\[([^\[]+)\]\((.*)\)/', '<a href="$2">$1</a>', $content);
+        $content = preg_replace('/\[([^\[]+)\]\(([^)]+)(\))/', '<a href="$2">$1</a>', $content);
 
         // Hack to make images work in generated HTML
         $content = preg_replace_callback('/(src=("|\')\/)([^"\']+)/', function (array $elements): string {
             return explode('?', $elements[0])[0];
         }, $content);
 
-        $content = preg_replace('/(\/readme.md)("|\')/i', '/index.md$2', $content);
+        $content = preg_replace('/(\/readme.md)("|\')(>)/i', '/index.md$2>', $content);
+        $content = preg_replace('/("|\')(readme.md)("|\')(>)/i', '$1index.md$1>', $content);
+
         $event->setContent($content);
 
         $outputFileName = $event->getOutputFilePatch();

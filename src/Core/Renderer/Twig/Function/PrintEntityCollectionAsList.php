@@ -6,9 +6,10 @@ namespace BumbleDocGen\Core\Renderer\Twig\Function;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Renderer\Twig\Filter\RemoveLineBrakes;
 
 /**
- * Outputting entity data as HTML list
+ * Outputting entity data as MD list
  *
  * @note This function initiates the creation of documents for the displayed entities
  *
@@ -20,8 +21,10 @@ use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
  */
 final class PrintEntityCollectionAsList implements CustomFunctionInterface
 {
-    public function __construct(private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction)
-    {
+    public function __construct(
+        private readonly GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private readonly RemoveLineBrakes $removeLineBrakes
+    ) {
     }
 
     public static function getName(): string
@@ -33,35 +36,41 @@ final class PrintEntityCollectionAsList implements CustomFunctionInterface
     {
         return [
             'is_safe' => ['html'],
+            'needs_context' => true,
         ];
     }
 
     /**
+     * @param array $context
      * @param RootEntityCollection $rootEntityCollection Processed entity collection
      * @param string $type List tag type (<ul>/<ol>)
      * @param bool $skipDescription Don't print description of this entities
      * @param bool $useFullName Use the full name of the entity in the list
      * @return string
-     * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
+        array $context,
         RootEntityCollection $rootEntityCollection,
         string $type = 'ul',
         bool $skipDescription = false,
         bool $useFullName = false,
     ): string {
-        $result = "<{$type}>";
+        $result = '';
+        $prefix = '1. ';
+        if ($type === 'ul') {
+            $prefix = '- ';
+        }
         foreach ($rootEntityCollection as $entity) {
             $description = $entity->getDescription();
-            $descriptionText = !$skipDescription && $description ? " - {$description}" : '';
+            $descriptionText = call_user_func($this->removeLineBrakes, !$skipDescription && $description ? " - {$description}" : '');
             $entityDocUrl = call_user_func_array($this->getDocumentedEntityUrlFunction, [
+                $context,
                 $rootEntityCollection,
                 $entity->getName()
             ]);
             $name = $useFullName ? $entity->getName() : $entity->getShortName();
-            $result .= "<li><a href='{$entityDocUrl}'>{$name}</a>{$descriptionText}</li>";
+            $result .= "{$prefix} [{$name}]({$entityDocUrl}){$descriptionText}\n";
         }
-        $result .= "</{$type}>";
-        return "<embed> {$result} </embed>";
+        return $result;
     }
 }

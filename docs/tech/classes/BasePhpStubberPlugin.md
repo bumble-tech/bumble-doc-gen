@@ -1,143 +1,63 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> BasePhpStubberPlugin<hr> </embed>
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Plugin system](../04_pluginSystem.md) **/**
+BasePhpStubberPlugin
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/BasePhpStubberPlugin.php#L15">BasePhpStubberPlugin</a> class:
-</h1>
+---
 
 
-
-
+# [BasePhpStubberPlugin](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/BasePhpStubberPlugin.php#L15) class:
 
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
 final class BasePhpStubberPlugin implements \BumbleDocGen\Core\Plugin\PluginInterface, \Symfony\Component\EventDispatcher\EventSubscriberInterface
 ```
+Adding links to type documentation and documentation of built-in PHP classes
 
-<blockquote>Adding links to type documentation and documentation of built-in PHP classes</blockquote>
+## Methods
 
+1. [getSubscribedEvents](#mgetsubscribedevents) 
+1. [onCheckIsEntityCanBeLoaded](#moncheckisentitycanbeloaded) 
+1. [onGettingResourceLink](#mongettingresourcelink) 
 
+## Methods details:
 
-
-
-
-
-<h2>Methods:</h2>
-
-<ol>
-<li>
-    <a href="#mgetsubscribedevents">getSubscribedEvents</a>
-    </li>
-<li>
-    <a href="#moncheckisentitycanbeloaded">onCheckIsEntityCanBeLoaded</a>
-    </li>
-<li>
-    <a href="#mongettingresourcelink">onGettingResourceLink</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a>
- <b>getSubscribedEvents</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/BasePhpStubberPlugin.php#L146">source code</a></li>
-</ul>
-
+<a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a> `getSubscribedEvents`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/BasePhpStubberPlugin.php#L146)
 ```php
 public static function getSubscribedEvents(): array;
 ```
 
+***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
+---
 
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.array.php'>array</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="moncheckisentitycanbeloaded" href="#moncheckisentitycanbeloaded">#</a>
- <b>onCheckIsEntityCanBeLoaded</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/BasePhpStubberPlugin.php#L169">source code</a></li>
-</ul>
-
+<a name="moncheckisentitycanbeloaded" href="#moncheckisentitycanbeloaded">#</a> `onCheckIsEntityCanBeLoaded`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/BasePhpStubberPlugin.php#L169)
 ```php
 public function onCheckIsEntityCanBeLoaded(\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded $event): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$event | [\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/Event/Entity/OnCheckIsEntityCanBeLoaded.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/Event/Entity/OnCheckIsEntityCanBeLoaded.php'>\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
+---
 
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mongettingresourcelink" href="#mongettingresourcelink">#</a>
- <b>onGettingResourceLink</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/BasePhpStubberPlugin.php#L154">source code</a></li>
-</ul>
-
+<a name="mongettingresourcelink" href="#mongettingresourcelink">#</a> `onGettingResourceLink`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/BasePhpStubberPlugin.php#L154)
 ```php
 public function onGettingResourceLink(\BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink $event): void;
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$event | [\BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php) | - |
 
-<b>Parameters:</b>
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/OnGettingResourceLink.php'>\BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
-
-
-</div>
-<hr>
+---

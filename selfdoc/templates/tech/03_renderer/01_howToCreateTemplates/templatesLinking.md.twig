@@ -2,14 +2,14 @@
 title: Linking templates
 prevPage: How to create documentation templates?
 ---
-{{ generatePageBreadcrumbs(title, _self) }}
+{{ drawPageBreadcrumbs() }}
 
-{{ "Linking templates" | textToHeading('H1') }}
+# Linking templates
 
 One of the main requirements of the documentation is to be able to easily and quickly implement linking between pages.
 We have several options for this, such as using special functions or using a special document linking mechanism (`completing blank links`)
 
-{{ "Completing blank links" | textToHeading('H2') }}
+## Completing blank links
 
 Plugin [a]PageHtmlLinkerPlugin[/a] have been added to the basic configuration,
 which process the text of the filled template before its result is written to a file, and fill in all empty links.
@@ -33,7 +33,7 @@ Examples:
 {{ '<pre>&#91;a x-title="test"&#93;Existent page name&#91;/a&#93; <b>=></b> &lt;a href=&quot;/docs/some/page/targetPage.md&quot;&gt;test&lt;/a&gt;</pre>' }}
 
 
-{{ "Generating links through functions" | textToHeading('H2') }}
+## Generating links through functions
 
 The second way to relink templates is to generate links through functions.
 

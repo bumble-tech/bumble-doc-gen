@@ -1,28 +1,36 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/02_parser/readme.md">Parser</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/readme.md">Reflection API</a> <b>/</b> <a href="/docs/tech/02_parser/reflectionApi/php/readme.md">Reflection API for PHP</a> <b>/</b> PHP entities collection<hr> </embed>
+[BumbleDocGen](../../../../README.md) **/**
+[Technical description of the project](../../../readme.md) **/**
+[Parser](../../readme.md) **/**
+[Reflection API](../readme.md) **/**
+[Reflection API for PHP](readme.md) **/**
+PHP entities collection
 
-<embed> <h1>PHP entities collection</h1> </embed>
+---
+
+
+# PHP entities collection
 
 **PHP entities collection API methods:**
 
-- [add()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#madd): Add an entity to the collection
-- [filterByInterfaces()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mfilterbyinterfaces): Get a copy of the current collection only with entities filtered by interfaces names (filtering is only available for ClassLikeEntity)
-- [filterByNameRegularExpression()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mfilterbynameregularexpression): Get a copy of the current collection with only entities whose names match the regular expression
-- [filterByParentClassNames()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mfilterbyparentclassnames): Get a copy of the current collection only with entities filtered by parent classes names (filtering is only available for ClassLikeEntity)
-- [filterByPaths()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mfilterbypaths): Get a copy of the current collection only with entities filtered by file paths (from project_root)
-- [findEntity()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mfindentity): Find an entity in a collection
-- [get()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mget): Get an entity from a collection (only previously added)
-- [getEntityCollectionName()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mgetentitycollectionname): Get collection name
-- [getLoadedOrCreateNew()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mgetloadedorcreatenew): Get an entity from the collection or create a new one if it has not yet been added
-- [getOnlyAbstractClasses()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mgetonlyabstractclasses): Get a copy of the current collection with only abstract classes
-- [getOnlyInstantiable()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mgetonlyinstantiable): Get a copy of the current collection with only instantiable entities
-- [getOnlyInterfaces()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mgetonlyinterfaces): Get a copy of the current collection with only interfaces
-- [getOnlyTraits()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mgetonlytraits): Get a copy of the current collection with only traits
-- [has()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mhas): Check if an entity has been added to the collection
-- [isEmpty()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#misempty): Check if the collection is empty or not
-- [loadEntities()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mloadentities): Load entities into a collection
-- [remove()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mremove): Remove an entity from a collection
-- [toArray()](/docs/tech/02_parser/reflectionApi/php/classes/PhpEntitiesCollection.md#mtoarray): Convert collection to array
+- [add()](classes/PhpEntitiesCollection.md#madd): Add an entity to the collection
+- [filterByInterfaces()](classes/PhpEntitiesCollection.md#mfilterbyinterfaces): Get a copy of the current collection only with entities filtered by interfaces names (filtering is only available for ClassLikeEntity)
+- [filterByNameRegularExpression()](classes/PhpEntitiesCollection.md#mfilterbynameregularexpression): Get a copy of the current collection with only entities whose names match the regular expression
+- [filterByParentClassNames()](classes/PhpEntitiesCollection.md#mfilterbyparentclassnames): Get a copy of the current collection only with entities filtered by parent classes names (filtering is only available for ClassLikeEntity)
+- [filterByPaths()](classes/PhpEntitiesCollection.md#mfilterbypaths): Get a copy of the current collection only with entities filtered by file paths (from project_root)
+- [findEntity()](classes/PhpEntitiesCollection.md#mfindentity): Find an entity in a collection
+- [get()](classes/PhpEntitiesCollection.md#mget): Get an entity from a collection (only previously added)
+- [getEntityCollectionName()](classes/PhpEntitiesCollection.md#mgetentitycollectionname): Get collection name
+- [getLoadedOrCreateNew()](classes/PhpEntitiesCollection.md#mgetloadedorcreatenew): Get an entity from the collection or create a new one if it has not yet been added
+- [getOnlyAbstractClasses()](classes/PhpEntitiesCollection.md#mgetonlyabstractclasses): Get a copy of the current collection with only abstract classes
+- [getOnlyInstantiable()](classes/PhpEntitiesCollection.md#mgetonlyinstantiable): Get a copy of the current collection with only instantiable entities
+- [getOnlyInterfaces()](classes/PhpEntitiesCollection.md#mgetonlyinterfaces): Get a copy of the current collection with only interfaces
+- [getOnlyTraits()](classes/PhpEntitiesCollection.md#mgetonlytraits): Get a copy of the current collection with only traits
+- [has()](classes/PhpEntitiesCollection.md#mhas): Check if an entity has been added to the collection
+- [isEmpty()](classes/PhpEntitiesCollection.md#misempty): Check if the collection is empty or not
+- [loadEntities()](classes/PhpEntitiesCollection.md#mloadentities): Load entities into a collection
+- [remove()](classes/PhpEntitiesCollection.md#mremove): Remove an entity from a collection
+- [toArray()](classes/PhpEntitiesCollection.md#mtoarray): Convert collection to array
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Wed Jan 10 23:55:33 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+---
+
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Sat Jan 20 00:42:48 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

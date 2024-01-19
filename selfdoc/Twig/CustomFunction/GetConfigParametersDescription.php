@@ -13,7 +13,7 @@ use function BumbleDocGen\Core\is_associative_array;
 
 final class GetConfigParametersDescription implements CustomFunctionInterface
 {
-    public function __construct(private ConfigurationParameterBag $parameterBag)
+    public function __construct(private readonly ConfigurationParameterBag $parameterBag)
     {
     }
 
@@ -30,11 +30,12 @@ final class GetConfigParametersDescription implements CustomFunctionInterface
                     $shortName = array_reverse(explode('\\', $defaultValue['class']))[0];
                     $tmpDefaultValue = "[a x-title='{$shortName}']{$defaultValue['class']}[/a]";
                 } else {
-                    $tmpDefaultValue = "\n\n";
+                    $tmpDefaultValue = "<ul>";
                     foreach ($defaultValue as $v) {
                         $shortName = array_reverse(explode('\\', $v['class']))[0];
-                        $tmpDefaultValue .= "- [a x-title='{$shortName}']{$v['class']}[/a]\n\n";
+                        $tmpDefaultValue .= "<li>[a x-title='{$shortName}']{$v['class']}[/a]</li>";
                     }
+                    $tmpDefaultValue .= "</ul>";
                 }
                 $defaultValue = $tmpDefaultValue;
             } else {
@@ -42,7 +43,7 @@ final class GetConfigParametersDescription implements CustomFunctionInterface
             }
             $params[] = [
                 'key' => $name,
-                'type' => str_replace([' ', '(', ')'], '', $matches[4] ?? ''),
+                'type' => str_replace([' ', '(', ')', '|'], ['','','',' \\| '], $matches[4] ?? ''),
                 'description' => trim($matches[6] ?? ''),
                 'defaultValue' => $defaultValue,
             ];
