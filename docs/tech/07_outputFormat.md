@@ -1,5 +1,5 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
+[BumbleDocGen](../README.md) **/**
+[Technical description of the project](readme.md) **/**
 Output formats
 
 ---
@@ -10,7 +10,7 @@ Output formats
 At the moment, the documentation generator is focused on creating documentation in two formats: [GitHub Flavored Markdown](https://github.github.com/gfm/) and HTML.
 However, it is possible to create other files with some restrictions.
 
-1) Creating **GFM** documentation is possible both using a [console application](/docs/tech/05_console.md) and using the [built-in commands](/docs/tech/classes/DocGenerator.md#mgenerate) of the documentation generator.
+1) Creating **GFM** documentation is possible both using a [console application](/docs/tech/05_console.md) and using the [built-in commands](classes/DocGenerator.md#mgenerate) of the documentation generator.
 
     * Generate GFM doc by console command:
         ```bash
@@ -42,4 +42,4 @@ However, it is possible to create other files with some restrictions.
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

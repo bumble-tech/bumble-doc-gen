@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Renderer](readme.md) **/**
 Template functions
 
 ---
@@ -14,7 +14,7 @@ Functions available during page generation are defined in <a href='/docs/tech/01
 We use the twig template engine, you can get more information about working with functions here: https://twig.symfony.com/doc/1.x/advanced.html#functions
 
 You can also create your own functions and use them for any purpose, such as loading some additional information into a template, filtering data, or formatting the output of any information.
-Each function must implement the [CustomFunctionInterface](/docs/tech/03_renderer/classes/CustomFunctionInterface.md) interface, implement the `__invoke` magic method, and be added to the configuration.
+Each function must implement the [CustomFunctionInterface](classes/CustomFunctionInterface.md) interface, implement the `__invoke` magic method, and be added to the configuration.
 
 ## How to use a function in a template
 
@@ -58,10 +58,22 @@ Here is a list of functions available by default:
    </thead>
    <tbody>
                                               <tr>
-                                  <td rowspan="3">
-                    <a href="/docs/tech/03_renderer/classes/DrawDocumentationMenu.md">drawDocumentationMenu</a><br>
+                                  <td rowspan="5">
+                    <a href="classes/DrawDocumentationMenu.md">drawDocumentationMenu</a><br>
                                         Generate documentation menu in MD format. To generate the menu, the start page is taken, and all links with this page are recursively collected for it, after which the html menu is created.
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
+                                  <td>
+                    <b>$context</b>
+                 </td>
+                 <td>
+                    <i>[array](https://www.php.net/manual/en/language.types.array.php)</i>
+                 </td>
+                 <td></td>
+              </tr>
+                            <tr>
+                 <td colspan="3"></td>
+              </tr>
+                                        <tr>
                                   <td>
                     <b>$startPageKey</b>
                  </td>
@@ -86,15 +98,27 @@ Here is a list of functions available by default:
              <td colspan="4">&nbsp;</td>
           </tr>
                                                           <tr>
-                                  <td rowspan="5">
-                    <a href="/docs/tech/03_renderer/classes/DrawDocumentedEntityLink.md">drawDocumentedEntityLink</a><br>
+                                  <td rowspan="7">
+                    <a href="classes/DrawDocumentedEntityLink.md">drawDocumentedEntityLink</a><br>
                                         Creates an entity link by object
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
+                                  <td>
+                    <b>$context</b>
+                 </td>
+                 <td>
+                    <i>[array](https://www.php.net/manual/en/language.types.array.php)</i>
+                 </td>
+                 <td></td>
+              </tr>
+                            <tr>
+                 <td colspan="3"></td>
+              </tr>
+                                        <tr>
                                   <td>
                     <b>$entity</b>
                  </td>
                  <td>
-                    <i>[RootEntityInterface](/docs/tech/03_renderer/classes/RootEntityInterface.md)</i>
+                    <i>[\BumbleDocGen\Core\Parser\Entity\RootEntityInterface](classes/RootEntityInterface.md)</i>
                  </td>
                  <td>The entity for which we want to get the link</td>
               </tr>
@@ -127,7 +151,7 @@ Here is a list of functions available by default:
           </tr>
                                                           <tr>
                                   <td rowspan="1">
-                    <a href="/docs/tech/03_renderer/classes/FileGetContents.md">fileGetContents</a><br>
+                    <a href="classes/FileGetContents.md">fileGetContents</a><br>
                                         Displaying the content of a file or web resource
                                      </td>
                                   <td>
@@ -141,9 +165,9 @@ Here is a list of functions available by default:
                                             <tr>
              <td colspan="4">&nbsp;</td>
           </tr>
-                                                          <tr>
+                                                                      <tr>
                                   <td rowspan="5">
-                    <a href="/docs/tech/03_renderer/classes/GeneratePageBreadcrumbs.md">generatePageBreadcrumbs</a><br>
+                    <a href="classes/GeneratePageBreadcrumbs.md">generatePageBreadcrumbs</a><br>
                                         Function to generate breadcrumbs on the page
                                      </td>
                                   <td>
@@ -183,7 +207,7 @@ Here is a list of functions available by default:
           </tr>
                                                           <tr>
                                   <td rowspan="1">
-                    <a href="/docs/tech/03_renderer/classes/GetDocumentationPageUrl.md">getDocumentationPageUrl</a><br>
+                    <a href="classes/GetDocumentationPageUrl.md">getDocumentationPageUrl</a><br>
                                         Creates an entity link by object
                                      </td>
                                   <td>
@@ -198,15 +222,27 @@ Here is a list of functions available by default:
              <td colspan="4">&nbsp;</td>
           </tr>
                                                           <tr>
-                                  <td rowspan="7">
-                    <a href="/docs/tech/03_renderer/classes/GetDocumentedEntityUrl.md">getDocumentedEntityUrl</a><br>
+                                  <td rowspan="9">
+                    <a href="classes/GetDocumentedEntityUrl.md">getDocumentedEntityUrl</a><br>
                                         Get the URL of a documented entity by its name. If the entity is found, next to the file where this method was called, the `EntityDocRendererInterface::getDocFileExtension()` directory will be created, in which the documented entity file will be created
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
+                                  <td>
+                    <b>$context</b>
+                 </td>
+                 <td>
+                    <i>[array](https://www.php.net/manual/en/language.types.array.php)</i>
+                 </td>
+                 <td></td>
+              </tr>
+                            <tr>
+                 <td colspan="3"></td>
+              </tr>
+                                        <tr>
                                   <td>
                     <b>$rootEntityCollection</b>
                  </td>
                  <td>
-                    <i>[RootEntityCollection](/docs/tech/03_renderer/classes/RootEntityCollection.md)</i>
+                    <i>[\BumbleDocGen\Core\Parser\Entity\RootEntityCollection](classes/RootEntityCollection.md)</i>
                  </td>
                  <td>Processed entity collection</td>
               </tr>
@@ -251,7 +287,7 @@ Here is a list of functions available by default:
           </tr>
                                                           <tr>
                                   <td rowspan="5">
-                    <a href="/docs/tech/03_renderer/classes/LoadPluginsContent.md">loadPluginsContent</a><br>
+                    <a href="classes/LoadPluginsContent.md">loadPluginsContent</a><br>
                     <i><b>:warning: For internal use</b></i><br>                    Process entity template blocks with plugins. The method returns the content processed by plugins.
                                      </td>
                                   <td>
@@ -270,7 +306,7 @@ Here is a list of functions available by default:
                     <b>$entity</b>
                  </td>
                  <td>
-                    <i>[RootEntityInterface](/docs/tech/03_renderer/classes/RootEntityInterface.md)</i>
+                    <i>[\BumbleDocGen\Core\Parser\Entity\RootEntityInterface](classes/RootEntityInterface.md)</i>
                  </td>
                  <td>The entity for which we process the content block</td>
               </tr>
@@ -290,15 +326,27 @@ Here is a list of functions available by default:
              <td colspan="4">&nbsp;</td>
           </tr>
                                                           <tr>
-                                  <td rowspan="7">
-                    <a href="/docs/tech/03_renderer/classes/PrintEntityCollectionAsList.md">printEntityCollectionAsList</a><br>
+                                  <td rowspan="9">
+                    <a href="classes/PrintEntityCollectionAsList.md">printEntityCollectionAsList</a><br>
                                         Outputting entity data as MD list
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
+                                  <td>
+                    <b>$context</b>
+                 </td>
+                 <td>
+                    <i>[array](https://www.php.net/manual/en/language.types.array.php)</i>
+                 </td>
+                 <td></td>
+              </tr>
+                            <tr>
+                 <td colspan="3"></td>
+              </tr>
+                                        <tr>
                                   <td>
                     <b>$rootEntityCollection</b>
                  </td>
                  <td>
-                    <i>[RootEntityCollection](/docs/tech/03_renderer/classes/RootEntityCollection.md)</i>
+                    <i>[\BumbleDocGen\Core\Parser\Entity\RootEntityCollection](classes/RootEntityCollection.md)</i>
                  </td>
                  <td>Processed entity collection</td>
               </tr>
@@ -342,10 +390,22 @@ Here is a list of functions available by default:
              <td colspan="4">&nbsp;</td>
           </tr>
                                                           <tr>
-                                  <td rowspan="1">
-                    <a href="/docs/tech/03_renderer/classes/DisplayClassApiMethods.md">displayClassApiMethods</a><br>
+                                  <td rowspan="3">
+                    <a href="classes/DisplayClassApiMethods.md">displayClassApiMethods</a><br>
                                         Display all API methods of a class
                                      </td>
+                                  <td>
+                    <b>$context</b>
+                 </td>
+                 <td>
+                    <i>[array](https://www.php.net/manual/en/language.types.array.php)</i>
+                 </td>
+                 <td></td>
+              </tr>
+                            <tr>
+                 <td colspan="3"></td>
+              </tr>
+                                        <tr>
                                   <td>
                     <b>$className</b>
                  </td>
@@ -358,15 +418,27 @@ Here is a list of functions available by default:
              <td colspan="4">&nbsp;</td>
           </tr>
                                                           <tr>
-                                  <td rowspan="1">
-                    <a href="/docs/tech/03_renderer/classes/DrawClassMap.md">drawClassMap</a><br>
+                                  <td rowspan="3">
+                    <a href="classes/DrawClassMap.md">drawClassMap</a><br>
                                         Generate class map in HTML format
                     <br><i><b>:warning: This function initiates the creation of documents for the displayed entities</b></i><br>                 </td>
+                                  <td>
+                    <b>$context</b>
+                 </td>
+                 <td>
+                    <i>[array](https://www.php.net/manual/en/language.types.array.php)</i>
+                 </td>
+                 <td></td>
+              </tr>
+                            <tr>
+                 <td colspan="3"></td>
+              </tr>
+                                        <tr>
                                   <td>
                     <b>$entitiesCollections</b>
                  </td>
                  <td>
-                    <i>[PhpEntitiesCollection](/docs/tech/03_renderer/classes/PhpEntitiesCollection.md)</i>
+                    <i>[\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection](classes/PhpEntitiesCollection.md)</i>
                  </td>
                  <td>The collection of entities for which the class map will be generated</td>
               </tr>
@@ -375,7 +447,7 @@ Here is a list of functions available by default:
           </tr>
                                                           <tr>
                                   <td rowspan="3">
-                    <a href="/docs/tech/03_renderer/classes/GetClassMethodsBodyCode.md">getClassMethodsBodyCode</a><br>
+                    <a href="classes/GetClassMethodsBodyCode.md">getClassMethodsBodyCode</a><br>
                                         Get the code of the specified class methods as a formatted string
                                      </td>
                                   <td>
@@ -407,4 +479,4 @@ Here is a list of functions available by default:
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

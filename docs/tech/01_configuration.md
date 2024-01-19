@@ -1,5 +1,5 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
+[BumbleDocGen](../README.md) **/**
+[Technical description of the project](readme.md) **/**
 Configuration
 
 ---
@@ -85,17 +85,17 @@ The inheritance algorithm is as follows: scalar types can be overwritten by each
 | **`git_client_path`** | string | 'git' | Path to git client |
 | **`render_with_front_matter`** | bool | false | Do not remove the front matter block from templates when creating documents |
 | **`check_file_in_git_before_creating_doc`** | bool | true | Checking if a document exists in GIT before creating a document |
-| **`page_link_processor`** | PageLinkProcessorInterface | [BasePageLinkProcessor](/docs/tech/classes/BasePageLinkProcessor.md) | Link handler class on documentation pages |
+| **`page_link_processor`** | PageLinkProcessorInterface | [BasePageLinkProcessor](classes/BasePageLinkProcessor.md) | Link handler class on documentation pages |
 | **`language_handlers`** | array&lt;LanguageHandlerInterface&gt; | NULL | List of programming language handlers |
 | **`source_locators`** | array&lt;SourceLocatorInterface&gt; | NULL | List of source locators |
 | **`use_shared_cache`** | bool | true | Enable cache usage of generated documents |
-| **`twig_functions`** | array&lt;CustomFunctionInterface&gt; | <ul><li>[DrawDocumentationMenu](/docs/tech/classes/DrawDocumentationMenu.md)</li><li>[DrawDocumentedEntityLink](/docs/tech/classes/DrawDocumentedEntityLink.md)</li><li>[GeneratePageBreadcrumbs](/docs/tech/classes/GeneratePageBreadcrumbs.md)</li><li>[GetDocumentedEntityUrl](/docs/tech/classes/GetDocumentedEntityUrl.md)</li><li>[LoadPluginsContent](/docs/tech/classes/LoadPluginsContent.md)</li><li>[PrintEntityCollectionAsList](/docs/tech/classes/PrintEntityCollectionAsList.md)</li><li>[GetDocumentationPageUrl](/docs/tech/classes/GetDocumentationPageUrl.md)</li><li>[FileGetContents](/docs/tech/classes/FileGetContents.md)</li></ul> | Functions that can be used in document templates |
-| **`twig_filters`** | array&lt;CustomFilterInterface&gt; | <ul><li>[AddIndentFromLeft](/docs/tech/classes/AddIndentFromLeft.md)</li><li>[FixStrSize](/docs/tech/classes/FixStrSize.md)</li><li>[PrepareSourceLink](/docs/tech/classes/PrepareSourceLink.md)</li><li>[Quotemeta](/docs/tech/classes/Quotemeta.md)</li><li>[RemoveLineBrakes](/docs/tech/classes/RemoveLineBrakes.md)</li><li>[StrTypeToUrl](/docs/tech/classes/StrTypeToUrl.md)</li><li>[PregMatch](/docs/tech/classes/PregMatch.md)</li><li>[Implode](/docs/tech/classes/Implode.md)</li></ul> | Filters that can be used in document templates |
-| **`plugins`** | array&lt;PluginInterface&gt; \| null | <ul><li>[PageHtmlLinkerPlugin](/docs/tech/classes/PageHtmlLinkerPlugin_2.md)</li><li>[PageLinkerPlugin](/docs/tech/classes/PageLinkerPlugin_2.md)</li></ul> | List of plugins |
+| **`twig_functions`** | array&lt;CustomFunctionInterface&gt; | <ul><li>[DrawDocumentationMenu](classes/DrawDocumentationMenu.md)</li><li>[DrawDocumentedEntityLink](classes/DrawDocumentedEntityLink.md)</li><li>[GeneratePageBreadcrumbs](classes/GeneratePageBreadcrumbs.md)</li><li>[GetDocumentedEntityUrl](classes/GetDocumentedEntityUrl.md)</li><li>[LoadPluginsContent](classes/LoadPluginsContent.md)</li><li>[PrintEntityCollectionAsList](classes/PrintEntityCollectionAsList.md)</li><li>[GetDocumentationPageUrl](classes/GetDocumentationPageUrl.md)</li><li>[FileGetContents](classes/FileGetContents.md)</li></ul> | Functions that can be used in document templates |
+| **`twig_filters`** | array&lt;CustomFilterInterface&gt; | <ul><li>[AddIndentFromLeft](classes/AddIndentFromLeft.md)</li><li>[FixStrSize](classes/FixStrSize.md)</li><li>[PrepareSourceLink](classes/PrepareSourceLink.md)</li><li>[Quotemeta](classes/Quotemeta.md)</li><li>[RemoveLineBrakes](classes/RemoveLineBrakes.md)</li><li>[StrTypeToUrl](classes/StrTypeToUrl.md)</li><li>[PregMatch](classes/PregMatch.md)</li><li>[Implode](classes/Implode.md)</li></ul> | Filters that can be used in document templates |
+| **`plugins`** | array&lt;PluginInterface&gt; \| null | <ul><li>[PageHtmlLinkerPlugin](classes/PageHtmlLinkerPlugin_2.md)</li><li>[PageLinkerPlugin](classes/PageLinkerPlugin_2.md)</li></ul> | List of plugins |
 | **`additional_console_commands`** | array&lt;Command&gt; | NULL | Additional console commands |
 
 
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 17:19:08 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 17:19:08 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Plugin system](/docs/tech/04_pluginSystem.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Plugin system](../04_pluginSystem.md) **/**
 PhpDocumentorStubberPlugin
 
 ---

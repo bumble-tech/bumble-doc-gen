@@ -1,7 +1,7 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
-[Template filters](/docs/tech/03_renderer/04_twigCustomFilters.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Renderer](../readme.md) **/**
+[Template filters](../04_twigCustomFilters.md) **/**
 PrepareSourceLink
 
 ---

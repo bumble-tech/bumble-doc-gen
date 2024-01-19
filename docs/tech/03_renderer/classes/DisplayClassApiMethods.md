@@ -1,7 +1,7 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
-[Template functions](/docs/tech/03_renderer/05_twigCustomFunctions.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Renderer](../readme.md) **/**
+[Template functions](../05_twigCustomFunctions.md) **/**
 DisplayClassApiMethods
 
 ---
@@ -56,15 +56,16 @@ $getDocumentedEntityUrlFunction | [\BumbleDocGen\Core\Renderer\Twig\Function\Get
 
 ---
 
-<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DisplayClassApiMethods.php#L45)
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DisplayClassApiMethods.php#L47)
 ```php
-public function __invoke(string $className): null|string;
+public function __invoke(array $context, string $className): null|string;
 ```
 
 ***Parameters:***
 
 | Name | Type | Description |
 |:-|:-|:-|
+$context | [array](https://www.php.net/manual/en/language.types.array.php) | - |
 $className | [string](https://www.php.net/manual/en/language.types.string.php) | Name of the class for which API methods need to be displayed |
 
 ***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)

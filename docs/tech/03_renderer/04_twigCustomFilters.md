@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Renderer](readme.md) **/**
 Template filters
 
 ---
@@ -61,7 +61,7 @@ Here is a list of filters available by default:
     <tbody>
                                         <tr>
                                                         <td rowspan="5">
-                        <a href="/docs/tech/03_renderer/classes/AddIndentFromLeft.md">addIndentFromLeft</a><br>
+                        <a href="classes/AddIndentFromLeft.md">addIndentFromLeft</a><br>
                         Filter adds indent from left                    </td>
                                                 </tr>
                             <tr>
@@ -93,7 +93,7 @@ Here is a list of filters available by default:
             </tr>
                                                 <tr>
                                                         <td rowspan="5">
-                        <a href="/docs/tech/03_renderer/classes/FixStrSize.md">fixStrSize</a><br>
+                        <a href="classes/FixStrSize.md">fixStrSize</a><br>
                         The filter pads the string with the specified characters on the right to the specified size                    </td>
                                                 </tr>
                             <tr>
@@ -125,7 +125,7 @@ Here is a list of filters available by default:
             </tr>
                                                 <tr>
                                                         <td rowspan="3">
-                        <a href="/docs/tech/03_renderer/classes/Implode.md">implode</a><br>
+                        <a href="classes/Implode.md">implode</a><br>
                         Join array elements with a string                    </td>
                                                 </tr>
                             <tr>
@@ -145,7 +145,7 @@ Here is a list of filters available by default:
             </tr>
                                                 <tr>
                                                         <td rowspan="3">
-                        <a href="/docs/tech/03_renderer/classes/PregMatch.md">preg_match</a><br>
+                        <a href="classes/PregMatch.md">preg_match</a><br>
                         Perform a regular expression match                    </td>
                                                 </tr>
                             <tr>
@@ -165,7 +165,7 @@ Here is a list of filters available by default:
             </tr>
                                                 <tr>
                                                         <td >
-                        <a href="/docs/tech/03_renderer/classes/PrepareSourceLink.md">prepareSourceLink</a><br>
+                        <a href="classes/PrepareSourceLink.md">prepareSourceLink</a><br>
                         The filter converts the string into an anchor that can be used in a GitHub document link                    </td>
                                             <td colspan="3">The filter does not accept any additional parameters</td>
                                                 </tr>
@@ -174,7 +174,7 @@ Here is a list of filters available by default:
             </tr>
                                                 <tr>
                                                         <td >
-                        <a href="/docs/tech/03_renderer/classes/Quotemeta.md">quotemeta</a><br>
+                        <a href="classes/Quotemeta.md">quotemeta</a><br>
                         Quote meta characters                    </td>
                                             <td colspan="3">The filter does not accept any additional parameters</td>
                                                 </tr>
@@ -183,7 +183,7 @@ Here is a list of filters available by default:
             </tr>
                                                 <tr>
                                                         <td >
-                        <a href="/docs/tech/03_renderer/classes/RemoveLineBrakes.md">removeLineBrakes</a><br>
+                        <a href="classes/RemoveLineBrakes.md">removeLineBrakes</a><br>
                         The filter replaces all line breaks with a space                    </td>
                                             <td colspan="3">The filter does not accept any additional parameters</td>
                                                 </tr>
@@ -191,10 +191,22 @@ Here is a list of filters available by default:
                 <td colspan="4">&nbsp;</td>
             </tr>
                                                 <tr>
-                                                        <td rowspan="9">
-                        <a href="/docs/tech/03_renderer/classes/StrTypeToUrl.md">strTypeToUrl</a><br>
+                                                        <td rowspan="11">
+                        <a href="classes/StrTypeToUrl.md">strTypeToUrl</a><br>
                         The filter converts the string with the data type into a link to the documented entity, if possible.<br><i><b>:warning: This filter initiates the creation of documents for the displayed entities</b></i><br>                    </td>
                                                 </tr>
+                            <tr>
+                    <td colspan="3"></td>
+                </tr>
+                                <tr>
+                                    <td>
+                        <b>$text</b>
+                    </td>
+                    <td>
+                        <i>[string](https://www.php.net/manual/en/language.types.string.php)</i>
+                    </td>
+                    <td>Processed text</td>
+                            </tr>
                             <tr>
                     <td colspan="3"></td>
                 </tr>
@@ -203,7 +215,7 @@ Here is a list of filters available by default:
                         <b>$rootEntityCollection</b>
                     </td>
                     <td>
-                        <i>[RootEntityCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php)</i>
+                        <i>[\BumbleDocGen\Core\Parser\Entity\RootEntityCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php)</i>
                     </td>
                     <td></td>
                             </tr>
@@ -252,4 +264,4 @@ Here is a list of filters available by default:
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

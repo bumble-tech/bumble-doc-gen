@@ -1,7 +1,7 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Parser](/docs/tech/02_parser/readme.md) **/**
-[Reflection API](/docs/tech/02_parser/reflectionApi/readme.md) **/**
+[BumbleDocGen](../../../../README.md) **/**
+[Technical description of the project](../../../readme.md) **/**
+[Parser](../../readme.md) **/**
+[Reflection API](../readme.md) **/**
 RootEntityCollectionsGroup
 
 ---

@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Output formats](/docs/tech/07_outputFormat.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Output formats](../07_outputFormat.md) **/**
 DocGenerator
 
 ---

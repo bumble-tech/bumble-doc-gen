@@ -1,7 +1,7 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
-[How to create documentation templates?](/docs/tech/03_renderer/01_howToCreateTemplates/readme.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Renderer](../readme.md) **/**
+[How to create documentation templates?](readme.md) **/**
 Linking templates
 
 ---
@@ -14,7 +14,7 @@ We have several options for this, such as using special functions or using a spe
 
 ## Completing blank links
 
-Plugin [PageHtmlLinkerPlugin](/docs/tech/03_renderer/01_howToCreateTemplates/classes/PageHtmlLinkerPlugin.md) have been added to the basic configuration,
+Plugin [PageHtmlLinkerPlugin](classes/PageHtmlLinkerPlugin.md) have been added to the basic configuration,
 which process the text of the filled template before its result is written to a file, and fill in all empty links.
 
 For example, an empty link:
@@ -40,9 +40,9 @@ Examples:
 
 The second way to relink templates is to generate links through functions.
 
-There are a number of functions that allow you to get a link to an entity, for example [GetDocumentedEntityUrl](/docs/tech/03_renderer/01_howToCreateTemplates/classes/GetDocumentedEntityUrl.md), and there are also functions for getting a link to other documents, for example [GetDocumentationPageUrl](/docs/tech/03_renderer/01_howToCreateTemplates/classes/GetDocumentationPageUrl.md).
+There are a number of functions that allow you to get a link to an entity, for example [GetDocumentedEntityUrl](classes/GetDocumentedEntityUrl.md), and there are also functions for getting a link to other documents, for example [GetDocumentationPageUrl](classes/GetDocumentationPageUrl.md).
 You can also implement your own functions for relinking if necessary.
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

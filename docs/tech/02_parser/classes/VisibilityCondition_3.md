@@ -1,7 +1,7 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Parser](/docs/tech/02_parser/readme.md) **/**
-[Entity filter conditions](/docs/tech/02_parser/entityFilterCondition.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Parser](../readme.md) **/**
+[Entity filter conditions](../entityFilterCondition.md) **/**
 VisibilityCondition
 
 ---

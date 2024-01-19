@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Configuration](/docs/tech/01_configuration.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Configuration](../01_configuration.md) **/**
 FileGetContents
 
 ---

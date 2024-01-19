@@ -1,7 +1,7 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
-[Template functions](/docs/tech/03_renderer/05_twigCustomFunctions.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Renderer](../readme.md) **/**
+[Template functions](../05_twigCustomFunctions.md) **/**
 PrintEntityCollectionAsList
 
 ---
@@ -61,15 +61,16 @@ $removeLineBrakes | [\BumbleDocGen\Core\Renderer\Twig\Filter\RemoveLineBrakes](h
 
 ---
 
-<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L50)
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L51)
 ```php
-public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string $type = 'ul', bool $skipDescription = false, bool $useFullName = false): string;
+public function __invoke(array $context, \BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, string $type = 'ul', bool $skipDescription = false, bool $useFullName = false): string;
 ```
 
 ***Parameters:***
 
 | Name | Type | Description |
 |:-|:-|:-|
+$context | [array](https://www.php.net/manual/en/language.types.array.php) | - |
 $rootEntityCollection | [\BumbleDocGen\Core\Parser\Entity\RootEntityCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php) | Processed entity collection |
 $type | [string](https://www.php.net/manual/en/language.types.string.php) | List tag type (<ul>/<ol>) |
 $skipDescription | [bool](https://www.php.net/manual/en/language.types.boolean.php) | Don't print description of this entities |

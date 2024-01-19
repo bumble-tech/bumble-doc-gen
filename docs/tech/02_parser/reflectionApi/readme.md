@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Parser](/docs/tech/02_parser/readme.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Parser](../readme.md) **/**
 Reflection API
 
 ---
@@ -61,9 +61,9 @@ The only difference with the first example is that the first option is more conv
 
 The settings for which entities will be available to the reflector in this case are taken from the configuration file or configuration array, depending on the method of creating the documentation generator instance.
 
-In addition, [RootEntityCollectionsGroup](/docs/tech/02_parser/reflectionApi/classes/RootEntityCollectionsGroup.md) is always available through DI, for example when you implement some twig function or plugin.
+In addition, [RootEntityCollectionsGroup](classes/RootEntityCollectionsGroup.md) is always available through DI, for example when you implement some twig function or plugin.
 
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

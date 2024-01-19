@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Configuration](/docs/tech/01_configuration.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Configuration](../01_configuration.md) **/**
 DrawDocumentedEntityLink
 
 ---
@@ -60,15 +60,16 @@ $getDocumentedEntityUrlFunction | [\BumbleDocGen\Core\Renderer\Twig\Function\Get
 
 ---
 
-<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L50)
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L51)
 ```php
-public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $entity, string $cursor = '', bool $useShortName = true): string;
+public function __invoke(array $context, \BumbleDocGen\Core\Parser\Entity\RootEntityInterface $entity, string $cursor = '', bool $useShortName = true): string;
 ```
 
 ***Parameters:***
 
 | Name | Type | Description |
 |:-|:-|:-|
+$context | [array](https://www.php.net/manual/en/language.types.array.php) | - |
 $entity | [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php) | The entity for which we want to get the link |
 $cursor | [string](https://www.php.net/manual/en/language.types.string.php) | Reference to an element inside an entity, for example, the name of a function/constant/property |
 $useShortName | [bool](https://www.php.net/manual/en/language.types.boolean.php) | Use the full or short entity name in the link |

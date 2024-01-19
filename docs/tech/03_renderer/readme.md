@@ -1,5 +1,5 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
 Renderer
 
 ---
@@ -16,15 +16,15 @@ We use twig to process templates.
 ## More detailed description of renderer components
 
 
-- [How to create documentation templates?](/docs/tech/03_renderer/01_howToCreateTemplates/readme.md)    
-    - [Front Matter](/docs/tech/03_renderer/01_howToCreateTemplates/frontMatter.md)
-    - [Templates dynamic blocks](/docs/tech/03_renderer/01_howToCreateTemplates/templatesDynamicBlocks.md)
-    - [Linking templates](/docs/tech/03_renderer/01_howToCreateTemplates/templatesLinking.md)
-    - [Templates variables](/docs/tech/03_renderer/01_howToCreateTemplates/templatesVariables.md)
-- [Documentation structure and breadcrumbs](/docs/tech/03_renderer/02_breadcrumbs.md)
-- [Document structure of generated entities](/docs/tech/03_renderer/03_documentStructure.md)
-- [Template filters](/docs/tech/03_renderer/04_twigCustomFilters.md)
-- [Template functions](/docs/tech/03_renderer/05_twigCustomFunctions.md)
+- [How to create documentation templates?](01_howToCreateTemplates/readme.md)    
+    - [Front Matter](01_howToCreateTemplates/frontMatter.md)
+    - [Templates dynamic blocks](01_howToCreateTemplates/templatesDynamicBlocks.md)
+    - [Linking templates](01_howToCreateTemplates/templatesLinking.md)
+    - [Templates variables](01_howToCreateTemplates/templatesVariables.md)
+- [Documentation structure and breadcrumbs](02_breadcrumbs.md)
+- [Document structure of generated entities](03_documentStructure.md)
+- [Template filters](04_twigCustomFilters.md)
+- [Template functions](05_twigCustomFunctions.md)
 
 ## Starting the rendering process
 
@@ -73,4 +73,4 @@ This process is presented in the form of a diagram below.
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

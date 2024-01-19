@@ -1,7 +1,7 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Parser](/docs/tech/02_parser/readme.md) **/**
-[Entities and entities collections](/docs/tech/02_parser/entity.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Parser](../readme.md) **/**
+[Entities and entities collections](../entity.md) **/**
 ClassConstantEntitiesCollection
 
 ---

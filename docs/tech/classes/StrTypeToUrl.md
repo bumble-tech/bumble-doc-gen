@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Configuration](/docs/tech/01_configuration.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Configuration](../01_configuration.md) **/**
 StrTypeToUrl
 
 ---
@@ -58,15 +58,16 @@ $logger | [\Monolog\Logger](https://github.com/Seldaek/monolog/blob/master/src/M
 
 ---
 
-<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L50)
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Filter/StrTypeToUrl.php#L51)
 ```php
-public function __invoke(string $text, \BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, bool $useShortLinkVersion = false, bool $createDocument = false, string $separator = ' | '): string;
+public function __invoke(array $context, string $text, \BumbleDocGen\Core\Parser\Entity\RootEntityCollection $rootEntityCollection, bool $useShortLinkVersion = false, bool $createDocument = false, string $separator = ' | '): string;
 ```
 
 ***Parameters:***
 
 | Name | Type | Description |
 |:-|:-|:-|
+$context | [array](https://www.php.net/manual/en/language.types.array.php) | - |
 $text | [string](https://www.php.net/manual/en/language.types.string.php) | Processed text |
 $rootEntityCollection | [\BumbleDocGen\Core\Parser\Entity\RootEntityCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityCollection.php) | - |
 $useShortLinkVersion | [bool](https://www.php.net/manual/en/language.types.boolean.php) | Shorten or not the link name. When shortening, only the shortName of the entity will be shown |

@@ -1,13 +1,13 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
-[Documentation structure and breadcrumbs](/docs/tech/03_renderer/02_breadcrumbs.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Renderer](../readme.md) **/**
+[Documentation structure and breadcrumbs](../02_breadcrumbs.md) **/**
 BreadcrumbsHelper
 
 ---
 
 
-# [BreadcrumbsHelper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L26) class:
+# [BreadcrumbsHelper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L23) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\Breadcrumbs;
@@ -31,13 +31,12 @@ Helper entity for working with breadcrumbs
 1. [getTemplateFrontMatter](#mgettemplatefrontmatter) 
 1. [getTemplateLinkKey](#mgettemplatelinkkey) 
 1. [getTemplateTitle](#mgettemplatetitle) - Get the name of a template by its URL.
-1. [renderBreadcrumbs](#mrenderbreadcrumbs) - Returns an HTML string with rendered breadcrumbs
 
 ## Methods details:
 
-<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L38)
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L35)
 ```php
-public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment $breadcrumbsTwig, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, string $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE);
+public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache $localObjectCache, \BumbleDocGen\Core\Plugin\PluginEventDispatcher $pluginEventDispatcher, string $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE);
 ```
 
 ***Parameters:***
@@ -46,13 +45,12 @@ public function __construct(\BumbleDocGen\Core\Configuration\Configuration $conf
 |:-|:-|:-|
 $configuration | [\BumbleDocGen\Core\Configuration\Configuration](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php) | - |
 $localObjectCache | [\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php) | - |
-$breadcrumbsTwig | [\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsTwigEnvironment.php) | - |
 $pluginEventDispatcher | [\BumbleDocGen\Core\Plugin\PluginEventDispatcher](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/PluginEventDispatcher.php) | - |
 $prevPageNameTemplate | [string](https://www.php.net/manual/en/language.types.string.php) | Index page for each child section |
 
 ---
 
-<a name="mgetallpagelinks" href="#mgetallpagelinks">#</a> `getAllPageLinks`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L240)
+<a name="mgetallpagelinks" href="#mgetallpagelinks">#</a> `getAllPageLinks`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L236)
 ```php
 public function getAllPageLinks(): array;
 ```
@@ -61,7 +59,7 @@ public function getAllPageLinks(): array;
 
 ---
 
-<a name="mgetbreadcrumbs" href="#mgetbreadcrumbs">#</a> `getBreadcrumbs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L191)
+<a name="mgetbreadcrumbs" href="#mgetbreadcrumbs">#</a> `getBreadcrumbs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L187)
 ```php
 public function getBreadcrumbs(string $filePatch, bool $fromCurrent = true): array;
 ```
@@ -78,7 +76,7 @@ $fromCurrent | [bool](https://www.php.net/manual/en/language.types.boolean.php) 
 
 ---
 
-<a name="mgetbreadcrumbsfortemplates" href="#mgetbreadcrumbsfortemplates">#</a> `getBreadcrumbsForTemplates`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L213)
+<a name="mgetbreadcrumbsfortemplates" href="#mgetbreadcrumbsfortemplates">#</a> `getBreadcrumbsForTemplates`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L209)
 ```php
 public function getBreadcrumbsForTemplates(string $filePatch, bool $fromCurrent = true): array;
 ```
@@ -94,7 +92,7 @@ $fromCurrent | [bool](https://www.php.net/manual/en/language.types.boolean.php) 
 
 ---
 
-<a name="mgetnearestindexfile" href="#mgetnearestindexfile">#</a> `getNearestIndexFile`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L86)
+<a name="mgetnearestindexfile" href="#mgetnearestindexfile">#</a> `getNearestIndexFile`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L82)
 ```php
 public function getNearestIndexFile(string $templateName): string;
 ```
@@ -109,7 +107,7 @@ $templateName | [string](https://www.php.net/manual/en/language.types.string.php
 
 ---
 
-<a name="mgetpagedatabykey" href="#mgetpagedatabykey">#</a> `getPageDataByKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L307)
+<a name="mgetpagedatabykey" href="#mgetpagedatabykey">#</a> `getPageDataByKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L303)
 ```php
 public function getPageDataByKey(string $key): null|array;
 ```
@@ -124,7 +122,7 @@ $key | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
 ---
 
-<a name="mgetpagedocfilebykey" href="#mgetpagedocfilebykey">#</a> `getPageDocFileByKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L333)
+<a name="mgetpagedocfilebykey" href="#mgetpagedocfilebykey">#</a> `getPageDocFileByKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L329)
 ```php
 public function getPageDocFileByKey(string $key): null|string;
 ```
@@ -139,7 +137,7 @@ $key | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
 ---
 
-<a name="mgetpagelinkbykey" href="#mgetpagelinkbykey">#</a> `getPageLinkByKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L322)
+<a name="mgetpagelinkbykey" href="#mgetpagelinkbykey">#</a> `getPageLinkByKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L318)
 ```php
 public function getPageLinkByKey(string $key): null|string;
 ```
@@ -154,7 +152,7 @@ $key | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
 ---
 
-<a name="mgettemplatefrontmatter" href="#mgettemplatefrontmatter">#</a> `getTemplateFrontMatter`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L156)
+<a name="mgettemplatefrontmatter" href="#mgettemplatefrontmatter">#</a> `getTemplateFrontMatter`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L152)
 ```php
 public function getTemplateFrontMatter(string $templateName): array;
 ```
@@ -169,7 +167,7 @@ $templateName | [string](https://www.php.net/manual/en/language.types.string.php
 
 ---
 
-<a name="mgettemplatelinkkey" href="#mgettemplatelinkkey">#</a> `getTemplateLinkKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L147)
+<a name="mgettemplatelinkkey" href="#mgettemplatelinkkey">#</a> `getTemplateLinkKey`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L143)
 ```php
 public function getTemplateLinkKey(string $templateName): null|string;
 ```
@@ -184,7 +182,7 @@ $templateName | [string](https://www.php.net/manual/en/language.types.string.php
 
 ---
 
-<a name="mgettemplatetitle" href="#mgettemplatetitle">#</a> `getTemplateTitle`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L138)
+<a name="mgettemplatetitle" href="#mgettemplatetitle">#</a> `getTemplateTitle`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L134)
 ```php
 public function getTemplateTitle(string $templateName): string;
 ```
@@ -207,23 +205,5 @@ $templateName | [string](https://www.php.net/manual/en/language.types.string.php
 
 $breadcrumbsHelper->getTemplateTitle() == 'Some template title'; // is true
 ```
-
----
-
-<a name="mrenderbreadcrumbs" href="#mrenderbreadcrumbs">#</a> `renderBreadcrumbs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php#L349)
-```php
-public function renderBreadcrumbs(string $currentPageTitle, string $filePatch, bool $fromCurrent = true): string;
-```
-Returns an HTML string with rendered breadcrumbs
-
-***Parameters:***
-
-| Name | Type | Description |
-|:-|:-|:-|
-$currentPageTitle | [string](https://www.php.net/manual/en/language.types.string.php) | - |
-$filePatch | [string](https://www.php.net/manual/en/language.types.string.php) | - |
-$fromCurrent | [bool](https://www.php.net/manual/en/language.types.boolean.php) | - |
-
-***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
 ---

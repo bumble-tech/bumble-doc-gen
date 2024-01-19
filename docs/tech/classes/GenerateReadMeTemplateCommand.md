@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Console app](/docs/tech/05_console.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Console app](../05_console.md) **/**
 GenerateReadMeTemplateCommand
 
 ---
@@ -19,7 +19,7 @@ final class GenerateReadMeTemplateCommand extends \BumbleDocGen\Console\Command\
 1. [__construct](#m-construct) 
 ## Traits:
 
-1. [\BumbleDocGen\AI\Traits\SharedCommandLogicTrait](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Traits/SharedCommandLogicTrait.php)
+1. [BumbleDocGen\AI\Traits\SharedCommandLogicTrait](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Traits/SharedCommandLogicTrait.php)
 
 
 ## Methods details:

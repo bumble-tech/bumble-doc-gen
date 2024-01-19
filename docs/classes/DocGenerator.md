@@ -1,4 +1,4 @@
-[BumbleDocGen](/docs/README.md) **/**
+[BumbleDocGen](../README.md) **/**
 DocGenerator
 
 ---

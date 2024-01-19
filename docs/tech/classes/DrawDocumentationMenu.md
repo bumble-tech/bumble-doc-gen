@@ -1,12 +1,12 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Configuration](/docs/tech/01_configuration.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Configuration](../01_configuration.md) **/**
 DrawDocumentationMenu
 
 ---
 
 
-# [DrawDocumentationMenu](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L29) class:
+# [DrawDocumentationMenu](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L32) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\Twig\Function;
@@ -54,7 +54,7 @@ and all links with this page are recursively collected for it, after which the h
 
 ## Methods details:
 
-<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L31)
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L34)
 ```php
 public function __construct(\BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper $breadcrumbsHelper, \BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory $dependencyFactory);
 ```
@@ -70,15 +70,16 @@ $dependencyFactory | [\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDep
 
 ---
 
-<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L64)
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L69)
 ```php
-public function __invoke(string|null $startPageKey = null, int|null $maxDeep = null): string;
+public function __invoke(array $context, string|null $startPageKey = null, int|null $maxDeep = null): string;
 ```
 
 ***Parameters:***
 
 | Name | Type | Description |
 |:-|:-|:-|
+$context | [array](https://www.php.net/manual/en/language.types.array.php) | - |
 $startPageKey | [string](https://www.php.net/manual/en/language.types.string.php) \| [null](https://www.php.net/manual/en/language.types.null.php) | Relative path to the page from which the menu will be generated (only child pages will be taken into account).
  By default, the main documentation page (readme.md) is used. |
 $maxDeep | [int](https://www.php.net/manual/en/language.types.integer.php) \| [null](https://www.php.net/manual/en/language.types.null.php) | Maximum parsing depth of documented links starting from the current page.
@@ -88,7 +89,7 @@ $maxDeep | [int](https://www.php.net/manual/en/language.types.integer.php) \| [n
 
 ---
 
-<a name="mgetname" href="#mgetname">#</a> `getName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L39)
+<a name="mgetname" href="#mgetname">#</a> `getName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L42)
 ```php
 public static function getName(): string;
 ```
@@ -97,7 +98,7 @@ public static function getName(): string;
 
 ---
 
-<a name="mgetoptions" href="#mgetoptions">#</a> `getOptions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L44)
+<a name="mgetoptions" href="#mgetoptions">#</a> `getOptions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentationMenu.php#L47)
 ```php
 public static function getOptions(): array;
 ```

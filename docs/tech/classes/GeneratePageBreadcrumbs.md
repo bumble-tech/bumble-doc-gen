@@ -1,12 +1,12 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Configuration](/docs/tech/01_configuration.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Configuration](../01_configuration.md) **/**
 GeneratePageBreadcrumbs
 
 ---
 
 
-# [GeneratePageBreadcrumbs](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L20) class:
+# [GeneratePageBreadcrumbs](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L24) class:
 
 ```php
 namespace BumbleDocGen\Core\Renderer\Twig\Function;
@@ -36,9 +36,9 @@ Function to generate breadcrumbs on the page
 
 ## Methods details:
 
-<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L22)
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L26)
 ```php
-public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper $breadcrumbsHelper, \BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory $dependencyFactory);
+public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper $breadcrumbsHelper, \BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment $breadcrumbsTwig, \BumbleDocGen\Core\Renderer\Context\RendererContext $rendererContext, \BumbleDocGen\Core\Configuration\Configuration $configuration, \BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory $dependencyFactory);
 ```
 
 ***Parameters:***
@@ -46,12 +46,14 @@ public function __construct(\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsH
 | Name | Type | Description |
 |:-|:-|:-|
 $breadcrumbsHelper | [\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsHelper.php) | - |
+$breadcrumbsTwig | [\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Breadcrumbs/BreadcrumbsTwigEnvironment.php) | - |
 $rendererContext | [\BumbleDocGen\Core\Renderer\Context\RendererContext](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php) | - |
+$configuration | [\BumbleDocGen\Core\Configuration\Configuration](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/Configuration.php) | - |
 $dependencyFactory | [\BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/Dependency/RendererDependencyFactory.php) | - |
 
 ---
 
-<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L57)
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L63)
 ```php
 public function __invoke(string $currentPageTitle, string $templatePath, bool $skipFirstTemplatePage = true): string;
 ```
@@ -70,7 +72,7 @@ $skipFirstTemplatePage | [bool](https://www.php.net/manual/en/language.types.boo
 
 ---
 
-<a name="mgetname" href="#mgetname">#</a> `getName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L29)
+<a name="mgetname" href="#mgetname">#</a> `getName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L35)
 ```php
 public static function getName(): string;
 ```
@@ -79,7 +81,7 @@ public static function getName(): string;
 
 ---
 
-<a name="mgetoptions" href="#mgetoptions">#</a> `getOptions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L34)
+<a name="mgetoptions" href="#mgetoptions">#</a> `getOptions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GeneratePageBreadcrumbs.php#L40)
 ```php
 public static function getOptions(): array;
 ```

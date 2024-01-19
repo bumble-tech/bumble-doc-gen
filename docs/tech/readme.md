@@ -1,4 +1,4 @@
-[BumbleDocGen](/docs/README.md) **/**
+[BumbleDocGen](../README.md) **/**
 Technical description of the project
 
 ---
@@ -11,13 +11,13 @@ This documentation generator is a library that allows you to create handwritten 
 ## Documentation sections
 
 
-- [Configuration](/docs/tech/01_configuration.md)
-- [Parser](/docs/tech/02_parser/readme.md)
-- [Renderer](/docs/tech/03_renderer/readme.md)
-- [Plugin system](/docs/tech/04_pluginSystem.md)
-- [Console app](/docs/tech/05_console.md)
-- [Debug documents](/docs/tech/06_debugging.md)
-- [Output formats](/docs/tech/07_outputFormat.md)
+- [Configuration](01_configuration.md)
+- [Parser](02_parser/readme.md)
+- [Renderer](03_renderer/readme.md)
+- [Plugin system](04_pluginSystem.md)
+- [Console app](05_console.md)
+- [Debug documents](06_debugging.md)
+- [Output formats](07_outputFormat.md)
 
 ## How it works
 
@@ -53,4 +53,4 @@ After that, the process of parsing the project code according to the configurati
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

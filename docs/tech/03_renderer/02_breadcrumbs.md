@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Renderer](readme.md) **/**
 Documentation structure and breadcrumbs
 
 ---
@@ -8,7 +8,7 @@ Documentation structure and breadcrumbs
 
 # Documentation structure and breadcrumbs
 
-To work with breadcrumbs and get the structure of the documentation, we use the inner class [BreadcrumbsHelper](/docs/tech/03_renderer/classes/BreadcrumbsHelper.md).
+To work with breadcrumbs and get the structure of the documentation, we use the inner class [BreadcrumbsHelper](classes/BreadcrumbsHelper.md).
 To build the documentation structure, twig templates from the `templates_dir` configuration are used.
 
 ## Project structure definitions
@@ -33,7 +33,7 @@ In this way, complex documentation structures can be created with less file nest
 
 ## Displaying breadcrumbs in documents
 
-There is a built-in function to generate breadcrumbs in templates [GeneratePageBreadcrumbs](/docs/tech/03_renderer/classes/GeneratePageBreadcrumbs_2.md).
+There is a built-in function to generate breadcrumbs in templates [GeneratePageBreadcrumbs](classes/GeneratePageBreadcrumbs_2.md).
 Here is how it is used in twig templates:
 
 ```twig
@@ -58,4 +58,4 @@ Here is an example of the result of the `generatePageBreadcrumbs` function:
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

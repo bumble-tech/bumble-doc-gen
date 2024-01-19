@@ -1,7 +1,7 @@
 [BumbleDocGen](../../../README.md) **/**
 [Technical description of the project](../../readme.md) **/**
-[Renderer](../readme.md) **/**
-[Template functions](../05_twigCustomFunctions.md) **/**
+[Parser](../readme.md) **/**
+[Entities and entities collections](../entity.md) **/**
 RootEntityCollection
 
 ---
@@ -122,7 +122,7 @@ $withAddClassEntityToCollectionEvent | [bool](https://www.php.net/manual/en/lang
 ***Return value:*** [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php)
 
 ***Links:***
-- [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::isEntityDataCanBeLoaded()](/docs/tech/03_renderer/classes/RootEntityInterface_2.md#misentitydatacanbeloaded)
+- [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::isEntityDataCanBeLoaded()](/docs/tech/02_parser/classes/RootEntityInterface.md#misentitydatacanbeloaded)
 
 ---
 

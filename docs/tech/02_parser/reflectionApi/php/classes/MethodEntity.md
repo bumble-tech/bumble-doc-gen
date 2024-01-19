@@ -1,9 +1,9 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Parser](/docs/tech/02_parser/readme.md) **/**
-[Reflection API](/docs/tech/02_parser/reflectionApi/readme.md) **/**
-[Reflection API for PHP](/docs/tech/02_parser/reflectionApi/php/readme.md) **/**
-[PHP class method reflection API](/docs/tech/02_parser/reflectionApi/php/phpClassMethodReflectionApi.md) **/**
+[BumbleDocGen](../../../../../README.md) **/**
+[Technical description of the project](../../../../readme.md) **/**
+[Parser](../../../readme.md) **/**
+[Reflection API](../../readme.md) **/**
+[Reflection API for PHP](../readme.md) **/**
+[PHP class method reflection API](../phpClassMethodReflectionApi.md) **/**
 MethodEntity
 
 ---
@@ -59,7 +59,6 @@ Class method entity
 1. [getStartColumn](#mgetstartcolumn) - Get the column number of the beginning of the method code in a file
 1. [getStartLine](#mgetstartline) - Get the line number of the beginning of the entity code in a file
 1. [getThrows](#mgetthrows) - Get parsed throws from `throws` doc block
-1. [getThrowsDocBlockLinks](#mgetthrowsdocblocklinks) 
 1. [hasDescriptionLinks](#mhasdescriptionlinks) - Checking if an entity has links in its description
 1. [hasExamples](#mhasexamples) - Checking if an entity has `example` docBlock
 1. [hasThrows](#mhasthrows) - Checking if an entity has `throws` docBlock
@@ -103,7 +102,7 @@ $implementingClassName | [string](https://www.php.net/manual/en/language.types.s
 
 ---
 
-<a name="mgetabsolutefilename" href="#mgetabsolutefilename">#</a> `getAbsoluteFileName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L102)
+<a name="mgetabsolutefilename" href="#mgetabsolutefilename">#</a> `getAbsoluteFileName`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L104)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -146,7 +145,7 @@ public function getCacheKey(): string;
 
 ---
 
-<a name="mgetcachedentitydependencies" href="#mgetcachedentitydependencies">#</a> `getCachedEntityDependencies` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L658)
+<a name="mgetcachedentitydependencies" href="#mgetcachedentitydependencies">#</a> `getCachedEntityDependencies` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L573)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -157,7 +156,7 @@ public function getCachedEntityDependencies(): array;
 
 ---
 
-<a name="mgetcurrentrootentity" href="#mgetcurrentrootentity">#</a> `getCurrentRootEntity` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L634)
+<a name="mgetcurrentrootentity" href="#mgetcurrentrootentity">#</a> `getCurrentRootEntity` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L549)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -168,7 +167,7 @@ public function getCurrentRootEntity(): null|\BumbleDocGen\LanguageHandler\Php\P
 
 ---
 
-<a name="mgetdescription" href="#mgetdescription">#</a> `getDescription`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L127)
+<a name="mgetdescription" href="#mgetdescription">#</a> `getDescription`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L129)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -180,7 +179,7 @@ Get entity description
 
 ---
 
-<a name="mgetdescriptionlinks" href="#mgetdescriptionlinks">#</a> `getDescriptionLinks`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L419)
+<a name="mgetdescriptionlinks" href="#mgetdescriptionlinks">#</a> `getDescriptionLinks`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L289)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -192,7 +191,7 @@ Get parsed links from description and doc blocks `see` and `link`
 
 ---
 
-<a name="mgetdocblock" href="#mgetdocblock">#</a> `getDocBlock` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L213)
+<a name="mgetdocblock" href="#mgetdocblock">#</a> `getDocBlock` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L215)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -204,7 +203,7 @@ Get DocBlock for current entity
 
 ---
 
-<a name="mgetdoccomment" href="#mgetdoccomment">#</a> `getDocComment`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L625)
+<a name="mgetdoccomment" href="#mgetdoccomment">#</a> `getDocComment`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L540)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -235,7 +234,7 @@ public function getDocCommentLine(): null|int;
 
 ---
 
-<a name="mgetdocnote" href="#mgetdocnote">#</a> `getDocNote`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L612)
+<a name="mgetdocnote" href="#mgetdocnote">#</a> `getDocNote`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L527)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -257,7 +256,7 @@ Get the line number of the end of a method's code in a file
 
 ---
 
-<a name="mgetexamples" href="#mgetexamples">#</a> `getExamples`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L578)
+<a name="mgetexamples" href="#mgetexamples">#</a> `getExamples`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L493)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -269,7 +268,7 @@ Get parsed examples from `examples` doc block
 
 ---
 
-<a name="mgetfilesourcelink" href="#mgetfilesourcelink">#</a> `getFileSourceLink` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L171)
+<a name="mgetfilesourcelink" href="#mgetfilesourcelink">#</a> `getFileSourceLink` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L173)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -286,7 +285,7 @@ $withLine | [bool](https://www.php.net/manual/en/language.types.boolean.php) | -
 
 ---
 
-<a name="mgetfirstexample" href="#mgetfirstexample">#</a> `getFirstExample`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L599)
+<a name="mgetfirstexample" href="#mgetfirstexample">#</a> `getFirstExample`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L514)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -358,7 +357,7 @@ Namespace of the class that contains this method
 
 ---
 
-<a name="mgetobjectid" href="#mgetobjectid">#</a> `getObjectId`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L185)
+<a name="mgetobjectid" href="#mgetobjectid">#</a> `getObjectId`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L187)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -482,7 +481,7 @@ Get the line number of the beginning of the entity code in a file
 
 ---
 
-<a name="mgetthrows" href="#mgetthrows">#</a> `getThrows`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L485)
+<a name="mgetthrows" href="#mgetthrows">#</a> `getThrows`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L438)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -494,18 +493,7 @@ Get parsed throws from `throws` doc block
 
 ---
 
-<a name="mgetthrowsdocblocklinks" href="#mgetthrowsdocblocklinks">#</a> `getThrowsDocBlockLinks`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L443)
-```php
-// Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
-
-public function getThrowsDocBlockLinks(): array;
-```
-
-***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
-
----
-
-<a name="mhasdescriptionlinks" href="#mhasdescriptionlinks">#</a> `hasDescriptionLinks`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L272)
+<a name="mhasdescriptionlinks" href="#mhasdescriptionlinks">#</a> `hasDescriptionLinks`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L274)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -517,7 +505,7 @@ Checking if an entity has links in its description
 
 ---
 
-<a name="mhasexamples" href="#mhasexamples">#</a> `hasExamples`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L563)
+<a name="mhasexamples" href="#mhasexamples">#</a> `hasExamples`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L478)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -529,7 +517,7 @@ Checking if an entity has `example` docBlock
 
 ---
 
-<a name="mhasthrows" href="#mhasthrows">#</a> `hasThrows`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L432)
+<a name="mhasthrows" href="#mhasthrows">#</a> `hasThrows`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L423)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -541,7 +529,7 @@ Checking if an entity has `throws` docBlock
 
 ---
 
-<a name="misapi" href="#misapi">#</a> `isApi`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L244)
+<a name="misapi" href="#misapi">#</a> `isApi`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L246)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -563,7 +551,7 @@ Checking that a method is a constructor
 
 ---
 
-<a name="misdeprecated" href="#misdeprecated">#</a> `isDeprecated`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L258)
+<a name="misdeprecated" href="#misdeprecated">#</a> `isDeprecated`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L260)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -585,7 +573,7 @@ Check if a method is a dynamic method, that is, implementable using __call or __
 
 ---
 
-<a name="misentitycacheoutdated" href="#misentitycacheoutdated">#</a> `isEntityCacheOutdated` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L761)
+<a name="misentitycacheoutdated" href="#misentitycacheoutdated">#</a> `isEntityCacheOutdated` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L676)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -608,7 +596,7 @@ public function isEntityDataCacheOutdated(): bool;
 
 ---
 
-<a name="misentityfilecanbeload" href="#misentityfilecanbeload">#</a> `isEntityFileCanBeLoad`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L115)
+<a name="misentityfilecanbeload" href="#misentityfilecanbeload">#</a> `isEntityFileCanBeLoad`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L117)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -640,7 +628,7 @@ Check if a method is an initialization method
 
 ---
 
-<a name="misinternal" href="#misinternal">#</a> `isInternal`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L230)
+<a name="misinternal" href="#misinternal">#</a> `isInternal`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L232)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 
@@ -692,7 +680,7 @@ Check if this method is static
 
 ---
 
-<a name="mreloadentitydependenciescache" href="#mreloadentitydependenciescache">#</a> `reloadEntityDependenciesCache` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L678)
+<a name="mreloadentitydependenciescache" href="#mreloadentitydependenciescache">#</a> `reloadEntityDependenciesCache` ⚠️ Internal  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/BaseEntity.php#L593)
 ```php
 // Implemented in BumbleDocGen\LanguageHandler\Php\Parser\Entity\BaseEntity
 

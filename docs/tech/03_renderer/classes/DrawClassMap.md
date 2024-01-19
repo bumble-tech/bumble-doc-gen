@@ -1,7 +1,7 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
-[Template functions](/docs/tech/03_renderer/05_twigCustomFunctions.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Renderer](../readme.md) **/**
+[Template functions](../05_twigCustomFunctions.md) **/**
 DrawClassMap
 
 ---
@@ -61,22 +61,23 @@ $rootEntityCollectionsGroup | [\BumbleDocGen\Core\Parser\Entity\RootEntityCollec
 
 ---
 
-<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L57)
+<a name="m-invoke" href="#m-invoke">#</a> `__invoke`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L59)
 ```php
-public function __invoke(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection ...$entitiesCollections): string;
+public function __invoke(array $context, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection ...$entitiesCollections): string;
 ```
 
 ***Parameters:***
 
 | Name | Type | Description |
 |:-|:-|:-|
+$context | [array](https://www.php.net/manual/en/language.types.array.php) | - |
 $entitiesCollections <i>(variadic)</i> | [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php) | The collection of entities for which the class map will be generated |
 
 ***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
 ---
 
-<a name="mconvertdirectorystructuretoformattedstring" href="#mconvertdirectorystructuretoformattedstring">#</a> `convertDirectoryStructureToFormattedString`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L132)
+<a name="mconvertdirectorystructuretoformattedstring" href="#mconvertdirectorystructuretoformattedstring">#</a> `convertDirectoryStructureToFormattedString`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L136)
 ```php
 public function convertDirectoryStructureToFormattedString(array $structure, string $prefix = '│', string $path = '/'): string;
 ```
@@ -93,15 +94,16 @@ $path | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
 ---
 
-<a name="mgetdirectorystructure" href="#mgetdirectorystructure">#</a> `getDirectoryStructure`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L97)
+<a name="mgetdirectorystructure" href="#mgetdirectorystructure">#</a> `getDirectoryStructure`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Renderer/Twig/Function/DrawClassMap.php#L101)
 ```php
-public function getDirectoryStructure(\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection ...$entitiesCollections): array;
+public function getDirectoryStructure(array $context, \BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection ...$entitiesCollections): array;
 ```
 
 ***Parameters:***
 
 | Name | Type | Description |
 |:-|:-|:-|
+$context | [array](https://www.php.net/manual/en/language.types.array.php) | - |
 $entitiesCollections <i>(variadic)</i> | [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/PhpEntitiesCollection.php) | - |
 
 ***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)

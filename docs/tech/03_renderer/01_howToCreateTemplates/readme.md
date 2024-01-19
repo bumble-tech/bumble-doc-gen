@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Renderer](/docs/tech/03_renderer/readme.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Renderer](../readme.md) **/**
 How to create documentation templates?
 
 ---
@@ -13,10 +13,10 @@ Templates are `twig` files in which you can write both static text and dynamic b
 **You can read more about template parts here:**
 
 
-- [Front Matter](/docs/tech/03_renderer/01_howToCreateTemplates/frontMatter.md)
-- [Templates dynamic blocks](/docs/tech/03_renderer/01_howToCreateTemplates/templatesDynamicBlocks.md)
-- [Linking templates](/docs/tech/03_renderer/01_howToCreateTemplates/templatesLinking.md)
-- [Templates variables](/docs/tech/03_renderer/01_howToCreateTemplates/templatesVariables.md)
+- [Front Matter](frontMatter.md)
+- [Templates dynamic blocks](templatesDynamicBlocks.md)
+- [Linking templates](templatesLinking.md)
+- [Templates variables](templatesVariables.md)
 
 ## Examples
 
@@ -102,4 +102,4 @@ More static text...
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

@@ -1,8 +1,8 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Parser](/docs/tech/02_parser/readme.md) **/**
-[Reflection API](/docs/tech/02_parser/reflectionApi/readme.md) **/**
-[Reflection API for PHP](/docs/tech/02_parser/reflectionApi/php/readme.md) **/**
+[BumbleDocGen](../../../../README.md) **/**
+[Technical description of the project](../../../readme.md) **/**
+[Parser](../../readme.md) **/**
+[Reflection API](../readme.md) **/**
+[Reflection API for PHP](readme.md) **/**
 PHP trait reflection API
 
 ---
@@ -10,7 +10,7 @@ PHP trait reflection API
 
 # PHP trait reflection API
 
-PHP trait reflection [TraitEntity](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md) inherits from [ClassLikeEntity](/docs/tech/02_parser/reflectionApi/php/classes/ClassLikeEntity.md).
+PHP trait reflection [TraitEntity](classes/TraitEntity.md) inherits from [ClassLikeEntity](classes/ClassLikeEntity.md).
 
 **Source trait formats:**
 
@@ -26,68 +26,68 @@ $traitReflection = $entitiesCollection->getLoadedOrCreateNew('SomeTraitName'); /
 
 **Trait reflection API methods:**
 
-- [getAbsoluteFileName()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetabsolutefilename): Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
-- [getAst()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetast): Get AST for this entity
-- [getConstant()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetconstant): Get the method entity by its name
-- [getConstantEntitiesCollection()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetconstantentitiescollection): Get a collection of constant entities
-- [getConstantValue()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetconstantvalue): Get the compiled value of a constant
-- [getConstants()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetconstants): Get all constants that are available according to the configuration as an array
-- [getConstantsValues()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetconstantsvalues): Get class constant compiled values according to filters
-- [getDescription()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetdescription): Get entity description
-- [getDescriptionLinks()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetdescriptionlinks): Get parsed links from description and doc blocks `see` and `link`
-- [getDocComment()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetdoccomment): Get the doc comment of an entity
-- [getDocCommentLine()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetdoccommentline): Get the code line number where the docBlock of the current entity begins
-- [getDocNote()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetdocnote): Get the note annotation value
-- [getEndLine()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetendline): Get the line number of the end of a class code in a file
-- [getExamples()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetexamples): Get parsed examples from `examples` doc block
-- [getFirstExample()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetfirstexample): Get first example from `examples` doc block
-- [getImplementingClass()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetimplementingclass): Get the class like entity in which the current entity was implemented
-- [getInterfaceNames()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetinterfacenames): Get a list of class interface names
-- [getInterfacesEntities()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetinterfacesentities): Get a list of interface entities that the current class implements
-- [getMethod()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetmethod): Get the method entity by its name
-- [getMethodEntitiesCollection()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetmethodentitiescollection): Get a collection of method entities
-- [getMethods()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetmethods): Get all methods that are available according to the configuration as an array
-- [getName()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetname): Full name of the entity
-- [getNamespaceName()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetnamespacename): Get the entity namespace name
-- [getObjectId()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetobjectid): Get entity unique ID
-- [getParentClass()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetparentclass): Get the entity of the parent class if it exists
-- [getParentClassEntities()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetparentclassentities): Get a list of parent class entities
-- [getParentClassName()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetparentclassname): Get the name of the parent class entity if it exists
-- [getParentClassNames()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetparentclassnames): Get a list of entity names of parent classes
-- [getPluginData()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetplugindata): Get additional information added using the plugin
-- [getProperties()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetproperties): Get all properties that are available according to the configuration as an array
-- [getProperty()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetproperty): Get the property entity by its name
-- [getPropertyDefaultValue()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetpropertydefaultvalue): Get the compiled value of a property
-- [getPropertyEntitiesCollection()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetpropertyentitiescollection): Get a collection of property entities
-- [getRelativeFileName()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetrelativefilename): File name relative to project_root configuration parameter
-- [getRootEntityCollection()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetrootentitycollection): Get the collection of root entities to which this entity belongs
-- [getShortName()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetshortname): Short name of the entity
-- [getStartLine()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetstartline): Get the line number of the start of a class code in a file
-- [getThrows()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgetthrows): Get parsed throws from `throws` doc block
-- [getTraits()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgettraits): Get a list of trait entities of the current class
-- [getTraitsNames()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mgettraitsnames): Get a list of class traits names
-- [hasConstant()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mhasconstant): Check if a constant exists in a class
-- [hasDescriptionLinks()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mhasdescriptionlinks): Checking if an entity has links in its description
-- [hasExamples()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mhasexamples): Checking if an entity has `example` docBlock
-- [hasMethod()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mhasmethod): Check if a method exists in a class
-- [hasParentClass()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mhasparentclass): Check if a certain parent class exists in a chain of parent classes
-- [hasProperty()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mhasproperty): Check if a property exists in a class
-- [hasThrows()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mhasthrows): Checking if an entity has `throws` docBlock
-- [hasTraits()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mhastraits): Check if the class contains traits
-- [implementsInterface()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mimplementsinterface): Check if a class implements an interface
-- [isAbstract()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#misabstract): Check that an entity is abstract
-- [isApi()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#misapi): Checking if an entity has `api` docBlock
-- [isClass()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#misclass): Check if an entity is a Class
-- [isDeprecated()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#misdeprecated): Checking if an entity has `deprecated` docBlock
-- [isEntityFileCanBeLoad()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#misentityfilecanbeload): Checking if entity data can be retrieved
-- [isEnum()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#misenum): Check if an entity is an Enum
-- [isInstantiable()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#misinstantiable): Check that an entity is instantiable
-- [isInterface()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#misinterface): Check if an entity is an Interface
-- [isInternal()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#misinternal): Checking if an entity has `internal` docBlock
-- [isSubclassOf()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#missubclassof): Whether the given class is a subclass of the specified class
-- [isTrait()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mistrait): Check if an entity is a Trait
-- [normalizeClassName()](/docs/tech/02_parser/reflectionApi/php/classes/TraitEntity.md#mnormalizeclassname): Bring the class name to the standard format used in the system
+- [getAbsoluteFileName()](classes/TraitEntity.md#mgetabsolutefilename): Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
+- [getAst()](classes/TraitEntity.md#mgetast): Get AST for this entity
+- [getConstant()](classes/TraitEntity.md#mgetconstant): Get the method entity by its name
+- [getConstantEntitiesCollection()](classes/TraitEntity.md#mgetconstantentitiescollection): Get a collection of constant entities
+- [getConstantValue()](classes/TraitEntity.md#mgetconstantvalue): Get the compiled value of a constant
+- [getConstants()](classes/TraitEntity.md#mgetconstants): Get all constants that are available according to the configuration as an array
+- [getConstantsValues()](classes/TraitEntity.md#mgetconstantsvalues): Get class constant compiled values according to filters
+- [getDescription()](classes/TraitEntity.md#mgetdescription): Get entity description
+- [getDescriptionLinks()](classes/TraitEntity.md#mgetdescriptionlinks): Get parsed links from description and doc blocks `see` and `link`
+- [getDocComment()](classes/TraitEntity.md#mgetdoccomment): Get the doc comment of an entity
+- [getDocCommentLine()](classes/TraitEntity.md#mgetdoccommentline): Get the code line number where the docBlock of the current entity begins
+- [getDocNote()](classes/TraitEntity.md#mgetdocnote): Get the note annotation value
+- [getEndLine()](classes/TraitEntity.md#mgetendline): Get the line number of the end of a class code in a file
+- [getExamples()](classes/TraitEntity.md#mgetexamples): Get parsed examples from `examples` doc block
+- [getFirstExample()](classes/TraitEntity.md#mgetfirstexample): Get first example from `examples` doc block
+- [getImplementingClass()](classes/TraitEntity.md#mgetimplementingclass): Get the class like entity in which the current entity was implemented
+- [getInterfaceNames()](classes/TraitEntity.md#mgetinterfacenames): Get a list of class interface names
+- [getInterfacesEntities()](classes/TraitEntity.md#mgetinterfacesentities): Get a list of interface entities that the current class implements
+- [getMethod()](classes/TraitEntity.md#mgetmethod): Get the method entity by its name
+- [getMethodEntitiesCollection()](classes/TraitEntity.md#mgetmethodentitiescollection): Get a collection of method entities
+- [getMethods()](classes/TraitEntity.md#mgetmethods): Get all methods that are available according to the configuration as an array
+- [getName()](classes/TraitEntity.md#mgetname): Full name of the entity
+- [getNamespaceName()](classes/TraitEntity.md#mgetnamespacename): Get the entity namespace name
+- [getObjectId()](classes/TraitEntity.md#mgetobjectid): Get entity unique ID
+- [getParentClass()](classes/TraitEntity.md#mgetparentclass): Get the entity of the parent class if it exists
+- [getParentClassEntities()](classes/TraitEntity.md#mgetparentclassentities): Get a list of parent class entities
+- [getParentClassName()](classes/TraitEntity.md#mgetparentclassname): Get the name of the parent class entity if it exists
+- [getParentClassNames()](classes/TraitEntity.md#mgetparentclassnames): Get a list of entity names of parent classes
+- [getPluginData()](classes/TraitEntity.md#mgetplugindata): Get additional information added using the plugin
+- [getProperties()](classes/TraitEntity.md#mgetproperties): Get all properties that are available according to the configuration as an array
+- [getProperty()](classes/TraitEntity.md#mgetproperty): Get the property entity by its name
+- [getPropertyDefaultValue()](classes/TraitEntity.md#mgetpropertydefaultvalue): Get the compiled value of a property
+- [getPropertyEntitiesCollection()](classes/TraitEntity.md#mgetpropertyentitiescollection): Get a collection of property entities
+- [getRelativeFileName()](classes/TraitEntity.md#mgetrelativefilename): File name relative to project_root configuration parameter
+- [getRootEntityCollection()](classes/TraitEntity.md#mgetrootentitycollection): Get the collection of root entities to which this entity belongs
+- [getShortName()](classes/TraitEntity.md#mgetshortname): Short name of the entity
+- [getStartLine()](classes/TraitEntity.md#mgetstartline): Get the line number of the start of a class code in a file
+- [getThrows()](classes/TraitEntity.md#mgetthrows): Get parsed throws from `throws` doc block
+- [getTraits()](classes/TraitEntity.md#mgettraits): Get a list of trait entities of the current class
+- [getTraitsNames()](classes/TraitEntity.md#mgettraitsnames): Get a list of class traits names
+- [hasConstant()](classes/TraitEntity.md#mhasconstant): Check if a constant exists in a class
+- [hasDescriptionLinks()](classes/TraitEntity.md#mhasdescriptionlinks): Checking if an entity has links in its description
+- [hasExamples()](classes/TraitEntity.md#mhasexamples): Checking if an entity has `example` docBlock
+- [hasMethod()](classes/TraitEntity.md#mhasmethod): Check if a method exists in a class
+- [hasParentClass()](classes/TraitEntity.md#mhasparentclass): Check if a certain parent class exists in a chain of parent classes
+- [hasProperty()](classes/TraitEntity.md#mhasproperty): Check if a property exists in a class
+- [hasThrows()](classes/TraitEntity.md#mhasthrows): Checking if an entity has `throws` docBlock
+- [hasTraits()](classes/TraitEntity.md#mhastraits): Check if the class contains traits
+- [implementsInterface()](classes/TraitEntity.md#mimplementsinterface): Check if a class implements an interface
+- [isAbstract()](classes/TraitEntity.md#misabstract): Check that an entity is abstract
+- [isApi()](classes/TraitEntity.md#misapi): Checking if an entity has `api` docBlock
+- [isClass()](classes/TraitEntity.md#misclass): Check if an entity is a Class
+- [isDeprecated()](classes/TraitEntity.md#misdeprecated): Checking if an entity has `deprecated` docBlock
+- [isEntityFileCanBeLoad()](classes/TraitEntity.md#misentityfilecanbeload): Checking if entity data can be retrieved
+- [isEnum()](classes/TraitEntity.md#misenum): Check if an entity is an Enum
+- [isInstantiable()](classes/TraitEntity.md#misinstantiable): Check that an entity is instantiable
+- [isInterface()](classes/TraitEntity.md#misinterface): Check if an entity is an Interface
+- [isInternal()](classes/TraitEntity.md#misinternal): Checking if an entity has `internal` docBlock
+- [isSubclassOf()](classes/TraitEntity.md#missubclassof): Whether the given class is a subclass of the specified class
+- [isTrait()](classes/TraitEntity.md#mistrait): Check if an entity is a Trait
+- [normalizeClassName()](classes/TraitEntity.md#mnormalizeclassname): Bring the class name to the standard format used in the system
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

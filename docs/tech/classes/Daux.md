@@ -1,6 +1,6 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Plugin system](/docs/tech/04_pluginSystem.md) **/**
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Plugin system](../04_pluginSystem.md) **/**
 Daux
 
 ---
@@ -42,7 +42,7 @@ $breadcrumbsHelper | [\BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper]
 
 ---
 
-<a name="mafterrenderingentities" href="#mafterrenderingentities">#</a> `afterRenderingEntities`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L95)
+<a name="mafterrenderingentities" href="#mafterrenderingentities">#</a> `afterRenderingEntities`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L97)
 ```php
 public function afterRenderingEntities(): void;
 ```
@@ -75,7 +75,7 @@ public static function getSubscribedEvents(): array;
 
 ---
 
-<a name="moncreatedocumentedentitywrapper" href="#moncreatedocumentedentitywrapper">#</a> `onCreateDocumentedEntityWrapper`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L71)
+<a name="moncreatedocumentedentitywrapper" href="#moncreatedocumentedentitywrapper">#</a> `onCreateDocumentedEntityWrapper`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L73)
 ```php
 public function onCreateDocumentedEntityWrapper(\BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper $event): void;
 ```
@@ -90,7 +90,7 @@ $event | [\BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapp
 
 ---
 
-<a name="mongetprojecttemplatesdirs" href="#mongetprojecttemplatesdirs">#</a> `onGetProjectTemplatesDirs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L87)
+<a name="mongetprojecttemplatesdirs" href="#mongetprojecttemplatesdirs">#</a> `onGetProjectTemplatesDirs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L89)
 ```php
 public function onGetProjectTemplatesDirs(\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs $event): void;
 ```
@@ -105,7 +105,7 @@ $event | [\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs](ht
 
 ---
 
-<a name="mongettemplatepathbyrelativedocpath" href="#mongettemplatepathbyrelativedocpath">#</a> `onGetTemplatePathByRelativeDocPath`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L78)
+<a name="mongettemplatepathbyrelativedocpath" href="#mongettemplatepathbyrelativedocpath">#</a> `onGetTemplatePathByRelativeDocPath`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/Daux/Daux.php#L80)
 ```php
 public function onGetTemplatePathByRelativeDocPath(\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath $event): void;
 ```

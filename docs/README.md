@@ -31,21 +31,21 @@ composer require bumble-tech/bumble-doc-gen
 
 ### Entry points
 
-BumbleDocGen's interface consists of mainly two classes: [DocGenerator](/docs/classes/DocGenerator.md) and [DocGeneratorFactory](/docs/classes/DocGeneratorFactory.md).
+BumbleDocGen's interface consists of mainly two classes: [DocGenerator](classes/DocGenerator.md) and [DocGeneratorFactory](classes/DocGeneratorFactory.md).
 
-- [DocGenerator](/docs/classes/DocGenerator.md) provides main operations for generating the documents.
+- [DocGenerator](classes/DocGenerator.md) provides main operations for generating the documents.
 
-    - [addDocBlocks()](/docs/classes/DocGenerator.md#madddocblocks): Generate missing docBlocks with LLM for project class methods that are available for documentation
-    - [generate()](/docs/classes/DocGenerator.md#mgenerate): Generates documentation using configuration
-    - [generateReadmeTemplate()](/docs/classes/DocGenerator.md#mgeneratereadmetemplate): Creates a `README.md` template filled with basic information using LLM
-    - [serve()](/docs/classes/DocGenerator.md#mserve): Serve documentation
+    - [addDocBlocks()](classes/DocGenerator.md#madddocblocks): Generate missing docBlocks with LLM for project class methods that are available for documentation
+    - [generate()](classes/DocGenerator.md#mgenerate): Generates documentation using configuration
+    - [generateReadmeTemplate()](classes/DocGenerator.md#mgeneratereadmetemplate): Creates a `README.md` template filled with basic information using LLM
+    - [serve()](classes/DocGenerator.md#mserve): Serve documentation
 
-- [DocGeneratorFactory](/docs/classes/DocGeneratorFactory.md) provides a method for creating `DocGenerator` instance.
+- [DocGeneratorFactory](classes/DocGeneratorFactory.md) provides a method for creating `DocGenerator` instance.
 
-    - [create()](/docs/classes/DocGeneratorFactory.md#mcreate): Creates a documentation generator instance using configuration files
-    - [createByConfigArray()](/docs/classes/DocGeneratorFactory.md#mcreatebyconfigarray): Creates a documentation generator instance using an array containing the configuration
-    - [createConfiguration()](/docs/classes/DocGeneratorFactory.md#mcreateconfiguration): Creating a project configuration instance
-    - [createRootEntitiesCollection()](/docs/classes/DocGeneratorFactory.md#mcreaterootentitiescollection): Creating a collection of entities (see `ReflectionAPI`)
+    - [create()](classes/DocGeneratorFactory.md#mcreate): Creates a documentation generator instance using configuration files
+    - [createByConfigArray()](classes/DocGeneratorFactory.md#mcreatebyconfigarray): Creates a documentation generator instance using an array containing the configuration
+    - [createConfiguration()](classes/DocGeneratorFactory.md#mcreateconfiguration): Creating a project configuration instance
+    - [createRootEntitiesCollection()](classes/DocGeneratorFactory.md#mcreaterootentitiescollection): Creating a collection of entities (see `ReflectionAPI`)
 
 ### Examples of usage
 
@@ -91,4 +91,4 @@ To update this documentation, run the following command:
 
 ---
 
-**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Thu Jan 18 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Thu Jan 18 14:38:29 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

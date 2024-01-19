@@ -1,7 +1,7 @@
-[BumbleDocGen](/docs/README.md) **/**
-[Technical description of the project](/docs/tech/readme.md) **/**
-[Parser](/docs/tech/02_parser/readme.md) **/**
-[Source locators](/docs/tech/02_parser/sourceLocator.md) **/**
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Parser](../readme.md) **/**
+[Source locators](../sourceLocator.md) **/**
 FileIteratorSourceLocator
 
 ---
