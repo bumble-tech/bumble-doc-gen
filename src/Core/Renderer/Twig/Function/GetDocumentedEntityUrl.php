@@ -39,10 +39,10 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
     public const DEFAULT_URL = '#';
 
     public function __construct(
-        private RendererHelper $rendererHelper,
-        private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
-        private Configuration $configuration,
-        private Logger $logger
+        private readonly RendererHelper $rendererHelper,
+        private readonly DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
+        private readonly Configuration $configuration,
+        private readonly Logger $logger
     ) {
     }
 

@@ -17,7 +17,7 @@ use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
  */
 final class LoadPluginsContent implements CustomFunctionInterface
 {
-    public function __construct(private PluginEventDispatcher $pluginEventDispatcher)
+    public function __construct(private readonly PluginEventDispatcher $pluginEventDispatcher)
     {
     }
 
