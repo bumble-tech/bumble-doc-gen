@@ -33,11 +33,12 @@ final class StrTypeToUrl implements CustomFilterInterface
     {
         return [
             'is_safe' => ['html'],
+            'needs_context' => true,
         ];
     }
 
-
     /**
+     * @param array $context
      * @param string $text Processed text
      * @param RootEntityCollection $rootEntityCollection
      * @param bool $useShortLinkVersion Shorten or not the link name. When shortening, only the shortName of the entity will be shown
@@ -48,6 +49,7 @@ final class StrTypeToUrl implements CustomFilterInterface
      * @return string
      */
     public function __invoke(
+        array $context,
         string $text,
         RootEntityCollection $rootEntityCollection,
         bool $useShortLinkVersion = false,
@@ -59,6 +61,10 @@ final class StrTypeToUrl implements CustomFilterInterface
         $preparedTypes = [];
         $types = explode('|', $text);
         foreach ($types as $type) {
+            $name = $type;
+            $data = explode('::', $type);
+            $type = $data[0];
+            $cursor = $data[1] ?? '';
             $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($type);
             if ($preloadResourceLink) {
                 if ($useShortLinkVersion) {
@@ -71,7 +77,7 @@ final class StrTypeToUrl implements CustomFilterInterface
                 $entityOfLink = $rootEntityCollection->getLoadedOrCreateNew($type);
                 if (!$entityOfLink->isExternalLibraryEntity() && $entityOfLink->isEntityDataCanBeLoaded()) {
                     if ($entityOfLink->getAbsoluteFileName()) {
-                        $link = $getDocumentedEntityUrlFunction($rootEntityCollection, $type, '', $createDocument);
+                        $link = $getDocumentedEntityUrlFunction($context, $rootEntityCollection, $type, $cursor, $createDocument);
 
                         if ($useShortLinkVersion) {
                             $type = $entityOfLink->getShortName();
@@ -80,7 +86,7 @@ final class StrTypeToUrl implements CustomFilterInterface
                         }
 
                         if ($link && $link !== '#') {
-                            $preparedTypes[] = "[$type]({$link})";
+                            $preparedTypes[] = "[$name]({$link})";
                         } else {
                             $preparedTypes[] = $type;
                         }

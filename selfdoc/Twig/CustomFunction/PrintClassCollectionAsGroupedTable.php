@@ -26,6 +26,7 @@ final class PrintClassCollectionAsGroupedTable implements CustomFunctionInterfac
     {
         return [
             'is_safe' => ['html'],
+            'needs_context' => true,
         ];
     }
 
@@ -34,7 +35,7 @@ final class PrintClassCollectionAsGroupedTable implements CustomFunctionInterfac
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function __invoke(PhpEntitiesCollection $rootEntityCollection): string
+    public function __invoke(array $context, PhpEntitiesCollection $rootEntityCollection): string
     {
         $groups = $this->groupEntities($rootEntityCollection);
         $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
@@ -44,9 +45,9 @@ final class PrintClassCollectionAsGroupedTable implements CustomFunctionInterfac
 
         foreach ($groups as $groupKey => $entities) {
             $firstEntity = array_shift($entities);
-            $table .= "| **{$groupKey}** | [{$firstEntity->getShortName()}]({$getDocumentedEntityUrlFunction($rootEntityCollection, $firstEntity->getName())}) | {$firstEntity->getDescription()} |\n";
+            $table .= "| **{$groupKey}** | [{$firstEntity->getShortName()}]({$getDocumentedEntityUrlFunction($context, $rootEntityCollection, $firstEntity->getName())}) | {$firstEntity->getDescription()} |\n";
             foreach ($entities as $entity) {
-                $table .= "| | [{$entity->getShortName()}]({$getDocumentedEntityUrlFunction($rootEntityCollection, $entity->getName())}) | {$entity->getDescription()} |\n";
+                $table .= "| | [{$entity->getShortName()}]({$getDocumentedEntityUrlFunction($context, $rootEntityCollection, $entity->getName())}) | {$entity->getDescription()} |\n";
             }
             $table .= "| | | |\n";
         }

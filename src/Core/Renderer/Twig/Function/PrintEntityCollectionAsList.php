@@ -36,18 +36,20 @@ final class PrintEntityCollectionAsList implements CustomFunctionInterface
     {
         return [
             'is_safe' => ['html'],
+            'needs_context' => true,
         ];
     }
 
     /**
+     * @param array $context
      * @param RootEntityCollection $rootEntityCollection Processed entity collection
      * @param string $type List tag type (<ul>/<ol>)
      * @param bool $skipDescription Don't print description of this entities
      * @param bool $useFullName Use the full name of the entity in the list
      * @return string
-     * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
+        array $context,
         RootEntityCollection $rootEntityCollection,
         string $type = 'ul',
         bool $skipDescription = false,
@@ -62,6 +64,7 @@ final class PrintEntityCollectionAsList implements CustomFunctionInterface
             $description = $entity->getDescription();
             $descriptionText = call_user_func($this->removeLineBrakes, !$skipDescription && $description ? " - {$description}" : '');
             $entityDocUrl = call_user_func_array($this->getDocumentedEntityUrlFunction, [
+                $context,
                 $rootEntityCollection,
                 $entity->getName()
             ]);

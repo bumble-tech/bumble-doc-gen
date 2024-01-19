@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Renderer\Twig\Function;
 
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
+use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsTwigEnvironment;
 use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use DI\DependencyException;
@@ -14,6 +16,8 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
+use function BumbleDocGen\Core\get_relative_path;
+
 /**
  * Function to generate breadcrumbs on the page
  */
@@ -21,7 +25,9 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
 {
     public function __construct(
         private readonly BreadcrumbsHelper $breadcrumbsHelper,
+        private readonly BreadcrumbsTwigEnvironment $breadcrumbsTwig,
         private readonly RendererContext $rendererContext,
+        private readonly Configuration $configuration,
         private readonly RendererDependencyFactory $dependencyFactory,
     ) {
     }
@@ -59,11 +65,17 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
         string $templatePath,
         bool $skipFirstTemplatePage = true
     ): string {
-        $content = $this->breadcrumbsHelper->renderBreadcrumbs(
-            $currentPageTitle,
-            $templatePath,
-            !$skipFirstTemplatePage
-        );
+
+        $docUrl = $this->configuration->getOutputDirBaseUrl() . $templatePath;
+        $breadcrumbs = $this->breadcrumbsHelper->getBreadcrumbs($templatePath, false);
+        foreach ($breadcrumbs as $k => $breadcrumb) {
+            $breadcrumbs[$k]['url'] = get_relative_path($docUrl, $breadcrumb['url']);
+        }
+
+        $content = $this->breadcrumbsTwig->render('breadcrumbs.md.twig', [
+            'currentPageTitle' => $currentPageTitle,
+            'breadcrumbs' => $breadcrumbs,
+        ]);
 
         $templatesBreadcrumbs = $this->breadcrumbsHelper->getBreadcrumbsForTemplates($templatePath, !$skipFirstTemplatePage);
         foreach ($templatesBreadcrumbs as $templateBreadcrumb) {

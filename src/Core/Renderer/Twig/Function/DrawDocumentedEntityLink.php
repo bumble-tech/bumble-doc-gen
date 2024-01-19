@@ -33,6 +33,7 @@ final class DrawDocumentedEntityLink implements CustomFunctionInterface
     {
         return [
             'is_safe' => ['html'],
+            'needs_context' => true,
         ];
     }
 
@@ -48,12 +49,13 @@ final class DrawDocumentedEntityLink implements CustomFunctionInterface
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
+        array $context,
         RootEntityInterface $entity,
         string $cursor = '',
         bool $useShortName = true
     ): string {
         $getDocumentedEntityUrlFunction = $this->getDocumentedEntityUrlFunction;
-        $url = $getDocumentedEntityUrlFunction($entity->getRootEntityCollection(), $entity->getName(), $cursor);
+        $url = $getDocumentedEntityUrlFunction($context, $entity->getRootEntityCollection(), $entity->getName(), $cursor);
         $name = $useShortName ? $entity->getShortName() : $entity->getName();
         return "[{$name}]({$url})";
     }

@@ -20,8 +20,8 @@ use DI\NotFoundException;
 final class DisplayClassApiMethods implements CustomFunctionInterface
 {
     public function __construct(
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private readonly GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
     ) {
     }
 
@@ -32,7 +32,9 @@ final class DisplayClassApiMethods implements CustomFunctionInterface
 
     public static function getOptions(): array
     {
-        return [];
+        return [
+            'needs_context' => true,
+        ];
     }
 
     /**
@@ -42,7 +44,7 @@ final class DisplayClassApiMethods implements CustomFunctionInterface
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    public function __invoke(string $className): ?string
+    public function __invoke(array $context, string $className): ?string
     {
         $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
         if (!$entitiesCollection) {
@@ -55,6 +57,7 @@ final class DisplayClassApiMethods implements CustomFunctionInterface
                 if ($method->isApi()) {
                     $description = $method->getDescription();
                     $entityDocUrl = call_user_func_array($this->getDocumentedEntityUrlFunction, [
+                        $context,
                         $entitiesCollection,
                         $classEntity->getName(),
                         $method->getName()

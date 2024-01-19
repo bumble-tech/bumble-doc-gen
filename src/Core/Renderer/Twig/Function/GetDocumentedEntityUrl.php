@@ -12,9 +12,12 @@ use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Renderer\RendererHelper;
+use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
+
+use function BumbleDocGen\Core\get_relative_path;
 
 /**
  * Get the URL of a documented entity by its name. If the entity is found, next to the file where this method was called,
@@ -55,10 +58,12 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
     {
         return [
             'is_safe' => ['html'],
+            'needs_context' => true,
         ];
     }
 
     /**
+     * @param array $context
      * @param RootEntityCollection $rootEntityCollection Processed entity collection
      * @param string $entityName
      *  The full name of the entity for which the URL will be retrieved.
@@ -73,8 +78,34 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
      */
-    public function __invoke(RootEntityCollection $rootEntityCollection, string $entityName, string $cursor = '', bool $createDocument = true): string
-    {
+    public function __invoke(
+        array $context,
+        RootEntityCollection $rootEntityCollection,
+        string $entityName,
+        string $cursor = '',
+        bool $createDocument = true
+    ): string {
+        return $this->process(
+            $rootEntityCollection,
+            $entityName,
+            $cursor,
+            $createDocument,
+            $context[MainTwigEnvironment::CURRENT_TEMPLATE_NAME_KEY] ?? null,
+        );
+    }
+
+    /**
+     * @throws NotFoundException
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     */
+    public function process(
+        RootEntityCollection $rootEntityCollection,
+        string $entityName,
+        string $cursor = '',
+        bool $createDocument = true,
+        ?string $callingTemplate = null
+    ): string {
         if (str_contains($entityName, ' ')) {
             return self::DEFAULT_URL;
         }
@@ -90,13 +121,18 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
                 $documentedEntity = $this->documentedEntityWrappersCollection->createAndAddDocumentedEntityWrapper($entity);
                 $rootEntityCollection->add($entity);
                 $url = $this->configuration->getPageLinkProcessor()->getAbsoluteUrl($documentedEntity->getDocUrl());
+                $url = $url . $entity->cursorToDocAttributeLinkFragment($cursor);
+
+                $callingTemplate = "{$this->configuration->getOutputDirBaseUrl()}{$callingTemplate}";
+                $url = get_relative_path($callingTemplate, $url);
             } else {
                 $url = $entity->getFileSourceLink(false);
+                $url = $url . $entity->cursorToDocAttributeLinkFragment($cursor, false);
             }
             if (!$url) {
                 return self::DEFAULT_URL;
             }
-            return $url . $entity->cursorToDocAttributeLinkFragment($cursor);
+            return $url;
         } else {
             $this->logger->warning(
                 "GetDocumentedEntityUrl: Entity {$entityName} not found in specified sources"
