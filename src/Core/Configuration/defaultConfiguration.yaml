@@ -15,7 +15,7 @@ use_shared_cache: true            # (bool) Enable cache usage of generated docum
 twig_functions:                   # (array<CustomFunctionInterface>) Functions that can be used in document templates
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawDocumentationMenu
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawDocumentedEntityLink
-  - class: \BumbleDocGen\Core\Renderer\Twig\Function\GeneratePageBreadcrumbs
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawPageBreadcrumbs
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\PrintEntityCollectionAsList

@@ -2,7 +2,7 @@
 title: Documentation structure and breadcrumbs
 prevPage: Renderer
 ---
-{{ generatePageBreadcrumbs(title, _self) }}
+{{ drawPageBreadcrumbs() }}
 
 # Documentation structure and breadcrumbs
 
@@ -31,11 +31,11 @@ In this way, complex documentation structures can be created with less file nest
 
 ## Displaying breadcrumbs in documents
 
-There is a built-in function to generate breadcrumbs in templates [a]GeneratePageBreadcrumbs[/a].
+There is a built-in function to generate breadcrumbs in templates [a]DrawPageBreadcrumbs[/a].
 Here is how it is used in twig templates:
 
 ```twig
-{{ '{{ generatePageBreadcrumbs(title, _self) }}' }}
+{{ '{{ drawPageBreadcrumbs() }}' }}
 ```
 
 To build breadcrumbs, the previously compiled project structure and the names of each template are used.
@@ -47,7 +47,7 @@ title: Some page title
 ---
 ```
 
-Here is an example of the result of the `generatePageBreadcrumbs` function:
+Here is an example of the result of the `drawPageBreadcrumbs` function:
 
 ```twig
 {{ '<embed> <a href="/docs/readme.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/index.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/3.renderer/index.md">Renderer</a> <b>/</b> Some page title <hr> </embed>' }}

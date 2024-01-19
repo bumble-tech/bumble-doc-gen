@@ -36,4 +36,4 @@ This document serves as a reference for updating your current version of the Bum
 * Twig filter `\BumbleDocGen\Core\Renderer\Twig\Filter\TextToCodeBlock` removed
 * Twig filter `\BumbleDocGen\Core\Renderer\Twig\Filter\TextToHeading` removed
 * Plugin `\BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageLinkerPlugin` now generates MD instead of HTML
-* Twig filter `\BumbleDocGen\Core\Renderer\Twig\Function\GeneratePageBreadcrumbs` now generates MD instead of HTML
+* Twig function `\BumbleDocGen\Core\Renderer\Twig\Function\GeneratePageBreadcrumbs` removed. Use `\BumbleDocGen\Core\Renderer\Twig\Function\DrawPageBreadcrumbs` function instead

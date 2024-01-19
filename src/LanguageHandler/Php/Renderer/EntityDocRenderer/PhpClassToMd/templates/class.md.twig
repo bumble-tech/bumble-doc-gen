@@ -1,4 +1,4 @@
-{{ generateEntityBreadcrumbs(classEntity.getShortName(), docUrl, parentDocFilePath, false) }}
+{{ drawEntityBreadcrumbs(classEntity.getShortName(), docUrl, parentDocFilePath, false) }}
 
 {% include '_classHeader.md.twig' %}
 {{ loadPluginsContent('', classEntity, constant('BumbleDocGen\\LanguageHandler\\Php\\Renderer\\EntityDocRenderer\\PhpClassToMd\\PhpClassToMdDocRenderer::BLOCK_AFTER_HEADER')) }}
