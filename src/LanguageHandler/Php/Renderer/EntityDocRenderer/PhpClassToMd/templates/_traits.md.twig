@@ -2,7 +2,7 @@
 ## Traits:
 
 {% for traitName in classEntity.getTraitsNames() %}
-1. {{ traitName | strTypeToUrl(classEntity.getRootEntityCollection()) }}
+1. {{ traitName | strTypeToUrl(classEntity.getRootEntityCollection(), false, propRefsInternalLinksMode) }}
 
 {% endfor %}
 {% endif %}

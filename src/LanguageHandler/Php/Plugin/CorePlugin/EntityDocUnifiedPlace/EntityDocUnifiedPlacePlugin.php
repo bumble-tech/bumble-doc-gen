@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginInterface;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 
 /**
  * This plugin changes the algorithm for saving entity documents. The standard system stores each file
@@ -18,6 +19,12 @@ final class EntityDocUnifiedPlacePlugin implements PluginInterface
 {
     private const TEMPLATES_FOLDER = __DIR__ . DIRECTORY_SEPARATOR . 'templates';
     public const ENTITY_DOC_STRUCTURE_DIR_NAME = '__structure';
+
+    public function __construct(
+        PhpHandlerSettings $phpHandlerSettings
+    ) {
+        $phpHandlerSettings->changePropRefsInternalLinksMode(true);
+    }
 
     public static function getSubscribedEvents(): array
     {

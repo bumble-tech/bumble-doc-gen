@@ -24,8 +24,8 @@ final class PhpHandlerSettings
     public const DEFAULT_SETTINGS_FILE = __DIR__ . '/phpHandlerDefaultSettings.yaml';
 
     public function __construct(
-        private ConfigurationParameterBag $parameterBag,
-        private LocalObjectCache $localObjectCache
+        private readonly ConfigurationParameterBag $parameterBag,
+        private readonly LocalObjectCache $localObjectCache
     ) {
         $parameterBag->addValueFromFileIfNotExists('', self::DEFAULT_SETTINGS_FILE);
     }
@@ -152,6 +152,29 @@ final class PhpHandlerSettings
         );
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $fileSourceBaseUrl);
         return $fileSourceBaseUrl;
+    }
+
+    /**
+     * If `true` - parameters and properties in class documents refer to generated documents and not to external sources
+     *
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getPropRefsInternalLinksMode(): bool
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $propRefsInternalLinksMode = $this->parameterBag->validateAndGetBooleanValue(
+            $this->getSettingsKey('prop_refs_internal_links_mode')
+        );
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $propRefsInternalLinksMode);
+        return $propRefsInternalLinksMode;
+    }
+
+    final public function changePropRefsInternalLinksMode(bool $propRefsInternalLinksMode): void
+    {
+        $this->localObjectCache->cacheMethodResult(__CLASS__ . '::getPropRefsInternalLinksMode', '', $propRefsInternalLinksMode);
     }
 
     /**

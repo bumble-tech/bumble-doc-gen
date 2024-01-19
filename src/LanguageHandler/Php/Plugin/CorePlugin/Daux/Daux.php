@@ -14,6 +14,7 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Breadcrumbs\BreadcrumbsHelper;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 
 /**
  * @internal
@@ -25,8 +26,10 @@ final class Daux implements PluginInterface
 
     public function __construct(
         private readonly Configuration $configuration,
-        private readonly BreadcrumbsHelper $breadcrumbsHelper
+        private readonly BreadcrumbsHelper $breadcrumbsHelper,
+        PhpHandlerSettings $phpHandlerSettings
     ) {
+        $phpHandlerSettings->changePropRefsInternalLinksMode(true);
     }
 
     public static function getSubscribedEvents(): array

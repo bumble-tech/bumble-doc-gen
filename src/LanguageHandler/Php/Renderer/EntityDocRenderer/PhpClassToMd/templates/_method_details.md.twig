@@ -25,12 +25,12 @@
 | Name | Type | Description |
 |:-|:-|:-|
 {% for parameter in methodEntity.getParameters() %}
-${{ parameter.name }}{% if parameter.isVariadic %} <i>(variadic)</i>{% endif %} | {{ parameter.expectedType | strTypeToUrl(methodEntity.getRootEntityCollection(), false, false, ' \\| ') }} | {% if parameter.description %}{{ parameter.description | addIndentFromLeft(1, true) }}{% else %}-{% endif %} |
+${{ parameter.name }}{% if parameter.isVariadic %} <i>(variadic)</i>{% endif %} | {{ parameter.expectedType | strTypeToUrl(methodEntity.getRootEntityCollection(), false, propRefsInternalLinksMode, ' \\| ') }} | {% if parameter.description %}{{ parameter.description | addIndentFromLeft(1, true) }}{% else %}-{% endif %} |
 {% endfor %}
 {% endif %}
 {% if not methodEntity.isConstructor() and methodEntity.getReturnType() %}
 
-***Return value:*** {{ methodEntity.getReturnType() | strTypeToUrl(methodEntity.getRootEntityCollection()) }}
+***Return value:*** {{ methodEntity.getReturnType() | strTypeToUrl(methodEntity.getRootEntityCollection(), false, propRefsInternalLinksMode) }}
 {% endif %}
 {% if methodEntity.hasDescriptionLinks() %}
 
