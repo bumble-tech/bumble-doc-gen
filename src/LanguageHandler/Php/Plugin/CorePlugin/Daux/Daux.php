@@ -60,7 +60,9 @@ final class Daux implements PluginInterface
             return explode('?', $elements[0])[0];
         }, $content);
 
-        $content = preg_replace('/(\/readme.md)("|\')/i', '/index.md$2', $content);
+        $content = preg_replace('/(\/readme.md)("|\')(>)/i', '/index.md$2>', $content);
+        $content = preg_replace('/("|\')(readme.md)("|\')(>)/i', '$1index.md$1>', $content);
+
         $event->setContent($content);
 
         $outputFileName = $event->getOutputFilePatch();
