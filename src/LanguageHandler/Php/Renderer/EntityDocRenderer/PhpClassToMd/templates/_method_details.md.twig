@@ -36,7 +36,7 @@ ${{ parameter.name }}{% if parameter.isVariadic %} <i>(variadic)</i>{% endif %} 
 
 ***Links:***
 {% for link in methodEntity.getDescriptionLinks() %}
-- {% if link.url %}[{{ link.name }}]({{ link.url }}){% else %}{{ link.name }}{% endif %}{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
+- {% if link.url %}[{{ link.name }}]({{ link.url }}){% elseif link.className %}{{ link.className|strTypeToUrl(classEntity.getRootEntityCollection(), false, true) }}{% else %}{{ link.name }}{% endif %}{% if link.description %} - {{ link.description | removeLineBrakes }} {% endif %}
 
 {% endfor %}
 {% endif %}
