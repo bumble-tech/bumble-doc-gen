@@ -16,7 +16,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-use function BumbleDocGen\Core\get_relative_path;
+use function BumbleDocGen\Core\calculate_relative_url;
 
 /**
  * Function to generate breadcrumbs on the page
@@ -69,7 +69,7 @@ final class GeneratePageBreadcrumbs implements CustomFunctionInterface
         $docUrl = $this->configuration->getOutputDirBaseUrl() . $templatePath;
         $breadcrumbs = $this->breadcrumbsHelper->getBreadcrumbs($templatePath, false);
         foreach ($breadcrumbs as $k => $breadcrumb) {
-            $breadcrumbs[$k]['url'] = get_relative_path($docUrl, $breadcrumb['url']);
+            $breadcrumbs[$k]['url'] = calculate_relative_url($docUrl, $breadcrumb['url']);
         }
 
         $content = $this->breadcrumbsTwig->render('breadcrumbs.md.twig', [

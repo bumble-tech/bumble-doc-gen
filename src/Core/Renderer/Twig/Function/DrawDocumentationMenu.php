@@ -15,7 +15,7 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
 
-use function BumbleDocGen\Core\get_relative_path;
+use function BumbleDocGen\Core\calculate_relative_url;
 
 /**
  * Generate documentation menu in MD format. To generate the menu, the start page is taken,
@@ -114,7 +114,7 @@ final class DrawDocumentationMenu implements CustomFunctionInterface
                 $md .= "\n- ";
                 $url = $pageData['url'];
                 if ($callingTemplate) {
-                    $url = get_relative_path($callingTemplate, $pageData['url']);
+                    $url = calculate_relative_url($callingTemplate, $pageData['url']);
                 }
                 $md .= "[{$pageData['title']}]({$url})";
                 if ($structure[$pageData['url']]) {

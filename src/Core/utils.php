@@ -20,8 +20,8 @@ if (!function_exists('BumbleDocGen\Core\get_class_short')) {
     }
 }
 
-if (!function_exists('BumbleDocGen\Core\get_relative_path')) {
-    function get_relative_path(string $from, string $to): string
+if (!function_exists('BumbleDocGen\Core\calculate_relative_url')) {
+    function calculate_relative_url(string $from, string $to): string
     {
         $from = explode('/', $from);
         $to = explode('/', $to);

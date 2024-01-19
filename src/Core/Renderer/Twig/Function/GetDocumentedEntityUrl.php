@@ -17,7 +17,7 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
 
-use function BumbleDocGen\Core\get_relative_path;
+use function BumbleDocGen\Core\calculate_relative_url;
 
 /**
  * Get the URL of a documented entity by its name. If the entity is found, next to the file where this method was called,
@@ -125,7 +125,7 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
 
                 if ($callingTemplate) {
                     $callingTemplate = "{$this->configuration->getOutputDirBaseUrl()}{$callingTemplate}";
-                    $url = get_relative_path($callingTemplate, $url);
+                    $url = calculate_relative_url($callingTemplate, $url);
                 }
             } else {
                 $url = $entity->getFileSourceLink(false);
