@@ -19,7 +19,7 @@ Generate documentation menu in MD format. To generate the menu, the start page i
 and all links with this page are recursively collected for it, after which the html menu is created.
 
 ***Links:***
-- [\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl](/docs/tech/03_renderer/01_howToCreateTemplates/classes/GetDocumentedEntityUrl_2.md)
+- [\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl](GetDocumentedEntityUrl_2.md)
 
 ***Examples of using:***
 ```php

@@ -6,7 +6,7 @@ EntityDocUnifiedPlacePlugin
 ---
 
 
-# [EntityDocUnifiedPlacePlugin](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L17) class:
+# [EntityDocUnifiedPlacePlugin](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L18) class:
 
 ```php
 namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\EntityDocUnifiedPlace;
@@ -17,6 +17,9 @@ This plugin changes the algorithm for saving entity documents. The standard syst
 in a directory next to the file where it was requested. This behavior changes and all documents are saved
 in a separate directory structure, so they are not duplicated.
 
+## Initialization methods
+
+1. [__construct](#m-construct) 
 ## Methods
 
 1. [getSubscribedEvents](#mgetsubscribedevents) 
@@ -26,7 +29,20 @@ in a separate directory structure, so they are not duplicated.
 
 ## Methods details:
 
-<a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a> `getSubscribedEvents`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L22)
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L23)
+```php
+public function __construct(\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings $phpHandlerSettings);
+```
+
+***Parameters:***
+
+| Name | Type | Description |
+|:-|:-|:-|
+$phpHandlerSettings | [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php) | - |
+
+---
+
+<a name="mgetsubscribedevents" href="#mgetsubscribedevents">#</a> `getSubscribedEvents`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L29)
 ```php
 public static function getSubscribedEvents(): array;
 ```
@@ -35,7 +51,7 @@ public static function getSubscribedEvents(): array;
 
 ---
 
-<a name="moncreatedocumentedentitywrapper" href="#moncreatedocumentedentitywrapper">#</a> `onCreateDocumentedEntityWrapper`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L31)
+<a name="moncreatedocumentedentitywrapper" href="#moncreatedocumentedentitywrapper">#</a> `onCreateDocumentedEntityWrapper`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L38)
 ```php
 public function onCreateDocumentedEntityWrapper(\BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapper $event): void;
 ```
@@ -50,7 +66,7 @@ $event | [\BumbleDocGen\Core\Plugin\Event\Renderer\OnCreateDocumentedEntityWrapp
 
 ---
 
-<a name="mongetprojecttemplatesdirs" href="#mongetprojecttemplatesdirs">#</a> `onGetProjectTemplatesDirs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L47)
+<a name="mongetprojecttemplatesdirs" href="#mongetprojecttemplatesdirs">#</a> `onGetProjectTemplatesDirs`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L54)
 ```php
 public function onGetProjectTemplatesDirs(\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs $event): void;
 ```
@@ -65,7 +81,7 @@ $event | [\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs](ht
 
 ---
 
-<a name="mongettemplatepathbyrelativedocpath" href="#mongettemplatepathbyrelativedocpath">#</a> `onGetTemplatePathByRelativeDocPath`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L38)
+<a name="mongettemplatepathbyrelativedocpath" href="#mongettemplatepathbyrelativedocpath">#</a> `onGetTemplatePathByRelativeDocPath`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/EntityDocUnifiedPlace/EntityDocUnifiedPlacePlugin.php#L45)
 ```php
 public function onGetTemplatePathByRelativeDocPath(\BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath $event): void;
 ```

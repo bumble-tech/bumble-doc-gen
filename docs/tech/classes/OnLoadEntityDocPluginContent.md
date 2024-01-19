@@ -16,7 +16,7 @@ final class OnLoadEntityDocPluginContent extends \Symfony\Contracts\EventDispatc
 Called when entity documentation is generated (plugin content loading)
 
 ***Links:***
-- [\BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent](/docs/tech/classes/LoadPluginsContent_2.md)
+- [\BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent](LoadPluginsContent_2.md)
 
 ## Initialization methods
 

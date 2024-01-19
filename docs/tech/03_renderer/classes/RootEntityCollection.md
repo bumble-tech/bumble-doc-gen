@@ -122,7 +122,7 @@ $withAddClassEntityToCollectionEvent | [bool](https://www.php.net/manual/en/lang
 ***Return value:*** [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Parser/Entity/RootEntityInterface.php)
 
 ***Links:***
-- [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::isEntityDataCanBeLoaded()](/docs/tech/03_renderer/classes/RootEntityInterface_2.md#misentitydatacanbeloaded)
+- [\BumbleDocGen\Core\Parser\Entity\RootEntityInterface::isEntityDataCanBeLoaded()](RootEntityInterface_2.md#misentitydatacanbeloaded)
 
 ---
 

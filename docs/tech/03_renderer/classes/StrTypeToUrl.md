@@ -17,7 +17,7 @@ final class StrTypeToUrl implements \BumbleDocGen\Core\Renderer\Twig\Filter\Cust
 The filter converts the string with the data type into a link to the documented entity, if possible.
 
 ***Links:***
-- [\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl](/docs/tech/03_renderer/classes/GetDocumentedEntityUrl_2.md)
+- [\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl](GetDocumentedEntityUrl_2.md)
 
 
 <h2>Settings:</h2>

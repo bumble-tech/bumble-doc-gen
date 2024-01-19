@@ -19,6 +19,7 @@ final class PhpHandlerSettings
 1. [__construct](#m-construct) 
 ## Methods
 
+1. [changePropRefsInternalLinksMode](#mchangeproprefsinternallinksmode) 
 1. [getClassConstantEntityFilter](#mgetclassconstantentityfilter) 
 1. [getClassEntityFilter](#mgetclassentityfilter) 
 1. [getComposerConfigFile](#mgetcomposerconfigfile) 
@@ -28,6 +29,7 @@ final class PhpHandlerSettings
 1. [getEntityDocRenderersCollection](#mgetentitydocrendererscollection) 
 1. [getFileSourceBaseUrl](#mgetfilesourcebaseurl) 
 1. [getMethodEntityFilter](#mgetmethodentityfilter) 
+1. [getPropRefsInternalLinksMode](#mgetproprefsinternallinksmode) - If `true` - parameters and properties in class documents refer to generated documents and not to external sources
 1. [getPropertyEntityFilter](#mgetpropertyentityfilter) 
 1. [getPsr4Map](#mgetpsr4map) 
 1. [getUseComposerAutoload](#mgetusecomposerautoload) 
@@ -45,6 +47,21 @@ public function __construct(\BumbleDocGen\Core\Configuration\ConfigurationParame
 |:-|:-|:-|
 $parameterBag | [\BumbleDocGen\Core\Configuration\ConfigurationParameterBag](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Configuration/ConfigurationParameterBag.php) | - |
 $localObjectCache | [\BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Cache/LocalCache/LocalObjectCache.php) | - |
+
+---
+
+<a name="mchangeproprefsinternallinksmode" href="#mchangeproprefsinternallinksmode">#</a> `changePropRefsInternalLinksMode`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L175)
+```php
+public function changePropRefsInternalLinksMode(bool $propRefsInternalLinksMode): void;
+```
+
+***Parameters:***
+
+| Name | Type | Description |
+|:-|:-|:-|
+$propRefsInternalLinksMode | [bool](https://www.php.net/manual/en/language.types.boolean.php) | - |
+
+***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
 ---
 
@@ -66,7 +83,7 @@ public function getClassEntityFilter(): \BumbleDocGen\Core\Parser\FilterConditio
 
 ---
 
-<a name="mgetcomposerconfigfile" href="#mgetcomposerconfigfile">#</a> `getComposerConfigFile`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L176)
+<a name="mgetcomposerconfigfile" href="#mgetcomposerconfigfile">#</a> `getComposerConfigFile`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L199)
 ```php
 public function getComposerConfigFile(): null|string;
 ```
@@ -75,7 +92,7 @@ public function getComposerConfigFile(): null|string;
 
 ---
 
-<a name="mgetcomposervendordir" href="#mgetcomposervendordir">#</a> `getComposerVendorDir`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L193)
+<a name="mgetcomposervendordir" href="#mgetcomposervendordir">#</a> `getComposerVendorDir`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L216)
 ```php
 public function getComposerVendorDir(): null|string;
 ```
@@ -84,7 +101,7 @@ public function getComposerVendorDir(): null|string;
 
 ---
 
-<a name="mgetcustomtwigfilters" href="#mgetcustomtwigfilters">#</a> `getCustomTwigFilters`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L250)
+<a name="mgetcustomtwigfilters" href="#mgetcustomtwigfilters">#</a> `getCustomTwigFilters`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L273)
 ```php
 public function getCustomTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 ```
@@ -93,7 +110,7 @@ public function getCustomTwigFilters(): \BumbleDocGen\Core\Renderer\Twig\Filter\
 
 ---
 
-<a name="mgetcustomtwigfunctions" href="#mgetcustomtwigfunctions">#</a> `getCustomTwigFunctions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L227)
+<a name="mgetcustomtwigfunctions" href="#mgetcustomtwigfunctions">#</a> `getCustomTwigFunctions`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L250)
 ```php
 public function getCustomTwigFunctions(): \BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 ```
@@ -129,6 +146,16 @@ public function getMethodEntityFilter(): \BumbleDocGen\Core\Parser\FilterConditi
 
 ---
 
+<a name="mgetproprefsinternallinksmode" href="#mgetproprefsinternallinksmode">#</a> `getPropRefsInternalLinksMode`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L162)
+```php
+public function getPropRefsInternalLinksMode(): bool;
+```
+If `true` - parameters and properties in class documents refer to generated documents and not to external sources
+
+***Return value:*** [bool](https://www.php.net/manual/en/language.types.boolean.php)
+
+---
+
 <a name="mgetpropertyentityfilter" href="#mgetpropertyentityfilter">#</a> `getPropertyEntityFilter`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L103)
 ```php
 public function getPropertyEntityFilter(): \BumbleDocGen\Core\Parser\FilterCondition\ConditionInterface;
@@ -138,7 +165,7 @@ public function getPropertyEntityFilter(): \BumbleDocGen\Core\Parser\FilterCondi
 
 ---
 
-<a name="mgetpsr4map" href="#mgetpsr4map">#</a> `getPsr4Map`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L209)
+<a name="mgetpsr4map" href="#mgetpsr4map">#</a> `getPsr4Map`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L232)
 ```php
 public function getPsr4Map(): array;
 ```
@@ -147,7 +174,7 @@ public function getPsr4Map(): array;
 
 ---
 
-<a name="mgetusecomposerautoload" href="#mgetusecomposerautoload">#</a> `getUseComposerAutoload`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L160)
+<a name="mgetusecomposerautoload" href="#mgetusecomposerautoload">#</a> `getUseComposerAutoload`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/PhpHandlerSettings.php#L183)
 ```php
 public function getUseComposerAutoload(): bool;
 ```

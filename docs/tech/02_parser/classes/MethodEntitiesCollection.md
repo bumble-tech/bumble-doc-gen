@@ -153,7 +153,7 @@ Load method entities into the collection according to the project configuration
 ***Return value:*** [void](https://www.php.net/manual/en/language.types.void.php)
 
 ***Links:***
-- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getMethodEntityFilter()](/docs/tech/02_parser/classes/PhpHandlerSettings.md#mgetmethodentityfilter)
+- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getMethodEntityFilter()](PhpHandlerSettings.md#mgetmethodentityfilter)
 
 ---
 

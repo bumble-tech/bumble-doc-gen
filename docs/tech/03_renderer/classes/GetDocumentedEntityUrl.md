@@ -18,9 +18,9 @@ Get the URL of a documented entity by its name. If the entity is found, next to 
 the `EntityDocRendererInterface::getDocFileExtension()` directory will be created, in which the documented entity file will be created
 
 ***Links:***
-- [\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper](/docs/tech/03_renderer/classes/DocumentedEntityWrapper.md)
-- [\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection](/docs/tech/03_renderer/classes/DocumentedEntityWrappersCollection.md)
-- [\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection](/docs/tech/03_renderer/classes/RendererContext.md#pentitywrapperscollection)
+- [\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper](DocumentedEntityWrapper.md)
+- [\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection](DocumentedEntityWrappersCollection.md)
+- [\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection](RendererContext.md#pentitywrapperscollection)
 
 ***Examples of using:***
 ```php

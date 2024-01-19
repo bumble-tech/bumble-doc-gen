@@ -237,7 +237,7 @@ Get a collection of constant entities
 ***Return value:*** [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntitiesCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/ClassConstant/ClassConstantEntitiesCollection.php)
 
 ***Links:***
-- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getClassConstantEntityFilter()](/docs/tech/02_parser/reflectionApi/php/classes/PhpHandlerSettings.md#mgetclassconstantentityfilter)
+- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getClassConstantEntityFilter()](PhpHandlerSettings.md#mgetclassconstantentityfilter)
 
 ---
 
@@ -266,8 +266,8 @@ Get all constants that are available according to the configuration as an array
 ***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
 ***Links:***
-- [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity::getConstantEntitiesCollection()](/docs/tech/02_parser/reflectionApi/php/classes/ClassLikeEntity_5.md#mgetconstantentitiescollection)
-- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getClassConstantEntityFilter()](/docs/tech/02_parser/reflectionApi/php/classes/PhpHandlerSettings.md#mgetclassconstantentityfilter)
+- [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity::getConstantEntitiesCollection()](ClassLikeEntity_5.md#mgetconstantentitiescollection)
+- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getClassConstantEntityFilter()](PhpHandlerSettings.md#mgetclassconstantentityfilter)
 
 ---
 
@@ -532,7 +532,7 @@ Get a collection of method entities
 ***Return value:*** [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Method\MethodEntitiesCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/Method/MethodEntitiesCollection.php)
 
 ***Links:***
-- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getMethodEntityFilter()](/docs/tech/02_parser/reflectionApi/php/classes/PhpHandlerSettings.md#mgetmethodentityfilter)
+- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getMethodEntityFilter()](PhpHandlerSettings.md#mgetmethodentityfilter)
 
 ---
 
@@ -545,8 +545,8 @@ Get all methods that are available according to the configuration as an array
 ***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
 ***Links:***
-- [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity::getMethodEntitiesCollection()](/docs/tech/02_parser/reflectionApi/php/classes/ClassLikeEntity_5.md#mgetmethodentitiescollection)
-- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getMethodEntityFilter()](/docs/tech/02_parser/reflectionApi/php/classes/PhpHandlerSettings.md#mgetmethodentityfilter)
+- [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity::getMethodEntitiesCollection()](ClassLikeEntity_5.md#mgetmethodentitiescollection)
+- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getMethodEntityFilter()](PhpHandlerSettings.md#mgetmethodentityfilter)
 
 ---
 
@@ -672,8 +672,8 @@ Get all properties that are available according to the configuration as an array
 ***Return value:*** [array](https://www.php.net/manual/en/language.types.array.php)
 
 ***Links:***
-- [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity::getPropertyEntitiesCollection()](/docs/tech/02_parser/reflectionApi/php/classes/ClassLikeEntity_5.md#mgetpropertyentitiescollection)
-- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getPropertyEntityFilter()](/docs/tech/02_parser/reflectionApi/php/classes/PhpHandlerSettings.md#mgetpropertyentityfilter)
+- [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity::getPropertyEntitiesCollection()](ClassLikeEntity_5.md#mgetpropertyentitiescollection)
+- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getPropertyEntityFilter()](PhpHandlerSettings.md#mgetpropertyentityfilter)
 
 ---
 
@@ -736,7 +736,7 @@ Get a collection of property entities
 ***Return value:*** [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntitiesCollection](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Parser/Entity/SubEntity/Property/PropertyEntitiesCollection.php)
 
 ***Links:***
-- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getPropertyEntityFilter()](/docs/tech/02_parser/reflectionApi/php/classes/PhpHandlerSettings.md#mgetpropertyentityfilter)
+- [\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getPropertyEntityFilter()](PhpHandlerSettings.md#mgetpropertyentityfilter)
 
 ---
 
@@ -749,7 +749,7 @@ File name relative to project_root configuration parameter
 ***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
 ***Links:***
-- [\BumbleDocGen\Core\Configuration\Configuration::getProjectRoot()](/docs/tech/02_parser/reflectionApi/php/classes/Configuration.md#mgetprojectroot)
+- [\BumbleDocGen\Core\Configuration\Configuration::getProjectRoot()](Configuration.md#mgetprojectroot)
 
 ---
 

@@ -348,7 +348,7 @@ File name relative to project_root configuration parameter
 ***Return value:*** [null](https://www.php.net/manual/en/language.types.null.php) | [string](https://www.php.net/manual/en/language.types.string.php)
 
 ***Links:***
-- [\BumbleDocGen\Core\Configuration\Configuration::getProjectRoot()](/docs/tech/02_parser/classes/Configuration.md#mgetprojectroot)
+- [\BumbleDocGen\Core\Configuration\Configuration::getProjectRoot()](Configuration.md#mgetprojectroot)
 
 ---
 
@@ -381,7 +381,7 @@ Constant short name
 ***Return value:*** [string](https://www.php.net/manual/en/language.types.string.php)
 
 ***Links:***
-- [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity::getName()](/docs/tech/02_parser/classes/ClassConstantEntity_2.md#mgetname)
+- [\BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity::getName()](ClassConstantEntity_2.md#mgetname)
 
 ---
 
