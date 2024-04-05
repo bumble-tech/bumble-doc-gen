@@ -2,6 +2,7 @@
 ## [2.0.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.6.0)
 ### Features
 - Adds the ability to generate HTML documentation + live mode for previewing changes.
+- Templates now use Frontmatter instead of variables
 
 ### Breaking Changes
 - ⚠️ Minimum PHP version is now 8.1
