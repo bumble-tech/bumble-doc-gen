@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master"]
   pull_request:
-    branches: [ "1.x.x" ]
+    branches: [ "1.x.x",  "2.x.x" ]
 
 permissions:
   contents: read
@@ -18,7 +18,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.0
+          php-version: 8.1
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
