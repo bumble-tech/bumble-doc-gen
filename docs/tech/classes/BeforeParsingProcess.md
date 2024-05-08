@@ -1,12 +1,12 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> BeforeParsingProcess<hr> </embed>
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Plugin system](../04_pluginSystem.md) **/**
+BeforeParsingProcess
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Parser/BeforeParsingProcess.php#L9">BeforeParsingProcess</a> class:
-</h1>
+---
 
 
-
-
+# [BeforeParsingProcess](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Parser/BeforeParsingProcess.php#L9) class:
 
 ```php
 namespace BumbleDocGen\Core\Plugin\Event\Parser;
@@ -14,47 +14,15 @@ namespace BumbleDocGen\Core\Plugin\Event\Parser;
 final class BeforeParsingProcess extends \Symfony\Contracts\EventDispatcher\Event
 ```
 
+## Initialization methods
 
+1. [__construct](#m-construct) 
 
+## Methods details:
 
-
-
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-
-
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Parser/BeforeParsingProcess.php#L11">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Parser/BeforeParsingProcess.php#L11)
 ```php
 public function __construct();
 ```
 
-
-
-<b>Parameters:</b> not specified
-
-
-
-</div>
-<hr>
+---

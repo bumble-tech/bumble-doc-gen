@@ -15,7 +15,7 @@ use_shared_cache: true            # (bool) Enable cache usage of generated docum
 twig_functions:                   # (array<CustomFunctionInterface>) Functions that can be used in document templates
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawDocumentationMenu
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawDocumentedEntityLink
-  - class: \BumbleDocGen\Core\Renderer\Twig\Function\GeneratePageBreadcrumbs
+  - class: \BumbleDocGen\Core\Renderer\Twig\Function\DrawPageBreadcrumbs
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\LoadPluginsContent
   - class: \BumbleDocGen\Core\Renderer\Twig\Function\PrintEntityCollectionAsList
@@ -28,8 +28,6 @@ twig_filters:                     # (array<CustomFilterInterface>) Filters that 
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\Quotemeta
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\RemoveLineBrakes
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\StrTypeToUrl
-  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\TextToCodeBlock
-  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\TextToHeading
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\PregMatch
   - class: \BumbleDocGen\Core\Renderer\Twig\Filter\Implode
 plugins:                          # (array<PluginInterface>|null) List of plugins

@@ -12,14 +12,10 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\TemplateFile;
-use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
 /**
  * Helper entity for working with breadcrumbs
@@ -39,7 +35,6 @@ final class BreadcrumbsHelper
     public function __construct(
         private readonly Configuration $configuration,
         private readonly LocalObjectCache $localObjectCache,
-        private readonly BreadcrumbsTwigEnvironment $breadcrumbsTwig,
         private readonly PluginEventDispatcher $pluginEventDispatcher,
         private readonly string $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
     ) {
@@ -335,23 +330,5 @@ final class BreadcrumbsHelper
     {
         $pageData = $this->getPageDataByKey($key);
         return $pageData['doc_file'] ?? null;
-    }
-
-    /**
-     * Returns an HTML string with rendered breadcrumbs
-     *
-     * @throws SyntaxError
-     * @throws NotFoundException
-     * @throws RuntimeError
-     * @throws DependencyException
-     * @throws LoaderError
-     * @throws InvalidConfigurationParameterException
-     */
-    public function renderBreadcrumbs(string $currentPageTitle, string $filePatch, bool $fromCurrent = true): string
-    {
-        return $this->breadcrumbsTwig->render('breadcrumbs.html.twig', [
-            'currentPageTitle' => $currentPageTitle,
-            'breadcrumbs' => $this->getBreadcrumbs($filePatch, $fromCurrent),
-        ]);
     }
 }

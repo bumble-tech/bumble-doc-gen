@@ -1,36 +1,38 @@
 ---
 title: BumbleDocGen
 ---
-{{ "BumbleDocGen: A Documentation Generator for PHP projects 🐝" | textToHeading('H1') }}
+# BumbleDocGen: A Documentation Generator for PHP projects 🐝
 
-<b>BumbleDocGen</b> is a robust library for generating and maintaining documentation next to the code of large and small PHP projects.
+**BumbleDocGen** is a robust library for generating and maintaining documentation next to the code of large and small PHP projects.
 
 This tool analyzes your codebase and produces a comprehensive set of Markdown documents, including descriptions of classes, methods, and properties alongside navigable internal links.
 
-{{ "Installation" | textToHeading('H2') }}
+## Installation
 
 Add the BumbleDocGen to the `composer.json` file of your project using the following command:
 
-{{ 'composer require bumble-tech/bumble-doc-gen' | textToCodeBlock('console') }}
+```console
+composer require bumble-tech/bumble-doc-gen
+```
 
-{{ "Detailed technical description" | textToHeading('H2') }}
+## Detailed technical description
 
 💡 Please refer to the [a x-title="Description of the technical part of the project"]Technical description of the project[/a] for a detailed explanation of all the classes and methods used.
 
-{{ "Core Features" | textToHeading('H2') }}
+## Core Features
 
-- 🔍 <b>[a x-title="Parsing"]Parser[/a]:</b>
+1. 🔍 **[a x-title="Parsing"]Parser[/a]:**
   BumbleDocGen analyzes your code and provides a convenient [a]Reflection API[/a].
 
-- ✍️ <b>[a x-title="Rendering"]Renderer[/a]:</b>
+2. ✍️ **[a x-title="Rendering"]Renderer[/a]:**
   BumbleDocGen generates markdown content using templates and fills them with data obtained from parsing your code.
 
-- 🧠 <b>AI tools for documentation generation:</b>
+3. 🧠 **AI tools for documentation generation:**
   BumbleDocGen allows you to use a group of AI tools to help generate project documentation.
 
-{{ "How to Use" | textToHeading('H2') }}
+## How to Use
 
-{{ "Entry points" | textToHeading('H3') }}
+### Entry points
 
 BumbleDocGen's interface consists of mainly two classes: [a]DocGenerator[/a] and [a]DocGeneratorFactory[/a].
 
@@ -42,39 +44,36 @@ BumbleDocGen's interface consists of mainly two classes: [a]DocGenerator[/a] and
 
 {{ displayClassApiMethods('\\BumbleDocGen\\DocGeneratorFactory') | addIndentFromLeft }}
 
-{{ "Examples of usage" | textToHeading('H3') }}
+### Examples of usage
 
 1) Working with a library in a PHP file
+    ```php
+    require_once 'vendor/autoload.php';
 
-```php
-require_once 'vendor/autoload.php';
+    use BumbleDocGen\DocGeneratorFactory;
 
-use BumbleDocGen\DocGeneratorFactory;
+    // Initialize the factory
+    $factory = new DocGeneratorFactory();
 
-// Initialize the factory
-$factory = new DocGeneratorFactory();
+    // Create a DocGenerator instance
+    $docgen = $factory->create('/path/to/configuration/files');
 
-// Create a DocGenerator instance
-$docgen = $factory->create('/path/to/configuration/files');
+    // or $docgen = $factory->createByConfigArray([...]);
 
-// or $docgen = $factory->createByConfigArray([...]);
-
-// Now call the desired operation
-$docgen->generate();
-```
-
+    // Now call the desired operation
+    $docgen->generate();
+    ```
 2) Working with the library through a console application
+    ```bash
+    # List of available commands
+    ./vendor/bin/bumbleDocGen list
 
-```bash
-# List of available commands
-./vendor/bin/bumbleDocGen list
+    # Documentation generation example
+    ./vendor/bin/bumbleDocGen generate -c <path to config file>
 
-# Documentation generation example
-./vendor/bin/bumbleDocGen generate -c <path to config file>
-
-# Getting detailed information about a command
-./vendor/bin/bumbleDocGen generate -h
-```
+    # Getting detailed information about a command
+    ./vendor/bin/bumbleDocGen generate -h
+    ```
 
 ------------------
 
@@ -82,4 +81,6 @@ $docgen->generate();
 
 To update this documentation, run the following command:
 
-{{ './bin/bumbleDocGen generate' | textToCodeBlock('console') }}
+```console
+./bin/bumbleDocGen generate
+```

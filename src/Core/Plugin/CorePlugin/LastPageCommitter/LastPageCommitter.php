@@ -15,8 +15,8 @@ use BumbleDocGen\Core\Renderer\Context\RendererContext;
 final class LastPageCommitter implements PluginInterface
 {
     public function __construct(
-        private RendererContext $context,
-        private Configuration $configuration
+        private readonly RendererContext $context,
+        private readonly Configuration $configuration
     ) {
     }
 
@@ -41,10 +41,10 @@ final class LastPageCommitter implements PluginInterface
 
             $content = $event->getContent();
             if (isset($output[2]) && str_contains($output[2], 'Date: ')) {
-                $author = str_replace('Author:', '<b>Last page committer:</b>', htmlspecialchars($output[1]));
-                $date = str_replace('Date:', '<b>Last modified date:</b>', $output[2]);
-                $contentRegenerationDate = '<b>Page content update date:</b> ' . date('D M d Y');
-                $content .= "\n\n<div id='page_committer_info'>\n<hr>\n{$author}<br>{$date}<br>{$contentRegenerationDate}<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>";
+                $author = str_replace('Author:', '**Last page committer:**', htmlspecialchars($output[1]));
+                $date = str_replace('Date:', '**Last modified date:**', $output[2]);
+                $contentRegenerationDate = '**Page content update date:** ' . date('D M d Y');
+                $content .= "\n\n---\n\n{$author}<br>{$date}<br>{$contentRegenerationDate}<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)";
             }
             $event->setContent($content);
         } catch (\Exception) {

@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd;
 
+use BumbleDocGen\Core\Configuration\Configuration;
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
+use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
+use BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -22,7 +26,9 @@ class PhpClassToMdDocRenderer implements EntityDocRendererInterface
     public const BLOCK_BEFORE_DETAILS = 'before_details';
 
     public function __construct(
-        private PhpClassRendererTwigEnvironment $classRendererTwig
+        private readonly PhpClassRendererTwigEnvironment $classRendererTwig,
+        private readonly Configuration $configuration,
+        private readonly PhpHandlerSettings $phpHandlerSettings
     ) {
     }
 
@@ -45,12 +51,16 @@ class PhpClassToMdDocRenderer implements EntityDocRendererInterface
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
+     * @throws InvalidConfigurationParameterException
      */
     public function getRenderedText(DocumentedEntityWrapper $entityWrapper): string
     {
         return $this->classRendererTwig->render('class.md.twig', [
             'classEntity' => $entityWrapper->getDocumentTransformableEntity(),
-            'parentDocFilePath' => $entityWrapper->getParentDocFilePath()
+            'parentDocFilePath' => $entityWrapper->getParentDocFilePath(),
+            'docUrl' => $this->configuration->getOutputDirBaseUrl() . $entityWrapper->getDocUrl(),
+            MainTwigEnvironment::CURRENT_TEMPLATE_NAME_KEY => $entityWrapper->getDocUrl() . '.twig',
+            'propRefsInternalLinksMode' => $this->phpHandlerSettings->getPropRefsInternalLinksMode()
         ]);
     }
 }

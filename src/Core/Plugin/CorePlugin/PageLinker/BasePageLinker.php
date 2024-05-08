@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Plugin\CorePlugin\PageLinker;
 
+use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingDocFile;
@@ -17,10 +18,11 @@ use Psr\Log\LoggerInterface;
 abstract class BasePageLinker implements PluginInterface
 {
     public function __construct(
-        private BreadcrumbsHelper $breadcrumbsHelper,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
-        private LoggerInterface $logger,
+        private readonly BreadcrumbsHelper $breadcrumbsHelper,
+        private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private readonly GetDocumentedEntityUrl $getDocumentedEntityUrlFunction,
+        private readonly Configuration $configuration,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -70,9 +72,11 @@ abstract class BasePageLinker implements PluginInterface
      */
     final public function beforeCreatingDocFile(BeforeCreatingDocFile $event): void
     {
+        $docRelativeFilePath = str_replace($this->configuration->getOutputDir(), '', $event->getOutputFilePatch());
+
         $content = preg_replace_callback(
             $this->getLinkRegEx(),
-            function (array $matches) {
+            function (array $matches) use ($docRelativeFilePath) {
                 $match = $matches[0] ?? '';
                 $linkString = $this->getUrlFromMatch($match);
                 $pageData = $this->breadcrumbsHelper->getPageDataByKey($linkString);
@@ -85,11 +89,12 @@ abstract class BasePageLinker implements PluginInterface
                     foreach ($this->rootEntityCollectionsGroup as $rootEntityCollection) {
                         $entityUrlData = $rootEntityCollection->getEntityLinkData($linkString);
                         if ($entityUrlData['entityName'] ?? null) {
-                            $getDocumentedEntityUrl = $this->getDocumentedEntityUrlFunction;
-                            $entityUrlData['url'] = $getDocumentedEntityUrl(
+                            $entityUrlData['url'] = $this->getDocumentedEntityUrlFunction->process(
                                 $rootEntityCollection,
                                 $entityUrlData['entityName'],
-                                $entityUrlData['cursor']
+                                $entityUrlData['cursor'],
+                                true,
+                                "{$docRelativeFilePath}.twig"
                             );
                             return $this->getFilledOutputTemplate(
                                 $this->getCustomTitleFromMatch($match) ?: $entityUrlData['title'],

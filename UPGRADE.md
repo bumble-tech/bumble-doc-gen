@@ -33,3 +33,7 @@ This document serves as a reference for updating your current version of the Bum
 * Class `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad` has been removed. Use `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded`
 * ⚠️**PHP ReflectionAPI has been completely changed. See information about the current version here:** [ReflectionAPI](https://github.com/bumble-tech/bumble-doc-gen/tree/master/docs/tech/2.parser/reflectionApi)
 * Method `\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getComposerInstalledFile()` renamed to `\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getComposerVendorDir()`
+* Twig filter `\BumbleDocGen\Core\Renderer\Twig\Filter\TextToCodeBlock` removed
+* Twig filter `\BumbleDocGen\Core\Renderer\Twig\Filter\TextToHeading` removed
+* Plugin `\BumbleDocGen\Core\Plugin\CorePlugin\PageLinker\PageLinkerPlugin` now generates MD instead of HTML
+* Twig function `\BumbleDocGen\Core\Renderer\Twig\Function\GeneratePageBreadcrumbs` removed. Use `\BumbleDocGen\Core\Renderer\Twig\Function\DrawPageBreadcrumbs` function instead

@@ -16,7 +16,7 @@ use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
  */
 final class FileGetContents implements CustomFunctionInterface
 {
-    public function __construct(private ConfigurationParameterBag $parameterBag)
+    public function __construct(private readonly ConfigurationParameterBag $parameterBag)
     {
     }
 

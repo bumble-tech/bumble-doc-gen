@@ -1,6 +1,13 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/03_renderer/readme.md">Renderer</a> <b>/</b> <a href="/docs/tech/03_renderer/01_howToCreateTemplates/readme.md">How to create documentation templates?</a> <b>/</b> Templates dynamic blocks<hr> </embed>
+[BumbleDocGen](../../../README.md) **/**
+[Technical description of the project](../../readme.md) **/**
+[Renderer](../readme.md) **/**
+[How to create documentation templates?](readme.md) **/**
+Templates dynamic blocks
 
-<embed> <h1>Templates dynamic blocks</h1> </embed>
+---
+
+
+# Templates dynamic blocks
 
 There are several ways to create dynamic blocks in templates.
 
@@ -8,22 +15,19 @@ There are several ways to create dynamic blocks in templates.
 You can use the built-in functions and filters or add your own, so you can implement any logic for generating dynamically changing content.
 
 ```twig
- {{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['\\BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable()) }}
+{{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['\\BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable()) }}
 ```
-
 
 * The second way is to output data from <a href='/docs/tech/03_renderer/01_howToCreateTemplates/templatesVariables.md'>variables</a> directly to the template. For example, you can display a list of classes or methods of documented code according to certain rules.
 
 ```twig
- {% for entity in phpEntities.filterByInterfaces(['\\BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable() %}
-     * {{ entity.getName() }}
- {% endfor %}
- 
+{% for entity in phpEntities.filterByInterfaces(['\\BumbleDocGen\\Core\\Parser\\SourceLocator\\SourceLocatorInterface']).getOnlyInstantiable() %}
+    * {{ entity.getName() }}
+{% endfor %}
 ```
 
 
 
+---
 
-<div id='page_committer_info'>
-<hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Thu Jan 11 00:14:41 2024 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+**Last page committer:** fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br>**Last modified date:**   Sat Jan 20 00:42:48 2024 +0300<br>**Page content update date:** Fri Jan 19 2024<br>Made with [Bumble Documentation Generator](https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md)

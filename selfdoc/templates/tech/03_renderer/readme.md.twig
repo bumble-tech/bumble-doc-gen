@@ -1,9 +1,9 @@
 ---
 title: Renderer
 ---
-{{ generatePageBreadcrumbs(title, _self) }}
+{{ drawPageBreadcrumbs() }}
 
-{{ "Documentation renderer" | textToHeading('H1') }}
+# Documentation renderer
 
 Render passes through all files from the directory specified in configuration param `templates_dir`
 
@@ -11,18 +11,20 @@ If the file ends with **.twig** then the file is processed, otherwise it is simp
 to the target directory obtained from configuration param `output_dir`.
 We use twig to process templates.
 
-{{ "More detailed description of renderer components" | textToHeading('H2') }}
+## More detailed description of renderer components
 
 {{ drawDocumentationMenu(_self) }}
 
-{{ "Starting the rendering process" | textToHeading('H2') }}
+## Starting the rendering process
 
-{{ "$renderer = new Renderer(...);
+```php
+$renderer = new Renderer(...);
 
 // Starting the process of filling templates with data and saving finished documents
-$renderer->run();" | textToCodeBlock('php') }}
+$renderer->run();
+```
 
-{{ "How it works" | textToHeading('H2') }}
+## How it works
 
 The process of rendering documents is divided into several stages. We separately generate documentation for templates that were pre-prepared by the user,
 and then create documentation for classes that the user refers to from document templates.

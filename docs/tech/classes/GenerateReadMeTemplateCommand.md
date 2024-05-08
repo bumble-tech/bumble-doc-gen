@@ -1,12 +1,12 @@
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/05_console.md">Console app</a> <b>/</b> GenerateReadMeTemplateCommand<hr> </embed>
+[BumbleDocGen](../../README.md) **/**
+[Technical description of the project](../readme.md) **/**
+[Console app](../05_console.md) **/**
+GenerateReadMeTemplateCommand
 
-<h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Console/GenerateReadMeTemplateCommand.php#L17">GenerateReadMeTemplateCommand</a> class:
-</h1>
+---
 
 
-
-
+# [GenerateReadMeTemplateCommand](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Console/GenerateReadMeTemplateCommand.php#L17) class:
 
 ```php
 namespace BumbleDocGen\AI\Console;
@@ -14,78 +14,27 @@ namespace BumbleDocGen\AI\Console;
 final class GenerateReadMeTemplateCommand extends \BumbleDocGen\Console\Command\BaseCommand
 ```
 
+## Initialization methods
+
+1. [__construct](#m-construct) 
+## Traits:
+
+1. [BumbleDocGen\AI\Traits\SharedCommandLogicTrait](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Traits/SharedCommandLogicTrait.php)
 
 
+## Methods details:
 
-
-
-
-
-<h2>Initialization methods:</h2>
-
-<ol>
-<li>
-    <a href="#m-construct">__construct</a>
-    </li>
-</ol>
-
-
-<h2>Traits:</h2>
-
-<ul>
-        <li><b><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/AI/Traits/SharedCommandLogicTrait.php'>\BumbleDocGen\AI\Traits\SharedCommandLogicTrait</a></b></li>
-    </ul>
-
-<h2>Constants:</h2>
-<ul>
-            <li><a name="qname"
-               href="#qname">#</a>
-            <code>NAME</code>                   <b>|</b> <a href="/src/AI/Console/GenerateReadMeTemplateCommand.php#L21">source
-                    code</a> </li>
-    </ul>
-
-
-
-
-
-<h2>Method details:</h2>
-
-<div class='method_description-block'>
-
-<ul>
-<li><a name="m-construct" href="#m-construct">#</a>
- <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/BaseCommand.php#L21">source code</a></li>
-</ul>
-
+<a name="m-construct" href="#m-construct">#</a> `__construct`  **|** [source code](https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Console/Command/BaseCommand.php#L21)
 ```php
 // Implemented in BumbleDocGen\Console\Command\BaseCommand
 
 public function __construct(string $name = null);
 ```
 
+***Parameters:***
 
+| Name | Type | Description |
+|:-|:-|:-|
+$name | [string](https://www.php.net/manual/en/language.types.string.php) | - |
 
-<b>Parameters:</b>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td>$name</td>
-            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-</table>
-
-
-
-</div>
-<hr>
+---

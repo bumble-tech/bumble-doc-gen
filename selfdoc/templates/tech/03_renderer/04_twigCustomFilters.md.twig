@@ -2,9 +2,9 @@
 title: Template filters
 prevPage: Renderer
 ---
-{{ generatePageBreadcrumbs(title, _self) }}
+{{ drawPageBreadcrumbs() }}
 
-{{ "Template filters" | textToHeading('H1') }}
+# Template filters
 
 When generating pages, you can use filters that allow you to modify the content.
 Filters available during page generation are defined in <a href='{{ getDocumentationPageUrl('01_configuration.md') }}'>the configuration</a> ( `twig_filters` parameter )
@@ -12,7 +12,7 @@ Filters available during page generation are defined in <a href='{{ getDocumenta
 We use the twig template engine, you can get more information about working with filters here: https://twig.symfony.com/doc/1.x/advanced.html#filters
 
 
-{{ "How to use a filter in a template:" | textToHeading('H2') }}
+## How to use a filter in a template:
 
 {{ '<pre>&#123;&#123; someText | filter(...parameters) &#125;&#125;</pre>' }}
 
@@ -21,7 +21,7 @@ or
 {{ '<pre>&#123;&#123; someText | filter &#125;&#125;</pre>' }}
 
 
-{{ "Configuration example" | textToHeading('H2') }}
+## Configuration example
 
 You can add your custom filters to the configuration like this:
 
@@ -34,7 +34,7 @@ twig_filters:
 It is important to remember that when a template is inherited, custom filters are not overridden and augmented.
 This information is detailed on page [a]01_configuration.md[/a].
 
-{{ "Defautl template filters" | textToHeading('H2') }}
+## Default template filters
 
 Several filters are already defined in the base configuration.
 There are both general filters for all types of entities, and filters that only serve to process entities that belong to a particular PL.

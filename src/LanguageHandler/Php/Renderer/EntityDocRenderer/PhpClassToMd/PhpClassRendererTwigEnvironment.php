@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd;
 
+use BumbleDocGen\Core\Renderer\Twig\Function\DrawEntityBreadcrumbs;
 use BumbleDocGen\Core\Renderer\Twig\MainExtension;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -15,13 +16,20 @@ final class PhpClassRendererTwigEnvironment
 {
     private Environment $twig;
 
-    public function __construct(MainExtension $mainExtension)
-    {
+    public function __construct(
+        MainExtension $mainExtension,
+        DrawEntityBreadcrumbs $drawEntityBreadcrumbsFunction
+    ) {
         $loader = new FilesystemLoader([
             __DIR__ . '/templates',
         ]);
         $this->twig = new Environment($loader);
         $this->twig->addExtension($mainExtension);
+        $this->twig->addFunction(new \Twig\TwigFunction(
+            $drawEntityBreadcrumbsFunction->getName(),
+            $drawEntityBreadcrumbsFunction,
+            $drawEntityBreadcrumbsFunction->getOptions()
+        ));
     }
 
     /**
