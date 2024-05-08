@@ -1,7 +1,7 @@
-project_root: '%WORKING_DIR%/vendor/doctrine'
+project_root: '%WORKING_DIR%'
 templates_dir: '%WORKING_DIR%/demo/demo1/templates'
-cache_dir: '%WORKING_DIR%/demo/demo1/__cache'
 output_dir: "%WORKING_DIR%/demo/demo1/docs"
+cache_dir: '%WORKING_DIR%/demo/demo1/__cache'
 output_dir_base_url: "/demo/demo1/docs"
 check_file_in_git_before_creating_doc: false
 language_handlers:
@@ -13,4 +13,6 @@ source_locators:
   - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
     arguments:
       directories:
-        - "%project_root%"
+        - "%project_root%/src"
+        - "%project_root%/demo/demo1/docs"
+        - "%project_root%/vendor/doctrine"
