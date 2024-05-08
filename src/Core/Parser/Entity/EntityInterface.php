@@ -4,28 +4,56 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Parser\Entity;
 
+use BumbleDocGen\Core\Configuration\Configuration;
+
 interface EntityInterface
 {
+    /**
+     * Entity object ID
+     *
+     * @api
+     */
     public function getObjectId(): string;
 
     /**
      * Get parent collection of entities
+     *
+     * @api
      */
     public function getRootEntityCollection(): RootEntityCollection;
 
+    /**
+     * Full name of the entity
+     *
+     * @api
+     */
     public function getName(): string;
 
+    /**
+     * Short name of the entity
+     *
+     * @api
+     */
     public function getShortName(): string;
 
     /**
-     * Returns the relative path to a file if it can be retrieved and if the file is in the project directory
+     * File name relative to project_root configuration parameter
+     *
+     * @api
+     *
+     * @see Configuration::getProjectRoot()
      */
-    public function getFileName(): ?string;
+    public function getRelativeFileName(): ?string;
 
     /**
      * Returns the absolute path to a file if it can be retrieved and if the file is in the project directory
+     *
+     * @api
      */
     public function getAbsoluteFileName(): ?string;
 
-    public function entityCacheIsOutdated(): bool;
+    /**
+     * @internal
+     */
+    public function isEntityCacheOutdated(): bool;
 }

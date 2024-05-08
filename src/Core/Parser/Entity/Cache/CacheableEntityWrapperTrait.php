@@ -39,7 +39,7 @@ trait CacheableEntityWrapperTrait
             $funcArgs
         );
 
-        if ($this->hasEntityCacheValue($cacheKey) && !$this->entityCacheIsOutdated()) {
+        if ($this->hasEntityCacheValue($cacheKey) && !$this->isEntityCacheOutdated()) {
             $methodReturnValue = $this->getEntityCacheValue($cacheKey);
         } else {
             $errorsBeforeGenerationCount = count($this->generationErrorsHandler->getRecords());

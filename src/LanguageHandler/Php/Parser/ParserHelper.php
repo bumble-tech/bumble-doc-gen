@@ -8,18 +8,13 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use Monolog\Logger;
-use Nette\PhpGenerator\GlobalFunction;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
 use phpDocumentor\Reflection\Location;
 use phpDocumentor\Reflection\Types\Context;
 use phpDocumentor\Reflection\Types\ContextFactory;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionMethod;
 
 final class ParserHelper
 {
@@ -158,30 +153,15 @@ final class ParserHelper
 
     public function __construct(
         private Configuration $configuration,
-        private ReflectorWrapper $reflector,
+        private ComposerHelper $composerHelper,
         private LocalObjectCache $localObjectCache,
         private Logger $logger
     ) {
     }
 
-    public static function getBuiltInClassNames(): array
-    {
-        static $classNames = [];
-        if (!$classNames) {
-            $builtInClassNames = array_merge(self::$predefinedClassesInterfaces, get_declared_classes());
-            foreach ($builtInClassNames as $className) {
-                if (str_starts_with(ltrim($className, '\\'), 'Composer')) {
-                    break;
-                }
-                $classNames[$className] = $className;
-            }
-        }
-        return $classNames;
-    }
-
     public static function isBuiltInClass(string $className): bool
     {
-        $className = ltrim(str_replace('\\\\', '\\', $className), '\\');
+        $className = ClassLikeEntity::normalizeClassName($className);
         return array_key_exists($className, self::getBuiltInClassNames());
     }
 
@@ -195,49 +175,32 @@ final class ParserHelper
         return false;
     }
 
-    private static function checkIsClassName(string $name): bool
-    {
-        if (
-            !preg_match(
-                '/^(?=_*[A-z]+)[A-z0-9]+$/',
-                $name
-            )
-        ) {
-            return false;
-        }
-
-        $name = explode('\\', $name);
-        $name = end($name);
-        $chr = \mb_substr($name, 0, 1, "UTF-8");
-        return \mb_strtolower($chr, "UTF-8") != $chr;
-    }
-
     public static function isCorrectClassName(string $className, bool $checkBuiltIns = true): bool
     {
         if (self::isBuiltInType($className) || ($checkBuiltIns && self::isBuiltInClass($className))) {
             return false;
         }
-        return self::checkIsClassName($className);
+        return (bool)preg_match(
+            '/^(?=_*[A-z]+)[A-z0-9]+$/',
+            $className
+        );
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     public function isClassLoaded(string $className): bool
     {
         if (self::isCorrectClassName($className)) {
-            try {
-                $this->reflector->reflectClass($className);
-                return true;
-            } catch (\Exception) {
-            }
+            return (bool)$this->composerHelper->getComposerClassLoader()->findFile($className);
         }
-
         return false;
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function getUsesListByClassEntity(ClassEntity $classEntity, bool $extended = true): array
+    public function getUsesListByClassEntity(ClassLikeEntity $classEntity, bool $extended = true): array
     {
         $fileName = $classEntity->getAbsoluteFileName();
         if (!$fileName) {
@@ -274,12 +237,11 @@ final class ParserHelper
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function parseFullClassName(
         string $searchClassName,
-        ClassEntity $parentClassEntity,
+        ClassLikeEntity $parentClassEntity,
         bool $extended = true
     ): string {
         $classNameParts = explode('::', $searchClassName);
@@ -322,141 +284,6 @@ final class ParserHelper
         return $className;
     }
 
-    public function getClassFromFile($file): ?string
-    {
-        if (str_ends_with($file, '.php')) {
-            $content = file_get_contents($file);
-            $namespaceLevel = false;
-            $classLevel = false;
-            $namespace = '';
-            foreach (token_get_all($content, TOKEN_PARSE) as $token) {
-                if ($token[0] === T_NAMESPACE) {
-                    $namespaceLevel = true;
-                } elseif ($namespaceLevel && in_array($token[0], [T_NAME_QUALIFIED, T_STRING])) {
-                    $namespaceLevel = false;
-                    $namespace = $token[1];
-                }
-                if (!$namespaceLevel && in_array($token[0], [T_CLASS, T_INTERFACE, T_TRAIT])) {
-                    $classLevel = true;
-                } elseif ($classLevel && $token[0] === T_STRING) {
-                    return $namespace . '\\' . $token[1];
-                }
-            }
-        }
-        return null;
-    }
-
-    protected function getRawValue(
-        ReflectionClass $reflectionClass,
-        ReflectionMethod $reflectionMethod,
-        string $condition
-    ) {
-        $prepareReturnValue = function (mixed $value): mixed {
-            if (!is_string($value) || str_contains($value, ':') || str_contains($value, '->')) {
-                return $value;
-            }
-            return "'{$value}'";
-        };
-        if (
-            str_contains($condition, '::') && !str_contains($condition, '"') && !str_contains($condition, '\'')
-        ) {
-            try {
-                $nextClass = null;
-                $parts = explode('::', $condition);
-                if ($parts[0] === 'parent') {
-                    $nextClass = $reflectionMethod->getImplementingClass()->getParentClass();
-                } elseif ($parts[0] === 'self') {
-                    $nextClass = $reflectionMethod->getImplementingClass();
-                } elseif ($this->isClassLoaded($parts[0])) {
-                    $nextClass = $this->reflector->reflectClass($parts[0]);
-                }
-
-                if ($nextClass) {
-                    if (str_contains($parts[1], '(') && !str_contains($parts[1], ' ') && !str_contains($parts[1], '.')) {
-                        $methodName = explode('(', $parts[1])[0];
-                        $nextReflection = $nextClass->getMethod($methodName);
-                        $methodValue = $this->getMethodReturnValue($reflectionClass, $nextReflection);
-                        return $prepareReturnValue($methodValue);
-                    } elseif (!preg_match('/([-+:\/ ])/', $parts[1])) {
-                        $constantValue = $nextClass->getConstant($parts[1]);
-                        return $prepareReturnValue($constantValue);
-                    }
-                    $reflectionClass = $nextClass;
-                }
-            } catch (\Exception) {
-            }
-        }
-
-        $value = preg_replace_callback(
-            '/([$]?)([a-zA-Z_\\\\]+)((::)|(->))([\s\S]([^ -+\-;\]])+)(([^)]?)+[)])?/',
-            function (array $matches) use ($reflectionClass, $prepareReturnValue) {
-                if ($matches[1] && $matches[2] != 'this') {
-                    return $matches[0];
-                }
-                if (substr_count($matches[0], '->') > 1) {
-                    return $matches[0];
-                }
-
-                $nextClass = $reflectionClass;
-                if (!in_array($matches[2], ['static', 'self', 'partner', 'this'])) {
-                    $nextClass = $this->reflector->reflectClass($matches[2]);
-                }
-
-                if (isset($matches[8]) && $nextClass->hasMethod($matches[6])) {
-                    $methodValue = $this->getMethodReturnValue($nextClass, $nextClass->getMethod($matches[6]));
-                    return $prepareReturnValue($methodValue);
-                } elseif ($nextClass->hasConstant($matches[6])) {
-                    $constantValue = $nextClass->getConstant($matches[6]);
-                    return $prepareReturnValue($constantValue);
-                } else {
-                    return $matches[0];
-                }
-            },
-            $condition
-        );
-
-        return $value;
-    }
-
-    public function getMethodReturnValue(
-        ReflectionClass $reflectionClass,
-        ReflectionMethod $reflectionMethod
-    ): mixed {
-        if (preg_match('/(return )([^;]+)/', $reflectionMethod->getBodyCode(), $matches)) {
-            $savedParts = [];
-            $i = 0;
-            $preparedConditions = preg_replace_callback("/((\")(.*?)(\"))|((')(.*?)('))/", function (array $matches) use (&$savedParts, &$i) {
-                $value = array_key_exists(7, $matches) ? $matches[7] : $matches[3];
-                $savedParts[++$i] = $value;
-                return "'[%{$i}%]'";
-            }, $matches[2]);
-
-            $conditions = explode('.', $preparedConditions);
-            $values = [];
-            foreach ($conditions as $condition) {
-                foreach ($savedParts as $i => $savedPart) {
-                    $condition = str_replace("[%{$i}%]", $savedPart, $condition);
-                }
-                $values[] = self::getRawValue($reflectionClass, $reflectionMethod, trim($condition));
-            }
-            $value = implode(' . ', $values);
-
-            if ($value && !str_contains($value, '::') && !str_contains($value, '$this->')) {
-                try {
-                    $fName = 'x' . uniqid();
-                    $fn = new GlobalFunction($fName);
-                    $value = str_replace(['(', ')'], '', $value);
-                    $fn->setBody("return {$value};");
-                    eval((string)$fn);
-                    return $fName();
-                } catch (\Exception) {
-                }
-            }
-            return $value;
-        }
-        return null;
-    }
-
     /**
      * @throws InvalidConfigurationParameterException
      */
@@ -473,22 +300,10 @@ final class ParserHelper
         return $gitFiles;
     }
 
-    private function getDocBlockFactory(): DocBlockFactory
-    {
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
-        } catch (ObjectNotFoundException) {
-        }
-        $docBlockFactory = DocBlockFactory::createInstance();
-        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $docBlockFactory);
-        return $docBlockFactory;
-    }
-
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlock(ClassEntity $classEntity, string $docComment, ?int $lineNumber = null): DocBlock
+    public function getDocBlock(ClassLikeEntity $classEntity, string $docComment, ?int $lineNumber = null): DocBlock
     {
         $docComment = $docComment ?: ' ';
         $cacheKey = md5("{$classEntity->getName()}{$docComment}{$lineNumber}");
@@ -517,10 +332,9 @@ final class ParserHelper
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDocBlockContext(ClassEntity $classEntity): Context
+    public function getDocBlockContext(ClassLikeEntity $classEntity): Context
     {
         try {
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $classEntity->getName());
@@ -554,5 +368,31 @@ final class ParserHelper
         );
         $this->localObjectCache->cacheMethodResult(__METHOD__, $classEntity->getName(), $context);
         return $context;
+    }
+
+    private static function getBuiltInClassNames(): array
+    {
+        static $classNames = [];
+        if (!$classNames) {
+            $builtInClassNames = array_merge(self::$predefinedClassesInterfaces, get_declared_classes());
+            foreach ($builtInClassNames as $className) {
+                if (str_starts_with(ltrim($className, '\\'), 'Composer')) {
+                    break;
+                }
+                $classNames[$className] = $className;
+            }
+        }
+        return $classNames;
+    }
+
+    private function getDocBlockFactory(): DocBlockFactory
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $docBlockFactory = DocBlockFactory::createInstance();
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $docBlockFactory);
+        return $docBlockFactory;
     }
 }

@@ -59,12 +59,15 @@ final class StrTypeToUrl implements CustomFilterInterface
         foreach ($types as $type) {
             $preloadResourceLink = $this->rendererHelper->getPreloadResourceLink($type);
             if ($preloadResourceLink) {
+                if ($useShortLinkVersion) {
+                    $type = array_reverse(explode('\\', $type))[0];
+                }
                 $preparedTypes[] = "<a href='{$preloadResourceLink}'>{$type}</a>";
                 continue;
             }
             try {
                 $entityOfLink = $rootEntityCollection->getLoadedOrCreateNew($type);
-                if (!$entityOfLink->isExternalLibraryEntity() && $entityOfLink->entityDataCanBeLoaded()) {
+                if (!$entityOfLink->isExternalLibraryEntity() && $entityOfLink->isEntityDataCanBeLoaded()) {
                     if ($entityOfLink->getAbsoluteFileName()) {
                         $link = $getDocumentedEntityUrlFunction($rootEntityCollection, $type, '', $createDocument);
 

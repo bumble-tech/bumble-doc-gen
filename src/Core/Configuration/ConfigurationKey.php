@@ -14,6 +14,7 @@ final class ConfigurationKey
     public const PAGE_LINK_PROCESSOR = 'page_link_processor';
     public const GIT_CLIENT_PATH = 'git_client_path';
     public const USE_SHARED_CACHE = 'use_shared_cache';
+    public const RENDER_WITH_FRONT_MATTER = 'render_with_front_matter';
     public const CHECK_FILE_IN_GIT_BEFORE_CREATING_DOC = 'check_file_in_git_before_creating_doc';
     public const SOURCE_LOCATORS = 'source_locators';
     public const LANGUAGE_HANDLERS = 'language_handlers';
@@ -33,6 +34,7 @@ final class ConfigurationKey
             self::PAGE_LINK_PROCESSOR,
             self::GIT_CLIENT_PATH,
             self::USE_SHARED_CACHE,
+            self::RENDER_WITH_FRONT_MATTER,
             self::CHECK_FILE_IN_GIT_BEFORE_CREATING_DOC,
             self::SOURCE_LOCATORS,
             self::LANGUAGE_HANDLERS,

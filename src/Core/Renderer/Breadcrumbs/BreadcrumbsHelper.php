@@ -9,11 +9,14 @@ use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetTemplatePathByRelativeDocPath;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\TemplateFile;
+use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Yaml\Yaml;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -34,33 +37,12 @@ final class BreadcrumbsHelper
      * @param string $prevPageNameTemplate Index page for each child section
      */
     public function __construct(
-        private Configuration $configuration,
-        private LocalObjectCache $localObjectCache,
-        private BreadcrumbsTwigEnvironment $breadcrumbsTwig,
-        private PluginEventDispatcher $pluginEventDispatcher,
-        private string $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
+        private readonly Configuration $configuration,
+        private readonly LocalObjectCache $localObjectCache,
+        private readonly BreadcrumbsTwigEnvironment $breadcrumbsTwig,
+        private readonly PluginEventDispatcher $pluginEventDispatcher,
+        private readonly string $prevPageNameTemplate = self::DEFAULT_PREV_PAGE_NAME_TEMPLATE
     ) {
-    }
-
-    /**
-     * @throws InvalidConfigurationParameterException
-     */
-    private function loadTemplateContent(string $templateName): string
-    {
-        $filePath = TemplateFile::getTemplatePathByRelativeDocPath(
-            $templateName,
-            $this->configuration,
-            $this->pluginEventDispatcher
-        );
-
-        try {
-            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $filePath);
-        } catch (ObjectNotFoundException) {
-        }
-
-        $templateContent = file_get_contents($filePath) ?: '';
-        $this->localObjectCache->cacheMethodResult(__METHOD__, $filePath, $templateContent);
-        return $templateContent;
     }
 
     /**
@@ -74,10 +56,9 @@ final class BreadcrumbsHelper
             return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateName);
         } catch (ObjectNotFoundException) {
         }
-        $code = $this->loadTemplateContent($templateName);
-        if (preg_match_all('/({%)( ?)(set)( )(prevPage)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
-            $prevPageKey = array_reverse($matches[8])[0];
-            $prevPage = $this->getPageDocFileByKey($prevPageKey);
+        $frontMatter = $this->getTemplateFrontMatter($templateName);
+        if (array_key_exists('prevPage', $frontMatter) && $frontMatter['prevPage']) {
+            $prevPage = $this->getPageDocFileByKey($frontMatter['prevPage']);
             if ($prevPage) {
                 $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $prevPage);
                 return $prevPage;
@@ -120,13 +101,16 @@ final class BreadcrumbsHelper
      */
     private function getFindIndexFileByRelativePath(string $relativePath): ?string
     {
+        $event = $this->pluginEventDispatcher->dispatch(new OnGetTemplatePathByRelativeDocPath($relativePath));
+        $path = $event->getCustomTemplateFilePath() ?: $this->configuration->getTemplatesDir() . '/' . $relativePath;
+
         $finder = Finder::create()
             ->name('*.twig')
             ->ignoreVCS(true)
             ->ignoreDotFiles(true)
             ->ignoreUnreadableDirs()
             ->depth(0)
-            ->in($this->configuration->getTemplatesDir() . '/' . $relativePath);
+            ->in($path);
 
         $indexFile = null;
         foreach ($finder->files() as $file) {
@@ -145,19 +129,17 @@ final class BreadcrumbsHelper
      *
      * @throws InvalidConfigurationParameterException
      * @example
-     *  // variable in template:
-     *  // {% set title = 'Some template title' %}
+     *  # Front matter in template:
+     *  # ---
+     *  # title: Some template title
+     *  # ---
      *
      *  $breadcrumbsHelper->getTemplateTitle() == 'Some template title'; // is true
      */
     public function getTemplateTitle(string $templateName): string
     {
-        $code = $this->loadTemplateContent($templateName);
-        if (preg_match_all('/({%)( ?)(set)( )(title)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
-            return array_reverse($matches[8])[0];
-        }
-
-        return pathinfo($templateName, PATHINFO_FILENAME);
+        $frontMatter = $this->getTemplateFrontMatter($templateName);
+        return $frontMatter['title'] ?? pathinfo($templateName, PATHINFO_FILENAME);
     }
 
     /**
@@ -165,12 +147,35 @@ final class BreadcrumbsHelper
      */
     public function getTemplateLinkKey(string $templateName): ?string
     {
-        $code = $this->loadTemplateContent($templateName);
-        if (preg_match_all('/({%)( ?)(set)( )(linkKey)([ =]+)([\'"])(.*)(\'|")( %})/', $code, $matches)) {
-            return array_reverse($matches[8])[0];
+        $frontMatter = $this->getTemplateFrontMatter($templateName);
+        return $frontMatter['linkKey'] ?? null;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function getTemplateFrontMatter(string $templateName): array
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, $templateName);
+        } catch (ObjectNotFoundException) {
         }
 
-        return null;
+        $filePath = TemplateFile::getTemplatePathByRelativeDocPath(
+            $templateName,
+            $this->configuration,
+            $this->pluginEventDispatcher
+        );
+        $code = file_get_contents($filePath) ?: '';
+
+        $frontMatter = [];
+        if (preg_match('/^---([^-]+)(---)/', $code)) {
+            $frontMatterBlock = explode('---', $code)[1];
+            $frontMatter = Yaml::parse($frontMatterBlock);
+        }
+
+        $this->localObjectCache->cacheMethodResult(__METHOD__, $templateName, $frontMatter);
+        return $frontMatter;
     }
 
     /**
@@ -283,6 +288,9 @@ final class BreadcrumbsHelper
             $addLinkKey($docFilePatch, $value);
             $addLinkKey($url, $value);
             $addLinkKey($title, $value);
+            $templateFileName = array_reverse(explode(DIRECTORY_SEPARATOR, $filePatch))[0];
+            $addLinkKey($templateFileName, $value);
+            $addLinkKey(rtrim($templateFileName, '.twig'), $value);
             $linkKey = $this->getTemplateLinkKey($filePatch);
             if ($linkKey) {
                 $addLinkKey($linkKey, $value);

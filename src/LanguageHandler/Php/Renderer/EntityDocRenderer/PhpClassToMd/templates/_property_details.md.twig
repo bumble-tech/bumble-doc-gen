@@ -1,7 +1,7 @@
-{% if not classEntity.getPropertyEntityCollection().isEmpty() %}
+{% if not classEntity.getPropertyEntitiesCollection().isEmpty() %}
 <h2>Property details:</h2>
 
-{% for propertyEntity in classEntity.getPropertyEntityCollection() %}
+{% for propertyEntity in classEntity.getPropertyEntitiesCollection() %}
 
 * <a name="p{{ propertyEntity.getName() | prepareSourceLink }}" href="#p{{ propertyEntity.getName() | prepareSourceLink }}">#</a>
  <b>${{ propertyEntity.getName() }}</b>

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Unit\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ConstantEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\ClassConstant\ClassConstantEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassConstantFilterCondition\VisibilityCondition;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
 use PHPUnit\Framework\TestCase;
@@ -21,8 +21,8 @@ final class VisibilityConditionTest extends TestCase
      */
     public function testCanAddToCollection(array $visibilityModifiers, array $methodsStubs, bool $expectedResult): void
     {
-        $entityStub = $this->createStub(ConstantEntity::class);
-        foreach (get_class_methods(ConstantEntity::class) as $classMethod) {
+        $entityStub = $this->createStub(ClassConstantEntity::class);
+        foreach (get_class_methods(ClassConstantEntity::class) as $classMethod) {
             if (
                 !in_array($classMethod, [
                 '__construct',

@@ -14,9 +14,9 @@
 
 {% include '_enumCases.md.twig' with {'classEntity': classEntity} only %}
 
-{% include '_methods.md.twig' with {'blockName': 'Initialization methods', 'methodEntityCollection': classEntity.getMethodEntityCollection().getInitializations()} only %}
+{% include '_methods.md.twig' with {'blockName': 'Initialization methods', 'methodEntitiesCollection': classEntity.getMethodEntitiesCollection().getInitializations()} only %}
 
-{% include '_methods.md.twig' with {'blockName': 'Methods', 'methodEntityCollection': classEntity.getMethodEntityCollection().getAllExceptInitializations()} only %}
+{% include '_methods.md.twig' with {'blockName': 'Methods', 'methodEntitiesCollection': classEntity.getMethodEntitiesCollection().getAllExceptInitializations()} only %}
 
 {% include '_traits.md.twig' with {'classEntity': classEntity} only %}
 
@@ -28,4 +28,4 @@
 
 {% include '_property_details.md.twig' with {'classEntity': classEntity} only %}
 
-{% include '_method_details.md.twig' with {'methodEntityCollection': classEntity.getMethodEntityCollection()} only %}
+{% include '_method_details.md.twig' with {'methodEntitiesCollection': classEntity.getMethodEntitiesCollection()} only %}

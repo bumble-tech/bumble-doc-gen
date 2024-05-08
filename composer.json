@@ -15,18 +15,17 @@
         "issues": "https://github.com/bumble-tech/bumble-doc-gen/issues"
     },
     "require": {
-        "php": "^8.0.0",
+        "php": "^8.1.0",
         "ext-zlib": "*",
         "ext-mbstring": "*",
         "symfony/console": "^6.0",
         "symfony/finder": "^6.0",
         "twig/twig": "^3.3",
-        "roave/better-reflection": "^5.5",
         "nikic/php-parser": "^4.13",
         "phpdocumentor/reflection-docblock": "^5.3",
         "doctrine/annotations": "^1.13",
         "nette/php-generator": "^4.0",
-        "monolog/monolog": "^2.5",
+        "monolog/monolog": "^3.0",
         "bramus/monolog-colored-line-formatter": "^3.0",
         "symfony/cache": "^6.0",
         "symfony/event-dispatcher": "^6.0",
@@ -34,7 +33,8 @@
         "symfony/yaml": "^6.0",
         "hassankhan/config": "^3.1",
         "guzzlehttp/guzzle": "^7.8",
-        "symfony/filesystem": "^6.0"
+        "symfony/filesystem": "^6.0",
+        "daux/daux.io": "^0.22.1"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
@@ -68,7 +68,7 @@
     ],
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "phpcs": "vendor/bin/phpcs --standard=psr12 src demo tests --warning-severity=0 --error-severity=1",
-        "phpcbf": "vendor/bin/phpcbf --standard=psr12 src demo tests"
+        "phpcs": "vendor/bin/phpcs --standard=psr12 src demo tests selfdoc --warning-severity=0 --error-severity=1",
+        "phpcbf": "vendor/bin/phpcbf --standard=psr12 src demo tests selfdoc"
     }
 }

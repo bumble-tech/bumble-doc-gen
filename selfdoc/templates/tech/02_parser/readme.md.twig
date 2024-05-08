@@ -1,0 +1,41 @@
+---
+title: Parser
+---
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Documentation parser" | textToHeading('H1') }}
+
+Most often, we need [a]ProjectParser[/a] in order to get a list of entities for documentation.
+But this is not the only use of this tool. The result of the parser's work (a collection of entities) can be used to programmatically analyze the project and perform any operations based on this analysis.
+For example, in our documentation generator, we also use the result of the parser in the tasks of generating documentation using AI tools.
+You can also use the parser for your own purposes other than generating documentation.
+
+In this section, we show how the parser works and what components it consists of.
+
+{{ "Description of the main components of the parser" | textToHeading('H2') }}
+
+{{ drawDocumentationMenu(_self) }}
+
+{{ "Starting the parsing process" | textToHeading('H2') }}
+
+{{ "$parser = new ProjectParser($configuration, $rootEntityCollectionsGroup);
+
+// Parsing the project and filling RootEntityCollectionsGroup with data
+$this->parser->parse();
+$rootEntityCollectionsGroup = $this->parser->getRootEntityCollectionsGroup();" | textToCodeBlock('php') }}
+
+{{ "How it works" | textToHeading('H2') }}
+
+```mermaid
+ flowchart TD
+    Start((Start)) --> Init(<b>ProjectParser</b> initialization)
+    Init --> StartParsing(Starting the parsing process)
+    StartParsing --> HandlerLoop(Entering the LanguageHandlers processing loop)
+    HandlerLoop --> NextHandler{Is there a \nnext <b>LanguageHandler</b> \nfor parsing entities?}
+    NextHandler -- Yes --> LoadSourceLocators(<b>Loading SourceLocators for the current LanguageHandler</b>)
+    LoadSourceLocators --> GetFileList(Getting a list of files to bypass them)
+    GetFileList --> PopulateEntities(<b>Filling the collection with entities obtained from files</b>)
+    PopulateEntities --> HandlerLoop
+    NextHandler -- No --> ReturnResult(We return the result of the parser - <b>RootEntityCollectionsGroup</b>)
+    ReturnResult --> Exit(((Exit)))
+```

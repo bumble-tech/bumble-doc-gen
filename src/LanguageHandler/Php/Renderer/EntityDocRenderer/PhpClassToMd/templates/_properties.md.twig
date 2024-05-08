@@ -1,8 +1,8 @@
-{% if not classEntity.getPropertyEntityCollection().isEmpty() %}
+{% if not classEntity.getPropertyEntitiesCollection().isEmpty() %}
 <h2>Properties:</h2>
 
 <ol>
-    {% for propertyEntity in classEntity.getPropertyEntityCollection() %}
+    {% for propertyEntity in classEntity.getPropertyEntitiesCollection() %}
         <li>
             <a href="#p{{ propertyEntity.getName() | prepareSourceLink }}">{{ propertyEntity.getName() }}</a> {% if propertyEntity.getDescription() %}-
                 <i>{{ propertyEntity.getDescription() | removeLineBrakes }}</i>{% endif %}</li>

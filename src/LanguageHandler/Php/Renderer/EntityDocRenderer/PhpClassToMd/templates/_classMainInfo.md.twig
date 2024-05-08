@@ -6,7 +6,7 @@
 namespace {{ classEntity.getNamespaceName() }};
 {% endif %}
 
-{{ classEntity.getModifiersString() }} {{ classEntity.getShortName() }}{% if classEntity.getExtends() %} extends {{ classEntity.getExtends() }}{% endif %}{% if classEntity.getInterfacesString() %} implements {{ classEntity.getInterfacesString() }}{% endif %}
+{{ classEntity.getModifiersString() }} {{ classEntity.getShortName() }}{% if classEntity.isInterface() and classEntity.getInterfaceNames() %} extends \{{ classEntity.getInterfaceNames() | implode(', \\') }}{% else %}{% if classEntity.getParentClassName() %} extends \{{ classEntity.getParentClassName() }}{% endif %}{% if classEntity.getInterfaceNames() %} implements \{{ classEntity.getInterfaceNames() | implode(', \\') }}{% endif %}{% endif %}
 
 ```
 

@@ -1,8 +1,7 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> GetDocumentedEntityUrl<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/01_configuration.md">Configuration</a> <b>/</b> GetDocumentedEntityUrl<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L38">GetDocumentedEntityUrl</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L37">GetDocumentedEntityUrl</a> class:
 </h1>
 
 
@@ -21,30 +20,30 @@ the `EntityDocRendererInterface::getDocFileExtension()` directory will be create
 See:
 <ul>
     <li>
-        <a href="/docs/tech/classes/DocumentedEntityWrapper_2.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
+        <a href="/docs/tech/classes/DocumentedEntityWrapper.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>    </li>
     <li>
-        <a href="/docs/tech/classes/DocumentedEntityWrappersCollection_2.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
+        <a href="/docs/tech/classes/DocumentedEntityWrappersCollection.md">\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection</a>    </li>
     <li>
-        <a href="/docs/tech/classes/RendererContext_2.md">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
+        <a href="/docs/tech/classes/RendererContext.md">\BumbleDocGen\Core\Renderer\Context\RendererContext::$entityWrappersCollection</a>    </li>
 </ul>
 
 
 <b>Examples of using:</b>
 
 ```php
-{{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', 'getFunctions') }}
+{{ getDocumentedEntityUrl(phpEntities, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', 'getFunctions') }}
 The function returns a reference to the documented entity, anchored to the getFunctions method
 
 ```
 
 ```php
-{{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension') }}
+{{ getDocumentedEntityUrl(phpEntities, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension') }}
 The function returns a reference to the documented entity MainExtension
 
 ```
 
 ```php
-{{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', '', false) }}
+{{ getDocumentedEntityUrl(phpEntities, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', '', false) }}
 The function returns a link to the file MainExtension
 
 ```
@@ -91,7 +90,7 @@ The function returns a link to the file MainExtension
 <ul>
             <li><a name="qdefault-url"
                href="#qdefault-url">#</a>
-            <code>DEFAULT_URL</code>                   <b>|</b> <a href="/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L40">source
+            <code>DEFAULT_URL</code>                   <b>|</b> <a href="/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L39">source
                     code</a> </li>
     </ul>
 
@@ -106,7 +105,7 @@ The function returns a link to the file MainExtension
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L42">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L41">source code</a></li>
 </ul>
 
 ```php
@@ -158,7 +157,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\RendererHelper $renderer
 <ul>
 <li><a name="m-invoke" href="#m-invoke">#</a>
  <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L78">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L76">source code</a></li>
 </ul>
 
 ```php
@@ -211,13 +210,10 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 <li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
-
-<li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
 
 </ul>
 
@@ -228,7 +224,7 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L50">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L49">source code</a></li>
 </ul>
 
 ```php
@@ -249,7 +245,7 @@ public static function getName(): string;
 <ul>
 <li><a name="mgetoptions" href="#mgetoptions">#</a>
  <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L55">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/GetDocumentedEntityUrl.php#L54">source code</a></li>
 </ul>
 
 ```php
@@ -265,5 +261,3 @@ public static function getOptions(): array;
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

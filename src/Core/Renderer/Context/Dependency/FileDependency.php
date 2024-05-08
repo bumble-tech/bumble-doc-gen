@@ -6,7 +6,6 @@ namespace BumbleDocGen\Core\Renderer\Context\Dependency;
 
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Renderer\RendererHelper;
-use Roave\BetterReflection\Util\FileHelper;
 
 final class FileDependency implements RendererDependencyInterface
 {

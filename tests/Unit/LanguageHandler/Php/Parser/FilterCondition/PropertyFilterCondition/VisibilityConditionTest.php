@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Unit\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition;
 
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PropertyEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\SubEntity\Property\PropertyEntity;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\ClassFilterCondition\VisibilityConditionModifier;
 use BumbleDocGen\LanguageHandler\Php\Parser\FilterCondition\PropertyFilterCondition\VisibilityCondition;
 use PHPUnit\Framework\TestCase;

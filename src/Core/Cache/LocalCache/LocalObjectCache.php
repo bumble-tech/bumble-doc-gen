@@ -25,4 +25,9 @@ final class LocalObjectCache
         }
         return $this->cache[$methodKey][$objectId];
     }
+
+    public function clear(): void
+    {
+        $this->cache = [];
+    }
 }

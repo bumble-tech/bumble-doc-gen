@@ -8,8 +8,7 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -43,24 +42,23 @@ final class GetClassMethodsBodyCode implements CustomFunctionInterface
      * @param array $methodsNames
      *  List of class methods whose code needs to be retrieved
      *
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(string $className, array $methodsNames): ?string
     {
-        $classEntityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
-        if (!is_a($classEntityCollection, ClassEntityCollection::class)) {
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
+        if (!is_a($entitiesCollection, PhpEntitiesCollection::class)) {
             return null;
         }
-        $classEntity = $classEntityCollection->getLoadedOrCreateNew($className);
-        if ($classEntity->entityDataCanBeLoaded()) {
+        $classEntity = $entitiesCollection->getLoadedOrCreateNew($className);
+        if ($classEntity->isEntityDataCanBeLoaded()) {
             $methodsCode = [];
-            $methodEntityCollection = $classEntity->getMethodEntityCollection();
+            $methodEntitiesCollection = $classEntity->getMethodEntitiesCollection();
             $addIndentFromLeft = new AddIndentFromLeft();
             foreach ($methodsNames as $methodName) {
-                $method = $methodEntityCollection->unsafeGet($methodName);
+                $method = $methodEntitiesCollection->unsafeGet($methodName);
                 if ($method) {
                     $bodyCode = "{$method->getModifiersString()} {$method->getName()}({$method->getParametersString()}): {$method->getReturnType()}\n";
                     $bodyCode .= "{\n";

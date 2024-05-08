@@ -13,10 +13,13 @@ trait CacheableEntityTrait
     #[Inject] private EntityCacheStorageHelper $entityCacheStorageHelper;
     #[Inject] private Configuration $configuration;
 
-    private string $entityCacheVersion = 'v1';
+    private string $entityCacheVersion = 'v2';
     private string $entityCacheKey = '';
     private bool $isCacheChanged = false;
 
+    /**
+     * @internal
+     */
     public function getCacheKey(): string
     {
         if (!$this->entityCacheKey) {
@@ -29,9 +32,14 @@ trait CacheableEntityTrait
         return $this->entityCacheKey;
     }
 
-    abstract public function entityCacheIsOutdated(): bool;
+    /**
+     * @internal
+     */
+    abstract public function isEntityCacheOutdated(): bool;
 
     /**
+     * @internal
+     *
      * @throws InvalidArgumentException
      */
     protected function getEntityCacheValue(string $key): mixed
@@ -40,6 +48,8 @@ trait CacheableEntityTrait
     }
 
     /**
+     * @internal
+     *
      * @throws InvalidArgumentException
      */
     protected function hasEntityCacheValue(string $key): bool
@@ -49,6 +59,8 @@ trait CacheableEntityTrait
     }
 
     /**
+     * @internal
+     *
      * @throws InvalidArgumentException
      */
     protected function addEntityValueToCache(string $key, mixed $value, int $cacheExpiresAfter = 604800): void
@@ -62,6 +74,9 @@ trait CacheableEntityTrait
         );
     }
 
+    /**
+     * @internal
+     */
     public function removeEntityValueFromCache(string $key): void
     {
         $this->isCacheChanged = true;
@@ -72,6 +87,8 @@ trait CacheableEntityTrait
     }
 
     /**
+     * @internal
+     *
      * @throws InvalidArgumentException
      */
     public function isEntityDataCacheOutdated(): bool
@@ -92,6 +109,8 @@ trait CacheableEntityTrait
     }
 
     /**
+     * @internal
+     *
      * @throws InvalidArgumentException
      */
     public function removeNotUsedEntityDataCache(): void

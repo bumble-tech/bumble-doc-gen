@@ -1,8 +1,7 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> BeforeCreatingDocFile<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> BeforeCreatingDocFile<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L13">BeforeCreatingDocFile</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L12">BeforeCreatingDocFile</a> class:
 </h1>
 
 
@@ -37,17 +36,14 @@ final class BeforeCreatingDocFile extends \Symfony\Contracts\EventDispatcher\Eve
     <a href="#mgetcontent">getContent</a>
     </li>
 <li>
-    <a href="#mgetcontext">getContext</a>
+    <a href="#mgetoutputfilepatch">getOutputFilePatch</a>
     </li>
-<li>
-    <a href="#mispropagationstopped">isPropagationStopped</a>
-    - <i>Is propagation stopped?</i></li>
 <li>
     <a href="#msetcontent">setContent</a>
     </li>
 <li>
-    <a href="#mstoppropagation">stopPropagation</a>
-    - <i>Stops the propagation of the event to further event listeners.</i></li>
+    <a href="#msetoutputfilepatch">setOutputFilePatch</a>
+    </li>
 </ol>
 
 
@@ -63,11 +59,11 @@ final class BeforeCreatingDocFile extends \Symfony\Contracts\EventDispatcher\Eve
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L15">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L14">source code</a></li>
 </ul>
 
 ```php
-public function __construct(string $content, \BumbleDocGen\Core\Renderer\Context\RendererContext $context);
+public function __construct(string $content, string $outputFilePatch);
 ```
 
 
@@ -89,8 +85,8 @@ public function __construct(string $content, \BumbleDocGen\Core\Renderer\Context
             <td>-</td>
         </tr>
             <tr>
-            <td>$context</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php'>\BumbleDocGen\Core\Renderer\Context\RendererContext</a></td>
+            <td>$outputFilePatch</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -105,7 +101,7 @@ public function __construct(string $content, \BumbleDocGen\Core\Renderer\Context
 <ul>
 <li><a name="mgetcontent" href="#mgetcontent">#</a>
  <b>getContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L19">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L20">source code</a></li>
 </ul>
 
 ```php
@@ -124,43 +120,20 @@ public function getContent(): string;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mgetcontext" href="#mgetcontext">#</a>
- <b>getContext</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L29">source code</a></li>
+<li><a name="mgetoutputfilepatch" href="#mgetoutputfilepatch">#</a>
+ <b>getOutputFilePatch</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L30">source code</a></li>
 </ul>
 
 ```php
-public function getContext(): \BumbleDocGen\Core\Renderer\Context\RendererContext;
+public function getOutputFilePatch(): string;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php'>\BumbleDocGen\Core\Renderer\Context\RendererContext</a>
-
-
-</div>
-<hr>
-<div class='method_description-block'>
-
-<ul>
-<li><a name="mispropagationstopped" href="#mispropagationstopped">#</a>
- <b>isPropagationStopped</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/vendor/symfony/event-dispatcher-contracts/Event.php#L38">source code</a></li>
-</ul>
-
-```php
-// Implemented in Symfony\Contracts\EventDispatcher\Event
-
-public function isPropagationStopped(): bool;
-```
-
-<blockquote>Is propagation stopped?</blockquote>
-
-<b>Parameters:</b> not specified
-
-<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.boolean.php'>bool</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.string.php'>string</a>
 
 
 </div>
@@ -170,7 +143,7 @@ public function isPropagationStopped(): bool;
 <ul>
 <li><a name="msetcontent" href="#msetcontent">#</a>
  <b>setContent</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L25">source code</a></li>
 </ul>
 
 ```php
@@ -206,25 +179,38 @@ public function setContent(string $content): void;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="mstoppropagation" href="#mstoppropagation">#</a>
- <b>stopPropagation</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/vendor/symfony/event-dispatcher-contracts/Event.php#L50">source code</a></li>
+<li><a name="msetoutputfilepatch" href="#msetoutputfilepatch">#</a>
+ <b>setOutputFilePatch</b>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/Event/Renderer/BeforeCreatingDocFile.php#L35">source code</a></li>
 </ul>
 
 ```php
-// Implemented in Symfony\Contracts\EventDispatcher\Event
-
-public function stopPropagation(): void;
+public function setOutputFilePatch(string $outputFilePatch): void;
 ```
 
-<blockquote>Stops the propagation of the event to further event listeners.</blockquote>
 
-<b>Parameters:</b> not specified
+
+<b>Parameters:</b>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td>$outputFilePatch</td>
+            <td><a href='https://www.php.net/manual/en/language.types.string.php'>string</a></td>
+            <td>-</td>
+        </tr>
+        </tbody>
+</table>
 
 <b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.void.php'>void</a>
 
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->
