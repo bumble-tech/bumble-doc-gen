@@ -9,10 +9,10 @@ use BumbleDocGen\Core\Cache\LocalCache\Exception\ObjectNotFoundException;
 use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
 use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
-use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
+use BumbleDocGen\Core\Plugin\Event\Renderer\BeforeCreatingEntityDocFile;
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\Core\Renderer\Context\Dependency\RendererDependencyFactory;
@@ -30,20 +30,19 @@ final class RendererIteratorFactory
     private array $renderedFileNames = [];
 
     public function __construct(
-        private RendererContext $rendererContext,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
-        private Configuration $configuration,
-        private ConfigurationParameterBag $configurationParameterBag,
-        private SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
+        private readonly RendererContext $rendererContext,
+        private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private readonly DocumentedEntityWrappersCollection $documentedEntityWrappersCollection,
+        private readonly Configuration $configuration,
+        private readonly SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
         private RendererHelper $rendererHelper,
-        private RendererDependencyFactory $dependencyFactory,
-        private LocalObjectCache $localObjectCache,
-        private ProgressBarFactory $progressBarFactory,
-        private PluginEventDispatcher $pluginEventDispatcher,
-        private OutputStyle $io,
-        private Logger $logger,
-        private GenerationErrorsHandler $generationErrorsHandler,
+        private readonly RendererDependencyFactory $dependencyFactory,
+        private readonly LocalObjectCache $localObjectCache,
+        private readonly ProgressBarFactory $progressBarFactory,
+        private readonly PluginEventDispatcher $pluginEventDispatcher,
+        private readonly OutputStyle $io,
+        private readonly Logger $logger,
+        private readonly GenerationErrorsHandler $generationErrorsHandler,
     ) {
     }
 
@@ -149,7 +148,7 @@ final class RendererIteratorFactory
         $skippedCount = 0;
         foreach ($pb->iterate($this->documentedEntityWrappersCollection) as $entityWrapper) {
             $pb->setStepDescription("Processing `{$entityWrapper->getEntityName()}` entity");
-            if (!$entityWrapper->getDocumentTransformableEntity()->entityDataCanBeLoaded()) {
+            if (!$entityWrapper->getDocumentTransformableEntity()->isEntityDataCanBeLoaded()) {
                 continue;
             }
 
@@ -167,7 +166,7 @@ final class RendererIteratorFactory
                 !$this->isGeneratedEntityDocumentExists($entityWrapper) ||
                 $this->isInternalCachingVersionChanged() ||
                 $this->isConfigurationVersionChanged() ||
-                $entityWrapper->getDocumentTransformableEntity()->entityCacheIsOutdated() ||
+                $entityWrapper->getDocumentTransformableEntity()->isEntityCacheOutdated() ||
                 $this->isFilesDependenciesCacheOutdated($filesDependenciesKey) ||
                 $this->isEntityRelationsCacheOutdated($entityWrapper) ||
                 $this->isEntitiesOperationsLogCacheOutdated($entityWrapper->getEntityName())
@@ -270,10 +269,11 @@ final class RendererIteratorFactory
      */
     private function markFileNameAsRendered(string $docFileName): void
     {
-        $docFileName = str_replace([
-            '.twig',
-            $this->configuration->getOutputDir()
-        ], '', $docFileName);
+        $docFileName = str_replace('.twig', '', $docFileName);
+        $handledEvent = $this->pluginEventDispatcher->dispatch(
+            new BeforeCreatingEntityDocFile('', $docFileName)
+        );
+        $docFileName = str_replace($this->configuration->getOutputDir(), '', $handledEvent->getOutputFilePatch());
         $this->renderedFileNames[$docFileName] = $docFileName;
     }
 
@@ -358,6 +358,9 @@ final class RendererIteratorFactory
         return false;
     }
 
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
     private function moveCachedDataToCurrentData(string $templateFileName, ?string $entityName = null): void
     {
         $cachedEntitiesRelations = $this->sharedCompressedDocumentFileCache->get('entities_relations', []);
@@ -392,5 +395,10 @@ final class RendererIteratorFactory
     private function getFilesDependenciesCacheKey(string $key): string
     {
         return "files_dependencies_{$key}";
+    }
+
+    public function clearCounters(): void
+    {
+        $this->renderedFileNames = [];
     }
 }

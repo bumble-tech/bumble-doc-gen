@@ -1,8 +1,8 @@
-{% if not methodEntityCollection.isEmpty() %}
+{% if not methodEntitiesCollection.isEmpty() %}
 <h2>{{ blockName }}:</h2>
 
 <ol>
-{% for methodEntity in methodEntityCollection %}
+{% for methodEntity in methodEntitiesCollection %}
 <li>
     <a href="#m{{ methodEntity.getName() | prepareSourceLink }}">{% if methodEntity.isDeprecated() %}<s>{{ methodEntity.getName() }}</s>{% else %}{{ methodEntity.getName() }}{% endif %}</a>
     {% if methodEntity.getDescription() %}- <i>{{ methodEntity.getDescription() | removeLineBrakes | raw }}</i>{% endif %}

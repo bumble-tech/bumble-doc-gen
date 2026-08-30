@@ -8,6 +8,7 @@ use BumbleDocGen\AI\Console\AddDocBlocksCommand;
 use BumbleDocGen\AI\Console\GenerateReadMeTemplateCommand;
 use BumbleDocGen\Console\Command\ConfigurationCommand;
 use BumbleDocGen\Console\Command\GenerateCommand;
+use BumbleDocGen\Console\Command\ServeCommand;
 use BumbleDocGen\DocGeneratorFactory;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\CompleteCommand;
@@ -33,6 +34,7 @@ class App extends Application
         );
         $this->setDefinition($inputDefinition);
         $this->add(new GenerateCommand());
+        $this->add(new ServeCommand());
         $this->add(new GenerateReadMeTemplateCommand());
         $this->add(new AddDocBlocksCommand());
         $this->add(new ConfigurationCommand());

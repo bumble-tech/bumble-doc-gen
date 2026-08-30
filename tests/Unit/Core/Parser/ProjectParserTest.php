@@ -8,6 +8,7 @@ use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
+use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
 use PHPUnit\Framework\TestCase;
@@ -38,9 +39,11 @@ final class ProjectParserTest extends TestCase
             ->method('getLanguageHandlersCollection')
             ->willReturn($languageHandlersCollection);
 
+        $pluginEventDispatcherStub = $this->createStub(PluginEventDispatcher::class);
+
         $rootEntityCollectionsGroup = new RootEntityCollectionsGroup();
 
-        $projectParser = new ProjectParser($configurationStub, $rootEntityCollectionsGroup);
+        $projectParser = new ProjectParser($configurationStub, $pluginEventDispatcherStub, $rootEntityCollectionsGroup);
         $projectParser->parse();
 
         self::assertCount($languageHandlerCount, $rootEntityCollectionsGroup);

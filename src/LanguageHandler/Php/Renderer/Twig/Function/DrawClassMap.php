@@ -8,9 +8,8 @@ use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterExcep
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionInterface;
 use BumbleDocGen\Core\Renderer\Twig\Function\GetDocumentedEntityUrl;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use DI\DependencyException;
 use DI\NotFoundException;
 
@@ -19,8 +18,8 @@ use DI\NotFoundException;
  *
  * @note This function initiates the creation of documents for the displayed entities
  *
- * @example {{ drawClassMap(classEntityCollection.filterByPaths(['/src/Renderer'])) }}
- * @example {{ drawClassMap(classEntityCollection) }}
+ * @example {{ drawClassMap(phpEntities.filterByPaths(['/src/Renderer'])) }}
+ * @example {{ drawClassMap(phpEntities) }}
  */
 final class DrawClassMap implements CustomFunctionInterface
 {
@@ -47,39 +46,37 @@ final class DrawClassMap implements CustomFunctionInterface
 
 
     /**
-     * @param ClassEntityCollection ...$classEntityCollections
+     * @param PhpEntitiesCollection ...$entitiesCollections
      *  The collection of entities for which the class map will be generated
      * @return string
      *
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function __invoke(
-        ClassEntityCollection ...$classEntityCollections,
+        PhpEntitiesCollection ...$entitiesCollections,
     ): string {
         $structure = $this->convertDirectoryStructureToFormattedString(
-            $this->getDirectoryStructure(...$classEntityCollections),
+            $this->getDirectoryStructure(...$entitiesCollections),
         );
         return "<embed> <pre>{$structure}</pre> </embed>";
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    protected function appendClassToDirectoryStructure(array $directoryStructure, ClassEntity $classEntity): array
+    protected function appendClassToDirectoryStructure(array $directoryStructure, ClassLikeEntity $classEntity): array
     {
-        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
-        $this->fileClassmap[$classEntity->getFileName()] = call_user_func_array(
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
+        $this->fileClassmap[$classEntity->getRelativeFileName()] = call_user_func_array(
             callback: $this->getDocumentedEntityUrlFunction,
             args: [
-                $entityCollection,
+                $entitiesCollection,
                 $classEntity->getName()
             ]
         );
-        $fileName = ltrim($classEntity->getFileName(), DIRECTORY_SEPARATOR);
+        $fileName = ltrim($classEntity->getRelativeFileName(), DIRECTORY_SEPARATOR);
         $pathParts = array_reverse(explode(DIRECTORY_SEPARATOR, $fileName));
         $tmpStructure = [array_shift($pathParts)];
         $prevKey = '';
@@ -94,16 +91,15 @@ final class DrawClassMap implements CustomFunctionInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function getDirectoryStructure(ClassEntityCollection ...$classEntityCollections): array
+    public function getDirectoryStructure(PhpEntitiesCollection ...$entitiesCollections): array
     {
         $entities = [];
-        foreach ($classEntityCollections as $classEntityCollection) {
-            foreach ($classEntityCollection as $classEntity) {
-                if (!$classEntity->entityDataCanBeLoaded()) {
+        foreach ($entitiesCollections as $entitiesCollection) {
+            foreach ($entitiesCollection as $classEntity) {
+                if (!$classEntity->isEntityDataCanBeLoaded()) {
                     continue;
                 }
                 $entities[$classEntity->getName()] = $classEntity;
@@ -138,7 +134,7 @@ final class DrawClassMap implements CustomFunctionInterface
         string $prefix = '│',
         string $path = '/'
     ): string {
-        $entityCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
         $formattedString = '';
         $elementsCount = count($structure);
         $i = 0;
@@ -156,7 +152,7 @@ final class DrawClassMap implements CustomFunctionInterface
             } else {
                 $filepath = "{$path}{$line}";
                 $filepath = $this->fileClassmap[$filepath] ?? $filepath;
-                $classEntity = $entityCollection->findEntity("{$path}{$line}");
+                $classEntity = $entitiesCollection->findEntity("{$path}{$line}");
                 if ($description = $classEntity?->getDescription() ?: '') {
                     $description = str_replace(["\r\n", "\r", "\n", "\t", '  '], ' ', strip_tags($description));
                     $description = mb_strimwidth($description, 0, 100, "...");

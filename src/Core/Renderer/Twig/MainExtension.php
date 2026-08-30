@@ -11,6 +11,8 @@ use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFiltersCollection;
 use BumbleDocGen\Core\Renderer\Twig\Function\CustomFunctionsCollection;
 use BumbleDocGen\LanguageHandler\LanguageHandlerInterface;
 use BumbleDocGen\LanguageHandler\LanguageHandlersCollection;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 /**
  * This is an extension that is used to generate documents from templates
@@ -21,18 +23,22 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     private CustomFiltersCollection $filters;
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function __construct(
-        private RendererContext $context,
-        private Configuration $configuration
+        private readonly RendererContext $context,
+        private readonly Configuration $configuration
     ) {
         $this->setDefaultFunctions();
         $this->setDefaultFilters();
     }
 
     /**
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
      */
     public function getLanguageHandlersCollection(): LanguageHandlersCollection
     {
@@ -40,6 +46,8 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function setDefaultFunctions(): void
@@ -54,6 +62,8 @@ final class MainExtension extends \Twig\Extension\AbstractExtension
     }
 
     /**
+     * @throws NotFoundException
+     * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
     public function setDefaultFilters(): void

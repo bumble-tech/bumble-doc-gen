@@ -1,4 +1,3 @@
-<!-- {% raw %} -->
 <embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> LoadPluginsContent<hr> </embed>
 
 <h1>
@@ -197,5 +196,3 @@ public static function getOptions(): array;
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

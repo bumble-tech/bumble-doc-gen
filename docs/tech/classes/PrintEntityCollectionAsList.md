@@ -1,5 +1,4 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PrintEntityCollectionAsList<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/01_configuration.md">Configuration</a> <b>/</b> PrintEntityCollectionAsList<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/PrintEntityCollectionAsList.php#L21">PrintEntityCollectionAsList</a> class:
@@ -21,13 +20,13 @@ final class PrintEntityCollectionAsList implements \BumbleDocGen\Core\Renderer\T
 <b>Examples of using:</b>
 
 ```php
-{{ printEntityCollectionAsList(phpClassEntityCollection.filterByInterfaces(['ScriptFramework\\ScriptInterface', 'ScriptFramework\\TestScriptInterface'])) }}
+{{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['ScriptFramework\\ScriptInterface', 'ScriptFramework\\TestScriptInterface'])) }}
 The function will output a list of PHP classes that match the ScriptFramework\ScriptInterface and ScriptFramework\TestScriptInterface interfaces
 
 ```
 
 ```php
-{{ printEntityCollectionAsList(phpClassEntityCollection) }}
+{{ printEntityCollectionAsList(phpEntities) }}
 The function will list all documented PHP classes
 
 ```
@@ -168,7 +167,7 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityCollection $
 <b>Throws:</b>
 <ul>
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -216,5 +215,3 @@ public static function getOptions(): array;
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

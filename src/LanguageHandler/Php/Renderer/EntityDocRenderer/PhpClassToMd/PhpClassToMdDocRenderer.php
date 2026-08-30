@@ -7,7 +7,7 @@ namespace BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassTo
 use BumbleDocGen\Core\Parser\Entity\RootEntityInterface;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\EntityDocRenderer\EntityDocRendererInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -38,7 +38,7 @@ class PhpClassToMdDocRenderer implements EntityDocRendererInterface
 
     public function isAvailableForEntity(RootEntityInterface $entity): bool
     {
-        return is_a($entity, ClassEntity::class);
+        return is_a($entity, ClassLikeEntity::class);
     }
 
     /**

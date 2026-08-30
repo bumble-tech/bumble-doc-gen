@@ -1,15 +1,52 @@
 # Changelog
-# [1.6.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.6.0)
+## [2.0.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.6.0)
+### Features
+- Adds the ability to generate HTML documentation + live mode for previewing changes.
+- Templates now use Frontmatter instead of variables
+
+### Breaking Changes
+- ⚠️ Minimum PHP version is now 8.1
+- ⚠️ Changes when working with templates:
+  - Variable `phpClassEntityCollection` renamed to `phpEntities`
+  - Instead of variables in the template with title and previous page, the Front Matter block is used
+- ⚠️ PHP ReflectionAPI has been completely changed. See information about the current version here: [ReflectionAPI](https://github.com/bumble-tech/bumble-doc-gen/tree/master/docs/tech/2.parser/reflectionApi)
+- The BetterReflection library and classes that depend on it in the code have been removed:
+  - `\BumbleDocGen\Core\Cache\SourceLocatorCacheItemPool`
+  - `\BumbleDocGen\Core\Plugin\Event\Parser\OnLoadSourceLocatorsCollection`
+  - `\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException`
+  - `\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Reflection\ReflectorWrapper`
+  - `\BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\AsyncSourceLocator`
+  - `\BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\CustomSourceLocatorInterface`
+  - `\BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\CachedSourceLocator`
+  - `\BumbleDocGen\LanguageHandler\Php\Parser\SourceLocator\Internal\SystemAsyncSourceLocator`
+- Class `\BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser` renamed to `\BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper`
+- Doc block parsing has been removed:
+  - `\Roave\BetterReflection\Reflection\ReflectionMethod::getDocBlockReturnTypes()`
+  - `\Roave\BetterReflection\Reflection\ReflectionFunction::getDocBlockReturnTypes()`
+  - `\Roave\BetterReflection\Reflection\ReflectionParameter::getDocBlockTypes()`
+  - `\Roave\BetterReflection\Reflection\ReflectionParameter::getDocBlockTypeStrings()`
+  - `\Roave\BetterReflection\Reflection\ReflectionProperty::getDocBlockTypes()`
+  - `\Roave\BetterReflection\Reflection\ReflectionProperty::getDocBlockTypeStrings()`
+- Method `\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity::hasAnnotationKey()` has been removed. 
+- Method `\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity::getExtends()` has been removed. 
+- Method `\BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity::getInterfacesString()` has been removed. 
+- Now documentation for built classes does not load automatically 
+- Removed the `async_source_loading_enabled` configuration option (Method `\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::asyncSourceLoadingEnabled()`)
+- Class `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\AfterLoadingClassEntityCollection` has been removed. Use `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\AfterLoadingPhpEntitiesCollection` instead.
+- Class `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad` has been removed. Use `\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded`
+- Method `\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getComposerInstalledFile()` renamed to `\BumbleDocGen\LanguageHandler\Php\PhpHandlerSettings::getComposerVendorDir()`
+
+## [1.6.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.6.0)
 - Updating composer scripts [#66](https://github.com/bumble-tech/bumble-doc-gen/pull/66)
 - Configuration console command [#54](https://github.com/bumble-tech/bumble-doc-gen/pull/54)
 
-# [1.5.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.5.0)
+## [1.5.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.5.0)
 - Caching system refactoring [#62](https://github.com/bumble-tech/bumble-doc-gen/pull/62)
 - Ai refactor [#61](https://github.com/bumble-tech/bumble-doc-gen/pull/61)
 - Optimization of the caching and error handling [#63](https://github.com/bumble-tech/bumble-doc-gen/pull/63)
 - Fixing generation problems [#64](https://github.com/bumble-tech/bumble-doc-gen/pull/64)
 
-# [1.4.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.4.0)
+## [1.4.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.4.0)
 - Fixed config errors [#52](https://github.com/bumble-tech/bumble-doc-gen/pull/52)
 - Fixed method type getter bug [#53](https://github.com/bumble-tech/bumble-doc-gen/pull/53)
 - Changed errors output [#55](https://github.com/bumble-tech/bumble-doc-gen/pull/55)
@@ -18,14 +55,14 @@
 - Changed default plugins list [#57](https://github.com/bumble-tech/bumble-doc-gen/pull/57)
 - Fixed link finder errors [#59](https://github.com/bumble-tech/bumble-doc-gen/pull/59)
 
-# [1.3.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.3.0)
+## [1.3.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.3.0)
 - Add Unit Tests for BumbleDocGen\Core\Configuration\ValueTransformer [#45](https://github.com/bumble-tech/bumble-doc-gen/pull/45)
 - Add Unit Tests for ValueResolver Namespace [#47](https://github.com/bumble-tech/bumble-doc-gen/pull/47)
 - Adding entity doc generation modes [#46](https://github.com/bumble-tech/bumble-doc-gen/pull/46)
 - Adding new filter condition [#50](https://github.com/bumble-tech/bumble-doc-gen/pull/50)
 - Removing empty doc dirs [#49](https://github.com/bumble-tech/bumble-doc-gen/pull/49)
 
-# [1.2.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.2.0)
+## [1.2.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.2.0)
 - Fixing contributing rules [#9](https://github.com/bumble-tech/bumble-doc-gen/pull/9)
 - Adds issue templates for Bug reports & feature requests [#13](https://github.com/bumble-tech/bumble-doc-gen/pull/13)
 - Adds Code of Conduct & PR template [#15](https://github.com/bumble-tech/bumble-doc-gen/pull/15)
@@ -39,10 +76,10 @@
 - Removing ocramius proxy manager [#37](https://github.com/bumble-tech/bumble-doc-gen/pull/37)
 - Use shared cache option [#38](https://github.com/bumble-tech/bumble-doc-gen/pull/38)
 
-# [1.1.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.1.0)
+## [1.1.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.1.0)
 - Implementation of the ability to add custom commands to a standard console application [#4](https://github.com/bumble-tech/bumble-doc-gen/pull/4)
 - Fixing console app bugs [#5](https://github.com/bumble-tech/bumble-doc-gen/pull/5)
 - Adding new console commands [#6](https://github.com/bumble-tech/bumble-doc-gen/pull/6)
 
-# [1.0.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.0.0)
+## [1.0.0](https://github.com/bumble-tech/bumble-doc-gen/releases/tag/v1.0.0)
 - First public version of documentation generator.

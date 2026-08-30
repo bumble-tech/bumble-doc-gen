@@ -1,0 +1,103 @@
+---
+title: Template filters
+prevPage: Renderer
+---
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Template filters" | textToHeading('H1') }}
+
+When generating pages, you can use filters that allow you to modify the content.
+Filters available during page generation are defined in <a href='{{ getDocumentationPageUrl('01_configuration.md') }}'>the configuration</a> ( `twig_filters` parameter )
+
+We use the twig template engine, you can get more information about working with filters here: https://twig.symfony.com/doc/1.x/advanced.html#filters
+
+
+{{ "How to use a filter in a template:" | textToHeading('H2') }}
+
+{{ '<pre>&#123;&#123; someText | filter(...parameters) &#125;&#125;</pre>' }}
+
+or
+
+{{ '<pre>&#123;&#123; someText | filter &#125;&#125;</pre>' }}
+
+
+{{ "Configuration example" | textToHeading('H2') }}
+
+You can add your custom filters to the configuration like this:
+
+```yaml
+twig_filters:
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft
+  - class: \BumbleDocGen\Core\Renderer\Twig\Filter\FixStrSize
+```
+
+It is important to remember that when a template is inherited, custom filters are not overridden and augmented.
+This information is detailed on page [a]01_configuration.md[/a].
+
+{{ "Defautl template filters" | textToHeading('H2') }}
+
+Several filters are already defined in the base configuration.
+There are both general filters for all types of entities, and filters that only serve to process entities that belong to a particular PL.
+
+Here is a list of filters available by default:
+
+<table>
+    <thead>
+    <tr>
+        <th rowspan="3">Filter</th>
+        <th colspan="3">Parameters</th>
+    </tr>
+    <tr>
+        <th>name</th>
+        <th>type</th>
+        <th>description</th>
+    </tr>
+    <tr>
+        <th colspan="4"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for filter in phpEntities.filterByPaths([
+            '/src/Core/Renderer/Twig/Filter',
+            '/src/LanguageHandler/Php/Renderer/Twig/Filter'
+        ])
+        .filterByInterfaces(['BumbleDocGen\\Core\\Renderer\\Twig\\Filter\\CustomFilterInterface'])
+        .getOnlyInstantiable()
+    %}
+        {% set twigFilterData = filter.getPluginData('twigFilterClassParserPlugin') %}
+        {% set paramsCount = twigFilterData.parameters | length %}
+        {% for parameter in twigFilterData.parameters %}
+            <tr>
+                {% if loop.index == 1 %}
+                    {% set rowspan = paramsCount * 2 - 1 %}
+                    <td {% if rowspan > 1 %}rowspan="{{ rowspan }}"{% endif %}>
+                        <a href="{{ getDocumentedEntityUrl(phpEntities, filter.getName()) }}">{{ twigFilterData.name }}</a><br>
+                        {% if filter.isInternal() %}<i><b>:warning: For internal use</b></i><br>{% endif %}{{ filter.getDescription() | removeLineBrakes }}{% if filter.getDocNote() %}<br><i><b>:warning: {{ filter.getDocNote() }}</b></i><br>{% endif %}
+                    </td>
+                    {% if rowspan == 1 %}
+                        <td colspan="3">The filter does not accept any additional parameters</td>
+                    {% endif %}
+                {% else %}
+                    <td>
+                        <b>${{ parameter.name }}</b>
+                    </td>
+                    <td>
+                        <i>{{ parameter.type | strTypeToUrl(phpEntities, true) }}</i>
+                    </td>
+                    <td>{{ parameter.description | removeLineBrakes }}</td>
+                {% endif %}
+            </tr>
+            {% if loop.last == false %}
+                <tr>
+                    <td colspan="3"></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        {% if loop.last == false %}
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>

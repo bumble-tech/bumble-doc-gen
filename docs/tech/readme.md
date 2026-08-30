@@ -6,7 +6,7 @@ This documentation generator is a library that allows you to create handwritten 
 
 <embed> <h2>Documentation sections</h2> </embed>
 
-<embed> <ul><li><div><a href='/docs/tech/1.configuration/readme.md'>Configuration files</a></div></li><li><div><a href='/docs/tech/2.parser/readme.md'>Parser</a></div></li><li><div><a href='/docs/tech/3.renderer/readme.md'>Renderer</a></div></li><li><div><a href='/docs/tech/4.pluginSystem/readme.md'>Plugin system</a></div></li><li><div><a href='/docs/tech/map.md'>Class map</a></div></li></ul> </embed>
+<embed> <ul><li><div><a href='/docs/tech/01_configuration.md'>Configuration</a></div></li><li><div><a href='/docs/tech/02_parser/readme.md'>Parser</a></div></li><li><div><a href='/docs/tech/03_renderer/readme.md'>Renderer</a></div></li><li><div><a href='/docs/tech/04_pluginSystem.md'>Plugin system</a></div></li><li><div><a href='/docs/tech/05_console.md'>Console app</a></div></li><li><div><a href='/docs/tech/06_debugging.md'>Debug documents</a></div></li><li><div><a href='/docs/tech/07_outputFormat.md'>Output formats</a></div></li></ul> </embed>
 
 <embed> <h2>How it works</h2> </embed>
 
@@ -44,4 +44,4 @@ After that, the process of parsing the project code according to the configurati
 
 <div id='page_committer_info'>
 <hr>
-<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Thu Oct 5 17:42:06 2023 +0300<br><b>Page content update date:</b> Mon Nov 06 2023<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>
+<b>Last page committer:</b> fshcherbanich &lt;filipp.shcherbanich@team.bumble.com&gt;<br><b>Last modified date:</b>   Sat Dec 23 23:00:37 2023 +0300<br><b>Page content update date:</b> Mon Jan 15 2024<br>Made with <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/docs/README.md'>Bumble Documentation Generator</a></div>

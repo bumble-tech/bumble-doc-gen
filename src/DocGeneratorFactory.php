@@ -6,6 +6,9 @@ namespace BumbleDocGen;
 
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationParameterBag;
+use BumbleDocGen\Core\Configuration\ReflectionApiConfig;
+use BumbleDocGen\Core\Parser\Entity\RootEntityCollection;
+use BumbleDocGen\Core\Parser\ProjectParser;
 use DI\Container;
 use DI\ContainerBuilder;
 use DI\DependencyException;
@@ -38,6 +41,10 @@ final class DocGeneratorFactory
     }
 
     /**
+     * Creates a documentation generator instance using configuration files
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \Exception
@@ -59,6 +66,10 @@ final class DocGeneratorFactory
     }
 
     /**
+     * Creates a documentation generator instance using an array containing the configuration
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \Exception
@@ -80,6 +91,10 @@ final class DocGeneratorFactory
     }
 
     /**
+     * Creating a project configuration instance
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws \Exception
@@ -98,6 +113,36 @@ final class DocGeneratorFactory
             $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
             throw new \RuntimeException($e->getMessage());
         }
+    }
+
+    /**
+     * Creating a collection of entities (see `ReflectionAPI`)
+     *
+     * @api
+     *
+     * @throws DependencyException
+     * @throws NotFoundException
+     * @throws \Exception
+     */
+    public function createRootEntitiesCollection(ReflectionApiConfig $reflectionApiConfig): RootEntityCollection
+    {
+        $diContainer = $this->buildDiContainer();
+        $logger = $diContainer->get(LoggerInterface::class);
+        try {
+            /** @var ConfigurationParameterBag $configurationParameterBag */
+            $configurationParameterBag = $diContainer->get(ConfigurationParameterBag::class);
+            $configurationParameterBag->loadFromArray($reflectionApiConfig->toConfigArray());
+            $entitiesCollection =  $diContainer->get(ProjectParser::class)->getEntityCollectionForPL(
+                $reflectionApiConfig->getLanguageHandlerClassName()
+            );
+        } catch (\Exception $e) {
+            $logger->error("{$e->getMessage()} ( {$e->getFile()}:{$e->getLine()} )");
+            throw new \RuntimeException($e->getMessage());
+        }
+        if (!$entitiesCollection) {
+            throw new \InvalidArgumentException('The collection could not be created');
+        }
+        return $entitiesCollection;
     }
 
     /**

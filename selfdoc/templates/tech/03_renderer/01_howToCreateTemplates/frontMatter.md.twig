@@ -1,0 +1,29 @@
+---
+title: Front Matter
+prevPage: How to create documentation templates?
+---
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Front Matter" | textToHeading('H1') }}
+
+Front Matter is a special block at the top of a document template or generated document that contains certain important meta information.
+
+This block must be located strictly at the top of the template, its beginning and end are indicated by a combination of symbols `---`:
+
+```twig
+---
+title: Front Matter
+prevPage: How to create documentation templates?
+someVariable: 123
+---
+
+some template content ...
+```
+
+The content of this block must be in YAML format.
+During the template generation process, this block is parsed, and all values become available in the form of twig variables.
+By default, this block is hidden from generated MD files, but it can be displayed by enabling the special option [a x-title="render_with_front_matter"]Configuration::renderWithFrontMatter()[/a] in the configuration
+
+Some Front Matter block variables are used internally in our system, for example `title` and `prevPage` are used to generate [a x-title="breadcrumbs"]Documentation structure and breadcrumbs[/a] and [a x-title="documentation menus"]DrawDocumentationMenu[/a].
+
+This block is also used when generating HTML documentation. You can learn about the variables used in this block when generating HTML content [in the documentation of the library](https://daux.io/Features/Front_Matter.html) that we use to create HTML pages.

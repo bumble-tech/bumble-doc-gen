@@ -38,11 +38,12 @@ abstract class BaseCommand extends Command
      */
     protected function createDocGenInstance(
         InputInterface $input,
-        OutputInterface $output
+        OutputInterface $output,
+        array $customConfigurationParameters = []
     ): DocGenerator {
         $docGeneratorFactory = (new DocGeneratorFactory());
         $docGeneratorFactory->setCustomConfigurationParameters(
-            $this->getCustomConfigurationParameters($input)
+            array_merge($this->getCustomConfigurationParameters($input), $customConfigurationParameters)
         );
         $docGeneratorFactory->setCustomDiDefinitions([
             OutputStyle::class => new SymfonyStyle($input, $output),

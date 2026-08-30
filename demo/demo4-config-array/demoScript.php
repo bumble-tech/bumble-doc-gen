@@ -18,9 +18,6 @@ try {
             'language_handlers' => [
                 'php' => [
                     'class' => \BumbleDocGen\LanguageHandler\Php\PhpHandler::class,
-                    'settings' => [
-                        'async_source_loading_enabled' => true,
-                    ],
                 ]
             ],
             'source_locators' => [

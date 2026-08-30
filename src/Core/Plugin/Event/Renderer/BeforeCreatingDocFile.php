@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Core\Plugin\Event\Renderer;
 
-use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -12,8 +11,10 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class BeforeCreatingDocFile extends Event
 {
-    public function __construct(private string $content, private RendererContext $context)
-    {
+    public function __construct(
+        private string $content,
+        private string $outputFilePatch
+    ) {
     }
 
     public function getContent(): string
@@ -26,8 +27,13 @@ final class BeforeCreatingDocFile extends Event
         $this->content = $content;
     }
 
-    public function getContext(): RendererContext
+    public function getOutputFilePatch(): string
     {
-        return $this->context;
+        return $this->outputFilePatch;
+    }
+
+    public function setOutputFilePatch(string $outputFilePatch): void
+    {
+        $this->outputFilePatch = $outputFilePatch;
     }
 }

@@ -10,10 +10,9 @@ use BumbleDocGen\Core\Plugin\Event\Renderer\OnLoadEntityDocPluginContent;
 use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Context\RendererContext;
 use BumbleDocGen\Core\Renderer\Twig\Filter\CustomFilterInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingClassEntityCollection;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Parser\AfterLoadingPhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer;
 use DI\DependencyException;
 use DI\NotFoundException;
@@ -36,13 +35,12 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            AfterLoadingClassEntityCollection::class => 'afterLoadingClassEntityCollection',
+            AfterLoadingPhpEntitiesCollection::class => 'afterLoadingClassEntityCollection',
             OnLoadEntityDocPluginContent::class => 'onLoadEntityDocPluginContentEvent',
         ];
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     public function onLoadEntityDocPluginContentEvent(OnLoadEntityDocPluginContent $event): void
@@ -54,7 +52,7 @@ final class TwigFilterClassParserPlugin implements PluginInterface
         }
 
         $entity = $event->getEntity();
-        if (!is_a($entity, ClassEntity::class) || !$this->isCustomTwigFilter($event->getEntity())) {
+        if (!is_a($entity, ClassLikeEntity::class) || !$this->isCustomTwigFilter($event->getEntity())) {
             return;
         }
 
@@ -71,30 +69,31 @@ final class TwigFilterClassParserPlugin implements PluginInterface
 
     /**
      * @throws NotFoundException
-     * @throws ReflectionException
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      */
-    public function afterLoadingClassEntityCollection(AfterLoadingClassEntityCollection $event): void
+    public function afterLoadingClassEntityCollection(AfterLoadingPhpEntitiesCollection $event): void
     {
-        foreach ($event->getClassEntityCollection() as $classEntity) {
+        foreach ($event->getPhpEntitiesCollection() as $classEntity) {
             if ($this->isCustomTwigFilter($classEntity)) {
-                $classEntity->loadPluginData(
+                $classEntity->addPluginData(
                     self::PLUGIN_KEY,
-                    $this->getFilterData($event->getClassEntityCollection(), $classEntity->getName()) ?? []
+                    $this->getFilterData($event->getPhpEntitiesCollection(), $classEntity->getName()) ?? []
                 );
             }
         }
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
-    private function isCustomTwigFilter(ClassEntity $classEntity): bool
+    private function isCustomTwigFilter(ClassLikeEntity $classEntity): bool
     {
         foreach (self::TWIG_FILTER_DIR_NAMES as $dirName) {
-            if (str_starts_with($classEntity->getFileName(), $dirName) && $classEntity->implementsInterface(CustomFilterInterface::class)) {
+            if (!$classEntity->isEntityDataCanBeLoaded()) {
+                continue;
+            }
+            if (str_starts_with($classEntity->getRelativeFileName(), $dirName) && $classEntity->implementsInterface(CustomFilterInterface::class)) {
                 return true;
             }
         }
@@ -104,7 +103,6 @@ final class TwigFilterClassParserPlugin implements PluginInterface
     /**
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
      */
     private function getAllUsedFilters(): array
@@ -125,11 +123,10 @@ final class TwigFilterClassParserPlugin implements PluginInterface
 
     /**
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
      */
-    private function getFilterData(ClassEntityCollection $classEntityCollection, string $className): ?array
+    private function getFilterData(PhpEntitiesCollection $entitiesCollection, string $className): ?array
     {
         static $filtersData = [];
         if (!array_key_exists($className, $filtersData)) {
@@ -139,8 +136,8 @@ final class TwigFilterClassParserPlugin implements PluginInterface
             }
 
             $functionData['name'] = $filters[$className];
-            $entity = $classEntityCollection->getEntityByClassName($className);
-            $method = $entity->getMethodEntityCollection()->get('__invoke');
+            $entity = $entitiesCollection->getLoadedOrCreateNew($className);
+            $method = $entity->getMethodEntitiesCollection()->get('__invoke');
             $functionData['parameters'] = $method->getParameters();
             $filtersData[$className] = $functionData;
         }

@@ -8,7 +8,6 @@ language_handlers:
     class: \BumbleDocGen\LanguageHandler\Php\PhpHandler
     settings:
       file_source_base_url: 'https://github.com/bumble-tech/bumble-doc-gen/blob/master'
-      async_source_loading_enabled: true
 source_locators:
   - class: \BumbleDocGen\Core\Parser\SourceLocator\RecursiveDirectoriesSourceLocator
     arguments:
@@ -21,6 +20,7 @@ twig_functions:
   - class: \SelfDocConfig\Twig\CustomFunction\FindEntitiesClassesByCollectionClassName
   - class: \SelfDocConfig\Twig\CustomFunction\PrintClassCollectionAsGroupedTable
   - class: \SelfDocConfig\Twig\CustomFunction\GetConfigParametersDescription
+  - class: \SelfDocConfig\Twig\CustomFunction\GetConsoleCommands
 plugins:
   - class: \SelfDocConfig\Plugin\TwigFilterClassParser\TwigFilterClassParserPlugin
   - class: \SelfDocConfig\Plugin\TwigFunctionClassParser\TwigFunctionClassParserPlugin

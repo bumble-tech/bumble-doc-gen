@@ -12,7 +12,6 @@ use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 use BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrappersCollection;
 use BumbleDocGen\Core\Renderer\Context\DocumentTransformableEntityInterface;
 use BumbleDocGen\Core\Renderer\RendererHelper;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Monolog\Logger;
@@ -26,13 +25,13 @@ use Monolog\Logger;
  * @see DocumentedEntityWrappersCollection
  * @see RendererContext::$entityWrappersCollection
  *
- * @example {{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', 'getFunctions') }}
+ * @example {{ getDocumentedEntityUrl(phpEntities, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', 'getFunctions') }}
  *  The function returns a reference to the documented entity, anchored to the getFunctions method
  *
- * @example {{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension') }}
+ * @example {{ getDocumentedEntityUrl(phpEntities, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension') }}
  *  The function returns a reference to the documented entity MainExtension
  *
- * @example {{ getDocumentedEntityUrl(phpClassEntityCollection, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', '', false) }}
+ * @example {{ getDocumentedEntityUrl(phpEntities, '\\BumbleDocGen\\Renderer\\Twig\\MainExtension', '', false) }}
  *  The function returns a link to the file MainExtension
  */
 final class GetDocumentedEntityUrl implements CustomFunctionInterface
@@ -73,7 +72,6 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
      * @throws DependencyException
      * @throws InvalidConfigurationParameterException
      * @throws NotFoundException
-     * @throws ReflectionException
      */
     public function __invoke(RootEntityCollection $rootEntityCollection, string $entityName, string $cursor = '', bool $createDocument = true): string
     {
@@ -85,8 +83,8 @@ final class GetDocumentedEntityUrl implements CustomFunctionInterface
             return $preloadResourceLink;
         }
         $entity = $rootEntityCollection->getLoadedOrCreateNew($entityName);
-        if ($entity->entityDataCanBeLoaded()) {
-            if (!$entity->documentCreationAllowed()) {
+        if ($entity->isEntityDataCanBeLoaded()) {
+            if (!$entity->isDocumentCreationAllowed()) {
                 return self::DEFAULT_URL;
             } elseif ($createDocument && is_a($entity, DocumentTransformableEntityInterface::class)) {
                 $documentedEntity = $this->documentedEntityWrappersCollection->createAndAddDocumentedEntityWrapper($entity);

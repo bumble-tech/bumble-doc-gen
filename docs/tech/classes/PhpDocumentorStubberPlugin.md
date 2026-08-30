@@ -1,5 +1,4 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> PhpDocumentorStubberPlugin<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> PhpDocumentorStubberPlugin<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/PhpDocumentorStubberPlugin.php#L23">PhpDocumentorStubberPlugin</a> class:
@@ -28,9 +27,9 @@ final class PhpDocumentorStubberPlugin implements \BumbleDocGen\Core\Plugin\Plug
 <ol>
 <li>
     <a href="#mgetsubscribedevents">getSubscribedEvents</a>
-    - <i>Returns an array of event names this subscriber wants to listen to.</i></li>
+    </li>
 <li>
-    <a href="#moncheckisclassentitycanbeload">onCheckIsClassEntityCanBeLoad</a>
+    <a href="#moncheckisentitycanbeloaded">onCheckIsEntityCanBeLoaded</a>
     </li>
 <li>
     <a href="#mongettingresourcelink">onGettingResourceLink</a>
@@ -57,7 +56,7 @@ final class PhpDocumentorStubberPlugin implements \BumbleDocGen\Core\Plugin\Plug
 public static function getSubscribedEvents(): array;
 ```
 
-<blockquote>Returns an array of event names this subscriber wants to listen to.</blockquote>
+
 
 <b>Parameters:</b> not specified
 
@@ -69,13 +68,13 @@ public static function getSubscribedEvents(): array;
 <div class='method_description-block'>
 
 <ul>
-<li><a name="moncheckisclassentitycanbeload" href="#moncheckisclassentitycanbeload">#</a>
- <b>onCheckIsClassEntityCanBeLoad</b>
+<li><a name="moncheckisentitycanbeloaded" href="#moncheckisentitycanbeloaded">#</a>
+ <b>onCheckIsEntityCanBeLoaded</b>
     <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/CorePlugin/BasePhpStubber/PhpDocumentorStubberPlugin.php#L73">source code</a></li>
 </ul>
 
 ```php
-public function onCheckIsClassEntityCanBeLoad(\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad $event): void;
+public function onCheckIsEntityCanBeLoaded(\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded $event): void;
 ```
 
 
@@ -93,7 +92,7 @@ public function onCheckIsClassEntityCanBeLoad(\BumbleDocGen\LanguageHandler\Php\
     <tbody>
             <tr>
             <td>$event</td>
-            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/Event/Entity/OnCheckIsClassEntityCanBeLoad.php'>\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad</a></td>
+            <td><a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/LanguageHandler/Php/Plugin/Event/Entity/OnCheckIsEntityCanBeLoaded.php'>\BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded</a></td>
             <td>-</td>
         </tr>
         </tbody>
@@ -142,5 +141,3 @@ public function onGettingResourceLink(\BumbleDocGen\Core\Plugin\Event\Renderer\O
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

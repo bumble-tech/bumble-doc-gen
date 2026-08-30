@@ -6,6 +6,8 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber;
 
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;
+use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded;
 
 /**
  * Adding links to type documentation and documentation of built-in PHP classes
@@ -30,6 +32,7 @@ final class BasePhpStubberPlugin implements PluginInterface
         'object' => 'https://www.php.net/manual/en/language.types.object.php',
         'float' => 'https://www.php.net/manual/en/language.types.float.php',
         'callable' => 'https://www.php.net/manual/en/language.types.callable.php',
+        'iterable' => 'https://www.php.net/manual/en/language.types.iterable.php',
         '[]' => 'https://www.php.net/manual/en/language.types.array.php',
         '\Traversable' => 'https://www.php.net/manual/en/class.traversable.php',
         '\Iterator' => 'https://www.php.net/manual/en/class.iterator.php',
@@ -144,6 +147,7 @@ final class BasePhpStubberPlugin implements PluginInterface
     {
         return [
             OnGettingResourceLink::class => 'onGettingResourceLink',
+            OnCheckIsEntityCanBeLoaded::class => 'onCheckIsEntityCanBeLoaded',
         ];
     }
 
@@ -159,6 +163,22 @@ final class BasePhpStubberPlugin implements PluginInterface
             } elseif (!str_starts_with($resourceName, '\\') && array_key_exists("\\{$resourceName}", self::$builtInUrls)) {
                 $event->setResourceUrl(self::$builtInUrls["\\{$resourceName}"]);
             }
+        }
+    }
+
+    final public function onCheckIsEntityCanBeLoaded(OnCheckIsEntityCanBeLoaded $event): void
+    {
+        $entityName = $event->getEntity()->getName();
+        $entityName = explode('::', $entityName)[0];
+        if (preg_match('/([{\[])/', $entityName) || preg_match('/^(array)([{<])/', $entityName)) {
+            $entityName = 'array';
+        }
+        if (!ParserHelper::isCorrectClassName($entityName)) {
+            $event->disableEntityLoading();
+            return;
+        }
+        if (array_key_exists($entityName, self::$builtInUrls) || array_key_exists("\\{$entityName}", self::$builtInUrls)) {
+            $event->disableEntityLoading();
         }
     }
 }

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Console\ProgressBar;
 
+use BumbleDocGen\Core\Parser\Entity\EntitiesLoaderProgressBarInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Style\OutputStyle;
 
-final class StylizedProgressBar
+final class StylizedProgressBar implements EntitiesLoaderProgressBarInterface
 {
     private ProgressBar $progressBar;
     private string $name = '';
@@ -56,6 +57,11 @@ final class StylizedProgressBar
 
     public function iterate(iterable $iterable, ?int $max = null): \Generator
     {
+        $lastIterationNumber = is_countable($iterable) ? \count($iterable) : 0;
+        if (!$lastIterationNumber) {
+            return;
+        }
+
         $i = 0;
         foreach ($this->progressBar->iterate($iterable, $max) as $key => $item) {
             $lastIterationNumber = is_countable($iterable) ? \count($iterable) : 0;

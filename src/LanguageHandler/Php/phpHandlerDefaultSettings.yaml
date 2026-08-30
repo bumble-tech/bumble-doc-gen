@@ -25,13 +25,18 @@ language_handlers:
         - class: \BumbleDocGen\LanguageHandler\Php\Renderer\EntityDocRenderer\PhpClassToMd\PhpClassToMdDocRenderer
 
       custom_twig_functions:
+        - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\DisplayClassApiMethods
         - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\DrawClassMap
         - class: \BumbleDocGen\LanguageHandler\Php\Renderer\Twig\Function\GetClassMethodsBodyCode
 
       custom_twig_filters:
 
       file_source_base_url: null
-      async_source_loading_enabled: false
+
+      use_composer_autoload: true # whether to use composer to load the class map or not
+      composer_config_file: "%project_root%/composer.json"
+      composer_vendor_dir: "%project_root%/vendor"
+      psr4_map: # same as in composer
 plugins:
   - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\BasePhpStubberPlugin
   - class: \BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\BasePhpStubber\PhpDocumentorStubberPlugin

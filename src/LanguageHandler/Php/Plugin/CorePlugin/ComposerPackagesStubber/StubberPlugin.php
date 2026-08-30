@@ -6,18 +6,17 @@ namespace BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\ComposerPackagesStu
 
 use BumbleDocGen\Core\Plugin\Event\Renderer\OnGettingResourceLink;
 use BumbleDocGen\Core\Plugin\PluginInterface;
-use BumbleDocGen\LanguageHandler\Php\Parser\ComposerParser;
-use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsClassEntityCanBeLoad;
+use BumbleDocGen\LanguageHandler\Php\Parser\ComposerHelper;
+use BumbleDocGen\LanguageHandler\Php\Plugin\Event\Entity\OnCheckIsEntityCanBeLoaded;
 
 /**
  * The plugin allows you to automatically provide links to github repositories for documented classes from libraries included in composer
  */
 final class StubberPlugin implements PluginInterface
 {
-    private array $packages = [];
     private array $foundLinks = [];
 
-    public function __construct(private ComposerParser $composerParser)
+    public function __construct(private ComposerHelper $composerHelper)
     {
     }
 
@@ -25,7 +24,7 @@ final class StubberPlugin implements PluginInterface
     {
         return [
             OnGettingResourceLink::class => 'onGettingResourceLink',
-            OnCheckIsClassEntityCanBeLoad::class => 'onCheckIsClassEntityCanBeLoad',
+            OnCheckIsEntityCanBeLoaded::class => 'onCheckIsEntityCanBeLoaded',
         ];
     }
 
@@ -38,7 +37,7 @@ final class StubberPlugin implements PluginInterface
             $resourceName = trim($event->getResourceName());
             $resourceName = explode('::', $resourceName)[0];
             if (!isset($this->foundLinks[$resourceName])) {
-                $packageData = $this->composerParser->getComposerPackageDataByClassName($resourceName);
+                $packageData = $this->composerHelper->getComposerPackageDataByClassName($resourceName);
                 if (!$packageData) {
                     return;
                 }
@@ -58,10 +57,10 @@ final class StubberPlugin implements PluginInterface
     /**
      * @throws \Exception
      */
-    final public function onCheckIsClassEntityCanBeLoad(OnCheckIsClassEntityCanBeLoad $event): void
+    final public function onCheckIsEntityCanBeLoaded(OnCheckIsEntityCanBeLoaded $event): void
     {
-        if ($this->composerParser->getComposerPackageDataByClassName($event->getEntity()->getName())) {
-            $event->disableClassLoading();
+        if ($this->composerHelper->getComposerPackageDataByClassName($event->getEntity()->getName())) {
+            $event->disableEntityLoading();
         }
     }
 }

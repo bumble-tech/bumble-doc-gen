@@ -1,8 +1,7 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> DrawDocumentedEntityLink<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/01_configuration.md">Configuration</a> <b>/</b> DrawDocumentedEntityLink<hr> </embed>
 
 <h1>
-    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L22">DrawDocumentedEntityLink</a> class:
+    <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L21">DrawDocumentedEntityLink</a> class:
 </h1>
 
 
@@ -85,7 +84,7 @@ final class DrawDocumentedEntityLink implements \BumbleDocGen\Core\Renderer\Twig
 <ul>
 <li><a name="m-construct" href="#m-construct">#</a>
  <b>__construct</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L24">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L23">source code</a></li>
 </ul>
 
 ```php
@@ -122,7 +121,7 @@ public function __construct(\BumbleDocGen\Core\Renderer\Twig\Function\GetDocumen
 <ul>
 <li><a name="m-invoke" href="#m-invoke">#</a>
  <b>__invoke</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L52">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L50">source code</a></li>
 </ul>
 
 ```php
@@ -169,13 +168,10 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $e
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/NotFoundException.php">\DI\NotFoundException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/ReflectionException_2.md">\BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException</a></li>
-
-<li>
     <a href="https://github.com/PHP-DI/PHP-DI/blob/master/src/DependencyException.php">\DI\DependencyException</a></li>
 
 <li>
-    <a href="/docs/tech/classes/InvalidConfigurationParameterException_2.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
+    <a href="/docs/tech/classes/InvalidConfigurationParameterException.md">\BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException</a></li>
 
 </ul>
 
@@ -186,7 +182,7 @@ public function __invoke(\BumbleDocGen\Core\Parser\Entity\RootEntityInterface $e
 <ul>
 <li><a name="mgetname" href="#mgetname">#</a>
  <b>getName</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L28">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L27">source code</a></li>
 </ul>
 
 ```php
@@ -207,7 +203,7 @@ public static function getName(): string;
 <ul>
 <li><a name="mgetoptions" href="#mgetoptions">#</a>
  <b>getOptions</b>
-    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L33">source code</a></li>
+    <b>|</b> <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Twig/Function/DrawDocumentedEntityLink.php#L32">source code</a></li>
 </ul>
 
 ```php
@@ -223,5 +219,3 @@ public static function getOptions(): array;
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

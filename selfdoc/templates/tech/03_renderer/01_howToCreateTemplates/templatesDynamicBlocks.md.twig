@@ -1,0 +1,22 @@
+---
+title: Templates dynamic blocks
+prevPage: How to create documentation templates?
+---
+{{ generatePageBreadcrumbs(title, _self) }}
+
+{{ "Templates dynamic blocks" | textToHeading('H1') }}
+
+There are several ways to create dynamic blocks in templates.
+
+* First of all, these are custom twig <a href='{{ getDocumentationPageUrl('Template functions') }}'>functions</a> and <a href='{{ getDocumentationPageUrl('Template filters') }}'>filters</a>.
+You can use the built-in functions and filters or add your own, so you can implement any logic for generating dynamically changing content.
+
+{{ "{\{ printEntityCollectionAsList(phpEntities.filterByInterfaces(['\\\\BumbleDocGen\\\\Core\\\\Parser\\\\SourceLocator\\\\SourceLocatorInterface']).getOnlyInstantiable()) }\}" | textToCodeBlock('twig') }}
+
+* The second way is to output data from <a href='{{ getDocumentationPageUrl('Templates variables') }}'>variables</a> directly to the template. For example, you can display a list of classes or methods of documented code according to certain rules.
+
+{{ "{% for entity in phpEntities.filterByInterfaces(['\\\\BumbleDocGen\\\\Core\\\\Parser\\\\SourceLocator\\\\SourceLocatorInterface']).getOnlyInstantiable() %}
+    * {{ entity.getName() }}
+{% endfor %}
+" | textToCodeBlock('twig') }}
+

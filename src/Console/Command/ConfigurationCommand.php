@@ -18,8 +18,7 @@ final class ConfigurationCommand extends BaseCommand
         $this
             ->setName('configuration')
             ->setDescription('Display list of configured plugins, programming language handlers, etc')
-            ->addArgument('key', InputArgument::OPTIONAL, 'Configuration key to display')
-        ;
+            ->addArgument('key', InputArgument::OPTIONAL, 'Configuration key to display');
     }
 
     /**

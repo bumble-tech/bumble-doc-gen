@@ -17,7 +17,7 @@ final class SingleEntitySearchOperation implements OperationInterface
         private array $args,
         ?RootEntityInterface $entity
     ) {
-        if ($entity?->entityDataCanBeLoaded()) {
+        if ($entity?->isEntityDataCanBeLoaded()) {
             $this->entityName = $entity->getObjectId();
         }
     }

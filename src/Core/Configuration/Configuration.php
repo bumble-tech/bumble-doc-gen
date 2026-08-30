@@ -210,20 +210,22 @@ final class Configuration
         }
 
         $cacheDir = $this->parameterBag->validateAndGetStringValue(ConfigurationKey::CACHE_DIR);
-        $parentDir = dirname($cacheDir);
-        if (!is_dir($parentDir)) {
-            throw new InvalidConfigurationParameterException(
-                sprintf(
-                    "`%s` cannot be created because parent directory `{$parentDir}` does not exist",
-                    ConfigurationKey::CACHE_DIR
-                )
-            );
+        if ($cacheDir) {
+            $parentDir = dirname($cacheDir);
+            if (!is_dir($parentDir)) {
+                throw new InvalidConfigurationParameterException(
+                    sprintf(
+                        "`%s` cannot be created because parent directory `{$parentDir}` does not exist",
+                        ConfigurationKey::CACHE_DIR
+                    )
+                );
+            }
+            if (!file_exists($cacheDir)) {
+                $this->logger->notice("Creating `{$cacheDir}` directory");
+                mkdir($cacheDir);
+            }
+            $cacheDir = realpath($cacheDir);
         }
-        if (!file_exists($cacheDir)) {
-            $this->logger->notice("Creating `{$cacheDir}` directory");
-            mkdir($cacheDir);
-        }
-        $cacheDir = realpath($cacheDir);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $cacheDir);
         return $cacheDir;
     }
@@ -320,6 +322,20 @@ final class Configuration
         $useSharedCache = $this->parameterBag->validateAndGetBooleanValue(ConfigurationKey::USE_SHARED_CACHE);
         $this->localObjectCache->cacheMethodResult(__METHOD__, '', $useSharedCache);
         return $useSharedCache;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function renderWithFrontMatter(): bool
+    {
+        try {
+            return $this->localObjectCache->getMethodCachedResult(__METHOD__, '');
+        } catch (ObjectNotFoundException) {
+        }
+        $renderWithFrontMatter = $this->parameterBag->validateAndGetBooleanValue(ConfigurationKey::RENDER_WITH_FRONT_MATTER);
+        $this->localObjectCache->cacheMethodResult(__METHOD__, '', $renderWithFrontMatter);
+        return $renderWithFrontMatter;
     }
 
     /**

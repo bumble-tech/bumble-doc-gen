@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace BumbleDocGen\Console\Command;
 
+use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
+use BumbleDocGen\LanguageHandler\Php\Plugin\CorePlugin\Daux\Daux;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
 
 final class GenerateCommand extends BaseCommand
 {
@@ -25,19 +30,53 @@ final class GenerateCommand extends BaseCommand
 
     protected function configure(): void
     {
-        $this->setName('generate')->setDescription('Generate documentation');
+        $this->setName('generate')
+            ->setDescription('Generate documentation')
+            ->addOption(
+                name: 'as-html',
+                mode: InputOption::VALUE_NONE,
+                description: 'Generate documentation in HTML format',
+            );
     }
 
     /**
      * @throws NotFoundException
      * @throws DependencyException
      * @throws InvalidArgumentException
+     * @throws InvalidConfigurationParameterException
      */
     protected function execute(
         InputInterface $input,
         OutputInterface $output
     ): int {
-        $this->createDocGenInstance($input, $output)->generate();
+
+        $asHtml = $input->getOption('as-html');
+        if ($asHtml) {
+            $tmpDir = sys_get_temp_dir() . '/~bumbleDocGen';
+            $filesystem = new Filesystem();
+            $filesystem->remove($tmpDir);
+
+            $docGen = $this->createDocGenInstance($input, $output, [
+                'output_dir' => $tmpDir,
+                'render_with_front_matter' => true
+            ]);
+            $docGen->addPlugin(Daux::class);
+            $docGen->generate();
+
+            $docGen = $this->createDocGenInstance($input, $output)->getConfiguration();
+            $process = new Process([
+                PHP_BINARY,
+                dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . 'vendor/bin/daux',
+                'generate',
+                "--source={$tmpDir}",
+                "--destination={$docGen->getOutputDir()}/html"
+            ]);
+            $process->setTty(true);
+            $process->run();
+        } else {
+            $this->createDocGenInstance($input, $output)->generate();
+        }
+
         return self::SUCCESS;
     }
 }

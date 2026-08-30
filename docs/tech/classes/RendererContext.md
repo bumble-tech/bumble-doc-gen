@@ -1,5 +1,4 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> RendererContext<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> RendererContext<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/RendererContext.php#L12">RendererContext</a> class:
@@ -125,14 +124,14 @@ public function clearDependencies(): void;
 </ul>
 
 ```php
-public function getCurrentDocumentedEntityWrapper(): \BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper|null;
+public function getCurrentDocumentedEntityWrapper(): null|\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper;
 ```
 
 
 
 <b>Parameters:</b> not specified
 
-<b>Return value:</b> <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a> | <a href='https://www.php.net/manual/en/language.types.null.php'>null</a>
+<b>Return value:</b> <a href='https://www.php.net/manual/en/language.types.null.php'>null</a> | <a href='https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Renderer/Context/DocumentedEntityWrapper.php'>\BumbleDocGen\Core\Renderer\Context\DocumentedEntityWrapper</a>
 
 
 </div>
@@ -255,5 +254,3 @@ public function setCurrentTemplateFilePatch(string $currentTemplateFilePath): vo
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

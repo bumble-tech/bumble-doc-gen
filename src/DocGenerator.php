@@ -7,19 +7,25 @@ namespace BumbleDocGen;
 use BumbleDocGen\AI\Generators\DocBlocksGenerator;
 use BumbleDocGen\AI\Generators\ReadmeTemplateGenerator;
 use BumbleDocGen\AI\ProviderInterface;
+use BumbleDocGen\Console\ProgressBar\ProgressBarFactory;
+use BumbleDocGen\Core\Cache\LocalCache\LocalObjectCache;
+use BumbleDocGen\Core\Cache\SharedCompressedDocumentFileCache;
 use BumbleDocGen\Core\Configuration\Configuration;
 use BumbleDocGen\Core\Configuration\ConfigurationKey;
 use BumbleDocGen\Core\Configuration\Exception\InvalidConfigurationParameterException;
 use BumbleDocGen\Core\Logger\Handler\GenerationErrorsHandler;
 use BumbleDocGen\Core\Parser\Entity\RootEntityCollectionsGroup;
 use BumbleDocGen\Core\Parser\ProjectParser;
+use BumbleDocGen\Core\Plugin\Event\Renderer\OnGetProjectTemplatesDirs;
 use BumbleDocGen\Core\Plugin\PluginEventDispatcher;
+use BumbleDocGen\Core\Plugin\PluginInterface;
 use BumbleDocGen\Core\Renderer\Renderer;
 use BumbleDocGen\Core\Renderer\Twig\Filter\AddIndentFromLeft;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntity;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassEntityCollection;
-use BumbleDocGen\LanguageHandler\Php\Parser\Entity\Exception\ReflectionException;
+use BumbleDocGen\Core\Renderer\Twig\MainTwigEnvironment;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\ClassLikeEntity;
+use BumbleDocGen\LanguageHandler\Php\Parser\Entity\PhpEntitiesCollection;
 use BumbleDocGen\LanguageHandler\Php\Parser\ParserHelper;
+use DI\Container;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Exception;
@@ -30,7 +36,6 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Style\OutputStyle;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 use function BumbleDocGen\Core\get_class_short;
@@ -40,7 +45,7 @@ use function BumbleDocGen\Core\get_class_short;
  */
 final class DocGenerator
 {
-    public const VERSION = '1.6.0';
+    public const VERSION = '2.0.0';
     public const LOG_FILE_NAME = 'last_run.log';
 
     /**
@@ -49,16 +54,19 @@ final class DocGenerator
      * @throws NotFoundException
      */
     public function __construct(
-        private Filesystem $fs,
-        private OutputStyle $io,
-        private Configuration $configuration,
-        PluginEventDispatcher $pluginEventDispatcher,
-        private ProjectParser $parser,
-        private ParserHelper $parserHelper,
-        private Renderer $renderer,
-        private GenerationErrorsHandler $generationErrorsHandler,
-        private RootEntityCollectionsGroup $rootEntityCollectionsGroup,
-        private Logger $logger
+        private readonly OutputStyle $io,
+        private readonly Configuration $configuration,
+        private readonly PluginEventDispatcher $pluginEventDispatcher,
+        private readonly ProjectParser $parser,
+        private readonly ParserHelper $parserHelper,
+        private readonly Renderer $renderer,
+        private readonly GenerationErrorsHandler $generationErrorsHandler,
+        private readonly RootEntityCollectionsGroup $rootEntityCollectionsGroup,
+        private readonly ProgressBarFactory $progressBarFactory,
+        private readonly Container $diContainer,
+        private readonly SharedCompressedDocumentFileCache $sharedCompressedDocumentFileCache,
+        private readonly LocalObjectCache $localObjectCache,
+        private readonly Logger $logger
     ) {
         if (file_exists(self::LOG_FILE_NAME)) {
             unlink(self::LOG_FILE_NAME);
@@ -67,6 +75,21 @@ final class DocGenerator
         foreach ($configuration->getPlugins() as $plugin) {
             $pluginEventDispatcher->addSubscriber($plugin);
         }
+    }
+
+    /**
+     * @throws DependencyException
+     * @throws InvalidConfigurationParameterException
+     * @throws NotFoundException
+     */
+    public function addPlugin(PluginInterface|string $plugin): void
+    {
+        if (is_string($plugin)) {
+            $plugin = $this->diContainer->get($plugin);
+        }
+
+        $this->configuration->getPlugins()->add($plugin);
+        $this->pluginEventDispatcher->addSubscriber($plugin);
     }
 
     /**
@@ -81,12 +104,14 @@ final class DocGenerator
     }
 
     /**
-     * Generate missing docBlocks with ChatGPT for project class methods that are available for documentation
+     * Generate missing docBlocks with LLM for project class methods that are available for documentation
+     *
+     * @api
      *
      * @throws NotFoundException
      * @throws DependencyException
-     * @throws ReflectionException
      * @throws InvalidConfigurationParameterException
+     * @throws \JsonException
      */
     public function addDocBlocks(
         ProviderInterface $aiProvider,
@@ -96,19 +121,18 @@ final class DocGenerator
         }
 
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
         $missingDocBlocksGenerator = new DocBlocksGenerator($aiProvider, $this->parserHelper);
 
         $alreadyProcessedEntities = [];
-        $getEntities = function (ClassEntityCollection|array $entitiesCollection) use (
+        $getEntities = function (PhpEntitiesCollection|array $entitiesCollection) use (
             &$getEntities,
-            &
-            $alreadyProcessedEntities
+            &$alreadyProcessedEntities
         ): Generator {
             foreach ($entitiesCollection as $classEntity) {
-                /**@var ClassEntity $classEntity */
+                /**@var ClassLikeEntity $classEntity */
                 if (
-                    !$classEntity->entityDataCanBeLoaded() || array_key_exists(
+                    !$classEntity->isEntityDataCanBeLoaded() || array_key_exists(
                         $classEntity->getName(),
                         $alreadyProcessedEntities
                     )
@@ -129,7 +153,7 @@ final class DocGenerator
         };
 
         foreach ($getEntities($entitiesCollection) as $entity) {
-            /**@var ClassEntity $entity */
+            /**@var ClassLikeEntity $entity */
             if (!$missingDocBlocksGenerator->hasMethodsWithoutDocBlocks($entity)) {
                 $this->logger->notice("Skipping `{$entity->getName()}`class. All methods are already documented");
             }
@@ -143,13 +167,11 @@ final class DocGenerator
             $toReplace = [];
             $classFileLines = explode("\n", $classFileContent);
             foreach ($newBocBlocks as $method => $docBlock) {
-                $methodEntity = $entity->getMethodEntity($method);
-                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock(
-                    false
-                )->getLocation()?->getLineNumber() : null;
+                $methodEntity = $entity->getMethod($method, true);
+                $lineNumber = $docCommentLine = $methodEntity->getDocComment() ? $methodEntity->getDocBlock()->getLocation()?->getLineNumber() : null;
                 $lineNumber = $lineNumber ?: $methodEntity->getStartLine();
 
-                foreach (file($entity->getFullFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
+                foreach (file($entity->getAbsoluteFileName(), FILE_IGNORE_NEW_LINES) as $line => $lineContent) {
                     if ($line + 1 === $lineNumber) {
                         $classFileLines[$line] = "[%docBlock%{$method}%]{$lineContent}";
                         break;
@@ -161,13 +183,16 @@ final class DocGenerator
 
             $classFileContent = implode("\n", $classFileLines);
             $classFileContent = preg_replace(array_keys($toReplace), $toReplace, $classFileContent);
-            file_put_contents($entity->getFullFileName(), $classFileContent);
+            file_put_contents($entity->getAbsoluteFileName(), $classFileContent);
             $this->logger->notice("DocBlocks added");
         }
     }
 
     /**
-     * @throws ReflectionException
+     * Creates a `README.md` template filled with basic information using LLM
+     *
+     * @api
+     *
      * @throws DependencyException
      * @throws NotFoundException
      * @throws InvalidConfigurationParameterException
@@ -177,7 +202,7 @@ final class DocGenerator
     ): void {
         $this->io->note("Project analysis");
         $this->parser->parse();
-        $entitiesCollection = $this->rootEntityCollectionsGroup->get(ClassEntityCollection::NAME);
+        $entitiesCollection = $this->rootEntityCollectionsGroup->get(PhpEntitiesCollection::NAME);
 
         $finder = new Finder();
         $finder
@@ -241,7 +266,7 @@ final class DocGenerator
             $additionalPrompt,
         );
 
-        $fileContent = "{% set title = 'About the project' %}\n{$readmeFileContent}";
+        $fileContent = "---\ntitle: About the project\n---\n{$readmeFileContent}";
         $this->io->note("readme.md.twig file content generated:");
         $this->io->text($fileContent);
         if ($this->io->confirm('Save file?')) {
@@ -254,6 +279,8 @@ final class DocGenerator
     /**
      * Generates documentation using configuration
      *
+     * @api
+     *
      * @throws InvalidArgumentException
      * @throws Exception
      */
@@ -263,11 +290,22 @@ final class DocGenerator
         $memory = memory_get_usage(true);
 
         try {
-            $this->parser->parse();
+            $pb = $this->progressBarFactory->createStylizedProgressBar();
+            $result = $this->parser->parse($pb);
+
+            $resSummary = $result->getSummary();
+            $this->io->table([], [
+                ['Processed files:', "<options=bold,underscore>{$resSummary->getProcessedFilesCount()}</>"],
+                ['Processed entities:', "<options=bold,underscore>{$resSummary->getProcessedEntitiesCount()}</>"],
+                ['Skipped entities:', "<options=bold,underscore>{$resSummary->getSkippedEntitiesCount()}</>"],
+                ['Entities added by plugins:', "<options=bold,underscore>{$resSummary->getEntitiesAddedByPluginsCount()}</>"],
+                ['Total added entities:', "<options=bold,underscore>{$resSummary->getTotalAddedEntities()}</>"],
+            ]);
+
             $this->renderer->run();
         } catch (Exception $e) {
             $this->logger->critical(
-                "{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{{$e->getTraceAsString()}}"
+                "{$e->getFile()}:{$e->getLine()} {$e->getMessage()} \n\n{$e->getTraceAsString()}"
             );
             throw $e;
         }
@@ -276,39 +314,11 @@ final class DocGenerator
         $memory = memory_get_usage(true) - $memory;
 
         $warningMessages = $this->generationErrorsHandler->getRecords();
-
         if (empty($warningMessages)) {
             $this->io->writeln("<info>Documentation successfully generated</>");
         } else {
             $this->io->writeln("<comment>Generation completed with errors</>");
-
-            $this->io->getFormatter()->setStyle('warning', new OutputFormatterStyle('yellow'));
-            $badErrorStyle = new OutputFormatterStyle('red', '#ff0', ['bold']);
-            $this->io->getFormatter()->setStyle('critical', $badErrorStyle);
-            $this->io->getFormatter()->setStyle('alert', $badErrorStyle);
-            $this->io->getFormatter()->setStyle('emergency', $badErrorStyle);
-            $table = $this->io->createTable();
-
-            $rows = [];
-            $warningMessagesCount = count($warningMessages);
-            foreach ($warningMessages as $i => $warningMessage) {
-                $tag = strtolower($warningMessage['type']);
-                $rows[] = ["<{$tag}>{$warningMessage['type']}</>", "<{$tag}>{$warningMessage['msg']}</>"];
-                if ($warningMessage['isRenderingError']) {
-                    $rows[] = [
-                        '',
-                        '<options=conceal,underscore>This error occurs during the document rendering process</>'
-                    ];
-                }
-                $rows[] = ['', $warningMessage['initiator']];
-                if ($warningMessagesCount - $i !== 1) {
-                    $rows[] = new TableSeparator();
-                }
-            }
-            $table->setStyle('box');
-            $table->addRows($rows);
-            $table->render();
-            $this->io->newLine();
+            $this->displayErrors();
         }
 
         $this->io->writeln("<info>Performance</>");
@@ -317,6 +327,88 @@ final class DocGenerator
             ['Allocated memory:', '<options=bold,underscore>' . Helper::formatMemory(memory_get_usage(true)) . '</>'],
             ['Command memory usage:', '<options=bold,underscore>' . Helper::formatMemory($memory) . '</>']
         ]);
+    }
+
+    /**
+     * Serve documentation
+     *
+     * @api
+     *
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function serve(
+        ?callable $afterPreparation = null,
+        ?callable $afterDocChanged = null,
+        int $timeout = 1000000
+    ): void {
+        $templatesDir = $this->configuration->getTemplatesDir();
+        $event = $this->pluginEventDispatcher->dispatch(new OnGetProjectTemplatesDirs([$templatesDir]));
+        $templatesDirs = $event->getTemplatesDirs();
+
+        // todo This code is temporary.
+        // Why is it needed? The thing is that in live mode there is some problem with the cache,
+        // which I did not have time to debug. If you add a reference to a non-existent entity to the template,
+        // the error will persist even when it is actually corrected.
+        // This happens because a reference to this object is stored in the operation log and is not deleted.
+        // Need to investigate later and fix
+        $handleErrors = function (): void {
+            if ($this->generationErrorsHandler->getRecords()) {
+                $this->sharedCompressedDocumentFileCache->removeFile();
+                foreach ($this->rootEntityCollectionsGroup as $collection) {
+                    $collection->removeAllNotLoadedEntities();
+                }
+                $this->displayErrors();
+            }
+        };
+
+        $checkedFiles = [];
+        $checkIsTemplatesChanged = function () use ($templatesDirs, &$checkedFiles, $handleErrors) {
+            $finder = Finder::create()
+                ->ignoreVCS(true)
+                ->ignoreDotFiles(true)
+                ->ignoreUnreadableDirs()
+                ->sortByName()
+                ->in($templatesDirs)
+                ->files();
+
+            $files = [];
+            foreach ($finder as $f) {
+                try {
+                    $files[$f->getPathname()] = $f->getMTime();
+                } catch (\Exception) {
+                }
+            }
+            $changed = $checkedFiles !== $files;
+            $checkedFiles = $files;
+            return $changed;
+        };
+
+        $pb = $this->progressBarFactory->createStylizedProgressBar();
+        $this->parser->parse($pb);
+        $this->renderer->run();
+        $checkIsTemplatesChanged();
+        $handleErrors();
+        if ($afterPreparation) {
+            call_user_func($afterPreparation);
+        }
+
+        while (true) {
+            if ($checkIsTemplatesChanged()) {
+                try {
+                    $this->localObjectCache->clear();
+                    $this->renderer->run();
+                    $handleErrors();
+                    if ($afterDocChanged) {
+                        call_user_func($afterDocChanged);
+                    }
+                    $this->io->success('Documentation updated');
+                } catch (\Exception $e) {
+                    $this->io->error($e->getMessage());
+                }
+            }
+            usleep($timeout);
+        }
     }
 
     /**
@@ -397,6 +489,12 @@ final class DocGenerator
                     $boolWrapFn($this->configuration->useSharedCache()),
                 ],
             ],
+            ConfigurationKey::RENDER_WITH_FRONT_MATTER => [
+                [
+                    'Do not remove the front matter block from templates when creating documents',
+                    $boolWrapFn($this->configuration->renderWithFrontMatter()),
+                ],
+            ],
             ConfigurationKey::CHECK_FILE_IN_GIT_BEFORE_CREATING_DOC => [
                 [
                     'Check file in Git before creating doc',
@@ -431,5 +529,47 @@ final class DocGenerator
         };
 
         $this->io->table([], $result);
+    }
+
+    public function getConfiguration(): Configuration
+    {
+        return $this->configuration;
+    }
+
+    private function displayErrors(bool $removeRecordsAfterDisplaying = true): void
+    {
+        $warningMessages = $this->generationErrorsHandler->getRecords();
+        if ($warningMessages) {
+            $this->io->getFormatter()->setStyle('warning', new OutputFormatterStyle('yellow'));
+            $badErrorStyle = new OutputFormatterStyle('red', '#ff0', ['bold']);
+            $this->io->getFormatter()->setStyle('critical', $badErrorStyle);
+            $this->io->getFormatter()->setStyle('alert', $badErrorStyle);
+            $this->io->getFormatter()->setStyle('emergency', $badErrorStyle);
+            $table = $this->io->createTable();
+
+            $rows = [];
+            $warningMessagesCount = count($warningMessages);
+            foreach ($warningMessages as $i => $warningMessage) {
+                $tag = strtolower($warningMessage['type']);
+                $rows[] = ["<{$tag}>{$warningMessage['type']}</>", "<{$tag}>{$warningMessage['msg']}</>"];
+                if ($warningMessage['isRenderingError']) {
+                    $rows[] = [
+                        '',
+                        '<options=conceal,underscore>This error occurs during the document rendering process</>'
+                    ];
+                }
+                $rows[] = ['', $warningMessage['initiator']];
+                if ($warningMessagesCount - $i !== 1) {
+                    $rows[] = new TableSeparator();
+                }
+            }
+            $table->setStyle('box');
+            $table->addRows($rows);
+            $table->render();
+            $this->io->newLine();
+            if ($removeRecordsAfterDisplaying) {
+                $this->generationErrorsHandler->removeRecords();
+            }
+        }
     }
 }

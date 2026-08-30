@@ -73,7 +73,7 @@ abstract class LoggableRootEntityCollection extends RootEntityCollection
         $clone->callerNameToSkipLogging = $backtrace[1]['function'];
         if ($onlyLoaded) {
             foreach ($clone->entities as $objectId => $rootEntity) {
-                if (!$rootEntity->entityDataCanBeLoaded()) {
+                if (!$rootEntity->isEntityDataCanBeLoaded()) {
                     $clone->remove($objectId);
                 }
             }

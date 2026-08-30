@@ -1,5 +1,4 @@
-<!-- {% raw %} -->
-<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/map.md">Class map</a> <b>/</b> LastPageCommitter<hr> </embed>
+<embed> <a href="/docs/README.md">BumbleDocGen</a> <b>/</b> <a href="/docs/tech/readme.md">Technical description of the project</a> <b>/</b> <a href="/docs/tech/04_pluginSystem.md">Plugin system</a> <b>/</b> LastPageCommitter<hr> </embed>
 
 <h1>
     <a href="https://github.com/bumble-tech/bumble-doc-gen/blob/master/src/Core/Plugin/CorePlugin/LastPageCommitter/LastPageCommitter.php#L15">LastPageCommitter</a> class:
@@ -38,7 +37,7 @@ final class LastPageCommitter implements \BumbleDocGen\Core\Plugin\PluginInterfa
     </li>
 <li>
     <a href="#mgetsubscribedevents">getSubscribedEvents</a>
-    - <i>Returns an array of event names this subscriber wants to listen to.</i></li>
+    </li>
 </ol>
 
 
@@ -141,7 +140,7 @@ public function beforeCreatingDocFile(\BumbleDocGen\Core\Plugin\Event\Renderer\B
 public static function getSubscribedEvents(): array;
 ```
 
-<blockquote>Returns an array of event names this subscriber wants to listen to.</blockquote>
+
 
 <b>Parameters:</b> not specified
 
@@ -150,5 +149,3 @@ public static function getSubscribedEvents(): array;
 
 </div>
 <hr>
-
-<!-- {% endraw %} -->

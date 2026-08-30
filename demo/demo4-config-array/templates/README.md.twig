@@ -1,8 +1,9 @@
-{% set title = 'Demo 5' %}
-
+---
+title: Demo 5
+---
 {{ "Demo 5" | textToHeading('H1') }}
 
-{{ printEntityCollectionAsList( phpClassEntityCollection.filterByPaths(['/annotations']) ) }}
+{{ printEntityCollectionAsList( phpEntities.filterByPaths(['/annotations']) ) }}
 
 To update this documentation, run the following command:
 

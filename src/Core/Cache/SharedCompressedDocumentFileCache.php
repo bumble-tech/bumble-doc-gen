@@ -15,12 +15,18 @@ final class SharedCompressedDocumentFileCache
     private array $cacheData = [];
     private array $usedKeys = [];
 
+    public function __construct(
+        private readonly Configuration $configuration
+    ) {
+    }
+
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function __construct(
-        private Configuration $configuration
-    ) {
+    public function reloadDataFromFile(): void
+    {
+        $this->usedKeys = [];
+        $this->cacheData = [];
         $this->cacheFileName = $this->configuration->getOutputDir() . '/' . self::FILE_NAME;
         if (!$this->configuration->useSharedCache()) {
             return;
@@ -53,28 +59,33 @@ final class SharedCompressedDocumentFileCache
         $this->cacheData[$key] = $data;
     }
 
-    public function removeNotUsedKeys(): void
-    {
-        $this->cacheData = array_filter(
-            $this->cacheData,
-            fn(string $key) => array_key_exists($key, $this->usedKeys),
-            ARRAY_FILTER_USE_KEY
-        );
-    }
-
     /**
      * @throws InvalidConfigurationParameterException
      */
-    public function saveChanges(): void
+    public function saveChanges(bool $clearUsedKeysCounter = true): void
     {
         $gitAttributesFile = $this->configuration->getOutputDir() . '/.gitattributes';
         file_put_contents($gitAttributesFile, self::FILE_NAME . ' merge=ours');
         if (!$this->configuration->useSharedCache()) {
-            if (file_exists($this->cacheFileName)) {
-                unlink($this->cacheFileName);
-            }
+            $this->removeFile();
             return;
         }
-        file_put_contents($this->cacheFileName, base64_encode(gzcompress(serialize($this->cacheData))));
+        $cacheData = array_filter(
+            $this->cacheData,
+            fn(string $key) => array_key_exists($key, $this->usedKeys),
+            ARRAY_FILTER_USE_KEY
+        );
+        file_put_contents($this->cacheFileName, base64_encode(gzcompress(serialize($cacheData))));
+
+        if ($clearUsedKeysCounter) {
+            $this->usedKeys = [];
+        }
+    }
+
+    public function removeFile(): void
+    {
+        if (file_exists($this->cacheFileName)) {
+            unlink($this->cacheFileName);
+        }
     }
 }

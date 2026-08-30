@@ -186,7 +186,11 @@ final class ConfigurationParameterBag
         string $classInterfaceName
     ): object {
         $value = $this->get($parameterName);
-        $valueObject = $this->valueToClassTransformer->transform($value);
+        if (is_object($value)) {
+            $valueObject = $value;
+        } else {
+            $valueObject = $this->valueToClassTransformer->transform($value);
+        }
         if (is_null($valueObject)) {
             throw new InvalidConfigurationParameterException(
                 "Configuration parameter `{$parameterName}` contains an incorrect value"
@@ -219,7 +223,11 @@ final class ConfigurationParameterBag
             throw new InvalidConfigurationParameterException("Parameter `{$parameterName}` must be an array");
         }
         foreach ($values as $i => $value) {
-            $valueObject = $this->valueToClassTransformer->transform($value);
+            if (is_object($value)) {
+                $valueObject = $value;
+            } else {
+                $valueObject = $this->valueToClassTransformer->transform($value);
+            }
             if (is_null($valueObject)) {
                 throw new InvalidConfigurationParameterException(
                     "Configuration parameter `{$parameterName}[{$i}]` contains an incorrect value"
@@ -233,6 +241,36 @@ final class ConfigurationParameterBag
             $preparedValues[$i] = $valueObject;
         }
         return $preparedValues;
+    }
+
+    /**
+     * @throws InvalidConfigurationParameterException
+     */
+    public function validateAndGetStringListValue(
+        string $parameterName,
+        bool $associative = true,
+        bool $nullable = true
+    ): array {
+        $values = $this->get($parameterName);
+        if (is_null($values) && $nullable) {
+            $values = [];
+        }
+        if (!is_array($values)) {
+            throw new InvalidConfigurationParameterException("Parameter `{$parameterName}` must be an array");
+        }
+        foreach ($values as $i => $value) {
+            if (($associative && !is_string($i)) || (!$associative && is_string($i))) {
+                throw new InvalidConfigurationParameterException(
+                    "Configuration parameter `{$parameterName}[\"{$i}\"]` contains an incorrect key value"
+                );
+            }
+            if (!is_string($value)) {
+                throw new InvalidConfigurationParameterException(
+                    "Configuration parameter `{$parameterName}[{$i}]` contains an incorrect value"
+                );
+            }
+        }
+        return $values;
     }
 
     /**
